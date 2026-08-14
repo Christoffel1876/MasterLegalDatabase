@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "required_fields": ["report_id", "session_date", "search_completed", "sources_checked", "candidates"],
+  "candidate_required_fields": ["candidate_id", "source_owner", "source_url", "possible_layer", "discovered_date", "change_type", "reason_for_review", "status", "confidence"],
+  "allowed_statuses": ["needs_validation", "queued", "processed", "rejected", "duplicate"],
+  "allowed_change_types": ["new", "amended", "repealed", "corrected", "unknown"],
+  "rules": [
+    "Use official Colorado sources whenever available.",
+    "A candidate is not a database record until it passes ingestion validation.",
+    "Unknown source dates and change types must remain unknown.",
+    "The report must state what sources were checked and what was not checked."
+  ]
+}

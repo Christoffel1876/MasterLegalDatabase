@@ -1,58 +1,58 @@
 {
-  "generated_at": "2026-07-07T23:49:29.134643+00:00",
+  "generated_at": "2026-08-11T18:40:00Z",
   "network_refresh_performed": false,
   "refreshed_sources": [],
   "items": [
     {
       "layer_id": "01_Statutes_CRS",
       "local_freshness_status": "fresh",
-      "last_checked": "2026-07-02",
+      "last_checked": "2026-08-11",
       "network_refresh_required": true,
       "official_refresh_action": "Confirm current OLLS CRS publication year and archive date."
     },
     {
       "layer_id": "02_Regulations_CCR",
       "local_freshness_status": "fresh",
-      "last_checked": "2026-07-02",
+      "last_checked": "2026-08-11",
       "network_refresh_required": true,
       "official_refresh_action": "Run SOS CCR current-rule refresh and compare inventory hashes."
     },
     {
       "layer_id": "03_Legislation",
       "local_freshness_status": "fresh",
-      "last_checked": "2026-07-02",
+      "last_checked": "2026-08-11",
       "network_refresh_required": true,
       "official_refresh_action": "Run LegiScan/current General Assembly refresh window."
     },
     {
       "layer_id": "04_Rulemaking",
       "local_freshness_status": "fresh",
-      "last_checked": "2026-07-02",
-      "network_refresh_required": true,
-      "official_refresh_action": "Run Secretary of State Register/eDocket refresh."
+      "last_checked": "2026-08-11",
+      "network_refresh_required": false,
+      "official_refresh_action": "Live Register check found no newer issue marker than the locally ingested 2026-08-11 data; retain routine watch."
     },
     {
       "layer_id": "05_Executive_Orders",
       "local_freshness_status": "fresh",
-      "last_checked": "2026-07-02",
-      "network_refresh_required": true,
-      "official_refresh_action": "Replace EO-2019-007 bad artifact and refresh Governor EO index."
+      "last_checked": "2026-08-11",
+      "network_refresh_required": false,
+      "official_refresh_action": "Live Governor check found no newer marker; the historical EO artifact issue is tracked in the derived reconciliation report."
     },
     {
       "layer_id": "06_Session_Laws",
       "local_freshness_status": "fresh",
-      "last_checked": "2026-07-02",
+      "last_checked": "2026-08-11",
       "network_refresh_required": true,
       "official_refresh_action": "Confirm session law chapter list and download full chapter artifacts where available."
     },
     {
       "layer_id": "07_Supplementary",
       "local_freshness_status": "fresh",
-      "last_checked": "2026-07-02",
-      "network_refresh_required": true,
-      "official_refresh_action": "Refresh AG opinions and COPRRR source pages."
+      "last_checked": "2026-08-11",
+      "network_refresh_required": false,
+      "official_refresh_action": "Live AG and COPRRR checks found no newer marker than the local records; retain routine watch."
     }
   ],
-  "pending_items": 7,
-  "boundary": "This queue defines required official freshness checks. It does not claim live freshness."
+  "pending_items": 4,
+  "boundary": "This queue distinguishes completed live marker checks from full downloads or inventory comparisons. It does not claim legal freshness or complete source replacement."
 }
