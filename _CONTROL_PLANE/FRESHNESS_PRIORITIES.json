@@ -1,0 +1,58 @@
+{
+    "version":  "1.0.0",
+    "review_frequency":  "every_session",
+    "purpose":  "Select high-value official Colorado sources for the brief session freshness review.",
+    "priority_areas":  [
+                           {
+                               "id":  "rulemaking",
+                               "priority":  "high",
+                               "source_owners":  [
+                                                     "Colorado Secretary of State"
+                                                 ],
+                               "target_layers":  [
+                                                     "02_Regulations_CCR",
+                                                     "04_Rulemaking"
+                                                 ]
+                           },
+                           {
+                               "id":  "legislation",
+                               "priority":  "high",
+                               "source_owners":  [
+                                                     "Colorado General Assembly"
+                                                 ],
+                               "target_layers":  [
+                                                     "03_Legislation",
+                                                     "06_Session_Laws",
+                                                     "01_Statutes_CRS"
+                                                 ]
+                           },
+                           {
+                               "id":  "executive_orders",
+                               "priority":  "medium",
+                               "source_owners":  [
+                                                     "Colorado Governor\u0027s Office"
+                                                 ],
+                               "target_layers":  [
+                                                     "05_Executive_Orders"
+                                                 ]
+                           },
+                           {
+                               "id":  "stale_or_incomplete_layers",
+                               "priority":  "high",
+                               "source_owners":  [
+                                                     "Source registry owner"
+                                                 ],
+                               "target_layers":  [
+                                                     "Use coverage and freshness reports"
+                                                 ]
+                           }
+                       ],
+    "selection_rules":  [
+                            "Prefer stale or incomplete layers.",
+                            "Prefer sources with recent publication activity.",
+                            "Prefer changes affecting many records.",
+                            "Prefer user-requested subjects.",
+                            "Do not infer importance from search ranking alone."
+                        ],
+    "review_actor":  "brief_freshness_subagent"
+}
