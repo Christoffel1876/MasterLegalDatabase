@@ -1,12 +1,14 @@
 # Colorado Register pilot implementation and validation
 
-The first daily-source pilot is implemented on `codex/daily-register-refresh`.
-It is **not active on the repository's default branch yet**. GitHub authentication
-is configured for `Christoffel1876`, which has read-only access to
-`GEODE77/MasterLegalDatabase`. The implementation is being submitted through an
-account-owned fork for review. A repository maintainer must merge the implementation
-and enable the required Actions settings before the initial run, data PR review,
-and seven consecutive scheduled daily checks can be completed.
+This audit records implementation and local validation of the first daily-source
+pilot on `codex/daily-register-refresh`, before GitHub activation. The user selected
+[Christoffel1876/MasterLegalDatabase](https://github.com/Christoffel1876/MasterLegalDatabase)
+as the working repository and has administrator access there. The fork preserves
+the original project's data and history. Deployment and daily runs are managed in
+that repository; consult its
+[Actions history](https://github.com/Christoffel1876/MasterLegalDatabase/actions)
+for current operational status. The local checks below do not establish seven
+consecutive successful scheduled daily runs.
 
 ## Live source validation
 

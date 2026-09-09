@@ -1,5 +1,11 @@
 # Daily Colorado Register pilot
 
+The pilot's working repository is
+[Christoffel1876/MasterLegalDatabase](https://github.com/Christoffel1876/MasterLegalDatabase).
+Use its [Actions page](https://github.com/Christoffel1876/MasterLegalDatabase/actions)
+for run status and its pull requests for update review. The original repository is
+retained as upstream history; activation does not depend on its owner's permissions.
+
 The pilot checks four rulemaking sections in Colorado Register publications dated
 July 1, 2026 onward: proposed rules, permanent rules adopted, emergency rules
 adopted, and terminated rulemaking. It preserves official issue responses and
