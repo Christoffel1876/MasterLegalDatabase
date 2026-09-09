@@ -22,7 +22,11 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def build_freshness_report(root: Path, today: date | None = None) -> list[dict[str, object]]:
-    """Build freshness status rows from the master manifest."""
+    """Calculate local manifest check ages without checking official sources.
+
+    Stored staleness values are historical and cannot establish the current age.
+    Missing, invalid, or future check dates therefore have an unknown age.
+    """
 
     today = today or date.today()
     manifest = read_json(root / "_CONTROL_PLANE" / "MASTER_MANIFEST.json")
@@ -32,10 +36,7 @@ def build_freshness_report(root: Path, today: date | None = None) -> list[dict[s
         if not isinstance(layer, dict):
             continue
         last_checked = layer.get("last_checked")
-        staleness_days = layer.get("staleness_days")
-        if isinstance(last_checked, str) and staleness_days is None:
-            checked_date = date.fromisoformat(last_checked)
-            staleness_days = (today - checked_date).days
+        staleness_days = _days_since_check(last_checked, today)
         rows.append(
             {
                 "id": layer.get("id"),
@@ -44,9 +45,24 @@ def build_freshness_report(root: Path, today: date | None = None) -> list[dict[s
                 "staleness_days": staleness_days,
                 "policy": policy,
                 "status": layer.get("status"),
+                "reported_as_of": today.isoformat(),
+                "network_refresh_performed": False,
             }
         )
     return rows
+
+
+def _days_since_check(last_checked: object, today: date) -> int | None:
+    """Return the check age only when a valid nonfuture date is recorded."""
+
+    if not isinstance(last_checked, str):
+        return None
+    try:
+        checked_date = date.fromisoformat(last_checked)
+    except ValueError:
+        return None
+    age = (today - checked_date).days
+    return age if age >= 0 else None
 
 
 def main() -> int:
@@ -55,6 +71,7 @@ def main() -> int:
     configure_logging()
     args = build_parser().parse_args()
     rows = build_freshness_report(args.root.resolve())
+    LOGGER.info("Local manifest report only; no official sources were checked.")
     for row in rows:
         LOGGER.info(
             "%s records=%s staleness=%s status=%s",
@@ -68,4 +85,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

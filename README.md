@@ -4,6 +4,11 @@ Project Geode is a backend-first regulatory intelligence database for Colorado
 law and regulation. It is built for AI retrieval, agentic workflows, search,
 ingestion, legal data analysis, and source-backed answer generation.
 
+The working repository is
+[Christoffel1876/MasterLegalDatabase](https://github.com/Christoffel1876/MasterLegalDatabase).
+Development, update review, and the daily Colorado Register pilot are managed there.
+The fork preserves the original project's data and Git history.
+
 Geode stores official legal source material, normalized metadata, relationship
 records, freshness state, provenance, and audit trails. AI systems use those
 records through deterministic retrieval and verification layers before any
@@ -106,6 +111,13 @@ municipality, source, date range, or legal topic is covered until it appears in
 the manifest and has passed validation.
 
 ## Setup
+
+For the daily Colorado Register refresh, start with the
+[pilot setup and activation guide](docs/DAILY_REGISTER_PILOT.md). It provides a
+small, frozen dependency set, preserves original evidence, and proposes data
+updates through review pull requests. Its scope begins July 1, 2026; it does not
+certify the historical corpus or calculate regulatory burden. The GitHub schedule
+becomes active only after the workflow is merged into `main` and Actions is enabled.
 
 Install Python 3.11+ and create a virtual environment:
 
