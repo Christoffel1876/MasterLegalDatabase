@@ -44,9 +44,9 @@
           }
         },
         "route": {
-          "type": "string",
-          "description": "Optional pipeline routing outcome.",
-          "enum": ["auto_accept", "flag_accept", "quarantine", "reject"]
+          "type": ["string", "null"],
+          "description": "Pipeline routing outcome, or null when not evaluated.",
+          "enum": ["auto_accept", "flag_accept", "quarantine", "reject", null]
         }
       }
     },
@@ -413,10 +413,23 @@
         "notice_type": {
           "type": "string",
           "description": "Notice type.",
-          "enum": ["proposed", "adopted", "emergency", "amended", "repealed"]
+          "enum": ["proposed", "adopted", "emergency", "amended", "repealed", "terminated"]
         },
-        "ccr_rule_affected": {"type": "string", "description": "CCR rule modified by the notice."},
-        "agency_code": {"type": "string", "description": "Agency code from registry."},
+        "ccr_rule_affected": {"type": "string", "description": "CCR rule referenced by the notice."},
+        "agency_code": {"type": ["string", "null"], "description": "Verified agency registry code, or null when unresolved."},
+        "title": {"type": ["string", "null"], "description": "Source notice title if available."},
+        "ccr_citation": {"type": ["string", "null"], "description": "CCR citation as printed in the source."},
+        "agency": {"type": ["string", "null"], "description": "Agency name as printed in the source."},
+        "source_section_heading": {"type": ["string", "null"], "description": "Source table section heading."},
+        "source_row_number": {"type": ["integer", "null"], "minimum": 1, "description": "Source notice row number."},
+        "source_evidence": {"type": ["string", "null"], "description": "Preserved factual source row evidence."},
+        "notice_type_source": {"type": ["string", "null"], "description": "Source used to classify the notice type."},
+        "edocket_tracking_number": {"type": ["string", "null"], "description": "Official docket tracking number."},
+        "edocket_url": {"type": ["string", "null"], "format": "uri", "description": "Official docket detail URL if available."},
+        "source_path": {"type": ["string", "null"], "description": "Original source archive path."},
+        "raw_text_path": {"type": ["string", "null"], "description": "Extracted source text path if available."},
+        "extraction_method": {"type": ["string", "null"], "description": "Method used to extract this record."},
+        "field_confidence": {"type": "object", "additionalProperties": {"type": "number", "minimum": 0, "maximum": 1}, "description": "Per-field confidence values."},
         "summary": {"type": "string", "description": "Notice summary."},
         "hearing_date": {"type": ["string", "null"], "description": "Hearing date if known.", "format": "date"},
         "effective_date": {"type": ["string", "null"], "description": "Effective date if known.", "format": "date"},

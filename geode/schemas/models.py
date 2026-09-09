@@ -446,7 +446,7 @@ class RulemakingNotice(GeodeModel):
     notice_type: str = Field(min_length=1)
     ccr_rule_affected: str = Field(min_length=1)
     ccr_citation: str | None = None
-    agency_code: str = Field(min_length=1)
+    agency_code: str | None = Field(default=None, min_length=1)
     agency: str | None = None
     summary: str = Field(min_length=1)
     source_section_heading: str | None = None

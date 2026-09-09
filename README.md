@@ -107,6 +107,13 @@ the manifest and has passed validation.
 
 ## Setup
 
+For the daily Colorado Register refresh, start with the
+[pilot setup and activation guide](docs/DAILY_REGISTER_PILOT.md). It provides a
+small, frozen dependency set, preserves original evidence, and proposes data
+updates through review pull requests. Its scope begins July 1, 2026; it does not
+certify the historical corpus or calculate regulatory burden. The GitHub schedule
+becomes active only after the workflow is merged into `main` and Actions is enabled.
+
 Install Python 3.11+ and create a virtual environment:
 
 ```powershell

@@ -123,6 +123,9 @@ def test_missing_category_is_flagged_by_completeness_gate() -> None:
     gate = result.verification_report.gate_results[0] if result.verification_report else None
     assert gate is not None
     assert gate.missing_categories == ["colorado_regulations"]
+    assert gate.action == GateAction.DOWNGRADE
+    assert result.verification_report.status == VerificationStatus.NEEDS_REVIEW
+    assert result.trace[-1].details["passed"] is False
 
 
 def test_unsupported_sentence_is_removed_by_faithfulness_gate() -> None:
@@ -148,6 +151,8 @@ def test_unsupported_sentence_is_removed_by_faithfulness_gate() -> None:
     gate = result.verification_report.gate_results[0] if result.verification_report else None
     assert gate is not None
     assert gate.action == GateAction.STRIP
+    assert result.verification_report.status == VerificationStatus.NEEDS_REVIEW
+    assert result.trace[-1].details["stripped_claim_ids"] == ["sentence-2"]
 
 
 def test_absence_verification_rewrites_retrieval_limit_as_not_verified_absence() -> None:
@@ -182,6 +187,7 @@ def test_gate_outcomes_are_recorded_in_report_and_trace() -> None:
             EnforceGroundingStage("enforce_grounding"),
             VerifyCitationsStage("verify_citations"),
             VerifyCurrencyStage("verify_currency"),
+            CheckCompletenessStage("check_completeness"),
             CheckFaithfulnessStage("check_faithfulness"),
             AbsenceVerificationStage("absence_verification"),
         ]
@@ -193,6 +199,7 @@ def test_gate_outcomes_are_recorded_in_report_and_trace() -> None:
         "enforce_grounding",
         "verify_citations",
         "verify_currency",
+        "check_completeness",
         "check_faithfulness",
         "absence_verification",
     ]
