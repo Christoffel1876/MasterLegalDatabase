@@ -9,8 +9,11 @@
     {
       "id": "01_Statutes_CRS",
       "path": "01_Statutes_CRS",
-      "entity_type": "statute_section",
       "record_count": 34717,
+      "known_gaps": [
+        "No versioned historical snapshots in machine-readable form."
+      ],
+      "entity_type": "statute_section",
       "source": "crs",
       "format": [
         "markdown",
@@ -19,9 +22,6 @@
       "last_ingested": "2026-07-02",
       "currency": "2025",
       "index_file": "01_Statutes_CRS/_index.jsonl",
-      "known_gaps": [
-        "No versioned historical snapshots in machine-readable form."
-      ],
       "last_checked": "2026-07-02",
       "staleness_days": 0,
       "status": "ready"
@@ -29,8 +29,20 @@
     {
       "id": "02_Regulations_CCR",
       "path": "02_Regulations_CCR",
-      "entity_type": "regulation_rule",
       "record_count": 1035,
+      "known_gaps": [
+        "Rule version history has been locally backfilled; live Rulemaking Search status flags remain pending.",
+        "Rulemaking Search comparison workflow is ready; official snapshot comparison must be refreshed during release testing."
+      ],
+      "derived_files": [
+        "02_Regulations_CCR/_history/ccr_rule_version_history.jsonl",
+        "02_Regulations_CCR/_history/ccr_rule_version_summary.json",
+        "_CONTROL_PLANE/CURRENT_RULE_VERIFICATION.jsonl",
+        "04_Rulemaking/_verification/rulemaking_search_comparison.jsonl",
+        "04_Rulemaking/_verification/rulemaking_search_verification_summary.json",
+        "_CONTROL_PLANE/COLORADO_RULEMAKING_SEARCH_VERIFICATION.json"
+      ],
+      "entity_type": "regulation_rule",
       "source": "ccr",
       "format": [
         "markdown",
@@ -39,27 +51,18 @@
       "last_ingested": "2026-07-02",
       "currency": null,
       "index_file": "02_Regulations_CCR/_index.jsonl",
-      "known_gaps": [
-        "Rule version history has been locally backfilled; live Rulemaking Search status flags remain pending.",
-        "Rulemaking Search comparison workflow is ready; official snapshot comparison must be refreshed during release testing."
-      ],
       "last_checked": "2026-07-08",
       "staleness_days": 0,
-      "status": "ready",
-      "derived_files": [
-        "02_Regulations_CCR/_history/ccr_rule_version_history.jsonl",
-        "02_Regulations_CCR/_history/ccr_rule_version_summary.json",
-        "_CONTROL_PLANE/CURRENT_RULE_VERIFICATION.jsonl",
-        "04_Rulemaking/_verification/rulemaking_search_comparison.jsonl",
-        "04_Rulemaking/_verification/rulemaking_search_verification_summary.json",
-        "_CONTROL_PLANE/COLORADO_RULEMAKING_SEARCH_VERIFICATION.json"
-      ]
+      "status": "ready"
     },
     {
       "id": "03_Legislation",
       "path": "03_Legislation",
-      "entity_type": "bill",
       "record_count": 12453,
+      "known_gaps": [
+        "Pre-2010 coverage requires historical session-law sources."
+      ],
+      "entity_type": "bill",
       "source": "legiscan",
       "format": [
         "jsonl"
@@ -67,9 +70,6 @@
       "last_ingested": "2026-07-06",
       "currency": null,
       "index_file": "03_Legislation/_index.jsonl",
-      "known_gaps": [
-        "Pre-2010 coverage requires historical session-law sources."
-      ],
       "last_checked": "2026-07-06",
       "staleness_days": 0,
       "status": "ready"
@@ -77,8 +77,22 @@
     {
       "id": "04_Rulemaking",
       "path": "04_Rulemaking",
+      "record_count": 8079,
+      "known_gaps": [
+        "Rulemaking notices have local rule-version reconciliation; six notices still need stronger version-history source evidence.",
+        "Rulemaking Search comparison workflow is ready; official snapshot comparison must be refreshed during release testing.",
+        "Daily Register pilot covers issues from 2026-07-01; earlier records require separate verification."
+      ],
+      "derived_files": [
+        "04_Rulemaking/_dataset/rulemaking_rule_version_reconciliation.jsonl",
+        "04_Rulemaking/_dataset/rulemaking_rule_version_reconciliation_summary.json",
+        "04_Rulemaking/_verification/rulemaking_search_comparison.jsonl",
+        "04_Rulemaking/_verification/rulemaking_search_verification_summary.json",
+        "_CONTROL_PLANE/COLORADO_RULEMAKING_SEARCH_VERIFICATION.json",
+        "04_Rulemaking/_dataset/register_daily_sources.jsonl",
+        "_CONTROL_PLANE/REGISTER_REFRESH_STATE.json"
+      ],
       "entity_type": "rulemaking_notice",
-      "record_count": 7955,
       "source": "colorado_register",
       "format": [
         "jsonl"
@@ -86,26 +100,18 @@
       "last_ingested": "2026-07-02",
       "currency": null,
       "index_file": "04_Rulemaking/_index.jsonl",
-      "known_gaps": [
-        "Rulemaking notices have local rule-version reconciliation; six notices still need stronger version-history source evidence.",
-        "Rulemaking Search comparison workflow is ready; official snapshot comparison must be refreshed during release testing."
-      ],
       "last_checked": "2026-07-08",
       "staleness_days": 0,
-      "status": "ready",
-      "derived_files": [
-        "04_Rulemaking/_dataset/rulemaking_rule_version_reconciliation.jsonl",
-        "04_Rulemaking/_dataset/rulemaking_rule_version_reconciliation_summary.json",
-        "04_Rulemaking/_verification/rulemaking_search_comparison.jsonl",
-        "04_Rulemaking/_verification/rulemaking_search_verification_summary.json",
-        "_CONTROL_PLANE/COLORADO_RULEMAKING_SEARCH_VERIFICATION.json"
-      ]
+      "status": "ready"
     },
     {
       "id": "05_Executive_Orders",
       "path": "05_Executive_Orders",
-      "entity_type": "executive_order",
       "record_count": 535,
+      "known_gaps": [
+        "Historical executive orders may require archive discovery."
+      ],
+      "entity_type": "executive_order",
       "source": "executive_orders",
       "format": [
         "jsonl"
@@ -113,9 +119,6 @@
       "last_ingested": "2026-07-07",
       "currency": null,
       "index_file": "05_Executive_Orders/_index.jsonl",
-      "known_gaps": [
-        "Historical executive orders may require archive discovery."
-      ],
       "last_checked": "2026-07-07",
       "staleness_days": 0,
       "status": "ready"
@@ -123,8 +126,11 @@
     {
       "id": "06_Session_Laws",
       "path": "06_Session_Laws",
-      "entity_type": "session_law",
       "record_count": 437,
+      "known_gaps": [
+        "Older session laws require separate historical collection."
+      ],
+      "entity_type": "session_law",
       "source": "crs",
       "format": [
         "jsonl"
@@ -132,9 +138,6 @@
       "last_ingested": "2026-07-02",
       "currency": null,
       "index_file": "06_Session_Laws/_index.jsonl",
-      "known_gaps": [
-        "Older session laws require separate historical collection."
-      ],
       "last_checked": "2026-07-02",
       "staleness_days": 0,
       "status": "ready"
@@ -142,8 +145,12 @@
     {
       "id": "07_Supplementary",
       "path": "07_Supplementary",
-      "entity_type": "supplementary_document",
       "record_count": 34,
+      "known_gaps": [
+        "Program-to-statute links require extraction from report text.",
+        "Federal OSHA coverage is limited to selected standards added for the 2026-07-08 search repair."
+      ],
+      "entity_type": "supplementary_document",
       "source": "coprrr, ag_opinions, federal_osha",
       "format": [
         "jsonl"
@@ -151,10 +158,6 @@
       "last_ingested": "2026-07-08",
       "currency": null,
       "index_file": "07_Supplementary/_index.jsonl",
-      "known_gaps": [
-        "Program-to-statute links require extraction from report text.",
-        "Federal OSHA coverage is limited to selected standards added for the 2026-07-08 search repair."
-      ],
       "last_checked": "2026-07-08",
       "staleness_days": 0,
       "status": "ready"
@@ -162,22 +165,10 @@
     {
       "id": "08_County_Authorities",
       "path": "08_County_Authorities",
-      "entity_type": "local_authority,local_rule",
       "record_count": 120341,
-      "source": "local_county_registry",
-      "format": [
-        "markdown",
-        "jsonl"
-      ],
-      "last_ingested": "2026-07-20",
-      "currency": null,
-      "index_file": "08_County_Authorities/_index.jsonl",
       "known_gaps": [
         "Official county source-category gap audit is clear; semantic normalization and review queues remain open."
       ],
-      "last_checked": "2026-07-20",
-      "staleness_days": 0,
-      "status": "ready",
       "derived_files": [
         "_CONTROL_PLANE/COUNTY_SOURCE_COVERAGE.json",
         "_CONTROL_PLANE/COUNTY_GAP_AUDIT.jsonl",
@@ -204,13 +195,28 @@
         "_CONTROL_PLANE/RETRIEVAL_CATALOG.jsonl",
         "_CROSSWALKS/local_rule_to_state_authority.jsonl",
         "_CROSSWALKS/state_authority_to_local_rule.jsonl"
-      ]
+      ],
+      "entity_type": "local_authority,local_rule",
+      "source": "local_county_registry",
+      "format": [
+        "markdown",
+        "jsonl"
+      ],
+      "last_ingested": "2026-07-20",
+      "currency": null,
+      "index_file": "08_County_Authorities/_index.jsonl",
+      "last_checked": "2026-07-20",
+      "staleness_days": 0,
+      "status": "ready"
     },
     {
       "id": "09_District_Authorities",
       "path": "09_District_Authorities",
-      "entity_type": "local_authority,local_rule",
       "record_count": 712,
+      "known_gaps": [
+        "School-district policy documents still require individual discovery and download."
+      ],
+      "entity_type": "local_authority,local_rule",
       "source": "local_district_registry",
       "format": [
         "markdown",
@@ -219,9 +225,6 @@
       "last_ingested": "2026-07-16",
       "currency": null,
       "index_file": "09_District_Authorities/_index.jsonl",
-      "known_gaps": [
-        "School-district policy documents still require individual discovery and download."
-      ],
       "last_checked": "2026-07-16",
       "staleness_days": 0,
       "status": "ready"
@@ -229,8 +232,16 @@
     {
       "id": "10_Municipal_Authorities",
       "path": "10_Municipal_Authorities",
-      "entity_type": "local_authority,local_rule",
       "record_count": 85,
+      "known_gaps": [
+        "Eighty-five priority municipal identities are registered; category-specific downloading and source verification is in progress.",
+        "The registry does not claim that an unlisted category is absent."
+      ],
+      "derived_files": [
+        "_CONTROL_PLANE/MUNICIPAL_SOURCE_REGISTRY.json",
+        "_CONTROL_PLANE/LOCAL_DOWNLOAD_MANIFEST.jsonl"
+      ],
+      "entity_type": "local_authority,local_rule",
       "source": "municipal_source_registry",
       "format": [
         "markdown",
@@ -239,17 +250,9 @@
       "last_ingested": "2026-07-16",
       "currency": null,
       "index_file": "10_Municipal_Authorities/_index.jsonl",
-      "known_gaps": [
-        "Eighty-five priority municipal identities are registered; category-specific downloading and source verification is in progress.",
-        "The registry does not claim that an unlisted category is absent."
-      ],
       "last_checked": "2026-07-16",
       "staleness_days": 0,
-      "status": "in_progress",
-      "derived_files": [
-        "_CONTROL_PLANE/MUNICIPAL_SOURCE_REGISTRY.json",
-        "_CONTROL_PLANE/LOCAL_DOWNLOAD_MANIFEST.jsonl"
-      ]
+      "status": "in_progress"
     }
   ],
   "crosswalks_available": [
