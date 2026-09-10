@@ -1,0 +1,115 @@
+# Pass 2 Report — georgetown-2026-ordinance-4-original
+
+## 1. Metadata
+
+| Field | Value |
+|---|---|
+| Source ID | `georgetown-2026-ordinance-4-original` |
+| Reviewer | Ebenezer (Grok Bot) |
+| Review date | 2026-09-10 (America/Denver) |
+| How images viewed | Read tool on full page PNGs `page-0001.png` … `page-0004.png`, plus targeted crops of handwritten dates, citations, Section 2–3 text, and signature/date blocks |
+| Tool limits | Read returns vision captions of raster pages (not a pixel editor). Some early crops missed vertical bands and required re-cropping. One poorly framed date crop briefly captioned “July 1”; a tighter ink-mapped crop and 3× magnification re-confirmed **July 7**. No Codex corrections, GitHub issues, or other review reports were consulted. |
+| Finding ID prefix | `GT-ORD4-P2-###` |
+| Source PDF SHA-256 | `72ad2a316b3fdfa3c719dfb9de41cea0365bf41ad978b8894e35c12c3b52c5df` — **verified match** on `/workspace/geode-pass1/georgetown-2026-ordinance-4-original/original.pdf` |
+| Candidate SHA-256 | Expected `538114637db907c41d8d078289852ec0acfb4065387f74a78d91536fdcca92ab` — **verified match** on `/workspace/geode-pass1/pass2/candidate.txt` |
+| Frozen pass-1 SHA-256 | Expected `a2fc1f86cb0c5be3e8462bd231b022542cdf1473097969dd59759a162fc7ed21` — **verified match** on `/workspace/geode-pass1/pass2/PASS1_frozen.md` |
+| Frozen pass-1 path | `/workspace/geode-pass1/pass2/PASS1_frozen.md` (referenced; not retyped) |
+| Candidate packaging | Page markers / header lines in `candidate.txt` treated as packaging metadata, not source text |
+| Prior Codex corrections | **Not consulted.** This pass-2 comparison used only the page PNGs, `candidate.txt`, and the frozen pass-1 file. |
+
+Pass-1 independent transcript is retained unchanged at the frozen path/hash above. This report does not modify the original PDF, page PNGs, `candidate.txt`, or `PASS1_frozen.md`.
+
+---
+
+## 2. Page coverage
+
+| source_id | physical_page | image actually inspected (yes/no) | comparison complete (yes/no) | status | unchecked regions and reasons |
+|---|---|---|---|---|---|
+| georgetown-2026-ordinance-4-original | 1 | yes | yes | differences_found | None for printable body text. Faint scanner bars at extreme top/bottom margins only (not source text). |
+| georgetown-2026-ordinance-4-original | 2 | yes | yes | differences_found | None for printable body text. Mid-sentence page break after “With respect to violations of” is intentional source pagination. |
+| georgetown-2026-ordinance-4-original | 3 | yes | yes | differences_found | Large lower white space contains only a faint stray pen flick (not text). No subsection **(f)** body appears in source despite intro promising (a)–(f) — treated as source observation, not unchecked OCR. |
+| georgetown-2026-ordinance-4-original | 4 | yes | yes | differences_found | Sparse lower white space below the Date line has no further text. Stylized Town Clerk initials are partially ambiguous as exact letterforms (see findings); presence is confirmed. |
+
+All four expected physical pages were re-inspected with the Read tool; comparison against `candidate.txt` is complete for each page.
+
+---
+
+## 3. Findings
+
+| finding_id | source_id | source_pdf_sha256 | physical_page | location | candidate text | text visibly supported by image | proposed correction or unresolved alternatives | error type | severity | source-based explanation |
+|---|---|---|---|---|---|---|---|---|---|---|
+| GT-ORD4-P2-001 | georgetown-2026-ordinance-4-original | 72ad2a316b3fdfa3c719dfb9de41cea0365bf41ad978b8894e35c12c3b52c5df | 1 | 8th WHEREAS; blank underline before “, 2026” | `209yn2de` | Handwritten blue ink **May 26** on the printed underline | `May 26` | date | critical | Machine OCR completely garbled the handwritten public-hearing date; meaning of the hearing date is lost. |
+| GT-ORD4-P2-002 | georgetown-2026-ordinance-4-original | 72ad2a316b3fdfa3c719dfb9de41cea0365bf41ad978b8894e35c12c3b52c5df | 1 | Same WHEREAS; citation after “in accordance with” | `C.R.S. $ 31-16-` (line ends; next WHEREAS begins) | `C.R.S. § 31-16-` then wrapped next line `203; and` | `C.R.S. § 31-16-203; and` | citation | critical | Section symbol misread as `$`, and the wrapped continuation line **`203; and`** is omitted entirely, destroying the C.R.S. § 31-16-203 citation. (Elsewhere candidate correctly keeps `§` for 31-15-601 and 31-16-206.) |
+| GT-ORD4-P2-003 | georgetown-2026-ordinance-4-original | 72ad2a316b3fdfa3c719dfb9de41cea0365bf41ad978b8894e35c12c3b52c5df | 2 | Section 3 intro, before “(a) - (f)” | `a new•subsections` (U+2022 BULLET between words) | `a new subsections` (ordinary space) | `a new subsections` | substitution | minor | Spurious bullet character inserted where the print shows a normal word space. The awkward grammar “a new subsections” itself is in the source (see source observations). |
+| GT-ORD4-P2-004 | georgetown-2026-ordinance-4-original | 72ad2a316b3fdfa3c719dfb9de41cea0365bf41ad978b8894e35c12c3b52c5df | 2 | Sec. 15.20.050(a)(2) | `(2)` alone on its line; body text starts on following lines | `(2) Failure to perform an act…` as a continuous numbered item | Keep `(2)` with its sentence on the same logical item (cosmetic line-break only) | reading_order | minor | Content words are present; only the line association of the enumerator is awkward. |
+| GT-ORD4-P2-005 | georgetown-2026-ordinance-4-original | 72ad2a316b3fdfa3c719dfb9de41cea0365bf41ad978b8894e35c12c3b52c5df | 2–4 (quotes) | Quoted phrases such as “Board”, “Town of Georgetown.”, “Building Department”; also `Town's` | Straight ASCII `"` / `'` | Source uses curly/smart double quotes in those phrases (and a curly apostrophe in “Town’s” on p.4 posting paragraph) | Restore curly quotes/apostrophe to match print, or note as typography normalization | substitution | minor | Cosmetic typography; meaning unchanged. |
+| GT-ORD4-P2-006 | georgetown-2026-ordinance-4-original | 72ad2a316b3fdfa3c719dfb9de41cea0365bf41ad978b8894e35c12c3b52c5df | 3 | FIRST READING fill-ins | `on the 20 day of April` / `_2026.` | Handwritten **28** and **April**; printed year `2026.` (period present); underline is a blank form line, not a literal underscore character | `on the 28 day of April 2026.` | date | critical | Day **28** misread as **20**; underscore artifact from the blank underline. Changes first-reading date. |
+| GT-ORD4-P2-007 | georgetown-2026-ordinance-4-original | 72ad2a316b3fdfa3c719dfb9de41cea0365bf41ad978b8894e35c12c3b52c5df | 3 | SECOND READING / final adoption fill-ins | `on the 2le day of May` / `_2026` | Handwritten **26** and **May**; year `2026` with **no** terminal period after 2026 (matches source) | `on the 26 day of May 2026` (no trailing period) | date | critical | Day **26** misread as **2le**; underscore artifact from blank underline. Changes final-adoption date. |
+| GT-ORD4-P2-008 | georgetown-2026-ordinance-4-original | 72ad2a316b3fdfa3c719dfb9de41cea0365bf41ad978b8894e35c12c3b52c5df | 3 | Continuation of 15.20.050 after (c); item (d) | `(d)` alone on its line, then penalty sentence | `(d) The imposition of a penalty…` as one item | Join enumerator with its sentence | reading_order | minor | Same class of split-enumerator artifact as (2) on page 2. |
+| GT-ORD4-P2-009 | georgetown-2026-ordinance-4-original | 72ad2a316b3fdfa3c719dfb9de41cea0365bf41ad978b8894e35c12c3b52c5df | 3 | Centered footer page numeral | *(absent from candidate page-3 body)* | Printed centered page number **3** | Include `3` as printed footer text (or consistently omit all printed page numerals—but candidate kept `2` and `4`) | omission | minor | Candidate retained printed `2` (p.2) and `4` (p.4) but dropped printed `3`. |
+| GT-ORD4-P2-010 | georgetown-2026-ordinance-4-original | 72ad2a316b3fdfa3c719dfb9de41cea0365bf41ad978b8894e35c12c3b52c5df | 4 | TOWN OF GEORGETOWN / By: signature block | `By:` then `in Kofoed` only; **no** printed title line | Handwritten blue-ink signature visibly readable as **Georgia Kofoed** on the By: line; printed line below: **Georgia Kofoed, Police Judge** | Restore printed `Georgia Kofoed, Police Judge`; represent signature as present/handwritten (readable “Georgia Kofoed”) rather than `in Kofoed` | omission | critical | Entire printed name/title line under the Police Judge signature is missing; residual `in Kofoed` is a mangled fragment (likely from ink overlapping the print), not the printed line. |
+| GT-ORD4-P2-011 | georgetown-2026-ordinance-4-original | 72ad2a316b3fdfa3c719dfb9de41cea0365bf41ad978b8894e35c12c3b52c5df | 4 | Same By: block — handwritten signature reading | `in Kofoed` | Cursive blue-ink signature present; visibly readable as **Georgia Kofoed** (not inferred solely from the printed name) | Prefer annotation: `[handwritten signature present; visibly readable: Georgia Kofoed]` rather than OCR fragment `in Kofoed` | substitution | critical | Misreads the Police Judge wet-ink signature; together with GT-ORD4-P2-010, the signatory block is badly damaged in the candidate. |
+| GT-ORD4-P2-012 | georgetown-2026-ordinance-4-original | 72ad2a316b3fdfa3c719dfb9de41cea0365bf41ad978b8894e35c12c3b52c5df | 4 | ATTEST: block — handwritten initials | *(no handwritten initials transcribed; jumps to printed name)* | Blue-ink stylized initials present on the ATTEST line; best reading **BK** (stylized) | Note signature presence; readable initials ≈ `BK` (stylized; exact letterforms slightly ambiguous) | graphic_or_annotation | minor | Printed `Brigitte Korte, Town Clerk` is present in candidate; only the wet-ink initials above the line are omitted. |
+| GT-ORD4-P2-013 | georgetown-2026-ordinance-4-original | 72ad2a316b3fdfa3c719dfb9de41cea0365bf41ad978b8894e35c12c3b52c5df | 4 | Posting attestation signature above second `Brigitte Korte, Town Clerk` | `BBK` | Same stylized blue-ink initials as ATTEST; best reading **BK** (not three letters) | `BK` (stylized initials); unresolved alternative if another reader sees a different flourish | substitution | minor | Candidate over-reads the stylized initials as three characters `BBK`. Do not treat the printed name as the signature. |
+| GT-ORD4-P2-014 | georgetown-2026-ordinance-4-original | 72ad2a316b3fdfa3c719dfb9de41cea0365bf41ad978b8894e35c12c3b52c5df | 4 | `Date:` line | `July 1, 2026` | Handwritten blue ink **July 7, 2026** (digit **7** confirmed on tight/magnified crop) | `July 7, 2026` | date | critical | Posting attestation date day corrupted from **7** to **1**. |
+
+### Notes on non-findings / faithful reproductions
+
+- **CRWC** in Section 2(c) is printed that way in the source; candidate’s `CRWC` is faithful → source observation, not an OCR error.
+- Section 3 promises subsections `(a) - (f)` but body text only prints **(a)–(e)**; candidate likewise has no `(f)` → shared correct omission of non-existent text; source anomaly.
+- Mixed `noncriminal` / `non-criminal`, `CRS 31-16-204` (no periods/§), and missing terminal period after second-reading `2026` are reproduced faithfully where present.
+- Candidate packaging lines (`Source ID:`, `=== PHYSICAL PDF PAGE … ===`) are not scored as source errors.
+
+---
+
+## 4. Pass-1 errata
+
+| physical page | report location | original pass-1 wording | image-supported correction or uncertainty | explanation |
+|---|---|---|---|---|
+| 2 | Section 3 intro transcript / typo notes | `(a) – (f)` (en-dash) | `(a) - (f)` (ASCII hyphen-minus with spaces on both sides) | Re-crop of the Section 3 intro line shows a spaced hyphen, not an en-dash. Leave `PASS1_frozen.md` unchanged; this table is the correction record. |
+
+No other pass-1 wording required correction after re-inspection. In particular: handwritten **May 26**, **28 April**, **26 May**, and **July 7, 2026** in pass-1 match the images; the Police Judge wet-ink signature is independently readable as “Georgia Kofoed” (not merely copied from the printed title); ATTEST/posting initials remain best-read as stylized **BK**.
+
+---
+
+## 5. Source observations
+
+Printed anomalies faithfully reproduced by the candidate (not OCR findings):
+
+1. **Section 2(c) acronym typo:** printed **`CRWC`** Section 103.1 while the rest of the ordinance uses **`CWRC`**.
+2. **Section 3 grammar:** printed **`a new subsections`** (singular article + plural noun).
+3. **Missing subsection (f):** Section 3 intro cites subsections **(a) - (f)**, but pages 2–3 only set forth **(a) through (e)**; no printed **(f)** body appears.
+4. **Citation style inconsistency:** Section 3 uses **`CRS 31-16-204`** (no periods, no §) versus **`C.R.S. § …`** elsewhere.
+5. **Hyphenation inconsistency:** Sec. 15.20.050(c) uses both **`noncriminal`** and **`non-criminal`**.
+6. **Second-reading line punctuation:** final-adoption block ends **`2026`** without a terminal period; first-reading block ends **`2026.`** with a period.
+7. **Awkward relative clause (Section 2 intro):** “building and safety codes the Town has adopted by reference” (no relative pronoun) — as printed.
+8. **Page 3 stray mark:** faint blue pen flick in lower white space — not textual content.
+9. **Handwritten elements (blue ink) present in source:** p.1 `May 26`; p.3 `28`/`April` and `26`/`May`; p.4 Police Judge signature, two Town Clerk initial signatures, and `July 7, 2026`.
+
+---
+
+## 6. Frozen pass-1 reference
+
+Independent pass-1 visual transcript (unchanged):
+
+- Path: `/workspace/geode-pass1/pass2/PASS1_frozen.md`
+- SHA-256: `a2fc1f86cb0c5be3e8462bd231b022542cdf1473097969dd59759a162fc7ed21`
+
+Full pass-1 transcript is not retyped here.
+
+---
+
+## 7. Explicit non-consultation statement
+
+**Prior Codex corrections, GitHub issues, and other review reports were not consulted** for this Pass 2. Discrepancies were identified by re-inspecting the original page PNGs with the Read tool (and confirmatory crops), comparing them to `candidate.txt`, and cross-checking against the frozen pass-1 notes only as an aid—not as an authority when image evidence differed.
+
+---
+
+## 8. Summary
+
+Critical candidate errors concentrate on **handwritten dates** (May 26; 28 April; 26 May; July 7→1), the **truncated/mangled C.R.S. § 31-16-203** citation, and the **Police Judge signature/title block**. Minor issues include a bullet inserted in `new•subsections`, quote straightening, split enumerators, omitted page numeral `3`, and stylized-initial mishandling (`BBK` vs `BK`). Source typos such as **CRWC** and the promised-but-absent **(f)** are documented as source observations because the candidate reproduces them faithfully.
+
+---
+
+**Result status:** `completed_pending_atlas_verification`  
+**legal_currentness:** not_verified

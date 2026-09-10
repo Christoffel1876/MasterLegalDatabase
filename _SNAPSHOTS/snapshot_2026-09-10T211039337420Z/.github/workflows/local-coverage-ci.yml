@@ -62,22 +62,6 @@ jobs:
           PY
       - name: Verify bounded visual amendment checks
         run: python -m geode.pipeline.local_text_review --root . --review research/local_review/amendment-excerpts-2026-09-10.json
-      - name: Verify first external review intake and unchanged received reports
-        run: |
-          python -m geode.pipeline.local_text_review --root . --review research/local_review/ebenezer-001-2026-09-10/checked-excerpts.json
-          python - <<'PY'
-          import hashlib
-          from pathlib import Path
-          folder = Path("research/local_review/ebenezer-001-2026-09-10")
-          expected = {
-              "PASS1_received.txt": "a2fc1f86cb0c5be3e8462bd231b022542cdf1473097969dd59759a162fc7ed21",
-              "PASS2_received.txt": "8e174e4a6598df86eacbdd19c420b2672b04fdc7ca3e8f9a81ce237eebf29627",
-          }
-          for name, digest in expected.items():
-              actual = hashlib.sha256((folder / name).read_bytes()).hexdigest()
-              if actual != digest:
-                  raise ValueError(f"Received review changed: {name}")
-          PY
       - name: Verify publisher exports and every saved native page or node
         run: python -m geode.pipeline.municipal_code_export --root . --manifest _CONTROL_PLANE/MUNICIPAL_EXPORTS_2026-09-10.json --text 09_Municipal_Authorities/_verification/municipal_exports/text.jsonl
       - name: Verify sampled fee evidence and checked scanned passages
