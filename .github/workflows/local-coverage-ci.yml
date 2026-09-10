@@ -1,0 +1,51 @@
+name: Local coverage ledger checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: local-coverage-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  local-coverage:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GIT_LFS_SKIP_SMUDGE: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+      COVERAGE_FILE: .coverage-local-coverage
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          lfs: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+      - name: Install frozen evidence-validation dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements-ci.txt -r requirements-county.txt
+      - name: Run collection and directory regression checks
+        run: |
+          python -m pytest tests/test_local_coverage.py tests/test_municipal_directory.py tests/test_coverage_dashboard.py -q --cov=geode.pipeline.local_coverage --cov=geode.pipeline.municipal_directory --cov-branch --cov-report=term-missing --cov-report=xml:local-coverage.xml --junitxml=local-coverage-tests.xml
+          python -m coverage report --fail-under=90 --include=geode/pipeline/local_coverage.py
+          python -m coverage report --fail-under=90 --include=geode/pipeline/municipal_directory.py
+      - name: Verify every archived ledger source offline
+        run: python -m geode.pipeline.local_coverage --ledger _CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json --root .
+      - name: Retain validation evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: local-coverage-tests-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            local-coverage-tests.xml
+            local-coverage.xml
+          retention-days: 30
+          if-no-files-found: warn
