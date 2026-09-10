@@ -119,6 +119,11 @@ source designations visible. See the
 [coverage baseline](docs/audits/COVERAGE_BASELINE_2026-09-09.md) and
 [county recovery findings](docs/audits/COUNTY_RECOVERY_2026-09-09.md).
 
+The [county source recovery pilot](docs/COUNTY_REACQUISITION_PILOT.md) preserves
+four official catalogs and 30 selected Jefferson/Clear Creek documents through
+an explicit manifest and a separate daily review workflow. Its source evidence
+does not replace missing historical county records or establish complete coverage.
+
 For the daily Colorado Register refresh, start with the
 [pilot setup and activation guide](docs/DAILY_REGISTER_PILOT.md). It provides a
 small, frozen dependency set, preserves original evidence, and proposes data

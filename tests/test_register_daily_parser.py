@@ -10,6 +10,7 @@ import pytest
 from geode.connectors.register_daily_parser import (
     RegisterParseError,
     decode_register_html,
+    official_sos_url,
     parse_edocket_detail,
     parse_register_index,
     parse_register_issue,
@@ -128,6 +129,30 @@ def test_document_links_require_https_sos(bad_url: str) -> None:
     )
     with pytest.raises(RegisterParseError, match="HTTPS"):
         parse_register_issue(html, date(2026, 8, 25), ISSUE)
+
+
+def test_attachment_filename_space_is_encoded_before_collection() -> None:
+    """The September 10 filename form must remain the same resource over HTTP."""
+
+    source_path = "/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00398 .docx"
+    html = issue_html().replace(
+        "/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00370.docx", source_path,
+    )
+    rows = parse_register_issue(html, date(2026, 8, 25), ISSUE)
+    assert rows[0].document_urls == [
+        "https://www.sos.state.co.us/CCR/Upload/NoticeOfRulemaking/"
+        "ProposedRuleAttach2026-00398%20.docx"
+    ]
+    assert source_path in html  # Parsing does not modify the archived source input.
+
+
+def test_url_space_encoding_preserves_existing_escapes_and_query_delimiters() -> None:
+    """Encoding is idempotent and cannot turn a literal filename space into plus."""
+
+    source = "https://www.sos.state.co.us/CCR/Upload/A%20B+C .docx?name=A+B%2FC D"
+    expected = "https://www.sos.state.co.us/CCR/Upload/A%20B+C%20.docx?name=A+B%2FC%20D"
+    assert official_sos_url(source) == expected
+    assert official_sos_url(expected) == expected
 
 
 def test_missing_labeled_ccr_does_not_use_unrelated_citation() -> None:
