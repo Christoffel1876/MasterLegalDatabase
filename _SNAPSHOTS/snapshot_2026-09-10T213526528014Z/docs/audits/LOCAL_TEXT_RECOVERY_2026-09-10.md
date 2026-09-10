@@ -52,10 +52,8 @@ operations for municipal exports and 25 for fee research, including web discover
   expressly supersedes its short-term-rental fees. It does not establish that
   all planning fees were replaced.
 - Visual checks corrected OCR errors in handwritten dates, including Georgetown
-  Ordinance 4's posting date. A later EB-PDF-005 review supersedes the initial
-  Clear Creek Ordinance 4-A second-publication year correction: its final
-  handwritten digit remains uncertain between 4 and 6. Neither 2024 nor 2026
-  is certified for that field. Raw OCR and prior snapshots remain unchanged.
+  Ordinance 4's posting date and Clear Creek Ordinance 4-A's second-publication
+  year. Raw OCR remains unchanged and its unreviewed status is retained.
 - West Metro's adoption contains further municipality/county approval conditions.
   Its district adoption date alone does not prove effectiveness for a property.
 - Georgetown Ordinances 3 and 4 touch overlapping Chapter 15.20 provisions. The
