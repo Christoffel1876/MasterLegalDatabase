@@ -6,7 +6,7 @@ ingestion, legal data analysis, and source-backed answer generation.
 
 The working repository is
 [Christoffel1876/MasterLegalDatabase](https://github.com/Christoffel1876/MasterLegalDatabase).
-Development, update review, and the daily Colorado Register pilot are managed there.
+Development, update review, and the daily source-check pilots are managed there.
 The fork preserves the original project's data and Git history.
 
 Geode stores official legal source material, normalized metadata, relationship
@@ -112,6 +112,18 @@ the manifest and has passed validation.
 
 ## Setup
 
+The [coverage inventory and CCR guide](docs/COVERAGE_AND_CCR_PILOT.md) explains
+the generated jurisdiction/category dashboard and the bounded daily Department
+of Local Affairs source check. It keeps missing local evidence and unreviewed
+source designations visible. See the
+[coverage baseline](docs/audits/COVERAGE_BASELINE_2026-09-09.md) and
+[county recovery findings](docs/audits/COUNTY_RECOVERY_2026-09-09.md).
+
+The [county source recovery pilot](docs/COUNTY_REACQUISITION_PILOT.md) preserves
+four official catalogs and 30 selected Jefferson/Clear Creek documents through
+an explicit manifest and a separate daily review workflow. Its source evidence
+does not replace missing historical county records or establish complete coverage.
+
 For the daily Colorado Register refresh, start with the
 [pilot setup and activation guide](docs/DAILY_REGISTER_PILOT.md). It provides a
 small, frozen dependency set, preserves original evidence, and proposes data
@@ -165,8 +177,10 @@ control-plane files belong in Git; large generated outputs do not.
 
 ## Current Priority
 
-The next durable work is to strengthen the backend retrieval and orchestration
-layer:
+The immediate priority is to reconcile official source versions, rebuild missing
+county evidence, and establish complete local source inventories under the
+[coverage roadmap](docs/audits/UPDATE_ROADMAP_2026-09-09.md). The backend retrieval
+and orchestration work depends on that verified evidence:
 
 - formal retrieval plans
 - evidence packet format

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from typing import Literal
 
 from pydantic import (
@@ -67,6 +67,12 @@ EntityType = Literal[
 ]
 
 
+def _utc_today() -> date:
+    """Return the UTC calendar date used for retrieval-date validation."""
+
+    return datetime.now(timezone.utc).date()
+
+
 class GeodeModel(BaseModel):
     """Base model with strict field handling for Geode records."""
 
@@ -85,8 +91,22 @@ class GeodeModel(BaseModel):
         check_fields=False,
     )
     @classmethod
-    def validate_not_future_date(cls, value: date | None, info: ValidationInfo) -> date | None:
-        """Reject impossible future dates."""
+    def validate_not_future_date(
+        cls, value: date | datetime | None, info: ValidationInfo,
+    ) -> date | datetime | None:
+        """Check retrieval dates in UTC while preserving date and datetime field values."""
+
+        if info.field_name == "data_retrieved":
+            comparison = value
+            if isinstance(value, datetime):
+                # Naive timestamps retain the inherited calendar-date check; models that
+                # require timezone awareness still reject them in their field validator.
+                comparison = (
+                    value.astimezone(timezone.utc) if value.utcoffset() is not None else value
+                ).date()
+            if comparison is not None and comparison > _utc_today():
+                raise ValueError("date cannot be in the future")
+            return value
 
         if cls.__name__ == "RegulationRule" and info.field_name == "effective_date":
             return value
