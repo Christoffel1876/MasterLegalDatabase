@@ -155,13 +155,18 @@ class RegisterParseError(ValueError):
 
 
 def official_sos_url(value: str) -> str:
-    """Validate an HTTPS Secretary of State source URL without rewriting it."""
+    """Validate an SOS URL and encode literal spaces without changing its meaning.
+
+    The September 10, 2026 issue links a DOCX filename containing a space. Curl
+    requires its percent-encoded representation; existing escapes and query
+    delimiters must remain untouched. The original source HTML is archived as-is.
+    """
 
     parsed = urlparse(value)
     if (parsed.scheme != "https" or parsed.hostname not in _SOS_HOSTS
             or parsed.username or parsed.password or parsed.port not in {None, 443}):
         raise RegisterParseError(f"Expected an HTTPS Colorado SOS source URL: {value}")
-    return value
+    return value.replace(" ", "%20")
 
 
 class DailyNoticeRow(BaseModel):
