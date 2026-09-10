@@ -10,6 +10,12 @@ historical county index or treating downloaded documents as reviewed legal rules
 The explicit selection is in
 `_CONTROL_PLANE/COUNTY_REACQUISITION_PILOT.json`.
 
+**Operational status, September 10:** the first GitHub-hosted run failed when
+Clear Creek returned HTTP 403. A fresh local run collected and validated all 34
+sources. The daily schedule is enabled, but automated county collection is not
+operational until this access problem is resolved. See the
+[hosted-access audit](audits/COUNTY_HOSTED_ACCESS_2026-09-10.md).
+
 ## What is collected
 
 | County / catalog | Selected documents | Scope |
