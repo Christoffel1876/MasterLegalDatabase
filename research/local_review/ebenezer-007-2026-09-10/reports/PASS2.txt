@@ -1,0 +1,90 @@
+# PASS 2 — Source vs OCR Comparison
+
+## Metadata
+
+| Field | Value |
+|-------|-------|
+| assignment_id | EB-PDF-007 |
+| source_id | cc-ordinance-14430 |
+| reviewer | Ebenezer (Grok Bot) |
+| model | unknown |
+| utc_pass2_start | 2026-09-10T22:08:00Z |
+| utc_pass2_end | 2026-09-10T22:09:33Z |
+| time_cost | unknown |
+| status | completed_pending_atlas_verification |
+| legal_currentness | not_verified |
+| candidate_status | machine_ocr_unreviewed |
+| prior_atlas_sherlock_consultation | none for this document |
+
+## Hash references (unchanged)
+
+| Artifact | SHA-256 |
+|----------|---------|
+| PASS1_frozen.md (unchanged) | a0d178dc6055c7bea47403466c7773a7b4c24e699e912e69de5fcc6fa90661ec |
+| packet manifest.json | 89ffd573cc57a5fb4b255c80aab2da010cce1c56478777417e7947a09fdc1ddd |
+| original.pdf | 946c9875e66f0ff3b9d04b9704f3a487910d4fecc974fdd591113589493aba34 |
+| page-0001.png | 472cd411b1defea3c8116cca4e86e217916c02568edabef8000fce865e2c04fb |
+| page-0002.png | bdab0b01f5c659cc7f25ac23e5e25ec5fe41da401bbcf7ced30ad600e781182c |
+| candidate.txt | 7c3a75e489df72f3acc671b42d4c5b5ae7f205d27590775bee957ac502b08f24 |
+
+Candidate hash verified against manifest after pass-1 freeze. Packaging markers are **not** source text.
+
+## Image-viewing method / limits
+
+Caption-mediated Read on full pages and sectional crops (same as pass 1). Captions are not source quotations. Regions of agreement and disagreement re-inspected via crops. Not certified pixel-perfect coverage.
+
+## Page coverage
+
+| source_id | physical_page | image_inspected | comparison_complete | status | unchecked_regions |
+|-----------|---------------|-----------------|---------------------|--------|--------------------|
+| cc-ordinance-14430 | 1 | yes | yes | differences_found | Exact stamp colon/dollar punctuation; Unicode of quotes around Board; barcode decode |
+| cc-ordinance-14430 | 2 | yes | yes | differences_found | Exact struck-Luther punctuation; Ovington/Oxington letterforms; residual day-digit raster under caption mediation |
+
+## Findings
+
+Finding IDs use prefix `EB007-P2-`. source_pdf_sha256 for all rows: `946c9875e66f0ff3b9d04b9704f3a487910d4fecc974fdd591113589493aba34`.
+
+| finding_id | physical_page | location | candidate_text | text_visibly_supported_by_image | proposed_correction_or_alternatives | error_type | severity | explanation |
+|---|---:|---|---|---|---|---|---|---|
+| EB007-P2-001 | 1 | recorder stamp | Bage 1 01/2/2924 + Cyrillic-like garbage | Stamp lines approx. 312315 04/24/2024 01:37 PM B: 1056 P: 691 ORDIN / Page 1 of 2 R $0.00 D $0.00 T $0.00 Clear Creek + barcode | Replace OCR noise with stamp transcription; exact stamp punctuation unresolved | substitution / omission / graphic_or_annotation | critical | Reception metadata destroyed; page field and book/page lost. |
+| EB007-P2-002 | 1 | hereinafter | heremnafter | hereinafter | hereinafter | substitution | critical | Legal defined-term spelling corrupted. |
+| EB007-P2-003 | 1 | Fines / Fire | Funes ; Fire with non-ASCII i | Fines ; Fire | Restore ASCII Fines / Fire | substitution | critical | Fee/code nouns corrupted. |
+| EB007-P2-004 | 1 | Ordinance spelling | Ordinance with non-ASCII i (multiple) | Ordinance | Ordinance | substitution | minor | Systematic dotted-i substitution; meaning recoverable. |
+| EB007-P2-005 | 1 | third WHEREAS (Fire Authority / 2018) | Garbled Clear Gieck / 2013 edition; WHEREAS lead mangled | WHEREAS, the Clear Creek Fire Authority recommends adoption of the 2018 edition of the Uniform Fire Code, and | Restore full WHEREAS; 2018 not 2013 | substitution / omission / date | critical | Year and agency name wrong; clause almost unreadable. |
+| EB007-P2-006 | 1 | Citizens | Citzens | Citizens | Citizens | substitution | minor | Missing i. |
+| EB007-P2-007 | 1 | immediately | immedrately | immediately | immediately | substitution | minor | Typo in OCR. |
+| EB007-P2-008 | 1 | intro hearing date fills | Broken 19 fragment / DAY OF / March 2024 | 19th DAY OF March, 2024 on blanks | Restore 19th / March / comma before year | date / illegible | critical | Day suffix and layout destroyed; year still 2024 in OCR fragment. |
+| EB007-P2-009 | 1 | Chair signature label | Sean Cood, Chan (+ noise cwal) | Printed Sean C. Wood, Chair + signature-mark presence | Restore printed label; annotate signature presence separately; do not invent signature spelling from OCR noise | substitution / graphic_or_annotation | critical | Name and title corrupted; OCR invents signature tokens. |
+| EB007-P2-010 | 1 | Marlin label | George Marlin with non-ASCII i | George Marlin, Commissioner | Marlin (ASCII i) | substitution | minor | Dotted-i in surname. |
+| EB007-P2-011 | 1 | DATE OF PUBLICATION | Candidate order: April 4,2024 then label then unstruck March 27, 2024 | Label DATE OF PUBLICATION; visibly struck March 27, 2024; handwritten April 4, 2024 above strike | Report strike + superseding handwritten date; do not present both as equally operative plain text | reading_order / date / graphic_or_annotation | critical | Strike lost; April appears before label; March left as if current. |
+| EB007-P2-012 | 1 | BE IT EVEN FURTHER | Matches substance | Same | none — faithful anomaly | — | — | Unusual EVEN FURTHER phrasing preserved. |
+| EB007-P2-013 | 1 | Ordinance No 6 (no period) | Ordinance No 6 | Same | none — preserve source anomaly | — | — | Faithful. |
+| EB007-P2-014 | 2 | recorder stamp | Bage 2 + garbage timestamp/fees | 312315 04/24/2024 01:37 PM B: 1056 P: 692 ORDIN / Page 2 of 2 … Clear Creek + barcode | Restore stamp; page 692 | substitution / omission | critical | Same class of stamp destruction as page 1. |
+| EB007-P2-015 | 2 | clerk substitution | Suu / OxinayEn, Deputy / BA Lather… (no strike noted) | Handwritten Sue Ovington (alt. Oxington) over visibly struck printed E.A./E A Luther, Deputy Clerk & Recorder | Restore struck printed Luther + handwritten Sue Ovington/Oxington uncertainty; reject BA Lather as OCR invention | substitution / graphic_or_annotation / illegible | critical | Substitution of clerk identity; strike omitted. |
+| EB007-P2-016 | 2 | HEARING | IEARING | HEARING | HEARING | substitution | critical | Opening H lost. |
+| EB007-P2-017 | 2 | adoption day | LEIDAYOF / APrIL 2024 | 16th DAY OF April, 2024 | Restore 16th / April | date / illegible | critical | Day numeral destroyed in OCR. |
+| EB007-P2-018 | 2 | Chairman / Commissioner labels | Chaurman ; Commisstoner ; Marlin with bad i | Chairman ; Commissioner ; Marlin | Restore spellings | substitution | minor | Title/name OCR noise. |
+| EB007-P2-019 | 2 | Absent | Absent on Sean C Wood line | Handwritten Absent across signature line above printed Sean C Wood, Commissioner | Keep as presence of handwritten Absent (not a personal-name signature) | — | — | Faithful enough; good capture of absence notation. |
+| EB007-P2-020 | 2 | certification body | Heavily garbled; missing readable April 16 / effective 16th / April | CERTIFICATION THE FOREGOING ORDINANCE WAS CONSIDERED AT PUBLIC HEARING ON April 16, 2024, AND ADOPTED … EFFECTIVE THE 16th DAY OF April, 2024. | Restore full certification with handwritten fills | omission / substitution / date | critical | Adoption/effectiveness dates lost in OCR mush. |
+| EB007-P2-021 | 2 | DATE OF SECOND PUBLICATION | 4/25/2024 | Handwritten 4/25/2024 | none for digits as read under captions | date | — | Agrees; year final digit read as 4 (not handwriting-certified beyond captions). |
+| EB007-P2-022 | 2 | closing clerk | EA Luther, Deputy Clerk & Recorder (+ noise etreel) | Printed E A Luther, Deputy Clerk & Recorder + signature-mark presence | Restore printed label; annotate signature presence; ignore etreel | substitution / graphic_or_annotation | minor | Junk token near signature. |
+
+## PASS1 errata (do not edit PASS1_frozen.md)
+
+| original_PASS1_wording | source_supported_correction | page/location | reason |
+|---|---|---|---|
+| Prefer Ovington with Oxington alternative | Keep both; OCR OxinayEn supports letterform uncertainty — do not certify either spelling | p2 clerk | Caption conflict + OCR |
+| Stamp rendered with normalized 01:37 / $0.00 / B: | Keep punctuation uncertain (captions often drop colons) | p1–p2 stamps | Already noted; reinforce |
+
+## Agreements worth recording
+
+- Titles ORDINANCE NO. 6A / repeal of ORDINANCE NO. 6.
+- BE IT EVEN FURTHER ORDAINED phrasing.
+- Body Ordinance No 6 without period after No.
+- Handwritten Absent on Sean C Wood (page 2).
+- Second-publication digits 4/25/2024 present in OCR.
+- Footer filename / Page | n lines largely intact.
+
+## Completion
+
+Both expected pages received pass 1 and pass 2. Status: **completed_pending_atlas_verification**. **legal_currentness: not_verified**. No repository or packet files modified. Prefer file mtime over any later narrative stamp if they disagree.
