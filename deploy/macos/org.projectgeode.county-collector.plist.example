@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>org.projectgeode.county-collector</string>
+  <key>UserName</key><string>geodecollector</string>
+  <key>WorkingDirectory</key><string>/Users/Shared/GeodeCounty/code</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/Shared/GeodeCounty/venv/bin/python</string>
+    <string>-m</string><string>geode.pipeline.county_scheduled_run</string>
+    <string>--code-root</string><string>/Users/Shared/GeodeCounty/code</string>
+    <string>--root</string><string>/Users/Shared/GeodeCounty/corpus</string>
+    <string>--report-root</string><string>/Users/Shared/GeodeCounty/reports</string>
+    <string>--manifest</string>
+    <string>/Users/Shared/GeodeCounty/code/_CONTROL_PLANE/COUNTY_REACQUISITION_PILOT.json</string>
+    <string>--expected-code-sha256</string><string>REPLACE_WITH_REVIEWED_CODE_SHA256</string>
+    <string>--expected-manifest-sha256</string><string>REPLACE_WITH_REVIEWED_MANIFEST_SHA256</string>
+    <string>--timeout-seconds</string><string>2700</string>
+  </array>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PYTHONNOUSERSITE</key><string>1</string>
+    <key>PYTHONDONTWRITEBYTECODE</key><string>1</string>
+  </dict>
+  <key>StartCalendarInterval</key>
+  <dict><key>Hour</key><integer>7</integer><key>Minute</key><integer>17</integer></dict>
+  <key>RunAtLoad</key><false/>
+  <key>KeepAlive</key><false/>
+  <key>StandardOutPath</key><string>/Users/Shared/GeodeCounty/logs/launchd.stdout.log</string>
+  <key>StandardErrorPath</key><string>/Users/Shared/GeodeCounty/logs/launchd.stderr.log</string>
+</dict>
+</plist>
