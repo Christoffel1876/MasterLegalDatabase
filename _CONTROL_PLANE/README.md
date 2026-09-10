@@ -27,3 +27,9 @@ Current operational handoff files:
   collection, legal-currentness and review work. It includes dated directory reconciliation
   and a full category checklist for each identified authority. See
   `../docs/LOCAL_COVERAGE_LEDGER.md` for its validation and collection process.
+
+- `MUNICIPAL_EXPORTS_2026-09-10.json` binds two recovered municipal publications
+  to official referrals, publisher identities, source hashes and linked images.
+  Its explicitly derived endpoint/redaction summaries are distinct from exact
+  original source files. See `../docs/LOCAL_TEXT_RECOVERY.md` for saved native text,
+  OCR page receipts, checked excerpts and the fee reconciliation study.

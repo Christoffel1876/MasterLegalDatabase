@@ -88,3 +88,11 @@ The ordinary scheduled county collector still checks its original four catalogs
 and thirty selected documents. This collection batch does not expand that daily
 manifest or install the deferred always-on Mac collector. Missing legacy LFS data
 and failures of hosted collection remain visible limitations.
+
+## Recovered local text and fee evidence
+
+Golden and Georgetown published code exports, full-page OCR receipts and sampled
+fee reconciliation now have separate evidence contracts. See
+[Local text recovery](LOCAL_TEXT_RECOVERY.md) for their editions, validation commands,
+known OCR limitations and remaining amendment work. Publication text and checked
+excerpts remain research evidence pending canonical legal review.

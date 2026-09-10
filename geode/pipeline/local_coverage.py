@@ -17,7 +17,7 @@ from datetime import datetime
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Literal
-from urllib.parse import unquote, urljoin, urlparse
+from urllib.parse import parse_qs, unquote, urljoin, urlparse
 
 import pymupdf
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
@@ -87,6 +87,10 @@ class EvidenceSource(LedgerModel):
     pdf_pages: int | None = Field(default=None, ge=1, strict=True)
     categories: list[str] = Field(min_length=1)
     linked_from_source_id: str | None = None
+    publisher_export_manifest: str | None = Field(
+        default=None,
+        pattern=r"^_CONTROL_PLANE/MUNICIPAL_EXPORTS_[0-9]{4}-[0-9]{2}-[0-9]{2}\.json$",
+    )
     provenance_notes: str
     currentness_notes: str
     legal_currentness: Literal["not_verified"] = "not_verified"
@@ -109,6 +113,12 @@ class EvidenceSource(LedgerModel):
         if (len(set(self.categories)) != len(self.categories)
                 or set(self.categories) - set(CATEGORIES)):
             raise ValueError("Source categories must be unique checklist categories")
+        if self.publisher_export_manifest and (
+            self.authority_id not in {"CO-MUNICIPAL-GOLDEN", "CO-MUNICIPAL-GEORGETOWN"}
+            or self.kind != "legal_text" or self.media_type not in {"pdf", "json"}
+            or not self.linked_from_source_id or self.url != self.final_url
+        ):
+            raise ValueError("Publisher exports require scoped legal content and official referral")
         for value in (self.url, self.final_url):
             parsed = urlparse(value)
             if (parsed.scheme != "https" or parsed.username or parsed.password
@@ -117,6 +127,18 @@ class EvidenceSource(LedgerModel):
                     or ".." in unquote(parsed.path).split("/")):
                 raise ValueError("Evidence URLs must be ordinary HTTPS URLs")
             owner = self.authority_id or "directory"
+            if self.publisher_export_manifest:
+                expected = (
+                    "https://mcclibrary.blob.core.usgovcloudapi.net/"
+                    "publication-official-copy-pdfs/768/Final.pdf"
+                    if owner == "CO-MUNICIPAL-GOLDEN" else
+                    "https://library.municode.com/api/CodesContent/docIds"
+                )
+                if (value.split("?", 1)[0] != expected
+                        or (owner == "CO-MUNICIPAL-GOLDEN" and parsed.query)
+                        or parsed.fragment):
+                    raise ValueError("Publisher export endpoint is outside the scoped authority")
+                continue
             if parsed.hostname not in OFFICIAL_HOSTS.get(owner, set()):
                 prefixes = DELEGATED_PREFIXES.get(owner, ())
                 if not any(value == p.rstrip("/") or value.startswith(p.rstrip("/") + "/")
@@ -270,6 +292,62 @@ class _Links(HTMLParser):
             self.links.append(href)
 
 
+def _catalog_targets(parent: EvidenceSource, body: bytes) -> set[str]:
+    """Resolve observed anchors, including a wrapper that explicitly names a city URL."""
+    parser = _Links()
+    parser.feed(body.decode("utf-8", errors="replace"))
+    base = urljoin(parent.final_url, parser.base or "")
+    targets = {unquote(urljoin(base, href)) for href in parser.links}
+    for href in parser.links:
+        wrapper = urlparse(urljoin(base, href))
+        if (wrapper.scheme != "https" or wrapper.netloc != "www.google.com"
+                or wrapper.path != "/url"):
+            continue
+        target = parse_qs(wrapper.query).get("q", [])
+        if (len(target) == 1 and urlparse(target[0]).scheme == "https"
+                and urlparse(target[0]).hostname
+                in OFFICIAL_HOSTS.get(parent.authority_id or "directory", set())):
+            targets.add(unquote(target[0]))
+    return targets
+
+
+def _validate_publisher_export(
+    source: EvidenceSource, parent: EvidenceSource, root: Path, cache: dict[str, object]
+) -> None:
+    """Require an offline publisher proof matching this exact source and official parent."""
+    from geode.pipeline.municipal_code_export import (
+        MunicipalExportManifest, validate_municipal_exports,
+    )
+
+    relative = source.publisher_export_manifest
+    assert relative is not None
+    if relative not in cache:
+        path = root / relative
+        if any(part.is_symlink() for part in (path.absolute(), *path.absolute().parents)):
+            raise ValueError("Publisher manifest path cannot contain symlinks")
+        with path.open("rb") as stream:
+            body = stream.read(MAX_LEDGER_BYTES + 1)
+        if len(body) > MAX_LEDGER_BYTES:
+            raise ValueError("Publisher manifest exceeds bounded read limit")
+        manifest = MunicipalExportManifest.model_validate_json(body)
+        validate_municipal_exports(manifest, root)
+        cache[relative] = manifest
+    manifest = cache[relative]
+    refs = {item.source_id: item for item in manifest.sources}
+    exports = [item for item in manifest.exports if item.authority_id == source.authority_id]
+    if len(exports) != 1 or exports[0].content != source.source_id:
+        raise ValueError("Publisher manifest does not identify this authority and content")
+    export = exports[0]
+    content = refs[export.content]
+    referral = refs[export.official_referral]
+    for actual, proof in ((source, content), (parent, referral)):
+        if (actual.source_id != proof.source_id or actual.final_url != proof.url
+                or actual.archive_path != proof.archive_path or actual.sha256 != proof.sha256
+                or actual.size_bytes != proof.size_bytes or actual.media_type != proof.media_type
+                or actual.retrieved_at != proof.retrieved_at):
+            raise ValueError("Publisher proof differs from ledger source or official referral")
+
+
 def validate_ledger_evidence(ledger: CoverageLedger, root: Path) -> None:
     """Check archive confinement, exact hashes, sizes, and usable source formats offline."""
     ledger = CoverageLedger.model_validate(ledger.model_dump())
@@ -325,17 +403,19 @@ def validate_ledger_evidence(ledger: CoverageLedger, root: Path) -> None:
             elif not any(c in text for c in ("|", "\t")) or len(text.splitlines()) < 2:
                 raise ValueError("Directory text must be a delimited table with data rows")
     sources = {s.source_id: s for s in ledger.sources}
+    publisher_cache: dict[str, object] = {}
     for source in ledger.sources:
+        if source.publisher_export_manifest:
+            _validate_publisher_export(source, sources[source.linked_from_source_id],
+                                       root, publisher_cache)
+            continue
         if all(urlparse(u).hostname in OFFICIAL_HOSTS[source.authority_id or "directory"]
                for u in (source.url, source.final_url)):
             continue
         parent = sources[source.linked_from_source_id]
         if parent.media_type != "html":
             raise ValueError("Delegated sources require an HTML referring catalog")
-        parser = _Links()
-        parser.feed(contents[parent.source_id].decode("utf-8", errors="replace"))
-        base = urljoin(parent.final_url, parser.base or "")
-        if unquote(source.url) not in {unquote(urljoin(base, href)) for href in parser.links}:
+        if unquote(source.url) not in _catalog_targets(parent, contents[parent.source_id]):
             raise ValueError(f"Delegated source link absent from catalog: {source.source_id}")
 
 

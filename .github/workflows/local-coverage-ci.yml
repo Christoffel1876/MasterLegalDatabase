@@ -34,11 +34,40 @@ jobs:
         run: python -m pip install --disable-pip-version-check -r requirements-ci.txt -r requirements-county.txt
       - name: Run collection and directory regression checks
         run: |
-          python -m pytest tests/test_local_coverage.py tests/test_municipal_directory.py tests/test_coverage_dashboard.py -q --cov=geode.pipeline.local_coverage --cov=geode.pipeline.municipal_directory --cov-branch --cov-report=term-missing --cov-report=xml:local-coverage.xml --junitxml=local-coverage-tests.xml
+          python -m pytest tests/test_local_coverage.py tests/test_local_coverage_exports.py tests/test_municipal_directory.py tests/test_coverage_dashboard.py tests/test_verified_local_ocr.py tests/test_municipal_code_export.py tests/test_local_text_review.py tests/test_local_fee_review.py -q --cov=geode.pipeline.local_coverage --cov=geode.pipeline.municipal_directory --cov=geode.pipeline.verified_local_ocr --cov=geode.pipeline.municipal_code_export --cov=geode.pipeline.local_text_review --cov=geode.pipeline.local_fee_review --cov-branch --cov-report=term-missing --cov-report=xml:local-coverage.xml --junitxml=local-coverage-tests.xml
           python -m coverage report --fail-under=90 --include=geode/pipeline/local_coverage.py
           python -m coverage report --fail-under=90 --include=geode/pipeline/municipal_directory.py
+          python -m coverage report --fail-under=90 --include=geode/pipeline/verified_local_ocr.py
+          python -m coverage report --fail-under=90 --include=geode/pipeline/municipal_code_export.py
+          python -m coverage report --fail-under=90 --include=geode/pipeline/local_text_review.py
+          python -m coverage report --fail-under=90 --include=geode/pipeline/local_fee_review.py
       - name: Verify every archived ledger source offline
         run: python -m geode.pipeline.local_coverage --ledger _CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json --root .
+      - name: Verify OCR receipts and preserve the known blank-page limitation
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from geode.pipeline.verified_local_ocr import validate_ocr_collection, OCRManifest
+          root = Path.cwd()
+          ledger = root / "_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json"
+          scans = root / "_DERIVED/local_ocr/scans-2026-09-10"
+          summary = validate_ocr_collection(root, scans, ledger)
+          assert (summary.source_count, summary.expected_pages, summary.page_records) == (22, 316, 316)
+          assert (summary.status, summary.failed_pages, summary.blank_pages) == ("failed", 0, 1)
+          blank = OCRManifest.model_validate_json((scans / "d298c41e415d99079df94b5955715a23bb002a04377b9b8726ec1a5f4271e8a8/manifest.json").read_bytes())
+          assert blank.blank_pages == [12]
+          fees = validate_ocr_collection(root, root / "_DERIVED/local_ocr/fees-2026-09-10", ledger)
+          assert (fees.source_count, fees.expected_pages, fees.page_records) == (4, 48, 48)
+          assert fees.status == "fully_collected"
+          PY
+      - name: Verify bounded visual amendment checks
+        run: python -m geode.pipeline.local_text_review --root . --review research/local_review/amendment-excerpts-2026-09-10.json
+      - name: Verify publisher exports and every saved native page or node
+        run: python -m geode.pipeline.municipal_code_export --root . --manifest _CONTROL_PLANE/MUNICIPAL_EXPORTS_2026-09-10.json --text 09_Municipal_Authorities/_verification/municipal_exports/text.jsonl
+      - name: Verify sampled fee evidence and checked scanned passages
+        run: |
+          python -m geode.pipeline.local_text_review --root . --review research/fees/fee-scan-excerpts-2026-09-10.json
+          python -m geode.pipeline.local_fee_review --root . --study research/fees/fee-reconciliation-2026-09-10.json
       - name: Retain validation evidence
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
