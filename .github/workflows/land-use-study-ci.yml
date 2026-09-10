@@ -1,0 +1,50 @@
+name: Land-use research evidence checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: land-use-study-checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  study-evidence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GIT_LFS_SKIP_SMUDGE: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+      COVERAGE_FILE: .coverage-land-use-study
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          lfs: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+      - name: Install frozen validation dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements-ci.txt -r requirements-county.txt
+      - name: Offline schema and evidence regression tests
+        run: |
+          python -m pytest tests/test_land_use_study.py -q --cov=geode.pipeline.land_use_study --cov-branch --cov-report=term-missing --cov-report=xml:land-use-study-coverage.xml --junitxml=land-use-study-tests.xml
+          python -m coverage report --fail-under=90 --include=geode/pipeline/land_use_study.py
+      - name: Validate actual archived research study and every cited PDF excerpt
+        run: python -m geode.pipeline.land_use_study --study research/land_use/rezoning-2026-09-10.json --root .
+      - name: Retain regression evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: land-use-study-tests-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            land-use-study-tests.xml
+            land-use-study-coverage.xml
+          retention-days: 30
+          if-no-files-found: warn
