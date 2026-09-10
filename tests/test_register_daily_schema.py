@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from datetime import date, datetime, timedelta, timezone, tzinfo
+from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
@@ -14,6 +14,7 @@ from jsonschema.exceptions import ValidationError as JsonSchemaValidationError
 from pydantic import ValidationError as PydanticValidationError
 
 from geode.schemas import models, validators
+from geode.schemas.local import LocalAuthority, LocalRule
 from geode.schemas.models import CrosswalkEntry, RulemakingNotice
 
 SCHEMA_PATH = Path(__file__).resolve().parents[1] / "_CONTROL_PLANE" / "MASTER_SCHEMA.json"
@@ -131,14 +132,6 @@ def test_daily_crosswalk_retrieval_dates_use_utc_at_local_midnight_boundary(
     local_today = now.astimezone(ZoneInfo(local_zone)).date()
     assert local_today != now.date()
 
-    class FrozenUTC(datetime):
-        @classmethod
-        def now(cls, tz: tzinfo | None = None) -> datetime:
-            """Expose the collection instant only through an explicit UTC clock."""
-
-            assert tz is timezone.utc
-            return now
-
     class LocalDate(date):
         @classmethod
         def today(cls) -> date:
@@ -146,7 +139,7 @@ def test_daily_crosswalk_retrieval_dates_use_utc_at_local_midnight_boundary(
 
             return local_today
 
-    monkeypatch.setattr(models, "datetime", FrozenUTC)
+    monkeypatch.setattr(models, "_utc_today", lambda: now.date())
     monkeypatch.setattr(validators, "date", LocalDate)
     payload = {
         "source_id": "RM-2026-midnight-fixture",
@@ -170,4 +163,76 @@ def test_daily_crosswalk_retrieval_dates_use_utc_at_local_midnight_boundary(
     with pytest.raises(PydanticValidationError, match="date cannot be in the future"):
         RulemakingNotice.model_validate({
             **minimal_notice(), "publication_date": local_today + timedelta(days=1),
+        })
+
+
+@pytest.fixture(scope="module")
+def inherited_local_metadata() -> tuple[dict[str, Any], dict[str, Any]]:
+    """Read real date and datetime records exercised by the coverage dashboard."""
+
+    root = SCHEMA_PATH.parents[1]
+    with (root / "08_County_Authorities/_meta/local_authorities.jsonl").open() as handle:
+        authority = json.loads(next(handle))
+    with (root / "09_District_Authorities/_meta/local_rules.jsonl").open() as handle:
+        rule = json.loads(next(handle))
+    return authority, rule
+
+
+def test_inherited_local_metadata_keeps_date_and_datetime_types(
+    inherited_local_metadata: tuple[dict[str, Any], dict[str, Any]],
+) -> None:
+    """Actual dashboard metadata validates without converting its stored timestamp values."""
+
+    authority_payload, rule_payload = inherited_local_metadata
+    authority = LocalAuthority.model_validate(authority_payload)
+    rule = LocalRule.model_validate(rule_payload)
+    assert type(authority.data_retrieved) is date
+    assert authority.data_retrieved == date.fromisoformat(authority_payload["data_retrieved"])
+    assert type(rule.data_retrieved) is datetime
+    assert rule.data_retrieved == datetime.fromisoformat(rule_payload["data_retrieved"])
+    assert LocalRule.model_validate(rule.model_dump(mode="json")) == rule
+
+
+@pytest.mark.parametrize("timestamp,failure", [
+    ("2026-09-09T18:00:37-06:00", None),
+    ("2026-09-11T00:30:00+14:00", None),
+    ("2026-09-10T23:30:00-06:00", "date cannot be in the future"),
+    ("2026-09-11T00:00:00+00:00", "date cannot be in the future"),
+    ("2026-09-10T01:00:00", "datetime must include timezone information"),
+])
+def test_local_rule_retrieval_timestamp_compares_utc_day_and_preserves_timezone(
+    monkeypatch: pytest.MonkeyPatch,
+    inherited_local_metadata: tuple[dict[str, Any], dict[str, Any]],
+    timestamp: str,
+    failure: str | None,
+) -> None:
+    """Offsets cannot hide tomorrow's UTC day, and naive timestamp rejection remains active."""
+
+    monkeypatch.setattr(models, "_utc_today", lambda: date(2026, 9, 10))
+    payload = {**inherited_local_metadata[1], "data_retrieved": timestamp}
+    if failure:
+        with pytest.raises(PydanticValidationError, match=failure):
+            LocalRule.model_validate(payload)
+        return
+    rule = LocalRule.model_validate(payload)
+    expected = datetime.fromisoformat(timestamp)
+    assert rule.data_retrieved == expected
+    assert rule.data_retrieved.utcoffset() == expected.utcoffset()
+    assert rule.data_retrieved.isoformat() == timestamp
+    assert LocalRule.model_validate(rule.model_dump(mode="json")) == rule
+
+
+def test_local_authority_retrieval_date_still_rejects_future_days(
+    monkeypatch: pytest.MonkeyPatch,
+    inherited_local_metadata: tuple[dict[str, Any], dict[str, Any]],
+) -> None:
+    """The datetime compatibility fix retains the local authority date-only contract."""
+
+    today = date(2026, 9, 10)
+    monkeypatch.setattr(models, "_utc_today", lambda: today)
+    payload = {**inherited_local_metadata[0], "data_retrieved": today.isoformat()}
+    assert LocalAuthority.model_validate(payload).data_retrieved == today
+    with pytest.raises(PydanticValidationError, match="date cannot be in the future"):
+        LocalAuthority.model_validate({
+            **payload, "data_retrieved": (today + timedelta(days=1)).isoformat(),
         })
