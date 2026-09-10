@@ -1,0 +1,3285 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+<!-- Google Tag Manager for GA4 -->
+				<script>(function(w,d,s,l,i){w.GAMeasurementID='G-V67BCVC3C7';w[l]=w[l]||[];w[l].push({'gtm.start':
+				new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+				j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+				'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+				})(window,document,'script','cpDataLayerGA4','GTM-K73C5PS');</script>
+				<!-- End Google Tag Manager for GA4 -->
+				<script type='text/javascript'>
+					var enableTelemetry = 'false'
+					var aiConfig = {
+					instrumentationKey: '1cde048e-3185-4906-aa46-c92a7312b60f'						
+					}
+					var appInsights = window.appInsights || function (a) { function b(a) { c[a] = function () { var b = arguments; c.queue.push(function () { c[a].apply(c, b) }) } } var c = { config: a }, d = document, e = window; setTimeout(function () { var b = d.createElement('script'); b.src = a.url || 'https://js.monitor.azure.com/scripts/a/ai.0.js', d.getElementsByTagName('script')[0].parentNode.appendChild(b) }); try { c.cookie = d.cookie } catch (a) { } c.queue = []; for (var f = ['Event', 'Exception', 'Metric', 'PageView', 'Trace', 'Dependency']; f.length;)b('track' + f.pop()); if (b('setAuthenticatedUserContext'), b('clearAuthenticatedUserContext'), b('startTrackEvent'), b('stopTrackEvent'), b('startTrackPage'), b('stopTrackPage'), b('flush'), !a.disableExceptionTracking) { f = 'onerror', b('_' + f); var g = e[f]; e[f] = function (a, b, d, e, h) { var i = g && g(a, b, d, e, h); return !0 !== i && c['_' + f](a, b, d, e, h), i } } return c }(aiConfig);
+					window.appInsights = appInsights, appInsights.queue && 0 === appInsights.queue.length;
+					// Add telemetry initializer
+					appInsights.queue.push(function() {
+						appInsights.context.addTelemetryInitializer(function(envelope) {
+							var telemetryItem = envelope.data.baseData;
+							// To check the telemetry item’s type:
+							if (!false)
+							{
+								//If the telemetry is not enabled, we still want to capture Google map custom event, so only allow that
+								if (envelope.name.indexOf('.Event') == -1)
+									return false;
+							}
+						});
+					});						
+					appInsights.trackPageView();
+				</script>
+	<script>
+		function populateAntiForgery(token) {
+			var input = document.createElement("input");
+			input.name = "__RequestVerificationToken";
+			input.type = "hidden";
+			input.value = token;
+			var absPat = /^https?:\/\/|^\/\//i;
+			var forms = document.getElementsByTagName("form");
+			for (var i = 0; i < forms.length; i++) {
+				if (forms[i].method == "post" &&
+					!forms[i].querySelector('[name="__RequestVerificationToken"]') &&
+					!absPat.test(forms[i].getAttribute("action"))) {
+					forms[i].appendChild(input.cloneNode());
+				}
+			}
+		}
+
+		function getAntiForgeryToken(callback, error) {
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "/antiforgery");
+			xhr.addEventListener("load", function() {
+				try {
+					if (this.status !== 200) {
+						throw Error("Invalid status. Could not retrieve antiforgery token.");
+		}
+					var obj = JSON.parse(this.responseText);
+					callback(obj.token);
+				} catch (e) {
+					typeof error === "function" && error(e);
+				}
+			});
+			xhr.send();
+		}
+
+		getAntiForgeryToken(function(token) {
+			if (document.readyState === "complete"
+				|| document.readyState === "loaded" 
+				|| document.readyState === "interactive") {
+				populateAntiForgery(token);
+				return;
+			}
+			document.addEventListener("DOMContentLoaded", function() {
+				populateAntiForgery(token);
+			}, false);
+		}, console.error);
+			</script>
+			
+
+	<script type="text/javascript">
+		window.departmentHeader = {"DepartmentHeaderId":4874,"DepartmentHeaderName":"Development & Transportation"};
+		window.pageSectionTracker = {"PageSectionTrackerId":4874,"PageSectionTrackerName":"Development & Transportation"};
+		window.isResponsiveEnabled = true;
+		window.isRemoveSetHeights= true;
+		if (window.isRemoveSetHeights) {
+			document.documentElement.className += ' removeSetHeights';
+		}
+		window.mainMenuMediaQuery = 'screen and (max-width: 40em)';
+		window.isMobileBrowserIncludingTablets = false;
+		window.fixedResponsiveMenu = false;
+		window.fullWidthResponsiveMenu = false;
+		window.responsiveMenuHeight = '';
+		window.responsiveMenuFontSize = '';
+		window.isContentAdvisor = false;
+		(function () {
+			window.setSizeCookie = function () {
+				document.cookie = "dpi=" + window.devicePixelRatio + "; path=/";
+				document.cookie = "viewportWidth=" + window.innerWidth + "; path=/";
+				document.cookie = "viewportHeight=" + window.innerHeight + "; path=/";
+				if (screen && screen.width && screen.height) {
+					document.cookie = "screenWidth=" + screen.width + "; path=/";
+					document.cookie = "screenHeight=" + screen.height + "; path=/";
+				}
+				document.cookie = "responsiveGhost=1; path=/";
+			};
+
+			setSizeCookie();
+		}());
+	</script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<script async src="https://docaccess.com/docbox.js"></script>
+	<meta name="google-site-verification" content="Fv_TcQVlf83ymrqsSgGsEzyWjLseCeiAa93p3eDcIeU" />
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-53BWNW7');</script>
+<!-- End Google Tag Manager -->
+
+	<meta name="category0" content="Development &amp; Transportation" />
+<meta name="category1" content="Sitemap" />
+<meta name="category2" content="Planning &amp; Zoning" />
+<meta name="category3" content="Online Services" />
+<meta name="category4" content="Mandatory Application Documents" />
+
+	
+	<meta name="theme-color" content="rgb(60, 89, 85)">
+	<link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+		<title>Mandatory Documents for Online Permit Application Submittal | Jefferson County, CO</title>
+
+		<meta name="description" content="Information regarding how to submit Floodplain Permits, Land Disturbance Permits (Including Grading Permits, Notice of Intents and Natural Surface Trails), Minor Adjustments, Pre-Applications, Building Permits, Rezoning, Site Development Plan on our Online Application System.">
+		<meta name="keywords" content="mandatory documents,submittal,online application system,entraprise,apply online,permit">
+			<script src="/Assets/Scripts/jQuery/jquery-3.7.1.min.js"></script>
+	<script src="/Assets/Scripts/jQuery/jquery-migrate-3.6.0.min.js" type="text/javascript"></script>
+	
+
+	<!--[if IE 6]><script language="JavaScript" type="text/javascript"> var isie6 = true; </script><![endif]-->
+	<!--[if IE 7]><script language="JavaScript" type="text/javascript"> var isie7 = true; </script><![endif]-->
+	<!--[if IE 8]><script language="JavaScript" type="text/javascript"> var isie8 = true; </script><![endif]-->
+	<!--[if IE 9]><script language="JavaScript" type="text/javascript"> var isie8 = true; </script><![endif]-->
+	<script type="text/javascript"><!--
+	var intCountryCode = 840;
+	var order = '';
+//--></script>
+	
+<link href="/-880373222.css" rel="stylesheet" type="text/css" />	<link href="/828027460.css" rel="stylesheet" type="text/css" />	<link href="/486523939.css" rel="stylesheet" type="text/css" />
+
+	<link rel="stylesheet" type="text/css" href="/Assets/Styles/Print.css" media="print">
+	<script type="text/javascript">
+		window.Pages = window.Pages || {};
+		// FrontEnd RWD initialization
+		window.Pages.rwdReady = $.Deferred();
+		window.Pages.toolBarDeferred = $.Deferred();
+		window.Pages.rwdSetupComplete = $.Deferred();
+		window.Pages.megaMenuLoaded = $.Deferred();
+		window.Pages.angularToolbarComplete = $.Deferred();
+		window.Pages.frontEndToolbarComplete = $.Deferred();
+	</script>
+	<!--CPHeadContent-->
+	<script src="/636175734.js" type="text/javascript"></script>
+	
+	
+	
+	
+
+
+
+
+	<!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="/App_Themes/ie8.css"><![endif]-->
+	<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="/App_Themes/ie7.css"><![endif]-->
+	<!--[if lte IE 6]><link rel="stylesheet" type="text/css" href="/App_Themes/ie6.css"><![endif]-->
+	<!--[if lt IE 9]><script type="text/javascript" src="/Scripts/html5.js"></script><![endif]-->
+
+	<script type="text/javascript">
+		setEditorVariables(false, 840);
+		function getPrintPreviewType() { return 0; } function printPreview() {pPreview(getPrintPreviewType()); }
+	</script>
+	<script src="/Assets/Scripts/AlpineJS/3.14.1/alpine.min.js" type="text/javascript" defer="defer"></script>
+</head>
+<body class="wide hideContent" >
+
+    <script>jQuery(document).click(function (event) {
+	var target = jQuery(event.target);
+	if (target.attr('src') && target.parents('.image').length && target.parents('.widget').length) {
+		var text = target.attr('title');
+		
+		if (!text.length) {
+			text = "N/A";
+		}
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'Image',
+				eventAction: 'Image - ' + text,
+				eventLabel: window.location.href
+			});
+	}
+	if (target.is('button') || target.hasClass('button') || target.parents().hasClass('button')) {
+		var text = "";
+		if (target.parents('.button')[0]) {
+			text = target.parents('.button').first().text();
+		} else if (target.text().length) {
+			text = target.text();
+		} else if (target.attr('title').length) {
+			text = target.attr('title');
+		}
+		if (!text.length) {
+			text = "N/A";
+		}
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'Button',
+				eventAction: 'Button - ' + text,
+				eventLabel: window.location.href
+			});
+	}
+	if (target.parents('.widgetCustomHtml').length) {
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'Custom Html',
+				eventAction: 'Custom Html Clicked',
+				eventLabel: window.location.href
+			});
+	}
+	if (target.parents('.editor').length) {
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'Editor',
+				eventAction: 'Editor Link Clicked',
+				eventLabel: window.location.href
+			});
+	}
+	if (target.parents('.GraphicLinks').length) {
+		var text = "";
+		var targetGraphicLink = target;
+		if (target.hasClass('widgetGraphicLinksLink')) {
+			targetGraphicLink = jQuery(target.children()[0]);
+		}
+		if (targetGraphicLink.hasClass('text')) {
+			text = targetGraphicLink.text();
+		} else if (targetGraphicLink.attr('src').length) {
+			if (targetGraphicLink.attr('alt').length) {
+				text = targetGraphicLink.attr('alt');
+			} else {
+				text = targetGraphicLink.attr('src');
+			}
+		} else {
+			text = "N/A";
+		}
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'Graphic Links',
+				eventAction: 'Graphic Link - ' + text,
+				eventLabel: window.location.href
+			});
+	}
+	if (target.parents('.InfoAdvanced').length) {
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'Info Advanced',
+				eventAction: 'Info Advanced Clicked',
+				eventLabel: window.location.href
+			});
+	}
+	if (target.parents('.list').length) {
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'List',
+				eventAction: 'List Clicked',
+				eventLabel: window.location.href
+			});
+	}
+	if (target.parents('.megaMenuItem').length || target.parents('.topMenuItem').length) {
+		var megaMenuText = jQuery('.topMenuItem.mouseover').find('span').text();
+		var breadCrumbs = [];
+		jQuery('.breadCrumbs > li').each(function () {
+			 breadCrumbs.push(this.textContent);
+		});
+		var pageTitle = breadCrumbs.join('>');
+		var subTitleText = target.parents('.megaMenuItem').children('.widgetTitle').children().text();
+		var text = "";
+		if (pageTitle) {
+			text += pageTitle + " | ";
+		} else {
+			text += document.title + ' - ';
+		}
+		if (target.text() == "" && megaMenuText == "") {
+			text += "N/A";
+		} else if (target.text().length && megaMenuText.length) {
+			if (megaMenuText == target.text()) {
+				text += megaMenuText;
+			} else {
+				text += megaMenuText + " - " + subTitleText + " - " + target.text();
+			}
+		} else if (target.text() == "") {
+			text += megaMenuText;
+		} else {
+			text += target.text();
+		}
+		if (!text.length) {
+			text = "N/A";
+		}
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'Mega Menu',
+				eventAction: 'Mega Menu : ' + text,
+				eventLabel: window.location.href
+			});
+	}
+	if (target.parents('.widgetNewsFlash').length && target.parents('.widgetItem').length) {
+		var text = jQuery(target.parents('.widgetItem')[0]).find('.widgetTitle').children().text();
+		if (!text.length) {
+			text = "N/A";
+		}
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'News Flash',
+				eventAction: 'News Flash - ' + text,
+				eventLabel: window.location.href
+			});
+	}
+	if (target.hasClass('widgetQuickLinksLink') || target.find('.widgetQuickLinksLink').length) {
+		var text = target.text();
+		if (!text.length) {
+			text = "N/A";
+		}
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'Quick Links',
+				eventAction: 'Quick Links - ' + text,
+				eventLabel: window.location.href
+			});
+	}
+	if (target.attr('src') && target.parents('.cpSlideshow').length) {
+		var text = target.attr('title');
+		if (!text.length) {
+			text = "N/A";
+		}
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'Slideshow',
+				eventAction: 'Slideshow - ' + text,
+				eventLabel: window.location.href
+			});
+	}
+	if (target.parents('.widgetText').length) {
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'Text',
+				eventAction: 'Text Link Clicked',
+				eventLabel: window.location.href
+			});
+	}
+});</script>
+	<div id="popoverModal" class="cp-PopOver cp-PopOver--modal cp-AdminWrap" style="position: fixed; display: none;">
+	<div class="cp-PopOver-header">
+		<h3 class="cp-PopOver-title"></h3>
+		<button class="cp-Btn cp-PopOver-close" onclick="closePopOverModal(event)">
+			<svg class="cp-Icon--close" alt="close" title="close">
+				<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#iconClose"></use>
+			</svg>
+		</button>
+	</div>
+	<div id="cpPopOverBody" class="cp-PopOver-body">
+		<form id="cpPopOverForm" name="cpPopOverForm" novalidate></form>
+	</div>
+	<div id="cpPopOverFooter" class="cp-PopOver-footer">
+		<div class="cp-BtnGroup" id="actionButtons">
+			<!-- Action buttons will be dynamically added here -->
+		</div>
+	</div>
+</div>
+    <div id="fb-root"></div>
+<div id=skipToContentLinks>
+<a href="#cc4a61ef01-7f4b-463c-b15d-d78c950fb4b6" target="_self" class="skipToContentLink">Skip to Main Content</a>
+</div>
+    <form id="frmReferenceFormForTelerikEditorDialogs"></form>
+
+        <input type="hidden" id="GoogleMapsKey" value="AIzaSyDWUuE-ifkbhxblF920N8MjpBdTg1Wt784" />
+
+
+
+    <input type="hidden" id="cpcDomain" value="https://cp-civicplusuniversity2.civicplus.com">
+    <input type="hidden" id="hdnStructureID" value="9" />
+    <input type="hidden" id="hdnContentCollectionID" value="2289ca00-5fe0-4439-8aca-22d8a711c3cd" />
+    <input type="hidden" id="hdnWorkingCopyID" value="00000000-0000-0000-0000-000000000000" />
+    <input type="hidden" id="hdnThemeID" value="119" />
+    <input type="hidden" id="pageIsFrontEnd" value="true" />
+    <input type="hidden" id="pageModuleID" />
+    <input type="hidden" id="pagePageID" value="4445" />
+
+    <div id="stickyPlaceholder"></div>
+    <div id="outer-wrap" class="outer-wrap">
+        <div id="inner-wrap" class="inner-wrap">
+                <div id="divToolbars" class="cpToolbars newCP mui-fixed" style="">
+                    
+<style>
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700); 
+.alertText .customAlert {
+    color: #EAEAEA;
+    display: inline-block;
+    font-family: 'Open Sans Condensed', sans-serif; 
+    text-transform: uppercase;
+    font-weight: bold;
+    height: 27px;
+    left: 57px;
+    line-height: 27px;
+    overflow: hidden;
+    position: absolute;
+    top: 15px;
+    white-space: nowrap;
+    width: 268px;
+}
+</style>
+  <div id="1_divAlertBar" class="alertToolbar cpToolbar" style="background: #983222;">
+    <div id="1_divAlertToolbarInner" class="alertToolbarInner" style="font-size: 12px;">
+        <a href="/AlertCenter.aspx" id="1_lnkAlertText" class="alertText" style="border-right: 1px solid #000000;">
+            <img src="/Common/Images/AlertCenter/alertBarBlink.svg" id="1_imgDot" alt="Emergency Alert" class="redDot" />
+            <span id="1_customAlert" class="customAlert">NOTICE</span>
+        </a>
+        <span id="1_spnAlertContainer" class="alertContainer"><a href="/AlertCenter.aspx?AID=Stage-1-Fire-Restrictions-for-Unincorpor-406" target="_self" class="alert" style="border-left: 1px solid #635e65; border-right: 1px solid #000000;background: #030303 url(/Common/images/AlertCenter/alertBarBlackTextBckg.png) repeat-x; color: #FFFFFF;">
+	Stage 1 Fire Restrictions for Unincorporated Jefferson County
+	<span style="color: #FFFFFF;">Read On...</span>
+</a>
+</span>
+    </div>
+  </div>
+  <div id="1_divAlertBarEmpty" class="alertBarEmpty"></div>
+  
+
+
+
+                </div>
+            <div id="bodyWrapper">
+                <div id="mainNavHolderMobile" class="mainNavHolderMobile"></div>
+                
+<div data-cpRole="structuralContainer" id="bodyContainerTS">
+<!-- Header Container --><header data-cpRole="structuralContainer" id="headerContainerTS" class="fixedTopTS">
+<div class="siteWrap"><div data-cpRole="banner" id="bannerLogoTS" class="bannerLogoTS empty">
+
+
+
+
+				<a id="bannerLogoTS-487" style="			display: block; text-align: center;
+" class="bannerObject" href="/4874" target="_self"><img alt="Jefferson County Colorado Development and Transportation Home Page" class="bannerObject" height="340" src="/ImageRepository/Document?documentID=49419" width="1260" /></a>
+</div><nav data-cpRole="nav" id="mainNav" class="siteNav mainNav" role="navigation">
+<ol id="mainNavMenu" data-parent="4874" class="rootNavMenu" role="menu"><!--
+--><li id="MainItem3022" class="topMenuItem" role="none" data-pageid="3022" data-displaymegamenu="True"><!--
+			--><!--
+			--> <a role = "menuitem"  aria-haspopup=true aria-expanded='false' aria-controls="mainNavMegaMenu3022" id = "mainNavDivisions" class="navMainItem mainNavItem mainNavItem1 " href="/2041/Divisions" target = "_self" >   Divisions  </a>			<!--
+			--><!--
+			--></li><!----><li id="MainItem2955" class="topMenuItem" role="none" data-pageid="2955" data-displaymegamenu="True"><!--
+			--><!--
+			--> <a role = "menuitem"  aria-haspopup=true aria-expanded='false' aria-controls="mainNavMegaMenu2955" id = "mainNavServices" class="navMainItem mainNavItem mainNavItem2 " href="/2883/Services" target = "_self" >   Services  </a>			<!--
+			--><!--
+			--></li><!----><li id="MainItem2914" class="topMenuItem" role="none" data-pageid="2914" data-displaymegamenu="True"><!--
+			--><!--
+			--> <a role = "menuitem"  aria-haspopup=true aria-expanded='false' aria-controls="mainNavMegaMenu2914" id = "mainNavProjects" class="navMainItem mainNavItem mainNavItem3 " href="/2914/Projects" target = "_self" >   Projects  </a>			<!--
+			--><!--
+			--></li><!----><li id="MainItem2918" class="topMenuItem" role="none" data-pageid="2918" data-displaymegamenu="True"><!--
+			--><!--
+			--> <a role = "menuitem"  aria-haspopup=true aria-expanded='false' aria-controls="mainNavMegaMenu2918" id = "mainNavRegulationsPlans" class="navMainItem mainNavItem mainNavItem4 " href="/2918/Regulations-Plans" target = "_self" >   Regulations &amp; Plans  </a>			<!--
+			--><!--
+			--></li><!----><li id="MainItem2916" class="topMenuItem" role="none" data-pageid="2916" data-displaymegamenu="True"><!--
+			--><!--
+			--> <a role = "menuitem"  aria-haspopup=true aria-expanded='false' aria-controls="mainNavMegaMenu2916" id = "mainNavIWantTo" class="navMainItem mainNavItem mainNavItem5 " href="/2916/I-Want-To" target = "_self" >   I Want To...  </a>			<!--
+			--><!--
+			--></li><!----><li id="MainItem784" class="topMenuItem" role="none" data-pageid="784" data-displaymegamenu="True"><!--
+			--><!--
+			--> <a role = "menuitem"  aria-haspopup=true aria-expanded='false' aria-controls="mainNavMegaMenu784" id = "mainNavSitemap" class="navMainItem mainNavItem mainNavItem6 " href="/784/Sitemap" target = "_self" >   Sitemap  </a>			<!--
+			--><!--
+			--></li><!---->
+</ol>
+
+
+	<script type="text/javascript">
+		(function () {
+			function setupMenu() {
+				const menuID = 'mainNavMenu';
+				const menuType = MAIN_MENU;
+
+				//setup menu manager properties for main menu
+				if (!menuManager.mobileMainNav && true)
+					menuManager.adjustMainItemsWidth('#' + menuID);
+				menuManager.isMainMenuEditable = false;
+				menuManager.mainMenuMaxSubMenuLevels = 4;
+				menuManager.setMOMMode(2, menuType);
+
+				//Init main menu
+				const setupDraggable = menuManager.isMainMenuEditable;
+				const urlToGetHiddenMenus = '/Pages/MenuMain/HiddenMainSubMenus?pageID=4874&moduleID=&themeID=119&menuContainerID=mainNav';
+
+				menuManager.setupMenu(menuID, 'mainNav', menuType, setupDraggable, urlToGetHiddenMenus);
+				menuManager.mainMenuInit = true;
+				menuManager.mainMenuTextResizer = false;
+				if (1.00 > 0)
+					menuManager.mainMenuTextResizerRatio = 1.00;
+				if (window.isResponsiveEnabled)
+					menuManager.mainMenuReady.resolve();
+
+			}
+
+			if (document.readyState === "complete"
+				|| document.readyState === "loaded"
+				|| document.readyState === "interactive") {
+				setupMenu();
+				return;
+			}
+
+			document.addEventListener("DOMContentLoaded", setupMenu);
+		})();
+	</script>
+
+
+<aside data-cpRole="megaMenu" id="megaMenu" class="megaMenu" style="display: none;"><input type="hidden" id="megaMenuPopupDirection" value="0"><input type="hidden" id="megaMenuWidthReference" value="0"><aside role="menu" data-cpRole="contentContainer" id="mainNavMegaMenu3022" class="contentTop mainNavMegaMenu megaMenuContainer pageID_3022 hidden" data-orientation="horizontal">	<div id="cc28cbf276-23df-4134-ba16-f66619f18c6c" data-containerid="28cbf276-23df-4134-ba16-f66619f18c6c" class="pageContent cpGrid cpGrid24">
+				                
+
+
+
+	</div>
+</aside><aside role="menu" data-cpRole="contentContainer" id="mainNavMegaMenu2955" class="contentTop mainNavMegaMenu megaMenuContainer pageID_2955 hidden" data-orientation="horizontal">	<div id="ccca088a29-10c8-424b-92bb-0cf1fbc68c53" data-containerid="ca088a29-10c8-424b-92bb-0cf1fbc68c53" class="pageContent cpGrid cpGrid24">
+				                
+
+
+
+	</div>
+</aside><aside role="menu" data-cpRole="contentContainer" id="mainNavMegaMenu2914" class="contentTop mainNavMegaMenu megaMenuContainer pageID_2914 hidden" data-orientation="horizontal">	<div id="cc044b42b7-77a2-4089-8a36-97a4530a37c6" data-containerid="044b42b7-77a2-4089-8a36-97a4530a37c6" class="pageContent cpGrid cpGrid24">
+				                
+
+
+
+	</div>
+</aside><aside role="menu" data-cpRole="contentContainer" id="mainNavMegaMenu2918" class="contentTop mainNavMegaMenu megaMenuContainer pageID_2918 hidden" data-orientation="horizontal">	<div id="cc852f826e-efb5-4c0a-bd73-e9fc16ab3c4d" data-containerid="852f826e-efb5-4c0a-bd73-e9fc16ab3c4d" class="pageContent cpGrid cpGrid24">
+				                
+
+
+
+	</div>
+</aside><aside role="menu" data-cpRole="contentContainer" id="mainNavMegaMenu2916" class="contentTop mainNavMegaMenu megaMenuContainer pageID_2916 hidden" data-orientation="horizontal">	<div id="ccbbb37460-0e13-446d-b7fa-352d4b03ef02" data-containerid="bbb37460-0e13-446d-b7fa-352d4b03ef02" class="pageContent cpGrid cpGrid24">
+				                
+
+
+
+	</div>
+</aside><aside role="menu" data-cpRole="contentContainer" id="mainNavMegaMenu784" class="contentTop mainNavMegaMenu megaMenuContainer pageID_784 hidden" data-orientation="horizontal">	<div id="cc71000a7a-9730-4ce9-8b67-6ef5339eee8e" data-containerid="71000a7a-9730-4ce9-8b67-6ef5339eee8e" class="pageContent cpGrid cpGrid24">
+				                
+
+
+
+	</div>
+</aside></aside></nav></div>
+</header><!-- County Home --><div data-cpRole="structuralContainer" id="homeContainerTS" class="fixedLeftTS">
+<div class="siteWrap4"><div data-cpRole="contentContainer" id="homeTS">	<div id="cc9851e082-1daf-41b3-bbb9-c57670730474" data-containerid="9851e082-1daf-41b3-bbb9-c57670730474" class="pageContent cpGrid cpGrid24 isLockedContainer showInMobile">
+				                
+
+		<div class="row outer wide"><!--
+--><div class="outer col col24 first last" style="" data-widgetcontainerid="1d032c19-b23d-420a-86bd-3201114b23c4">				
+	<div class="row nest first last wide">
+	
+	<div class="inner col col24 first last id27edc839-5a19-45a5-a1ae-0e231aa6a31d" style="" data-widgetcontainerid="27edc839-5a19-45a5-a1ae-0e231aa6a31d">	
+<div data-widget-id="1561223f-a4c4-4298-a3af-eef90770f1c7" data-widget-controller-path="/GraphicLinks/Widget">
+
+
+
+
+<div id="graphicLinkWidget1561223f-a4c4-4298-a3af-eef90770f1c7" class="widget widgetGraphicLinks skin136 widgetOptionSet24 wide" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}' data-elementquerymatch='matchMultiColumn' data-elementqueryunmatch='unmatchMultiColumn' data-modulewidgettype="graphicLinks">
+	<div class="widgetHeader">
+		<div class="">
+				</div>
+	</div>
+	<div class="widgetBody cpGrid cpGrid1 ">
+		<nav class="widgetGraphicLinksNav" aria-labelledby="GraphicLinkHeaderText">
+				<ul class="semanticList">
+					<!--
+
+	    --><li class="widgetItem GraphicLinks">
+
+<div>
+	<a href="/" target="_self" class="fancyButton fancyButton2154 " >
+		<span>
+			<span><span class="text">County Home</span></span>
+		</span>
+	</a>
+</div>
+		<style scoped="scoped">.fancyButton2154.fancyButton:link,.fancyButton2154.fancyButton:visited, .fancyButton2154div.fancyButton{
+	background-image: url('/ImageRepository/Document?documentID=49284');
+	background-repeat: no-repeat;
+	background-position: center top;
+background-size: 40px;
+}
+.fancyButton2154.fancyButton:hover,.fancyButton2154.fancyButton:focus,.fancyButton2154.fancyButton:active,.fancyButton2154.fancyButton.hover{
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+.fancyButton2154.fancyButton:link > span,.fancyButton2154.fancyButton:visited > span, .fancyButton2154div.fancyButton > span{
+}
+.fancyButton2154.fancyButton:hover > span,.fancyButton2154.fancyButton:focus > span,.fancyButton2154.fancyButton:active > span,.fancyButton2154.fancyButton.hover > span{
+}
+.fancyButton2154.fancyButton .text{
+	color: rgb(0, 0, 0);
+	font-size: .9em;
+	font-family: "Aleo";
+	padding-top: 3em;
+	font-style: normal;
+	text-decoration: underline;
+	padding-top: 3em;
+	background-repeat: no-repeat;
+	background-position: left top;
+
+line-height: 1.1;}
+.fancyButton2154.fancyButton:hover .text,.fancyButton2154.fancyButton:focus .text,.fancyButton2154.fancyButton:active .text,.fancyButton2154.fancyButton.hover .text{
+	text-decoration: underline;
+	background-repeat: no-repeat;
+	background-position: left top;
+
+
+}
+</style>
+
+ </li><!--
+				-->
+				</ul>
+			</nav>
+		</div>
+	<div class="widgetFooter">
+			</div>
+</div>
+</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!--		--></div> <!-- outer row -->
+
+
+	</div>
+</div></div>
+</div><!-- Banner --><div data-cpRole="structuralContainer" id="bannerContainerTS" class="noOverflowTS">
+<div data-cpRole="banner" id="banner1"><div data-cpRole="structuralContainer" id="bannerSizingTS">
+<div class="siteWrap"><div data-cpRole="structuralContainer" id="bannerContentTS">
+<div data-cpRole="contentContainer" id="searchTS">	<div id="cca30fb351-da4d-413b-95bc-32126aeebf01" data-containerid="a30fb351-da4d-413b-95bc-32126aeebf01" class="pageContent cpGrid cpGrid24 isLockedContainer showInMobile">
+				                
+
+		<div class="row outer wide"><!--
+--><div class="outer col col24 first last" style="" data-widgetcontainerid="fd8d2487-c28a-4f40-a3f8-cd297bc4d979">				
+	<div class="row nest first last wide">
+	
+	<div class="inner col col24 first last idc426dcb3-e5de-411e-8409-a587310cb33b" style="" data-widgetcontainerid="c426dcb3-e5de-411e-8409-a587310cb33b">	
+<div data-widget-id="c8d9a5f4-7189-4e12-a2dd-76825f73d9a5" data-widget-controller-path="/Layout/WidgetSearch">
+	
+	<script defer type="text/javascript" src="/Common/Controls/jquery-ui-1.14.2/jquery-ui.min.js"></script>
+	<script defer src="/Areas/Layout/Assets/Scripts/Search.js" type="text/javascript"></script>
+	<script defer type="text/javascript">
+
+		$(document).ready(function () {
+			try {
+				// Minimum characters required before performing a search/autocomplete
+				var minPrefixLength = 3;
+				var autoCompleteDebounceDelay = 500;
+				var searchFieldSelector = "#searchField" + 'c8d9a5f4-7189-4e12-a2dd-76825f73d9a5';
+				var checkboxSelector = "#ysnSearchOnlyDept" + 'c8d9a5f4-7189-4e12-a2dd-76825f73d9a5';
+				var buttonSelector = ".widgetSearchButton" + 'c8d9a5f4-7189-4e12-a2dd-76825f73d9a5';
+				var autoCompleteCache = {};
+				var autoCompleteCacheKeys = [];
+				var autoCompleteCacheLimit = 25;
+				var currentAutoCompleteRequest = null;
+				var currentAutoCompleteRequestKey = null;
+				var autoCompleteDebounceTimer = null;
+				var autoCompleteDebounceKey = null;
+				var pendingAutoCompleteResponses = [];
+
+				function normalizeAutoCompleteTerm(term) {
+					return $.trim((term || "") + "").replace(/\s+/g, " ");
+				}
+
+				function shouldSearch(term) {
+					return normalizeAutoCompleteTerm(term).length >= minPrefixLength;
+				}
+
+				function getAutoCompleteUrl() {
+					return '/Search/AutoComplete' + ($(checkboxSelector).is(':checked') || false? '?departmentId=0' : '');
+				}
+
+				function getAutoCompleteCacheKey(requestUrl, term) {
+					return requestUrl + "|" + term.toLowerCase();
+				}
+
+				function cacheAutoCompleteResult(cacheKey, data) {
+					if (!Object.prototype.hasOwnProperty.call(autoCompleteCache, cacheKey)) {
+						autoCompleteCacheKeys.push(cacheKey);
+						if (autoCompleteCacheKeys.length > autoCompleteCacheLimit) {
+							delete autoCompleteCache[autoCompleteCacheKeys.shift()];
+						}
+					}
+					autoCompleteCache[cacheKey] = data;
+				}
+
+				function respondToPendingAutoComplete(data) {
+					var responses = pendingAutoCompleteResponses;
+					pendingAutoCompleteResponses = [];
+					for (var i = 0; i < responses.length; i++) {
+						responses[i](data);
+					}
+				}
+
+				function cancelPendingAutoComplete() {
+					clearTimeout(autoCompleteDebounceTimer);
+					autoCompleteDebounceKey = null;
+					if (currentAutoCompleteRequest != null) {
+						currentAutoCompleteRequest.abort();
+						currentAutoCompleteRequest = null;
+					}
+					currentAutoCompleteRequestKey = null;
+					respondToPendingAutoComplete([]);
+				}
+
+				function createWidgetAutoCompleteSource(options) {
+					return function (request, response) {
+						var term = normalizeAutoCompleteTerm(request.term);
+						if (!options.shouldSearch(term)) {
+							response([]);
+							return;
+						}
+
+						var requestUrl = options.url();
+						var cacheKey = getAutoCompleteCacheKey(requestUrl, term);
+						if (Object.prototype.hasOwnProperty.call(autoCompleteCache, cacheKey)) {
+							response(autoCompleteCache[cacheKey]);
+							if (options.success) {
+								options.success(autoCompleteCache[cacheKey]);
+							}
+							return;
+						}
+
+						if (currentAutoCompleteRequestKey === cacheKey || autoCompleteDebounceKey === cacheKey) {
+							pendingAutoCompleteResponses.push(response);
+							return;
+						}
+
+						cancelPendingAutoComplete();
+						autoCompleteDebounceKey = cacheKey;
+						pendingAutoCompleteResponses.push(response);
+						autoCompleteDebounceTimer = setTimeout(function () {
+							autoCompleteDebounceKey = null;
+							currentAutoCompleteRequestKey = cacheKey;
+							currentAutoCompleteRequest = $.ajax({
+								url: requestUrl,
+								dataType: "json",
+								timeout: options.timeout,
+								data: {
+									term: term,
+								},
+								success: function (data) {
+									if (currentAutoCompleteRequestKey === cacheKey) {
+										cacheAutoCompleteResult(cacheKey, data);
+										respondToPendingAutoComplete(data);
+										if (options.success) {
+											options.success(data);
+										}
+									}
+								},
+								error: function (xmlhttprequest, textstatus, message) {
+									if (textstatus === "abort") {
+										return;
+									}
+
+									if (options.error) {
+										options.error(xmlhttprequest, textstatus, message);
+									}
+
+									respondToPendingAutoComplete([]);
+								},
+								complete: function (xmlhttprequest) {
+									if (currentAutoCompleteRequest === xmlhttprequest) {
+										currentAutoCompleteRequest = null;
+										currentAutoCompleteRequestKey = null;
+									}
+								}
+							});
+						}, options.delay);
+					};
+				}
+
+				// click handler for search buttons
+				$(buttonSelector).click(function (e) {
+					e.preventDefault();
+					var $btn = $(this);
+					var $field = $btn.siblings(".widgetSearchBox");
+					var term = $field.val() + "";
+					if (!shouldSearch(term)) {
+						// do nothing until user types enough characters
+						$field.focus();
+						return;
+					}
+
+					if ($(checkboxSelector).is(':checked') || false)
+					{
+						doWidgetSearch($.trim(term), Number(0));
+					}
+					else {
+						doWidgetSearch($.trim(term), 0);
+					}
+				});
+
+				// enter key handler for the search field
+				$(searchFieldSelector).keypress(function (e) {
+					var code = e.which || e.keyCode;
+					if (code === 13) {
+						e.preventDefault();
+						var $this = $(this);
+						var term = $this.val() + "";
+						if (!shouldSearch(term)) {
+							// do nothing until user types enough characters
+							$this.focus();
+							return false;
+						}
+
+						if ($(checkboxSelector).is(':checked') || false) {
+							doWidgetSearch($.trim(term), Number(0));
+						} else {
+							doWidgetSearch($.trim(term), 0);
+						}
+						return false;
+					}
+					return true;
+				});
+
+				// autocomplete: set minLength and guard source
+				if (true) {
+					var $searchField = $(searchFieldSelector).autocomplete({
+						minLength: minPrefixLength,
+						source: createWidgetAutoCompleteSource({
+							delay: autoCompleteDebounceDelay,
+							timeout: 10000,
+							shouldSearch: shouldSearch,
+							url: getAutoCompleteUrl,
+							success: function () {
+								$('.autoCompleteError').remove();
+							},
+							error: function (xmlhttprequest, textstatus, message) {
+								if (textstatus === "timeout") {
+									if ($(searchFieldSelector).siblings('.autoCompleteError').length == 0)
+										$('<span class="autoCompleteError"><p class="alert error">Search autocomplete is currently not responding. Please try again later.</p></span>').insertAfter($(searchFieldSelector));
+								}
+							}
+						}),
+						html: true,
+						delay: 0,
+						select: function (event, ui) {
+							$(this).val(ui.item.value);
+							$(this).next().click();
+						}
+					});
+
+					$searchField.data("ui-autocomplete")._renderItem = function (ul, item) {
+						return $("<li class=\"itemList\"></li>")
+							.data("ui-autocomplete-item", item)
+							.append("<a>" + item.label + "</a>")
+							.appendTo(ul);
+					};
+				}
+
+				// keep searchBtnApplyQuery consistent with prefix rule
+				window.searchBtnApplyQuery = function() {
+					var $field = $(searchFieldSelector);
+					var term = $field.val() + "";
+					if (shouldSearch(term)) {
+						// update href for the icon/button (if present)
+						var btn = document.getElementById("btnSearchIcon");
+						if (btn) btn.href = "/Search?searchPhrase=" + encodeURIComponent($.trim(term));
+					} else {
+						var btn = document.getElementById("btnSearchIcon");
+						if (btn) btn.href = "#";
+					}
+				};
+			}
+			catch(e) {} //we're going to eat this error. Autocomplete won't work but we dont wan't to break anything else on the page.
+		});
+	</script>
+
+	<section id="widgetPreviewSearch" class="widget widgetSearch skin136 widgetOptionSet85" style="display: block;" aria-label="Search">
+				<!-- For the button right and inside -->
+		<div class="widgetBody buttonRightInside">
+			<input class="widgetSearchBox widgetSearchBoxc8d9a5f4-7189-4e12-a2dd-76825f73d9a5" cp5ph="true" id="searchFieldc8d9a5f4-7189-4e12-a2dd-76825f73d9a5" name="searchField" onchange="searchBtnApplyQuery();" placeholder="Search our site..." type="text" value="" />
+						<a href="/Search/Results" id="btnSearchIcon" class="widgetSearchButton widgetSearchButtonc8d9a5f4-7189-4e12-a2dd-76825f73d9a5" role="button"><img alt="Search" class="imageHover" data-hover="/ImageRepository/Document?documentID=46969" data-image="/ImageRepository/Document?documentID=46970" src="/ImageRepository/Document?documentID=46970" /></a>
+
+			<label class="searchLabel" aria-hidden="true" for="searchFieldc8d9a5f4-7189-4e12-a2dd-76825f73d9a5">Search</label>
+		</div>
+
+	</section>
+
+
+<style scoped>
+	  
+		.widgetSearch ::-webkit-input-placeholder {
+		color: #163A64;
+	  }
+		.widgetSearch :-moz-placeholder { /* Firefox 18- */
+	   color: #163A64;
+	}
+		.widgetSearch ::-moz-placeholder {  /* Firefox 19+ */
+	   color: #163A64;
+	}
+	.widgetSearch :-ms-input-placeholder {
+	   color: #163A64;
+	}
+	
+
+	.widgetSearch .widgetBody .widgetSearchBoxc8d9a5f4-7189-4e12-a2dd-76825f73d9a5
+	{
+		color: #163A64;
+		font-family: Open Sans;
+height: 60px;
+border: none;
+background: #fff;
+border-radius: 10px;
+box-shadow: 0 3px 10px #02304733;
+padding: 0 80px 0 20px;
+	}
+	.widgetSearch .widgetBody .widgetSearchButtonc8d9a5f4-7189-4e12-a2dd-76825f73d9a5
+	{
+		width: 45px;
+margin: 7px;
+	}
+	.widgetSearch .widgetSearch-onlyDeptc8d9a5f4-7189-4e12-a2dd-76825f73d9a5
+	{
+		display: inline-block;
+		color: #333;
+		
+		
+		 padding-top: 10px;
+	}
+	#ysnSearchOnlyDeptc8d9a5f4-7189-4e12-a2dd-76825f73d9a5
+	{
+		position: relative;
+		top: .125em;
+	}
+
+</style>
+
+<link rel="stylesheet" href="/Common/Controls/jquery-ui-1.14.2/jquery-ui.min.css">
+<link rel="stylesheet" href="/Common/Controls/jquery-ui-1.14.2/jquery-ui.theme.min.css">
+
+
+
+<script type="text/javascript">
+	//Updates search icons href to have the correct queryString
+	function searchBtnApplyQuery() {
+		document.getElementById("btnSearchIcon").href = "/Search?searchPhrase=" + document.getElementById("searchFieldc8d9a5f4-7189-4e12-a2dd-76825f73d9a5").value;
+	}
+</script>
+
+</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!--		--></div> <!-- outer row -->
+
+
+	</div>
+</div>
+</div></div>
+</div>
+
+
+
+
+		<div id="bannerImagesJSON486" class="hidden"></div>
+		<div id="bannerSlideshowControls_banner1" class="bannerSlideshowControlsNew none " style="display:none">
+			<a id="arrowPrev_banner1" tabindex="0" class="arrowNew prev" aria-label="Banner Arrow Previous"><svg style=" " class=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#iconSlideshowArrowLeft"></use></svg></a>
+			<a id="arrowNext_banner1" tabindex="0" class="arrowNew next" aria-label="Banner Arrow Next"><svg style=" " class=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#iconSlideshowArrowRight"></use></svg></a>
+		</div>
+			<script type="text/javascript">
+				$(window).on("load", function () {
+					$.when(window.Pages.rwdSetupComplete)
+						.done(function () {
+							renderExternalBannerSlideshow('banner1',
+								{"BannerOptionID":486,"ThemeID":119,"SlotName":"banner1","Name":"Default","IsDefault":true,"BannerMode":2,"SlideShowSlideTiming":"5","SlideshowTransition":0,"SlideShowTransitionTiming":"1","ImageScale":true,"ImageAlignment":1,"ImageScroll":true,"MuteSound":true,"VideoType":0,"Status":40,"SlideshowControlsPosition":0,"SlideshowControlsAlignment":0,"SlideshowBannerControlsColorScheme":0,"DisplayVideoPauseButton":false,"VideoPauseButtonAlignment":1,"VideoPauseButtonControlsAlignment":0,"VideoPauseButtonStyle":"#FFFFFF","VideoPauseButtonBackgroundStyle":"#000000","VideoPauseButtonAlignmentClass":"alignRight viewport","DisplaySlideshowPauseButton":false,"SlideshowControlsColor":"#FFFFFF","SlideshowControlsBackgroundColor":"#000000","SlideshowPauseButtonClass":"isHidden","BannerImages":[{"BannerImageID":1427,"BannerOptionID":486,"FileName":"/ImageRepository/Document?documentID=49418","Height":700,"Width":2200,"StartingOn":null,"StoppingOn":null,"IsLink":false,"LinkAddress":null,"Sequence":1,"RecordStatus":0,"ModifiedBy":0,"ModifiedOn":"\/Date(-62135568000000)\/","AltText":""},{"BannerImageID":1428,"BannerOptionID":486,"FileName":"/ImageRepository/Document?documentID=49417","Height":700,"Width":2200,"StartingOn":null,"StoppingOn":null,"IsLink":false,"LinkAddress":null,"Sequence":2,"RecordStatus":0,"ModifiedBy":0,"ModifiedOn":"\/Date(-62135568000000)\/","AltText":""},{"BannerImageID":1429,"BannerOptionID":486,"FileName":"/ImageRepository/Document?documentID=49416","Height":700,"Width":2200,"StartingOn":null,"StoppingOn":null,"IsLink":false,"LinkAddress":null,"Sequence":3,"RecordStatus":0,"ModifiedBy":0,"ModifiedOn":"\/Date(-62135568000000)\/","AltText":""}],"BannerVideos":[],"RecordStatus":0,"ModifiedBy":0,"ModifiedOn":"\/Date(-62135568000000)\/"},
+								'/App_Themes/2024 - Interior/Images/',
+								'Rotating');
+						});
+				});
+			</script>
+
+</div>
+</div><!-- Content container --><div data-cpRole="structuralContainer" id="mainContainerTS">
+<div class="siteWrap2"><div data-cpRole="structuralContainer" id="mainWrapTS" class="mainWrap" role="main">
+<div data-cpRole="structuralContainer" id="siteSidebarTS" class="siteSidebar">
+<aside data-cpRole="contentContainer" id="sidebarContainer1TS">	<div id="cc3a7be7f3-f415-43cd-965a-6276fee4de4c" data-containerid="3a7be7f3-f415-43cd-965a-6276fee4de4c" class="pageContent cpGrid cpGrid24 showInMobile">
+				                
+
+
+
+	</div>
+</aside><nav data-cpRole="nav" id="secondaryNav" class="siteNav secondaryNav">
+
+
+
+
+
+	<ol role="menu" id="secondaryMenusecondaryNav" data-parent="2330" class="rootNavMenu accordionNav">
+	<li class="topMenuItem sideNavLi hasAccordionChildren" id="SideItem2341" data-pageid="2341">
+		<div class="accordionNavItem">
+			<a href="/2341/jMap-Online-Mapping" target="_self" class="navMainItem secondaryNavItem cpComponent" data-type="SecondaryMainItem">jMap Online Mapping</a>
+		</div>
+			</li>
+	<li class="topMenuItem sideNavLi hasAccordionChildren" id="SideItem2344" data-pageid="2344">
+		<div class="accordionNavItem">
+			<a href="/2166/Permit-Search" target="_self" class="navMainItem secondaryNavItem cpComponent" data-type="SecondaryMainItem">Permit Search</a>
+		</div>
+			</li>
+	<li class="topMenuItem sideNavLi hasAccordionChildren" id="SideItem2348" data-pageid="2348">
+		<div class="accordionNavItem">
+			<a href="/2348/Online-Applications" target="_self" class="navMainItem secondaryNavItem cpComponent" data-type="SecondaryMainItem">Online Applications</a>
+		</div>
+			</li>
+	<li class="topMenuItem sideNavLi hasAccordionChildren" id="SideItem2332" data-pageid="2332">
+		<div class="accordionNavItem">
+			<a href="/2332/Zoning-Complaints" target="_self" class="navMainItem secondaryNavItem cpComponent" data-type="SecondaryMainItem">Zoning Complaints</a>
+		</div>
+			</li>
+	<li class="topMenuItem sideNavLi hasAccordionChildren" id="SideItem2338" data-pageid="2338">
+		<div class="accordionNavItem">
+			<a href="/2338/Distressed-Properties" target="_self" class="navMainItem secondaryNavItem cpComponent" data-type="SecondaryMainItem">Distressed Properties</a>
+		</div>
+			</li>
+	<li class="topMenuItem sideNavLi hasAccordionChildren" id="SideItem4445" data-pageid="4445">
+		<div class="accordionNavItem">
+			<a href="/4445/Mandatory-Application-Documents" target="_self" class="navMainItem secondaryNavItem cpComponent" data-type="SecondaryMainItem">Mandatory Application Documents</a>
+		</div>
+			</li>
+	<li class="topMenuItem sideNavLi hasAccordionChildren" id="SideItem5059" data-pageid="5059">
+		<div class="accordionNavItem">
+			<a href="/5059/Beware-of-Fraudulent-Emails" target="_self" class="navMainItem secondaryNavItem cpComponent" data-type="SecondaryMainItem">Beware of Fraudulent Emails</a>
+		</div>
+			</li>
+
+	</ol>
+
+
+	<script type="text/javascript">
+		(function () {
+			function setupSecondaryMenuProperties() {
+				//setup menu manager properties for secondary menu
+				menuManager.isSideMenuEditable = false;
+				menuManager.sideMenuMaxSubMenuLevels = 4;
+				menuManager.sideMenuHasCustomLinks = true;
+			}
+
+			if (document.readyState === "loading") {
+				document.addEventListener("DOMContentLoaded", setupSecondaryMenuProperties, { once: true });
+				return;
+			}
+
+			setupSecondaryMenuProperties();
+		})();
+	</script>
+
+	<script type="text/javascript">
+		(function () {
+			function setupAccordionSecondaryNav() {
+				var $menuContainer = $('#secondaryNav');
+
+				$menuContainer.find('*[id^="SideItem"]').each(function () {
+					var ids = $('[id="' + this.id + '"]');
+					if (ids.length > 1)
+						$.each(ids, function (index, value) {
+							value.id = value.id + '_' + index;
+						});
+				});
+
+				$menuContainer.find('.hasAccordionChildren .openAccordionNav').off('click.secondaryNav').on('click.secondaryNav', function (e) {
+					e.preventDefault();
+					showHideAccordionMenuForSecondaryNav($(this));
+				});
+
+				$menuContainer.find(".grippy").each(function () {
+					menuManager.setupDraggableElement($(this), SIDE_MENU, '#secondaryNav');
+				});
+
+				$menuContainer.find("li").each(function () {
+					menuManager.setupDroppableAccordionElement($(this), SIDE_MENU);
+				});
+			}
+
+			if (document.readyState === "loading") {
+				document.addEventListener("DOMContentLoaded", setupAccordionSecondaryNav, { once: true });
+				return;
+			}
+
+			setupAccordionSecondaryNav();
+		})();
+	</script>
+
+
+
+</nav><aside data-cpRole="contentContainer" id="sidebarContainer2TS">	<div id="ccf9205a4f-f357-41ff-8f3d-132dc00a638b" data-containerid="f9205a4f-f357-41ff-8f3d-132dc00a638b" class="pageContent cpGrid cpGrid24 showInMobile">
+				                
+
+
+
+	</div>
+</aside>
+</div><div data-cpRole="structuralContainer" id="outerContentWrapTS" class="outerContentWrap">
+<div data-cpRole="structuralContainer" id="contentWrapTS" class="contentWrap">
+<div data-cpRole="breadCrumbs" id="breadCrumbs" class="breadCrumbContainer">		<ol class="semanticList breadCrumbs">
+			<li><a class="breadCrumb" href="/4874/Development-Transportation">Development & Transportation</a></li><li><a class="breadCrumb" href="/784/Sitemap">Sitemap</a></li><li><a class="breadCrumb" href="/786/Planning-Zoning">Planning & Zoning</a></li><li><a class="breadCrumb" href="/2330/Online-Services">Online Services</a></li><li id="currentBCPage" data-pageid="4445"><a href class="breadCrumb" aria-current="page">Mandatory Application Documents</a></li>
+		</ol>
+
+	   
+    
+</div><div data-cpRole="mainContentContainer" id="moduleContent">
+	
+	<div id="page" class="moduleContentNew">
+		
+
+	<input id="hdnPageID" name="hdnPageID" type="hidden" value="4445" />
+	<input id="hdnParentID" name="hdnParentID" type="hidden" value="2330" />
+	<input id="hdnVersionID" name="hdnVersionID" type="hidden" value="37620" />
+	<input id="pageMenuTitle" name="pageMenuTitle" type="hidden" value="Mandatory Application Documents" />
+	<input id="pageShowFeatureColumn" name="pageShowFeatureColumn" type="hidden" value="True" />
+	<input id="hdnIsLayoutPage" name="hdnIsLayoutPage" type="hidden" value="False" />
+	<input id="hdnPageStatus" name="hdnPageStatus" type="hidden" value="Published" />
+
+				<h1 id="versionHeadLine" class="headline">
+
+Mandatory Documents for Online Permit Application Submittal		</h1>
+			<p class="breadCrumbContainer">
+			Last Content Update:
+			<time title="8/20/2026 9:27:14 AM"> 3 weeks ago</time>
+		</p>
+
+		<div id="cc4a61ef01-7f4b-463c-b15d-d78c950fb4b6" data-containerid="4a61ef01-7f4b-463c-b15d-d78c950fb4b6" class="pageContent cpGrid cpGrid24"  >
+			
+
+		<div class="row outer wide"><!--
+--><div class="outer col col24 first last" style="" data-widgetcontainerid="40ef83ff-3d89-48d4-bed6-57e91542c94a">				
+	<div class="row nest first last wide">
+	
+	<div class="inner col col24 first last id2ae89fdf-def0-424a-93d0-7deb026df19d" style="" data-widgetcontainerid="2ae89fdf-def0-424a-93d0-7deb026df19d">	
+<div class="widget editor pageStyles narrow" id="divEditor7d6572cc-225b-4929-833b-59feabecd411" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}'>
+	    <div class="fr-view">
+
+
+        <p id="isPasted">Please apply using the <a href="https://citizenportal.jeffco.us/" target="_blank" rel="noopener">Jefferson County Citizen Portal</a>. <a href="/DocumentCenter/View/39978/Planning-and-Zoning-Citizen-Portal-Guide" target="_blank" rel="noopener" aria-label="Review our user guide Opens in new window">Review our user guide (PDF)</a> for helpful tips about how to navigate the new citizen portal. <a href="/cdn-cgi/l/email-protection#4a3a302b2e2723240a202f2c2c2925643f39">Reach out to our administrative team</a> or your Case Manager with questions or concerns.</p><p>Please also review our <a href="/DocumentCenter/View/52478/" target="_blank" rel="noopener">Application Types and How to Submit guide (PDF)</a> for clarification about which applications should be submitted on the Citizen Portal or via email.</p><p>If the type of permit you are submitting is <strong>not</strong> listed below, the permit application and supporting documents should be <a href="/cdn-cgi/l/email-protection#4b3b313b2e3926223f380b212e2d2d2824653e38">emailed to Planning &amp; Zoning</a>.</p>
+    </div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript">
+	$(document).ready(function (e) {		
+	    renderSlideshowIfApplicable($('#divEditor' + '7d6572cc-225b-4929-833b-59feabecd411'));
+	});
+</script>
+</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!--		--></div> <!-- outer row -->
+		<div class="row outer wide"><!--
+--><div class="outer col col24 first last" style="" data-widgetcontainerid="c13c1629-7651-4ac6-b766-d33ea6080b0d">				
+	<div class="row nest first last wide">
+	
+	<div class="inner col col24 first last id86f3da0c-41cb-458d-a2ce-ed17c3085ad4" style="" data-widgetcontainerid="86f3da0c-41cb-458d-a2ce-ed17c3085ad4">	
+<div class="widget editor pageStyles narrow" id="divEditorddf57c1d-6e5a-48f7-b83d-f9d6e7dc6ac4" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}'>
+	    <div class="fr-view">
+
+
+        <p><a id="top"></a></p><h2 class="subhead1">On this page:</h2><ul><li><a href="#bp">Building Permit Applications</a></li><li id="isPasted"><a href="#landdisturbance">Land Disturbance and Floodplain Permit Applications</a></li><li>Development Review Permit Applications:<ul><li><a href="#dev">Preliminary and Final Plat</a></li><li><a href="#dev">Pre-Applications</a></li><li><a href="#dev">Rezoning Applications</a></li><li><a href="#dev">Site Development Plan Applications</a></li></ul></li><li><a href="#minoradjustment">Minor Adjustment Applications</a></li></ul><p><a id="bp" style="padding-top: 40px;"></a></p><hr><p>Scroll down and click on the type of project you want to apply for. The mandatory documents will populate below.</p><p><em>Note: Additional documents will be required on a case by case basis.</em></p><hr><h2 class="subhead1">Building Permit Applications</h2>
+    </div>
+
+<script type="text/javascript">
+	$(document).ready(function (e) {		
+	    renderSlideshowIfApplicable($('#divEditor' + 'ddf57c1d-6e5a-48f7-b83d-f9d6e7dc6ac4'));
+	});
+</script>
+</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!--		--></div> <!-- outer row -->
+		<div class="row outer wide"><!--
+--><div class="outer col col24 first last" style="" data-widgetcontainerid="88a702d3-3838-4922-91c6-1d268a6e4108">				
+	<div class="row nest first last wide">
+	
+	<div class="inner col col24 first last id62c429fa-1262-4b79-a308-364901972718" style="" data-widgetcontainerid="62c429fa-1262-4b79-a308-364901972718">	
+
+	<div id="divTabbed89d12699-87d0-4c47-882a-d179ae2e0d02" class="widget widgetTabbed narrow skin203 accordionTabs" data-widgetid="89d12699-87d0-4c47-882a-d179ae2e0d02">
+
+		<div class="cpTabPanels">
+					<ol class="tabbedWidgetNarrow cpTabs  accordion"  aria-hidden="False.ToString().ToLowerInvariant()" >
+						<li class="" role="presentation">	<a href="#tab89d12699-87d0-4c47-882a-d179ae2e0d02_0" class="tabButton" id="tabBtnNarrow89d12699-87d0-4c47-882a-d179ae2e0d02_0" role="button" aria-controls="tab89d12699-87d0-4c47-882a-d179ae2e0d02_0" aria-expanded="false" ><span class="tabName editable" data-sequence="0" data-tabname="New Dwelling" contenteditable="false">New Dwelling</span></a>
+</li>
+					</ol>
+				<div class="tabbedWidget cpTabPanel " style="display: none;" id="tab89d12699-87d0-4c47-882a-d179ae2e0d02_0" role="region" aria-labelledby="tabBtn89d12699-87d0-4c47-882a-d179ae2e0d02_0" >
+
+<div class="widget editor pageStyles narrow" id="divEditorf0e9e099-189f-410b-8a9f-5e52ef8c6408" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}'>
+	    <div class="fr-view">
+
+
+        <h2 class="subhead1">In order to start a New Dwelling Building Permit application, you need the following documents ready to upload from your computer:</h2><ul><li>Completed and Signed <a aria-label="Application form Opens in new window" href="https://www.jeffco.us/DocumentCenter/View/1473" rel="noopener" target="_blank">Application form</a> (PDF)</li><li>Surveyed Site Plan or Scaled Site Plan (project dependent); <a aria-label="informational handout is available here Opens in new window" href="/DocumentCenter/View/58344" rel="noopener" target="_blank">informational handout is available here</a> (PDF)</li><li>Architectural/Engineered Plans</li><li>Proof of Water</li><li>Proof of Sanitation</li><li>Proof of Fire Protection</li><li>Current Deed</li></ul><h3 class="subhead2">If you have these documents ready to go, Click &quot;Apply Now&quot; below and you will be taken to the Online Application system.</h3><p style="text-align: center;"><a aria-label="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank"><img src="/ImageRepository/Document?documentId=32637" class="fr-dib" alt="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" style="width: 30%;"></a><a href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank" aria-label="Apply Now Opens in new window">Apply Now</a></p>
+    </div>
+
+<script type="text/javascript">
+	$(document).ready(function (e) {		
+	    renderSlideshowIfApplicable($('#divEditor' + 'f0e9e099-189f-410b-8a9f-5e52ef8c6408'));
+	});
+</script>
+</div>
+				</div>
+					<ol class="tabbedWidgetNarrow cpTabs  accordion"  aria-hidden="False.ToString().ToLowerInvariant()" >
+						<li class="" role="presentation">	<a href="#tab89d12699-87d0-4c47-882a-d179ae2e0d02_1" class="tabButton" id="tabBtnNarrow89d12699-87d0-4c47-882a-d179ae2e0d02_1" role="button" aria-controls="tab89d12699-87d0-4c47-882a-d179ae2e0d02_1" aria-expanded="false" ><span class="tabName editable" data-sequence="1" data-tabname="Accessory Structure" contenteditable="false">Accessory Structure</span></a>
+</li>
+					</ol>
+				<div class="tabbedWidget cpTabPanel " style="display: none;" id="tab89d12699-87d0-4c47-882a-d179ae2e0d02_1" role="region" aria-labelledby="tabBtn89d12699-87d0-4c47-882a-d179ae2e0d02_1" >
+
+<div class="widget editor pageStyles narrow" id="divEditorba6f2971-bc5b-404d-a5aa-9c3f19583f1f" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}'>
+	    <div class="fr-view">
+
+
+        <h2 class="subhead1">In order to start an Accessory Structure Building Permit application, you need the following documents ready to upload from your computer:</h2><ul><li>Completed and Signed <a aria-label="(fillable PDF form is available here) Opens in new window" href="https://www.jeffco.us/DocumentCenter/View/1473" rel="noopener" target="_blank">Application form</a> (PDF)</li><li id="isPasted">Surveyed Site Plan or Scaled Site Plan (project dependent); <a aria-label="an informational PDF handout is available here Opens in new window" href="/DocumentCenter/View/58344/" rel="noopener" target="_blank">an informational handout is available here</a> (PDF)</li><li>Architectural/Engineered Plans</li><li>Current Deed</li></ul><h3 class="subhead2">If you have these documents ready to go, Click &quot;Apply Now&quot; below and you will be taken to the Online Application system.</h3><p style="text-align: center;" id="isPasted"><a aria-label="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank"><img src="/ImageRepository/Document?documentId=32637" alt="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" style="width: 30%;" class="fr-fic fr-dii"></a><br><a href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank" aria-label="Apply Now Opens in new window">Apply Now</a></p>
+    </div>
+
+<script type="text/javascript">
+	$(document).ready(function (e) {		
+	    renderSlideshowIfApplicable($('#divEditor' + 'ba6f2971-bc5b-404d-a5aa-9c3f19583f1f'));
+	});
+</script>
+</div>
+				</div>
+					<ol class="tabbedWidgetNarrow cpTabs  accordion"  aria-hidden="False.ToString().ToLowerInvariant()" >
+						<li class="" role="presentation">	<a href="#tab89d12699-87d0-4c47-882a-d179ae2e0d02_2" class="tabButton" id="tabBtnNarrow89d12699-87d0-4c47-882a-d179ae2e0d02_2" role="button" aria-controls="tab89d12699-87d0-4c47-882a-d179ae2e0d02_2" aria-expanded="false" ><span class="tabName editable" data-sequence="2" data-tabname="Interior Residential Remodel" contenteditable="false">Interior Residential Remodel</span></a>
+</li>
+					</ol>
+				<div class="tabbedWidget cpTabPanel " style="display: none;" id="tab89d12699-87d0-4c47-882a-d179ae2e0d02_2" role="region" aria-labelledby="tabBtn89d12699-87d0-4c47-882a-d179ae2e0d02_2" >
+
+<div class="widget editor pageStyles narrow" id="divEditora8befe51-29e6-4e44-9422-23035bbc7867" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}'>
+	    <div class="fr-view">
+
+
+        <h2 class="subhead1">In order to start an Interior Remodel Building Permit application, you need the following documents ready to upload from your computer:</h2><ul><li>Completed and Signed <a aria-label="(fillable PDF form is available here) Opens in new window" href="/DocumentCenter/View/1473" rel="noopener" target="_blank">Application form</a> (PDF)</li><li>Floor Plan (demolition plan and proposed floor plan)</li></ul><h3 class="subhead2">If you have these documents ready to go, Click &quot;Apply Now&quot; below and you will be taken to the Online Application system.</h3><p style="text-align: center;" id="isPasted"><a aria-label="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank"><img src="/ImageRepository/Document?documentId=32637" alt="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" style="width: 30%;" class="fr-fic fr-dii"></a><br><a href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank" aria-label="Apply Now Opens in new window">Apply Now</a></p>
+    </div>
+
+<script type="text/javascript">
+	$(document).ready(function (e) {		
+	    renderSlideshowIfApplicable($('#divEditor' + 'a8befe51-29e6-4e44-9422-23035bbc7867'));
+	});
+</script>
+</div>
+				</div>
+					<ol class="tabbedWidgetNarrow cpTabs  accordion"  aria-hidden="False.ToString().ToLowerInvariant()" >
+						<li class="" role="presentation">	<a href="#tab89d12699-87d0-4c47-882a-d179ae2e0d02_3" class="tabButton" id="tabBtnNarrow89d12699-87d0-4c47-882a-d179ae2e0d02_3" role="button" aria-controls="tab89d12699-87d0-4c47-882a-d179ae2e0d02_3" aria-expanded="false" ><span class="tabName editable" data-sequence="3" data-tabname="Deck" contenteditable="false">Deck</span></a>
+</li>
+					</ol>
+				<div class="tabbedWidget cpTabPanel " style="display: none;" id="tab89d12699-87d0-4c47-882a-d179ae2e0d02_3" role="region" aria-labelledby="tabBtn89d12699-87d0-4c47-882a-d179ae2e0d02_3" >
+
+<div class="widget editor pageStyles narrow" id="divEditora71c0d83-c5b5-4c6f-9d9e-e3c405bbbdfd" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}'>
+	    <div class="fr-view">
+
+
+        <h2 class="subhead1" id="isPasted">In order to start a New Deck Building Permit application, you need the following documents ready to upload from your computer:</h2><ul><li>Completed and Signed <a aria-label="(fillable PDF form is available here) Opens in new window" href="/DocumentCenter/View/1473" rel="noopener" target="_blank">Application form</a> (PDF)</li><li id="isPasted">Surveyed Site Plan or Scaled Site Plan (project dependent); <a aria-label="an informational PDF handout is available here Opens in new window" href="/DocumentCenter/View/58344/" rel="noopener" target="_blank">an informational handout is available here</a> (PDF)</li><li>Architectural/Engineered Plans</li></ul><p><em>* All new decks, deck expansions, replacement decks and deck repairs require a Building Permit.</em><br><em>** Concrete pads do not require a building permit.</em><br><em>*** For more detailed information, see our <a href="/3975/" rel="noopener" target="_blank">Decks section</a>.</em></p><h3 class="subhead2" id="isPasted">If you have these documents ready to go, Click &quot;Apply Now&quot; below and you will be taken to the Online Application system.</h3><p style="text-align: center;" id="isPasted"><a aria-label="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank"><img src="/ImageRepository/Document?documentId=32637" alt="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" style="width: 30%;" class="fr-fic fr-dii"></a><br><a href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank" aria-label="Apply Now Opens in new window">Apply Now</a></p>
+    </div>
+
+<script type="text/javascript">
+	$(document).ready(function (e) {		
+	    renderSlideshowIfApplicable($('#divEditor' + 'a71c0d83-c5b5-4c6f-9d9e-e3c405bbbdfd'));
+	});
+</script>
+</div>
+				</div>
+					<ol class="tabbedWidgetNarrow cpTabs  accordion"  aria-hidden="False.ToString().ToLowerInvariant()" >
+						<li class="" role="presentation">	<a href="#tab89d12699-87d0-4c47-882a-d179ae2e0d02_4" class="tabButton" id="tabBtnNarrow89d12699-87d0-4c47-882a-d179ae2e0d02_4" role="button" aria-controls="tab89d12699-87d0-4c47-882a-d179ae2e0d02_4" aria-expanded="false" ><span class="tabName editable" data-sequence="4" data-tabname="Commercial Project" contenteditable="false">Commercial Project</span></a>
+</li>
+					</ol>
+				<div class="tabbedWidget cpTabPanel " style="display: none;" id="tab89d12699-87d0-4c47-882a-d179ae2e0d02_4" role="region" aria-labelledby="tabBtn89d12699-87d0-4c47-882a-d179ae2e0d02_4" >
+
+<div class="widget editor pageStyles narrow" id="divEditor5ab8b083-78db-42be-8a6e-ea53405393b5" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}'>
+	    <div class="fr-view">
+
+
+        <h2 class="subhead1" id="isPasted">In order to start a Commercial Building Permit application, you need the following documents ready to upload from your computer:</h2><ul><li>Completed and Signed <a aria-label="(fillable PDF form is available here) Opens in new window" href="https://www.jeffco.us/DocumentCenter/View/1473" rel="noopener" target="_blank">Application form</a> (PDF)</li><li id="isPasted">Surveyed Site Plan or Scaled Site Plan (project dependent); <a href="/DocumentCenter/View/58344/" rel="noopener" target="_blank">an informational handout is available here</a> (PDF)</li><li>Parking Plan</li><li>Floor Plans (demolition plan and proposed floor plan)</li></ul><h3 class="subhead2" id="isPasted">If you have these documents ready to go, Click &quot;Apply Now&quot; below and you will be taken to the Online Application system.</h3><p style="text-align: center;" id="isPasted"><a aria-label="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank"><img src="/ImageRepository/Document?documentId=32637" alt="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" style="width: 30%;" class="fr-fic fr-dii"></a><br><a href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank" aria-label="Apply Now Opens in new window">Apply Now</a></p>
+    </div>
+
+<script type="text/javascript">
+	$(document).ready(function (e) {		
+	    renderSlideshowIfApplicable($('#divEditor' + '5ab8b083-78db-42be-8a6e-ea53405393b5'));
+	});
+</script>
+</div>
+				</div>
+					</div>
+	</div>
+	<script type="text/javascript">
+
+		//If responsive not enabled, execute this after a timeout
+		if(!isResponsiveEnabled)
+		{
+			window.setTimeout(function(){
+				var tabbedWidgetID = 'divTabbed89d12699-87d0-4c47-882a-d179ae2e0d02';
+				typeof setTabbedWidgetsTabHeight === "function" && setTabbedWidgetsTabHeight(tabbedWidgetID);
+			}, 1500);
+		}
+
+		function reinitCarousels() {
+			if (window.carouselsToInit) {
+				for (var i = 0; i < window.carouselsToInit.length; i++) {
+					carouselsToInit[i]();
+				}
+			}
+		}
+		function sizeTabbedContent(element){
+			if(window.Pages){
+				if(window.Pages.onResizeHandlers){
+					var setTabbedInterval = setInterval(function () {
+						window.Pages.onResizeHandlers.forEach(function(car){car();});
+					}, 25)
+
+
+					setTimeout(function () {
+						clearInterval(setTabbedInterval);
+						if ($.cookie("enableLiveEdit") === "true") {
+							setInterval(function () {
+								window.Pages.onResizeHandlers.forEach(function(car){car();});
+							}, 2000);
+						}
+					}, 2500);
+					element.onclick="window.setTimeout(function(){reinitCarousels();},2);"
+				}
+			}
+		}
+
+		function adjustTab(e) {
+			e.preventDefault();
+			window.setTimeout(function(){
+				reinitCarousels();
+			}, 2);
+			sizeTabbedContent(this);
+		}
+
+		var tabButtons = document.querySelectorAll("#divTabbed89d12699-87d0-4c47-882a-d179ae2e0d02 .tabButton");
+
+		tabButtons.forEach(function (tabButton) {
+			tabButton.addEventListener("click", adjustTab);
+		});
+
+	</script>
+
+
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!--		--></div> <!-- outer row -->
+		<div class="row outer wide"><!--
+--><div class="outer col col24 first last" style="" data-widgetcontainerid="f73bcdf9-e5b9-4bbb-b417-d223266877be">				
+	<div class="row nest first last wide">
+	
+	<div class="inner col col24 first last id65c9629c-a0d8-4714-a2d0-4a276e41e13d" style="" data-widgetcontainerid="65c9629c-a0d8-4714-a2d0-4a276e41e13d">	
+<div class="widget editor pageStyles narrow" id="divEditor958f0d24-1128-4210-a3c4-850946b61c64" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}'>
+	    <div class="fr-view">
+
+
+        <h3 class="subhead2">Helpful tools for Building Permits:</h3><ul><li><a href="/DocumentCenter/View/10902" aria-label="Residential Building Permit Checklist (PDF) [Opens in new window]" rel="noopener" target="_blank">Residential Building Permit Checklist (PDF)</a></li><li><a href="/DocumentCenter/View/2073" aria-label="Commercial Building Permit Checklist (PDF) [Opens in new window]" rel="noopener" target="_blank">Commercial Building Permit Checklist (PDF)</a></li><li><a href="https://www.jeffco.us/2659/" aria-label="Types of Permits web page [Opens in new window]" rel="noopener" target="_blank">Types of Permits web page</a></li></ul><p><a href="#top"><em><strong>Back to Top</strong></em></a></p><hr><p><a id="landdisturbance" style="padding-top: 40px;"></a></p><h2 class="subhead1">Land Disturbance and Floodplain Applications</h2><p>There are three types of Land Disturbance Permit: Notice of Intent, Grading Permit, and Natural Surface Trail. The type of permit that applies depends on the total area of land disturbance and the nature of the work proposed. See <a href="/DocumentCenter/View/2497/" rel="noopener" target="_blank">Section 16.B</a> for criteria. If you are unsure which permit applies, please use the <a aria-label="Do I need a Land Disturbance Permit Worksheet Opens in new window" href="/DocumentCenter/View/10314/" rel="noopener" target="_blank">Do I need a Land Disturbance Permit Worksheet</a> or <a href="/cdn-cgi/l/email-protection#66161c110304260c0300000509481315">email us</a>.&nbsp;</p>
+    </div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript">
+	$(document).ready(function (e) {		
+	    renderSlideshowIfApplicable($('#divEditor' + '958f0d24-1128-4210-a3c4-850946b61c64'));
+	});
+</script>
+</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!--		--></div> <!-- outer row -->
+		<div class="row outer wide"><!--
+--><div class="outer col col24 first last" style="" data-widgetcontainerid="5c5728f8-26b6-4600-851b-c9792456f678">				
+	<div class="row nest first last wide">
+	
+	<div class="inner col col24 first last id7f81d7dd-fbf7-47dc-82f3-4973dca42dfc" style="" data-widgetcontainerid="7f81d7dd-fbf7-47dc-82f3-4973dca42dfc">	
+
+	<div id="divTabbed71807f9a-c83f-4de4-ab76-81ee8a0da4df" class="widget widgetTabbed narrow skin203 accordionTabs" data-widgetid="71807f9a-c83f-4de4-ab76-81ee8a0da4df">
+
+		<div class="cpTabPanels">
+					<ol class="tabbedWidgetNarrow cpTabs  accordion"  aria-hidden="False.ToString().ToLowerInvariant()" >
+						<li class="" role="presentation">	<a href="#tab71807f9a-c83f-4de4-ab76-81ee8a0da4df_0" class="tabButton" id="tabBtnNarrow71807f9a-c83f-4de4-ab76-81ee8a0da4df_0" role="button" aria-controls="tab71807f9a-c83f-4de4-ab76-81ee8a0da4df_0" aria-expanded="false" ><span class="tabName editable" data-sequence="0" data-tabname="Grading Permit" contenteditable="false">Grading Permit</span></a>
+</li>
+					</ol>
+				<div class="tabbedWidget cpTabPanel " style="display: none;" id="tab71807f9a-c83f-4de4-ab76-81ee8a0da4df_0" role="region" aria-labelledby="tabBtn71807f9a-c83f-4de4-ab76-81ee8a0da4df_0" >
+
+<div class="widget editor pageStyles narrow" id="divEditor4f1a24f4-fbaf-474e-af74-4dd554ea3984" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}'>
+	    <div class="fr-view">
+
+
+        <p id="isPasted">The Grading Permit process applies to land disturbance that exceeds &frac12; acre. A Grading Permit undergoes a formal County review process with a referral to internal and external reviewers. All plans and reports shall bear the signature and seal of a registered professional engineer. &nbsp;&nbsp;</p><h2 class="subhead1">Submittal Requirements for a Grading Permit:&nbsp;</h2><ul><li>Cover Letter (narrative describing the proposed work) - <em>Mandatory</em>&nbsp;</li><li>Completed and Signed <a aria-label="Application Form Opens in new window" href="/DocumentCenter/View/2239" rel="noopener" target="_blank">Application Form</a> - <em>Mandatory</em>&nbsp;</li><li>A Grading Erosion and Sediment Control (GESC) Plan in conformance with <a aria-label="Section 16 Opens in new window" href="/DocumentCenter/View/2497/" rel="noopener" target="_blank" id="isPasted">Section 16</a> of the Zoning Resolution - <em>Mandatory</em>&nbsp;</li><li>If there are geologic hazards or steep slopes proposed, a Geologic and/or Soils Investigation Report in conformance with <a aria-label="Section 16 Opens in new window" href="/DocumentCenter/View/2497/" rel="noopener" target="_blank">Section 16</a> of the Zoning Resolution - <em>Mandatory</em></li><li>A Drainage Report in conformance with the <a aria-label="Storm Drainage Design and Technical Criteria Opens in new window" href="/DocumentCenter/View/1901/" rel="noopener" target="_blank">Storm Drainage Design and Technical Criteria</a> - <em>Mandatory</em></li><li>A quantity estimate (<a href="/DocumentCenter/View/10424" rel="noopener" target="_blank">Exhibit A</a>) for BMP&apos;s - <em>Mandatory</em></li><li>Current Deed - <em>Mandatory</em></li><li>If there will be any retaining walls taller than 3 feet, details and supporting calculations</li></ul><h3 class="subhead2">If you have these documents ready to go, Click &quot;Apply Now&quot; below and you will be taken to the Online Application system.</h3><p style="text-align: center;" id="isPasted"><a aria-label="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank"><img src="/ImageRepository/Document?documentId=32637" alt="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" style="width: 30%;" class="fr-fic fr-dii"></a><br><a href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank" aria-label="Apply Now Opens in new window">Apply Now</a></p>
+    </div>
+
+<script type="text/javascript">
+	$(document).ready(function (e) {		
+	    renderSlideshowIfApplicable($('#divEditor' + '4f1a24f4-fbaf-474e-af74-4dd554ea3984'));
+	});
+</script>
+</div>
+				</div>
+					<ol class="tabbedWidgetNarrow cpTabs  accordion"  aria-hidden="False.ToString().ToLowerInvariant()" >
+						<li class="" role="presentation">	<a href="#tab71807f9a-c83f-4de4-ab76-81ee8a0da4df_1" class="tabButton" id="tabBtnNarrow71807f9a-c83f-4de4-ab76-81ee8a0da4df_1" role="button" aria-controls="tab71807f9a-c83f-4de4-ab76-81ee8a0da4df_1" aria-expanded="false" ><span class="tabName editable" data-sequence="1" data-tabname="Notice of Intent" contenteditable="false">Notice of Intent</span></a>
+</li>
+					</ol>
+				<div class="tabbedWidget cpTabPanel " style="display: none;" id="tab71807f9a-c83f-4de4-ab76-81ee8a0da4df_1" role="region" aria-labelledby="tabBtn71807f9a-c83f-4de4-ab76-81ee8a0da4df_1" >
+
+<div class="widget editor pageStyles narrow" id="divEditor0e093f73-4ceb-4823-ac93-5593eaeea983" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}'>
+	    <div class="fr-view">
+
+
+        <p id="isPasted">The Notice of Intent process applies to land disturbance that does not exceed &frac12; acre for a new start building permit for a primary structure (residential). The County relies on your Professional Engineer to prepare the Plans in accordance with County regulations and to certify through the N-1 Form that the Plans comply with County standards.</p><p><em>Note: This Notice of Intent process shall only apply to permits that meet the regulatory requirements related to grading, drainage and circulation; if any relief from standards is needed, a Grading Permit is required. </em></p><h2 class="subhead1">Submittal Requirements for a Notice of Intent:&nbsp;</h2><ul><li>Cover Letter (narrative describing the proposed work) - <em>Mandatory</em>&nbsp;</li><li>Completed and Signed <a aria-label="Completed and Signed Application Form Opens in new window" href="/DocumentCenter/View/10315" rel="noopener" target="_blank">Application form</a> - <em>Mandatory</em>&nbsp;</li><li>Completed and signed <a aria-label="N-1 Form Opens in new window" href="/DocumentCenter/View/18177" rel="noopener" target="_blank">N-1 Form</a> - <em>Mandatory</em>&nbsp;</li><li>A Grading Erosion and Sediment Control (GESC) Plan in conformance with&nbsp;<a aria-label="Section 16 Opens in new window" href="/DocumentCenter/View/2497/" rel="noopener" target="_blank">Section 16</a> of the Zoning Resolution - <em>Mandatory</em>&nbsp;</li><li>A Drainage Report in conformance with the&nbsp;<a aria-label="Storm Drainage Design and Technical Criteria Opens in new window" href="/DocumentCenter/View/1901/" rel="noopener" target="_blank">Storm Drainage Design and Technical Criteria</a>&nbsp;- <em>Mandatory</em>&nbsp;</li><li>Current Deed - <em>Mandatory</em>&nbsp;</li><li>If there will be any retaining walls taller than 3 feet, you will need to apply for a separate <a aria-label="Miscellaneous Permit Opens in new window" href="/DocumentCenter/View/10349" rel="noopener" target="_blank">Miscellaneous Permit</a>&nbsp;</li></ul><h3 class="subhead2" id="isPasted">If you have these documents ready to go, Click &quot;Apply Now&quot; below and you will be taken to the Online Application system.</h3><p style="text-align: center;" id="isPasted"><a aria-label="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank"><img src="/ImageRepository/Document?documentId=32637" alt="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" style="width: 30%;" class="fr-fic fr-dii"></a><br><a href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank" aria-label="Apply Now Opens in new window">Apply Now</a></p>
+    </div>
+
+<script type="text/javascript">
+	$(document).ready(function (e) {		
+	    renderSlideshowIfApplicable($('#divEditor' + '0e093f73-4ceb-4823-ac93-5593eaeea983'));
+	});
+</script>
+</div>
+				</div>
+					<ol class="tabbedWidgetNarrow cpTabs  accordion"  aria-hidden="False.ToString().ToLowerInvariant()" >
+						<li class="" role="presentation">	<a href="#tab71807f9a-c83f-4de4-ab76-81ee8a0da4df_2" class="tabButton" id="tabBtnNarrow71807f9a-c83f-4de4-ab76-81ee8a0da4df_2" role="button" aria-controls="tab71807f9a-c83f-4de4-ab76-81ee8a0da4df_2" aria-expanded="false" ><span class="tabName editable" data-sequence="2" data-tabname="Natural Surface Trail" contenteditable="false">Natural Surface Trail</span></a>
+</li>
+					</ol>
+				<div class="tabbedWidget cpTabPanel " style="display: none;" id="tab71807f9a-c83f-4de4-ab76-81ee8a0da4df_2" role="region" aria-labelledby="tabBtn71807f9a-c83f-4de4-ab76-81ee8a0da4df_2" >
+
+<div class="widget editor pageStyles narrow" id="divEditor939da94e-917c-48ef-bd6f-0813e846cce0" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}'>
+	    <div class="fr-view">
+
+
+        <p id="isPasted">A Natural Surface Trail Permit is required for work involving the creation of natural surface trails, such as hiking or mountain biking trails. However, land disturbance for natural surface trails that disturb less than one acre are exempt. Land disturbance over one acre associated with the construction of natural surface trails shall follow the procedure outlined in the land disturbance section of the Zoning Resolution prior to commencement of any trail construction.&nbsp;</p><h2 class="subhead1">Submittal Requirements for a Natural Surface Trail:&nbsp;</h2><ul><li>Cover Letter - <em>Mandatory</em></li><li>Natural Surface Trail&nbsp;<a href="/DocumentCenter/View/10324" rel="noopener" target="_blank">Application Form</a> - <em>Mandatory</em>&nbsp;</li><li>Plans Showing Scope of Project and Construction Phasing - <em>Mandatory</em>&nbsp;</li><li>Construction Guide that Includes Erosion and Sediment Control Measures - <em>Mandatory</em>&nbsp;</li><li>Current Deed - <em>Mandatory</em> </li></ul><h3 class="subhead2">If you have these documents ready to go, Click &quot;Apply Now&quot; below and you will be taken to the Online Application system.</h3><p style="text-align: center;" id="isPasted"><a aria-label="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank"><img src="/ImageRepository/Document?documentId=32637" alt="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" style="width: 30%;" class="fr-fic fr-dii"></a><br><a href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank" aria-label="Apply Now Opens in new window">Apply Now</a></p>
+    </div>
+
+<script type="text/javascript">
+	$(document).ready(function (e) {		
+	    renderSlideshowIfApplicable($('#divEditor' + '939da94e-917c-48ef-bd6f-0813e846cce0'));
+	});
+</script>
+</div>
+				</div>
+					<ol class="tabbedWidgetNarrow cpTabs  accordion"  aria-hidden="False.ToString().ToLowerInvariant()" >
+						<li class="" role="presentation">	<a href="#tab71807f9a-c83f-4de4-ab76-81ee8a0da4df_3" class="tabButton" id="tabBtnNarrow71807f9a-c83f-4de4-ab76-81ee8a0da4df_3" role="button" aria-controls="tab71807f9a-c83f-4de4-ab76-81ee8a0da4df_3" aria-expanded="false" ><span class="tabName editable" data-sequence="3" data-tabname="Floodplain Permit" contenteditable="false">Floodplain Permit</span></a>
+</li>
+					</ol>
+				<div class="tabbedWidget cpTabPanel " style="display: none;" id="tab71807f9a-c83f-4de4-ab76-81ee8a0da4df_3" role="region" aria-labelledby="tabBtn71807f9a-c83f-4de4-ab76-81ee8a0da4df_3" >
+
+<div class="widget editor pageStyles narrow" id="divEditor97fd0adc-60f0-4717-99c8-282c0c5348ba" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}'>
+	    <div class="fr-view">
+
+
+        <p id="isPasted">Per <a aria-label="Section 37 Opens in new window" href="/DocumentCenter/View/2472/" rel="noopener" target="_blank" id="isPasted">Section 37</a> of the Zoning Resolution (ZR), any work in a floodplain requires a Floodplain Development Permit. There are two types of Floodplain Development Permits: Major and Minor. The type of permit that applies depends on the floodplain designation and the nature of the work proposed. See <a aria-label="Section 37 Opens in new window" href="/DocumentCenter/View/2472/" rel="noopener" target="_blank" id="isPasted">Section 37</a>.H for criteria.&nbsp;</p><h2 class="subhead1">Submittal Requirements for a Floodplain Permit (Minor):&nbsp;</h2><ul><li>Cover Letter (narrative describing the proposed work) - <em>Mandatory</em>&nbsp;</li><li>Completed and Signed <a aria-label="pplication Form Opens in new window" href="/DocumentCenter/View/10504" rel="noopener" target="_blank">Application Form (PDF)</a> - <em>Mandatory</em>&nbsp;</li><li>Current Deed - <em>Mandatory</em>&nbsp;</li><li>A Site Plan that that follows the format described in ZR <a aria-label="Section 37 Opens in new window" href="/DocumentCenter/View/2472/" rel="noopener" target="_blank">Section 37</a>.H - <em>Mandatory</em>&nbsp;</li><li>If the work will include improvements to an existing building, the assessed value of the existing building and a cost estimate of the proposed work.&nbsp;</li></ul><h2 class="subhead1">Submittal Requirements for a Floodplain Permit (Major):&nbsp;</h2><ul><li>Cover Letter (narrative describing the proposed work) - <em>Mandatory</em>&nbsp;</li><li>Completed and Signed <a href="/DocumentCenter/View/10504" target="_blank" rel="noopener">Application Form</a> - <em>Mandatory</em>&nbsp;</li><li>Current Deed - <em>Mandatory</em>&nbsp;</li><li>A Site Plan that that follows the format described in ZR <a aria-label="Section 37 Opens in new window" href="/DocumentCenter/View/2472/" rel="noopener" target="_blank">Section 37</a>.I.2 and includes Grading, Erosion and Sediment Control details as described in ZR <a aria-label="Section 16 Opens in new window" href="/DocumentCenter/View/2497/" rel="noopener" target="_blank">Section 16</a>.E - <em>Mandatory</em>&nbsp;</li><li>A Floodplain Study that follows the format described in ZR <a aria-label="Section 37 Opens in new window" href="/DocumentCenter/View/2472/" rel="noopener" target="_blank">Section 37</a>.I.2 - <em>Mandatory</em>&nbsp;</li><li>If the work will include improvements to an existing building, the assessed value of the existing building and a cost estimate of the proposed work.&nbsp;</li></ul><h3 class="subhead2">To assist the applicant with the Floodplain Permit Application process, Staff created 3 standard forms:</h3><ul><li><a aria-label="No-Adverse Impact Opens in new window" href="/DocumentCenter/View/36671" rel="noopener" target="_blank">No-Adverse Impact</a></li><li><a aria-label="No-Rise Certification Opens in new window" href="/DocumentCenter/View/36672" rel="noopener" target="_blank">No-Rise Certification</a>&nbsp;</li><li><a aria-label="Manufactured Home in Floodplain Opens in new window" href="/DocumentCenter/View/36670" rel="noopener" target="_blank">Manufactured Home in Floodplain</a>&nbsp;</li></ul><h3 class="subhead2">If you have these documents ready to go, Click &quot;Apply Now&quot; below and you will be taken to the Online Application system.</h3><p style="text-align: center;" id="isPasted"><a aria-label="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank"><img src="/ImageRepository/Document?documentId=32637" alt="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" style="width: 30%;" class="fr-fic fr-dii"></a><br><a href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank" aria-label="Apply Now Opens in new window">Apply Now</a></p>
+    </div>
+
+<script type="text/javascript">
+	$(document).ready(function (e) {		
+	    renderSlideshowIfApplicable($('#divEditor' + '97fd0adc-60f0-4717-99c8-282c0c5348ba'));
+	});
+</script>
+</div>
+				</div>
+					</div>
+	</div>
+	<script type="text/javascript">
+
+		//If responsive not enabled, execute this after a timeout
+		if(!isResponsiveEnabled)
+		{
+			window.setTimeout(function(){
+				var tabbedWidgetID = 'divTabbed71807f9a-c83f-4de4-ab76-81ee8a0da4df';
+				typeof setTabbedWidgetsTabHeight === "function" && setTabbedWidgetsTabHeight(tabbedWidgetID);
+			}, 1500);
+		}
+
+		function reinitCarousels() {
+			if (window.carouselsToInit) {
+				for (var i = 0; i < window.carouselsToInit.length; i++) {
+					carouselsToInit[i]();
+				}
+			}
+		}
+		function sizeTabbedContent(element){
+			if(window.Pages){
+				if(window.Pages.onResizeHandlers){
+					var setTabbedInterval = setInterval(function () {
+						window.Pages.onResizeHandlers.forEach(function(car){car();});
+					}, 25)
+
+
+					setTimeout(function () {
+						clearInterval(setTabbedInterval);
+						if ($.cookie("enableLiveEdit") === "true") {
+							setInterval(function () {
+								window.Pages.onResizeHandlers.forEach(function(car){car();});
+							}, 2000);
+						}
+					}, 2500);
+					element.onclick="window.setTimeout(function(){reinitCarousels();},2);"
+				}
+			}
+		}
+
+		function adjustTab(e) {
+			e.preventDefault();
+			window.setTimeout(function(){
+				reinitCarousels();
+			}, 2);
+			sizeTabbedContent(this);
+		}
+
+		var tabButtons = document.querySelectorAll("#divTabbed71807f9a-c83f-4de4-ab76-81ee8a0da4df .tabButton");
+
+		tabButtons.forEach(function (tabButton) {
+			tabButton.addEventListener("click", adjustTab);
+		});
+
+	</script>
+
+
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!--		--></div> <!-- outer row -->
+		<div class="row outer wide"><!--
+--><div class="outer col col24 first last" style="" data-widgetcontainerid="a8172049-5110-44e2-b36f-b3cea8f938ef">				
+	<div class="row nest first last wide">
+	
+	<div class="inner col col24 first last id0cf97855-9e92-4acb-bbee-8944443b940f" style="" data-widgetcontainerid="0cf97855-9e92-4acb-bbee-8944443b940f">	
+<div class="widget editor pageStyles narrow" id="divEditor6497f201-da70-4359-b955-10623a708fae" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}'>
+	    <div class="fr-view">
+
+
+        <h3 class="subhead2">Helpful tools for Land Disturbance and Floodplain Permits:</h3><ul><li><a href="https://www.jeffco.us/DocumentCenter/View/10314/" aria-label="Do I Need a Land Disturbance Permit Worksheet [Opens in new window]" target="_blank" rel="noopener">Do I Need a Land Disturbance Permit Worksheet</a></li><li><a href="https://www.jeffco.us/3978/" aria-label="Engineering and Earthwork web page [Opens in new window]" target="_blank" rel="noopener">Engineering and Earthwork web page</a></li><li><a href="https://www.jeffco.us/DocumentCenter/View/36671" aria-label="No-Adverse Impact [Opens in new window]" target="_blank" rel="noopener">No-Adverse Impact</a></li><li><a href="https://www.jeffco.us/DocumentCenter/View/36672" aria-label="No-Rise Certification [Opens in new window]" target="_blank" rel="noopener">No-Rise Certification</a></li><li><a href="https://www.jeffco.us/DocumentCenter/View/36670" aria-label="Manufactured Home in Floodplain [Opens in new window]" target="_blank" rel="noopener">Manufactured Home in Floodplain</a></li></ul><p><a href="#top"><em><strong>Back to Top</strong></em></a></p><hr><p><a id="dev" style="padding-top: 40px;"></a></p><h2>Development Review Permit Applications</h2>
+    </div>
+
+<script type="text/javascript">
+	$(document).ready(function (e) {		
+	    renderSlideshowIfApplicable($('#divEditor' + '6497f201-da70-4359-b955-10623a708fae'));
+	});
+</script>
+</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!--		--></div> <!-- outer row -->
+		<div class="row outer wide"><!--
+--><div class="outer col col24 first last" style="" data-widgetcontainerid="eb81e08a-e615-4149-8d08-620d75edccce">				
+	<div class="row nest first last wide">
+	
+	<div class="inner col col24 first last id4e66ce70-fbb3-4bfb-8ae8-6b71e599261a" style="" data-widgetcontainerid="4e66ce70-fbb3-4bfb-8ae8-6b71e599261a">	
+
+	<div id="divTabbed1ab38873-d4bd-4764-9726-4f92785c88ae" class="widget widgetTabbed narrow skin203 accordionTabs" data-widgetid="1ab38873-d4bd-4764-9726-4f92785c88ae">
+
+		<div class="cpTabPanels">
+					<ol class="tabbedWidgetNarrow cpTabs  accordion"  aria-hidden="False.ToString().ToLowerInvariant()" >
+						<li class="" role="presentation">	<a href="#tab1ab38873-d4bd-4764-9726-4f92785c88ae_0" class="tabButton" id="tabBtnNarrow1ab38873-d4bd-4764-9726-4f92785c88ae_0" role="button" aria-controls="tab1ab38873-d4bd-4764-9726-4f92785c88ae_0" aria-expanded="false" ><span class="tabName editable" data-sequence="0" data-tabname="Preliminary and Final Plat" contenteditable="false">Preliminary and Final Plat</span></a>
+</li>
+					</ol>
+				<div class="tabbedWidget cpTabPanel " style="display: none;" id="tab1ab38873-d4bd-4764-9726-4f92785c88ae_0" role="region" aria-labelledby="tabBtn1ab38873-d4bd-4764-9726-4f92785c88ae_0" >
+
+<div class="widget editor pageStyles narrow" id="divEditor3e78b144-e165-4f6c-8ce7-5b44630d94bd" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}'>
+	    <div class="fr-view">
+
+
+        <p id="isPasted">Subdivision of land is handled through a <a href="/DocumentCenter/View/10283/" target="_blank" rel="noopener">Preliminary and Final Plat process</a>. The resulting lots must meet the minimum lot size for the Zone District (see <a href="/2398/" target="_blank" rel="noopener">&ldquo;What is My Zoning / What Can I Do on My Property?&rdquo;</a>), as well as other requirements such as <a href="/DocumentCenter/View/2505/" target="_blank" rel="noopener">Lot and Tract Standards</a> and Public Health requirements for <a href="/2379/" target="_blank" rel="noopener">septic systems</a>.&nbsp;</p><p>General questions about specific properties should be directed to <a href="/FormCenter/Planning-Zoning-16/Ask-Planning-and-Zoning-70" target="_blank" rel="noopener">Planning Engineering Staff</a>. You may also <a href="https://outlook.office365.com/book/PlanningandZoning1@jeffcogov.onmicrosoft.com/" target="_blank" rel="noopener">schedule an appointment</a> with an engineer through our website.</p><p>Staff recommends applicants ready to move forward with a Preliminary and Final Plat schedule a <a href="/DocumentCenter/View/1608/" target="_blank" rel="noopener">Pre-Application Meeting</a> prior to submitting a subdivision application. This meeting allows applicants to discuss their plans with Staff and receive preliminary feedback and guidance from Staff and External Agencies prior to formal application.&nbsp;</p><h2 class="subhead1">Submittal Requirements for a Preliminary and Final Plat</h2><p><em>See the&nbsp;</em><a href="/DocumentCenter/View/2531/" target="_blank" rel="noopener"><em>Submittal Requirements Section of the Land Development Regulation</em></a><em>&nbsp;for detailed information on each of these items.&nbsp;</em></p><ul><li>Cover Letter - Mandatory&nbsp;</li><li>Application Form - Mandatory&nbsp;</li><li>Wastewater Collection Information - Mandatory&nbsp;</li><li>Water Supply Information - Mandatory&nbsp;</li><li>Geologic and Geotechnical Report - Mandatory&nbsp;</li><li>Environmental Questionnaire/Assessment - Mandatory&nbsp;</li><li>Phase III Drainage Report - Mandatory&nbsp;</li><li>Sensory Impact Assessment/Report/Plan - Mandatory&nbsp;</li><li>Digital Survey Information - Mandatory&nbsp;</li><li>Title Insurance Commitment - Mandatory&nbsp;</li><li>Wildlife and Vegetation Assessment - Mandatory&nbsp;</li><li>Utility Report/Plan - Mandatory&nbsp;</li><li>Proof of Fire Protection - Mandatory&nbsp;</li><li>Final Plat Document - Mandatory&nbsp;</li><li>Supplemental Information - Mandatory</li><li>Boundary Closure Sheets - Mandatory&nbsp;</li><li>Historical, Archaeological, and Paleontological Report/Plan - Mandatory&nbsp;</li></ul><h3 class="subhead2">May be Mandatory Depending on the Application:</h3><ul><li>Access Information</li><li>Wildfire Hazard Mitigation Plan</li><li>Construction Plans</li><li>Exhibit A</li><li>Transportation Information</li><li>Deeds/Easements/Agreements</li><li>Radiation Assessment/Report/Plan</li><li>Parking Plan</li><li>Landscape Plan</li><li>Vegetation Preservation Plan</li><li>Mineral Estate Notification Form</li></ul><h3 class="subhead2">If you have the mandatory documents ready to go and have spoken with Staff about your application, Click &quot;Apply Now&quot; below and you will be taken to the Online Application system.</h3><p style="text-align: center;"><a aria-label="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank"><img src="/ImageRepository/Document?documentId=32637" alt="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" style="width: 30%;" class="fr-fic fr-dii"></a><br><a href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank" aria-label="Apply Now Opens in new window">Apply Now</a></p>
+    </div>
+
+<script type="text/javascript">
+	$(document).ready(function (e) {		
+	    renderSlideshowIfApplicable($('#divEditor' + '3e78b144-e165-4f6c-8ce7-5b44630d94bd'));
+	});
+</script>
+</div>
+				</div>
+					<ol class="tabbedWidgetNarrow cpTabs  accordion"  aria-hidden="False.ToString().ToLowerInvariant()" >
+						<li class="" role="presentation">	<a href="#tab1ab38873-d4bd-4764-9726-4f92785c88ae_1" class="tabButton" id="tabBtnNarrow1ab38873-d4bd-4764-9726-4f92785c88ae_1" role="button" aria-controls="tab1ab38873-d4bd-4764-9726-4f92785c88ae_1" aria-expanded="false" ><span class="tabName editable" data-sequence="1" data-tabname="Pre-Application" contenteditable="false">Pre-Application</span></a>
+</li>
+					</ol>
+				<div class="tabbedWidget cpTabPanel " style="display: none;" id="tab1ab38873-d4bd-4764-9726-4f92785c88ae_1" role="region" aria-labelledby="tabBtn1ab38873-d4bd-4764-9726-4f92785c88ae_1" >
+
+<div class="widget editor pageStyles narrow" id="divEditord1b6c0cf-5ac0-43bd-9145-5aff82489258" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}'>
+	    <div class="fr-view">
+
+
+        <h2 class="subhead1">In order to start a Pre-Application, you need the following documents ready to upload from your computer:</h2><ul><li style="box-sizing: border-box; margin-bottom: 0.35em; border: 0px none; font-style: normal;">Cover Letter</li><li>Site Plan</li><li style="box-sizing: border-box; margin-bottom: 0.35em; border: 0px none; font-style: normal; font-weight: 400;">Optional but preferred:<ul><li>water supply information</li><li>wastewater information</li><li>plans for roads/streets</li><li style="box-sizing: border-box; margin-bottom: 0.35em; border: 0px none; font-style: normal; font-weight: 400;">conceptual plans for drainage</li></ul></li></ul><h3 class="subhead2">If you have these documents ready to go, Click &quot;Apply Now&quot; below and you will be taken to the Online Application system.</h3><p style="text-align: center;" id="isPasted"><a aria-label="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank"><img src="/ImageRepository/Document?documentId=32637" alt="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" style="width: 30%;" class="fr-fic fr-dii"></a><br><a href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank" aria-label="Apply Now Opens in new window">Apply Now</a></p>
+    </div>
+
+<script type="text/javascript">
+	$(document).ready(function (e) {		
+	    renderSlideshowIfApplicable($('#divEditor' + 'd1b6c0cf-5ac0-43bd-9145-5aff82489258'));
+	});
+</script>
+</div>
+				</div>
+					<ol class="tabbedWidgetNarrow cpTabs  accordion"  aria-hidden="False.ToString().ToLowerInvariant()" >
+						<li class="" role="presentation">	<a href="#tab1ab38873-d4bd-4764-9726-4f92785c88ae_2" class="tabButton" id="tabBtnNarrow1ab38873-d4bd-4764-9726-4f92785c88ae_2" role="button" aria-controls="tab1ab38873-d4bd-4764-9726-4f92785c88ae_2" aria-expanded="false" ><span class="tabName editable" data-sequence="2" data-tabname="Rezoning" contenteditable="false">Rezoning</span></a>
+</li>
+					</ol>
+				<div class="tabbedWidget cpTabPanel " style="display: none;" id="tab1ab38873-d4bd-4764-9726-4f92785c88ae_2" role="region" aria-labelledby="tabBtn1ab38873-d4bd-4764-9726-4f92785c88ae_2" >
+
+<div class="widget editor pageStyles narrow" id="divEditor8975c740-47de-4ffc-b5f4-37b28bf9e45f" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}'>
+	    <div class="fr-view">
+
+
+        <p>Before starting a Rezoning Permit application, you should <a aria-label="contact Planning & Zoning Opens in new window" href="https://www.jeffco.us/FormCenter/Planning-Zoning-16/Ask-Planning-and-Zoning-70" rel="noopener" target="_blank">contact Planning &amp; Zoning</a> prior to submitting an application so we may go over the details with you.</p><p>The <a aria-label="Site Development Plan Process Guide Opens in new window" href="https://www.jeffco.us/DocumentCenter/View/9504/" id="isPasted" rel="noopener" target="_blank">Rezoning Process Guide</a> is a helpful tool for applicants.</p><p id="isPasted">If you have already met with Planning &amp; Zoning staff and are ready to apply, click &quot;Apply Now&quot; below and you will be taken to the Online Application system.</p><p style="text-align: center;" id="isPasted"><a aria-label="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank"><img src="/ImageRepository/Document?documentId=32637" alt="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" style="width: 30%;" class="fr-fic fr-dii"></a><br><a href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank" aria-label="Apply Now Opens in new window">Apply Now</a></p>
+    </div>
+
+<script type="text/javascript">
+	$(document).ready(function (e) {		
+	    renderSlideshowIfApplicable($('#divEditor' + '8975c740-47de-4ffc-b5f4-37b28bf9e45f'));
+	});
+</script>
+</div>
+				</div>
+					<ol class="tabbedWidgetNarrow cpTabs  accordion"  aria-hidden="False.ToString().ToLowerInvariant()" >
+						<li class="" role="presentation">	<a href="#tab1ab38873-d4bd-4764-9726-4f92785c88ae_3" class="tabButton" id="tabBtnNarrow1ab38873-d4bd-4764-9726-4f92785c88ae_3" role="button" aria-controls="tab1ab38873-d4bd-4764-9726-4f92785c88ae_3" aria-expanded="false" ><span class="tabName editable" data-sequence="3" data-tabname="Site Development Plan" contenteditable="false">Site Development Plan</span></a>
+</li>
+					</ol>
+				<div class="tabbedWidget cpTabPanel " style="display: none;" id="tab1ab38873-d4bd-4764-9726-4f92785c88ae_3" role="region" aria-labelledby="tabBtn1ab38873-d4bd-4764-9726-4f92785c88ae_3" >
+
+<div class="widget editor pageStyles narrow" id="divEditor1f13dcd5-7cab-4fba-8633-945c067e1324" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}'>
+	    <div class="fr-view">
+
+
+        <p>Before starting a Site Development Plan application, you should <a aria-label="contact Planning & Zoning Opens in new window" href="https://www.jeffco.us/FormCenter/Planning-Zoning-16/Ask-Planning-and-Zoning-70" id="isPasted" rel="noopener" target="_blank">contact Planning &amp; Zoning</a> prior to submitting an application so we may go over the details with you.</p><p>The <a aria-label="Site Development Plan Process Guide Opens in new window" href="https://www.jeffco.us/DocumentCenter/View/9498/" rel="noopener" target="_blank">Site Development Plan Process Guide</a> is a helpful tool for applicants.</p><p id="isPasted">If you have already met with Planning &amp; Zoning staff and are ready to apply, click &quot;Apply Now&quot; below and you will be taken to the Online Application system.</p><p style="text-align: center;" id="isPasted"><a aria-label="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank"><img src="/ImageRepository/Document?documentId=32637" alt="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" style="width: 30%;" class="fr-fic fr-dii"></a><br><a href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank" aria-label="Apply Now Opens in new window">Apply Now</a></p>
+    </div>
+
+<script type="text/javascript">
+	$(document).ready(function (e) {		
+	    renderSlideshowIfApplicable($('#divEditor' + '1f13dcd5-7cab-4fba-8633-945c067e1324'));
+	});
+</script>
+</div>
+				</div>
+					</div>
+	</div>
+	<script type="text/javascript">
+
+		//If responsive not enabled, execute this after a timeout
+		if(!isResponsiveEnabled)
+		{
+			window.setTimeout(function(){
+				var tabbedWidgetID = 'divTabbed1ab38873-d4bd-4764-9726-4f92785c88ae';
+				typeof setTabbedWidgetsTabHeight === "function" && setTabbedWidgetsTabHeight(tabbedWidgetID);
+			}, 1500);
+		}
+
+		function reinitCarousels() {
+			if (window.carouselsToInit) {
+				for (var i = 0; i < window.carouselsToInit.length; i++) {
+					carouselsToInit[i]();
+				}
+			}
+		}
+		function sizeTabbedContent(element){
+			if(window.Pages){
+				if(window.Pages.onResizeHandlers){
+					var setTabbedInterval = setInterval(function () {
+						window.Pages.onResizeHandlers.forEach(function(car){car();});
+					}, 25)
+
+
+					setTimeout(function () {
+						clearInterval(setTabbedInterval);
+						if ($.cookie("enableLiveEdit") === "true") {
+							setInterval(function () {
+								window.Pages.onResizeHandlers.forEach(function(car){car();});
+							}, 2000);
+						}
+					}, 2500);
+					element.onclick="window.setTimeout(function(){reinitCarousels();},2);"
+				}
+			}
+		}
+
+		function adjustTab(e) {
+			e.preventDefault();
+			window.setTimeout(function(){
+				reinitCarousels();
+			}, 2);
+			sizeTabbedContent(this);
+		}
+
+		var tabButtons = document.querySelectorAll("#divTabbed1ab38873-d4bd-4764-9726-4f92785c88ae .tabButton");
+
+		tabButtons.forEach(function (tabButton) {
+			tabButton.addEventListener("click", adjustTab);
+		});
+
+	</script>
+
+
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!--		--></div> <!-- outer row -->
+		<div class="row outer wide"><!--
+--><div class="outer col col24 first last" style="" data-widgetcontainerid="eb159c4f-5f6a-4942-8ec6-630ba834cd92">				
+	<div class="row nest first last wide">
+	
+	<div class="inner col col24 first last id34dcc1da-d5da-49f7-bc07-f602ccd0a3c0" style="" data-widgetcontainerid="34dcc1da-d5da-49f7-bc07-f602ccd0a3c0">	
+<div class="widget editor pageStyles narrow" id="divEditorf0cf50a4-3a18-46d3-b508-cbfab98f1c47" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}'>
+	    <div class="fr-view">
+
+
+        <h3 class="subhead2">Helpful tools for Development Review Permits:</h3><ul><li><a href="/2659/" aria-label="Types of Permits web page [Opens in new window]" target="_blank" rel="noopener">Types of Permits web page</a></li><li><a href="/DocumentCenter/View/10283/" target="_blank" rel="noopener">Preliminary and Final Plat Guide (PDF) </a><a href="/DocumentCenter/View/9504" aria-label="Rezoning Guide (PDF) [Opens in new window]" target="_blank" rel="noopener"></a></li><li><a href="/DocumentCenter/View/9504" aria-label="Rezoning Guide (PDF) [Opens in new window]" target="_blank" rel="noopener">Rezoning Guide (PDF)</a> <a href="/DocumentCenter/View/1608" aria-label="Pre-Application Guide (PDF) [Opens in new window]" target="_blank" rel="noopener"></a></li><li><a href="/DocumentCenter/View/1608" aria-label="Pre-Application Guide (PDF) [Opens in new window]" target="_blank" rel="noopener">Pre-Application Guide (PDF)</a> <a href="/DocumentCenter/View/9498" aria-label="Site Development Plan Guide (PDF) [Opens in new window]" target="_blank" rel="noopener"></a></li><li><a href="/DocumentCenter/View/9498" aria-label="Site Development Plan Guide (PDF) [Opens in new window]" target="_blank" rel="noopener">Site Development Plan Guide (PDF)</a></li></ul><p><a href="#top"><em><strong>Back to Top</strong></em></a></p><hr><p><a id="minoradjustment" style="padding-top: 40px;"></a></p><h2 class="subhead1">Minor Adjustment Applications</h2><p>The Minor Adjustment Process may be used for a variety of development activities as described in <a aria-label="Section 11.B Opens in new window" href="/DocumentCenter/View/2502/" rel="noopener" target="_blank">Section 11.B</a> of the Land Development Regulation. Depending on the Minor Adjustment process being applied for there is one major difference which is the requirement for the submittal and review of a survey. &nbsp;</p>
+    </div>
+
+<script type="text/javascript">
+	$(document).ready(function (e) {		
+	    renderSlideshowIfApplicable($('#divEditor' + 'f0cf50a4-3a18-46d3-b508-cbfab98f1c47'));
+	});
+</script>
+</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!--		--></div> <!-- outer row -->
+		<div class="row outer wide"><!--
+--><div class="outer col col24 first last" style="" data-widgetcontainerid="49933529-f17d-44a9-8160-cb469a642378">				
+	<div class="row nest first wide">
+	
+	<div class="inner col col24 first last ide5196861-27f4-4a1e-8063-a00d35cbe8e4" style="" data-widgetcontainerid="e5196861-27f4-4a1e-8063-a00d35cbe8e4">	
+
+	<div id="divTabbed76b0edb6-9fc5-4c00-b915-bbc8783d2f87" class="widget widgetTabbed narrow skin203 accordionTabs" data-widgetid="76b0edb6-9fc5-4c00-b915-bbc8783d2f87">
+
+		<div class="cpTabPanels">
+					<ol class="tabbedWidgetNarrow cpTabs  accordion"  aria-hidden="False.ToString().ToLowerInvariant()" >
+						<li class="" role="presentation">	<a href="#tab76b0edb6-9fc5-4c00-b915-bbc8783d2f87_0" class="tabButton" id="tabBtnNarrow76b0edb6-9fc5-4c00-b915-bbc8783d2f87_0" role="button" aria-controls="tab76b0edb6-9fc5-4c00-b915-bbc8783d2f87_0" aria-expanded="false" ><span class="tabName editable" data-sequence="0" data-tabname="Minor Adjustment (Survey)" contenteditable="false">Minor Adjustment (Survey)</span></a>
+</li>
+					</ol>
+				<div class="tabbedWidget cpTabPanel " style="display: none;" id="tab76b0edb6-9fc5-4c00-b915-bbc8783d2f87_0" role="region" aria-labelledby="tabBtn76b0edb6-9fc5-4c00-b915-bbc8783d2f87_0" >
+
+<div class="widget editor pageStyles narrow" id="divEditorb6a5147d-5a3b-4983-b36e-372dd3a9af00" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}'>
+	    <div class="fr-view">
+
+
+        <p id="isPasted">The Minor Adjustment with Survey may be used to reconfigure or eliminate interior lot lines, create commercial superlots, adjust previously established building envelopes, non-buildable areas or non-disturbance areas, create lot lines to convert a duplex to a single family attached or to create a non-buildable tract. &nbsp;</p><h2 class="subhead1">Submittal Requirements for a Minor Adjustment with Survey</h2><ul><li>A Minor Adjustment <a href="/DocumentCenter/View/10288" target="_blank" rel="noopener">Application Form (PDF)</a> - <em>Mandatory</em>&nbsp;</li><li>A Cover Letter describing your plans and including contact information - <em>Mandatory</em>&nbsp;</li><li>Current Deed and Pre-2000 Deed (For metes and bounds parcels) - <em>Mandatory</em>&nbsp;</li><li>An Ownership &amp; Encumbrances Report or Title Insurance Commitment for each lot - <em>Mandatory</em>&nbsp;</li><li>If the owner is a LLC, Corporation, Trust or other non-individual entity, additional documents will be needed to confirm signature authority of whoever will be signing&nbsp;</li><li>A Minor Adjustment Document in the format described in <a href="/DocumentCenter/View/2535/" rel="noopener" target="_blank">Section 8 of the Land Development Regulation (PDF)</a> - <em>Mandatory</em>&nbsp;</li><li>Water Supply Information: a will-serve letter from the water district or a well permit. Well permits may be obtained through the <a aria-label="Colorado Division of Water Resources Opens in new window" href="https://dwr.colorado.gov/" rel="noopener" target="_blank">Colorado Division of Water Resources</a> - <em>Mandatory</em>&nbsp;</li><li>If existing or resulting lots will use a septic system, Form 6002 from <a href="/2426/" target="_blank" rel="noopener">Public Health&apos;s web page</a></li><li>If land will be exchanged between two owners, a draft deed for property transfer. This can be prepared by a land use attorney</li></ul><h3 class="subhead2" id="isPasted">If you have these documents ready to go, Click &quot;Apply Now&quot; below and you will be taken to the Online Application system.</h3><p style="text-align: center;" id="isPasted"><a aria-label="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank"><img src="/ImageRepository/Document?documentId=32637" alt="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" style="width: 30%;" class="fr-fic fr-dii"></a><br><a href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank" aria-label="Apply Now Opens in new window">Apply Now</a></p>
+    </div>
+
+<script type="text/javascript">
+	$(document).ready(function (e) {		
+	    renderSlideshowIfApplicable($('#divEditor' + 'b6a5147d-5a3b-4983-b36e-372dd3a9af00'));
+	});
+</script>
+</div>
+				</div>
+					<ol class="tabbedWidgetNarrow cpTabs  accordion"  aria-hidden="False.ToString().ToLowerInvariant()" >
+						<li class="" role="presentation">	<a href="#tab76b0edb6-9fc5-4c00-b915-bbc8783d2f87_1" class="tabButton" id="tabBtnNarrow76b0edb6-9fc5-4c00-b915-bbc8783d2f87_1" role="button" aria-controls="tab76b0edb6-9fc5-4c00-b915-bbc8783d2f87_1" aria-expanded="false" ><span class="tabName editable" data-sequence="1" data-tabname="Minor Adjustment (No Survey)" contenteditable="false">Minor Adjustment (No Survey)</span></a>
+</li>
+					</ol>
+				<div class="tabbedWidget cpTabPanel " style="display: none;" id="tab76b0edb6-9fc5-4c00-b915-bbc8783d2f87_1" role="region" aria-labelledby="tabBtn76b0edb6-9fc5-4c00-b915-bbc8783d2f87_1" >
+
+<div class="widget editor pageStyles narrow" id="divEditor3edfd372-e635-48cb-b778-b533aeebb0ac" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}'>
+	    <div class="fr-view">
+
+
+        <p id="isPasted">The &nbsp;Minor Adjustment without Survey may be used to eliminate building envelopes, adjust previously approved development agreements, and for changes to or elimination of notes, restrictions and certificates.&nbsp;</p><h2 class="subhead1">Submittal Requirements for a Minor Adjustment (No Survey)</h2><ul><li>A Minor Adjustment <a aria-label="Application Opens in new window" href="/DocumentCenter/View/10288" rel="noopener" target="_blank">Application</a> - <em>Mandatory</em>&nbsp;</li><li>A Cover Letter describing your plans and including contact information - <em>Mandatory</em>&nbsp;</li><li>If the owner is a LLC, Corporation, Trust or other non-individual entity, additional documents will be needed to confirm signature authority of whoever will be signing </li></ul><h3 class="subhead2">If you have these documents ready to go, Click &quot;Apply Now&quot; below and you will be taken to the Online Application system.</h3><p style="text-align: center;" id="isPasted"><a aria-label="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank"><img src="/ImageRepository/Document?documentId=32637" alt="Linked image that takes the user to the Planning and Zoning Online Applications site. Opens in new window" style="width: 30%;" class="fr-fic fr-dii"></a><br><a href="https://citizenportal.jeffco.us/" rel="noopener" target="_blank" aria-label="Apply Now Opens in new window">Apply Now</a></p>
+    </div>
+
+<script type="text/javascript">
+	$(document).ready(function (e) {		
+	    renderSlideshowIfApplicable($('#divEditor' + '3edfd372-e635-48cb-b778-b533aeebb0ac'));
+	});
+</script>
+</div>
+				</div>
+					</div>
+	</div>
+	<script type="text/javascript">
+
+		//If responsive not enabled, execute this after a timeout
+		if(!isResponsiveEnabled)
+		{
+			window.setTimeout(function(){
+				var tabbedWidgetID = 'divTabbed76b0edb6-9fc5-4c00-b915-bbc8783d2f87';
+				typeof setTabbedWidgetsTabHeight === "function" && setTabbedWidgetsTabHeight(tabbedWidgetID);
+			}, 1500);
+		}
+
+		function reinitCarousels() {
+			if (window.carouselsToInit) {
+				for (var i = 0; i < window.carouselsToInit.length; i++) {
+					carouselsToInit[i]();
+				}
+			}
+		}
+		function sizeTabbedContent(element){
+			if(window.Pages){
+				if(window.Pages.onResizeHandlers){
+					var setTabbedInterval = setInterval(function () {
+						window.Pages.onResizeHandlers.forEach(function(car){car();});
+					}, 25)
+
+
+					setTimeout(function () {
+						clearInterval(setTabbedInterval);
+						if ($.cookie("enableLiveEdit") === "true") {
+							setInterval(function () {
+								window.Pages.onResizeHandlers.forEach(function(car){car();});
+							}, 2000);
+						}
+					}, 2500);
+					element.onclick="window.setTimeout(function(){reinitCarousels();},2);"
+				}
+			}
+		}
+
+		function adjustTab(e) {
+			e.preventDefault();
+			window.setTimeout(function(){
+				reinitCarousels();
+			}, 2);
+			sizeTabbedContent(this);
+		}
+
+		var tabButtons = document.querySelectorAll("#divTabbed76b0edb6-9fc5-4c00-b915-bbc8783d2f87 .tabButton");
+
+		tabButtons.forEach(function (tabButton) {
+			tabButton.addEventListener("click", adjustTab);
+		});
+
+	</script>
+
+
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+	<div class="row nest last wide">
+	
+	<div class="inner col col24 first last id0aeb89ad-d583-446c-9c5e-785138c4f2bb" style="" data-widgetcontainerid="0aeb89ad-d583-446c-9c5e-785138c4f2bb">	
+<div class="widget editor pageStyles narrow" id="divEditorb85eded2-62c6-4c30-866d-1a01f95855b6" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}'>
+	    <div class="fr-view">
+
+
+        <p><a href="#top"><em><strong>Back to Top</strong></em></a></p>
+    </div>
+
+<script type="text/javascript">
+	$(document).ready(function (e) {		
+	    renderSlideshowIfApplicable($('#divEditor' + 'b85eded2-62c6-4c30-866d-1a01f95855b6'));
+	});
+</script>
+</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!--		--></div> <!-- outer row -->
+
+
+		</div>
+
+	</div>
+
+	
+	<div class="newCP">
+
+	</div>
+</div>
+</div><aside data-cpRole="contentContainer" id="featureColumn" class="secondaryContent">	<div id="ccacfef851-8196-46c1-8565-f0467c21b487" data-containerid="acfef851-8196-46c1-8565-f0467c21b487" class="pageContent cpGrid cpGrid24 showInMobile">
+				                
+
+		<div class="row outer wide"><!--
+--><div class="outer col col24 first last" style="" data-widgetcontainerid="ca8f77d6-4fc6-4b24-b22b-d985996f1e4c">				
+	<div class="row nest first last wide">
+	
+	<div class="inner col col24 first last ide2ecdbf4-db71-4e99-b4ff-0bd0a754ffa5" style="" data-widgetcontainerid="e2ecdbf4-db71-4e99-b4ff-0bd0a754ffa5">	
+
+
+
+
+
+
+
+
+<div data-widget-id="fe7254f4-076c-468f-9e0a-1719055b969c" data-moduleWidgetType="cityDirectory" data-widget-controller-path="/CityDirectory/Widget">
+	<div id="cityDirectoryWidgetfe7254f4-076c-468f-9e0a-1719055b969c" class="widget widgetStaffDirectory skin202 wide" >
+			<div class="widgetHeader">
+					<h3><a style="" href= /m/directory>Contact Us</a></h3>
+							</div>
+						<ol class="semanticList">
+		<li class="widgetItem h-card">
+
+				<h4 class="widgetTitle field p-name">Planning &amp; Zoning Division</h4>
+
+
+
+				<div class="field h-adr">
+					<strong>Physical Address</strong>
+					<br />
+					<span class="p-street-address">100 Jefferson County Parkway</span><br />
+						<span class="p-street-address">Suite 3550</span><br />
+					<span class="locality">Golden</span>, <span class="p-region">CO</span> <span class="p-postal-code">80419</span>
+
+				</div>
+				<br />
+
+
+
+				<div class="field p-tel">Phone <a href="tel:3032718700">303-271-8700</a></div>
+													<br />
+
+				<div class="field p-note">
+
+					<h2 class="subhead1">Office Hours:</h2><p>Monday - Thursday<br>8:00 a.m. - 5:00 p.m.&nbsp;<br>Please <a href="https://outlook.office365.com/book/PlanningandZoning1@jeffcogov.onmicrosoft.com/" target="_blank" rel="noopener" class="external_link">make an appointment</a> with Planning &amp; Zoning staff.</p><h2 class="subhead1" data-pasted="true">Need Help?</h2><p>For the fastest response to general questions, <a href="/FormCenter/Planning-Zoning-16/Ask-Planning-and-Zoning-70" target="_self" data-pasted="true">contact us online</a> or visit our <a href="https://jeffersoncountyco.qscend.com/311/knowledgebase/category/15575" target="_blank" rel="noopener" class="external_link">Knowledge Base articles</a>.&nbsp;</p><p><a href="https://jeffersoncountyco.qscend.com/311/request/add/82007ff19f1a4ff29a558999d6fbd983" target="_blank" rel="noopener" class="external_link">Report an issue or submit a request for service</a>.</p><h2 class="subhead1">Submit Permits and Licenses:</h2><p>Save time by <a href="https://www.jeffco.us/DocumentCenter/View/21893" target="_self">submitting permit and license applications online (PDF).</a></p>
+				</div>
+				<br />
+
+
+		</li>
+									</ol>
+	</div>
+</div>	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!--		--></div> <!-- outer row -->
+
+
+	</div>
+</aside>
+</div>
+</div></div>
+</div><!-- GBs --><div data-cpRole="structuralContainer" id="gbsContainerTS">
+<div class="siteWrap"><div data-cpRole="contentContainer" id="gbsTS">	<div id="ccee85a4dd-bc9d-4062-baf2-8543cc4530d5" data-containerid="ee85a4dd-bc9d-4062-baf2-8543cc4530d5" class="pageContent cpGrid cpGrid24 isLockedContainer showInMobile" data-contentcontainerbreakpoint="1">
+				                
+
+		<div class="row outer wide"><!--
+--><div class="outer col col24 first last" style="" data-widgetcontainerid="d07c188d-ae55-4bf5-ac05-4561c9c47e2a">				
+	<div class="row nest first last wide">
+	
+	<div class="inner col col24 first last idab49dee0-b7be-40ca-9cf0-bcf3a2d4939b" style="" data-widgetcontainerid="ab49dee0-b7be-40ca-9cf0-bcf3a2d4939b">	
+<div data-widget-id="f91481e6-4c3c-47a9-ba88-a5ee2a9533f8" data-widget-controller-path="/GraphicLinks/Widget">
+
+
+
+
+<div id="graphicLinkWidgetf91481e6-4c3c-47a9-ba88-a5ee2a9533f8" class="widget widgetGraphicLinks skin140 widgetOptionSet24 wide" data-elementqueryclasses='{"wide-narrow":"min-width:35em"}' data-elementquerymatch='matchMultiColumn' data-elementqueryunmatch='unmatchMultiColumn' data-modulewidgettype="graphicLinks">
+	<div class="widgetHeader">
+		<div class="">
+				</div>
+	</div>
+	<div class="widgetBody cpGrid cpGrid5 ">
+		<nav class="widgetGraphicLinksNav" aria-labelledby="GraphicLinkHeaderText">
+				<div class="row   wide">
+					<!--
+--><div class="col col1 first "><ul class="semanticList"><!--
+
+	    --><li class="widgetItem GraphicLinks">
+
+<div>
+	<a href="/755/Airport" target="_self" class="fancyButton fancyButton2176 " >
+		<span>
+			<span><span class="text">Airport</span></span>
+		</span>
+	</a>
+</div>
+		<style scoped="scoped">.fancyButton2176.fancyButton:link,.fancyButton2176.fancyButton:visited, .fancyButton2176div.fancyButton{
+	background-repeat: no-repeat;
+	background-position: center top;
+background-size: 120px;
+-webkit-transition: .4s ease-in-out;
+-moz-transition: .4s ease-in-out;
+-o-transition: .4s ease-in-out;
+transition: .4s ease-in-out;}
+.fancyButton2176.fancyButton:hover,.fancyButton2176.fancyButton:focus,.fancyButton2176.fancyButton:active,.fancyButton2176.fancyButton.hover{
+	background-image: url('/ImageRepository/Document?documentID=49116');
+	background-repeat: no-repeat;
+	background-position: center top;
+background-size: 120px;}
+.fancyButton2176.fancyButton:link > span,.fancyButton2176.fancyButton:visited > span, .fancyButton2176div.fancyButton > span{
+}
+.fancyButton2176.fancyButton:hover > span,.fancyButton2176.fancyButton:focus > span,.fancyButton2176.fancyButton:active > span,.fancyButton2176.fancyButton.hover > span{
+}
+.fancyButton2176.fancyButton .text{
+	color: rgb(255, 255, 255);
+	font-family: "Open Sans";
+	padding-top: 130px;
+	font-weight: 500;
+	text-decoration: underline;
+	padding-top: 130px;
+	background-image: url('/ImageRepository/Document?documentID=49459');
+	background-repeat: no-repeat;
+	background-position: center top;
+background-size: 110px;
+-webkit-transition: .3s ease-in-out;
+-moz-transition: .3s ease-in-out;
+-o-transition: .3s ease-in-out;
+transition: .3s ease-in-out;
+}
+.fancyButton2176.fancyButton:hover .text,.fancyButton2176.fancyButton:focus .text,.fancyButton2176.fancyButton:active .text,.fancyButton2176.fancyButton.hover .text{
+	font-family: Open Sans;
+	font-weight: 600;
+	text-decoration: underline;
+	background-repeat: no-repeat;
+	background-position: center 25px ;
+background-size: 70px;
+}
+</style>
+
+ </li><!--
+--></ul></div><!----><div class="col col1  "><ul class="semanticList"><!--
+
+	    --><li class="widgetItem GraphicLinks">
+
+<div>
+	<a href="/785/Building-Safety" target="_self" class="fancyButton fancyButton2177 " >
+		<span>
+			<span><span class="text">Building Safety</span></span>
+		</span>
+	</a>
+</div>
+		<style scoped="scoped">.fancyButton2177.fancyButton:link,.fancyButton2177.fancyButton:visited, .fancyButton2177div.fancyButton{
+	background-repeat: no-repeat;
+	background-position: center top;
+background-size: 120px;
+-webkit-transition: .4s ease-in-out;
+-moz-transition: .4s ease-in-out;
+-o-transition: .4s ease-in-out;
+transition: .4s ease-in-out;}
+.fancyButton2177.fancyButton:hover,.fancyButton2177.fancyButton:focus,.fancyButton2177.fancyButton:active,.fancyButton2177.fancyButton.hover{
+	background-image: url('/ImageRepository/Document?documentID=49115');
+	background-repeat: no-repeat;
+	background-position: center top;
+background-size: 120px;}
+.fancyButton2177.fancyButton:link > span,.fancyButton2177.fancyButton:visited > span, .fancyButton2177div.fancyButton > span{
+}
+.fancyButton2177.fancyButton:hover > span,.fancyButton2177.fancyButton:focus > span,.fancyButton2177.fancyButton:active > span,.fancyButton2177.fancyButton.hover > span{
+}
+.fancyButton2177.fancyButton .text{
+	color: rgb(255, 255, 255);
+	font-family: "Open Sans";
+	padding-top: 130px;
+	font-weight: 500;
+	text-decoration: underline;
+	padding-top: 130px;
+	background-image: url('/ImageRepository/Document?documentID=49460');
+	background-repeat: no-repeat;
+	background-position: center top;
+background-size: 110px;
+-webkit-transition: .3s ease-in-out;
+-moz-transition: .3s ease-in-out;
+-o-transition: .3s ease-in-out;
+transition: .3s ease-in-out;
+}
+.fancyButton2177.fancyButton:hover .text,.fancyButton2177.fancyButton:focus .text,.fancyButton2177.fancyButton:active .text,.fancyButton2177.fancyButton.hover .text{
+	font-family: Open Sans;
+	font-weight: 600;
+	text-decoration: underline;
+	background-repeat: no-repeat;
+	background-position: center 25px ;
+background-size: 70px;
+}
+</style>
+
+ </li><!--
+--></ul></div><!----><div class="col col1  "><ul class="semanticList"><!--
+
+	    --><li class="widgetItem GraphicLinks">
+
+<div>
+	<a href="/786/Planning-Zoning" target="_self" class="fancyButton fancyButton2178 " >
+		<span>
+			<span><span class="text">Planning and Zoning</span></span>
+		</span>
+	</a>
+</div>
+		<style scoped="scoped">.fancyButton2178.fancyButton:link,.fancyButton2178.fancyButton:visited, .fancyButton2178div.fancyButton{
+	background-repeat: no-repeat;
+	background-position: center top;
+background-size: 120px;
+-webkit-transition: .4s ease-in-out;
+-moz-transition: .4s ease-in-out;
+-o-transition: .4s ease-in-out;
+transition: .4s ease-in-out;}
+.fancyButton2178.fancyButton:hover,.fancyButton2178.fancyButton:focus,.fancyButton2178.fancyButton:active,.fancyButton2178.fancyButton.hover{
+	background-image: url('/ImageRepository/Document?documentID=49117');
+	background-repeat: no-repeat;
+	background-position: center top;
+background-size: 120px;}
+.fancyButton2178.fancyButton:link > span,.fancyButton2178.fancyButton:visited > span, .fancyButton2178div.fancyButton > span{
+}
+.fancyButton2178.fancyButton:hover > span,.fancyButton2178.fancyButton:focus > span,.fancyButton2178.fancyButton:active > span,.fancyButton2178.fancyButton.hover > span{
+}
+.fancyButton2178.fancyButton .text{
+	color: rgb(255, 255, 255);
+	font-family: "Open Sans";
+	padding-top: 130px;
+	font-weight: 500;
+	text-decoration: underline;
+	padding-top: 130px;
+	background-image: url('/ImageRepository/Document?documentID=49461');
+	background-repeat: no-repeat;
+	background-position: center top;
+background-size: 110px;
+-webkit-transition: .3s ease-in-out;
+-moz-transition: .3s ease-in-out;
+-o-transition: .3s ease-in-out;
+transition: .3s ease-in-out;
+}
+.fancyButton2178.fancyButton:hover .text,.fancyButton2178.fancyButton:focus .text,.fancyButton2178.fancyButton:active .text,.fancyButton2178.fancyButton.hover .text{
+	font-family: Open Sans;
+	font-weight: 600;
+	text-decoration: underline;
+	background-repeat: no-repeat;
+	background-position: center 21px ;
+background-size: 70px;
+}
+</style>
+
+ </li><!--
+--></ul></div><!----><div class="col col1  "><ul class="semanticList"><!--
+
+	    --><li class="widgetItem GraphicLinks">
+
+<div>
+	<a href="/787/Road-Bridge-Division" target="_self" class="fancyButton fancyButton2285 " >
+		<span>
+			<span><span class="text">Road and Bridge</span></span>
+		</span>
+	</a>
+</div>
+		<style scoped="scoped">.fancyButton2285.fancyButton:link,.fancyButton2285.fancyButton:visited, .fancyButton2285div.fancyButton{
+	background-repeat: no-repeat;
+	background-position: center top;
+background-size: 120px;
+-webkit-transition: .4s ease-in-out;
+-moz-transition: .4s ease-in-out;
+-o-transition: .4s ease-in-out;
+transition: .4s ease-in-out;}
+.fancyButton2285.fancyButton:hover,.fancyButton2285.fancyButton:focus,.fancyButton2285.fancyButton:active,.fancyButton2285.fancyButton.hover{
+	background-image: url('/ImageRepository/Document?documentID=49116');
+	background-repeat: no-repeat;
+	background-position: center top;
+background-size: 120px;}
+.fancyButton2285.fancyButton:link > span,.fancyButton2285.fancyButton:visited > span, .fancyButton2285div.fancyButton > span{
+}
+.fancyButton2285.fancyButton:hover > span,.fancyButton2285.fancyButton:focus > span,.fancyButton2285.fancyButton:active > span,.fancyButton2285.fancyButton.hover > span{
+}
+.fancyButton2285.fancyButton .text{
+	color: rgb(255, 255, 255);
+	font-family: "Open Sans";
+	padding-top: 130px;
+	font-weight: 500;
+	text-decoration: underline;
+	padding-top: 130px;
+	background-image: url('/ImageRepository/Document?documentID=49462');
+	background-repeat: no-repeat;
+	background-position: center top;
+background-size: 110px;
+-webkit-transition: .3s ease-in-out;
+-moz-transition: .3s ease-in-out;
+-o-transition: .3s ease-in-out;
+transition: .3s ease-in-out;
+}
+.fancyButton2285.fancyButton:hover .text,.fancyButton2285.fancyButton:focus .text,.fancyButton2285.fancyButton:active .text,.fancyButton2285.fancyButton.hover .text{
+	font-family: Open Sans;
+	font-weight: 600;
+	text-decoration: underline;
+	background-repeat: no-repeat;
+	background-position: center 25px ;
+background-size: 70px;
+}
+</style>
+
+ </li><!--
+--></ul></div><!----><div class="col col1  last"><ul class="semanticList"><!--
+
+	    --><li class="widgetItem GraphicLinks">
+
+<div>
+	<a href="/788/Transportation-Engineering" target="_self" class="fancyButton fancyButton2286 " >
+		<span>
+			<span><span class="text">Transportation and Engineering</span></span>
+		</span>
+	</a>
+</div>
+		<style scoped="scoped">.fancyButton2286.fancyButton:link,.fancyButton2286.fancyButton:visited, .fancyButton2286div.fancyButton{
+	background-repeat: no-repeat;
+	background-position: center top;
+background-size: 120px;
+-webkit-transition: .4s ease-in-out;
+-moz-transition: .4s ease-in-out;
+-o-transition: .4s ease-in-out;
+transition: .4s ease-in-out;}
+.fancyButton2286.fancyButton:hover,.fancyButton2286.fancyButton:focus,.fancyButton2286.fancyButton:active,.fancyButton2286.fancyButton.hover{
+	background-image: url('/ImageRepository/Document?documentID=49115');
+	background-repeat: no-repeat;
+	background-position: center top;
+background-size: 120px;}
+.fancyButton2286.fancyButton:link > span,.fancyButton2286.fancyButton:visited > span, .fancyButton2286div.fancyButton > span{
+}
+.fancyButton2286.fancyButton:hover > span,.fancyButton2286.fancyButton:focus > span,.fancyButton2286.fancyButton:active > span,.fancyButton2286.fancyButton.hover > span{
+}
+.fancyButton2286.fancyButton .text{
+	color: rgb(255, 255, 255);
+	font-family: "Open Sans";
+	padding-top: 130px;
+	font-weight: 500;
+	text-decoration: underline;
+	padding-top: 130px;
+	background-image: url('/ImageRepository/Document?documentID=49463');
+	background-repeat: no-repeat;
+	background-position: center top;
+background-size: 110px;
+-webkit-transition: .3s ease-in-out;
+-moz-transition: .3s ease-in-out;
+-o-transition: .3s ease-in-out;
+transition: .3s ease-in-out;
+}
+.fancyButton2286.fancyButton:hover .text,.fancyButton2286.fancyButton:focus .text,.fancyButton2286.fancyButton:active .text,.fancyButton2286.fancyButton.hover .text{
+	font-family: Open Sans;
+	font-weight: 600;
+	text-decoration: underline;
+	background-repeat: no-repeat;
+	background-position: center 25px ;
+background-size: 70px;
+}
+</style>
+
+ </li><!--
+--></ul></div><!--				-->
+				</div>
+			</nav>
+		</div>
+	<div class="widgetFooter">
+			</div>
+</div>
+</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!--		--></div> <!-- outer row -->
+
+
+	</div>
+</div></div>
+</div><!-- Calendar/Carousel --><!-- <div data-cpRole="structuralContainer" id="homeContainer1">
+    <div class="siteWrap">
+      <div data-cpRole="contentContainer" id="homeContent1a"></div>
+    </div>
+  </div> --><!-- Footer --><footer data-cpRole="structuralContainer" id="footerContainerTS">
+<div class="siteWrap"><div data-cpRole="contentContainer" id="footerTS">	<div id="cccf69b8b6-1392-4133-8fd6-ea55895803fc" data-containerid="cf69b8b6-1392-4133-8fd6-ea55895803fc" class="pageContent cpGrid cpGrid24 isLockedContainer showInMobile" data-contentcontainerbreakpoint="45">
+				                
+
+		<div class="row outer wide"><!--
+--><div class="outer col col4 first" style="" data-widgetcontainerid="38d8eed0-6b0e-4fdc-9c6b-79bcd94adfe7">				
+	<div class="row nest first last wide">
+	
+	<div class="inner col col4 first last id19c2f0cd-9351-45f9-9aa8-89b8d6c49c34" style="" data-widgetcontainerid="19c2f0cd-9351-45f9-9aa8-89b8d6c49c34">	
+    <div data-widget-id="291c3952-d550-42a4-abea-6d2336430d4f" data-widget-controller-path="/InfoAdvanced/Widget">
+
+
+
+
+
+	<section id="divInfoAdv291c3952-d550-42a4-abea-6d2336430d4f" class="widget widgetInfoAdvanced skin138 widgetOptionSet5 wide" data-modulewidgettype="infoAdv" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}' data-elementquerymatch='matchMultiColumn' data-elementqueryunmatch='unmatchMultiColumn' aria-labelledby="header291c3952-d550-42a4-abea-6d2336430d4f">
+			<header class="widgetHeader" id="header291c3952-d550-42a4-abea-6d2336430d4f">
+		<div class="">
+					<h3 >Contact Us</h3>
+								</div>
+	</header>
+	<div class="widgetBody  cpGrid cpGrid1 ">
+		<div class="row  wide">
+					<div class="col col1 first last">
+						<ol class="pageStyles semanticList">
+
+<li class="InfoAdvanced widgetItem fr-view">
+	<p id="isPasted">100 Jefferson County Parkway<br>Golden, CO 80419<br>Phone: <a href="tel: 303-271-6511">303-271-6511</a></p>
+</li>						</ol>
+					</div>
+		</div>
+	</div>
+	<div class="widgetFooter">
+
+	</div>
+
+	</section>
+
+
+
+<script type="text/javascript">
+	//Render slideshow if info advacned items contain one.
+	$(document).ready(function (e) {
+		$('#divInfoAdv291c3952-d550-42a4-abea-6d2336430d4f .InfoAdvanced.widgetItem').each(function () {
+			renderSlideshowIfApplicable($(this));		
+		});
+	});
+</script></div>	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!----><div class="outer col col3" style="" data-widgetcontainerid="52741ea3-f525-42b7-a5b9-12d9fb1ca308">				
+	<div class="row nest first last wide">
+	
+	<div class="inner col col3 first last id9fb39788-6507-453d-9b25-e2970daf09d8" style="" data-widgetcontainerid="9fb39788-6507-453d-9b25-e2970daf09d8">	
+
+<div class="widget widgetSpacer" id="cce4b34f-bf7e-432d-b722-12c247dd7b58"></div>	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!----><div class="outer col col3" style="" data-widgetcontainerid="e3d721ab-b21a-4049-ad2a-60dede9d12ef">				
+	<div class="row nest first last wide">
+	
+	<div class="inner col col3 first last id89980329-61c5-41b5-824a-d9d050277ce4" style="" data-widgetcontainerid="89980329-61c5-41b5-824a-d9d050277ce4">	
+<div data-widget-id="e424137d-c84f-4ee8-9a09-1d1b9b3706fd" data-widget-controller-path="/GraphicLinks/Widget">
+
+
+
+
+<div id="graphicLinkWidgete424137d-c84f-4ee8-9a09-1d1b9b3706fd" class="widget widgetGraphicLinks skin138 widgetOptionSet24 wide" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}' data-elementquerymatch='matchMultiColumn' data-elementqueryunmatch='unmatchMultiColumn' data-modulewidgettype="graphicLinks">
+	<div class="widgetHeader">
+		<div class="">
+			<h3 id="GraphicLinkHeaderText" class="class?'':'visuallyhidden" >Social Media</h3>
+				</div>
+	</div>
+	<div class="widgetBody cpGrid cpGrid1 ">
+		<nav class="widgetGraphicLinksNav" aria-labelledby="GraphicLinkHeaderText">
+					<ul class="semanticList">
+						<!--
+
+	    --><li class="widgetItem GraphicLinks">
+
+<div>
+	<a href="https://www.facebook.com/JeffcoColorado/" target="_self" class="fancyButton fancyButton2191 " >
+		<span>
+			<span><span class="text">Facebook</span></span>
+		</span>
+	</a>
+</div>
+		<style scoped="scoped">.fancyButton2191.fancyButton:link,.fancyButton2191.fancyButton:visited, .fancyButton2191div.fancyButton{
+	background-image: url('/ImageRepository/Document?documentID=46991');
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.fancyButton2191.fancyButton:hover,.fancyButton2191.fancyButton:focus,.fancyButton2191.fancyButton:active,.fancyButton2191.fancyButton.hover{
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.fancyButton2191.fancyButton:link > span,.fancyButton2191.fancyButton:visited > span, .fancyButton2191div.fancyButton > span{
+}
+.fancyButton2191.fancyButton:hover > span,.fancyButton2191.fancyButton:focus > span,.fancyButton2191.fancyButton:active > span,.fancyButton2191.fancyButton.hover > span{
+}
+.fancyButton2191.fancyButton .text{
+	color: rgb(255, 255, 255);
+	font-family: "Open Sans";
+	text-align: left;
+	padding-left: 2em;
+	font-style: normal;
+	text-decoration: underline;
+	padding-left: 2em;
+	background-repeat: no-repeat;
+	background-position: left top;
+
+
+}
+.fancyButton2191.fancyButton:hover .text,.fancyButton2191.fancyButton:focus .text,.fancyButton2191.fancyButton:active .text,.fancyButton2191.fancyButton.hover .text{
+	text-decoration: underline;
+	background-repeat: no-repeat;
+	background-position: left top;
+
+
+}
+</style>
+
+ </li><!--
+
+	    --><li class="widgetItem GraphicLinks">
+
+<div>
+	<a href="https://www.instagram.com/jeffcocolorado/" target="_self" class="fancyButton fancyButton2192 " >
+		<span>
+			<span><span class="text">Instagram</span></span>
+		</span>
+	</a>
+</div>
+		<style scoped="scoped">.fancyButton2192.fancyButton:link,.fancyButton2192.fancyButton:visited, .fancyButton2192div.fancyButton{
+	background-image: url(/ImageRepository/Document?documentID=46992);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.fancyButton2192.fancyButton:hover,.fancyButton2192.fancyButton:focus,.fancyButton2192.fancyButton:active,.fancyButton2192.fancyButton.hover{
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.fancyButton2192.fancyButton:link > span,.fancyButton2192.fancyButton:visited > span, .fancyButton2192div.fancyButton > span{
+}
+.fancyButton2192.fancyButton:hover > span,.fancyButton2192.fancyButton:focus > span,.fancyButton2192.fancyButton:active > span,.fancyButton2192.fancyButton.hover > span{
+}
+.fancyButton2192.fancyButton .text{
+	color: rgb(255, 255, 255);
+	font-family: "Open Sans";
+	text-align: left;
+	padding-left: 2em;
+	font-style: normal;
+	text-decoration: underline;
+	padding-left: 2em;
+	background-repeat: no-repeat;
+	background-position: left top;
+
+
+}
+.fancyButton2192.fancyButton:hover .text,.fancyButton2192.fancyButton:focus .text,.fancyButton2192.fancyButton:active .text,.fancyButton2192.fancyButton.hover .text{
+	text-decoration: underline;
+	background-repeat: no-repeat;
+	background-position: left top;
+
+
+}
+</style>
+
+ </li><!--
+
+	    --><li class="widgetItem GraphicLinks">
+
+<div>
+	<a href="https://x.com/jeffcocolorado" target="_self" class="fancyButton fancyButton2193 " >
+		<span>
+			<span><span class="text">X</span></span>
+		</span>
+	</a>
+</div>
+		<style scoped="scoped">.fancyButton2193.fancyButton:link,.fancyButton2193.fancyButton:visited, .fancyButton2193div.fancyButton{
+	background-image: url(/ImageRepository/Document?documentID=46993);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.fancyButton2193.fancyButton:hover,.fancyButton2193.fancyButton:focus,.fancyButton2193.fancyButton:active,.fancyButton2193.fancyButton.hover{
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.fancyButton2193.fancyButton:link > span,.fancyButton2193.fancyButton:visited > span, .fancyButton2193div.fancyButton > span{
+}
+.fancyButton2193.fancyButton:hover > span,.fancyButton2193.fancyButton:focus > span,.fancyButton2193.fancyButton:active > span,.fancyButton2193.fancyButton.hover > span{
+}
+.fancyButton2193.fancyButton .text{
+	color: rgb(255, 255, 255);
+	font-family: "Open Sans";
+	text-align: left;
+	padding-left: 2em;
+	font-style: normal;
+	text-decoration: underline;
+	padding-left: 2em;
+	background-repeat: no-repeat;
+	background-position: left top;
+
+
+}
+.fancyButton2193.fancyButton:hover .text,.fancyButton2193.fancyButton:focus .text,.fancyButton2193.fancyButton:active .text,.fancyButton2193.fancyButton.hover .text{
+	text-decoration: underline;
+	background-repeat: no-repeat;
+	background-position: left top;
+
+
+}
+</style>
+
+ </li><!--
+
+	    --><li class="widgetItem GraphicLinks">
+
+<div>
+	<a href="https://www.youtube.com/user/JeffcoColorado" target="_self" class="fancyButton fancyButton2194 " >
+		<span>
+			<span><span class="text">YouTube</span></span>
+		</span>
+	</a>
+</div>
+		<style scoped="scoped">.fancyButton2194.fancyButton:link,.fancyButton2194.fancyButton:visited, .fancyButton2194div.fancyButton{
+	background-image: url(/ImageRepository/Document?documentID=46994);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.fancyButton2194.fancyButton:hover,.fancyButton2194.fancyButton:focus,.fancyButton2194.fancyButton:active,.fancyButton2194.fancyButton.hover{
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.fancyButton2194.fancyButton:link > span,.fancyButton2194.fancyButton:visited > span, .fancyButton2194div.fancyButton > span{
+}
+.fancyButton2194.fancyButton:hover > span,.fancyButton2194.fancyButton:focus > span,.fancyButton2194.fancyButton:active > span,.fancyButton2194.fancyButton.hover > span{
+}
+.fancyButton2194.fancyButton .text{
+	color: rgb(255, 255, 255);
+	font-family: "Open Sans";
+	text-align: left;
+	padding-left: 2em;
+	font-style: normal;
+	text-decoration: underline;
+	padding-left: 2em;
+	background-repeat: no-repeat;
+	background-position: left top;
+
+
+}
+.fancyButton2194.fancyButton:hover .text,.fancyButton2194.fancyButton:focus .text,.fancyButton2194.fancyButton:active .text,.fancyButton2194.fancyButton.hover .text{
+	text-decoration: underline;
+	background-repeat: no-repeat;
+	background-position: left top;
+
+
+}
+</style>
+
+ </li><!--
+					-->
+					</ul>
+			</nav>
+		</div>
+	<div class="widgetFooter">
+			</div>
+</div>
+</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!----><div class="outer col col3" style="" data-widgetcontainerid="d668bb9a-385c-4205-b635-19f5ecd9afb4">				
+	<div class="row nest first last wide">
+	
+	<div class="inner col col3 first last idf3731a6f-ee04-4083-bd9b-d19e298ac634" style="" data-widgetcontainerid="f3731a6f-ee04-4083-bd9b-d19e298ac634">	
+
+<div class="widget widgetSpacer" id="f8bd82db-4856-4faf-a325-6356d4e9408b"></div>	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!----><div class="outer col col4" style="" data-widgetcontainerid="c52c7674-0c63-45d9-9e5d-1cbbead1d3d4">				
+	<div class="row nest first last wide">
+	
+	<div class="inner col col4 first last idc7a7a169-1634-4550-b296-7b824b77357e" style="" data-widgetcontainerid="c7a7a169-1634-4550-b296-7b824b77357e">	
+	<div data-widget-id="bba0b1a5-c7a6-470f-8718-40e223d1e3c7" data-widget-controller-path="/QuickLinks/Widget">
+
+
+
+
+
+
+
+
+	<section id="widgetQuicklinkbba0b1a5-c7a6-470f-8718-40e223d1e3c7" class="widget widgetQuickLinks skin138 widgetOptionSet25 narrow" data-modulewidgettype="quickLinks" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}' data-elementquerymatch='matchMultiColumn' data-elementqueryunmatch='unmatchMultiColumn' aria-labelledby="quickLinksHeaderbba0b1a5-c7a6-470f-8718-40e223d1e3c7">
+			<header class="widgetHeader" id="quickLinksHeaderbba0b1a5-c7a6-470f-8718-40e223d1e3c7">
+		<div class="">
+					<h3><a  style="" href="/QuickLinks.aspx?CID=134" >Helpful Links</a></h3>
+						</div>
+	</header>
+	<div class="widgetBody cpGrid cpGrid1 ">
+        <div class="row  narrow">
+				<div class="col col1 first last">
+					<ol class="semanticList">
+
+    <li style="position:relative" class="widgetItem QuickLinks">
+        <a class="widgetDesc widgetQuickLinksLink" href="/755/Airport" target="_self" >Rocky Mountain Metropolitan Airport</a>
+        <div class="widgetMeta"></div>
+    </li>
+
+    <li style="position:relative" class="widgetItem QuickLinks">
+        <a class="widgetDesc widgetQuickLinksLink" href="/785/Building-Safety" target="_self" >Building Safety</a>
+        <div class="widgetMeta"></div>
+    </li>
+
+    <li style="position:relative" class="widgetItem QuickLinks">
+        <a class="widgetDesc widgetQuickLinksLink" href="/786/Planning-Zoning" target="_self" >Planning and Zoning</a>
+        <div class="widgetMeta"></div>
+    </li>
+
+    <li style="position:relative" class="widgetItem QuickLinks">
+        <a class="widgetDesc widgetQuickLinksLink" href="/787/Road-Bridge" target="_self" >Road and Bridge</a>
+        <div class="widgetMeta"></div>
+    </li>
+
+    <li style="position:relative" class="widgetItem QuickLinks">
+        <a class="widgetDesc widgetQuickLinksLink" href="/788/Transportation-Engineering" target="_self" >Transportation and Engineering</a>
+        <div class="widgetMeta"></div>
+    </li>
+					</ol>
+				</div>
+		</div>
+        
+	</div>
+	<div class="widgetFooter">
+	</div>
+	<div class="addItemModal hidden">
+		<div class="url hidden">/QuickLinks.aspx</div>
+	</div>
+
+	</section>
+</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!----><div class="outer col col3" style="" data-widgetcontainerid="88754e7e-f46e-45a0-8f13-eb596b68e28a">				
+	<div class="row nest first last wide">
+	
+	<div class="inner col col3 first last ided16c1df-e94f-413e-a712-798d41f671a7" style="" data-widgetcontainerid="ed16c1df-e94f-413e-a712-798d41f671a7">	
+
+<div class="widget widgetSpacer" id="e681cf74-c793-4753-8e3f-65a6939174f7"></div>	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!----><div class="outer col col4 last" style="" data-widgetcontainerid="4f787980-b8e4-4b4d-b061-9f4a8ff12883">				
+	<div class="row nest first wide">
+	
+	<div class="inner col col4 first last id25ab6703-fc85-4a85-9cf4-df66040d4cf2" style="" data-widgetcontainerid="25ab6703-fc85-4a85-9cf4-df66040d4cf2">	
+	<div data-widget-id="6dc34d0f-568a-4ea8-9c86-732114baf8c1" data-widget-controller-path="/QuickLinks/Widget">
+
+
+
+
+
+
+
+
+	<section id="widgetQuicklink6dc34d0f-568a-4ea8-9c86-732114baf8c1" class="widget widgetQuickLinks skin138 widgetOptionSet25 narrow" data-modulewidgettype="quickLinks" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}' data-elementquerymatch='matchMultiColumn' data-elementqueryunmatch='unmatchMultiColumn' aria-labelledby="quickLinksHeader6dc34d0f-568a-4ea8-9c86-732114baf8c1">
+			<header class="widgetHeader" id="quickLinksHeader6dc34d0f-568a-4ea8-9c86-732114baf8c1">
+		<div class="">
+					<h3><a  style="" href="/QuickLinks.aspx?CID=14" >County Site Links</a></h3>
+						</div>
+	</header>
+	<div class="widgetBody cpGrid cpGrid1 ">
+        <div class="row  narrow">
+				<div class="col col1 first last">
+					<ol class="semanticList">
+
+    <li style="position:relative" class="widgetItem QuickLinks">
+        <a class="widgetDesc widgetQuickLinksLink" href="/sitemap" target="_self" >Sitemap</a>
+        <div class="widgetMeta"></div>
+    </li>
+
+    <li style="position:relative" class="widgetItem QuickLinks">
+        <a class="widgetDesc widgetQuickLinksLink" href="/5175/Contact-Us" target="_self" >Contact Us</a>
+        <div class="widgetMeta"></div>
+    </li>
+
+    <li style="position:relative" class="widgetItem QuickLinks">
+        <a class="widgetDesc widgetQuickLinksLink" href="/3558/Accessibility" target="_self" >Accessibility</a>
+        <div class="widgetMeta"></div>
+    </li>
+
+    <li style="position:relative" class="widgetItem QuickLinks">
+        <a class="widgetDesc widgetQuickLinksLink" href="/3557/Non-Discrimination" target="_self" >Non-Discrimination Notice</a>
+        <div class="widgetMeta"></div>
+    </li>
+
+    <li style="position:relative" class="widgetItem QuickLinks">
+        <a class="widgetDesc widgetQuickLinksLink" href="/749/Website-Photography" target="_self" >Website Photography</a>
+        <div class="widgetMeta"></div>
+    </li>
+
+    <li style="position:relative" class="widgetItem QuickLinks">
+        <a class="widgetDesc widgetQuickLinksLink" href="/2845/Privacy-and-Site-Disclaimer" target="_self" >Privacy & Site Disclaimer</a>
+        <div class="widgetMeta"></div>
+    </li>
+
+    <li style="position:relative" class="widgetItem QuickLinks">
+        <a class="widgetDesc widgetQuickLinksLink" href="https://jeffersoncountyco.qscend.com/311/request/add/29bea368333e479791ea6e75d1feed02" target="_blank"  aria-label="Report a website issue opens in new window">Report a website issue</a>
+        <div class="widgetMeta"></div>
+    </li>
+					</ol>
+				</div>
+		</div>
+        
+	</div>
+	<div class="widgetFooter">
+	</div>
+	<div class="addItemModal hidden">
+		<div class="url hidden">/QuickLinks.aspx</div>
+	</div>
+
+	</section>
+</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+	<div class="row nest last wide">
+	
+	<div class="inner col col4 first last id61eb4cf8-aad1-4d21-bdc4-01c1f3cd1745" style="" data-widgetcontainerid="61eb4cf8-aad1-4d21-bdc4-01c1f3cd1745">	
+ 
+	<div data-widget-id='6348cd52-0ed9-4c3a-ac0f-4d0d369c9464' data-moduleName="customHtml" id='widgetCustomHtml6348cd52-0ed9-4c3a-ac0f-4d0d369c9464' class="widget widgetCustomHtml skin136 narrow" >
+	<div class="widgetBody pageStyles" id="widgetBody6348cd52-0ed9-4c3a-ac0f-4d0d369c9464">
+		<div id="customHtml6348cd52-0ed9-4c3a-ac0f-4d0d369c9464"><div><!----------Google Translate (Mobile Friendly)--------->
+
+<style>
+  #google-translate-container a {
+color: #fff !important;
+  }
+
+  #google-translate-container {
+text-align: center;
+margin: 1em auto;
+  }
+
+@media (min-width: 1200px) {
+  #google-translate-container {
+text-align: left;
+margin: 1em auto;
+  }
+}
+  
+  .goog-te-combo, .goog-te-banner *, .goog-te-ftab *, .goog-te-menu *, .goog-te-menu2 *, .goog-te-balloon * {
+    font-family: arial;
+    font-size: 10pt;
+    background-image: url("https://www.gstatic.com/images/branding/product/2x/translate_24dp.png");
+    background-position: 5px 5px;
+    background-size: 18px;
+    background-repeat: no-repeat;
+    text-indent: 16px;
+    background-color: #fff;
+    color: #000 !important;
+  }
+  
+  .goog-logo-link {
+    display: none !important;
+  }
+  
+  .goog-te-gadget {
+    color: transparent !important;
+  }
+  
+  .goog-te-gadget .goog-te-combo {
+    margin: 2px 0 !important;
+    border-radius: 5px !important;
+    }
+  
+  .goog-te-combo{
+    border: 1px solid !important;
+    border-color: #bcc9d7 #96a3b1 #96a3b1 #bcc9d7 !important;
+    border-radius: 50px !important;
+    height:31px !important;
+    padding: 0 1px 0 .25rem !important;
+                width: 156px;
+  }
+
+  #launcher-wrapper {
+    bottom: 50px !important;
+  }
+
+</style>
+
+<div id="google-translate-container">
+  <div id="google_translate_element">
+  </div>
+</div>
+
+<script>
+
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({ pageLanguage: "en" }, "google_translate_element");
+    // begin accessibility compliance
+    $('img.goog-te-gadget-icon').attr('alt','Google Translate');
+    $('div#goog-gt-tt div.logo img').attr('alt','translate');
+    $('div#goog-gt-tt .original-text').css('text-align','left');
+    $('.goog-te-gadget-simple .goog-te-menu-value span').css('color','#000000');
+    $('.goog-te-combo').attr('aria-label','google translate languages');
+    $('svg.goog-te-spinner').attr('title','Google Translate Spinner');
+    $('.goog-te-gadget-simple .goog-te-menu-value span').css('color','#000000');
+  }
+
+  $(function() {
+    $.getScript("//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit");
+  });
+
+</script>
+
+<!--------------End Google Translate----------------->
+</div></div>
+	</div>
+	</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!--		--></div> <!-- outer row -->
+
+
+	</div>
+</div><div data-cpRole="contentContainer" id="poweredByTS">	<div id="cc9f7acdb4-1bd3-4fcd-9867-85ea8e6f9b4c" data-containerid="9f7acdb4-1bd3-4fcd-9867-85ea8e6f9b4c" class="pageContent cpGrid cpGrid24 isLockedContainer showInMobile">
+				                
+
+		<div class="row outer wide"><!--
+--><div class="outer col col24 first last" style="" data-widgetcontainerid="d6f921ef-2561-4604-9d70-fec9c17b6ca0">				
+	<div class="row nest first last wide">
+	
+	<div class="inner col col24 first last id51ae4f45-3d33-4ac1-8522-816ae21751f9" style="" data-widgetcontainerid="51ae4f45-3d33-4ac1-8522-816ae21751f9">	
+ 
+	<div data-widget-id='5236c3ac-b123-4f8c-9e8f-1b81109dde4a' data-moduleName="customHtml" id='widgetCustomHtml5236c3ac-b123-4f8c-9e8f-1b81109dde4a' class="widget widgetCustomHtml skin138 narrow" >
+	<div class="widgetBody pageStyles" id="widgetBody5236c3ac-b123-4f8c-9e8f-1b81109dde4a">
+		<div id="customHtml5236c3ac-b123-4f8c-9e8f-1b81109dde4a"><div><!-- CP BAR -->
+  <style>
+    /* CP icon */
+    .cpBylineIconTS {
+        color: #fff;
+    }
+    /* CP Text */
+    .cpBylineTextTS,
+    .cpBylineTextTS a:link,
+    .cpBylineTextTS a:visited,
+    .cpBylineTextTS a:hover,
+    .cpBylineTextTS a:focus,
+    .cpBylineTextTS a:active {
+        color: #fff!important;
+    }
+
+    .cpBylineTextTS a:link,
+    .cpBylineTextTS a:visited,
+    .cpBylineTextTS a:hover,
+    .cpBylineTextTS a:focus,
+    .cpBylineTextTS a:active {
+        text-decoration: underline !important;
+    }
+
+    .cpBylineTS {
+        text-align: center;
+    }
+    .cpBylineIconTS {
+        fill: currentColor;
+        width: 39px;
+        height: 26px;
+        display: inline;
+        vertical-align: middle;
+    }
+  </style>
+    
+  <div class="widgetItem cpBylineTS">
+    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" class="cpBylineIconTS">
+      <path class="c" d="M73.4,23.2h-19v16.7h19c2.8,0,5,2.2,5,5c0,2.8-2.2,5-5,5h-19v28.4h5.5l11.3-11.7h2.2c11.9,0,21.6-9.7,21.6-21.6C95,33,85.3,23.2,73.4,23.2"></path>
+      <path class="p" d="M45.8,66.5H26.6C14.7,66.5,5,56.8,5,44.9C5,33,14.7,23.2,26.6,23.2h19.1v16.7H26.6c-2.8,0-5,2.2-5,5c0,2.8,2.2,5,5,5h19.1V66.5z"></path>
+    </svg>
+    <span class="cpBylineTextTS">Government Websites by <a href="https://connect.civicplus.com/referral">CivicPlus&reg;</a></span>
+  </div></div></div>
+	</div>
+	</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!--		--></div> <!-- outer row -->
+
+
+	</div>
+</div></div>
+</footer>
+</div>
+
+            </div>
+        </div>
+    </div>
+
+<link href="/2110643746.css" rel="stylesheet" type="text/css" />
+
+<div id="SplashMessageWrapper" class="cp-Splash-wrapper">
+	<div role="dialog" aria-labelledby="cp-Splash-title" aria-describedby="editorContentDesc" aria-modal="true" tabindex="-1" id="SplashMessage" class="hidden cp-Splash cp-Splash--modal is-open">
+		<div class="cp-Splash-header">
+			<h2 class="cp-Splash-title" id="cp-Splash-title">Loading</h2>
+			<button class="cp-Splash-Btn cp-Splash-close" aria-label="Close this modal" title="Close this window">
+				<svg id="iconClose" viewBox="0 0 25 25">
+					<polygon style="fill:currentcolor"
+							 points="18.806,6.98 18.075,6.248 12.532,11.792 6.989,6.248 6.257,6.98 11.786,12.508 6.212,18.084 6.943,18.815 12.532,13.224 18.12,18.815 18.851,18.084 13.277,12.508"></polygon>
+				</svg>
+			</button>
+		</div>
+		<div class="cp-Splash-body">
+			<div class="cp-Splash-Prose editorContent fr-view" id="editorContentDesc">
+				<!-- Content from the Froala Editor will go here. -->
+				Loading
+			</div>
+		</div>
+		<div class="cp-Splash-footer">
+			<button class="cp-Splash-Btn cp-Splash-Btn--NoShow">Do Not Show Again</button>
+			<button class="cp-Splash-Btn cp-Splash-Btn--Close">Close</button>
+		</div>
+	</div>
+</div>
+
+<script src="/Assets/Scripts/APIClient.js"></script>
+<script src="/Assets/Mystique/Shared/Scripts/Moment/Moment.min.js"></script>
+<script src="/Assets/Scripts/SplashModal/SplashModalRender.js"></script>
+<script>
+
+		$(document).ready(function () {
+			var filter = {
+				targetId: '4445',
+				targetType: 1
+			}
+
+			new SplashModalRender().triggerRender(filter);
+		});
+</script>
+
+
+	
+	
+	
+	
+
+
+
+	
+
+
+
+
+
+
+    <script src="/1482631785.js" type="text/javascript"></script>
+    <script type="text/javascript">
+  window.loop11_key = "a85d6ca13fabc743028745606d30daf86c1a34bb";
+</script>
+<script src="//cdn.loop11.com/my/loop11.js" type="text/javascript" async="async"></script>
+
+<script type="text/javascript">
+/*<![CDATA[*/
+(function() {
+var sz = document.createElement('script'); sz.type = 'text/javascript'; sz.async = true;
+sz.src = '//siteimproveanalytics.com/js/siteanalyze_1306761.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sz, s);
+})();
+/*]]>*/
+</script>
+
+<!-- Fixed Nav Adjustment -->
+<script>
+  function getValueTS(elem, attr) {
+    var val = elem.css(attr);
+    if (val === undefined) return undefined;
+    var num = parseInt(val, 10);
+    if (num === NaN) return undefined;
+    return num;
+  }
+
+  function clampTS(number, min, max) {
+    return Math.min(Math.max(number, min), max);
+  }
+
+  function isPageEditingTS() {
+    return (
+      $("#doneEditing").length > 0 || // In live edit
+      typeof DesignCenter !== "undefined" // In theme manager
+    );
+  }
+
+  var bgColorRegexTS = new RegExp("rgba\((\d+), (\d+), (\d+), (\d*\.?\d*)\)");
+  function isTransparentTS(elem) {
+    var bg = elem.css('background-color');
+    if (typeof bg !== "string") return false;
+    if (bg === "transparent") return true;
+    if (!bg.startsWith('rgba(')) return false;
+    var matchState = bg.match(bgColorRegexTS);
+    if (!matchState || matchState.length !== 5) return false;
+    var alpha = parseFloat(matchState[4], 10);
+    if (!(alpha >= 0 && alpha < 1)) return false;
+    return true;
+  }
+
+  function iterateLeftpads(cb) {
+    var containersTS = $("[class^='siteWrap'],[class*=' siteWrap']");
+    for (var i = 0; i < containersTS.length; i++) {
+      var containerTS = containersTS[i];
+      // Skip the body container and anything with data-skip-leftpad
+      if (
+        containerTS.id !== "bodyContainerTS" &&
+        containerTS.getAttribute('data-skip-leftpad') === null
+      ) {
+        cb(containerTS);
+      }
+    }
+  }
+
+  function iterateRightpads(cb) {
+    var containersTS = $("[class^='siteWrap'],[class*=' siteWrap']");
+    for (var i = 0; i < containersTS.length; i++) {
+      var containerTS = containersTS[i];
+      // Skip the body container and anything with data-skip-rightpad
+      if (
+        containerTS.id !== "bodyContainerTS" &&
+        containerTS.getAttribute('data-skip-rightpad') === null
+      ) {
+        cb(containerTS);
+      }
+    }
+  }
+
+  var anchor = $("#divToolbars");
+  var bodyContainerTS = $("#bodyContainerTS");
+
+  // Outer banner padding (push banner down)
+  var outerSizingTS = $("#bannerContainerTS");
+  // Inner banner padding (push banner content down) - Transparent header OR on attaching headers
+  var innerSizingTS = $("#bannerSizingTS");
+
+  var forceUnfixClassTS = "forceUnfixTS";
+
+  var fixedTopTS = $(".fixedTopTS");
+  var fixedBottomTS = $(".fixedBottomTS");
+  var fixedLeftTS = $(".fixedLeftTS");
+  var fixedRightTS = $(".fixedRightTS");
+
+  var initialTopTS;
+  var topAttachTS;
+  if (fixedTopTS && fixedTopTS.length === 1) {
+    initialTopTS = getValueTS(fixedTopTS, 'top');
+    var attachment = fixedTopTS.attr('data-attach');
+    if (attachment) topAttachTS = $("#" + attachment);
+    if (!topAttachTS || topAttachTS.length !== 1) topAttachTS = undefined;
+  }
+
+  function resizeAdjustmentTS() {
+    var editing = isPageEditingTS();
+
+    // Fixed top script
+    (function () {
+      if (!fixedTopTS || fixedTopTS.length !== 1 || initialTopTS === undefined) return;
+
+      if (editing) {
+        fixedTopTS[0].classList.add(forceUnfixClassTS);
+      } else {
+        fixedTopTS[0].classList.remove(forceUnfixClassTS);
+      }
+
+      var topPosition = fixedTopTS.css('position');
+      if (topPosition === 'fixed') {
+        if (topAttachTS) {
+          scrollAdjustmentTS();
+        } else {
+          var anchorHeight = anchor.outerHeight() - 1;
+          fixedTopTS.css('top', anchorHeight + initialTopTS);
+        }
+      } else {
+        fixedTopTS.css('top', initialTopTS);
+      }
+
+      if (topPosition === 'fixed' || topPosition === 'absolute') {
+        // Bump the banner content down
+        if (isTransparentTS(fixedTopTS)) {
+          innerSizingTS.css('padding-top', initialTopTS + fixedTopTS.outerHeight());
+          outerSizingTS.css('padding-top', '');
+
+          try {
+            window.Pages.onResizeHandlersExecute();
+          } catch (e) { }
+        } else {
+          outerSizingTS.css('padding-top', fixedTopTS.outerHeight() - 1);
+          innerSizingTS.css('padding-top', '');
+        }
+      } else {
+        innerSizingTS.css('padding-top', '');
+        outerSizingTS.css('padding-top', '');
+      }
+    })();
+
+    // Fixed bottom script
+    (function () {
+      if (!fixedBottomTS || fixedBottomTS.length === 0) return;
+
+      // If the widget has gone narrow, force unfix
+      if (editing || fixedBottomTS.outerHeight() > 200) {
+        fixedBottomTS[0].classList.add(forceUnfixClassTS);
+      } else {
+        fixedBottomTS[0].classList.remove(forceUnfixClassTS);
+      }
+
+      if (fixedBottomTS.css('position') === 'fixed') {
+        bodyContainerTS.css('padding-bottom', fixedBottomTS.outerHeight());
+      } else {
+        bodyContainerTS.css('padding-bottom', '');
+      }
+    })();
+
+    // Fixed left script
+    (function () {
+      if (!fixedLeftTS || fixedLeftTS.length === 0) return;
+
+      if (editing) {
+        fixedLeftTS[0].classList.add(forceUnfixClassTS);
+      } else {
+        fixedLeftTS[0].classList.remove(forceUnfixClassTS);
+      }
+
+      if (fixedLeftTS.css('position') === 'fixed') {
+        var anchorHeight = anchor.outerHeight() - 1;
+        fixedLeftTS.css('top', anchorHeight);
+        var leftBoundingTS = fixedLeftTS[0].getBoundingClientRect();
+        iterateLeftpads(function (containerTS) {
+          var containerBoundingTS = containerTS.getBoundingClientRect();
+          if (containerBoundingTS.left <= leftBoundingTS.right) {
+            $(containerTS).css('padding-left', leftBoundingTS.width + 16);
+          } else {
+            $(containerTS).css('padding-left', '');
+          }
+        });
+      } else {
+        fixedLeftTS.css('top', '');
+        iterateLeftpads(function (containerTS) {
+          $(containerTS).css('padding-left', '');
+        });
+      }
+    })();
+
+    // Fixed right script
+    (function () {
+      if (!fixedRightTS || fixedRightTS.length === 0) return;
+
+      if (editing) {
+        fixedRightTS[0].classList.add(forceUnfixClassTS);
+      } else {
+        fixedRightTS[0].classList.remove(forceUnfixClassTS);
+      }
+
+      if (fixedRightTS.css('position') === 'fixed') {
+        var anchorHeight = anchor.outerHeight() - 1;
+        fixedRightTS.css('top', anchorHeight);
+        var rightBoundingTS = fixedRightTS[0].getBoundingClientRect();
+        iterateRightpads(function (containerTS) {
+          var containerBoundingTS = containerTS.getBoundingClientRect();
+          if (containerBoundingTS.right >= rightBoundingTS.left) {
+            $(containerTS).css('padding-right', rightBoundingTS.width + 16);
+          }
+        });
+      } else {
+        fixedRightTS.css('top', '');
+        iterateRightpads(function (containerTS) {
+          $(containerTS).css('padding-right', '');
+        });
+      }
+    })();
+  }
+
+  function scrollAdjustmentTS() {
+    if (!fixedTopTS || fixedTopTS.length !== 1 || !topAttachTS || topAttachTS.length !== 1) return;
+    var topPosition = fixedTopTS.css('position');
+    if (topPosition === 'fixed' || topPosition === 'absolute') {
+      var anchorBounding = anchor[0].getBoundingClientRect();
+      var attachBounding = topAttachTS[0].getBoundingClientRect();
+      var scrollTop = $(window).scrollTop();
+
+      fixedTopTS.css('top', Math.max(anchorBounding.bottom - 1, attachBounding.bottom));
+    } else {
+      fixedTopTS.css('top', initialTopTS);
+    }
+  }
+
+  $(window).load(function () {
+    setTimeout(function () {
+      try {
+        resizeAdjustmentTS();
+      } catch (e) {
+        console.error(e);
+      }
+    }, 350);
+
+    $(window).scroll(function () {
+      try {
+        scrollAdjustmentTS();
+      } catch (e) {
+        console.error(e);
+      }
+    });
+
+    var adjustTimeoutTS;
+    $(window).resize(function () {
+      clearTimeout(adjustTimeoutTS);
+      adjustTimeoutTS = setTimeout(function () {
+        try {
+          resizeAdjustmentTS();
+        } catch (e) {
+          console.error(e);
+        }
+      }, 350);
+    });
+
+    $.when(window.Pages.angularToolbarComplete).done(function () {
+      try {
+        resizeAdjustmentTS();
+      } catch (e) {
+        console.error(e);
+      }
+    });
+  });
+</script>
+<!-- End Fixed Nav Adjustment -->
+
+
+
+<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/f6163dd5aa413762d38553666/7b787d9099bd92d4a2491e66d.js");</script>
+
+<script src="https://cdn-residentagent.civicplus.com/loader.js"></script>
+<script>
+    window.ResidentAgentWidget.load({
+        agentId: 'a14c3861-0d41-454e-838f-6201f4916b80',
+        apiUrl: 'https://residentagent-api-production.azurewebsites.net'
+    });
+</script>
+
+
+    <script type="text/javascript">
+        $(function () {
+            document.cookie = "responsiveGhost=0; path=/";
+        });
+        $(window).on("load", function () {
+            $('body').addClass('doneLoading').removeClass('hideContent');
+
+            if ($('#404Content').length > 0)
+                $('div#bodyWrapper').css('padding', '0px');
+        });
+    </script>
+
+    <noscript>
+        <style>
+            body.hideContent {
+                opacity: 1 !important;
+            }
+        </style>
+    </noscript>
+
+        
+<div style="display: none;">
+	<svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
+
+		<symbol id="iconArrow--left" viewbox="0 0 25 25">
+			<title>Arrow Left</title>
+			<polygon style="fill:currentcolor" points="18.044,25 19.498,23.545 8.409,12.454 19.408,1.455 17.954,0 5.502,12.452"></polygon>
+		</symbol>
+
+		<symbol id="iconArrow--right" viewbox="0 0 25 25">
+			<title>Arrow Right</title>
+			<polygon style="fill:currentcolor" points="6.957,0 5.502,1.455 16.591,12.546 5.592,23.545 7.047,25 19.498,12.548"></polygon>
+		</symbol>
+
+	</svg>
+</div>
+    <script type="text/javascript">loadCSS('//fonts.googleapis.com/css?family=Aleo:500,600,700,800,900,italic,regular|Bitter:700,italic|Coming+Soon:regular|Cormorant+Garamond:600|Montserrat:500,600,700,regular|Open+Sans:500,600,700,800,italic,regular|Quicksand:700,regular|Rubik:500,700,regular|Source+Sans+Pro:regular|');</script>
+    
+
+    <div class="hidden activeWidgetSkinComponentsOnPageJson">[]</div>
+        <div style="display: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                <symbol id="iconSlideshowArrowLeft" viewBox="0 0 22.68 40">
+                    <title>Slideshow Left Arrow</title>
+                    <g>
+                        <path style="fill:currentcolor;" d="M20,40a2.67,2.67,0,0,1-1.9-.79L.79,21.9a2.68,2.68,0,0,1,0-3.79L18.1.79a2.68,2.68,0,1,1,3.79,3.79L6.47,20,21.89,35.42A2.68,2.68,0,0,1,20,40Z"></path>
+                    </g>
+                </symbol>
+                <symbol id="iconSlideshowArrowRight" viewBox="0 0 22.68 40">
+                    <title>Slideshow Right Arrow</title>
+                    <g>
+                        <path style="fill:currentcolor;" d="M2.68,0a2.67,2.67,0,0,1,1.9.79L21.89,18.1a2.68,2.68,0,0,1,0,3.79L4.58,39.21A2.68,2.68,0,0,1,.79,35.42L16.21,20,.79,4.58A2.68,2.68,0,0,1,2.68,0Z"></path>
+                    </g>
+                </symbol>
+            </svg>
+        </div>
+    
+	
+
+    <div id="root-picker-outlet"></div>
+</body>
+</html>
