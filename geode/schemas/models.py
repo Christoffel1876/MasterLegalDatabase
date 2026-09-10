@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from typing import Literal
 
 from pydantic import (
@@ -86,7 +86,12 @@ class GeodeModel(BaseModel):
     )
     @classmethod
     def validate_not_future_date(cls, value: date | None, info: ValidationInfo) -> date | None:
-        """Reject impossible future dates."""
+        """Reject future dates, checking UTC-derived retrieval dates against UTC today."""
+
+        if info.field_name == "data_retrieved":
+            if value is not None and value > datetime.now(timezone.utc).date():
+                raise ValueError("date cannot be in the future")
+            return value
 
         if cls.__name__ == "RegulationRule" and info.field_name == "effective_date":
             return value
