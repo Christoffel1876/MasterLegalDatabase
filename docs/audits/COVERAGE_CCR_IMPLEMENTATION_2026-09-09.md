@@ -108,6 +108,17 @@ The full-suite check also exposed a UTC/local-date mismatch in validation of
 retrieval dates near midnight UTC. Retrieval dates use UTC; the targeted fix
 compares them against the UTC calendar date and retains future-date rejection.
 
+The first hosted run,
+[34419898850](https://github.com/Christoffel1876/MasterLegalDatabase/actions/runs/34419898850),
+completed source collection but stopped before publication when the coverage
+inventory encountered a district `LocalRule` with a full retrieval timestamp.
+The compatibility correction compares that timestamp's UTC date, preserves the
+original timestamp, and retains the existing timezone-awareness requirement.
+Regression coverage includes the inherited district record, date-only local
+authority records, offset timestamps, and future-date rejection. The failed run's
+source-check report remains in its artifact; no data PR was published by
+that run.
+
 Collection is read-only; publication receives separate write permissions and
 rechecks the candidate bundle and same-run validation report. The bot maintains
 one department-12 data PR and never approves or merges it. Run reports retain

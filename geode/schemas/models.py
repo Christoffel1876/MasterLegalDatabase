@@ -67,6 +67,12 @@ EntityType = Literal[
 ]
 
 
+def _utc_today() -> date:
+    """Return the UTC calendar date used for retrieval-date validation."""
+
+    return datetime.now(timezone.utc).date()
+
+
 class GeodeModel(BaseModel):
     """Base model with strict field handling for Geode records."""
 
@@ -85,11 +91,20 @@ class GeodeModel(BaseModel):
         check_fields=False,
     )
     @classmethod
-    def validate_not_future_date(cls, value: date | None, info: ValidationInfo) -> date | None:
-        """Reject future dates, checking UTC-derived retrieval dates against UTC today."""
+    def validate_not_future_date(
+        cls, value: date | datetime | None, info: ValidationInfo,
+    ) -> date | datetime | None:
+        """Check retrieval dates in UTC while preserving date and datetime field values."""
 
         if info.field_name == "data_retrieved":
-            if value is not None and value > datetime.now(timezone.utc).date():
+            comparison = value
+            if isinstance(value, datetime):
+                # Naive timestamps retain the inherited calendar-date check; models that
+                # require timezone awareness still reject them in their field validator.
+                comparison = (
+                    value.astimezone(timezone.utc) if value.utcoffset() is not None else value
+                ).date()
+            if comparison is not None and comparison > _utc_today():
                 raise ValueError("date cannot be in the future")
             return value
 
