@@ -1,0 +1,125 @@
+{
+  "$defs": {
+    "File": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "larimer-equity-fee-resolution-sd007-04",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-LARIMER",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "review_artifacts": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Review Artifacts",
+      "type": "array"
+    },
+    "root_verification": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Root Verification",
+      "type": "array"
+    },
+    "validation_command": {
+      "title": "Validation Command",
+      "type": "string"
+    },
+    "validation_output": {
+      "additionalProperties": true,
+      "title": "Validation Output",
+      "type": "object"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "new_original_count": {
+      "const": 0,
+      "default": 0,
+      "title": "New Original Count",
+      "type": "integer"
+    },
+    "frozen_inventory_updated": {
+      "const": false,
+      "default": false,
+      "title": "Frozen Inventory Updated",
+      "type": "boolean"
+    },
+    "canonical_coverage_promoted": {
+      "const": false,
+      "default": false,
+      "title": "Canonical Coverage Promoted",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "source_id",
+    "authority_id",
+    "review_artifacts",
+    "root_verification",
+    "validation_command",
+    "validation_output",
+    "scope",
+    "limitations"
+  ],
+  "title": "Acceptance",
+  "type": "object"
+}

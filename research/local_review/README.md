@@ -27,6 +27,10 @@ mapped review link. A null review link does not establish that no earlier
 inspection exists. Each linked scope retains its original limitations, and the
 older coverage ledger remains unchanged.
 
+A [later Larimer equity-resolution review](../../docs/audits/LARIMER_EQUITY_RESOLUTION_2026-09-11/README.md)
+was accepted after that inventory snapshot. It is preserved separately and awaits
+an explicit join in the next inventory version; the frozen counts are unchanged.
+
 ## Checked text and source structure
 
 | Source | Entry point | What is checked | Remaining limit |
@@ -38,6 +42,7 @@ older coverage ledger remains unchanged.
 | Larimer development review fees, EB010 | [Seven-page review](ebenezer-010-2026-09-11/README.md) | All native bytes retained in reviewed source order, with section and fee associations | Source arithmetic and wording anomalies are preserved |
 | Larimer fee increase memo, EB011 | [One-page review](ebenezer-011-2026-09-11/ATLAS_REVIEW.md) | Complete native text; separate building and transportation assertions | The underlying adopting instruments remain separate gaps |
 | Larimer initial data-center moratorium, EB012 | [Body and execution review](ebenezer-012-2026-09-11/ATLAS_REVIEW.md) | Printed body corrections; separately qualified execution block | Handwritten identities and later extension effect are not certified |
+| Larimer equity fee-reduction resolution | [Two-page manual transcript](larimer-equity-fee-resolution-source-review-2026-09-11/SOURCE_QA.md) | Complete printed body, eight eligibility items and separately qualified execution observations | Printed `20243` anomaly retained; actual acquisition, authenticated adoption and current applicability remain unverified |
 | Fort Collins wildfire code, EB013 | [Eight-page draft review](ebenezer-013-2026-09-11/README.md) | Native text and separate strike, highlight, blank-field and display-order annotations | The source is visibly a discussion draft with placeholders and blank execution fields |
 | Fort Collins Land Use Code Article 1, EB014 | [Seven-page source review](ebenezer-014-2026-09-11/README.md) | Native text, visibility, paragraph associations and embedded links | Edition, adoption and effective dates are unverified |
 | Greeley building fees, EB015 | [One-page source review](greeley-fees-atlas-source-review-2026-09-11/README.md) | Eight valuation rows, nine other-fee items, footnotes and tax/electrical sections | External review pending; 2024 title and unlabeled 2026 footer remain distinct |
