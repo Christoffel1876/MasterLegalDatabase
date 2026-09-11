@@ -1,0 +1,115 @@
+{
+  "$defs": {
+    "FileRef": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "validated_at": {
+      "format": "date-time",
+      "title": "Validated At",
+      "type": "string"
+    },
+    "reconciliation": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "external_reports": {
+      "const": 4,
+      "title": "External Reports",
+      "type": "integer"
+    },
+    "comparison_files": {
+      "const": 75,
+      "title": "Comparison Files",
+      "type": "integer"
+    },
+    "distinct_asset_hash_claims": {
+      "const": 15,
+      "title": "Distinct Asset Hash Claims",
+      "type": "integer"
+    },
+    "reconciled_external_findings": {
+      "const": 23,
+      "title": "Reconciled External Findings",
+      "type": "integer"
+    },
+    "reconciled_errata": {
+      "const": 4,
+      "title": "Reconciled Errata",
+      "type": "integer"
+    },
+    "atlas_supplements": {
+      "const": 3,
+      "title": "Atlas Supplements",
+      "type": "integer"
+    },
+    "original_pages": {
+      "const": 8,
+      "title": "Original Pages",
+      "type": "integer"
+    },
+    "original_bytes": {
+      "const": 169449,
+      "title": "Original Bytes",
+      "type": "integer"
+    },
+    "original_and_candidate_unchanged": {
+      "const": true,
+      "title": "Original And Candidate Unchanged",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "checks_passed": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks Passed",
+      "type": "array"
+    }
+  },
+  "required": [
+    "validated_at",
+    "reconciliation",
+    "external_reports",
+    "comparison_files",
+    "distinct_asset_hash_claims",
+    "reconciled_external_findings",
+    "reconciled_errata",
+    "atlas_supplements",
+    "original_pages",
+    "original_bytes",
+    "original_and_candidate_unchanged",
+    "legal_currentness",
+    "checks_passed"
+  ],
+  "title": "ValidationResult",
+  "type": "object"
+}

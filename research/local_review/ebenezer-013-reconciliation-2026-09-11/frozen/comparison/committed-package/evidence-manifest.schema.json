@@ -1,0 +1,116 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "A confined package-relative file binding.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "CopyBinding": {
+      "additionalProperties": false,
+      "description": "The original location is historical provenance; validation uses the local copy.",
+      "properties": {
+        "historical_path": {
+          "title": "Historical Path",
+          "type": "string"
+        },
+        "local": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "historical_path",
+        "local"
+      ],
+      "title": "CopyBinding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "All local package files, excluding this inventory's own bytes.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "assignment_id": {
+      "const": "EB-PDF-013",
+      "default": "EB-PDF-013",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "copy_bindings": {
+      "items": {
+        "$ref": "#/$defs/CopyBinding"
+      },
+      "title": "Copy Bindings",
+      "type": "array"
+    },
+    "file_count": {
+      "exclusiveMinimum": 0,
+      "title": "File Count",
+      "type": "integer"
+    },
+    "total_listed_bytes": {
+      "exclusiveMinimum": 0,
+      "title": "Total Listed Bytes",
+      "type": "integer"
+    },
+    "external_review_status": {
+      "const": "pending_receipt_and_reconciliation",
+      "title": "External Review Status",
+      "type": "string"
+    },
+    "source_status": {
+      "const": "visibly_draft",
+      "title": "Source Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "files",
+    "copy_bindings",
+    "file_count",
+    "total_listed_bytes",
+    "external_review_status",
+    "source_status"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}
