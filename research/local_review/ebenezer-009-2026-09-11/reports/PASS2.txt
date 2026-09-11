@@ -1,0 +1,119 @@
+# PASS 2 — Candidate vs Image Comparison (EB-PDF-009)
+
+## 1. Metadata
+
+| Field | Value |
+| :--- | :--- |
+| assignment_id | EB-PDF-009 |
+| source_id | larimer-building-fees-sd004-06 |
+| expected_pages | 5 |
+| utc_pass2_start | 2026-09-11T17:25:39Z |
+| utc_pass2_end | 2026-09-11T17:30:40Z |
+| status | completed_pending_atlas_verification |
+| legal_currentness | not_verified |
+| candidate_status | machine_native_text_unreviewed |
+| candidate_engine | PyMuPDF native text (NOT OCR) |
+| reviewer | Ebenezer (Grok Bot) |
+| pass | PASS2 |
+| prior_materials_used | PASS1_frozen.md (read-only aid); PASS1_NOTES.md (optional); candidate.txt; page-0001.png…page-0005.png + Pillow crops |
+| native_evidence_json | not_opened |
+
+## 2. Hash references
+
+| Asset | SHA-256 | Role / notes |
+| :--- | :--- | :--- |
+| packet manifest | ae7a6a63ece9b99ab039b87a1fe11a45ee04b6f57861c89d4ab54e3ab7391859 | cited |
+| original.pdf | 1ac4dde1a7bbbd8ebf3b26bf8719c5c6854bbbd4844c221f54729d36bb193b2c | cited |
+| page-0001.png | a80d429c50139e0d7cf376b944ba231696d2828826f2d0e2f075eb8401debece | verified match this pass |
+| page-0002.png | e6068c7ab47633b1dfcb146fcee430377b2a7235f9a54700962a44155a419f91 | verified match this pass |
+| page-0003.png | 006b27833a6b6a0c7813a88e709d6f8d6a7c2220bdc6643a82fc5003a5117f11 | verified match this pass |
+| page-0004.png | ba6c6fb2aef8b2747b6f4320de9ba59bac0bf5423af8ebf5dd505bbfadd55a54 | verified match this pass |
+| page-0005.png | 3381afcddc5f8370c45f6c2cd9f6753cfd09b60727ecb9f3629ecf941827a7f3 | verified match this pass |
+| candidate.txt | 9556e48b0bd77506576fa4eda189d3751528b4d529aae01c30ed7a378f2fc071 | **verified** this pass (sha256sum) |
+| PASS1_frozen.md | bdb41679bc42301267b6655ed8341b900149b98c515c9685c38a2260697ebae2 | **unchanged**; verified; **not edited** |
+
+## 3. Image-viewing method / limits
+
+- Compared `candidate.txt` (PyMuPDF native text, `machine_native_text_unreviewed`) to all five page PNGs.
+- Page images inspected with the **Read** tool (returns **caption-mediated** vision descriptions — **not** source quotations and **not** OCR) plus **Pillow crops** of disputed/dense regions (Tables 1-A…1-F valuation tiers, Other lists, 1-E §A/B examples, 1-F boundary, 1-D header/rows/notes, 1-C fee decimals, Temporary Construction Meter, page-1 closing).
+- **Caption mediation disclosed:** captions can truncate, invent, or inject context. When full-page and crop captions conflicted, preference went to **complete-row / tight crops**; rejected known hallucination patterns (e.g., truncated 1-D “processing cost / mapping” wording). Captions are never treated as authoritative verbatim source text.
+- Page markers `===== PHYSICAL PDF PAGE … =====` in candidate are **packaging only**, not printed source text.
+- PASS1_frozen used only as a **finder aid**; neither PASS1 nor candidate was assumed correct when they agree or disagree — image pixels (via Read+crops) decide.
+- Source anomalies are **preserved**, not “fixed” (1-E round-up vs EXAMPLE round-down; 1-F page-30 overlap; missing `$` on first `2000.00`; `$ 66` space; 1-B item 2 lacking `/hour`; 1-A “Sections 108.8 IRC” without `R`; etc.).
+- `legal_currentness: not_verified`. Printed “July 1, 2026” / CPI 2.29% reported as printed only.
+- Did **not** open native-evidence JSON. Did **not** modify PASS1_frozen.md, source images, or candidate.txt.
+
+## 4. Page coverage
+
+| Physical page | File | Candidate section present | Image+crops re-inspected | Compared | Notes |
+| :---: | :--- | :---: | :---: | :---: | :--- |
+| 1 | page-0001.png | YES | YES (full + title/date + closing crops) | YES | Narrative fee schedule; matches candidate closely |
+| 2 | page-0002.png | YES | YES (full + span header + $1M fee + Other 1–3 + upper table) | YES | Table 1-A complete; native column linearization recoverable |
+| 3 | page-0003.png | YES | YES (full + last tier + item 2 Other) | YES | Table 1-B complete; `$54.00` w/o `/hour` on item 2 preserved |
+| 4 | page-0004.png | YES | YES (full + 1-C full/row2 fee + 1-D header/rows/notes) | YES | Tables 1-C & 1-D; 1-D blank-line inflation (see findings) |
+| 5 | page-0005.png | YES | YES (full + §A + §B + C/D/Other + Section109 + 1-F + Other→1-F boundary) | YES | **Table 1-F label reading-order error** (see findings) |
+
+**Coverage statement:** All 5 physical pages compared in both Pass 1 (frozen) and Pass 2. Stop after 009.
+
+## 5. Findings
+
+| finding_id | physical_page | location | candidate_text | text_visibly_supported_by_image | proposed_correction_or_alternatives | error_type | severity | explanation |
+| :--- | :---: | :--- | :--- | :---: | :--- | :--- | :--- | :--- |
+| EB009-P2-001 | 5 | After §D Temporary Construction Meter; before Document Imaging Fees | `Table 1-F` then immediately `Other Inspections and Fees:` (items 1–9), then later `Document Imaging Fees` | no | Place `Other Inspections and Fees` (items 1–9) **before** the `Table 1-F` label; keep `Table 1-F` immediately above `Document Imaging Fees` only. Visual order: 1-E (A–D) → Other box → **Table 1-F** → Document Imaging Fees. | reading_order | critical | Image/crops show the Other Inspections box **above** the centered `Table 1-F` caption; Document Imaging is the Table 1-F body. Native stream emits `Table 1-F` **before** Other, displacing the label. |
+| EB009-P2-002 | 5 | Table affiliation of Other Inspections 1–9 vs Document Imaging | Other list packaged under `Table 1-F`; Document Imaging Fees appears without an adjacent `Table 1-F` caption | no | Bind Other list with Table **1-E** / electrical block (page-1 narrative: reinspection/penalty fees in Table 1-E). Bind `Table 1-F` exclusively to Document Imaging Fees. | scope | critical | Consequence of EB009-P2-001: readers of candidate may treat electrical Other (TRIM, NEC cites, “electrical permit fee”) as Table 1-F, while Document Imaging loses its table-number adjacency. Page 1 explicitly points Document Imaging to Table 1-F and reinspection/penalty content to Table 1-E. |
+| EB009-P2-003 | 4 | Table 1-D body | `Type` / `Site Assessment` / `Required` on separate lines; each Type then `$150.00` separated by many blank lines; leading space on ` New Utility Bldg.` | partial | Reconstruct as two-column table: header **Type** \| **Site Assessment Required** (Required is second line of header cell); six Type↔`$150.00` pairs; strip leading space on New Utility Bldg. | table_alignment | minor | Content values and row order are present and correct, but native extraction inflates whitespace and splits the multi-line header, degrading pair recoverability versus the printed grid. |
+| EB009-P2-004 | 5 | Table 1-E §A living-area table | `Living Area:` alone on its line, then `Less than or equal to 1000 square feet … $147` | partial | Keep `Living Area:` as prefix of the first data row (or column stub), not a detached orphan line. | table_alignment | minor | Image shows `Living Area:` as part of the first residential row / stub, not a freestanding section title. Fees themselves match. |
+| EB009-P2-005 | 4 | Table 1-C third valuation fee cell | leading space before `$1,277.95 for the first $50,000 plus $20.0816…` | no (extra space) | Remove incidental leading space; preserve `$50,000` without `.00` and four-decimal `$20.0816` as printed. | insertion | minor | Crop-confirmed fee wording is correct; candidate inserts a leading space on that line only. |
+| EB009-P2-006 | 5 | Table 1-E §B EXAMPLE | `round down  to $5,000` (two spaces) | no (extra space) | `round down to $5,000` (single space), retaining round-down EXAMPLE as printed anomaly. | insertion | minor | Tight §B crop shows single space; candidate doubles the space. Not a numeric change. |
+| EB009-P2-007 | 2 | Table 1-A Other item 7 | `7.  A Code Compliance` (two spaces after period) | no (extra space) | `7. A Code Compliance…` | insertion | minor | Cosmetic double space after the item number; wording and `$100` match image. |
+| EB009-P2-008 | 5 | Table 1-F Document Imaging fee column | Category on one line; fee on next line with indent (`No Fees required`, `$18`, `$36`, `$100`, etc.) | partial | Acceptable native linearization if category↔fee pairing is documented; optionally emit as explicit pairs. | table_alignment | minor | All six rows’ text is present and correct (including page-30 overlap anomaly). Pairing is recoverable via order/indent but not grid-explicit. |
+| EB009-P2-009 | 2–4 | Tables 1-A, 1-B, 1-C headers/tiers | `Total Valuation` then `Fee` then alternating valuation / fee blocks | partial | Document as native reading-order linearization of a 2-column table (not a content error). Row associations remain correct. | reading_order | minor | Typical PyMuPDF column/cell dump. Unlike EB009-P2-001, valuation↔fee pairing here remains faithful; recorded for extractor-behavior awareness. |
+
+### Finding counts
+
+| Severity | Count |
+| :--- | ---: |
+| critical | 2 |
+| minor | 7 |
+| unresolved | 0 |
+
+## 6. PASS1 errata (PASS1_frozen.md not edited)
+
+| PASS1 locus | PASS1 statement | Pass 2 disposition |
+| :--- | :--- | :--- |
+| §6 item 10 / Table 1-E Other item 2 | Left **[UNCERTAIN]** between `Section109.7` (missing space) and `Section 109.7` | **Resolve to `Section109.7` (no space).** Multiple tight crops (`p5_1e_cd_other`, `p5_other_mid`, `p5_1e_b`) consistently show missing space; candidate matches. |
+| Page 5 structure | Other Inspections under 1-E; Document Imaging under 1-F | **Confirmed correct vs image.** Candidate disagrees (see EB009-P2-001/002); PASS1 affiliation stands. |
+| Table 1-A $1M+ base / span header / 1-D trailing text | Used `$7,545.75`; “except for Utility Occupancies”; “other inspections or services…” | **Reconfirmed** against crops; candidate agrees. No PASS1 errata. |
+| 1-C header singular “Fee” | Prefer singular | **Reconfirmed** on page-4 / 1-C crops; candidate agrees. |
+
+## 7. Agreements worth recording (esp. preserved anomalies)
+
+| Topic | Candidate | Image / PASS1 | Notes |
+| :--- | :--- | :--- | :--- |
+| 1-E §A round-up vs EXAMPLE round-down | Instruction: round **up**; EXAMPLE: “235 rounded **down**”; arithmetic → `$285` | Same contradiction printed | **Preserve**; do not normalize |
+| 1-F page-30 overlap | “11 pages to 30 pages” `$36` and “30 to 50 pages” `$100` | Same overlap | **Preserve** |
+| 1-C missing `$` on first `2000.00` | `first 2000.00` without `$` | Crop-confirmed | **Preserve** |
+| 1-C decimal / comma quirks | `$25.5506` / `$20.0816` vs `$14.14`; `$1000.00` without comma; `$50,000` without `.00` in mid tiers | Crop-confirmed | **Preserve** |
+| Temporary Construction Meter | `$ 66` (space after `$`) | Crop-confirmed | **Preserve** |
+| 1-B Other item 2 | `$54.00` **without** `/hour` | Crop-confirmed (items 1/3/4 have `/hour`) | **Preserve** |
+| 1-A Other item 2 cite | `Sections 108.8 IRC & 109.7 IBC` (no `R` on 108.8) | Matches image; contrasts 1-B `Section R108.8` | **Preserve** |
+| 1-A `$54.00/ hour` spacing | Item 1 & 4 spaced; items 2–3 tight `/hour` | Crop-confirmed | **Preserve** |
+| 1-A $1M+ base fee | `$7,545.75` + `$4.3668` | Crop-confirmed (reject `$7,343.73` hallucination) | Agreement |
+| 1-A span header | `Building Permit Fees except for Utility Occupancies` | Crop-confirmed | Agreement |
+| 1-D trailing lines | `Fees for other inspections or services not covered above… $54.00/hour`; `(Minimum charge = one hour.)`; Docket `..$55.00` quirk | Notes crop shows `..$55.00`; reject “mapping/processing” caption hallucinations | Agreement |
+| 1-E item 2 | `Section109.7` missing space; fee `$54.00` w/o `/hour` | Crop-confirmed | Agreement (resolves PASS1 UNCERTAIN) |
+| No signatures / handwritten marks | none in candidate | none on images | Agreement |
+| Page 1 date/CPI / phones / STR $300-600 / CC $100 | present | present | Agreement |
+| 1-B incremental rates (2-decimal) | `$4.14`, `$16.07`, `$11.54`, `$7.92`, `$6.25`, `$5.32`, `$3.83` | Match crops | Agreement |
+
+## 8. Completion statement
+
+- **All 5 physical pages** were inspected against images in **Pass 1** (frozen blind transcript) and again in **Pass 2** (candidate vs image).
+- Candidate SHA-256 **verified** as `9556e48b0bd77506576fa4eda189d3751528b4d529aae01c30ed7a378f2fc071`.
+- PASS1_frozen SHA-256 **unchanged** at `bdb41679bc42301267b6655ed8341b900149b98c515c9685c38a2260697ebae2` (not edited).
+- Status: `completed_pending_atlas_verification`.
+- `legal_currentness: not_verified`.
+- **Stop after 009** — no further assignments in this packet.
+
+---
+END PASS2
