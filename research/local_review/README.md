@@ -34,6 +34,7 @@ review does not certify the whole document.
 | Greeley building fees, EB015 | [One-page source review](greeley-fees-atlas-source-review-2026-09-11/README.md) | Eight valuation rows, nine other-fee items, footnotes and tax/electrical sections | External review pending; 2024 title and unlabeled 2026 footer remain distinct |
 | Greeley development impact fees, EB016 | [Three-page memo review](greeley-fees-atlas-source-review-2026-09-11/README.md) | Complete memo, EAF grid and thirty fee rows with their column associations | External review pending; future utility adoption is not treated as completed |
 | Greeley proposed water/sewer PIFs, EB017 | [Two-page source review](greeley-fees-atlas-source-review-2026-09-11/README.md) | Notice and separate seven-row/one-row tables with 24 data cells | External review pending; stated March 2021 date is expressly conditional on adoption |
+| Weld building fees | [Five-page source review](weld-building-fees-atlas-source-review-2026-09-11/README.md) | 107 fee/value/referral rows and 252 valuation-matrix cells with their conditions | Exact successful acquisition URL remains unconfirmed; source date and amount anomalies are preserved |
 | Fort Collins fee schedules HTML | [Structured source snapshot](fort-collins-fee-catalog-2026-09-11/README.md) | Preserved main-content structure, tables and links from the captured page | Snapshot structure is pending semantic and legal review |
 
 The EB013 and EB014 packages above preserve Atlas's source checks as they stood
