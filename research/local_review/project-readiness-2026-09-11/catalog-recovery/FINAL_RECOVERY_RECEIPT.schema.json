@@ -1,0 +1,124 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "source_oid": {
+      "title": "Source Oid",
+      "type": "string"
+    },
+    "expected_bytes": {
+      "title": "Expected Bytes",
+      "type": "integer"
+    },
+    "configured_repository": {
+      "const": "Christoffel1876/MasterLegalDatabase",
+      "title": "Configured Repository",
+      "type": "string"
+    },
+    "first_attempt": {
+      "$ref": "#/$defs/Asset"
+    },
+    "retry_attempt": {
+      "$ref": "#/$defs/Asset"
+    },
+    "first_attempt_result": {
+      "const": "transport_failed_without_http_response",
+      "title": "First Attempt Result",
+      "type": "string"
+    },
+    "retry_result": {
+      "const": "batch_http_200_exact_object_error_404",
+      "title": "Retry Result",
+      "type": "string"
+    },
+    "returned_error_message": {
+      "const": "Object does not exist on the server",
+      "title": "Returned Error Message",
+      "type": "string"
+    },
+    "object_bytes_downloaded": {
+      "const": 0,
+      "title": "Object Bytes Downloaded",
+      "type": "integer"
+    },
+    "source_catalog_replaced": {
+      "const": false,
+      "title": "Source Catalog Replaced",
+      "type": "boolean"
+    },
+    "prior_files_unchanged": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Prior Files Unchanged",
+      "type": "array"
+    },
+    "tls_method": {
+      "const": "installed_certifi_ca_bundle_with_verification_enabled",
+      "title": "Tls Method",
+      "type": "string"
+    },
+    "object_absence_scope": {
+      "title": "Object Absence Scope",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "completed_at",
+    "source_oid",
+    "expected_bytes",
+    "configured_repository",
+    "first_attempt",
+    "retry_attempt",
+    "first_attempt_result",
+    "retry_result",
+    "returned_error_message",
+    "object_bytes_downloaded",
+    "source_catalog_replaced",
+    "prior_files_unchanged",
+    "tls_method",
+    "object_absence_scope",
+    "limitations"
+  ],
+  "title": "FinalReceipt",
+  "type": "object"
+}

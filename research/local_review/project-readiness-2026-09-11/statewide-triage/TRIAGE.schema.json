@@ -1,0 +1,182 @@
+{
+  "$defs": {
+    "Input": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Input",
+      "type": "object"
+    },
+    "Priority": {
+      "additionalProperties": false,
+      "properties": {
+        "rank": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Rank",
+          "type": "integer"
+        },
+        "authority_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Authority Ids",
+          "type": "array"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Ids",
+          "type": "array"
+        },
+        "evidence_paths": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Paths",
+          "type": "array"
+        },
+        "missing_or_unresolved": {
+          "title": "Missing Or Unresolved",
+          "type": "string"
+        },
+        "next_intake_decision": {
+          "title": "Next Intake Decision",
+          "type": "string"
+        },
+        "acceptance": {
+          "title": "Acceptance",
+          "type": "string"
+        }
+      },
+      "required": [
+        "rank",
+        "authority_ids",
+        "source_ids",
+        "evidence_paths",
+        "missing_or_unresolved",
+        "next_intake_decision",
+        "acceptance"
+      ],
+      "title": "Priority",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "scope": {
+      "const": "read_only_working_tree_snapshot",
+      "default": "read_only_working_tree_snapshot",
+      "title": "Scope",
+      "type": "string"
+    },
+    "inputs": {
+      "items": {
+        "$ref": "#/$defs/Input"
+      },
+      "title": "Inputs",
+      "type": "array"
+    },
+    "identity_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Identity Counts",
+      "type": "object"
+    },
+    "checklist_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Checklist Counts",
+      "type": "object"
+    },
+    "legacy_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Legacy Counts",
+      "type": "object"
+    },
+    "manual_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Manual Counts",
+      "type": "object"
+    },
+    "manual_record_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Manual Record Ids",
+      "type": "array"
+    },
+    "known_missing_ledger_record_id": {
+      "const": "EO-2019-007",
+      "default": "EO-2019-007",
+      "title": "Known Missing Ledger Record Id",
+      "type": "string"
+    },
+    "priorities": {
+      "items": {
+        "$ref": "#/$defs/Priority"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "title": "Priorities",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "inputs",
+    "identity_counts",
+    "checklist_counts",
+    "legacy_counts",
+    "manual_counts",
+    "manual_record_ids",
+    "priorities",
+    "limitations"
+  ],
+  "title": "Inventory",
+  "type": "object"
+}

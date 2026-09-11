@@ -83,6 +83,13 @@ the same claimed download URL; that conflict is not proof of a legal update.
 
 The later Ordinance 5269 review found two incompatible effective-date statements in the same PDF: September 1, 2025 in the body and August 18, 2025 in certification. Earlier intake records preserve their limited inspection scope; use the linked later source review with them. No controlling effective date has been selected.
 
+## Retrieval and collection readiness
+
+The [readiness and next-intake assessment](project-readiness-2026-09-11/README.md)
+records the distinction between preserved sources and integrated retrieval,
+targeted adoption-record gaps, and the unsuccessful exact catalog-object recovery.
+It is a timed operational assessment, not a legal coverage certification.
+
 ## How to use a package
 
 1. Read its README or Atlas review for the actual inspection scope and limits.

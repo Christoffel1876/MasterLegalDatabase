@@ -1,0 +1,82 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "default_cafile": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Default Cafile"
+    },
+    "default_capath": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Default Capath"
+    },
+    "configured_cafile": {
+      "title": "Configured Cafile",
+      "type": "string"
+    },
+    "configured_capath": {
+      "title": "Configured Capath",
+      "type": "string"
+    },
+    "store_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Store Counts",
+      "type": "object"
+    },
+    "installed_certifi_path": {
+      "title": "Installed Certifi Path",
+      "type": "string"
+    },
+    "installed_certifi_exists": {
+      "title": "Installed Certifi Exists",
+      "type": "boolean"
+    },
+    "source_pointer_unchanged": {
+      "title": "Source Pointer Unchanged",
+      "type": "boolean"
+    },
+    "conclusion": {
+      "title": "Conclusion",
+      "type": "string"
+    },
+    "limits": {
+      "title": "Limits",
+      "type": "string"
+    }
+  },
+  "required": [
+    "checked_at",
+    "default_cafile",
+    "default_capath",
+    "configured_cafile",
+    "configured_capath",
+    "store_counts",
+    "installed_certifi_path",
+    "installed_certifi_exists",
+    "source_pointer_unchanged",
+    "conclusion",
+    "limits"
+  ],
+  "title": "Diagnostics",
+  "type": "object"
+}
