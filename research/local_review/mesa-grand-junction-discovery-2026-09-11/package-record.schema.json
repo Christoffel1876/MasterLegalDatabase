@@ -1,0 +1,205 @@
+{
+  "$defs": {
+    "FileRecord": {
+      "additionalProperties": false,
+      "description": "Identify exact distributed bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "FileRecord",
+      "type": "object"
+    },
+    "Redaction": {
+      "additionalProperties": false,
+      "description": "Bind an omitted header original to a visibly redacted derivative.",
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "original_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Original Sha256",
+          "type": "string"
+        },
+        "original_bytes": {
+          "minimum": 1,
+          "title": "Original Bytes",
+          "type": "integer"
+        },
+        "derivative": {
+          "$ref": "#/$defs/FileRecord"
+        },
+        "removed_field_count": {
+          "const": 3,
+          "title": "Removed Field Count",
+          "type": "integer"
+        },
+        "fields": {
+          "items": {
+            "const": "set-cookie",
+            "type": "string"
+          },
+          "title": "Fields",
+          "type": "array"
+        },
+        "method": {
+          "const": "replace_entire_sensitive_header_value_with_REDACTED",
+          "title": "Method",
+          "type": "string"
+        },
+        "original_distributed": {
+          "const": false,
+          "default": false,
+          "title": "Original Distributed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "event_id",
+        "original_path",
+        "original_sha256",
+        "original_bytes",
+        "derivative",
+        "removed_field_count",
+        "fields",
+        "method"
+      ],
+      "title": "Redaction",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Describe additive packaging without changing frozen discovery outcomes.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "package_id": {
+      "const": "mesa-grand-junction-discovery-2026-09-11",
+      "title": "Package Id",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "original_handoff_path": {
+      "title": "Original Handoff Path",
+      "type": "string"
+    },
+    "original_final_manifest_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Original Final Manifest Sha256",
+      "type": "string"
+    },
+    "original_files": {
+      "const": 356,
+      "title": "Original Files",
+      "type": "integer"
+    },
+    "unchanged_original_files": {
+      "const": 350,
+      "title": "Unchanged Original Files",
+      "type": "integer"
+    },
+    "omitted_original_files": {
+      "const": 6,
+      "title": "Omitted Original Files",
+      "type": "integer"
+    },
+    "header_derivatives": {
+      "items": {
+        "$ref": "#/$defs/Redaction"
+      },
+      "maxItems": 6,
+      "minItems": 6,
+      "title": "Header Derivatives",
+      "type": "array"
+    },
+    "acquisition_status": {
+      "const": "frozen_discovery_custody_only",
+      "title": "Acquisition Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "completeness": {
+      "const": "not_assessed",
+      "default": "not_assessed",
+      "title": "Completeness",
+      "type": "string"
+    },
+    "canonical_intake_status": {
+      "const": "not_asserted_by_this_package",
+      "title": "Canonical Intake Status",
+      "type": "string"
+    },
+    "later_review_status": {
+      "const": "not_asserted_by_this_package",
+      "title": "Later Review Status",
+      "type": "string"
+    },
+    "verification_policy": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Verification Policy",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "package_id",
+    "prepared_at",
+    "original_handoff_path",
+    "original_final_manifest_sha256",
+    "original_files",
+    "unchanged_original_files",
+    "omitted_original_files",
+    "header_derivatives",
+    "acquisition_status",
+    "canonical_intake_status",
+    "later_review_status",
+    "verification_policy",
+    "limitations"
+  ],
+  "title": "PackageRecord",
+  "type": "object"
+}

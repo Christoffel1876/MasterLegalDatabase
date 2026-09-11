@@ -1,0 +1,93 @@
+{
+  "$defs": {
+    "Page": {
+      "additionalProperties": false,
+      "description": "Bind exact native text from one PDF physical page.",
+      "properties": {
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "native_path": {
+          "title": "Native Path",
+          "type": "string"
+        },
+        "native_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Native Sha256",
+          "type": "string"
+        },
+        "native_bytes": {
+          "title": "Native Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "physical_page",
+        "native_path",
+        "native_sha256",
+        "native_bytes"
+      ],
+      "title": "Page",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Preserve structural metadata independently of visual inspection.",
+  "properties": {
+    "event_id": {
+      "title": "Event Id",
+      "type": "string"
+    },
+    "pdf_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Pdf Sha256",
+      "type": "string"
+    },
+    "pages": {
+      "title": "Pages",
+      "type": "integer"
+    },
+    "is_repaired": {
+      "title": "Is Repaired",
+      "type": "boolean"
+    },
+    "is_encrypted": {
+      "title": "Is Encrypted",
+      "type": "boolean"
+    },
+    "metadata": {
+      "additionalProperties": true,
+      "title": "Metadata",
+      "type": "object"
+    },
+    "native_flags": {
+      "title": "Native Flags",
+      "type": "integer"
+    },
+    "native_sort": {
+      "title": "Native Sort",
+      "type": "boolean"
+    },
+    "native_pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Native Pages",
+      "type": "array"
+    }
+  },
+  "required": [
+    "event_id",
+    "pdf_sha256",
+    "pages",
+    "is_repaired",
+    "is_encrypted",
+    "metadata",
+    "native_flags",
+    "native_sort",
+    "native_pages"
+  ],
+  "title": "PDF",
+  "type": "object"
+}
