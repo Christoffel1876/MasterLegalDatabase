@@ -31,12 +31,23 @@ review does not certify the whole document.
 | Larimer initial data-center moratorium, EB012 | [Body and execution review](ebenezer-012-2026-09-11/ATLAS_REVIEW.md) | Printed body corrections; separately qualified execution block | Handwritten identities and later extension effect are not certified |
 | Fort Collins wildfire code, EB013 | [Eight-page draft review](ebenezer-013-2026-09-11/README.md) | Native text and separate strike, highlight, blank-field and display-order annotations | The source is visibly a discussion draft with placeholders and blank execution fields |
 | Fort Collins Land Use Code Article 1, EB014 | [Seven-page source review](ebenezer-014-2026-09-11/README.md) | Native text, visibility, paragraph associations and embedded links | Edition, adoption and effective dates are unverified |
+| Greeley building fees, EB015 | [One-page source review](greeley-fees-atlas-source-review-2026-09-11/README.md) | Eight valuation rows, nine other-fee items, footnotes and tax/electrical sections | External review pending; 2024 title and unlabeled 2026 footer remain distinct |
+| Greeley development impact fees, EB016 | [Three-page memo review](greeley-fees-atlas-source-review-2026-09-11/README.md) | Complete memo, EAF grid and thirty fee rows with their column associations | External review pending; future utility adoption is not treated as completed |
+| Greeley proposed water/sewer PIFs, EB017 | [Two-page source review](greeley-fees-atlas-source-review-2026-09-11/README.md) | Notice and separate seven-row/one-row tables with 24 data cells | External review pending; stated March 2021 date is expressly conditional on adoption |
 | Fort Collins fee schedules HTML | [Structured source snapshot](fort-collins-fee-catalog-2026-09-11/README.md) | Preserved main-content structure, tables and links from the captured page | Snapshot structure is pending semantic and legal review |
 
 The EB013 and EB014 packages above preserve Atlas's source checks as they stood
 before reconciliation of the external reviews. Their historical pending-status
 fields are part of those frozen packages. Any later reconciliation belongs in a
 separate supplement, with its own source and report hashes.
+
+### External-review supplements
+
+- [EB013 wildfire draft reconciliation](ebenezer-013-reconciliation-2026-09-11/README.md):
+  all 23 external findings, four errata and three Atlas supplements are dispositioned.
+  Missing graphic marks are qualified as draft representation issues; green blanks
+  are not proven redactions. Two proposed italic corrections are rejected. Original
+  native text and reports remain unchanged.
 
 ## Received sources and documentary evidence
 

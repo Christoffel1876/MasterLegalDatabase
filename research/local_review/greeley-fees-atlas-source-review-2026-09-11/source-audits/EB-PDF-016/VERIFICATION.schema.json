@@ -1,0 +1,188 @@
+{
+  "$defs": {
+    "Checks": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "passed",
+          "title": "Status",
+          "type": "string"
+        },
+        "references_checked": {
+          "const": 19,
+          "title": "References Checked",
+          "type": "integer"
+        },
+        "physical_pages": {
+          "const": 3,
+          "title": "Physical Pages",
+          "type": "integer"
+        },
+        "native_bytes": {
+          "const": 7191,
+          "title": "Native Bytes",
+          "type": "integer"
+        },
+        "exhaustive_native_chunks": {
+          "const": 12,
+          "title": "Exhaustive Native Chunks",
+          "type": "integer"
+        },
+        "table_regions": {
+          "const": 3,
+          "title": "Table Regions",
+          "type": "integer"
+        },
+        "fee_rows": {
+          "const": 30,
+          "title": "Fee Rows",
+          "type": "integer"
+        },
+        "table_rows_including_headers_spacers": {
+          "const": 45,
+          "title": "Table Rows Including Headers Spacers",
+          "type": "integer"
+        },
+        "table_cells": {
+          "const": 191,
+          "title": "Table Cells",
+          "type": "integer"
+        },
+        "observations": {
+          "const": 15,
+          "title": "Observations",
+          "type": "integer"
+        },
+        "crop_rerenders": {
+          "const": 7,
+          "title": "Crop Rerenders",
+          "type": "integer"
+        },
+        "native_replay": {
+          "const": "exact",
+          "title": "Native Replay",
+          "type": "string"
+        },
+        "currentness": {
+          "const": "not_verified",
+          "title": "Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "references_checked",
+        "physical_pages",
+        "native_bytes",
+        "exhaustive_native_chunks",
+        "table_regions",
+        "fee_rows",
+        "table_rows_including_headers_spacers",
+        "table_cells",
+        "observations",
+        "crop_rerenders",
+        "native_replay",
+        "currentness"
+      ],
+      "title": "Checks",
+      "type": "object"
+    },
+    "R": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "R",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "status": {
+      "const": "verified_candidate_aware_source_qa_pending_parent_integration",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "artifacts": {
+      "items": {
+        "$ref": "#/$defs/R"
+      },
+      "title": "Artifacts",
+      "type": "array"
+    },
+    "checks": {
+      "$ref": "#/$defs/Checks"
+    },
+    "negative_checks_rejected": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 9,
+      "minItems": 9,
+      "title": "Negative Checks Rejected",
+      "type": "array"
+    },
+    "packet_and_source_changes": {
+      "const": "none",
+      "title": "Packet And Source Changes",
+      "type": "string"
+    },
+    "external_review_consulted": {
+      "const": false,
+      "title": "External Review Consulted",
+      "type": "boolean"
+    },
+    "new_network_requests": {
+      "const": 0,
+      "title": "New Network Requests",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schema_version",
+    "checked_at",
+    "status",
+    "legal_currentness",
+    "artifacts",
+    "checks",
+    "negative_checks_rejected",
+    "packet_and_source_changes",
+    "external_review_consulted",
+    "new_network_requests"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

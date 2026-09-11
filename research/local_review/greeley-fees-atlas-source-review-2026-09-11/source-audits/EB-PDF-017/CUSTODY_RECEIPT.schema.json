@@ -1,0 +1,74 @@
+{
+  "$defs": {
+    "Copy": {
+      "additionalProperties": false,
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "copied_file": {
+          "$ref": "#/$defs/FileRef"
+        }
+      },
+      "required": [
+        "original_path",
+        "copied_file"
+      ],
+      "title": "Copy",
+      "type": "object"
+    },
+    "FileRef": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "copied_at": {
+      "format": "date-time",
+      "title": "Copied At",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Copy"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "originals_unchanged": {
+      "title": "Originals Unchanged",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "copied_at",
+    "files",
+    "originals_unchanged"
+  ],
+  "title": "Custody",
+  "type": "object"
+}
