@@ -85,6 +85,10 @@ The later Ordinance 5269 review found two incompatible effective-date statements
 
 ## Retrieval and collection readiness
 
+The [checked-source lookup](../../docs/RESEARCH_SOURCE_LOOKUP.md) now provides
+an offline, cited keyword search over the 57 reviewed Grand Junction fire-fee
+rows. It preserves source qualifications and does not answer current-law questions.
+
 The [readiness and next-intake assessment](project-readiness-2026-09-11/README.md)
 records the distinction between preserved sources and integrated retrieval,
 targeted adoption-record gaps, and the unsuccessful exact catalog-object recovery.
