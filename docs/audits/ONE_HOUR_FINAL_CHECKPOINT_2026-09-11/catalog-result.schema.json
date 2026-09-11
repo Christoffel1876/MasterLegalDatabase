@@ -1,0 +1,281 @@
+{
+  "$defs": {
+    "Claims": {
+      "additionalProperties": false,
+      "description": "Inherited source metadata, never verified acquisition or legal dates.",
+      "properties": {
+        "recorded_source_url": {
+          "title": "Recorded Source Url",
+          "type": "string"
+        },
+        "recorded_original_path": {
+          "title": "Recorded Original Path",
+          "type": "string"
+        },
+        "recorded_metadata_retrieved_date": {
+          "format": "date",
+          "title": "Recorded Metadata Retrieved Date",
+          "type": "string"
+        },
+        "recorded_index_updated_at": {
+          "format": "date-time",
+          "title": "Recorded Index Updated At",
+          "type": "string"
+        },
+        "recorded_data_version": {
+          "title": "Recorded Data Version",
+          "type": "string"
+        },
+        "recorded_publication_year": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Recorded Publication Year"
+        },
+        "recorded_effective_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Recorded Effective Date"
+        },
+        "interpretation": {
+          "const": "inherited_metadata_not_independently_verified",
+          "default": "inherited_metadata_not_independently_verified",
+          "title": "Interpretation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "recorded_source_url",
+        "recorded_original_path",
+        "recorded_metadata_retrieved_date",
+        "recorded_index_updated_at",
+        "recorded_data_version",
+        "recorded_publication_year",
+        "recorded_effective_date"
+      ],
+      "title": "Claims",
+      "type": "object"
+    },
+    "ResearchRecord": {
+      "additionalProperties": false,
+      "description": "Metadata for one explicitly admitted derived section, with no statutory body.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "title_number": {
+          "const": "1",
+          "default": "1",
+          "title": "Title Number",
+          "type": "string"
+        },
+        "title_name": {
+          "const": "ELECTIONS",
+          "default": "ELECTIONS",
+          "title": "Title Name",
+          "type": "string"
+        },
+        "article_number": {
+          "const": "1",
+          "default": "1",
+          "title": "Article Number",
+          "type": "string"
+        },
+        "section_number": {
+          "title": "Section Number",
+          "type": "string"
+        },
+        "authority_level": {
+          "const": "state",
+          "default": "state",
+          "title": "Authority Level",
+          "type": "string"
+        },
+        "input_kind": {
+          "const": "derived_record_only",
+          "default": "derived_record_only",
+          "title": "Input Kind",
+          "type": "string"
+        },
+        "original_custody": {
+          "const": "unresolved_nonportable_path",
+          "default": "unresolved_nonportable_path",
+          "title": "Original Custody",
+          "type": "string"
+        },
+        "index_line": {
+          "$ref": "#/$defs/Span"
+        },
+        "metadata_line": {
+          "$ref": "#/$defs/Span"
+        },
+        "heading": {
+          "$ref": "#/$defs/Span"
+        },
+        "body": {
+          "$ref": "#/$defs/Span"
+        },
+        "claims": {
+          "$ref": "#/$defs/Claims"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "answer_safe": {
+          "const": false,
+          "default": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "section_number",
+        "index_line",
+        "metadata_line",
+        "heading",
+        "body",
+        "claims"
+      ],
+      "title": "ResearchRecord",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "description": "Half-open UTF-8 byte location in a frozen derived file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "exclusiveMinimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "line": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Line"
+        }
+      },
+      "required": [
+        "path",
+        "start",
+        "end",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Source-only metadata response and stable failure/refusal envelope.",
+  "properties": {
+    "status": {
+      "enum": [
+        "built",
+        "matched",
+        "no_matching_record",
+        "refused_current_law",
+        "invalid"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "records": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ResearchRecord"
+      },
+      "maxItems": 3,
+      "title": "Records",
+      "type": "array"
+    },
+    "package_path": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Package Path"
+    },
+    "manifest_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Manifest Sha256"
+    },
+    "boundary": {
+      "default": "Three selected derived CRS records only. Full copied input files do not mean all their records were validated. Original custody is unresolved; recorded dates, versions and URLs are inherited claims. No current-law, applicability, completeness or absence conclusion. Results contain metadata and exact derived-file locations, not verified legal evidence.",
+      "title": "Boundary",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "status"
+  ],
+  "title": "Result",
+  "type": "object"
+}

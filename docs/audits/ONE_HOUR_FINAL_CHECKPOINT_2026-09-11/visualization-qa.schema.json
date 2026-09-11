@@ -1,0 +1,127 @@
+{
+  "$defs": {
+    "Case": {
+      "additionalProperties": false,
+      "description": "Retain one theme/width interaction case.",
+      "properties": {
+        "theme": {
+          "enum": [
+            "light",
+            "dark"
+          ],
+          "title": "Theme",
+          "type": "string"
+        },
+        "width": {
+          "enum": [
+            736,
+            360
+          ],
+          "title": "Width",
+          "type": "integer"
+        },
+        "selections_checked": {
+          "const": 46,
+          "title": "Selections Checked",
+          "type": "integer"
+        },
+        "layout": {
+          "$ref": "#/$defs/Layout"
+        },
+        "screenshot": {
+          "title": "Screenshot",
+          "type": "string"
+        }
+      },
+      "required": [
+        "theme",
+        "width",
+        "selections_checked",
+        "layout",
+        "screenshot"
+      ],
+      "title": "Case",
+      "type": "object"
+    },
+    "Layout": {
+      "additionalProperties": false,
+      "description": "Retain dimensions from the actual preview browser.",
+      "properties": {
+        "innerWidth": {
+          "title": "Innerwidth",
+          "type": "integer"
+        },
+        "rootWidth": {
+          "title": "Rootwidth",
+          "type": "integer"
+        },
+        "overflow": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Overflow",
+          "type": "array"
+        },
+        "rootHeight": {
+          "title": "Rootheight",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "innerWidth",
+        "rootWidth",
+        "overflow",
+        "rootHeight"
+      ],
+      "title": "Layout",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Validate the bounded browser QA report before copying it.",
+  "properties": {
+    "status": {
+      "const": "passed",
+      "title": "Status",
+      "type": "string"
+    },
+    "fragment_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Fragment Sha256",
+      "type": "string"
+    },
+    "source_inventory_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Source Inventory Sha256",
+      "type": "string"
+    },
+    "network_boundary": {
+      "title": "Network Boundary",
+      "type": "string"
+    },
+    "errors": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Errors",
+      "type": "array"
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/Case"
+      },
+      "title": "Results",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "fragment_sha256",
+    "source_inventory_sha256",
+    "network_boundary",
+    "errors",
+    "results"
+  ],
+  "title": "VisualQA",
+  "type": "object"
+}

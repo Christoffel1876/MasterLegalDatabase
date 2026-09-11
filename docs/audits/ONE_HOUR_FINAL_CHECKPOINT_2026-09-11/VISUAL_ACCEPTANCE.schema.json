@@ -1,0 +1,119 @@
+{
+  "$defs": {
+    "Artifact": {
+      "additionalProperties": false,
+      "description": "Identify a durable local visualization artifact.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Artifact",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Record root visual inspection and exact source binding.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "original_count": {
+      "const": 46,
+      "title": "Original Count",
+      "type": "integer"
+    },
+    "mapped_review_count": {
+      "const": 19,
+      "title": "Mapped Review Count",
+      "type": "integer"
+    },
+    "unmapped_review_count": {
+      "const": 27,
+      "title": "Unmapped Review Count",
+      "type": "integer"
+    },
+    "authority_count": {
+      "const": 7,
+      "title": "Authority Count",
+      "type": "integer"
+    },
+    "root_viewed": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Root Viewed",
+      "type": "array"
+    },
+    "browser_cases": {
+      "const": 4,
+      "title": "Browser Cases",
+      "type": "integer"
+    },
+    "selections_per_case": {
+      "const": 46,
+      "title": "Selections Per Case",
+      "type": "integer"
+    },
+    "fragment": {
+      "$ref": "#/$defs/Artifact"
+    },
+    "source_inventory": {
+      "$ref": "#/$defs/Artifact"
+    },
+    "qa_report": {
+      "$ref": "#/$defs/Artifact"
+    },
+    "screenshots": {
+      "items": {
+        "$ref": "#/$defs/Artifact"
+      },
+      "title": "Screenshots",
+      "type": "array"
+    },
+    "limitation": {
+      "title": "Limitation",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "original_count",
+    "mapped_review_count",
+    "unmapped_review_count",
+    "authority_count",
+    "root_viewed",
+    "browser_cases",
+    "selections_per_case",
+    "fragment",
+    "source_inventory",
+    "qa_report",
+    "screenshots",
+    "limitation"
+  ],
+  "title": "Acceptance",
+  "type": "object"
+}

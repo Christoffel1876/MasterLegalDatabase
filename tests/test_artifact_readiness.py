@@ -112,7 +112,9 @@ def test_regular_content_with_quoted_lfs_marker_is_not_a_pointer(tmp_path: Path)
     require_hydrated_file(path)
 
 
-def test_readiness_rejects_catalog_pointer_and_checks_actual_local_indexes(ready_root: Path) -> None:
+def test_readiness_rejects_catalog_pointer_and_checks_actual_local_indexes(
+    ready_root: Path,
+) -> None:
     """Catalog and county stubs are diagnosed independently despite being nonempty."""
     catalog = ready_root / "_CONTROL_PLANE/RETRIEVAL_CATALOG.jsonl"
     index = ready_root / "08_County_Authorities/_index.jsonl"

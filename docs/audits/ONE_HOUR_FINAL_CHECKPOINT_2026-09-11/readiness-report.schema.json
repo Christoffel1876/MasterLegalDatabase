@@ -1,0 +1,160 @@
+{
+  "$defs": {
+    "ReadinessCheck": {
+      "additionalProperties": false,
+      "description": "One prerequisite observation, without an implied legal-currentness finding.",
+      "properties": {
+        "check": {
+          "title": "Check",
+          "type": "string"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "detail": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Detail"
+        },
+        "path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Path"
+        },
+        "artifact_status": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Artifact Status"
+        },
+        "rows": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rows"
+        },
+        "declared_object_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Declared Object Sha256"
+        },
+        "declared_object_bytes": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Declared Object Bytes"
+        }
+      },
+      "required": [
+        "check",
+        "passed"
+      ],
+      "title": "ReadinessCheck",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Validated diagnostic output for selected query prerequisites.",
+  "properties": {
+    "version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Version",
+      "type": "string"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "purpose": {
+      "title": "Purpose",
+      "type": "string"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/ReadinessCheck"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "passed_checks": {
+      "minimum": 0,
+      "title": "Passed Checks",
+      "type": "integer"
+    },
+    "total_checks": {
+      "minimum": 0,
+      "title": "Total Checks",
+      "type": "integer"
+    },
+    "status": {
+      "enum": [
+        "ready",
+        "needs_review"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "known_limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Known Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "generated_at",
+    "purpose",
+    "checks",
+    "passed_checks",
+    "total_checks",
+    "status",
+    "known_limits"
+  ],
+  "title": "AIReadinessReport",
+  "type": "object"
+}
