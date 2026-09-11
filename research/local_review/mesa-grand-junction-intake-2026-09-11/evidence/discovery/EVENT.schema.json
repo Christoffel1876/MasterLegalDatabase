@@ -1,0 +1,126 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "event_id": {
+      "title": "Event Id",
+      "type": "string"
+    },
+    "requested_url": {
+      "title": "Requested Url",
+      "type": "string"
+    },
+    "basis": {
+      "title": "Basis",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "curl_exit": {
+      "title": "Curl Exit",
+      "type": "integer"
+    },
+    "http_status": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Http Status"
+    },
+    "final_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Final Url"
+    },
+    "content_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Content Type"
+    },
+    "body_path": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Body Path"
+    },
+    "body_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Body Sha256"
+    },
+    "body_bytes": {
+      "title": "Body Bytes",
+      "type": "integer"
+    },
+    "headers_path": {
+      "title": "Headers Path",
+      "type": "string"
+    },
+    "metadata_path": {
+      "title": "Metadata Path",
+      "type": "string"
+    },
+    "stderr_path": {
+      "title": "Stderr Path",
+      "type": "string"
+    },
+    "outcome": {
+      "title": "Outcome",
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "requested_url",
+    "basis",
+    "started_at",
+    "completed_at",
+    "curl_exit",
+    "http_status",
+    "final_url",
+    "content_type",
+    "body_path",
+    "body_sha256",
+    "body_bytes",
+    "headers_path",
+    "metadata_path",
+    "stderr_path",
+    "outcome"
+  ],
+  "title": "Event",
+  "type": "object"
+}

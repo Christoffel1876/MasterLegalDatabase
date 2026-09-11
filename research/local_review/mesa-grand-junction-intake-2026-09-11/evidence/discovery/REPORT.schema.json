@@ -1,0 +1,557 @@
+{
+  "$defs": {
+    "Basis": {
+      "additionalProperties": false,
+      "description": "Identify a retained catalog anchor or pinned registry row.",
+      "properties": {
+        "event_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Event Id"
+        },
+        "input_source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Source Ids",
+          "type": "array"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "input_source_ids",
+        "label",
+        "note"
+      ],
+      "title": "Basis",
+      "type": "object"
+    },
+    "Cell": {
+      "additionalProperties": false,
+      "description": "A bounded discovery result for one requested authority/category pair.",
+      "properties": {
+        "authority_id": {
+          "enum": [
+            "CO-COUNTY-MESA",
+            "CO-MUNICIPAL-GRAND_JUNCTION"
+          ],
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            "land_use_zoning",
+            "building_fire",
+            "fees",
+            "adopted_changes"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "priority_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Priority Ids",
+          "type": "array"
+        },
+        "supporting_event_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Supporting Event Ids",
+          "type": "array"
+        },
+        "status": {
+          "enum": [
+            "preserved_partial",
+            "catalog_and_leads_only"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "gap": {
+          "title": "Gap",
+          "type": "string"
+        },
+        "completeness": {
+          "const": "not_assessed",
+          "default": "not_assessed",
+          "title": "Completeness",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "authority_id",
+        "category",
+        "priority_ids",
+        "supporting_event_ids",
+        "status",
+        "gap"
+      ],
+      "title": "Cell",
+      "type": "object"
+    },
+    "Legacy": {
+      "additionalProperties": false,
+      "description": "Separate exact attempted URLs from parent-catalog association.",
+      "properties": {
+        "requested_url_matches": {
+          "minimum": 0,
+          "title": "Requested Url Matches",
+          "type": "integer"
+        },
+        "parent_source_url_matches": {
+          "minimum": 0,
+          "title": "Parent Source Url Matches",
+          "type": "integer"
+        },
+        "requested_match_source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Requested Match Source Ids",
+          "type": "array"
+        },
+        "parent_match_source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Parent Match Source Ids",
+          "type": "array"
+        },
+        "known_digests_at_requested_url": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Known Digests At Requested Url",
+          "type": "array"
+        },
+        "preserved_digest_equal_records": {
+          "minimum": 0,
+          "title": "Preserved Digest Equal Records",
+          "type": "integer"
+        },
+        "preserved_digest_equal_source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Preserved Digest Equal Source Ids",
+          "type": "array"
+        },
+        "interpretation": {
+          "title": "Interpretation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "requested_url_matches",
+        "parent_source_url_matches",
+        "requested_match_source_ids",
+        "parent_match_source_ids",
+        "known_digests_at_requested_url",
+        "preserved_digest_equal_records",
+        "preserved_digest_equal_source_ids",
+        "interpretation"
+      ],
+      "title": "Legacy",
+      "type": "object"
+    },
+    "Priority": {
+      "additionalProperties": false,
+      "description": "One source resource, never an assertion of a complete authority corpus.",
+      "properties": {
+        "priority_id": {
+          "title": "Priority Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "enum": [
+            "CO-COUNTY-MESA",
+            "CO-MUNICIPAL-GRAND_JUNCTION"
+          ],
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "categories": {
+          "items": {
+            "enum": [
+              "land_use_zoning",
+              "building_fire",
+              "fees",
+              "adopted_changes"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Categories",
+          "type": "array"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "acquisition_status": {
+          "enum": [
+            "source_preserved",
+            "linked_unopened",
+            "redirect_only"
+          ],
+          "title": "Acquisition Status",
+          "type": "string"
+        },
+        "source_event_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Event Id"
+        },
+        "unfollowed_redirect_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unfollowed Redirect Url"
+        },
+        "basis": {
+          "items": {
+            "$ref": "#/$defs/Basis"
+          },
+          "minItems": 1,
+          "title": "Basis",
+          "type": "array"
+        },
+        "existing_registry_source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Existing Registry Source Ids",
+          "type": "array"
+        },
+        "legacy": {
+          "$ref": "#/$defs/Legacy"
+        },
+        "date_and_scope_notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Date And Scope Notes",
+          "type": "array"
+        },
+        "gaps": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Gaps",
+          "type": "array"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "priority_id",
+        "authority_id",
+        "categories",
+        "title",
+        "url",
+        "role",
+        "acquisition_status",
+        "source_event_id",
+        "basis",
+        "existing_registry_source_ids",
+        "legacy",
+        "date_and_scope_notes",
+        "gaps"
+      ],
+      "title": "Priority",
+      "type": "object"
+    },
+    "Summary": {
+      "additionalProperties": false,
+      "description": "Bind all finite counts to events and source preservation.",
+      "properties": {
+        "public_events": {
+          "maximum": 20,
+          "title": "Public Events",
+          "type": "integer"
+        },
+        "distinct_requested_urls": {
+          "maximum": 12,
+          "title": "Distinct Requested Urls",
+          "type": "integer"
+        },
+        "http_200": {
+          "title": "Http 200",
+          "type": "integer"
+        },
+        "http_301": {
+          "title": "Http 301",
+          "type": "integer"
+        },
+        "transport_failures": {
+          "title": "Transport Failures",
+          "type": "integer"
+        },
+        "response_body_bytes": {
+          "title": "Response Body Bytes",
+          "type": "integer"
+        },
+        "accepted_200_bytes": {
+          "title": "Accepted 200 Bytes",
+          "type": "integer"
+        },
+        "pdf_count": {
+          "title": "Pdf Count",
+          "type": "integer"
+        },
+        "pdf_structural_pages": {
+          "title": "Pdf Structural Pages",
+          "type": "integer"
+        },
+        "full_pages_visually_checked": {
+          "title": "Full Pages Visually Checked",
+          "type": "integer"
+        },
+        "priority_count": {
+          "maximum": 8,
+          "title": "Priority Count",
+          "type": "integer"
+        },
+        "checklist_rows": {
+          "const": 8,
+          "title": "Checklist Rows",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "public_events",
+        "distinct_requested_urls",
+        "http_200",
+        "http_301",
+        "transport_failures",
+        "response_body_bytes",
+        "accepted_200_bytes",
+        "pdf_count",
+        "pdf_structural_pages",
+        "full_pages_visually_checked",
+        "priority_count",
+        "checklist_rows"
+      ],
+      "title": "Summary",
+      "type": "object"
+    },
+    "VisualScope": {
+      "additionalProperties": false,
+      "description": "Record actual full-page inspection separately from structural extraction.",
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "source_pages": {
+          "title": "Source Pages",
+          "type": "integer"
+        },
+        "full_pages_viewed": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Full Pages Viewed",
+          "type": "array"
+        },
+        "render_paths": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Render Paths",
+          "type": "array"
+        },
+        "scope": {
+          "title": "Scope",
+          "type": "string"
+        },
+        "observations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Observations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "event_id",
+        "source_pages",
+        "full_pages_viewed",
+        "render_paths",
+        "scope",
+        "observations"
+      ],
+      "title": "VisualScope",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Research-only discovery and custody outcome for two separate authorities.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "task_id": {
+      "const": "atlas-mesa-grand-junction-discovery-2026-09-11",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "stop_at": {
+      "format": "date-time",
+      "title": "Stop At",
+      "type": "string"
+    },
+    "input_commit": {
+      "pattern": "^[a-f0-9]{40}$",
+      "title": "Input Commit",
+      "type": "string"
+    },
+    "initial_observed_commit": {
+      "pattern": "^[a-f0-9]{40}$",
+      "title": "Initial Observed Commit",
+      "type": "string"
+    },
+    "input_commit_note": {
+      "title": "Input Commit Note",
+      "type": "string"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "completeness": {
+      "const": "not_assessed",
+      "default": "not_assessed",
+      "title": "Completeness",
+      "type": "string"
+    },
+    "summary": {
+      "$ref": "#/$defs/Summary"
+    },
+    "priorities": {
+      "items": {
+        "$ref": "#/$defs/Priority"
+      },
+      "maxItems": 8,
+      "title": "Priorities",
+      "type": "array"
+    },
+    "checklist": {
+      "items": {
+        "$ref": "#/$defs/Cell"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "title": "Checklist",
+      "type": "array"
+    },
+    "pdf_review": {
+      "items": {
+        "$ref": "#/$defs/VisualScope"
+      },
+      "title": "Pdf Review",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "explicit_unopened_gaps": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Explicit Unopened Gaps",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "task_id",
+    "prepared_at",
+    "stop_at",
+    "input_commit",
+    "initial_observed_commit",
+    "input_commit_note",
+    "scope",
+    "summary",
+    "priorities",
+    "checklist",
+    "pdf_review",
+    "findings",
+    "explicit_unopened_gaps",
+    "limitations"
+  ],
+  "title": "Report",
+  "type": "object"
+}
