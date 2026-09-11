@@ -48,6 +48,10 @@ separate supplement, with its own source and report hashes.
   Missing graphic marks are qualified as draft representation issues; green blanks
   are not proven redactions. Two proposed italic corrections are rejected. Original
   native text and reports remain unchanged.
+- [EB014 Article 1 reconciliation](ebenezer-014-reconciliation-2026-09-11/README.md):
+  all 21 findings, three errata and five unresolved themes are dispositioned.
+  Extracted headers and footers absent from rendered pages remain labeled with
+  that visibility limit; source punctuation and native bytes remain unchanged.
 
 ## Received sources and documentary evidence
 

@@ -1,0 +1,77 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "A confined ordinary file with its exact byte identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "The complete portable file inventory, excluding its own JSON and schema.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "file_count": {
+      "exclusiveMinimum": 0,
+      "title": "File Count",
+      "type": "integer"
+    },
+    "listed_bytes": {
+      "exclusiveMinimum": 0,
+      "title": "Listed Bytes",
+      "type": "integer"
+    },
+    "excluded_self_files": {
+      "const": "evidence-manifest.json,evidence-manifest.schema.json",
+      "title": "Excluded Self Files",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "prepared_at",
+    "files",
+    "file_count",
+    "listed_bytes",
+    "excluded_self_files"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

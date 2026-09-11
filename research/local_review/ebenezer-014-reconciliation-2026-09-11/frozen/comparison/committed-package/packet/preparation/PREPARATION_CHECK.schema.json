@@ -1,0 +1,227 @@
+{
+  "$defs": {
+    "File": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    },
+    "PageCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "assignment_id": {
+          "enum": [
+            "EB-PDF-013",
+            "EB-PDF-014"
+          ],
+          "title": "Assignment Id",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 8,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/File"
+        },
+        "original_dimensions": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Original Dimensions",
+          "type": "array"
+        },
+        "displayed_dimensions": {
+          "const": "1376x1780",
+          "default": "1376x1780",
+          "title": "Displayed Dimensions",
+          "type": "string"
+        },
+        "full_page_visually_inspected": {
+          "const": true,
+          "default": true,
+          "title": "Full Page Visually Inspected",
+          "type": "boolean"
+        },
+        "observed_render_defect": {
+          "default": null,
+          "title": "Observed Render Defect",
+          "type": "null"
+        },
+        "printed_page_label_observed": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Printed Page Label Observed"
+        },
+        "image_observation": {
+          "title": "Image Observation",
+          "type": "string"
+        },
+        "scope": {
+          "const": "render completeness only; independent transcription pending",
+          "default": "render completeness only; independent transcription pending",
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "assignment_id",
+        "source_id",
+        "physical_page",
+        "image",
+        "original_dimensions",
+        "printed_page_label_observed",
+        "image_observation"
+      ],
+      "title": "PageCheck",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "status": {
+      "const": "prepared_verified_not_sent",
+      "default": "prepared_verified_not_sent",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "inspection_recorded_at": {
+      "format": "date-time",
+      "title": "Inspection Recorded At",
+      "type": "string"
+    },
+    "packet_manifest": {
+      "$ref": "#/$defs/File"
+    },
+    "assignment": {
+      "$ref": "#/$defs/File"
+    },
+    "active_payload_inventory": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Active Payload Inventory",
+      "type": "array"
+    },
+    "page_checks": {
+      "items": {
+        "$ref": "#/$defs/PageCheck"
+      },
+      "title": "Page Checks",
+      "type": "array"
+    },
+    "local_reference_checks": {
+      "title": "Local Reference Checks",
+      "type": "integer"
+    },
+    "unique_payload_files_before_this_record": {
+      "title": "Unique Payload Files Before This Record",
+      "type": "integer"
+    },
+    "native_text_changes": {
+      "const": "none",
+      "default": "none",
+      "title": "Native Text Changes",
+      "type": "string"
+    },
+    "network_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "Network Requests",
+      "type": "integer"
+    },
+    "independent_transcription_performed": {
+      "const": false,
+      "default": false,
+      "title": "Independent Transcription Performed",
+      "type": "boolean"
+    },
+    "source_role_observations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Role Observations",
+      "type": "array"
+    },
+    "verification_checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Verification Checks",
+      "type": "array"
+    },
+    "exclusions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Exclusions",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "inspection_recorded_at",
+    "packet_manifest",
+    "assignment",
+    "active_payload_inventory",
+    "page_checks",
+    "local_reference_checks",
+    "unique_payload_files_before_this_record",
+    "source_role_observations",
+    "verification_checks",
+    "exclusions",
+    "limitations"
+  ],
+  "title": "Final",
+  "type": "object"
+}
