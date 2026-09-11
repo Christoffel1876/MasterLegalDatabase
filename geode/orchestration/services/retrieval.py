@@ -26,6 +26,7 @@ from geode.orchestration.contracts import (
     RetrievalStep,
 )
 from geode.utils.file_io import iter_jsonl
+from geode.utils.lfs_pointer import require_hydrated_file
 
 
 MAX_CANDIDATES = 50
@@ -115,6 +116,7 @@ class LocalKnowledgeRetrievalBackend:
         catalog_path = self.root / "_CONTROL_PLANE" / "RETRIEVAL_CATALOG.jsonl"
         if not catalog_path.exists():
             return []
+        require_hydrated_file(catalog_path)
         scored_candidates: list[tuple[float, Evidence]] = []
         policy: OwnershipPolicy | None = None
         ownership_index: dict[str, dict[str, object]] | None = None
