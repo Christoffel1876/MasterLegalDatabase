@@ -9,6 +9,12 @@ from datetime import datetime
 from pathlib import Path
 from typing import Protocol
 
+from geode.pipeline.local_release_ownership import ownership_reason_with_parents
+from geode.pipeline.local_source_ownership import (
+    OwnershipPolicy,
+    load_ownership_policy,
+    requires_ownership_policy,
+)
 from geode.orchestration.contracts import (
     AuthorityLevel,
     Citation,
@@ -110,6 +116,8 @@ class LocalKnowledgeRetrievalBackend:
         if not catalog_path.exists():
             return []
         scored_candidates: list[tuple[float, Evidence]] = []
+        policy: OwnershipPolicy | None = None
+        ownership_index: dict[str, dict[str, object]] | None = None
         for row in iter_jsonl(catalog_path):
             entity_type = str(row.get("entity_type") or "")
             if entity_type in {"rule_unit", "local_rule"} and row.get("semantic_status") in {
@@ -123,6 +131,13 @@ class LocalKnowledgeRetrievalBackend:
                 continue
             if not _matches_location(row, state):
                 continue
+            if requires_ownership_policy(row):
+                if policy is None:
+                    policy = load_ownership_policy(self.root)
+                if ownership_index is None:
+                    ownership_index = _local_ownership_index(self.root)
+                if ownership_reason_with_parents(policy, row, ownership_index):
+                    continue
             metadata_score = _query_score(row, state)
             if metadata_score <= 0:
                 continue
@@ -130,6 +145,15 @@ class LocalKnowledgeRetrievalBackend:
             if not source_id:
                 continue
             source_record = _load_source_record(self.root, row)
+            if requires_ownership_policy(source_record):
+                if policy is None:
+                    policy = load_ownership_policy(self.root)
+                if ownership_index is None:
+                    ownership_index = _local_ownership_index(self.root)
+            if policy is not None and ownership_reason_with_parents(
+                policy, source_record, ownership_index or {}
+            ):
+                continue
             source_text = _select_source_text(source_record, row, state)
             if not source_text:
                 source_text = str(row.get("retrieval_text") or row.get("title") or source_id)
@@ -185,6 +209,26 @@ class LocalKnowledgeRetrievalBackend:
         """Follow validated crosswalk rows and load their source passages."""
 
         source_id = evidence.citation.canonical_id or evidence.provenance.source_id
+        policy: OwnershipPolicy | None = None
+        ownership_index: dict[str, dict[str, object]] | None = None
+        origin = {
+            "id": source_id,
+            "authority_level": evidence.citation.authority_level.value,
+            "source_url": evidence.provenance.source_url,
+        }
+        origin_catalog = _catalog_row_for_id(self.root, source_id)
+        origin_record = _load_source_record(self.root, origin_catalog) if origin_catalog else {}
+        if any(requires_ownership_policy(item) for item in (origin, origin_catalog or {},
+                                                          origin_record)):
+            policy = load_ownership_policy(self.root)
+            ownership_index = _local_ownership_index(self.root)
+            # Cached local evidence cannot establish its current ownership by itself.
+            if origin_catalog is None:
+                return []
+            if any(ownership_reason_with_parents(policy, item, ownership_index) for item in (
+                origin, origin_catalog, origin_record
+            )):
+                return []
         crosswalk_dir = self.root / "_CROSSWALKS"
         if not crosswalk_dir.exists():
             return []
@@ -201,10 +245,26 @@ class LocalKnowledgeRetrievalBackend:
                 target = _catalog_row_for_id(self.root, target_id)
                 if target is None:
                     continue
+                if requires_ownership_policy(target):
+                    if policy is None:
+                        policy = load_ownership_policy(self.root)
+                    if ownership_index is None:
+                        ownership_index = _local_ownership_index(self.root)
+                    if ownership_reason_with_parents(policy, target, ownership_index):
+                        continue
                 target_status = str(target.get("semantic_status") or "")
                 if target_status in {"source_preservation_only", "needs_review"}:
                     continue
                 source_record = _load_source_record(self.root, target)
+                if requires_ownership_policy(source_record):
+                    if policy is None:
+                        policy = load_ownership_policy(self.root)
+                    if ownership_index is None:
+                        ownership_index = _local_ownership_index(self.root)
+                if policy is not None and ownership_reason_with_parents(
+                    policy, source_record, ownership_index or {}
+                ):
+                    continue
                 source_text = _select_source_text(source_record, target, None)
                 reached.append(
                     Evidence(
@@ -243,6 +303,27 @@ class LocalKnowledgeRetrievalBackend:
                     )
                 )
         return reached
+
+
+def _local_ownership_index(root: Path) -> dict[str, dict[str, object]]:
+    """Stream local indexes for current ownership; never cache across requests."""
+
+    result: dict[str, dict[str, object]] = {}
+    keys = {
+        "id", "source_id", "authority_id", "authority_level", "url", "source_url",
+        "requested_url", "final_url", "discovery_parent_url", "parent_rule_id",
+        "parent_regulation_id", "review_id", "rule_unit_id", "candidate_rule_unit_id",
+        "permanent_rule_unit_id", "source", "source_metadata", "metadata",
+    }
+    for layer in ("08_County_Authorities", "09_District_Authorities", "10_Municipal_Authorities"):
+        path = root / layer / "_index.jsonl"
+        if path.exists():
+            for row in iter_jsonl(path):
+                if row.get("id"):
+                    result[str(row["id"])] = {
+                        key: value for key, value in row.items() if key in keys
+                    }
+    return result
 
 
 def _matches_authority(row: dict[str, object], authority_level: str) -> bool:

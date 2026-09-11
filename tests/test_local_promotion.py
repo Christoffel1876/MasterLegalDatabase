@@ -10,6 +10,7 @@ from geode.pipeline.local_promotion import (
     build_local_promotion_queue,
 )
 from geode.utils.file_io import atomic_write_jsonl, iter_jsonl
+from tests.ownership_support import ownership_policy
 
 
 RULE_ID = "LOCAL-RULE-CO-COUNTY-TEST-UNIT-0001"

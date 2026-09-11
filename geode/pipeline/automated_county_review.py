@@ -13,6 +13,8 @@ from pathlib import Path
 from typing import Any
 from xml.etree import ElementTree
 
+from geode.pipeline.local_release_ownership import ownership_reason_with_parents
+from geode.pipeline.local_source_ownership import OwnershipPolicy, load_ownership_policy
 from geode.schemas import RuleUnit
 from geode.utils.file_io import atomic_write_json, atomic_write_jsonl, iter_jsonl
 
@@ -70,6 +72,7 @@ def review_county_candidates(root: Path, *, apply: bool = False) -> dict[str, An
     """Review the final county queue and optionally promote passing candidates."""
 
     resolved = root.resolve()
+    policy = load_ownership_policy(resolved)
     queue = list(iter_jsonl(resolved / QUEUE))
     mappings = {
         row["review_id"]: row for row in iter_jsonl(resolved / MAPPING)
@@ -83,7 +86,7 @@ def review_county_candidates(root: Path, *, apply: bool = False) -> dict[str, An
         if not row.get("review_disposition"):
             continue
         result, approved = _review_one(
-            resolved, row, mappings.get(row.get("review_id")), index_rows, source_cache
+            resolved, row, mappings.get(row.get("review_id")), index_rows, source_cache, policy
         )
         results.append(result)
         counts[result["automated_disposition"]] += 1
@@ -129,6 +132,7 @@ def _review_one(
     mapping: dict[str, Any] | None,
     index_rows: dict[str, dict[str, Any]],
     source_cache: dict[str, str],
+    policy: OwnershipPolicy,
 ) -> tuple[dict[str, Any], bool]:
     """Review one candidate with hard gates and an auditable score."""
 
@@ -154,6 +158,10 @@ def _review_one(
                       mapping.get("mapping_status") != "blocked")
     current_index = bool(parent and parent.get("last_updated"))
     hard_failures: list[str] = []
+    for source_row in (row, mapping or {}, parent or {}):
+        reason = ownership_reason_with_parents(policy, source_row, index_rows)
+        if reason and reason not in hard_failures:
+            hard_failures.append(reason)
     if not source_identity:
         hard_failures.append("source hash does not match active parent")
     if not mapping_ok:

@@ -3,7 +3,7 @@
   "prepared_at": "2026-09-10T21:45:55.488213Z",
   "attribution_review": "three_current_source_entries_verified",
   "legal_currentness": "not_verified",
-  "pipeline_enforcement": "implemented_and_tested_offline_2026-09-11_full_regeneration_blocked",
+  "pipeline_enforcement": "not_implemented_required_before_legacy_regeneration",
   "replacements": [
     {
       "retired_source_id": "county_boulder_administrative_rule_manuals_484ef287b62c",
@@ -261,12 +261,11 @@
     "08_County_Authorities/_meta/local_rules.jsonl"
   ],
   "required_followup": [
-    "Ownership exclusions are enforced through ingestion, regeneration, mapping, promotion and retrieval; retain regression checks in local-ownership-ci.yml.",
+    "Enforce exclusions in legacy ingestion, coverage regeneration and promotion before rerun.",
     "Recover missing county LFS index/rule metadata before full downstream attribution audit.",
     "Re-review affected source bytes and excerpts; do not automatically relabel legal duties.",
     "Rebuild downstream indexes, semantic decisions and historical-derived reports after repair.",
-    "Four mapped candidates remain auto_quarantined; no scoped candidate is accepted as law.",
-    "Do not broadly regenerate while the two exact LFS payloads are unavailable or while the inherited local_pilot rebuild drops ordinary rule_unit rows."
+    "Four mapped candidates remain auto_quarantined; no scoped candidate is accepted as law."
   ],
   "verification_method": "Atlas read official City pages through web parsed-page access and official County homepage/building-amendments pages on 2026-09-10. Direct City HTTP attempts returned 403; response bodies are error pages, not source evidence. County amendment referral HTML returned 200 and is preserved in the local intake handoff. No fresh City byte equality or exhaustive legal-currentness verification is claimed."
 }

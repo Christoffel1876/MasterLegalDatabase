@@ -7,6 +7,7 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from geode.pipeline.local_source_ownership import load_ownership_policy
 from geode.utils.file_io import atomic_write_json, iter_jsonl
 
 
@@ -25,14 +26,22 @@ def build_local_source_freshness(
     if attention_after_days < 0 or stale_after_days < attention_after_days:
         raise ValueError("freshness thresholds are invalid")
     resolved = root.resolve()
+    ownership = load_ownership_policy(resolved)
     reference = today or date.today()
+    exclusions: list[str] = []
     latest: dict[str, dict[str, Any]] = {}
     for row in iter_jsonl(resolved / "_CONTROL_PLANE" / "LOCAL_DOWNLOAD_MANIFEST.jsonl"):
+        reason = ownership.entity_exclusion_reason(row)
+        if reason:
+            exclusions.append(reason)
+            continue
         source_id = str(row.get("source_id") or "")
         if not source_id or row.get("status") != "downloaded":
             continue
         previous = latest.get(source_id)
-        if previous is None or str(row.get("retrieved_at") or "") > str(previous.get("retrieved_at") or ""):
+        if previous is None or str(row.get("retrieved_at") or "") > str(
+            previous.get("retrieved_at") or ""
+        ):
             latest[source_id] = row
     records: list[dict[str, Any]] = []
     for source_id, row in sorted(latest.items()):
@@ -68,10 +77,15 @@ def build_local_source_freshness(
         "attention_after_days": attention_after_days,
         "stale_after_days": stale_after_days,
         "sources_checked": len(records),
+        "ownership_excluded": len(exclusions),
+        "ownership_exclusion_reasons": exclusions,
         "status_counts": _counts(records),
         "records": records,
         "network_refresh_performed": False,
-        "boundary": "This report measures local download age and file presence; it does not prove live official freshness.",
+        "boundary": (
+            "This report measures local download age and file presence; "
+            "it does not prove live official freshness."
+        ),
     }
     return report
 

@@ -7,7 +7,7 @@ import hashlib
 import json
 import os
 from datetime import datetime, timezone
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
@@ -16,7 +16,7 @@ from geode.connectors.archive_paths import safe_archive_stem
 from geode.connectors.download_metadata import source_format_from_extension
 from geode.constants import ALL_LAYERS, CONTROL_PLANE_DIR, RAW_ARCHIVE_DIR
 from geode.schemas.validators import require_official_source_url
-from geode.utils.file_io import atomic_write_json, iter_jsonl, relative_path
+from geode.utils.file_io import atomic_write_json, atomic_write_text, iter_jsonl, relative_path
 
 MANUAL_INTAKE_ARCHIVE_ROOT = Path(RAW_ARCHIVE_DIR) / "manual_intake"
 MANUAL_INTAKE_MANIFEST_PATH = MANUAL_INTAKE_ARCHIVE_ROOT / "manual_source_intake_manifest.jsonl"
@@ -136,7 +136,196 @@ class ManualSourceIntakeReport(BaseModel):
     pending_pipeline_use: int = Field(ge=0)
     layers: dict[str, int] = Field(default_factory=dict)
     latest_record_id: str | None = None
+    acquisition_methods: dict[str, int] = Field(default_factory=dict)
+    archive_verification: ManualIntakeArchiveVerification | None = None
     boundary: str
+
+
+class ManualIntakeArchiveVerification(BaseModel):
+    """Distinguish verified archive bytes from retained ledger-only history."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    manifest_records: int = Field(ge=0)
+    verified_intake_ids: list[str]
+    ledger_only_intake_ids: list[str]
+    missing_ledger_only_intake_ids: list[str]
+    boundary: str = (
+        "Hash and size verification establishes local byte identity only. "
+        "Ledger-only history may lack a local original; custody, acquisition claims, "
+        "pipeline status, and legal currentness are not promoted."
+    )
+
+
+class ManualIntakeReconciliation(BaseModel):
+    """Validated preview or result of reconciling the archive into the ledger."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    status: Literal["dry_run", "updated", "no_change"]
+    added_intake_ids: list[str]
+    ledger_records_before: int = Field(ge=0)
+    ledger_records_after: int = Field(ge=0)
+    report_needs_update: bool
+    report: ManualSourceIntakeReport
+
+
+def _reconciliation_path(root: Path, relative: Path) -> Path:
+    """Reject path escapes and symlink components, including ancestors of root."""
+
+    if relative.is_absolute() or ".." in relative.parts:
+        raise ValueError(f"unsafe reconciliation path: {relative}")
+    path = root / relative
+    if any(part.is_symlink() for part in (path, *path.parents)):
+        raise ValueError(f"symlink in reconciliation path: {path}")
+    if path.exists() and not path.is_file():
+        raise ValueError(f"reconciliation path is not a file: {path}")
+    return path
+
+
+def _validate_reconciliation_record(root: Path, row: ManualSourceIntakeRecord) -> Path:
+    """Validate an existing record without reclassifying its acquisition method."""
+
+    for value in (row.intake_id, row.record_id):
+        if not value.strip() or "/" in value or "\\" in value or value in {".", ".."}:
+            raise ValueError("invalid reconciliation record identifier")
+    if row.layer_id not in ALL_LAYERS:
+        raise ValueError(f"unknown layer_id: {row.layer_id}")
+    if len(row.sha256) != 64 or any(c not in "0123456789abcdef" for c in row.sha256):
+        raise ValueError("invalid reconciliation SHA-256")
+    if row.received_at.tzinfo is None or row.received_at.utcoffset() is None:
+        raise ValueError("reconciliation received_at must be timezone-aware")
+    if row.official_source_url:
+        require_official_source_url(row.official_source_url)
+    path = PurePosixPath(row.archive_path)
+    expected_parent = MANUAL_INTAKE_ARCHIVE_ROOT / row.layer_id / safe_archive_stem(row.record_id)
+    if (
+        path.as_posix() != row.archive_path
+        or "\\" in row.archive_path
+        or ":" in row.archive_path
+        or path.parent != PurePosixPath(expected_parent.as_posix())
+    ):
+        raise ValueError(f"invalid manual archive path: {row.archive_path}")
+    return _reconciliation_path(root, Path(row.archive_path))
+
+
+def reconcile_manual_source_intake(
+    root: Path, *, dry_run: bool = True
+) -> ManualIntakeReconciliation:
+    """Append missing validated archive records and repair the derived report.
+
+    Incoming records must be pending and have matching local source bytes. Existing
+    ledger-only history is retained, with missing originals disclosed separately.
+    All identity/custody conflicts fail before writes. Ledger and report writes are
+    separately atomic and snapshotted; rerunning repairs an interrupted report write.
+    This never writes the raw manifest, sources, or blocked-download queue.
+    """
+
+    root = root.absolute()
+    paths = [
+        _reconciliation_path(root, path)
+        for path in (
+            MANUAL_INTAKE_MANIFEST_PATH,
+            MANUAL_INTAKE_LEDGER_PATH,
+            MANUAL_INTAKE_REPORT_PATH,
+        )
+    ]
+    manifest_path, ledger_path, report_path = paths
+    if not manifest_path.is_file():
+        raise ValueError("manual archive manifest is missing")
+    before = {path: path.read_bytes() if path.exists() else None for path in paths}
+    manifest = _read_records(manifest_path)
+    ledger = _read_records(ledger_path)
+    by_identity: dict[tuple[str, ...], ManualSourceIntakeRecord] = {}
+    by_id: dict[str, ManualSourceIntakeRecord] = {}
+    added: list[ManualSourceIntakeRecord] = []
+    for label, rows in (("ledger", ledger), ("manifest", manifest)):
+        seen: set[str] = set()
+        for row in rows:
+            _validate_reconciliation_record(root, row)
+            if row.intake_id in seen:
+                raise ValueError(f"duplicate intake_id in {label}: {row.intake_id}")
+            seen.add(row.intake_id)
+            if label == "manifest" and row.status != "archived_pending_pipeline":
+                raise ValueError(
+                    f"manifest record is not archived_pending_pipeline: {row.intake_id}"
+                )
+            keys = (
+                ("intake_id", row.intake_id),
+                ("archive_path", row.archive_path),
+                ("record_digest", row.record_id, row.sha256),
+            )
+            for key in keys:
+                prior = by_identity.get(key)
+                if prior is not None and prior != row:
+                    raise ValueError(f"conflicting manual intake {key[0]}: {key[1:]}")
+                by_identity[key] = row
+            if row.intake_id not in by_id:
+                by_id[row.intake_id] = row
+                if label == "manifest":
+                    added.append(row)
+
+    manifest_ids = {row.intake_id for row in manifest}
+    verified: list[str] = []
+    missing: list[str] = []
+    ledger_only = [row.intake_id for row in ledger if row.intake_id not in manifest_ids]
+    for row in by_id.values():
+        path = _validate_reconciliation_record(root, row)
+        if not path.exists():
+            if row.intake_id in manifest_ids:
+                raise ValueError(f"manifest source is missing: {row.archive_path}")
+            missing.append(row.intake_id)
+            continue
+        with path.open("rb") as handle:
+            digest = hashlib.file_digest(handle, "sha256").hexdigest()
+        if path.stat().st_size != row.size_bytes or digest != row.sha256:
+            raise ValueError(f"archive hash or size mismatch: {row.archive_path}")
+        verified.append(row.intake_id)
+
+    report = _report_from_records([*ledger, *added])
+    report.archive_verification = ManualIntakeArchiveVerification(
+        manifest_records=len(manifest),
+        verified_intake_ids=verified,
+        ledger_only_intake_ids=ledger_only,
+        missing_ledger_only_intake_ids=missing,
+    )
+    current_report = (
+        ManualSourceIntakeReport.model_validate_json(before[report_path])
+        if before[report_path] is not None
+        else None
+    )
+    report_changed = current_report is None or current_report.model_dump(
+        exclude={"generated_at"}
+    ) != report.model_dump(exclude={"generated_at"})
+    if not report_changed:
+        report = current_report
+    result = ManualIntakeReconciliation(
+        status="dry_run" if dry_run else "updated" if added or report_changed else "no_change",
+        added_intake_ids=[row.intake_id for row in added],
+        ledger_records_before=len(ledger),
+        ledger_records_after=len(ledger) + len(added),
+        report_needs_update=report_changed,
+        report=report,
+    )
+    for path, data in before.items():
+        _reconciliation_path(root, path.relative_to(root))
+        if (path.read_bytes() if path.exists() else None) != data:
+            raise ValueError(f"manual intake input changed during reconciliation: {path}")
+    if dry_run or result.status == "no_change":
+        return result
+    snapshots = root / "_SNAPSHOTS"
+    if any(path.is_symlink() for path in (snapshots, *snapshots.parents)):
+        raise ValueError("symlink in reconciliation snapshot path")
+    # Preserve existing ledger bytes, including historical custody wording.
+    if added:
+        prefix = (before[ledger_path] or b"").decode("utf-8")
+        if prefix and not prefix.endswith("\n"):
+            prefix += "\n"
+        content = prefix + "".join(row.model_dump_json() + "\n" for row in added)
+        atomic_write_text(ledger_path, content, root)
+    if report_changed:
+        atomic_write_json(report_path, report, root)
+    return result
 
 
 def archive_manual_source(
@@ -253,9 +442,17 @@ def build_manual_source_intake_report(root: Path) -> ManualSourceIntakeReport:
 
     resolved_root = root.resolve()
     rows = list(_read_records(resolved_root / MANUAL_INTAKE_LEDGER_PATH))
+    return _report_from_records(rows)
+
+
+def _report_from_records(rows: list[ManualSourceIntakeRecord]) -> ManualSourceIntakeReport:
+    """Summarize custody records without asserting their acquisition is verified."""
+
     layers: dict[str, int] = {}
+    methods: dict[str, int] = {}
     for row in rows:
         layers[row.layer_id] = layers.get(row.layer_id, 0) + 1
+        methods[row.acquisition_method] = methods.get(row.acquisition_method, 0) + 1
     latest = rows[-1].record_id if rows else None
     return ManualSourceIntakeReport(
         generated_at=datetime.now(timezone.utc),
@@ -265,9 +462,12 @@ def build_manual_source_intake_report(root: Path) -> ManualSourceIntakeReport:
         pending_pipeline_use=sum(1 for row in rows if row.status == "archived_pending_pipeline"),
         layers=dict(sorted(layers.items())),
         latest_record_id=latest,
+        acquisition_methods=dict(sorted(methods.items())),
         boundary=(
-            "This report tracks manually archived official source artifacts. It does not "
-            "mean the related structured layer has already been rebuilt."
+            "This report summarizes manual intake custody records, including received review "
+            "packages. Acquisition methods and source claims are preserved as recorded; counts "
+            "do not verify official delivery, local availability, legal currentness, or "
+            "completion of a structured-layer rebuild."
         ),
     )
 
@@ -450,6 +650,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", default=".")
     parser.add_argument("--write-policy", action="store_true")
+    parser.add_argument("--reconcile", action="store_true")
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--json", action="store_true")
     parser.add_argument("--source-file")
@@ -468,7 +669,12 @@ def main() -> None:
 
     root = Path(args.root)
     output: dict[str, Any] = {}
-    if args.write_policy:
+    if args.reconcile:
+        if args.write_policy or args.source_file or args.record_id:
+            parser.error("--reconcile cannot be combined with policy writing or a new intake")
+        result = reconcile_manual_source_intake(root, dry_run=not args.apply)
+        output["reconciliation"] = result.model_dump(mode="json")
+    elif args.write_policy:
         output["policy"] = write_manual_source_intake_policy(root)
         output["report"] = write_manual_source_intake_report(root).model_dump(mode="json")
     else:
@@ -481,7 +687,14 @@ def main() -> None:
     if args.json:
         print(json.dumps(output, indent=2))
         return
-    if "record" in output:
+    if "reconciliation" in output:
+        result = output["reconciliation"]
+        print(
+            f"Manual intake reconciliation {result['status']}: "
+            f"{len(result['added_intake_ids'])} additions, "
+            f"{result['ledger_records_after']} ledger records"
+        )
+    elif "record" in output:
         status = output["record"]["status"]
         archive_path = output["record"]["archive_path"]
         print(f"Manual source intake {status}: {archive_path}")

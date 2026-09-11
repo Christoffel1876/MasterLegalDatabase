@@ -10,6 +10,8 @@ from typing import Any
 from pydantic import BaseModel, Field
 
 from geode.constants import CONTROL_PLANE_DIR
+from geode.pipeline.local_release_ownership import ownership_reason_with_parents
+from geode.pipeline.local_source_ownership import OwnershipPolicy, load_ownership_policy
 from geode.utils.file_io import atomic_write_json, atomic_write_jsonl, iter_jsonl, load_json
 
 
@@ -33,6 +35,8 @@ class LocalReviewSummary(BaseModel):
     metadata_version_items: int = Field(ge=0)
     total_review_items: int = Field(ge=0)
     answer_safe_local_rule_units: int = Field(ge=0)
+    ownership_excluded: int = Field(default=0, ge=0)
+    ownership_exclusion_reasons: list[str] = Field(default_factory=list)
     boundary: str
 
 
@@ -40,15 +44,30 @@ def build_local_review_queues(root: Path, today: date | None = None) -> LocalRev
     """Build all remaining local review queues without modifying raw sources."""
 
     resolved = root.resolve()
+    ownership = load_ownership_policy(resolved)
+    excluded_support = _excluded_source_support(resolved, ownership)
+    exclusions: list[str] = []
     del today  # Reserved for future age-based priority scoring.
     generated_at = datetime.now(timezone.utc)
     review_rows: list[dict[str, Any]] = []
     ocr_rows: list[dict[str, Any]] = []
     classification_rows: list[dict[str, Any]] = []
+    index_rows: list[dict[str, Any]] = []
+    for layer in ("08_County_Authorities", "09_District_Authorities"):
+        index_file = resolved / layer / "_index.jsonl"
+        if index_file.exists():
+            index_rows.extend(iter_jsonl(index_file))
+    indexed = {str(row["id"]): row for row in index_rows if row.get("id")}
 
     quarantine_file = resolved / "_QUARANTINE" / "local_extraction_quarantine.jsonl"
     quarantine_rows = iter_jsonl(quarantine_file) if quarantine_file.exists() else []
     for row in quarantine_rows:
+        reason = ownership_reason_with_parents(ownership, row, indexed) or excluded_support.get(
+            (str(row.get("authority_id") or ""), str(row.get("source_id") or ""))
+        )
+        if reason:
+            exclusions.append(reason)
+            continue
         common = _source_fields(row)
         reason = str(row.get("reason") or "")
         if "OCR" in reason:
@@ -75,14 +94,15 @@ def build_local_review_queues(root: Path, today: date | None = None) -> LocalRev
                 }
             )
 
-    index_rows: list[dict[str, Any]] = []
-    for layer in ("08_County_Authorities", "09_District_Authorities"):
-        index_file = resolved / layer / "_index.jsonl"
-        if index_file.exists():
-            index_rows.extend(iter_jsonl(index_file))
     semantic_items = 0
     answer_safe_units = 0
     for row in index_rows:
+        reason = ownership_reason_with_parents(ownership, row, indexed) or excluded_support.get(
+            (str(row.get("authority_id") or ""), str(row.get("source_id") or ""))
+        )
+        if reason:
+            exclusions.append(reason)
+            continue
         if row.get("entity_type") != "rule_unit":
             continue
         status = str(row.get("semantic_status") or "semantic_ready")
@@ -117,11 +137,25 @@ def build_local_review_queues(root: Path, today: date | None = None) -> LocalRev
             if not isinstance(cell, dict):
                 continue
             status = str(cell.get("status") or "")
+            source_ids = []
+            excluded_count = 0
+            for source_id in cell.get("source_ids", []):
+                support = {"authority_id": county.get("county_id"), "source_id": source_id}
+                reason = ownership.source_exclusion_reason(support) or excluded_support.get(
+                    (str(county.get("county_id") or ""), str(source_id))
+                )
+                if reason:
+                    exclusions.append(reason)
+                    excluded_count += 1
+                else:
+                    source_ids.append(source_id)
+            if excluded_count and not source_ids:
+                continue
             item = {
                 "authority_id": county.get("county_id"),
                 "county_name": county.get("county_name"),
                 "category": category,
-                "source_ids": cell.get("source_ids", []),
+                "source_ids": source_ids,
                 "status": "pending",
                 "reason": cell.get("notes") or status,
             }
@@ -152,14 +186,43 @@ def build_local_review_queues(root: Path, today: date | None = None) -> LocalRev
         metadata_version_items=len(metadata_audit["unreferenced_versioned_files"]),
         total_review_items=len(review_rows),
         answer_safe_local_rule_units=answer_safe_units,
+        ownership_excluded=len(exclusions),
+        ownership_exclusion_reasons=exclusions,
         boundary=(
-            "These queues identify work that remains. They do not approve legal meaning, perform OCR, "
+            "These queues identify work that remains. They do not approve legal meaning, "
+            "perform OCR, "
             "delete versioned files, or claim that blocked categories have no law."
         ),
     )
     atomic_write_json(resolved / SUMMARY_PATH, summary, resolved)
     _write_promotion_queue_if_available(resolved, index_rows)
     return summary
+
+
+def _excluded_source_support(
+    root: Path, ownership: OwnershipPolicy,
+) -> dict[tuple[str, str], str]:
+    """Resolve only exact excluded aliases from preserved registry and manifest evidence."""
+    excluded: dict[tuple[str, str], str] = {}
+
+    def examine(row: dict[str, Any]) -> None:
+        reason = ownership.entity_exclusion_reason(row)
+        if reason and row.get("source_id"):
+            key = (str(row.get("authority_id") or ""), str(row["source_id"]))
+            excluded[key] = reason
+
+    manifest = root / CONTROL_PLANE_DIR / "LOCAL_DOWNLOAD_MANIFEST.jsonl"
+    if manifest.exists():
+        for row in iter_jsonl(manifest):
+            examine(row)
+    for name in ("LOCAL_SOURCE_REGISTRY.json", "MUNICIPAL_SOURCE_REGISTRY.json"):
+        registry = _load_dict(root / CONTROL_PLANE_DIR / name)
+        for entries in registry.get("pilot", {}).values():
+            if isinstance(entries, list):
+                for row in entries:
+                    if isinstance(row, dict):
+                        examine(row)
+    return excluded
 
 
 def _write_promotion_queue_if_available(root: Path, index_rows: list[dict[str, Any]]) -> None:

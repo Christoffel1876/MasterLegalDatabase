@@ -1,0 +1,148 @@
+{
+  "$defs": {
+    "Evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Evidence",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "based_on_commit": {
+      "title": "Based On Commit",
+      "type": "string"
+    },
+    "status": {
+      "const": "ownership_gates_verified_offline_full_corpus_blocked",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "policy_before_sha256": {
+      "title": "Policy Before Sha256",
+      "type": "string"
+    },
+    "policy_after_sha256": {
+      "title": "Policy After Sha256",
+      "type": "string"
+    },
+    "policy_snapshot": {
+      "title": "Policy Snapshot",
+      "type": "string"
+    },
+    "exclusion_identities_unchanged": {
+      "title": "Exclusion Identities Unchanged",
+      "type": "boolean"
+    },
+    "full_tests_passed": {
+      "title": "Full Tests Passed",
+      "type": "integer"
+    },
+    "full_test_seconds": {
+      "title": "Full Test Seconds",
+      "type": "number"
+    },
+    "full_branch_coverage_percent": {
+      "title": "Full Branch Coverage Percent",
+      "type": "integer"
+    },
+    "focused_tests_passed": {
+      "title": "Focused Tests Passed",
+      "type": "integer"
+    },
+    "focused_policy_and_parent_helper_branch_coverage_percent": {
+      "title": "Focused Policy And Parent Helper Branch Coverage Percent",
+      "type": "integer"
+    },
+    "environment": {
+      "title": "Environment",
+      "type": "string"
+    },
+    "changed_code_and_tests": {
+      "items": {
+        "$ref": "#/$defs/Evidence"
+      },
+      "title": "Changed Code And Tests",
+      "type": "array"
+    },
+    "logs": {
+      "items": {
+        "$ref": "#/$defs/Evidence"
+      },
+      "title": "Logs",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "enforced_paths": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Enforced Paths",
+      "type": "array"
+    },
+    "observed_repairs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Observed Repairs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "based_on_commit",
+    "status",
+    "legal_currentness",
+    "policy_before_sha256",
+    "policy_after_sha256",
+    "policy_snapshot",
+    "exclusion_identities_unchanged",
+    "full_tests_passed",
+    "full_test_seconds",
+    "full_branch_coverage_percent",
+    "focused_tests_passed",
+    "focused_policy_and_parent_helper_branch_coverage_percent",
+    "environment",
+    "changed_code_and_tests",
+    "logs",
+    "limitations",
+    "enforced_paths",
+    "observed_repairs"
+  ],
+  "title": "Checkpoint",
+  "type": "object"
+}

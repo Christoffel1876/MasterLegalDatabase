@@ -3,39 +3,59 @@
 from __future__ import annotations
 
 import hashlib
+import logging
 from datetime import date, datetime, timezone
 from pathlib import Path
 
+from geode.pipeline.local_release_ownership import ownership_reason_with_parents
+from geode.pipeline.local_source_ownership import load_ownership_policy
 from geode.schemas import ConfidenceScores, LayerIndexRecord, LocalAuthority
 from geode.utils.file_io import atomic_write_jsonl, iter_jsonl, load_json
+
+LOGGER = logging.getLogger(__name__)
 
 
 def materialize_pilot_authorities(root: Path) -> dict[str, int]:
     """Write registered county, municipal, and district identities and indexes."""
 
     resolved_root = root.resolve()
+    ownership = load_ownership_policy(resolved_root)
     registry = load_json(resolved_root / "_CONTROL_PLANE" / "LOCAL_SOURCE_REGISTRY.json")
     municipal_registry_path = resolved_root / "_CONTROL_PLANE" / "MUNICIPAL_SOURCE_REGISTRY.json"
     if municipal_registry_path.exists():
         municipal_registry = load_json(municipal_registry_path)
         registry.setdefault("pilot", {}).update(municipal_registry.get("pilot", {}))
     pilot = registry["pilot"]
-    counts: dict[str, int] = {}
+    counts: dict[str, int] = {"ownership_excluded": 0}
     for level, layer, entries_key in (
         ("county", "08_County_Authorities", "counties"),
         ("municipal", "10_Municipal_Authorities", "municipalities"),
         ("district", "09_District_Authorities", "districts"),
     ):
-        records = [_authority_from_entry(entry) for entry in pilot.get(entries_key, [])]
+        records = []
+        for entry in pilot.get(entries_key, []):
+            reason = ownership.entity_exclusion_reason(entry)
+            if reason:
+                counts["ownership_excluded"] += 1
+                LOGGER.warning("Ownership exclusion during pilot materialization: %s", reason)
+                continue
+            records.append(_authority_from_entry(entry))
         metadata_path = resolved_root / layer / "_meta" / "local_authorities.jsonl"
-        atomic_write_jsonl(metadata_path, records, resolved_root)
         indexes = [_index_record(record, metadata_path, resolved_root, layer) for record in records]
         index_path = resolved_root / layer / "_index.jsonl"
-        existing_rules = (
-            [row for row in iter_jsonl(index_path) if row.get("entity_type") == "local_rule"]
-            if index_path.exists()
-            else []
-        )
+        existing = list(iter_jsonl(index_path)) if index_path.exists() else []
+        indexed = {str(row["id"]): row for row in existing if row.get("id")}
+        existing_rules = []
+        for row in existing:
+            if row.get("entity_type") != "local_rule":
+                continue
+            reason = ownership_reason_with_parents(ownership, row, indexed)
+            if reason:
+                counts["ownership_excluded"] += 1
+                LOGGER.warning("Ownership exclusion during pilot materialization: %s", reason)
+            else:
+                existing_rules.append(row)
+        atomic_write_jsonl(metadata_path, records, resolved_root)
         atomic_write_jsonl(index_path, [*indexes, *existing_rules], resolved_root)
         counts[level] = len(records)
     return counts
@@ -59,7 +79,9 @@ def _authority_from_entry(entry: dict[str, object]) -> LocalAuthority:
     )
 
 
-def _index_record(record: LocalAuthority, metadata_path: Path, root: Path, layer: str) -> LayerIndexRecord:
+def _index_record(
+    record: LocalAuthority, metadata_path: Path, root: Path, layer: str,
+) -> LayerIndexRecord:
     """Create a machine-readable index row for one local authority."""
 
     relative_meta = metadata_path.resolve().relative_to(root.resolve()).as_posix()
