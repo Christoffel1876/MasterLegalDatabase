@@ -1,0 +1,59 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact ordinary package-relative file binding.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Complete file inventory except for the inventory's own bytes.",
+  "properties": {
+    "package_id": {
+      "const": "arapahoe-resolution26-224-evidence-2026-09-11",
+      "title": "Package Id",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "excluded_self": {
+      "const": "evidence-manifest.json",
+      "title": "Excluded Self",
+      "type": "string"
+    }
+  },
+  "required": [
+    "package_id",
+    "files",
+    "excluded_self"
+  ],
+  "title": "Inventory",
+  "type": "object"
+}

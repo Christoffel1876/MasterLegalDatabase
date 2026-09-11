@@ -1,0 +1,107 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "event_id": {
+      "title": "Event Id",
+      "type": "string"
+    },
+    "requested_url": {
+      "title": "Requested Url",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "curl_exit_code": {
+      "title": "Curl Exit Code",
+      "type": "integer"
+    },
+    "http_status": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Http Status"
+    },
+    "effective_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Effective Url"
+    },
+    "redirect_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Redirect Url"
+    },
+    "content_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Content Type"
+    },
+    "response_files": {
+      "additionalProperties": {
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        },
+        "type": "object"
+      },
+      "title": "Response Files",
+      "type": "object"
+    },
+    "policy": {
+      "title": "Policy",
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "requested_url",
+    "started_at",
+    "completed_at",
+    "curl_exit_code",
+    "http_status",
+    "effective_url",
+    "redirect_url",
+    "content_type",
+    "response_files",
+    "policy"
+  ],
+  "title": "Capture",
+  "type": "object"
+}

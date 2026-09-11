@@ -1,0 +1,574 @@
+{
+  "audit_id": "ARAPAHOE-RESOLUTION-26-224-ACCESS-2026-09-11",
+  "completed_at": "2026-09-11T20:05:39.599527Z",
+  "deadline": "2026-09-11T20:15:00Z",
+  "stop_reason": "eight_counted_public_events_reached",
+  "public_events_counted": 8,
+  "distinct_observed_targets": [
+    "https://arapahoeco.gov/your_county/codes_criteria_and_ordinances/county_ordinances_and_resolutions.php",
+    "https://arapahoe.legistar.com/",
+    "https://arapahoe.legistar.com/Calendar.aspx",
+    "https://arapahoe.legistar.com/MeetingDetail.aspx?GUID=594E6EF1-1E4F-456D-BC8E-69AFE0B7C19F&ID=1422522&Options=info%7C&Search=",
+    "https://arapahoe.legistar.com/LegislationDetail.aspx?GUID=6621BDD6-BBE2-4180-972F-235EC1885EFA&ID=8200547&Options=&Search=",
+    "https://arapahoe.legistar.com/View.ashx?GUID=E4F2D438-01EB-4B24-B6DD-6E13EEB14FDB&ID=15828215&M=F"
+  ],
+  "event_counting_limit": "Eight counted visible access events: five web-tool calls plus one explicitly reported redirect and two direct curl attempts. Counts include cached results, DNS failure and cache miss. Underlying web-provider HTTP activity is not exposed; no exact wire-request count is claimed.",
+  "events": [
+    {
+      "event_id": "E001",
+      "requested_url": "https://arapahoeco.gov/your_county/codes_criteria_and_ordinances/county_ordinances_and_resolutions.php",
+      "kind": "web_tool_open",
+      "parent_event": null,
+      "observed_link_label": null,
+      "referral_evidence": "inputs/seed-attempted-urls.json and seed-report.md",
+      "result": "County catalog representation refers users to Legistar for December 2020 onward. No exact Resolution 26-224 attachment observed in returned catalog.",
+      "output_assets": [
+        {
+          "path": "web/E001-tool-output.txt",
+          "sha256": "9a1322d52ce94724c1ad9ad039e7a984bd5e1c9168306af95d06efbc2c2926e8",
+          "size_bytes": 24873
+        }
+      ],
+      "raw_http_status": null,
+      "started_at": null,
+      "completed_at": null,
+      "tool_crawl_label": "Crawled: last month",
+      "qualification": "Web-tool text is a derived/cache-facing representation. Exact publisher HTML, HTTP status and request timing are not supplied; no currentness inference."
+    },
+    {
+      "event_id": "E002",
+      "requested_url": "https://arapahoeco.gov/your_county/codes_criteria_and_ordinances/county_ordinances_and_resolutions.php",
+      "kind": "ordinary_http_get",
+      "parent_event": "E001",
+      "observed_link_label": null,
+      "referral_evidence": "Same exact retained official catalog URL",
+      "result": "DNS failure before any HTTP response: curl (6) Could not resolve host: arapahoeco.gov. Zero-byte body/headers are empty placeholders, not preserved official HTML.",
+      "output_assets": [
+        {
+          "path": "http/E002.body",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        {
+          "path": "http/E002.headers",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        },
+        {
+          "path": "http/E002.stderr",
+          "sha256": "406dd548f23d5ab7686550b59e1d38161f90853ef352c5b0a6f43c3d08aafea1",
+          "size_bytes": 49
+        }
+      ],
+      "raw_http_status": null,
+      "started_at": null,
+      "completed_at": null,
+      "tool_crawl_label": null,
+      "qualification": "One local ordinary curl attempt with default TLS and no redirects/retries. Initial receipt serialization failed because redirect_url was null; raw failure artifacts survived. Actual start/end timestamps and metrics were not retained. Filesystem mtimes are not acquisition proof. No fresh request was made to repair this metadata."
+    },
+    {
+      "event_id": "E003",
+      "requested_url": "https://arapahoe.legistar.com/",
+      "kind": "web_tool_open",
+      "parent_event": "E001",
+      "observed_link_label": "Legistar Portal",
+      "referral_evidence": "Retained SD002 URL and the county catalog Legistar referral",
+      "result": "Web tool reported redirect to Calendar.aspx.",
+      "output_assets": [
+        {
+          "path": "web/E003-E004-tool-output.txt",
+          "sha256": "be3a98ad73a11127dd8b17f0794649ae057f83d0ff9126738c8201897c81dbcf",
+          "size_bytes": 16730
+        }
+      ],
+      "raw_http_status": null,
+      "started_at": null,
+      "completed_at": null,
+      "tool_crawl_label": "Crawled: today",
+      "qualification": "Counted separately from the explicitly reported destination event E004; unobservable provider internals are unknown."
+    },
+    {
+      "event_id": "E004",
+      "requested_url": "https://arapahoe.legistar.com/Calendar.aspx",
+      "kind": "reported_redirect",
+      "parent_event": "E003",
+      "observed_link_label": null,
+      "referral_evidence": "Explicit redirect destination returned by web tool",
+      "result": "Calendar lists September 8, 2026 Business Meeting and an observed Meeting details link.",
+      "output_assets": [
+        {
+          "path": "web/E003-E004-tool-output.txt",
+          "sha256": "be3a98ad73a11127dd8b17f0794649ae057f83d0ff9126738c8201897c81dbcf",
+          "size_bytes": 16730
+        }
+      ],
+      "raw_http_status": null,
+      "started_at": null,
+      "completed_at": null,
+      "tool_crawl_label": "Crawled: today",
+      "qualification": "Web-tool text is a derived/cache-facing representation. Exact publisher HTML, HTTP status and request timing are not supplied; no currentness inference."
+    },
+    {
+      "event_id": "E005",
+      "requested_url": "https://arapahoe.legistar.com/MeetingDetail.aspx?GUID=594E6EF1-1E4F-456D-BC8E-69AFE0B7C19F&ID=1422522&Options=info%7C&Search=",
+      "kind": "web_tool_click",
+      "parent_event": "E004",
+      "observed_link_label": "Meeting details",
+      "referral_evidence": "Calendar row: Board of County Commissioners Business Meeting, 9/8/2026, 9:30 AM",
+      "result": "Meeting page labels agenda Final and minutes Draft; published minutes unavailable. Item 26-403 concerns LDC26-002 and fee schedule update.",
+      "output_assets": [
+        {
+          "path": "web/E005-tool-output.txt",
+          "sha256": "3f24eedf83fe81ce7b4c11ff29b68a5db2577990fcce6ab9a80f91edd7dd7490",
+          "size_bytes": 5897
+        }
+      ],
+      "raw_http_status": null,
+      "started_at": null,
+      "completed_at": null,
+      "tool_crawl_label": "Crawled: 3 days ago",
+      "qualification": "Web-tool text is a derived/cache-facing representation. Exact publisher HTML, HTTP status and request timing are not supplied; no currentness inference."
+    },
+    {
+      "event_id": "E006",
+      "requested_url": "https://arapahoe.legistar.com/LegislationDetail.aspx?GUID=6621BDD6-BBE2-4180-972F-235EC1885EFA&ID=8200547&Options=&Search=",
+      "kind": "web_tool_click",
+      "parent_event": "E005",
+      "observed_link_label": "26-403",
+      "referral_evidence": "Observed agenda item 7.b link in the September 8 business meeting",
+      "result": "Item metadata: Type Resolution, Status Passed, agenda/final action 9/8/2026; attachment label Resolution. File ID 26-403 is distinct from claimed resolution number 26-224.",
+      "output_assets": [
+        {
+          "path": "web/E006-tool-output.txt",
+          "sha256": "15c3c19e8311a7fdf45087bbdf33713b88d5fdb17239ea8655f8c178ad3617fc",
+          "size_bytes": 4817
+        }
+      ],
+      "raw_http_status": null,
+      "started_at": null,
+      "completed_at": null,
+      "tool_crawl_label": "Crawled: 2 days ago",
+      "qualification": "Web-tool text is a derived/cache-facing representation. Exact publisher HTML, HTTP status and request timing are not supplied; no currentness inference."
+    },
+    {
+      "event_id": "E007",
+      "requested_url": "https://arapahoe.legistar.com/View.ashx?GUID=E4F2D438-01EB-4B24-B6DD-6E13EEB14FDB&ID=15828215&M=F",
+      "kind": "web_tool_click",
+      "parent_event": "E006",
+      "observed_link_label": "Resolution",
+      "referral_evidence": "Observed attachment 10 Resolution in official item 26-403",
+      "result": "Web tool failed with Cache miss; no source PDF bytes received through this event.",
+      "output_assets": [
+        {
+          "path": "web/E007-tool-output.txt",
+          "sha256": "b93261660ee4c5974e0e8ddf1998436ebd58b542d2c8c32e5999ae478ff8fe5c",
+          "size_bytes": 253
+        }
+      ],
+      "raw_http_status": null,
+      "started_at": null,
+      "completed_at": null,
+      "tool_crawl_label": null,
+      "qualification": "Failure contains the exact public attachment URL used by E008. Cache miss supplies no HTTP status or evidence that the attachment is absent."
+    },
+    {
+      "event_id": "E008",
+      "requested_url": "https://arapahoe.legistar.com/View.ashx?GUID=E4F2D438-01EB-4B24-B6DD-6E13EEB14FDB&ID=15828215&M=F",
+      "kind": "ordinary_http_get",
+      "parent_event": "E006",
+      "observed_link_label": "Resolution",
+      "referral_evidence": "Same observed attachment URL exposed by E007 failure; no guessed ID or route",
+      "result": "HTTP 200 application/pdf; exact original body and response headers retained. No redirect reported.",
+      "output_assets": [
+        {
+          "path": "E008.json",
+          "sha256": "1b05a019f2547a66ec4f3854293607a525a81f971d254e7008abcc9dcfd65c24",
+          "size_bytes": 1351
+        },
+        {
+          "path": "E008.schema.json",
+          "sha256": "c9c452f0eb706bf4c454cbda8e2e0b06f1273749b880e99b21c8b37f31430b59",
+          "size_bytes": 1936
+        },
+        {
+          "path": "http/E008.body",
+          "sha256": "8f1e94f6332fc9c36ee479f4673e2f85a533b2b777f29cbfc9757c2adcd41e6c",
+          "size_bytes": 122776
+        },
+        {
+          "path": "http/E008.headers",
+          "sha256": "78257b8f02bc6dee6582c744cebf7698b4b402d7bae242ba78c86d5cb2569b71",
+          "size_bytes": 367
+        },
+        {
+          "path": "http/E008.curl-metrics.txt",
+          "sha256": "7c33eec257ff438b7a7c0bd60140a0d342c8127e92b909a003d216a1478873c4",
+          "size_bytes": 17555
+        },
+        {
+          "path": "http/E008.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "size_bytes": 0
+        }
+      ],
+      "raw_http_status": 200,
+      "started_at": "2026-09-11T20:02:42.892535Z",
+      "completed_at": "2026-09-11T20:02:43.497783Z",
+      "tool_crawl_label": null,
+      "qualification": "One approved ordinary local GET with default TLS validation and descriptive user-agent, no credentials or redirect/retry/impersonation. This was the final public access event. Bytes establish the linked attachment received at this time, not execution or current legal effect."
+    }
+  ],
+  "retained_inputs": [
+    {
+      "historical_path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-002/attempted_urls-arapahoe.json",
+      "preserved_copy": {
+        "path": "inputs/seed-attempted-urls.json",
+        "sha256": "3d406bd10fed7ee3cbc6ae6675d7c80edefa81a7c1c16c4ba7cab33aee8a4a79",
+        "size_bytes": 7641
+      },
+      "purpose": "Retained exact official starting URLs; prior claims only."
+    },
+    {
+      "historical_path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-002/priority_candidates_final.json",
+      "preserved_copy": {
+        "path": "inputs/seed-priority-candidates.json",
+        "sha256": "b0c5cdbb3120ef00ee32ccd88904d7e4386a58b7b97cf2dfe9cd05472c122ba7",
+        "size_bytes": 48449
+      },
+      "purpose": "Retained SD002 priority identities and URL/referral claims."
+    },
+    {
+      "historical_path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-002/report-20260910T211727Z.md",
+      "preserved_copy": {
+        "path": "inputs/seed-report.md",
+        "sha256": "8b1b6de5a0f5317f5935ec84a081a4cf82876b25923f6003acd4ec82eaca1a9a",
+        "size_bytes": 47013
+      },
+      "purpose": "Historical source discovery context; superseded date claims qualified by addendum."
+    },
+    {
+      "historical_path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-002/addendum-atlas-feedback-20260910T213206Z.md",
+      "preserved_copy": {
+        "path": "inputs/seed-date-addendum.md",
+        "sha256": "246008e7325b1db9657d80af9fae364e82422a214c6746177df08d8dbe26b910",
+        "size_bytes": 6210
+      },
+      "purpose": "Prior correction: fee revision does not prove adoption or effectiveness."
+    },
+    {
+      "historical_path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-002/addendum-log-reconciliation-20260910T215637Z.md",
+      "preserved_copy": {
+        "path": "inputs/seed-log-addendum.md",
+        "sha256": "4db21d19ccd6a92d01aa4434383559f92e0fc9df4d863ee1d59fb6fd1025b75d",
+        "size_bytes": 3356
+      },
+      "purpose": "Retain prior log reconciliation limitations."
+    },
+    {
+      "historical_path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/ebenezer-006-2026-09-10/intake-record.json",
+      "preserved_copy": {
+        "path": "inputs/fee-intake-record.json",
+        "sha256": "f4da5edeb64e0f8e44cc516fd1c7ca6393a18ff6be1ade98a0121c121ab9b024",
+        "size_bytes": 1492
+      },
+      "purpose": "Exact prior source identity/custody."
+    },
+    {
+      "historical_path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/ebenezer-006-2026-09-10/http-receipt.json",
+      "preserved_copy": {
+        "path": "inputs/fee-http-receipt.json",
+        "sha256": "b245e7149c1c6908d634d3713fe30720c8995736aa86c8478e5cdbf555a14919",
+        "size_bytes": 800
+      },
+      "purpose": "Prior fee PDF acquisition receipt, not this access event."
+    },
+    {
+      "historical_path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/ebenezer-006-2026-09-10/reviewed-table.json",
+      "preserved_copy": {
+        "path": "inputs/fee-reviewed-table.json",
+        "sha256": "737fa68330475a096001a93f237054d484b50b2765ca9a44b4f0583d3438fb7b",
+        "size_bytes": 27284
+      },
+      "purpose": "Existing EB006 checked source observations, unchanged."
+    }
+  ],
+  "subject_fee_source": {
+    "path": "inputs/fee-original.pdf",
+    "sha256": "ce519b6fe89546cf85a77934fcbdb6b6bf08473e19c545cf4c51414e1cdcb818",
+    "size_bytes": 220138
+  },
+  "subject_fee_source_id": "arapahoe-planning-fees-sd002-14",
+  "related_resolution_response": {
+    "path": "http/E008.body",
+    "sha256": "8f1e94f6332fc9c36ee479f4673e2f85a533b2b777f29cbfc9757c2adcd41e6c",
+    "size_bytes": 122776
+  },
+  "related_resolution_pdf_copy": {
+    "path": "resolution/original.pdf",
+    "sha256": "8f1e94f6332fc9c36ee479f4673e2f85a533b2b777f29cbfc9757c2adcd41e6c",
+    "size_bytes": 122776
+  },
+  "related_resolution_pages": 2,
+  "related_resolution_sha256": "8f1e94f6332fc9c36ee479f4673e2f85a533b2b777f29cbfc9757c2adcd41e6c",
+  "related_resolution_status": "unnumbered_unfilled_resolution_attachment",
+  "physical_pages_directly_viewed": [
+    1,
+    2
+  ],
+  "extraction_settings": "PyMuPDF 1.28.2 get_text('text', sort=False, flags=195), UTF-8 unchanged",
+  "rendering_settings": "PyMuPDF 1.28.2 Matrix(200/72,200/72), alpha=False, full-page PNG",
+  "excerpts": [
+    {
+      "excerpt_id": "AR224-01",
+      "physical_page": 1,
+      "source_sha256": "8f1e94f6332fc9c36ee479f4673e2f85a533b2b777f29cbfc9757c2adcd41e6c",
+      "native": {
+        "path": "resolution/page-0001.txt",
+        "sha256": "7dbaa9d67e49923964da0ba7328dad1dcdc0a25c2fa3d1f39014811b5527ba83",
+        "size_bytes": 2861
+      },
+      "image": {
+        "path": "resolution/page-0001.png",
+        "sha256": "50d200ec14ef9f82618b095044a27808c0e1103a76d9e5304db470227190cf88",
+        "size_bytes": 425164
+      },
+      "start_byte": 0,
+      "end_byte_exclusive": 142,
+      "exact_native": "RESOLUTION NO.  ____________ \nIt was moved by Commissioner ______ and \nduly seconded by Commissioner ______ to adopt the following Resolution:",
+      "observation": "The visible resolution-number, moving-commissioner and seconding-commissioner fields are blank.",
+      "limit": "Do not fill in 26-224 or commissioner identities from the fee sheet or other metadata."
+    },
+    {
+      "excerpt_id": "AR224-02",
+      "physical_page": 1,
+      "source_sha256": "8f1e94f6332fc9c36ee479f4673e2f85a533b2b777f29cbfc9757c2adcd41e6c",
+      "native": {
+        "path": "resolution/page-0001.txt",
+        "sha256": "7dbaa9d67e49923964da0ba7328dad1dcdc0a25c2fa3d1f39014811b5527ba83",
+        "size_bytes": 2861
+      },
+      "image": {
+        "path": "resolution/page-0001.png",
+        "sha256": "50d200ec14ef9f82618b095044a27808c0e1103a76d9e5304db470227190cf88",
+        "size_bytes": 425164
+      },
+      "start_byte": 997,
+      "end_byte_exclusive": 1502,
+      "exact_native": "WHEREAS, the Department of Public Works and Development, Planning Division \nstaff, has made recommendations for certain amendments to the Arapahoe County \nDevelopment Application Manual and Planning Review Fee Schedule, in Case No. LDC26-\n002 addressing Commercial Mobile Radio Service (CMRS) a/k/a Wireless Communication \nFacilities (WCF) and updating the associated Planning Review Fee Schedule, and \nforwarded such proposed amendments to the Arapahoe Planning Commission for review \nand recommendation;",
+      "observation": "The attachment concerns LDC26-002, Development Application Manual and Planning Review Fee Schedule amendments for CMRS/WCF.",
+      "limit": "Related subject/case identity is supported; the exact resolution number remains unfilled."
+    },
+    {
+      "excerpt_id": "AR224-03",
+      "physical_page": 1,
+      "source_sha256": "8f1e94f6332fc9c36ee479f4673e2f85a533b2b777f29cbfc9757c2adcd41e6c",
+      "native": {
+        "path": "resolution/page-0001.txt",
+        "sha256": "7dbaa9d67e49923964da0ba7328dad1dcdc0a25c2fa3d1f39014811b5527ba83",
+        "size_bytes": 2861
+      },
+      "image": {
+        "path": "resolution/page-0001.png",
+        "sha256": "50d200ec14ef9f82618b095044a27808c0e1103a76d9e5304db470227190cf88",
+        "size_bytes": 425164
+      },
+      "start_byte": 1508,
+      "end_byte_exclusive": 1992,
+      "exact_native": "WHEREAS, on July 7, 2026, the Planning Commission held a duly noticed public \nhearing, heard such public comment as was presented, and reviewed and considered the \nPlanning Division staff’s proposed recommended amendments to the Development \nApplication Manual and Planning Review Fee Schedule, and following such public hearing, \nthe Planning Commission voted to recommend approval of the proposed amendments to \nthe Development Application Manual and Planning Review Fee Schedule;",
+      "observation": "The recital states a July 7 Planning Commission hearing and recommendation.",
+      "limit": "This is a recital in an unfilled resolution attachment, not independently preserved Planning Commission minutes."
+    },
+    {
+      "excerpt_id": "AR224-04",
+      "physical_page": 1,
+      "source_sha256": "8f1e94f6332fc9c36ee479f4673e2f85a533b2b777f29cbfc9757c2adcd41e6c",
+      "native": {
+        "path": "resolution/page-0001.txt",
+        "sha256": "7dbaa9d67e49923964da0ba7328dad1dcdc0a25c2fa3d1f39014811b5527ba83",
+        "size_bytes": 2861
+      },
+      "image": {
+        "path": "resolution/page-0001.png",
+        "sha256": "50d200ec14ef9f82618b095044a27808c0e1103a76d9e5304db470227190cf88",
+        "size_bytes": 425164
+      },
+      "start_byte": 2000,
+      "end_byte_exclusive": 2373,
+      "exact_native": "WHEREAS, Notice of a Public Hearing to be held on September 8, 2026, on the \nproposed amendments to the Land Development Code was published on August  20, 2026, \nin Colorado Community Media, a newspaper of general circulation in the County, and was \nalso published on August 19, 2026, in the I-70 Scout, a newspaper with circulation in the \neastern part of Arapahoe County;",
+      "observation": "The recital contains September 8, 2026 hearing date and August 20/August 19 publication dates.",
+      "limit": "Keep publication and hearing date roles separate; publications were not independently acquired. Source refers to Land Development Code in this notice recital."
+    },
+    {
+      "excerpt_id": "AR224-05",
+      "physical_page": 1,
+      "source_sha256": "8f1e94f6332fc9c36ee479f4673e2f85a533b2b777f29cbfc9757c2adcd41e6c",
+      "native": {
+        "path": "resolution/page-0001.txt",
+        "sha256": "7dbaa9d67e49923964da0ba7328dad1dcdc0a25c2fa3d1f39014811b5527ba83",
+        "size_bytes": 2861
+      },
+      "image": {
+        "path": "resolution/page-0001.png",
+        "sha256": "50d200ec14ef9f82618b095044a27808c0e1103a76d9e5304db470227190cf88",
+        "size_bytes": 425164
+      },
+      "start_byte": 2380,
+      "end_byte_exclusive": 2584,
+      "exact_native": "WHEREAS, on September 8, 2026, in accordance with the published notice, the \nBoard held a Public Hearing on the proposed amendments to the Development Application \nManual and Planning Review Fee Schedule;",
+      "observation": "The recital describes a September 8, 2026 Board hearing.",
+      "limit": "No executed resolution or finalized minutes was acquired to corroborate actual action."
+    },
+    {
+      "excerpt_id": "AR224-06",
+      "physical_page": 2,
+      "source_sha256": "8f1e94f6332fc9c36ee479f4673e2f85a533b2b777f29cbfc9757c2adcd41e6c",
+      "native": {
+        "path": "resolution/page-0002.txt",
+        "sha256": "020cab75dee4824775d24977bdfbb94a64582af5ef019ba4760d3d245b6a4550",
+        "size_bytes": 2262
+      },
+      "image": {
+        "path": "resolution/page-0002.png",
+        "sha256": "fb099878c1f1ca134e447508c4290df495510c862fea55986190c834f2f55c89",
+        "size_bytes": 334491
+      },
+      "start_byte": 1158,
+      "end_byte_exclusive": 1399,
+      "exact_native": "NOW, THEREFORE, BE IT RESOLVED by the Board of County Commissioners \nof Arapahoe County, Colorado, that the revisions to the Development Application Manual \nand the Planning Reviews Fee Schedule as set forth in the record are hereby adopted.",
+      "observation": "The operative-form wording purports to adopt revisions as set forth in the record; the source says Planning Reviews Fee Schedule here.",
+      "limit": "Do not activate draft/blank-field wording or equate it with a numbered, executed instrument; underlying record and final numbering remain unresolved."
+    },
+    {
+      "excerpt_id": "AR224-07",
+      "physical_page": 2,
+      "source_sha256": "8f1e94f6332fc9c36ee479f4673e2f85a533b2b777f29cbfc9757c2adcd41e6c",
+      "native": {
+        "path": "resolution/page-0002.txt",
+        "sha256": "020cab75dee4824775d24977bdfbb94a64582af5ef019ba4760d3d245b6a4550",
+        "size_bytes": 2262
+      },
+      "image": {
+        "path": "resolution/page-0002.png",
+        "sha256": "fb099878c1f1ca134e447508c4290df495510c862fea55986190c834f2f55c89",
+        "size_bytes": 334491
+      },
+      "start_byte": 1403,
+      "end_byte_exclusive": 1804,
+      "exact_native": "BE IT FURTHER RESOLVED by the Board of County Commissioners of Arapahoe \nCounty that Planning Division management, with the approval of the County Attorney, is \nhereby authorized to correct typographical errors and make such text revisions to the \nunderlying Development Application Manual and Planning Review Fee Schedule as are \nreasonably necessary to incorporate the approved amendments into each.",
+      "observation": "The attachment includes management/County Attorney authority for typo and incorporation changes.",
+      "limit": "Retain this qualification; it does not authorize this review to edit the fee sheet or supply the final incorporated record."
+    },
+    {
+      "excerpt_id": "AR224-08",
+      "physical_page": 2,
+      "source_sha256": "8f1e94f6332fc9c36ee479f4673e2f85a533b2b777f29cbfc9757c2adcd41e6c",
+      "native": {
+        "path": "resolution/page-0002.txt",
+        "sha256": "020cab75dee4824775d24977bdfbb94a64582af5ef019ba4760d3d245b6a4550",
+        "size_bytes": 2262
+      },
+      "image": {
+        "path": "resolution/page-0002.png",
+        "sha256": "fb099878c1f1ca134e447508c4290df495510c862fea55986190c834f2f55c89",
+        "size_bytes": 334491
+      },
+      "start_byte": 1810,
+      "end_byte_exclusive": 2041,
+      "exact_native": "BE IT FURTHER RESOLVED by the Board of County Commissioners of Arapahoe \nCounty that the amendments to the Development Application Manual and Planning Review \nFee Schedule approved by this Resolution shall be effective immediately.",
+      "observation": "The attachment has an effective-immediately clause.",
+      "limit": "Relative effect wording in an unfilled attachment is not proof of an actual effective date or of its activation."
+    },
+    {
+      "excerpt_id": "AR224-09",
+      "physical_page": 2,
+      "source_sha256": "8f1e94f6332fc9c36ee479f4673e2f85a533b2b777f29cbfc9757c2adcd41e6c",
+      "native": {
+        "path": "resolution/page-0002.txt",
+        "sha256": "020cab75dee4824775d24977bdfbb94a64582af5ef019ba4760d3d245b6a4550",
+        "size_bytes": 2262
+      },
+      "image": {
+        "path": "resolution/page-0002.png",
+        "sha256": "fb099878c1f1ca134e447508c4290df495510c862fea55986190c834f2f55c89",
+        "size_bytes": 334491
+      },
+      "start_byte": 2046,
+      "end_byte_exclusive": 2201,
+      "exact_native": "The vote was: \n \nCommissioner Baker, ___; Commissioner Campbell, ___; Commissioner Fields, ___; \nCommissioner Summey, ____; Commissioner Warren-Gully, ___.",
+      "observation": "All five vote entries are visibly blank.",
+      "limit": "Do not infer votes or identities beyond the printed labels; Passed item metadata does not fill these blanks."
+    }
+  ],
+  "date_roles": [
+    {
+      "literal": "Revised 09-08-2026 / Res No. 26-224",
+      "role": "retained_fee_sheet_revision_and_reference",
+      "source_event_or_excerpt": "inputs/fee-reviewed-table.json and inputs/fee-page-0001-native.txt",
+      "qualification": "Prior source reference; adoption/effective date remains unknown."
+    },
+    {
+      "literal": "7/28/2026",
+      "role": "Legistar_file_created_metadata",
+      "source_event_or_excerpt": "E006",
+      "qualification": "Metadata on a cached/derived official page, not an adoption date."
+    },
+    {
+      "literal": "9/8/2026",
+      "role": "Legistar_agenda_and_final_action_metadata",
+      "source_event_or_excerpt": "E006",
+      "qualification": "Passed action metadata is distinct from executed resolution number and effective date."
+    },
+    {
+      "literal": "July 7, 2026",
+      "role": "Planning_Commission_hearing_recital",
+      "source_event_or_excerpt": "AR224-03",
+      "qualification": "Recited in unfilled attachment; original minutes not obtained."
+    },
+    {
+      "literal": "August 20, 2026 / August 19, 2026",
+      "role": "publication_recitals",
+      "source_event_or_excerpt": "AR224-04",
+      "qualification": "Two stated newspaper publication dates; newspaper notices not obtained."
+    },
+    {
+      "literal": "September 8, 2026",
+      "role": "Board_hearing_recital",
+      "source_event_or_excerpt": "AR224-05",
+      "qualification": "Recital not independently certified final action evidence."
+    },
+    {
+      "literal": "effective immediately",
+      "role": "relative_effect_clause",
+      "source_event_or_excerpt": "AR224-08",
+      "qualification": "Activation and actual effective date are not established by this unfilled attachment."
+    }
+  ],
+  "confirmed_resolution_26_224_identity": false,
+  "confirmed_adoption_date": null,
+  "confirmed_effective_date": null,
+  "final_minutes_preserved": false,
+  "legal_currentness": "not_verified",
+  "repository_or_packet_changed": false,
+  "external_assignment": null,
+  "findings": [
+    "A fresh HTTP 200 official Legistar attachment was preserved: 122,776 bytes, two parseable PDF pages, no repair/encryption; exact source SHA 8f1e94f6332fc9c36ee479f4673e2f85a533b2b777f29cbfc9757c2adcd41e6c.",
+    "Public official-derived item 26-403 shows Passed and final action 9/8/2026 for LDC26-002 fee schedule update. This metadata is separate from the PDF and from source-sheet resolution reference 26-224.",
+    "The meeting representation labels minutes Draft and published minutes unavailable. It warns actions/results are not available there, while the linked item independently displays Passed. Preserve these distinct page statuses, not a fabricated completed minute record.",
+    "The received attachment has blank resolution number, mover, seconder and five vote fields. It provides related adoption-form/immediate-effect wording, but no confirmed numbering or executed vote record.",
+    "The sought adopting-instrument chain remains open. This check strengthens the related case/action lead without assigning an adoption/effective date to the retained fee sheet."
+  ],
+  "unresolved": [
+    "Obtain the numbered adopted/executed Resolution 26-224 or authenticated certified resolution set and verify its link to LDC26-002 / item 26-403.",
+    "Obtain finalized September 8, 2026 Board minutes or an official action record that identifies the adopted resolution number and vote.",
+    "Verify that the final adopted instrument and incorporated fee schedule correspond to the retained fee PDF SHA ce519b6fe89546cf85a77934fcbdb6b6bf08473e19c545cf4c51414e1cdcb818.",
+    "Only after resolving the final instrument establish whether its relative effective clause took effect, on what date, and whether later amendments superseded it. No follow-on access is authorized by this completed batch."
+  ],
+  "limitations": [
+    "No public opens after E008. Six distinct observed targets; no guessed IDs/endpoints, hidden routes, CUA, authenticated sessions, contacts, external assignment or follow-on batch.",
+    "Web-tool outputs are preserved as received derived text, not raw publisher HTML. Their crawl labels are tool claims; actual originating fetch timestamps/statuses are unknown.",
+    "E002 failed at DNS resolution. Its initial receipt model rejected a null redirect URL; only the empty body/headers and exact stderr survived. No HTTP status, start/end time or official HTML was invented during recovery.",
+    "E008 is a fresh ordinary public GET with default TLS validation and no redirect, credentials or retries. HTTP Date/Last-Modified headers are transport metadata, not legal adoption/effective dates.",
+    "Both resolution pages were directly viewed for identity, date roles, operative-form clauses and execution blanks. This is bounded source evidence, not a complete legal-validity assessment or a new full-text accuracy certification.",
+    "All fee source, prior reviewed table and external reports remain unchanged; only copies/evidence in this new handoff folder were written. No registry, ledger, packet, canonical raw, Git or coverage change."
+  ]
+}
