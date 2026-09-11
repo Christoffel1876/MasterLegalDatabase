@@ -18,6 +18,15 @@ PDF. Their source counts and page counts must not be added together to measure
 coverage. Read each package's scope before using its text. A bounded-excerpt
 review does not certify the whole document.
 
+## Preserved-source inventory
+
+The [manual-source review inventory](manual-source-review-inventory-2026-09-11/README.md)
+binds all 46 preserved PDFs to their recorded county or municipal authority and
+exact provenance. Eighteen have an explicit allowlisted review link; 28 have no
+mapped review link. A null review link does not establish that no earlier
+inspection exists. Each linked scope retains its original limitations, and the
+older coverage ledger remains unchanged.
+
 ## Checked text and source structure
 
 | Source | Entry point | What is checked | Remaining limit |
@@ -75,6 +84,7 @@ separate supplement, with its own source and report hashes.
 | [Mesa County and Grand Junction discovery](mesa-grand-junction-discovery-2026-09-11/README.md) | Three official PDFs and bounded catalog evidence for two separate authorities | Eight of 250 structural pages visually checked; discovery leads, later amendments and full coverage remain unresolved |
 | [Arapahoe related resolution evidence](arapahoe-resolution26-224-evidence-2026-09-11/README.md) | Official item metadata and a two-page attachment with blank resolution and vote fields | Research evidence only; identity with Resolution 26-224, adoption and effect remain unverified |
 | [Larimer extension evidence, Sherlock009](larimer-extension-evidence-sherlock009-2026-09-11/README.md) | July staff memo, browser-printed unsigned addendum and received February minutes | Research evidence only; disputed download association, conflicting dates and missing executed instruments remain explicit |
+| [Later Larimer extension access check](larimer-extension-access-session2-2026-09-11/REPORT.md) | Eight requested actions and one reported redirect, with preserved response evidence | No executed extension or final July action obtained; access/search limits do not prove legal absence |
 
 For Sherlock009, only ten distinct pages of the 27 structural pages received a
 visual review. The two sets of reproduced page images are copies of that same
@@ -86,8 +96,15 @@ The later Ordinance 5269 review found two incompatible effective-date statements
 ## Retrieval and collection readiness
 
 The [checked-source lookup](../../docs/RESEARCH_SOURCE_LOOKUP.md) now provides
-an offline, cited keyword search over the 57 reviewed Grand Junction fire-fee
-rows. It preserves source qualifications and does not answer current-law questions.
+an offline, cited keyword search over 57 reviewed Grand Junction fire-fee rows
+and 19 Greeley building-fee entries. Greeley clauses retain their headings,
+footnotes and separate date statements. Both sources preserve review limitations
+and do not answer current-law questions. These scopes are not whole-city coverage.
+
+The [one-hour continuation audit](../../docs/audits/ONE_HOUR_CONTINUATION_2026-09-11/README.md)
+records the expanded lookup tests, inventory validation and corrected missing-input
+diagnostics. Three original LFS content objects remain unavailable; the valid
+local-review summary is preserved.
 
 The [readiness and next-intake assessment](project-readiness-2026-09-11/README.md)
 records the distinction between preserved sources and integrated retrieval,

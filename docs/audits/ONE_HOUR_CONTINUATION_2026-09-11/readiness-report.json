@@ -1,0 +1,176 @@
+{
+  "version": "1.0",
+  "generated_at": "2026-09-11T21:18:56.042664Z",
+  "purpose": "Check selected artifact and review prerequisites for AI retrieval.",
+  "checks": [
+    {
+      "check": "control_plane/AI_READ_ORDER.json",
+      "passed": true,
+      "detail": null,
+      "path": "_CONTROL_PLANE/AI_READ_ORDER.json",
+      "artifact_status": null,
+      "rows": null,
+      "declared_object_sha256": null,
+      "declared_object_bytes": null
+    },
+    {
+      "check": "control_plane/AI_QUERY_CONTRACT.json",
+      "passed": true,
+      "detail": null,
+      "path": "_CONTROL_PLANE/AI_QUERY_CONTRACT.json",
+      "artifact_status": null,
+      "rows": null,
+      "declared_object_sha256": null,
+      "declared_object_bytes": null
+    },
+    {
+      "check": "control_plane/AI_RETRIEVAL_CONTRACT.json",
+      "passed": true,
+      "detail": null,
+      "path": "_CONTROL_PLANE/AI_RETRIEVAL_CONTRACT.json",
+      "artifact_status": null,
+      "rows": null,
+      "declared_object_sha256": null,
+      "declared_object_bytes": null
+    },
+    {
+      "check": "control_plane/AI_ANSWER_CONTRACT.json",
+      "passed": true,
+      "detail": null,
+      "path": "_CONTROL_PLANE/AI_ANSWER_CONTRACT.json",
+      "artifact_status": null,
+      "rows": null,
+      "declared_object_sha256": null,
+      "declared_object_bytes": null
+    },
+    {
+      "check": "master_manifest",
+      "passed": true,
+      "detail": null,
+      "path": null,
+      "artifact_status": null,
+      "rows": null,
+      "declared_object_sha256": null,
+      "declared_object_bytes": null
+    },
+    {
+      "check": "retrieval_catalog",
+      "passed": false,
+      "detail": "This file contains a Git LFS pointer, not its declared JSONL content.",
+      "path": "_CONTROL_PLANE/RETRIEVAL_CATALOG.jsonl",
+      "artifact_status": "unhydrated_lfs",
+      "rows": null,
+      "declared_object_sha256": "e12d942b4c8098281d86a8e0db7a76b22512a8a75d050ff590a8e876c7b840b4",
+      "declared_object_bytes": 225796201
+    },
+    {
+      "check": "local_index/08_County_Authorities",
+      "passed": false,
+      "detail": "This file contains a Git LFS pointer, not its declared JSONL content.",
+      "path": "08_County_Authorities/_index.jsonl",
+      "artifact_status": "unhydrated_lfs",
+      "rows": null,
+      "declared_object_sha256": "e896fc157617cfd9cd9839bf2bf955d893b66d7de514107e8b3c98dc4795c806",
+      "declared_object_bytes": 172131787
+    },
+    {
+      "check": "local_index/09_District_Authorities",
+      "passed": true,
+      "detail": "JSONL syntax checked; ownership, currency and query behavior are separate checks.",
+      "path": "09_District_Authorities/_index.jsonl",
+      "artifact_status": "valid_jsonl",
+      "rows": 4,
+      "declared_object_sha256": null,
+      "declared_object_bytes": null
+    },
+    {
+      "check": "local_index/10_Municipal_Authorities",
+      "passed": true,
+      "detail": "JSONL syntax checked; ownership, currency and query behavior are separate checks.",
+      "path": "10_Municipal_Authorities/_index.jsonl",
+      "artifact_status": "valid_jsonl",
+      "rows": 85,
+      "declared_object_sha256": null,
+      "declared_object_bytes": null
+    },
+    {
+      "check": "local_answer_safe_filter",
+      "passed": true,
+      "detail": "Local preservation-only material is excluded until reviewed.",
+      "path": null,
+      "artifact_status": null,
+      "rows": null,
+      "declared_object_sha256": null,
+      "declared_object_bytes": null
+    },
+    {
+      "check": "local_review_queues",
+      "passed": true,
+      "detail": "Summary schema checked; dependent queue files are checked separately.",
+      "path": null,
+      "artifact_status": null,
+      "rows": null,
+      "declared_object_sha256": null,
+      "declared_object_bytes": null
+    },
+    {
+      "check": "local_review_queue",
+      "passed": false,
+      "detail": "This file contains a Git LFS pointer, not its declared JSONL content.",
+      "path": "_CONTROL_PLANE/LOCAL_REVIEW_QUEUE.jsonl",
+      "artifact_status": "unhydrated_lfs",
+      "rows": null,
+      "declared_object_sha256": "c65a0f190fd5d5dca7810c47afc7e6843cd78520242add1fe6951545fe92ad00",
+      "declared_object_bytes": 72395471
+    },
+    {
+      "check": "local_ocr_queue",
+      "passed": true,
+      "detail": "JSONL syntax checked; ownership, currency and query behavior are separate checks.",
+      "path": "_CONTROL_PLANE/LOCAL_OCR_QUEUE.jsonl",
+      "artifact_status": "valid_jsonl",
+      "rows": 315,
+      "declared_object_sha256": null,
+      "declared_object_bytes": null
+    },
+    {
+      "check": "local_stress_tests",
+      "passed": true,
+      "detail": null,
+      "path": "_CONTROL_PLANE/LOCAL_STRESS_TEST_REPORT.json",
+      "artifact_status": null,
+      "rows": null,
+      "declared_object_sha256": null,
+      "declared_object_bytes": null
+    },
+    {
+      "check": "local_golden_questions",
+      "passed": true,
+      "detail": null,
+      "path": "_CONTROL_PLANE/LOCAL_GOLDEN_EVALUATION.json",
+      "artifact_status": null,
+      "rows": null,
+      "declared_object_sha256": null,
+      "declared_object_bytes": null
+    },
+    {
+      "check": "local_promotion_boundary",
+      "passed": true,
+      "detail": "Only validated reviewer decisions may promote local evidence.",
+      "path": "_CONTROL_PLANE/LOCAL_PROMOTION_REPORT.json",
+      "artifact_status": null,
+      "rows": null,
+      "declared_object_sha256": null,
+      "declared_object_bytes": null
+    }
+  ],
+  "passed_checks": 13,
+  "total_checks": 16,
+  "status": "needs_review",
+  "known_limits": [
+    "Local source-preservation-only records remain available for audit but are not answer-safe.",
+    "Unknown currency must be disclosed until the source is verified against a current official version.",
+    "Coverage gaps are findings, not proof that no rule exists.",
+    "Passing these artifact checks does not execute a query or certify complete legal coverage."
+  ]
+}

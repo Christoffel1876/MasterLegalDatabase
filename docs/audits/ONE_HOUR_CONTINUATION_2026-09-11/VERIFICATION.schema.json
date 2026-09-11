@@ -1,0 +1,220 @@
+{
+  "$defs": {
+    "Artifact": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Artifact",
+      "type": "object"
+    },
+    "Review": {
+      "additionalProperties": false,
+      "properties": {
+        "reviewer": {
+          "title": "Reviewer",
+          "type": "string"
+        },
+        "scope": {
+          "title": "Scope",
+          "type": "string"
+        },
+        "result": {
+          "title": "Result",
+          "type": "string"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "reviewer",
+        "scope",
+        "result",
+        "qualification"
+      ],
+      "title": "Review",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "baseline_commit": {
+      "title": "Baseline Commit",
+      "type": "string"
+    },
+    "full_test_command": {
+      "title": "Full Test Command",
+      "type": "string"
+    },
+    "full_test_exit_code": {
+      "const": 0,
+      "title": "Full Test Exit Code",
+      "type": "integer"
+    },
+    "full_test_passed": {
+      "exclusiveMinimum": 0,
+      "title": "Full Test Passed",
+      "type": "integer"
+    },
+    "full_test_warnings": {
+      "minimum": 0,
+      "title": "Full Test Warnings",
+      "type": "integer"
+    },
+    "full_test_seconds": {
+      "exclusiveMinimum": 0,
+      "title": "Full Test Seconds",
+      "type": "number"
+    },
+    "full_geode_coverage_percent": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Full Geode Coverage Percent",
+      "type": "integer"
+    },
+    "focused_checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Focused Checks",
+      "type": "array"
+    },
+    "actual_readiness_status": {
+      "const": "needs_review",
+      "title": "Actual Readiness Status",
+      "type": "string"
+    },
+    "actual_readiness_passed": {
+      "title": "Actual Readiness Passed",
+      "type": "integer"
+    },
+    "actual_readiness_total": {
+      "title": "Actual Readiness Total",
+      "type": "integer"
+    },
+    "unavailable_content_files": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unavailable Content Files",
+      "type": "array"
+    },
+    "actual_corpus_validator_exit": {
+      "const": 1,
+      "title": "Actual Corpus Validator Exit",
+      "type": "integer"
+    },
+    "actual_corpus_validator_issues": {
+      "const": 2,
+      "title": "Actual Corpus Validator Issues",
+      "type": "integer"
+    },
+    "corpus_qualification": {
+      "title": "Corpus Qualification",
+      "type": "string"
+    },
+    "source_inventory_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Source Inventory Counts",
+      "type": "object"
+    },
+    "independent_reviews": {
+      "items": {
+        "$ref": "#/$defs/Review"
+      },
+      "title": "Independent Reviews",
+      "type": "array"
+    },
+    "implementation": {
+      "items": {
+        "$ref": "#/$defs/Artifact"
+      },
+      "title": "Implementation",
+      "type": "array"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/Artifact"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "canonical_coverage_promotion": {
+      "const": false,
+      "default": false,
+      "title": "Canonical Coverage Promotion",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "baseline_commit",
+    "full_test_command",
+    "full_test_exit_code",
+    "full_test_passed",
+    "full_test_warnings",
+    "full_test_seconds",
+    "full_geode_coverage_percent",
+    "focused_checks",
+    "actual_readiness_status",
+    "actual_readiness_passed",
+    "actual_readiness_total",
+    "unavailable_content_files",
+    "actual_corpus_validator_exit",
+    "actual_corpus_validator_issues",
+    "corpus_qualification",
+    "source_inventory_counts",
+    "independent_reviews",
+    "implementation",
+    "evidence",
+    "limitations"
+  ],
+  "title": "Verification",
+  "type": "object"
+}

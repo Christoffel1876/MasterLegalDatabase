@@ -1,0 +1,387 @@
+{
+  "schema_version": 1,
+  "prepared_at": "2026-09-11T21:06:41.875277Z",
+  "authority_id": "CO-COUNTY-LARIMER",
+  "status": "bounded_attempt_complete_unresolved",
+  "legal_currentness": "not_verified",
+  "scope": "Executed February/July 2026 Larimer data-center moratorium extensions and final July action only; bounded public access after prior SD009 evidence review.",
+  "actions": [
+    {
+      "event_id": "E001",
+      "tool": "curl_direct_https",
+      "requested_url": "https://records.larimer.org/landmarkweb/",
+      "query": null,
+      "search_domains": [],
+      "request_window_start": "2026-09-11T21:02:31.613732Z",
+      "request_window_end": "2026-09-11T21:02:31.633169Z",
+      "time_precision": "direct_microsecond_receipt",
+      "result_asset": {
+        "path": "events/E001/event.json",
+        "sha256": "c93437bb5b0b78c47b41fe1288b2a6bda88177b80932a00ce46cb1581a034326",
+        "size_bytes": 1185
+      },
+      "outcome": "dns_failure_no_http",
+      "observed_final_url": null,
+      "redirect_target_reported": null,
+      "publisher_http_status": null,
+      "original_publisher_body_received": false,
+      "cached_crawl_label": null,
+      "limitation": "curl exit 6: DNS resolution failed before any publisher response. curl url_effective in the underlying receipt is the attempted URL, not a verified final-response URL."
+    },
+    {
+      "event_id": "E002",
+      "tool": "curl_direct_https",
+      "requested_url": "https://www.larimer.gov/policies-ordinances-resolutions",
+      "query": null,
+      "search_domains": [],
+      "request_window_start": "2026-09-11T21:02:31.610690Z",
+      "request_window_end": "2026-09-11T21:02:31.633157Z",
+      "time_precision": "direct_microsecond_receipt",
+      "result_asset": {
+        "path": "events/E002/event.json",
+        "sha256": "cd0dd806daf7d7d766760a819f8e409befcf574d4f558b368e8057ce4b7ae473",
+        "size_bytes": 1207
+      },
+      "outcome": "dns_failure_no_http",
+      "observed_final_url": null,
+      "redirect_target_reported": null,
+      "publisher_http_status": null,
+      "original_publisher_body_received": false,
+      "cached_crawl_label": null,
+      "limitation": "curl exit 6: DNS resolution failed before any publisher response. curl url_effective in the underlying receipt is the attempted URL, not a verified final-response URL."
+    },
+    {
+      "event_id": "E003",
+      "tool": "web_open",
+      "requested_url": "https://records.larimer.org/landmarkweb/",
+      "query": null,
+      "search_domains": [],
+      "request_window_start": "2026-09-11T21:02:51Z",
+      "request_window_end": "2026-09-11T21:02:52Z",
+      "time_precision": "tool_call_whole_second_window",
+      "result_asset": {
+        "path": "web-tool-call-001.json",
+        "sha256": "b01c8fac90f4f61fe25d4f029d9aa3defa14b35408091782b98f74d11b9cd6ff",
+        "size_bytes": 14366
+      },
+      "outcome": "tool_text_derivative",
+      "observed_final_url": "https://records.larimer.org/landmarkweb/",
+      "redirect_target_reported": null,
+      "publisher_http_status": null,
+      "original_publisher_body_received": false,
+      "cached_crawl_label": "yesterday",
+      "limitation": "Web tool text is a derivative; no exact publisher HTML/PDF bytes or HTTP status were supplied."
+    },
+    {
+      "event_id": "E004",
+      "tool": "web_open",
+      "requested_url": "https://www.larimer.gov/policies-ordinances-resolutions",
+      "query": null,
+      "search_domains": [],
+      "request_window_start": "2026-09-11T21:02:51Z",
+      "request_window_end": "2026-09-11T21:02:52Z",
+      "time_precision": "tool_call_whole_second_window",
+      "result_asset": {
+        "path": "web-tool-call-001.json",
+        "sha256": "b01c8fac90f4f61fe25d4f029d9aa3defa14b35408091782b98f74d11b9cd6ff",
+        "size_bytes": 14366
+      },
+      "outcome": "tool_text_derivative",
+      "observed_final_url": "https://www.larimer.gov/policies",
+      "redirect_target_reported": "https://www.larimer.gov/policies",
+      "publisher_http_status": null,
+      "original_publisher_body_received": false,
+      "cached_crawl_label": "3 days ago",
+      "limitation": "Web tool text is a derivative; no exact publisher HTML/PDF bytes or HTTP status were supplied."
+    },
+    {
+      "event_id": "E005",
+      "tool": "web_search",
+      "requested_url": null,
+      "query": "\"20260016505\"",
+      "search_domains": [
+        "larimer.gov",
+        "larimer.org",
+        "civicclerk.com"
+      ],
+      "request_window_start": "2026-09-11T21:03:09Z",
+      "request_window_end": "2026-09-11T21:03:09Z",
+      "time_precision": "tool_call_whole_second_window",
+      "result_asset": {
+        "path": "web-tool-call-002.json",
+        "sha256": "e352c23fb9921c16b4d7b7ba101526052411a1fe494a91c5eaf60e058ba95732",
+        "size_bytes": 587
+      },
+      "outcome": "empty_search_result",
+      "observed_final_url": null,
+      "redirect_target_reported": null,
+      "publisher_http_status": null,
+      "original_publisher_body_received": false,
+      "cached_crawl_label": null,
+      "limitation": "The combined tool response reported no results for the supplied two searches. Search result absence is not document absence; raw search-engine responses and underlying HTTP counts were not exposed."
+    },
+    {
+      "event_id": "E006",
+      "tool": "web_search",
+      "requested_url": null,
+      "query": "\"July 13, 2026\" \"moratorium\"",
+      "search_domains": [
+        "larimer.gov",
+        "larimer.org",
+        "civicclerk.com"
+      ],
+      "request_window_start": "2026-09-11T21:03:09Z",
+      "request_window_end": "2026-09-11T21:03:09Z",
+      "time_precision": "tool_call_whole_second_window",
+      "result_asset": {
+        "path": "web-tool-call-002.json",
+        "sha256": "e352c23fb9921c16b4d7b7ba101526052411a1fe494a91c5eaf60e058ba95732",
+        "size_bytes": 587
+      },
+      "outcome": "empty_search_result",
+      "observed_final_url": null,
+      "redirect_target_reported": null,
+      "publisher_http_status": null,
+      "original_publisher_body_received": false,
+      "cached_crawl_label": null,
+      "limitation": "The combined tool response reported no results for the supplied two searches. Search result absence is not document absence; raw search-engine responses and underlying HTTP counts were not exposed."
+    },
+    {
+      "event_id": "E007",
+      "tool": "web_open",
+      "requested_url": "https://larimercoco.portal.civicclerk.com/event/8139/files",
+      "query": null,
+      "search_domains": [],
+      "request_window_start": "2026-09-11T21:03:09Z",
+      "request_window_end": "2026-09-11T21:03:09Z",
+      "time_precision": "tool_call_whole_second_window",
+      "result_asset": {
+        "path": "web-tool-call-002.json",
+        "sha256": "e352c23fb9921c16b4d7b7ba101526052411a1fe494a91c5eaf60e058ba95732",
+        "size_bytes": 587
+      },
+      "outcome": "tool_preflight_nonretryable_error",
+      "observed_final_url": null,
+      "redirect_target_reported": null,
+      "publisher_http_status": null,
+      "original_publisher_body_received": false,
+      "cached_crawl_label": null,
+      "limitation": "Tool refused this URL with a non-retryable preflight error. No publisher HTTP status or body was supplied; no retry was made."
+    },
+    {
+      "event_id": "E008",
+      "tool": "web_click",
+      "requested_url": "https://www.larimer.gov/planning/land-use-code",
+      "query": null,
+      "search_domains": [],
+      "request_window_start": "2026-09-11T21:03:28Z",
+      "request_window_end": "2026-09-11T21:03:29Z",
+      "time_precision": "tool_call_whole_second_window",
+      "result_asset": {
+        "path": "web-tool-call-003.json",
+        "sha256": "44567403721e102dccfe713f46371aa99db8e42718342dc939a75a6c78969e09",
+        "size_bytes": 25596
+      },
+      "outcome": "tool_text_derivative",
+      "observed_final_url": "https://www.larimer.gov/planning/land-use-code",
+      "redirect_target_reported": null,
+      "publisher_http_status": null,
+      "original_publisher_body_received": false,
+      "cached_crawl_label": "today",
+      "limitation": "Observed linked Land Use Code anchor from the policies result. Returned text did not identify the sought extensions; rendered/hidden content and full-site completeness are not certified."
+    }
+  ],
+  "requested_action_count": 8,
+  "reported_redirect_count": 1,
+  "conservative_observed_action_plus_redirect_count": 9,
+  "distinct_requested_urls": [
+    "https://larimercoco.portal.civicclerk.com/event/8139/files",
+    "https://records.larimer.org/landmarkweb/",
+    "https://www.larimer.gov/planning/land-use-code",
+    "https://www.larimer.gov/policies-ordinances-resolutions"
+  ],
+  "distinct_requested_and_reported_final_urls": [
+    "https://larimercoco.portal.civicclerk.com/event/8139/files",
+    "https://records.larimer.org/landmarkweb/",
+    "https://www.larimer.gov/planning/land-use-code",
+    "https://www.larimer.gov/policies",
+    "https://www.larimer.gov/policies-ordinances-resolutions"
+  ],
+  "distinct_search_queries": [
+    "\"20260016505\"",
+    "\"July 13, 2026\" \"moratorium\""
+  ],
+  "conservative_url_and_query_target_count": 7,
+  "exact_underlying_http_request_count": null,
+  "publisher_originals_acquired": 0,
+  "pdfs_acquired": 0,
+  "new_pdf_pages_visually_reviewed": 0,
+  "public_access_stopped_at": "2026-09-11T21:03:29Z",
+  "public_cutoff": "2026-09-11T21:30:00Z",
+  "inputs": [
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/atlas-reviews/sherlock-source-discovery-009/check-2026-09-11/INTAKE_AUDIT.md",
+      "captured_at": "2026-09-11T21:06:41.802900Z",
+      "evidence_role": "prior_atlas_audit",
+      "copy": {
+        "path": "inputs/prior-sd009-atlas-audit.md",
+        "sha256": "dfd0222d74529b29aa531f4dc3163622dc91aea471d08cd8661ab9220481b5ea",
+        "size_bytes": 12973
+      }
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/atlas-reviews/statewide-next-intake-triage-2026-09-11/REPORT.md",
+      "captured_at": "2026-09-11T21:06:41.805625Z",
+      "evidence_role": "prior_atlas_audit",
+      "copy": {
+        "path": "inputs/prior-statewide-triage.md",
+        "sha256": "e90036a2c84ee6ffa79af13a7e969544ead6f32570c7b30c3a7ad2554c1edca4",
+        "size_bytes": 14802
+      }
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/atlas-reviews/sherlock-source-discovery-009/public-link-followup-2026-09-11/ATTEMPTS.json",
+      "captured_at": "2026-09-11T21:06:41.807436Z",
+      "evidence_role": "prior_access_audit",
+      "copy": {
+        "path": "inputs/prior-sd009-web-attempts.json",
+        "sha256": "0c09cc0852eaadcc4565cbc7a6a84dd9d7c3dc8b26b6eac6ebd0e9fe58607fc8",
+        "size_bytes": 1356
+      }
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-009/priority_candidates_final.json",
+      "captured_at": "2026-09-11T21:06:41.809445Z",
+      "evidence_role": "prior_external_claims",
+      "copy": {
+        "path": "inputs/prior-sd009-candidates.json",
+        "sha256": "5ff5e2fc4ba3a904c7e401c54e50c930faeb2c3d4b4ce0a0803478953bc6ca1d",
+        "size_bytes": 9515
+      }
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-007/20260911T182833Z/raw/temp_moratorium_data_centers.html",
+      "captured_at": "2026-09-11T21:06:41.811579Z",
+      "evidence_role": "prior_page_snapshot",
+      "copy": {
+        "path": "inputs/prior-sd007-hub.html",
+        "sha256": "e998a221aec6a1e0db13d75fea9967458699359fd69e7501c289f7de2876a7b9",
+        "size_bytes": 59423
+      }
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "LA-01",
+      "classification": "fresh_tool_observation",
+      "statement": "The public Records Search landing-page derivative states that document images require registration and login. No terms acceptance, registration, login, image purchase or record-image retrieval was performed.",
+      "evidence": [
+        {
+          "asset_path": "web-tool-call-001.json",
+          "locator": "Records Search result, L42",
+          "excerpt": "To view Watermarked Images you must"
+        }
+      ]
+    },
+    {
+      "finding_id": "LA-02",
+      "classification": "fresh_tool_observation",
+      "statement": "The official policies page was reported redirected to /policies and includes a warning that county-code updating is delayed. This does not identify or authenticate a moratorium extension.",
+      "evidence": [
+        {
+          "asset_path": "web-tool-call-001.json",
+          "locator": "County Code and Policies result, L56",
+          "excerpt": "An update of the County Codes is underway and there will be a delay for the updates."
+        }
+      ]
+    },
+    {
+      "finding_id": "LA-03",
+      "classification": "fresh_tool_observation",
+      "statement": "The returned land-use-code page labels the consolidated code December 8, 2025 and lists 2025 amendments. No February/July 2026 extension reference was found in this returned text; this is not a finding that none exists.",
+      "evidence": [
+        {
+          "asset_path": "web-tool-call-003.json",
+          "locator": "Land Use Code result, L61-L65",
+          "excerpt": "Larimer County Land Use Code - Effective December 8, 2025"
+        }
+      ]
+    },
+    {
+      "finding_id": "LA-04",
+      "classification": "fresh_tool_observation",
+      "statement": "The exact July meeting-file URL was blocked by the web tool before a publisher response. The error is not an HTTP denial or proof that meeting minutes are unposted.",
+      "evidence": [
+        {
+          "asset_path": "web-tool-call-002.json",
+          "locator": "July meeting result, L0",
+          "excerpt": "https://larimercoco.portal.civicclerk.com/event/8139/files is not safe to open (non-retryable error)"
+        }
+      ]
+    },
+    {
+      "finding_id": "LA-05",
+      "classification": "fresh_tool_observation",
+      "statement": "Both targeted official-domain searches returned an empty aggregate result; executed instruments and final July action remain unlocated in this bounded attempt.",
+      "evidence": [
+        {
+          "asset_path": "web-tool-call-002.json",
+          "locator": "Combined search result heading",
+          "excerpt": "No results were found for the provided queries"
+        }
+      ]
+    },
+    {
+      "finding_id": "LA-06",
+      "classification": "prior_audit_fact",
+      "statement": "The prior Atlas audit records February minutes page 10 approving extension to August 25, 2026 by 3-0, separately from the missing executed instrument. This session did not re-review or recertify those PDF pages.",
+      "evidence": [
+        {
+          "asset_path": "inputs/prior-sd009-atlas-audit.md",
+          "locator": "ATLAS-SD009-08",
+          "excerpt": "February minutes page 10 records an August 25, 2026 extension motion carried 3-0."
+        }
+      ]
+    },
+    {
+      "finding_id": "LA-07",
+      "classification": "prior_audit_fact",
+      "statement": "The prior audit identifies the July addendum as a browser-print unsigned draft, with literal August 25, 2025 on page 5 and April 7, 2026 / reception 20260016505 in the page 3 recital. These conflicts remain unresolved; no date was corrected or treated as enacted effect.",
+      "evidence": [
+        {
+          "asset_path": "inputs/prior-sd009-atlas-audit.md",
+          "locator": "ATLAS-SD009-06 and07",
+          "excerpt": "Direct inspection of addendum physical page 5 shows August 25, 2025 clearly."
+        }
+      ]
+    },
+    {
+      "finding_id": "LA-08",
+      "classification": "prior_audit_fact",
+      "statement": "The exact agenda/3563 URL is associated in prior delivery claims with both a 194-page packet and a 20-page minutes PDF. That original-acquisition conflict remains; this attempt did not reacquire the URL or assume a source replacement.",
+      "evidence": [
+        {
+          "asset_path": "inputs/prior-sd009-atlas-audit.md",
+          "locator": "ATLAS-SD009-05",
+          "excerpt": "both claim https://larimercoco.portal.civicclerk.com/event/2812/files/agenda/3563."
+        }
+      ]
+    }
+  ],
+  "unresolved": [
+    "Executed/attested/recorded February extension instrument bound to the minutes motion.",
+    "Final July Board action and its executed/recorded extension instrument, if any.",
+    "Reconciliation of the prior July draft literal 2025 date and April 7 / reception 20260016505 recital.",
+    "Exact publisher acquisition association for the previously received February minutes."
+  ],
+  "limitations": [
+    "No new publisher-original HTML or PDF bytes were received; saved web outputs are tool-generated text derivatives with tool-reported crawl labels, not certified contemporaneous publisher responses.",
+    "Eight explicit requested actions plus one reported redirect were recorded. Five requested/final HTTPS URLs and two distinct searches make seven conservative targets. Hidden web-tool network requests and cache operations are not observable; exact underlying HTTP count is unknown.",
+    "No record-index search was submitted after the public landing-page review; no terms were accepted. The image-access registration/login condition was not bypassed.",
+    "Original staff report, unsigned browser-print addendum and minutes were not reacquired as new authority. Prior audit facts remain qualified and are not a new PDF transcription review.",
+    "No canonical archive, registry, ledger, index or Git state was changed by this package; no officials or external reviewers were contacted."
+  ],
+  "acceptance_or_registration_performed": false,
+  "external_messages_sent": false,
+  "canonical_files_changed": false
+}
