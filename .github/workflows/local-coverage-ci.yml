@@ -82,6 +82,8 @@ jobs:
         run: python -m geode.pipeline.local_text_review --root . --review research/local_review/ebenezer-005-2026-09-10/checked-excerpts.json
       - name: Verify Clear Creek Ordinance6A excerpt evidence
         run: python -m geode.pipeline.local_text_review --root . --review research/local_review/ebenezer-007-2026-09-10/checked-excerpts.json
+      - name: Verify Clear Creek Ordinance 7-A excerpt evidence
+        run: python -m geode.pipeline.local_text_review --root . --review research/local_review/ebenezer-008-2026-09-11/checked-excerpts.json
       - name: Verify publisher exports and every saved native page or node
         run: python -m geode.pipeline.municipal_code_export --root . --manifest _CONTROL_PLANE/MUNICIPAL_EXPORTS_2026-09-10.json --text 09_Municipal_Authorities/_verification/municipal_exports/text.jsonl
       - name: Verify sampled fee evidence and checked scanned passages
