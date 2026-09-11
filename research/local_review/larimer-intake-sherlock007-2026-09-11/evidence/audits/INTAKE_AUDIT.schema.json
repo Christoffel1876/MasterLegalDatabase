@@ -1,0 +1,620 @@
+{
+  "$defs": {
+    "Counts": {
+      "additionalProperties": false,
+      "properties": {
+        "declared_public_events": {
+          "minimum": 0,
+          "title": "Declared Public Events",
+          "type": "integer"
+        },
+        "recorded_public_events": {
+          "minimum": 0,
+          "title": "Recorded Public Events",
+          "type": "integer"
+        },
+        "distinct_requested_urls": {
+          "minimum": 0,
+          "title": "Distinct Requested Urls",
+          "type": "integer"
+        },
+        "event_cap": {
+          "minimum": 0,
+          "title": "Event Cap",
+          "type": "integer"
+        },
+        "target_cap": {
+          "minimum": 0,
+          "title": "Target Cap",
+          "type": "integer"
+        },
+        "recorded_local_pdf_reads": {
+          "minimum": 0,
+          "title": "Recorded Local Pdf Reads",
+          "type": "integer"
+        },
+        "mac_403_events": {
+          "minimum": 0,
+          "title": "Mac 403 Events",
+          "type": "integer"
+        },
+        "reconstructed_browser_200_events": {
+          "minimum": 0,
+          "title": "Reconstructed Browser 200 Events",
+          "type": "integer"
+        },
+        "successful_browser_pdf_artifacts": {
+          "minimum": 0,
+          "title": "Successful Browser Pdf Artifacts",
+          "type": "integer"
+        },
+        "successful_browser_html_artifacts": {
+          "minimum": 0,
+          "title": "Successful Browser Html Artifacts",
+          "type": "integer"
+        },
+        "successful_browser_body_bytes": {
+          "minimum": 0,
+          "title": "Successful Browser Body Bytes",
+          "type": "integer"
+        },
+        "current_mac_error_body_bytes": {
+          "minimum": 0,
+          "title": "Current Mac Error Body Bytes",
+          "type": "integer"
+        },
+        "targets_with_two_recorded_events": {
+          "minimum": 0,
+          "title": "Targets With Two Recorded Events",
+          "type": "integer"
+        },
+        "targets_with_one_recorded_event": {
+          "minimum": 0,
+          "title": "Targets With One Recorded Event",
+          "type": "integer"
+        },
+        "recovered_mac_targets": {
+          "minimum": 0,
+          "title": "Recovered Mac Targets",
+          "type": "integer"
+        },
+        "failed_only_mac_targets": {
+          "minimum": 0,
+          "title": "Failed Only Mac Targets",
+          "type": "integer"
+        },
+        "priority_records": {
+          "minimum": 0,
+          "title": "Priority Records",
+          "type": "integer"
+        },
+        "priority_cap": {
+          "minimum": 0,
+          "title": "Priority Cap",
+          "type": "integer"
+        },
+        "primary_and_related_priority_resources": {
+          "minimum": 0,
+          "title": "Primary And Related Priority Resources",
+          "type": "integer"
+        },
+        "inventory_files": {
+          "minimum": 0,
+          "title": "Inventory Files",
+          "type": "integer"
+        },
+        "inventory_bytes": {
+          "minimum": 0,
+          "title": "Inventory Bytes",
+          "type": "integer"
+        },
+        "tar_regular_files": {
+          "minimum": 0,
+          "title": "Tar Regular Files",
+          "type": "integer"
+        },
+        "tar_directories": {
+          "minimum": 0,
+          "title": "Tar Directories",
+          "type": "integer"
+        },
+        "inventory_files_omitted_from_tar": {
+          "minimum": 0,
+          "title": "Inventory Files Omitted From Tar",
+          "type": "integer"
+        },
+        "received_files": {
+          "minimum": 0,
+          "title": "Received Files",
+          "type": "integer"
+        },
+        "received_bytes": {
+          "minimum": 0,
+          "title": "Received Bytes",
+          "type": "integer"
+        },
+        "distinct_pdf_pages_visually_inspected": {
+          "minimum": 0,
+          "title": "Distinct Pdf Pages Visually Inspected",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "declared_public_events",
+        "recorded_public_events",
+        "distinct_requested_urls",
+        "event_cap",
+        "target_cap",
+        "recorded_local_pdf_reads",
+        "mac_403_events",
+        "reconstructed_browser_200_events",
+        "successful_browser_pdf_artifacts",
+        "successful_browser_html_artifacts",
+        "successful_browser_body_bytes",
+        "current_mac_error_body_bytes",
+        "targets_with_two_recorded_events",
+        "targets_with_one_recorded_event",
+        "recovered_mac_targets",
+        "failed_only_mac_targets",
+        "priority_records",
+        "priority_cap",
+        "primary_and_related_priority_resources",
+        "inventory_files",
+        "inventory_bytes",
+        "tar_regular_files",
+        "tar_directories",
+        "inventory_files_omitted_from_tar",
+        "received_files",
+        "received_bytes",
+        "distinct_pdf_pages_visually_inspected"
+      ],
+      "title": "Counts",
+      "type": "object"
+    },
+    "Custody": {
+      "additionalProperties": false,
+      "properties": {
+        "received_at": {
+          "format": "date-time",
+          "title": "Received At",
+          "type": "string"
+        },
+        "files": {
+          "items": {
+            "$ref": "#/$defs/Receipt"
+          },
+          "title": "Files",
+          "type": "array"
+        },
+        "copies_rehashed": {
+          "const": true,
+          "default": true,
+          "title": "Copies Rehashed",
+          "type": "boolean"
+        },
+        "originals_rechecked_unchanged": {
+          "const": true,
+          "default": true,
+          "title": "Originals Rechecked Unchanged",
+          "type": "boolean"
+        },
+        "copies_write_protected": {
+          "const": true,
+          "default": true,
+          "title": "Copies Write Protected",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "received_at",
+        "files"
+      ],
+      "title": "Custody",
+      "type": "object"
+    },
+    "EventCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "requested_url": {
+          "format": "uri",
+          "maxLength": 2083,
+          "minLength": 1,
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "reported_final_url": {
+          "format": "uri",
+          "maxLength": 2083,
+          "minLength": 1,
+          "title": "Reported Final Url",
+          "type": "string"
+        },
+        "reported_http_status": {
+          "enum": [
+            200,
+            403
+          ],
+          "title": "Reported Http Status",
+          "type": "integer"
+        },
+        "reported_time": {
+          "title": "Reported Time",
+          "type": "string"
+        },
+        "evidence": {
+          "$ref": "#/$defs/FileEvidence"
+        },
+        "hash_size_agree": {
+          "const": true,
+          "default": true,
+          "title": "Hash Size Agree",
+          "type": "boolean"
+        },
+        "provenance_limit": {
+          "title": "Provenance Limit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "requested_url",
+        "reported_final_url",
+        "reported_http_status",
+        "reported_time",
+        "evidence",
+        "provenance_limit"
+      ],
+      "title": "EventCheck",
+      "type": "object"
+    },
+    "FileEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileEvidence",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "disposition": {
+          "enum": [
+            "correct",
+            "qualify",
+            "accepted_with_limits"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "source_locations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Locations",
+          "type": "array"
+        },
+        "evidence": {
+          "title": "Evidence",
+          "type": "string"
+        },
+        "required_overlay": {
+          "title": "Required Overlay",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "disposition",
+        "title",
+        "source_locations",
+        "evidence",
+        "required_overlay"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "Gap": {
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "discovered_unopened",
+            "unlocated_instrument",
+            "blocked_only"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "exact_url": {
+          "anyOf": [
+            {
+              "format": "uri",
+              "maxLength": 2083,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Exact Url"
+        },
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "status",
+        "basis"
+      ],
+      "title": "Gap",
+      "type": "object"
+    },
+    "Receipt": {
+      "additionalProperties": false,
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "received_path": {
+          "title": "Received Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "original_path",
+        "received_path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Receipt",
+      "type": "object"
+    },
+    "SourceCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "priority_id": {
+          "pattern": "^SD007-\\d{2}$",
+          "title": "Priority Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-LARIMER",
+          "default": "CO-COUNTY-LARIMER",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "primary": {
+          "$ref": "#/$defs/FileEvidence"
+        },
+        "related": {
+          "items": {
+            "$ref": "#/$defs/FileEvidence"
+          },
+          "title": "Related",
+          "type": "array"
+        },
+        "inspected_physical_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Inspected Physical Pages",
+          "type": "array"
+        },
+        "accepted_claims": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accepted Claims",
+          "type": "array"
+        },
+        "qualifications": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Qualifications",
+          "type": "array"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "review_status": {
+          "const": "pending_intake",
+          "default": "pending_intake",
+          "title": "Review Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "priority_id",
+        "role",
+        "primary",
+        "accepted_claims",
+        "qualifications"
+      ],
+      "title": "SourceCheck",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "assignment": {
+      "const": "geode-source-discovery-007",
+      "default": "geode-source-discovery-007",
+      "title": "Assignment",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "comparison_commit": {
+      "pattern": "^[a-f0-9]{40}$",
+      "title": "Comparison Commit",
+      "type": "string"
+    },
+    "disposition": {
+      "const": "retain_evidence_with_corrections_pending_intake",
+      "title": "Disposition",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "canonical_coverage_changed": {
+      "const": false,
+      "default": false,
+      "title": "Canonical Coverage Changed",
+      "type": "boolean"
+    },
+    "reviewer_network_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "Reviewer Network Requests",
+      "type": "integer"
+    },
+    "originals_modified": {
+      "const": false,
+      "default": false,
+      "title": "Originals Modified",
+      "type": "boolean"
+    },
+    "custody": {
+      "$ref": "#/$defs/Custody"
+    },
+    "counts": {
+      "$ref": "#/$defs/Counts"
+    },
+    "integrity_checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Integrity Checks",
+      "type": "array"
+    },
+    "tar_omissions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Tar Omissions",
+      "type": "array"
+    },
+    "event_checks": {
+      "items": {
+        "$ref": "#/$defs/EventCheck"
+      },
+      "title": "Event Checks",
+      "type": "array"
+    },
+    "source_checks": {
+      "items": {
+        "$ref": "#/$defs/SourceCheck"
+      },
+      "title": "Source Checks",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "backlog_overlay": {
+      "items": {
+        "$ref": "#/$defs/Gap"
+      },
+      "title": "Backlog Overlay",
+      "type": "array"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "comparison_commit",
+    "disposition",
+    "custody",
+    "counts",
+    "integrity_checks",
+    "tar_omissions",
+    "event_checks",
+    "source_checks",
+    "findings",
+    "backlog_overlay",
+    "limits"
+  ],
+  "title": "Audit",
+  "type": "object"
+}
