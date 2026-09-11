@@ -1,0 +1,483 @@
+{
+  "$defs": {
+    "FileRef": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    },
+    "NativePage": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "source_id": {
+          "enum": [
+            "larimer-development-review-fees-sd004-07",
+            "larimer-fee-increase-memo-sd004-lc-09",
+            "larimer-data-center-moratorium-sd004-04"
+          ],
+          "title": "Source Id",
+          "type": "string"
+        },
+        "source_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "expected_pages": {
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Expected Pages",
+          "type": "integer"
+        },
+        "extracted_at": {
+          "format": "date-time",
+          "title": "Extracted At",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "text_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Text Sha256",
+          "type": "string"
+        },
+        "text_size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Text Size Bytes",
+          "type": "integer"
+        },
+        "changes": {
+          "const": "none",
+          "default": "none",
+          "title": "Changes",
+          "type": "string"
+        },
+        "method_family": {
+          "const": "native",
+          "default": "native",
+          "title": "Method Family",
+          "type": "string"
+        },
+        "engine": {
+          "const": "PyMuPDF",
+          "default": "PyMuPDF",
+          "title": "Engine",
+          "type": "string"
+        },
+        "engine_version": {
+          "minLength": 1,
+          "title": "Engine Version",
+          "type": "string"
+        },
+        "method": {
+          "const": "Page.get_text(\"text\", sort=False, flags=195)",
+          "default": "Page.get_text(\"text\", sort=False, flags=195)",
+          "title": "Method",
+          "type": "string"
+        },
+        "sort": {
+          "const": false,
+          "default": false,
+          "title": "Sort",
+          "type": "boolean"
+        },
+        "flags": {
+          "const": 195,
+          "default": 195,
+          "title": "Flags",
+          "type": "integer"
+        },
+        "status": {
+          "const": "machine_native_text_unreviewed",
+          "default": "machine_native_text_unreviewed",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "source_sha256",
+        "physical_page",
+        "expected_pages",
+        "extracted_at",
+        "text",
+        "text_sha256",
+        "text_size_bytes",
+        "engine_version"
+      ],
+      "title": "NativePage",
+      "type": "object"
+    },
+    "OCRObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "bbox": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Bbox",
+          "type": "array"
+        }
+      },
+      "required": [
+        "text",
+        "confidence",
+        "bbox"
+      ],
+      "title": "OCRObservation",
+      "type": "object"
+    },
+    "OCRPage": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "default": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "source_id": {
+          "enum": [
+            "larimer-development-review-fees-sd004-07",
+            "larimer-fee-increase-memo-sd004-lc-09",
+            "larimer-data-center-moratorium-sd004-04"
+          ],
+          "title": "Source Id",
+          "type": "string"
+        },
+        "source_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "expected_pages": {
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Expected Pages",
+          "type": "integer"
+        },
+        "extracted_at": {
+          "format": "date-time",
+          "title": "Extracted At",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "text_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Text Sha256",
+          "type": "string"
+        },
+        "text_size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Text Size Bytes",
+          "type": "integer"
+        },
+        "changes": {
+          "const": "none",
+          "default": "none",
+          "title": "Changes",
+          "type": "string"
+        },
+        "method_family": {
+          "const": "ocr",
+          "default": "ocr",
+          "title": "Method Family",
+          "type": "string"
+        },
+        "engine": {
+          "const": "Apple Vision",
+          "default": "Apple Vision",
+          "title": "Engine",
+          "type": "string"
+        },
+        "engine_revision": {
+          "const": 3,
+          "default": 3,
+          "title": "Engine Revision",
+          "type": "integer"
+        },
+        "engine_os_version": {
+          "minLength": 1,
+          "title": "Engine Os Version",
+          "type": "string"
+        },
+        "adapter": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "settings": {
+          "$ref": "#/$defs/OCRSettings"
+        },
+        "native_preflight_engine": {
+          "const": "PyMuPDF",
+          "default": "PyMuPDF",
+          "title": "Native Preflight Engine",
+          "type": "string"
+        },
+        "native_preflight_version": {
+          "title": "Native Preflight Version",
+          "type": "string"
+        },
+        "native_preflight_method": {
+          "const": "Page.get_text(\"text\", sort=False, flags=195)",
+          "default": "Page.get_text(\"text\", sort=False, flags=195)",
+          "title": "Native Preflight Method",
+          "type": "string"
+        },
+        "native_preflight_text_size_bytes": {
+          "const": 0,
+          "default": 0,
+          "title": "Native Preflight Text Size Bytes",
+          "type": "integer"
+        },
+        "native_preflight_text_sha256": {
+          "const": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "default": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "title": "Native Preflight Text Sha256",
+          "type": "string"
+        },
+        "input_image": {
+          "$ref": "#/$defs/PacketFile"
+        },
+        "raw_engine_stdout": {
+          "$ref": "#/$defs/PacketFile"
+        },
+        "engine_stderr_size_bytes": {
+          "const": 0,
+          "default": 0,
+          "title": "Engine Stderr Size Bytes",
+          "type": "integer"
+        },
+        "engine_exit_code": {
+          "const": 0,
+          "default": 0,
+          "title": "Engine Exit Code",
+          "type": "integer"
+        },
+        "observations": {
+          "items": {
+            "$ref": "#/$defs/OCRObservation"
+          },
+          "minItems": 1,
+          "title": "Observations",
+          "type": "array"
+        },
+        "text_derivation": {
+          "const": "Join every raw engine observation text in returned order with one LF separator; no other changes",
+          "default": "Join every raw engine observation text in returned order with one LF separator; no other changes",
+          "title": "Text Derivation",
+          "type": "string"
+        },
+        "raw_tsv": {
+          "const": "not_applicable_Apple_Vision_returns_JSON",
+          "default": "not_applicable_Apple_Vision_returns_JSON",
+          "title": "Raw Tsv",
+          "type": "string"
+        },
+        "tesseract_psm": {
+          "const": "not_applicable_Apple_Vision",
+          "default": "not_applicable_Apple_Vision",
+          "title": "Tesseract Psm",
+          "type": "string"
+        },
+        "status": {
+          "const": "machine_ocr_unreviewed",
+          "default": "machine_ocr_unreviewed",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "source_sha256",
+        "physical_page",
+        "expected_pages",
+        "extracted_at",
+        "text",
+        "text_sha256",
+        "text_size_bytes",
+        "engine_os_version",
+        "adapter",
+        "settings",
+        "native_preflight_version",
+        "input_image",
+        "raw_engine_stdout",
+        "observations"
+      ],
+      "title": "OCRPage",
+      "type": "object"
+    },
+    "OCRSettings": {
+      "additionalProperties": false,
+      "properties": {
+        "recognition_level": {
+          "const": "accurate",
+          "default": "accurate",
+          "title": "Recognition Level",
+          "type": "string"
+        },
+        "recognition_languages": {
+          "items": {
+            "const": "en-US",
+            "type": "string"
+          },
+          "maxItems": 1,
+          "minItems": 1,
+          "title": "Recognition Languages",
+          "type": "array"
+        },
+        "uses_language_correction": {
+          "const": false,
+          "default": false,
+          "title": "Uses Language Correction",
+          "type": "boolean"
+        },
+        "automatically_detects_language": {
+          "const": false,
+          "default": false,
+          "title": "Automatically Detects Language",
+          "type": "boolean"
+        },
+        "minimum_text_height": {
+          "const": 0,
+          "default": 0,
+          "title": "Minimum Text Height",
+          "type": "integer"
+        },
+        "uses_cpu_only": {
+          "const": true,
+          "default": true,
+          "title": "Uses Cpu Only",
+          "type": "boolean"
+        },
+        "bounding_box_origin": {
+          "const": "bottom_left",
+          "default": "bottom_left",
+          "title": "Bounding Box Origin",
+          "type": "string"
+        },
+        "reading_order": {
+          "const": "engine_observation_order",
+          "default": "engine_observation_order",
+          "title": "Reading Order",
+          "type": "string"
+        }
+      },
+      "required": [
+        "recognition_languages"
+      ],
+      "title": "OCRSettings",
+      "type": "object"
+    },
+    "PacketFile": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "PacketFile",
+      "type": "object"
+    }
+  },
+  "discriminator": {
+    "mapping": {
+      "native": "#/$defs/NativePage",
+      "ocr": "#/$defs/OCRPage"
+    },
+    "propertyName": "method_family"
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/NativePage"
+    },
+    {
+      "$ref": "#/$defs/OCRPage"
+    }
+  ]
+}

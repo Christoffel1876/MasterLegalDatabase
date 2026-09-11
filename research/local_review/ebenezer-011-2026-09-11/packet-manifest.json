@@ -1,0 +1,386 @@
+{
+  "schema_version": 2,
+  "packet_id": "grok-pdf-review-2026-09-11-batch-2",
+  "prepared_at": "2026-09-11T18:25:50.438317Z",
+  "status": "prepared_not_sent",
+  "purpose": "independent_pdf_transcription_review",
+  "independence": "procedural separation; each candidate/evidence withheld until that document pass 1 is frozen",
+  "start_no_document_at_or_after": "2026-09-11T20:50:00Z",
+  "finish_by": "2026-09-11T21:20:00Z",
+  "continuation": "Return each completed result, then continue to next active item without acknowledgment if before cutoff; stop after EB-PDF-011",
+  "canonical_intake_boundary": "Raw PDFs are archived_pending_pipeline. This handoff changes no repository, coverage, transcription-review or legal-currentness status.",
+  "excluded_assignment": "EB-PDF-012: native text empty on both pages; Apple Vision returned exit 1, empty stdout, stderr nilError on the page-1 diagnostic. No candidate prepared; not authorized in this active queue.",
+  "documents": [
+    {
+      "queue_order": 1,
+      "assignment_id": "EB-PDF-010",
+      "source_id": "larimer-development-review-fees-sd004-07",
+      "authority_id": "CO-COUNTY-LARIMER",
+      "expected_pages": 7,
+      "original": {
+        "path": "01-source-only/larimer-development-review-fees-sd004-07/original.pdf",
+        "sha256": "752dec4468ad92f5895a7af53ad0451b21517fb390212dc76b5f358f15fec64b",
+        "size_bytes": 86261
+      },
+      "provenance": {
+        "basis": "verified repository intake and delivered archive/member bytes; upstream URL/acquisition remain supplied claims",
+        "canonical_raw_pdf": {
+          "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/_RAW_ARCHIVE/manual_intake/08_County_Authorities/larimer-development-review-fees-sd004-07/20260911T171343Z_development_review_fees.pdf",
+          "sha256": "752dec4468ad92f5895a7af53ad0451b21517fb390212dc76b5f358f15fec64b",
+          "size_bytes": 86261
+        },
+        "intake_receipt": {
+          "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/larimer-intake-2026-09-11/intake-receipt.json",
+          "sha256": "1304c35b8953fe4c2e4f7601c8be8f6f4b952b1dfd7e5c0f7fc36d723509a38d",
+          "size_bytes": 51117
+        },
+        "raw_intake_manifest": {
+          "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+          "sha256": "261eef34f4d0a951c05f1a2987598d6cfedb1aaedc4411c31602502c02205992",
+          "size_bytes": 24284
+        },
+        "raw_manifest_line_number": 8,
+        "raw_manifest_line_sha256": "4cd06dd56d10a234cb2b8eab30193f2c56dae0fa81b5e471cde11dd200849137",
+        "raw_manifest_line_size_bytes": 2097,
+        "intake_record_id": "MSI-20260911T171343813349Z-larimer-development-review-fees-sd004-07",
+        "actual_repository_received_at": "2026-09-11T17:13:43.813349Z",
+        "acquisition_method": "received_review_package",
+        "intake_status": "archived_pending_pipeline",
+        "source_archive": {
+          "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-004/packages-retained-20260910T221344Z.tar.gz",
+          "sha256": "88c61f9e39c5fd8e3ad2a09cb90d0aab4227054e1c8cf753e22b0aeb7affa78a",
+          "size_bytes": 47886306
+        },
+        "archive_member": "larimer/raw/development_review_fees.pdf",
+        "archive_member_sha256": "752dec4468ad92f5895a7af53ad0451b21517fb390212dc76b5f358f15fec64b",
+        "archive_member_size_bytes": 86261,
+        "archive_audit": {
+          "path": "/Users/mcoors/Documents/Project Geode/handoffs/atlas-reviews/sherlock-source-discovery-004/addendum-check-2026-09-10/package-audit.json",
+          "sha256": "01bd0723817a7fc48ea1fb294bc0730733e692ffbc53c1bde89c5646902a73c2",
+          "size_bytes": 53119
+        },
+        "claimed_official_source_url": "https://www.larimer.gov/sites/default/files/current-development-review-fees.pdf",
+        "claimed_final_url": "https://www.larimer.gov/sites/default/files/current-development-review-fees.pdf",
+        "claimed_attempt_sequence": 31,
+        "claimed_attempt_time": "2026-09-10T21:46:50Z",
+        "claimed_attempt_method": "curl",
+        "claimed_attempt_http_status": 200,
+        "attempt_log_member": "larimer/attempted_urls.json",
+        "attempt_log_sha256": "8237f396f3129d630de03f3b69d9f8c90524d97d13de2275b47ad4cce27cb3d3",
+        "original_acquisition_time": null,
+        "upstream_http_acquisition_independently_verified": false,
+        "supplied_member_mtime": "2026-09-10T21:46:50Z",
+        "caveats": [
+          "Raw-intake manifest line, intake receipt, original bytes and supplied archive member are independently hash-verified. This is local custody verification, not a witnessed original HTTP response.",
+          "Official URL, request outcome and attempt timestamp are supplied log claims. The member association is based on supplied log/filename correspondence; original acquisition time remains unknown.",
+          "Archive filesystem mtime is not proof of acquisition time. Actual repository intake, extraction and packet preparation times have distinct meanings.",
+          "No operative year, adoption/effective/publication date, amendment completeness, legal applicability or currentness is inferred from filename, URL or successful text extraction."
+        ]
+      },
+      "rendering": {
+        "engine": "Poppler pdftoppm",
+        "version": "26.05.0",
+        "command": "pdftoppm -r 300 -png original.pdf page",
+        "dpi": 300,
+        "scope": "entire PDF page; no crop, annotation, image edit or rescaling"
+      },
+      "candidate": {
+        "path": "02-candidate-text/larimer-development-review-fees-sd004-07/candidate.txt",
+        "sha256": "10e1a99cc47fdf2bbd3e42b5a17577efc975b4c36c94dc3f8f7090a195c55f04",
+        "size_bytes": 10373
+      },
+      "candidate_method_family": "native",
+      "candidate_status": "machine_native_text_unreviewed",
+      "candidate_changes": "none",
+      "candidate_packaging": "UTF-8; explicit physical-page markers added outside unchanged text slices",
+      "page_evidence_schema": {
+        "path": "02-candidate-text/page-evidence.schema.json",
+        "sha256": "4a21b13de58ac8bea392e8e3a085eb2109a113f8406e10d6913e20f4d50684ac",
+        "size_bytes": 12612
+      },
+      "pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "01-source-only/larimer-development-review-fees-sd004-07/page-0001.png",
+            "sha256": "4b194f91bb827fbd1be2b6af014f12920378c63a553dd03e2593c7d570fce8de",
+            "size_bytes": 451765
+          },
+          "image_width": 2550,
+          "image_height": 3301,
+          "evidence": {
+            "path": "02-candidate-text/larimer-development-review-fees-sd004-07/native-evidence/page-0001.json",
+            "sha256": "1bae75424183267457b020d44dc205ae154d377ddfb5b99a751b53b6698806ed",
+            "size_bytes": 2384
+          },
+          "raw_engine_stdout": null,
+          "text_sha256": "b017553b6046b0561c9a8b81f82287c55d3ceb10f5029b09c00048d619238f98",
+          "text_size_bytes": 1697,
+          "candidate_text_offset_bytes": 56,
+          "candidate_text_end_byte_exclusive": 1753
+        },
+        {
+          "physical_page": 2,
+          "image": {
+            "path": "01-source-only/larimer-development-review-fees-sd004-07/page-0002.png",
+            "sha256": "3004b43481dc1d56351d7d27a4132b60e13fcdb7a5d6b68e5aa1134f94c6a298",
+            "size_bytes": 399214
+          },
+          "image_width": 2550,
+          "image_height": 3301,
+          "evidence": {
+            "path": "02-candidate-text/larimer-development-review-fees-sd004-07/native-evidence/page-0002.json",
+            "sha256": "ccde8020d18e16a1e1e5b463e376816a4b5c42f88b381a57ab02e7edf09fe792",
+            "size_bytes": 1843
+          },
+          "raw_engine_stdout": null,
+          "text_sha256": "90914445ca816da1ca06a03f6a6aa85c95d6baa2ef59b2ef5740e89b58b0e79e",
+          "text_size_bytes": 1148,
+          "candidate_text_offset_bytes": 1866,
+          "candidate_text_end_byte_exclusive": 3014
+        },
+        {
+          "physical_page": 3,
+          "image": {
+            "path": "01-source-only/larimer-development-review-fees-sd004-07/page-0003.png",
+            "sha256": "c3c26a92d936b4ee4ae3d1a0bd68c70ec04aa0be2c5e664eba289e70fff51fd1",
+            "size_bytes": 435248
+          },
+          "image_width": 2550,
+          "image_height": 3301,
+          "evidence": {
+            "path": "02-candidate-text/larimer-development-review-fees-sd004-07/native-evidence/page-0003.json",
+            "sha256": "5413873936a46bf354438979b1ab9282146d1d4ea27dc9a3dd11ff519c822fee",
+            "size_bytes": 2100
+          },
+          "raw_engine_stdout": null,
+          "text_sha256": "43f62dc3c692e50cee9c431e002589ff2bbaa5c5ac1885322fda18b6a9144453",
+          "text_size_bytes": 1398,
+          "candidate_text_offset_bytes": 3127,
+          "candidate_text_end_byte_exclusive": 4525
+        },
+        {
+          "physical_page": 4,
+          "image": {
+            "path": "01-source-only/larimer-development-review-fees-sd004-07/page-0004.png",
+            "sha256": "6a79297beb7b86f5fd79edf488ed5c680d1061095323782d458ca7f7cf3661a0",
+            "size_bytes": 374455
+          },
+          "image_width": 2550,
+          "image_height": 3301,
+          "evidence": {
+            "path": "02-candidate-text/larimer-development-review-fees-sd004-07/native-evidence/page-0004.json",
+            "sha256": "242602cca91536aaaf0afd6e50f2fb4e99b844e5c77ff1163d8844ed09d7f5a3",
+            "size_bytes": 1685
+          },
+          "raw_engine_stdout": null,
+          "text_sha256": "8c419e100ad627e2531d7a55639479b5fceae0423f03f64e6bc000ca836420d9",
+          "text_size_bytes": 993,
+          "candidate_text_offset_bytes": 4638,
+          "candidate_text_end_byte_exclusive": 5631
+        },
+        {
+          "physical_page": 5,
+          "image": {
+            "path": "01-source-only/larimer-development-review-fees-sd004-07/page-0005.png",
+            "sha256": "0e459d42dc39789671608cdcb65a76ea02ee5b5be3faa7c2f5f54df3bb928a09",
+            "size_bytes": 356606
+          },
+          "image_width": 2550,
+          "image_height": 3301,
+          "evidence": {
+            "path": "02-candidate-text/larimer-development-review-fees-sd004-07/native-evidence/page-0005.json",
+            "sha256": "b0e29de5e066e91ae76666a65418078dda186352aea79d44a61b3953d9455cad",
+            "size_bytes": 1946
+          },
+          "raw_engine_stdout": null,
+          "text_sha256": "1a587e1bfa013eacaf1dbb58f21664973a36450b8eff66468c7f2ee55f304ea0",
+          "text_size_bytes": 1272,
+          "candidate_text_offset_bytes": 5744,
+          "candidate_text_end_byte_exclusive": 7016
+        },
+        {
+          "physical_page": 6,
+          "image": {
+            "path": "01-source-only/larimer-development-review-fees-sd004-07/page-0006.png",
+            "sha256": "26c6c9d41fa9baa8e0b4a52fc2dedaaa5b6ff2a8db3607935d9b53d11e266509",
+            "size_bytes": 283956
+          },
+          "image_width": 2550,
+          "image_height": 3301,
+          "evidence": {
+            "path": "02-candidate-text/larimer-development-review-fees-sd004-07/native-evidence/page-0006.json",
+            "sha256": "4eb213ef5b7610fa088346e86f7ccb19602f5664cd0bc73a8bb652292878594b",
+            "size_bytes": 1747
+          },
+          "raw_engine_stdout": null,
+          "text_sha256": "8fcb97e0e1a1419af1b0096b4a520a978f110150cc14d30d8f99acb5afd9daba",
+          "text_size_bytes": 1072,
+          "candidate_text_offset_bytes": 7129,
+          "candidate_text_end_byte_exclusive": 8201
+        },
+        {
+          "physical_page": 7,
+          "image": {
+            "path": "01-source-only/larimer-development-review-fees-sd004-07/page-0007.png",
+            "sha256": "220cd68c8362590cc4a9ad3a488716e2eb691725077bd88db50e4444a34ff0d7",
+            "size_bytes": 474704
+          },
+          "image_width": 2550,
+          "image_height": 3301,
+          "evidence": {
+            "path": "02-candidate-text/larimer-development-review-fees-sd004-07/native-evidence/page-0007.json",
+            "sha256": "85d74dd8af5eb5d8c06fa933a2912f661199234118f6b0af573e4011a094a61b",
+            "size_bytes": 2710
+          },
+          "raw_engine_stdout": null,
+          "text_sha256": "1737e56f1a6e7e7d85eef3585a416aa97e28b74d7a69cd0fd76be862abde1b6e",
+          "text_size_bytes": 2002,
+          "candidate_text_offset_bytes": 8314,
+          "candidate_text_end_byte_exclusive": 10316
+        }
+      ],
+      "legal_currentness": "not_verified",
+      "legal_review": "pending"
+    },
+    {
+      "queue_order": 2,
+      "assignment_id": "EB-PDF-011",
+      "source_id": "larimer-fee-increase-memo-sd004-lc-09",
+      "authority_id": "CO-COUNTY-LARIMER",
+      "expected_pages": 1,
+      "original": {
+        "path": "01-source-only/larimer-fee-increase-memo-sd004-lc-09/original.pdf",
+        "sha256": "17a50621a9669c37876bef67cbeeba930d95b0520abc6a210a23bfd7f40b1d19",
+        "size_bytes": 121743
+      },
+      "provenance": {
+        "basis": "verified repository intake and delivered archive/member bytes; upstream URL/acquisition remain supplied claims",
+        "canonical_raw_pdf": {
+          "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/_RAW_ARCHIVE/manual_intake/08_County_Authorities/larimer-fee-increase-memo-sd004-lc-09/20260911T171343Z_fee_increase_memo.pdf",
+          "sha256": "17a50621a9669c37876bef67cbeeba930d95b0520abc6a210a23bfd7f40b1d19",
+          "size_bytes": 121743
+        },
+        "intake_receipt": {
+          "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/larimer-intake-2026-09-11/intake-receipt.json",
+          "sha256": "1304c35b8953fe4c2e4f7601c8be8f6f4b952b1dfd7e5c0f7fc36d723509a38d",
+          "size_bytes": 51117
+        },
+        "raw_intake_manifest": {
+          "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+          "sha256": "261eef34f4d0a951c05f1a2987598d6cfedb1aaedc4411c31602502c02205992",
+          "size_bytes": 24284
+        },
+        "raw_manifest_line_number": 11,
+        "raw_manifest_line_sha256": "a8b652b7cce5531effcefd278d2830bb00aab22be73ad116828eecd9758da3c2",
+        "raw_manifest_line_size_bytes": 2054,
+        "intake_record_id": "MSI-20260911T171343813349Z-larimer-fee-increase-memo-sd004-lc-09",
+        "actual_repository_received_at": "2026-09-11T17:13:43.813349Z",
+        "acquisition_method": "received_review_package",
+        "intake_status": "archived_pending_pipeline",
+        "source_archive": {
+          "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-004/packages-retained-20260910T221344Z.tar.gz",
+          "sha256": "88c61f9e39c5fd8e3ad2a09cb90d0aab4227054e1c8cf753e22b0aeb7affa78a",
+          "size_bytes": 47886306
+        },
+        "archive_member": "larimer/raw/fee_increase_memo.pdf",
+        "archive_member_sha256": "17a50621a9669c37876bef67cbeeba930d95b0520abc6a210a23bfd7f40b1d19",
+        "archive_member_size_bytes": 121743,
+        "archive_audit": {
+          "path": "/Users/mcoors/Documents/Project Geode/handoffs/atlas-reviews/sherlock-source-discovery-004/addendum-check-2026-09-10/package-audit.json",
+          "sha256": "01bd0723817a7fc48ea1fb294bc0730733e692ffbc53c1bde89c5646902a73c2",
+          "size_bytes": 53119
+        },
+        "claimed_official_source_url": "https://www.larimer.gov/sites/default/files/2026-fee-increase-memo.pdf",
+        "claimed_final_url": "https://www.larimer.gov/sites/default/files/2026-fee-increase-memo.pdf",
+        "claimed_attempt_sequence": 30,
+        "claimed_attempt_time": "2026-09-10T21:46:50Z",
+        "claimed_attempt_method": "curl",
+        "claimed_attempt_http_status": 200,
+        "attempt_log_member": "larimer/attempted_urls.json",
+        "attempt_log_sha256": "8237f396f3129d630de03f3b69d9f8c90524d97d13de2275b47ad4cce27cb3d3",
+        "original_acquisition_time": null,
+        "upstream_http_acquisition_independently_verified": false,
+        "supplied_member_mtime": "2026-09-10T21:46:50Z",
+        "caveats": [
+          "Raw-intake manifest line, intake receipt, original bytes and supplied archive member are independently hash-verified. This is local custody verification, not a witnessed original HTTP response.",
+          "Official URL, request outcome and attempt timestamp are supplied log claims. The member association is based on supplied log/filename correspondence; original acquisition time remains unknown.",
+          "Archive filesystem mtime is not proof of acquisition time. Actual repository intake, extraction and packet preparation times have distinct meanings.",
+          "No operative year, adoption/effective/publication date, amendment completeness, legal applicability or currentness is inferred from filename, URL or successful text extraction."
+        ]
+      },
+      "rendering": {
+        "engine": "Poppler pdftoppm",
+        "version": "26.05.0",
+        "command": "pdftoppm -r 300 -png original.pdf page",
+        "dpi": 300,
+        "scope": "entire PDF page; no crop, annotation, image edit or rescaling"
+      },
+      "candidate": {
+        "path": "02-candidate-text/larimer-fee-increase-memo-sd004-lc-09/candidate.txt",
+        "sha256": "5d8cbcad2b5c8dd72c8ba4092358607c78041a80457a56e7adac82e52bc1a768",
+        "size_bytes": 1369
+      },
+      "candidate_method_family": "native",
+      "candidate_status": "machine_native_text_unreviewed",
+      "candidate_changes": "none",
+      "candidate_packaging": "UTF-8; explicit physical-page markers added outside unchanged text slices",
+      "page_evidence_schema": {
+        "path": "02-candidate-text/page-evidence.schema.json",
+        "sha256": "4a21b13de58ac8bea392e8e3a085eb2109a113f8406e10d6913e20f4d50684ac",
+        "size_bytes": 12612
+      },
+      "pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "01-source-only/larimer-fee-increase-memo-sd004-lc-09/page-0001.png",
+            "sha256": "39b8e679e3709ec002883799412a21bc9bc6b60c6f0998fa44e81704fd8b853f",
+            "size_bytes": 268245
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/larimer-fee-increase-memo-sd004-lc-09/native-evidence/page-0001.json",
+            "sha256": "6d8eda8867776885ce8bf4599c14ed98f11fbacdc0178bf9e5cb05b0fab89558",
+            "size_bytes": 1916
+          },
+          "raw_engine_stdout": null,
+          "text_sha256": "dae0c668939e36f18d414236cca135fa5d90c75f0565293a6f686b74d05ec153",
+          "text_size_bytes": 1256,
+          "candidate_text_offset_bytes": 56,
+          "candidate_text_end_byte_exclusive": 1312
+        }
+      ],
+      "legal_currentness": "not_verified",
+      "legal_review": "pending"
+    }
+  ],
+  "supporting_payloads": [
+    {
+      "path": "START_HERE.md",
+      "sha256": "1e2a6d2b437bb07a25ccb5cc997dfe9109d298c7fa6bcb0ca00002f4e545f25d",
+      "size_bytes": 2406
+    },
+    {
+      "path": "PASS_1_PROMPT.md",
+      "sha256": "d0aca15aa7dd2b9c65fea091a19d6a41d9f3dfebe17ace4fef6315b707762862",
+      "size_bytes": 3082
+    },
+    {
+      "path": "PASS_2_PROMPT.md",
+      "sha256": "928f73f313cce70bde03ed197b92f8511ab530e2fe4ba42c1ab526a49ab07b0c",
+      "size_bytes": 3155
+    },
+    {
+      "path": "02-candidate-text/page-evidence.schema.json",
+      "sha256": "4a21b13de58ac8bea392e8e3a085eb2109a113f8406e10d6913e20f4d50684ac",
+      "size_bytes": 12612
+    }
+  ],
+  "assignment": {
+    "path": "/Users/mcoors/Documents/Project Geode/handoffs/EBENEZER_QUEUE_010_012_2026-09-11.md",
+    "sha256": "26040e759c5745e4c63ab033a751a6a7473dcca23c7ba64d037761cb3596c4c6",
+    "size_bytes": 4733
+  }
+}

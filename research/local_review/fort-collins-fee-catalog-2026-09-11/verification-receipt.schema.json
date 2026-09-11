@@ -1,0 +1,193 @@
+{
+  "$defs": {
+    "Capture": {
+      "additionalProperties": false,
+      "description": "Bind the new copy to the unchanged original capture artifact.",
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "frozen_file": {
+          "$ref": "#/$defs/File"
+        },
+        "exact_byte_equality_checked": {
+          "const": true,
+          "default": true,
+          "title": "Exact Byte Equality Checked",
+          "type": "boolean"
+        },
+        "observed_destination_birthtime": {
+          "format": "date-time",
+          "title": "Observed Destination Birthtime",
+          "type": "string"
+        },
+        "birthtime_role": {
+          "const": "filesystem birthtime observed after copy; not source retrieval",
+          "default": "filesystem birthtime observed after copy; not source retrieval",
+          "title": "Birthtime Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "original_path",
+        "frozen_file",
+        "observed_destination_birthtime"
+      ],
+      "title": "Capture",
+      "type": "object"
+    },
+    "File": {
+      "additionalProperties": false,
+      "description": "Bind one package-relative file to exact bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "size_bytes",
+        "sha256"
+      ],
+      "title": "File",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Describe finite source structure checks without semantic approval.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "status": {
+      "const": "source_snapshot_structured_pending_semantic_review",
+      "default": "source_snapshot_structured_pending_semantic_review",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "fort-collins-fee-catalog-atlas-sd004-14",
+      "default": "fort-collins-fee-catalog-atlas-sd004-14",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "source_capture_completed_at": {
+      "format": "date-time",
+      "title": "Source Capture Completed At",
+      "type": "string"
+    },
+    "originals": {
+      "items": {
+        "$ref": "#/$defs/Capture"
+      },
+      "title": "Originals",
+      "type": "array"
+    },
+    "package_files": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Package Files",
+      "type": "array"
+    },
+    "python_version": {
+      "title": "Python Version",
+      "type": "string"
+    },
+    "pydantic_version": {
+      "title": "Pydantic Version",
+      "type": "string"
+    },
+    "checks_passed": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks Passed",
+      "type": "array"
+    },
+    "pytest_passed": {
+      "const": 11,
+      "default": 11,
+      "title": "Pytest Passed",
+      "type": "integer"
+    },
+    "branch_inclusive_coverage_percent": {
+      "maximum": 100,
+      "minimum": 90,
+      "title": "Branch Inclusive Coverage Percent",
+      "type": "number"
+    },
+    "source_slice_hash_checks": {
+      "const": 5144,
+      "default": 5144,
+      "title": "Source Slice Hash Checks",
+      "type": "integer"
+    },
+    "semantic_review_completed": {
+      "const": false,
+      "default": false,
+      "title": "Semantic Review Completed",
+      "type": "boolean"
+    },
+    "network_requests_performed": {
+      "const": 0,
+      "default": 0,
+      "title": "Network Requests Performed",
+      "type": "integer"
+    },
+    "excluded_package_files": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Excluded Package Files",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "source_capture_completed_at",
+    "originals",
+    "package_files",
+    "python_version",
+    "pydantic_version",
+    "checks_passed",
+    "branch_inclusive_coverage_percent",
+    "excluded_package_files",
+    "limitations"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

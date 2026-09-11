@@ -1,0 +1,128 @@
+{
+  "source_id": "larimer-fee-increase-memo-sd004-lc-09",
+  "assignment_id": "EB-PDF-011",
+  "recorded_at": "2026-09-11T18:52:26.780409Z",
+  "status": "source_fidelity_verified_with_portability_qualification",
+  "legal_currentness": "not_verified",
+  "inspected_files": [
+    {
+      "path": "ATLAS_REVIEW.md",
+      "sha256": "6a13df4c2d57ed6abf19491332c3dc43a2e5f97509dd15bd484aa99c8da176da",
+      "size_bytes": 1463
+    },
+    {
+      "path": "candidate.txt",
+      "sha256": "5d8cbcad2b5c8dd72c8ba4092358607c78041a80457a56e7adac82e52bc1a768",
+      "size_bytes": 1369
+    },
+    {
+      "path": "custody/PROVENANCE_RESOLUTION.json",
+      "sha256": "83461b1ec54c0fc6946d4b5cd1c70198e241dfae6d8c0104892f02ec39e64beb",
+      "size_bytes": 4281
+    },
+    {
+      "path": "native-evidence/page-0001.json",
+      "sha256": "6d8eda8867776885ce8bf4599c14ed98f11fbacdc0178bf9e5cb05b0fab89558",
+      "size_bytes": 1916
+    },
+    {
+      "path": "packet-manifest.json",
+      "sha256": "36dcce0e4b4712069e663a7950c1c21ebd2ef31dc6a53321b0a59ba72cc59db4",
+      "size_bytes": 19980
+    },
+    {
+      "path": "packet-manifest.schema.json",
+      "sha256": "5c6a2e286bbd6dd2e49b3ed504db661ed96602b19df8123c485c9f76a55cdc54",
+      "size_bytes": 15896
+    },
+    {
+      "path": "page-0001.png",
+      "sha256": "39b8e679e3709ec002883799412a21bc9bc6b60c6f0998fa44e81704fd8b853f",
+      "size_bytes": 268245
+    },
+    {
+      "path": "reports/ATLAS_PRE_REVIEW.md",
+      "sha256": "b9240b9ce6545490c760e68ee928ecbc58f2b383c277058b6b895ca0940b984c",
+      "size_bytes": 2425
+    },
+    {
+      "path": "reports/COMPLETION_RECEIPT.json",
+      "sha256": "1d9a0a0476bc064c314542d97a69418bf64ab233e2b02f122e8c630181610386",
+      "size_bytes": 3237
+    },
+    {
+      "path": "reports/PASS1_FREEZE_RECEIPT.json",
+      "sha256": "5ce23f28d5f51770f34f50514c200803d67093c946dbd0bed5054032794897f8",
+      "size_bytes": 1680
+    },
+    {
+      "path": "reports/PASS1_frozen.md",
+      "sha256": "a4c4a3102cdd29e01402e80df4a35dac13cafcaf2809a26720bf45866cabd09a",
+      "size_bytes": 9680
+    },
+    {
+      "path": "reports/PASS2_REVIEW.md",
+      "sha256": "e11954f76e8bdb04ba907e117f221881ad14f991e933bd345b96a12e5b351d11",
+      "size_bytes": 10974
+    },
+    {
+      "path": "reviewed-native.json",
+      "sha256": "dfb2188e8bb732604fd8ce8084dcf53954ad2331ab3edc4512ed22cc8fe5bc13",
+      "size_bytes": 10990
+    },
+    {
+      "path": "reviewed-native.schema.json",
+      "sha256": "f05bebf8c6b3cf626da067dfa4e546b4dfd95c37b926d7f3d95a22d789beda5e",
+      "size_bytes": 5869
+    },
+    {
+      "path": "reviewed-native.txt",
+      "sha256": "dae0c668939e36f18d414236cca135fa5d90c75f0565293a6f686b74d05ec153",
+      "size_bytes": 1256
+    },
+    {
+      "path": "source.pdf",
+      "sha256": "17a50621a9669c37876bef67cbeeba930d95b0520abc6a210a23bfd7f40b1d19",
+      "size_bytes": 121743
+    }
+  ],
+  "verified_copy_receipts": 12,
+  "verified_reviewer_hash_references": 11,
+  "native_text_bytes": 1256,
+  "candidate_slice": [
+    56,
+    1312
+  ],
+  "topic_count": 2,
+  "source_pages": 1,
+  "image_sha256": "39b8e679e3709ec002883799412a21bc9bc6b60c6f0998fa44e81704fd8b853f",
+  "checks": [
+    "Pydantic review, packet and native evidence models validate the exact records.",
+    "Exported review and packet JSON schemas validate; review schema equals its model.",
+    "All 12 review copy receipts match size/hash and original file bytes.",
+    "All seven completion and four pass1 receipt hash references match actual files.",
+    "Source PDF is one structurally readable, unrepaired, unencrypted page.",
+    "Fresh PyMuPDF 1.28.2 sort=False flags=195 extraction equals all 1256 native bytes.",
+    "Candidate bytes [56,1312), native evidence, reviewed text and review text agree.",
+    "Two heading and two body ranges match exact native byte slices.",
+    "Independent full-page Poppler 26.05.0 300 dpi rendering matches PNG bytes exactly.",
+    "Complete page image was directly viewed at 1376x1780 from 2550x3300; wording, numbers, dates, enumerated table IDs and topic reading order agree.",
+    "The external frozen raw manifest has exact 24284 bytes, 12 records, and the specified line 11 hash and size."
+  ],
+  "findings": [
+    "No substantive wording, numeric, date or reading-order defect found.",
+    "Building 2.29% / July 1, 2026 applies in the memo to the enumerated Tables 1-A, 1-B, 1-C and 1-E; no missing table is supplied by inference.",
+    "Transportation topic retains October 1, 2026 and its separate paragraph; no percentage or fee amount is printed there or carried from the building topic.",
+    "Portability gap: frozen PROVENANCE_RESOLUTION names a handoffs-only historical raw manifest. Add its exact copy and exported resolution schema to this package, with a new package-relative receipt; do not edit frozen original references.",
+    "The native page-evidence schema is also referenced only in the original packet; copy that exact schema and identify its local resolution in the additive receipt.",
+    "The whole two-document packet manifest is historical context; EB010 payload paths are not EB011 missing-page failures. An additive map should explicitly enumerate EB011 payloads and distinguish remaining external custody context.",
+    "The review schema is typed and rejects extras but does not enforce all hash, path, date or cross-file checks itself. Acceptance here relies on independent exact checks, not schema validation alone."
+  ],
+  "limitations": [
+    "Exact codepoints, space counts, letter spacing, underline geometry and color values are not certified from the displayed raster. Unchanged native text is kept.",
+    "This audit read the candidate and reports; it is not a blind transcription.",
+    "External reviewer blindness/caption procedure and root prior-review chronology are documented method claims, not independently replayed actions.",
+    "Original upstream HTTP acquisition, underlying 2008 resolution, amendment completeness, legal applicability and currentness are not verified.",
+    "No new source URLs opened; no production or packet files changed."
+  ]
+}

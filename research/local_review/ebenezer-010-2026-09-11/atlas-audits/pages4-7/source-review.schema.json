@@ -1,0 +1,546 @@
+{
+  "$defs": {
+    "Binding": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Binding",
+      "type": "object"
+    },
+    "Diagnostic": {
+      "additionalProperties": false,
+      "properties": {
+        "file": {
+          "$ref": "#/$defs/Binding"
+        },
+        "source_kind": {
+          "enum": [
+            "original_pdf",
+            "original_png"
+          ],
+          "title": "Source Kind",
+          "type": "string"
+        },
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "method": {
+          "title": "Method",
+          "type": "string"
+        },
+        "region_coordinates": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Region Coordinates",
+          "type": "array"
+        },
+        "coordinate_units": {
+          "enum": [
+            "PDF_points",
+            "image_pixels"
+          ],
+          "title": "Coordinate Units",
+          "type": "string"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        }
+      },
+      "required": [
+        "file",
+        "source_kind",
+        "physical_page",
+        "method",
+        "region_coordinates",
+        "coordinate_units",
+        "purpose"
+      ],
+      "title": "Diagnostic",
+      "type": "object"
+    },
+    "FeeRow": {
+      "additionalProperties": false,
+      "properties": {
+        "row_id": {
+          "title": "Row Id",
+          "type": "string"
+        },
+        "label_as_printed": {
+          "title": "Label As Printed",
+          "type": "string"
+        },
+        "amount_as_printed": {
+          "title": "Amount As Printed",
+          "type": "string"
+        },
+        "parent_label_as_printed": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Parent Label As Printed"
+        },
+        "basis_as_printed": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Basis As Printed"
+        },
+        "conditions_as_printed": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Conditions As Printed",
+          "type": "array"
+        }
+      },
+      "required": [
+        "row_id",
+        "label_as_printed",
+        "amount_as_printed"
+      ],
+      "title": "FeeRow",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "finding_id": {
+          "title": "Finding Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 7,
+          "minimum": 4,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "region_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Region Ids",
+          "type": "array"
+        },
+        "classification": {
+          "enum": [
+            "material_association_risk",
+            "layout_only",
+            "source_punctuation_preserved"
+          ],
+          "title": "Classification",
+          "type": "string"
+        },
+        "native_excerpts": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Native Excerpts",
+          "type": "array"
+        },
+        "visible_source_association": {
+          "title": "Visible Source Association",
+          "type": "string"
+        },
+        "minimal_action": {
+          "title": "Minimal Action",
+          "type": "string"
+        },
+        "external_report_consulted": {
+          "const": false,
+          "default": false,
+          "title": "External Report Consulted",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "finding_id",
+        "physical_page",
+        "region_ids",
+        "classification",
+        "native_excerpts",
+        "visible_source_association",
+        "minimal_action"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "PageCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "maximum": 7,
+          "minimum": 4,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "printed_page_label": {
+          "title": "Printed Page Label",
+          "type": "string"
+        },
+        "image": {
+          "$ref": "#/$defs/Binding"
+        },
+        "native_evidence": {
+          "$ref": "#/$defs/Binding"
+        },
+        "text_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Text Sha256",
+          "type": "string"
+        },
+        "candidate_offset_start": {
+          "title": "Candidate Offset Start",
+          "type": "integer"
+        },
+        "candidate_offset_end": {
+          "title": "Candidate Offset End",
+          "type": "integer"
+        },
+        "native_reproduced_exactly": {
+          "const": true,
+          "default": true,
+          "title": "Native Reproduced Exactly",
+          "type": "boolean"
+        },
+        "candidate_slice_matches_exactly": {
+          "const": true,
+          "default": true,
+          "title": "Candidate Slice Matches Exactly",
+          "type": "boolean"
+        },
+        "full_page_visually_inspected": {
+          "const": true,
+          "default": true,
+          "title": "Full Page Visually Inspected",
+          "type": "boolean"
+        },
+        "region_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Region Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "physical_page",
+        "printed_page_label",
+        "image",
+        "native_evidence",
+        "text_sha256",
+        "candidate_offset_start",
+        "candidate_offset_end",
+        "region_ids"
+      ],
+      "title": "PageCheck",
+      "type": "object"
+    },
+    "Region": {
+      "additionalProperties": false,
+      "properties": {
+        "region_id": {
+          "title": "Region Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 7,
+          "minimum": 4,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Image Sha256",
+          "type": "string"
+        },
+        "region_description": {
+          "title": "Region Description",
+          "type": "string"
+        },
+        "headings_as_printed": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Headings As Printed",
+          "type": "array"
+        },
+        "fee_rows": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/FeeRow"
+          },
+          "title": "Fee Rows",
+          "type": "array"
+        },
+        "statements_as_printed": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Statements As Printed",
+          "type": "array"
+        },
+        "association_notes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Association Notes",
+          "type": "array"
+        },
+        "status": {
+          "const": "rendered_region_checked_pending_integration",
+          "default": "rendered_region_checked_pending_integration",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "region_id",
+        "physical_page",
+        "image_sha256",
+        "region_description",
+        "headings_as_printed"
+      ],
+      "title": "Region",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source_id": {
+      "const": "larimer-development-review-fees-sd004-07",
+      "default": "larimer-development-review-fees-sd004-07",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "assignment_id": {
+      "const": "EB-PDF-010",
+      "default": "EB-PDF-010",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "reviewer": {
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "review_status": {
+      "const": "pages4_7_regions_checked_pending_integration",
+      "default": "pages4_7_regions_checked_pending_integration",
+      "title": "Review Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "legal_applicability": {
+      "const": "not_assessed",
+      "default": "not_assessed",
+      "title": "Legal Applicability",
+      "type": "string"
+    },
+    "source_original": {
+      "$ref": "#/$defs/Binding"
+    },
+    "canonical_raw_original": {
+      "$ref": "#/$defs/Binding"
+    },
+    "packet_manifest": {
+      "$ref": "#/$defs/Binding"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Binding"
+    },
+    "page_evidence_schema": {
+      "$ref": "#/$defs/Binding"
+    },
+    "expected_document_pages": {
+      "const": 7,
+      "default": 7,
+      "title": "Expected Document Pages",
+      "type": "integer"
+    },
+    "reviewed_physical_pages": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Reviewed Physical Pages",
+      "type": "array"
+    },
+    "not_reviewed_physical_pages": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Not Reviewed Physical Pages",
+      "type": "array"
+    },
+    "claimed_official_source_url": {
+      "title": "Claimed Official Source Url",
+      "type": "string"
+    },
+    "source_acquisition_verification": {
+      "const": "supplied_claim_not_independently_replayed",
+      "default": "supplied_claim_not_independently_replayed",
+      "title": "Source Acquisition Verification",
+      "type": "string"
+    },
+    "native_engine": {
+      "title": "Native Engine",
+      "type": "string"
+    },
+    "native_engine_version": {
+      "title": "Native Engine Version",
+      "type": "string"
+    },
+    "native_settings": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "boolean"
+          }
+        ]
+      },
+      "title": "Native Settings",
+      "type": "object"
+    },
+    "review_sequence": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Review Sequence",
+      "type": "array"
+    },
+    "external_reports_consulted": {
+      "items": {
+        "type": "string"
+      },
+      "title": "External Reports Consulted",
+      "type": "array"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/PageCheck"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "checked_regions": {
+      "items": {
+        "$ref": "#/$defs/Region"
+      },
+      "title": "Checked Regions",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "diagnostic_crops": {
+      "items": {
+        "$ref": "#/$defs/Diagnostic"
+      },
+      "title": "Diagnostic Crops",
+      "type": "array"
+    },
+    "fee_rows_checked": {
+      "title": "Fee Rows Checked",
+      "type": "integer"
+    },
+    "all_inputs_unchanged": {
+      "const": true,
+      "default": true,
+      "title": "All Inputs Unchanged",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "reviewed_at",
+    "reviewer",
+    "source_original",
+    "canonical_raw_original",
+    "packet_manifest",
+    "candidate",
+    "page_evidence_schema",
+    "reviewed_physical_pages",
+    "not_reviewed_physical_pages",
+    "claimed_official_source_url",
+    "native_engine",
+    "native_engine_version",
+    "native_settings",
+    "review_sequence",
+    "external_reports_consulted",
+    "pages",
+    "checked_regions",
+    "findings",
+    "diagnostic_crops",
+    "fee_rows_checked",
+    "limitations"
+  ],
+  "title": "Review",
+  "type": "object"
+}

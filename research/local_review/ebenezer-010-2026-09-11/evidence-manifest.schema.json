@@ -1,0 +1,111 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "One immutable repository file binding.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Exact package inventory; its own bytes are the sole inventory exclusion.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "assignment_id": {
+      "const": "EB-PDF-010",
+      "default": "EB-PDF-010",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "larimer-development-review-fees-sd004-07",
+      "default": "larimer-development-review-fees-sd004-07",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "status": {
+      "const": "bounded_source_review_preserved",
+      "title": "Status",
+      "type": "string"
+    },
+    "package_path": {
+      "const": "research/local_review/ebenezer-010-2026-09-11",
+      "title": "Package Path",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "source_original": {
+      "$ref": "#/$defs/Asset"
+    },
+    "file_count": {
+      "minimum": 1,
+      "title": "File Count",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "no_coverage_or_semantic_promotion": {
+      "const": true,
+      "default": true,
+      "title": "No Coverage Or Semantic Promotion",
+      "type": "boolean"
+    },
+    "full_corpus_validation": {
+      "const": "not_run_by_this_bounded_intake",
+      "title": "Full Corpus Validation",
+      "type": "string"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "status",
+    "package_path",
+    "files",
+    "source_original",
+    "file_count",
+    "full_corpus_validation"
+  ],
+  "title": "EvidenceManifest",
+  "type": "object"
+}

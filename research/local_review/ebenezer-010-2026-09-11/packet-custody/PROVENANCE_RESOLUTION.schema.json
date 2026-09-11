@@ -1,0 +1,116 @@
+{
+  "$defs": {
+    "FileRef": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "verified_at": {
+      "format": "date-time",
+      "title": "Verified At",
+      "type": "string"
+    },
+    "packet_manifest": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "original_bound_raw_manifest": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "immutable_resolution": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "copy_filesystem_mtime": {
+      "format": "date-time",
+      "title": "Copy Filesystem Mtime",
+      "type": "string"
+    },
+    "record_count": {
+      "const": 12,
+      "default": 12,
+      "title": "Record Count",
+      "type": "integer"
+    },
+    "reason": {
+      "const": "The original absolute raw-manifest path is appendable. Resolve its exact historical hash to this byte-identical preserved copy; source/raw-record identities are unchanged.",
+      "default": "The original absolute raw-manifest path is appendable. Resolve its exact historical hash to this byte-identical preserved copy; source/raw-record identities are unchanged.",
+      "title": "Reason",
+      "type": "string"
+    },
+    "inspected_active_sources": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Inspected Active Sources",
+      "type": "array"
+    },
+    "other_external_references": {
+      "items": {
+        "$ref": "#/$defs/FileRef"
+      },
+      "title": "Other External References",
+      "type": "array"
+    },
+    "checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "status": {
+      "const": "byte_integrity_verified_pending_independent_transcription",
+      "default": "byte_integrity_verified_pending_independent_transcription",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "verified_at",
+    "packet_manifest",
+    "original_bound_raw_manifest",
+    "immutable_resolution",
+    "copy_filesystem_mtime",
+    "inspected_active_sources",
+    "other_external_references",
+    "checks"
+  ],
+  "title": "Resolution",
+  "type": "object"
+}
