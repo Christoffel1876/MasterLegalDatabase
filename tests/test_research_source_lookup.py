@@ -245,3 +245,354 @@ def test_real_cli_is_read_only_with_optimized_parent(copied_root: Path) -> None:
     after = {p.relative_to(copied_root): hashlib.sha256(p.read_bytes()).hexdigest()
              for p in copied_root.rglob("*") if p.is_file()}
     assert before == after
+
+
+@pytest.fixture
+def greeley_root(tmp_path: Path) -> Path:
+    """Use an isolated copy of the actual frozen three-source custody package."""
+    shutil.copytree(ROOT / lookup.GREELEY_PACKAGE, tmp_path / lookup.GREELEY_PACKAGE,
+                    ignore=shutil.ignore_patterns("__pycache__"), copy_function=shutil.copyfile)
+    return tmp_path
+
+
+def reseal_greeley(root: Path, review: dict, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Update test-only outer identities so the unchanged verifier checks associations."""
+    package = root / lookup.GREELEY_PACKAGE
+    review_path = package / lookup.GREELEY_REVIEW
+    review_path.write_text(json.dumps(review), encoding="utf-8")
+    manifest_path = package / "PACKAGE.json"
+    manifest = json.loads(manifest_path.read_bytes())
+
+    def replace_ref(value: object) -> None:
+        if isinstance(value, dict):
+            if value.get("path") == lookup.GREELEY_REVIEW:
+                value.update(sha256=lookup._digest(review_path),
+                             size_bytes=review_path.stat().st_size)
+            for child in value.values():
+                replace_ref(child)
+        elif isinstance(value, list):
+            for child in value:
+                replace_ref(child)
+
+    replace_ref(manifest)
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    saved_path = package / "VALIDATION.json"
+    saved = json.loads(saved_path.read_bytes())
+    saved["package"].update(sha256=lookup._digest(manifest_path),
+                            size_bytes=manifest_path.stat().st_size)
+    saved_path.write_text(json.dumps(saved), encoding="utf-8")
+    for path in [review_path, manifest_path, saved_path]:
+        monkeypatch.setitem(lookup.GREELEY_PINS, path.relative_to(package).as_posix(),
+                            lookup._digest(path))
+
+
+def test_greeley_complete_distinct_entries_and_native_partition() -> None:
+    """List all nineteen whole clauses plus ten contexts without invented fee columns."""
+    result = lookup.lookup(ROOT, lookup.GREELEY_SOURCE_ID, list_rows=True)
+    assert isinstance(result, lookup.GreeleyLookupResult)
+    assert len(result.entries) == len({e.entry_id for e in result.entries}) == 19
+    assert len(result.context) == 10
+    assert not hasattr(result, "rows")
+    assert result.authority_id == result.source.authority_id == "CO-MUNICIPAL-GREELEY"
+    blocks = [e.statement for e in result.entries] + result.context
+    assert len({b.id for b in blocks}) == 29
+    ordered = sorted(blocks, key=lambda b: b.native_start)
+    assert ordered[0].native_start == 0 and ordered[-1].native_end == 3236
+    assert all(a.native_end == b.native_start for a, b in zip(ordered, ordered[1:]))
+    for block in blocks:
+        assert block.candidate_start == block.native_start + 56
+        raw = Path(block.candidate_path).read_bytes()[block.candidate_start:block.candidate_end]
+        assert raw == block.text.encode()
+        assert hashlib.sha256(raw).hexdigest() == block.sha256
+        assert block.byte_basis == "utf8_candidate_file_with_page_marker"
+    assert all("fee" not in entry.model_dump() for entry in result.entries)
+    assert result.external_review_status == "pending_not_intaken"
+
+
+def test_greeley_all_minima_cost_footnotes_and_payment_conditions() -> None:
+    """Hourly prices retain their greater-cost footnote and distinct minimum durations."""
+    result = lookup.lookup(ROOT, lookup.GREELEY_SOURCE_ID, list_rows=True)
+    by_id = {e.entry_id: e for e in result.entries}
+    for i in range(1, 5):
+        entry = by_id[f"other_{i}"]
+        assert "$75.00 per hour1" in entry.statement.text
+        assert [b.id for b in entry.footnotes] == ["footnote_1"]
+        assert "whichever is the greatest" in entry.footnotes[0].text
+        assert "supervision, overhead, equipment, hourly wages" in entry.footnotes[0].text
+    assert "minimum charge, two hours" in by_id["other_1"].statement.text
+    assert "Section 109.8" in by_id["other_2"].statement.text
+    assert "minimum charge, one-half hour" in by_id["other_3"].statement.text
+    assert "one-half \nhour" in by_id["other_4"].statement.text
+    assert [b.id for b in by_id["other_5"].footnotes] == ["footnote_2"]
+    assert "administrative and overhead costs" in by_id["other_5"].footnotes[0].text
+    major = by_id["other_6"].statement.text
+    assert all(s in major for s in ["Section 106", "time of submitting", "65 percent",
+                                    "separate fees", "in \naddition to the permit fees"])
+    assert "under 1,000 square feet" in by_id["other_7"].statement.text
+    assert ("$175 per application for SFD and $175 for multi-family"
+            in by_id["other_9"].statement.text)
+    assert "or fraction" in by_id["valuation_8"].statement.text
+
+
+def test_greeley_displaced_headings_tax_branches_and_uncomputed_formulas() -> None:
+    """Each late body keeps its own displaced heading and all branching conditions."""
+    tax = lookup.lookup(ROOT, lookup.GREELEY_SOURCE_ID, "sales tax").entries
+    assert [e.entry_id for e in tax] == ["sales_tax_body"]
+    assert tax[0].headings[-1].id == "sales_tax_heading"
+    assert tax[0].headings[-1].native_end < tax[0].statement.native_start
+    assert all(s in tax[0].statement.text for s in [
+        "4.11% of 45%", "$75,000", "or less per \nunit", "all other construction",
+        "4.11% of 50%",
+    ])
+    electrical = lookup.lookup(ROOT, lookup.GREELEY_SOURCE_ID, "temporary electrical")
+    assert [e.entry_id for e in electrical.entries] == ["temporary_electrical_body"]
+    item = electrical.entries[0]
+    assert item.headings[-1].id == "temporary_electrical_heading"
+    assert "$45.00 per inspection" in item.statement.text
+    assert "single-family dwellings, multi-family dwellings, and commercial" in item.statement.text
+    hourly = lookup.lookup(ROOT, lookup.GREELEY_SOURCE_ID, "whichever is the greatest")
+    assert [e.entry_id for e in hourly.entries] == [f"other_{i}" for i in range(1, 5)]
+
+
+def test_greeley_provenance_and_ambiguous_date_roles_are_separate() -> None:
+    """Receipt and filename/year claims cannot become verified acquisition or legal dates."""
+    result = lookup.lookup(ROOT, lookup.GREELEY_SOURCE_ID, "major plan review")
+    source = result.source
+    assert source.official_source_url is source.original_acquisition_time is None
+    assert source.acquisition_method == "received_review_package"
+    assert source.intake_status == "archived_pending_pipeline"
+    assert source.received_at.isoformat() == "2026-09-11T19:15:24.670419+00:00"
+    assert source.reported_acquisition_at.isoformat() == "2026-09-11T18:50:31+00:00"
+    assert source.reviewed_at.isoformat() == "2026-09-11T19:28:50.209076+00:00"
+    assert "greeleyco.gov" in source.official_referral_url
+    assert "sitecorecontenthub.cloud" in source.reported_requested_url
+    assert result.adoption_date is result.effective_date is result.source_edition_date is None
+    assert [d.role for d in result.date_statements] == [
+        "schedule_title_year", "effective_heading_year", "unlabeled_footer",
+    ]
+    assert "2024 Building" in result.date_statements[0].evidence.text
+    assert "Effective -2024" in result.date_statements[1].evidence.text
+    assert result.date_statements[2].evidence.text == "8/18/2026 \n"
+    rendered = lookup.render_markdown(result)
+    assert "Official referral page" in rendered and "Reported download URL" in rendered
+    assert "[Official source]" not in rendered
+    assert "Receipt time is not acquisition time" in rendered
+    assert "additional short horizontal mark" in rendered
+
+
+@pytest.mark.parametrize("field,value", [
+    ("answer_safe", True), ("effective_date", "2024-01-01"),
+    ("external_review_status", "verified"), ("authority_id", "CO-COUNTY-WELD"),
+])
+def test_greeley_output_cannot_promote_status(field: str, value: object) -> None:
+    """The distinct output contract refuses currentness, owner or external-review changes."""
+    empty = lookup.GreeleyLookupResult(
+        status="no_matching_row", query="x", evidence_verified=False, entries=[],
+        context=[], date_statements=[], observations=[],
+    ).model_dump()
+    with pytest.raises(ValidationError):
+        lookup.GreeleyLookupResult.model_validate({**empty, field: value})
+
+
+@pytest.mark.parametrize("query", [
+    "current fees", "What does a permit cost?", "calculate total cost", "legally effective",
+])
+def test_greeley_refusal_before_file_access(query: str, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Question or current-law requests do not execute any package verifier."""
+    monkeypatch.setattr(lookup, "_load_greeley_verified", lambda _: pytest.fail("must not load"))
+    result = lookup.lookup(ROOT, lookup.GREELEY_SOURCE_ID, query)
+    assert result.status == "refused_current_law" and not result.evidence_verified
+    assert result.entries == [] and result.context == [] and result.source is None
+    assert "Request refused" in lookup.render_markdown(result)
+
+
+@pytest.mark.parametrize("source", [
+    "greeley-development-impact-fees-sd008-07", "greeley-water-sewer-pif-sd008-08", "EB-PDF-016",
+])
+def test_other_packaged_greeley_sources_inaccessible(source: str) -> None:
+    """Verifying the custody package does not expose its other source documents."""
+    with pytest.raises(ValueError, match="Unsupported source"):
+        lookup.lookup(ROOT, source, list_rows=True)
+
+
+@pytest.mark.parametrize("mutation", [
+    "footnote", "heading_order", "offset", "omitted_span", "minimum", "timing", "tax_condition",
+])
+def test_greeley_resealed_semantic_mutations_fail(
+    greeley_root: Path, monkeypatch: pytest.MonkeyPatch, mutation: str,
+) -> None:
+    """Outer hashes are not sufficient when fee/condition/source associations are altered."""
+    path = greeley_root / lookup.GREELEY_PACKAGE / lookup.GREELEY_REVIEW
+    data = json.loads(path.read_bytes())
+    if mutation == "footnote":
+        data["footnote_links"]["other_1"] = "footnote_2"
+    elif mutation == "heading_order":
+        a = data["source_order"].index("sales_tax_heading")
+        b = data["source_order"].index("temporary_electrical_heading")
+        data["source_order"][a], data["source_order"][b] = (
+            data["source_order"][b], data["source_order"][a])
+    elif mutation == "offset":
+        data["candidate_native_start"] = 55
+    elif mutation == "omitted_span":
+        data["spans"].pop()
+    else:
+        label, old = {
+            "minimum": ("other_1", " (minimum charge, two hours)"),
+            "timing": ("other_6", "the time of submitting plans and specifications for review"),
+            "tax_condition": ("sales_tax_body", "or less per \nunit"),
+        }[mutation]
+        span = next(s for s in data["spans"] if s["label"] == label)
+        assert old in span["text"]
+        span["text"] = span["text"].replace(old, "")
+        span["sha256"] = hashlib.sha256(span["text"].encode()).hexdigest()
+    reseal_greeley(greeley_root, data, monkeypatch)
+    with pytest.raises(ValueError, match="source-package verification failed"):
+        lookup.lookup(greeley_root, lookup.GREELEY_SOURCE_ID, "plan review")
+
+
+@pytest.mark.parametrize("name", [
+    "validate_package.py", "package_models.py", "packet/04-verification/verify_packet.py",
+    "source-audits/EB-PDF-016/build_review.py",
+    "source-audits/EB-PDF-017/review_models.py",
+    "source-audits/EB-PDF-017/validate_source_review.py", lookup.GREELEY_PDF,
+])
+def test_greeley_dependencies_pinned_before_execution(
+    greeley_root: Path, monkeypatch: pytest.MonkeyPatch, name: str,
+) -> None:
+    """A changed transitive verifier or source cannot run before its pin is checked."""
+    path = greeley_root / lookup.GREELEY_PACKAGE / name
+    path.write_bytes(path.read_bytes() + b"changed")
+    monkeypatch.setattr(lookup.subprocess, "run", lambda *a, **k: pytest.fail("must not execute"))
+    with pytest.raises(ValueError, match="mismatch"):
+        lookup.lookup(greeley_root, lookup.GREELEY_SOURCE_ID, "inspection")
+
+
+def test_greeley_no_match_and_exact_numeric_search_boundaries() -> None:
+    """A substring of 1,000 is not an unstated zero tier or an exemption."""
+    for phrase in ["0 square feet", "unlisted submarine inspection"]:
+        result = lookup.lookup(ROOT, lookup.GREELEY_SOURCE_ID, phrase)
+        assert result.entries == [] and result.status == "no_matching_row"
+        assert result.evidence_verified and not result.answer_safe
+        assert "does not establish" in lookup.render_markdown(result)
+
+
+def test_greeley_cli_portable_read_only_and_isolated(greeley_root: Path) -> None:
+    """The actual isolated wrapper runs portably even under an optimized parent."""
+    before = {p.relative_to(greeley_root): lookup._digest(p)
+              for p in greeley_root.rglob("*") if p.is_file()}
+    result = subprocess.run(
+        [sys.executable, "-O", "-B", str(ROOT / "scripts/research_source_lookup.py"),
+         "--root", str(greeley_root), "--source-id", lookup.GREELEY_SOURCE_ID,
+         "--query", "inspections outside", "--format", "json"],
+        text=True, capture_output=True, timeout=30,
+    )
+    assert result.returncode == 0, result.stderr
+    data = json.loads(result.stdout)
+    assert data["entries"][0]["entry_id"] == "other_1"
+    assert data["entries"][0]["footnotes"][0]["id"] == "footnote_1"
+    after = {p.relative_to(greeley_root): lookup._digest(p)
+             for p in greeley_root.rglob("*") if p.is_file()}
+    assert before == after
+
+
+@pytest.mark.parametrize("kind", ["extra", "missing", "symlink", "oversized"])
+def test_greeley_inventory_cannot_hide_substitution(
+    greeley_root: Path, monkeypatch: pytest.MonkeyPatch, kind: str,
+) -> None:
+    """Closed scope, ordinary files and size limits apply before execution."""
+    package = greeley_root / lookup.GREELEY_PACKAGE
+    path = package / "source-audits/EB-PDF-015/page-0001.png"
+    if kind == "extra":
+        (package / "unlisted.py").write_text("raise RuntimeError('must never run')")
+    elif kind == "missing":
+        path.unlink()
+    elif kind == "symlink":
+        original = greeley_root / "same-image.png"
+        original.write_bytes(path.read_bytes())
+        path.unlink()
+        path.symlink_to(original)
+    else:
+        with path.open("wb") as handle:
+            handle.truncate(20_000_001)
+    monkeypatch.setattr(lookup.subprocess, "run", lambda *a, **k: pytest.fail("must not execute"))
+    with pytest.raises(ValueError):
+        lookup.lookup(greeley_root, lookup.GREELEY_SOURCE_ID, "inspection")
+
+
+@pytest.mark.parametrize("outcome", ["timeout", "failed", "bad_json", "bad_receipt"])
+def test_greeley_validator_failure_never_returns_partial_evidence(
+    greeley_root: Path, monkeypatch: pytest.MonkeyPatch, outcome: str,
+) -> None:
+    """A complete successful typed scope receipt is required, even after good pins."""
+    def fail(*args: object, **kwargs: object) -> subprocess.CompletedProcess:
+        if outcome == "timeout":
+            raise subprocess.TimeoutExpired("frozen verifier", 30)
+        if outcome == "failed":
+            raise subprocess.CalledProcessError(1, "frozen verifier")
+        value = "not-json" if outcome == "bad_json" else json.dumps({"status": "failed"})
+        return subprocess.CompletedProcess("frozen verifier", 0, stdout=value, stderr="")
+    monkeypatch.setattr(lookup.subprocess, "run", fail)
+    with pytest.raises(ValueError, match="source-package verification failed"):
+        lookup.lookup(greeley_root, lookup.GREELEY_SOURCE_ID, "inspection")
+
+
+def test_greeley_post_verification_change_fails(greeley_root: Path,
+                                               monkeypatch: pytest.MonkeyPatch) -> None:
+    """A valid verifier result cannot excuse evidence changed during its execution."""
+    run = lookup.subprocess.run
+
+    def change(*args: object, **kwargs: object) -> subprocess.CompletedProcess:
+        result = run(*args, **kwargs)
+        path = greeley_root / lookup.GREELEY_PACKAGE / "source-audits/EB-PDF-015/candidate.txt"
+        path.write_bytes(path.read_bytes() + b"after verification")
+        return result
+
+    monkeypatch.setattr(lookup.subprocess, "run", change)
+    with pytest.raises(ValueError, match="mismatch"):
+        lookup.lookup(greeley_root, lookup.GREELEY_SOURCE_ID, "inspection")
+
+
+@pytest.mark.parametrize("field,value", [
+    ("candidate_start", 0), ("candidate_end", 1), ("native_start", 1),
+    ("text", "changed"), ("sha256", "0" * 64),
+])
+def test_greeley_binding_does_not_confuse_candidate_with_native(
+    field: str, value: object,
+) -> None:
+    """The output model itself rejects offset, text and hash inconsistencies."""
+    data = {
+        "id": "example", "text": "A", "candidate_path": "candidate.txt",
+        "native_start": 0, "native_end": 1, "candidate_start": 56, "candidate_end": 57,
+        "sha256": hashlib.sha256(b"A").hexdigest(),
+    }
+    with pytest.raises(ValidationError, match="byte binding mismatch"):
+        lookup.GreeleyBlock.model_validate({**data, field: value})
+
+
+@pytest.mark.parametrize("field,value", [
+    ("official_source_url", "https://example.gov"),
+    ("original_acquisition_time", "2026-09-11T19:15:24.670419Z"),
+    ("acquisition_method", "official_download"),
+    ("upstream_http_acquisition_independently_verified", True),
+])
+def test_greeley_custody_model_rejects_acquisition_relabeling(field: str, value: object) -> None:
+    """Known receipt custody cannot silently be described as a witnessed official fetch."""
+    result = lookup.lookup(ROOT, lookup.GREELEY_SOURCE_ID, "major plan review")
+    with pytest.raises(ValidationError):
+        lookup.GreeleySourceBinding.model_validate_json(json.dumps({
+            **result.source.model_dump(mode="json"), field: value,
+        }))
+
+
+def test_greeley_cli_list_refusal_and_owner_separation(capsys: pytest.CaptureFixture[str]) -> None:
+    """CLI returns the distinct adapter and keeps legal refusal and authority IDs explicit."""
+    base = ["--source-id", lookup.GREELEY_SOURCE_ID, "--format", "json"]
+    assert lookup.main(base + ["--list-rows"]) == 0
+    data = json.loads(capsys.readouterr().out)
+    assert len(data["entries"]) == 19 and "rows" not in data
+    assert data["source_id"] != data["authority_id"]
+    assert lookup.main(base + ["--list-rows", "--mode", "current-law"]) == 2
+    assert json.loads(capsys.readouterr().out)["entries"] == []
+    gj = lookup.lookup(ROOT, lookup.SOURCE_ID, "burn permit")
+    assert gj.authority_id == gj.source.authority_id == "CO-MUNICIPAL-GRAND_JUNCTION"
+    assert gj.source_id != gj.authority_id
