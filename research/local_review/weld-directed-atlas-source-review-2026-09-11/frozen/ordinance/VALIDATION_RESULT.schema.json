@@ -1,0 +1,126 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "validated_at": {
+      "format": "date-time",
+      "title": "Validated At",
+      "type": "string"
+    },
+    "status": {
+      "const": "passed",
+      "title": "Status",
+      "type": "string"
+    },
+    "review": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_pdf_bytes": {
+      "const": 125953,
+      "title": "Source Pdf Bytes",
+      "type": "integer"
+    },
+    "source_pages": {
+      "const": 5,
+      "title": "Source Pages",
+      "type": "integer"
+    },
+    "native_bytes": {
+      "const": 9284,
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "page_observations": {
+      "const": 18,
+      "title": "Page Observations",
+      "type": "integer"
+    },
+    "stated_date_records": {
+      "const": 11,
+      "title": "Stated Date Records",
+      "type": "integer"
+    },
+    "images_bound": {
+      "const": 8,
+      "title": "Images Bound",
+      "type": "integer"
+    },
+    "crops_reproduced": {
+      "const": 11,
+      "title": "Crops Reproduced",
+      "type": "integer"
+    },
+    "selected_custody_files": {
+      "const": 6,
+      "title": "Selected Custody Files",
+      "type": "integer"
+    },
+    "original_paths_checked": {
+      "title": "Original Paths Checked",
+      "type": "boolean"
+    },
+    "candidate_or_source_changed": {
+      "const": false,
+      "title": "Candidate Or Source Changed",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks",
+      "type": "array"
+    }
+  },
+  "required": [
+    "validated_at",
+    "status",
+    "review",
+    "source_pdf_bytes",
+    "source_pages",
+    "native_bytes",
+    "page_observations",
+    "stated_date_records",
+    "images_bound",
+    "crops_reproduced",
+    "selected_custody_files",
+    "original_paths_checked",
+    "candidate_or_source_changed",
+    "legal_currentness",
+    "checks"
+  ],
+  "title": "ValidationResult",
+  "type": "object"
+}
