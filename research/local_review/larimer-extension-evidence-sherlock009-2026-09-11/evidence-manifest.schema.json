@@ -1,0 +1,83 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "A normalized confined relative path and exact byte identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Inventory actual package files separately from historical delivery counts.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "file_count": {
+      "exclusiveMinimum": 0,
+      "title": "File Count",
+      "type": "integer"
+    },
+    "listed_bytes": {
+      "exclusiveMinimum": 0,
+      "title": "Listed Bytes",
+      "type": "integer"
+    },
+    "excludes_own_bytes": {
+      "const": true,
+      "default": true,
+      "title": "Excludes Own Bytes",
+      "type": "boolean"
+    },
+    "status": {
+      "const": "research_evidence_only",
+      "default": "research_evidence_only",
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "files",
+    "file_count",
+    "listed_bytes"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

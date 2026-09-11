@@ -1,0 +1,61 @@
+{
+  "$defs": {
+    "FileRef": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "frozen_at": {
+      "format": "date-time",
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "assignment": {
+      "title": "Assignment",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/FileRef"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "frozen_at",
+    "assignment",
+    "files",
+    "legal_currentness"
+  ],
+  "title": "FinalManifest",
+  "type": "object"
+}

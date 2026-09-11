@@ -1,0 +1,575 @@
+{
+  "$defs": {
+    "AcquisitionSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "consolidated_rows": {
+          "const": 13,
+          "title": "Consolidated Rows",
+          "type": "integer"
+        },
+        "reported_public_events": {
+          "const": 12,
+          "title": "Reported Public Events",
+          "type": "integer"
+        },
+        "local_reread_events": {
+          "const": 1,
+          "title": "Local Reread Events",
+          "type": "integer"
+        },
+        "distinct_public_targets": {
+          "const": 9,
+          "title": "Distinct Public Targets",
+          "type": "integer"
+        },
+        "distinct_https_urls": {
+          "const": 8,
+          "title": "Distinct Https Urls",
+          "type": "integer"
+        },
+        "distinct_search_queries": {
+          "const": 1,
+          "title": "Distinct Search Queries",
+          "type": "integer"
+        },
+        "minimum_public_attempts_supported": {
+          "const": 13,
+          "title": "Minimum Public Attempts Supported",
+          "type": "integer"
+        },
+        "exact_public_event_count": {
+          "title": "Exact Public Event Count",
+          "type": "null"
+        },
+        "exact_event_completeness_verified": {
+          "const": false,
+          "title": "Exact Event Completeness Verified",
+          "type": "boolean"
+        },
+        "max_public_events": {
+          "const": 30,
+          "title": "Max Public Events",
+          "type": "integer"
+        },
+        "max_distinct_targets": {
+          "const": 20,
+          "title": "Max Distinct Targets",
+          "type": "integer"
+        },
+        "cap_breach_demonstrated": {
+          "const": false,
+          "title": "Cap Breach Demonstrated",
+          "type": "boolean"
+        },
+        "cap_compliance_certified": {
+          "const": false,
+          "title": "Cap Compliance Certified",
+          "type": "boolean"
+        },
+        "browser_http_status_verified": {
+          "const": false,
+          "title": "Browser Http Status Verified",
+          "type": "boolean"
+        },
+        "browser_acquisition_times_verified": {
+          "const": false,
+          "title": "Browser Acquisition Times Verified",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "consolidated_rows",
+        "reported_public_events",
+        "local_reread_events",
+        "distinct_public_targets",
+        "distinct_https_urls",
+        "distinct_search_queries",
+        "minimum_public_attempts_supported",
+        "exact_public_event_count",
+        "exact_event_completeness_verified",
+        "max_public_events",
+        "max_distinct_targets",
+        "cap_breach_demonstrated",
+        "cap_compliance_certified",
+        "browser_http_status_verified",
+        "browser_acquisition_times_verified"
+      ],
+      "title": "AcquisitionSummary",
+      "type": "object"
+    },
+    "CustodySummary": {
+      "additionalProperties": false,
+      "properties": {
+        "files": {
+          "minimum": 1,
+          "title": "Files",
+          "type": "integer"
+        },
+        "bytes": {
+          "minimum": 1,
+          "title": "Bytes",
+          "type": "integer"
+        },
+        "symlinks": {
+          "const": 0,
+          "title": "Symlinks",
+          "type": "integer"
+        },
+        "advertised_hashes_checked": {
+          "const": 6,
+          "title": "Advertised Hashes Checked",
+          "type": "integer"
+        },
+        "top_level_aliases_checked": {
+          "const": 5,
+          "title": "Top Level Aliases Checked",
+          "type": "integer"
+        },
+        "nested_aliases_checked": {
+          "const": 33,
+          "title": "Nested Aliases Checked",
+          "type": "integer"
+        },
+        "inventory_files": {
+          "const": 51,
+          "title": "Inventory Files",
+          "type": "integer"
+        },
+        "inventory_bytes": {
+          "const": 19290536,
+          "title": "Inventory Bytes",
+          "type": "integer"
+        },
+        "main_tar_files": {
+          "const": 54,
+          "title": "Main Tar Files",
+          "type": "integer"
+        },
+        "main_tar_missing_inventory_files": {
+          "const": 0,
+          "title": "Main Tar Missing Inventory Files",
+          "type": "integer"
+        },
+        "browser_tar_files": {
+          "const": 33,
+          "title": "Browser Tar Files",
+          "type": "integer"
+        },
+        "browser_tar_missing_inventory_files": {
+          "const": 18,
+          "title": "Browser Tar Missing Inventory Files",
+          "type": "integer"
+        },
+        "all_originals_unchanged": {
+          "const": true,
+          "title": "All Originals Unchanged",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "files",
+        "bytes",
+        "symlinks",
+        "advertised_hashes_checked",
+        "top_level_aliases_checked",
+        "nested_aliases_checked",
+        "inventory_files",
+        "inventory_bytes",
+        "main_tar_files",
+        "main_tar_missing_inventory_files",
+        "browser_tar_files",
+        "browser_tar_missing_inventory_files",
+        "all_originals_unchanged"
+      ],
+      "title": "CustodySummary",
+      "type": "object"
+    },
+    "Excerpt": {
+      "additionalProperties": false,
+      "properties": {
+        "source_priority_id": {
+          "enum": [
+            "SD009-01",
+            "SD009-02",
+            "SD009-03"
+          ],
+          "title": "Source Priority Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "region": {
+          "title": "Region",
+          "type": "string"
+        },
+        "wording": {
+          "title": "Wording",
+          "type": "string"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        },
+        "image": {
+          "$ref": "#/$defs/FileRef"
+        }
+      },
+      "required": [
+        "source_priority_id",
+        "physical_page",
+        "region",
+        "wording",
+        "qualification",
+        "image"
+      ],
+      "title": "Excerpt",
+      "type": "object"
+    },
+    "FileRef": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^ATLAS-SD009-[0-9]{2}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "disposition": {
+          "enum": [
+            "accept",
+            "qualify",
+            "correct",
+            "gap"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        },
+        "evidence_paths": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Paths",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "disposition",
+        "title",
+        "detail",
+        "evidence_paths"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "SourceAssessment": {
+      "additionalProperties": false,
+      "properties": {
+        "priority_id": {
+          "enum": [
+            "SD009-01",
+            "SD009-02",
+            "SD009-03"
+          ],
+          "title": "Priority Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-LARIMER",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "file": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "pages": {
+          "minimum": 1,
+          "title": "Pages",
+          "type": "integer"
+        },
+        "inspected_physical_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 1,
+          "title": "Inspected Physical Pages",
+          "type": "array"
+        },
+        "claimed_requested_url": {
+          "title": "Claimed Requested Url",
+          "type": "string"
+        },
+        "claimed_final_url": {
+          "title": "Claimed Final Url",
+          "type": "string"
+        },
+        "provenance_class": {
+          "enum": [
+            "received_pdf_download_claim_not_http_verified",
+            "browser_print_derivative"
+          ],
+          "title": "Provenance Class",
+          "type": "string"
+        },
+        "exact_delivered_bytes_verified": {
+          "const": true,
+          "title": "Exact Delivered Bytes Verified",
+          "type": "boolean"
+        },
+        "exact_publisher_original_verified": {
+          "const": false,
+          "title": "Exact Publisher Original Verified",
+          "type": "boolean"
+        },
+        "acquisition_time": {
+          "title": "Acquisition Time",
+          "type": "null"
+        },
+        "role": {
+          "enum": [
+            "staff_recommendation",
+            "unsigned_extension_draft",
+            "board_minutes"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "metadata_notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Metadata Notes",
+          "type": "array"
+        },
+        "visible_source_findings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Visible Source Findings",
+          "type": "array"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "priority_id",
+        "authority_id",
+        "file",
+        "pages",
+        "inspected_physical_pages",
+        "claimed_requested_url",
+        "claimed_final_url",
+        "provenance_class",
+        "exact_delivered_bytes_verified",
+        "exact_publisher_original_verified",
+        "acquisition_time",
+        "role",
+        "metadata_notes",
+        "visible_source_findings",
+        "legal_currentness"
+      ],
+      "title": "SourceAssessment",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "assignment": {
+      "const": "geode-source-discovery-009",
+      "title": "Assignment",
+      "type": "string"
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "reviewer": {
+      "const": "Atlas / Codex independent intake audit",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "review_mode": {
+      "const": "candidate_aware_direct_page_and_custody_review",
+      "title": "Review Mode",
+      "type": "string"
+    },
+    "disposition": {
+      "const": "accept_custody_with_provenance_and_claim_corrections",
+      "title": "Disposition",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "production_changes": {
+      "const": false,
+      "title": "Production Changes",
+      "type": "boolean"
+    },
+    "network_requests": {
+      "const": 0,
+      "title": "Network Requests",
+      "type": "integer"
+    },
+    "comparison_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "title": "Comparison Commit",
+      "type": "string"
+    },
+    "custody": {
+      "$ref": "#/$defs/CustodySummary"
+    },
+    "acquisition": {
+      "$ref": "#/$defs/AcquisitionSummary"
+    },
+    "priority_records": {
+      "const": 8,
+      "title": "Priority Records",
+      "type": "integer"
+    },
+    "new_pdf_artifacts": {
+      "const": 3,
+      "title": "New Pdf Artifacts",
+      "type": "integer"
+    },
+    "prior_resource_references": {
+      "const": 1,
+      "title": "Prior Resource References",
+      "type": "integer"
+    },
+    "gap_placeholders": {
+      "const": 4,
+      "title": "Gap Placeholders",
+      "type": "integer"
+    },
+    "total_structural_pdf_pages": {
+      "const": 27,
+      "title": "Total Structural Pdf Pages",
+      "type": "integer"
+    },
+    "directly_inspected_full_pages": {
+      "const": 10,
+      "title": "Directly Inspected Full Pages",
+      "type": "integer"
+    },
+    "full_minutes_transcription_certified": {
+      "const": false,
+      "title": "Full Minutes Transcription Certified",
+      "type": "boolean"
+    },
+    "supporting_files": {
+      "items": {
+        "$ref": "#/$defs/FileRef"
+      },
+      "title": "Supporting Files",
+      "type": "array"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/SourceAssessment"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Sources",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "excerpts": {
+      "items": {
+        "$ref": "#/$defs/Excerpt"
+      },
+      "title": "Excerpts",
+      "type": "array"
+    },
+    "unresolved_gaps": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unresolved Gaps",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "assignment",
+    "reviewed_at",
+    "reviewer",
+    "review_mode",
+    "disposition",
+    "legal_currentness",
+    "production_changes",
+    "network_requests",
+    "comparison_commit",
+    "custody",
+    "acquisition",
+    "priority_records",
+    "new_pdf_artifacts",
+    "prior_resource_references",
+    "gap_placeholders",
+    "total_structural_pdf_pages",
+    "directly_inspected_full_pages",
+    "full_minutes_transcription_certified",
+    "supporting_files",
+    "sources",
+    "findings",
+    "excerpts",
+    "unresolved_gaps"
+  ],
+  "title": "Audit",
+  "type": "object"
+}
