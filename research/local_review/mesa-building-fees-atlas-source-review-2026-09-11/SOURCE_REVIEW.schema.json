@@ -1,0 +1,730 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Cell": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "anchor_row": {
+          "minimum": 0,
+          "title": "Anchor Row",
+          "type": "integer"
+        },
+        "anchor_column": {
+          "minimum": 0,
+          "title": "Anchor Column",
+          "type": "integer"
+        },
+        "row_span": {
+          "minimum": 1,
+          "title": "Row Span",
+          "type": "integer"
+        },
+        "column_span": {
+          "minimum": 1,
+          "title": "Column Span",
+          "type": "integer"
+        },
+        "bbox": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Bbox",
+          "type": "array"
+        },
+        "geometric_extraction": {
+          "title": "Geometric Extraction",
+          "type": "string"
+        },
+        "native_evidence": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "title": "Native Evidence",
+          "type": "array"
+        },
+        "blank": {
+          "title": "Blank",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "anchor_row",
+        "anchor_column",
+        "row_span",
+        "column_span",
+        "bbox",
+        "geometric_extraction",
+        "native_evidence",
+        "blank"
+      ],
+      "title": "Cell",
+      "type": "object"
+    },
+    "Context": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "title",
+            "condition",
+            "valuation_note",
+            "footnote",
+            "unclassified_native_context"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "applies_to": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Applies To",
+          "type": "array"
+        },
+        "annotation": {
+          "title": "Annotation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "kind",
+        "evidence",
+        "applies_to",
+        "annotation"
+      ],
+      "title": "Context",
+      "type": "object"
+    },
+    "Crop": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "clip": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Clip",
+          "type": "array"
+        },
+        "scale": {
+          "title": "Scale",
+          "type": "number"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "directly_viewed": {
+          "const": true,
+          "default": true,
+          "title": "Directly Viewed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "clip",
+        "scale",
+        "image"
+      ],
+      "title": "Crop",
+      "type": "object"
+    },
+    "NativeLine": {
+      "additionalProperties": false,
+      "properties": {
+        "line": {
+          "title": "Line",
+          "type": "integer"
+        },
+        "bbox": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Bbox",
+          "type": "array"
+        },
+        "span": {
+          "$ref": "#/$defs/Span"
+        }
+      },
+      "required": [
+        "line",
+        "bbox",
+        "span"
+      ],
+      "title": "NativeLine",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Physical Pages",
+          "type": "array"
+        },
+        "kind": {
+          "enum": [
+            "source_anomaly",
+            "scope_limit",
+            "association",
+            "reading_order",
+            "date_role"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "related_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Related Ids",
+          "type": "array"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "treatment": {
+          "title": "Treatment",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "physical_pages",
+        "kind",
+        "related_ids",
+        "evidence",
+        "statement",
+        "treatment"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "layout": {
+          "$ref": "#/$defs/Asset"
+        },
+        "lines": {
+          "items": {
+            "$ref": "#/$defs/NativeLine"
+          },
+          "title": "Lines",
+          "type": "array"
+        },
+        "directly_viewed": {
+          "const": true,
+          "default": true,
+          "title": "Directly Viewed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "physical_page",
+        "native",
+        "image",
+        "layout",
+        "lines"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Row": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "row_index": {
+          "minimum": 0,
+          "title": "Row Index",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "header",
+            "body"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "cell_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Cell Ids",
+          "type": "array"
+        },
+        "fee_number_as_printed": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Fee Number As Printed"
+        },
+        "qualification_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Qualification Ids",
+          "type": "array"
+        },
+        "annotation": {
+          "title": "Annotation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "row_index",
+        "kind",
+        "cell_ids",
+        "fee_number_as_printed",
+        "qualification_ids",
+        "annotation"
+      ],
+      "title": "Row",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "exact_text": {
+          "title": "Exact Text",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "physical_page",
+        "start",
+        "end",
+        "exact_text",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    },
+    "Table": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "title_status": {
+          "enum": [
+            "visible_source_title",
+            "continued_table_structural_label"
+          ],
+          "title": "Title Status",
+          "type": "string"
+        },
+        "x_grid": {
+          "items": {
+            "type": "number"
+          },
+          "title": "X Grid",
+          "type": "array"
+        },
+        "y_grid": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Y Grid",
+          "type": "array"
+        },
+        "extracted_matrix": {
+          "items": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "array"
+          },
+          "title": "Extracted Matrix",
+          "type": "array"
+        },
+        "cells": {
+          "items": {
+            "$ref": "#/$defs/Cell"
+          },
+          "title": "Cells",
+          "type": "array"
+        },
+        "rows": {
+          "items": {
+            "$ref": "#/$defs/Row"
+          },
+          "title": "Rows",
+          "type": "array"
+        },
+        "column_meanings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Column Meanings",
+          "type": "array"
+        },
+        "qualification_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Qualification Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "title",
+        "title_status",
+        "x_grid",
+        "y_grid",
+        "extracted_matrix",
+        "cells",
+        "rows",
+        "column_meanings",
+        "qualification_ids"
+      ],
+      "title": "Table",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "review_id": {
+      "const": "ATLAS-MESA-BUILDING-FEES-2026-09-11",
+      "title": "Review Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-MESA",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Asset"
+    },
+    "acquired_at": {
+      "format": "date-time",
+      "title": "Acquired At",
+      "type": "string"
+    },
+    "source_url": {
+      "title": "Source Url",
+      "type": "string"
+    },
+    "final_url": {
+      "title": "Final Url",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "review_mode": {
+      "const": "atlas_candidate_aware_not_blind",
+      "title": "Review Mode",
+      "type": "string"
+    },
+    "external_assignment": {
+      "title": "External Assignment",
+      "type": "null"
+    },
+    "status": {
+      "const": "source_text_and_table_associations_reviewed",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "adoption_effectiveness": {
+      "const": "not_verified",
+      "title": "Adoption Effectiveness",
+      "type": "string"
+    },
+    "engine": {
+      "const": "PyMuPDF",
+      "title": "Engine",
+      "type": "string"
+    },
+    "engine_version": {
+      "const": "1.28.2",
+      "title": "Engine Version",
+      "type": "string"
+    },
+    "native_flags": {
+      "const": 195,
+      "title": "Native Flags",
+      "type": "integer"
+    },
+    "native_sort": {
+      "const": false,
+      "title": "Native Sort",
+      "type": "boolean"
+    },
+    "render_scale": {
+      "const": 2.0,
+      "title": "Render Scale",
+      "type": "number"
+    },
+    "native_bytes": {
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "native_byte_changes": {
+      "const": 0,
+      "title": "Native Byte Changes",
+      "type": "integer"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "tables": {
+      "items": {
+        "$ref": "#/$defs/Table"
+      },
+      "title": "Tables",
+      "type": "array"
+    },
+    "contexts": {
+      "items": {
+        "$ref": "#/$defs/Context"
+      },
+      "title": "Contexts",
+      "type": "array"
+    },
+    "crops": {
+      "items": {
+        "$ref": "#/$defs/Crop"
+      },
+      "title": "Crops",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "review_id",
+    "authority_id",
+    "source",
+    "candidate",
+    "acquired_at",
+    "source_url",
+    "final_url",
+    "prepared_at",
+    "completed_at",
+    "review_mode",
+    "external_assignment",
+    "status",
+    "legal_currentness",
+    "adoption_effectiveness",
+    "engine",
+    "engine_version",
+    "native_flags",
+    "native_sort",
+    "render_scale",
+    "native_bytes",
+    "native_byte_changes",
+    "pages",
+    "tables",
+    "contexts",
+    "crops",
+    "observations",
+    "limits"
+  ],
+  "title": "Review",
+  "type": "object"
+}

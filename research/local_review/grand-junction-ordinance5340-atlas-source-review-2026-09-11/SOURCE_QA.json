@@ -1,0 +1,703 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-09-11T20:30:52.208937Z",
+  "source": {
+    "path": "original.pdf",
+    "sha256": "ee803ba2d03f7d7ba93b9135812244f904a83ab36a7f06f8434c93554a2eeb78",
+    "size_bytes": 1485560
+  },
+  "receipt": {
+    "path": "access-event.json",
+    "sha256": "ddc3a6949bc6b6dca0d08fa28403ecfd02ed42e0ff0bb27415019ed666b6df75",
+    "size_bytes": 821
+  },
+  "passages_file": {
+    "path": "REVIEWED_PASSAGES.md",
+    "sha256": "c3efe292cae08aa8d2312c8d84b42fa71b336ffafaee8f99562bc8108a3d8091",
+    "size_bytes": 11630
+  },
+  "mode": "atlas_candidate_aware_direct_image_review",
+  "status": "bounded_passages_checked_graphical_limits_preserved",
+  "legal_currentness": "not_verified",
+  "adoption_date_verified": null,
+  "effective_date_verified": null,
+  "full_diplomatic_transcription": false,
+  "external_blind_review": false,
+  "original_and_native_edited": false,
+  "native_bytes": 4465,
+  "pages": [
+    {
+      "physical_page": 1,
+      "image": {
+        "path": "page-1.png",
+        "sha256": "4671db36fa586ee645442b32f567f589ab7e5fbecf3c72c8df4aaf5515113207",
+        "size_bytes": 103347
+      },
+      "native": {
+        "path": "page-1.native.txt",
+        "sha256": "9f7235bad4d3926806d0420e5d3c46925f1ee061976e782d29f4983d12cc85d6",
+        "size_bytes": 1931
+      },
+      "full_page_viewed": true,
+      "native_status": "partial_ocr_with_errors"
+    },
+    {
+      "physical_page": 2,
+      "image": {
+        "path": "page-2.png",
+        "sha256": "905c3b12a9398ad884c3c4466893dd210eb1c475913af49f8ef90130b15cddd4",
+        "size_bytes": 931564
+      },
+      "native": {
+        "path": "page-2.native.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_bytes": 0
+      },
+      "full_page_viewed": true,
+      "native_status": "empty_despite_visible_text"
+    },
+    {
+      "physical_page": 3,
+      "image": {
+        "path": "page-3.png",
+        "sha256": "ed737762248e7031d3e64fa056c6b21653d9d03ec8c356c84449f4417b190c87",
+        "size_bytes": 1093535
+      },
+      "native": {
+        "path": "page-3.native.txt",
+        "sha256": "f77fb32bbdb048a5fb4ad20b3f95495f30a1894a93b9f4fc6bf90b419cd7319a",
+        "size_bytes": 637
+      },
+      "full_page_viewed": true,
+      "native_status": "largely_unusable_ocr"
+    },
+    {
+      "physical_page": 4,
+      "image": {
+        "path": "page-4.png",
+        "sha256": "f59af8f81370e58eaa92a083be23a8b4e0c412ef49cc32a39ce3624872b299ab",
+        "size_bytes": 637596
+      },
+      "native": {
+        "path": "page-4.native.txt",
+        "sha256": "5c69fed98977ee053da1f935bf09467c5103331169c045261eed4abeca0464b1",
+        "size_bytes": 1064
+      },
+      "full_page_viewed": true,
+      "native_status": "partial_ocr_with_errors"
+    },
+    {
+      "physical_page": 5,
+      "image": {
+        "path": "page-5.png",
+        "sha256": "8bbd5c318ee1593f13a522b9e57e47a4ab98c5fe13aaff8a26bba8209991de57",
+        "size_bytes": 613645
+      },
+      "native": {
+        "path": "page-5.native.txt",
+        "sha256": "93403d6336f2ffb3b3d1f6270f0ce334c604f809eabead748cdc56b2a5aa2ec3",
+        "size_bytes": 833
+      },
+      "full_page_viewed": true,
+      "native_status": "printed_body_readable_graphics_separate"
+    }
+  ],
+  "derivatives": [
+    {
+      "path": "page-3-upright.png",
+      "sha256": "d55909a9bd3476505c0d8e263069da2501d3216dd528dea14a2aa77b48f83172",
+      "size_bytes": 1060939
+    },
+    {
+      "path": "page-3-table-detail.png",
+      "sha256": "ad3922891ef5065335c6110254e6115a171d3ed70109b01ffb46900ea77a61f6",
+      "size_bytes": 1116196
+    }
+  ],
+  "derivative_recipe": [
+    "Original page images: pdftoppm -r 144 -png original.pdf page",
+    "Upright page3: PyMuPDF page index2 get_pixmap(Matrix(2,2).prerotate(-90), alpha=False).",
+    "Table detail: upright image pixel rectangle(135,550,1120,835), doubled; rendered through PyMuPDF image-to-PDF coordinates. No source alteration."
+  ],
+  "passages": [
+    {
+      "physical_page": 1,
+      "start": 1090,
+      "end": 1129,
+      "text": "## Page 1 — identity and instructions",
+      "image_path": "page-1.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 1,
+      "start": 1131,
+      "end": 1305,
+      "text": "The title identifies **CITY OF GRAND JUNCTION, COLORADO**, **ORDINANCE NO. 5340**, and an ordinance amending sections of Title 21 regarding preservation of significant trees.",
+      "image_path": "page-1.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 1,
+      "start": 1307,
+      "end": 1515,
+      "text": "The recital concerning the Housing Affordability Code Task Force states that Resolution No. 47-25 was adopted on August 6, 2025. This is a separate historical recital, not the adoption date of Ordinance 5340.",
+      "image_path": "page-1.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 1,
+      "start": 1517,
+      "end": 1683,
+      "text": "The operative introduction visibly reads **NOW THEREFORE BE IT ORDAINED BY THE CITY COUNCIL OF THE CITY OF GRAND JUNCTION THAT:**. The native `BE tT` is an OCR error.",
+      "image_path": "page-1.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 1,
+      "start": 1685,
+      "end": 2068,
+      "text": "The final paragraph explains that sections “are amended as follows (deletions struck through, added language underlined)”. The words “struck through” are themselves printed with strike marks as a typographic example; “underlined” is underlined. The native `underimed` is an OCR error. This example is not classified as a substantive deletion of the amendment instruction.",
+      "image_path": "page-1.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 2070,
+      "end": 2110,
+      "text": "## Page 2 — source text visibly struck",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 2112,
+      "end": 2452,
+      "text": "The heading **21.07.040 — PRESERVATION OF SIGNIFICANT TREES.** and all the displayed body text on this page are visibly struck. The blue horizontal rule is a graphic separator. The following selected clauses recover substantive content entirely absent from the native text layer; every passage in this subsection remains marked as struck.",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 2454,
+      "end": 2500,
+      "text": "~~(a) This section applies to the following:~~",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 2502,
+      "end": 2565,
+      "text": "~~(1) New residential, mixed-use, and commercial development;~~",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 2567,
+      "end": 2600,
+      "text": "~~(2) Redevelopment as follows:~~",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 2602,
+      "end": 2656,
+      "text": "~~(i) Preservation is required for all lots in MU-3.~~",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 2658,
+      "end": 2774,
+      "text": "~~(ii) Preservation is required for lots larger than one acre in all other zone districts unless otherwise exempt.~~",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 2776,
+      "end": 2857,
+      "text": "~~(3) All development in Industrial zone districts is exempt from this section.~~",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 2859,
+      "end": 3060,
+      "text": "~~(b) Existing landscape features such as escarpments, large trees or stands, heavy vegetative cover, ponds, and bluffs shall be identified by the applicant as part of the development review process.~~",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 3062,
+      "end": 3443,
+      "text": "~~(1) This identification shall include a surveyed inventory of significant trees. Prior to undertaking a survey, an applicant may have a landscape professional view the site and determine whether there are any potential significant trees on the site. If there are no potentially significant trees on the site, the applicant may request the Director waive the survey requirement.~~",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 3445,
+      "end": 3562,
+      "text": "~~(2) Any significant tree to be preserved during development shall be identified on the proposed landscaping plan.~~",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 3564,
+      "end": 3760,
+      "text": "~~(c) All trees, except those identified as 'excluded' on the Suitable Plants List, that meet all of the following criteria as determined by a certified arborist shall be considered significant:~~",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 3762,
+      "end": 3801,
+      "text": "~~(1) Are 15 inches or larger in DBH;~~",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 3803,
+      "end": 3843,
+      "text": "~~(2) Are in fair or better condition;~~",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 3845,
+      "end": 3902,
+      "text": "~~(3) Are free from irreparable structural defects; and~~",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 3904,
+      "end": 4004,
+      "text": "~~(4) Are not infested with a disease or pestilence that threatens the good health of other trees.~~",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 4006,
+      "end": 4036,
+      "text": "~~(d) Preservation Required.~~",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 4038,
+      "end": 4184,
+      "text": "~~(1) Where significant trees exist on a property, at least one and no less than 30% of significant trees shall be preserved during development.~~",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 4186,
+      "end": 4272,
+      "text": "~~(i) Significant trees may be preserved in individual lots or private common areas.~~",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 4274,
+      "end": 4644,
+      "text": "~~(ii) Significant trees may also be preserved in land dedicated for public use while still credited to the site tree preservation requirement. Where the value of the land dedication does not meet the minimum assessment requirement of GJMC § 21.05.030(a), the valuation of the significant tree shall not be considered separately from or added to the assessment total.~~",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 4646,
+      "end": 4855,
+      "text": "~~(iii) The developer may request review by the City Forester to determine if well-established, healthy trees under 15 inches in diameter may be approved for credit towards preservation at an equivalent DBH.~~",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 2,
+      "start": 4857,
+      "end": 5010,
+      "text": "The cross-page continuation starts at (d)(2), not a new independent section. No current requirement or exemption is generated from these struck passages.",
+      "image_path": "page-2.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 3,
+      "start": 5012,
+      "end": 5063,
+      "text": "## Page 3 — rotated continuation and struck table",
+      "image_path": "page-3.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 3,
+      "start": 5065,
+      "end": 5401,
+      "text": "This physical page is sideways in the retained PDF. The upright derivative rotates the rendering 90 degrees counterclockwise; the original PDF bytes are unchanged. All displayed body paragraphs, the table title, headings, cells and notes are visibly struck. Table marks are thick red lines; surrounding paragraph strikes are dark lines.",
+      "image_path": "page-3.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 3,
+      "start": 5403,
+      "end": 5693,
+      "text": "~~(2) If the 30% minimum preservation requirement impedes the proposed Primary Development of a site, then the Director may grant a 10% adjustment of the minimum setbacks, lot size, parking lot interior landscaping, and parking count requirements, or allow the use of cluster development.~~",
+      "image_path": "page-3.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 3,
+      "start": 5695,
+      "end": 5938,
+      "text": "~~(3) Furthermore, the City Forester may adjust the drip line protection standards described in Subsection (d)(6)(i) of this section so to allow for additional flexibility for the development to occur around the identified significant trees.~~",
+      "image_path": "page-3.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 3,
+      "start": 5940,
+      "end": 6322,
+      "text": "~~(4) If the provisions in Subsections (d)(2) and (3) do not provide a viable means of development the site with the preservation of the minimum required significant trees then, at the developer's discretion, the developer may remove significant trees present on the site. Tree replacement shall be required for all significant trees removed on a property at the following ratios:~~",
+      "image_path": "page-3.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 3,
+      "start": 6324,
+      "end": 6495,
+      "text": "The unusual source wording “development the site” is retained. The displayed reference to (d)(6)(i) is retained without inventing or resolving an unprinted subsection.",
+      "image_path": "page-3.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 3,
+      "start": 6497,
+      "end": 6831,
+      "text": "The colored table is titled **Table 21.07-3. Tree Replacement Requirements**, with columns **Percent of Trees Preserved** and **Tree Replacement Ratio**. Three displayed rows concern minimum 30% preservation, above 30% minimum, and significant trees damaged or killed during construction. Both footnotes are also crossed by red marks.",
+      "image_path": "page-3.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 3,
+      "start": 6833,
+      "end": 7192,
+      "text": "**Table limitation:** the thick red marks overlap letter and numeral strokes. Exact ratios, bracketed footnote markers and every character of the table notes are not certified in this passage review. Use the full upright page and the enlarged table image for subsequent independent transcription. No replacement-ratio values are entered into structured rules.",
+      "image_path": "page-3.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 3,
+      "start": 7194,
+      "end": 7312,
+      "text": "~~(e) Replacement of Significant Trees.Replacement trees may be planted in individual lots and private common areas.~~",
+      "image_path": "page-3.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 3,
+      "start": 7314,
+      "end": 7614,
+      "text": "~~(f) Fee-In-Lieu.The fee in-lieu shall be based on the value of the required replacement tree(s) not planted on site, along with the total cost of installation. The City shall use this payment to purchase the required replacement trees not planted on-site and plant them on nearby public property.~~",
+      "image_path": "page-3.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 3,
+      "start": 7616,
+      "end": 7840,
+      "text": "~~(g) Features to be preserved shall be protected throughout site development. No person shall kill or damage a landscape feature required to be preserved by this section. The developer shall protect trees from compaction.~~",
+      "image_path": "page-3.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 3,
+      "start": 7842,
+      "end": 8110,
+      "text": "~~(1) During construction, existing plant material to be preserved shall be enclosed by a temporary fence at least five feet outside the canopy dripline. In no case shall vehicles be parked, or materials or equipment be stored or stockpiled within the enclosed area.~~",
+      "image_path": "page-3.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 3,
+      "start": 8112,
+      "end": 8247,
+      "text": "~~(2) Irrigation shall be provided to trees preserved during construction of sufficient quantity to ensure their health and survival.~~",
+      "image_path": "page-3.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 3,
+      "start": 8249,
+      "end": 8537,
+      "text": "The joined sentence boundaries after “Trees.” and “Lieu.” reflect the visibly tight source presentation; exact whitespace is not certified. The fee-in-lieu paragraph and the tree-protection duties are recorded as struck source text, not operative fee or construction requirements.",
+      "image_path": "page-3.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 4,
+      "start": 8539,
+      "end": 8589,
+      "text": "## Page 4 — selective marks and execution labels",
+      "image_path": "page-4.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 4,
+      "start": 8591,
+      "end": 8727,
+      "text": "The heading **21.07.100 — SUBSTITUTIONS.** is visibly struck, followed by a printed ellipsis and a visibly struck displayed paragraph:",
+      "image_path": "page-4.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 4,
+      "start": 8729,
+      "end": 8968,
+      "text": "~~(g) Existing significant trees preserved above the required 30% shall count toward the total tree requirement at a ratio of one inch of DBH of preserved significant tree is equivalent to three caliper inches of required tree plantings.~~",
+      "image_path": "page-4.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 4,
+      "start": 8970,
+      "end": 9165,
+      "text": "Native `prosorved` and `thrco` are OCR errors for visibly printed “preserved” and “three”. The excerpt and ellipsis do not certify deletion of every undisplayed provision of § 21.07.100.",
+      "image_path": "page-4.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 4,
+      "start": 9167,
+      "end": 9288,
+      "text": "The next heading, **21.09.060 OPEN AND UNDEVELOPED SPACES.**, is not struck. Its introductory paragraph remains unstruck:",
+      "image_path": "page-4.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 4,
+      "start": 9290,
+      "end": 9567,
+      "text": "> (a) Sensitive Lands and Unique Site Features. Each subdivision plat shall include and protect as much of the following open space as the Director deems reasonable to protect public health and safety based on the anticipated size, use, and impacts of the proposed development:",
+      "image_path": "page-4.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 4,
+      "start": 9569,
+      "end": 9664,
+      "text": "The displayed item retains the surrounding list while striking only the words **mature trees**:",
+      "image_path": "page-4.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 4,
+      "start": 9666,
+      "end": 9876,
+      "text": "> (1) Stream beds and corridors, bluffs, ridges, steep slopes, ~~mature trees~~ and/or stands of native vegetation, rock outcroppings, wetlands, native upland ecosystems, riparian areas, and wildlife corridors;",
+      "image_path": "page-4.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 4,
+      "start": 9878,
+      "end": 10047,
+      "text": "Additional ellipses are printed below; omitted code passages are not reconstructed. The native text omits these visible ellipses and all substantive strike associations.",
+      "image_path": "page-4.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 4,
+      "start": 10049,
+      "end": 10082,
+      "text": "The unstruck reading lines state:",
+      "image_path": "page-4.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 4,
+      "start": 10084,
+      "end": 10181,
+      "text": "> INTRODUCED on first reading this 5th day of August 2026 and ordered published in pamphlet form.",
+      "image_path": "page-4.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 4,
+      "start": 10183,
+      "end": 10281,
+      "text": "> ADOPTED on second reading this 2nd day of September 2026 and ordered published in pamphlet form.",
+      "image_path": "page-4.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 4,
+      "start": 10283,
+      "end": 10745,
+      "text": "Printed names/titles are **Ben Van Dyke**, **President Pro-Tem of the City Council**, and **Selestina Sandoval**, **City Clerk**. Signature marks and a circular city seal are visible. Handwriting identity, signature authenticity and exact seal microlettering are not certified. The native clerk name is truncated to `Selestina Sa`; `^^^` is not a reliable signature transcription. Native print order differs from the spatial relationship of the signature blocks.",
+      "image_path": "page-4.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 5,
+      "start": 10747,
+      "end": 10789,
+      "text": "## Page 5 — separate source-stated dates",
+      "image_path": "page-5.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 5,
+      "start": 10791,
+      "end": 11002,
+      "text": "The certification states introduction at the August 5, 2026 meeting and a September 2, 2026 public hearing at which the ordinance was read, considered, adopted and ordered published. Its closing sentence states:",
+      "image_path": "page-5.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 5,
+      "start": 11004,
+      "end": 11128,
+      "text": "> IN WITNESS WHEREOF, I have hereunto set my hand and affixed the official seal of said City this 8th day of September 2026.",
+      "image_path": "page-5.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 5,
+      "start": 11130,
+      "end": 11312,
+      "text": "The printed title **Deputy City Clerk** appears below a signature mark. A separate circular city seal is visible. Neither handwriting identity nor execution authenticity is inferred.",
+      "image_path": "page-5.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 5,
+      "start": 11314,
+      "end": 11342,
+      "text": "The final printed lines are:",
+      "image_path": "page-5.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 5,
+      "start": 11344,
+      "end": 11435,
+      "text": "> Published: August 8, 2026\n>\n> Published: September 5, 2026\n>\n> Effective: October 5, 2026",
+      "image_path": "page-5.png",
+      "evidence_scope": "full_page_image_manual_check"
+    },
+    {
+      "physical_page": 5,
+      "start": 11437,
+      "end": 11630,
+      "text": "The stated effective date is later than the September 11, 2026 acquisition. These are source assertions; subsequent changes, consolidated code text and present applicability remain unverified.\n",
+      "image_path": "page-5.png",
+      "evidence_scope": "full_page_image_manual_check"
+    }
+  ],
+  "corrections": [
+    {
+      "physical_page": 1,
+      "candidate": "BE tT",
+      "checked_print": "BE IT",
+      "qualification": "Printed operative introduction; native bytes unchanged."
+    },
+    {
+      "physical_page": 1,
+      "candidate": "underimed",
+      "checked_print": "underlined",
+      "qualification": "Printed typography example, not a substantive amendment."
+    },
+    {
+      "physical_page": 4,
+      "candidate": "prosorved",
+      "checked_print": "preserved",
+      "qualification": "Inside visibly struck paragraph (g)."
+    },
+    {
+      "physical_page": 4,
+      "candidate": "thrco",
+      "checked_print": "three",
+      "qualification": "Inside visibly struck paragraph (g)."
+    },
+    {
+      "physical_page": 4,
+      "candidate": "Selestina Sa",
+      "checked_print": "Selestina Sandoval",
+      "qualification": "Printed clerk label only; no handwriting identity claim."
+    }
+  ],
+  "dates": [
+    {
+      "physical_page": 1,
+      "role": "historical_recital_resolution_47_25",
+      "date": "2025-08-06",
+      "native_anchor": "On August 6, 2025",
+      "status": "source_assertion_only"
+    },
+    {
+      "physical_page": 4,
+      "role": "introduction_first_reading",
+      "date": "2026-08-05",
+      "native_anchor": "5th day of August 2026",
+      "status": "source_assertion_only"
+    },
+    {
+      "physical_page": 4,
+      "role": "adoption_second_reading",
+      "date": "2026-09-02",
+      "native_anchor": "2nd day of September 2026",
+      "status": "source_assertion_only"
+    },
+    {
+      "physical_page": 5,
+      "role": "certification",
+      "date": "2026-09-08",
+      "native_anchor": "8th day of September 2026",
+      "status": "source_assertion_only"
+    },
+    {
+      "physical_page": 5,
+      "role": "first_publication",
+      "date": "2026-08-08",
+      "native_anchor": "Published: August 8, 2026",
+      "status": "source_assertion_only"
+    },
+    {
+      "physical_page": 5,
+      "role": "second_publication",
+      "date": "2026-09-05",
+      "native_anchor": "Published: September 5, 2026",
+      "status": "source_assertion_only"
+    },
+    {
+      "physical_page": 5,
+      "role": "effective_as_stated_future_at_capture",
+      "date": "2026-10-05",
+      "native_anchor": "Effective: October 5, 2026",
+      "status": "source_assertion_only"
+    }
+  ],
+  "unresolved": [
+    "The table ratios and all footnote characters under heavy red strike marks are not certified.",
+    "Page2 manual passage recovery and page3 body passages require an independent external review before any stronger transcription status.",
+    "Exact Unicode typography, joined sentence whitespace and seal microlettering are not certified.",
+    "Handwritten identities and signature authenticity are not determined.",
+    "Source effect is stated in the future at acquisition; consolidation and later changes remain unverified.",
+    "Visible ellipses do not supply omitted provisions; the struck heading of21.07.100 does not alone establish deletion of the entire undisplayed section."
+  ]
+}

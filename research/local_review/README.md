@@ -37,6 +37,9 @@ review does not certify the whole document.
 | Weld building fees | [Five-page source review](weld-building-fees-atlas-source-review-2026-09-11/README.md) | 107 fee/value/referral rows and 252 valuation-matrix cells with their conditions | Exact successful acquisition URL remains unconfirmed; source date and amount anomalies are preserved |
 | Weld Ordinance 2026-01 | [Five-page amendment review](weld-directed-atlas-source-review-2026-09-11/README.md) | Complete native text and selected zoning amendments; separately stated reading, adoption and effective dates | Full consolidated Chapter 23, execution and subsequent amendments remain unverified |
 | Weld environmental-health fees | [Three-page schedule review](weld-directed-atlas-source-review-2026-09-11/README.md) | 137 rows in eleven service groups, including one blank fee and the contract exception | Year 2026 is a source label; adoption and effective dates remain unverified |
+| Grand Junction IFC Ordinance 5269 | [Twenty-nine-page source review](grand-junction-ordinance5269-atlas-source-review-2026-09-11/SOURCE_REVIEW.md) | All pages visually inspected; 37 bounded annotations and unchanged native text | Effective dates conflict: September 1, 2025 in the body versus August 18, 2025 in certification; controlling date unresolved |
+| Grand Junction tree Ordinance 5340 | [Five-page passage review](grand-junction-ordinance5340-atlas-source-review-2026-09-11/README.md) | Recovered passages from missing/garbled text, with visible strikes and separate execution labels | Full transcription and obscured table ratios remain uncertified; stated October 5, 2026 effect was future at receipt |
+| Mesa building-fee Exhibit A | [Five-page table review](mesa-building-fees-atlas-source-review-2026-09-11/SOURCE_REVIEW.md) | 64 body rows, eight valuation tiers, 234 matrix entries and source notes | No legal dates; referenced Table 3B and exact equality cases remain unresolved |
 | Grand Junction fire-prevention fees | [Two-page table review](grand-junction-fire-fees-atlas-source-review-2026-09-11/README.md) | All 57 fee rows, five heading associations and 23 qualified continuation rows; all native bytes retained | No visible edition or legal dates; alternate fee source and applicability remain unreconciled |
 | Fort Collins fee schedules HTML | [Structured source snapshot](fort-collins-fee-catalog-2026-09-11/README.md) | Preserved main-content structure, tables and links from the captured page | Snapshot structure is pending semantic and legal review |
 
@@ -66,6 +69,7 @@ separate supplement, with its own source and report hashes.
 | [Larimer adopting-instrument intake, Sherlock007](larimer-intake-sherlock007-2026-09-11/README.md) | Three additional originals; six other supplied PDFs match existing originals | Staff recommendations, unsigned draft content and source date anomalies remain qualified |
 | [Weld County and Greeley intake, Sherlock008](weld-greeley-intake-sherlock008-2026-09-11/README.md) | Four fee-related PDFs from two distinct authorities | Requested URL, received bytes, document date and effective-date assertion remain distinct |
 | [Recovered Weld ordinance and environmental-health schedule](weld-directed-intake-2026-09-11/INTAKE_COMPLETE.md) | Two official PDFs recovered by direct requests, with eight pages and complete source reviews | Both match older recorded hashes; this records reacquisition, with legal currentness unverified |
+| [Mesa and Grand Junction directed-gap intake](mesa-grand-junction-directed-intake-2026-09-11/README.md) | City Ordinance 5340 and two county fee exhibits, with seven official responses | Historical fee-date conflicts, unavailable county adopting ordinance and future stated city effectiveness remain explicit |
 | [Mesa County and Grand Junction archival intake](mesa-grand-junction-intake-2026-09-11/README.md) | Three originals: Mesa code edition, city IFC Ordinance 5269 and city fire-fee schedule | Existing Mesa bytes recovered; source dates, shared services and separate authorities retain their qualifications |
 | [Mesa County and Grand Junction discovery](mesa-grand-junction-discovery-2026-09-11/README.md) | Three official PDFs and bounded catalog evidence for two separate authorities | Eight of 250 structural pages visually checked; discovery leads, later amendments and full coverage remain unresolved |
 | [Arapahoe related resolution evidence](arapahoe-resolution26-224-evidence-2026-09-11/README.md) | Official item metadata and a two-page attachment with blank resolution and vote fields | Research evidence only; identity with Resolution 26-224, adoption and effect remain unverified |
@@ -75,6 +79,8 @@ For Sherlock009, only ten distinct pages of the 27 structural pages received a
 visual review. The two sets of reproduced page images are copies of that same
 scope. The minutes and the earlier meeting packet have different bytes despite
 the same claimed download URL; that conflict is not proof of a legal update.
+
+The later Ordinance 5269 review found two incompatible effective-date statements in the same PDF: September 1, 2025 in the body and August 18, 2025 in certification. Earlier intake records preserve their limited inspection scope; use the linked later source review with them. No controlling effective date has been selected.
 
 ## How to use a package
 
