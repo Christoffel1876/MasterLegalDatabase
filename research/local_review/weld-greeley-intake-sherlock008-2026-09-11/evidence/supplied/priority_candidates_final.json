@@ -1,0 +1,345 @@
+{
+  "assignment": "geode-source-discovery-008",
+  "comparison_commit": "0bc3658f6c7c9f378a5083884714dc4111677afd",
+  "atlas_export_json_sha256": "cf18b014ad52241a88b90c31411b17945f47f8387ffca081b3ade5e0f7f799fa",
+  "candidate_count": 16,
+  "candidates": [
+    {
+      "authority_id": "CO-COUNTY-WELD",
+      "title": "Weld County Building Permit & Inspection Fee Schedule (face January 2026)",
+      "issuer": "Weld County Building Inspection Division",
+      "role": "fee_schedule",
+      "requested_url": "https://www.weld.gov/files/sharedassets/public/v/3/departments/building/documents/fees/2026-bldg-fee-schedule.pdf",
+      "access_result": "browser_saved_after_mac_curl_403",
+      "retained_bytes": true,
+      "sha256": "8fb5dc78f67407a22857160f107a0253da42320e9e502387be573ef53cab9f27",
+      "byte_count": 213975,
+      "local_path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-008/20260911T184800Z/raw/weld/2026-bldg-fee-schedule.pdf",
+      "dates": {
+        "schedule_face": "January 2026"
+      },
+      "evidence": "PDF text header JANUARY 2026. Filename/year alone do not establish legal currentness.",
+      "historical_comparison": {
+        "status": "no_exact_digest_in_pinned_CO-COUNTY-WELD_rows",
+        "comparison_commit": "0bc3658f6c7c9f378a5083884714dc4111677afd",
+        "export_json_sha256": "cf18b014ad52241a88b90c31411b17945f47f8387ffca081b3ade5e0f7f799fa"
+      },
+      "next_action": "Pair with Chapter 29 / adopting fee resolution when located",
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake",
+      "id": "SD008-01"
+    },
+    {
+      "authority_id": "CO-COUNTY-WELD",
+      "title": "Weld County Building Codes, Design Criteria and Fees hub",
+      "issuer": "Weld County Planning and Development Services \u2014 Building",
+      "role": "official_hub_html",
+      "requested_url": "https://www.weld.gov/Government/Departments/Planning-and-Development-Services/Building/Building-Codes-Design-Criteria-and-Fees",
+      "access_result": "mac_curl_403;_browser_loaded_for_pdf_referral",
+      "retained_bytes": false,
+      "evidence": "Mac access_denied shell retained; browser used page to fetch fee PDF. I-Code edition claims from WebFetch not verified from retained HTML bytes.",
+      "historical_comparison": {
+        "status": "url_known_in_pinned_planning_building_cluster",
+        "comparison_commit": "0bc3658f6c7c9f378a5083884714dc4111677afd"
+      },
+      "next_action": "Retain successful hub HTML if authorized",
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake",
+      "id": "SD008-02"
+    },
+    {
+      "authority_id": "CO-COUNTY-WELD",
+      "title": "Weld County Municode Charter and County Code landing",
+      "issuer": "Weld County via Municode Library",
+      "role": "codification_catalog",
+      "requested_url": "https://library.municode.com/co/weld_county",
+      "access_result": "mac_curl_200_thin_shell",
+      "retained_bytes": true,
+      "sha256": "f3fd7f69268ded8be4a4a059c71f4badaea74813e73ec224ed5bdccc206bfaa6",
+      "local_path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-008/20260911T184800Z/raw/weld/municode_index.html",
+      "evidence": "Thin JS shell (~6095 B). Monitoring catalog for Ch 23/29.",
+      "historical_comparison": {
+        "status": "shell_digest_family_seen_in_pin",
+        "comparison_commit": "0bc3658f6c7c9f378a5083884714dc4111677afd"
+      },
+      "next_action": "Browser TOC capture for Ch23/Ch29",
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake",
+      "id": "SD008-03"
+    },
+    {
+      "authority_id": "CO-COUNTY-WELD",
+      "title": "Weld County home \u2014 government identity",
+      "issuer": "Weld County",
+      "role": "identity_service_area",
+      "requested_url": "https://www.weld.gov/",
+      "access_result": "mac_curl_403;_browser_partial",
+      "retained_bytes": true,
+      "local_path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-008/20260911T184800Z/raw/weld/home.html",
+      "sha256": "f56599bbbd4288f05c7e188e2605f6ef04da63a4120c794c8befd499b2c137c2",
+      "evidence": "403 shell retained. Separate authority from City of Greeley.",
+      "historical_comparison": {
+        "status": "url_in_pinned_ledger",
+        "comparison_commit": "0bc3658f6c7c9f378a5083884714dc4111677afd"
+      },
+      "next_action": "Retain successful homepage HTML",
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake",
+      "id": "SD008-04"
+    },
+    {
+      "authority_id": "CO-COUNTY-WELD",
+      "title": "Pinned lead: Ord 26-01 3rd adopted PDF (zoning) \u2014 UNOPENED",
+      "issuer": "Weld County BOCC",
+      "role": "adopted_instrument_lead",
+      "requested_url": "https://www.weld.gov/files/sharedassets/public/v/3/departments/planning-and-zoning/documents/long-range/code-changes/ord26-01.3rd-adopted.pdf",
+      "access_result": "not_opened_this_batch",
+      "retained_bytes": false,
+      "evidence": "Pinned LOCAL_DOWNLOAD_MANIFEST sha256 2ba9073aa06420e4\u2026; backlog only",
+      "historical_comparison": {
+        "status": "pinned_ledger_downloaded_bytes_not_copied_here",
+        "comparison_commit": "0bc3658f6c7c9f378a5083884714dc4111677afd",
+        "pinned_sha256_prefix": "2ba9073aa06420e4"
+      },
+      "next_action": "Intake from pinned raw_path or future authorized open",
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake",
+      "id": "SD008-05"
+    },
+    {
+      "authority_id": "CO-MUNICIPAL-GREELEY",
+      "title": "City of Greeley Building Permit Fee Schedule (document face Effective-2024)",
+      "issuer": "City of Greeley Building Inspection",
+      "role": "fee_schedule",
+      "requested_url": "https://cogy-p-001.sitecorecontenthub.cloud/api/public/content/dad9bcd41d394807be1e339c71367e76?v=f77f3c32",
+      "access_result": "mac_curl_200_pdf",
+      "retained_bytes": true,
+      "sha256": "fa8a90dae00525c2dcb62ef4d69aeb84b7032a0fd2dc64f45c1685981e9becd4",
+      "byte_count": 152164,
+      "local_path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-008/20260911T184800Z/raw/greeley/building_permit_fee_schedule.pdf",
+      "dates": {
+        "schedule_face_effective_year": "2024"
+      },
+      "evidence": "Title 2024 Building Permit Fee Schedule; Table 1-A; plan review 65%. Year on face \u2260 verified currentness.",
+      "historical_comparison": {
+        "status": "no_exact_digest_in_pinned_CO-MUNICIPAL-GREELEY_rows",
+        "comparison_commit": "0bc3658f6c7c9f378a5083884714dc4111677afd"
+      },
+      "next_action": "Locate adopting resolution / newer schedule via Questica if authorized",
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake",
+      "id": "SD008-06"
+    },
+    {
+      "authority_id": "CO-MUNICIPAL-GREELEY",
+      "title": "2026 Development Impact Fee Schedule memo (Finance)",
+      "issuer": "City of Greeley Finance Department",
+      "role": "fee_schedule_memo",
+      "requested_url": "https://cogy-p-001.sitecorecontenthub.cloud/api/public/content/610f6e36c19f455d9fb662cc2cdbe1af?v=ef2524cb",
+      "access_result": "mac_curl_200_pdf",
+      "retained_bytes": true,
+      "sha256": "9effbd15196898c16105913ee21032db52ad1e259f4f9def0586804726f78709",
+      "byte_count": 651009,
+      "local_path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-008/20260911T184800Z/raw/greeley/2026_development_impact_fee_schedule.pdf",
+      "dates": {
+        "memo_date": "2025-11-01",
+        "fee_year_label": "2026"
+      },
+      "evidence": "Memo Nov 1 2025; cites Code Chapter 4.64.055(b) EAF.",
+      "historical_comparison": {
+        "status": "no_exact_digest_in_pinned_rows",
+        "comparison_commit": "0bc3658f6c7c9f378a5083884714dc4111677afd"
+      },
+      "next_action": "Confirm ordinance adopting 2023 fee methodology",
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake",
+      "id": "SD008-07"
+    },
+    {
+      "authority_id": "CO-MUNICIPAL-GREELEY",
+      "title": "2021 Water/Sewer Plant Investment Fees notice",
+      "issuer": "Greeley Water and Sewer",
+      "role": "utility_fee_schedule",
+      "requested_url": "https://cogy-p-001.sitecorecontenthub.cloud/api/public/content/43b3c7a9134e4881babf60501311ea21?v=be391228",
+      "access_result": "mac_curl_200_pdf",
+      "retained_bytes": true,
+      "sha256": "edfd4eecc57657bec922b8e0e63597fbf2fc957936d8f26a1a457b195dac145c",
+      "byte_count": 74466,
+      "local_path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-008/20260911T184800Z/raw/greeley/2021_water_sewer_plant_investment_fees.pdf",
+      "dates": {
+        "notice": "2020-11-20",
+        "effective": "2021-03-01"
+      },
+      "evidence": "PIF schedule effective March 1 2021 assuming adoption. Hub CTA \u2260 proof unsuperseded.",
+      "historical_comparison": {
+        "status": "no_exact_digest_in_pinned_rows",
+        "comparison_commit": "0bc3658f6c7c9f378a5083884714dc4111677afd"
+      },
+      "next_action": "Seek newer PIF board action if any",
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake",
+      "id": "SD008-08"
+    },
+    {
+      "authority_id": "CO-MUNICIPAL-GREELEY",
+      "title": "Building Permits and Inspections hub (canonical path)",
+      "issuer": "City of Greeley Community Development",
+      "role": "official_hub_html",
+      "requested_url": "https://greeleyco.gov/business/construction-and-growth/building-permits-and-inspections",
+      "access_result": "mac_curl_200",
+      "retained_bytes": true,
+      "sha256": "ff4608777bcf73f12decc5ab995303de7b14cf6dd8742c4a4843e89dfae52dc2",
+      "local_path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-008/20260911T184800Z/raw/greeley/building_permits_and_inspections.html",
+      "dates": {
+        "policy_statement_effective": "2026-01-30"
+      },
+      "evidence": "Links Sitecore fee PDFs; eTRAKiT; Municode; policy statement Jan 30 2026. Old docs/default-source paths 404.",
+      "historical_comparison": {
+        "status": "url_not_in_pinned_13_greeley_rows",
+        "comparison_commit": "0bc3658f6c7c9f378a5083884714dc4111677afd"
+      },
+      "next_action": "Daily monitoring candidate",
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake",
+      "id": "SD008-09"
+    },
+    {
+      "authority_id": "CO-MUNICIPAL-GREELEY",
+      "title": "City of Greeley identity dual-host (greeleygov.com / greeleyco.gov)",
+      "issuer": "City of Greeley",
+      "role": "identity_service_area",
+      "requested_url": "https://greeleyco.gov/",
+      "related_urls": [
+        "https://greeleygov.com/"
+      ],
+      "access_result": "mac_curl_200_both",
+      "retained_bytes": true,
+      "evidence": "Both hosts return City of Greeley chrome and addresses; one municipal authority.",
+      "historical_comparison": {
+        "status": "greeley_hosts_in_pin_cluster",
+        "comparison_commit": "0bc3658f6c7c9f378a5083884714dc4111677afd"
+      },
+      "next_action": "None",
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake",
+      "id": "SD008-10"
+    },
+    {
+      "authority_id": "CO-MUNICIPAL-GREELEY",
+      "title": "Planning and Zoning hub",
+      "issuer": "City of Greeley Planning",
+      "role": "department_hub",
+      "requested_url": "https://greeleyco.gov/planning-and-zoning/",
+      "access_result": "mac_curl_200",
+      "retained_bytes": true,
+      "sha256": "e3c9a1fb4b38bf12ec057c5e04aa8756aee4bc30786028b251b568a258cfa7bb",
+      "local_path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-008/20260911T184800Z/raw/greeley/planning_and_zoning.html",
+      "evidence": "Links Development Code Municode Title 24, applications, GIS apps",
+      "historical_comparison": {
+        "status": "not_in_pinned_url_list",
+        "comparison_commit": "0bc3658f6c7c9f378a5083884714dc4111677afd"
+      },
+      "next_action": "Monitoring catalog",
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake",
+      "id": "SD008-11"
+    },
+    {
+      "authority_id": "CO-MUNICIPAL-GREELEY",
+      "title": "Municode Municipal Code / Title 24 Development Code referral",
+      "issuer": "City of Greeley via Municode",
+      "role": "codification_catalog",
+      "requested_url": "https://library.municode.com/co/greeley/codes/municipal_code",
+      "access_result": "mac_curl_200_thin_shell",
+      "retained_bytes": true,
+      "evidence": "Thin shells for code root, TIT24, TIT22. Pinned ledger also thin-shell digests.",
+      "historical_comparison": {
+        "status": "pinned_shell_digest_family_f67f1c72",
+        "comparison_commit": "0bc3658f6c7c9f378a5083884714dc4111677afd"
+      },
+      "next_action": "Browser full TOC / chapter export",
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake",
+      "id": "SD008-12"
+    },
+    {
+      "authority_id": "CO-MUNICIPAL-GREELEY",
+      "title": "eTRAKiT permit portal",
+      "issuer": "City of Greeley",
+      "role": "permit_portal",
+      "requested_url": "https://trakit.greeleygov.com/eTRAKiT/",
+      "access_result": "mac_curl_200",
+      "retained_bytes": true,
+      "sha256": "767e09bf3f873737761cb4579bfbd68f1693c537c514220bc681c726e7afc0dc",
+      "local_path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-008/20260911T184800Z/raw/greeley/etrakit_portal.html",
+      "evidence": "Operational portal landing; not regulatory text",
+      "historical_comparison": {
+        "status": "new_to_this_batch_vs_pinned_greeley_urls",
+        "comparison_commit": "0bc3658f6c7c9f378a5083884714dc4111677afd"
+      },
+      "next_action": "None for code intake",
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake",
+      "id": "SD008-13"
+    },
+    {
+      "authority_id": "CO-MUNICIPAL-GREELEY",
+      "title": "Design Criteria and Construction Specifications hub",
+      "issuer": "City of Greeley",
+      "role": "policies_guidance_catalog",
+      "requested_url": "https://greeleyco.gov/business/construction-and-growth/design-criteria-and-construction-specifications",
+      "access_result": "mac_curl_200",
+      "retained_bytes": true,
+      "sha256": "48b09776ba8eeb9a324ba1e584ce839bc4c2c4e727baf4d1e8686a44fa320434",
+      "local_path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-008/20260911T184800Z/raw/greeley/design_criteria.html",
+      "evidence": "Catalog of Sitecore PDFs (street, geotech, storm, W&S). Manuals unopened (budget).",
+      "historical_comparison": {
+        "status": "hub_new;_storm_manual_legacy_url_failed_in_pin",
+        "comparison_commit": "0bc3658f6c7c9f378a5083884714dc4111677afd"
+      },
+      "next_action": "Prioritize storm drainage manual if authorized",
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake",
+      "id": "SD008-14"
+    },
+    {
+      "authority_id": "CO-MUNICIPAL-GREELEY",
+      "title": "Budget hub \u2014 Fee Directory referral (Questica OpenBook)",
+      "issuer": "City of Greeley Budget Division",
+      "role": "fee_directory_referral",
+      "requested_url": "https://greeleyco.gov/finance/budget/",
+      "access_result": "mac_curl_200_html;_dashboard_unopened",
+      "retained_bytes": true,
+      "sha256": "c2652e6f548e71d5e8853141c384c9ffe787a07a484a16a808eb3bd1ca53438e",
+      "local_path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-008/20260911T184800Z/raw/greeley/budget.html",
+      "evidence": "Points to https://greeley.openbook.questica.com/ for current fee directory \u2014 not opened",
+      "historical_comparison": {
+        "status": "hub_not_in_pinned_greeley_list",
+        "comparison_commit": "0bc3658f6c7c9f378a5083884714dc4111677afd"
+      },
+      "next_action": "Open Questica fee directory when authorized",
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake",
+      "id": "SD008-15"
+    },
+    {
+      "authority_id": "CO-COUNTY-WELD",
+      "title": "Pinned lead: 2026 EHS/OWTS fee schedule PDF \u2014 UNOPENED",
+      "issuer": "Weld County Health and Environment",
+      "role": "fee_schedule_lead",
+      "requested_url": "https://www.weld.gov/files/sharedassets/public/v/1/departments/health-and-environment/documents/environmental-health/owts/2026-ehs-fee-schedule_final.pdf",
+      "access_result": "not_opened_this_batch",
+      "retained_bytes": false,
+      "evidence": "Pinned manifest sha256 852801c5ad0056c7\u2026; health_environment backlog",
+      "historical_comparison": {
+        "status": "pinned_ledger_downloaded",
+        "comparison_commit": "0bc3658f6c7c9f378a5083884714dc4111677afd",
+        "pinned_sha256_prefix": "852801c5ad0056c7"
+      },
+      "next_action": "Authorized open or copy from ledger raw_path",
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake",
+      "id": "SD008-16"
+    }
+  ]
+}

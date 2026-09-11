@@ -1,0 +1,72 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "original_path": {
+      "title": "Original Path",
+      "type": "string"
+    },
+    "preserved_path": {
+      "title": "Preserved Path",
+      "type": "string"
+    },
+    "sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Sha256",
+      "type": "string"
+    },
+    "size_bytes": {
+      "minimum": 1,
+      "title": "Size Bytes",
+      "type": "integer"
+    },
+    "validation_performed_by": {
+      "const": "Atlas root agent",
+      "default": "Atlas root agent",
+      "title": "Validation Performed By",
+      "type": "string"
+    },
+    "receipt_unchanged": {
+      "const": true,
+      "default": true,
+      "title": "Receipt Unchanged",
+      "type": "boolean"
+    },
+    "disposition": {
+      "const": "same_two_inherited_failures_reported_by_root",
+      "default": "same_two_inherited_failures_reported_by_root",
+      "title": "Disposition",
+      "type": "string"
+    },
+    "limitation": {
+      "title": "Limitation",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "original_path",
+    "preserved_path",
+    "sha256",
+    "size_bytes",
+    "limitation"
+  ],
+  "title": "Supplement",
+  "type": "object"
+}
