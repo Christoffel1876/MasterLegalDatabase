@@ -85,3 +85,27 @@ unchanged; a future session needs fresh explicit dispatch and finite deadlines.
 No public push, official contact, purchase, security change or deployment to the
 unavailable always-on Mac occurred. The earlier audit and acceptance JSON files
 remain frozen; later navigation notes explain the 18/28 to 19/27 transition.
+
+
+A later [independent final audit](INDEPENDENT_FINAL_AUDIT.md) checked all recorded
+implementation/evidence bindings, tracked files and the actual runtime package
+at commit7531793. It found no actionable mismatch; frozen verification records
+remain unchanged.
+
+
+The final [Weld EHS lookup implementation plan](WELD_EHS_NEXT_LOOKUP_PLAN.md)
+identifies a concrete next adapter over the already reviewed 137-row schedule.
+It preserves blank fees, conditions, market-rate wording, page context and
+contract exceptions; it proposes regression cases and exact evidence pins.
+This is a proposal only: no third lookup adapter was implemented this session.
+The plan was preserved byte-for-byte with SHA-256
+`cbb8ac133560d8d6cf134f9fdfb7b2bfc8737e16c0441a5d7137ad7fbe8e6535`.
+
+
+## Session stopped
+
+Recorded at 2026-09-11T21:47:14.978882+00:00. All three local workers completed and stopped;
+the finite-session heartbeat is PAUSED. [SESSION_CLOSEOUT.json](SESSION_CLOSEOUT.json)
+and its [schema](SESSION_CLOSEOUT.schema.json) preserve the observed state.
+The session reached this stopping point before its 22:00 UTC hard end.
+External bots received no new dispatch, and nothing was pushed publicly.
