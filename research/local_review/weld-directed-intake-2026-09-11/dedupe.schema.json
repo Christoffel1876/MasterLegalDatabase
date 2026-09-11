@@ -1,0 +1,256 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Baseline": {
+      "additionalProperties": false,
+      "properties": {
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "frozen": {
+          "$ref": "#/$defs/Asset"
+        },
+        "records": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Records"
+        }
+      },
+      "required": [
+        "repository_path",
+        "frozen",
+        "records"
+      ],
+      "title": "Baseline",
+      "type": "object"
+    },
+    "Match": {
+      "additionalProperties": false,
+      "properties": {
+        "metadata_file": {
+          "title": "Metadata File",
+          "type": "string"
+        },
+        "metadata_file_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Metadata File Sha256",
+          "type": "string"
+        },
+        "location": {
+          "title": "Location",
+          "type": "string"
+        },
+        "source_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Id"
+        },
+        "review_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Review Id"
+        },
+        "source_hash": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Hash"
+        },
+        "exact_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Exact Url"
+        },
+        "relative_original_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Relative Original Path"
+        },
+        "actual_local_original_present": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Actual Local Original Present"
+        },
+        "relation": {
+          "title": "Relation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "metadata_file",
+        "metadata_file_sha256",
+        "location",
+        "source_id",
+        "review_id",
+        "source_hash",
+        "exact_url",
+        "relative_original_path",
+        "actual_local_original_present",
+        "relation"
+      ],
+      "title": "Match",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "raw_manifest_records": {
+      "const": 38,
+      "title": "Raw Manifest Records",
+      "type": "integer"
+    },
+    "manual_ledger_records": {
+      "const": 39,
+      "title": "Manual Ledger Records",
+      "type": "integer"
+    },
+    "ordinary_raw_files_size_screened": {
+      "const": 542,
+      "title": "Ordinary Raw Files Size Screened",
+      "type": "integer"
+    },
+    "matching_size_files_hashed": {
+      "const": 0,
+      "title": "Matching Size Files Hashed",
+      "type": "integer"
+    },
+    "raw_files_equal_digest": {
+      "const": 0,
+      "title": "Raw Files Equal Digest",
+      "type": "integer"
+    },
+    "symlinks_encountered": {
+      "const": 0,
+      "title": "Symlinks Encountered",
+      "type": "integer"
+    },
+    "raw_manifest_matches": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Raw Manifest Matches",
+      "type": "array"
+    },
+    "manual_ledger_matches": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Manual Ledger Matches",
+      "type": "array"
+    },
+    "proposed_record_id_collisions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Proposed Record Id Collisions",
+      "type": "array"
+    },
+    "legacy_matches": {
+      "items": {
+        "$ref": "#/$defs/Match"
+      },
+      "title": "Legacy Matches",
+      "type": "array"
+    },
+    "baseline": {
+      "items": {
+        "$ref": "#/$defs/Baseline"
+      },
+      "title": "Baseline",
+      "type": "array"
+    },
+    "qualification": {
+      "title": "Qualification",
+      "type": "string"
+    }
+  },
+  "required": [
+    "checked_at",
+    "raw_manifest_records",
+    "manual_ledger_records",
+    "ordinary_raw_files_size_screened",
+    "matching_size_files_hashed",
+    "raw_files_equal_digest",
+    "symlinks_encountered",
+    "raw_manifest_matches",
+    "manual_ledger_matches",
+    "proposed_record_id_collisions",
+    "legacy_matches",
+    "baseline",
+    "qualification"
+  ],
+  "title": "Dedupe",
+  "type": "object"
+}

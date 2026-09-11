@@ -64,6 +64,7 @@ separate supplement, with its own source and report hashes.
 | [Fort Collins source intake](fort-collins-intake-2026-09-11/README.md) | Nineteen PDFs: seventeen code/amendment candidates and two provisional meeting packets | Filenames and packet inclusion do not establish enacted law |
 | [Larimer adopting-instrument intake, Sherlock007](larimer-intake-sherlock007-2026-09-11/README.md) | Three additional originals; six other supplied PDFs match existing originals | Staff recommendations, unsigned draft content and source date anomalies remain qualified |
 | [Weld County and Greeley intake, Sherlock008](weld-greeley-intake-sherlock008-2026-09-11/README.md) | Four fee-related PDFs from two distinct authorities | Requested URL, received bytes, document date and effective-date assertion remain distinct |
+| [Recovered Weld ordinance and environmental-health schedule](weld-directed-intake-2026-09-11/INTAKE_COMPLETE.md) | Two official PDFs recovered by direct requests, with eight pages and complete source reviews | Both match older recorded hashes; this records reacquisition, with legal currentness unverified |
 | [Larimer extension evidence, Sherlock009](larimer-extension-evidence-sherlock009-2026-09-11/README.md) | July staff memo, browser-printed unsigned addendum and received February minutes | Research evidence only; disputed download association, conflicting dates and missing executed instruments remain explicit |
 
 For Sherlock009, only ten distinct pages of the 27 structural pages received a
