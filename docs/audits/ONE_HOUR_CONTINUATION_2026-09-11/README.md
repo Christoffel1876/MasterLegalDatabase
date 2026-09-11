@@ -90,3 +90,16 @@ receipts and a source-only reader before broader inputs are accepted. The plan
 was preserved verbatim with SHA-256
 `0f7515f061dbfd40da07f41842f371c4cec52d2cde5d6cd68cf184ebe6b1e193`;
 no canonical catalog build was run.
+
+## Later inventory mapping and prototype
+
+At 21:33 UTC the operational inventory gained one explicit join to the accepted
+Larimer equity-resolution review: 46 originals, 19 mapped review scopes and 27
+unmapped. The five exact files from this earlier 18/28 checkpoint remain in
+[inventory-at-first-checkpoint](inventory-at-first-checkpoint/). Its frozen
+VERIFICATION.json is unchanged; implementation hashes describe the earlier
+checkpoint (inventory code at commit b740691), not later revisions.
+
+The later [three-section research catalog guide](../../RESEARCH_CATALOG.md)
+describes a separate metadata discovery prototype. It does not replace the
+missing canonical catalog or verify the currency of the inherited CRS text.

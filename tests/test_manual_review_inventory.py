@@ -414,3 +414,48 @@ def test_standalone_inventory_model_rejects_false_review_accounting(
         data["sources"][1]["review_status"] = "explicit_review_artifacts_linked"
     with pytest.raises(ValueError):
         inventory.Inventory.model_validate_json(json.dumps(data))
+
+
+def test_accepted_equity_review_is_one_bounded_additive_join() -> None:
+    """The later two-page source review changes only its former null-review row."""
+    root = Path(__file__).resolve().parents[1]
+    checkpoint = root / (
+        "docs/audits/ONE_HOUR_CONTINUATION_2026-09-11/inventory-at-first-checkpoint"
+    )
+    old_plan = json.loads((checkpoint / "join-plan.json").read_bytes())
+    old = inventory.Inventory.model_validate_json((checkpoint / "inventory.json").read_bytes())
+    new_plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
+    new = inventory.build_inventory(root)
+    assert len(new.sources) == len(old.sources) == 46
+    assert (old.rows_with_review, old.rows_without_review) == (18, 28)
+    assert (new.rows_with_review, new.rows_without_review) == (19, 27)
+    assert [r.model_dump(mode="json") for r in new_plan.reviews[:18]] == old_plan["reviews"]
+    assert len(new_plan.reviews) == 19
+    previous = {s.record_id: s for s in old.sources}
+    for row in new.sources:
+        if row.record_id != "larimer-equity-fee-resolution-sd007-04":
+            assert row == previous[row.record_id]
+            continue
+        assert previous[row.record_id].reviews is None
+        assert len(row.reviews) == 1 and row.reviews[0].review_kind == "checked_passages"
+        review = row.reviews[0]
+        assert review.scope_fields["/expected_physical_pages"] == 2
+        assert review.scope_fields["/review_mode"] == "atlas_candidate_aware_source_qa_not_blind"
+        assert review.limitations["/adopted_status_verified"] is False
+        assert review.limitations["/effective_date_verified"] is None
+        assert review.limitations["/adoption_date_verified"] is None
+        assert review.limitations["/attachment_a_reference_observed"] is False
+        assert len(review.limitations["/execution"]) == 5
+        assert "20243" in json.dumps(review.limitations["/observations"])
+        assert row.verified_http_acquired_at is None
+        assert row.acquisition_method == "received_review_package"
+        assert row.recorded_intake_status == "archived_pending_pipeline"
+        assert row.legal_currentness == "not_verified" and row.answer_safe is False
+        prior_fields = previous[row.record_id].model_dump()
+        current_fields = row.model_dump()
+        for key in ("reviews", "review_status"):
+            prior_fields.pop(key)
+            current_fields.pop(key)
+        assert current_fields == prior_fields
+    assert new.manual_manifest == old.manual_manifest
+    assert new.unchanged_legacy_ledger == old.unchanged_legacy_ledger

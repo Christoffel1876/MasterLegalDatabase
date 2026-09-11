@@ -6,7 +6,7 @@ answer_safe: false
 
 # Manual source/review inventory
 
-46 custody rows; 19 have an explicit review link and 27 have no allowlisted review link.
+46 custody rows; 18 have an explicit review link and 28 have no allowlisted review link.
 These are source-custody counts, not statewide coverage or current-law readiness.
 
 From the repository root:
@@ -49,7 +49,7 @@ python -m geode.pipeline.manual_review_inventory --root . --check
 | fort-collins-meeting-packet-9909c320-sd005-09 | CO-MUNICIPAL-FORT_COLLINS | metadata only |
 | fort-collins-meeting-packet-98ce54e6-sd005-11 | CO-MUNICIPAL-FORT_COLLINS | metadata only |
 | larimer-equity-fee-memo-sd007-05 | CO-COUNTY-LARIMER | metadata only |
-| larimer-equity-fee-resolution-sd007-04 | CO-COUNTY-LARIMER | checked_passages |
+| larimer-equity-fee-resolution-sd007-04 | CO-COUNTY-LARIMER | metadata only |
 | larimer-february-meeting-packet-sd007-08 | CO-COUNTY-LARIMER | metadata only |
 | weld-building-fees-sd008-01 | CO-COUNTY-WELD | checked_tables |
 | greeley-building-fees-sd008-06 | CO-MUNICIPAL-GREELEY | checked_tables |

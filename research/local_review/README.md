@@ -22,14 +22,15 @@ review does not certify the whole document.
 
 The [manual-source review inventory](manual-source-review-inventory-2026-09-11/README.md)
 binds all 46 preserved PDFs to their recorded county or municipal authority and
-exact provenance. Eighteen have an explicit allowlisted review link; 28 have no
+exact provenance. Nineteen have an explicit allowlisted review link; 27 have no
 mapped review link. A null review link does not establish that no earlier
 inspection exists. Each linked scope retains its original limitations, and the
 older coverage ledger remains unchanged.
 
 A [later Larimer equity-resolution review](../../docs/audits/LARIMER_EQUITY_RESOLUTION_2026-09-11/README.md)
-was accepted after that inventory snapshot. It is preserved separately and awaits
-an explicit join in the next inventory version; the frozen counts are unchanged.
+was accepted after the initial inventory snapshot and explicitly joined at
+21:33 UTC. The earlier 18/28 snapshot remains preserved in the continuation audit;
+the operational inventory now includes that qualified two-page review.
 
 ## Checked text and source structure
 
@@ -110,6 +111,11 @@ The [one-hour continuation audit](../../docs/audits/ONE_HOUR_CONTINUATION_2026-0
 records the expanded lookup tests, inventory validation and corrected missing-input
 diagnostics. Three original LFS content objects remain unavailable; the valid
 local-review summary is preserved.
+
+The separate [three-section CRS catalog prototype](../../docs/RESEARCH_CATALOG.md)
+provides metadata discovery with exact derived-file bindings. Only three selected
+records are admitted; copied larger input files are not fully source-verified.
+This isolated package does not serve the normal backend or current-law answers.
 
 The [readiness and next-intake assessment](project-readiness-2026-09-11/README.md)
 records the distinction between preserved sources and integrated retrieval,

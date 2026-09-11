@@ -38,3 +38,11 @@ This review finished after the frozen manual-source inventory was built. It is a
 separate supplement; that inventory's 46 originals, 18 mapped reviews and 28
 unmapped review links remain its earlier snapshot. The inventory mapping can be
 extended in a later version with this exact review schema and source identity.
+
+## Later inventory join
+
+At 21:33 UTC the operational inventory added this exact source/review/schema join.
+Its 46 originals now have 19 mapped review scopes and 27 unmapped links. The prior
+18 joins, source custody and raw archive are unchanged. The acceptance receipt
+above preserves its earlier timestamp and statement that no mapping had yet
+been made; it has not been rewritten. Neither event verifies current law.

@@ -21,6 +21,7 @@ PLAN = PACKAGE / "join-plan.json"
 ReviewKind = Literal["native_candidate", "checked_passages", "checked_tables", "source_structure"]
 # Exact schema identities, reviewed individually; no directory-name or filename inference.
 ALLOWED_REVIEW_SCHEMAS: dict[str, ReviewKind] = {
+    "2e25d770a6d69f66088fd711ac0fa58084e4d3a5bfc0a89a1e12d67f38c0d7e4": "checked_passages",
     "d29c8fdee28168161fd2d0e83c10a2d72d0d545cac9525ea17d05bc2549e5b63": "checked_tables",
     "01cce506b8e53c71079d275681c4296bcfe1f7abbe0475e3b2422f9fd579daea": "checked_passages",
     "ade2d62932c258b3cc4f34817dcbf8568c8cd44080ba0ce032c4713f89f3d342": "checked_tables",
