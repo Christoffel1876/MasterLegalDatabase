@@ -1,0 +1,111 @@
+{
+  "$defs": {
+    "Evidence": {
+      "additionalProperties": false,
+      "description": "One immutable validation artifact or final implementation digest.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Evidence",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Bounded code validation without production regeneration.",
+  "properties": {
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "repair_verified_locally_production_regeneration_deferred",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "full_tests_passed": {
+      "title": "Full Tests Passed",
+      "type": "integer"
+    },
+    "focused_tests_passed": {
+      "title": "Focused Tests Passed",
+      "type": "integer"
+    },
+    "full_branch_coverage_percent": {
+      "title": "Full Branch Coverage Percent",
+      "type": "integer"
+    },
+    "focused_branch_coverage_percent": {
+      "title": "Focused Branch Coverage Percent",
+      "type": "integer"
+    },
+    "policy_before_sha256": {
+      "title": "Policy Before Sha256",
+      "type": "string"
+    },
+    "policy_after_sha256": {
+      "title": "Policy After Sha256",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Evidence"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "behavior": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Behavior",
+      "type": "array"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "status",
+    "legal_currentness",
+    "full_tests_passed",
+    "focused_tests_passed",
+    "full_branch_coverage_percent",
+    "focused_branch_coverage_percent",
+    "policy_before_sha256",
+    "policy_after_sha256",
+    "files",
+    "behavior",
+    "limits"
+  ],
+  "title": "Checkpoint",
+  "type": "object"
+}

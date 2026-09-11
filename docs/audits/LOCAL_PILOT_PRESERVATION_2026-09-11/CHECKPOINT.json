@@ -1,0 +1,69 @@
+{
+  "prepared_at": "2026-09-11T19:12:01.996823Z",
+  "status": "repair_verified_locally_production_regeneration_deferred",
+  "legal_currentness": "not_verified",
+  "full_tests_passed": 1778,
+  "focused_tests_passed": 299,
+  "full_branch_coverage_percent": 77,
+  "focused_branch_coverage_percent": 100,
+  "policy_before_sha256": "a6221eb8a249662b6f848982639ed152d4bdf14f1be536e4d993339eed9c00b2",
+  "policy_after_sha256": "b597faa4b475587a94fe10454e2a368b9ec8ee1885d899749cbd63edb3e5d63a",
+  "files": [
+    {
+      "path": "geode/pipeline/local_pilot.py",
+      "sha256": "49dfde48a1dfa6e42c7bb191b600fd6f30ed7831b3bed05c35777478c171393f",
+      "bytes": 9354
+    },
+    {
+      "path": "tests/test_local_pilot_index_preservation.py",
+      "sha256": "a8016069281152d202a0b64ea01ca4afa9ea26f624085528cbc5f8566fe7237a",
+      "bytes": 15742
+    },
+    {
+      "path": "tests/test_ownership_regeneration.py",
+      "sha256": "367c852c74cd2488d94270f0c59386607776c9bc337ff7082c4f47b5edd81602",
+      "bytes": 27694
+    },
+    {
+      "path": ".github/workflows/local-ownership-ci.yml",
+      "sha256": "4687d25ea468848ddef637e4ffa0e1772916eef12caaec265f15ba2b9898a32b",
+      "bytes": 2804
+    },
+    {
+      "path": "_CONTROL_PLANE/LOCAL_SOURCE_OWNERSHIP_CORRECTIONS.json",
+      "sha256": "b597faa4b475587a94fe10454e2a368b9ec8ee1885d899749cbd63edb3e5d63a",
+      "bytes": 22388
+    },
+    {
+      "path": "docs/audits/LOCAL_PILOT_PRESERVATION_2026-09-11/full-tests.log",
+      "sha256": "c47548273c41e7aaa90124c955a706ce400227b00e5c7966d7563a3ff14b4ee8",
+      "bytes": 79053
+    },
+    {
+      "path": "docs/audits/LOCAL_PILOT_PRESERVATION_2026-09-11/focused-ci-tests.log",
+      "sha256": "988cedf95aa6316465ccc155ff5cb49c16521ee25a45fa2f547d71ad291c6c14",
+      "bytes": 1524
+    },
+    {
+      "path": "docs/audits/LOCAL_PILOT_PRESERVATION_2026-09-11/corpus-validation-after-sherlock007.log",
+      "sha256": "9ffeba0f2279faa724da0074c00f7aec9a52d7731f950ff7f2a34084d7985a0d",
+      "bytes": 312
+    }
+  ],
+  "behavior": [
+    "Merge registered authorities by ID while preserving unrelated index and metadata rows.",
+    "Retain unrelated rule_unit, local_rule, unknown record fields and row order.",
+    "Apply explicit ownership exclusions through parent chains across all three local layers.",
+    "Reject duplicate IDs, type collisions and malformed inputs before any output write.",
+    "Validate both meta_path and path against all planned managed authority metadata.",
+    "Normalize relative aliases and internal parent components; reject escaping, absolute, URL and Windows-style references without accessing external files.",
+    "Snapshot preimages and atomically replace each output file after preflight validation."
+  ],
+  "limits": [
+    "No broad production regeneration; exact county index and local review queue LFS payloads remain missing. Full corpus validation retains two inherited failures.",
+    "Writes are atomic per file; no multi-file rollback is claimed for a disk failure.",
+    "Full repository branch coverage is 77%; the three focused policy/parent/pilot modules have 100% combined statement and branch coverage.",
+    "The updated GitHub workflow has been checked locally, not run on GitHub.",
+    "No legal currentness, source completeness, public push or coverage promotion."
+  ]
+}

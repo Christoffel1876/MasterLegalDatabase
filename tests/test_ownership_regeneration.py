@@ -191,7 +191,7 @@ def test_pilot_filters_identity_and_existing_retired_rules(
     assert result == {"ownership_excluded": 2, "county": 1, "municipal": 1, "district": 0}
     assert "retired source ownership" in caplog.text
     assert "affected ownership identity" in caplog.text
-    assert {r["id"] for r in iter_jsonl(index)} == {COUNTY, "LOCAL-RULE-GOOD"}
+    assert {r["id"] for r in iter_jsonl(index)} == {COUNTY, "LOCAL-RULE-GOOD", "OLD-IDENTITY"}
     assert registry.read_bytes() == original_registry
     assert any(p.read_bytes() == original_index for p in (tmp_path / "_SNAPSHOTS").rglob("*.jsonl"))
 
