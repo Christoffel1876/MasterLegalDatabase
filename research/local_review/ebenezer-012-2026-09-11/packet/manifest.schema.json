@@ -1,0 +1,548 @@
+{
+  "$defs": {
+    "Document": {
+      "additionalProperties": false,
+      "properties": {
+        "queue_order": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Queue Order",
+          "type": "integer"
+        },
+        "assignment_id": {
+          "enum": [
+            "EB-PDF-010",
+            "EB-PDF-011",
+            "EB-PDF-012"
+          ],
+          "title": "Assignment Id",
+          "type": "string"
+        },
+        "source_id": {
+          "enum": [
+            "larimer-development-review-fees-sd004-07",
+            "larimer-fee-increase-memo-sd004-lc-09",
+            "larimer-data-center-moratorium-sd004-04"
+          ],
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-LARIMER",
+          "default": "CO-COUNTY-LARIMER",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "expected_pages": {
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Expected Pages",
+          "type": "integer"
+        },
+        "original": {
+          "$ref": "#/$defs/PacketFile"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "rendering": {
+          "$ref": "#/$defs/Render"
+        },
+        "candidate": {
+          "$ref": "#/$defs/PacketFile"
+        },
+        "candidate_method_family": {
+          "enum": [
+            "native",
+            "ocr"
+          ],
+          "title": "Candidate Method Family",
+          "type": "string"
+        },
+        "candidate_status": {
+          "enum": [
+            "machine_native_text_unreviewed",
+            "machine_ocr_unreviewed"
+          ],
+          "title": "Candidate Status",
+          "type": "string"
+        },
+        "candidate_changes": {
+          "const": "none",
+          "default": "none",
+          "title": "Candidate Changes",
+          "type": "string"
+        },
+        "candidate_packaging": {
+          "const": "UTF-8; explicit physical-page markers added outside unchanged text slices",
+          "default": "UTF-8; explicit physical-page markers added outside unchanged text slices",
+          "title": "Candidate Packaging",
+          "type": "string"
+        },
+        "page_evidence_schema": {
+          "$ref": "#/$defs/PacketFile"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/Page"
+          },
+          "maxItems": 7,
+          "minItems": 1,
+          "title": "Pages",
+          "type": "array"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "legal_review": {
+          "const": "pending",
+          "default": "pending",
+          "title": "Legal Review",
+          "type": "string"
+        }
+      },
+      "required": [
+        "queue_order",
+        "assignment_id",
+        "source_id",
+        "expected_pages",
+        "original",
+        "provenance",
+        "rendering",
+        "candidate",
+        "candidate_method_family",
+        "candidate_status",
+        "page_evidence_schema",
+        "pages"
+      ],
+      "title": "Document",
+      "type": "object"
+    },
+    "FileRef": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    },
+    "PacketFile": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "PacketFile",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/PacketFile"
+        },
+        "image_width": {
+          "exclusiveMinimum": 0,
+          "title": "Image Width",
+          "type": "integer"
+        },
+        "image_height": {
+          "exclusiveMinimum": 0,
+          "title": "Image Height",
+          "type": "integer"
+        },
+        "evidence": {
+          "$ref": "#/$defs/PacketFile"
+        },
+        "raw_engine_stdout": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PacketFile"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "text_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Text Sha256",
+          "type": "string"
+        },
+        "text_size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Text Size Bytes",
+          "type": "integer"
+        },
+        "candidate_text_offset_bytes": {
+          "minimum": 0,
+          "title": "Candidate Text Offset Bytes",
+          "type": "integer"
+        },
+        "candidate_text_end_byte_exclusive": {
+          "exclusiveMinimum": 0,
+          "title": "Candidate Text End Byte Exclusive",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "image_width",
+        "image_height",
+        "evidence",
+        "raw_engine_stdout",
+        "text_sha256",
+        "text_size_bytes",
+        "candidate_text_offset_bytes",
+        "candidate_text_end_byte_exclusive"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "basis": {
+          "const": "verified repository intake and delivered archive/member bytes; upstream URL/acquisition remain supplied claims",
+          "default": "verified repository intake and delivered archive/member bytes; upstream URL/acquisition remain supplied claims",
+          "title": "Basis",
+          "type": "string"
+        },
+        "canonical_raw_pdf": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "intake_receipt": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "raw_intake_manifest": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "raw_manifest_line_number": {
+          "minimum": 1,
+          "title": "Raw Manifest Line Number",
+          "type": "integer"
+        },
+        "raw_manifest_line_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Raw Manifest Line Sha256",
+          "type": "string"
+        },
+        "raw_manifest_line_size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Raw Manifest Line Size Bytes",
+          "type": "integer"
+        },
+        "intake_record_id": {
+          "minLength": 1,
+          "title": "Intake Record Id",
+          "type": "string"
+        },
+        "actual_repository_received_at": {
+          "format": "date-time",
+          "title": "Actual Repository Received At",
+          "type": "string"
+        },
+        "acquisition_method": {
+          "const": "received_review_package",
+          "default": "received_review_package",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "intake_status": {
+          "const": "archived_pending_pipeline",
+          "default": "archived_pending_pipeline",
+          "title": "Intake Status",
+          "type": "string"
+        },
+        "source_archive": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "archive_member": {
+          "pattern": "^larimer/raw/[^/]+\\.pdf$",
+          "title": "Archive Member",
+          "type": "string"
+        },
+        "archive_member_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Archive Member Sha256",
+          "type": "string"
+        },
+        "archive_member_size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Archive Member Size Bytes",
+          "type": "integer"
+        },
+        "archive_audit": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "claimed_official_source_url": {
+          "pattern": "^https://www\\.larimer\\.gov/",
+          "title": "Claimed Official Source Url",
+          "type": "string"
+        },
+        "claimed_final_url": {
+          "pattern": "^https://www\\.larimer\\.gov/",
+          "title": "Claimed Final Url",
+          "type": "string"
+        },
+        "claimed_attempt_sequence": {
+          "minimum": 1,
+          "title": "Claimed Attempt Sequence",
+          "type": "integer"
+        },
+        "claimed_attempt_time": {
+          "format": "date-time",
+          "title": "Claimed Attempt Time",
+          "type": "string"
+        },
+        "claimed_attempt_method": {
+          "const": "curl",
+          "default": "curl",
+          "title": "Claimed Attempt Method",
+          "type": "string"
+        },
+        "claimed_attempt_http_status": {
+          "const": 200,
+          "default": 200,
+          "title": "Claimed Attempt Http Status",
+          "type": "integer"
+        },
+        "attempt_log_member": {
+          "const": "larimer/attempted_urls.json",
+          "default": "larimer/attempted_urls.json",
+          "title": "Attempt Log Member",
+          "type": "string"
+        },
+        "attempt_log_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Attempt Log Sha256",
+          "type": "string"
+        },
+        "original_acquisition_time": {
+          "default": null,
+          "title": "Original Acquisition Time",
+          "type": "null"
+        },
+        "upstream_http_acquisition_independently_verified": {
+          "const": false,
+          "default": false,
+          "title": "Upstream Http Acquisition Independently Verified",
+          "type": "boolean"
+        },
+        "supplied_member_mtime": {
+          "format": "date-time",
+          "title": "Supplied Member Mtime",
+          "type": "string"
+        },
+        "caveats": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Caveats",
+          "type": "array"
+        }
+      },
+      "required": [
+        "canonical_raw_pdf",
+        "intake_receipt",
+        "raw_intake_manifest",
+        "raw_manifest_line_number",
+        "raw_manifest_line_sha256",
+        "raw_manifest_line_size_bytes",
+        "intake_record_id",
+        "actual_repository_received_at",
+        "source_archive",
+        "archive_member",
+        "archive_member_sha256",
+        "archive_member_size_bytes",
+        "archive_audit",
+        "claimed_official_source_url",
+        "claimed_final_url",
+        "claimed_attempt_sequence",
+        "claimed_attempt_time",
+        "attempt_log_sha256",
+        "supplied_member_mtime",
+        "caveats"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "Render": {
+      "additionalProperties": false,
+      "properties": {
+        "engine": {
+          "const": "Poppler pdftoppm",
+          "default": "Poppler pdftoppm",
+          "title": "Engine",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        },
+        "command": {
+          "const": "pdftoppm -r 300 -png original.pdf page",
+          "default": "pdftoppm -r 300 -png original.pdf page",
+          "title": "Command",
+          "type": "string"
+        },
+        "dpi": {
+          "const": 300,
+          "default": 300,
+          "title": "Dpi",
+          "type": "integer"
+        },
+        "scope": {
+          "const": "entire PDF page; no crop, annotation, image edit or rescaling",
+          "default": "entire PDF page; no crop, annotation, image edit or rescaling",
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "version"
+      ],
+      "title": "Render",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 2,
+      "default": 2,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "packet_id": {
+      "const": "grok-pdf-review-2026-09-11-batch-3",
+      "default": "grok-pdf-review-2026-09-11-batch-3",
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "prepared_not_sent",
+      "default": "prepared_not_sent",
+      "title": "Status",
+      "type": "string"
+    },
+    "purpose": {
+      "const": "independent_pdf_transcription_review",
+      "default": "independent_pdf_transcription_review",
+      "title": "Purpose",
+      "type": "string"
+    },
+    "independence": {
+      "const": "procedural separation; each candidate/evidence withheld until that document pass 1 is frozen",
+      "default": "procedural separation; each candidate/evidence withheld until that document pass 1 is frozen",
+      "title": "Independence",
+      "type": "string"
+    },
+    "start_no_document_at_or_after": {
+      "const": "2026-09-11T20:50:00Z",
+      "default": "2026-09-11T20:50:00Z",
+      "title": "Start No Document At Or After",
+      "type": "string"
+    },
+    "finish_by": {
+      "const": "2026-09-11T21:20:00Z",
+      "default": "2026-09-11T21:20:00Z",
+      "title": "Finish By",
+      "type": "string"
+    },
+    "continuation": {
+      "const": "Only after separate Atlas dispatch and after EB-PDF-010/011: complete EB-PDF-012 if before cutoff; return result and stop",
+      "default": "Only after separate Atlas dispatch and after EB-PDF-010/011: complete EB-PDF-012 if before cutoff; return result and stop",
+      "title": "Continuation",
+      "type": "string"
+    },
+    "canonical_intake_boundary": {
+      "const": "Raw PDFs are archived_pending_pipeline. This handoff changes no repository, coverage, transcription-review or legal-currentness status.",
+      "default": "Raw PDFs are archived_pending_pipeline. This handoff changes no repository, coverage, transcription-review or legal-currentness status.",
+      "title": "Canonical Intake Boundary",
+      "type": "string"
+    },
+    "documents": {
+      "items": {
+        "$ref": "#/$defs/Document"
+      },
+      "maxItems": 1,
+      "minItems": 1,
+      "title": "Documents",
+      "type": "array"
+    },
+    "supporting_payloads": {
+      "items": {
+        "$ref": "#/$defs/PacketFile"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "title": "Supporting Payloads",
+      "type": "array"
+    },
+    "assignment": {
+      "$ref": "#/$defs/FileRef"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "documents",
+    "supporting_payloads",
+    "assignment"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

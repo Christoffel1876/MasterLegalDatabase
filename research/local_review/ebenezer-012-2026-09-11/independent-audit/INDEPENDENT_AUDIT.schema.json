@@ -1,0 +1,149 @@
+{
+  "$defs": {
+    "File": {
+      "additionalProperties": false,
+      "description": "One exact inspected file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Bounded source/body/custody acceptance with explicit visual qualifications.",
+  "properties": {
+    "assignment_id": {
+      "const": "EB-PDF-012",
+      "default": "EB-PDF-012",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "larimer-data-center-moratorium-sd004-04",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "scoped_body_and_qualified_execution_notes_verified",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "package_files": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Package Files",
+      "type": "array"
+    },
+    "independently_verified_copy_receipts": {
+      "const": 23,
+      "default": 23,
+      "title": "Independently Verified Copy Receipts",
+      "type": "integer"
+    },
+    "reviewer_hash_references": {
+      "const": 14,
+      "default": 14,
+      "title": "Reviewer Hash References",
+      "type": "integer"
+    },
+    "body_edit_count": {
+      "const": 3,
+      "default": 3,
+      "title": "Body Edit Count",
+      "type": "integer"
+    },
+    "critical_finding_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Critical Finding Ids",
+      "type": "array"
+    },
+    "critical_count": {
+      "const": 10,
+      "default": 10,
+      "title": "Critical Count",
+      "type": "integer"
+    },
+    "visual_pages": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Visual Pages",
+      "type": "array"
+    },
+    "visual_crops": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Visual Crops",
+      "type": "array"
+    },
+    "checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_id",
+    "recorded_at",
+    "status",
+    "package_files",
+    "critical_finding_ids",
+    "visual_pages",
+    "visual_crops",
+    "checks",
+    "findings",
+    "limitations"
+  ],
+  "title": "Audit",
+  "type": "object"
+}
