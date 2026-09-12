@@ -1,0 +1,147 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Bind one exact ordinary file relative to this package.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Hold only known final-record fields; execution fields must remain null.",
+  "properties": {
+    "record_id": {
+      "title": "Record Id",
+      "type": "string"
+    },
+    "layer_id": {
+      "const": "08_County_Authorities",
+      "title": "Layer Id",
+      "type": "string"
+    },
+    "official_source_name": {
+      "title": "Official Source Name",
+      "type": "string"
+    },
+    "official_source_url": {
+      "title": "Official Source Url",
+      "type": "string"
+    },
+    "acquisition_method": {
+      "const": "received_review_package",
+      "title": "Acquisition Method",
+      "type": "string"
+    },
+    "received_from": {
+      "title": "Received From",
+      "type": "string"
+    },
+    "reviewer_name": {
+      "title": "Reviewer Name",
+      "type": "string"
+    },
+    "reviewer_email": {
+      "title": "Reviewer Email",
+      "type": "null"
+    },
+    "custody_note": {
+      "title": "Custody Note",
+      "type": "string"
+    },
+    "source_file": {
+      "$ref": "#/$defs/Asset"
+    },
+    "expected_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Expected Sha256",
+      "type": "string"
+    },
+    "source_format": {
+      "const": "pdf",
+      "title": "Source Format",
+      "type": "string"
+    },
+    "size_bytes": {
+      "minimum": 1,
+      "title": "Size Bytes",
+      "type": "integer"
+    },
+    "allow_duplicate": {
+      "const": false,
+      "title": "Allow Duplicate",
+      "type": "boolean"
+    },
+    "intake_id": {
+      "title": "Intake Id",
+      "type": "null"
+    },
+    "archive_path": {
+      "title": "Archive Path",
+      "type": "null"
+    },
+    "received_at": {
+      "title": "Received At",
+      "type": "null"
+    },
+    "status": {
+      "const": "proposed_not_applied",
+      "title": "Status",
+      "type": "string"
+    },
+    "intended_record_status": {
+      "const": "archived_pending_pipeline",
+      "title": "Intended Record Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "record_id",
+    "layer_id",
+    "official_source_name",
+    "official_source_url",
+    "acquisition_method",
+    "received_from",
+    "reviewer_name",
+    "reviewer_email",
+    "custody_note",
+    "source_file",
+    "expected_sha256",
+    "source_format",
+    "size_bytes",
+    "allow_duplicate",
+    "intake_id",
+    "archive_path",
+    "received_at",
+    "status",
+    "intended_record_status",
+    "legal_currentness"
+  ],
+  "title": "RecordTemplate",
+  "type": "object"
+}

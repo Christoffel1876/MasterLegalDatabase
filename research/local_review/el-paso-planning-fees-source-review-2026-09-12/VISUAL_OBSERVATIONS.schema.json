@@ -1,0 +1,106 @@
+{
+  "$defs": {
+    "Page": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image_path": {
+          "title": "Image Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image_path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Page",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source_id": {
+      "const": "el-paso-planning-fees-sd011",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "const": "c3bd819da169a58328e7bdfcd8ea65e4a751326a65dce325ad19e5bc868b3e12",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "review_mode": {
+      "const": "source_images_first_with_prior_title_role_awareness_not_blind",
+      "title": "Review Mode",
+      "type": "string"
+    },
+    "candidate_generated": {
+      "const": false,
+      "default": false,
+      "title": "Candidate Generated",
+      "type": "boolean"
+    },
+    "candidate_consulted": {
+      "const": false,
+      "default": false,
+      "title": "Candidate Consulted",
+      "type": "boolean"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_id",
+    "source_sha256",
+    "prepared_at",
+    "review_mode",
+    "pages",
+    "observations"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

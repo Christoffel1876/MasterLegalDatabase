@@ -1,0 +1,81 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "parent_commit": {
+      "title": "Parent Commit",
+      "type": "string"
+    },
+    "full_suite": {
+      "title": "Full Suite",
+      "type": "string"
+    },
+    "coverage": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Coverage",
+      "type": "object"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "conclusions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Conclusions",
+      "type": "array"
+    },
+    "public_push": {
+      "const": false,
+      "default": false,
+      "title": "Public Push",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "checked_at",
+    "parent_commit",
+    "full_suite",
+    "coverage",
+    "evidence",
+    "conclusions"
+  ],
+  "title": "Checkpoint",
+  "type": "object"
+}

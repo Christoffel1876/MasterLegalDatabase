@@ -1,0 +1,375 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Crop": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "source_image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "pixel_box": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Pixel Box",
+          "type": "array"
+        },
+        "method": {
+          "const": "PyMuPDF Pixmap.copy: exact source PNG pixels, no resampling",
+          "title": "Method",
+          "type": "string"
+        },
+        "scope": {
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "physical_page",
+        "source_image",
+        "pixel_box",
+        "method",
+        "scope"
+      ],
+      "title": "Crop",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "disposition_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Disposition Ids",
+          "type": "array"
+        },
+        "physical_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Physical Pages",
+          "type": "array"
+        },
+        "conclusion": {
+          "title": "Conclusion",
+          "type": "string"
+        },
+        "native_slice_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Native Slice Ids",
+          "type": "array"
+        },
+        "crop_paths": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Crop Paths",
+          "type": "array"
+        },
+        "correction_required": {
+          "const": false,
+          "default": false,
+          "title": "Correction Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "disposition_ids",
+        "physical_pages",
+        "conclusion",
+        "native_slice_ids",
+        "crop_paths"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "Slice": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "native_evidence": {
+          "$ref": "#/$defs/Asset"
+        },
+        "start_byte": {
+          "minimum": 0,
+          "title": "Start Byte",
+          "type": "integer"
+        },
+        "end_byte": {
+          "exclusiveMinimum": 0,
+          "title": "End Byte",
+          "type": "integer"
+        },
+        "exact_native_text": {
+          "title": "Exact Native Text",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "native_evidence",
+        "start_byte",
+        "end_byte",
+        "exact_native_text",
+        "sha256",
+        "purpose"
+      ],
+      "title": "Slice",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source_id": {
+      "const": "weld-building-fees-sd008-01",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-WELD",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "review_mode": {
+      "const": "candidate_report_and_prior_review_aware_direct_image_check",
+      "title": "Review Mode",
+      "type": "string"
+    },
+    "completed_at": {
+      "title": "Completed At",
+      "type": "string"
+    },
+    "status": {
+      "const": "no_actionable_issue_in_scoped_reconciliation_check",
+      "title": "Status",
+      "type": "string"
+    },
+    "original_root_inventory_sha256": {
+      "const": "caef1211d7a8b310234b403e1e4c8d3ed01dfb57d5f6fa4b291abc91a87f8f65",
+      "title": "Original Root Inventory Sha256",
+      "type": "string"
+    },
+    "frozen_inputs": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Frozen Inputs",
+      "type": "array"
+    },
+    "original_delivery_reports": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Original Delivery Reports",
+      "type": "array"
+    },
+    "full_page_images_directly_inspected": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Full Page Images Directly Inspected",
+      "type": "array"
+    },
+    "report_disposition_ids_read": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Report Disposition Ids Read",
+      "type": "array"
+    },
+    "pdf_page_count": {
+      "const": 5,
+      "default": 5,
+      "title": "Pdf Page Count",
+      "type": "integer"
+    },
+    "native_page_count_reproduced": {
+      "const": 5,
+      "default": 5,
+      "title": "Native Page Count Reproduced",
+      "type": "integer"
+    },
+    "total_native_bytes": {
+      "const": 14311,
+      "default": 14311,
+      "title": "Total Native Bytes",
+      "type": "integer"
+    },
+    "candidate_bytes": {
+      "const": 14876,
+      "default": 14876,
+      "title": "Candidate Bytes",
+      "type": "integer"
+    },
+    "selected_slices": {
+      "items": {
+        "$ref": "#/$defs/Slice"
+      },
+      "title": "Selected Slices",
+      "type": "array"
+    },
+    "crops": {
+      "items": {
+        "$ref": "#/$defs/Crop"
+      },
+      "title": "Crops",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    },
+    "blind_review": {
+      "const": false,
+      "default": false,
+      "title": "Blind Review",
+      "type": "boolean"
+    },
+    "exhaustive_252_cell_review": {
+      "const": false,
+      "default": false,
+      "title": "Exhaustive 252 Cell Review",
+      "type": "boolean"
+    },
+    "currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "source_changes": {
+      "const": false,
+      "default": false,
+      "title": "Source Changes",
+      "type": "boolean"
+    },
+    "native_changes": {
+      "const": false,
+      "default": false,
+      "title": "Native Changes",
+      "type": "boolean"
+    },
+    "external_report_changes": {
+      "const": false,
+      "default": false,
+      "title": "External Report Changes",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "source_id",
+    "authority_id",
+    "review_mode",
+    "completed_at",
+    "status",
+    "original_root_inventory_sha256",
+    "frozen_inputs",
+    "original_delivery_reports",
+    "full_page_images_directly_inspected",
+    "report_disposition_ids_read",
+    "selected_slices",
+    "crops",
+    "observations",
+    "limits"
+  ],
+  "title": "Check",
+  "type": "object"
+}

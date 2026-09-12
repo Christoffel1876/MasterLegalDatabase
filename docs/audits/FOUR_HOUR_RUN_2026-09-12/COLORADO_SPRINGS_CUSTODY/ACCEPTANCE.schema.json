@@ -1,0 +1,53 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "source_manifest_sha256": {
+      "title": "Source Manifest Sha256",
+      "type": "string"
+    },
+    "source_scope_sha256": {
+      "title": "Source Scope Sha256",
+      "type": "string"
+    },
+    "file_count": {
+      "title": "File Count",
+      "type": "integer"
+    },
+    "copied_bytes": {
+      "title": "Copied Bytes",
+      "type": "integer"
+    },
+    "validations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Validations",
+      "type": "array"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "source_manifest_sha256",
+    "source_scope_sha256",
+    "file_count",
+    "copied_bytes",
+    "validations",
+    "scope",
+    "legal_currentness"
+  ],
+  "title": "Acceptance",
+  "type": "object"
+}

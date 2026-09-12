@@ -1,0 +1,2852 @@
+{
+  "schema_version": 1,
+  "prepared_at": "2026-09-12T22:32:06.336365Z",
+  "status": "prepared_not_applied",
+  "apply_available": false,
+  "audit": {
+    "path": "inputs/audit/AUDIT.json",
+    "sha256": "a6e5befb2cd424a6a0c9f072075bab3abd1f78849495b91b4ca0194064d377f0",
+    "size_bytes": 238993
+  },
+  "audit_sha256": "a6e5befb2cd424a6a0c9f072075bab3abd1f78849495b91b4ca0194064d377f0",
+  "comparison_commit": "0a3ba27aaf5358141efb5af2c33c3a6b9043d099",
+  "baseline": [
+    {
+      "repository_path": "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+      "preserved": {
+        "path": "inputs/current/_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+        "sha256": "c459eea9a0a5828334e61970d9bc6c078f14673aafadf1e359a60969e4c5f8e6",
+        "size_bytes": 101095
+      },
+      "records": 46
+    },
+    {
+      "repository_path": "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl",
+      "preserved": {
+        "path": "inputs/current/_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl",
+        "sha256": "33a448ff4d2f0d941826739ba29a7ca889b9fe8a621ef7f095a084782a59df3b",
+        "size_bytes": 102331
+      },
+      "records": 47
+    },
+    {
+      "repository_path": "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_REPORT.json",
+      "preserved": {
+        "path": "inputs/current/_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_REPORT.json",
+        "sha256": "687d79dc3d2864bb0fe1bc72d95861e7093a5b925e4c2d97b403d0883019a068",
+        "size_bytes": 4850
+      },
+      "records": null
+    },
+    {
+      "repository_path": "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_POLICY.json",
+      "preserved": {
+        "path": "inputs/current/_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_POLICY.json",
+        "sha256": "9cd00825fcb7a8ab905fefcebe3575355b41eb4cf3e3168b1b83c7ef56aba205",
+        "size_bytes": 1345
+      },
+      "records": null
+    },
+    {
+      "repository_path": "_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+      "preserved": {
+        "path": "inputs/current/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+        "sha256": "ad27514fe91659c9914780c7d3e69e48ace742bc31ad67d9c3a3c99945aecde3",
+        "size_bytes": 2066981
+      },
+      "records": null
+    },
+    {
+      "repository_path": "geode/pipeline/manual_source_intake.py",
+      "preserved": {
+        "path": "inputs/current/geode/pipeline/manual_source_intake.py",
+        "sha256": "5442b78cf16fb3b24f28a72f1c95753a444d39aaf8a906858e3fdcc9f439e0bd",
+        "size_bytes": 28410
+      },
+      "records": null
+    },
+    {
+      "repository_path": "AGENTS.md",
+      "preserved": {
+        "path": "inputs/current/AGENTS.md",
+        "sha256": "0302a59413c44fffe491b9e63b88f07793a2c9a9e956f99152555a901b051b10",
+        "size_bytes": 18506
+      },
+      "records": null
+    }
+  ],
+  "dedupe": {
+    "checked_at": "2026-09-12T22:32:06.336365Z",
+    "raw_records": 46,
+    "ledger_records": 47,
+    "ordinary_raw_files_screened": 550,
+    "symlinks_skipped": [],
+    "candidate_size_files_hashed": [],
+    "source_id_matches": [],
+    "raw_manifest_digest_matches": [],
+    "ledger_digest_matches": [],
+    "ordinary_raw_digest_matches": [],
+    "boundary": "Current manual streams and ordinary raw files only; no former Windows host or unavailable LFS bytes were opened. Absence here is not universal absence. Repeat this screen against the then-current repository before any authorized apply."
+  },
+  "sources": [
+    {
+      "source_id": "el-paso-planning-fees-sd011",
+      "decision": "propose_county_intake",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "layer_id": "08_County_Authorities",
+      "issuer_as_shown": "El Paso County, Planning and Community Development",
+      "issuer_kind": "county_department",
+      "document_role": "planning_and_community_development_fee_schedule",
+      "title_for_intake": "El Paso County 2026 Planning and Community Development Fee Schedule",
+      "language": "en",
+      "original": {
+        "path": "sources/el-paso-planning-fees-sd011/original.pdf",
+        "sha256": "c3bd819da169a58328e7bdfcd8ea65e4a751326a65dce325ad19e5bc868b3e12",
+        "size_bytes": 1198750
+      },
+      "received_body_path": "received/raw/el_paso/wp_content_uploads_sites_12_fees_Fee_Schedule_2026_ADA_pdf.pdf",
+      "source_pages": 5,
+      "event_id": "SD011-E053",
+      "requested_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/fees/Fee-Schedule-2026-ADA.pdf",
+      "final_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/fees/Fee-Schedule-2026-ADA.pdf",
+      "acquisition_started_at_claim": "2026-09-12T22:01:39Z",
+      "acquisition_completed_at_claim": "2026-09-12T22:01:39Z",
+      "upstream_acquisition_independently_verified": false,
+      "verified_http_acquired_at": null,
+      "atlas_delivery_captured_at": "2026-09-12T22:08:54.656702Z",
+      "atlas_preparation_copied_at": "2026-09-12T22:32:06.336365Z",
+      "actual_repository_received_at": null,
+      "public_headers": {
+        "path": "inputs/public-headers/SD011-E053.headers.txt",
+        "sha256": "a51347db60c3aab3eb71abcf821f4b793a6dba5b7ef4248fb03082e03eef4985",
+        "size_bytes": 471
+      },
+      "observed_http_statuses": [
+        200
+      ],
+      "observed_redirect_destinations": [],
+      "source_referrals": [
+        {
+          "event_id": "SD011-E043",
+          "parent_url": "https://planningdevelopment.elpasoco.com/",
+          "parent": {
+            "path": "inputs/referrals/SD011-E043.html",
+            "sha256": "42d19bb45c4c7e3df8e6a44cf92f61e790a4b01503813e193450c37ac5813381",
+            "size_bytes": 199975
+          },
+          "href": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/fees/Fee-Schedule-2026-ADA.pdf",
+          "resolved_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/fees/Fee-Schedule-2026-ADA.pdf",
+          "anchor_text": "2026 Fee Schedule"
+        }
+      ],
+      "referral_basis": "preserved_official_html_anchor",
+      "historical_matching_rows": 0,
+      "historical_source_ids": [],
+      "directly_viewed_pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "images/el-paso-planning-fees-sd011-1.png",
+            "sha256": "c4513b4209a3b245766f72b8b531ece650e1f5b43c90cb9605afb20748b214cf",
+            "size_bytes": 211921
+          },
+          "native": {
+            "path": "native/el-paso-planning-fees-sd011-p001.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size_bytes": 0
+          },
+          "native_nonwhitespace": false,
+          "view_scope": "full_page_for_title_issuer_role_and_selected_date_context",
+          "numeric_table_certification": false
+        }
+      ],
+      "observations": [
+        {
+          "observation_id": "el-paso-planning-fees-sd011-O01",
+          "physical_page": 1,
+          "region": "top banner",
+          "visible_text": "2026 Planning and Community Development\nFee Schedule- Effective Date May 1, 2026",
+          "native_anchor": null,
+          "conclusion": "County-branded planning/development fee schedule; effective date is printed in its banner.",
+          "uncertainty": "First-page native text is empty; no full fee-row, footnote or applicability review.",
+          "legal_currentness": "not_verified"
+        }
+      ],
+      "date_claims": [
+        {
+          "value": "2026-05-01",
+          "role": "source_stated_effective",
+          "observation_id": "el-paso-planning-fees-sd011-O01",
+          "independently_verified": false
+        }
+      ],
+      "verified_adoption_date": null,
+      "verified_effective_date": null,
+      "legal_currentness": "not_verified",
+      "answer_safe": false,
+      "translation_equivalence_verified": false,
+      "full_text_reviewed": false,
+      "qualifications": [
+        "The actual visible effective date is May 1, 2026; the 2026 filename alone is not its evidence.",
+        "Five source pages retained; only physical page 1 viewed for issuer/title/date, not all fee associations."
+      ]
+    },
+    {
+      "source_id": "el-paso-boh-ehs-fees-sd011",
+      "decision": "propose_county_intake",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "layer_id": "08_County_Authorities",
+      "issuer_as_shown": "El Paso County Board of Health / El Paso County Public Health",
+      "issuer_kind": "county_board_of_health",
+      "document_role": "board_of_health_fee_schedule_and_civil_penalties",
+      "title_for_intake": "El Paso County Board of Health, Chapter 3: Fee Schedule and Civil Penalties (English)",
+      "language": "en",
+      "original": {
+        "path": "sources/el-paso-boh-ehs-fees-sd011/original.pdf",
+        "sha256": "1b0529fb7514bcc50c0dd36c903ca361f6ab431712b4aebc48bca8e3f5373622",
+        "size_bytes": 151508
+      },
+      "received_body_path": "received/raw/el_paso/t_uploads_sites_18_2025_06_3_BoH_2024_EHS_Fee_Schedule_Chapter_3_Acc_Checked_June_2025_pdf.pdf",
+      "source_pages": 5,
+      "event_id": "SD011-E065",
+      "requested_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/3-BoH-2024-EHS-Fee-Schedule-Chapter-3_Acc-Checked-June-2025.pdf",
+      "final_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/3-BoH-2024-EHS-Fee-Schedule-Chapter-3_Acc-Checked-June-2025.pdf",
+      "acquisition_started_at_claim": "2026-09-12T22:01:43Z",
+      "acquisition_completed_at_claim": "2026-09-12T22:01:43Z",
+      "upstream_acquisition_independently_verified": false,
+      "verified_http_acquired_at": null,
+      "atlas_delivery_captured_at": "2026-09-12T22:08:54.656702Z",
+      "atlas_preparation_copied_at": "2026-09-12T22:32:06.336365Z",
+      "actual_repository_received_at": null,
+      "public_headers": {
+        "path": "inputs/public-headers/SD011-E065.headers.txt",
+        "sha256": "90f7975582f1e3ea20ef336e287c8699f27bf16788fff76e1ad248d0375304c0",
+        "size_bytes": 480
+      },
+      "observed_http_statuses": [
+        200
+      ],
+      "observed_redirect_destinations": [],
+      "source_referrals": [
+        {
+          "event_id": "SD011-E014",
+          "parent_url": "https://www.elpasocountyhealth.org/about-public-health/regulations/",
+          "parent": {
+            "path": "inputs/referrals/SD011-E014.html",
+            "sha256": "fae060312917346ff8a62d3265234ae1bf5bb44800635d565563312eb3dcdb8d",
+            "size_bytes": 286726
+          },
+          "href": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/3-BoH-2024-EHS-Fee-Schedule-Chapter-3_Acc-Checked-June-2025.pdf",
+          "resolved_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/3-BoH-2024-EHS-Fee-Schedule-Chapter-3_Acc-Checked-June-2025.pdf",
+          "anchor_text": "Fee Schedule and Civil Penalties"
+        }
+      ],
+      "referral_basis": "preserved_official_html_anchor",
+      "historical_matching_rows": 0,
+      "historical_source_ids": [],
+      "directly_viewed_pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "images/el-paso-boh-ehs-fees-sd011-1.png",
+            "sha256": "b79060866f07058f8c76c03d433142981b506705cd5c0386bd8d3f3ed9e4ecc6",
+            "size_bytes": 75715
+          },
+          "native": {
+            "path": "native/el-paso-boh-ehs-fees-sd011-p001.txt",
+            "sha256": "0e4558156834c9c4c33c30b2172c1c5c79cbc65b3a57cc78d4e710390817e1ab",
+            "size_bytes": 386
+          },
+          "native_nonwhitespace": true,
+          "view_scope": "full_page_for_title_issuer_role_and_selected_date_context",
+          "numeric_table_certification": false
+        },
+        {
+          "physical_page": 2,
+          "image": {
+            "path": "images/el-paso-boh-ehs-fees-sd011-2.png",
+            "sha256": "1c0ae9370b590f65e17e3344b6b603c0b61eb959917191007dd16742d030546b",
+            "size_bytes": 269277
+          },
+          "native": {
+            "path": "native/el-paso-boh-ehs-fees-sd011-p002.txt",
+            "sha256": "b68c63a7cd95ee336aa83d28121ab0dc3e7bd24df18aaaf4a3c57605c90c0c4e",
+            "size_bytes": 1937
+          },
+          "native_nonwhitespace": true,
+          "view_scope": "full_page_for_title_issuer_role_and_selected_date_context",
+          "numeric_table_certification": false
+        }
+      ],
+      "observations": [
+        {
+          "observation_id": "el-paso-boh-ehs-fees-sd011-O01",
+          "physical_page": 1,
+          "region": "cover and footer",
+          "visible_text": "REGULATIONS OF THE EL PASO COUNTY BOARD OF HEALTH\nChapter 3\nFee Schedule and Civil Penalties\nApproved by the Board of Health October 25, 2023",
+          "native_anchor": {
+            "start": 336,
+            "end": 384,
+            "text": "Approved by the Board of Health October 25, 2023",
+            "sha256": "913a8988b7a0df1a70ea5cf979551e02e15f69f0e5fcb34411437741d01fbf8a"
+          },
+          "conclusion": "Board of Health fee/civil-penalty chapter, not county commissioner legislation.",
+          "uncertainty": "Approval is a document statement, not independent authentication of board action.",
+          "legal_currentness": "not_verified"
+        },
+        {
+          "observation_id": "el-paso-boh-ehs-fees-sd011-O02",
+          "physical_page": 2,
+          "region": "section 3.1 opening",
+          "visible_text": "Effective January 1, 2024, the following fees are adopted by the Board of Health",
+          "native_anchor": {
+            "start": 357,
+            "end": 437,
+            "text": "Effective January 1, 2024, the following fees are adopted by the Board of Health",
+            "sha256": "5aec3e8c61d915128f7c3cfc6373e5b3bdba8d3d1e4825bec24920b5d18b9725"
+          },
+          "conclusion": "The first fee page expressly gives a 2024 effective-date statement.",
+          "uncertainty": "No entire five-page fee table or later amendment reconciliation; filename June 2025 is not an adoption date.",
+          "legal_currentness": "not_verified"
+        }
+      ],
+      "date_claims": [
+        {
+          "value": "2023-10-25",
+          "role": "source_stated_approval",
+          "observation_id": "el-paso-boh-ehs-fees-sd011-O01",
+          "independently_verified": false
+        },
+        {
+          "value": "2024-01-01",
+          "role": "source_stated_effective",
+          "observation_id": "el-paso-boh-ehs-fees-sd011-O02",
+          "independently_verified": false
+        }
+      ],
+      "verified_adoption_date": null,
+      "verified_effective_date": null,
+      "legal_currentness": "not_verified",
+      "answer_safe": false,
+      "translation_equivalence_verified": false,
+      "full_text_reviewed": false,
+      "qualifications": [
+        "English and Spanish PDFs are distinct received artifacts; translation equivalence is not reviewed.",
+        "The viewed fee table includes air quality, body art, child care and OWTS categories; it is not exclusively an OWTS schedule."
+      ]
+    },
+    {
+      "source_id": "el-paso-ordinance-26-01-sd011",
+      "decision": "propose_county_intake",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "layer_id": "08_County_Authorities",
+      "issuer_as_shown": "Board of County Commissioners of El Paso County, Colorado",
+      "issuer_kind": "county_board_of_commissioners",
+      "document_role": "stormwater_management_ordinance",
+      "title_for_intake": "El Paso County Ordinance 26-01: Stormwater Management Program Required by the MS4 Permit",
+      "language": "en",
+      "original": {
+        "path": "sources/el-paso-ordinance-26-01-sd011/original.pdf",
+        "sha256": "dd88d0a74d746d28301fd1a2092575d2b19f9f96de1741dbf9e076e87e31b20b",
+        "size_bytes": 8055141
+      },
+      "received_body_path": "received/raw/el_paso/wp_content_uploads_sites_5_Ordinance_26_01_Accessible_pdf.pdf",
+      "source_pages": 23,
+      "event_id": "SD011-E023",
+      "requested_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/5/Ordinance-26-01-Accessible.pdf",
+      "final_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/5/Ordinance-26-01-Accessible.pdf",
+      "acquisition_started_at_claim": "2026-09-12T22:00:58Z",
+      "acquisition_completed_at_claim": "2026-09-12T22:01:00Z",
+      "upstream_acquisition_independently_verified": false,
+      "verified_http_acquired_at": null,
+      "atlas_delivery_captured_at": "2026-09-12T22:08:54.656702Z",
+      "atlas_preparation_copied_at": "2026-09-12T22:32:06.336365Z",
+      "actual_repository_received_at": null,
+      "public_headers": {
+        "path": "inputs/public-headers/SD011-E023.headers.txt",
+        "sha256": "c717c48a54dc72e9bc2c50362b8894cb0831cc11344655b629c75865b4b45c26",
+        "size_bytes": 471
+      },
+      "observed_http_statuses": [
+        200
+      ],
+      "observed_redirect_destinations": [],
+      "source_referrals": [
+        {
+          "event_id": "SD011-E002",
+          "parent_url": "https://clerkandrecorder.elpasoco.com/clerk-to-the-board/ordinances/",
+          "parent": {
+            "path": "inputs/referrals/SD011-E002.html",
+            "sha256": "fab6ff320223ed834fccd26e4f1d71a502cd04bc5ce57d4883eb0942fe0df44f",
+            "size_bytes": 159171
+          },
+          "href": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/5/Ordinance-26-01-Accessible.pdf",
+          "resolved_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/5/Ordinance-26-01-Accessible.pdf",
+          "anchor_text": "26-01"
+        }
+      ],
+      "referral_basis": "preserved_official_html_anchor",
+      "historical_matching_rows": 0,
+      "historical_source_ids": [],
+      "directly_viewed_pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "images/el-paso-ordinance-26-01-sd011-01.png",
+            "sha256": "9025f8cc4f53c673e70942d0fd17970188fcf10574cd3585aabc5402bba6357a",
+            "size_bytes": 968173
+          },
+          "native": {
+            "path": "native/el-paso-ordinance-26-01-sd011-p001.txt",
+            "sha256": "820b23a71cacd6d08707ce248ac51140f8e0a0d5810bc18c7b5b2f10d3334154",
+            "size_bytes": 2847
+          },
+          "native_nonwhitespace": true,
+          "view_scope": "full_page_for_title_issuer_role_and_selected_date_context",
+          "numeric_table_certification": false
+        }
+      ],
+      "observations": [
+        {
+          "observation_id": "el-paso-ordinance-26-01-sd011-O01",
+          "physical_page": 1,
+          "region": "heading and recitals",
+          "visible_text": "COUNTY ORDINANCE NO. 26-01\nORDINANCE TO DEVELOP, IMPLEMENT, AND ENFORCE THE STORMWATER MANAGEMENT PROGRAM REQUIRED BY THE MUNICIPAL SEPARATE STORM SEWER SYSTEM PERMIT",
+          "native_anchor": {
+            "start": 206,
+            "end": 216,
+            "text": "STORMWATER",
+            "sha256": "bc83bdb0d39a8cd64f7b34d8643786bdd89510853b051423d65ce2298d772f81"
+          },
+          "conclusion": "The ordinance concerns the county stormwater/MS4 program; municipal in MS4 is not City of Colorado Springs ownership.",
+          "uncertainty": "Native extraction contains OCR errors; this is title/role review only, not all 23 pages or execution verification.",
+          "legal_currentness": "not_verified"
+        },
+        {
+          "observation_id": "el-paso-ordinance-26-01-sd011-O02",
+          "physical_page": 1,
+          "region": "upper recorder stamp",
+          "visible_text": "04/08/2026 08:46:34 AM\n226032306",
+          "native_anchor": null,
+          "conclusion": "Visible recorder stamp states April 8, 2026; the native OCR starts with an incorrect month.",
+          "uncertainty": "Recording is not adoption or effectiveness; no signature identity or currentness is certified.",
+          "legal_currentness": "not_verified"
+        }
+      ],
+      "date_claims": [
+        {
+          "value": "2026-04-08",
+          "role": "recording_stamp",
+          "observation_id": "el-paso-ordinance-26-01-sd011-O02",
+          "independently_verified": false
+        }
+      ],
+      "verified_adoption_date": null,
+      "verified_effective_date": null,
+      "legal_currentness": "not_verified",
+      "answer_safe": false,
+      "translation_equivalence_verified": false,
+      "full_text_reviewed": false,
+      "qualifications": [
+        "Do not describe Ordinance 26-01 as a land-use or wildfire ordinance solely from its catalog position.",
+        "Stamp OCR is visibly unreliable; source bytes and uncorrected native text remain unchanged."
+      ]
+    },
+    {
+      "source_id": "el-paso-ldc-wildfire-appendix-e-sd011",
+      "decision": "propose_county_intake",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "layer_id": "08_County_Authorities",
+      "issuer_as_shown": "El Paso County Planning and Community Development publication context",
+      "issuer_kind": "county_department",
+      "document_role": "land_development_code_wildfire_appendix",
+      "title_for_intake": "El Paso County LDC Appendix E: Wildfire Resiliency Requirements",
+      "language": "en",
+      "original": {
+        "path": "sources/el-paso-ldc-wildfire-appendix-e-sd011/original.pdf",
+        "sha256": "2ed93562c8317eee9517736175d5bc76d2dc205fc5b65dd36b570d1c79c58d17",
+        "size_bytes": 518107
+      },
+      "received_body_path": "received/raw/el_paso/ontent_uploads_sites_12_LDC_Resolution_Appendix_E_Wildfire_Resiliency_Requirements_ADA_pdf.pdf",
+      "source_pages": 18,
+      "event_id": "SD011-E052",
+      "requested_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/LDC-Resolution/Appendix-E-Wildfire-Resiliency-Requirements-ADA.pdf",
+      "final_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/LDC-Resolution/Appendix-E-Wildfire-Resiliency-Requirements-ADA.pdf",
+      "acquisition_started_at_claim": "2026-09-12T22:01:38Z",
+      "acquisition_completed_at_claim": "2026-09-12T22:01:39Z",
+      "upstream_acquisition_independently_verified": false,
+      "verified_http_acquired_at": null,
+      "atlas_delivery_captured_at": "2026-09-12T22:08:54.656702Z",
+      "atlas_preparation_copied_at": "2026-09-12T22:32:06.336365Z",
+      "actual_repository_received_at": null,
+      "public_headers": {
+        "path": "inputs/public-headers/SD011-E052.headers.txt",
+        "sha256": "9909c5a32c3688b0fe580c74a3d9a240f46d180bbca3923124969061d2be5ae8",
+        "size_bytes": 470
+      },
+      "observed_http_statuses": [
+        200
+      ],
+      "observed_redirect_destinations": [],
+      "source_referrals": [
+        {
+          "event_id": "SD011-E043",
+          "parent_url": "https://planningdevelopment.elpasoco.com/",
+          "parent": {
+            "path": "inputs/referrals/SD011-E043.html",
+            "sha256": "42d19bb45c4c7e3df8e6a44cf92f61e790a4b01503813e193450c37ac5813381",
+            "size_bytes": 199975
+          },
+          "href": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/LDC-Resolution/Appendix-E-Wildfire-Resiliency-Requirements-ADA.pdf",
+          "resolved_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/LDC-Resolution/Appendix-E-Wildfire-Resiliency-Requirements-ADA.pdf",
+          "anchor_text": "Appendix E Wildfire Resiliency Requirements"
+        },
+        {
+          "event_id": "SD011-E043",
+          "parent_url": "https://planningdevelopment.elpasoco.com/",
+          "parent": {
+            "path": "inputs/referrals/SD011-E043.html",
+            "sha256": "42d19bb45c4c7e3df8e6a44cf92f61e790a4b01503813e193450c37ac5813381",
+            "size_bytes": 199975
+          },
+          "href": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/LDC-Resolution/Appendix-E-Wildfire-Resiliency-Requirements-ADA.pdf",
+          "resolved_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/LDC-Resolution/Appendix-E-Wildfire-Resiliency-Requirements-ADA.pdf",
+          "anchor_text": "Appendix E Wildfire Resiliency Requirements"
+        }
+      ],
+      "referral_basis": "preserved_official_html_anchor",
+      "historical_matching_rows": 0,
+      "historical_source_ids": [],
+      "directly_viewed_pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "images/el-paso-ldc-wildfire-appendix-e-sd011-01.png",
+            "sha256": "becd4b54609621059f83616501911ee492c1f6b4c1f024fb6cd6a75eac6fee04",
+            "size_bytes": 220696
+          },
+          "native": {
+            "path": "native/el-paso-ldc-wildfire-appendix-e-sd011-p001.txt",
+            "sha256": "bacf1b71ecc2b2aae54b4173bb1d855e9bbb3a4e4e96962c6c9ebef2ec4843ff",
+            "size_bytes": 1660
+          },
+          "native_nonwhitespace": true,
+          "view_scope": "full_page_for_title_issuer_role_and_selected_date_context",
+          "numeric_table_certification": false
+        }
+      ],
+      "observations": [
+        {
+          "observation_id": "el-paso-ldc-wildfire-appendix-e-sd011-O01",
+          "physical_page": 1,
+          "region": "title and E.1.2",
+          "visible_text": "APPENDIX E – WILDFIRE RESILIENCY REQUIREMENTS\nThe provisions of this Appendix E apply to all areas of unincorporated El Paso County that lie within the Wildland-Urban Interface but outside the boundaries of any Fire District.",
+          "native_anchor": {
+            "start": 476,
+            "end": 657,
+            "text": "The provisions of this Appendix E apply to all areas of unincorporated El \nPaso County that lie within the Wildland-Urban Interface but outside the \nboundaries of any Fire District.",
+            "sha256": "5f6d058711187589311373c5702322a3f8adf6e73118e352720af7d3c817c3f4"
+          },
+          "conclusion": "First page explicitly limits stated territory to the unincorporated WUI outside fire-district boundaries.",
+          "uncertainty": "No adoption/effective date is visible on this page; the separate adopting instrument and applicability maps were not reconciled.",
+          "legal_currentness": "not_verified"
+        }
+      ],
+      "date_claims": [],
+      "verified_adoption_date": null,
+      "verified_effective_date": null,
+      "legal_currentness": "not_verified",
+      "answer_safe": false,
+      "translation_equivalence_verified": false,
+      "full_text_reviewed": false,
+      "qualifications": [
+        "County posting plus the document's territorial wording support a county appendix role; this does not establish adoption or current application.",
+        "Eighteen pages are preserved, not all provisions or exceptions checked."
+      ]
+    },
+    {
+      "source_id": "el-paso-open-burning-22-001-sd011",
+      "decision": "propose_county_intake",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "layer_id": "08_County_Authorities",
+      "issuer_as_shown": "Board of County Commissioners of the County of El Paso, State of Colorado",
+      "issuer_kind": "county_board_of_commissioners",
+      "document_role": "open_burning_ordinance",
+      "title_for_intake": "El Paso County Ordinance 22-001: Regulation of Open Burning in Unincorporated Areas",
+      "language": "en",
+      "original": {
+        "path": "sources/el-paso-open-burning-22-001-sd011/original.pdf",
+        "sha256": "e294621d7252886c4820a877470f4d51b1bc1c287064a4253f4d0a4f5dfd859b",
+        "size_bytes": 1084910
+      },
+      "received_body_path": "received/raw/el_paso/wp_content_uploads_CTB_Ordinances_22_001_Open_Burning_Ordinance_pdf.pdf",
+      "source_pages": 14,
+      "event_id": "SD011-E013",
+      "requested_url_claim": "https://clerkandrecorder.elpasoco.com/wp-content/uploads/CTB/Ordinances/22-001-Open-Burning-Ordinance.pdf",
+      "final_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/5/CTB/Ordinances/22-001-Open-Burning-Ordinance.pdf",
+      "acquisition_started_at_claim": "2026-09-12T22:00:30Z",
+      "acquisition_completed_at_claim": "2026-09-12T22:00:31Z",
+      "upstream_acquisition_independently_verified": false,
+      "verified_http_acquired_at": null,
+      "atlas_delivery_captured_at": "2026-09-12T22:08:54.656702Z",
+      "atlas_preparation_copied_at": "2026-09-12T22:32:06.336365Z",
+      "actual_repository_received_at": null,
+      "public_headers": {
+        "path": "inputs/public-headers/SD011-E013.headers.txt",
+        "sha256": "0daeae25327718bb0dae0f1f12ba671df58358bb3c10577182a54d7488b365ec",
+        "size_bytes": 760
+      },
+      "observed_http_statuses": [
+        302,
+        200
+      ],
+      "observed_redirect_destinations": [
+        "https://epc-assets.elpasoco.com/wp-content/uploads/sites/5/CTB/Ordinances/22-001-Open-Burning-Ordinance.pdf"
+      ],
+      "source_referrals": [
+        {
+          "event_id": "SD011-E002",
+          "parent_url": "https://clerkandrecorder.elpasoco.com/clerk-to-the-board/ordinances/",
+          "parent": {
+            "path": "inputs/referrals/SD011-E002.html",
+            "sha256": "fab6ff320223ed834fccd26e4f1d71a502cd04bc5ce57d4883eb0942fe0df44f",
+            "size_bytes": 159171
+          },
+          "href": "https://clerkandrecorder.elpasoco.com/wp-content/uploads/CTB/Ordinances/22-001-Open-Burning-Ordinance.pdf",
+          "resolved_url": "https://clerkandrecorder.elpasoco.com/wp-content/uploads/CTB/Ordinances/22-001-Open-Burning-Ordinance.pdf",
+          "anchor_text": "22-001"
+        }
+      ],
+      "referral_basis": "preserved_official_html_anchor",
+      "historical_matching_rows": 18,
+      "historical_source_ids": [
+        "county_el_paso_archived_versions_20260716",
+        "county_el_paso_code",
+        "county_el_paso_environmental_open_burning_571ea48a25d1",
+        "county_elpaso_ordinances",
+        "county_elpaso_ordinances_continuing_resolutions",
+        "county_elpaso_ordinances_county_codes",
+        "county_elpaso_ordinances_emergency_fire_restrictions"
+      ],
+      "directly_viewed_pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "images/el-paso-open-burning-22-001-sd011-01.png",
+            "sha256": "55b1f3ef7782fe8d04c7adec2508c53d63fadf0fdcc8ce53e64ed6444b1c46cb",
+            "size_bytes": 1283830
+          },
+          "native": {
+            "path": "native/el-paso-open-burning-22-001-sd011-p001.txt",
+            "sha256": "ad8b5c6579450ef13c0cda5406adc01d4d0c9846ea43dbfb044efd3905c6daae",
+            "size_bytes": 3441
+          },
+          "native_nonwhitespace": true,
+          "view_scope": "full_page_for_title_issuer_role_and_selected_date_context",
+          "numeric_table_certification": false
+        }
+      ],
+      "observations": [
+        {
+          "observation_id": "el-paso-open-burning-22-001-sd011-O01",
+          "physical_page": 1,
+          "region": "title and recitals",
+          "visible_text": "ORDINANCE NO. 22-001\nORDINANCE FOR THE REGULATION OF OPEN BURNING IN THE UNINCORPORATED AREAS OF EL PASO COUNTY",
+          "native_anchor": {
+            "start": 303,
+            "end": 347,
+            "text": "ORDINANCE FOR THE REGULATION OF OPEN BURNING",
+            "sha256": "e734474ad345950824ff87f83217cdb351dc5924d41dc0241e7623630571d18f"
+          },
+          "conclusion": "County open-burning ordinance; the first-page recitals also discuss conditional firework restrictions.",
+          "uncertainty": "The applicable annual/stage restriction resolutions were not reviewed. No present fire ban or operative restriction follows.",
+          "legal_currentness": "not_verified"
+        },
+        {
+          "observation_id": "el-paso-open-burning-22-001-sd011-O02",
+          "physical_page": 1,
+          "region": "upper recorder stamp",
+          "visible_text": "07/13/2022 09:42:54 AM\n222094518",
+          "native_anchor": {
+            "start": 67,
+            "end": 89,
+            "text": "07/13/2022 09:42:54 AM",
+            "sha256": "bed1b5f652212b3d408e451c7c20ce2035836225af412d4e7a25786bc70bbf63"
+          },
+          "conclusion": "This is the recorder-stamp date, separately from legal adoption/effect.",
+          "uncertainty": "Top stamp name is partly cropped; no identity authentication.",
+          "legal_currentness": "not_verified"
+        }
+      ],
+      "date_claims": [
+        {
+          "value": "2022-07-13",
+          "role": "recording_stamp",
+          "observation_id": "el-paso-open-burning-22-001-sd011-O02",
+          "independently_verified": false
+        }
+      ],
+      "verified_adoption_date": null,
+      "verified_effective_date": null,
+      "legal_currentness": "not_verified",
+      "answer_safe": false,
+      "translation_equivalence_verified": false,
+      "full_text_reviewed": false,
+      "qualifications": [
+        "Exact source hash matches inherited manifest claims; historical original bytes were not opened.",
+        "Current restrictions cannot be inferred from the ordinance alone."
+      ]
+    },
+    {
+      "source_id": "el-paso-ldc-chapter-1-sd011",
+      "decision": "propose_county_intake",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "layer_id": "08_County_Authorities",
+      "issuer_as_shown": "El Paso County, Colorado",
+      "issuer_kind": "county_department",
+      "document_role": "land_development_code_chapter_1",
+      "title_for_intake": "El Paso County Land Development Code, Chapter 1: Introductory Provisions",
+      "language": "en",
+      "original": {
+        "path": "sources/el-paso-ldc-chapter-1-sd011/original.pdf",
+        "sha256": "2c77fdf9aa7f3fc3bdcd5162b5059d7ceb1e5e04f3f914a1cbb29474a9a035b0",
+        "size_bytes": 389804
+      },
+      "received_body_path": "received/raw/el_paso/wp_content_uploads_LandUseCode_EPC_Land_Use_Code_Chapter_1_2016_pdf.pdf",
+      "source_pages": 72,
+      "event_id": "SD011-E010",
+      "requested_url_claim": "https://planningdevelopment.elpasoco.com/wp-content/uploads/LandUseCode/EPC-Land-Use-Code-Chapter-1-2016.pdf",
+      "final_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/LandUseCode/EPC-Land-Use-Code-Chapter-1-2016.pdf",
+      "acquisition_started_at_claim": "2026-09-12T22:00:27Z",
+      "acquisition_completed_at_claim": "2026-09-12T22:00:29Z",
+      "upstream_acquisition_independently_verified": false,
+      "verified_http_acquired_at": null,
+      "atlas_delivery_captured_at": "2026-09-12T22:08:54.656702Z",
+      "atlas_preparation_copied_at": "2026-09-12T22:32:06.336365Z",
+      "actual_repository_received_at": null,
+      "public_headers": {
+        "path": "inputs/public-headers/SD011-E010.headers.txt",
+        "sha256": "ed70e91c7c247dd828f3351415161311e673f7ff85264d436f6afb602023f143",
+        "size_bytes": 928
+      },
+      "observed_http_statuses": [
+        302,
+        200
+      ],
+      "observed_redirect_destinations": [
+        "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/LandUseCode/EPC-Land-Use-Code-Chapter-1-2016.pdf"
+      ],
+      "source_referrals": [],
+      "referral_basis": "inherited_url_no_fresh_anchor",
+      "historical_matching_rows": 11,
+      "historical_source_ids": [
+        "county_elpaso_land_development_code",
+        "county_elpaso_land_development_code_building_construction",
+        "county_elpaso_land_development_code_roads_transportation_access",
+        "county_elpaso_land_development_code_subdivision_development"
+      ],
+      "directly_viewed_pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "images/el-paso-ldc-chapter-1-sd011-01.png",
+            "sha256": "60973931008fbf16277e348895c97ac238fb80452b7888b78f83d3e58941d5c9",
+            "size_bytes": 254777
+          },
+          "native": {
+            "path": "native/el-paso-ldc-chapter-1-sd011-p001.txt",
+            "sha256": "2ddd8003f592709747e336d1a55d9337fd2f02a1fd9d855915ec9ab8742765e8",
+            "size_bytes": 2072
+          },
+          "native_nonwhitespace": true,
+          "view_scope": "full_page_for_title_issuer_role_and_selected_date_context",
+          "numeric_table_certification": false
+        }
+      ],
+      "observations": [
+        {
+          "observation_id": "el-paso-ldc-chapter-1-sd011-O01",
+          "physical_page": 1,
+          "region": "heading, section 1.3 and footer",
+          "visible_text": "Chapter One\nINTRODUCTORY PROVISIONS\nEffective 01/09/2018",
+          "native_anchor": {
+            "start": 205,
+            "end": 225,
+            "text": "Effective 01/09/2018",
+            "sha256": "1fbc7daac8b45a13b28d311cd1cf8fc82b9b21dc758b098acd1efe6ac1f76637"
+          },
+          "conclusion": "First page identifies county LDC and states that it does not apply within incorporated municipalities.",
+          "uncertainty": "Only this front page is directly viewed among 72 pages. The 2016 URL filename is not the visible effective-date statement.",
+          "legal_currentness": "not_verified"
+        }
+      ],
+      "date_claims": [
+        {
+          "value": "2018-01-09",
+          "role": "source_stated_effective",
+          "observation_id": "el-paso-ldc-chapter-1-sd011-O01",
+          "independently_verified": false
+        }
+      ],
+      "verified_adoption_date": null,
+      "verified_effective_date": null,
+      "legal_currentness": "not_verified",
+      "answer_safe": false,
+      "translation_equivalence_verified": false,
+      "full_text_reviewed": false,
+      "qualifications": [
+        "Exact inherited URL and historical digest match, but no fresh source-page anchor was preserved.",
+        "This is a chapter artifact, not proof of a complete LDC or reconciliation with later amendments."
+      ]
+    },
+    {
+      "source_id": "el-paso-ldc-chapter-2-sd011",
+      "decision": "propose_county_intake",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "layer_id": "08_County_Authorities",
+      "issuer_as_shown": "El Paso County, Colorado",
+      "issuer_kind": "county_department",
+      "document_role": "land_development_code_chapter_2",
+      "title_for_intake": "El Paso County Land Development Code, Chapter 2: Administration",
+      "language": "en",
+      "original": {
+        "path": "sources/el-paso-ldc-chapter-2-sd011/original.pdf",
+        "sha256": "f3d527fd6a9da5b0043672582dda812dc9c3dfe9958d8b53eec876957ed10953",
+        "size_bytes": 116324
+      },
+      "received_body_path": "received/raw/el_paso/wp_content_uploads_LandUseCode_EPC_Land_Use_Code_Chapter_2_2016_pdf.pdf",
+      "source_pages": 7,
+      "event_id": "SD011-E011",
+      "requested_url_claim": "https://planningdevelopment.elpasoco.com/wp-content/uploads/LandUseCode/EPC-Land-Use-Code-Chapter-2-2016.pdf",
+      "final_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/LandUseCode/EPC-Land-Use-Code-Chapter-2-2016.pdf",
+      "acquisition_started_at_claim": "2026-09-12T22:00:29Z",
+      "acquisition_completed_at_claim": "2026-09-12T22:00:29Z",
+      "upstream_acquisition_independently_verified": false,
+      "verified_http_acquired_at": null,
+      "atlas_delivery_captured_at": "2026-09-12T22:08:54.656702Z",
+      "atlas_preparation_copied_at": "2026-09-12T22:32:06.336365Z",
+      "actual_repository_received_at": null,
+      "public_headers": {
+        "path": "inputs/public-headers/SD011-E011.headers.txt",
+        "sha256": "c4f000ed1b33b599df7dda1b7b874a38a8be25f9ce387981b32f0ebfd92592c8",
+        "size_bytes": 928
+      },
+      "observed_http_statuses": [
+        302,
+        200
+      ],
+      "observed_redirect_destinations": [
+        "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/LandUseCode/EPC-Land-Use-Code-Chapter-2-2016.pdf"
+      ],
+      "source_referrals": [],
+      "referral_basis": "inherited_url_no_fresh_anchor",
+      "historical_matching_rows": 2,
+      "historical_source_ids": [
+        "county_elpaso_land_development_administration"
+      ],
+      "directly_viewed_pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "images/el-paso-ldc-chapter-2-sd011-1.png",
+            "sha256": "c44699bfcd3e642a21c65c3fb91c4e87c959f6537c0ceeb1908dadbb3bfe9860",
+            "size_bytes": 299187
+          },
+          "native": {
+            "path": "native/el-paso-ldc-chapter-2-sd011-p001.txt",
+            "sha256": "7aff5f610ea7a3aa6d58d869a49d79cf6c4cc9eeced15727aa26f0579ac7cbfc",
+            "size_bytes": 2802
+          },
+          "native_nonwhitespace": true,
+          "view_scope": "full_page_for_title_issuer_role_and_selected_date_context",
+          "numeric_table_certification": false
+        }
+      ],
+      "observations": [
+        {
+          "observation_id": "el-paso-ldc-chapter-2-sd011-O01",
+          "physical_page": 1,
+          "region": "heading and footer",
+          "visible_text": "Chapter Two\nADMINISTRATION\nEffective 12/12/2017",
+          "native_anchor": {
+            "start": 196,
+            "end": 216,
+            "text": "Effective 12/12/2017",
+            "sha256": "6ece4d05212733dbc9aacf148d8c63702162d366501b85d9f0fc88caf4f7cb2b"
+          },
+          "conclusion": "County LDC administration chapter; first page separately describes a Procedures Manual.",
+          "uncertainty": "This PDF is not that separate Procedures Manual. Later amendments and all seven pages were not reviewed.",
+          "legal_currentness": "not_verified"
+        }
+      ],
+      "date_claims": [
+        {
+          "value": "2017-12-12",
+          "role": "source_stated_effective",
+          "observation_id": "el-paso-ldc-chapter-2-sd011-O01",
+          "independently_verified": false
+        }
+      ],
+      "verified_adoption_date": null,
+      "verified_effective_date": null,
+      "legal_currentness": "not_verified",
+      "answer_safe": false,
+      "translation_equivalence_verified": false,
+      "full_text_reviewed": false,
+      "qualifications": [
+        "Inherited URL/no fresh preserved anchor; recorded digest equality does not prove current law.",
+        "The filename's 2016 label differs from the viewed effective-date statement."
+      ]
+    },
+    {
+      "source_id": "el-paso-ldc-chapter-5-sd011",
+      "decision": "propose_county_intake",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "layer_id": "08_County_Authorities",
+      "issuer_as_shown": "El Paso County, Colorado",
+      "issuer_kind": "county_department",
+      "document_role": "land_development_code_chapter_5",
+      "title_for_intake": "El Paso County Land Development Code, Chapter 5: Use and Dimensional Standards",
+      "language": "en",
+      "original": {
+        "path": "sources/el-paso-ldc-chapter-5-sd011/original.pdf",
+        "sha256": "59d97136afdf3deb606b2c2f223ac17cb71d7aad0d5622769d4de9fc265d920c",
+        "size_bytes": 1521266
+      },
+      "received_body_path": "received/raw/el_paso/wp_content_uploads_LandUseCode_New_LDC_Chapter_5_pdf.pdf",
+      "source_pages": 172,
+      "event_id": "SD011-E012",
+      "requested_url_claim": "https://planningdevelopment.elpasoco.com/wp-content/uploads/LandUseCode/New-LDC-Chapter-5.pdf",
+      "final_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/LandUseCode/New-LDC-Chapter-5.pdf",
+      "acquisition_started_at_claim": "2026-09-12T22:00:29Z",
+      "acquisition_completed_at_claim": "2026-09-12T22:00:30Z",
+      "upstream_acquisition_independently_verified": false,
+      "verified_http_acquired_at": null,
+      "atlas_delivery_captured_at": "2026-09-12T22:08:54.656702Z",
+      "atlas_preparation_copied_at": "2026-09-12T22:32:06.336365Z",
+      "actual_repository_received_at": null,
+      "public_headers": {
+        "path": "inputs/public-headers/SD011-E012.headers.txt",
+        "sha256": "e7313bcde95dc21459604fdf81e3c330c0b7858068919111604e19ab1757b572",
+        "size_bytes": 914
+      },
+      "observed_http_statuses": [
+        302,
+        200
+      ],
+      "observed_redirect_destinations": [
+        "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/LandUseCode/New-LDC-Chapter-5.pdf"
+      ],
+      "source_referrals": [],
+      "referral_basis": "inherited_url_no_fresh_anchor",
+      "historical_matching_rows": 8,
+      "historical_source_ids": [
+        "county_elpaso_land_development_uses",
+        "county_elpaso_land_development_uses_building_construction",
+        "county_elpaso_land_development_uses_roads_transportation_access"
+      ],
+      "directly_viewed_pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "images/el-paso-ldc-chapter-5-sd011-001.png",
+            "sha256": "6394dc90ea3a8b5fb7f28acd0b511f477ad05cf5eb56877861712ec277f4a74d",
+            "size_bytes": 274905
+          },
+          "native": {
+            "path": "native/el-paso-ldc-chapter-5-sd011-p001.txt",
+            "sha256": "9c702a55aaa4651af7b8a883f7f9081610573e07da3668ccabaec457f44b3b23",
+            "size_bytes": 2571
+          },
+          "native_nonwhitespace": true,
+          "view_scope": "full_page_for_title_issuer_role_and_selected_date_context",
+          "numeric_table_certification": false
+        }
+      ],
+      "observations": [
+        {
+          "observation_id": "el-paso-ldc-chapter-5-sd011-O01",
+          "physical_page": 1,
+          "region": "heading and footer",
+          "visible_text": "Chapter Five\nUSE AND DIMENSIONAL STANDARDS\nEffective 01/09/2018",
+          "native_anchor": {
+            "start": 231,
+            "end": 251,
+            "text": "Effective 01/09/2018",
+            "sha256": "1fbc7daac8b45a13b28d311cd1cf8fc82b9b21dc758b098acd1efe6ac1f76637"
+          },
+          "conclusion": "County use/dimensional standards chapter, including a first-page introduction to use tables.",
+          "uncertainty": "Only page 1 of 172 viewed; tables, zone columns and all later pages have not been certified. Repeated visible 5.2.3 labels remain uncorrected.",
+          "legal_currentness": "not_verified"
+        }
+      ],
+      "date_claims": [
+        {
+          "value": "2018-01-09",
+          "role": "source_stated_effective",
+          "observation_id": "el-paso-ldc-chapter-5-sd011-O01",
+          "independently_verified": false
+        }
+      ],
+      "verified_adoption_date": null,
+      "verified_effective_date": null,
+      "legal_currentness": "not_verified",
+      "answer_safe": false,
+      "translation_equivalence_verified": false,
+      "full_text_reviewed": false,
+      "qualifications": [
+        "Inherited URL/no fresh preserved anchor; source hash matches inherited claims.",
+        "A large chapter is not full county zoning coverage or a current consolidated code."
+      ]
+    },
+    {
+      "source_id": "el-paso-unsafe-buildings-18-03-sd011",
+      "decision": "propose_county_intake",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "layer_id": "08_County_Authorities",
+      "issuer_as_shown": "Board of County Commissioners, County of El Paso, State of Colorado",
+      "issuer_kind": "county_board_of_commissioners",
+      "document_role": "adopting_resolution_with_unsafe_buildings_ordinance",
+      "title_for_intake": "El Paso County Resolution 17-321 with Ordinance 18-03: Removal of Unsafe Buildings",
+      "language": "en",
+      "original": {
+        "path": "sources/el-paso-unsafe-buildings-18-03-sd011/original.pdf",
+        "sha256": "86eed9d885a9cec1cb01528318f66f8eed525ddb0860655a1983865bfa196d00",
+        "size_bytes": 327510
+      },
+      "received_body_path": "received/raw/el_paso/wp_content_uploads_sites_5_18_03_Unsafe_Buildings_Accessible_pdf.pdf",
+      "source_pages": 8,
+      "event_id": "SD011-E022",
+      "requested_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/5/18-03-Unsafe-Buildings-Accessible.pdf",
+      "final_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/5/18-03-Unsafe-Buildings-Accessible.pdf",
+      "acquisition_started_at_claim": "2026-09-12T22:00:58Z",
+      "acquisition_completed_at_claim": "2026-09-12T22:00:58Z",
+      "upstream_acquisition_independently_verified": false,
+      "verified_http_acquired_at": null,
+      "atlas_delivery_captured_at": "2026-09-12T22:08:54.656702Z",
+      "atlas_preparation_copied_at": "2026-09-12T22:32:06.336365Z",
+      "actual_repository_received_at": null,
+      "public_headers": {
+        "path": "inputs/public-headers/SD011-E022.headers.txt",
+        "sha256": "357406f69bcc1ed1d9900e9fead0763334bea71c2cdc0751e1fb2ab6e84c32b1",
+        "size_bytes": 470
+      },
+      "observed_http_statuses": [
+        200
+      ],
+      "observed_redirect_destinations": [],
+      "source_referrals": [
+        {
+          "event_id": "SD011-E002",
+          "parent_url": "https://clerkandrecorder.elpasoco.com/clerk-to-the-board/ordinances/",
+          "parent": {
+            "path": "inputs/referrals/SD011-E002.html",
+            "sha256": "fab6ff320223ed834fccd26e4f1d71a502cd04bc5ce57d4883eb0942fe0df44f",
+            "size_bytes": 159171
+          },
+          "href": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/5/18-03-Unsafe-Buildings-Accessible.pdf",
+          "resolved_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/5/18-03-Unsafe-Buildings-Accessible.pdf",
+          "anchor_text": "18-03"
+        }
+      ],
+      "referral_basis": "preserved_official_html_anchor",
+      "historical_matching_rows": 0,
+      "historical_source_ids": [],
+      "directly_viewed_pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "images/el-paso-unsafe-buildings-18-03-sd011-1.png",
+            "sha256": "5f0ed8a07658f7dd8c9838defd570adb60b8dff1a95463405df553b41a7a394e",
+            "size_bytes": 114768
+          },
+          "native": {
+            "path": "native/el-paso-unsafe-buildings-18-03-sd011-p001.txt",
+            "sha256": "30cf3f3c45fd6bb3ad54e72af283b9337c72b6e7dc0ef2c9bb7888eacb4c558a",
+            "size_bytes": 2585
+          },
+          "native_nonwhitespace": true,
+          "view_scope": "full_page_for_title_issuer_role_and_selected_date_context",
+          "numeric_table_certification": false
+        },
+        {
+          "physical_page": 2,
+          "image": {
+            "path": "images/el-paso-unsafe-buildings-18-03-sd011-2.png",
+            "sha256": "476416e78298d72459f6322bd24140c6f9bde84c73fa4347def0227da09315d0",
+            "size_bytes": 37082
+          },
+          "native": {
+            "path": "native/el-paso-unsafe-buildings-18-03-sd011-p002.txt",
+            "sha256": "76d3542fb7e79dd9183f01c3fea67fcf2154a91bf38690f18cafaf7041e2c9cb",
+            "size_bytes": 220
+          },
+          "native_nonwhitespace": true,
+          "view_scope": "full_page_for_title_issuer_role_and_selected_date_context",
+          "numeric_table_certification": false
+        },
+        {
+          "physical_page": 3,
+          "image": {
+            "path": "images/el-paso-unsafe-buildings-18-03-sd011-3.png",
+            "sha256": "496a55fb59beeeba132695a41d4380a22afb4b406289a84dae2a38cb36d66061",
+            "size_bytes": 90917
+          },
+          "native": {
+            "path": "native/el-paso-unsafe-buildings-18-03-sd011-p003.txt",
+            "sha256": "747c45f6fad15f16024e6f605e150d4e6e2d64646ed053efa9be54b0ea8fe041",
+            "size_bytes": 2349
+          },
+          "native_nonwhitespace": true,
+          "view_scope": "full_page_for_title_issuer_role_and_selected_date_context",
+          "numeric_table_certification": false
+        }
+      ],
+      "observations": [
+        {
+          "observation_id": "el-paso-unsafe-buildings-18-03-sd011-O01",
+          "physical_page": 1,
+          "region": "heading and adoption paragraph",
+          "visible_text": "RESOLUTION NO. 17-321\nRESOLUTION ADOPTING ORDINANCE NO. 18-03, REQUIRING THE REMOVAL OF UNSAFE BUILDINGS",
+          "native_anchor": {
+            "start": 0,
+            "end": 21,
+            "text": "RESOLUTION NO. 17-321",
+            "sha256": "d55ddb1a3d964a291379935a4f860ccb86ad233d402c716d157bdd13143bed6d"
+          },
+          "conclusion": "The PDF begins with a resolution, rather than only the ordinance named in its filename.",
+          "uncertainty": "Source's 2017 resolution/18-03 designation is preserved, not editorially corrected.",
+          "legal_currentness": "not_verified"
+        },
+        {
+          "observation_id": "el-paso-unsafe-buildings-18-03-sd011-O02",
+          "physical_page": 2,
+          "region": "execution line and signature region",
+          "visible_text": "DONE THIS 21st day of November, 2017, at Colorado Springs, Colorado.",
+          "native_anchor": {
+            "start": 168,
+            "end": 181,
+            "text": "November 2017",
+            "sha256": "15e6aecbbadca79c76e969dd9aba917e6be4eb53a01638f750eccb84ce07c32b"
+          },
+          "conclusion": "Day/month fields appear handwritten; signature and seal marks are present beside printed office labels.",
+          "uncertainty": "No signature identity or execution authentication. This is a source-stated execution date.",
+          "legal_currentness": "not_verified"
+        },
+        {
+          "observation_id": "el-paso-unsafe-buildings-18-03-sd011-O03",
+          "physical_page": 3,
+          "region": "ordinance title and section 3",
+          "visible_text": "ORDINANCE NO. 18-03\nREQUIRING THE REMOVAL OF UNSAFE BUILDINGS",
+          "native_anchor": {
+            "start": 79,
+            "end": 120,
+            "text": "REQUIRING THE REMOVAL OF UNSAFE BUILDINGS",
+            "sha256": "42248b9a79f9229d6f7b37885befb50a390b48e4e50e84ce6cfab2b61e3da208"
+          },
+          "conclusion": "The actual ordinance starts on physical page 3; section 3 states unincorporated coverage and a conditional municipal opt-in/IGA route.",
+          "uncertainty": "No municipality is established as opted in by this document review; only three of eight pages inspected.",
+          "legal_currentness": "not_verified"
+        }
+      ],
+      "date_claims": [
+        {
+          "value": "2017-11-21",
+          "role": "source_stated_execution",
+          "observation_id": "el-paso-unsafe-buildings-18-03-sd011-O02",
+          "independently_verified": false
+        }
+      ],
+      "verified_adoption_date": null,
+      "verified_effective_date": null,
+      "legal_currentness": "not_verified",
+      "answer_safe": false,
+      "translation_equivalence_verified": false,
+      "full_text_reviewed": false,
+      "qualifications": [
+        "Preserve resolution and appended ordinance together in their original eight-page artifact.",
+        "No full repeal chain, final effectiveness or municipality opt-in confirmation."
+      ]
+    },
+    {
+      "source_id": "el-paso-school-district-fees-sd011",
+      "decision": "defer_issuer_layer_decision",
+      "authority_id": null,
+      "layer_id": null,
+      "issuer_as_shown": "Not explicitly identified on the one-page school-district fee sheet",
+      "issuer_kind": "unresolved_school_fee_issuer",
+      "document_role": "school_district_development_fee_comparison_sheet",
+      "title_for_intake": "School District Fees for Development in El Paso County (issuer unresolved)",
+      "language": "en",
+      "original": {
+        "path": "sources/el-paso-school-district-fees-sd011/original.pdf",
+        "sha256": "e17683d7e1672c7fc69d72b499265c99af16510de539e2318de22b50b7dbad5e",
+        "size_bytes": 10273
+      },
+      "received_body_path": "received/raw/el_paso/wp_content_uploads_sites_12_fees_School_District_Fees_Current_2010_pdf.pdf",
+      "source_pages": 1,
+      "event_id": "SD011-E054",
+      "requested_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/fees/School-District-Fees-Current-2010.pdf",
+      "final_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/fees/School-District-Fees-Current-2010.pdf",
+      "acquisition_started_at_claim": "2026-09-12T22:01:39Z",
+      "acquisition_completed_at_claim": "2026-09-12T22:01:39Z",
+      "upstream_acquisition_independently_verified": false,
+      "verified_http_acquired_at": null,
+      "atlas_delivery_captured_at": "2026-09-12T22:08:54.656702Z",
+      "atlas_preparation_copied_at": "2026-09-12T22:32:06.336365Z",
+      "actual_repository_received_at": null,
+      "public_headers": {
+        "path": "inputs/public-headers/SD011-E054.headers.txt",
+        "sha256": "821da3e2668a2be2a7374830d1adc655e286c5cb7b2ca7858d118bb806dcb439",
+        "size_bytes": 637
+      },
+      "observed_http_statuses": [
+        200
+      ],
+      "observed_redirect_destinations": [],
+      "source_referrals": [
+        {
+          "event_id": "SD011-E043",
+          "parent_url": "https://planningdevelopment.elpasoco.com/",
+          "parent": {
+            "path": "inputs/referrals/SD011-E043.html",
+            "sha256": "42d19bb45c4c7e3df8e6a44cf92f61e790a4b01503813e193450c37ac5813381",
+            "size_bytes": 199975
+          },
+          "href": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/fees/School-District-Fees-Current-2010.pdf",
+          "resolved_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/fees/School-District-Fees-Current-2010.pdf",
+          "anchor_text": "School District Fees"
+        }
+      ],
+      "referral_basis": "preserved_official_html_anchor",
+      "historical_matching_rows": 0,
+      "historical_source_ids": [],
+      "directly_viewed_pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "images/el-paso-school-district-fees-sd011-1.png",
+            "sha256": "2ffc3b2e37c118d770b3aa9ff3494093c82aa6a21d81b332287530718fa666eb",
+            "size_bytes": 40748
+          },
+          "native": {
+            "path": "native/el-paso-school-district-fees-sd011-p001.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "size_bytes": 0
+          },
+          "native_nonwhitespace": false,
+          "view_scope": "full_page_for_title_issuer_role_and_selected_date_context",
+          "numeric_table_certification": false
+        }
+      ],
+      "observations": [
+        {
+          "observation_id": "el-paso-school-district-fees-sd011-O01",
+          "physical_page": 1,
+          "region": "full one-page sheet",
+          "visible_text": "SCHOOL DISTRICT FEES for DEVELOPMENT IN EL PASO COUNTY\nSCHOOL DISTRICT #\nFEE per SINGLE FAMILY UNIT/PATIO HOMES\nFEE for ALL OTHER RESIDENTIAL TYPES per DWELLING UNIT",
+          "native_anchor": null,
+          "conclusion": "Rows name districts 3, 20, 38, 49 and All Other Districts; sheet compares two residential fee categories.",
+          "uncertainty": "No issuer, authorizing instrument or date is visible. County hosting does not establish the levy/collection authority; 2010 in the filename is not a source-stated effective date.",
+          "legal_currentness": "not_verified"
+        }
+      ],
+      "date_claims": [],
+      "verified_adoption_date": null,
+      "verified_effective_date": null,
+      "legal_currentness": "not_verified",
+      "answer_safe": false,
+      "translation_equivalence_verified": false,
+      "full_text_reviewed": false,
+      "qualifications": [
+        "Excluded from proposed county intake pending explicit issuer/layer decision; do not automatically assign a district or county.",
+        "The native text is empty; this is issuer/role review, not a complete checked fee-table dataset."
+      ]
+    },
+    {
+      "source_id": "el-paso-boh-admin-regulations-sd011",
+      "decision": "propose_county_intake",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "layer_id": "08_County_Authorities",
+      "issuer_as_shown": "El Paso County Board of Health / El Paso County Public Health",
+      "issuer_kind": "county_board_of_health",
+      "document_role": "board_of_health_administrative_regulations",
+      "title_for_intake": "El Paso County Board of Health, Chapter 2: Administrative Regulations",
+      "language": "en",
+      "original": {
+        "path": "sources/el-paso-boh-admin-regulations-sd011/original.pdf",
+        "sha256": "64d72ce1f7783dcf7fb5a3f6956e8ba4845c4839318613a1dee09d99716625d7",
+        "size_bytes": 189000
+      },
+      "received_body_path": "received/raw/el_paso/ads_sites_18_2025_06_2_BoH_Regulation_Chapter_2_Admin_Regs_2011_1Acc_Checked_June_2025_pdf.pdf",
+      "source_pages": 7,
+      "event_id": "SD011-E064",
+      "requested_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/2-BoH.Regulation.Chapter.2.Admin_.Regs_.2011_1Acc-Checked-June-2025.pdf",
+      "final_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/2-BoH.Regulation.Chapter.2.Admin_.Regs_.2011_1Acc-Checked-June-2025.pdf",
+      "acquisition_started_at_claim": "2026-09-12T22:01:42Z",
+      "acquisition_completed_at_claim": "2026-09-12T22:01:43Z",
+      "upstream_acquisition_independently_verified": false,
+      "verified_http_acquired_at": null,
+      "atlas_delivery_captured_at": "2026-09-12T22:08:54.656702Z",
+      "atlas_preparation_copied_at": "2026-09-12T22:32:06.336365Z",
+      "actual_repository_received_at": null,
+      "public_headers": {
+        "path": "inputs/public-headers/SD011-E064.headers.txt",
+        "sha256": "5f7dfd07fe4f24fd2f6b894f08a9f070a623851c9affd839e2d84b4d9ea12b18",
+        "size_bytes": 470
+      },
+      "observed_http_statuses": [
+        200
+      ],
+      "observed_redirect_destinations": [],
+      "source_referrals": [
+        {
+          "event_id": "SD011-E014",
+          "parent_url": "https://www.elpasocountyhealth.org/about-public-health/regulations/",
+          "parent": {
+            "path": "inputs/referrals/SD011-E014.html",
+            "sha256": "fae060312917346ff8a62d3265234ae1bf5bb44800635d565563312eb3dcdb8d",
+            "size_bytes": 286726
+          },
+          "href": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/2-BoH.Regulation.Chapter.2.Admin_.Regs_.2011_1Acc-Checked-June-2025.pdf",
+          "resolved_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/2-BoH.Regulation.Chapter.2.Admin_.Regs_.2011_1Acc-Checked-June-2025.pdf",
+          "anchor_text": "Administrative Regulations"
+        }
+      ],
+      "referral_basis": "preserved_official_html_anchor",
+      "historical_matching_rows": 0,
+      "historical_source_ids": [],
+      "directly_viewed_pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "images/el-paso-boh-admin-regulations-sd011-1.png",
+            "sha256": "d91666434f85e34fb6b22316e0ebb02cd54178fa8e5fdc90f0060b88ad741582",
+            "size_bytes": 55606
+          },
+          "native": {
+            "path": "native/el-paso-boh-admin-regulations-sd011-p001.txt",
+            "sha256": "2067245fe822edf6320d17db6c98029de762b24671685a169579d3ce77a37934",
+            "size_bytes": 219
+          },
+          "native_nonwhitespace": true,
+          "view_scope": "full_page_for_title_issuer_role_and_selected_date_context",
+          "numeric_table_certification": false
+        }
+      ],
+      "observations": [
+        {
+          "observation_id": "el-paso-boh-admin-regulations-sd011-O01",
+          "physical_page": 1,
+          "region": "cover and lower-left date",
+          "visible_text": "REGULATIONS OF THE EL PASO COUNTY BOARD OF HEALTH\nChapter 2\nAdministrative Regulations\n5/23/2012",
+          "native_anchor": {
+            "start": 208,
+            "end": 217,
+            "text": "5/23/2012",
+            "sha256": "689fe4f82a8a2caff100b5ad68374e73bb69a6311752766a4b9a637ff820f887"
+          },
+          "conclusion": "Explicit Board of Health/Public Health identification supports a separate health-board role within county intake.",
+          "uncertainty": "The date has no adoption/effective label on the cover; do not replace it with 2011 or June 2025 filename labels.",
+          "legal_currentness": "not_verified"
+        }
+      ],
+      "date_claims": [
+        {
+          "value": "2012-05-23",
+          "role": "unlabeled_cover_date",
+          "observation_id": "el-paso-boh-admin-regulations-sd011-O01",
+          "independently_verified": false
+        }
+      ],
+      "verified_adoption_date": null,
+      "verified_effective_date": null,
+      "legal_currentness": "not_verified",
+      "answer_safe": false,
+      "translation_equivalence_verified": false,
+      "full_text_reviewed": false,
+      "qualifications": [
+        "No full administrative-regulations or subsequent-amendment review.",
+        "Board of Health is not silently relabeled Board of County Commissioners."
+      ]
+    },
+    {
+      "source_id": "el-paso-boh-bylaws-sd011",
+      "decision": "propose_county_intake",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "layer_id": "08_County_Authorities",
+      "issuer_as_shown": "El Paso County Board of Health / El Paso County Public Health",
+      "issuer_kind": "county_board_of_health",
+      "document_role": "board_of_health_bylaws",
+      "title_for_intake": "El Paso County Board of Health, Chapter 1: Bylaws (English)",
+      "language": "en",
+      "original": {
+        "path": "sources/el-paso-boh-bylaws-sd011/original.pdf",
+        "sha256": "5b71fc2ba18d7a11a5c66d691b1f11526cce424cc0eb8fc07cbd37fb7e5c268a",
+        "size_bytes": 204027
+      },
+      "received_body_path": "received/raw/el_paso/uploads_sites_18_2025_06_1_BoH_Regulation_Chapter_1_Bylaws_2011_0Acc_Checked_June_2025_pdf.pdf",
+      "source_pages": 5,
+      "event_id": "SD011-E062",
+      "requested_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/1-BoH.Regulation.Chapter.1.Bylaws.2011_0Acc-Checked-June-2025.pdf",
+      "final_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/1-BoH.Regulation.Chapter.1.Bylaws.2011_0Acc-Checked-June-2025.pdf",
+      "acquisition_started_at_claim": "2026-09-12T22:01:41Z",
+      "acquisition_completed_at_claim": "2026-09-12T22:01:42Z",
+      "upstream_acquisition_independently_verified": false,
+      "verified_http_acquired_at": null,
+      "atlas_delivery_captured_at": "2026-09-12T22:08:54.656702Z",
+      "atlas_preparation_copied_at": "2026-09-12T22:32:06.336365Z",
+      "actual_repository_received_at": null,
+      "public_headers": {
+        "path": "inputs/public-headers/SD011-E062.headers.txt",
+        "sha256": "70068b90104e732c8fdab34f7de4f5af0204c98c15ac1dbea926bc9a3cf04dee",
+        "size_bytes": 470
+      },
+      "observed_http_statuses": [
+        200
+      ],
+      "observed_redirect_destinations": [],
+      "source_referrals": [
+        {
+          "event_id": "SD011-E014",
+          "parent_url": "https://www.elpasocountyhealth.org/about-public-health/regulations/",
+          "parent": {
+            "path": "inputs/referrals/SD011-E014.html",
+            "sha256": "fae060312917346ff8a62d3265234ae1bf5bb44800635d565563312eb3dcdb8d",
+            "size_bytes": 286726
+          },
+          "href": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/1-BoH.Regulation.Chapter.1.Bylaws.2011_0Acc-Checked-June-2025.pdf",
+          "resolved_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/1-BoH.Regulation.Chapter.1.Bylaws.2011_0Acc-Checked-June-2025.pdf",
+          "anchor_text": "Bylaws"
+        }
+      ],
+      "referral_basis": "preserved_official_html_anchor",
+      "historical_matching_rows": 0,
+      "historical_source_ids": [],
+      "directly_viewed_pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "images/el-paso-boh-bylaws-sd011-1.png",
+            "sha256": "caea338e2978bd21dd5ed5c21a240c1adf5fa4431990890d5a23252ed1c2b4e6",
+            "size_bytes": 59628
+          },
+          "native": {
+            "path": "native/el-paso-boh-bylaws-sd011-p001.txt",
+            "sha256": "77e193f277eaa8152230eb98bb1ec1489544ee44a3e1d54f81b7c551cfdbfc53",
+            "size_bytes": 278
+          },
+          "native_nonwhitespace": true,
+          "view_scope": "full_page_for_title_issuer_role_and_selected_date_context",
+          "numeric_table_certification": false
+        }
+      ],
+      "observations": [
+        {
+          "observation_id": "el-paso-boh-bylaws-sd011-O01",
+          "physical_page": 1,
+          "region": "cover and lower-left date",
+          "visible_text": "Chapter 1\nBylaws\nEl Paso County Board of Health\n5/23/2012",
+          "native_anchor": {
+            "start": 267,
+            "end": 276,
+            "text": "5/23/2012",
+            "sha256": "689fe4f82a8a2caff100b5ad68374e73bb69a6311752766a4b9a637ff820f887"
+          },
+          "conclusion": "Board of Health bylaws chapter, distinct from commissioner legislation.",
+          "uncertainty": "Cover date is unlabeled; the 2011/June 2025 filename is not a legal date.",
+          "legal_currentness": "not_verified"
+        }
+      ],
+      "date_claims": [
+        {
+          "value": "2012-05-23",
+          "role": "unlabeled_cover_date",
+          "observation_id": "el-paso-boh-bylaws-sd011-O01",
+          "independently_verified": false
+        }
+      ],
+      "verified_adoption_date": null,
+      "verified_effective_date": null,
+      "legal_currentness": "not_verified",
+      "answer_safe": false,
+      "translation_equivalence_verified": false,
+      "full_text_reviewed": false,
+      "qualifications": [
+        "English and Spanish bylaws remain separate files, with no translation-equivalence claim.",
+        "Only cover inspected; entire governance text/current board status remains unreviewed."
+      ]
+    },
+    {
+      "source_id": "el-paso-boh-bylaws-spanish-sd011",
+      "decision": "propose_county_intake",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "layer_id": "08_County_Authorities",
+      "issuer_as_shown": "Junta de Salud del Condado de El Paso / El Paso County Public Health",
+      "issuer_kind": "county_board_of_health",
+      "document_role": "board_of_health_bylaws_spanish_text",
+      "title_for_intake": "El Paso County Board of Health, Capítulo 1: Estatutos (Spanish)",
+      "language": "es",
+      "original": {
+        "path": "sources/el-paso-boh-bylaws-spanish-sd011/original.pdf",
+        "sha256": "1b8367a5710b5159ea479ad588ee5dee9850e1e9451b0115d2770a2d4aae6c7f",
+        "size_bytes": 64434
+      },
+      "received_body_path": "received/raw/el_paso/uploads_sites_18_2025_06_1_SpanishBoh_Regulation_Chapter1_SpanishAcc_Checked_June_2025_pdf.pdf",
+      "source_pages": 6,
+      "event_id": "SD011-E063",
+      "requested_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/1-SpanishBoh.-Regulation-Chapter1-SpanishAcc-Checked-June-2025.pdf",
+      "final_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/1-SpanishBoh.-Regulation-Chapter1-SpanishAcc-Checked-June-2025.pdf",
+      "acquisition_started_at_claim": "2026-09-12T22:01:42Z",
+      "acquisition_completed_at_claim": "2026-09-12T22:01:42Z",
+      "upstream_acquisition_independently_verified": false,
+      "verified_http_acquired_at": null,
+      "atlas_delivery_captured_at": "2026-09-12T22:08:54.656702Z",
+      "atlas_preparation_copied_at": "2026-09-12T22:32:06.336365Z",
+      "actual_repository_received_at": null,
+      "public_headers": {
+        "path": "inputs/public-headers/SD011-E063.headers.txt",
+        "sha256": "5e7fae40dcf159e7d91357db0464331d1aaebf3918efdaa47e61a7d411a688f4",
+        "size_bytes": 469
+      },
+      "observed_http_statuses": [
+        200
+      ],
+      "observed_redirect_destinations": [],
+      "source_referrals": [
+        {
+          "event_id": "SD011-E014",
+          "parent_url": "https://www.elpasocountyhealth.org/about-public-health/regulations/",
+          "parent": {
+            "path": "inputs/referrals/SD011-E014.html",
+            "sha256": "fae060312917346ff8a62d3265234ae1bf5bb44800635d565563312eb3dcdb8d",
+            "size_bytes": 286726
+          },
+          "href": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/1-SpanishBoh.-Regulation-Chapter1-SpanishAcc-Checked-June-2025.pdf",
+          "resolved_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/1-SpanishBoh.-Regulation-Chapter1-SpanishAcc-Checked-June-2025.pdf",
+          "anchor_text": "Bylaws (Spanish)"
+        }
+      ],
+      "referral_basis": "preserved_official_html_anchor",
+      "historical_matching_rows": 0,
+      "historical_source_ids": [],
+      "directly_viewed_pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "images/el-paso-boh-bylaws-spanish-sd011-1.png",
+            "sha256": "0785386c81ff4ea8ecba1f2e6cc590fb53e2d597150584f9bb394c541ab2aa57",
+            "size_bytes": 52217
+          },
+          "native": {
+            "path": "native/el-paso-boh-bylaws-spanish-sd011-p001.txt",
+            "sha256": "6de11b747d127f16f67b734380034d9de637ee1b25b10b0cfdc6ec144b4d0ef9",
+            "size_bytes": 172
+          },
+          "native_nonwhitespace": true,
+          "view_scope": "full_page_for_title_issuer_role_and_selected_date_context",
+          "numeric_table_certification": false
+        }
+      ],
+      "observations": [
+        {
+          "observation_id": "el-paso-boh-bylaws-spanish-sd011-O01",
+          "physical_page": 1,
+          "region": "cover",
+          "visible_text": "REGLAMENTO DEL PASO\nJUNTA DE SALUD DEL CONDADO\nCONDADO DE EL PASO, COLORADO\nCapítulo 1\nEstatutos",
+          "native_anchor": {
+            "start": 79,
+            "end": 90,
+            "text": "Capítulo 1",
+            "sha256": "84d86b110fc13b5d44284bab9123fc519df85a869b08bf417cd520a290b9bd14"
+          },
+          "conclusion": "Spanish-language bylaws artifact explicitly identifies the El Paso County Board of Health.",
+          "uncertainty": "The unusual visible REGLAMENTO DEL PASO wording is not silently corrected. No cover date is visible or borrowed from English.",
+          "legal_currentness": "not_verified"
+        }
+      ],
+      "date_claims": [],
+      "verified_adoption_date": null,
+      "verified_effective_date": null,
+      "legal_currentness": "not_verified",
+      "answer_safe": false,
+      "translation_equivalence_verified": false,
+      "full_text_reviewed": false,
+      "qualifications": [
+        "Distinct six-page Spanish artifact; English has five pages. Page counts do not establish translation equivalence.",
+        "No date/currentness inferred from the URL or English companion."
+      ]
+    },
+    {
+      "source_id": "el-paso-boh-ehs-fees-spanish-sd011",
+      "decision": "propose_county_intake",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "layer_id": "08_County_Authorities",
+      "issuer_as_shown": "Junta de Salud del Condado de El Paso / Salud Publica del Condado de El Paso",
+      "issuer_kind": "county_board_of_health",
+      "document_role": "board_of_health_fee_schedule_and_civil_penalties_spanish_text",
+      "title_for_intake": "El Paso County Board of Health, Capítulo 3: Lista de tarifas y sanciones civiles (Spanish)",
+      "language": "es",
+      "original": {
+        "path": "sources/el-paso-boh-ehs-fees-spanish-sd011/original.pdf",
+        "sha256": "fd162c37442dc99097a272d9ebbf74fbfd063f2dc2f2226fdeb8b93a53849ec9",
+        "size_bytes": 252997
+      },
+      "received_body_path": "received/raw/el_paso/_18_2025_06_3_Spanish_BoH_2024_EHS_Fee_Schedule_Chapter_3_EspanolAcc_Checked_June_2025_pdf.pdf",
+      "source_pages": 6,
+      "event_id": "SD011-E066",
+      "requested_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/3-Spanish-BoH-2024-EHS-Fee-Schedule-Chapter-3_EspanolAcc-Checked-June-2025.pdf",
+      "final_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/3-Spanish-BoH-2024-EHS-Fee-Schedule-Chapter-3_EspanolAcc-Checked-June-2025.pdf",
+      "acquisition_started_at_claim": "2026-09-12T22:01:43Z",
+      "acquisition_completed_at_claim": "2026-09-12T22:01:43Z",
+      "upstream_acquisition_independently_verified": false,
+      "verified_http_acquired_at": null,
+      "atlas_delivery_captured_at": "2026-09-12T22:08:54.656702Z",
+      "atlas_preparation_copied_at": "2026-09-12T22:32:06.336365Z",
+      "actual_repository_received_at": null,
+      "public_headers": {
+        "path": "inputs/public-headers/SD011-E066.headers.txt",
+        "sha256": "ff9a46ce84b08fe763c56ceaec7064a3ec5caa877f01fcc291297f09d764b95e",
+        "size_bytes": 470
+      },
+      "observed_http_statuses": [
+        200
+      ],
+      "observed_redirect_destinations": [],
+      "source_referrals": [
+        {
+          "event_id": "SD011-E014",
+          "parent_url": "https://www.elpasocountyhealth.org/about-public-health/regulations/",
+          "parent": {
+            "path": "inputs/referrals/SD011-E014.html",
+            "sha256": "fae060312917346ff8a62d3265234ae1bf5bb44800635d565563312eb3dcdb8d",
+            "size_bytes": 286726
+          },
+          "href": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/3-Spanish-BoH-2024-EHS-Fee-Schedule-Chapter-3_EspanolAcc-Checked-June-2025.pdf",
+          "resolved_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/3-Spanish-BoH-2024-EHS-Fee-Schedule-Chapter-3_EspanolAcc-Checked-June-2025.pdf",
+          "anchor_text": "Fee Schedule and Civil Penalties (Spanish)"
+        }
+      ],
+      "referral_basis": "preserved_official_html_anchor",
+      "historical_matching_rows": 0,
+      "historical_source_ids": [],
+      "directly_viewed_pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "images/el-paso-boh-ehs-fees-spanish-sd011-1.png",
+            "sha256": "6f468a487e659ae4131b65d21d566e518a5452baabda46606178f59c4c7ed824",
+            "size_bytes": 79080
+          },
+          "native": {
+            "path": "native/el-paso-boh-ehs-fees-spanish-sd011-p001.txt",
+            "sha256": "b3d613daab5243d7c2daebca9b7158001fbbb1f2ea47f58c625300ee2fa840c8",
+            "size_bytes": 476
+          },
+          "native_nonwhitespace": true,
+          "view_scope": "full_page_for_title_issuer_role_and_selected_date_context",
+          "numeric_table_certification": false
+        },
+        {
+          "physical_page": 2,
+          "image": {
+            "path": "images/el-paso-boh-ehs-fees-spanish-sd011-2.png",
+            "sha256": "7013d14a9b4215ba18ef76e6f0b09d20c3fdbcf181234ea7c02d8c14db732c9f",
+            "size_bytes": 271860
+          },
+          "native": {
+            "path": "native/el-paso-boh-ehs-fees-spanish-sd011-p002.txt",
+            "sha256": "5cdaad3514d6f8d86df69743aeb7dfd12f45f275b3e5bfb8d1fa6730d8457c76",
+            "size_bytes": 2146
+          },
+          "native_nonwhitespace": true,
+          "view_scope": "full_page_for_title_issuer_role_and_selected_date_context",
+          "numeric_table_certification": false
+        }
+      ],
+      "observations": [
+        {
+          "observation_id": "el-paso-boh-ehs-fees-spanish-sd011-O01",
+          "physical_page": 1,
+          "region": "cover and clipped footer",
+          "visible_text": "Capítulo 3\nLista de tarifas y sanciones civiles\nAprobado por la Junta de Salud el 25 de octubre",
+          "native_anchor": {
+            "start": 235,
+            "end": 246,
+            "text": "Capítulo 3",
+            "sha256": "b43201597e87745e83d60c0f35b8991a1d397c7ad7a510907faac1b6da3d587a"
+          },
+          "conclusion": "Spanish Board of Health fee/civil-penalty chapter; approval-footer continuation is clipped in the rendered source.",
+          "uncertainty": "Native extraction contains hidden/clipped year text. Do not certify its visible year or import the English approval date.",
+          "legal_currentness": "not_verified"
+        },
+        {
+          "observation_id": "el-paso-boh-ehs-fees-spanish-sd011-O02",
+          "physical_page": 2,
+          "region": "section 3.1 opening",
+          "visible_text": "A partir del 1 de enero de 2024, la Junta de Salud adopta las siguientes tarifas",
+          "native_anchor": {
+            "start": 531,
+            "end": 549,
+            "text": "1 de enero de 2024",
+            "sha256": "4bba86c404412c2c38e23371788c7fcc837c2e3d528c5c7a608ecb6c92424e09"
+          },
+          "conclusion": "The top of page 2 visibly states a January 1, 2024 commencement date.",
+          "uncertainty": "Only two of six pages viewed; no entire table or English/Spanish equivalence review. Footer still clips approval continuation.",
+          "legal_currentness": "not_verified"
+        }
+      ],
+      "date_claims": [
+        {
+          "value": "2024-01-01",
+          "role": "source_stated_effective",
+          "observation_id": "el-paso-boh-ehs-fees-spanish-sd011-O02",
+          "independently_verified": false
+        }
+      ],
+      "verified_adoption_date": null,
+      "verified_effective_date": null,
+      "legal_currentness": "not_verified",
+      "answer_safe": false,
+      "translation_equivalence_verified": false,
+      "full_text_reviewed": false,
+      "qualifications": [
+        "Distinct Spanish file with a visibly clipped approval footer, preserved unchanged.",
+        "Do not treat embedded text beyond the visible page as an image-confirmed year."
+      ]
+    },
+    {
+      "source_id": "el-paso-hosted-cgs-review-guide-sd011",
+      "decision": "defer_issuer_layer_decision",
+      "authority_id": null,
+      "layer_id": null,
+      "issuer_as_shown": "Colorado Geological Survey",
+      "issuer_kind": "colorado_geological_survey",
+      "document_role": "external_agency_land_use_review_referral_and_fee_guide",
+      "title_for_intake": "Colorado Geological Survey Land Use Review Referral and Fee Guide (county-hosted copy)",
+      "language": "en",
+      "original": {
+        "path": "sources/el-paso-hosted-cgs-review-guide-sd011/original.pdf",
+        "sha256": "f726d6cd956cee12d2a112a72b355fbdfc7041980fa85cbeefc26c6893234cf6",
+        "size_bytes": 187775
+      },
+      "received_body_path": "received/raw/el_paso/ds_sites_12_Misc_CGS_ColoGeoSurvey_Land_Use_Review_Referral_and_Fee_Guide_June_18_2026_pdf.pdf",
+      "source_pages": 2,
+      "event_id": "SD011-E055",
+      "requested_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/Misc/CGS/ColoGeoSurvey-Land-Use-Review-Referral-and-Fee-Guide-June-18-2026.pdf",
+      "final_url_claim": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/Misc/CGS/ColoGeoSurvey-Land-Use-Review-Referral-and-Fee-Guide-June-18-2026.pdf",
+      "acquisition_started_at_claim": "2026-09-12T22:01:39Z",
+      "acquisition_completed_at_claim": "2026-09-12T22:01:40Z",
+      "upstream_acquisition_independently_verified": false,
+      "verified_http_acquired_at": null,
+      "atlas_delivery_captured_at": "2026-09-12T22:08:54.656702Z",
+      "atlas_preparation_copied_at": "2026-09-12T22:32:06.336365Z",
+      "actual_repository_received_at": null,
+      "public_headers": {
+        "path": "inputs/public-headers/SD011-E055.headers.txt",
+        "sha256": "3639aba0d7d169c42a211fefd5e9f9313455348fbc533326f02f332e937f934b",
+        "size_bytes": 470
+      },
+      "observed_http_statuses": [
+        200
+      ],
+      "observed_redirect_destinations": [],
+      "source_referrals": [
+        {
+          "event_id": "SD011-E043",
+          "parent_url": "https://planningdevelopment.elpasoco.com/",
+          "parent": {
+            "path": "inputs/referrals/SD011-E043.html",
+            "sha256": "42d19bb45c4c7e3df8e6a44cf92f61e790a4b01503813e193450c37ac5813381",
+            "size_bytes": 199975
+          },
+          "href": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/Misc/CGS/ColoGeoSurvey-Land-Use-Review-Referral-and-Fee-Guide-June-18-2026.pdf",
+          "resolved_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/Misc/CGS/ColoGeoSurvey-Land-Use-Review-Referral-and-Fee-Guide-June-18-2026.pdf",
+          "anchor_text": "Colorado Geological Survey (CGS) Fee Update"
+        }
+      ],
+      "referral_basis": "preserved_official_html_anchor",
+      "historical_matching_rows": 0,
+      "historical_source_ids": [],
+      "directly_viewed_pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "images/el-paso-hosted-cgs-review-guide-sd011-1.png",
+            "sha256": "c9c3b0690ec50409a2d3948d82edb8e7e303cb99602f7561151c9cc316b306db",
+            "size_bytes": 384348
+          },
+          "native": {
+            "path": "native/el-paso-hosted-cgs-review-guide-sd011-p001.txt",
+            "sha256": "459dd3adc533f334b93e3bbfb093e2fcfa45ba597144743fcfbc346e1dc7d00e",
+            "size_bytes": 2948
+          },
+          "native_nonwhitespace": true,
+          "view_scope": "full_page_for_title_issuer_role_and_selected_date_context",
+          "numeric_table_certification": false
+        },
+        {
+          "physical_page": 2,
+          "image": {
+            "path": "images/el-paso-hosted-cgs-review-guide-sd011-2.png",
+            "sha256": "8df096d0344a82e0d691a444ffcaf1731c25b0dabed6f0077160111870bbc0e8",
+            "size_bytes": 384521
+          },
+          "native": {
+            "path": "native/el-paso-hosted-cgs-review-guide-sd011-p002.txt",
+            "sha256": "34aea086a2f9bf5c6c102bbaffb5c40cf22f7169c62aee1b65ff338471fc4faf",
+            "size_bytes": 3183
+          },
+          "native_nonwhitespace": true,
+          "view_scope": "full_page_for_title_issuer_role_and_selected_date_context",
+          "numeric_table_certification": false
+        }
+      ],
+      "observations": [
+        {
+          "observation_id": "el-paso-hosted-cgs-review-guide-sd011-O01",
+          "physical_page": 1,
+          "region": "branding, title and opening",
+          "visible_text": "COLORADO GEOLOGICAL SURVEY\nLAND USE REVIEW REFERRAL AND FEE GUIDE\nInformation for project applicants and their representatives",
+          "native_anchor": {
+            "start": 130,
+            "end": 268,
+            "text": "The Colorado Geological Survey (CGS) is an external review agency for counties, municipalities, and \nschool districts throughout Colorado.",
+            "sha256": "6086567e831ef4b02544ef0d0ab553c5290e7ace68fb9707d16a38cdfe0bbb51"
+          },
+          "conclusion": "The guide names CGS as an external review agency for counties, municipalities and school districts; it is not an El Paso County fee instrument.",
+          "uncertainty": "CGS institutional/authority registry placement requires an explicit decision; county asset hosting alone does not supply ownership.",
+          "legal_currentness": "not_verified"
+        },
+        {
+          "observation_id": "el-paso-hosted-cgs-review-guide-sd011-O02",
+          "physical_page": 2,
+          "region": "FAQ, contact and footer",
+          "visible_text": "CGS serves as an independent technical reviewer and advisor to local governments\nColoGeoSurvey Land Use Review Referral and Fee Guide - June 18, 2026",
+          "native_anchor": {
+            "start": 0,
+            "end": 68,
+            "text": "ColoGeoSurvey Land Use Review Referral and Fee Guide - June 18, 2026",
+            "sha256": "5ff0d611daed1c00a39578f261efa9f58f6e35c8c4b6fe7372fc8ea79246efc4"
+          },
+          "conclusion": "The second page describes CGS's advisory role and shows a June 18, 2026 footer date and a mines.edu contact address.",
+          "uncertainty": "Footer date is a document label, not verified adoption/effectiveness. Links and email were not opened or contacted.",
+          "legal_currentness": "not_verified"
+        }
+      ],
+      "date_claims": [
+        {
+          "value": "2026-06-18",
+          "role": "document_footer_date",
+          "observation_id": "el-paso-hosted-cgs-review-guide-sd011-O02",
+          "independently_verified": false
+        }
+      ],
+      "verified_adoption_date": null,
+      "verified_effective_date": null,
+      "legal_currentness": "not_verified",
+      "answer_safe": false,
+      "translation_equivalence_verified": false,
+      "full_text_reviewed": false,
+      "qualifications": [
+        "Excluded from county intake pending explicit issuer/layer decision; no automatic state-layer assignment is made.",
+        "Both pages viewed for role/date; no full numeric fee-table certification or application advice."
+      ]
+    }
+  ],
+  "proposed_records": [
+    {
+      "record_id": "el-paso-planning-fees-sd011",
+      "layer_id": "08_County_Authorities",
+      "official_source_name": "El Paso County 2026 Planning and Community Development Fee Schedule",
+      "official_source_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/fees/Fee-Schedule-2026-ADA.pdf",
+      "acquisition_method": "received_review_package",
+      "received_from": "Sherlock",
+      "reviewer_name": "Atlas / Ptolemy",
+      "reviewer_email": null,
+      "custody_note": "Received through Sherlock source-discovery-011, not a direct Atlas HTTP acquisition. Delivered event SD011-E053 claims download from https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/fees/Fee-Schedule-2026-ADA.pdf ending at https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/fees/Fee-Schedule-2026-ADA.pdf on 2026-09-12T22:01:39Z; these times and original-download provenance are not independently witnessed. Exact retained PDF digest is c3bd819da169a58328e7bdfcd8ea65e4a751326a65dce325ad19e5bc868b3e12. Atlas delivery custody captured at 2026-09-12T22:08:54.656702Z; actual repository receipt time remains unset. Issuer: El Paso County, Planning and Community Development. Role: planning_and_community_development_fee_schedule. The actual visible effective date is May 1, 2026; the 2026 filename alone is not its evidence. Five source pages retained; only physical page 1 viewed for issuer/title/date, not all fee associations. Source-only title/role review; no legal currentness, complete extraction, translation equivalence or answer-safety promotion. The source-discovery batch exceeded its distinct-target cap (66/50) and lost two earlier non-PDF bodies; these custody failures remain disclosed, not repaired by intake.",
+      "source_file": {
+        "path": "sources/el-paso-planning-fees-sd011/original.pdf",
+        "sha256": "c3bd819da169a58328e7bdfcd8ea65e4a751326a65dce325ad19e5bc868b3e12",
+        "size_bytes": 1198750
+      },
+      "expected_sha256": "c3bd819da169a58328e7bdfcd8ea65e4a751326a65dce325ad19e5bc868b3e12",
+      "source_format": "pdf",
+      "size_bytes": 1198750,
+      "allow_duplicate": false,
+      "intake_id": null,
+      "archive_path": null,
+      "received_at": null,
+      "status": "proposed_not_applied",
+      "intended_record_status": "archived_pending_pipeline",
+      "legal_currentness": "not_verified"
+    },
+    {
+      "record_id": "el-paso-boh-ehs-fees-sd011",
+      "layer_id": "08_County_Authorities",
+      "official_source_name": "El Paso County Board of Health, Chapter 3: Fee Schedule and Civil Penalties (English)",
+      "official_source_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/3-BoH-2024-EHS-Fee-Schedule-Chapter-3_Acc-Checked-June-2025.pdf",
+      "acquisition_method": "received_review_package",
+      "received_from": "Sherlock",
+      "reviewer_name": "Atlas / Ptolemy",
+      "reviewer_email": null,
+      "custody_note": "Received through Sherlock source-discovery-011, not a direct Atlas HTTP acquisition. Delivered event SD011-E065 claims download from https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/3-BoH-2024-EHS-Fee-Schedule-Chapter-3_Acc-Checked-June-2025.pdf ending at https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/3-BoH-2024-EHS-Fee-Schedule-Chapter-3_Acc-Checked-June-2025.pdf on 2026-09-12T22:01:43Z; these times and original-download provenance are not independently witnessed. Exact retained PDF digest is 1b0529fb7514bcc50c0dd36c903ca361f6ab431712b4aebc48bca8e3f5373622. Atlas delivery custody captured at 2026-09-12T22:08:54.656702Z; actual repository receipt time remains unset. Issuer: El Paso County Board of Health / El Paso County Public Health. Role: board_of_health_fee_schedule_and_civil_penalties. English and Spanish PDFs are distinct received artifacts; translation equivalence is not reviewed. The viewed fee table includes air quality, body art, child care and OWTS categories; it is not exclusively an OWTS schedule. Source-only title/role review; no legal currentness, complete extraction, translation equivalence or answer-safety promotion. The source-discovery batch exceeded its distinct-target cap (66/50) and lost two earlier non-PDF bodies; these custody failures remain disclosed, not repaired by intake.",
+      "source_file": {
+        "path": "sources/el-paso-boh-ehs-fees-sd011/original.pdf",
+        "sha256": "1b0529fb7514bcc50c0dd36c903ca361f6ab431712b4aebc48bca8e3f5373622",
+        "size_bytes": 151508
+      },
+      "expected_sha256": "1b0529fb7514bcc50c0dd36c903ca361f6ab431712b4aebc48bca8e3f5373622",
+      "source_format": "pdf",
+      "size_bytes": 151508,
+      "allow_duplicate": false,
+      "intake_id": null,
+      "archive_path": null,
+      "received_at": null,
+      "status": "proposed_not_applied",
+      "intended_record_status": "archived_pending_pipeline",
+      "legal_currentness": "not_verified"
+    },
+    {
+      "record_id": "el-paso-ordinance-26-01-sd011",
+      "layer_id": "08_County_Authorities",
+      "official_source_name": "El Paso County Ordinance 26-01: Stormwater Management Program Required by the MS4 Permit",
+      "official_source_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/5/Ordinance-26-01-Accessible.pdf",
+      "acquisition_method": "received_review_package",
+      "received_from": "Sherlock",
+      "reviewer_name": "Atlas / Ptolemy",
+      "reviewer_email": null,
+      "custody_note": "Received through Sherlock source-discovery-011, not a direct Atlas HTTP acquisition. Delivered event SD011-E023 claims download from https://epc-assets.elpasoco.com/wp-content/uploads/sites/5/Ordinance-26-01-Accessible.pdf ending at https://epc-assets.elpasoco.com/wp-content/uploads/sites/5/Ordinance-26-01-Accessible.pdf on 2026-09-12T22:01:00Z; these times and original-download provenance are not independently witnessed. Exact retained PDF digest is dd88d0a74d746d28301fd1a2092575d2b19f9f96de1741dbf9e076e87e31b20b. Atlas delivery custody captured at 2026-09-12T22:08:54.656702Z; actual repository receipt time remains unset. Issuer: Board of County Commissioners of El Paso County, Colorado. Role: stormwater_management_ordinance. Do not describe Ordinance 26-01 as a land-use or wildfire ordinance solely from its catalog position. Stamp OCR is visibly unreliable; source bytes and uncorrected native text remain unchanged. Source-only title/role review; no legal currentness, complete extraction, translation equivalence or answer-safety promotion. The source-discovery batch exceeded its distinct-target cap (66/50) and lost two earlier non-PDF bodies; these custody failures remain disclosed, not repaired by intake.",
+      "source_file": {
+        "path": "sources/el-paso-ordinance-26-01-sd011/original.pdf",
+        "sha256": "dd88d0a74d746d28301fd1a2092575d2b19f9f96de1741dbf9e076e87e31b20b",
+        "size_bytes": 8055141
+      },
+      "expected_sha256": "dd88d0a74d746d28301fd1a2092575d2b19f9f96de1741dbf9e076e87e31b20b",
+      "source_format": "pdf",
+      "size_bytes": 8055141,
+      "allow_duplicate": false,
+      "intake_id": null,
+      "archive_path": null,
+      "received_at": null,
+      "status": "proposed_not_applied",
+      "intended_record_status": "archived_pending_pipeline",
+      "legal_currentness": "not_verified"
+    },
+    {
+      "record_id": "el-paso-ldc-wildfire-appendix-e-sd011",
+      "layer_id": "08_County_Authorities",
+      "official_source_name": "El Paso County LDC Appendix E: Wildfire Resiliency Requirements",
+      "official_source_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/LDC-Resolution/Appendix-E-Wildfire-Resiliency-Requirements-ADA.pdf",
+      "acquisition_method": "received_review_package",
+      "received_from": "Sherlock",
+      "reviewer_name": "Atlas / Ptolemy",
+      "reviewer_email": null,
+      "custody_note": "Received through Sherlock source-discovery-011, not a direct Atlas HTTP acquisition. Delivered event SD011-E052 claims download from https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/LDC-Resolution/Appendix-E-Wildfire-Resiliency-Requirements-ADA.pdf ending at https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/LDC-Resolution/Appendix-E-Wildfire-Resiliency-Requirements-ADA.pdf on 2026-09-12T22:01:39Z; these times and original-download provenance are not independently witnessed. Exact retained PDF digest is 2ed93562c8317eee9517736175d5bc76d2dc205fc5b65dd36b570d1c79c58d17. Atlas delivery custody captured at 2026-09-12T22:08:54.656702Z; actual repository receipt time remains unset. Issuer: El Paso County Planning and Community Development publication context. Role: land_development_code_wildfire_appendix. County posting plus the document's territorial wording support a county appendix role; this does not establish adoption or current application. Eighteen pages are preserved, not all provisions or exceptions checked. Source-only title/role review; no legal currentness, complete extraction, translation equivalence or answer-safety promotion. The source-discovery batch exceeded its distinct-target cap (66/50) and lost two earlier non-PDF bodies; these custody failures remain disclosed, not repaired by intake.",
+      "source_file": {
+        "path": "sources/el-paso-ldc-wildfire-appendix-e-sd011/original.pdf",
+        "sha256": "2ed93562c8317eee9517736175d5bc76d2dc205fc5b65dd36b570d1c79c58d17",
+        "size_bytes": 518107
+      },
+      "expected_sha256": "2ed93562c8317eee9517736175d5bc76d2dc205fc5b65dd36b570d1c79c58d17",
+      "source_format": "pdf",
+      "size_bytes": 518107,
+      "allow_duplicate": false,
+      "intake_id": null,
+      "archive_path": null,
+      "received_at": null,
+      "status": "proposed_not_applied",
+      "intended_record_status": "archived_pending_pipeline",
+      "legal_currentness": "not_verified"
+    },
+    {
+      "record_id": "el-paso-open-burning-22-001-sd011",
+      "layer_id": "08_County_Authorities",
+      "official_source_name": "El Paso County Ordinance 22-001: Regulation of Open Burning in Unincorporated Areas",
+      "official_source_url": "https://clerkandrecorder.elpasoco.com/wp-content/uploads/CTB/Ordinances/22-001-Open-Burning-Ordinance.pdf",
+      "acquisition_method": "received_review_package",
+      "received_from": "Sherlock",
+      "reviewer_name": "Atlas / Ptolemy",
+      "reviewer_email": null,
+      "custody_note": "Received through Sherlock source-discovery-011, not a direct Atlas HTTP acquisition. Delivered event SD011-E013 claims download from https://clerkandrecorder.elpasoco.com/wp-content/uploads/CTB/Ordinances/22-001-Open-Burning-Ordinance.pdf ending at https://epc-assets.elpasoco.com/wp-content/uploads/sites/5/CTB/Ordinances/22-001-Open-Burning-Ordinance.pdf on 2026-09-12T22:00:31Z; these times and original-download provenance are not independently witnessed. Exact retained PDF digest is e294621d7252886c4820a877470f4d51b1bc1c287064a4253f4d0a4f5dfd859b. Atlas delivery custody captured at 2026-09-12T22:08:54.656702Z; actual repository receipt time remains unset. Issuer: Board of County Commissioners of the County of El Paso, State of Colorado. Role: open_burning_ordinance. Exact source hash matches inherited manifest claims; historical original bytes were not opened. Current restrictions cannot be inferred from the ordinance alone. Source-only title/role review; no legal currentness, complete extraction, translation equivalence or answer-safety promotion. The source-discovery batch exceeded its distinct-target cap (66/50) and lost two earlier non-PDF bodies; these custody failures remain disclosed, not repaired by intake.",
+      "source_file": {
+        "path": "sources/el-paso-open-burning-22-001-sd011/original.pdf",
+        "sha256": "e294621d7252886c4820a877470f4d51b1bc1c287064a4253f4d0a4f5dfd859b",
+        "size_bytes": 1084910
+      },
+      "expected_sha256": "e294621d7252886c4820a877470f4d51b1bc1c287064a4253f4d0a4f5dfd859b",
+      "source_format": "pdf",
+      "size_bytes": 1084910,
+      "allow_duplicate": false,
+      "intake_id": null,
+      "archive_path": null,
+      "received_at": null,
+      "status": "proposed_not_applied",
+      "intended_record_status": "archived_pending_pipeline",
+      "legal_currentness": "not_verified"
+    },
+    {
+      "record_id": "el-paso-ldc-chapter-1-sd011",
+      "layer_id": "08_County_Authorities",
+      "official_source_name": "El Paso County Land Development Code, Chapter 1: Introductory Provisions",
+      "official_source_url": "https://planningdevelopment.elpasoco.com/wp-content/uploads/LandUseCode/EPC-Land-Use-Code-Chapter-1-2016.pdf",
+      "acquisition_method": "received_review_package",
+      "received_from": "Sherlock",
+      "reviewer_name": "Atlas / Ptolemy",
+      "reviewer_email": null,
+      "custody_note": "Received through Sherlock source-discovery-011, not a direct Atlas HTTP acquisition. Delivered event SD011-E010 claims download from https://planningdevelopment.elpasoco.com/wp-content/uploads/LandUseCode/EPC-Land-Use-Code-Chapter-1-2016.pdf ending at https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/LandUseCode/EPC-Land-Use-Code-Chapter-1-2016.pdf on 2026-09-12T22:00:29Z; these times and original-download provenance are not independently witnessed. Exact retained PDF digest is 2c77fdf9aa7f3fc3bdcd5162b5059d7ceb1e5e04f3f914a1cbb29474a9a035b0. Atlas delivery custody captured at 2026-09-12T22:08:54.656702Z; actual repository receipt time remains unset. Issuer: El Paso County, Colorado. Role: land_development_code_chapter_1. Exact inherited URL and historical digest match, but no fresh source-page anchor was preserved. This is a chapter artifact, not proof of a complete LDC or reconciliation with later amendments. Source-only title/role review; no legal currentness, complete extraction, translation equivalence or answer-safety promotion. The source-discovery batch exceeded its distinct-target cap (66/50) and lost two earlier non-PDF bodies; these custody failures remain disclosed, not repaired by intake.",
+      "source_file": {
+        "path": "sources/el-paso-ldc-chapter-1-sd011/original.pdf",
+        "sha256": "2c77fdf9aa7f3fc3bdcd5162b5059d7ceb1e5e04f3f914a1cbb29474a9a035b0",
+        "size_bytes": 389804
+      },
+      "expected_sha256": "2c77fdf9aa7f3fc3bdcd5162b5059d7ceb1e5e04f3f914a1cbb29474a9a035b0",
+      "source_format": "pdf",
+      "size_bytes": 389804,
+      "allow_duplicate": false,
+      "intake_id": null,
+      "archive_path": null,
+      "received_at": null,
+      "status": "proposed_not_applied",
+      "intended_record_status": "archived_pending_pipeline",
+      "legal_currentness": "not_verified"
+    },
+    {
+      "record_id": "el-paso-ldc-chapter-2-sd011",
+      "layer_id": "08_County_Authorities",
+      "official_source_name": "El Paso County Land Development Code, Chapter 2: Administration",
+      "official_source_url": "https://planningdevelopment.elpasoco.com/wp-content/uploads/LandUseCode/EPC-Land-Use-Code-Chapter-2-2016.pdf",
+      "acquisition_method": "received_review_package",
+      "received_from": "Sherlock",
+      "reviewer_name": "Atlas / Ptolemy",
+      "reviewer_email": null,
+      "custody_note": "Received through Sherlock source-discovery-011, not a direct Atlas HTTP acquisition. Delivered event SD011-E011 claims download from https://planningdevelopment.elpasoco.com/wp-content/uploads/LandUseCode/EPC-Land-Use-Code-Chapter-2-2016.pdf ending at https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/LandUseCode/EPC-Land-Use-Code-Chapter-2-2016.pdf on 2026-09-12T22:00:29Z; these times and original-download provenance are not independently witnessed. Exact retained PDF digest is f3d527fd6a9da5b0043672582dda812dc9c3dfe9958d8b53eec876957ed10953. Atlas delivery custody captured at 2026-09-12T22:08:54.656702Z; actual repository receipt time remains unset. Issuer: El Paso County, Colorado. Role: land_development_code_chapter_2. Inherited URL/no fresh preserved anchor; recorded digest equality does not prove current law. The filename's 2016 label differs from the viewed effective-date statement. Source-only title/role review; no legal currentness, complete extraction, translation equivalence or answer-safety promotion. The source-discovery batch exceeded its distinct-target cap (66/50) and lost two earlier non-PDF bodies; these custody failures remain disclosed, not repaired by intake.",
+      "source_file": {
+        "path": "sources/el-paso-ldc-chapter-2-sd011/original.pdf",
+        "sha256": "f3d527fd6a9da5b0043672582dda812dc9c3dfe9958d8b53eec876957ed10953",
+        "size_bytes": 116324
+      },
+      "expected_sha256": "f3d527fd6a9da5b0043672582dda812dc9c3dfe9958d8b53eec876957ed10953",
+      "source_format": "pdf",
+      "size_bytes": 116324,
+      "allow_duplicate": false,
+      "intake_id": null,
+      "archive_path": null,
+      "received_at": null,
+      "status": "proposed_not_applied",
+      "intended_record_status": "archived_pending_pipeline",
+      "legal_currentness": "not_verified"
+    },
+    {
+      "record_id": "el-paso-ldc-chapter-5-sd011",
+      "layer_id": "08_County_Authorities",
+      "official_source_name": "El Paso County Land Development Code, Chapter 5: Use and Dimensional Standards",
+      "official_source_url": "https://planningdevelopment.elpasoco.com/wp-content/uploads/LandUseCode/New-LDC-Chapter-5.pdf",
+      "acquisition_method": "received_review_package",
+      "received_from": "Sherlock",
+      "reviewer_name": "Atlas / Ptolemy",
+      "reviewer_email": null,
+      "custody_note": "Received through Sherlock source-discovery-011, not a direct Atlas HTTP acquisition. Delivered event SD011-E012 claims download from https://planningdevelopment.elpasoco.com/wp-content/uploads/LandUseCode/New-LDC-Chapter-5.pdf ending at https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/LandUseCode/New-LDC-Chapter-5.pdf on 2026-09-12T22:00:30Z; these times and original-download provenance are not independently witnessed. Exact retained PDF digest is 59d97136afdf3deb606b2c2f223ac17cb71d7aad0d5622769d4de9fc265d920c. Atlas delivery custody captured at 2026-09-12T22:08:54.656702Z; actual repository receipt time remains unset. Issuer: El Paso County, Colorado. Role: land_development_code_chapter_5. Inherited URL/no fresh preserved anchor; source hash matches inherited claims. A large chapter is not full county zoning coverage or a current consolidated code. Source-only title/role review; no legal currentness, complete extraction, translation equivalence or answer-safety promotion. The source-discovery batch exceeded its distinct-target cap (66/50) and lost two earlier non-PDF bodies; these custody failures remain disclosed, not repaired by intake.",
+      "source_file": {
+        "path": "sources/el-paso-ldc-chapter-5-sd011/original.pdf",
+        "sha256": "59d97136afdf3deb606b2c2f223ac17cb71d7aad0d5622769d4de9fc265d920c",
+        "size_bytes": 1521266
+      },
+      "expected_sha256": "59d97136afdf3deb606b2c2f223ac17cb71d7aad0d5622769d4de9fc265d920c",
+      "source_format": "pdf",
+      "size_bytes": 1521266,
+      "allow_duplicate": false,
+      "intake_id": null,
+      "archive_path": null,
+      "received_at": null,
+      "status": "proposed_not_applied",
+      "intended_record_status": "archived_pending_pipeline",
+      "legal_currentness": "not_verified"
+    },
+    {
+      "record_id": "el-paso-unsafe-buildings-18-03-sd011",
+      "layer_id": "08_County_Authorities",
+      "official_source_name": "El Paso County Resolution 17-321 with Ordinance 18-03: Removal of Unsafe Buildings",
+      "official_source_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/5/18-03-Unsafe-Buildings-Accessible.pdf",
+      "acquisition_method": "received_review_package",
+      "received_from": "Sherlock",
+      "reviewer_name": "Atlas / Ptolemy",
+      "reviewer_email": null,
+      "custody_note": "Received through Sherlock source-discovery-011, not a direct Atlas HTTP acquisition. Delivered event SD011-E022 claims download from https://epc-assets.elpasoco.com/wp-content/uploads/sites/5/18-03-Unsafe-Buildings-Accessible.pdf ending at https://epc-assets.elpasoco.com/wp-content/uploads/sites/5/18-03-Unsafe-Buildings-Accessible.pdf on 2026-09-12T22:00:58Z; these times and original-download provenance are not independently witnessed. Exact retained PDF digest is 86eed9d885a9cec1cb01528318f66f8eed525ddb0860655a1983865bfa196d00. Atlas delivery custody captured at 2026-09-12T22:08:54.656702Z; actual repository receipt time remains unset. Issuer: Board of County Commissioners, County of El Paso, State of Colorado. Role: adopting_resolution_with_unsafe_buildings_ordinance. Preserve resolution and appended ordinance together in their original eight-page artifact. No full repeal chain, final effectiveness or municipality opt-in confirmation. Source-only title/role review; no legal currentness, complete extraction, translation equivalence or answer-safety promotion. The source-discovery batch exceeded its distinct-target cap (66/50) and lost two earlier non-PDF bodies; these custody failures remain disclosed, not repaired by intake.",
+      "source_file": {
+        "path": "sources/el-paso-unsafe-buildings-18-03-sd011/original.pdf",
+        "sha256": "86eed9d885a9cec1cb01528318f66f8eed525ddb0860655a1983865bfa196d00",
+        "size_bytes": 327510
+      },
+      "expected_sha256": "86eed9d885a9cec1cb01528318f66f8eed525ddb0860655a1983865bfa196d00",
+      "source_format": "pdf",
+      "size_bytes": 327510,
+      "allow_duplicate": false,
+      "intake_id": null,
+      "archive_path": null,
+      "received_at": null,
+      "status": "proposed_not_applied",
+      "intended_record_status": "archived_pending_pipeline",
+      "legal_currentness": "not_verified"
+    },
+    {
+      "record_id": "el-paso-boh-admin-regulations-sd011",
+      "layer_id": "08_County_Authorities",
+      "official_source_name": "El Paso County Board of Health, Chapter 2: Administrative Regulations",
+      "official_source_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/2-BoH.Regulation.Chapter.2.Admin_.Regs_.2011_1Acc-Checked-June-2025.pdf",
+      "acquisition_method": "received_review_package",
+      "received_from": "Sherlock",
+      "reviewer_name": "Atlas / Ptolemy",
+      "reviewer_email": null,
+      "custody_note": "Received through Sherlock source-discovery-011, not a direct Atlas HTTP acquisition. Delivered event SD011-E064 claims download from https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/2-BoH.Regulation.Chapter.2.Admin_.Regs_.2011_1Acc-Checked-June-2025.pdf ending at https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/2-BoH.Regulation.Chapter.2.Admin_.Regs_.2011_1Acc-Checked-June-2025.pdf on 2026-09-12T22:01:43Z; these times and original-download provenance are not independently witnessed. Exact retained PDF digest is 64d72ce1f7783dcf7fb5a3f6956e8ba4845c4839318613a1dee09d99716625d7. Atlas delivery custody captured at 2026-09-12T22:08:54.656702Z; actual repository receipt time remains unset. Issuer: El Paso County Board of Health / El Paso County Public Health. Role: board_of_health_administrative_regulations. No full administrative-regulations or subsequent-amendment review. Board of Health is not silently relabeled Board of County Commissioners. Source-only title/role review; no legal currentness, complete extraction, translation equivalence or answer-safety promotion. The source-discovery batch exceeded its distinct-target cap (66/50) and lost two earlier non-PDF bodies; these custody failures remain disclosed, not repaired by intake.",
+      "source_file": {
+        "path": "sources/el-paso-boh-admin-regulations-sd011/original.pdf",
+        "sha256": "64d72ce1f7783dcf7fb5a3f6956e8ba4845c4839318613a1dee09d99716625d7",
+        "size_bytes": 189000
+      },
+      "expected_sha256": "64d72ce1f7783dcf7fb5a3f6956e8ba4845c4839318613a1dee09d99716625d7",
+      "source_format": "pdf",
+      "size_bytes": 189000,
+      "allow_duplicate": false,
+      "intake_id": null,
+      "archive_path": null,
+      "received_at": null,
+      "status": "proposed_not_applied",
+      "intended_record_status": "archived_pending_pipeline",
+      "legal_currentness": "not_verified"
+    },
+    {
+      "record_id": "el-paso-boh-bylaws-sd011",
+      "layer_id": "08_County_Authorities",
+      "official_source_name": "El Paso County Board of Health, Chapter 1: Bylaws (English)",
+      "official_source_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/1-BoH.Regulation.Chapter.1.Bylaws.2011_0Acc-Checked-June-2025.pdf",
+      "acquisition_method": "received_review_package",
+      "received_from": "Sherlock",
+      "reviewer_name": "Atlas / Ptolemy",
+      "reviewer_email": null,
+      "custody_note": "Received through Sherlock source-discovery-011, not a direct Atlas HTTP acquisition. Delivered event SD011-E062 claims download from https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/1-BoH.Regulation.Chapter.1.Bylaws.2011_0Acc-Checked-June-2025.pdf ending at https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/1-BoH.Regulation.Chapter.1.Bylaws.2011_0Acc-Checked-June-2025.pdf on 2026-09-12T22:01:42Z; these times and original-download provenance are not independently witnessed. Exact retained PDF digest is 5b71fc2ba18d7a11a5c66d691b1f11526cce424cc0eb8fc07cbd37fb7e5c268a. Atlas delivery custody captured at 2026-09-12T22:08:54.656702Z; actual repository receipt time remains unset. Issuer: El Paso County Board of Health / El Paso County Public Health. Role: board_of_health_bylaws. English and Spanish bylaws remain separate files, with no translation-equivalence claim. Only cover inspected; entire governance text/current board status remains unreviewed. Source-only title/role review; no legal currentness, complete extraction, translation equivalence or answer-safety promotion. The source-discovery batch exceeded its distinct-target cap (66/50) and lost two earlier non-PDF bodies; these custody failures remain disclosed, not repaired by intake.",
+      "source_file": {
+        "path": "sources/el-paso-boh-bylaws-sd011/original.pdf",
+        "sha256": "5b71fc2ba18d7a11a5c66d691b1f11526cce424cc0eb8fc07cbd37fb7e5c268a",
+        "size_bytes": 204027
+      },
+      "expected_sha256": "5b71fc2ba18d7a11a5c66d691b1f11526cce424cc0eb8fc07cbd37fb7e5c268a",
+      "source_format": "pdf",
+      "size_bytes": 204027,
+      "allow_duplicate": false,
+      "intake_id": null,
+      "archive_path": null,
+      "received_at": null,
+      "status": "proposed_not_applied",
+      "intended_record_status": "archived_pending_pipeline",
+      "legal_currentness": "not_verified"
+    },
+    {
+      "record_id": "el-paso-boh-bylaws-spanish-sd011",
+      "layer_id": "08_County_Authorities",
+      "official_source_name": "El Paso County Board of Health, Capítulo 1: Estatutos (Spanish)",
+      "official_source_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/1-SpanishBoh.-Regulation-Chapter1-SpanishAcc-Checked-June-2025.pdf",
+      "acquisition_method": "received_review_package",
+      "received_from": "Sherlock",
+      "reviewer_name": "Atlas / Ptolemy",
+      "reviewer_email": null,
+      "custody_note": "Received through Sherlock source-discovery-011, not a direct Atlas HTTP acquisition. Delivered event SD011-E063 claims download from https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/1-SpanishBoh.-Regulation-Chapter1-SpanishAcc-Checked-June-2025.pdf ending at https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/1-SpanishBoh.-Regulation-Chapter1-SpanishAcc-Checked-June-2025.pdf on 2026-09-12T22:01:42Z; these times and original-download provenance are not independently witnessed. Exact retained PDF digest is 1b8367a5710b5159ea479ad588ee5dee9850e1e9451b0115d2770a2d4aae6c7f. Atlas delivery custody captured at 2026-09-12T22:08:54.656702Z; actual repository receipt time remains unset. Issuer: Junta de Salud del Condado de El Paso / El Paso County Public Health. Role: board_of_health_bylaws_spanish_text. Distinct six-page Spanish artifact; English has five pages. Page counts do not establish translation equivalence. No date/currentness inferred from the URL or English companion. Source-only title/role review; no legal currentness, complete extraction, translation equivalence or answer-safety promotion. The source-discovery batch exceeded its distinct-target cap (66/50) and lost two earlier non-PDF bodies; these custody failures remain disclosed, not repaired by intake.",
+      "source_file": {
+        "path": "sources/el-paso-boh-bylaws-spanish-sd011/original.pdf",
+        "sha256": "1b8367a5710b5159ea479ad588ee5dee9850e1e9451b0115d2770a2d4aae6c7f",
+        "size_bytes": 64434
+      },
+      "expected_sha256": "1b8367a5710b5159ea479ad588ee5dee9850e1e9451b0115d2770a2d4aae6c7f",
+      "source_format": "pdf",
+      "size_bytes": 64434,
+      "allow_duplicate": false,
+      "intake_id": null,
+      "archive_path": null,
+      "received_at": null,
+      "status": "proposed_not_applied",
+      "intended_record_status": "archived_pending_pipeline",
+      "legal_currentness": "not_verified"
+    },
+    {
+      "record_id": "el-paso-boh-ehs-fees-spanish-sd011",
+      "layer_id": "08_County_Authorities",
+      "official_source_name": "El Paso County Board of Health, Capítulo 3: Lista de tarifas y sanciones civiles (Spanish)",
+      "official_source_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/3-Spanish-BoH-2024-EHS-Fee-Schedule-Chapter-3_EspanolAcc-Checked-June-2025.pdf",
+      "acquisition_method": "received_review_package",
+      "received_from": "Sherlock",
+      "reviewer_name": "Atlas / Ptolemy",
+      "reviewer_email": null,
+      "custody_note": "Received through Sherlock source-discovery-011, not a direct Atlas HTTP acquisition. Delivered event SD011-E066 claims download from https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/3-Spanish-BoH-2024-EHS-Fee-Schedule-Chapter-3_EspanolAcc-Checked-June-2025.pdf ending at https://epc-assets.elpasoco.com/wp-content/uploads/sites/18/2025/06/3-Spanish-BoH-2024-EHS-Fee-Schedule-Chapter-3_EspanolAcc-Checked-June-2025.pdf on 2026-09-12T22:01:43Z; these times and original-download provenance are not independently witnessed. Exact retained PDF digest is fd162c37442dc99097a272d9ebbf74fbfd063f2dc2f2226fdeb8b93a53849ec9. Atlas delivery custody captured at 2026-09-12T22:08:54.656702Z; actual repository receipt time remains unset. Issuer: Junta de Salud del Condado de El Paso / Salud Publica del Condado de El Paso. Role: board_of_health_fee_schedule_and_civil_penalties_spanish_text. Distinct Spanish file with a visibly clipped approval footer, preserved unchanged. Do not treat embedded text beyond the visible page as an image-confirmed year. Source-only title/role review; no legal currentness, complete extraction, translation equivalence or answer-safety promotion. The source-discovery batch exceeded its distinct-target cap (66/50) and lost two earlier non-PDF bodies; these custody failures remain disclosed, not repaired by intake.",
+      "source_file": {
+        "path": "sources/el-paso-boh-ehs-fees-spanish-sd011/original.pdf",
+        "sha256": "fd162c37442dc99097a272d9ebbf74fbfd063f2dc2f2226fdeb8b93a53849ec9",
+        "size_bytes": 252997
+      },
+      "expected_sha256": "fd162c37442dc99097a272d9ebbf74fbfd063f2dc2f2226fdeb8b93a53849ec9",
+      "source_format": "pdf",
+      "size_bytes": 252997,
+      "allow_duplicate": false,
+      "intake_id": null,
+      "archive_path": null,
+      "received_at": null,
+      "status": "proposed_not_applied",
+      "intended_record_status": "archived_pending_pipeline",
+      "legal_currentness": "not_verified"
+    }
+  ],
+  "custody": [
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/AUDIT.json",
+      "original_sha256": "a6e5befb2cd424a6a0c9f072075bab3abd1f78849495b91b4ca0194064d377f0",
+      "preserved": {
+        "path": "inputs/audit/AUDIT.json",
+        "sha256": "a6e5befb2cd424a6a0c9f072075bab3abd1f78849495b91b4ca0194064d377f0",
+        "size_bytes": 238993
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/AUDIT.schema.json",
+      "original_sha256": "e9d15ba7823bc9f06949ead16d862cae9f02b3e39ac99024fba9233a0e912c6e",
+      "preserved": {
+        "path": "inputs/audit/AUDIT.schema.json",
+        "sha256": "e9d15ba7823bc9f06949ead16d862cae9f02b3e39ac99024fba9233a0e912c6e",
+        "size_bytes": 21823
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/CUSTODY_RECEIPT.json",
+      "original_sha256": "46479e2089447a123b7a0631662478fab9c611bffef856a60e5ee71487edf58e",
+      "preserved": {
+        "path": "inputs/audit/CUSTODY_RECEIPT.json",
+        "sha256": "46479e2089447a123b7a0631662478fab9c611bffef856a60e5ee71487edf58e",
+        "size_bytes": 62636
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/CUSTODY_RECEIPT.schema.json",
+      "original_sha256": "e40413b1a29269ece89a83068c8a538c581c9201b4bc8fc45d6f7a6f36463354",
+      "preserved": {
+        "path": "inputs/audit/CUSTODY_RECEIPT.schema.json",
+        "sha256": "e40413b1a29269ece89a83068c8a538c581c9201b4bc8fc45d6f7a6f36463354",
+        "size_bytes": 2061
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/DECISION_RECEIPT.json",
+      "original_sha256": "1e7ef7fdb1388df67d95064271291a034b593816e9d100b5ead1f7a5549ee00c",
+      "preserved": {
+        "path": "inputs/audit/DECISION_RECEIPT.json",
+        "sha256": "1e7ef7fdb1388df67d95064271291a034b593816e9d100b5ead1f7a5549ee00c",
+        "size_bytes": 1561
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/FINAL_MANIFEST.json",
+      "original_sha256": "8c9ef2bb76f05345969aaa10305c402c7bffaaff53d5fca2a1de1f0daed64c27",
+      "preserved": {
+        "path": "inputs/audit/FINAL_MANIFEST.json",
+        "sha256": "8c9ef2bb76f05345969aaa10305c402c7bffaaff53d5fca2a1de1f0daed64c27",
+        "size_bytes": 46515
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/FINAL_MANIFEST.schema.json",
+      "original_sha256": "953095648d0e97abbb67cb01b9db1c962ea6bcda14c9f9bf898452859198f82b",
+      "preserved": {
+        "path": "inputs/audit/FINAL_MANIFEST.schema.json",
+        "sha256": "953095648d0e97abbb67cb01b9db1c962ea6bcda14c9f9bf898452859198f82b",
+        "size_bytes": 1439
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/REPORT.md",
+      "original_sha256": "5feef91c5ef560cf6933fe37f2e6c99b1fa62e49f72c2f5f52e2d929a4e2b450",
+      "preserved": {
+        "path": "inputs/audit/REPORT.md",
+        "sha256": "5feef91c5ef560cf6933fe37f2e6c99b1fa62e49f72c2f5f52e2d929a4e2b450",
+        "size_bytes": 9785
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+      "original_sha256": "c459eea9a0a5828334e61970d9bc6c078f14673aafadf1e359a60969e4c5f8e6",
+      "preserved": {
+        "path": "inputs/current/_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+        "sha256": "c459eea9a0a5828334e61970d9bc6c078f14673aafadf1e359a60969e4c5f8e6",
+        "size_bytes": 101095
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl",
+      "original_sha256": "33a448ff4d2f0d941826739ba29a7ca889b9fe8a621ef7f095a084782a59df3b",
+      "preserved": {
+        "path": "inputs/current/_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl",
+        "sha256": "33a448ff4d2f0d941826739ba29a7ca889b9fe8a621ef7f095a084782a59df3b",
+        "size_bytes": 102331
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_REPORT.json",
+      "original_sha256": "687d79dc3d2864bb0fe1bc72d95861e7093a5b925e4c2d97b403d0883019a068",
+      "preserved": {
+        "path": "inputs/current/_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_REPORT.json",
+        "sha256": "687d79dc3d2864bb0fe1bc72d95861e7093a5b925e4c2d97b403d0883019a068",
+        "size_bytes": 4850
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_POLICY.json",
+      "original_sha256": "9cd00825fcb7a8ab905fefcebe3575355b41eb4cf3e3168b1b83c7ef56aba205",
+      "preserved": {
+        "path": "inputs/current/_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_POLICY.json",
+        "sha256": "9cd00825fcb7a8ab905fefcebe3575355b41eb4cf3e3168b1b83c7ef56aba205",
+        "size_bytes": 1345
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+      "original_sha256": "ad27514fe91659c9914780c7d3e69e48ace742bc31ad67d9c3a3c99945aecde3",
+      "preserved": {
+        "path": "inputs/current/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+        "sha256": "ad27514fe91659c9914780c7d3e69e48ace742bc31ad67d9c3a3c99945aecde3",
+        "size_bytes": 2066981
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/geode/pipeline/manual_source_intake.py",
+      "original_sha256": "5442b78cf16fb3b24f28a72f1c95753a444d39aaf8a906858e3fdcc9f439e0bd",
+      "preserved": {
+        "path": "inputs/current/geode/pipeline/manual_source_intake.py",
+        "sha256": "5442b78cf16fb3b24f28a72f1c95753a444d39aaf8a906858e3fdcc9f439e0bd",
+        "size_bytes": 28410
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/AGENTS.md",
+      "original_sha256": "0302a59413c44fffe491b9e63b88f07793a2c9a9e956f99152555a901b051b10",
+      "preserved": {
+        "path": "inputs/current/AGENTS.md",
+        "sha256": "0302a59413c44fffe491b9e63b88f07793a2c9a9e956f99152555a901b051b10",
+        "size_bytes": 18506
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/weld-directed-intake-2026-09-11/validate_preparation.py",
+      "original_sha256": "fd8630da6c854d54cbf5cd1c7bbe92ba4cea13ca3db6cda0e3d57e8cfb9dbd39",
+      "preserved": {
+        "path": "inputs/precedent/research/local_review/weld-directed-intake-2026-09-11/validate_preparation.py",
+        "sha256": "fd8630da6c854d54cbf5cd1c7bbe92ba4cea13ca3db6cda0e3d57e8cfb9dbd39",
+        "size_bytes": 4502
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/weld-directed-intake-2026-09-11/README.md",
+      "original_sha256": "90fe3432be56b8b5db4fec6c95e0895773806f8b54a5d3ef24801376034d860e",
+      "preserved": {
+        "path": "inputs/precedent/research/local_review/weld-directed-intake-2026-09-11/README.md",
+        "sha256": "90fe3432be56b8b5db4fec6c95e0895773806f8b54a5d3ef24801376034d860e",
+        "size_bytes": 4318
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/mesa-grand-junction-directed-intake-2026-09-11/INTAKE_RECEIPT.json",
+      "original_sha256": "f0a6b5a0a9cac0bc108ade078a27c42615074e6e4c7c3489f8a44ede36409633",
+      "preserved": {
+        "path": "inputs/precedent/research/local_review/mesa-grand-junction-directed-intake-2026-09-11/INTAKE_RECEIPT.json",
+        "sha256": "f0a6b5a0a9cac0bc108ade078a27c42615074e6e4c7c3489f8a44ede36409633",
+        "size_bytes": 39246
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/mesa-grand-junction-directed-intake-2026-09-11/validate_intake.py",
+      "original_sha256": "81fce0982694d4763410e0d81c82cbdbb6925a56256acd118a616e89d08068e2",
+      "preserved": {
+        "path": "inputs/precedent/research/local_review/mesa-grand-junction-directed-intake-2026-09-11/validate_intake.py",
+        "sha256": "81fce0982694d4763410e0d81c82cbdbb6925a56256acd118a616e89d08068e2",
+        "size_bytes": 13149
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/weld-greeley-intake-sherlock008-2026-09-11/README.md",
+      "original_sha256": "042a24783d3f64dd7f30f055f22499d28fc766108657898e82cd857ddccae0e4",
+      "preserved": {
+        "path": "inputs/precedent/research/local_review/weld-greeley-intake-sherlock008-2026-09-11/README.md",
+        "sha256": "042a24783d3f64dd7f30f055f22499d28fc766108657898e82cd857ddccae0e4",
+        "size_bytes": 4739
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/weld-greeley-intake-sherlock008-2026-09-11/validate_intake.py",
+      "original_sha256": "1c036b161de6390898758dddad8fb4ac74ecb8330f062634eae36435e4dc6d35",
+      "preserved": {
+        "path": "inputs/precedent/research/local_review/weld-greeley-intake-sherlock008-2026-09-11/validate_intake.py",
+        "sha256": "1c036b161de6390898758dddad8fb4ac74ecb8330f062634eae36435e4dc6d35",
+        "size_bytes": 18124
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/received/raw/el_paso/wp_content_uploads_sites_12_fees_Fee_Schedule_2026_ADA_pdf.pdf",
+      "original_sha256": "c3bd819da169a58328e7bdfcd8ea65e4a751326a65dce325ad19e5bc868b3e12",
+      "preserved": {
+        "path": "sources/el-paso-planning-fees-sd011/original.pdf",
+        "sha256": "c3bd819da169a58328e7bdfcd8ea65e4a751326a65dce325ad19e5bc868b3e12",
+        "size_bytes": 1198750
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/public-headers/SD011-E053.headers.txt",
+      "original_sha256": "a51347db60c3aab3eb71abcf821f4b793a6dba5b7ef4248fb03082e03eef4985",
+      "preserved": {
+        "path": "inputs/public-headers/SD011-E053.headers.txt",
+        "sha256": "a51347db60c3aab3eb71abcf821f4b793a6dba5b7ef4248fb03082e03eef4985",
+        "size_bytes": 471
+      },
+      "method": "audited_public_header_derivative",
+      "excluded_raw_header_sha256": "a51347db60c3aab3eb71abcf821f4b793a6dba5b7ef4248fb03082e03eef4985"
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/received/raw/el_paso/index.html",
+      "original_sha256": "42d19bb45c4c7e3df8e6a44cf92f61e790a4b01503813e193450c37ac5813381",
+      "preserved": {
+        "path": "inputs/referrals/SD011-E043.html",
+        "sha256": "42d19bb45c4c7e3df8e6a44cf92f61e790a4b01503813e193450c37ac5813381",
+        "size_bytes": 199975
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/public-headers/SD011-E043.headers.txt",
+      "original_sha256": "ef17be12218b26d15f62d18c7f90fc747a2ed58c450a08eafebc69cf4baf3df5",
+      "preserved": {
+        "path": "inputs/public-headers/SD011-E043.headers.txt",
+        "sha256": "ef17be12218b26d15f62d18c7f90fc747a2ed58c450a08eafebc69cf4baf3df5",
+        "size_bytes": 567
+      },
+      "method": "audited_public_header_derivative",
+      "excluded_raw_header_sha256": "ef17be12218b26d15f62d18c7f90fc747a2ed58c450a08eafebc69cf4baf3df5"
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/received/raw/el_paso/t_uploads_sites_18_2025_06_3_BoH_2024_EHS_Fee_Schedule_Chapter_3_Acc_Checked_June_2025_pdf.pdf",
+      "original_sha256": "1b0529fb7514bcc50c0dd36c903ca361f6ab431712b4aebc48bca8e3f5373622",
+      "preserved": {
+        "path": "sources/el-paso-boh-ehs-fees-sd011/original.pdf",
+        "sha256": "1b0529fb7514bcc50c0dd36c903ca361f6ab431712b4aebc48bca8e3f5373622",
+        "size_bytes": 151508
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/public-headers/SD011-E065.headers.txt",
+      "original_sha256": "90f7975582f1e3ea20ef336e287c8699f27bf16788fff76e1ad248d0375304c0",
+      "preserved": {
+        "path": "inputs/public-headers/SD011-E065.headers.txt",
+        "sha256": "90f7975582f1e3ea20ef336e287c8699f27bf16788fff76e1ad248d0375304c0",
+        "size_bytes": 480
+      },
+      "method": "audited_public_header_derivative",
+      "excluded_raw_header_sha256": "90f7975582f1e3ea20ef336e287c8699f27bf16788fff76e1ad248d0375304c0"
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/received/raw/el_paso/about_public_health_regulations.html",
+      "original_sha256": "fae060312917346ff8a62d3265234ae1bf5bb44800635d565563312eb3dcdb8d",
+      "preserved": {
+        "path": "inputs/referrals/SD011-E014.html",
+        "sha256": "fae060312917346ff8a62d3265234ae1bf5bb44800635d565563312eb3dcdb8d",
+        "size_bytes": 286726
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/public-headers/SD011-E014.headers.txt",
+      "original_sha256": "4b2cc2874360cf98de28a2aaca2b586e24874ab64c3515354b72dbe6d8df6fc3",
+      "preserved": {
+        "path": "inputs/public-headers/SD011-E014.headers.txt",
+        "sha256": "4b2cc2874360cf98de28a2aaca2b586e24874ab64c3515354b72dbe6d8df6fc3",
+        "size_bytes": 561
+      },
+      "method": "audited_public_header_derivative",
+      "excluded_raw_header_sha256": "4b2cc2874360cf98de28a2aaca2b586e24874ab64c3515354b72dbe6d8df6fc3"
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/received/raw/el_paso/wp_content_uploads_sites_5_Ordinance_26_01_Accessible_pdf.pdf",
+      "original_sha256": "dd88d0a74d746d28301fd1a2092575d2b19f9f96de1741dbf9e076e87e31b20b",
+      "preserved": {
+        "path": "sources/el-paso-ordinance-26-01-sd011/original.pdf",
+        "sha256": "dd88d0a74d746d28301fd1a2092575d2b19f9f96de1741dbf9e076e87e31b20b",
+        "size_bytes": 8055141
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/public-headers/SD011-E023.headers.txt",
+      "original_sha256": "c717c48a54dc72e9bc2c50362b8894cb0831cc11344655b629c75865b4b45c26",
+      "preserved": {
+        "path": "inputs/public-headers/SD011-E023.headers.txt",
+        "sha256": "c717c48a54dc72e9bc2c50362b8894cb0831cc11344655b629c75865b4b45c26",
+        "size_bytes": 471
+      },
+      "method": "audited_public_header_derivative",
+      "excluded_raw_header_sha256": "c717c48a54dc72e9bc2c50362b8894cb0831cc11344655b629c75865b4b45c26"
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/received/raw/el_paso/clerk_to_the_board_ordinances.html",
+      "original_sha256": "fab6ff320223ed834fccd26e4f1d71a502cd04bc5ce57d4883eb0942fe0df44f",
+      "preserved": {
+        "path": "inputs/referrals/SD011-E002.html",
+        "sha256": "fab6ff320223ed834fccd26e4f1d71a502cd04bc5ce57d4883eb0942fe0df44f",
+        "size_bytes": 159171
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/public-headers/SD011-E002.headers.txt",
+      "original_sha256": "9fca1f9ded3129d7730549465ed9d04337a940725b5eb779797db3c77a3e3407",
+      "preserved": {
+        "path": "inputs/public-headers/SD011-E002.headers.txt",
+        "sha256": "9fca1f9ded3129d7730549465ed9d04337a940725b5eb779797db3c77a3e3407",
+        "size_bytes": 568
+      },
+      "method": "audited_public_header_derivative",
+      "excluded_raw_header_sha256": "9fca1f9ded3129d7730549465ed9d04337a940725b5eb779797db3c77a3e3407"
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/received/raw/el_paso/ontent_uploads_sites_12_LDC_Resolution_Appendix_E_Wildfire_Resiliency_Requirements_ADA_pdf.pdf",
+      "original_sha256": "2ed93562c8317eee9517736175d5bc76d2dc205fc5b65dd36b570d1c79c58d17",
+      "preserved": {
+        "path": "sources/el-paso-ldc-wildfire-appendix-e-sd011/original.pdf",
+        "sha256": "2ed93562c8317eee9517736175d5bc76d2dc205fc5b65dd36b570d1c79c58d17",
+        "size_bytes": 518107
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/public-headers/SD011-E052.headers.txt",
+      "original_sha256": "9909c5a32c3688b0fe580c74a3d9a240f46d180bbca3923124969061d2be5ae8",
+      "preserved": {
+        "path": "inputs/public-headers/SD011-E052.headers.txt",
+        "sha256": "9909c5a32c3688b0fe580c74a3d9a240f46d180bbca3923124969061d2be5ae8",
+        "size_bytes": 470
+      },
+      "method": "audited_public_header_derivative",
+      "excluded_raw_header_sha256": "9909c5a32c3688b0fe580c74a3d9a240f46d180bbca3923124969061d2be5ae8"
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/received/raw/el_paso/wp_content_uploads_CTB_Ordinances_22_001_Open_Burning_Ordinance_pdf.pdf",
+      "original_sha256": "e294621d7252886c4820a877470f4d51b1bc1c287064a4253f4d0a4f5dfd859b",
+      "preserved": {
+        "path": "sources/el-paso-open-burning-22-001-sd011/original.pdf",
+        "sha256": "e294621d7252886c4820a877470f4d51b1bc1c287064a4253f4d0a4f5dfd859b",
+        "size_bytes": 1084910
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/public-headers/SD011-E013.headers.txt",
+      "original_sha256": "0daeae25327718bb0dae0f1f12ba671df58358bb3c10577182a54d7488b365ec",
+      "preserved": {
+        "path": "inputs/public-headers/SD011-E013.headers.txt",
+        "sha256": "0daeae25327718bb0dae0f1f12ba671df58358bb3c10577182a54d7488b365ec",
+        "size_bytes": 760
+      },
+      "method": "audited_public_header_derivative",
+      "excluded_raw_header_sha256": "0daeae25327718bb0dae0f1f12ba671df58358bb3c10577182a54d7488b365ec"
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/received/raw/el_paso/wp_content_uploads_LandUseCode_EPC_Land_Use_Code_Chapter_1_2016_pdf.pdf",
+      "original_sha256": "2c77fdf9aa7f3fc3bdcd5162b5059d7ceb1e5e04f3f914a1cbb29474a9a035b0",
+      "preserved": {
+        "path": "sources/el-paso-ldc-chapter-1-sd011/original.pdf",
+        "sha256": "2c77fdf9aa7f3fc3bdcd5162b5059d7ceb1e5e04f3f914a1cbb29474a9a035b0",
+        "size_bytes": 389804
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/public-headers/SD011-E010.headers.txt",
+      "original_sha256": "ed70e91c7c247dd828f3351415161311e673f7ff85264d436f6afb602023f143",
+      "preserved": {
+        "path": "inputs/public-headers/SD011-E010.headers.txt",
+        "sha256": "ed70e91c7c247dd828f3351415161311e673f7ff85264d436f6afb602023f143",
+        "size_bytes": 928
+      },
+      "method": "audited_public_header_derivative",
+      "excluded_raw_header_sha256": "ed70e91c7c247dd828f3351415161311e673f7ff85264d436f6afb602023f143"
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/received/raw/el_paso/wp_content_uploads_LandUseCode_EPC_Land_Use_Code_Chapter_2_2016_pdf.pdf",
+      "original_sha256": "f3d527fd6a9da5b0043672582dda812dc9c3dfe9958d8b53eec876957ed10953",
+      "preserved": {
+        "path": "sources/el-paso-ldc-chapter-2-sd011/original.pdf",
+        "sha256": "f3d527fd6a9da5b0043672582dda812dc9c3dfe9958d8b53eec876957ed10953",
+        "size_bytes": 116324
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/public-headers/SD011-E011.headers.txt",
+      "original_sha256": "c4f000ed1b33b599df7dda1b7b874a38a8be25f9ce387981b32f0ebfd92592c8",
+      "preserved": {
+        "path": "inputs/public-headers/SD011-E011.headers.txt",
+        "sha256": "c4f000ed1b33b599df7dda1b7b874a38a8be25f9ce387981b32f0ebfd92592c8",
+        "size_bytes": 928
+      },
+      "method": "audited_public_header_derivative",
+      "excluded_raw_header_sha256": "c4f000ed1b33b599df7dda1b7b874a38a8be25f9ce387981b32f0ebfd92592c8"
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/received/raw/el_paso/wp_content_uploads_LandUseCode_New_LDC_Chapter_5_pdf.pdf",
+      "original_sha256": "59d97136afdf3deb606b2c2f223ac17cb71d7aad0d5622769d4de9fc265d920c",
+      "preserved": {
+        "path": "sources/el-paso-ldc-chapter-5-sd011/original.pdf",
+        "sha256": "59d97136afdf3deb606b2c2f223ac17cb71d7aad0d5622769d4de9fc265d920c",
+        "size_bytes": 1521266
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/public-headers/SD011-E012.headers.txt",
+      "original_sha256": "e7313bcde95dc21459604fdf81e3c330c0b7858068919111604e19ab1757b572",
+      "preserved": {
+        "path": "inputs/public-headers/SD011-E012.headers.txt",
+        "sha256": "e7313bcde95dc21459604fdf81e3c330c0b7858068919111604e19ab1757b572",
+        "size_bytes": 914
+      },
+      "method": "audited_public_header_derivative",
+      "excluded_raw_header_sha256": "e7313bcde95dc21459604fdf81e3c330c0b7858068919111604e19ab1757b572"
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/received/raw/el_paso/wp_content_uploads_sites_5_18_03_Unsafe_Buildings_Accessible_pdf.pdf",
+      "original_sha256": "86eed9d885a9cec1cb01528318f66f8eed525ddb0860655a1983865bfa196d00",
+      "preserved": {
+        "path": "sources/el-paso-unsafe-buildings-18-03-sd011/original.pdf",
+        "sha256": "86eed9d885a9cec1cb01528318f66f8eed525ddb0860655a1983865bfa196d00",
+        "size_bytes": 327510
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/public-headers/SD011-E022.headers.txt",
+      "original_sha256": "357406f69bcc1ed1d9900e9fead0763334bea71c2cdc0751e1fb2ab6e84c32b1",
+      "preserved": {
+        "path": "inputs/public-headers/SD011-E022.headers.txt",
+        "sha256": "357406f69bcc1ed1d9900e9fead0763334bea71c2cdc0751e1fb2ab6e84c32b1",
+        "size_bytes": 470
+      },
+      "method": "audited_public_header_derivative",
+      "excluded_raw_header_sha256": "357406f69bcc1ed1d9900e9fead0763334bea71c2cdc0751e1fb2ab6e84c32b1"
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/received/raw/el_paso/wp_content_uploads_sites_12_fees_School_District_Fees_Current_2010_pdf.pdf",
+      "original_sha256": "e17683d7e1672c7fc69d72b499265c99af16510de539e2318de22b50b7dbad5e",
+      "preserved": {
+        "path": "sources/el-paso-school-district-fees-sd011/original.pdf",
+        "sha256": "e17683d7e1672c7fc69d72b499265c99af16510de539e2318de22b50b7dbad5e",
+        "size_bytes": 10273
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/public-headers/SD011-E054.headers.txt",
+      "original_sha256": "821da3e2668a2be2a7374830d1adc655e286c5cb7b2ca7858d118bb806dcb439",
+      "preserved": {
+        "path": "inputs/public-headers/SD011-E054.headers.txt",
+        "sha256": "821da3e2668a2be2a7374830d1adc655e286c5cb7b2ca7858d118bb806dcb439",
+        "size_bytes": 637
+      },
+      "method": "audited_public_header_derivative",
+      "excluded_raw_header_sha256": "821da3e2668a2be2a7374830d1adc655e286c5cb7b2ca7858d118bb806dcb439"
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/received/raw/el_paso/ads_sites_18_2025_06_2_BoH_Regulation_Chapter_2_Admin_Regs_2011_1Acc_Checked_June_2025_pdf.pdf",
+      "original_sha256": "64d72ce1f7783dcf7fb5a3f6956e8ba4845c4839318613a1dee09d99716625d7",
+      "preserved": {
+        "path": "sources/el-paso-boh-admin-regulations-sd011/original.pdf",
+        "sha256": "64d72ce1f7783dcf7fb5a3f6956e8ba4845c4839318613a1dee09d99716625d7",
+        "size_bytes": 189000
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/public-headers/SD011-E064.headers.txt",
+      "original_sha256": "5f7dfd07fe4f24fd2f6b894f08a9f070a623851c9affd839e2d84b4d9ea12b18",
+      "preserved": {
+        "path": "inputs/public-headers/SD011-E064.headers.txt",
+        "sha256": "5f7dfd07fe4f24fd2f6b894f08a9f070a623851c9affd839e2d84b4d9ea12b18",
+        "size_bytes": 470
+      },
+      "method": "audited_public_header_derivative",
+      "excluded_raw_header_sha256": "5f7dfd07fe4f24fd2f6b894f08a9f070a623851c9affd839e2d84b4d9ea12b18"
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/received/raw/el_paso/uploads_sites_18_2025_06_1_BoH_Regulation_Chapter_1_Bylaws_2011_0Acc_Checked_June_2025_pdf.pdf",
+      "original_sha256": "5b71fc2ba18d7a11a5c66d691b1f11526cce424cc0eb8fc07cbd37fb7e5c268a",
+      "preserved": {
+        "path": "sources/el-paso-boh-bylaws-sd011/original.pdf",
+        "sha256": "5b71fc2ba18d7a11a5c66d691b1f11526cce424cc0eb8fc07cbd37fb7e5c268a",
+        "size_bytes": 204027
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/public-headers/SD011-E062.headers.txt",
+      "original_sha256": "70068b90104e732c8fdab34f7de4f5af0204c98c15ac1dbea926bc9a3cf04dee",
+      "preserved": {
+        "path": "inputs/public-headers/SD011-E062.headers.txt",
+        "sha256": "70068b90104e732c8fdab34f7de4f5af0204c98c15ac1dbea926bc9a3cf04dee",
+        "size_bytes": 470
+      },
+      "method": "audited_public_header_derivative",
+      "excluded_raw_header_sha256": "70068b90104e732c8fdab34f7de4f5af0204c98c15ac1dbea926bc9a3cf04dee"
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/received/raw/el_paso/uploads_sites_18_2025_06_1_SpanishBoh_Regulation_Chapter1_SpanishAcc_Checked_June_2025_pdf.pdf",
+      "original_sha256": "1b8367a5710b5159ea479ad588ee5dee9850e1e9451b0115d2770a2d4aae6c7f",
+      "preserved": {
+        "path": "sources/el-paso-boh-bylaws-spanish-sd011/original.pdf",
+        "sha256": "1b8367a5710b5159ea479ad588ee5dee9850e1e9451b0115d2770a2d4aae6c7f",
+        "size_bytes": 64434
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/public-headers/SD011-E063.headers.txt",
+      "original_sha256": "5e7fae40dcf159e7d91357db0464331d1aaebf3918efdaa47e61a7d411a688f4",
+      "preserved": {
+        "path": "inputs/public-headers/SD011-E063.headers.txt",
+        "sha256": "5e7fae40dcf159e7d91357db0464331d1aaebf3918efdaa47e61a7d411a688f4",
+        "size_bytes": 469
+      },
+      "method": "audited_public_header_derivative",
+      "excluded_raw_header_sha256": "5e7fae40dcf159e7d91357db0464331d1aaebf3918efdaa47e61a7d411a688f4"
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/received/raw/el_paso/_18_2025_06_3_Spanish_BoH_2024_EHS_Fee_Schedule_Chapter_3_EspanolAcc_Checked_June_2025_pdf.pdf",
+      "original_sha256": "fd162c37442dc99097a272d9ebbf74fbfd063f2dc2f2226fdeb8b93a53849ec9",
+      "preserved": {
+        "path": "sources/el-paso-boh-ehs-fees-spanish-sd011/original.pdf",
+        "sha256": "fd162c37442dc99097a272d9ebbf74fbfd063f2dc2f2226fdeb8b93a53849ec9",
+        "size_bytes": 252997
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/public-headers/SD011-E066.headers.txt",
+      "original_sha256": "ff9a46ce84b08fe763c56ceaec7064a3ec5caa877f01fcc291297f09d764b95e",
+      "preserved": {
+        "path": "inputs/public-headers/SD011-E066.headers.txt",
+        "sha256": "ff9a46ce84b08fe763c56ceaec7064a3ec5caa877f01fcc291297f09d764b95e",
+        "size_bytes": 470
+      },
+      "method": "audited_public_header_derivative",
+      "excluded_raw_header_sha256": "ff9a46ce84b08fe763c56ceaec7064a3ec5caa877f01fcc291297f09d764b95e"
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/received/raw/el_paso/ds_sites_12_Misc_CGS_ColoGeoSurvey_Land_Use_Review_Referral_and_Fee_Guide_June_18_2026_pdf.pdf",
+      "original_sha256": "f726d6cd956cee12d2a112a72b355fbdfc7041980fa85cbeefc26c6893234cf6",
+      "preserved": {
+        "path": "sources/el-paso-hosted-cgs-review-guide-sd011/original.pdf",
+        "sha256": "f726d6cd956cee12d2a112a72b355fbdfc7041980fa85cbeefc26c6893234cf6",
+        "size_bytes": 187775
+      },
+      "method": "exact_copy",
+      "excluded_raw_header_sha256": null
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/sherlock011-atlas-audit/public-headers/SD011-E055.headers.txt",
+      "original_sha256": "3639aba0d7d169c42a211fefd5e9f9313455348fbc533326f02f332e937f934b",
+      "preserved": {
+        "path": "inputs/public-headers/SD011-E055.headers.txt",
+        "sha256": "3639aba0d7d169c42a211fefd5e9f9313455348fbc533326f02f332e937f934b",
+        "size_bytes": 470
+      },
+      "method": "audited_public_header_derivative",
+      "excluded_raw_header_sha256": "3639aba0d7d169c42a211fefd5e9f9313455348fbc533326f02f332e937f934b"
+    }
+  ],
+  "source_structural_pages": 351,
+  "directly_viewed_pages": 20,
+  "full_numeric_table_reviews": 0,
+  "public_events_during_preparation": 0,
+  "upstream_public_events": 66,
+  "upstream_distinct_targets": 66,
+  "upstream_distinct_target_cap": 50,
+  "upstream_cap_status": "failed",
+  "upstream_missing_body_sha256": [
+    "75c50637f46f8bc0624588780e0400067b80401280ab89e524ae97cb9ea41d3b",
+    "41bab1490d0d0914fda432d30cb3310fcbd65429ea62ad134350929857fe7466"
+  ],
+  "original_acquisition_certified": false,
+  "legal_currentness": "not_verified",
+  "production_mutations": 0,
+  "limitations": [
+    "All 15 first pages and five additional source-role/date pages were viewed; this is not a 351-page legal review.",
+    "Only 13 proposed county/Board of Health records; school-fee issuer and CGS layer remain unresolved.",
+    "Four exact PDF hashes match inherited historical claims; former original bytes were not opened.",
+    "All 15 retained PDF bodies match their delivered event hashes; the two missing earlier bodies are other events.",
+    "No request API was invoked: its official-only acquisition enum cannot truthfully express received_review_package.",
+    "Record templates intentionally lack intake IDs, archive destinations and actual receipt times until authorized execution.",
+    "Upstream cap/body-path failures and incomplete browser activity assurance remain inherited from the frozen audit.",
+    "Only audited public header derivatives are copied. Original private headers and all six cookie-bearing files remain outside this package.",
+    "Current-law answers, rule units, registry changes and coverage promotion are outside this preparation."
+  ]
+}

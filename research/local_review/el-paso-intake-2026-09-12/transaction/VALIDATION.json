@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "status": "prepared_not_applied",
+  "frozen_at": "2026-09-12T22:56:11.616658Z",
+  "implementation": {
+    "path": "transaction.py",
+    "sha256": "8b664308fb80a6d4338ec86900db840516d4146c330dfeec54fd52f2af2263e7",
+    "size_bytes": 25157
+  },
+  "tests": {
+    "path": "test_transaction.py",
+    "sha256": "953e184ba903f4bc539171726cf569aa3703db7300e32b572717283f8da18277",
+    "size_bytes": 14978
+  },
+  "fixture_test_log": {
+    "path": "tests-final.log",
+    "sha256": "78a70f7fea4cdec8bb3389138030209c853cb9f62394a9074c7275dbf940ca86",
+    "size_bytes": 1497
+  },
+  "fixture_tests_passed": 30,
+  "fixture_test_warnings": 5,
+  "fixture_seconds_reported": 10.7,
+  "combined_coverage": {
+    "path": "coverage-final-combined.json",
+    "sha256": "a1dff58778a3c706791efc3bdd7a3f05b1ddb50f3f65d93dbdd32b81837bb8c8",
+    "size_bytes": 25399
+  },
+  "combined_coverage_percent": 91.06463878326996,
+  "coverage_scope": "fixture_tests_plus_actual_read_only_cli",
+  "actual_dry_run": {
+    "argv": [
+      "/private/tmp/geode-status-venv/bin/python",
+      "-I",
+      "-B",
+      "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/el-paso-intake-transaction/transaction.py",
+      "--root",
+      "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+      "--dry-run"
+    ],
+    "cwd": "/private/tmp",
+    "started_at": "2026-09-12T22:56:09.948655Z",
+    "completed_at": "2026-09-12T22:56:11.613994Z",
+    "exit_code": 0,
+    "stdout": {
+      "path": "dry-run.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "stderr": {
+      "path": "dry-run.stderr.txt",
+      "sha256": "bcd0ab0ae14ae20ee528859b26928b3fee3d591241d3ac97c86e8b52e00f4e3e",
+      "size_bytes": 155
+    }
+  },
+  "baselines": [
+    {
+      "before": {
+        "path": "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+        "sha256": "c459eea9a0a5828334e61970d9bc6c078f14673aafadf1e359a60969e4c5f8e6",
+        "size_bytes": 101095
+      },
+      "after": {
+        "path": "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+        "sha256": "c459eea9a0a5828334e61970d9bc6c078f14673aafadf1e359a60969e4c5f8e6",
+        "size_bytes": 101095
+      }
+    },
+    {
+      "before": {
+        "path": "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl",
+        "sha256": "33a448ff4d2f0d941826739ba29a7ca889b9fe8a621ef7f095a084782a59df3b",
+        "size_bytes": 102331
+      },
+      "after": {
+        "path": "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl",
+        "sha256": "33a448ff4d2f0d941826739ba29a7ca889b9fe8a621ef7f095a084782a59df3b",
+        "size_bytes": 102331
+      }
+    },
+    {
+      "before": {
+        "path": "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_REPORT.json",
+        "sha256": "687d79dc3d2864bb0fe1bc72d95861e7093a5b925e4c2d97b403d0883019a068",
+        "size_bytes": 4850
+      },
+      "after": {
+        "path": "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_REPORT.json",
+        "sha256": "687d79dc3d2864bb0fe1bc72d95861e7093a5b925e4c2d97b403d0883019a068",
+        "size_bytes": 4850
+      }
+    }
+  ],
+  "baseline_raw_records": 46,
+  "baseline_ledger_records": 47,
+  "real_repository_apply_performed": false,
+  "real_execution_directory_exists": false,
+  "expected_after_if_applied": "59 raw / 60 ledger; same one missing historical original",
+  "full_corpus_validation": "not_run_by_this_subtask",
+  "tested_recovery_scope": "process_interruption_and_deterministic_replay",
+  "power_loss_durability_verified": false,
+  "legal_currentness": "not_verified",
+  "answer_safe": false
+}

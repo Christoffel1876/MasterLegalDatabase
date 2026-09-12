@@ -1,0 +1,27 @@
+Observed focused checks for this update; progress dots omitted.
+
+Repository command:
+python -B -m pytest tests/test_manual_review_inventory.py -q -p no:cacheprovider
+60 passed in 3.32s
+
+Isolated actual-join fixture command, from the preserved support handoff:
+python -B -m pytest test_el_paso_joins.py -q -p no:cacheprovider
+5 passed in 0.75s
+
+Repository deterministic check:
+python -B -m geode.pipeline.manual_review_inventory --root . --check
+INFO: Verified 59 sources; 19 with review links; legal currentness not verified
+
+Portable package-only verification, executed from /private/tmp with -I -B:
+status=portable_custody_verified; sources=13; raw_records=59; ledger_records=60;
+actual_repository_checked=false; unchanged_inherited_lfs_errors=2;
+legal_currentness=not_verified
+
+Portable verification with explicit actual repository --root, also from /private/tmp:
+status=portable_custody_verified; sources=13; raw_records=59; ledger_records=60;
+actual_repository_checked=true; unchanged_inherited_lfs_errors=2;
+legal_currentness=not_verified
+
+The full corpus result remains invalid for the same two inherited missing LFS
+objects. The root's exact before/after JSON is retained separately. This log
+does not claim a full-suite or full-corpus pass for this update.

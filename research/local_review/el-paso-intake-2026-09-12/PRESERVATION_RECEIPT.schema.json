@@ -1,0 +1,407 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Bind a confined ordinary file to its exact bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Prefix": {
+      "additionalProperties": false,
+      "description": "Preserve exact before/after bytes and their original repository destination.",
+      "properties": {
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "before": {
+          "$ref": "#/$defs/Asset"
+        },
+        "after": {
+          "$ref": "#/$defs/Asset"
+        },
+        "before_records": {
+          "minimum": 0,
+          "title": "Before Records",
+          "type": "integer"
+        },
+        "after_records": {
+          "minimum": 0,
+          "title": "After Records",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "repository_path",
+        "before",
+        "after",
+        "before_records",
+        "after_records"
+      ],
+      "title": "Prefix",
+      "type": "object"
+    },
+    "Record": {
+      "additionalProperties": false,
+      "description": "Validate all nineteen fields of each final pending received-PDF custody record.",
+      "properties": {
+        "intake_id": {
+          "title": "Intake Id",
+          "type": "string"
+        },
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "const": "08_County_Authorities",
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "official_source_name": {
+          "title": "Official Source Name",
+          "type": "string"
+        },
+        "official_source_url": {
+          "title": "Official Source Url",
+          "type": "string"
+        },
+        "acquisition_method": {
+          "const": "received_review_package",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "received_from": {
+          "title": "Received From",
+          "type": "string"
+        },
+        "reviewer_name": {
+          "title": "Reviewer Name",
+          "type": "string"
+        },
+        "reviewer_email": {
+          "title": "Reviewer Email",
+          "type": "null"
+        },
+        "custody_note": {
+          "title": "Custody Note",
+          "type": "string"
+        },
+        "original_filename": {
+          "const": "original.pdf",
+          "title": "Original Filename",
+          "type": "string"
+        },
+        "archive_path": {
+          "title": "Archive Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "source_format": {
+          "const": "pdf",
+          "title": "Source Format",
+          "type": "string"
+        },
+        "received_at": {
+          "format": "date-time",
+          "title": "Received At",
+          "type": "string"
+        },
+        "status": {
+          "const": "archived_pending_pipeline",
+          "title": "Status",
+          "type": "string"
+        },
+        "blocked_queue_match": {
+          "const": false,
+          "title": "Blocked Queue Match",
+          "type": "boolean"
+        },
+        "boundary": {
+          "title": "Boundary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "intake_id",
+        "record_id",
+        "layer_id",
+        "official_source_name",
+        "official_source_url",
+        "acquisition_method",
+        "received_from",
+        "reviewer_name",
+        "reviewer_email",
+        "custody_note",
+        "original_filename",
+        "archive_path",
+        "sha256",
+        "size_bytes",
+        "source_format",
+        "received_at",
+        "status",
+        "blocked_queue_match",
+        "boundary"
+      ],
+      "title": "Record",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "description": "Keep canonical archive identity bound to the exact received provenance row.",
+      "properties": {
+        "record": {
+          "$ref": "#/$defs/Record"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-EL_PASO",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "preserved_original": {
+          "$ref": "#/$defs/Asset"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Asset"
+        },
+        "provenance_jsonl_row": {
+          "minimum": 0,
+          "title": "Provenance Jsonl Row",
+          "type": "integer"
+        },
+        "review_status": {
+          "const": "metadata_only_review_unknown",
+          "title": "Review Status",
+          "type": "string"
+        },
+        "verified_http_acquired_at": {
+          "title": "Verified Http Acquired At",
+          "type": "null"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "answer_safe": {
+          "const": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "record",
+        "authority_id",
+        "preserved_original",
+        "provenance",
+        "provenance_jsonl_row",
+        "review_status",
+        "verified_http_acquired_at",
+        "legal_currentness",
+        "answer_safe"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Describe completed custody while preserving the intermediate failed preparation.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "packaged_at": {
+      "format": "date-time",
+      "title": "Packaged At",
+      "type": "string"
+    },
+    "status": {
+      "const": "completed_custody_portable_preservation",
+      "title": "Status",
+      "type": "string"
+    },
+    "original_actual_repository_received_at": {
+      "format": "date-time",
+      "title": "Original Actual Repository Received At",
+      "type": "string"
+    },
+    "original_completed_at": {
+      "format": "date-time",
+      "title": "Original Completed At",
+      "type": "string"
+    },
+    "transaction_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "transaction_payloads": {
+      "const": 159,
+      "title": "Transaction Payloads",
+      "type": "integer"
+    },
+    "recovery_inventory": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_intent": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_completion_receipt": {
+      "$ref": "#/$defs/Asset"
+    },
+    "exact_suffix": {
+      "$ref": "#/$defs/Asset"
+    },
+    "prefixes": {
+      "items": {
+        "$ref": "#/$defs/Prefix"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Prefixes",
+      "type": "array"
+    },
+    "before_report": {
+      "$ref": "#/$defs/Asset"
+    },
+    "after_report": {
+      "$ref": "#/$defs/Asset"
+    },
+    "legacy_coverage_ledger_repository_path": {
+      "const": "_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+      "title": "Legacy Coverage Ledger Repository Path",
+      "type": "string"
+    },
+    "unchanged_legacy_coverage_ledger": {
+      "$ref": "#/$defs/Asset"
+    },
+    "before_corpus_validation": {
+      "$ref": "#/$defs/Asset"
+    },
+    "after_corpus_validation": {
+      "$ref": "#/$defs/Asset"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "maxItems": 13,
+      "minItems": 13,
+      "title": "Sources",
+      "type": "array"
+    },
+    "inherited_missing_originals": {
+      "const": 1,
+      "title": "Inherited Missing Originals",
+      "type": "integer"
+    },
+    "full_corpus_valid": {
+      "const": false,
+      "title": "Full Corpus Valid",
+      "type": "boolean"
+    },
+    "unchanged_inherited_lfs_error_paths": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Unchanged Inherited Lfs Error Paths",
+      "type": "array"
+    },
+    "private_raw_headers_excluded": {
+      "const": true,
+      "title": "Private Raw Headers Excluded",
+      "type": "boolean"
+    },
+    "relocated_write_scripts_executed": {
+      "const": false,
+      "title": "Relocated Write Scripts Executed",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "coverage_promotion": {
+      "const": false,
+      "title": "Coverage Promotion",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "packaged_at",
+    "status",
+    "original_actual_repository_received_at",
+    "original_completed_at",
+    "transaction_manifest",
+    "transaction_payloads",
+    "recovery_inventory",
+    "original_intent",
+    "original_completion_receipt",
+    "exact_suffix",
+    "prefixes",
+    "before_report",
+    "after_report",
+    "legacy_coverage_ledger_repository_path",
+    "unchanged_legacy_coverage_ledger",
+    "before_corpus_validation",
+    "after_corpus_validation",
+    "sources",
+    "inherited_missing_originals",
+    "full_corpus_valid",
+    "unchanged_inherited_lfs_error_paths",
+    "private_raw_headers_excluded",
+    "relocated_write_scripts_executed",
+    "legal_currentness",
+    "answer_safe",
+    "coverage_promotion",
+    "limitations"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

@@ -1,0 +1,153 @@
+{
+  "$defs": {
+    "Event": {
+      "additionalProperties": false,
+      "properties": {
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "image_sha256": {
+          "title": "Image Sha256",
+          "type": "string"
+        },
+        "command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Command",
+          "type": "array"
+        },
+        "started_at": {
+          "title": "Started At",
+          "type": "string"
+        },
+        "completed_at": {
+          "title": "Completed At",
+          "type": "string"
+        },
+        "stdout_sha256": {
+          "title": "Stdout Sha256",
+          "type": "string"
+        },
+        "stdout_bytes": {
+          "title": "Stdout Bytes",
+          "type": "integer"
+        },
+        "stderr_sha256": {
+          "title": "Stderr Sha256",
+          "type": "string"
+        },
+        "stderr_bytes": {
+          "title": "Stderr Bytes",
+          "type": "integer"
+        },
+        "exit_code": {
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "status": {
+          "enum": [
+            "machine_ocr_unreviewed",
+            "failed"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "page",
+        "image_sha256",
+        "command",
+        "started_at",
+        "completed_at",
+        "stdout_sha256",
+        "stdout_bytes",
+        "stderr_sha256",
+        "stderr_bytes",
+        "exit_code",
+        "status"
+      ],
+      "title": "Event",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "enum": [
+        "machine_ocr_unreviewed",
+        "failed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "engine": {
+      "const": "Apple Vision",
+      "default": "Apple Vision",
+      "title": "Engine",
+      "type": "string"
+    },
+    "revision": {
+      "const": 3,
+      "default": 3,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "adapter_sha256": {
+      "title": "Adapter Sha256",
+      "type": "string"
+    },
+    "adapter_source_sha256": {
+      "title": "Adapter Source Sha256",
+      "type": "string"
+    },
+    "visual_freeze_sha256": {
+      "title": "Visual Freeze Sha256",
+      "type": "string"
+    },
+    "execution_context": {
+      "const": "explicitly_authorized_exec_require_escalated_once",
+      "title": "Execution Context",
+      "type": "string"
+    },
+    "settings": {
+      "additionalProperties": true,
+      "title": "Settings",
+      "type": "object"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "prior_failures": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Prior Failures",
+      "type": "array"
+    },
+    "reason_no_retry_after_failure": {
+      "const": "stop on first error in this authorized retry",
+      "default": "stop on first error in this authorized retry",
+      "title": "Reason No Retry After Failure",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "adapter_sha256",
+    "adapter_source_sha256",
+    "visual_freeze_sha256",
+    "execution_context",
+    "settings",
+    "events",
+    "prior_failures"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}
