@@ -1,0 +1,21 @@
+--- frozen-prototype/lookup.py
++++ scripts/crs_source_lookup.py
+@@ -12,6 +12,9 @@
+ from typing import Literal
+ 
+ from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, model_validator
++
++SOURCE_PACKAGE = Path("research/local_review/crs-2026-title1-source-review-2026-09-12")
++DEFAULT_SOURCE = Path(__file__).resolve().parents[1] / SOURCE_PACKAGE
+ 
+ IDS = ("CRS-1-1-101", "CRS-1-1-102", "CRS-1-1-103")
+ SectionID = Literal["CRS-1-1-101", "CRS-1-1-102", "CRS-1-1-103"]
+@@ -426,7 +429,7 @@
+ def main() -> None:
+     """Write one typed JSON response to stdout; never create files or acquire a source."""
+     parser = argparse.ArgumentParser(description=__doc__)
+-    parser.add_argument("--source", type=Path, default=Path(__file__).parent / "source")
++    parser.add_argument("--source", type=Path, default=DEFAULT_SOURCE)
+     parser.add_argument("--section", required=True)
+     parser.add_argument("--mode", default="source_only")
+     args = parser.parse_args()

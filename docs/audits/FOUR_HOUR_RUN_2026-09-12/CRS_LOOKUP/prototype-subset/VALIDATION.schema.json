@@ -1,0 +1,153 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Exact confined prepared-artifact bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "maximum": 8000000,
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Measured offline preparation results, not new acquisition or legal review.",
+  "properties": {
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "prepared_research_prototype_not_integrated",
+      "title": "Status",
+      "type": "string"
+    },
+    "source_manifest": {
+      "$ref": "#/$defs/Ref"
+    },
+    "source_review": {
+      "$ref": "#/$defs/Ref"
+    },
+    "lookup_code": {
+      "$ref": "#/$defs/Ref"
+    },
+    "test_code": {
+      "$ref": "#/$defs/Ref"
+    },
+    "test_log": {
+      "$ref": "#/$defs/Ref"
+    },
+    "example_results": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Example Results",
+      "type": "array"
+    },
+    "tests_passed": {
+      "exclusiveMinimum": 0,
+      "title": "Tests Passed",
+      "type": "integer"
+    },
+    "coverage_percent": {
+      "maximum": 100,
+      "minimum": 90,
+      "title": "Coverage Percent",
+      "type": "number"
+    },
+    "coverage_basis": {
+      "const": "statements_and_branches",
+      "title": "Coverage Basis",
+      "type": "string"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "source_sections": {
+      "const": 3,
+      "title": "Source Sections",
+      "type": "integer"
+    },
+    "statutory_paragraphs": {
+      "const": 6,
+      "title": "Statutory Paragraphs",
+      "type": "integer"
+    },
+    "native_fragments": {
+      "const": 19,
+      "title": "Native Fragments",
+      "type": "integer"
+    },
+    "source_copy_files": {
+      "const": 39,
+      "title": "Source Copy Files",
+      "type": "integer"
+    },
+    "source_copy_bytes": {
+      "const": 8028360,
+      "title": "Source Copy Bytes",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "prior_2025_original_custody": {
+      "const": "unresolved",
+      "title": "Prior 2025 Original Custody",
+      "type": "string"
+    },
+    "production_changes": {
+      "const": false,
+      "title": "Production Changes",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "status",
+    "source_manifest",
+    "source_review",
+    "lookup_code",
+    "test_code",
+    "test_log",
+    "example_results",
+    "tests_passed",
+    "coverage_percent",
+    "coverage_basis",
+    "public_requests",
+    "source_sections",
+    "statutory_paragraphs",
+    "native_fragments",
+    "source_copy_files",
+    "source_copy_bytes",
+    "legal_currentness",
+    "prior_2025_original_custody",
+    "production_changes"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

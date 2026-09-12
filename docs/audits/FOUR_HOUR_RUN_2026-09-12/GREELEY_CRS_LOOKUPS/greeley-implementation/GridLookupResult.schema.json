@@ -1,0 +1,624 @@
+{
+  "$defs": {
+    "GridBlock": {
+      "additionalProperties": false,
+      "description": "Preserve exact native UTF-8 bytes and their packaged candidate offsets.",
+      "properties": {
+        "physical_page": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "native_start": {
+          "minimum": 0,
+          "title": "Native Start",
+          "type": "integer"
+        },
+        "native_end": {
+          "title": "Native End",
+          "type": "integer"
+        },
+        "candidate_native_offset": {
+          "minimum": 0,
+          "title": "Candidate Native Offset",
+          "type": "integer"
+        },
+        "candidate_start": {
+          "title": "Candidate Start",
+          "type": "integer"
+        },
+        "candidate_end": {
+          "title": "Candidate End",
+          "type": "integer"
+        },
+        "candidate_path": {
+          "title": "Candidate Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "physical_page",
+        "text",
+        "native_start",
+        "native_end",
+        "candidate_native_offset",
+        "candidate_start",
+        "candidate_end",
+        "candidate_path",
+        "sha256"
+      ],
+      "title": "GridBlock",
+      "type": "object"
+    },
+    "GridCell": {
+      "additionalProperties": false,
+      "description": "Keep reviewed display text separate from exact contributing native strings.",
+      "properties": {
+        "column_start": {
+          "maximum": 8,
+          "minimum": 1,
+          "title": "Column Start",
+          "type": "integer"
+        },
+        "column_span": {
+          "maximum": 8,
+          "minimum": 1,
+          "title": "Column Span",
+          "type": "integer"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Text"
+        },
+        "status": {
+          "enum": [
+            "native_bound_visible_text",
+            "visually_blank"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "native_spans": {
+          "items": {
+            "$ref": "#/$defs/GridBlock"
+          },
+          "title": "Native Spans",
+          "type": "array"
+        }
+      },
+      "required": [
+        "column_start",
+        "column_span",
+        "text",
+        "status",
+        "native_spans"
+      ],
+      "title": "GridCell",
+      "type": "object"
+    },
+    "GridContext": {
+      "additionalProperties": false,
+      "description": "Expose complete source notes without silently converting them into operative rules.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        },
+        "native_spans": {
+          "items": {
+            "$ref": "#/$defs/GridBlock"
+          },
+          "title": "Native Spans",
+          "type": "array"
+        },
+        "page_image_paths": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Page Image Paths",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "role",
+        "statement",
+        "qualification",
+        "native_spans",
+        "page_image_paths"
+      ],
+      "title": "GridContext",
+      "type": "object"
+    },
+    "GridMatchedRow": {
+      "additionalProperties": false,
+      "description": "Attach explicit table/group/header associations to each matched fee row.",
+      "properties": {
+        "row_id": {
+          "title": "Row Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "cells": {
+          "items": {
+            "$ref": "#/$defs/GridCell"
+          },
+          "minItems": 1,
+          "title": "Cells",
+          "type": "array"
+        },
+        "table_id": {
+          "title": "Table Id",
+          "type": "string"
+        },
+        "column_roles": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": "Column Roles",
+          "type": "array"
+        },
+        "column_headers": {
+          "items": {
+            "$ref": "#/$defs/GridRowEvidence"
+          },
+          "title": "Column Headers",
+          "type": "array"
+        },
+        "group_headers": {
+          "items": {
+            "$ref": "#/$defs/GridRowEvidence"
+          },
+          "title": "Group Headers",
+          "type": "array"
+        },
+        "table_headings": {
+          "items": {
+            "$ref": "#/$defs/GridBlock"
+          },
+          "title": "Table Headings",
+          "type": "array"
+        },
+        "association_notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Association Notes",
+          "type": "array"
+        },
+        "page_image_path": {
+          "title": "Page Image Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "row_id",
+        "physical_page",
+        "role",
+        "cells",
+        "table_id",
+        "column_roles",
+        "column_headers",
+        "group_headers",
+        "table_headings",
+        "association_notes",
+        "page_image_path"
+      ],
+      "title": "GridMatchedRow",
+      "type": "object"
+    },
+    "GridRowEvidence": {
+      "additionalProperties": false,
+      "description": "Represent one source row, including merged and blank cells.",
+      "properties": {
+        "row_id": {
+          "title": "Row Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "cells": {
+          "items": {
+            "$ref": "#/$defs/GridCell"
+          },
+          "minItems": 1,
+          "title": "Cells",
+          "type": "array"
+        }
+      },
+      "required": [
+        "row_id",
+        "physical_page",
+        "role",
+        "cells"
+      ],
+      "title": "GridRowEvidence",
+      "type": "object"
+    },
+    "GridSourceBinding": {
+      "additionalProperties": false,
+      "description": "Separate source dates, reported acquisition, intake and qualified external review.",
+      "properties": {
+        "source_id": {
+          "enum": [
+            "greeley-development-impact-fee-memo-sd008-07",
+            "greeley-water-sewer-proposed-pif-notice-sd008-08"
+          ],
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-MUNICIPAL-GREELEY",
+          "default": "CO-MUNICIPAL-GREELEY",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "source_role": {
+          "enum": [
+            "development_impact_fee_memorandum",
+            "proposed_water_sewer_pif_notice"
+          ],
+          "title": "Source Role",
+          "type": "string"
+        },
+        "official_source_url": {
+          "default": null,
+          "title": "Official Source Url",
+          "type": "null"
+        },
+        "official_referral_url": {
+          "title": "Official Referral Url",
+          "type": "string"
+        },
+        "reported_requested_url": {
+          "title": "Reported Requested Url",
+          "type": "string"
+        },
+        "reported_final_url": {
+          "title": "Reported Final Url",
+          "type": "string"
+        },
+        "reported_acquisition_at": {
+          "format": "date-time",
+          "title": "Reported Acquisition At",
+          "type": "string"
+        },
+        "original_acquisition_time": {
+          "default": null,
+          "title": "Original Acquisition Time",
+          "type": "null"
+        },
+        "received_at": {
+          "format": "date-time",
+          "title": "Received At",
+          "type": "string"
+        },
+        "reviewed_at": {
+          "format": "date-time",
+          "title": "Reviewed At",
+          "type": "string"
+        },
+        "external_reconciliation_at": {
+          "format": "date-time",
+          "title": "External Reconciliation At",
+          "type": "string"
+        },
+        "superseding_disposition_at": {
+          "format": "date-time",
+          "title": "Superseding Disposition At",
+          "type": "string"
+        },
+        "acquisition_method": {
+          "const": "received_review_package",
+          "default": "received_review_package",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "acquisition_qualification": {
+          "title": "Acquisition Qualification",
+          "type": "string"
+        },
+        "pdf_path": {
+          "title": "Pdf Path",
+          "type": "string"
+        },
+        "pdf_sha256": {
+          "title": "Pdf Sha256",
+          "type": "string"
+        },
+        "candidate_path": {
+          "title": "Candidate Path",
+          "type": "string"
+        },
+        "candidate_sha256": {
+          "title": "Candidate Sha256",
+          "type": "string"
+        },
+        "review_path": {
+          "title": "Review Path",
+          "type": "string"
+        },
+        "review_sha256": {
+          "title": "Review Sha256",
+          "type": "string"
+        },
+        "provenance_path": {
+          "title": "Provenance Path",
+          "type": "string"
+        },
+        "packet_manifest_sha256": {
+          "title": "Packet Manifest Sha256",
+          "type": "string"
+        },
+        "reconciliation_path": {
+          "title": "Reconciliation Path",
+          "type": "string"
+        },
+        "reconciliation_sha256": {
+          "title": "Reconciliation Sha256",
+          "type": "string"
+        },
+        "superseding_disposition_path": {
+          "title": "Superseding Disposition Path",
+          "type": "string"
+        },
+        "superseding_disposition_sha256": {
+          "title": "Superseding Disposition Sha256",
+          "type": "string"
+        },
+        "package_manifest_sha256": {
+          "title": "Package Manifest Sha256",
+          "type": "string"
+        },
+        "verifier_sha256": {
+          "title": "Verifier Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "source_role",
+        "official_referral_url",
+        "reported_requested_url",
+        "reported_final_url",
+        "reported_acquisition_at",
+        "received_at",
+        "reviewed_at",
+        "external_reconciliation_at",
+        "superseding_disposition_at",
+        "acquisition_qualification",
+        "pdf_path",
+        "pdf_sha256",
+        "candidate_path",
+        "candidate_sha256",
+        "review_path",
+        "review_sha256",
+        "provenance_path",
+        "packet_manifest_sha256",
+        "reconciliation_path",
+        "reconciliation_sha256",
+        "superseding_disposition_path",
+        "superseding_disposition_sha256",
+        "package_manifest_sha256",
+        "verifier_sha256"
+      ],
+      "title": "GridSourceBinding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Return source table evidence with mandatory context and unknown legal dates.",
+  "properties": {
+    "status": {
+      "enum": [
+        "matched",
+        "matched_context_only",
+        "no_matching_row",
+        "refused_current_law"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "source_id": {
+      "enum": [
+        "greeley-development-impact-fee-memo-sd008-07",
+        "greeley-water-sewer-proposed-pif-notice-sd008-08"
+      ],
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-MUNICIPAL-GREELEY",
+      "default": "CO-MUNICIPAL-GREELEY",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "query": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Query"
+    },
+    "evidence_verified": {
+      "title": "Evidence Verified",
+      "type": "boolean"
+    },
+    "source": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/GridSourceBinding"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/GridMatchedRow"
+      },
+      "maxItems": 30,
+      "title": "Rows",
+      "type": "array"
+    },
+    "context": {
+      "items": {
+        "$ref": "#/$defs/GridContext"
+      },
+      "title": "Context",
+      "type": "array"
+    },
+    "context_tables": {
+      "items": {
+        "$ref": "#/$defs/GridRowEvidence"
+      },
+      "title": "Context Tables",
+      "type": "array"
+    },
+    "native_pages": {
+      "items": {
+        "$ref": "#/$defs/GridBlock"
+      },
+      "title": "Native Pages",
+      "type": "array"
+    },
+    "matched_context_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Matched Context Ids",
+      "type": "array"
+    },
+    "date_statements": {
+      "items": {
+        "$ref": "#/$defs/GridContext"
+      },
+      "title": "Date Statements",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "mandatory_qualification": {
+      "title": "Mandatory Qualification",
+      "type": "string"
+    },
+    "boundary": {
+      "default": "The preserved source states these reviewed rows, not current law, a computed charge or a determination of applicability. Printed columns, merged cells, blank cells and source qualifications remain distinct. No match does not establish free, exempt or unregulated activity. Legal dates and later adoption remain unverified.",
+      "title": "Boundary",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "external_review_status": {
+      "const": "reconciled_with_superseding_qualification",
+      "default": "reconciled_with_superseding_qualification",
+      "title": "External Review Status",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "adoption_date": {
+      "default": null,
+      "title": "Adoption Date",
+      "type": "null"
+    },
+    "effective_date": {
+      "default": null,
+      "title": "Effective Date",
+      "type": "null"
+    },
+    "source_edition_date": {
+      "default": null,
+      "title": "Source Edition Date",
+      "type": "null"
+    }
+  },
+  "required": [
+    "status",
+    "source_id",
+    "query",
+    "evidence_verified",
+    "rows",
+    "context",
+    "context_tables",
+    "native_pages",
+    "matched_context_ids",
+    "date_statements",
+    "observations",
+    "mandatory_qualification"
+  ],
+  "title": "GridLookupResult",
+  "type": "object"
+}

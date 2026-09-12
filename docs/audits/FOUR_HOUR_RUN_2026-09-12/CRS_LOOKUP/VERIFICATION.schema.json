@@ -1,0 +1,292 @@
+{
+  "$defs": {
+    "CliCheck": {
+      "additionalProperties": false,
+      "description": "A real isolated CLI invocation from a temporary directory outside the checkout.",
+      "properties": {
+        "section_id": {
+          "title": "Section Id",
+          "type": "string"
+        },
+        "mode": {
+          "enum": [
+            "source_only",
+            "current_law"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Command",
+          "type": "array"
+        },
+        "actual_cwd": {
+          "title": "Actual Cwd",
+          "type": "string"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "completed_at": {
+          "format": "date-time",
+          "title": "Completed At",
+          "type": "string"
+        },
+        "exit_code": {
+          "enum": [
+            0,
+            2
+          ],
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "status": {
+          "enum": [
+            "matched",
+            "outside_scope",
+            "refused_mode"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "stdout": {
+          "$ref": "#/$defs/Ref"
+        },
+        "stderr": {
+          "$ref": "#/$defs/Ref"
+        },
+        "temporary_directory_empty_after": {
+          "const": true,
+          "title": "Temporary Directory Empty After",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "section_id",
+        "mode",
+        "command",
+        "actual_cwd",
+        "started_at",
+        "completed_at",
+        "exit_code",
+        "status",
+        "stdout",
+        "stderr",
+        "temporary_directory_empty_after"
+      ],
+      "title": "CliCheck",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "One exact file with a declared local path base.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Selective-integration checks; no claim of full-suite success or current law.",
+  "properties": {
+    "verified_at": {
+      "format": "date-time",
+      "title": "Verified At",
+      "type": "string"
+    },
+    "status": {
+      "const": "selectively_integrated_pending_root_full_suite",
+      "title": "Status",
+      "type": "string"
+    },
+    "implementation_files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Implementation Files",
+      "type": "array"
+    },
+    "source_manifest": {
+      "$ref": "#/$defs/Ref"
+    },
+    "source_review": {
+      "$ref": "#/$defs/Ref"
+    },
+    "root_source_acceptance": {
+      "$ref": "#/$defs/Ref"
+    },
+    "prototype_manifest": {
+      "$ref": "#/$defs/Ref"
+    },
+    "prototype_manifest_sha256": {
+      "const": "6f0ddee7d2083d2d616456c043691057b96d634a691373cf661d1d0218b5a084",
+      "default": "6f0ddee7d2083d2d616456c043691057b96d634a691373cf661d1d0218b5a084",
+      "title": "Prototype Manifest Sha256",
+      "type": "string"
+    },
+    "prototype_subset_files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Prototype Subset Files",
+      "type": "array"
+    },
+    "prototype_paths_omitted_from_subset": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Prototype Paths Omitted From Subset",
+      "type": "array"
+    },
+    "code_adaptation_diff": {
+      "$ref": "#/$defs/Ref"
+    },
+    "test_adaptation_diff": {
+      "$ref": "#/$defs/Ref"
+    },
+    "focused_test_command": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Focused Test Command",
+      "type": "array"
+    },
+    "focused_test_exit": {
+      "const": 0,
+      "title": "Focused Test Exit",
+      "type": "integer"
+    },
+    "focused_tests_passed": {
+      "const": 81,
+      "title": "Focused Tests Passed",
+      "type": "integer"
+    },
+    "branch_inclusive_coverage_percent": {
+      "maximum": 100,
+      "minimum": 90,
+      "title": "Branch Inclusive Coverage Percent",
+      "type": "number"
+    },
+    "focused_test_log": {
+      "$ref": "#/$defs/Ref"
+    },
+    "cli_checks": {
+      "items": {
+        "$ref": "#/$defs/CliCheck"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "title": "Cli Checks",
+      "type": "array"
+    },
+    "reviewed_ids": {
+      "items": {
+        "enum": [
+          "CRS-1-1-101",
+          "CRS-1-1-102",
+          "CRS-1-1-103"
+        ],
+        "type": "string"
+      },
+      "title": "Reviewed Ids",
+      "type": "array"
+    },
+    "statutory_paragraphs": {
+      "const": 6,
+      "title": "Statutory Paragraphs",
+      "type": "integer"
+    },
+    "native_regions": {
+      "const": 19,
+      "title": "Native Regions",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "full_suite_run": {
+      "const": false,
+      "title": "Full Suite Run",
+      "type": "boolean"
+    },
+    "duplicate_production_source_copy": {
+      "const": false,
+      "title": "Duplicate Production Source Copy",
+      "type": "boolean"
+    },
+    "prior_2025_prototype_changed": {
+      "const": false,
+      "title": "Prior 2025 Prototype Changed",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "verified_at",
+    "status",
+    "implementation_files",
+    "source_manifest",
+    "source_review",
+    "root_source_acceptance",
+    "prototype_manifest",
+    "prototype_subset_files",
+    "prototype_paths_omitted_from_subset",
+    "code_adaptation_diff",
+    "test_adaptation_diff",
+    "focused_test_command",
+    "focused_test_exit",
+    "focused_tests_passed",
+    "branch_inclusive_coverage_percent",
+    "focused_test_log",
+    "cli_checks",
+    "reviewed_ids",
+    "statutory_paragraphs",
+    "native_regions",
+    "public_requests",
+    "full_suite_run",
+    "duplicate_production_source_copy",
+    "prior_2025_prototype_changed",
+    "legal_currentness",
+    "limitations"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}
