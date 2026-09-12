@@ -1,0 +1,66 @@
+{
+  "additionalProperties": false,
+  "description": "Describe checks actually performed, separate from external review claims.",
+  "properties": {
+    "verified_at": {
+      "format": "date-time",
+      "title": "Verified At",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "greeley-building-fees-sd008-06",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "status": {
+      "const": "local_integrity_passed_with_scope_limits",
+      "title": "Status",
+      "type": "string"
+    },
+    "checks": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "boolean"
+          }
+        ]
+      },
+      "title": "Checks",
+      "type": "object"
+    },
+    "supplementary_findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Supplementary Findings",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "verified_at",
+    "source_id",
+    "status",
+    "checks",
+    "supplementary_findings",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Verification",
+  "type": "object"
+}

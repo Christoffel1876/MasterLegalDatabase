@@ -1,0 +1,149 @@
+{
+  "$defs": {
+    "Span": {
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "start": {
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "title": "End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "start",
+        "end",
+        "text",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "physical_pages": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Physical Pages",
+      "type": "array"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "candidate_sha256": {
+      "title": "Candidate Sha256",
+      "type": "string"
+    },
+    "native_sha256": {
+      "title": "Native Sha256",
+      "type": "string"
+    },
+    "native_bytes": {
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "candidate_native_start": {
+      "title": "Candidate Native Start",
+      "type": "integer"
+    },
+    "candidate_native_end": {
+      "title": "Candidate Native End",
+      "type": "integer"
+    },
+    "spans": {
+      "items": {
+        "$ref": "#/$defs/Span"
+      },
+      "title": "Spans",
+      "type": "array"
+    },
+    "source_order": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Order",
+      "type": "array"
+    },
+    "footnote_links": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Footnote Links",
+      "type": "object"
+    },
+    "observations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "files": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Files",
+      "type": "object"
+    },
+    "legal_currentness": {
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "external_report_consulted": {
+      "title": "External Report Consulted",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "source_id",
+    "physical_pages",
+    "method",
+    "source_sha256",
+    "candidate_sha256",
+    "native_sha256",
+    "native_bytes",
+    "candidate_native_start",
+    "candidate_native_end",
+    "spans",
+    "source_order",
+    "footnote_links",
+    "observations",
+    "files",
+    "legal_currentness",
+    "external_report_consulted"
+  ],
+  "title": "Review",
+  "type": "object"
+}

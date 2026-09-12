@@ -1,0 +1,87 @@
+{
+  "$defs": {
+    "Copy": {
+      "additionalProperties": false,
+      "properties": {
+        "historical_path": {
+          "title": "Historical Path",
+          "type": "string"
+        },
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "historical_path",
+        "repository_path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Copy",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "copied_at": {
+      "format": "date-time",
+      "title": "Copied At",
+      "type": "string"
+    },
+    "status": {
+      "const": "accepted_with_superseding_disposition",
+      "title": "Status",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Copy"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "required_superseding_disposition_sha256": {
+      "title": "Required Superseding Disposition Sha256",
+      "type": "string"
+    },
+    "withdrawn_claims": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Withdrawn Claims",
+      "type": "array"
+    },
+    "preserved_source_currentness": {
+      "const": "not_verified",
+      "title": "Preserved Source Currentness",
+      "type": "string"
+    },
+    "canonical_changes": {
+      "const": "none",
+      "title": "Canonical Changes",
+      "type": "string"
+    }
+  },
+  "required": [
+    "copied_at",
+    "status",
+    "files",
+    "required_superseding_disposition_sha256",
+    "withdrawn_claims",
+    "preserved_source_currentness",
+    "canonical_changes"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

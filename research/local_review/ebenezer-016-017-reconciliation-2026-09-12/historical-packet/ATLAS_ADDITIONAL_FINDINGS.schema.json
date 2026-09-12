@@ -1,0 +1,185 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact file identity within this new package.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Binding": {
+      "additionalProperties": false,
+      "description": "Exact historical line identified by a later qualification.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "line": {
+          "minimum": 1,
+          "title": "Line",
+          "type": "integer"
+        },
+        "line_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Line Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "line",
+        "line_sha256"
+      ],
+      "title": "Binding",
+      "type": "object"
+    },
+    "TitleArtifact": {
+      "additionalProperties": false,
+      "description": "Native text exists but is not visible in the directly reviewed full render.",
+      "properties": {
+        "physical_page": {
+          "enum": [
+            2,
+            3
+          ],
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_text": {
+          "title": "Native Text",
+          "type": "string"
+        },
+        "native_start_byte": {
+          "title": "Native Start Byte",
+          "type": "integer"
+        },
+        "native_end_byte_exclusive": {
+          "title": "Native End Byte Exclusive",
+          "type": "integer"
+        },
+        "candidate_start_byte": {
+          "title": "Candidate Start Byte",
+          "type": "integer"
+        },
+        "candidate_end_byte_exclusive": {
+          "title": "Candidate End Byte Exclusive",
+          "type": "integer"
+        },
+        "text_sha256": {
+          "title": "Text Sha256",
+          "type": "string"
+        },
+        "prior_visibility_claim": {
+          "const": "visible",
+          "title": "Prior Visibility Claim",
+          "type": "string"
+        },
+        "atlas_render_observation": {
+          "const": "not_visible_in_checked_render",
+          "title": "Atlas Render Observation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "native_text",
+        "native_start_byte",
+        "native_end_byte_exclusive",
+        "candidate_start_byte",
+        "candidate_end_byte_exclusive",
+        "text_sha256",
+        "prior_visibility_claim",
+        "atlas_render_observation"
+      ],
+      "title": "TitleArtifact",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Qualify a newly found baseline error without rewriting its frozen evidence.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "additive_baseline_visibility_correction",
+      "title": "Status",
+      "type": "string"
+    },
+    "bindings": {
+      "items": {
+        "$ref": "#/$defs/Binding"
+      },
+      "title": "Bindings",
+      "type": "array"
+    },
+    "native_title_artifacts": {
+      "items": {
+        "$ref": "#/$defs/TitleArtifact"
+      },
+      "title": "Native Title Artifacts",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "source_and_candidate_changed": {
+      "const": false,
+      "title": "Source And Candidate Changed",
+      "type": "boolean"
+    },
+    "frozen_baseline_changed": {
+      "const": false,
+      "title": "Frozen Baseline Changed",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "bindings",
+    "native_title_artifacts",
+    "findings",
+    "source_and_candidate_changed",
+    "frozen_baseline_changed",
+    "legal_currentness"
+  ],
+  "title": "Supplement",
+  "type": "object"
+}
