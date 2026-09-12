@@ -1,0 +1,108 @@
+{
+  "recorded_at": "2026-09-12T22:14:14.577517Z",
+  "status": "passed_scoped_change",
+  "baseline_commit": "0a3ba27aaf5358141efb5af2c33c3a6b9043d099",
+  "changed_files": [
+    {
+      "path": "scripts/research_source_lookup.py",
+      "sha256": "69f80d72320d54486c7c6f81a3d7ccb8ea46271c1b72f19d55514ab777920eee",
+      "size_bytes": 50569
+    },
+    {
+      "path": "tests/test_research_source_lookup.py",
+      "sha256": "0d8c76450aaa6c42201740d5be285352dab16ef141099ced543fe9cf20190b9e",
+      "size_bytes": 54278
+    },
+    {
+      "path": "docs/RESEARCH_SOURCE_LOOKUP.md",
+      "sha256": "4c1eda88090ec29e023bb3d515d3862b588cbf4a48ee95032da24493d0207f7d",
+      "size_bytes": 10356
+    }
+  ],
+  "evidence_files": [
+    {
+      "path": "docs/audits/FOUR_HOUR_RUN_2026-09-12/WELD_LOOKUP/README.md",
+      "sha256": "fe6a820fd5c4dd0293a746b6a7b502e72bfdec1fb4906a0d65c6840a41fe0cf3",
+      "size_bytes": 2079
+    },
+    {
+      "path": "docs/audits/FOUR_HOUR_RUN_2026-09-12/WELD_LOOKUP/ROOT_ACCEPTANCE.json",
+      "sha256": "419ed1c5e3de1c98c44612c73728774664f8b681a876e5c7b44b207835cb4dc1",
+      "size_bytes": 8927
+    },
+    {
+      "path": "docs/audits/FOUR_HOUR_RUN_2026-09-12/WELD_LOOKUP/ROOT_ACCEPTANCE.schema.json",
+      "sha256": "f1c5655406c1a261edadc6510dd769a07eea0d54f0de22e016dbd8f12c1861c8",
+      "size_bytes": 2752
+    },
+    {
+      "path": "docs/audits/FOUR_HOUR_RUN_2026-09-12/WELD_LOOKUP/VERIFICATION.schema.json",
+      "sha256": "9a0224270885119d833881edf9500d0a1c30304dddc4d9d0604ae9966f71c5ee",
+      "size_bytes": 3365
+    },
+    {
+      "path": "docs/audits/FOUR_HOUR_RUN_2026-09-12/WELD_LOOKUP/blank-fee-example.json",
+      "sha256": "acf3a6c5871b1076d9c626581b0b46d1b1847e2d468051afec8ac2dd19fce434",
+      "size_bytes": 21512
+    },
+    {
+      "path": "docs/audits/FOUR_HOUR_RUN_2026-09-12/WELD_LOOKUP/context-example.json",
+      "sha256": "36754c3a2e14d2d57efd1658a6749ea8133237a98b1cad16648469bb3f7ee8d0",
+      "size_bytes": 20231
+    },
+    {
+      "path": "docs/audits/FOUR_HOUR_RUN_2026-09-12/WELD_LOOKUP/focused-coverage.json",
+      "sha256": "13df65bff5e0350517dab8e2963d5f4e562ae5f074f5ef92b07df3e676aeb17f",
+      "size_bytes": 40791
+    },
+    {
+      "path": "docs/audits/FOUR_HOUR_RUN_2026-09-12/WELD_LOOKUP/focused-tests.log",
+      "sha256": "0342f83305958842d8916f7ac4662f7b48cbf460f67a16c5dc665ed9b56d6621",
+      "size_bytes": 882
+    },
+    {
+      "path": "docs/audits/FOUR_HOUR_RUN_2026-09-12/WELD_LOOKUP/full-coverage.json",
+      "sha256": "b8314780d497ff5dad893b825970fd256071dd494bea8add0cd897439dbee7c4",
+      "size_bytes": 3087673
+    },
+    {
+      "path": "docs/audits/FOUR_HOUR_RUN_2026-09-12/WELD_LOOKUP/full-tests.log",
+      "sha256": "c5de1d12acfae1f15c0e6ebddd99424466c96874eca0c3146adc007d86b5362c",
+      "size_bytes": 332623
+    }
+  ],
+  "full_test_command": [
+    "PYTHONDONTWRITEBYTECODE=1",
+    "COVERAGE_FILE=/private/tmp/geode-four-hour-full-coverage",
+    "/private/tmp/geode-status-venv/bin/python",
+    "-m",
+    "pytest",
+    "tests/",
+    "-v",
+    "--cov=geode",
+    "--cov-report=term-missing",
+    "--cov-report=json:/private/tmp/geode-four-hour-full-coverage.json"
+  ],
+  "full_test_summary": "2024 passed, 124 warnings in 314.97s (0:05:14)",
+  "full_test_exit_code": 0,
+  "focused_test_count": 144,
+  "focused_combined_coverage_percent": 95.90268886043533,
+  "full_geode_combined_coverage_percent": 77.58063406918369,
+  "independent_cli_cases_passed": 8,
+  "source_counts": {
+    "grand_junction_fire_rows": 57,
+    "greeley_building_entries": 19,
+    "weld_ehs_rows": 137,
+    "weld_ehs_groups": 11,
+    "weld_ehs_native_lines": 313
+  },
+  "source_evidence_unchanged": true,
+  "limitations": [
+    "No adoption/currentness/applicability or fee calculation",
+    "Overall coverage remains below90%; focused changed module exceeds90%",
+    "Original retrieval catalog, county index and review queue still unavailable",
+    "Counts describe reviewed extraction scope, not statewide regulatory completeness"
+  ],
+  "legal_currentness": "not_verified",
+  "answer_safe": false
+}

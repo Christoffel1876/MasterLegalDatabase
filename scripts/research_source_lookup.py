@@ -1,4 +1,4 @@
-"""Look up two fixed source reviews without current-law or applicability claims."""
+"""Look up three fixed source reviews without current-law or applicability claims."""
 
 from __future__ import annotations
 
@@ -12,8 +12,9 @@ import subprocess
 import sys
 import unicodedata
 from pathlib import Path
-from typing import Literal
+from typing import Any, Literal
 
+import jsonschema
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, model_validator
 
 SOURCE_ID = "grand-junction-fire-fees-atlas-directed"
@@ -62,6 +63,42 @@ BOUNDARY = (
     "57-row snapshot, not current law, an applicability decision or a fee calculation. "
     "No matching row does not establish that a service is free, exempt or unregulated."
 )
+WELD_SOURCE_ID = "weld-ehs-fees-2026-atlas-directed"
+WELD_PACKAGE = Path("research/local_review/weld-directed-atlas-source-review-2026-09-11")
+WELD_INTAKE = Path("research/local_review/weld-directed-intake-2026-09-11")
+WELD_REVIEW = "frozen/ehs/SOURCE_QA.json"
+WELD_PDF = "frozen/ehs/original.pdf"
+WELD_PINS = {
+    "evidence-manifest.json":
+        "7928dbd366f95db4eddcfece663d6372265e4e1cc09f72b9cf6349220f1e78b0",
+    "evidence-manifest.schema.json":
+        "96890bd6a6bfc3577cad5784a81c737b6dffac6da328d6e3b5d99afee1824d88",
+    "package-record.json":
+        "cdb534f7012b5e38d65f7b34cffe69d2cc3c3484cdfbbc0ee6039d883f2238c5",
+    WELD_REVIEW: "468658770c7f755c00dc844a2a62d1ce8c6afd458ba760a20fedfef2480ee97e",
+    WELD_PDF: "852801c5ad0056c7b0dde6300e66e86f2e4235ce0efc16471d5210d74aa17ed3",
+    "frozen/ehs/build_review.py":
+        "a9411fb842d9cd1d1c7064601c01120121986e03827ee96f7cb1234ed1fe8f65",
+}
+WELD_INTAKE_PINS = {
+    "intake-receipt.json":
+        "13e1de8f33a6af1cd36a70d74c9b4275e07c2bcc0a832e53c100e55e3a0dcdaa",
+}
+WELD_BOUNDARY = (
+    "The preserved source states these rows and notes. This is a checked three-page "
+    "snapshot of 137 rows in eleven environmental-health service groups, not current "
+    "law, an applicability decision or a fee calculation. A visibly blank fee is not "
+    "zero; no matching row does not establish that a service is free, exempt or "
+    "unregulated. Page notes retain their source scope; no contract replacement "
+    "amount, adopting resolution or later amendment was reviewed."
+)
+WELD_VERIFICATION = {
+    "status": "passed", "pages": 3, "native_bytes": 7367, "groups": 11, "rows": 137,
+    "printed_fee_cells": 136, "blank_fee_cells": 1, "native_lines": 313,
+    "row_geometry_checked": True, "legal_currentness": "not_verified",
+}
+
+
 CURRENT_REQUEST = re.compile(
     r"\b(current(?:ly)?|today|now|latest|applicab\w*|appl(?:y|ies)|effective|"
     r"legal(?:ly)?|in force|calculate|calculation|owe|total cost)\b|"
@@ -243,6 +280,118 @@ class GreeleyLookupResult(StrictModel):
     source_edition_date: None = None
 
 
+class WeldBlock(SpanBinding):
+    """Keep an exact native line and its reviewed role, without text repair."""
+
+    text: str
+    role: Literal["blank", "header", "footer", "group", "label", "fee", "note"]
+
+    @model_validator(mode="after")
+    def check_bytes(self) -> WeldBlock:
+        """Check text length, digest and physical byte coordinates."""
+        raw = self.text.encode("utf-8")
+        if (self.physical_page not in {1, 2, 3} or self.start < 0
+                or self.end - self.start != len(raw) or not raw
+                or hashlib.sha256(raw).hexdigest() != self.sha256):
+            raise ValueError("Weld native byte binding mismatch")
+        return self
+
+
+class WeldRow(StrictModel):
+    """Retain one fee cell, its possibly wrapped label and only its own row notes."""
+
+    row_id: str
+    physical_page: Literal[1, 2, 3]
+    group: WeldBlock
+    labels: list[WeldBlock] = Field(min_length=1)
+    fee: WeldBlock | None
+    fee_cell_status: Literal["printed_text", "visibly_blank"]
+    notes: list[WeldBlock]
+    page_image_path: str
+
+    @model_validator(mode="after")
+    def check_associations(self) -> WeldRow:
+        """A blank is not a printed amount; all row spans retain roles and page."""
+        if (self.fee is None) != (self.fee_cell_status == "visibly_blank"):
+            raise ValueError("Weld fee presence/status mismatch")
+        associations = [(self.group, "group")]
+        associations += [(b, "label") for b in self.labels]
+        associations += [(b, "note") for b in self.notes]
+        if self.fee is not None:
+            associations.append((self.fee, "fee"))
+        if any(b.role != role or b.physical_page != self.physical_page
+               for b, role in associations):
+            raise ValueError("Weld row role/page mismatch")
+        return self
+
+
+class WeldPageContext(StrictModel):
+    """Separate page notes and native header visibility from row applicability."""
+
+    physical_page: Literal[1, 2, 3]
+    header_visible: bool
+    page_image_path: str
+    spans: list[WeldBlock]
+    scope: Literal["page_context_not_inferred_row_applicability"] = (
+        "page_context_not_inferred_row_applicability"
+    )
+
+
+class WeldSourceBinding(StrictModel):
+    """Bind county ownership, reviewed bytes and three distinct provenance clocks."""
+
+    canonical_source_id: Literal["weld-ehs-fees-2026-atlas-directed"] = WELD_SOURCE_ID
+    authority_id: Literal["CO-COUNTY-WELD"] = "CO-COUNTY-WELD"
+    source_role: Literal["county_environmental_health_services_fee_schedule"]
+    source_url: str
+    final_url: str
+    http_started_at: AwareDatetime
+    source_retrieved_at: AwareDatetime
+    reviewed_at: AwareDatetime
+    received_at: AwareDatetime
+    http_status: Literal[200] = 200
+    tls_verified: Literal[True] = True
+    acquisition_method: Literal["manual_official_download"] = "manual_official_download"
+    acquisition_description: str
+    intake_status: Literal["archived_pending_pipeline"] = "archived_pending_pipeline"
+    pdf_sha256: str
+    review_sha256: str
+    manifest_sha256: str
+    verifier_sha256: str
+    intake_receipt_sha256: str
+    pdf_path: str
+    review_path: str
+    provenance_path: str
+    access_receipt_path: str
+    access_receipt_sha256: str
+    review_mode: Literal["atlas_candidate_aware_direct_source_review"]
+    source_year_assertion: Literal["2026"] = "2026"
+    year_interpretation: Literal["source_claim_only_not_verified_legal_date"] = (
+        "source_claim_only_not_verified_legal_date"
+    )
+
+
+class WeldLookupResult(StrictModel):
+    """Expose reviewed EHS evidence with null legal dates and a distinct context match."""
+
+    status: Literal["matched", "matched_context_only", "no_matching_row", "refused_current_law"]
+    source_id: Literal["weld-ehs-fees-2026-atlas-directed"] = WELD_SOURCE_ID
+    authority_id: Literal["CO-COUNTY-WELD"] = "CO-COUNTY-WELD"
+    query: str | None
+    evidence_verified: bool
+    source: WeldSourceBinding | None = None
+    rows: list[WeldRow] = Field(max_length=137)
+    page_context: list[WeldPageContext] = Field(max_length=3)
+    matched_context_ids: list[str]
+    observations: list[str]
+    boundary: str = WELD_BOUNDARY
+    legal_currentness: Literal["not_verified"] = "not_verified"
+    answer_safe: Literal[False] = False
+    adoption_date: None = None
+    effective_date: None = None
+    source_edition_date: None = None
+
+
 def _digest(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
@@ -357,6 +506,188 @@ def _load_greeley_verified(package: Path) -> tuple[dict, dict, bytes]:
     return json.loads(review), json.loads(packet), candidate
 
 
+def _weld_ref(package: Path, ref: dict[str, Any]) -> Path:
+    """Resolve a bounded, hash-bound ordinary artifact without following links."""
+    path = _safe_file(package, ref["path"])
+    size = path.stat().st_size
+    if size > 20_000_000 or size != ref["size_bytes"] or _digest(path) != ref["sha256"]:
+        raise ValueError(f"Weld evidence mismatch: {ref['path']}")
+    return path
+
+
+def _check_weld_package(root: Path) -> dict[str, str]:
+    """Verify the closed review inventory and only the frozen intake dependencies used."""
+    package, intake = root / WELD_PACKAGE, root / WELD_INTAKE
+    hashes = {}
+    for base, pins in [(package, WELD_PINS), (intake, WELD_INTAKE_PINS)]:
+        for name, expected in pins.items():
+            path = _safe_file(base, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError(f"Frozen Weld evidence hash/size mismatch: {name}")
+            hashes[str(path)] = expected
+    manifest = json.loads((package / "evidence-manifest.json").read_bytes())
+    refs = manifest["files"]
+    inventory = {r["path"]: r for r in refs}
+    if len(inventory) != len(refs):
+        raise ValueError("Duplicate Weld inventory path")
+    expected = set(inventory) | {"evidence-manifest.json", "evidence-manifest.schema.json"}
+    expected_dirs = {str(p) for name in expected for p in Path(name).parents if str(p) != "."}
+    actual, actual_dirs = set(), set()
+    for path in package.rglob("*"):
+        if path.is_symlink():
+            raise ValueError("Symlinked Weld package entry")
+        name = path.relative_to(package).as_posix()
+        if path.is_dir():
+            actual_dirs.add(name)
+        else:
+            actual.add(name)
+    if actual != expected or actual_dirs != expected_dirs:
+        raise ValueError("Missing or uninventoried Weld package entry")
+    for ref in refs:
+        path = _weld_ref(package, ref)
+        hashes[str(path)] = ref["sha256"]
+    receipt = json.loads((intake / "intake-receipt.json").read_bytes())
+    for key in ["record_stream", "provenance_stream", "record_schema", "source_schema"]:
+        ref = receipt[key]
+        hashes[str(_weld_ref(intake, ref))] = ref["sha256"]
+    sources = [s for s in receipt["sources"] if s["source_id"] == WELD_SOURCE_ID]
+    if len(sources) != 1:
+        raise ValueError("Weld intake source identity mismatch")
+    for key in ["access_receipt", "public_headers"]:
+        ref = sources[0][key]
+        hashes[str(_weld_ref(intake, ref))] = ref["sha256"]
+    return hashes
+
+
+def _load_weld_verified(root: Path) -> tuple[dict, dict]:
+    """Run only the pinned EHS verifier; historical absolute paths are never opened."""
+    before = _check_weld_package(root)
+    package, intake = root / WELD_PACKAGE, root / WELD_INTAKE
+    review = (package / WELD_REVIEW).read_bytes()
+    receipt = json.loads((intake / "intake-receipt.json").read_bytes())
+    try:
+        result = subprocess.run(
+            [sys.executable, "-I", "-B", str(package / "frozen/ehs/build_review.py"), "--verify"],
+            cwd=package / "frozen/ehs", check=True, capture_output=True, text=True, timeout=30,
+        )
+        prefix = "WARNING:root:"
+        if (result.stdout.strip() or not result.stderr.startswith(prefix)
+                or json.loads(result.stderr[len(prefix):]) != WELD_VERIFICATION):
+            raise ValueError("Weld verification receipt mismatch")
+    except (subprocess.SubprocessError, OSError, ValueError) as exc:
+        raise ValueError("Existing Weld source-package verification failed") from exc
+    if _check_weld_package(root) != before:
+        raise ValueError("Weld evidence changed during verification")
+    rows = {}
+    for stream, schema, field in [("record_stream", "record_schema", "record_id"),
+                                   ("provenance_stream", "source_schema", "source_id")]:
+        validator = jsonschema.Draft202012Validator(json.loads(
+            (intake / receipt[schema]["path"]).read_bytes()))
+        selected = []
+        with (intake / receipt[stream]["path"]).open("rb") as handle:
+            for line in handle:
+                row = json.loads(line)
+                try:
+                    validator.validate(row)
+                except jsonschema.ValidationError as exc:
+                    raise ValueError("Weld frozen intake schema mismatch") from exc
+                if row[field] == WELD_SOURCE_ID:
+                    selected.append(row)
+        if len(selected) != 1:
+            raise ValueError("Weld final intake record identity mismatch")
+        rows[stream] = selected[0]
+    data = json.loads(review)
+    source = rows["provenance_stream"]
+    record = rows["record_stream"]
+    event = [e for e in json.loads((package / "frozen/ehs/ACCESS_RESULT.json").read_bytes())[
+        "events"] if e["event_id"] == "ATLAS-WELD-04"][0]
+    if (source not in receipt["sources"] or data["source_id"] != WELD_SOURCE_ID
+            or source["authority_id"] != "CO-COUNTY-WELD"
+            or source["canonical_original"]["sha256"] != WELD_PINS[WELD_PDF]
+            or record["sha256"] != WELD_PINS[WELD_PDF]
+            or record["layer_id"] != "08_County_Authorities"
+            or (record["status"], source["pipeline_status"]) != (
+                "archived_pending_pipeline", "archived_pending_pipeline")
+            or record["received_at"] != source["repository_received_at"]
+            or record["official_source_url"] != source["exact_requested_url"]
+            or source["exact_requested_url"] != source["exact_final_url"]
+            or event["retained_original"]["sha256"] != record["sha256"]
+            or event["exact_target_url"] != source["exact_requested_url"]
+            or event["finished_at"] != source["http_completed_at"]):
+        raise ValueError("Weld source/custody relationship mismatch")
+    if _check_weld_package(root) != before:
+        raise ValueError("Weld evidence changed while reading custody records")
+    return data, source
+
+
+def _lookup_weld(root: Path, query: str | None) -> WeldLookupResult:
+    """Preserve complete row associations and separately searchable page context."""
+    data, provenance = _load_weld_verified(root)
+    package = root / WELD_PACKAGE
+    base = package / "frozen/ehs"
+    spans = {s["id"]: (p, s) for p in data["pages"] for s in p["spans"]}
+
+    def bind(identity: str) -> WeldBlock:
+        """Bind one unchanged reviewed line to its physical native page."""
+        page, span = spans[identity]
+        native = _safe_file(base, page["native"]["path"])
+        raw = span["text"].encode("utf-8")
+        if native.read_bytes()[span["start"]:span["end"]] != raw:
+            raise ValueError("Weld native slice mismatch")
+        return WeldBlock(
+            **span, physical_page=page["physical_page"], native_path=str(native),
+            sha256=hashlib.sha256(raw).hexdigest(),
+        )
+
+    rows, used = [], set()
+    for row in data["rows"]:
+        group = bind(row["group_span"])
+        labels = [bind(i) for i in row["label_spans"]]
+        fee = bind(row["fee_span"]) if row["fee_span"] is not None else None
+        notes = [bind(i) for i in row["note_spans"]]
+        blocks = [group, *labels, *notes, *([fee] if fee else [])]
+        used.update(b.id for b in blocks)
+        if _matches(query, "".join(b.text for b in blocks)):
+            rows.append(WeldRow(
+                row_id=row["id"], physical_page=row["physical_page"], group=group,
+                labels=labels, fee=fee, fee_cell_status=row["fee_cell_status"], notes=notes,
+                page_image_path=str(base / data["pages"][row["physical_page"] - 1][
+                    "image"]["path"]),
+            ))
+    context = [WeldPageContext(
+        physical_page=p["physical_page"], header_visible=p["header_visible"],
+        page_image_path=str(base / p["image"]["path"]),
+        spans=[bind(s["id"]) for s in p["spans"] if s["id"] not in used],
+    ) for p in data["pages"]]
+    matched_context = [b.id for p in context for b in p.spans
+                       if query is not None and b.text.strip() and _matches(query, b.text)]
+    source = WeldSourceBinding.model_validate_json(json.dumps({
+        "source_role": provenance["source_role"],
+        "source_url": provenance["exact_requested_url"],
+        "final_url": provenance["exact_final_url"],
+        "http_started_at": provenance["http_started_at"],
+        "source_retrieved_at": provenance["http_completed_at"],
+        "reviewed_at": data["reviewed_at"], "received_at": provenance["repository_received_at"],
+        "acquisition_description": provenance["acquisition_description"],
+        "pdf_sha256": WELD_PINS[WELD_PDF], "review_sha256": WELD_PINS[WELD_REVIEW],
+        "manifest_sha256": WELD_PINS["evidence-manifest.json"],
+        "verifier_sha256": WELD_PINS["frozen/ehs/build_review.py"],
+        "intake_receipt_sha256": WELD_INTAKE_PINS["intake-receipt.json"],
+        "pdf_path": str(package / WELD_PDF), "review_path": str(package / WELD_REVIEW),
+        "provenance_path": str(root / WELD_INTAKE / "intake-receipt.json"),
+        "access_receipt_path": str(root / WELD_INTAKE / provenance["access_receipt"]["path"]),
+        "access_receipt_sha256": provenance["access_receipt"]["sha256"],
+        "review_mode": data["review_mode"], "source_year_assertion": data["source_year_assertion"],
+    }))
+    return WeldLookupResult(
+        status="matched" if rows else ("matched_context_only" if matched_context
+                                       else "no_matching_row"),
+        query=query, evidence_verified=True, source=source, rows=rows, page_context=context,
+        matched_context_ids=matched_context, observations=[o["statement"] for o in data[
+            "observations"]],
+    )
+
+
 def _search_text(text: str) -> str:
     return " ".join(unicodedata.normalize("NFKC", text).casefold().split())
 
@@ -467,10 +798,10 @@ def lookup(
     *,
     list_rows: bool = False,
     mode: Literal["source", "current-law"] = "source",
-) -> LookupResult | GreeleyLookupResult:
+) -> LookupResult | GreeleyLookupResult | WeldLookupResult:
     """Verify a fixed source and return unchanged evidence for a literal keyword phrase."""
-    if source_id not in {SOURCE_ID, GREELEY_SOURCE_ID}:
-        raise ValueError("Unsupported source; only the two fixed reviewed sources are available")
+    if source_id not in {SOURCE_ID, GREELEY_SOURCE_ID, WELD_SOURCE_ID}:
+        raise ValueError("Unsupported source; only the three fixed reviewed sources are available")
     if mode not in {"source", "current-law"}:
         raise ValueError("Unsupported lookup mode")
     if list_rows == (query is not None):
@@ -478,6 +809,14 @@ def lookup(
     if query is not None and not query.strip():
         raise ValueError("A nonempty keyword phrase is required")
     if mode == "current-law" or (query is not None and CURRENT_REQUEST.search(query)):
+        if source_id == WELD_SOURCE_ID:
+            return WeldLookupResult(
+                status="refused_current_law", query=query, evidence_verified=False,
+                rows=[], page_context=[], matched_context_ids=[], observations=[
+                    "Current-law and question answering are unsupported; use keywords "
+                    "only to inspect what this preserved source says.",
+                ],
+            )
         if source_id == GREELEY_SOURCE_ID:
             return GreeleyLookupResult(
                 status="refused_current_law", query=query, evidence_verified=False,
@@ -494,6 +833,8 @@ def lookup(
     root = root.expanduser().absolute()
     if ".." in root.parts:
         raise ValueError("Use a root without parent traversal")
+    if source_id == WELD_SOURCE_ID:
+        return _lookup_weld(root, query)
     if source_id == GREELEY_SOURCE_ID:
         return _lookup_greeley(root / GREELEY_PACKAGE, query)
     package = root / PACKAGE
@@ -602,8 +943,62 @@ def _render_greeley(result: GreeleyLookupResult) -> str:
     return "\n".join(lines) + "\n"
 
 
-def render_markdown(result: LookupResult | GreeleyLookupResult) -> str:
+def _render_weld(result: WeldLookupResult) -> str:
+    """Render exact fee text, explicit blanks and scoped notes without calculation."""
+    lines = [
+        "Source-only research lookup — legal_currentness: not_verified; answer_safe: false.",
+        "", result.boundary, "", "Adoption date: unknown. Effective date: unknown. "
+        "Verified source edition date: unknown. Source year assertion: 2026.", "",
+    ]
+    if result.status == "refused_current_law":
+        return "\n".join(lines + ["Request refused. " + result.observations[0], ""])
+    source = result.source
+    if source is None:
+        raise ValueError("Verified Weld source binding is required")
+    lines += [
+        f"Source: `{result.source_id}`. Authority: `{result.authority_id}`.", "",
+        f"[Official source]({source.source_url})", "",
+        f"- HTTP retrieval: {source.source_retrieved_at.isoformat()}.",
+        f"- Source review: {source.reviewed_at.isoformat()}.",
+        f"- Repository receipt: {source.received_at.isoformat()}.",
+        f"- PDF SHA-256: `{source.pdf_sha256}`.",
+        f"- Review SHA-256: `{source.review_sha256}`.", "",
+        source.acquisition_description, "",
+        _link("Preserved PDF", source.pdf_path) + " · "
+        + _link("Checked review", source.review_path) + " · "
+        + _link("Frozen intake custody", source.provenance_path), "",
+    ]
+    if not result.rows:
+        lines += ["No matching fee row in this preserved source snapshot.", ""]
+    if result.matched_context_ids:
+        lines += ["Matching page context: " + ", ".join(result.matched_context_ids) + ".", ""]
+    for row in result.rows:
+        lines += [f"**{row.row_id} — physical page {row.physical_page}**", "",
+                  "- Group: " + _markdown(row.group.text),
+                  "- Label: " + _markdown("".join(b.text for b in row.labels))]
+        lines += ["- Printed fee: " + _markdown(row.fee.text) if row.fee else
+                  "- Fee cell: visibly blank (no amount supplied; not zero)."]
+        lines += ["- Linked row note: " + _markdown(b.text) for b in row.notes]
+        blocks = [row.group, *row.labels, *row.notes, *([row.fee] if row.fee else [])]
+        lines += ["- Native spans: " + ", ".join(
+            f"`{b.id}` [{b.start}, {b.end})" for b in blocks) + ".", "",
+            _link("Full page image", row.page_image_path), ""]
+    lines += ["Complete page context (no inferred row applicability):", ""]
+    for page in result.page_context:
+        lines += [f"Physical page {page.physical_page}; native header visible in source render: "
+                  f"{'yes' if page.header_visible else 'no'}.", ""]
+        lines += [f"- `{b.id}` ({b.role}): {_markdown(b.text)}" for b in page.spans
+                  if b.role != "blank"]
+        lines.append("")
+    lines += ["Source-review qualifications:", ""]
+    lines += ["- " + _markdown(note) for note in result.observations]
+    return "\n".join(lines) + "\n"
+
+
+def render_markdown(result: LookupResult | GreeleyLookupResult | WeldLookupResult) -> str:
     """Render quoted source rows and their evidence links without calculating fees."""
+    if isinstance(result, WeldLookupResult):
+        return _render_weld(result)
     if isinstance(result, GreeleyLookupResult):
         return _render_greeley(result)
     lines = ["Source-only research lookup — legal_currentness: not_verified; answer_safe: false.",

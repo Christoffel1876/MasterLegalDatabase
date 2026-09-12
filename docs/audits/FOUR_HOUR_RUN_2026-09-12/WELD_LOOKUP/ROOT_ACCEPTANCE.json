@@ -1,0 +1,238 @@
+{
+  "recorded_at": "2026-09-12T22:09:37.727665Z",
+  "status": "passed",
+  "implementation_sha256": "69f80d72320d54486c7c6f81a3d7ccb8ea46271c1b72f19d55514ab777920eee",
+  "evidence_unchanged": true,
+  "runs": [
+    {
+      "name": "weld-all",
+      "command": [
+        "/private/tmp/geode-status-venv/bin/python",
+        "-I",
+        "-B",
+        "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/scripts/research_source_lookup.py",
+        "--root",
+        "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+        "--source-id",
+        "weld-ehs-fees-2026-atlas-directed",
+        "--format",
+        "json",
+        "--list-rows"
+      ],
+      "started_at": "2026-09-12T22:09:31.311459Z",
+      "finished_at": "2026-09-12T22:09:32.200512Z",
+      "exit_code": 0,
+      "status": "matched",
+      "result_count": 137,
+      "assertions": [
+        "CLI exit code and exact result count matched",
+        "Strict output model validated; legal_currentness not_verified, answer_safe false",
+        "All137 rows in11 groups; all3page contexts; verified legal dates remain null"
+      ],
+      "stdout_sha256": "bb29b39807dc84c8d6705e6c38cb6d7f6cc1b3ae516162e54d78c74cda3cf2c8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "weld-blank",
+      "command": [
+        "/private/tmp/geode-status-venv/bin/python",
+        "-I",
+        "-B",
+        "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/scripts/research_source_lookup.py",
+        "--root",
+        "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+        "--source-id",
+        "weld-ehs-fees-2026-atlas-directed",
+        "--format",
+        "json",
+        "--query",
+        "file review"
+      ],
+      "started_at": "2026-09-12T22:09:32.202027Z",
+      "finished_at": "2026-09-12T22:09:33.078981Z",
+      "exit_code": 0,
+      "status": "matched",
+      "result_count": 1,
+      "assertions": [
+        "CLI exit code and exact result count matched",
+        "Strict output model validated; legal_currentness not_verified, answer_safe false",
+        "R062 remains a visibly blank null fee, distinct from printed zero"
+      ],
+      "stdout_sha256": "acf3a6c5871b1076d9c626581b0b46d1b1847e2d468051afec8ac2dd19fce434",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "weld-context",
+      "command": [
+        "/private/tmp/geode-status-venv/bin/python",
+        "-I",
+        "-B",
+        "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/scripts/research_source_lookup.py",
+        "--root",
+        "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+        "--source-id",
+        "weld-ehs-fees-2026-atlas-directed",
+        "--format",
+        "json",
+        "--query",
+        "contract approved"
+      ],
+      "started_at": "2026-09-12T22:09:33.081220Z",
+      "finished_at": "2026-09-12T22:09:33.945791Z",
+      "exit_code": 0,
+      "status": "matched_context_only",
+      "result_count": 0,
+      "assertions": [
+        "CLI exit code and exact result count matched",
+        "Strict output model validated; legal_currentness not_verified, answer_safe false",
+        "Contract exception is a context-only match with all page context retained"
+      ],
+      "stdout_sha256": "36754c3a2e14d2d57efd1658a6749ea8133237a98b1cad16648469bb3f7ee8d0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "weld-condition",
+      "command": [
+        "/private/tmp/geode-status-venv/bin/python",
+        "-I",
+        "-B",
+        "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/scripts/research_source_lookup.py",
+        "--root",
+        "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+        "--source-id",
+        "weld-ehs-fees-2026-atlas-directed",
+        "--format",
+        "json",
+        "--query",
+        "excess of 4 hours"
+      ],
+      "started_at": "2026-09-12T22:09:33.947548Z",
+      "finished_at": "2026-09-12T22:09:34.762604Z",
+      "exit_code": 0,
+      "status": "matched",
+      "result_count": 1,
+      "assertions": [
+        "CLI exit code and exact result count matched",
+        "Strict output model validated; legal_currentness not_verified, answer_safe false",
+        "Excess-four-hours condition remains attached to R084 only"
+      ],
+      "stdout_sha256": "bc29673b94ddc422834497e8d99f8cd189b013f0c0223e915cc9c73299b940a4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "weld-zero",
+      "command": [
+        "/private/tmp/geode-status-venv/bin/python",
+        "-I",
+        "-B",
+        "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/scripts/research_source_lookup.py",
+        "--root",
+        "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+        "--source-id",
+        "weld-ehs-fees-2026-atlas-directed",
+        "--format",
+        "json",
+        "--query",
+        "0.00"
+      ],
+      "started_at": "2026-09-12T22:09:34.762983Z",
+      "finished_at": "2026-09-12T22:09:35.571478Z",
+      "exit_code": 0,
+      "status": "matched",
+      "result_count": 2,
+      "assertions": [
+        "CLI exit code and exact result count matched",
+        "Strict output model validated; legal_currentness not_verified, answer_safe false",
+        "Both printed-zero rows preserved separately from blank R062"
+      ],
+      "stdout_sha256": "83615176d3fe811792e7b33e786421e7ea5bb8b9e83b8b664569a42c71079855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "weld-refusal",
+      "command": [
+        "/private/tmp/geode-status-venv/bin/python",
+        "-I",
+        "-B",
+        "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/scripts/research_source_lookup.py",
+        "--root",
+        "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+        "--source-id",
+        "weld-ehs-fees-2026-atlas-directed",
+        "--format",
+        "json",
+        "--list-rows",
+        "--mode",
+        "current-law"
+      ],
+      "started_at": "2026-09-12T22:09:35.571899Z",
+      "finished_at": "2026-09-12T22:09:35.796598Z",
+      "exit_code": 2,
+      "status": "refused_current_law",
+      "result_count": 0,
+      "assertions": [
+        "CLI exit code and exact result count matched",
+        "Strict output model validated; legal_currentness not_verified, answer_safe false",
+        "Current-law mode refuses before returning evidence"
+      ],
+      "stdout_sha256": "95441ea4bcd17032ef3f501b154fd07814834552961688d462332c2338f980a6",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "grand-junction-regression",
+      "command": [
+        "/private/tmp/geode-status-venv/bin/python",
+        "-I",
+        "-B",
+        "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/scripts/research_source_lookup.py",
+        "--root",
+        "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+        "--source-id",
+        "grand-junction-fire-fees-atlas-directed",
+        "--format",
+        "json",
+        "--list-rows"
+      ],
+      "started_at": "2026-09-12T22:09:35.796873Z",
+      "finished_at": "2026-09-12T22:09:36.375971Z",
+      "exit_code": 0,
+      "status": "matched",
+      "result_count": 57,
+      "assertions": [
+        "CLI exit code and exact result count matched",
+        "Strict output model validated; legal_currentness not_verified, answer_safe false"
+      ],
+      "stdout_sha256": "24a70839cb4be2d3e828d1d96f5f580ec229028a0d7a210eb02871994b3691aa",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "greeley-regression",
+      "command": [
+        "/private/tmp/geode-status-venv/bin/python",
+        "-I",
+        "-B",
+        "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/scripts/research_source_lookup.py",
+        "--root",
+        "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+        "--source-id",
+        "greeley-building-fees-sd008-06",
+        "--format",
+        "json",
+        "--list-rows"
+      ],
+      "started_at": "2026-09-12T22:09:36.376587Z",
+      "finished_at": "2026-09-12T22:09:37.687964Z",
+      "exit_code": 0,
+      "status": "matched",
+      "result_count": 19,
+      "assertions": [
+        "CLI exit code and exact result count matched",
+        "Strict output model validated; legal_currentness not_verified, answer_safe false"
+      ],
+      "stdout_sha256": "09eebf3ed928b36344f2d602649508956c06fdcd11e3f7d9b8f8c0e1fc23de2a",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "legal_currentness": "not_verified",
+  "answer_safe": false
+}

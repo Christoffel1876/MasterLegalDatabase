@@ -596,3 +596,450 @@ def test_greeley_cli_list_refusal_and_owner_separation(capsys: pytest.CaptureFix
     gj = lookup.lookup(ROOT, lookup.SOURCE_ID, "burn permit")
     assert gj.authority_id == gj.source.authority_id == "CO-MUNICIPAL-GRAND_JUNCTION"
     assert gj.source_id != gj.authority_id
+
+
+@pytest.fixture
+def weld_root(tmp_path: Path) -> Path:
+    """Copy the frozen review and only the immutable intake dependencies consumed."""
+    shutil.copytree(ROOT / lookup.WELD_PACKAGE, tmp_path / lookup.WELD_PACKAGE,
+                    copy_function=shutil.copyfile)
+    intake = ROOT / lookup.WELD_INTAKE
+    receipt = json.loads((intake / "intake-receipt.json").read_bytes())
+    names = ["intake-receipt.json"]
+    names += [receipt[k]["path"] for k in (
+        "record_stream", "record_schema", "provenance_stream", "source_schema")]
+    source = next(s for s in receipt["sources"] if s["source_id"] == lookup.WELD_SOURCE_ID)
+    names += [source[k]["path"] for k in ("access_receipt", "public_headers")]
+    for name in names:
+        path = tmp_path / lookup.WELD_INTAKE / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(intake / name, path)
+    return tmp_path
+
+
+@pytest.fixture(scope="module")
+def weld_all() -> lookup.WeldLookupResult:
+    """Use the real verifier once for association and output-model assertions."""
+    return lookup.lookup(ROOT, lookup.WELD_SOURCE_ID, list_rows=True)
+
+
+def test_weld_every_row_group_and_all_native_bytes_survive(
+    weld_all: lookup.WeldLookupResult,
+) -> None:
+    """All 313 original lines remain reachable without merging any of the 137 rows."""
+    source = json.loads((ROOT / lookup.WELD_PACKAGE / lookup.WELD_REVIEW).read_bytes())
+    assert len(weld_all.rows) == len({r.row_id for r in weld_all.rows}) == 137
+    assert weld_all.status == "matched" and weld_all.evidence_verified
+    grouped: dict[str, int] = {}
+    bound = {}
+    for row, original in zip(weld_all.rows, source["rows"], strict=True):
+        assert row.row_id == original["id"]
+        assert row.physical_page == original["physical_page"]
+        assert row.group.id == original["group_span"]
+        assert [b.id for b in row.labels] == original["label_spans"]
+        assert (row.fee.id if row.fee else None) == original["fee_span"]
+        assert row.fee_cell_status == original["fee_cell_status"]
+        assert [b.id for b in row.notes] == original["note_spans"]
+        blocks = [row.group, *row.labels, *row.notes, *([row.fee] if row.fee else [])]
+        bound.update({b.id: b for b in blocks})
+        grouped[row.group.id] = grouped.get(row.group.id, 0) + 1
+    assert list(grouped.values()) == [7, 8, 32, 4, 12, 20, 2, 5, 41, 3, 3]
+    assert [(p.physical_page, p.header_visible) for p in weld_all.page_context] == [
+        (1, True), (2, False), (3, False)]
+    for page in weld_all.page_context:
+        assert not (set(bound) & {b.id for b in page.spans})
+        bound.update({b.id: b for b in page.spans})
+    assert len(bound) == 313
+    assert sum(len(b.text.encode()) for b in bound.values()) == 7367
+    for page in source["pages"]:
+        native = (ROOT / lookup.WELD_PACKAGE / "frozen/ehs" / page["native"]["path"]).read_bytes()
+        for span in page["spans"]:
+            b = bound[span["id"]]
+            assert b.text == span["text"] == native[b.start:b.end].decode()
+            assert b.sha256 == hashlib.sha256(native[b.start:b.end]).hexdigest()
+    assert weld_all.observations == [o["statement"] for o in source["observations"]]
+    assert len(weld_all.observations) == 12
+
+
+def test_weld_blank_printed_zero_clipped_word_and_wrapped_label(
+    weld_all: lookup.WeldLookupResult,
+) -> None:
+    """A blank, actual zero and incomplete source label remain materially different."""
+    rows = {r.row_id: r for r in weld_all.rows}
+    blank = rows["EHS-R062"]
+    assert blank.fee is None and blank.fee_cell_status == "visibly_blank"
+    assert "Appendix 5-D" in blank.labels[0].text
+    for identity in ("EHS-R016", "EHS-R028"):
+        row = rows[identity]
+        assert row.fee.text.strip() == "$0.00" and row.fee_cell_status == "printed_text"
+        assert "25-4-1607" in row.labels[0].text
+    assert "Temproary" in rows["EHS-R032"].labels[0].text
+    assert rows["EHS-R033"].labels[0].text.endswith("if applicab\n")
+    assert rows["EHS-R033"].fee.text.strip() == "$100.00/hour"
+    metals = rows["EHS-R131"]
+    assert [b.id for b in metals.labels] == ["P3-L085", "P3-L086"]
+    assert metals.labels[1].text == "Nickel, Silver\n"
+    assert "Atimony" in metals.labels[0].text and metals.fee.text.strip() == "$23.00"
+
+
+def test_weld_conditions_caps_duplicates_and_group_scopes(
+    weld_all: lookup.WeldLookupResult,
+) -> None:
+    """No fee math, repaired grammar or cross-group multiplier escapes the source."""
+    rows = {r.row_id: r for r in weld_all.rows}
+    expected = {
+        "EHS-R003": "Application fee of $100 plus $100.00/hour",
+        "EHS-R036": "$100.00/hour (not to exceed $895)",
+        "EHS-R038": "$100.00/hour (not to exceed $775)",
+        "EHS-R039": "$100.00/hour (not to exceed $620)",
+        "EHS-R050": "$100.00", "EHS-R051": "$50.00",
+        "EHS-R061": "$5.00+", "EHS-R080": "$200.00", "EHS-R081": "$248.00",
+        "EHS-R082": "$48.00", "EHS-R084": "$400.00", "EHS-R085": "$100.00/hour",
+        "EHS-R086": "3 x Stated Fee", "EHS-R089": "$52.50", "EHS-R090": "$54.50",
+        "EHS-R105": "Market Rate", "EHS-R107": "Market Rate", "EHS-R132": "Market Rate",
+        "EHS-R007": "$13.00", "EHS-R123": "$14.00",
+    }
+    for identity, text in expected.items():
+        assert rows[identity].fee.text.strip() == text
+    assert "<25" in rows["EHS-R045"].labels[0].text
+    assert ">25" in rows["EHS-R046"].labels[0].text
+    assert ">25" in rows["EHS-R047"].labels[0].text
+    assert "1 hour min" in rows["EHS-R060"].labels[0].text
+    assert "$.50" in rows["EHS-R061"].labels[0].text
+    assert "Transportion" in rows["EHS-R049"].labels[0].text
+    assert [b.id for b in rows["EHS-R084"].notes] == ["P2-L073"]
+    assert "excess of 4 hours" in rows["EHS-R084"].notes[0].text
+    assert rows["EHS-R085"].notes == []
+    assert "BACTERIOLOGICAL" in rows["EHS-R086"].group.text
+    assert rows["EHS-R007"].group.id != rows["EHS-R123"].group.id
+
+
+def test_weld_note_queries_page_notes_and_no_match_are_distinct() -> None:
+    """Page notes can match without being invented as fee rows or universal conditions."""
+    contract = lookup.lookup(ROOT, lookup.WELD_SOURCE_ID, "contract approved")
+    assert contract.status == "matched_context_only" and contract.rows == []
+    assert contract.matched_context_ids == ["P3-L111"]
+    text = lookup.render_markdown(contract)
+    assert "Matching page context: P3-L111" in text
+    assert "no inferred row applicability" in text and "No matching fee row" in text
+    metal = lookup.lookup(ROOT, lookup.WELD_SOURCE_ID, "additional metals")
+    assert [r.row_id for r in metal.rows] == ["EHS-R131"]
+    notes = {b.id: b.text for p in metal.page_context for b in p.spans}
+    assert "market rate" in notes["P3-L088"] and "Cholrite" in notes["P3-L089"]
+    assert "contract approved" in notes["P3-L111"]
+    excess = lookup.lookup(ROOT, lookup.WELD_SOURCE_ID, "excess of 4 hours")
+    assert [r.row_id for r in excess.rows] == ["EHS-R084"]
+    absent = lookup.lookup(ROOT, lookup.WELD_SOURCE_ID, "unlisted submarine service")
+    assert absent.status == "no_matching_row" and absent.rows == []
+    assert len(absent.page_context) == 3 and len(absent.observations) == 12
+    assert "does not establish that a service is free" in lookup.render_markdown(absent)
+
+
+def test_weld_dates_owner_custody_and_qualifications(
+    weld_all: lookup.WeldLookupResult,
+) -> None:
+    """HTTP, review and intake clocks are bound to source records and are not legal dates."""
+    d = weld_all.model_dump(mode="json")
+    assert d["source"]["source_retrieved_at"] == "2026-09-11T19:49:19.040662Z"
+    assert d["source"]["reviewed_at"] == "2026-09-11T19:55:05.808484Z"
+    assert d["source"]["received_at"] == "2026-09-11T20:02:02.187060Z"
+    assert d["authority_id"] == d["source"]["authority_id"] == "CO-COUNTY-WELD"
+    assert d["adoption_date"] is d["effective_date"] is d["source_edition_date"] is None
+    assert d["source"]["source_year_assertion"] == "2026"
+    assert "curl HTTPS" in d["source"]["acquisition_description"]
+    assert d["source"]["intake_status"] == "archived_pending_pipeline"
+    assert d["legal_currentness"] == "not_verified" and d["answer_safe"] is False
+    assert "environmental-health" in d["boundary"]
+    rendered = lookup.render_markdown(weld_all)
+    assert "visibly blank (no amount supplied; not zero)" in rendered
+    assert "&lt;25" in rendered and "&gt;25" in rendered
+    assert "[Preserved PDF](</" in rendered
+    assert "[Official source](https://www.weld.gov/" in rendered
+    assert "header visible in source render: no" in rendered
+
+
+@pytest.mark.parametrize("field,value", [
+    ("answer_safe", True), ("legal_currentness", "verified"), ("adoption_date", "2026-01-01"),
+    ("effective_date", "2026-01-01"), ("authority_id", "CO-MUNICIPAL-WELD"),
+])
+def test_weld_result_cannot_promote_claims(
+    weld_all: lookup.WeldLookupResult, field: str, value: object,
+) -> None:
+    """The public response model prohibits legal status or jurisdiction promotion."""
+    with pytest.raises(ValidationError):
+        lookup.WeldLookupResult.model_validate({**weld_all.model_dump(), field: value})
+
+
+@pytest.mark.parametrize("change", ["blank_zero", "wrong_role", "wrong_page"])
+def test_weld_row_model_rejects_ambiguous_binding(
+    weld_all: lookup.WeldLookupResult, change: str,
+) -> None:
+    """A caller cannot silently convert blanks or move notes/fees to another page."""
+    data = weld_all.rows[61].model_dump()
+    if change == "blank_zero":
+        data["fee_cell_status"] = "printed_text"
+    elif change == "wrong_role":
+        data["labels"][0]["role"] = "fee"
+    else:
+        data["physical_page"] = 3
+    with pytest.raises(ValidationError):
+        lookup.WeldRow.model_validate(data)
+
+
+@pytest.mark.parametrize("field,value", [("start", 1), ("end", 1), ("text", "changed"),
+                                         ("sha256", "0" * 64), ("physical_page", 4)])
+def test_weld_block_rejects_corrupted_offsets_and_bytes(
+    weld_all: lookup.WeldLookupResult, field: str, value: object,
+) -> None:
+    """Every emitted native line must retain a consistent byte identity."""
+    data = weld_all.rows[0].group.model_dump()
+    with pytest.raises(ValidationError):
+        lookup.WeldBlock.model_validate({**data, field: value})
+
+
+@pytest.mark.parametrize("query", ["current laboratory fee", "What do I owe?", "effective fees"])
+def test_weld_refuses_without_evidence_access(query: str, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Question and current-law handling stays a refusal before source loading."""
+    monkeypatch.setattr(lookup, "_load_weld_verified", lambda _: pytest.fail("must not load"))
+    result = lookup.lookup(ROOT, lookup.WELD_SOURCE_ID, query)
+    assert result.status == "refused_current_law" and result.rows == result.page_context == []
+    assert not result.evidence_verified and "Request refused" in lookup.render_markdown(result)
+    with pytest.raises(ValueError, match="Unsupported source"):
+        lookup.lookup(ROOT, "weld-ordinance-26-01-atlas-directed", list_rows=True)
+
+
+@pytest.mark.parametrize("name", [
+    lookup.WELD_REVIEW, "frozen/ehs/SOURCE_QA.schema.json", "frozen/ehs/build_review.py",
+    lookup.WELD_PDF, "frozen/ehs/page-2.native.txt", "frozen/ehs/page-3.png",
+    "package-record.schema.json", "frozen/ordinance/inputs/original.pdf",
+])
+def test_weld_closed_evidence_changes_fail_before_execution(
+    weld_root: Path, monkeypatch: pytest.MonkeyPatch, name: str,
+) -> None:
+    """Even an unchanged EHS review cannot excuse changes to inventoried dependencies."""
+    path = weld_root / lookup.WELD_PACKAGE / name
+    path.write_bytes(path.read_bytes() + b"changed")
+    monkeypatch.setattr(lookup.subprocess, "run", lambda *a, **k: pytest.fail("must not execute"))
+    with pytest.raises(ValueError, match="mismatch"):
+        lookup.lookup(weld_root, lookup.WELD_SOURCE_ID, "water")
+
+
+@pytest.mark.parametrize("kind", ["extra_file", "extra_dir", "missing", "symlink", "oversized"])
+def test_weld_inventory_and_paths_fail_closed(
+    weld_root: Path, monkeypatch: pytest.MonkeyPatch, kind: str,
+) -> None:
+    """Unlisted files/directories, links and excessive bytes fail before subprocesses."""
+    package = weld_root / lookup.WELD_PACKAGE
+    path = package / "frozen/ehs/page-2.png"
+    if kind == "extra_file":
+        (package / "extra.py").write_text("raise RuntimeError('must not run')")
+    elif kind == "extra_dir":
+        (package / "empty").mkdir()
+    elif kind == "missing":
+        path.unlink()
+    elif kind == "symlink":
+        path.unlink()
+        path.symlink_to(ROOT / lookup.WELD_PACKAGE / "frozen/ehs/page-2.png")
+    else:
+        with path.open("wb") as handle:
+            handle.truncate(20_000_001)
+    monkeypatch.setattr(lookup.subprocess, "run", lambda *a, **k: pytest.fail("must not execute"))
+    with pytest.raises(ValueError):
+        lookup.lookup(weld_root, lookup.WELD_SOURCE_ID, "water")
+
+
+@pytest.mark.parametrize("name", ["intake-receipt.json", "intake-records.final.jsonl",
+                                 "source-provenance.final.jsonl",
+                                 "evidence/access/retry/ACCESS_RECEIPT.json"])
+def test_weld_custody_bytes_pinned_separately_from_mutable_manifest(
+    weld_root: Path, name: str,
+) -> None:
+    """Frozen source-specific receipt records cannot be relabeled as another acquisition."""
+    path = weld_root / lookup.WELD_INTAKE / name
+    path.write_bytes(path.read_bytes() + b"changed")
+    with pytest.raises(ValueError, match="mismatch"):
+        lookup.lookup(weld_root, lookup.WELD_SOURCE_ID, "water")
+
+
+def reseal_weld_review(root: Path, data: dict, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Reseal test-only outer hashes so real native/geometry validation must run."""
+    package = root / lookup.WELD_PACKAGE
+    review = package / lookup.WELD_REVIEW
+    review.write_text(json.dumps(data))
+    manifest_path = package / "evidence-manifest.json"
+    manifest = json.loads(manifest_path.read_bytes())
+    for ref in manifest["files"]:
+        if ref["path"] == lookup.WELD_REVIEW:
+            ref.update(sha256=lookup._digest(review), size_bytes=review.stat().st_size)
+    manifest_path.write_text(json.dumps(manifest))
+    monkeypatch.setitem(lookup.WELD_PINS, lookup.WELD_REVIEW, lookup._digest(review))
+    monkeypatch.setitem(lookup.WELD_PINS, "evidence-manifest.json", lookup._digest(manifest_path))
+
+
+@pytest.mark.parametrize("change", ["same_price_swap", "wrong_group", "wrong_page", "text",
+                                    "offset", "source_id", "blank_zero"])
+def test_weld_real_verifier_rejects_resealed_semantic_damage(
+    weld_root: Path, monkeypatch: pytest.MonkeyPatch, change: str,
+) -> None:
+    """Pinned verifier independently checks source schema, bytes and row geometry."""
+    data = json.loads((weld_root / lookup.WELD_PACKAGE / lookup.WELD_REVIEW).read_bytes())
+    if change == "same_price_swap":
+        data["rows"][1]["fee_span"], data["rows"][3]["fee_span"] = (
+            data["rows"][3]["fee_span"], data["rows"][1]["fee_span"])
+    elif change == "wrong_group":
+        data["rows"][85]["group_span"] = "P2-L070"
+    elif change == "wrong_page":
+        data["rows"][0]["physical_page"] = 2
+    elif change == "text":
+        data["pages"][0]["spans"][0]["text"] += "changed"
+    elif change == "offset":
+        data["pages"][0]["spans"][0]["start"] = 1
+    elif change == "source_id":
+        data["source_id"] = "weld-ordinance-26-01-atlas-directed"
+    else:
+        data["rows"][61]["fee_cell_status"] = "printed_text"
+    reseal_weld_review(weld_root, data, monkeypatch)
+    with pytest.raises(ValueError, match="source-package verification failed"):
+        lookup.lookup(weld_root, lookup.WELD_SOURCE_ID, "water")
+
+
+@pytest.mark.parametrize("outcome", ["timeout", "failed", "bad_json", "bad_receipt", "stdout"])
+def test_weld_verifier_failure_does_not_return_rows(
+    weld_root: Path, monkeypatch: pytest.MonkeyPatch, outcome: str,
+) -> None:
+    """Only the exact success receipt from the frozen direct verifier permits a result."""
+    def fail(*args: object, **kwargs: object) -> subprocess.CompletedProcess:
+        """Simulate an interrupted, malformed or dishonest verifier response."""
+        if outcome == "timeout":
+            raise subprocess.TimeoutExpired("verifier", 30)
+        if outcome == "failed":
+            raise subprocess.CalledProcessError(1, "verifier")
+        receipt = dict(lookup.WELD_VERIFICATION)
+        if outcome == "bad_receipt":
+            receipt["rows"] = 136
+        stderr = "WARNING:root:" + ("bad JSON" if outcome == "bad_json" else json.dumps(receipt))
+        return subprocess.CompletedProcess("verifier", 0, stdout=("extra" if outcome == "stdout"
+                                                                 else ""), stderr=stderr)
+    monkeypatch.setattr(lookup.subprocess, "run", fail)
+    with pytest.raises(ValueError, match="source-package verification failed"):
+        lookup.lookup(weld_root, lookup.WELD_SOURCE_ID, "water")
+
+
+def test_weld_changes_after_verification_cannot_escape(
+    weld_root: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Rechecking catches changed evidence after a successful validator execution."""
+    run = lookup.subprocess.run
+
+    def change(*args: object, **kwargs: object) -> subprocess.CompletedProcess:
+        """Mutate a retained page after real validation in this disposable copy."""
+        result = run(*args, **kwargs)
+        path = weld_root / lookup.WELD_PACKAGE / "frozen/ehs/page-2.native.txt"
+        path.write_bytes(path.read_bytes() + b"changed")
+        return result
+
+    monkeypatch.setattr(lookup.subprocess, "run", change)
+    with pytest.raises(ValueError, match="mismatch"):
+        lookup.lookup(weld_root, lookup.WELD_SOURCE_ID, "water")
+
+
+def test_weld_cli_outside_checkout_optimized_environment_and_no_writes(
+    weld_root: Path, tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The direct verifier ignores hostile Python paths/optimization and leaves no artifacts."""
+    monkeypatch.setenv("PYTHONOPTIMIZE", "2")
+    monkeypatch.setenv("PYTHONPATH", str(tmp_path))
+    (tmp_path / "pymupdf.py").write_text("raise RuntimeError('untrusted import')")
+    before = {str(p): lookup._digest(p) for p in weld_root.rglob("*") if p.is_file()}
+    process = subprocess.run(
+        [sys.executable, "-I", "-O", "-B", str(ROOT / "scripts/research_source_lookup.py"),
+         "--root", str(weld_root), "--source-id", lookup.WELD_SOURCE_ID,
+         "--query", "file review", "--format", "json"],
+        cwd=tmp_path, text=True, capture_output=True, timeout=30,
+    )
+    assert process.returncode == 0, process.stderr
+    result = json.loads(process.stdout)
+    assert result["rows"][0]["fee"] is None and result["rows"][0]["row_id"] == "EHS-R062"
+    assert before == {str(p): lookup._digest(p) for p in weld_root.rglob("*") if p.is_file()}
+
+
+def test_weld_cli_statuses_and_markdown(capsys: pytest.CaptureFixture[str]) -> None:
+    """CLI handles context-only matches and explicit refusals without changing other sources."""
+    base = ["--source-id", lookup.WELD_SOURCE_ID]
+    assert lookup.main(base + ["--query", "contract approved", "--format", "json"]) == 0
+    assert json.loads(capsys.readouterr().out)["status"] == "matched_context_only"
+    assert lookup.main(base + ["--list-rows", "--mode", "current-law"]) == 2
+    assert "Request refused" in capsys.readouterr().out
+    assert lookup.main(base + ["--query", "file review"]) == 0
+    assert "visibly blank" in capsys.readouterr().out
+    assert lookup.main(base + ["--root", "/does/not/exist", "--list-rows"]) == 1
+    assert capsys.readouterr().out == ""
+
+
+@pytest.mark.parametrize("change", ["duplicate", "wrong_authority", "wrong_received_at"])
+def test_weld_resealed_intake_requires_single_consistent_source(
+    weld_root: Path, monkeypatch: pytest.MonkeyPatch, change: str,
+) -> None:
+    """Hashes alone do not replace the exact source/authority/time record join."""
+    intake = weld_root / lookup.WELD_INTAKE
+    receipt_path = intake / "intake-receipt.json"
+    receipt = json.loads(receipt_path.read_bytes())
+    key = "record_stream" if change in {"duplicate", "wrong_received_at"} else "provenance_stream"
+    path = intake / receipt[key]["path"]
+    with path.open("rb") as handle:
+        records = [json.loads(line) for line in handle]
+    field = "record_id" if key == "record_stream" else "source_id"
+    record = next(r for r in records if r[field] == lookup.WELD_SOURCE_ID)
+    if change == "duplicate":
+        records.append(dict(record))
+    elif change == "wrong_authority":
+        record["authority_id"] = "CO-COUNTY-JEFFERSON"
+        for source in receipt["sources"]:
+            if source["source_id"] == lookup.WELD_SOURCE_ID:
+                source["authority_id"] = record["authority_id"]
+    else:
+        record["received_at"] = "2026-09-11T19:49:19.040662Z"
+    path.write_text("".join(json.dumps(r) + "\n" for r in records))
+    receipt[key].update(sha256=lookup._digest(path), size_bytes=path.stat().st_size)
+    receipt_path.write_text(json.dumps(receipt))
+    monkeypatch.setitem(lookup.WELD_INTAKE_PINS, "intake-receipt.json",
+                        lookup._digest(receipt_path))
+    with pytest.raises(ValueError, match="identity mismatch|relationship mismatch|schema mismatch"):
+        lookup.lookup(weld_root, lookup.WELD_SOURCE_ID, "water")
+
+
+def test_weld_verifier_uses_direct_isolation_with_assertions(
+    weld_root: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Ignore inherited optimization and never execute the unrelated outer wrapper."""
+    monkeypatch.setenv("PYTHONOPTIMIZE", "2")
+    run = lookup.subprocess.run
+    calls = []
+
+    def inspect(*args: object, **kwargs: object) -> subprocess.CompletedProcess:
+        """Observe the real subprocess argv rather than imitating its receipt."""
+        calls.append(args[0])
+        return run(*args, **kwargs)
+
+    monkeypatch.setattr(lookup.subprocess, "run", inspect)
+    result = lookup.lookup(weld_root, lookup.WELD_SOURCE_ID, "0.00")
+    assert len(calls) == 1
+    assert calls[0] == [sys.executable, "-I", "-B", str(
+        weld_root / lookup.WELD_PACKAGE / "frozen/ehs/build_review.py"), "--verify"]
+    assert [r.row_id for r in result.rows] == ["EHS-R016", "EHS-R028"]
+    assert all(r.fee_cell_status == "printed_text" for r in result.rows)
+
+
+def test_weld_review_notes_cannot_be_dropped_without_detection(
+    weld_root: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Missing row conditions or page exceptions must trip immutable evidence identity."""
+    path = weld_root / lookup.WELD_PACKAGE / lookup.WELD_REVIEW
+    data = json.loads(path.read_bytes())
+    data["rows"][83]["note_spans"] = []
+    data["pages"][2]["spans"] = [s for s in data["pages"][2]["spans"]
+                                 if s["id"] != "P3-L111"]
+    path.write_text(json.dumps(data))
+    monkeypatch.setattr(lookup.subprocess, "run", lambda *a, **k: pytest.fail("must not execute"))
+    with pytest.raises(ValueError, match="hash/size mismatch"):
+        lookup.lookup(weld_root, lookup.WELD_SOURCE_ID, "methamphetamine")
