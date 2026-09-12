@@ -40,6 +40,7 @@ ALLOWED_REVIEW_SCHEMAS: dict[str, ReviewKind] = {
     "13e23d55f3dbccef04bd6fbd113e7ca20ccb91bd8dd5dfa07c0454b68f0b6aeb": "checked_tables",
     "a424f4dd025089ba144d4a49d902a2fd549447c6d4d4f0c9931588e61e8c8535": "source_structure",
     "3ece308140181240c4f9c908d522d16f07f00b84b9e780ed10af1306a8a0dfee": "checked_passages",
+    "62bd37c307f251742d70f1b9a6df62577ee5079d9333e09a6c4aae624189edc3": "checked_tables",
 }
 
 

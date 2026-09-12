@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+import jsonschema
 import pytest
 from pydantic import ValidationError
 
@@ -429,15 +430,18 @@ def test_accepted_equity_review_is_one_bounded_additive_join() -> None:
     assert len(old.sources) == 46
     assert len(new.sources) == 59
     assert (old.rows_with_review, old.rows_without_review) == (18, 28)
-    assert (new.rows_with_review, new.rows_without_review) == (19, 40)
+    assert (new.rows_with_review, new.rows_without_review) == (20, 39)
     assert [r.model_dump(mode="json") for r in new_plan.reviews[:18]] == old_plan["reviews"]
-    assert len(new_plan.reviews) == 19
+    assert len(new_plan.reviews) == 20
     previous = {s.record_id: s for s in old.sources}
     added = [row for row in new.sources if row.record_id not in previous]
     assert len(added) == 13
     for row in added:
         assert row.authority_id == "CO-COUNTY-EL_PASO"
-        assert row.reviews is None and row.review_status == "metadata_only_review_unknown"
+        if row.record_id == "el-paso-planning-fees-sd011":
+            assert len(row.reviews) == 1 and row.reviews[0].review_kind == "checked_tables"
+        else:
+            assert row.reviews is None and row.review_status == "metadata_only_review_unknown"
         assert row.verified_http_acquired_at is None and row.verified_http_evidence is None
         assert row.acquisition_method == "received_review_package"
         assert row.legal_currentness == "not_verified" and row.answer_safe is False
@@ -471,3 +475,84 @@ def test_accepted_equity_review_is_one_bounded_additive_join() -> None:
     assert new.manual_manifest.path == old.manual_manifest.path
     assert new.manual_manifest.sha256 != old.manual_manifest.sha256
     assert new.unchanged_legacy_ledger == old.unchanged_legacy_ledger
+
+
+def test_planning_scan_join_preserves_prior_59_sources_and_19_reviews() -> None:
+    """The accepted scan review changes only one previously unknown review status."""
+    root = Path(__file__).resolve().parents[1]
+    checkpoint = root / "docs/audits/FOUR_HOUR_RUN_2026-09-12/EL_PASO_INTAKE/inventory-after"
+    old_plan = inventory.JoinPlan.model_validate_json((checkpoint / "join-plan.json").read_bytes())
+    old = inventory.Inventory.model_validate_json((checkpoint / "inventory.json").read_bytes())
+    new_plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
+    new = inventory.build_inventory(root)
+    assert len(old.sources) == len(new.sources) == 59
+    assert (old.rows_with_review, old.rows_without_review) == (19, 40)
+    assert (new.rows_with_review, new.rows_without_review) == (20, 39)
+    assert len(new_plan.reviews) == 20 and new_plan.reviews[:19] == old_plan.reviews
+    assert new_plan.authorities == old_plan.authorities
+    assert new.manual_manifest == old.manual_manifest
+    assert new.unchanged_legacy_ledger == old.unchanged_legacy_ledger
+    for previous, current in zip(old.sources, new.sources, strict=True):
+        assert previous.record_id == current.record_id
+        if current.record_id != "el-paso-planning-fees-sd011":
+            assert current == previous
+            continue
+        assert previous.reviews is None
+        assert len(current.reviews) == 1
+        review = current.reviews[0]
+        assert review.review_kind == "checked_tables"
+        assert review.review_source_id == "el-paso-planning-fees-sd011"
+        assert review.artifact.sha256 == (
+            "77416babde5e963f47a76aee0ee7dd16e54d70fcb7019f0ffc2267971df665e6"
+        )
+        assert review.scope_fields["/page_coverage"] == [1, 2, 3, 4, 5]
+        assert review.scope_fields["/source_fee_rows"] == 104
+        assert review.scope_fields["/source_footnotes"] == 15
+        assert review.scope_fields["/source_general_notes"] == 3
+        assert review.limitations["/native_extraction"]["total_utf8_bytes"] == 0
+        assert review.limitations["/fully_legible_complete_extraction"] is False
+        assert "P3-ENG-14" in json.dumps(review.limitations["/unresolved_regions"])
+        assert "manually transcribed from pixels" in review.note
+        assert review.limitations["/currentness"] == "not_verified"
+        assert review.limitations["/verified_adoption_date"] is None
+        assert review.limitations["/verified_effective_date"] is None
+        assert review.limitations["/custody/verified_http_acquisition_at"] is None
+        assert review.limitations["/custody/actual_repository_received_at"] == (
+            "2026-09-12T22:59:48.795762Z"
+        )
+        assert not review.answer_safe and not review.limitations["/answer_safe"]
+        a, b = previous.model_dump(), current.model_dump()
+        for key in ("reviews", "review_status"):
+            a.pop(key)
+            b.pop(key)
+        assert a == b
+
+
+@pytest.mark.parametrize("field,value", [
+    ("authority_id", "CO-MUNICIPAL-COLORADO_SPRINGS"),
+    ("source_id", "el-paso-boh-ehs-fees-sd011"),
+    ("source_pdf", {"path": "source/original.pdf", "sha256": "0" * 64, "size_bytes": 1198750}),
+    ("source_fee_rows", 105),
+    ("currentness", "verified"),
+])
+def test_actual_planning_review_identity_scope_and_currency_tamper(
+    tmp_path: Path, field: str, value: object,
+) -> None:
+    """Rehashed mutant review bytes cannot substitute ownership, source, scope or currency."""
+    root = Path(__file__).resolve().parents[1]
+    plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
+    join = next(r for r in plan.reviews if r.record_id == "el-paso-planning-fees-sd011")
+    saved = inventory.Inventory.model_validate_json(
+        (root / inventory.PACKAGE / "inventory.json").read_bytes()
+    )
+    row = next(r for r in saved.sources if r.record_id == join.record_id)
+    data = json.loads((root / join.review.path).read_bytes())
+    data[field] = value
+    for asset in [join.review, join.review_schema]:
+        path = tmp_path / asset.path
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes((root / asset.path).read_bytes())
+    (tmp_path / join.review.path).write_text(json.dumps(data), encoding="utf-8")
+    mutant = join.model_copy(update={"review": inventory.identity(tmp_path, join.review.path)})
+    with pytest.raises((ValueError, jsonschema.ValidationError)):
+        inventory._review(tmp_path, mutant, row)

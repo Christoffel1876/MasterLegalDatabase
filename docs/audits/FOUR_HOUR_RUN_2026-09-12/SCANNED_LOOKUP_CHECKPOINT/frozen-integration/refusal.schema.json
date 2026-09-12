@@ -1,0 +1,33 @@
+{
+  "additionalProperties": false,
+  "description": "Refuse legal/currentness requests without generating fee matches.",
+  "properties": {
+    "status": {
+      "const": "refused",
+      "default": "refused",
+      "title": "Status",
+      "type": "string"
+    },
+    "reason": {
+      "title": "Reason",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "reason"
+  ],
+  "title": "Refusal",
+  "type": "object"
+}

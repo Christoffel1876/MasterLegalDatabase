@@ -1,0 +1,55 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "verified_at": {
+      "title": "Verified At",
+      "type": "string"
+    },
+    "input_manifest_sha256": {
+      "title": "Input Manifest Sha256",
+      "type": "string"
+    },
+    "copied_file_count": {
+      "title": "Copied File Count",
+      "type": "integer"
+    },
+    "all_copy_hashes_equal": {
+      "title": "All Copy Hashes Equal",
+      "type": "boolean"
+    },
+    "original_package_unchanged": {
+      "title": "Original Package Unchanged",
+      "type": "boolean"
+    },
+    "cwd": {
+      "title": "Cwd",
+      "type": "string"
+    },
+    "isolated_cli_exit_code": {
+      "title": "Isolated Cli Exit Code",
+      "type": "integer"
+    },
+    "validator_output": {
+      "additionalProperties": true,
+      "title": "Validator Output",
+      "type": "object"
+    },
+    "qualification": {
+      "title": "Qualification",
+      "type": "string"
+    }
+  },
+  "required": [
+    "verified_at",
+    "input_manifest_sha256",
+    "copied_file_count",
+    "all_copy_hashes_equal",
+    "original_package_unchanged",
+    "cwd",
+    "isolated_cli_exit_code",
+    "validator_output",
+    "qualification"
+  ],
+  "title": "Portable",
+  "type": "object"
+}

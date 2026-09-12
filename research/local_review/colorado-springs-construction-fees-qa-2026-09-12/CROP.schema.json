@@ -1,0 +1,41 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "path": {
+      "title": "Path",
+      "type": "string"
+    },
+    "page": {
+      "maximum": 7,
+      "minimum": 1,
+      "title": "Page",
+      "type": "integer"
+    },
+    "pixel_bbox": {
+      "items": {
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "title": "Pixel Bbox",
+      "type": "array"
+    },
+    "parent_sha256": {
+      "title": "Parent Sha256",
+      "type": "string"
+    },
+    "sha256": {
+      "title": "Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "path",
+    "page",
+    "pixel_bbox",
+    "parent_sha256",
+    "sha256"
+  ],
+  "title": "Crop",
+  "type": "object"
+}

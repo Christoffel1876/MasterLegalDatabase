@@ -1,0 +1,77 @@
+{
+  "additionalProperties": false,
+  "description": "Finite read scope; recording permission is not evidence of HTTP completion.",
+  "properties": {
+    "authorized_at": {
+      "format": "date-time",
+      "title": "Authorized At",
+      "type": "string"
+    },
+    "targets": {
+      "maxItems": 2,
+      "minItems": 2,
+      "prefixItems": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "title": "Targets",
+      "type": "array"
+    },
+    "maximum_requests": {
+      "const": 6,
+      "default": 6,
+      "title": "Maximum Requests",
+      "type": "integer"
+    },
+    "maximum_seconds_per_chain": {
+      "const": 30,
+      "default": 30,
+      "title": "Maximum Seconds Per Chain",
+      "type": "integer"
+    },
+    "maximum_body_bytes": {
+      "const": 5000000,
+      "default": 5000000,
+      "title": "Maximum Body Bytes",
+      "type": "integer"
+    },
+    "retries": {
+      "const": 0,
+      "default": 0,
+      "title": "Retries",
+      "type": "integer"
+    },
+    "helper_sha256": {
+      "title": "Helper Sha256",
+      "type": "string"
+    },
+    "parent_comparison_sha256": {
+      "title": "Parent Comparison Sha256",
+      "type": "string"
+    },
+    "fresh_acquisition_is_separate": {
+      "const": true,
+      "default": true,
+      "title": "Fresh Acquisition Is Separate",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "authorized_at",
+    "targets",
+    "helper_sha256",
+    "parent_comparison_sha256"
+  ],
+  "title": "Plan",
+  "type": "object"
+}

@@ -110,6 +110,31 @@ Geode should state missing coverage directly. It must not imply that a county,
 municipality, source, date range, or legal topic is covered until it appears in
 the manifest and has passed validation.
 
+## Explore Reviewed Sources
+
+Three research commands expose the reviewed source material with its page references,
+original wording and qualifications:
+
+- [Local fee-source lookup](docs/RESEARCH_SOURCE_LOOKUP.md): keyword searches within
+  selected fee tables from Grand Junction, Greeley and Weld County.
+- [El Paso scanned-fee lookup](docs/RESEARCH_SCANNED_FEE_LOOKUP.md): 104 planning-fee
+  rows with their complete notes, image references and unresolved clipped text.
+- [CRS passage lookup](docs/CRS_SOURCE_LOOKUP.md): three reviewed sections from the
+  preserved 2026 Title 1 source.
+
+For example, from the repository root using the project's Python environment:
+
+```sh
+python scripts/research_scanned_fee_lookup.py --root . \
+  --source-id el-paso-planning-fees-sd011 --query "Erosion" --format markdown
+```
+
+These commands report what the preserved sources say. They do not calculate a
+project's fees or establish current legal requirements. The
+[manual-source review inventory](research/local_review/manual-source-review-inventory-2026-09-11/README.md)
+distinguishes preserved PDFs from bounded source reviews; it is not a measure of
+complete statewide coverage.
+
 ## Setup
 
 The [coverage inventory and CCR guide](docs/COVERAGE_AND_CCR_PILOT.md) explains

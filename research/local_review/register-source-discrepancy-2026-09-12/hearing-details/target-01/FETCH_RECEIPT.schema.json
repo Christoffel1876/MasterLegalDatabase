@@ -1,0 +1,167 @@
+{
+  "$defs": {
+    "Event": {
+      "additionalProperties": false,
+      "description": "One actual HTTP request or local transport failure.",
+      "properties": {
+        "number": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Number",
+          "type": "integer"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "finished_at": {
+          "format": "date-time",
+          "title": "Finished At",
+          "type": "string"
+        },
+        "curl_exit": {
+          "title": "Curl Exit",
+          "type": "integer"
+        },
+        "http_status": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Http Status"
+        },
+        "content_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Content Type"
+        },
+        "location": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Location"
+        },
+        "header_path": {
+          "title": "Header Path",
+          "type": "string"
+        },
+        "header_sha256": {
+          "title": "Header Sha256",
+          "type": "string"
+        },
+        "body_path": {
+          "title": "Body Path",
+          "type": "string"
+        },
+        "body_sha256": {
+          "title": "Body Sha256",
+          "type": "string"
+        },
+        "body_bytes": {
+          "maximum": 5000000,
+          "minimum": 0,
+          "title": "Body Bytes",
+          "type": "integer"
+        },
+        "stderr_path": {
+          "title": "Stderr Path",
+          "type": "string"
+        },
+        "sensitive_header_names": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Sensitive Header Names",
+          "type": "array"
+        }
+      },
+      "required": [
+        "number",
+        "requested_url",
+        "started_at",
+        "finished_at",
+        "curl_exit",
+        "http_status",
+        "content_type",
+        "location",
+        "header_path",
+        "header_sha256",
+        "body_path",
+        "body_sha256",
+        "body_bytes",
+        "stderr_path",
+        "sensitive_header_names"
+      ],
+      "title": "Event",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Typed bounded network capture, without a legal-effect conclusion.",
+  "properties": {
+    "initial_url": {
+      "title": "Initial Url",
+      "type": "string"
+    },
+    "tls_verification": {
+      "default": "curl default CA/hostname verification; no insecure flags",
+      "title": "Tls Verification",
+      "type": "string"
+    },
+    "cookies_sent": {
+      "default": false,
+      "title": "Cookies Sent",
+      "type": "boolean"
+    },
+    "retries": {
+      "default": 0,
+      "title": "Retries",
+      "type": "integer"
+    },
+    "limits": {
+      "default": "30 seconds total; 5 MB/body; at most 2 same-authority HTTPS redirects",
+      "title": "Limits",
+      "type": "string"
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
+      "maxItems": 3,
+      "minItems": 1,
+      "title": "Events",
+      "type": "array"
+    }
+  },
+  "required": [
+    "initial_url",
+    "status",
+    "events"
+  ],
+  "title": "Capture",
+  "type": "object"
+}

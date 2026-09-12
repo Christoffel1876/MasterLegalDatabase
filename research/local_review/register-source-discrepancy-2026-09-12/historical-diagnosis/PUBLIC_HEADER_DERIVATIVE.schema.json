@@ -1,0 +1,58 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "captured_at": {
+      "format": "date-time",
+      "title": "Captured At",
+      "type": "string"
+    },
+    "original_path": {
+      "title": "Original Path",
+      "type": "string"
+    },
+    "original_sha256": {
+      "title": "Original Sha256",
+      "type": "string"
+    },
+    "original_bytes": {
+      "title": "Original Bytes",
+      "type": "integer"
+    },
+    "public_path": {
+      "title": "Public Path",
+      "type": "string"
+    },
+    "public_sha256": {
+      "title": "Public Sha256",
+      "type": "string"
+    },
+    "public_bytes": {
+      "title": "Public Bytes",
+      "type": "integer"
+    },
+    "removed_header_names": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Removed Header Names",
+      "type": "array"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    }
+  },
+  "required": [
+    "captured_at",
+    "original_path",
+    "original_sha256",
+    "original_bytes",
+    "public_path",
+    "public_sha256",
+    "public_bytes",
+    "removed_header_names",
+    "method"
+  ],
+  "title": "HeaderDerivative",
+  "type": "object"
+}

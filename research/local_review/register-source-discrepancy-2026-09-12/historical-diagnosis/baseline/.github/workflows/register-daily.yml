@@ -1,0 +1,130 @@
+name: Colorado Register daily pilot
+
+on:
+  schedule:
+    # 12:23 UTC = 06:23 MDT / 05:23 MST; away from the busy top of the hour.
+    - cron: '23 12 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: colorado-register-daily
+  cancel-in-progress: false
+
+env:
+  PYTHONUNBUFFERED: '1'
+  GIT_LFS_SKIP_SMUDGE: '1'
+
+jobs:
+  collect:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    permissions:
+      contents: read
+    outputs:
+      has_changes: ${{ steps.candidate.outputs.has_changes }}
+    steps:
+      - name: Checkout default branch with read-only credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+          lfs: false
+      - name: Initialize run evidence
+        run: |
+          mkdir -p .geode_runtime/register-refresh .geode_runtime/register-candidate
+          printf '%s\n' "Source check has not completed. Inspect the job log for setup failures." > .geode_runtime/register-refresh/summary.md
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+      - name: Install frozen pilot dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements-ci.txt
+      - name: Resume pending data and merge current main
+        run: python scripts/publish_register_update.py prepare --root . --output .geode_runtime/register-candidate
+      - name: Run offline pilot regression checks
+        run: |
+          python -m pytest tests/test_register_daily*.py tests/test_publish_register_update.py tests/test_register_table_parser.py tests/test_register_pipeline.py -q --cov=geode.pipeline.register_daily --cov=geode.connectors.register_daily_parser --cov=scripts.publish_register_update --cov-branch --cov-report=term-missing --cov-report=xml:.geode_runtime/register-refresh/coverage.xml --junitxml=.geode_runtime/register-refresh/tests.xml
+          python -m coverage report --fail-under=90 --include=geode/pipeline/register_daily.py
+          python -m coverage report --fail-under=90 --include=geode/connectors/register_daily_parser.py
+          python -m coverage report --fail-under=90 --include=scripts/publish_register_update.py
+      - name: Check official sources and validate the transaction
+        run: python -m geode.pipeline.register_daily --root . --since 2026-07-01 --report-dir .geode_runtime/register-refresh
+      - name: Package validated candidate
+        id: candidate
+        run: python scripts/publish_register_update.py build --root . --output .geode_runtime/register-candidate --report-dir .geode_runtime/register-refresh
+      - name: Show source-check result
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          printf '## Colorado Register source check\n\nJob result: %s\n\n' "$JOB_STATUS" >> "$GITHUB_STEP_SUMMARY"
+          if test -f .geode_runtime/register-refresh/summary.md; then
+            cat .geode_runtime/register-refresh/summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            printf 'The run failed before creating a source report. Inspect the job log.\n' >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Retain run report including failure or no-change results
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: register-report-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .geode_runtime/register-refresh/
+          retention-days: 90
+          if-no-files-found: warn
+          include-hidden-files: true
+      - name: Retain validated candidate for isolated publisher
+        if: success() && steps.candidate.outputs.has_changes == 'true'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: register-candidate-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .geode_runtime/register-candidate/
+          retention-days: 14
+          if-no-files-found: error
+          include-hidden-files: true
+
+  publish:
+    needs: collect
+    if: needs.collect.outputs.has_changes == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout trusted publisher from main
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+          lfs: false
+      - name: Download candidate from this successful collection job
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+        with:
+          name: register-candidate-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .geode_runtime/register-candidate/
+      - name: Recheck candidate, push bot branch and open review PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/publish_register_update.py publish --root . --output .geode_runtime/register-candidate
+      - name: Show publication result
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          printf '\nPublication job result: %s. The data update requires human review before merge.\n' "$JOB_STATUS" >> "$GITHUB_STEP_SUMMARY"
+      - name: Retain publication evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: register-publication-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .geode_runtime/register-candidate/candidate.json
+            .geode_runtime/register-candidate/published.json
+            .geode_runtime/register-candidate/pull-request-body.md
+          retention-days: 90
+          if-no-files-found: warn
+          include-hidden-files: true

@@ -1,0 +1,422 @@
+{
+  "$defs": {
+    "DailyNoticeRow": {
+      "additionalProperties": false,
+      "description": "A source row, including unresolved proposals and source-specific dates.",
+      "properties": {
+        "notice_type": {
+          "title": "Notice Type",
+          "type": "string"
+        },
+        "department": {
+          "minLength": 1,
+          "title": "Department",
+          "type": "string"
+        },
+        "agency": {
+          "minLength": 1,
+          "title": "Agency",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "ccr_citation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ccr Citation"
+        },
+        "ccr_rule_affected": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ccr Rule Affected"
+        },
+        "edocket_tracking_number": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Edocket Tracking Number"
+        },
+        "edocket_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Edocket Url"
+        },
+        "hearing_detail_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Hearing Detail Url"
+        },
+        "opinion_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Opinion Url"
+        },
+        "document_urls": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Document Urls",
+          "type": "array"
+        },
+        "hearing_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Hearing Date"
+        },
+        "effective_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Effective Date"
+        },
+        "expiration_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expiration Date"
+        },
+        "termination_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Termination Date"
+        },
+        "publication_date": {
+          "format": "date",
+          "title": "Publication Date",
+          "type": "string"
+        },
+        "section": {
+          "title": "Section",
+          "type": "string"
+        },
+        "row_number": {
+          "minimum": 1,
+          "title": "Row Number",
+          "type": "integer"
+        },
+        "source_evidence": {
+          "minLength": 1,
+          "title": "Source Evidence",
+          "type": "string"
+        },
+        "source_url": {
+          "title": "Source Url",
+          "type": "string"
+        }
+      },
+      "required": [
+        "notice_type",
+        "department",
+        "agency",
+        "title",
+        "publication_date",
+        "section",
+        "row_number",
+        "source_evidence",
+        "source_url"
+      ],
+      "title": "DailyNoticeRow",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "description": "One old row whose linked source request is absent from the complete job log.",
+      "properties": {
+        "notice_id": {
+          "title": "Notice Id",
+          "type": "string"
+        },
+        "tracking_number": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Tracking Number"
+        },
+        "notice_type": {
+          "title": "Notice Type",
+          "type": "string"
+        },
+        "ccr_citation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Ccr Citation"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "old_row_number": {
+          "title": "Old Row Number",
+          "type": "integer"
+        },
+        "archived_row": {
+          "$ref": "#/$defs/DailyNoticeRow"
+        },
+        "source_evidence": {
+          "title": "Source Evidence",
+          "type": "string"
+        },
+        "absent_document_requests": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Absent Document Requests",
+          "type": "array"
+        },
+        "absent_detail_request": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Absent Detail Request"
+        },
+        "classification": {
+          "const": "candidate_absent_from_hosted_issue_requests",
+          "title": "Classification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "notice_id",
+        "tracking_number",
+        "notice_type",
+        "ccr_citation",
+        "title",
+        "old_row_number",
+        "archived_row",
+        "source_evidence",
+        "absent_document_requests",
+        "absent_detail_request",
+        "classification"
+      ],
+      "title": "Finding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A bounded offline comparison, not a currentness or removal authorization.",
+  "properties": {
+    "status": {
+      "const": "archived_state_consistent_two_hosted_row_candidates",
+      "title": "Status",
+      "type": "string"
+    },
+    "issue_url": {
+      "title": "Issue Url",
+      "type": "string"
+    },
+    "archived_source_sha256": {
+      "title": "Archived Source Sha256",
+      "type": "string"
+    },
+    "old_state_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Old State Ids",
+      "type": "array"
+    },
+    "archived_replayed_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Archived Replayed Ids",
+      "type": "array"
+    },
+    "provenance_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Provenance Ids",
+      "type": "array"
+    },
+    "row_count": {
+      "title": "Row Count",
+      "type": "integer"
+    },
+    "old_resolution_pages": {
+      "title": "Old Resolution Pages",
+      "type": "integer"
+    },
+    "metadata_rows_schema_checked": {
+      "title": "Metadata Rows Schema Checked",
+      "type": "integer"
+    },
+    "index_rows_schema_checked": {
+      "title": "Index Rows Schema Checked",
+      "type": "integer"
+    },
+    "hosted_request_count": {
+      "title": "Hosted Request Count",
+      "type": "integer"
+    },
+    "affected_issue_request_number": {
+      "title": "Affected Issue Request Number",
+      "type": "integer"
+    },
+    "affected_issue_subsequent_requests": {
+      "title": "Affected Issue Subsequent Requests",
+      "type": "integer"
+    },
+    "candidates": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Candidates",
+      "type": "array"
+    },
+    "fresh_http_body_available": {
+      "title": "Fresh Http Body Available",
+      "type": "boolean"
+    },
+    "fresh_missing_ids": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fresh Missing Ids"
+    },
+    "fresh_added_row_keys": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Fresh Added Row Keys"
+    },
+    "limitation": {
+      "title": "Limitation",
+      "type": "string"
+    },
+    "currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "issue_url",
+    "archived_source_sha256",
+    "old_state_ids",
+    "archived_replayed_ids",
+    "provenance_ids",
+    "row_count",
+    "old_resolution_pages",
+    "metadata_rows_schema_checked",
+    "index_rows_schema_checked",
+    "hosted_request_count",
+    "affected_issue_request_number",
+    "affected_issue_subsequent_requests",
+    "candidates",
+    "fresh_http_body_available",
+    "limitation"
+  ],
+  "title": "Replay",
+  "type": "object"
+}

@@ -1,0 +1,138 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "status": {
+      "const": "prototype_frozen_pending_root_review",
+      "default": "prototype_frozen_pending_root_review",
+      "title": "Status",
+      "type": "string"
+    },
+    "completed_at": {
+      "title": "Completed At",
+      "type": "string"
+    },
+    "python_version": {
+      "title": "Python Version",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "tests_passed": {
+      "const": 66,
+      "default": 66,
+      "title": "Tests Passed",
+      "type": "integer"
+    },
+    "combined_coverage_percent": {
+      "title": "Combined Coverage Percent",
+      "type": "number"
+    },
+    "statement_coverage_percent": {
+      "title": "Statement Coverage Percent",
+      "type": "number"
+    },
+    "branch_coverage_percent": {
+      "title": "Branch Coverage Percent",
+      "type": "number"
+    },
+    "exact_source_rows_checked": {
+      "const": 104,
+      "default": 104,
+      "title": "Exact Source Rows Checked",
+      "type": "integer"
+    },
+    "authority": {
+      "const": "CO-COUNTY-EL_PASO",
+      "default": "CO-COUNTY-EL_PASO",
+      "title": "Authority",
+      "type": "string"
+    },
+    "production_files_placed": {
+      "const": false,
+      "default": false,
+      "title": "Production Files Placed",
+      "type": "boolean"
+    },
+    "evidence_or_corpus_modified": {
+      "const": false,
+      "default": false,
+      "title": "Evidence Or Corpus Modified",
+      "type": "boolean"
+    },
+    "other_lookup_modified": {
+      "const": false,
+      "default": false,
+      "title": "Other Lookup Modified",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "completed_at",
+    "python_version",
+    "files",
+    "combined_coverage_percent",
+    "statement_coverage_percent",
+    "branch_coverage_percent",
+    "limitations"
+  ],
+  "title": "Validation",
+  "type": "object"
+}

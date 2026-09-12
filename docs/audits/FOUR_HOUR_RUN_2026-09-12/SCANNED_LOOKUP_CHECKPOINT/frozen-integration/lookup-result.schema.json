@@ -1,0 +1,511 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Bind exact file bytes to a path.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Cell": {
+      "additionalProperties": false,
+      "description": "Preserve a manual visual cell; its offsets never describe native PDF text.",
+      "properties": {
+        "column": {
+          "enum": [
+            "application_type",
+            "application_fee",
+            "project_type",
+            "heading",
+            "page_label"
+          ],
+          "title": "Column",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "visible_text",
+            "visibly_blank",
+            "visible_text_with_clipped_unresolved_tail"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "pixel_bbox": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Pixel Bbox",
+          "type": "array"
+        },
+        "superscript_footnotes": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Superscript Footnotes",
+          "type": "array"
+        },
+        "transcript_start_byte": {
+          "minimum": 0,
+          "title": "Transcript Start Byte",
+          "type": "integer"
+        },
+        "transcript_end_byte": {
+          "minimum": 0,
+          "title": "Transcript End Byte",
+          "type": "integer"
+        },
+        "native_start_byte": {
+          "title": "Native Start Byte",
+          "type": "null"
+        },
+        "native_end_byte": {
+          "title": "Native End Byte",
+          "type": "null"
+        }
+      },
+      "required": [
+        "column",
+        "text",
+        "state",
+        "pixel_bbox",
+        "superscript_footnotes",
+        "transcript_start_byte",
+        "transcript_end_byte",
+        "native_start_byte",
+        "native_end_byte"
+      ],
+      "title": "Cell",
+      "type": "object"
+    },
+    "EvidenceBlock": {
+      "additionalProperties": false,
+      "description": "Attach page pixels and authored transcript bytes to one complete reviewed row.",
+      "properties": {
+        "row": {
+          "$ref": "#/$defs/Row"
+        },
+        "source_image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "visual_transcript": {
+          "$ref": "#/$defs/Asset"
+        },
+        "transcription_origin": {
+          "const": "manual_visual_from_scan",
+          "default": "manual_visual_from_scan",
+          "title": "Transcription Origin",
+          "type": "string"
+        },
+        "offset_basis": {
+          "const": "reviewed_visual_transcript_utf8_not_pdf_native",
+          "default": "reviewed_visual_transcript_utf8_not_pdf_native",
+          "title": "Offset Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "row",
+        "source_image",
+        "visual_transcript"
+      ],
+      "title": "EvidenceBlock",
+      "type": "object"
+    },
+    "FeeMatch": {
+      "additionalProperties": false,
+      "description": "Return all three cells plus exact section and row-specific footnote context.",
+      "properties": {
+        "fee_row": {
+          "$ref": "#/$defs/EvidenceBlock"
+        },
+        "section_header": {
+          "$ref": "#/$defs/EvidenceBlock"
+        },
+        "row_footnotes": {
+          "items": {
+            "$ref": "#/$defs/EvidenceBlock"
+          },
+          "title": "Row Footnotes",
+          "type": "array"
+        },
+        "section_continues_from_prior_page": {
+          "title": "Section Continues From Prior Page",
+          "type": "boolean"
+        },
+        "unresolved_clipped_label": {
+          "title": "Unresolved Clipped Label",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "fee_row",
+        "section_header",
+        "row_footnotes",
+        "section_continues_from_prior_page",
+        "unresolved_clipped_label"
+      ],
+      "title": "FeeMatch",
+      "type": "object"
+    },
+    "RequiredContext": {
+      "additionalProperties": false,
+      "description": "Mandatory shared context applies to every returned fee row.",
+      "properties": {
+        "source_headers": {
+          "items": {
+            "$ref": "#/$defs/EvidenceBlock"
+          },
+          "title": "Source Headers",
+          "type": "array"
+        },
+        "table_header": {
+          "$ref": "#/$defs/EvidenceBlock"
+        },
+        "global_footnote": {
+          "$ref": "#/$defs/EvidenceBlock"
+        },
+        "general_notes": {
+          "items": {
+            "$ref": "#/$defs/EvidenceBlock"
+          },
+          "title": "General Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source_headers",
+        "table_header",
+        "global_footnote",
+        "general_notes"
+      ],
+      "title": "RequiredContext",
+      "type": "object"
+    },
+    "Row": {
+      "additionalProperties": false,
+      "description": "Preserve an entire reviewed row and its original relationship identifiers.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "role": {
+          "enum": [
+            "fee_row",
+            "section_header",
+            "column_headers",
+            "title",
+            "footnote",
+            "general_note",
+            "page_label"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "section_header_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Section Header Id"
+        },
+        "fee_header_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Fee Header Id"
+        },
+        "note_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Note Id"
+        },
+        "cells": {
+          "items": {
+            "$ref": "#/$defs/Cell"
+          },
+          "minItems": 1,
+          "title": "Cells",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "role",
+        "section_header_id",
+        "fee_header_id",
+        "note_id",
+        "cells"
+      ],
+      "title": "Row",
+      "type": "object"
+    },
+    "SourceBinding": {
+      "additionalProperties": false,
+      "description": "Keep source claims, received custody and verified legal dates distinct.",
+      "properties": {
+        "source_id": {
+          "const": "el-paso-planning-fees-sd011",
+          "default": "el-paso-planning-fees-sd011",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-EL_PASO",
+          "default": "CO-COUNTY-EL_PASO",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "source_pdf": {
+          "$ref": "#/$defs/Asset"
+        },
+        "source_review": {
+          "$ref": "#/$defs/Asset"
+        },
+        "reviewed_grid": {
+          "$ref": "#/$defs/Asset"
+        },
+        "package_manifest": {
+          "$ref": "#/$defs/Asset"
+        },
+        "acceptance": {
+          "$ref": "#/$defs/Asset"
+        },
+        "claimed_source_url": {
+          "title": "Claimed Source Url",
+          "type": "string"
+        },
+        "claimed_final_url": {
+          "title": "Claimed Final Url",
+          "type": "string"
+        },
+        "acquisition_method": {
+          "const": "received_review_package",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "claimed_http_acquisition_at": {
+          "title": "Claimed Http Acquisition At",
+          "type": "string"
+        },
+        "verified_http_acquisition_at": {
+          "title": "Verified Http Acquisition At",
+          "type": "null"
+        },
+        "actual_repository_received_at": {
+          "title": "Actual Repository Received At",
+          "type": "string"
+        },
+        "source_printed_date_claim": {
+          "title": "Source Printed Date Claim",
+          "type": "string"
+        },
+        "verified_adoption_date": {
+          "title": "Verified Adoption Date",
+          "type": "null"
+        },
+        "verified_effective_date": {
+          "title": "Verified Effective Date",
+          "type": "null"
+        },
+        "review_completed_at": {
+          "title": "Review Completed At",
+          "type": "string"
+        },
+        "native_text_bytes": {
+          "const": 0,
+          "default": 0,
+          "title": "Native Text Bytes",
+          "type": "integer"
+        },
+        "fully_legible_complete_extraction": {
+          "const": false,
+          "default": false,
+          "title": "Fully Legible Complete Extraction",
+          "type": "boolean"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "answer_safe": {
+          "const": false,
+          "default": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        },
+        "limitations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        },
+        "unresolved_regions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Unresolved Regions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source_pdf",
+        "source_review",
+        "reviewed_grid",
+        "package_manifest",
+        "acceptance",
+        "claimed_source_url",
+        "claimed_final_url",
+        "acquisition_method",
+        "claimed_http_acquisition_at",
+        "verified_http_acquisition_at",
+        "actual_repository_received_at",
+        "source_printed_date_claim",
+        "verified_adoption_date",
+        "verified_effective_date",
+        "review_completed_at",
+        "limitations",
+        "unresolved_regions"
+      ],
+      "title": "SourceBinding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Machine-readable, source-only results with mandatory shared notes.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "status": {
+      "enum": [
+        "matched_rows",
+        "matched_context_only",
+        "no_matching_row",
+        "listed_rows"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "mode": {
+      "const": "source",
+      "default": "source",
+      "title": "Mode",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/SourceBinding"
+    },
+    "mandatory_context": {
+      "$ref": "#/$defs/RequiredContext"
+    },
+    "matches": {
+      "items": {
+        "$ref": "#/$defs/FeeMatch"
+      },
+      "maxItems": 104,
+      "title": "Matches",
+      "type": "array"
+    },
+    "matched_context_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Matched Context Ids",
+      "type": "array"
+    },
+    "scope": {
+      "const": "Source-only lookup in one 104-row reviewed scan. No fee calculation, applicability or current-law answer. A missing match does not establish absence, exemption or a zero fee.",
+      "default": "Source-only lookup in one 104-row reviewed scan. No fee calculation, applicability or current-law answer. A missing match does not establish absence, exemption or a zero fee.",
+      "title": "Scope",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "status",
+    "source",
+    "mandatory_context",
+    "matches",
+    "matched_context_ids"
+  ],
+  "title": "LookupResult",
+  "type": "object"
+}
