@@ -1,0 +1,156 @@
+{
+  "$defs": {
+    "Identity": {
+      "additionalProperties": false,
+      "description": "Neutral assignment identity and all expected physical pages.",
+      "properties": {
+        "assignment_id": {
+          "enum": [
+            "EB-PDF-025",
+            "EB-PDF-026"
+          ],
+          "title": "Assignment Id",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-EL_PASO",
+          "default": "CO-COUNTY-EL_PASO",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "language": {
+          "const": "Spanish",
+          "default": "Spanish",
+          "title": "Language",
+          "type": "string"
+        },
+        "expected_pages": {
+          "const": 6,
+          "default": 6,
+          "title": "Expected Pages",
+          "type": "integer"
+        },
+        "original": {
+          "$ref": "#/$defs/Ref"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/Page"
+          },
+          "maxItems": 6,
+          "minItems": 6,
+          "title": "Pages",
+          "type": "array"
+        }
+      },
+      "required": [
+        "assignment_id",
+        "source_id",
+        "original",
+        "pages"
+      ],
+      "title": "Identity",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "A complete physical source image, with no transcription hints.",
+      "properties": {
+        "physical_page": {
+          "maximum": 6,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Ref"
+        },
+        "width": {
+          "const": 2550,
+          "default": 2550,
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "const": 3300,
+          "default": 3300,
+          "title": "Height",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Exact packet-relative ordinary-file bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Only neutral pre-freeze metadata for this prepared two-document queue.",
+  "properties": {
+    "packet_id": {
+      "const": "ebenezer-025-026-2026-09-13",
+      "default": "ebenezer-025-026-2026-09-13",
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_DISPATCHED",
+      "default": "PREPARED_NOT_DISPATCHED",
+      "title": "Status",
+      "type": "string"
+    },
+    "documents": {
+      "items": {
+        "$ref": "#/$defs/Identity"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Documents",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "documents"
+  ],
+  "title": "Identities",
+  "type": "object"
+}

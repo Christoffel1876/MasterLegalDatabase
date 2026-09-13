@@ -1,0 +1,109 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "One retained file relative to the receipt directory.",
+      "properties": {
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sha256",
+        "size_bytes",
+        "path"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A finite procedure waiting for root's final scan and dispatch.",
+  "properties": {
+    "status": {
+      "const": "PREPARED_NOT_EXECUTED",
+      "title": "Status",
+      "type": "string"
+    },
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "final_scan_sha256": {
+      "title": "Final Scan Sha256",
+      "type": "null"
+    },
+    "final_scan_schema_sha256": {
+      "title": "Final Scan Schema Sha256",
+      "type": "null"
+    },
+    "actual_exports": {
+      "const": 0,
+      "title": "Actual Exports",
+      "type": "integer"
+    },
+    "git_mutations": {
+      "const": 0,
+      "title": "Git Mutations",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "fixture_tests_passed": {
+      "const": 23,
+      "title": "Fixture Tests Passed",
+      "type": "integer"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    },
+    "pending": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Pending",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "recorded_at",
+    "files",
+    "final_scan_sha256",
+    "final_scan_schema_sha256",
+    "actual_exports",
+    "git_mutations",
+    "public_requests",
+    "fixture_tests_passed",
+    "limits",
+    "pending"
+  ],
+  "title": "Preparation",
+  "type": "object"
+}

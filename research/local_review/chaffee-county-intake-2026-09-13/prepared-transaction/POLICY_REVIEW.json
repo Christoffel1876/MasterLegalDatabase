@@ -1,0 +1,76 @@
+{
+  "recorded_at": "2026-09-13T16:27:25.768617Z",
+  "reviewer": "Popper",
+  "status": "no_blocker_in_new_path_scoped_branch",
+  "copied_root_decision": {
+    "path": "inputs/policy-subset/DECISION.json",
+    "sha256": "ab02a886a3f9dd801db64f75483e21b8efdb966676d8fc1700ead9fb4c490350",
+    "size_bytes": 2755
+  },
+  "copied_root_inventory": {
+    "path": "inputs/policy-subset/INVENTORY.json",
+    "sha256": "11bc9002256428b8714179c1d4f14568b3c5bd26ff98eb487d87dc412d5ff88e",
+    "size_bytes": 8356
+  },
+  "copied_policy_subset": [
+    {
+      "path": "inputs/policy-subset/DECISION.json",
+      "sha256": "ab02a886a3f9dd801db64f75483e21b8efdb966676d8fc1700ead9fb4c490350",
+      "size_bytes": 2755
+    },
+    {
+      "path": "inputs/policy-subset/DECISION.schema.json",
+      "sha256": "867a88e9011e5c4865f2f3a206fd70662c9d2e3628accdf53364cb792ccd9d77",
+      "size_bytes": 1820
+    },
+    {
+      "path": "inputs/policy-subset/INVENTORY.json",
+      "sha256": "11bc9002256428b8714179c1d4f14568b3c5bd26ff98eb487d87dc412d5ff88e",
+      "size_bytes": 8356
+    },
+    {
+      "path": "inputs/policy-subset/INVENTORY.schema.json",
+      "sha256": "a9cf0d615996784e5d19a1704de9c2e86e0253e1258033b212a5d5c1e25cc0e5",
+      "size_bytes": 803
+    },
+    {
+      "path": "inputs/policy-subset/maintained-code-at-decision/constants.py",
+      "sha256": "e8045e0cc4d69045f4296ac464a518c43773bc762e747f672a9b5b40a6c56f95",
+      "size_bytes": 22102
+    },
+    {
+      "path": "inputs/policy-subset/maintained-code-at-decision/validators.py",
+      "sha256": "26708c26fa757a0981fed78c473bcaf84c0498c8c414c0a7003764f639a8c45b",
+      "size_bytes": 6448
+    },
+    {
+      "path": "inputs/policy-subset/maintained-code-at-decision/test_chaffee_source_path.py",
+      "sha256": "858d4452a0eb72bcb98eb449778a3e652fa5acf0092ad23bbb7ec4c8627f7c98",
+      "size_bytes": 3540
+    }
+  ],
+  "accepted_exact_urls": [
+    "https://cms2.revize.com/revize/chaffeecounty/Documents/Departments/Building%20Department/Adopted%20Codes%20&%20Design%20Criteria/2026-02%20Ordinance%20Adopting%20the%20CWRC%20with%20Local%20Amendments_RECORDED.pdf?t=202606021136110",
+    "https://cms2.revize.com/revize/chaffeecounty/2026-01%20Ordinance%20Chaffee%20County%20Electric%20Preferred%20Amendments_RECORDED.pdf?t=202608031134050"
+  ],
+  "rejected_probe_urls": [
+    "https://cms2.revize.com/revize/chaffeecounty-other/a.pdf",
+    "https://cms2.revize.com/revize/chaffeecounty/%2e%2e/other/a.pdf",
+    "https://cms2.revize.com/revize/chaffeecounty/%252e%252e/other/a.pdf",
+    "https://cms2.revize.com/revize/chaffeecounty/%5cother.pdf",
+    "https://cms2.revize.com:443/revize/chaffeecounty/a.pdf",
+    "https://x@cms2.revize.com/revize/chaffeecounty/a.pdf",
+    "https://cms2.revize.com/revize/anothercounty/a.pdf",
+    "https://cms2.revize.com/revize/chaffeecounty/a%00.pdf"
+  ],
+  "root_reported_focused_tests": 126,
+  "root_tests_independently_rerun": false,
+  "limitations": [
+    "Read-only review of the actual constants/validator diff and root tests; two exact positive URLs plus eight independent refusal probes passed locally.",
+    "This review is scoped to the new exact-netloc/tenant-path branch, not a global audit of historical host rules or a crawler/HTTP redirect authorization.",
+    "The policy subset omits root preimages and its redundant retrieval copy. The complete public retrieval packet is retained separately at inputs/retrieval/. The full external policy INVENTORY is bound, but is not claimed fully copied.",
+    "Root reports 126 relevant tests passed; these were read rather than rerun here. Transaction tests and live preflight are recorded independently in VALIDATION."
+  ],
+  "public_requests": 0,
+  "canonical_changes": 0
+}

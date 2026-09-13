@@ -1,0 +1,97 @@
+{
+  "status": "passed_preparation_only",
+  "completed_at": "2026-09-13T16:29:37.831771Z",
+  "preparation_sha256": "a8f768ff4c00bf55ba2db4712d67183f8c739e8e59777fa9bfed77f1bd12ef4b",
+  "transaction_sha256": "f6ba9314dbfb9c8fd546be3111485603bef5acdd544d6706bf3cd2bf6aca23fb",
+  "results": [
+    {
+      "label": "focused_tests",
+      "command": [
+        "/private/tmp/geode-status-venv/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py",
+        "--cov=transaction",
+        "--cov=models",
+        "--cov-branch",
+        "--cov-report=term-missing",
+        "--cov-report=json:/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13/popper-chaffee-intake-preparation/validation/coverage.json"
+      ],
+      "working_directory": "/Users/mcoors/Documents/Project Geode",
+      "started_at": "2026-09-13T16:28:50.542729Z",
+      "completed_at": "2026-09-13T16:29:36.894733Z",
+      "exit_code": 0,
+      "stdout": {
+        "path": "validation/focused_tests.stdout.txt",
+        "sha256": "9773b8827353589fa073d3274df2f515cabcb2f6b9ccfbd959b0dd353f0541e1",
+        "size_bytes": 2004
+      },
+      "stderr": {
+        "path": "validation/focused_tests.stderr.txt",
+        "sha256": "ee649220d15160ba4535a7786250af6d7977bbefe63aade254a3850aee272f43",
+        "size_bytes": 82
+      }
+    },
+    {
+      "label": "live_read_only_preflight",
+      "command": [
+        "/private/tmp/geode-status-venv/bin/python",
+        "-B",
+        "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py",
+        "--dry-run",
+        "--root",
+        "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase"
+      ],
+      "working_directory": "/Users/mcoors/Documents/Project Geode",
+      "started_at": "2026-09-13T16:29:36.906920Z",
+      "completed_at": "2026-09-13T16:29:37.814959Z",
+      "exit_code": 0,
+      "stdout": {
+        "path": "validation/live_read_only_preflight.stdout.txt",
+        "sha256": "6caefbd262fc1c7f0b470928e02bb14aff58726da9e9c737e7e3cdfe2e155896",
+        "size_bytes": 245
+      },
+      "stderr": {
+        "path": "validation/live_read_only_preflight.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_bytes": 0
+      }
+    }
+  ],
+  "test_count": 75,
+  "combined_branch_inclusive_coverage_percent": 92.17506631299734,
+  "coverage": {
+    "path": "validation/coverage.json",
+    "sha256": "2ca879b5a2942dc02ebf2645a07f1227f916f1a1e28d9f5124531722937454b3",
+    "size_bytes": 36514
+  },
+  "canonical_managed_sha256_before": {
+    "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl": "c0920acc249b795610132fa10df18bd912d9eb55e1e6d985ab8794feea4236f8",
+    "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl": "b83f729642af539eb2e66d2d3d4277cafa139bee1058607fa67dde482a93b204",
+    "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_REPORT.json": "0ad971a650f7d688bd8582442626d053748e906a9cd4c367edc46bf911c01691",
+    "_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json": "ad27514fe91659c9914780c7d3e69e48ace742bc31ad67d9c3a3c99945aecde3",
+    "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_POLICY.json": "9cd00825fcb7a8ab905fefcebe3575355b41eb4cf3e3168b1b83c7ef56aba205",
+    "_CONTROL_PLANE/BLOCKED_DOWNLOAD_QUEUE.json": "d195fdff2b686d51dc4e3e22bb8f2d6f6098fd8e2cdf7b83be088964a7a9f4be",
+    "_CONTROL_PLANE/LOCAL_SOURCE_REGISTRY.json": "05f9bb13489109027556728e91a75ad438fdfeb6e5e7cb4027b4d4dbaf66f64f"
+  },
+  "canonical_managed_sha256_after": {
+    "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl": "c0920acc249b795610132fa10df18bd912d9eb55e1e6d985ab8794feea4236f8",
+    "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl": "b83f729642af539eb2e66d2d3d4277cafa139bee1058607fa67dde482a93b204",
+    "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_REPORT.json": "0ad971a650f7d688bd8582442626d053748e906a9cd4c367edc46bf911c01691",
+    "_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json": "ad27514fe91659c9914780c7d3e69e48ace742bc31ad67d9c3a3c99945aecde3",
+    "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_POLICY.json": "9cd00825fcb7a8ab905fefcebe3575355b41eb4cf3e3168b1b83c7ef56aba205",
+    "_CONTROL_PLANE/BLOCKED_DOWNLOAD_QUEUE.json": "d195fdff2b686d51dc4e3e22bb8f2d6f6098fd8e2cdf7b83be088964a7a9f4be",
+    "_CONTROL_PLANE/LOCAL_SOURCE_REGISTRY.json": "05f9bb13489109027556728e91a75ad438fdfeb6e5e7cb4027b4d4dbaf66f64f"
+  },
+  "canonical_managed_bytes_unchanged": true,
+  "actual_execution_directory_created": false,
+  "limitations": [
+    "All mutations exercised by tests target temporary fixture repositories only.",
+    "The first adapted fixture omitted the new sources directory, causing36 failures; that test preimage, exact failure log and coverage are retained. After the fixture copy fix74 tests passed. This final75-case run adds coherent backdated-intent refusal.",
+    "No full suite, public request, source content review, canonical apply, currentness certification or global noncooperating-writer lock is asserted."
+  ]
+}

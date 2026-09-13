@@ -1,0 +1,90 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "title": "Completed At",
+      "type": "string"
+    },
+    "renderer_command": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Renderer Command",
+      "type": "array"
+    },
+    "exit_code": {
+      "title": "Exit Code",
+      "type": "integer"
+    },
+    "stderr": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "native_text": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Native Text",
+      "type": "array"
+    },
+    "native_total_bytes": {
+      "minimum": 0,
+      "title": "Native Total Bytes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "started_at",
+    "completed_at",
+    "renderer_command",
+    "exit_code",
+    "stderr",
+    "source",
+    "pages",
+    "native_text",
+    "native_total_bytes"
+  ],
+  "title": "Result",
+  "type": "object"
+}

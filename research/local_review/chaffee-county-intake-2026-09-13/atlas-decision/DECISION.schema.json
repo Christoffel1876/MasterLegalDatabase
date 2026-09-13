@@ -1,0 +1,77 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "reviewer": {
+      "const": "Atlas",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "approved_fixed_two_source_intake_before_execution",
+      "title": "Status",
+      "type": "string"
+    },
+    "preparation_sha256": {
+      "title": "Preparation Sha256",
+      "type": "string"
+    },
+    "transaction_sha256": {
+      "title": "Transaction Sha256",
+      "type": "string"
+    },
+    "independent_audit_sha256": {
+      "title": "Independent Audit Sha256",
+      "type": "string"
+    },
+    "source_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Ids",
+      "type": "array"
+    },
+    "checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "reviewer",
+    "recorded_at",
+    "status",
+    "preparation_sha256",
+    "transaction_sha256",
+    "independent_audit_sha256",
+    "source_ids",
+    "checks",
+    "limitations",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Decision",
+  "type": "object"
+}

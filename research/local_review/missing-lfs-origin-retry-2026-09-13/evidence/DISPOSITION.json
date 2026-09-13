@@ -1,0 +1,58 @@
+{
+  "schema_version": "lfs-origin-disposition-1",
+  "recorded_at": "2026-09-13T15:39:38.274506+00:00",
+  "status": "exact_objects_reported_missing_at_origin_no_recovery",
+  "started_at": "2026-09-13T15:37:48.781849Z",
+  "finished_at": "2026-09-13T15:37:49.775559Z",
+  "attempt": {
+    "path": "ATTEMPT.json",
+    "sha256": "104cbdca169ad97309e36ab57f92b41756305f7f27046a9f583cdc4a422aeeab",
+    "size_bytes": 3367
+  },
+  "objects": [
+    {
+      "path": "_CONTROL_PLANE/LOCAL_REVIEW_QUEUE.jsonl",
+      "oid": "c65a0f190fd5d5dca7810c47afc7e6843cd78520242add1fe6951545fe92ad00",
+      "expected_size_bytes": 72395471,
+      "cli_reported_object_error_code": 404,
+      "cli_reported_message": "Object does not exist on the server",
+      "source_output_line": 3,
+      "original_recovered": false
+    },
+    {
+      "path": "08_County_Authorities/_index.jsonl",
+      "oid": "e896fc157617cfd9cd9839bf2bf955d893b66d7de514107e8b3c98dc4795c806",
+      "expected_size_bytes": 172131787,
+      "cli_reported_object_error_code": 404,
+      "cli_reported_message": "Object does not exist on the server",
+      "source_output_line": 2,
+      "original_recovered": false
+    }
+  ],
+  "public_error_output": {
+    "path": "stderr.public.txt",
+    "sha256": "bec81eb27de2db2de7876be3f3d21a5293faceefb846ae1a69aae606cd90d9fb",
+    "size_bytes": 463
+  },
+  "private_error_output_sha256": "bec81eb27de2db2de7876be3f3d21a5293faceefb846ae1a69aae606cd90d9fb",
+  "public_output_derivation": "All four complete UTF-8 lines were checked against exact allowlisted templates: requested commit, the two requested OIDs with object-error404, and the configured origin endpoint. The public copy is byte-identical; no deletion or normalization occurred. This is CLI output, not a raw HTTP header/body transcript.",
+  "private_raw_outputs_excluded": true,
+  "http_batch_status": null,
+  "raw_http_response_preserved": false,
+  "low_level_request_count": null,
+  "object_bytes_recovered": 0,
+  "canonical_restoration_proposed": false,
+  "observations": [
+    "One explicitly authorized retry outside the restricted sandbox completed without timeout; the earlier sandbox DNS failure remains a separate record.",
+    "The LFS client reported each exact requested OID missing with object code404. This is stronger availability evidence than the earlier DNS failure, but the raw HTTP batch status was not captured.",
+    "The isolated LFS storage has no files. Both pointer files and repository configuration remained byte-identical. No checkout/smudge/reset or download action was run by Atlas.",
+    "Only the configured origin was checked; upstream was not contacted in this phase."
+  ],
+  "limitations": [
+    "Object404 is attributed to the Git LFS client diagnostic, not an independently retained raw HTTP response. No batchHTTP200 or exact wire-request count is asserted.",
+    "This receipt does not establish permanent absence or absence from another remote, original producer machine, inaccessible Downloads folder or backup.",
+    "The dry-run option still performs an LFS availability request. It must not be described as a network-free preflight.",
+    "The private stream paths in the unchanged ATTEMPT receipt identify excluded execution artifacts; the portable verifier does not open those paths."
+  ],
+  "next_step": "No canonical restoration is possible from this attempt. Preserve both pointers. Further recovery requires separately authorized evidence from another exact-object storage location or the original producer; do not substitute older/rebuilt data."
+}

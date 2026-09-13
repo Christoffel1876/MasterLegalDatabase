@@ -1,0 +1,125 @@
+{
+  "$defs": {
+    "FileRef": {
+      "additionalProperties": false,
+      "description": "A package-relative immutable byte identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Record actual focused tests and their limited verification-code coverage.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "pytest_status": {
+      "const": "passed",
+      "title": "Pytest Status",
+      "type": "string"
+    },
+    "tests_passed": {
+      "const": 38,
+      "title": "Tests Passed",
+      "type": "integer"
+    },
+    "reported_warnings": {
+      "const": 5,
+      "title": "Reported Warnings",
+      "type": "integer"
+    },
+    "elapsed_seconds": {
+      "const": 6.73,
+      "title": "Elapsed Seconds",
+      "type": "number"
+    },
+    "log": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "coverage": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "test_source": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "verified_modules": {
+      "items": {
+        "$ref": "#/$defs/FileRef"
+      },
+      "title": "Verified Modules",
+      "type": "array"
+    },
+    "covered_statements": {
+      "minimum": 0,
+      "title": "Covered Statements",
+      "type": "integer"
+    },
+    "total_statements": {
+      "exclusiveMinimum": 0,
+      "title": "Total Statements",
+      "type": "integer"
+    },
+    "covered_branches": {
+      "minimum": 0,
+      "title": "Covered Branches",
+      "type": "integer"
+    },
+    "total_branches": {
+      "exclusiveMinimum": 0,
+      "title": "Total Branches",
+      "type": "integer"
+    },
+    "combined_percent": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Combined Percent",
+      "type": "number"
+    },
+    "qualification": {
+      "title": "Qualification",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "pytest_status",
+    "tests_passed",
+    "reported_warnings",
+    "elapsed_seconds",
+    "log",
+    "coverage",
+    "test_source",
+    "verified_modules",
+    "covered_statements",
+    "total_statements",
+    "covered_branches",
+    "total_branches",
+    "combined_percent",
+    "qualification"
+  ],
+  "title": "TestReceipt",
+  "type": "object"
+}

@@ -1,0 +1,80 @@
+{
+  "additionalProperties": false,
+  "description": "Persist before a single public tool action; this is not a wire-request counter.",
+  "properties": {
+    "action_id": {
+      "pattern": "^SHEXT004-A[0-9]{3}$",
+      "title": "Action Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-CHAFFEE",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "reserved_at": {
+      "format": "date-time",
+      "title": "Reserved At",
+      "type": "string"
+    },
+    "tool_name": {
+      "title": "Tool Name",
+      "type": "string"
+    },
+    "action_kind": {
+      "enum": [
+        "open",
+        "download",
+        "search",
+        "browser_navigation",
+        "browser_click"
+      ],
+      "title": "Action Kind",
+      "type": "string"
+    },
+    "requested_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Requested Url"
+    },
+    "search_query": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Search Query"
+    },
+    "basis": {
+      "title": "Basis",
+      "type": "string"
+    },
+    "budget_checked": {
+      "const": true,
+      "title": "Budget Checked",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "action_id",
+    "authority_id",
+    "reserved_at",
+    "tool_name",
+    "action_kind",
+    "requested_url",
+    "basis",
+    "budget_checked"
+  ],
+  "title": "Reservation",
+  "type": "object"
+}

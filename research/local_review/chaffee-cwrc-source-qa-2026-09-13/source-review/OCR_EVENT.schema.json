@@ -1,0 +1,97 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "page": {
+      "title": "Page",
+      "type": "integer"
+    },
+    "image": {
+      "$ref": "#/$defs/Ref"
+    },
+    "executable": {
+      "$ref": "#/$defs/Ref"
+    },
+    "swift_source": {
+      "$ref": "#/$defs/Ref"
+    },
+    "argv": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Argv",
+      "type": "array"
+    },
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "title": "Completed At",
+      "type": "string"
+    },
+    "exit_code": {
+      "title": "Exit Code",
+      "type": "integer"
+    },
+    "stdout": {
+      "$ref": "#/$defs/Ref"
+    },
+    "stderr": {
+      "$ref": "#/$defs/Ref"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Ref"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "correction_performed": {
+      "title": "Correction Performed",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "page",
+    "image",
+    "executable",
+    "swift_source",
+    "argv",
+    "started_at",
+    "completed_at",
+    "exit_code",
+    "stdout",
+    "stderr",
+    "candidate",
+    "method",
+    "correction_performed"
+  ],
+  "title": "OcrEvent",
+  "type": "object"
+}

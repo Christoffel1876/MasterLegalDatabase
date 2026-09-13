@@ -1,0 +1,722 @@
+{
+  "$defs": {
+    "Crop": {
+      "additionalProperties": false,
+      "description": "An actually viewed detail crop; exact pixels and PDF rerenders stay distinct.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 6,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "method": {
+          "enum": [
+            "pdf_clip_pymupdf",
+            "exact_poppler_pixel_crop"
+          ],
+          "title": "Method",
+          "type": "string"
+        },
+        "rectangle": {
+          "items": {
+            "type": "integer"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Rectangle",
+          "type": "array"
+        },
+        "coordinate_unit": {
+          "enum": [
+            "pdf_points",
+            "source_png_pixels"
+          ],
+          "title": "Coordinate Unit",
+          "type": "string"
+        },
+        "viewed": {
+          "const": true,
+          "title": "Viewed",
+          "type": "boolean"
+        },
+        "observation": {
+          "title": "Observation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "image",
+        "method",
+        "rectangle",
+        "coordinate_unit",
+        "viewed",
+        "observation"
+      ],
+      "title": "Crop",
+      "type": "object"
+    },
+    "FileRef": {
+      "additionalProperties": false,
+      "description": "A package-relative immutable byte identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    },
+    "NativeLine": {
+      "additionalProperties": false,
+      "description": "An exact native line and its PDF-coordinate location, not inferred OCR.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 6,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "line_number": {
+          "minimum": 1,
+          "title": "Line Number",
+          "type": "integer"
+        },
+        "byte_start": {
+          "minimum": 0,
+          "title": "Byte Start",
+          "type": "integer"
+        },
+        "byte_end": {
+          "exclusiveMinimum": 0,
+          "title": "Byte End",
+          "type": "integer"
+        },
+        "candidate_byte_start": {
+          "minimum": 0,
+          "title": "Candidate Byte Start",
+          "type": "integer"
+        },
+        "candidate_byte_end": {
+          "exclusiveMinimum": 0,
+          "title": "Candidate Byte End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bbox_pdf_points": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Bbox Pdf Points",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "line_number",
+        "byte_start",
+        "byte_end",
+        "candidate_byte_start",
+        "candidate_byte_end",
+        "text",
+        "sha256",
+        "bbox_pdf_points"
+      ],
+      "title": "NativeLine",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "description": "A source-supported qualification, with exact native anchors and full context.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "source_anomaly",
+            "layout",
+            "conditional_wording",
+            "date_role",
+            "typography"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "segment_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Segment Ids",
+          "type": "array"
+        },
+        "literal_anchors": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Literal Anchors",
+          "type": "array"
+        },
+        "crop_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Crop Ids",
+          "type": "array"
+        },
+        "disposition": {
+          "enum": [
+            "preserve_source",
+            "native_formatting_limit"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "finding": {
+          "title": "Finding",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "segment_ids",
+        "literal_anchors",
+        "crop_ids",
+        "disposition",
+        "finding"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "The complete page image, native stream and actual visual inspection scope.",
+      "properties": {
+        "physical_page": {
+          "maximum": 6,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "native": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "candidate_native_start": {
+          "minimum": 0,
+          "title": "Candidate Native Start",
+          "type": "integer"
+        },
+        "candidate_native_end": {
+          "exclusiveMinimum": 0,
+          "title": "Candidate Native End",
+          "type": "integer"
+        },
+        "width_points": {
+          "const": 612.0,
+          "title": "Width Points",
+          "type": "number"
+        },
+        "height_points": {
+          "const": 792.0,
+          "title": "Height Points",
+          "type": "number"
+        },
+        "image_width": {
+          "const": 2550,
+          "title": "Image Width",
+          "type": "integer"
+        },
+        "image_height": {
+          "const": 3300,
+          "title": "Image Height",
+          "type": "integer"
+        },
+        "full_page_viewed": {
+          "const": true,
+          "title": "Full Page Viewed",
+          "type": "boolean"
+        },
+        "visible_date_footer": {
+          "title": "Visible Date Footer",
+          "type": "null"
+        },
+        "lines": {
+          "items": {
+            "$ref": "#/$defs/NativeLine"
+          },
+          "minItems": 1,
+          "title": "Lines",
+          "type": "array"
+        },
+        "segments": {
+          "items": {
+            "$ref": "#/$defs/Segment"
+          },
+          "minItems": 1,
+          "title": "Segments",
+          "type": "array"
+        },
+        "visual_notes": {
+          "title": "Visual Notes",
+          "type": "string"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "native",
+        "candidate_native_start",
+        "candidate_native_end",
+        "width_points",
+        "height_points",
+        "image_width",
+        "image_height",
+        "full_page_viewed",
+        "visible_date_footer",
+        "lines",
+        "segments",
+        "visual_notes"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Scope": {
+      "additionalProperties": false,
+      "description": "Visual judgment is recorded separately from deterministic byte checks.",
+      "properties": {
+        "method": {
+          "const": "preparation_candidate_aware_direct_image_review",
+          "title": "Method",
+          "type": "string"
+        },
+        "reviewer": {
+          "const": "Ptolemy (Codex subagent)",
+          "title": "Reviewer",
+          "type": "string"
+        },
+        "full_physical_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Full Physical Pages",
+          "type": "array"
+        },
+        "full_page_display_size": {
+          "const": "1376x1780 from 2550x3300 input",
+          "title": "Full Page Display Size",
+          "type": "string"
+        },
+        "full_pages_viewed_before_text_comparison": {
+          "const": true,
+          "title": "Full Pages Viewed Before Text Comparison",
+          "type": "boolean"
+        },
+        "prior_preparation_exposure": {
+          "const": true,
+          "title": "Prior Preparation Exposure",
+          "type": "boolean"
+        },
+        "external_reports_consulted": {
+          "const": false,
+          "title": "External Reports Consulted",
+          "type": "boolean"
+        },
+        "english_versions_consulted": {
+          "const": false,
+          "title": "English Versions Consulted",
+          "type": "boolean"
+        },
+        "translation_equivalence_assessed": {
+          "const": false,
+          "title": "Translation Equivalence Assessed",
+          "type": "boolean"
+        },
+        "native_utf8_bytes": {
+          "const": 13558,
+          "title": "Native Utf8 Bytes",
+          "type": "integer"
+        },
+        "native_lines": {
+          "const": 180,
+          "title": "Native Lines",
+          "type": "integer"
+        },
+        "nonwhitespace_lines": {
+          "const": 178,
+          "title": "Nonwhitespace Lines",
+          "type": "integer"
+        },
+        "inspected_crops": {
+          "const": 15,
+          "title": "Inspected Crops",
+          "type": "integer"
+        },
+        "excluded_scope": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Excluded Scope",
+          "type": "array"
+        }
+      },
+      "required": [
+        "method",
+        "reviewer",
+        "full_physical_pages",
+        "full_page_display_size",
+        "full_pages_viewed_before_text_comparison",
+        "prior_preparation_exposure",
+        "external_reports_consulted",
+        "english_versions_consulted",
+        "translation_equivalence_assessed",
+        "native_utf8_bytes",
+        "native_lines",
+        "nonwhitespace_lines",
+        "inspected_crops",
+        "excluded_scope"
+      ],
+      "title": "Scope",
+      "type": "object"
+    },
+    "Segment": {
+      "additionalProperties": false,
+      "description": "A whole visual paragraph, heading, or separately retained native whitespace.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 6,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "first_line": {
+          "minimum": 1,
+          "title": "First Line",
+          "type": "integer"
+        },
+        "last_line": {
+          "minimum": 1,
+          "title": "Last Line",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "cover",
+            "heading",
+            "paragraph",
+            "footer",
+            "extraction_whitespace"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "context": {
+          "title": "Context",
+          "type": "string"
+        },
+        "byte_start": {
+          "minimum": 0,
+          "title": "Byte Start",
+          "type": "integer"
+        },
+        "byte_end": {
+          "exclusiveMinimum": 0,
+          "title": "Byte End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "line_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Line Ids",
+          "type": "array"
+        },
+        "continues_from": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Continues From"
+        },
+        "continues_to": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Continues To"
+        },
+        "visual_disposition": {
+          "enum": [
+            "wording_matches_visible_source",
+            "native_whitespace_only"
+          ],
+          "title": "Visual Disposition",
+          "type": "string"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "first_line",
+        "last_line",
+        "kind",
+        "context",
+        "byte_start",
+        "byte_end",
+        "text",
+        "sha256",
+        "line_ids",
+        "continues_from",
+        "continues_to",
+        "visual_disposition",
+        "qualification"
+      ],
+      "title": "Segment",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A bounded Spanish source-fidelity review awaiting independent root acceptance.",
+  "properties": {
+    "schema_version": {
+      "const": "geode.eb026.spanish-bylaws.source-qa.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "el-paso-boh-bylaws-spanish-sd011",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "const": "1b8367a5710b5159ea479ad588ee5dee9850e1e9451b0115d2770a2d4aae6c7f",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-EL_PASO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "layer_id": {
+      "const": "08_County_Authorities",
+      "title": "Layer Id",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "candidate": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "packet_manifest": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "packet_manifest_sha256": {
+      "const": "ace3738bac6375b17f01ae0c4390350d5aeeacb1b9473838c57832dcd09427f5",
+      "title": "Packet Manifest Sha256",
+      "type": "string"
+    },
+    "canonical_record": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "custody": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "received_at": {
+      "const": "2026-09-12T22:59:48.795762Z",
+      "title": "Received At",
+      "type": "string"
+    },
+    "acquisition_method": {
+      "const": "received_review_package",
+      "title": "Acquisition Method",
+      "type": "string"
+    },
+    "independently_verified_http_at": {
+      "title": "Independently Verified Http At",
+      "type": "null"
+    },
+    "issue_date": {
+      "title": "Issue Date",
+      "type": "null"
+    },
+    "adoption_date": {
+      "title": "Adoption Date",
+      "type": "null"
+    },
+    "effective_date": {
+      "title": "Effective Date",
+      "type": "null"
+    },
+    "date_limitation": {
+      "title": "Date Limitation",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "initial_direct_source_qa_pending_root_acceptance",
+      "title": "Status",
+      "type": "string"
+    },
+    "review_kind": {
+      "const": "checked_passages",
+      "title": "Review Kind",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "fullscope": {
+      "$ref": "#/$defs/Scope"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "maxItems": 6,
+      "minItems": 6,
+      "title": "Pages",
+      "type": "array"
+    },
+    "crops": {
+      "items": {
+        "$ref": "#/$defs/Crop"
+      },
+      "maxItems": 15,
+      "minItems": 15,
+      "title": "Crops",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "source_id",
+    "source_sha256",
+    "authority_id",
+    "layer_id",
+    "source",
+    "candidate",
+    "packet_manifest",
+    "packet_manifest_sha256",
+    "canonical_record",
+    "custody",
+    "received_at",
+    "acquisition_method",
+    "independently_verified_http_at",
+    "issue_date",
+    "adoption_date",
+    "effective_date",
+    "date_limitation",
+    "prepared_at",
+    "status",
+    "review_kind",
+    "legal_currentness",
+    "answer_safe",
+    "fullscope",
+    "pages",
+    "crops",
+    "observations",
+    "limitations"
+  ],
+  "title": "Review",
+  "type": "object"
+}

@@ -1,0 +1,82 @@
+{
+  "additionalProperties": false,
+  "description": "Actual mechanical replay, without implied visual or legal certification.",
+  "properties": {
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "passed",
+      "title": "Status",
+      "type": "string"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "full_pages": {
+      "const": 4,
+      "title": "Full Pages",
+      "type": "integer"
+    },
+    "crops_replayed": {
+      "const": 7,
+      "title": "Crops Replayed",
+      "type": "integer"
+    },
+    "native_bytes": {
+      "const": 0,
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "ocr_bytes": {
+      "title": "Ocr Bytes",
+      "type": "integer"
+    },
+    "candidate_bytes": {
+      "title": "Candidate Bytes",
+      "type": "integer"
+    },
+    "reviewed_bytes": {
+      "title": "Reviewed Bytes",
+      "type": "integer"
+    },
+    "passages": {
+      "title": "Passages",
+      "type": "integer"
+    },
+    "tests": {
+      "title": "Tests",
+      "type": "integer"
+    },
+    "rerendered_pages": {
+      "title": "Rerendered Pages",
+      "type": "integer"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "source_sha256",
+    "full_pages",
+    "crops_replayed",
+    "native_bytes",
+    "ocr_bytes",
+    "candidate_bytes",
+    "reviewed_bytes",
+    "passages",
+    "tests",
+    "rerendered_pages",
+    "limitations"
+  ],
+  "title": "Validation",
+  "type": "object"
+}

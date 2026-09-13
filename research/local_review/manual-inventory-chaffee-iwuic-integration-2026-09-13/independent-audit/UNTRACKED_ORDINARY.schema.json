@@ -1,0 +1,106 @@
+{
+  "$defs": {
+    "File": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "tracked": {
+          "title": "Tracked",
+          "type": "boolean"
+        },
+        "ignored": {
+          "title": "Ignored",
+          "type": "boolean"
+        },
+        "ignore_rule": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Ignore Rule"
+        },
+        "lfs_filter": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Lfs Filter"
+        },
+        "issues": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Issues",
+          "type": "array"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes",
+        "tracked",
+        "ignored",
+        "ignore_rule",
+        "lfs_filter",
+        "issues"
+      ],
+      "title": "File",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "proposal_only_no_staging",
+      "title": "Status",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Qualifications",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "status",
+    "files",
+    "qualifications"
+  ],
+  "title": "Selection",
+  "type": "object"
+}

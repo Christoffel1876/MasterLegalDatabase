@@ -1,0 +1,93 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "A hash-bound ordinary copied file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Actual copying custody, not execution or source-content approval.",
+  "properties": {
+    "reviewer": {
+      "const": "Plato",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "source_directory": {
+      "title": "Source Directory",
+      "type": "string"
+    },
+    "copied_at": {
+      "format": "date-time",
+      "title": "Copied At",
+      "type": "string"
+    },
+    "source_manifest_sha256": {
+      "title": "Source Manifest Sha256",
+      "type": "string"
+    },
+    "copied_files": {
+      "const": 253,
+      "title": "Copied Files",
+      "type": "integer"
+    },
+    "copy_method": {
+      "const": "exact captured bytes, write-once destination",
+      "title": "Copy Method",
+      "type": "string"
+    },
+    "canonical_apply": {
+      "const": false,
+      "title": "Canonical Apply",
+      "type": "boolean"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "reviewer",
+    "source_directory",
+    "copied_at",
+    "source_manifest_sha256",
+    "copied_files",
+    "copy_method",
+    "canonical_apply",
+    "public_requests",
+    "files"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

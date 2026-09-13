@@ -1,0 +1,88 @@
+{
+  "$defs": {
+    "RowGeometry": {
+      "additionalProperties": false,
+      "description": "Original PDF point coordinates of each complete application/fee native line.",
+      "properties": {
+        "row_id": {
+          "title": "Row Id",
+          "type": "string"
+        },
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "application_boxes": {
+          "items": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "title": "Application Boxes",
+          "type": "array"
+        },
+        "fee_box": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Fee Box",
+          "type": "array"
+        },
+        "fee_start": {
+          "title": "Fee Start",
+          "type": "integer"
+        },
+        "application_end": {
+          "title": "Application End",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "row_id",
+        "page",
+        "application_boxes",
+        "fee_box",
+        "fee_start",
+        "application_end"
+      ],
+      "title": "RowGeometry",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Reproducible geometry, not an independent glyph-recognition result.",
+  "properties": {
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "engine": {
+      "const": "PyMuPDF 1.28.2 flags195 sortFalse",
+      "title": "Engine",
+      "type": "string"
+    },
+    "coordinate_basis": {
+      "const": "PDF points, upper-left origin",
+      "title": "Coordinate Basis",
+      "type": "string"
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/RowGeometry"
+      },
+      "maxItems": 49,
+      "minItems": 49,
+      "title": "Rows",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_sha256",
+    "engine",
+    "coordinate_basis",
+    "rows"
+  ],
+  "title": "Geometry",
+  "type": "object"
+}

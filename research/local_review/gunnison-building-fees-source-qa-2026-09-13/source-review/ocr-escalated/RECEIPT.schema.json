@@ -1,0 +1,86 @@
+{
+  "$defs": {
+    "Event": {
+      "additionalProperties": false,
+      "properties": {
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Command",
+          "type": "array"
+        },
+        "started_at": {
+          "title": "Started At",
+          "type": "string"
+        },
+        "finished_at": {
+          "title": "Finished At",
+          "type": "string"
+        },
+        "exit_code": {
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "image_sha256": {
+          "title": "Image Sha256",
+          "type": "string"
+        },
+        "stdout_sha256": {
+          "title": "Stdout Sha256",
+          "type": "string"
+        },
+        "stderr_sha256": {
+          "title": "Stderr Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "page",
+        "command",
+        "started_at",
+        "finished_at",
+        "exit_code",
+        "image_sha256",
+        "stdout_sha256",
+        "stderr_sha256"
+      ],
+      "title": "Event",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "binary_sha256": {
+      "title": "Binary Sha256",
+      "type": "string"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
+      "title": "Events",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "method",
+    "binary_sha256",
+    "events"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

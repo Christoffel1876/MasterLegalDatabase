@@ -1,0 +1,98 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "reviewer": {
+      "const": "Atlas",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "disposition": {
+      "const": "accept_exact_three_source_intake",
+      "title": "Disposition",
+      "type": "string"
+    },
+    "package_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "plan": {
+      "$ref": "#/$defs/Asset"
+    },
+    "transaction": {
+      "$ref": "#/$defs/Asset"
+    },
+    "independent_audit": {
+      "$ref": "#/$defs/Asset"
+    },
+    "checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "reviewer",
+    "recorded_at",
+    "disposition",
+    "package_manifest",
+    "plan",
+    "transaction",
+    "independent_audit",
+    "checks",
+    "limitations",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Decision",
+  "type": "object"
+}

@@ -1,0 +1,93 @@
+{
+  "reviewer": "Plato",
+  "recorded_at": "2026-09-13T16:41:24.328039Z",
+  "disposition": "no_blocker_found_in_fixed_two_source_preapply_scope",
+  "reviewed_preparation": {
+    "path": "reviewed-preparation/PREPARATION.json",
+    "sha256": "a8f768ff4c00bf55ba2db4712d67183f8c739e8e59777fa9bfed77f1bd12ef4b",
+    "size_bytes": 24909
+  },
+  "reviewed_transaction": {
+    "path": "reviewed-preparation/transaction.py",
+    "sha256": "f6ba9314dbfb9c8fd546be3111485603bef5acdd544d6706bf3cd2bf6aca23fb",
+    "size_bytes": 28630
+  },
+  "reviewed_manifest": {
+    "path": "reviewed-preparation/FINAL_MANIFEST.json",
+    "sha256": "a27a0932e382605d4213ea0e2645725504b97539ba306668b2408d09e7ab0f86",
+    "size_bytes": 19113
+  },
+  "copy_receipt": {
+    "path": "COPY_RECEIPT.json",
+    "sha256": "2934657ff2f53ca21945ae9137011953395e28636595758309448026baf87ec2",
+    "size_bytes": 21798
+  },
+  "checks": {
+    "path": "CHECKS.json",
+    "sha256": "62758b87aa05f75fd295439c56ceb5cca8eecfd5f293428f1d1f043cc5a45323",
+    "size_bytes": 32907
+  },
+  "sources": [
+    {
+      "source_id": "chaffee-cwrc-ordinance-2026-02-atlas-directed",
+      "authority_id": "CO-COUNTY-CHAFFEE",
+      "layer_id": "08_County_Authorities",
+      "original": {
+        "path": "reviewed-preparation/sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf",
+        "sha256": "0688818dfd4d7726f1eb84b5b57c47580d01b094297a92d4ce88c600ccfe7eba",
+        "size_bytes": 1146747
+      },
+      "physical_pages": 14,
+      "official_source_url": "https://cms2.revize.com/revize/chaffeecounty/Documents/Departments/Building%20Department/Adopted%20Codes%20&%20Design%20Criteria/2026-02%20Ordinance%20Adopting%20the%20CWRC%20with%20Local%20Amendments_RECORDED.pdf?t=202606021136110",
+      "acquisition_method": "manual_official_download",
+      "observed_get_started_at": "2026-09-13T16:09:37.188686Z",
+      "observed_get_completed_at": "2026-09-13T16:09:37.730305Z",
+      "future_repository_received_at": null,
+      "status": "archived_pending_pipeline"
+    },
+    {
+      "source_id": "chaffee-electric-ordinance-2026-01-atlas-directed",
+      "authority_id": "CO-COUNTY-CHAFFEE",
+      "layer_id": "08_County_Authorities",
+      "original": {
+        "path": "reviewed-preparation/sources/chaffee-electric-ordinance-2026-01-atlas-directed/original.pdf",
+        "sha256": "c0bfb6e8d4adb846fd62ec7dabbdd824286f7432be6a82b6b2d2264d4553cdf6",
+        "size_bytes": 529100
+      },
+      "physical_pages": 7,
+      "official_source_url": "https://cms2.revize.com/revize/chaffeecounty/2026-01%20Ordinance%20Chaffee%20County%20Electric%20Preferred%20Amendments_RECORDED.pdf?t=202608031134050",
+      "acquisition_method": "manual_official_download",
+      "observed_get_started_at": "2026-09-13T16:09:47.457061Z",
+      "observed_get_completed_at": "2026-09-13T16:09:47.762418Z",
+      "future_repository_received_at": null,
+      "status": "archived_pending_pipeline"
+    }
+  ],
+  "baseline_raw_records": 67,
+  "baseline_ledger_records": 68,
+  "proposed_raw_records": 69,
+  "proposed_ledger_records": 70,
+  "actual_intake_occurred_in_this_audit": false,
+  "independent_probe_cases": 8,
+  "observations": [
+    "Complete fixed transaction, preparation models, source-specific public custody, maintained path-scoped publisher gate and report projection were read. No concrete blocker was found.",
+    "The two exact incoming PDFs equal A001/A002 complete HTTP200 response bodies, with successful TLS/writeout and no followed redirects. The county and city are not conflated: both selected authorities are CO-COUNTY-CHAFFEE, layer08.",
+    "Actual local original_filename is original.pdf. The prior county label 2025 BOCC Ordinance 2026-02 remains literal rather than becoming a legal year assertion.",
+    "Fresh portable verifier and actual read-only repository preflight passed. All monitored metadata/runtime and complete original packet hashes stayed unchanged. The original execution directory was absent.",
+    "Eight independent cases passed in synthetic temporary corpora using the exact selected PDFs. Original source and parent-reference late substitutions cannot replace already checked buffers.",
+    "An interrupted completed metadata sequence receives its final receipt on replay without rewriting canonical bytes or mtimes. Wrong phase order, foreign suffixes, linked sources and pre-acquisition receipt times are refused.",
+    "Exact historical JSONL prefixes and missing ledger-only history remain preserved; expected report is projected only from captured baseline and selected fixed new records."
+  ],
+  "limitations": [
+    "Preapply disposition only. No actual canonical apply, source fetch, workflow action or current-law promotion was performed.",
+    "The synthetic baseline constructor is reused from the author fixture and explicitly disclosed; independent probe assertions and mutations are separate. The recorded author 75-test coverage run was inspected, not rerun wholesale.",
+    "The full preparation is copied, including its complete public acquisition packet. Omitted original nonpublic header values are unavailable; public-header derivation remains qualified retained acquisition evidence.",
+    "The 48,390-row legacy comparison remains author evidence. Fresh preflight checked its entire pinned file hash and scanned currently present raw files for selected-size duplicate bodies; absent LFS and external research originals are not included.",
+    "Packet flock is not a global lock against unrelated noncooperating writers. Exact-byte preflight and monotone recovery require exclusive root intake ownership; metadata files are not changed by one cross-file atomic primitive.",
+    "Application uses the explicitly pinned existing maintained runtime. The portable audit verifier itself uses only copied data and does not execute that transaction.",
+    "Observed HTTP times are distinct from the unknown future repository received_at. Adoption/effect, signatures, currentness and full source-text interpretation are outside this intake audit."
+  ],
+  "legal_currentness": "not_verified",
+  "answer_safe": false,
+  "public_requests": 0
+}

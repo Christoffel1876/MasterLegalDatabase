@@ -1,0 +1,104 @@
+{
+  "$defs": {
+    "Event": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Command",
+          "type": "array"
+        },
+        "started_at": {
+          "title": "Started At",
+          "type": "string"
+        },
+        "finished_at": {
+          "title": "Finished At",
+          "type": "string"
+        },
+        "exit_code": {
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "stdout_path": {
+          "title": "Stdout Path",
+          "type": "string"
+        },
+        "stdout_sha256": {
+          "title": "Stdout Sha256",
+          "type": "string"
+        },
+        "stderr_path": {
+          "title": "Stderr Path",
+          "type": "string"
+        },
+        "stderr_sha256": {
+          "title": "Stderr Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "command",
+        "started_at",
+        "finished_at",
+        "exit_code",
+        "stdout_path",
+        "stdout_sha256",
+        "stderr_path",
+        "stderr_sha256"
+      ],
+      "title": "Event",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "const": "passed",
+      "title": "Status",
+      "type": "string"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "managed_before": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Managed Before",
+      "type": "object"
+    },
+    "managed_after": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Managed After",
+      "type": "object"
+    },
+    "execution_directory_present": {
+      "const": false,
+      "title": "Execution Directory Present",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "status",
+    "events",
+    "managed_before",
+    "managed_after",
+    "execution_directory_present"
+  ],
+  "title": "Result",
+  "type": "object"
+}

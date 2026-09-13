@@ -1,0 +1,168 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "const": "PREPARED_ONLY_NOT_INSTALLED_NOT_DEPLOYED",
+      "title": "Status",
+      "type": "string"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "install_files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Install Files",
+      "type": "array"
+    },
+    "immutable_input_count": {
+      "const": 88,
+      "title": "Immutable Input Count",
+      "type": "integer"
+    },
+    "source_pairs": {
+      "const": 4,
+      "title": "Source Pairs",
+      "type": "integer"
+    },
+    "selected_sources": {
+      "const": 8,
+      "title": "Selected Sources",
+      "type": "integer"
+    },
+    "max_source_events": {
+      "const": 16,
+      "title": "Max Source Events",
+      "type": "integer"
+    },
+    "max_source_response_bytes": {
+      "const": 16000000,
+      "title": "Max Source Response Bytes",
+      "type": "integer"
+    },
+    "max_source_run_seconds": {
+      "const": 1200,
+      "title": "Max Source Run Seconds",
+      "type": "integer"
+    },
+    "scheduled_http_enabled_by_default": {
+      "const": false,
+      "title": "Scheduled Http Enabled By Default",
+      "type": "boolean"
+    },
+    "manual_http_enabled_by_default": {
+      "const": false,
+      "title": "Manual Http Enabled By Default",
+      "type": "boolean"
+    },
+    "source_http_requests": {
+      "const": 0,
+      "title": "Source Http Requests",
+      "type": "integer"
+    },
+    "primary_document_urls_observed": {
+      "const": 6,
+      "title": "Primary Document Urls Observed",
+      "type": "integer"
+    },
+    "final_focused_tests": {
+      "title": "Final Focused Tests",
+      "type": "integer"
+    },
+    "final_combined_tests": {
+      "title": "Final Combined Tests",
+      "type": "integer"
+    },
+    "branch_inclusive_coverage_percent": {
+      "title": "Branch Inclusive Coverage Percent",
+      "type": "number"
+    },
+    "local_python": {
+      "title": "Local Python",
+      "type": "string"
+    },
+    "python311_syntax_checked": {
+      "const": true,
+      "title": "Python311 Syntax Checked",
+      "type": "boolean"
+    },
+    "linux_execution_tested": {
+      "const": false,
+      "title": "Linux Execution Tested",
+      "type": "boolean"
+    },
+    "unchanged_maintained_input_pins": {
+      "const": true,
+      "title": "Unchanged Maintained Input Pins",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "prepared_at",
+    "install_files",
+    "immutable_input_count",
+    "source_pairs",
+    "selected_sources",
+    "max_source_events",
+    "max_source_response_bytes",
+    "max_source_run_seconds",
+    "scheduled_http_enabled_by_default",
+    "manual_http_enabled_by_default",
+    "source_http_requests",
+    "primary_document_urls_observed",
+    "final_focused_tests",
+    "final_combined_tests",
+    "branch_inclusive_coverage_percent",
+    "local_python",
+    "python311_syntax_checked",
+    "linux_execution_tested",
+    "unchanged_maintained_input_pins",
+    "legal_currentness",
+    "limitations"
+  ],
+  "title": "Preparation",
+  "type": "object"
+}

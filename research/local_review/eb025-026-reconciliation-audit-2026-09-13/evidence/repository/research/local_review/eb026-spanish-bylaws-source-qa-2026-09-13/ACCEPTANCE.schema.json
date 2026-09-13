@@ -1,0 +1,132 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "reviewer": {
+      "const": "Atlas",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "disposition": {
+      "const": "accepted_scoped_source_fidelity_with_explicit_limits",
+      "title": "Disposition",
+      "type": "string"
+    },
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source_review": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_review_schema": {
+      "$ref": "#/$defs/Asset"
+    },
+    "frozen_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "root_full_pages_directly_viewed": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Root Full Pages Directly Viewed",
+      "type": "array"
+    },
+    "root_crops_directly_viewed": {
+      "title": "Root Crops Directly Viewed",
+      "type": "integer"
+    },
+    "root_checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Root Checks",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "external_ebenezer_report_consulted_before_acceptance": {
+      "const": false,
+      "title": "External Ebenezer Report Consulted Before Acceptance",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "translation_equivalence_verified": {
+      "const": false,
+      "title": "Translation Equivalence Verified",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "reviewer",
+    "recorded_at",
+    "disposition",
+    "source_id",
+    "source_review",
+    "source_review_schema",
+    "frozen_manifest",
+    "root_full_pages_directly_viewed",
+    "root_crops_directly_viewed",
+    "root_checks",
+    "findings",
+    "limitations",
+    "external_ebenezer_report_consulted_before_acceptance",
+    "legal_currentness",
+    "answer_safe",
+    "translation_equivalence_verified"
+  ],
+  "title": "Acceptance",
+  "type": "object"
+}

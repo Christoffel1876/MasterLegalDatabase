@@ -1,0 +1,154 @@
+{
+  "$defs": {
+    "Change": {
+      "additionalProperties": false,
+      "description": "Describe one of the two permitted file changes.",
+      "properties": {
+        "install_path": {
+          "title": "Install Path",
+          "type": "string"
+        },
+        "before": {
+          "$ref": "#/$defs/Ref"
+        },
+        "after": {
+          "$ref": "#/$defs/Ref"
+        },
+        "scope": {
+          "enum": [
+            "annotations_only",
+            "yaml_frontmatter_only"
+          ],
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "install_path",
+        "before",
+        "after",
+        "scope"
+      ],
+      "title": "Change",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Bind one exact ordinary file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Preserve predecessor and exact two-file revision boundaries.",
+  "properties": {
+    "status": {
+      "const": "PREPARED_ADDITIVE_COMPLIANCE_REVISION",
+      "title": "Status",
+      "type": "string"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "predecessor_manifest": {
+      "$ref": "#/$defs/Ref"
+    },
+    "changes": {
+      "items": {
+        "$ref": "#/$defs/Change"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Changes",
+      "type": "array"
+    },
+    "ast_equivalence": {
+      "$ref": "#/$defs/Ref"
+    },
+    "focused_test": {
+      "$ref": "#/$defs/Ref"
+    },
+    "focused_tests_passed": {
+      "const": 44,
+      "title": "Focused Tests Passed",
+      "type": "integer"
+    },
+    "predecessor_payloads_unchanged": {
+      "const": 154,
+      "title": "Predecessor Payloads Unchanged",
+      "type": "integer"
+    },
+    "runner_changed": {
+      "const": false,
+      "title": "Runner Changed",
+      "type": "boolean"
+    },
+    "workflow_changed": {
+      "const": false,
+      "title": "Workflow Changed",
+      "type": "boolean"
+    },
+    "source_configs_changed": {
+      "const": false,
+      "title": "Source Configs Changed",
+      "type": "boolean"
+    },
+    "installed_or_deployed": {
+      "const": false,
+      "title": "Installed Or Deployed",
+      "type": "boolean"
+    },
+    "source_requests": {
+      "const": 0,
+      "title": "Source Requests",
+      "type": "integer"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "prepared_at",
+    "predecessor_manifest",
+    "changes",
+    "ast_equivalence",
+    "focused_test",
+    "focused_tests_passed",
+    "predecessor_payloads_unchanged",
+    "runner_changed",
+    "workflow_changed",
+    "source_configs_changed",
+    "installed_or_deployed",
+    "source_requests",
+    "limitations"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

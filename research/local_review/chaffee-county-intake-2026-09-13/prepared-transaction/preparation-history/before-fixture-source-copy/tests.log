@@ -1,0 +1,1579 @@
+FFFFFFFFFFFF........F......FFFFFFFFFFFFFFF...FFF............FFF......... [ 97%]
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+____________________ test_dry_run_prefixes_and_idempotence _____________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_dry_run_prefixes...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10bdf10f0>
+
+    def test_dry_run_prefixes_and_idempotence(fixture, monkeypatch):
+        root, base, plan = fixture; before = snapshot(root)
+        # No generic reconciliation, including its mutating mode, is used by the transaction.
+        monkeypatch.setattr(tx.mi, 'reconcile_manual_source_intake',
+                            lambda *a, **k: pytest.fail('generic reconciliation called'))
+>       result = tx.run(root, base=base)
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_dry_run_prefixes_and_idem0/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+________________ test_interruption_recovers_same_intent[intent] ________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_interruption_rec...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+stage = 'intent'
+
+    @pytest.mark.parametrize('stage', ['intent', 'original_1', 'original_2',
+                                      'raw', 'ledger', 'reconciled'])
+    def test_interruption_recovers_same_intent(fixture, stage):
+>       root, base, _ = fixture; interrupt(root, base, stage)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:109: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:72: in interrupt
+    tx.run(root, base=base, apply=True, fault=stop)
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_interruption_recovers_sam0/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+______________ test_interruption_recovers_same_intent[original_1] ______________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_interruption_rec...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+stage = 'original_1'
+
+    @pytest.mark.parametrize('stage', ['intent', 'original_1', 'original_2',
+                                      'raw', 'ledger', 'reconciled'])
+    def test_interruption_recovers_same_intent(fixture, stage):
+>       root, base, _ = fixture; interrupt(root, base, stage)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:109: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:72: in interrupt
+    tx.run(root, base=base, apply=True, fault=stop)
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_interruption_recovers_sam1/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+______________ test_interruption_recovers_same_intent[original_2] ______________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_interruption_rec...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+stage = 'original_2'
+
+    @pytest.mark.parametrize('stage', ['intent', 'original_1', 'original_2',
+                                      'raw', 'ledger', 'reconciled'])
+    def test_interruption_recovers_same_intent(fixture, stage):
+>       root, base, _ = fixture; interrupt(root, base, stage)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:109: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:72: in interrupt
+    tx.run(root, base=base, apply=True, fault=stop)
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_interruption_recovers_sam2/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+_________________ test_interruption_recovers_same_intent[raw] __________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_interruption_rec...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+stage = 'raw'
+
+    @pytest.mark.parametrize('stage', ['intent', 'original_1', 'original_2',
+                                      'raw', 'ledger', 'reconciled'])
+    def test_interruption_recovers_same_intent(fixture, stage):
+>       root, base, _ = fixture; interrupt(root, base, stage)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:109: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:72: in interrupt
+    tx.run(root, base=base, apply=True, fault=stop)
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_interruption_recovers_sam3/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+________________ test_interruption_recovers_same_intent[ledger] ________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_interruption_rec...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+stage = 'ledger'
+
+    @pytest.mark.parametrize('stage', ['intent', 'original_1', 'original_2',
+                                      'raw', 'ledger', 'reconciled'])
+    def test_interruption_recovers_same_intent(fixture, stage):
+>       root, base, _ = fixture; interrupt(root, base, stage)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:109: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:72: in interrupt
+    tx.run(root, base=base, apply=True, fault=stop)
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_interruption_recovers_sam4/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+______________ test_interruption_recovers_same_intent[reconciled] ______________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_interruption_rec...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+stage = 'reconciled'
+
+    @pytest.mark.parametrize('stage', ['intent', 'original_1', 'original_2',
+                                      'raw', 'ledger', 'reconciled'])
+    def test_interruption_recovers_same_intent(fixture, stage):
+>       root, base, _ = fixture; interrupt(root, base, stage)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:109: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:72: in interrupt
+    tx.run(root, base=base, apply=True, fault=stop)
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_interruption_recovers_sam5/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+_________________ test_foreign_raw_never_promoted[original_1] __________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_foreign_raw_neve...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+stage = 'original_1'
+
+    @pytest.mark.parametrize('stage', ['original_1', 'raw', 'ledger', 'reconciled'])
+    def test_foreign_raw_never_promoted(fixture, stage):
+        root, base, _ = fixture
+        before_ledger = (root / tx.LEDGER).read_bytes()
+        before_report = (root / tx.REPORT).read_bytes()
+        observed = {}
+        def arrival(here):
+            if here == stage:
+                row = json.loads(next(io.BytesIO((root / tx.RAW).read_bytes())))
+                row.update(intake_id='MSI-foreign', record_id='foreign')
+                observed['raw'] = (root / tx.RAW).read_bytes() + (json.dumps(row) + '\n').encode()
+                (root / tx.RAW).write_bytes(observed['raw'])
+                observed['ledger'] = (root / tx.LEDGER).read_bytes()
+                observed['report'] = (root / tx.REPORT).read_bytes()
+>       with pytest.raises(ValueError, match='unrecognized canonical prefix'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'unrecognized canonical prefix'
+E         Actual message: 'missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:130: AssertionError
+_____________________ test_foreign_raw_never_promoted[raw] _____________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_foreign_raw_neve...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+stage = 'raw'
+
+    @pytest.mark.parametrize('stage', ['original_1', 'raw', 'ledger', 'reconciled'])
+    def test_foreign_raw_never_promoted(fixture, stage):
+        root, base, _ = fixture
+        before_ledger = (root / tx.LEDGER).read_bytes()
+        before_report = (root / tx.REPORT).read_bytes()
+        observed = {}
+        def arrival(here):
+            if here == stage:
+                row = json.loads(next(io.BytesIO((root / tx.RAW).read_bytes())))
+                row.update(intake_id='MSI-foreign', record_id='foreign')
+                observed['raw'] = (root / tx.RAW).read_bytes() + (json.dumps(row) + '\n').encode()
+                (root / tx.RAW).write_bytes(observed['raw'])
+                observed['ledger'] = (root / tx.LEDGER).read_bytes()
+                observed['report'] = (root / tx.REPORT).read_bytes()
+>       with pytest.raises(ValueError, match='unrecognized canonical prefix'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'unrecognized canonical prefix'
+E         Actual message: 'missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:130: AssertionError
+___________________ test_foreign_raw_never_promoted[ledger] ____________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_foreign_raw_neve...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+stage = 'ledger'
+
+    @pytest.mark.parametrize('stage', ['original_1', 'raw', 'ledger', 'reconciled'])
+    def test_foreign_raw_never_promoted(fixture, stage):
+        root, base, _ = fixture
+        before_ledger = (root / tx.LEDGER).read_bytes()
+        before_report = (root / tx.REPORT).read_bytes()
+        observed = {}
+        def arrival(here):
+            if here == stage:
+                row = json.loads(next(io.BytesIO((root / tx.RAW).read_bytes())))
+                row.update(intake_id='MSI-foreign', record_id='foreign')
+                observed['raw'] = (root / tx.RAW).read_bytes() + (json.dumps(row) + '\n').encode()
+                (root / tx.RAW).write_bytes(observed['raw'])
+                observed['ledger'] = (root / tx.LEDGER).read_bytes()
+                observed['report'] = (root / tx.REPORT).read_bytes()
+>       with pytest.raises(ValueError, match='unrecognized canonical prefix'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'unrecognized canonical prefix'
+E         Actual message: 'missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:130: AssertionError
+_________________ test_foreign_raw_never_promoted[reconciled] __________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_foreign_raw_neve...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+stage = 'reconciled'
+
+    @pytest.mark.parametrize('stage', ['original_1', 'raw', 'ledger', 'reconciled'])
+    def test_foreign_raw_never_promoted(fixture, stage):
+        root, base, _ = fixture
+        before_ledger = (root / tx.LEDGER).read_bytes()
+        before_report = (root / tx.REPORT).read_bytes()
+        observed = {}
+        def arrival(here):
+            if here == stage:
+                row = json.loads(next(io.BytesIO((root / tx.RAW).read_bytes())))
+                row.update(intake_id='MSI-foreign', record_id='foreign')
+                observed['raw'] = (root / tx.RAW).read_bytes() + (json.dumps(row) + '\n').encode()
+                (root / tx.RAW).write_bytes(observed['raw'])
+                observed['ledger'] = (root / tx.LEDGER).read_bytes()
+                observed['report'] = (root / tx.REPORT).read_bytes()
+>       with pytest.raises(ValueError, match='unrecognized canonical prefix'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'unrecognized canonical prefix'
+E         Actual message: 'missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:130: AssertionError
+________________________ test_prewrite_refusal[source] _________________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_prewrite_refusal...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+kind = 'source'
+
+    @pytest.mark.parametrize('kind', ['source', 'parent', 'result', 'retrieval_plan', 'raw',
+                                      'ledger', 'report', 'policy', 'legacy', 'source_symlink',
+                                      'snapshot_parent', 'runtime_source_missing'])
+    def test_prewrite_refusal(fixture, kind):
+        root, base, plan = fixture
+        if kind in {'source', 'parent', 'result', 'retrieval_plan', 'source_symlink'}:
+            a = {'source': plan.templates[1].source, 'source_symlink': plan.templates[0].source,
+                 'parent': plan.provenance[0].parent, 'result': plan.provenance[1].result,
+                 'retrieval_plan': plan.retrieval_plan}[kind]
+            p = base / a.path
+            if kind == 'source_symlink':
+                moved = p.with_suffix('.saved'); p.rename(moved); p.symlink_to(moved)
+            else:
+>               p.write_bytes(p.read_bytes() + b'corruption')
+                              ^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:154: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py:777: in read_bytes
+    with self.open(mode='rb', buffering=0) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_prewrite_refusal_source_0/packet/sources/chaffee-electric-ordinance-2026-01-atlas-directed/original.pdf')
+mode = 'rb', buffering = 0, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_prewrite_refusal_source_0/packet/sources/chaffee-electric-ordinance-2026-01-atlas-directed/original.pdf'
+
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py:771: FileNotFoundError
+____________________ test_prewrite_refusal[source_symlink] _____________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_prewrite_refusal...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+kind = 'source_symlink'
+
+    @pytest.mark.parametrize('kind', ['source', 'parent', 'result', 'retrieval_plan', 'raw',
+                                      'ledger', 'report', 'policy', 'legacy', 'source_symlink',
+                                      'snapshot_parent', 'runtime_source_missing'])
+    def test_prewrite_refusal(fixture, kind):
+        root, base, plan = fixture
+        if kind in {'source', 'parent', 'result', 'retrieval_plan', 'source_symlink'}:
+            a = {'source': plan.templates[1].source, 'source_symlink': plan.templates[0].source,
+                 'parent': plan.provenance[0].parent, 'result': plan.provenance[1].result,
+                 'retrieval_plan': plan.retrieval_plan}[kind]
+            p = base / a.path
+            if kind == 'source_symlink':
+>               moved = p.with_suffix('.saved'); p.rename(moved); p.symlink_to(moved)
+                                                 ^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:152: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_prewrite_refusal_source_s0/packet/sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf')
+target = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_prewrite_refusal_source_s0/packet/sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.saved')
+
+    def rename(self, target):
+        """
+        Rename this path to the target path.
+    
+        The target path may be absolute or relative. Relative paths are
+        interpreted relative to the current working directory, *not* the
+        directory of the Path object.
+    
+        Returns the new Path instance pointing to the target path.
+        """
+>       os.rename(self, target)
+E       FileNotFoundError: [Errno 2] No such file or directory: '/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_prewrite_refusal_source_s0/packet/sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf' -> '/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_prewrite_refusal_source_s0/packet/sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.saved'
+
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py:1076: FileNotFoundError
+____________________ test_intent_tampering_refused[report] _____________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_intent_tampering...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+kind = 'report'
+
+    @pytest.mark.parametrize('kind', ['report', 'record', 'timestamp', 'order', 'plan_pin'])
+    def test_intent_tampering_refused(fixture, kind):
+>       root, base, _ = fixture; interrupt(root, base, 'intent')
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:72: in interrupt
+    tx.run(root, base=base, apply=True, fault=stop)
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_intent_tampering_refused_0/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+____________________ test_intent_tampering_refused[record] _____________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_intent_tampering...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+kind = 'record'
+
+    @pytest.mark.parametrize('kind', ['report', 'record', 'timestamp', 'order', 'plan_pin'])
+    def test_intent_tampering_refused(fixture, kind):
+>       root, base, _ = fixture; interrupt(root, base, 'intent')
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:72: in interrupt
+    tx.run(root, base=base, apply=True, fault=stop)
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_intent_tampering_refused_1/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+___________________ test_intent_tampering_refused[timestamp] ___________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_intent_tampering...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+kind = 'timestamp'
+
+    @pytest.mark.parametrize('kind', ['report', 'record', 'timestamp', 'order', 'plan_pin'])
+    def test_intent_tampering_refused(fixture, kind):
+>       root, base, _ = fixture; interrupt(root, base, 'intent')
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:72: in interrupt
+    tx.run(root, base=base, apply=True, fault=stop)
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_intent_tampering_refused_2/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+_____________________ test_intent_tampering_refused[order] _____________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_intent_tampering...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+kind = 'order'
+
+    @pytest.mark.parametrize('kind', ['report', 'record', 'timestamp', 'order', 'plan_pin'])
+    def test_intent_tampering_refused(fixture, kind):
+>       root, base, _ = fixture; interrupt(root, base, 'intent')
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:72: in interrupt
+    tx.run(root, base=base, apply=True, fault=stop)
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_intent_tampering_refused_3/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+___________________ test_intent_tampering_refused[plan_pin] ____________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_intent_tampering...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+kind = 'plan_pin'
+
+    @pytest.mark.parametrize('kind', ['report', 'record', 'timestamp', 'order', 'plan_pin'])
+    def test_intent_tampering_refused(fixture, kind):
+>       root, base, _ = fixture; interrupt(root, base, 'intent')
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:185: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:72: in interrupt
+    tx.run(root, base=base, apply=True, fault=stop)
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_intent_tampering_refused_4/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+________________ test_unrecognized_partial_states[ledger_ahead] ________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_unrecognized_par...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+mode = 'ledger_ahead'
+
+    @pytest.mark.parametrize('mode', ['ledger_ahead', 'report_ahead', 'partial_suffix',
+                                      'second_original_only', 'wrong_destination'])
+    def test_unrecognized_partial_states(fixture, mode):
+>       root, base, plan = fixture; interrupt(root, base, 'intent')
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:200: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:72: in interrupt
+    tx.run(root, base=base, apply=True, fault=stop)
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_unrecognized_partial_stat0/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+________________ test_unrecognized_partial_states[report_ahead] ________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_unrecognized_par...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+mode = 'report_ahead'
+
+    @pytest.mark.parametrize('mode', ['ledger_ahead', 'report_ahead', 'partial_suffix',
+                                      'second_original_only', 'wrong_destination'])
+    def test_unrecognized_partial_states(fixture, mode):
+>       root, base, plan = fixture; interrupt(root, base, 'intent')
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:200: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:72: in interrupt
+    tx.run(root, base=base, apply=True, fault=stop)
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_unrecognized_partial_stat1/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+_______________ test_unrecognized_partial_states[partial_suffix] _______________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_unrecognized_par...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+mode = 'partial_suffix'
+
+    @pytest.mark.parametrize('mode', ['ledger_ahead', 'report_ahead', 'partial_suffix',
+                                      'second_original_only', 'wrong_destination'])
+    def test_unrecognized_partial_states(fixture, mode):
+>       root, base, plan = fixture; interrupt(root, base, 'intent')
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:200: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:72: in interrupt
+    tx.run(root, base=base, apply=True, fault=stop)
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_unrecognized_partial_stat2/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+____________ test_unrecognized_partial_states[second_original_only] ____________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_unrecognized_par...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+mode = 'second_original_only'
+
+    @pytest.mark.parametrize('mode', ['ledger_ahead', 'report_ahead', 'partial_suffix',
+                                      'second_original_only', 'wrong_destination'])
+    def test_unrecognized_partial_states(fixture, mode):
+>       root, base, plan = fixture; interrupt(root, base, 'intent')
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:200: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:72: in interrupt
+    tx.run(root, base=base, apply=True, fault=stop)
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_unrecognized_partial_stat3/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+_____________ test_unrecognized_partial_states[wrong_destination] ______________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_unrecognized_par...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+mode = 'wrong_destination'
+
+    @pytest.mark.parametrize('mode', ['ledger_ahead', 'report_ahead', 'partial_suffix',
+                                      'second_original_only', 'wrong_destination'])
+    def test_unrecognized_partial_states(fixture, mode):
+>       root, base, plan = fixture; interrupt(root, base, 'intent')
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:200: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:72: in interrupt
+    tx.run(root, base=base, apply=True, fault=stop)
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_unrecognized_partial_stat4/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+_ test_write_failure_replay[_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl] _
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_write_failure_re...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10f817070>
+name = '_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl'
+
+    @pytest.mark.parametrize('name', [tx.RAW, tx.LEDGER, tx.REPORT])
+    def test_write_failure_replay(fixture, monkeypatch, name):
+        root, base, _ = fixture; original = tx.atomic_replace
+        def fail(path, before, after):
+            if path == root / name: raise OSError('synthetic write failure')
+            original(path, before, after)
+        monkeypatch.setattr(tx, 'atomic_replace', fail)
+>       with pytest.raises(OSError): tx.run(root, base=base, apply=True)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:226: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_write_failure_replay__RAW0/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+_ test_write_failure_replay[_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl] __
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_write_failure_re...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10f893380>
+name = '_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl'
+
+    @pytest.mark.parametrize('name', [tx.RAW, tx.LEDGER, tx.REPORT])
+    def test_write_failure_replay(fixture, monkeypatch, name):
+        root, base, _ = fixture; original = tx.atomic_replace
+        def fail(path, before, after):
+            if path == root / name: raise OSError('synthetic write failure')
+            original(path, before, after)
+        monkeypatch.setattr(tx, 'atomic_replace', fail)
+>       with pytest.raises(OSError): tx.run(root, base=base, apply=True)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:226: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_write_failure_replay__CON0/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+__ test_write_failure_replay[_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_REPORT.json] __
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_write_failure_re...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10f7e32a0>
+name = '_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_REPORT.json'
+
+    @pytest.mark.parametrize('name', [tx.RAW, tx.LEDGER, tx.REPORT])
+    def test_write_failure_replay(fixture, monkeypatch, name):
+        root, base, _ = fixture; original = tx.atomic_replace
+        def fail(path, before, after):
+            if path == root / name: raise OSError('synthetic write failure')
+            original(path, before, after)
+        monkeypatch.setattr(tx, 'atomic_replace', fail)
+>       with pytest.raises(OSError): tx.run(root, base=base, apply=True)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:226: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_write_failure_replay__CON1/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+___________________ test_input_changes_after_first_original ____________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_input_changes_af...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+
+    def test_input_changes_after_first_original(fixture):
+        root, base, plan = fixture
+        def change(stage):
+            if stage == 'original_1':
+                p = base / plan.templates[1].source.path; p.write_bytes(p.read_bytes()[:-1])
+        before_raw = (root / tx.RAW).read_bytes(); before_ledger = (root / tx.LEDGER).read_bytes()
+>       with pytest.raises(ValueError, match='input changed'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'input changed'
+E         Actual message: 'missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:240: AssertionError
+____________________ test_untracked_duplicate_body_refused _____________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_untracked_duplic...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+
+    def test_untracked_duplicate_body_refused(fixture):
+        root, base, plan = fixture
+        p = root / '_RAW_ARCHIVE/untracked-copy.pdf'
+>       p.write_bytes((base / plan.templates[0].source.path).read_bytes())
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:252: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py:777: in read_bytes
+    with self.open(mode='rb', buffering=0) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_untracked_duplicate_body_0/packet/sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf')
+mode = 'rb', buffering = 0, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_untracked_duplicate_body_0/packet/sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py:771: FileNotFoundError
+_________________________ test_execution_refusal[lock] _________________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_execution_refusa...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+kind = 'lock'
+
+    @pytest.mark.parametrize('kind', ['unknown_file', 'unknown_dir', 'symlink', 'lock'])
+    def test_execution_refusal(fixture, kind):
+        root, base, _ = fixture; execution = base / 'execution'; execution.mkdir()
+        if kind == 'unknown_file': (execution / 'unrelated').write_bytes(b'x')
+        elif kind == 'unknown_dir': (execution / 'unrelated').mkdir()
+        elif kind == 'symlink': (execution / 'INTENT.json').symlink_to(base / 'absent')
+        else:
+            import fcntl
+            with (execution / 'LOCK').open('a+b') as lock:
+                fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                before = snapshot(root)
+>               with pytest.raises(BlockingIOError): tx.run(root, base=base, apply=True)
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:270: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_execution_refusal_lock_0/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+___________________ test_missing_execution_and_mutual_modes ____________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_missing_executio...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+
+    def test_missing_execution_and_mutual_modes(fixture):
+        root, base, _ = fixture
+>       with pytest.raises(ValueError, match='no completed execution'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'no completed execution'
+E         Actual message: 'missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:280: AssertionError
+_______________________ test_receipt_snapshot_tampering ________________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_receipt_snapshot...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+
+    def test_receipt_snapshot_tampering(fixture):
+>       root, base, _ = fixture; tx.run(root, base=base, apply=True)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:287: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_receipt_snapshot_tamperin0/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+______________________ test_untracked_raw_symlink_refusal ______________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_untracked_raw_sy...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+tmp_path = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_untracked_raw_symlink_ref0')
+
+    def test_untracked_raw_symlink_refusal(fixture, tmp_path):
+        root, base, _ = fixture
+        (root / '_RAW_ARCHIVE/link').symlink_to(tmp_path / 'absent')
+        before = snapshot(root)
+>       with pytest.raises(ValueError, match='linked raw archive'): tx.run(root, base=base, apply=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'linked raw archive'
+E         Actual message: 'missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:391: AssertionError
+_________________________ test_snapshot_bytes_verified _________________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_snapshot_bytes_v...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+
+    def test_snapshot_bytes_verified(fixture):
+>       root, base, _ = fixture; tx.run(root, base=base, apply=True)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:396: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_snapshot_bytes_verified0/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+_______________ test_missing_new_original_with_metadata_refused ________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_missing_new_orig...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+
+    def test_missing_new_original_with_metadata_refused(fixture):
+>       root, base, _ = fixture; tx.run(root, base=base, apply=True)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:404: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:476: in run
+    state = preflight(root, base, plan, intent)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:356: in preflight
+    sources = check_custody(base, plan)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:275: in check_custody
+    raw = capture(base, template.source)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:61: in capture
+    raw = ordinary(root, asset.path).read_bytes()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_missing_new_original_with0/packet')
+name = 'sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+missing = False
+
+    def ordinary(root: Path, name: str, missing: bool = False) -> Path:
+        """Reject escape, aliases, links and nonordinary ancestors before access."""
+        relative = Path(name)
+        if (relative.is_absolute() or ".." in relative.parts or "\\" in name
+                or relative.as_posix() != name):
+            raise ValueError("unsafe path")
+        path = root / relative
+        if any(p.is_symlink() for p in (path, *path.parents)) or any(
+                p.exists() and not p.is_dir() for p in path.parents):
+            raise ValueError("symlink or nonordinary ancestor")
+        if path.exists() and not stat.S_ISREG(path.stat().st_mode):
+            raise ValueError("not an ordinary file: " + name)
+        if not missing and not path.is_file():
+>           raise ValueError("missing ordinary file: " + name)
+E           ValueError: missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py:56: ValueError
+________________ test_maintained_strict_host_gate_before_intent ________________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_maintained_stric...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10fe73700>
+
+    def test_maintained_strict_host_gate_before_intent(fixture, monkeypatch):
+        root, base, _ = fixture
+        before = snapshot(root)
+        def deny(url):
+            raise ValueError('deliberate maintained URL rejection')
+        monkeypatch.setattr(tx.mi, 'require_official_source_url', deny)
+>       with pytest.raises(ValueError, match='maintained URL rejection'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'maintained URL rejection'
+E         Actual message: 'missing ordinary file: sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:458: AssertionError
+_______________ test_captured_source_aba_preserves_checked_bytes _______________
+
+fixture = (PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_captured_source_...fter=3, ledger_after=3, public_requests=0, canonical_mutations=0, legal_currentness='not_verified', answer_safe=False))
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10fe73d20>
+
+    def test_captured_source_aba_preserves_checked_bytes(fixture, monkeypatch):
+        root, base, plan = fixture
+        original = tx.atomic_once
+        target = base / plan.templates[0].source.path
+>       checked = target.read_bytes()
+                  ^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py:467: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py:777: in read_bytes
+    with self.open(mode='rb', buffering=0) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_captured_source_aba_prese0/packet/sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf')
+mode = 'rb', buffering = 0, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-272/test_captured_source_aba_prese0/packet/sources/chaffee-cwrc-ordinance-2026-02-atlas-directed/original.pdf'
+
+/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py:771: FileNotFoundError
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+  <frozen importlib._bootstrap>:491: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+  <frozen importlib._bootstrap>:491: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+<frozen importlib._bootstrap>:491
+  <frozen importlib._bootstrap>:491: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================================ tests coverage ================================
+_______________ coverage: platform darwin, python 3.14.3-final-0 _______________
+
+Name                                                                       Stmts   Miss Branch BrPart  Cover   Missing
+----------------------------------------------------------------------------------------------------------------------
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/models.py          144      2     22      2    98%   146, 150
+handoffs/run-2026-09-13/popper-chaffee-intake-preparation/transaction.py     400    122    184     38    65%   121-124, 147-160, 164, 201, 210, 217, 220, 222, 227, 235, 242, 252, 260, 266, 270, 277, 279, 281, 283, 286, 293, 305, 313, 329, 336, 350, 362, 369, 372, 376-392, 396, 399-402, 405-408, 410, 412, 421, 425, 427-428, 441->439, 453, 470, 486-545
+----------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                        544    124    206     40    72%
+Coverage JSON written to file /private/tmp/chaffee-preliminary-coverage.json
+=========================== short test summary info ============================
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_dry_run_prefixes_and_idempotence
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_interruption_recovers_same_intent[intent]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_interruption_recovers_same_intent[original_1]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_interruption_recovers_same_intent[original_2]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_interruption_recovers_same_intent[raw]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_interruption_recovers_same_intent[ledger]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_interruption_recovers_same_intent[reconciled]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_foreign_raw_never_promoted[original_1]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_foreign_raw_never_promoted[raw]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_foreign_raw_never_promoted[ledger]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_foreign_raw_never_promoted[reconciled]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_prewrite_refusal[source]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_prewrite_refusal[source_symlink]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_intent_tampering_refused[report]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_intent_tampering_refused[record]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_intent_tampering_refused[timestamp]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_intent_tampering_refused[order]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_intent_tampering_refused[plan_pin]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_unrecognized_partial_states[ledger_ahead]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_unrecognized_partial_states[report_ahead]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_unrecognized_partial_states[partial_suffix]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_unrecognized_partial_states[second_original_only]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_unrecognized_partial_states[wrong_destination]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_write_failure_replay[_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_write_failure_replay[_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_write_failure_replay[_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_REPORT.json]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_input_changes_after_first_original
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_untracked_duplicate_body_refused
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_execution_refusal[lock]
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_missing_execution_and_mutual_modes
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_receipt_snapshot_tampering
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_untracked_raw_symlink_refusal
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_snapshot_bytes_verified
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_missing_new_original_with_metadata_refused
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_maintained_strict_host_gate_before_intent
+FAILED handoffs/run-2026-09-13/popper-chaffee-intake-preparation/test_transaction.py::test_captured_source_aba_preserves_checked_bytes
+36 failed, 38 passed, 5 warnings in 17.65s
+<sys>:0: DeprecationWarning: builtin type swigvarlink has no __module__ attribute

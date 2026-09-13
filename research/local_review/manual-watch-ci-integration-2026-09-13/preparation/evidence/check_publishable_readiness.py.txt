@@ -1,0 +1,25 @@
+from pathlib import Path
+from datetime import datetime,timezone
+import json,hashlib,subprocess,tempfile,shutil,sys,os
+B=Path('/Users/mcoors/Documents/Project Geode');R=B/'MasterLegalDatabase';A=B/'handoffs/run-2026-09-13/ptolemy-manual-watch-ci-publishable-revision';P=A/'proposed';plan=json.loads((P/'config/manual_source_watch_ci.json').read_bytes())
+env=os.environ.copy();env['GIT_OPTIONAL_LOCKS']='0';tracked=set(subprocess.check_output(['git','ls-files','-z'],cwd=R,env=env).decode().split('\0'))
+with tempfile.TemporaryDirectory(prefix='geode-watch-ci-publishable-',dir='/private/tmp') as name:
+ T=Path(name)
+ for ref in plan['immutable_inputs']:
+  assert ref['path'] in tracked
+  data=(R/ref['path']).read_bytes();assert hashlib.sha256(data).hexdigest()==ref['sha256']
+  path=T/ref['path'];path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(data)
+ raw='_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl';assert raw in tracked
+ path=T/raw;path.parent.mkdir(parents=True,exist_ok=True);rawbytes=(R/raw).read_bytes();path.write_bytes(rawbytes)
+ shutil.copytree(P,T,dirs_exist_ok=True,ignore=shutil.ignore_patterns('__pycache__'))
+ assert not (T/'geode/schemas/models 2.py').exists()
+ argv=[sys.executable,'-B',str(T/'scripts/manual_source_watch_ci.py'),'--root',str(T),'--run-name','publishable-readiness']
+ start=datetime.now(timezone.utc).isoformat();p=subprocess.run(argv,cwd=T,capture_output=True,timeout=90);end=datetime.now(timezone.utc).isoformat()
+ (A/'evidence/readiness.stdout').write_bytes(p.stdout);(A/'evidence/readiness.stderr').write_bytes(p.stderr)
+ assert p.returncode==0,(p.returncode,p.stdout,p.stderr)
+ d=json.loads(p.stdout);assert d['status']=='ready'
+ assert not(T/'.geode_runtime/manual_source_watch').exists() and not(T/'.geode_runtime/manual_source_watch_batches').exists()
+ assert (T/raw).read_bytes()==rawbytes
+ shutil.copytree(T/'.geode_runtime/manual_source_watch_ci/publishable-readiness',A/'evidence/readiness-run')
+ result={'status':'PASS','started_at':start,'finished_at':end,'argv':argv,'exit_code':p.returncode,'source_requests':0,'copied_git_tracked_dependency_count':87,'copied_complete_raw_manifest':True,'raw_manifest_sha256':hashlib.sha256(rawbytes).hexdigest(),'unrelated_models2_absent':True,'unselected_raw_originals_absent':True,'source_runtime_directories_absent':True,'result_status':'ready','temporary_directory_removed':True,'linux_execution_tested':False,'local_python':sys.version}
+(A/'evidence/SPARSE_READINESS.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))

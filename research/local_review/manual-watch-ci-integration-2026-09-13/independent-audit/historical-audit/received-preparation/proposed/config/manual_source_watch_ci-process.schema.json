@@ -1,0 +1,84 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "An exact ordinary-file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One bounded subprocess result with exact output identities.",
+  "properties": {
+    "argv": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Argv",
+      "type": "array"
+    },
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "finished_at": {
+      "title": "Finished At",
+      "type": "string"
+    },
+    "exit_code": {
+      "title": "Exit Code",
+      "type": "integer"
+    },
+    "timeout_seconds": {
+      "exclusiveMinimum": 0,
+      "maximum": 330,
+      "title": "Timeout Seconds",
+      "type": "integer"
+    },
+    "retried": {
+      "const": false,
+      "default": false,
+      "title": "Retried",
+      "type": "boolean"
+    },
+    "stdout": {
+      "$ref": "#/$defs/Ref"
+    },
+    "stderr": {
+      "$ref": "#/$defs/Ref"
+    }
+  },
+  "required": [
+    "argv",
+    "started_at",
+    "finished_at",
+    "exit_code",
+    "timeout_seconds",
+    "stdout",
+    "stderr"
+  ],
+  "title": "ProcessReceipt",
+  "type": "object"
+}

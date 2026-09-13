@@ -1,0 +1,100 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact relative file identity; historical paths are never opened.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Reviewer attestation, recorded after the tool image inspections.",
+  "properties": {
+    "reviewer": {
+      "const": "Plato",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "exposure": {
+      "title": "Exposure",
+      "type": "string"
+    },
+    "full_pages": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Full Pages",
+      "type": "array"
+    },
+    "crops": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Crops",
+      "type": "array"
+    },
+    "full_page_count": {
+      "const": 4,
+      "title": "Full Page Count",
+      "type": "integer"
+    },
+    "crop_count": {
+      "const": 7,
+      "title": "Crop Count",
+      "type": "integer"
+    },
+    "chronology": {
+      "title": "Chronology",
+      "type": "string"
+    },
+    "external_reports_consulted": {
+      "const": false,
+      "title": "External Reports Consulted",
+      "type": "boolean"
+    },
+    "handwriting_identities_authenticated": {
+      "const": false,
+      "title": "Handwriting Identities Authenticated",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "reviewer",
+    "recorded_at",
+    "exposure",
+    "full_pages",
+    "crops",
+    "full_page_count",
+    "crop_count",
+    "chronology",
+    "external_reports_consulted",
+    "handwriting_identities_authenticated"
+  ],
+  "title": "Inspection",
+  "type": "object"
+}

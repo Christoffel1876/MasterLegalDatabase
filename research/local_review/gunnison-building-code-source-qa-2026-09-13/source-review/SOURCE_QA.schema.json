@@ -1,0 +1,599 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact ordinary package file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Association": {
+      "additionalProperties": false,
+      "description": "Literal climatic-design entry with its parent heading and full source span.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "span": {
+          "$ref": "#/$defs/Span"
+        },
+        "parent_heading": {
+          "title": "Parent Heading",
+          "type": "string"
+        },
+        "context_block_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Context Block Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "value",
+        "span",
+        "parent_heading",
+        "context_block_ids"
+      ],
+      "title": "Association",
+      "type": "object"
+    },
+    "Block": {
+      "additionalProperties": false,
+      "description": "A source-context block; pixel box is a containing region, not glyph precision.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "heading",
+            "body",
+            "recording_stamp",
+            "printed_pagination"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "span": {
+          "$ref": "#/$defs/Span"
+        },
+        "pixel_box": {
+          "items": {
+            "type": "integer"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Pixel Box",
+          "type": "array"
+        },
+        "continuation_of": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Continuation Of"
+        }
+      },
+      "required": [
+        "id",
+        "role",
+        "span",
+        "pixel_box",
+        "continuation_of"
+      ],
+      "title": "Block",
+      "type": "object"
+    },
+    "Custody": {
+      "additionalProperties": false,
+      "description": "Repository receipt is distinct from supplied original HTTP claims.",
+      "properties": {
+        "source_id": {
+          "const": "gunnison-building-code-resolution-2023-22-sh-ext-003",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-GUNNISON",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "const": "08_County_Authorities",
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "acquisition_method": {
+          "const": "received_review_package",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "official_source_url": {
+          "title": "Official Source Url",
+          "type": "null"
+        },
+        "original_http_acquisition_verified": {
+          "const": false,
+          "title": "Original Http Acquisition Verified",
+          "type": "boolean"
+        },
+        "received_at": {
+          "title": "Received At",
+          "type": "string"
+        },
+        "record_line": {
+          "title": "Record Line",
+          "type": "integer"
+        },
+        "manifest": {
+          "$ref": "#/$defs/Asset"
+        },
+        "exact_record": {
+          "$ref": "#/$defs/Asset"
+        },
+        "preparation": {
+          "$ref": "#/$defs/Asset"
+        },
+        "receipt": {
+          "$ref": "#/$defs/Asset"
+        },
+        "supplied_url": {
+          "title": "Supplied Url",
+          "type": "string"
+        },
+        "limits": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limits",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source_id",
+        "authority_id",
+        "layer_id",
+        "acquisition_method",
+        "official_source_url",
+        "original_http_acquisition_verified",
+        "received_at",
+        "record_line",
+        "manifest",
+        "exact_record",
+        "preparation",
+        "receipt",
+        "supplied_url",
+        "limits"
+      ],
+      "title": "Custody",
+      "type": "object"
+    },
+    "Marking": {
+      "additionalProperties": false,
+      "description": "Visible non-plain-text feature, kept outside the exact wording.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "struck",
+            "handwritten_fill",
+            "signature_presence",
+            "seal_presence",
+            "subscript",
+            "underlining",
+            "barcode_presence"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "span": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Span"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "pixel_box": {
+          "items": {
+            "type": "integer"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Pixel Box",
+          "type": "array"
+        },
+        "identity_verified": {
+          "const": false,
+          "title": "Identity Verified",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "page",
+        "span",
+        "statement",
+        "pixel_box",
+        "identity_verified"
+      ],
+      "title": "Marking",
+      "type": "object"
+    },
+    "Note": {
+      "additionalProperties": false,
+      "description": "Visual qualification tied to a physical page and optional transcript span.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "execution",
+            "source_anomaly",
+            "table",
+            "exception_scope",
+            "date_role",
+            "layout",
+            "uncertain_glyph",
+            "transcription_correction"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "transcript_start": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Transcript Start"
+        },
+        "transcript_end": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Transcript End"
+        },
+        "exact_transcript": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Exact Transcript"
+        },
+        "crop": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Asset"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "statement",
+        "transcript_start",
+        "transcript_end",
+        "exact_transcript",
+        "crop"
+      ],
+      "title": "Note",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "Complete physical page, empty native text and separate reviewed transcript.",
+      "properties": {
+        "number": {
+          "maximum": 16,
+          "minimum": 1,
+          "title": "Number",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_byte_count": {
+          "const": 0,
+          "title": "Native Byte Count",
+          "type": "integer"
+        },
+        "ocr": {
+          "$ref": "#/$defs/Asset"
+        },
+        "ocr_text": {
+          "$ref": "#/$defs/Asset"
+        },
+        "transcript": {
+          "$ref": "#/$defs/Asset"
+        },
+        "image_width": {
+          "title": "Image Width",
+          "type": "integer"
+        },
+        "image_height": {
+          "title": "Image Height",
+          "type": "integer"
+        },
+        "full_image_viewed": {
+          "const": true,
+          "title": "Full Image Viewed",
+          "type": "boolean"
+        },
+        "review_method": {
+          "const": "candidate_aware_direct_image_source_qa",
+          "title": "Review Method",
+          "type": "string"
+        },
+        "notes": {
+          "items": {
+            "$ref": "#/$defs/Note"
+          },
+          "title": "Notes",
+          "type": "array"
+        },
+        "blocks": {
+          "items": {
+            "$ref": "#/$defs/Block"
+          },
+          "title": "Blocks",
+          "type": "array"
+        }
+      },
+      "required": [
+        "number",
+        "image",
+        "native",
+        "native_byte_count",
+        "ocr",
+        "ocr_text",
+        "transcript",
+        "image_width",
+        "image_height",
+        "full_image_viewed",
+        "review_method",
+        "notes",
+        "blocks"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "description": "A complete byte interval in a reviewed page-local UTF-8 transcript.",
+      "properties": {
+        "page": {
+          "maximum": 16,
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "exclusiveMinimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "page",
+        "start",
+        "end",
+        "text",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "All sixteen pages reviewed without promotion to current law.",
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_id": {
+      "const": "gunnison-building-code-resolution-2023-22-sh-ext-003",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-GUNNISON",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "page_count": {
+      "const": 16,
+      "title": "Page Count",
+      "type": "integer"
+    },
+    "native_total_bytes": {
+      "const": 0,
+      "title": "Native Total Bytes",
+      "type": "integer"
+    },
+    "source_currentness": {
+      "const": "not_verified",
+      "title": "Source Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "external_reports_consulted": {
+      "const": false,
+      "title": "External Reports Consulted",
+      "type": "boolean"
+    },
+    "review_method": {
+      "const": "candidate_aware_direct_image_source_qa",
+      "title": "Review Method",
+      "type": "string"
+    },
+    "legal_adoption_verified": {
+      "const": false,
+      "title": "Legal Adoption Verified",
+      "type": "boolean"
+    },
+    "signature_identity_verified": {
+      "const": false,
+      "title": "Signature Identity Verified",
+      "type": "boolean"
+    },
+    "created_at": {
+      "title": "Created At",
+      "type": "string"
+    },
+    "custody": {
+      "$ref": "#/$defs/Custody"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "maxItems": 16,
+      "minItems": 16,
+      "title": "Pages",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "associations": {
+      "items": {
+        "$ref": "#/$defs/Association"
+      },
+      "title": "Associations",
+      "type": "array"
+    },
+    "markings": {
+      "items": {
+        "$ref": "#/$defs/Marking"
+      },
+      "title": "Markings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "source",
+    "source_id",
+    "authority_id",
+    "page_count",
+    "native_total_bytes",
+    "source_currentness",
+    "answer_safe",
+    "external_reports_consulted",
+    "review_method",
+    "legal_adoption_verified",
+    "signature_identity_verified",
+    "created_at",
+    "custody",
+    "pages",
+    "limitations",
+    "associations",
+    "markings"
+  ],
+  "title": "Review",
+  "type": "object"
+}

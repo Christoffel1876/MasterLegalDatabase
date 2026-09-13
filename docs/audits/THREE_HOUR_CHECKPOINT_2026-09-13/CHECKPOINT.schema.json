@@ -1,0 +1,196 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "comparison_commit": {
+      "title": "Comparison Commit",
+      "type": "string"
+    },
+    "status": {
+      "const": "verified_local_checkpoint_precommit",
+      "title": "Status",
+      "type": "string"
+    },
+    "manual_originals": {
+      "const": 70,
+      "title": "Manual Originals",
+      "type": "integer"
+    },
+    "intake_ledger_rows": {
+      "const": 71,
+      "title": "Intake Ledger Rows",
+      "type": "integer"
+    },
+    "scoped_review_links": {
+      "const": 35,
+      "title": "Scoped Review Links",
+      "type": "integer"
+    },
+    "sources_without_mapped_review": {
+      "const": 35,
+      "title": "Sources Without Mapped Review",
+      "type": "integer"
+    },
+    "new_county_originals": {
+      "const": 6,
+      "title": "New County Originals",
+      "type": "integer"
+    },
+    "accepted_qa_packages": {
+      "const": 8,
+      "title": "Accepted Qa Packages",
+      "type": "integer"
+    },
+    "qa_physical_pages": {
+      "const": 58,
+      "title": "Qa Physical Pages",
+      "type": "integer"
+    },
+    "tests_passed": {
+      "exclusiveMinimum": 0,
+      "title": "Tests Passed",
+      "type": "integer"
+    },
+    "full_suite_exit": {
+      "const": 0,
+      "title": "Full Suite Exit",
+      "type": "integer"
+    },
+    "full_suite_inputs_unchanged": {
+      "const": true,
+      "title": "Full Suite Inputs Unchanged",
+      "type": "boolean"
+    },
+    "coverage_percent": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Coverage Percent",
+      "type": "object"
+    },
+    "suite_warning_count": {
+      "minimum": 0,
+      "title": "Suite Warning Count",
+      "type": "integer"
+    },
+    "repository_branch_inclusive_coverage": {
+      "title": "Repository Branch Inclusive Coverage",
+      "type": "number"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "missing_lfs": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Missing Lfs",
+      "type": "array"
+    },
+    "facts": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Facts",
+      "type": "array"
+    },
+    "next_steps": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Next Steps",
+      "type": "array"
+    },
+    "qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Qualifications",
+      "type": "array"
+    },
+    "public_push": {
+      "const": false,
+      "title": "Public Push",
+      "type": "boolean"
+    },
+    "scheduled_http_enabled": {
+      "const": false,
+      "title": "Scheduled Http Enabled",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "comparison_commit",
+    "status",
+    "manual_originals",
+    "intake_ledger_rows",
+    "scoped_review_links",
+    "sources_without_mapped_review",
+    "new_county_originals",
+    "accepted_qa_packages",
+    "qa_physical_pages",
+    "tests_passed",
+    "full_suite_exit",
+    "full_suite_inputs_unchanged",
+    "coverage_percent",
+    "suite_warning_count",
+    "repository_branch_inclusive_coverage",
+    "evidence",
+    "missing_lfs",
+    "facts",
+    "next_steps",
+    "qualifications",
+    "public_push",
+    "scheduled_http_enabled",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Checkpoint",
+  "type": "object"
+}

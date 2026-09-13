@@ -1,0 +1,60 @@
+{
+  "additionalProperties": false,
+  "description": "Actual focused execution; no production files are changed.",
+  "properties": {
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "command": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Command",
+      "type": "array"
+    },
+    "cwd": {
+      "title": "Cwd",
+      "type": "string"
+    },
+    "environment_overrides": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Environment Overrides",
+      "type": "object"
+    },
+    "exit_code": {
+      "title": "Exit Code",
+      "type": "integer"
+    },
+    "temporary_directory_removed": {
+      "title": "Temporary Directory Removed",
+      "type": "boolean"
+    },
+    "production_writes": {
+      "maximum": 0,
+      "minimum": 0,
+      "title": "Production Writes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "started_at",
+    "completed_at",
+    "command",
+    "cwd",
+    "environment_overrides",
+    "exit_code",
+    "temporary_directory_removed",
+    "production_writes"
+  ],
+  "title": "TestRun",
+  "type": "object"
+}

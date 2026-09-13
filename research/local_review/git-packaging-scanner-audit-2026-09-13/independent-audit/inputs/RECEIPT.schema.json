@@ -1,0 +1,145 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact local bytes with a declared relative path.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Target": {
+      "additionalProperties": false,
+      "description": "Exactly one authorized maintained target with immutable before and after copies.",
+      "properties": {
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "before": {
+          "$ref": "#/$defs/Asset"
+        },
+        "after": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "repository_path",
+        "before",
+        "after"
+      ],
+      "title": "Target",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Actual metadata installation with preserved preimages and completed local check.",
+  "properties": {
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "status": {
+      "const": "installed_and_verified",
+      "title": "Status",
+      "type": "string"
+    },
+    "preparation_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Preparation Sha256",
+      "type": "string"
+    },
+    "targets": {
+      "items": {
+        "$ref": "#/$defs/Target"
+      },
+      "title": "Targets",
+      "type": "array"
+    },
+    "snapshot_directory": {
+      "title": "Snapshot Directory",
+      "type": "string"
+    },
+    "verifier_exit_code": {
+      "const": 0,
+      "title": "Verifier Exit Code",
+      "type": "integer"
+    },
+    "verifier_stdout": {
+      "$ref": "#/$defs/Asset"
+    },
+    "verifier_stderr": {
+      "$ref": "#/$defs/Asset"
+    },
+    "raw_manifest_before": {
+      "$ref": "#/$defs/Asset"
+    },
+    "raw_manifest_after": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_files_changed": {
+      "const": false,
+      "title": "Source Files Changed",
+      "type": "boolean"
+    },
+    "records": {
+      "const": 70,
+      "title": "Records",
+      "type": "integer"
+    },
+    "reviewed": {
+      "const": 35,
+      "title": "Reviewed",
+      "type": "integer"
+    },
+    "unmapped": {
+      "const": 35,
+      "title": "Unmapped",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "started_at",
+    "completed_at",
+    "status",
+    "preparation_sha256",
+    "targets",
+    "snapshot_directory",
+    "verifier_exit_code",
+    "verifier_stdout",
+    "verifier_stderr",
+    "raw_manifest_before",
+    "raw_manifest_after",
+    "source_files_changed",
+    "records",
+    "reviewed",
+    "unmapped"
+  ],
+  "title": "InstallReceipt",
+  "type": "object"
+}

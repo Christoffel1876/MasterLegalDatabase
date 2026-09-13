@@ -1,0 +1,108 @@
+{
+  "$defs": {
+    "FileRef": {
+      "additionalProperties": false,
+      "description": "Exact package-relative byte identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Closed public package inventory; final manifest excludes itself only.",
+  "properties": {
+    "schema_version": {
+      "const": "chaffee-directed-public-custody-v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "sealed_at": {
+      "title": "Sealed At",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/FileRef"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "action_count": {
+      "maximum": 3,
+      "minimum": 0,
+      "title": "Action Count",
+      "type": "integer"
+    },
+    "distinct_requested_urls": {
+      "maximum": 3,
+      "minimum": 0,
+      "title": "Distinct Requested Urls",
+      "type": "integer"
+    },
+    "retained_response_body_bytes": {
+      "maximum": 50000000,
+      "minimum": 0,
+      "title": "Retained Response Body Bytes",
+      "type": "integer"
+    },
+    "pdf_count": {
+      "maximum": 3,
+      "minimum": 0,
+      "title": "Pdf Count",
+      "type": "integer"
+    },
+    "pdf_pages": {
+      "minimum": 0,
+      "title": "Pdf Pages",
+      "type": "integer"
+    },
+    "unopened_target_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unopened Target Ids",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "sealed_at",
+    "files",
+    "action_count",
+    "distinct_requested_urls",
+    "retained_response_body_bytes",
+    "pdf_count",
+    "pdf_pages",
+    "unopened_target_ids",
+    "limitations"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

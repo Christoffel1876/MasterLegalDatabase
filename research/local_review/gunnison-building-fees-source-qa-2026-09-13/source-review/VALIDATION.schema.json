@@ -1,0 +1,73 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact local evidence identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "test_command": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Test Command",
+      "type": "array"
+    },
+    "test_log": {
+      "$ref": "#/$defs/Asset"
+    },
+    "tests_passed": {
+      "title": "Tests Passed",
+      "type": "integer"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "test_command",
+    "test_log",
+    "tests_passed",
+    "limitations"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

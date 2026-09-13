@@ -1,0 +1,185 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact retained file relative to this audit.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Command": {
+      "additionalProperties": false,
+      "description": "A completed local command, including failures if any.",
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "argv": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Argv",
+          "type": "array"
+        },
+        "cwd": {
+          "title": "Cwd",
+          "type": "string"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "completed_at": {
+          "format": "date-time",
+          "title": "Completed At",
+          "type": "string"
+        },
+        "exit_code": {
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "stdout": {
+          "$ref": "#/$defs/Asset"
+        },
+        "stderr": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "label",
+        "argv",
+        "cwd",
+        "started_at",
+        "completed_at",
+        "exit_code",
+        "stdout",
+        "stderr"
+      ],
+      "title": "Command",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Actual checks; temporary synthetic application is distinct from canonical apply.",
+  "properties": {
+    "status": {
+      "enum": [
+        "passed",
+        "failed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "reviewer": {
+      "const": "Plato",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "commands": {
+      "items": {
+        "$ref": "#/$defs/Command"
+      },
+      "title": "Commands",
+      "type": "array"
+    },
+    "repository_pins_before": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Repository Pins Before",
+      "type": "object"
+    },
+    "repository_pins_after": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Repository Pins After",
+      "type": "object"
+    },
+    "original_packet_pins_before": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Original Packet Pins Before",
+      "type": "object"
+    },
+    "original_packet_pins_after": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Original Packet Pins After",
+      "type": "object"
+    },
+    "repository_metadata_runtime_unchanged": {
+      "title": "Repository Metadata Runtime Unchanged",
+      "type": "boolean"
+    },
+    "original_packet_unchanged": {
+      "title": "Original Packet Unchanged",
+      "type": "boolean"
+    },
+    "original_execution_directory_created": {
+      "title": "Original Execution Directory Created",
+      "type": "boolean"
+    },
+    "canonical_apply_invoked": {
+      "const": false,
+      "title": "Canonical Apply Invoked",
+      "type": "boolean"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "probe_scope": {
+      "title": "Probe Scope",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "reviewer",
+    "completed_at",
+    "commands",
+    "repository_pins_before",
+    "repository_pins_after",
+    "original_packet_pins_before",
+    "original_packet_pins_after",
+    "repository_metadata_runtime_unchanged",
+    "original_packet_unchanged",
+    "original_execution_directory_created",
+    "canonical_apply_invoked",
+    "public_requests",
+    "probe_scope"
+  ],
+  "title": "Checks",
+  "type": "object"
+}

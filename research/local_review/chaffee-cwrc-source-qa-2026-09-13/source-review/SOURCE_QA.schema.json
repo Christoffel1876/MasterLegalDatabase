@@ -1,0 +1,627 @@
+{
+  "$defs": {
+    "Acquisition": {
+      "additionalProperties": false,
+      "description": "Actual new HTTP custody distinct from any future canonical intake.",
+      "properties": {
+        "source_event": {
+          "$ref": "#/$defs/Ref"
+        },
+        "frozen_retrieval_manifest": {
+          "$ref": "#/$defs/Ref"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "final_url": {
+          "title": "Final Url",
+          "type": "string"
+        },
+        "actual_started_at": {
+          "title": "Actual Started At",
+          "type": "string"
+        },
+        "actual_completed_at": {
+          "title": "Actual Completed At",
+          "type": "string"
+        },
+        "http_status": {
+          "const": 200,
+          "title": "Http Status",
+          "type": "integer"
+        },
+        "actual_repository_received_at": {
+          "title": "Actual Repository Received At",
+          "type": "null"
+        },
+        "method": {
+          "const": "atlas_directed_public_http",
+          "title": "Method",
+          "type": "string"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_event",
+        "frozen_retrieval_manifest",
+        "requested_url",
+        "final_url",
+        "actual_started_at",
+        "actual_completed_at",
+        "http_status",
+        "actual_repository_received_at",
+        "method",
+        "qualification"
+      ],
+      "title": "Acquisition",
+      "type": "object"
+    },
+    "DateClaim": {
+      "additionalProperties": false,
+      "description": "Literal source date or relative interval with its printed role.",
+      "properties": {
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "segment_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Segment Ids",
+          "type": "array"
+        },
+        "independent_legal_verification": {
+          "const": false,
+          "title": "Independent Legal Verification",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "value",
+        "role",
+        "segment_ids",
+        "independent_legal_verification"
+      ],
+      "title": "DateClaim",
+      "type": "object"
+    },
+    "Markup": {
+      "additionalProperties": false,
+      "description": "Visually observed lexical mark extent in a checked transcript segment.",
+      "properties": {
+        "kind": {
+          "enum": [
+            "underline",
+            "strikethrough",
+            "superscript",
+            "italic"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "exclusiveMinimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "start",
+        "end",
+        "text",
+        "qualification"
+      ],
+      "title": "Markup",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "description": "A bounded image-supported finding; no interpretation or current-law status.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "segment_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Segment Ids",
+          "type": "array"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "segment_ids",
+        "statement",
+        "qualification"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "Complete physical source page and unchanged extraction candidates.",
+      "properties": {
+        "page": {
+          "maximum": 14,
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Ref"
+        },
+        "width": {
+          "const": 2550,
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "const": 3300,
+          "title": "Height",
+          "type": "integer"
+        },
+        "native": {
+          "$ref": "#/$defs/Ref"
+        },
+        "ocr_event": {
+          "$ref": "#/$defs/Ref"
+        },
+        "ocr_stdout": {
+          "$ref": "#/$defs/Ref"
+        },
+        "ocr_stderr": {
+          "$ref": "#/$defs/Ref"
+        },
+        "ocr_candidate": {
+          "$ref": "#/$defs/Ref"
+        },
+        "checked_transcript": {
+          "$ref": "#/$defs/Ref"
+        },
+        "ocr_line_count": {
+          "exclusiveMinimum": 0,
+          "title": "Ocr Line Count",
+          "type": "integer"
+        },
+        "segment_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Segment Ids",
+          "type": "array"
+        },
+        "full_page_viewed": {
+          "const": true,
+          "title": "Full Page Viewed",
+          "type": "boolean"
+        },
+        "half_page_crops_viewed": {
+          "const": true,
+          "title": "Half Page Crops Viewed",
+          "type": "boolean"
+        },
+        "footer_and_borders": {
+          "title": "Footer And Borders",
+          "type": "string"
+        }
+      },
+      "required": [
+        "page",
+        "image",
+        "width",
+        "height",
+        "native",
+        "ocr_event",
+        "ocr_stdout",
+        "ocr_stderr",
+        "ocr_candidate",
+        "checked_transcript",
+        "ocr_line_count",
+        "segment_ids",
+        "full_page_viewed",
+        "half_page_crops_viewed",
+        "footer_and_borders"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Package-relative exact file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "Segment": {
+      "additionalProperties": false,
+      "description": "A full printed paragraph, heading, or explicitly uncertain execution region.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "page": {
+          "maximum": 14,
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "heading",
+            "paragraph",
+            "recorder_metadata",
+            "execution_label",
+            "handwriting_uncertain",
+            "seal"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "context": {
+          "title": "Context",
+          "type": "string"
+        },
+        "ocr_line_numbers": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Ocr Line Numbers",
+          "type": "array"
+        },
+        "ocr_span": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Span"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "ocr_text": {
+          "title": "Ocr Text",
+          "type": "string"
+        },
+        "checked_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Checked Text"
+        },
+        "checked_span": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Span"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pixel_rect": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Pixel Rect",
+          "type": "array"
+        },
+        "image_path": {
+          "title": "Image Path",
+          "type": "string"
+        },
+        "crop_paths": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Crop Paths",
+          "type": "array"
+        },
+        "continuation_of": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Continuation Of"
+        },
+        "markup": {
+          "items": {
+            "$ref": "#/$defs/Markup"
+          },
+          "title": "Markup",
+          "type": "array"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "page",
+        "kind",
+        "context",
+        "ocr_line_numbers",
+        "ocr_span",
+        "ocr_text",
+        "checked_text",
+        "checked_span",
+        "pixel_rect",
+        "image_path",
+        "crop_paths",
+        "continuation_of",
+        "markup",
+        "notes"
+      ],
+      "title": "Segment",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "description": "Half-open byte span in a derived text file, never in the source PDF.",
+      "properties": {
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Complete scanned-source review and its explicit research-only limits.",
+  "properties": {
+    "schema_version": {
+      "const": "chaffee-cwrc-source-qa-1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "chaffee-cwrc-ordinance-2026-02-atlas-directed",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-CHAFFEE",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "layer_id": {
+      "const": "08_County_Authorities",
+      "title": "Layer Id",
+      "type": "string"
+    },
+    "source_sha": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Source Sha",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Ref"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "review_status": {
+      "const": "checked_passages",
+      "title": "Review Status",
+      "type": "string"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    },
+    "native_method": {
+      "title": "Native Method",
+      "type": "string"
+    },
+    "ocr_method": {
+      "title": "Ocr Method",
+      "type": "string"
+    },
+    "transcription_conventions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Transcription Conventions",
+      "type": "array"
+    },
+    "source_role": {
+      "title": "Source Role",
+      "type": "string"
+    },
+    "acquisition": {
+      "$ref": "#/$defs/Acquisition"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "maxItems": 14,
+      "minItems": 14,
+      "title": "Pages",
+      "type": "array"
+    },
+    "segments": {
+      "items": {
+        "$ref": "#/$defs/Segment"
+      },
+      "title": "Segments",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "date_claims": {
+      "items": {
+        "$ref": "#/$defs/DateClaim"
+      },
+      "title": "Date Claims",
+      "type": "array"
+    },
+    "external_reports_consulted": {
+      "const": false,
+      "title": "External Reports Consulted",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "verified_adoption_date": {
+      "title": "Verified Adoption Date",
+      "type": "null"
+    },
+    "verified_effective_date": {
+      "title": "Verified Effective Date",
+      "type": "null"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "source_id",
+    "authority_id",
+    "layer_id",
+    "source_sha",
+    "source",
+    "prepared_at",
+    "review_status",
+    "method",
+    "scope",
+    "native_method",
+    "ocr_method",
+    "transcription_conventions",
+    "source_role",
+    "acquisition",
+    "pages",
+    "segments",
+    "observations",
+    "date_claims",
+    "external_reports_consulted",
+    "legal_currentness",
+    "answer_safe",
+    "verified_adoption_date",
+    "verified_effective_date",
+    "limitations"
+  ],
+  "title": "SourceQA",
+  "type": "object"
+}

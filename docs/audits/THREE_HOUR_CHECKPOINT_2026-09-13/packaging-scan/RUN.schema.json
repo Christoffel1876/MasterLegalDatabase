@@ -1,0 +1,63 @@
+{
+  "additionalProperties": false,
+  "description": "Actual bounded local scanner invocation; no staging claim.",
+  "properties": {
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "finished_at": {
+      "title": "Finished At",
+      "type": "string"
+    },
+    "argv": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Argv",
+      "type": "array"
+    },
+    "exit_code": {
+      "title": "Exit Code",
+      "type": "integer"
+    },
+    "scanner_sha256": {
+      "title": "Scanner Sha256",
+      "type": "string"
+    },
+    "approvals_sha256": {
+      "title": "Approvals Sha256",
+      "type": "string"
+    },
+    "stdout_sha256": {
+      "title": "Stdout Sha256",
+      "type": "string"
+    },
+    "stderr_sha256": {
+      "title": "Stderr Sha256",
+      "type": "string"
+    },
+    "git_mutations": {
+      "title": "Git Mutations",
+      "type": "integer"
+    },
+    "public_requests": {
+      "title": "Public Requests",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "started_at",
+    "finished_at",
+    "argv",
+    "exit_code",
+    "scanner_sha256",
+    "approvals_sha256",
+    "stdout_sha256",
+    "stderr_sha256",
+    "git_mutations",
+    "public_requests"
+  ],
+  "title": "Run",
+  "type": "object"
+}

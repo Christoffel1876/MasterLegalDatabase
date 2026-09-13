@@ -1,0 +1,330 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact retained body, derivative or report.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Reservation": {
+      "additionalProperties": false,
+      "description": "Persist before a single public tool action; this is not a wire-request counter.",
+      "properties": {
+        "action_id": {
+          "pattern": "^SHEXT004-A[0-9]{3}$",
+          "title": "Action Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-CHAFFEE",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "reserved_at": {
+          "format": "date-time",
+          "title": "Reserved At",
+          "type": "string"
+        },
+        "tool_name": {
+          "title": "Tool Name",
+          "type": "string"
+        },
+        "action_kind": {
+          "enum": [
+            "open",
+            "download",
+            "search",
+            "browser_navigation",
+            "browser_click"
+          ],
+          "title": "Action Kind",
+          "type": "string"
+        },
+        "requested_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Requested Url"
+        },
+        "search_query": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Search Query"
+        },
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        },
+        "budget_checked": {
+          "const": true,
+          "title": "Budget Checked",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "action_id",
+        "authority_id",
+        "reserved_at",
+        "tool_name",
+        "action_kind",
+        "requested_url",
+        "basis",
+        "budget_checked"
+      ],
+      "title": "Reservation",
+      "type": "object"
+    },
+    "Result": {
+      "additionalProperties": false,
+      "description": "Record actual observations separately from the immutable reservation.",
+      "properties": {
+        "action_id": {
+          "pattern": "^SHEXT004-A[0-9]{3}$",
+          "title": "Action Id",
+          "type": "string"
+        },
+        "finished_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Finished At"
+        },
+        "time_unknown_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Time Unknown Reason"
+        },
+        "observed_final_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Observed Final Url"
+        },
+        "visible_redirect_urls": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Visible Redirect Urls",
+          "type": "array"
+        },
+        "observed_http_status": {
+          "anyOf": [
+            {
+              "maximum": 599,
+              "minimum": 100,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Observed Http Status"
+        },
+        "outcome": {
+          "enum": [
+            "response",
+            "access_denied",
+            "not_found",
+            "tool_preflight_error",
+            "transport_error",
+            "unretained_response",
+            "unknown"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        },
+        "body_role": {
+          "enum": [
+            "original_pdf",
+            "original_html",
+            "error_body",
+            "browser_derivative",
+            "tool_derivative",
+            "no_body",
+            "unknown"
+          ],
+          "title": "Body Role",
+          "type": "string"
+        },
+        "retained_assets": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "title": "Retained Assets",
+          "type": "array"
+        },
+        "body_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Body Sha256"
+        },
+        "pdf_magic_checked": {
+          "title": "Pdf Magic Checked",
+          "type": "boolean"
+        },
+        "pdf_parse_succeeded": {
+          "title": "Pdf Parse Succeeded",
+          "type": "boolean"
+        },
+        "physical_pages": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Physical Pages"
+        },
+        "notes": {
+          "title": "Notes",
+          "type": "string"
+        },
+        "source_qa_status": {
+          "const": "not_performed",
+          "default": "not_performed",
+          "title": "Source Qa Status",
+          "type": "string"
+        },
+        "body_size_basis": {
+          "default": "unknown",
+          "enum": [
+            "retained_complete",
+            "retained_partial",
+            "no_body_observed",
+            "unknown"
+          ],
+          "title": "Body Size Basis",
+          "type": "string"
+        },
+        "observed_body_bytes": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Observed Body Bytes"
+        }
+      },
+      "required": [
+        "action_id",
+        "finished_at",
+        "observed_final_url",
+        "visible_redirect_urls",
+        "outcome",
+        "body_role",
+        "retained_assets",
+        "pdf_magic_checked",
+        "pdf_parse_succeeded",
+        "notes"
+      ],
+      "title": "Result",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Validate finite visible-tool budgets, not hidden network requests or timing claims.",
+  "properties": {
+    "assignment_id": {
+      "const": "SH-EXT-004",
+      "default": "SH-EXT-004",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "reservations": {
+      "items": {
+        "$ref": "#/$defs/Reservation"
+      },
+      "maxItems": 4,
+      "title": "Reservations",
+      "type": "array"
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/Result"
+      },
+      "title": "Results",
+      "type": "array"
+    },
+    "hidden_network_requests_measured": {
+      "const": false,
+      "default": false,
+      "title": "Hidden Network Requests Measured",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "reservations",
+    "results"
+  ],
+  "title": "ActionLog",
+  "type": "object"
+}

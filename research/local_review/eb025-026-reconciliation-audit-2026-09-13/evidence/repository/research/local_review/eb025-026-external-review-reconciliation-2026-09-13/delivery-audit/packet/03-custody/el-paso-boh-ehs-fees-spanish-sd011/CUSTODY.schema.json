@@ -1,0 +1,97 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Exact packet-relative ordinary-file bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Original custody remains separate from this packet's preparation time.",
+  "properties": {
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-EL_PASO",
+      "default": "CO-COUNTY-EL_PASO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "canonical_record": {
+      "$ref": "#/$defs/Ref"
+    },
+    "canonical_archive_path": {
+      "title": "Canonical Archive Path",
+      "type": "string"
+    },
+    "original": {
+      "$ref": "#/$defs/Ref"
+    },
+    "recorded_official_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Recorded Official Url"
+    },
+    "acquisition_method": {
+      "const": "received_review_package",
+      "default": "received_review_package",
+      "title": "Acquisition Method",
+      "type": "string"
+    },
+    "original_http_acquisition_at": {
+      "default": null,
+      "title": "Original Http Acquisition At",
+      "type": "null"
+    },
+    "repository_received_at": {
+      "format": "date-time",
+      "title": "Repository Received At",
+      "type": "string"
+    },
+    "custody_note_as_recorded": {
+      "title": "Custody Note As Recorded",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_id",
+    "canonical_record",
+    "canonical_archive_path",
+    "original",
+    "recorded_official_url",
+    "repository_received_at",
+    "custody_note_as_recorded"
+  ],
+  "title": "Custody",
+  "type": "object"
+}

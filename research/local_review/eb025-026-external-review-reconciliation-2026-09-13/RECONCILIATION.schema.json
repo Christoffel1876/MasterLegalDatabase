@@ -1,0 +1,174 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "finding_id": {
+          "pattern": "^EB02[56]-P2-00[1-9]$",
+          "title": "Finding Id",
+          "type": "string"
+        },
+        "reported_classification": {
+          "title": "Reported Classification",
+          "type": "string"
+        },
+        "reported_summary": {
+          "title": "Reported Summary",
+          "type": "string"
+        },
+        "disposition": {
+          "enum": [
+            "accepted_formatting_issue",
+            "accepted_visibility_limit",
+            "qualified_encoding_note",
+            "source_faithful",
+            "continuation_context_required"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "atlas_reason": {
+          "title": "Atlas Reason",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "correction_applied": {
+          "const": false,
+          "default": false,
+          "title": "Correction Applied",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "finding_id",
+        "reported_classification",
+        "reported_summary",
+        "disposition",
+        "atlas_reason",
+        "evidence"
+      ],
+      "title": "Finding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "reviewer": {
+      "const": "Atlas",
+      "default": "Atlas",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "scoped_report_reconciliation_complete",
+      "default": "scoped_report_reconciliation_complete",
+      "title": "Status",
+      "type": "string"
+    },
+    "method": {
+      "const": "post_report_reinspection_against_pre_report_source_qa",
+      "default": "post_report_reinspection_against_pre_report_source_qa",
+      "title": "Method",
+      "type": "string"
+    },
+    "report_audit": {
+      "$ref": "#/$defs/Asset"
+    },
+    "pre_report_qa": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Pre Report Qa",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "critical_extraction_errors_accepted": {
+      "const": 0,
+      "default": 0,
+      "title": "Critical Extraction Errors Accepted",
+      "type": "integer"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "translation_equivalence_verified": {
+      "const": false,
+      "default": false,
+      "title": "Translation Equivalence Verified",
+      "type": "boolean"
+    },
+    "independent_grok_review_established": {
+      "const": false,
+      "default": false,
+      "title": "Independent Grok Review Established",
+      "type": "boolean"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "report_audit",
+    "pre_report_qa",
+    "findings",
+    "limitations"
+  ],
+  "title": "Reconciliation",
+  "type": "object"
+}

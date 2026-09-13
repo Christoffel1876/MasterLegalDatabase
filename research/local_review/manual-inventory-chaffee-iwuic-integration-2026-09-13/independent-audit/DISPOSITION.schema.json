@@ -1,0 +1,181 @@
+{
+  "$defs": {
+    "File": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "tracked": {
+          "title": "Tracked",
+          "type": "boolean"
+        },
+        "ignored": {
+          "title": "Ignored",
+          "type": "boolean"
+        },
+        "ignore_rule": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Ignore Rule"
+        },
+        "lfs_filter": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Lfs Filter"
+        },
+        "issues": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Issues",
+          "type": "array"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes",
+        "tracked",
+        "ignored",
+        "ignore_rule",
+        "lfs_filter",
+        "issues"
+      ],
+      "title": "File",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "inventory_status": {
+      "const": "scoped_pass",
+      "title": "Inventory Status",
+      "type": "string"
+    },
+    "private_header_values": {
+      "const": "redacted_only_in_four_already_tracked_logs",
+      "title": "Private Header Values",
+      "type": "string"
+    },
+    "header_files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Header Files",
+      "type": "array"
+    },
+    "historical_cache": {
+      "$ref": "#/$defs/File"
+    },
+    "cache_disposition": {
+      "title": "Cache Disposition",
+      "type": "string"
+    },
+    "new_cache_included": {
+      "const": false,
+      "title": "New Cache Included",
+      "type": "boolean"
+    },
+    "missing_selected_paths": {
+      "title": "Missing Selected Paths",
+      "type": "integer"
+    },
+    "largest_selected_file_bytes": {
+      "title": "Largest Selected File Bytes",
+      "type": "integer"
+    },
+    "later_packages_not_closed_by_this_snapshot": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Later Packages Not Closed By This Snapshot",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "schema_version",
+    "inventory_status",
+    "private_header_values",
+    "header_files",
+    "historical_cache",
+    "cache_disposition",
+    "new_cache_included",
+    "missing_selected_paths",
+    "largest_selected_file_bytes",
+    "later_packages_not_closed_by_this_snapshot",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Disposition",
+  "type": "object"
+}

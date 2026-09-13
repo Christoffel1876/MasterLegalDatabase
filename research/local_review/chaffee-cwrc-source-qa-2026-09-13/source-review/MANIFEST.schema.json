@@ -1,0 +1,64 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Package-relative exact file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Closed payload inventory; the manifest itself is the external root of trust.",
+  "properties": {
+    "schema_version": {
+      "const": "cwrc-closed-payloads-1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "created_at": {
+      "title": "Created At",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "payload_count": {
+      "exclusiveMinimum": 0,
+      "title": "Payload Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schema_version",
+    "created_at",
+    "files",
+    "payload_count"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

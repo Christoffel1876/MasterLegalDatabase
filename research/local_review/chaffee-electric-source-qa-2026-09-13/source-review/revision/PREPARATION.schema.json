@@ -1,0 +1,141 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Event": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "render",
+            "ocr"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Page"
+        },
+        "started_at": {
+          "title": "Started At",
+          "type": "string"
+        },
+        "finished_at": {
+          "title": "Finished At",
+          "type": "string"
+        },
+        "command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Command",
+          "type": "array"
+        },
+        "exit_code": {
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "stdout": {
+          "$ref": "#/$defs/Asset"
+        },
+        "stderr": {
+          "$ref": "#/$defs/Asset"
+        },
+        "outputs": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "title": "Outputs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "page",
+        "started_at",
+        "finished_at",
+        "command",
+        "exit_code",
+        "stdout",
+        "stderr",
+        "outputs"
+      ],
+      "title": "Event",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "page_count": {
+      "const": 7,
+      "title": "Page Count",
+      "type": "integer"
+    },
+    "native": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Native",
+      "type": "array"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "status": {
+      "enum": [
+        "prepared_unreviewed_images_and_native",
+        "prepared_unreviewed_ocr"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source",
+    "page_count",
+    "native",
+    "events",
+    "status"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

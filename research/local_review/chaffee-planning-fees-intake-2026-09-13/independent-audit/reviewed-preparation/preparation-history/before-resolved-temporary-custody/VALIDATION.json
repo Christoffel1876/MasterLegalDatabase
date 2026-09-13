@@ -1,0 +1,97 @@
+{
+  "status": "passed_preparation_only",
+  "completed_at": "2026-09-13T16:53:46.035391Z",
+  "preparation_sha256": "a25b2071c9275af9b7299edf198b96870a79ba5ac8e0c412f6b8647774d683ca",
+  "transaction_sha256": "d4342c76031ebcebb7948a137f96bf0f563be72d24ec76e0a5b7718074e127ef",
+  "results": [
+    {
+      "label": "focused_tests",
+      "command": [
+        "/private/tmp/geode-status-venv/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "test_transaction.py",
+        "--cov=transaction",
+        "--cov=models",
+        "--cov-branch",
+        "--cov-report=term-missing",
+        "--cov-report=json:/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13/ptolemy-chaffee-fee-intake-preparation/validation/final-coverage.json"
+      ],
+      "working_directory": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13/ptolemy-chaffee-fee-intake-preparation",
+      "started_at": "2026-09-13T16:52:47.948000Z",
+      "completed_at": "2026-09-13T16:53:45.231601Z",
+      "exit_code": 0,
+      "stdout": {
+        "path": "validation/focused_tests.stdout",
+        "sha256": "0b751b1fa61d419076ecf2117f71b651493b36eebd2f0080929625ef022363f1",
+        "size_bytes": 1667
+      },
+      "stderr": {
+        "path": "validation/focused_tests.stderr",
+        "sha256": "ee649220d15160ba4535a7786250af6d7977bbefe63aade254a3850aee272f43",
+        "size_bytes": 82
+      }
+    },
+    {
+      "label": "live_read_only_preflight",
+      "command": [
+        "/private/tmp/geode-status-venv/bin/python",
+        "-B",
+        "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13/ptolemy-chaffee-fee-intake-preparation/transaction.py",
+        "--dry-run",
+        "--root",
+        "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase"
+      ],
+      "working_directory": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13/ptolemy-chaffee-fee-intake-preparation",
+      "started_at": "2026-09-13T16:53:45.238797Z",
+      "completed_at": "2026-09-13T16:53:46.024120Z",
+      "exit_code": 0,
+      "stdout": {
+        "path": "validation/live_read_only_preflight.stdout",
+        "sha256": "28f8917b0264ffd7632e377478b91aa5eccd74585e53b574f5707b606195061a",
+        "size_bytes": 244
+      },
+      "stderr": {
+        "path": "validation/live_read_only_preflight.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_bytes": 0
+      }
+    }
+  ],
+  "test_count": 77,
+  "combined_branch_inclusive_coverage_percent": 92.23684210526316,
+  "coverage": {
+    "path": "validation/final-coverage.json",
+    "sha256": "bbc6405f48bd6f07b2c6b231c62a734419d808d06418314b5bad2cddee517439",
+    "size_bytes": 36457
+  },
+  "canonical_managed_sha256_before": {
+    "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl": "fa08f4ea1c021fc6247fa314f0c4a6df4f622ad3fdd29d92cd9f59e0005839b4",
+    "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl": "c47d52b5a361418ccad2e6c9fd24a0301f0ce340b12ffcf0427ae41a0bf79858",
+    "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_REPORT.json": "27a4cee71c86d1d42b2860d7df90f24f18f711d26883d54ff7be8f2fc067fb01",
+    "_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json": "ad27514fe91659c9914780c7d3e69e48ace742bc31ad67d9c3a3c99945aecde3",
+    "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_POLICY.json": "9cd00825fcb7a8ab905fefcebe3575355b41eb4cf3e3168b1b83c7ef56aba205",
+    "_CONTROL_PLANE/BLOCKED_DOWNLOAD_QUEUE.json": "d195fdff2b686d51dc4e3e22bb8f2d6f6098fd8e2cdf7b83be088964a7a9f4be",
+    "_CONTROL_PLANE/LOCAL_SOURCE_REGISTRY.json": "05f9bb13489109027556728e91a75ad438fdfeb6e5e7cb4027b4d4dbaf66f64f"
+  },
+  "canonical_managed_sha256_after": {
+    "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl": "fa08f4ea1c021fc6247fa314f0c4a6df4f622ad3fdd29d92cd9f59e0005839b4",
+    "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl": "c47d52b5a361418ccad2e6c9fd24a0301f0ce340b12ffcf0427ae41a0bf79858",
+    "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_REPORT.json": "27a4cee71c86d1d42b2860d7df90f24f18f711d26883d54ff7be8f2fc067fb01",
+    "_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json": "ad27514fe91659c9914780c7d3e69e48ace742bc31ad67d9c3a3c99945aecde3",
+    "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_POLICY.json": "9cd00825fcb7a8ab905fefcebe3575355b41eb4cf3e3168b1b83c7ef56aba205",
+    "_CONTROL_PLANE/BLOCKED_DOWNLOAD_QUEUE.json": "d195fdff2b686d51dc4e3e22bb8f2d6f6098fd8e2cdf7b83be088964a7a9f4be",
+    "_CONTROL_PLANE/LOCAL_SOURCE_REGISTRY.json": "05f9bb13489109027556728e91a75ad438fdfeb6e5e7cb4027b4d4dbaf66f64f"
+  },
+  "canonical_managed_bytes_unchanged": true,
+  "actual_execution_directory_created": false,
+  "limitations": [
+    "Temporary-fixture process interruption/replay only, not filesystem power-loss durability.",
+    "No network, source review or canonical application performed.",
+    "Original parent acquisition remains supplied historical evidence; actual redirect/PDF process times are separately observed."
+  ]
+}

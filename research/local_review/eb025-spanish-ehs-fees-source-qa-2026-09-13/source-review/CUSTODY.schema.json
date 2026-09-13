@@ -1,0 +1,107 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Copy": {
+      "additionalProperties": false,
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "retained": {
+          "$ref": "#/$defs/Asset"
+        },
+        "mode": {
+          "const": "exact",
+          "title": "Mode",
+          "type": "string"
+        }
+      },
+      "required": [
+        "original_path",
+        "retained",
+        "mode"
+      ],
+      "title": "Copy",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "captured_at": {
+      "format": "date-time",
+      "title": "Captured At",
+      "type": "string"
+    },
+    "source_review_sha256": {
+      "title": "Source Review Sha256",
+      "type": "string"
+    },
+    "original_root_review_folder": {
+      "title": "Original Root Review Folder",
+      "type": "string"
+    },
+    "packet_manifest_sha256": {
+      "title": "Packet Manifest Sha256",
+      "type": "string"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/$defs/Copy"
+      },
+      "title": "Items",
+      "type": "array"
+    },
+    "packet_scope": {
+      "title": "Packet Scope",
+      "type": "string"
+    },
+    "root_visual_claims_independently_repeated": {
+      "const": false,
+      "title": "Root Visual Claims Independently Repeated",
+      "type": "boolean"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "captured_at",
+    "source_review_sha256",
+    "original_root_review_folder",
+    "packet_manifest_sha256",
+    "items",
+    "packet_scope",
+    "root_visual_claims_independently_repeated",
+    "public_requests"
+  ],
+  "title": "Custody",
+  "type": "object"
+}

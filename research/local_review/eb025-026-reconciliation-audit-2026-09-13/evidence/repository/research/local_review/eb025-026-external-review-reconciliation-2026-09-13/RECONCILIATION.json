@@ -1,0 +1,348 @@
+{
+  "reviewer": "Atlas",
+  "recorded_at": "2026-09-13T16:09:45.420116+00:00",
+  "status": "scoped_report_reconciliation_complete",
+  "method": "post_report_reinspection_against_pre_report_source_qa",
+  "report_audit": {
+    "path": "research/local_review/eb025-026-external-review-reconciliation-2026-09-13/delivery-audit/AUDIT.json",
+    "sha256": "6c118237c75e6db5f5f1e5513c3838f6e503d6ee8ec4d1c9e9de5fb3cc578637",
+    "size_bytes": 73208
+  },
+  "pre_report_qa": [
+    {
+      "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/source-review/received/SOURCE_QA.json",
+      "sha256": "2372e6bde1fa544c56dbaed1a808a7389bf943006f8d2d4c65dd5fa10a8ad46f",
+      "size_bytes": 154874
+    },
+    {
+      "path": "research/local_review/eb026-spanish-bylaws-source-qa-2026-09-13/source-review/SOURCE_QA.json",
+      "sha256": "fff90226a2dd0c213b551f7f1345bfd87f1eabfd55107243a6c60c30e708a556",
+      "size_bytes": 191535
+    },
+    {
+      "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/ACCEPTANCE.json",
+      "sha256": "af6610851a22c3b922fd0400408825594c11038a3f645f6492d8e6df02dab6a8",
+      "size_bytes": 2576
+    },
+    {
+      "path": "research/local_review/eb026-spanish-bylaws-source-qa-2026-09-13/ACCEPTANCE.json",
+      "sha256": "00f1b9a610e3f65ca7a9e29662d1fb20738012110e439cb687463918fc072ba7",
+      "size_bytes": 2446
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "EB025-P2-001",
+      "reported_classification": "critical",
+      "reported_summary": "p2 lead §A: Candidate garbles lead as `A p` / `artir del 1 de enero de 2024` (hard line break mid-word). Pass1 caption and Pass2 reopen expect continuous **A partir**. Treat as extraction/packaging defect in candidate.",
+      "disposition": "accepted_formatting_issue",
+      "atlas_reason": "The image reads A. A partir continuously. Native text has A. A p/newline artir. This is a real line-splitting issue; no date digit, fee amount or service association changed. Do not adopt the reported critical severity. Source and candidate remain unchanged; reviewed date-clause context already preserves the reading.",
+      "evidence": [
+        {
+          "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/source-review/received/crops/page-0002-date-clause.png",
+          "sha256": "d93e2ecf7c5fe016343edcb5e3139e01ee218fcf878c5deb1f7cf2d5e9034f4b",
+          "size_bytes": 31974
+        },
+        {
+          "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/source-review/received/SOURCE_QA.json",
+          "sha256": "2372e6bde1fa544c56dbaed1a808a7389bf943006f8d2d4c65dd5fa10a8ad46f",
+          "size_bytes": 154874
+        }
+      ],
+      "correction_applied": false
+    },
+    {
+      "finding_id": "EB025-P2-002",
+      "reported_classification": "minor",
+      "reported_summary": "all footers: Candidate renders approval as `Aprobado… 25 de octubre` then lone `d` then `2023`. Pass1/Pass2 captions still show year **truncated/crop** at image bottom (`…20` / illegible). Candidate year digits come from native layer; caption-mediated Pass2 **cannot pixel-verify** full “de 2023”. Limitation + packaging split (`d`/`2023`), not a silent invent claim beyond native.",
+      "disposition": "accepted_visibility_limit",
+      "atlas_reason": "All six source footer first lines were read before the report. The following native d/newline2023 tail is obscured in the rendered source, so no full footer year is visually certified. The existing QA preserves null visible years and native-layer evidence separately.",
+      "evidence": [
+        {
+          "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/source-review/received/SOURCE_QA.json",
+          "sha256": "2372e6bde1fa544c56dbaed1a808a7389bf943006f8d2d4c65dd5fa10a8ad46f",
+          "size_bytes": 154874
+        },
+        {
+          "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/source-review/received/crops/page-0004-footer-left.png",
+          "sha256": "38593cead5c5424e7abc2f88faeb6e3db1e51bb87618e0fae5e99e72533ef625",
+          "size_bytes": 10739
+        }
+      ],
+      "correction_applied": false
+    },
+    {
+      "finding_id": "EB025-P2-003",
+      "reported_classification": "minor",
+      "reported_summary": "p3 OWTS sale rows: Soft hyphen U+00AD after `propiedad` / similar on p4 `especiales`. Cosmetic.",
+      "disposition": "qualified_encoding_note",
+      "atlas_reason": "U+00AD is present in the native text at the reported entries. A raster image shows a hyphen-like mark but cannot establish its Unicode code point. Retain native bytes and treat this as an encoding/layout observation, not a source-language correction.",
+      "evidence": [
+        {
+          "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/source-review/received/inputs/page-0003.png",
+          "sha256": "c6334a327364bb30127420bc4f8713ffdcaae590d13224cbb1654dd9fce1f5e3",
+          "size_bytes": 610235
+        },
+        {
+          "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/source-review/received/inputs/page-0004.png",
+          "sha256": "071166e29fec47b5777418ba5d2ad2e1483239cd946e424ddaf3497afcd034b9",
+          "size_bytes": 545801
+        },
+        {
+          "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/source-review/received/SOURCE_QA.json",
+          "sha256": "2372e6bde1fa544c56dbaed1a808a7389bf943006f8d2d4c65dd5fa10a8ad46f",
+          "size_bytes": 154874
+        }
+      ],
+      "correction_applied": false
+    },
+    {
+      "finding_id": "EB025-P2-004",
+      "reported_classification": "minor",
+      "reported_summary": "p3–p4 fee lines: Printed/mixed EN fragments in Spanish schedule appear in candidate and were flagged unresolved in Pass1 captions: `in 2024`, `per hour`, `Per Section 25-4-1607`, `1 Event`, `for Multiple Events`. **Source anomaly / bilingual print** under caption mediation — not scored as Spanish-to-English rewrite by extractor.",
+      "disposition": "source_faithful",
+      "atlas_reason": "The English phrases are printed within the Spanish fee table and are faithfully retained. They are not extraction translations. No assessment of English/Spanish legal equivalence is made.",
+      "evidence": [
+        {
+          "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/source-review/received/inputs/page-0003.png",
+          "sha256": "c6334a327364bb30127420bc4f8713ffdcaae590d13224cbb1654dd9fce1f5e3",
+          "size_bytes": 610235
+        },
+        {
+          "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/source-review/received/inputs/page-0004.png",
+          "sha256": "071166e29fec47b5777418ba5d2ad2e1483239cd946e424ddaf3497afcd034b9",
+          "size_bytes": 545801
+        }
+      ],
+      "correction_applied": false
+    },
+    {
+      "finding_id": "EB025-P2-005",
+      "reported_classification": "minor",
+      "reported_summary": "p4 start: Orphan token `de alimentos` before special-event block (page-break packaging remnant).",
+      "disposition": "continuation_context_required",
+      "atlas_reason": "The phrase de alimentos is visibly printed at the top of page4 in a continuation row with a blank fee cell. It completes the page3 Licencia de establecimiento minorista label whose fee cell gives Per Section25-4-1607 C.R.S. It is not disposable packaging and is not a new special-event service. The pre-report QA already links both physical fragments.",
+      "evidence": [
+        {
+          "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/source-review/received/inputs/page-0003.png",
+          "sha256": "c6334a327364bb30127420bc4f8713ffdcaae590d13224cbb1654dd9fce1f5e3",
+          "size_bytes": 610235
+        },
+        {
+          "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/source-review/received/inputs/page-0004.png",
+          "sha256": "071166e29fec47b5777418ba5d2ad2e1483239cd946e424ddaf3497afcd034b9",
+          "size_bytes": 545801
+        },
+        {
+          "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/source-review/received/SOURCE_QA.json",
+          "sha256": "2372e6bde1fa544c56dbaed1a808a7389bf943006f8d2d4c65dd5fa10a8ad46f",
+          "size_bytes": 154874
+        }
+      ],
+      "correction_applied": false
+    },
+    {
+      "finding_id": "EB025-P2-006",
+      "reported_classification": "minor",
+      "reported_summary": "p4 def (4): Spurious line break / period before `para mantener la seguridad alimentaria.`",
+      "disposition": "source_faithful",
+      "atlas_reason": "The period after medidas de control. and the next-line para mantener la seguridad alimentaria. are visible in definition4. Preserve both source punctuation and sentence continuation; reject the claim that the period is spurious extraction.",
+      "evidence": [
+        {
+          "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/source-review/received/inputs/page-0004.png",
+          "sha256": "071166e29fec47b5777418ba5d2ad2e1483239cd946e424ddaf3497afcd034b9",
+          "size_bytes": 545801
+        },
+        {
+          "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/source-review/received/SOURCE_QA.json",
+          "sha256": "2372e6bde1fa544c56dbaed1a808a7389bf943006f8d2d4c65dd5fa10a8ad46f",
+          "size_bytes": 154874
+        }
+      ],
+      "correction_applied": false
+    },
+    {
+      "finding_id": "EB025-P2-007",
+      "reported_classification": "minor",
+      "reported_summary": "p5 (7): Leading quote asymmetry: `adicional”` without matching open quote in candidate.",
+      "disposition": "source_faithful",
+      "atlas_reason": "The visible definition7 begins Reinspección/Inspección adicional followed by a closing double-quote glyph without an opening counterpart. The candidate faithfully preserves the asymmetry. Do not add a missing opening quote.",
+      "evidence": [
+        {
+          "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/source-review/received/inputs/page-0005.png",
+          "sha256": "7973f1c1c514c2c4c3d82ba8637fdaebff9a6c63c82b75cbdcb52d9c2012cb35",
+          "size_bytes": 243842
+        },
+        {
+          "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/source-review/received/SOURCE_QA.json",
+          "sha256": "2372e6bde1fa544c56dbaed1a808a7389bf943006f8d2d4c65dd5fa10a8ad46f",
+          "size_bytes": 154874
+        }
+      ],
+      "correction_applied": false
+    },
+    {
+      "finding_id": "EB026-P2-001",
+      "reported_classification": "critical",
+      "reported_summary": "p3 Tesorero: Candidate/native splits CRS cite as `Sección 11-10.5-10 1, et seq.` Pass2 caption mediation expects continuous **11-10.5-101**. Extraction line-break defect.",
+      "disposition": "source_faithful",
+      "atlas_reason": "The p3 image visibly prints 11-10.5-10 1 on one line, matching native text. The internal space is source-owned; no extraction line break occurs at that point. Reject the proposed continuous-number correction. Any normalized citation belongs in a separate, explicitly inferred research field.",
+      "evidence": [
+        {
+          "path": "research/local_review/eb026-spanish-bylaws-source-qa-2026-09-13/source-review/crops/p3-140-370.png",
+          "sha256": "f70fda61fb0c3e2ecec8d93dec96f52a200fd24c93ca72916bba9d76e2c1baa8",
+          "size_bytes": 178938
+        },
+        {
+          "path": "research/local_review/eb026-spanish-bylaws-source-qa-2026-09-13/source-review/SOURCE_QA.json",
+          "sha256": "fff90226a2dd0c213b551f7f1345bfd87f1eabfd55107243a6c60c30e708a556",
+          "size_bytes": 191535
+        }
+      ],
+      "correction_applied": false
+    },
+    {
+      "finding_id": "EB026-P2-002",
+      "reported_classification": "critical",
+      "reported_summary": "p3 Tesorero: Candidate/native splits as `Sección 25-1-5 11, CRS` vs Pass2 caption **25-1-511**. Same class of mid-number break.",
+      "disposition": "source_faithful",
+      "atlas_reason": "The p3 image visibly prints 25-1-5 11 on one line, matching native text. The internal space is source-owned, not an extraction line break. Reject the proposed continuous-number correction without making any claim about the intended legal citation.",
+      "evidence": [
+        {
+          "path": "research/local_review/eb026-spanish-bylaws-source-qa-2026-09-13/source-review/crops/p3-140-370.png",
+          "sha256": "f70fda61fb0c3e2ecec8d93dec96f52a200fd24c93ca72916bba9d76e2c1baa8",
+          "size_bytes": 178938
+        },
+        {
+          "path": "research/local_review/eb026-spanish-bylaws-source-qa-2026-09-13/source-review/SOURCE_QA.json",
+          "sha256": "fff90226a2dd0c213b551f7f1345bfd87f1eabfd55107243a6c60c30e708a556",
+          "size_bytes": 191535
+        }
+      ],
+      "correction_applied": false
+    },
+    {
+      "finding_id": "EB026-P2-003",
+      "reported_classification": "minor",
+      "reported_summary": "p1 cover: Title stacks as `REGLAMENTO DEL PASO` / `JUNTA DE SALUD DEL CONDADO` in candidate **and** Pass1/Pass2 captions — **source anomaly** (odd Spanish stacking), not extractor invent. English footer `El Paso County Public Health` preserved.",
+      "disposition": "source_faithful",
+      "atlas_reason": "The stacked Spanish cover wording and English organization footer are visible as reported and retained. This is a source observation, not a minor extraction error.",
+      "evidence": [
+        {
+          "path": "research/local_review/eb026-spanish-bylaws-source-qa-2026-09-13/source-review/inputs/01-source-only/el-paso-boh-bylaws-spanish-sd011/page-0001.png",
+          "sha256": "1bb67efe46cb9d80a4ffcaae24f5905c47282b530e484a0d50adddf26dde308c",
+          "size_bytes": 111401
+        }
+      ],
+      "correction_applied": false
+    },
+    {
+      "finding_id": "EB026-P2-004",
+      "reported_classification": "minor",
+      "reported_summary": "p2 §1.1.A: `Junta del Condado Comisionados del Condado` awkward Spanish — appears in candidate; Pass1 flagged caption-awkward; treat as **source anomaly** pending Atlas pixels.",
+      "disposition": "source_faithful",
+      "atlas_reason": "The Junta del Condado Comisionados del Condado wording is visibly present in the organization paragraph and faithfully extracted. Do not edit its grammar.",
+      "evidence": [
+        {
+          "path": "research/local_review/eb026-spanish-bylaws-source-qa-2026-09-13/source-review/crops/p2-180-455.png",
+          "sha256": "a90d06373d3e24a5f4ef2b38e12ea3a5cb70bb4353b54f4474f6fd2aca6b822e",
+          "size_bytes": 193677
+        }
+      ],
+      "correction_applied": false
+    },
+    {
+      "finding_id": "EB026-P2-005",
+      "reported_classification": "minor",
+      "reported_summary": "p2 §1.1.C.1–3: `establecidos`/`establecido` duplication; `normas generales`/`Políticas` capitalization break — candidate matches Pass1 compression notes; **source anomaly**.",
+      "disposition": "source_faithful",
+      "atlas_reason": "The established/established repetition and normas generales followed by capitalized Políticas are source wording and layout, retained in the complete context. This is not an extraction substitution.",
+      "evidence": [
+        {
+          "path": "research/local_review/eb026-spanish-bylaws-source-qa-2026-09-13/source-review/inputs/01-source-only/el-paso-boh-bylaws-spanish-sd011/page-0002.png",
+          "sha256": "f67b1da6bf4d6c577d22926c3f3c61cd4c45a71fea047d5787ec44dc8a7721cd",
+          "size_bytes": 443978
+        },
+        {
+          "path": "research/local_review/eb026-spanish-bylaws-source-qa-2026-09-13/source-review/SOURCE_QA.json",
+          "sha256": "fff90226a2dd0c213b551f7f1345bfd87f1eabfd55107243a6c60c30e708a556",
+          "size_bytes": 191535
+        }
+      ],
+      "correction_applied": false
+    },
+    {
+      "finding_id": "EB026-P2-006",
+      "reported_classification": "minor",
+      "reported_summary": "p3 Secretario: Duplicated lead `El El Director Ejecutivo` — **source anomaly**.",
+      "disposition": "source_faithful",
+      "atlas_reason": "The repeated El at the end of one printed line and beginning of the next in the Secretary paragraph is visible. Keep both words.",
+      "evidence": [
+        {
+          "path": "research/local_review/eb026-spanish-bylaws-source-qa-2026-09-13/source-review/crops/p3-140-370.png",
+          "sha256": "f70fda61fb0c3e2ecec8d93dec96f52a200fd24c93ca72916bba9d76e2c1baa8",
+          "size_bytes": 178938
+        }
+      ],
+      "correction_applied": false
+    },
+    {
+      "finding_id": "EB026-P2-007",
+      "reported_classification": "minor",
+      "reported_summary": "p4 attendance: `Junta de Salud Comisionados del condado`; `su su continua` — **source anomalies**.",
+      "disposition": "source_faithful",
+      "atlas_reason": "The reported attendance/removal phrasing and repeated su are printed in the source. The surrounding consultation and recommendation limits remain attached, including the county commissioners sole removal authority.",
+      "evidence": [
+        {
+          "path": "research/local_review/eb026-spanish-bylaws-source-qa-2026-09-13/source-review/crops/p4-70-370.png",
+          "sha256": "0e9b4b1d7b49c96adba6c90eb849921c73ea04f86f5d95e680f9019c870fc075",
+          "size_bytes": 236322
+        }
+      ],
+      "correction_applied": false
+    },
+    {
+      "finding_id": "EB026-P2-008",
+      "reported_classification": "minor",
+      "reported_summary": "p4 §F: `Si, si no se da el consentimiento` stutter — **source anomaly**.",
+      "disposition": "source_faithful",
+      "atlas_reason": "Si, si no se da el consentimiento is visibly printed in the executive-session paragraph. Preserve it and the two-thirds consent condition; do not repair source grammar.",
+      "evidence": [
+        {
+          "path": "research/local_review/eb026-spanish-bylaws-source-qa-2026-09-13/source-review/crops/p4-375-670.png",
+          "sha256": "6c8bd76e6a18901c4b102983b47aef5d397b5373cd2a99d97c8fcab04bc2825c",
+          "size_bytes": 229413
+        }
+      ],
+      "correction_applied": false
+    },
+    {
+      "finding_id": "EB026-P2-009",
+      "reported_classification": "minor",
+      "reported_summary": "p5 §1.8: `deberán regirán` double finite verb — **source anomaly** (calqued Spanish).",
+      "disposition": "source_faithful",
+      "atlas_reason": "deberán regirán is visible in section1.8 and faithfully extracted. Preserve the source wording rather than silently choosing one verb.",
+      "evidence": [
+        {
+          "path": "research/local_review/eb026-spanish-bylaws-source-qa-2026-09-13/source-review/crops/p5-510-715.png",
+          "sha256": "954da859138cb93bef7bb4e395214d5ab62bc4823eb6cdd22ef96afad8af9cc0",
+          "size_bytes": 145653
+        }
+      ],
+      "correction_applied": false
+    }
+  ],
+  "critical_extraction_errors_accepted": 0,
+  "limitations": [
+    "This is a new post-report adjudication. Earlier accepted source reviews remain byte-identical and retain their original no-external-report exposure statements. Root has now read both full PASS2 reports and the custody/method audit.",
+    "Root earlier inspected all12 full source pages plus focused crops. During this reconciliation root re-opened the fee date clause, fee pages4/5, bylaws cover, p2 organization/officials, p3 Secretary/Treasurer, p4 attendance/executive-session and p5 parliamentary/amendment crops. Evidence references also bind earlier full source QA; they do not imply every referenced page was reopened in this later pass.",
+    "All124 delivered artifact bindings checked by the portable audit match, but no raw request/response trace or contemporaneous chat freeze receipt establishes historical procedure. Supporting reopen narratives bear later claimed times than parent completion. No historical execution order is inferred from file mtimes.",
+    "The EB026 pass1 executor mentions optional EnglishEB024 structural cross-check awareness despite packet instructions. Its mechanism/timing is unknown. Caption-assisted source-first or independent review is not certified. The now-retained original PDF does not prove a worker opened it earlier.",
+    "Original source PDFs, candidates, external reports and pre-report QA are unchanged. Reported severity counts are preserved separately from Atlas dispositions. There are no accepted critical extraction errors among these16 findings; this does not prove absence of all possible errors.",
+    "Fidelity is scoped to the exact Spanish PDFs and recorded contexts. Translation equivalence, effective dates, current law, signer identity and statewide completeness are not verified."
+  ],
+  "legal_currentness": "not_verified",
+  "translation_equivalence_verified": false,
+  "independent_grok_review_established": false,
+  "answer_safe": false
+}

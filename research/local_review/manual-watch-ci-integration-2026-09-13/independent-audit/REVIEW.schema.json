@@ -1,0 +1,250 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact retained ordinary file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "HistoricalSubset": {
+      "additionalProperties": false,
+      "description": "An exact one-file omission, never a claim that original closure still passes.",
+      "properties": {
+        "root": {
+          "const": "historical-audit",
+          "title": "Root",
+          "type": "string"
+        },
+        "original_manifest": {
+          "$ref": "#/$defs/Asset"
+        },
+        "excluded_original_members": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "maxItems": 1,
+          "minItems": 1,
+          "title": "Excluded Original Members",
+          "type": "array"
+        },
+        "complete_original_packet_retained": {
+          "const": false,
+          "title": "Complete Original Packet Retained",
+          "type": "boolean"
+        },
+        "historical_verifiers_must_not_be_executed": {
+          "const": true,
+          "title": "Historical Verifiers Must Not Be Executed",
+          "type": "boolean"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "root",
+        "original_manifest",
+        "excluded_original_members",
+        "complete_original_packet_retained",
+        "historical_verifiers_must_not_be_executed",
+        "reason"
+      ],
+      "title": "HistoricalSubset",
+      "type": "object"
+    },
+    "PinCheck": {
+      "additionalProperties": false,
+      "description": "Each final explicit repository dependency must exist in ordinary Git storage.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "tracked": {
+          "const": true,
+          "title": "Tracked",
+          "type": "boolean"
+        },
+        "lfs_filter": {
+          "const": "unspecified",
+          "title": "Lfs Filter",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes",
+        "tracked",
+        "lfs_filter"
+      ],
+      "title": "PinCheck",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Latest operational verdict supersedes the invalid88-pin checkout conclusion.",
+  "properties": {
+    "status": {
+      "const": "reviewed_prepared_only_no_runtime_blocker",
+      "title": "Status",
+      "type": "string"
+    },
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "historical": {
+      "$ref": "#/$defs/HistoricalSubset"
+    },
+    "corrected_runner": {
+      "$ref": "#/$defs/Asset"
+    },
+    "corrected_config": {
+      "$ref": "#/$defs/Asset"
+    },
+    "final_explicit_pin_count": {
+      "const": 87,
+      "title": "Final Explicit Pin Count",
+      "type": "integer"
+    },
+    "pin_checks": {
+      "items": {
+        "$ref": "#/$defs/PinCheck"
+      },
+      "maxItems": 87,
+      "minItems": 87,
+      "title": "Pin Checks",
+      "type": "array"
+    },
+    "source_selection_unchanged": {
+      "const": true,
+      "title": "Source Selection Unchanged",
+      "type": "boolean"
+    },
+    "excluded_file_present_in_sparse_copy": {
+      "const": false,
+      "title": "Excluded File Present In Sparse Copy",
+      "type": "boolean"
+    },
+    "actual_readiness_processes": {
+      "const": 4,
+      "title": "Actual Readiness Processes",
+      "type": "integer"
+    },
+    "focused_tests": {
+      "title": "Focused Tests",
+      "type": "integer"
+    },
+    "independent_tests": {
+      "title": "Independent Tests",
+      "type": "integer"
+    },
+    "schema_exports_match": {
+      "const": true,
+      "title": "Schema Exports Match",
+      "type": "boolean"
+    },
+    "corrections": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Corrections",
+      "type": "array"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "public_source_requests": {
+      "const": 0,
+      "title": "Public Source Requests",
+      "type": "integer"
+    },
+    "canonical_changes": {
+      "const": false,
+      "title": "Canonical Changes",
+      "type": "boolean"
+    },
+    "linux_execution_verified": {
+      "const": false,
+      "title": "Linux Execution Verified",
+      "type": "boolean"
+    },
+    "installed_or_enabled_by_audit": {
+      "const": false,
+      "title": "Installed Or Enabled By Audit",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "recorded_at",
+    "historical",
+    "corrected_runner",
+    "corrected_config",
+    "final_explicit_pin_count",
+    "pin_checks",
+    "source_selection_unchanged",
+    "excluded_file_present_in_sparse_copy",
+    "actual_readiness_processes",
+    "focused_tests",
+    "independent_tests",
+    "schema_exports_match",
+    "corrections",
+    "evidence",
+    "public_source_requests",
+    "canonical_changes",
+    "linux_execution_verified",
+    "installed_or_enabled_by_audit",
+    "legal_currentness",
+    "limitations"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

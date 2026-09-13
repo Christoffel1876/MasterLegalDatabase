@@ -1,0 +1,172 @@
+{
+  "assignment_id": "SH-EXT-004",
+  "reservations": [
+    {
+      "action_id": "SHEXT004-A001",
+      "authority_id": "CO-COUNTY-CHAFFEE",
+      "reserved_at": "2026-09-13T15:40:35.744719Z",
+      "tool_name": "mac_curl",
+      "action_kind": "open",
+      "requested_url": "https://www.chaffeecounty.org/departments/community_planning_natural_resources/application_forms_fees.php",
+      "search_query": null,
+      "basis": "TARGETS.json rank=1 parent=SHEXT003-A001 label='Application Forms & Fees' transformation=urljoin(first HTML base href, literal anchor href); percent-encode spaces preserving existing escapes",
+      "budget_checked": true
+    },
+    {
+      "action_id": "SHEXT004-A002",
+      "authority_id": "CO-COUNTY-CHAFFEE",
+      "reserved_at": "2026-09-13T15:40:36.828420Z",
+      "tool_name": "mac_curl",
+      "action_kind": "open",
+      "requested_url": "https://www.chaffeecounty.org/departments/building_department/applications_fees.php",
+      "search_query": null,
+      "basis": "TARGETS.json rank=2 parent=SHEXT003-A002 label='Applications & Fees' transformation=urljoin(first HTML base href, literal anchor href); percent-encode spaces preserving existing escapes",
+      "budget_checked": true
+    },
+    {
+      "action_id": "SHEXT004-A003",
+      "authority_id": "CO-COUNTY-CHAFFEE",
+      "reserved_at": "2026-09-13T15:40:37.876838Z",
+      "tool_name": "mac_curl",
+      "action_kind": "download",
+      "requested_url": "https://www.chaffeecounty.org/Documents/Departments/Building%20Department/Adopted%20Codes%20&%20Design%20Criteria/2026-02%20Ordinance%20Adopting%20the%20CWRC%20with%20Local%20Amendments_RECORDED.pdf?t=202606021136110",
+      "search_query": null,
+      "basis": "TARGETS.json rank=3 parent=SHEXT003-A002 label='2025 BOCC Ordinance 2026-02' transformation=urljoin(first HTML base href, literal anchor href); percent-encode spaces preserving existing escapes",
+      "budget_checked": true
+    },
+    {
+      "action_id": "SHEXT004-A004",
+      "authority_id": "CO-COUNTY-CHAFFEE",
+      "reserved_at": "2026-09-13T15:40:38.722541Z",
+      "tool_name": "mac_curl",
+      "action_kind": "download",
+      "requested_url": "https://www.chaffeecounty.org/2026-01%20Ordinance%20Chaffee%20County%20Electric%20Preferred%20Amendments_RECORDED.pdf?t=202608031134050",
+      "search_query": null,
+      "basis": "TARGETS.json rank=4 parent=SHEXT003-A002 label='2026 BOCC Ordinance 2026-01' transformation=urljoin(first HTML base href, literal anchor href); percent-encode spaces preserving existing escapes",
+      "budget_checked": true
+    }
+  ],
+  "results": [
+    {
+      "action_id": "SHEXT004-A001",
+      "finished_at": "2026-09-13T15:40:36.223033Z",
+      "time_unknown_reason": null,
+      "observed_final_url": "https://www.chaffeecounty.org/departments/community_planning_natural_resources/application_forms_fees.php",
+      "visible_redirect_urls": [],
+      "observed_http_status": 200,
+      "outcome": "response",
+      "body_role": "original_html",
+      "retained_assets": [
+        {
+          "path": "raw/SHEXT004-A001.html",
+          "sha256": "bdad2052d6747e3066b42c7a857f4905d52f9464c36213d905936e709962e625",
+          "size_bytes": 85120
+        },
+        {
+          "path": "headers/SHEXT004-A001.json",
+          "sha256": "234ddcab601a08411f0f4bd43606aaf8ca5caea279f805149853ab96741808ad",
+          "size_bytes": 726
+        }
+      ],
+      "body_sha256": "bdad2052d6747e3066b42c7a857f4905d52f9464c36213d905936e709962e625",
+      "pdf_magic_checked": true,
+      "pdf_parse_succeeded": false,
+      "physical_pages": null,
+      "notes": "curl_rc=0; max_time=90; max_bytes=20000000; loc_unfollowed=None; num_redirects=0; url_effective_meta='https://www.chaffeecounty.org/departments/community_planning_natural_resources/application_forms_fees.php'; parse_err=None",
+      "source_qa_status": "not_performed",
+      "body_size_basis": "retained_complete",
+      "observed_body_bytes": 85120
+    },
+    {
+      "action_id": "SHEXT004-A002",
+      "finished_at": "2026-09-13T15:40:37.195399Z",
+      "time_unknown_reason": null,
+      "observed_final_url": "https://www.chaffeecounty.org/departments/building_department/applications_fees.php",
+      "visible_redirect_urls": [],
+      "observed_http_status": 200,
+      "outcome": "response",
+      "body_role": "original_html",
+      "retained_assets": [
+        {
+          "path": "raw/SHEXT004-A002.html",
+          "sha256": "51d29dcca8700c13a1fe62aa871e4a77bc7b0793b6f1f5c51cb497c75bbb978d",
+          "size_bytes": 81160
+        },
+        {
+          "path": "headers/SHEXT004-A002.json",
+          "sha256": "3f87e60908e6c78e8e7ca73d0001b39761e8e5777693c42f8577bc1a64d9b3d4",
+          "size_bytes": 682
+        }
+      ],
+      "body_sha256": "51d29dcca8700c13a1fe62aa871e4a77bc7b0793b6f1f5c51cb497c75bbb978d",
+      "pdf_magic_checked": true,
+      "pdf_parse_succeeded": false,
+      "physical_pages": null,
+      "notes": "curl_rc=0; max_time=90; max_bytes=20000000; loc_unfollowed=None; num_redirects=0; url_effective_meta='https://www.chaffeecounty.org/departments/building_department/applications_fees.php'; parse_err=None",
+      "source_qa_status": "not_performed",
+      "body_size_basis": "retained_complete",
+      "observed_body_bytes": 81160
+    },
+    {
+      "action_id": "SHEXT004-A003",
+      "finished_at": "2026-09-13T15:40:38.168225Z",
+      "time_unknown_reason": null,
+      "observed_final_url": "https://www.chaffeecounty.org/Documents/Departments/Building%20Department/Adopted%20Codes%20&%20Design%20Criteria/2026-02%20Ordinance%20Adopting%20the%20CWRC%20with%20Local%20Amendments_RECORDED.pdf?t=202606021136110",
+      "visible_redirect_urls": [],
+      "observed_http_status": 302,
+      "outcome": "response",
+      "body_role": "unknown",
+      "retained_assets": [
+        {
+          "path": "raw/SHEXT004-A003.bin",
+          "sha256": "405cac7c193ed4338f0065abd00f220bc087411790f0c89bd5403b8cc338f5d6",
+          "size_bytes": 334
+        },
+        {
+          "path": "headers/SHEXT004-A003.json",
+          "sha256": "743916b2421d26189532920459866a97e7c8cfa8a0c3b09a593e28fbeeef97bc",
+          "size_bytes": 1583
+        }
+      ],
+      "body_sha256": "405cac7c193ed4338f0065abd00f220bc087411790f0c89bd5403b8cc338f5d6",
+      "pdf_magic_checked": true,
+      "pdf_parse_succeeded": false,
+      "physical_pages": null,
+      "notes": "curl_rc=0; max_time=90; max_bytes=20000000; loc_unfollowed='https://cms2.revize.com/revize/chaffeecounty/Documents/Departments/Building Department/Adopted Codes & Design Criteria/2026-02 Ordinance Adopting the CWRC with Local Amendments_RECORDED.pdf?t=202606021136110'; num_redirects=0; url_effective_meta='https://www.chaffeecounty.org/Documents/Departments/Building%20Department/Adopted%20Codes%20&%20Design%20Criteria/2026-02%20Ordinance%20Adopting%20the%20CWRC%20with%20Local%20Amendments_RECORDED.pdf?t=202606021136110'; parse_err=None",
+      "source_qa_status": "not_performed",
+      "body_size_basis": "retained_complete",
+      "observed_body_bytes": 334
+    },
+    {
+      "action_id": "SHEXT004-A004",
+      "finished_at": "2026-09-13T15:40:38.993366Z",
+      "time_unknown_reason": null,
+      "observed_final_url": "https://www.chaffeecounty.org/2026-01%20Ordinance%20Chaffee%20County%20Electric%20Preferred%20Amendments_RECORDED.pdf?t=202608031134050",
+      "visible_redirect_urls": [],
+      "observed_http_status": 302,
+      "outcome": "response",
+      "body_role": "unknown",
+      "retained_assets": [
+        {
+          "path": "raw/SHEXT004-A004.bin",
+          "sha256": "35504079c37e870057b11530fc9a3c23aca757b5f57e363c07d0caca8844059b",
+          "size_bytes": 261
+        },
+        {
+          "path": "headers/SHEXT004-A004.json",
+          "sha256": "8a59d077baa7f17c6b2588c2317498bde188c4e1ab4e0993d0c444a422e0762f",
+          "size_bytes": 1214
+        }
+      ],
+      "body_sha256": "35504079c37e870057b11530fc9a3c23aca757b5f57e363c07d0caca8844059b",
+      "pdf_magic_checked": true,
+      "pdf_parse_succeeded": false,
+      "physical_pages": null,
+      "notes": "curl_rc=0; max_time=90; max_bytes=20000000; loc_unfollowed='https://cms2.revize.com/revize/chaffeecounty/2026-01 Ordinance Chaffee County Electric Preferred Amendments_RECORDED.pdf?t=202608031134050'; num_redirects=0; url_effective_meta='https://www.chaffeecounty.org/2026-01%20Ordinance%20Chaffee%20County%20Electric%20Preferred%20Amendments_RECORDED.pdf?t=202608031134050'; parse_err=None",
+      "source_qa_status": "not_performed",
+      "body_size_basis": "retained_complete",
+      "observed_body_bytes": 261
+    }
+  ],
+  "hidden_network_requests_measured": false
+}

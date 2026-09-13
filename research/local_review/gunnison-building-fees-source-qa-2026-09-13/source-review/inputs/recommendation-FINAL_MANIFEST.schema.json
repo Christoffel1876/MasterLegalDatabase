@@ -1,0 +1,57 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "const": "FROZEN_READ_ONLY_RECOMMENDATION",
+      "title": "Status",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "excluded_from_inventory": {
+      "const": "FINAL_MANIFEST.json",
+      "title": "Excluded From Inventory",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "files",
+    "excluded_from_inventory"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

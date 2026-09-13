@@ -1,0 +1,192 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact ordinary-file identity in this closed packet.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Check": {
+      "additionalProperties": false,
+      "description": "One bounded expectation and its separately recorded result.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "expected": {
+          "title": "Expected",
+          "type": "string"
+        },
+        "outcome": {
+          "enum": [
+            "pending",
+            "pass",
+            "fail",
+            "not_executed"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "expected",
+        "outcome",
+        "evidence"
+      ],
+      "title": "Check",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "description": "Material issue or explicit residual limitation, with a reproducible anchor.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "blocker",
+            "qualification",
+            "no_issue"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "severity",
+        "statement",
+        "evidence"
+      ],
+      "title": "Finding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Preparation review only; never a live HTTP execution or installation receipt.",
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "stage": {
+      "enum": [
+        "expectations_before_draft",
+        "frozen_independent_review"
+      ],
+      "title": "Stage",
+      "type": "string"
+    },
+    "created_at": {
+      "title": "Created At",
+      "type": "string"
+    },
+    "inputs": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Inputs",
+      "type": "array"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/Check"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "canonical_changes": {
+      "const": false,
+      "title": "Canonical Changes",
+      "type": "boolean"
+    },
+    "scheduled_or_installed_by_audit": {
+      "const": false,
+      "title": "Scheduled Or Installed By Audit",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "stage",
+    "created_at",
+    "inputs",
+    "checks",
+    "findings",
+    "public_requests",
+    "canonical_changes",
+    "scheduled_or_installed_by_audit",
+    "legal_currentness",
+    "limitations"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

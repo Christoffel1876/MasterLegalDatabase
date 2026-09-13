@@ -1,0 +1,208 @@
+{
+  "$defs": {
+    "Output": {
+      "additionalProperties": false,
+      "description": "Hash a privately retained child stream without exposing its body.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "visibility": {
+          "const": "private_unreviewed_cli_output_not_public_payload",
+          "title": "Visibility",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes",
+        "visibility"
+      ],
+      "title": "Output",
+      "type": "object"
+    },
+    "Target": {
+      "additionalProperties": false,
+      "description": "Identify requested content without implying its availability.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "object_sha256": {
+          "title": "Object Sha256",
+          "type": "string"
+        },
+        "object_size_bytes": {
+          "title": "Object Size Bytes",
+          "type": "integer"
+        },
+        "pointer_sha256": {
+          "title": "Pointer Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "object_sha256",
+        "object_size_bytes",
+        "pointer_sha256"
+      ],
+      "title": "Target",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Keep actual execution timing distinct from unavailable protocol details.",
+  "properties": {
+    "schema_version": {
+      "const": "lfs-origin-escalated-dry-run-1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "finished_at": {
+      "title": "Finished At",
+      "type": "string"
+    },
+    "elapsed_seconds": {
+      "title": "Elapsed Seconds",
+      "type": "number"
+    },
+    "environment": {
+      "const": "require_escalated_authorized_sandbox_route_retry",
+      "title": "Environment",
+      "type": "string"
+    },
+    "command": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Command",
+      "type": "array"
+    },
+    "environment_overrides": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Environment Overrides",
+      "type": "object"
+    },
+    "requested_commit": {
+      "title": "Requested Commit",
+      "type": "string"
+    },
+    "targets": {
+      "items": {
+        "$ref": "#/$defs/Target"
+      },
+      "title": "Targets",
+      "type": "array"
+    },
+    "process_exit_code": {
+      "title": "Process Exit Code",
+      "type": "integer"
+    },
+    "timed_out": {
+      "title": "Timed Out",
+      "type": "boolean"
+    },
+    "status": {
+      "enum": [
+        "cli_success_requires_availability_review",
+        "failed_requires_sanitized_error_review"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "outputs": {
+      "items": {
+        "$ref": "#/$defs/Output"
+      },
+      "title": "Outputs",
+      "type": "array"
+    },
+    "retained_storage_file_count": {
+      "title": "Retained Storage File Count",
+      "type": "integer"
+    },
+    "retained_storage_bytes": {
+      "title": "Retained Storage Bytes",
+      "type": "integer"
+    },
+    "canonical_pointer_bytes_unchanged": {
+      "title": "Canonical Pointer Bytes Unchanged",
+      "type": "boolean"
+    },
+    "repository_config_bytes_unchanged": {
+      "title": "Repository Config Bytes Unchanged",
+      "type": "boolean"
+    },
+    "logical_cli_invocations": {
+      "const": 1,
+      "title": "Logical Cli Invocations",
+      "type": "integer"
+    },
+    "independent_object_downloads_attempted": {
+      "const": 0,
+      "title": "Independent Object Downloads Attempted",
+      "type": "integer"
+    },
+    "publisher_http_status": {
+      "title": "Publisher Http Status",
+      "type": "null"
+    },
+    "object_availability": {
+      "const": "not_inferred_from_cli_exit_alone",
+      "title": "Object Availability",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "started_at",
+    "finished_at",
+    "elapsed_seconds",
+    "environment",
+    "command",
+    "environment_overrides",
+    "requested_commit",
+    "targets",
+    "process_exit_code",
+    "timed_out",
+    "status",
+    "outputs",
+    "retained_storage_file_count",
+    "retained_storage_bytes",
+    "canonical_pointer_bytes_unchanged",
+    "repository_config_bytes_unchanged",
+    "logical_cli_invocations",
+    "independent_object_downloads_attempted",
+    "publisher_http_status",
+    "object_availability",
+    "limitations"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

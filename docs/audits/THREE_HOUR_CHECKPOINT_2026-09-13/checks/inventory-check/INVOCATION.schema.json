@@ -1,0 +1,86 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "enum": [
+        "full-tests",
+        "corpus-validation",
+        "inventory-check"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "argv": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Argv",
+      "type": "array"
+    },
+    "cwd": {
+      "title": "Cwd",
+      "type": "string"
+    },
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "input_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Input Files",
+      "type": "array"
+    },
+    "environment_overrides": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Environment Overrides",
+      "type": "object"
+    },
+    "boundary": {
+      "title": "Boundary",
+      "type": "string"
+    }
+  },
+  "required": [
+    "kind",
+    "argv",
+    "cwd",
+    "started_at",
+    "input_files",
+    "environment_overrides",
+    "boundary"
+  ],
+  "title": "Invocation",
+  "type": "object"
+}

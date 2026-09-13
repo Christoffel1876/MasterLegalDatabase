@@ -1,0 +1,84 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact retained ordinary file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Observed local checks; no acquisition or legal conclusion.",
+  "properties": {
+    "status": {
+      "const": "pass",
+      "title": "Status",
+      "type": "string"
+    },
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "test_count": {
+      "title": "Test Count",
+      "type": "integer"
+    },
+    "combined_branch_coverage_percent": {
+      "title": "Combined Branch Coverage Percent",
+      "type": "number"
+    },
+    "tested_code": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Tested Code",
+      "type": "array"
+    },
+    "checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "recorded_at",
+    "test_count",
+    "combined_branch_coverage_percent",
+    "tested_code",
+    "checks",
+    "limitations"
+  ],
+  "title": "ValidationReceipt",
+  "type": "object"
+}
