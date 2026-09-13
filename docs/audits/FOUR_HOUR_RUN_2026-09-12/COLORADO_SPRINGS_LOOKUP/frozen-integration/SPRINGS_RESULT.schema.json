@@ -1,0 +1,692 @@
+{
+  "$defs": {
+    "SpringsAsset": {
+      "additionalProperties": false,
+      "description": "Bind one exact file from the accepted Colorado Springs source package.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "SpringsAsset",
+      "type": "object"
+    },
+    "SpringsBlock": {
+      "additionalProperties": false,
+      "description": "Retain a complete context block, including definitions crossing physical pages.",
+      "properties": {
+        "block_id": {
+          "title": "Block Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "heading",
+            "definition",
+            "table_note",
+            "general_note",
+            "implementation",
+            "other_schedule_reference",
+            "printed_date",
+            "cover",
+            "contents",
+            "footer",
+            "native_whitespace"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "parts": {
+          "items": {
+            "$ref": "#/$defs/SpringsPart"
+          },
+          "minItems": 1,
+          "title": "Parts",
+          "type": "array"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "block_id",
+        "kind",
+        "parts",
+        "notes"
+      ],
+      "title": "SpringsBlock",
+      "type": "object"
+    },
+    "SpringsCell": {
+      "additionalProperties": false,
+      "description": "Retain a cell's reviewed label or fee role without inventing a currency or total.",
+      "properties": {
+        "page": {
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "line_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Line Ids",
+          "type": "array"
+        },
+        "exact_native_text": {
+          "title": "Exact Native Text",
+          "type": "string"
+        },
+        "native_ranges": {
+          "items": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "title": "Native Ranges",
+          "type": "array"
+        },
+        "pdf_bboxes": {
+          "items": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "title": "Pdf Bboxes",
+          "type": "array"
+        },
+        "pixel_bboxes": {
+          "items": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "title": "Pixel Bboxes",
+          "type": "array"
+        },
+        "native_file": {
+          "$ref": "#/$defs/SpringsAsset"
+        },
+        "page_image": {
+          "$ref": "#/$defs/SpringsAsset"
+        },
+        "text_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Text Sha256",
+          "type": "string"
+        },
+        "offset_basis": {
+          "const": "unchanged_physical_page_native_utf8_half_open",
+          "default": "unchanged_physical_page_native_utf8_half_open",
+          "title": "Offset Basis",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "label",
+            "fee_as_printed"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "page",
+        "line_ids",
+        "exact_native_text",
+        "native_ranges",
+        "pdf_bboxes",
+        "pixel_bboxes",
+        "native_file",
+        "page_image",
+        "text_sha256",
+        "role"
+      ],
+      "title": "SpringsCell",
+      "type": "object"
+    },
+    "SpringsPart": {
+      "additionalProperties": false,
+      "description": "Keep complete native lines, geometry and physical-page custody together.",
+      "properties": {
+        "page": {
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "line_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Line Ids",
+          "type": "array"
+        },
+        "exact_native_text": {
+          "title": "Exact Native Text",
+          "type": "string"
+        },
+        "native_ranges": {
+          "items": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "title": "Native Ranges",
+          "type": "array"
+        },
+        "pdf_bboxes": {
+          "items": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "title": "Pdf Bboxes",
+          "type": "array"
+        },
+        "pixel_bboxes": {
+          "items": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "title": "Pixel Bboxes",
+          "type": "array"
+        },
+        "native_file": {
+          "$ref": "#/$defs/SpringsAsset"
+        },
+        "page_image": {
+          "$ref": "#/$defs/SpringsAsset"
+        },
+        "text_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Text Sha256",
+          "type": "string"
+        },
+        "offset_basis": {
+          "const": "unchanged_physical_page_native_utf8_half_open",
+          "default": "unchanged_physical_page_native_utf8_half_open",
+          "title": "Offset Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "page",
+        "line_ids",
+        "exact_native_text",
+        "native_ranges",
+        "pdf_bboxes",
+        "pixel_bboxes",
+        "native_file",
+        "page_image",
+        "text_sha256"
+      ],
+      "title": "SpringsPart",
+      "type": "object"
+    },
+    "SpringsRow": {
+      "additionalProperties": false,
+      "description": "Carry both full cells and all recorded global, table and definition relationships.",
+      "properties": {
+        "row_id": {
+          "title": "Row Id",
+          "type": "string"
+        },
+        "table_id": {
+          "title": "Table Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 2,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "label": {
+          "$ref": "#/$defs/SpringsCell"
+        },
+        "fee_as_printed": {
+          "$ref": "#/$defs/SpringsCell"
+        },
+        "global_context_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Global Context Ids",
+          "type": "array"
+        },
+        "table_context_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Table Context Ids",
+          "type": "array"
+        },
+        "definition_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Definition Ids",
+          "type": "array"
+        },
+        "context_rule": {
+          "const": "Return the complete global context, linked table notes and definitions with this source row; conditions remain source wording, not an applicability decision.",
+          "title": "Context Rule",
+          "type": "string"
+        }
+      },
+      "required": [
+        "row_id",
+        "table_id",
+        "physical_page",
+        "label",
+        "fee_as_printed",
+        "global_context_ids",
+        "table_context_ids",
+        "definition_ids",
+        "context_rule"
+      ],
+      "title": "SpringsRow",
+      "type": "object"
+    },
+    "SpringsSourceBinding": {
+      "additionalProperties": false,
+      "description": "Separate accepted source acquisition, completed intake and legal-date claims.",
+      "properties": {
+        "source_id": {
+          "const": "colorado-springs-construction-fees-atlas-directed",
+          "default": "colorado-springs-construction-fees-atlas-directed",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "historical_review_source_id": {
+          "const": "SD014-02",
+          "default": "SD014-02",
+          "title": "Historical Review Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-MUNICIPAL-COLORADO_SPRINGS",
+          "default": "CO-MUNICIPAL-COLORADO_SPRINGS",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "issuer": {
+          "const": "Colorado Springs Fire Department, Division of the Fire Marshal",
+          "title": "Issuer",
+          "type": "string"
+        },
+        "collector_qualification": {
+          "title": "Collector Qualification",
+          "type": "string"
+        },
+        "source_role": {
+          "const": "fee_schedule_as_received",
+          "default": "fee_schedule_as_received",
+          "title": "Source Role",
+          "type": "string"
+        },
+        "pdf": {
+          "$ref": "#/$defs/SpringsAsset"
+        },
+        "review": {
+          "$ref": "#/$defs/SpringsAsset"
+        },
+        "manifest": {
+          "$ref": "#/$defs/SpringsAsset"
+        },
+        "acceptance": {
+          "$ref": "#/$defs/SpringsAsset"
+        },
+        "official_url": {
+          "title": "Official Url",
+          "type": "string"
+        },
+        "request_started_at": {
+          "format": "date-time",
+          "title": "Request Started At",
+          "type": "string"
+        },
+        "response_finished_at": {
+          "format": "date-time",
+          "title": "Response Finished At",
+          "type": "string"
+        },
+        "http_status": {
+          "const": 200,
+          "default": 200,
+          "title": "Http Status",
+          "type": "integer"
+        },
+        "redirect_count": {
+          "const": 0,
+          "default": 0,
+          "title": "Redirect Count",
+          "type": "integer"
+        },
+        "acquisition_method": {
+          "const": "Atlas direct ordinary HTTPS GET retained complete response",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "custody_receipts": {
+          "items": {
+            "$ref": "#/$defs/SpringsAsset"
+          },
+          "title": "Custody Receipts",
+          "type": "array"
+        },
+        "canonical_intake_verified": {
+          "const": true,
+          "default": true,
+          "title": "Canonical Intake Verified",
+          "type": "boolean"
+        },
+        "intake_received_at": {
+          "format": "date-time",
+          "title": "Intake Received At",
+          "type": "string"
+        },
+        "intake_id": {
+          "title": "Intake Id",
+          "type": "string"
+        },
+        "canonical_original": {
+          "$ref": "#/$defs/SpringsAsset"
+        },
+        "intake_evidence": {
+          "items": {
+            "$ref": "#/$defs/SpringsAsset"
+          },
+          "minItems": 4,
+          "title": "Intake Evidence",
+          "type": "array"
+        },
+        "intake_qualification": {
+          "const": "Completed canonical intake receipt and present original are verified. Historical proposal text remains unchanged; intake does not establish current law.",
+          "default": "Completed canonical intake receipt and present original are verified. Historical proposal text remains unchanged; intake does not establish current law.",
+          "title": "Intake Qualification",
+          "type": "string"
+        },
+        "printed_effective_date": {
+          "const": "07/01/2026",
+          "default": "07/01/2026",
+          "title": "Printed Effective Date",
+          "type": "string"
+        },
+        "effective_date_verification": {
+          "const": "printed_claim_only",
+          "default": "printed_claim_only",
+          "title": "Effective Date Verification",
+          "type": "string"
+        },
+        "adoption_verification": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Adoption Verification",
+          "type": "string"
+        },
+        "reviewed_at": {
+          "format": "date-time",
+          "title": "Reviewed At",
+          "type": "string"
+        },
+        "review_method": {
+          "title": "Review Method",
+          "type": "string"
+        },
+        "native_byte_count": {
+          "const": 14423,
+          "default": 14423,
+          "title": "Native Byte Count",
+          "type": "integer"
+        },
+        "native_line_count": {
+          "const": 410,
+          "default": 410,
+          "title": "Native Line Count",
+          "type": "integer"
+        },
+        "native_byte_basis": {
+          "title": "Native Byte Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "issuer",
+        "collector_qualification",
+        "pdf",
+        "review",
+        "manifest",
+        "acceptance",
+        "official_url",
+        "request_started_at",
+        "response_finished_at",
+        "acquisition_method",
+        "custody_receipts",
+        "intake_received_at",
+        "intake_id",
+        "canonical_original",
+        "intake_evidence",
+        "reviewed_at",
+        "review_method",
+        "native_byte_basis"
+      ],
+      "title": "SpringsSourceBinding",
+      "type": "object"
+    },
+    "SpringsTable": {
+      "additionalProperties": false,
+      "description": "Preserve the table's reviewed heading, row order and cross-page scope.",
+      "properties": {
+        "table_id": {
+          "title": "Table Id",
+          "type": "string"
+        },
+        "heading_block_id": {
+          "title": "Heading Block Id",
+          "type": "string"
+        },
+        "page_order": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Page Order",
+          "type": "array"
+        },
+        "row_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Row Ids",
+          "type": "array"
+        },
+        "column_roles": {
+          "const": "Unlabeled left description and right fee columns; roles are visual associations, not invented printed column headings.",
+          "title": "Column Roles",
+          "type": "string"
+        }
+      },
+      "required": [
+        "table_id",
+        "heading_block_id",
+        "page_order",
+        "row_ids",
+        "column_roles"
+      ],
+      "title": "SpringsTable",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Expose a fixed native source with mandatory context and no reliance promotion.",
+  "properties": {
+    "status": {
+      "enum": [
+        "matched",
+        "matched_context_only",
+        "no_matching_row",
+        "refused_current_law"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "colorado-springs-construction-fees-atlas-directed",
+      "default": "colorado-springs-construction-fees-atlas-directed",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "query": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Query"
+    },
+    "evidence_verified": {
+      "title": "Evidence Verified",
+      "type": "boolean"
+    },
+    "source": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SpringsSourceBinding"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/SpringsRow"
+      },
+      "maxItems": 128,
+      "title": "Rows",
+      "type": "array"
+    },
+    "technology_fee": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SpringsRow"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "tables": {
+      "items": {
+        "$ref": "#/$defs/SpringsTable"
+      },
+      "maxItems": 9,
+      "title": "Tables",
+      "type": "array"
+    },
+    "context": {
+      "items": {
+        "$ref": "#/$defs/SpringsBlock"
+      },
+      "title": "Context",
+      "type": "array"
+    },
+    "matched_context_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Matched Context Ids",
+      "type": "array"
+    },
+    "global_context_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Global Context Ids",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "boundary": {
+      "default": "Source-only lookup in one accepted seven-page municipal Construction Services schedule with 128 rows. Complete global qualifications and linked source definitions accompany each result; links do not decide applicability. No arithmetic, current-law or adoption claim is made. No match does not establish free, exempt or unregulated activity. The separate Code Services schedule is outside this lookup.",
+      "title": "Boundary",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "adoption_date": {
+      "default": null,
+      "title": "Adoption Date",
+      "type": "null"
+    },
+    "effective_date": {
+      "default": null,
+      "title": "Effective Date",
+      "type": "null"
+    }
+  },
+  "required": [
+    "status",
+    "query",
+    "evidence_verified",
+    "rows",
+    "tables",
+    "context",
+    "matched_context_ids",
+    "global_context_ids",
+    "observations"
+  ],
+  "title": "SpringsLookupResult",
+  "type": "object"
+}

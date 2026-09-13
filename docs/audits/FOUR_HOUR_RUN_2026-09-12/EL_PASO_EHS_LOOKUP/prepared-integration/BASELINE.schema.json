@@ -1,0 +1,49 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "captured_at": {
+      "format": "date-time",
+      "title": "Captured At",
+      "type": "string"
+    },
+    "production_files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Production Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "captured_at",
+    "production_files"
+  ],
+  "title": "Capture",
+  "type": "object"
+}

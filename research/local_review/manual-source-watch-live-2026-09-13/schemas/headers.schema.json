@@ -1,0 +1,37 @@
+{
+  "additionalProperties": false,
+  "description": "Only selected public response fields; no cookie/authentication values.",
+  "properties": {
+    "headers": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Headers",
+      "type": "object"
+    },
+    "rejected_fields": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rejected Fields",
+      "type": "array"
+    },
+    "request_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Request Url"
+    }
+  },
+  "required": [
+    "headers"
+  ],
+  "title": "HeaderRecord",
+  "type": "object"
+}

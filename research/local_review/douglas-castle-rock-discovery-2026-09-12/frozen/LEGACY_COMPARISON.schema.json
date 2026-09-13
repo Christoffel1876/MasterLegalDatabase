@@ -1,0 +1,246 @@
+{
+  "$defs": {
+    "LegacyMatch": {
+      "additionalProperties": false,
+      "description": "One exact full-manifest line matching a current request or body digest.",
+      "properties": {
+        "line_number": {
+          "title": "Line Number",
+          "type": "integer"
+        },
+        "line_sha256": {
+          "title": "Line Sha256",
+          "type": "string"
+        },
+        "source_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Id"
+        },
+        "authority_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Authority Id"
+        },
+        "source_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Url"
+        },
+        "requested_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Requested Url"
+        },
+        "final_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Final Url"
+        },
+        "historical_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Historical Sha256"
+        },
+        "matching_event_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Matching Event Ids",
+          "type": "array"
+        },
+        "match_fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Match Fields",
+          "type": "array"
+        },
+        "historical_raw_path_claim": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Historical Raw Path Claim"
+        }
+      },
+      "required": [
+        "line_number",
+        "line_sha256",
+        "source_id",
+        "authority_id",
+        "source_url",
+        "requested_url",
+        "final_url",
+        "historical_sha256",
+        "matching_event_ids",
+        "match_fields",
+        "historical_raw_path_claim"
+      ],
+      "title": "LegacyMatch",
+      "type": "object"
+    },
+    "RawSizeCandidate": {
+      "additionalProperties": false,
+      "description": "Actual locally present raw bytes checked by matching size, not a path guess.",
+      "properties": {
+        "repository_relative_path": {
+          "title": "Repository Relative Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "title": "Bytes",
+          "type": "integer"
+        },
+        "identical_event_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Identical Event Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "repository_relative_path",
+        "sha256",
+        "bytes",
+        "identical_event_ids"
+      ],
+      "title": "RawSizeCandidate",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "An exact retained local file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Full-stream baseline comparisons and bounded local raw digest checks.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "legacy_manifest": {
+      "$ref": "#/$defs/Ref"
+    },
+    "streamed_rows": {
+      "const": 48390,
+      "title": "Streamed Rows",
+      "type": "integer"
+    },
+    "authority_selected_rows": {
+      "const": 33,
+      "title": "Authority Selected Rows",
+      "type": "integer"
+    },
+    "matches": {
+      "items": {
+        "$ref": "#/$defs/LegacyMatch"
+      },
+      "title": "Matches",
+      "type": "array"
+    },
+    "actual_raw_size_candidates": {
+      "items": {
+        "$ref": "#/$defs/RawSizeCandidate"
+      },
+      "title": "Actual Raw Size Candidates",
+      "type": "array"
+    },
+    "absent_pdf_legacy_digest_matches": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Absent Pdf Legacy Digest Matches",
+      "type": "array"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "legacy_manifest",
+    "streamed_rows",
+    "authority_selected_rows",
+    "matches",
+    "actual_raw_size_candidates",
+    "absent_pdf_legacy_digest_matches",
+    "limits"
+  ],
+  "title": "Comparison",
+  "type": "object"
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "reviewer": "Atlas",
+  "verified_at": "2026-09-12T23:57:39.009725Z",
+  "status": "accepted_custody_only",
+  "receipt": {
+    "path": "prepared-transaction/execution/RECEIPT.json",
+    "sha256": "59efef8ab0b90059004f85054acca3b82bcf613c34eaaba20b37d5a521b8d5ff",
+    "size_bytes": 10770
+  },
+  "intent": {
+    "path": "prepared-transaction/execution/INTENT.json",
+    "sha256": "fa9ab7c7a44b2836a8f2fd149472bdf52b872828a21794ee8d903faceebe70ce",
+    "size_bytes": 9301
+  },
+  "actual_repository_received_at": "2026-09-12T23:56:16.492216Z",
+  "raw_records": 61,
+  "ledger_records": 62,
+  "missing_historical_intake_ids": [
+    "MSI-20260707T221329208329Z-EO-2019-007"
+  ],
+  "checks": [
+    "Root read all 624 transaction lines, 486 test lines and complete portable validator.",
+    "Root portable preparation validation passed, binding 105 inventoried payloads and 56 recorded passing tests.",
+    "Root actual read-only dry run passed before apply with no repository writes.",
+    "Root actual apply and separate verification returned verified_complete, 61 raw and 62 ledger records.",
+    "Exact original 59 raw and 60 ledger byte prefixes, same 5927-byte suffix, source hashes and preimages verified.",
+    "Final reconciliation is a no-op; no source registry, policy, code or legal status was promoted."
+  ],
+  "limitations": [
+    "Acquisition at 23:10 UTC is distinct from actual repository intake at 23:56 UTC.",
+    "Source-printed dates do not establish current legal effect; older Code Services numeric tables are not fully reviewed.",
+    "Process interruption/replay tested; abrupt power-loss durability not established.",
+    "Full corpus validation is a separate checkpoint operation, not claimed by this custody acceptance.",
+    "Prepared transaction retains historical paths and must not be executed from this relocated evidence copy; use validate_package.py only."
+  ],
+  "legal_currentness": "not_verified",
+  "answer_safe": false
+}

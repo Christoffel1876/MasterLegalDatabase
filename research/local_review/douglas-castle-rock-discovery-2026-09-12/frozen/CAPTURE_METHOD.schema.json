@@ -1,0 +1,107 @@
+{
+  "$defs": {
+    "MethodPeriod": {
+      "additionalProperties": false,
+      "description": "The preserved helper version used for a contiguous event range.",
+      "properties": {
+        "first_event": {
+          "title": "First Event",
+          "type": "string"
+        },
+        "last_event": {
+          "title": "Last Event",
+          "type": "string"
+        },
+        "script": {
+          "$ref": "#/$defs/Ref"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "first_event",
+        "last_event",
+        "script",
+        "qualification"
+      ],
+      "title": "MethodPeriod",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "An exact retained local file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Provenance of helper changes and later parent-reported checkpoints.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "capture_versions": {
+      "items": {
+        "$ref": "#/$defs/MethodPeriod"
+      },
+      "title": "Capture Versions",
+      "type": "array"
+    },
+    "latest_parent_reported_head": {
+      "title": "Latest Parent Reported Head",
+      "type": "string"
+    },
+    "parent_reported_raw_rows": {
+      "const": 59,
+      "title": "Parent Reported Raw Rows",
+      "type": "integer"
+    },
+    "parent_reported_ledger_rows": {
+      "const": 60,
+      "title": "Parent Reported Ledger Rows",
+      "type": "integer"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "capture_versions",
+    "latest_parent_reported_head",
+    "parent_reported_raw_rows",
+    "parent_reported_ledger_rows",
+    "limits"
+  ],
+  "title": "MethodReceipt",
+  "type": "object"
+}

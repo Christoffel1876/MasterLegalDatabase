@@ -1,0 +1,160 @@
+{
+  "$defs": {
+    "Availability": {
+      "additionalProperties": false,
+      "description": "One recorded original's actual local hash check, not transcription review.",
+      "properties": {
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "hash_verified",
+            "unavailable_or_mismatch"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Reason"
+        }
+      },
+      "required": [
+        "record_id",
+        "status",
+        "reason"
+      ],
+      "title": "Availability",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Immutable confined local evidence identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Separate preservation, explicit selection, finite checks and recurring deployment.",
+  "properties": {
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "selection": {
+      "$ref": "#/$defs/Ref"
+    },
+    "manual_manifest": {
+      "$ref": "#/$defs/Ref"
+    },
+    "manual_pdf_records": {
+      "title": "Manual Pdf Records",
+      "type": "integer"
+    },
+    "locally_hash_verified_pdf_originals": {
+      "title": "Locally Hash Verified Pdf Originals",
+      "type": "integer"
+    },
+    "unavailable_or_mismatch": {
+      "items": {
+        "$ref": "#/$defs/Availability"
+      },
+      "title": "Unavailable Or Mismatch",
+      "type": "array"
+    },
+    "configured_sources": {
+      "title": "Configured Sources",
+      "type": "integer"
+    },
+    "configured_source_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Configured Source Ids",
+      "type": "array"
+    },
+    "unselected_manual_pdf_records": {
+      "title": "Unselected Manual Pdf Records",
+      "type": "integer"
+    },
+    "accepted_prior_finite_live_source_checks": {
+      "title": "Accepted Prior Finite Live Source Checks",
+      "type": "integer"
+    },
+    "prior_live_checked_at": {
+      "format": "date-time",
+      "title": "Prior Live Checked At",
+      "type": "string"
+    },
+    "recurring_deployment": {
+      "const": "not_deployed_by_this_feature",
+      "title": "Recurring Deployment",
+      "type": "string"
+    },
+    "existing_collectors": {
+      "const": "Register, CCR and county collectors unchanged by this feature",
+      "title": "Existing Collectors",
+      "type": "string"
+    },
+    "fixed_urls_find_new_editions_elsewhere": {
+      "const": false,
+      "default": false,
+      "title": "Fixed Urls Find New Editions Elsewhere",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "generated_at",
+    "selection",
+    "manual_manifest",
+    "manual_pdf_records",
+    "locally_hash_verified_pdf_originals",
+    "unavailable_or_mismatch",
+    "configured_sources",
+    "configured_source_ids",
+    "unselected_manual_pdf_records",
+    "accepted_prior_finite_live_source_checks",
+    "prior_live_checked_at",
+    "recurring_deployment",
+    "existing_collectors"
+  ],
+  "title": "Readiness",
+  "type": "object"
+}

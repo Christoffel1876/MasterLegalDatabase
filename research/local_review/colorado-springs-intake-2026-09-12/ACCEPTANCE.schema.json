@@ -1,0 +1,119 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "reviewer": {
+      "const": "Atlas",
+      "default": "Atlas",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "verified_at": {
+      "title": "Verified At",
+      "type": "string"
+    },
+    "status": {
+      "const": "accepted_custody_only",
+      "default": "accepted_custody_only",
+      "title": "Status",
+      "type": "string"
+    },
+    "receipt": {
+      "$ref": "#/$defs/Asset"
+    },
+    "intent": {
+      "$ref": "#/$defs/Asset"
+    },
+    "actual_repository_received_at": {
+      "title": "Actual Repository Received At",
+      "type": "string"
+    },
+    "raw_records": {
+      "const": 61,
+      "default": 61,
+      "title": "Raw Records",
+      "type": "integer"
+    },
+    "ledger_records": {
+      "const": 62,
+      "default": 62,
+      "title": "Ledger Records",
+      "type": "integer"
+    },
+    "missing_historical_intake_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Historical Intake Ids",
+      "type": "array"
+    },
+    "checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "verified_at",
+    "receipt",
+    "intent",
+    "actual_repository_received_at",
+    "missing_historical_intake_ids",
+    "checks",
+    "limitations"
+  ],
+  "title": "Acceptance",
+  "type": "object"
+}

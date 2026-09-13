@@ -1,0 +1,94 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "reviewer": {
+      "const": "Atlas",
+      "default": "Atlas",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "verified_at": {
+      "title": "Verified At",
+      "type": "string"
+    },
+    "status": {
+      "const": "accepted_public_discovery_evidence",
+      "default": "accepted_public_discovery_evidence",
+      "title": "Status",
+      "type": "string"
+    },
+    "package_path": {
+      "title": "Package Path",
+      "type": "string"
+    },
+    "manifest_sha256": {
+      "title": "Manifest Sha256",
+      "type": "string"
+    },
+    "original_manifest_sha256": {
+      "title": "Original Manifest Sha256",
+      "type": "string"
+    },
+    "copied_files": {
+      "title": "Copied Files",
+      "type": "integer"
+    },
+    "omitted_private_headers": {
+      "const": 31,
+      "default": 31,
+      "title": "Omitted Private Headers",
+      "type": "integer"
+    },
+    "root_direct_image_views": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Root Direct Image Views",
+      "type": "array"
+    },
+    "checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "verified_at",
+    "package_path",
+    "manifest_sha256",
+    "original_manifest_sha256",
+    "copied_files",
+    "root_direct_image_views",
+    "checks",
+    "limitations"
+  ],
+  "title": "Acceptance",
+  "type": "object"
+}

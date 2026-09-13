@@ -1,0 +1,119 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "An exact retained local file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "captured_at": {
+      "format": "date-time",
+      "title": "Captured At",
+      "type": "string"
+    },
+    "earlier_observed_head": {
+      "title": "Earlier Observed Head",
+      "type": "string"
+    },
+    "earlier_observation_time": {
+      "default": null,
+      "title": "Earlier Observation Time",
+      "type": "null"
+    },
+    "head_at_copy": {
+      "title": "Head At Copy",
+      "type": "string"
+    },
+    "git_commands_used": {
+      "default": false,
+      "title": "Git Commands Used",
+      "type": "boolean"
+    },
+    "working_file_commit_equality": {
+      "title": "Working File Commit Equality",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "jsonl_row_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Jsonl Row Counts",
+      "type": "object"
+    },
+    "lfs_pointers": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Lfs Pointers",
+      "type": "object"
+    },
+    "authority_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Authority Ids",
+      "type": "array"
+    },
+    "selected_legacy_rows": {
+      "title": "Selected Legacy Rows",
+      "type": "integer"
+    },
+    "selected_rows_basis": {
+      "title": "Selected Rows Basis",
+      "type": "string"
+    },
+    "notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Notes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "captured_at",
+    "earlier_observed_head",
+    "head_at_copy",
+    "working_file_commit_equality",
+    "files",
+    "jsonl_row_counts",
+    "lfs_pointers",
+    "authority_ids",
+    "selected_legacy_rows",
+    "selected_rows_basis",
+    "notes"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

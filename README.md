@@ -116,7 +116,8 @@ Three research commands expose the reviewed source material with its page refere
 original wording and qualifications:
 
 - [Local fee-source lookup](docs/RESEARCH_SOURCE_LOOKUP.md): keyword searches within
-  selected fee tables from Grand Junction, Greeley and Weld County.
+  selected fee tables from Grand Junction, Greeley, Weld County, Colorado Springs
+  and the El Paso County Board of Health English schedule.
 - [El Paso scanned-fee lookup](docs/RESEARCH_SCANNED_FEE_LOOKUP.md): 104 planning-fee
   rows with their complete notes, image references and unresolved clipped text.
 - [CRS passage lookup](docs/CRS_SOURCE_LOOKUP.md): three reviewed sections from the
@@ -148,6 +149,11 @@ The [county source recovery pilot](docs/COUNTY_REACQUISITION_PILOT.md) preserves
 four official catalogs and 30 selected Jefferson/Clear Creek documents through
 an explicit manifest and a separate daily review workflow. Its source evidence
 does not replace missing historical county records or establish complete coverage.
+
+The [manual PDF source watch](docs/MANUAL_SOURCE_WATCH.md) provides an offline
+readiness report and an explicit finite check of two preserved Colorado Springs
+PDFs. It records byte changes and failures for review. It is not scheduled, and
+the other manual originals are outside this selection.
 
 For the daily Colorado Register refresh, start with the
 [pilot setup and activation guide](docs/DAILY_REGISTER_PILOT.md). It provides a

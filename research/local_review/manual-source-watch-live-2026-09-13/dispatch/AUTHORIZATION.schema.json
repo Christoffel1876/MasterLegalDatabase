@@ -1,0 +1,108 @@
+{
+  "$defs": {
+    "Pin": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Pin",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "run_name": {
+      "title": "Run Name",
+      "type": "string"
+    },
+    "purpose": {
+      "title": "Purpose",
+      "type": "string"
+    },
+    "basis": {
+      "title": "Basis",
+      "type": "string"
+    },
+    "pins": {
+      "items": {
+        "$ref": "#/$defs/Pin"
+      },
+      "title": "Pins",
+      "type": "array"
+    },
+    "selected_urls": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Selected Urls",
+      "type": "array"
+    },
+    "max_events": {
+      "const": 4,
+      "default": 4,
+      "title": "Max Events",
+      "type": "integer"
+    },
+    "max_bytes": {
+      "const": 4000000,
+      "default": 4000000,
+      "title": "Max Bytes",
+      "type": "integer"
+    },
+    "max_run_seconds": {
+      "const": 300,
+      "default": 300,
+      "title": "Max Run Seconds",
+      "type": "integer"
+    },
+    "public_requests_before_dispatch": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Requests Before Dispatch",
+      "type": "integer"
+    },
+    "scheduling": {
+      "const": "not_deployed",
+      "default": "not_deployed",
+      "title": "Scheduling",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "run_name",
+    "purpose",
+    "basis",
+    "pins",
+    "selected_urls"
+  ],
+  "title": "Auth",
+  "type": "object"
+}

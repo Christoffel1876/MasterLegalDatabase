@@ -1,0 +1,92 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "reviewer": {
+      "const": "Atlas",
+      "default": "Atlas",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "verified_at": {
+      "title": "Verified At",
+      "type": "string"
+    },
+    "status": {
+      "const": "accepted_later_http_custody_only",
+      "default": "accepted_later_http_custody_only",
+      "title": "Status",
+      "type": "string"
+    },
+    "package_path": {
+      "title": "Package Path",
+      "type": "string"
+    },
+    "manifest_sha256": {
+      "title": "Manifest Sha256",
+      "type": "string"
+    },
+    "preservation_sha256": {
+      "title": "Preservation Sha256",
+      "type": "string"
+    },
+    "source_count": {
+      "const": 3,
+      "default": 3,
+      "title": "Source Count",
+      "type": "integer"
+    },
+    "public_get_count": {
+      "const": 4,
+      "default": 4,
+      "title": "Public Get Count",
+      "type": "integer"
+    },
+    "copied_files": {
+      "title": "Copied Files",
+      "type": "integer"
+    },
+    "checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "verified_at",
+    "package_path",
+    "manifest_sha256",
+    "preservation_sha256",
+    "copied_files",
+    "checks",
+    "limitations"
+  ],
+  "title": "Acceptance",
+  "type": "object"
+}

@@ -1,0 +1,57 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "const": "PREPARED_NOT_APPLIED",
+      "title": "Status",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "exclusions": {
+      "const": "FINAL_MANIFEST.json and FINAL_MANIFEST.schema.json only. Frozen review metadata may refer to external full QA packages explicitly not duplicated here.",
+      "title": "Exclusions",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "files",
+    "exclusions"
+  ],
+  "title": "Inventory",
+  "type": "object"
+}

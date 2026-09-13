@@ -1,0 +1,122 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "captured_at": {
+      "title": "Captured At",
+      "type": "string"
+    },
+    "status": {
+      "const": "accepted_finite_maintained_live_check_not_recurring",
+      "title": "Status",
+      "type": "string"
+    },
+    "source_runtime": {
+      "title": "Source Runtime",
+      "type": "string"
+    },
+    "dispatch_at": {
+      "title": "Dispatch At",
+      "type": "string"
+    },
+    "completed_at": {
+      "title": "Completed At",
+      "type": "string"
+    },
+    "actual_request_count": {
+      "const": 2,
+      "default": 2,
+      "title": "Actual Request Count",
+      "type": "integer"
+    },
+    "actual_retained_bytes": {
+      "const": 421075,
+      "default": 421075,
+      "title": "Actual Retained Bytes",
+      "type": "integer"
+    },
+    "source_outcomes": {
+      "items": {
+        "const": "unchanged",
+        "type": "string"
+      },
+      "title": "Source Outcomes",
+      "type": "array"
+    },
+    "fixed_sources": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Fixed Sources",
+      "type": "array"
+    },
+    "preserved_files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Preserved Files",
+      "type": "array"
+    },
+    "root_checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Root Checks",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "captured_at",
+    "status",
+    "source_runtime",
+    "dispatch_at",
+    "completed_at",
+    "source_outcomes",
+    "fixed_sources",
+    "preserved_files",
+    "root_checks",
+    "limitations"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

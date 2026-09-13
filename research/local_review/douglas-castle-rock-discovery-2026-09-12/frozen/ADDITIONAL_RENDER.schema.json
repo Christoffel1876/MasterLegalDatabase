@@ -1,0 +1,63 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "An exact retained local file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One complete physical page rendered after structural inspection.",
+  "properties": {
+    "event_id": {
+      "title": "Event Id",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Ref"
+    },
+    "physical_page": {
+      "title": "Physical Page",
+      "type": "integer"
+    },
+    "render_dpi": {
+      "const": 150,
+      "title": "Render Dpi",
+      "type": "integer"
+    },
+    "render": {
+      "$ref": "#/$defs/Ref"
+    }
+  },
+  "required": [
+    "event_id",
+    "source",
+    "physical_page",
+    "render_dpi",
+    "render"
+  ],
+  "title": "AdditionalRender",
+  "type": "object"
+}

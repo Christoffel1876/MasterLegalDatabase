@@ -1,0 +1,77 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "One exact package-relative original or derived file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A closed package; the manifest JSON alone is excluded from its own inventory.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "frozen_at": {
+      "format": "date-time",
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "self_excluded": {
+      "const": "FINAL_MANIFEST.json",
+      "title": "Self Excluded",
+      "type": "string"
+    },
+    "status": {
+      "const": "source_qa_portable_pending_intake",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "frozen_at",
+    "files",
+    "self_excluded",
+    "status",
+    "legal_currentness"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

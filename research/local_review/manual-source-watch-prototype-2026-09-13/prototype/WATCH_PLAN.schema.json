@@ -1,0 +1,291 @@
+{
+  "$defs": {
+    "Limits": {
+      "additionalProperties": false,
+      "description": "Narrow limits for two small existing PDFs; redirects consume request capacity.",
+      "properties": {
+        "requests": {
+          "default": 4,
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Requests",
+          "type": "integer"
+        },
+        "distinct_urls": {
+          "default": 4,
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Distinct Urls",
+          "type": "integer"
+        },
+        "redirects_per_source": {
+          "default": 1,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Redirects Per Source",
+          "type": "integer"
+        },
+        "bytes_per_source": {
+          "default": 2000000,
+          "maximum": 2000000,
+          "minimum": 1,
+          "title": "Bytes Per Source",
+          "type": "integer"
+        },
+        "total_bytes": {
+          "default": 4000000,
+          "maximum": 4000000,
+          "minimum": 1,
+          "title": "Total Bytes",
+          "type": "integer"
+        },
+        "request_seconds": {
+          "default": 30,
+          "maximum": 30,
+          "minimum": 1,
+          "title": "Request Seconds",
+          "type": "integer"
+        }
+      },
+      "title": "Limits",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Immutable confined local evidence identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "Target": {
+      "additionalProperties": false,
+      "description": "A fixed official URL and verified previous source bytes, without legal status.",
+      "properties": {
+        "source_id": {
+          "pattern": "^SD014-0[1-2]$",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "parent_priority_id": {
+          "title": "Parent Priority Id",
+          "type": "string"
+        },
+        "parent_url": {
+          "title": "Parent Url",
+          "type": "string"
+        },
+        "parent_html": {
+          "$ref": "#/$defs/Ref"
+        },
+        "element": {
+          "const": "iframe_data_src_and_pdfjs_file",
+          "title": "Element",
+          "type": "string"
+        },
+        "original_attribute": {
+          "title": "Original Attribute",
+          "type": "string"
+        },
+        "viewer_src": {
+          "title": "Viewer Src",
+          "type": "string"
+        },
+        "encoded_file_argument": {
+          "title": "Encoded File Argument",
+          "type": "string"
+        },
+        "transformation": {
+          "const": "read data-src; percent-decode viewer file argument once; exact compare",
+          "title": "Transformation",
+          "type": "string"
+        },
+        "iframe_title": {
+          "title": "Iframe Title",
+          "type": "string"
+        },
+        "document_heading": {
+          "title": "Document Heading",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "canonical_source_id": {
+          "title": "Canonical Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-MUNICIPAL-COLORADO_SPRINGS",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "baseline": {
+          "$ref": "#/$defs/Ref"
+        },
+        "baseline_page_count": {
+          "const": 7,
+          "title": "Baseline Page Count",
+          "type": "integer"
+        },
+        "baseline_request_started_at": {
+          "format": "date-time",
+          "title": "Baseline Request Started At",
+          "type": "string"
+        },
+        "baseline_response_finished_at": {
+          "format": "date-time",
+          "title": "Baseline Response Finished At",
+          "type": "string"
+        },
+        "repository_received_at": {
+          "default": null,
+          "title": "Repository Received At",
+          "type": "null"
+        },
+        "repository_time_basis": {
+          "const": "not_yet_received_at_prototype_preparation",
+          "title": "Repository Time Basis",
+          "type": "string"
+        },
+        "source_context": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Context",
+          "type": "array"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "parent_priority_id",
+        "parent_url",
+        "parent_html",
+        "element",
+        "original_attribute",
+        "viewer_src",
+        "encoded_file_argument",
+        "transformation",
+        "iframe_title",
+        "document_heading",
+        "url",
+        "canonical_source_id",
+        "authority_id",
+        "baseline",
+        "baseline_page_count",
+        "baseline_request_started_at",
+        "baseline_response_finished_at",
+        "repository_time_basis",
+        "source_context"
+      ],
+      "title": "Target",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One proposed finite invocation; scheduling and canonical updates are excluded.",
+  "properties": {
+    "status": {
+      "const": "PREPARED_NOT_DISPATCHED",
+      "title": "Status",
+      "type": "string"
+    },
+    "targets": {
+      "items": {
+        "$ref": "#/$defs/Target"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Targets",
+      "type": "array"
+    },
+    "limits": {
+      "$ref": "#/$defs/Limits"
+    },
+    "custody_scope": {
+      "$ref": "#/$defs/Ref"
+    },
+    "custody_manifest": {
+      "$ref": "#/$defs/Ref"
+    },
+    "proposed_finish_by": {
+      "format": "date-time",
+      "title": "Proposed Finish By",
+      "type": "string"
+    },
+    "no_new_source_at": {
+      "format": "date-time",
+      "title": "No New Source At",
+      "type": "string"
+    },
+    "hard_stop": {
+      "format": "date-time",
+      "title": "Hard Stop",
+      "type": "string"
+    },
+    "max_run_seconds": {
+      "const": 300,
+      "default": 300,
+      "title": "Max Run Seconds",
+      "type": "integer"
+    },
+    "cadence_proposal": {
+      "const": "daily_after_separate_deployment_approval",
+      "title": "Cadence Proposal",
+      "type": "string"
+    },
+    "automatic_baseline_updates": {
+      "const": false,
+      "default": false,
+      "title": "Automatic Baseline Updates",
+      "type": "boolean"
+    },
+    "qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Qualifications",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "targets",
+    "limits",
+    "custody_scope",
+    "custody_manifest",
+    "proposed_finish_by",
+    "no_new_source_at",
+    "hard_stop",
+    "cadence_proposal",
+    "qualifications"
+  ],
+  "title": "Plan",
+  "type": "object"
+}

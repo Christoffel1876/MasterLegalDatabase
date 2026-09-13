@@ -1,0 +1,101 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "accepted_bounded_source_lookup_behavior_not_current_law",
+      "title": "Status",
+      "type": "string"
+    },
+    "accepted_draft_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Accepted Draft Sha256",
+      "type": "string"
+    },
+    "initial_draft_sha256": {
+      "title": "Initial Draft Sha256",
+      "type": "string"
+    },
+    "expectation_sha256": {
+      "title": "Expectation Sha256",
+      "type": "string"
+    },
+    "initial_execution_sha256": {
+      "title": "Initial Execution Sha256",
+      "type": "string"
+    },
+    "corrected_execution_sha256": {
+      "title": "Corrected Execution Sha256",
+      "type": "string"
+    },
+    "boundary_receipt_sha256": {
+      "title": "Boundary Receipt Sha256",
+      "type": "string"
+    },
+    "code_review_scope": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Code Review Scope",
+      "type": "array"
+    },
+    "verified_results": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Verified Results",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    },
+    "public_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "production_edits": {
+      "const": 0,
+      "default": 0,
+      "title": "Production Edits",
+      "type": "integer"
+    },
+    "currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "accepted_draft_sha256",
+    "initial_draft_sha256",
+    "expectation_sha256",
+    "initial_execution_sha256",
+    "corrected_execution_sha256",
+    "boundary_receipt_sha256",
+    "code_review_scope",
+    "verified_results",
+    "findings",
+    "limits"
+  ],
+  "title": "Review",
+  "type": "object"
+}

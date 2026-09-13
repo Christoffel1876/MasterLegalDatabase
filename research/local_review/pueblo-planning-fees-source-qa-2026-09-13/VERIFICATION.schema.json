@@ -1,0 +1,181 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "RenderAttempt": {
+      "additionalProperties": false,
+      "properties": {
+        "renderer": {
+          "title": "Renderer",
+          "type": "string"
+        },
+        "outcome": {
+          "enum": [
+            "interrupted_configuration_errors",
+            "completed"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        },
+        "dpi": {
+          "title": "Dpi",
+          "type": "integer"
+        },
+        "exit_status": {
+          "title": "Exit Status",
+          "type": "integer"
+        },
+        "observation": {
+          "title": "Observation",
+          "type": "string"
+        },
+        "output_paths": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Output Paths",
+          "type": "array"
+        }
+      },
+      "required": [
+        "renderer",
+        "outcome",
+        "dpi",
+        "exit_status",
+        "observation",
+        "output_paths"
+      ],
+      "title": "RenderAttempt",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "source_qa": {
+      "$ref": "#/$defs/Ref"
+    },
+    "frozen_initial_inputs": {
+      "$ref": "#/$defs/Ref"
+    },
+    "implementation": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Implementation",
+      "type": "array"
+    },
+    "final_test_log": {
+      "$ref": "#/$defs/Ref"
+    },
+    "final_coverage": {
+      "$ref": "#/$defs/Ref"
+    },
+    "passed_tests": {
+      "const": 66,
+      "default": 66,
+      "title": "Passed Tests",
+      "type": "integer"
+    },
+    "branch_inclusive_coverage": {
+      "title": "Branch Inclusive Coverage",
+      "type": "number"
+    },
+    "module_coverages": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Module Coverages",
+      "type": "object"
+    },
+    "payload_verification": {
+      "const": "native_tables_custody_and_source_pixels_replayed_before_closure",
+      "title": "Payload Verification",
+      "type": "string"
+    },
+    "runtime": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Runtime",
+      "type": "object"
+    },
+    "native_method": {
+      "title": "Native Method",
+      "type": "string"
+    },
+    "original_native_extraction_time": {
+      "default": null,
+      "title": "Original Native Extraction Time",
+      "type": "null"
+    },
+    "render_attempts": {
+      "items": {
+        "$ref": "#/$defs/RenderAttempt"
+      },
+      "title": "Render Attempts",
+      "type": "array"
+    },
+    "public_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "canonical_writes": {
+      "const": 0,
+      "default": 0,
+      "title": "Canonical Writes",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "source_qa",
+    "frozen_initial_inputs",
+    "implementation",
+    "final_test_log",
+    "final_coverage",
+    "branch_inclusive_coverage",
+    "module_coverages",
+    "payload_verification",
+    "runtime",
+    "native_method",
+    "render_attempts"
+  ],
+  "title": "Verification",
+  "type": "object"
+}

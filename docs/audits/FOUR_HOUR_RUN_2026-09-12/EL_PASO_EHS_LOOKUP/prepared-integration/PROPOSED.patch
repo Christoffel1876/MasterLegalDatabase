@@ -1,0 +1,688 @@
+--- a/scripts/research_source_lookup.py
++++ b/scripts/research_source_lookup.py
+@@ -1,4 +1,4 @@
+-"""Look up six fixed source reviews without current-law or applicability claims."""
++"""Look up seven fixed source reviews without current-law or applicability claims."""
+ 
+ from __future__ import annotations
+ 
+@@ -1125,6 +1125,391 @@
+                   "Complete linked table notes: " + ", ".join(row.table_context_ids) + ".", ""]
+     if result.matched_context_ids:
+         lines += ["Matched source context: " + ", ".join(result.matched_context_ids) + ".", ""]
++    lines += ["Source-review qualifications:", ""]
++    lines += ["- " + _markdown(s) for s in result.observations]
++    return "\n".join(lines) + "\n"
++
++
++EHS_SOURCE_ID = "el-paso-boh-ehs-fees-sd011"
++EHS_PACKAGE = Path("research/local_review/el-paso-ehs-fees-source-qa-2026-09-13")
++EHS_ACCEPTANCE = Path(
++    "docs/audits/FOUR_HOUR_RUN_2026-09-12/EL_PASO_EHS_SOURCE_QA/ACCEPTANCE.json"
++)
++EHS_ACCEPTANCE_SHA = "6771f712028d6ee3c4f737d37b3470f13740fe12e8bd6e01587bfc07bd65bda4"
++EHS_PINS = {
++    "FINAL_MANIFEST.json": "da8cb23666be686d9182695201819121363f4700755b8e57aadc9accbde77832",
++    "SOURCE_QA.json": "55a5e8b088c3b407c20691c71cb62a73491b99e39c0e6d9c0d0e69c2b3746ebf",
++    "SOURCE_QA.schema.json": "f35d92def244a848eab1a60130cc9e3ed575a4e7f7c12f99a1c336e6128714db",
++    "source/original.pdf": "1b0529fb7514bcc50c0dd36c903ca361f6ab431712b4aebc48bca8e3f5373622",
++    "source/canonical-record.jsonl":
++        "00dc523f686bbc40fe005c834e0c93b121eaccef6d82a971e3f068ff75db87fa",
++    "validate_review.py": "0870bb43190b21819f378665c85369e3dfede891705d7ee52232e166884eca40",
++}
++EHS_GLOBAL = ["A", "B", "OTHER1", "OTHER2", "OTHER3"]
++EHS_BOUNDARY = (
++    "Source-only English El Paso County Board of Health schedule: 65 rows in seven groups. "
++    "All source context, definitions, civil-penalty exceptions and notes accompany each result. "
++    "No current-law, applicability, arithmetic or adoption claim is made. No match does not "
++    "establish free, exempt or unregulated activity. Spanish translation equivalence was not "
++    "reviewed. Source approval/effective dates and 2024/2025 fee cells remain printed claims."
++)
++
++
++class EhsAsset(StrictModel):
++    """An exact local evidence asset for the checked English EHS source."""
++
++    path: str
++    sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
++    size_bytes: int = Field(gt=0)
++
++
++class EhsSpan(StrictModel):
++    """An unchanged native substring and exact physical-page evidence identity."""
++
++    start: int = Field(ge=0)
++    end: int = Field(gt=0)
++    sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
++    text: str
++    native_file: EhsAsset
++    image: EhsAsset
++    physical_page: int = Field(ge=1, le=5)
++
++    @model_validator(mode="after")
++    def bound(self) -> EhsSpan:
++        """Reject detached text, lengths and page-native offsets."""
++        data = self.text.encode("utf-8")
++        if (not self.start < self.end <= self.native_file.size_bytes or
++                self.end - self.start != len(data) or
++                hashlib.sha256(data).hexdigest() != self.sha256):
++            raise ValueError("El Paso EHS native span differs")
++        return self
++
++
++class EhsContext(StrictModel):
++    """One complete checked source context; scope links do not decide applicability."""
++
++    context_id: str
++    physical_page: int = Field(ge=1, le=5)
++    kind: str
++    text: str
++    applies_to: list[str]
++    native: EhsSpan
++
++
++class EhsRow(StrictModel):
++    """A complete service/fee pair, its actual group heading and explicit source notes."""
++
++    row_id: str
++    physical_page: int = Field(ge=2, le=4)
++    group: str
++    group_physical_page: int = Field(ge=2, le=4)
++    service: str
++    fee: str
++    linked_context: list[str]
++    label_native: EhsSpan
++    fee_native: EhsSpan
++    group_native: EhsSpan
++    exact_grid_cells: list[str | None] = Field(min_length=2, max_length=2)
++    pdf_cell_rectangles: list[list[float] | None] = Field(min_length=2, max_length=2)
++
++    @model_validator(mode="after")
++    def associations(self) -> EhsRow:
++        """Retain mandatory context and adjacent label/fee identities on the source page."""
++        if (self.label_native.physical_page != self.physical_page or
++                self.fee_native.physical_page != self.physical_page or
++                self.group_native.physical_page != self.group_physical_page or
++                self.label_native.end > self.fee_native.start or
++                not set(EHS_GLOBAL) <= set(self.linked_context)):
++            raise ValueError("El Paso EHS row or global context differs")
++        return self
++
++
++class EhsSource(StrictModel):
++    """Keep actual repository custody separate from unverified original HTTP and legal dates."""
++
++    source_id: Literal["el-paso-boh-ehs-fees-sd011"] = EHS_SOURCE_ID
++    authority_id: Literal["CO-COUNTY-EL_PASO"] = "CO-COUNTY-EL_PASO"
++    issuer: Literal["El Paso County Board of Health"]
++    administering_agency: Literal["El Paso County Public Health"]
++    pdf: EhsAsset
++    candidate: EhsAsset
++    canonical_original: EhsAsset
++    review: EhsAsset
++    manifest: EhsAsset
++    acceptance: EhsAsset
++    copied_canonical_record: EhsAsset
++    official_url: str
++    intake_id: str
++    intake_received_at: AwareDatetime
++    acquisition_method: Literal["received_review_package"]
++    original_http_acquired_at: None = None
++    original_http_independently_verified: Literal[False] = False
++    original_custody_note: str
++    reviewed_at: AwareDatetime
++    accepted_at: AwareDatetime
++    printed_approval_claim: Literal["October 25, 2023"]
++    printed_effective_claim: Literal["January 1, 2024"]
++    legal_date_verification: Literal["printed_source_claims_only"] = "printed_source_claims_only"
++    native_bytes: Literal[8060] = 8060
++    source_role: Literal["English fee schedule and civil penalties as received"] = (
++        "English fee schedule and civil penalties as received"
++    )
++
++
++class EhsLookupResult(StrictModel):
++    """Qualified complete-context results for exactly one reviewed English source."""
++
++    status: Literal["matched", "matched_context_only", "no_matching_row", "refused_current_law"]
++    source_id: Literal["el-paso-boh-ehs-fees-sd011"] = EHS_SOURCE_ID
++    query: str | None
++    evidence_verified: bool
++    source: EhsSource | None = None
++    rows: list[EhsRow] = Field(max_length=65)
++    context: list[EhsContext]
++    matched_context_ids: list[str]
++    observations: list[str]
++    boundary: str = EHS_BOUNDARY
++    legal_currentness: Literal["not_verified"] = "not_verified"
++    answer_safe: Literal[False] = False
++    adoption_date: None = None
++    effective_date: None = None
++    translation_equivalence: Literal["not_reviewed"] = "not_reviewed"
++
++    @model_validator(mode="after")
++    def complete_context(self) -> EhsLookupResult:
++        """No successful response may drop the full checked source context or invent a row."""
++        if self.status == "refused_current_law":
++            if self.source or self.evidence_verified or self.rows or self.context:
++                raise ValueError("Refused El Paso EHS request exposes evidence")
++            return self
++        ids = {c.context_id for c in self.context}
++        if (not self.source or not self.evidence_verified or len(ids) != 37 or
++                len(self.context) != 37 or not set(EHS_GLOBAL) <= ids or
++                any(set(r.linked_context) - ids for r in self.rows) or
++                len({r.row_id for r in self.rows}) != len(self.rows)):
++            raise ValueError("El Paso EHS complete verified context required")
++        if bool(self.rows) != (self.status == "matched"):
++            raise ValueError("El Paso EHS result status differs")
++        if self.status == "matched_context_only" and not self.matched_context_ids:
++            raise ValueError("Empty El Paso EHS context match")
++        return self
++
++
++def _check_ehs_package(root: Path) -> dict[str, str]:
++    """Pin the closed accepted source package before any retained verifier can run."""
++    package = root / EHS_PACKAGE
++    acceptance_path = _safe_file(root, EHS_ACCEPTANCE.as_posix())
++    if _digest(acceptance_path) != EHS_ACCEPTANCE_SHA:
++        raise ValueError("El Paso EHS acceptance differs")
++    hashes = {str(acceptance_path): EHS_ACCEPTANCE_SHA}
++    for name, digest in EHS_PINS.items():
++        path = _safe_file(package, name)
++        if path.stat().st_size > 2_000_000 or _digest(path) != digest:
++            raise ValueError("El Paso EHS fixed evidence differs: " + name)
++        hashes[str(path)] = digest
++    acceptance = json.loads(acceptance_path.read_bytes())
++    if (acceptance["status"] !=
++            "accepted_complete_english_source_fidelity_review_not_current_law" or
++            acceptance["legal_currentness"] != "not_verified"):
++        raise ValueError("El Paso EHS acceptance scope differs")
++    refs = json.loads((package / "FINAL_MANIFEST.json").read_bytes())["files"]
++    names = {r["path"] for r in refs}
++    expected = names | {"FINAL_MANIFEST.json"}
++    expected_dirs = {p.as_posix() for name in expected for p in Path(name).parents
++                     if p.as_posix() != "."}
++    actual_files, actual_dirs = set(), set()
++    for path in package.rglob("*"):
++        if path.is_symlink() or not (path.is_file() or path.is_dir()):
++            raise ValueError("El Paso EHS nonordinary package member")
++        (actual_dirs if path.is_dir() else actual_files).add(path.relative_to(package).as_posix())
++    if (len(refs) != 41 or len(names) != 41 or actual_files != expected or
++            actual_dirs != expected_dirs):
++        raise ValueError("El Paso EHS closed membership differs")
++    accepted = acceptance["copied_originals"]
++    if len(accepted) != 42 or {r["path"] for r in accepted} != expected:
++        raise ValueError("El Paso EHS acceptance inventory differs")
++    total = 0
++    for ref in [*refs, *accepted]:
++        path = _safe_file(package, ref["path"])
++        size = path.stat().st_size
++        if size > 2_000_000 or size != ref["size_bytes"] or _digest(path) != ref["sha256"]:
++            raise ValueError("El Paso EHS package member differs: " + ref["path"])
++        total += size
++        hashes[str(path)] = ref["sha256"]
++    if total > 12_000_000:
++        raise ValueError("El Paso EHS evidence size bound exceeded")
++    return hashes
++
++
++def _load_ehs_verified(root: Path) -> tuple[dict, dict, dict]:
++    """Replay pinned source/grid verification and bind the current canonical row and original."""
++    before = _check_ehs_package(root)
++    package = root / EHS_PACKAGE
++    try:
++        process = subprocess.run([sys.executable, "-I", "-B", str(package / "validate_review.py")],
++            cwd=package, check=True, capture_output=True, text=True, timeout=45,
++            env={"PATH": os.defpath, "PYTHONNOUSERSITE": "1"})
++        text = process.stdout
++        notice = ("Consider using the pymupdf_layout package for a greatly improved "
++                  "page layout analysis.\n")
++        if text.startswith(notice):
++            text = text[len(notice):]
++        verification = json.loads(text)
++        expected = {
++            "status": "passed", "closed_files": 41, "physical_pages": 5, "service_rows": 65,
++            "named_groups": 7, "table_grid_rows": 74, "grid_cells_including_merged_nulls": 148,
++            "context_records": 37, "native_bytes": 8060, "native_text_reproduced": True,
++            "candidate_offsets_replayed": True, "table_geometry_replayed": True,
++            "all_nonwhitespace_native_bytes_bound": True,
++            "source_first_freeze_precedes_native_extraction_as_recorded": True,
++            "chronology_independently_authenticated": False, "rerendered": False,
++            "public_requests": 0, "legal_currentness": "not_verified",
++            "translation_equivalence": "not_reviewed",
++        }
++        if verification != expected:
++            raise ValueError("El Paso EHS verifier receipt differs")
++    except (subprocess.SubprocessError, OSError, ValueError) as error:
++        raise ValueError("El Paso EHS source verification failed") from error
++    if _check_ehs_package(root) != before:
++        raise ValueError("El Paso EHS package changed during verification")
++    copied = _safe_file(package, "source/canonical-record.jsonl").read_bytes()
++    record = json.loads(copied)
++    schema = json.loads(_safe_file(package, "source/canonical-record.schema.json").read_bytes())
++    jsonschema.Draft202012Validator(schema).validate(record)
++    manifest = _safe_file(root, "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl")
++    if manifest.stat().st_size > 8_000_000:
++        raise ValueError("Manual manifest size bound exceeded")
++    digest = _digest(manifest)
++    selected = []
++    with manifest.open("rb") as handle:
++        for line in handle:
++            if json.loads(line).get("record_id") == EHS_SOURCE_ID:
++                selected.append(line)
++    if selected != [copied] or _digest(manifest) != digest:
++        raise ValueError("El Paso EHS canonical record identity differs")
++    if (record["record_id"] != EHS_SOURCE_ID or record["layer_id"] != "08_County_Authorities" or
++            record["acquisition_method"] != "received_review_package" or
++            record["sha256"] != EHS_PINS["source/original.pdf"] or
++            not record["archive_path"].startswith(
++                f"_RAW_ARCHIVE/manual_intake/08_County_Authorities/{EHS_SOURCE_ID}/")):
++        raise ValueError("El Paso EHS canonical ownership differs")
++    original = _safe_file(root, record["archive_path"])
++    if original.stat().st_size != record["size_bytes"] or _digest(original) != record["sha256"]:
++        raise ValueError("El Paso EHS canonical original differs")
++    return (json.loads((package / "SOURCE_QA.json").read_bytes()), record,
++            json.loads((root / EHS_ACCEPTANCE).read_bytes()))
++
++
++def _ehs_matches(query: str, text: str) -> bool:
++    """Allow punctuation after a section citation without loosening fee-token boundaries."""
++    needle = _search_text(query)
++    if re.fullmatch(r"section \d+(?:-\d+)*", needle):
++        return re.search(r"(?<!\w)" + re.escape(needle) + r"(?![\w-]|\.\d)",
++                         _search_text(text)) is not None
++    return _matches(query, text)
++
++
++def _lookup_ehs(root: Path, query: str | None) -> EhsLookupResult:
++    """Return full native cells, source headings and every checked contextual qualification."""
++    data, record, acceptance = _load_ehs_verified(root)
++    package = root / EHS_PACKAGE
++    pages = {p["physical_page"]: p for p in data["pages"]}
++    native = {i: _safe_file(package, p["native"]["path"]).read_bytes() for i, p in pages.items()}
++    bindings = {b["identity"]: b for b in data["bindings"]}
++
++    def asset(ref: dict) -> dict:
++        """Resolve an already pinned local evidence reference."""
++        return {**ref, "path": str(package / ref["path"])}
++
++    def span(raw: dict, page: int) -> EhsSpan:
++        """Bind exact native bytes used in the output, not just display normalization."""
++        if native[page][raw["start"]:raw["end"]] != raw["text"].encode():
++            raise ValueError("El Paso EHS output span differs")
++        return EhsSpan(**raw, physical_page=page, native_file=EhsAsset(**asset(
++            pages[page]["native"])), image=EhsAsset(**asset(pages[page]["image"])))
++
++    contexts = [EhsContext(**c, native=span(bindings[c["context_id"]]["spans"][0],
++                                           c["physical_page"])) for c in data["contexts"]]
++    groups = {c.text: c for c in contexts if c.kind == "group_heading"}
++    grid = {r["fee_row_id"]: r for t in data["tables"] for r in t["rows"] if r["fee_row_id"]}
++    rows = []
++    for row in data["rows"]:
++        pair = bindings[row["row_id"]]["spans"]
++        heading = groups[row["group"]]
++        matched = query is None or any(_ehs_matches(query, value) for value in [
++            row["service"], row["fee"], row["group"]])
++        if matched:
++            rows.append(EhsRow(**row, label_native=span(pair[0], row["physical_page"]),
++                fee_native=span(pair[1], row["physical_page"]), group_native=heading.native,
++                exact_grid_cells=grid[row["row_id"]]["cells"],
++                pdf_cell_rectangles=grid[row["row_id"]]["cell_rectangles"]))
++    context_ids = ([] if query is None else
++                   [c.context_id for c in contexts if _ehs_matches(query, c.text)])
++    source = EhsSource.model_validate_json(json.dumps({
++        "issuer": data["issuer"], "administering_agency": data["administering_agency"],
++        "pdf": asset(data["source"]), "candidate": asset(data["candidate"]),
++        "canonical_original": {
++            "path": str(root / record["archive_path"]), "sha256": record["sha256"],
++            "size_bytes": record["size_bytes"]},
++        "review": {"path": str(package / "SOURCE_QA.json"),
++                   "sha256": EHS_PINS["SOURCE_QA.json"],
++                   "size_bytes": (package / "SOURCE_QA.json").stat().st_size},
++        "manifest": {"path": str(package / "FINAL_MANIFEST.json"),
++                     "sha256": EHS_PINS["FINAL_MANIFEST.json"],
++                     "size_bytes": (package / "FINAL_MANIFEST.json").stat().st_size},
++        "acceptance": {"path": str(root / EHS_ACCEPTANCE), "sha256": EHS_ACCEPTANCE_SHA,
++                       "size_bytes": (root / EHS_ACCEPTANCE).stat().st_size},
++        "copied_canonical_record": {"path": str(package / "source/canonical-record.jsonl"),
++            "sha256": EHS_PINS["source/canonical-record.jsonl"],
++            "size_bytes": (package / "source/canonical-record.jsonl").stat().st_size},
++        "official_url": record["official_source_url"], "intake_id": record["intake_id"],
++        "intake_received_at": record["received_at"],
++        "acquisition_method": record["acquisition_method"],
++        "original_custody_note": record["custody_note"], "reviewed_at": data["completed_at"],
++        "accepted_at": acceptance["checked_at"],
++        "printed_approval_claim": data["source_approval_claim"],
++        "printed_effective_claim": data["source_effective_claim"],
++    }))
++    return EhsLookupResult(status="matched" if rows else "matched_context_only" if context_ids
++        else "no_matching_row", query=query, evidence_verified=True, source=source, rows=rows,
++        context=contexts, matched_context_ids=context_ids,
++        observations=[*data["errata"], *data["limitations"]])
++
++
++def _render_ehs(result: EhsLookupResult) -> str:
++    """Expose full conditions with escaped source wording and no implied current fee answer."""
++    lines = ["Source-only research — legal_currentness: not_verified; answer_safe: false.", "",
++             result.boundary, ""]
++    if result.status == "refused_current_law":
++        return "\n".join(lines + ["Request refused. " + result.observations[0], ""])
++    source = result.source
++    if source is None:
++        raise ValueError("El Paso EHS verified source required")
++    lines += [f"Source: `{result.source_id}` — El Paso County Board of Health.", "",
++        f"[Official source]({source.official_url})", "",
++        _link("Original PDF", source.pdf.path) + " · " +
++        _link("Checked review", source.review.path),
++        "", f"PDF SHA256: `{source.pdf.sha256}`.", "",
++        "Printed approval: October 25, 2023. Printed effective claim: January 1, 2024. "
++        "Both remain source claims; current applicability is unverified.", "",
++        f"Repository intake: {source.intake_received_at.isoformat()}; "
++        f"source review: {source.reviewed_at.isoformat()}.", "",
++        "Original HTTP acquisition was not independently witnessed. "
++        "Spanish equivalence was not reviewed.", "", _markdown(source.original_custody_note), "",
++        "**Complete source context, definitions and exceptions**", ""]
++    for context in result.context:
++        lines += [f"**{_markdown(context.context_id)} — physical page {context.physical_page}**",
++                  "", _markdown(context.native.text), "",
++                  _link("Page image", context.native.image.path), ""]
++    if not result.rows:
++        lines += ["No matching fee row in this preserved snapshot.", ""]
++    for row in result.rows:
++        lines += [f"**{row.row_id} — physical page {row.physical_page}**", "",
++                  "- Group: " + _markdown(row.group),
++                  "- Service: " + _markdown(row.label_native.text),
++                  "- Fee as printed: " + _markdown(row.fee_native.text),
++                  "- Linked source context: " + ", ".join(row.linked_context), "",
++                  _link("Page image", row.label_native.image.path), ""]
+     lines += ["Source-review qualifications:", ""]
+     lines += ["- " + _markdown(s) for s in result.observations]
+     return "\n".join(lines) + "\n"
+@@ -1794,11 +2179,12 @@
+     *,
+     list_rows: bool = False,
+     mode: Literal["source", "current-law"] = "source",
+-) -> LookupResult | GreeleyLookupResult | WeldLookupResult | GridLookupResult | SpringsLookupResult:
++) -> (LookupResult | GreeleyLookupResult | WeldLookupResult | GridLookupResult |
++      SpringsLookupResult | EhsLookupResult):
+     """Verify a fixed source and return unchanged evidence for a literal keyword phrase."""
+     if source_id not in {SOURCE_ID, GREELEY_SOURCE_ID, WELD_SOURCE_ID,
+-                         *GRID_SOURCES, SPRINGS_SOURCE_ID}:
+-        raise ValueError("Unsupported source; only the six fixed reviewed sources are available")
++                         *GRID_SOURCES, SPRINGS_SOURCE_ID, EHS_SOURCE_ID}:
++        raise ValueError("Unsupported source; only the seven fixed reviewed sources are available")
+     if mode not in {"source", "current-law"}:
+         raise ValueError("Unsupported lookup mode")
+     if list_rows == (query is not None):
+@@ -1806,6 +2192,11 @@
+     if query is not None and not query.strip():
+         raise ValueError("A nonempty keyword phrase is required")
+     if mode == "current-law" or (query is not None and CURRENT_REQUEST.search(query)):
++        if source_id == EHS_SOURCE_ID:
++            return EhsLookupResult(status="refused_current_law", query=query,
++                evidence_verified=False, rows=[], context=[], matched_context_ids=[],
++                observations=[
++                    "Current-law and question answering are unsupported; use source keywords."])
+         if source_id == SPRINGS_SOURCE_ID:
+             return SpringsLookupResult(
+                 status="refused_current_law", query=query, evidence_verified=False,
+@@ -1847,6 +2238,8 @@
+     root = root.expanduser().absolute()
+     if ".." in root.parts:
+         raise ValueError("Use a root without parent traversal")
++    if source_id == EHS_SOURCE_ID:
++        return _lookup_ehs(root, query)
+     if source_id == SPRINGS_SOURCE_ID:
+         return _lookup_springs(root, query)
+     if source_id in GRID_SOURCES:
+@@ -2082,9 +2475,11 @@
+ 
+ def render_markdown(
+     result: LookupResult | GreeleyLookupResult | WeldLookupResult | GridLookupResult
+-    | SpringsLookupResult,
++    | SpringsLookupResult | EhsLookupResult,
+ ) -> str:
+     """Render quoted source rows and their evidence links without calculating fees."""
++    if isinstance(result, EhsLookupResult):
++        return _render_ehs(result)
+     if isinstance(result, SpringsLookupResult):
+         return _render_springs(result)
+     if isinstance(result, GridLookupResult):
+--- a/geode/pipeline/manual_review_inventory.py
++++ b/geode/pipeline/manual_review_inventory.py
+@@ -21,6 +21,7 @@
+ ReviewKind = Literal["native_candidate", "checked_passages", "checked_tables", "source_structure"]
+ # Exact schema identities, reviewed individually; no directory-name or filename inference.
+ ALLOWED_REVIEW_SCHEMAS: dict[str, ReviewKind] = {
++    "f35d92def244a848eab1a60130cc9e3ed575a4e7f7c12f99a1c336e6128714db": "checked_tables",
+     "2e25d770a6d69f66088fd711ac0fa58084e4d3a5bfc0a89a1e12d67f38c0d7e4": "checked_passages",
+     "d29c8fdee28168161fd2d0e83c10a2d72d0d545cac9525ea17d05bc2549e5b63": "checked_tables",
+     "01cce506b8e53c71079d275681c4296bcfe1f7abbe0475e3b2422f9fd579daea": "checked_passages",
+--- a/docs/RESEARCH_SOURCE_LOOKUP.md
++++ b/docs/RESEARCH_SOURCE_LOOKUP.md
+@@ -2,17 +2,18 @@
+ title: Checked source lookup
+ created: 2026-09-11
+ updated: 2026-09-12
+-scope: six_fixed_source_reviews
++scope: seven_fixed_source_reviews
+ legal_currentness: not_verified
+ ---
+ 
+ # Checked source lookup
+ 
+-Use this command to find and cite evidence in six preserved fee sources:
++Use this command to find and cite evidence in seven preserved fee sources:
+ Grand Junction's 57-row fire-prevention table, Greeley's 19-entry building schedule,
+ Weld County's 137-row environmental-health schedule, Greeley's 30-row impact-fee
+-memorandum, Greeley's separate seven-plus-one-row proposed water/sewer notice, and Colorado
+-Springs' seven-page 128-row Construction Services schedule.
++memorandum, Greeley's separate seven-plus-one-row proposed water/sewer notice, Colorado
++Springs' seven-page 128-row Construction Services schedule, and the El Paso County Board
++of Health's five-page, 65-row English EHS schedule.
+ Each output structure preserves its source wording and associations. These are transcription scopes, not counts of legal requirements
+ or complete jurisdictional fee coverage.
+ 
+@@ -255,7 +256,7 @@
+ and [Weld intake receipt](../research/local_review/weld-directed-intake-2026-09-11/intake-receipt.json)
+ preserve the county source and its custody. The [manual source/review inventory](../research/local_review/manual-source-review-inventory-2026-09-11/README.md)
+ links other preserved evidence and explicitly distinguishes missing review joins
+-from reviewed scopes. It does not expand this command's six-source allowlist.
++from reviewed scopes. It does not expand this command's seven-source allowlist.
+ 
+ The [earlier readiness assessment](../research/local_review/project-readiness-2026-09-11/README.md)
+ records broader query and coverage blockers. This lookup is an additive
+@@ -340,3 +341,31 @@
+ the present canonical PDF must also match the received source hash. Acquisition completed at
+ 23:10:47.380038Z, independently of the later intake time. Historical proposal text and SD014-02
+ remain unchanged; neither event establishes legal currentness.
++
++## El Paso Board of Health English EHS schedule
++
++The exact canonical source `el-paso-boh-ehs-fees-sd011` adds 65 service/fee rows from the
++five-page English Chapter 3 schedule. Example from the repository:
++
++```sh
++/private/tmp/geode-status-venv/bin/python -B scripts/research_source_lookup.py \
++  --source-id el-paso-boh-ehs-fees-sd011 --query 'OWTS New Permit' --format json
++```
++
++All 37 source contexts are returned, including definitions, the new-permit reinspection
++asterisk, per-visit and no-fee-investigation notes, and the civil-penalty Section 2 exception.
++The 23 OWTS rows include 14 on page 3 whose group heading is carried from page 2. Native cell bytes,
++page images and table geometry remain bound separately from normalized display fields.
++
++Printed approval October 25, 2023 and effective January 1, 2024 are source claims. Actual
++repository receipt at 2026-09-12T22:59:48.795762Z is separate from the unverified original
++Sherlock HTTP acquisition claim. No fee arithmetic, current applicability, or translation
++equivalence is supplied. The six-page Spanish source is unsupported. All source exceptions
++and definitions remain context; a context-only match returns no invented fee row.
++No match does not establish free, exempt or unregulated activity.
++
++Use `--list-rows` for all 65 rows. Queries such as `complaint investigations`, `100 per day`,
++and `January 1, 2024` can return source context without a matching fee row. Current-law
++mode/questions remain refused before evidence retrieval. No scheduler or baseline change
++is part of this adapter. The manual review inventory receives one explicit checked-table
++join with the source SHA and exact schema, preserving existing authority/custody joins.
+--- a/research/local_review/manual-source-review-inventory-2026-09-11/join-plan.json
++++ b/research/local_review/manual-source-review-inventory-2026-09-11/join-plan.json
+@@ -1,6 +1,6 @@
+ {
+   "schema_version": 1,
+-  "prepared_at": "2026-09-13T00:08:04.467059Z",
++  "prepared_at": "2026-09-13T00:44:52.100425Z",
+   "manual_manifest": {
+     "path": "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+     "sha256": "7814b23e9ddb97e0dbf469497d52ae59a55b485254bb0a5c9f690354a484c367",
+@@ -2682,6 +2682,40 @@
+         "/provenance"
+       ],
+       "note": "Accepted seven-page Atlas native-source QA, historical alias SD014-02: 128 fee rows, nine tables, thirteen complete definitions and three table notes. All 410 native lines / 14,423 bytes are assigned; all global qualifications and linked definitions accompany source rows, including the page-6 to page-7 re-inspection continuation. Preserve 0.04/sq. ft. without invented currency, $336.00, the conditional plan-review and technology-fee statements, implementation at plan approval, and the separate Code Services schedule reference. PPRBD is a named collector in a source definition, not substituted as municipal issuer. Effective 07/01/2026 is only a printed claim. Actual canonical intake is separately recorded on this source row; neither custody nor extraction certifies current law, applicability or fee calculations. The older 2015 Code Services schedule has no full table review join."
++    },
++    {
++      "record_id": "el-paso-boh-ehs-fees-sd011",
++      "review": {
++        "path": "research/local_review/el-paso-ehs-fees-source-qa-2026-09-13/SOURCE_QA.json",
++        "sha256": "55a5e8b088c3b407c20691c71cb62a73491b99e39c0e6d9c0d0e69c2b3746ebf",
++        "size_bytes": 140434
++      },
++      "review_schema": {
++        "path": "research/local_review/el-paso-ehs-fees-source-qa-2026-09-13/SOURCE_QA.schema.json",
++        "sha256": "f35d92def244a848eab1a60130cc9e3ed575a4e7f7c12f99a1c336e6128714db",
++        "size_bytes": 12210
++      },
++      "source_sha_pointer": "/source/sha256",
++      "source_id_pointer": null,
++      "expected_review_source_id": null,
++      "authority_pointer": null,
++      "scope_pointers": [
++        "/status",
++        "/source_fee_rows",
++        "/source_groups",
++        "/source_table_grid_rows",
++        "/native_bytes_preserved",
++        "/rows",
++        "/contexts",
++        "/tables"
++      ],
++      "limitation_pointers": [
++        "/errata",
++        "/limitations",
++        "/legal_currentness",
++        "/translation_equivalence"
++      ],
++      "note": "Exact accepted English source SHA links this canonical source to 65 rows, seven groups, 37 contexts and all five pages. The immutable review does not carry an inline source ID or authority ID; explicit plan ownership joins and accepted CUSTODY companion retain those identities. Source-fidelity scope only; no currentness, operative-date, translation-equivalence or coverage promotion."
+     }
+   ],
+   "limitations": [
+--- a/tests/test_manual_review_inventory.py
++++ b/tests/test_manual_review_inventory.py
+@@ -444,16 +444,16 @@
+     assert len(old.sources) == 46
+     assert len(new.sources) == 61
+     assert (old.rows_with_review, old.rows_without_review) == (18, 28)
+-    assert (new.rows_with_review, new.rows_without_review) == (21, 40)
++    assert (new.rows_with_review, new.rows_without_review) == (22, 39)
+     assert [r.model_dump(mode="json") for r in new_plan.reviews[:18]] == old_plan["reviews"]
+-    assert len(new_plan.reviews) == 21
++    assert len(new_plan.reviews) == 22
+     previous = {s.record_id: s for s in old.sources}
+     added = [row for row in new.sources if row.record_id not in previous
+              and row.authority_id == "CO-COUNTY-EL_PASO"]
+     assert len(added) == 13
+     for row in added:
+         assert row.authority_id == "CO-COUNTY-EL_PASO"
+-        if row.record_id == "el-paso-planning-fees-sd011":
++        if row.record_id in {"el-paso-planning-fees-sd011", "el-paso-boh-ehs-fees-sd011"}:
+             assert len(row.reviews) == 1 and row.reviews[0].review_kind == "checked_tables"
+         else:
+             assert row.reviews is None and row.review_status == "metadata_only_review_unknown"
+@@ -505,8 +505,8 @@
+     new = inventory.build_inventory(root)
+     assert len(old.sources) == 59 and len(new.sources) == 61
+     assert (old.rows_with_review, old.rows_without_review) == (19, 40)
+-    assert (new.rows_with_review, new.rows_without_review) == (21, 40)
+-    assert len(new_plan.reviews) == 21 and new_plan.reviews[:19] == old_plan.reviews
++    assert (new.rows_with_review, new.rows_without_review) == (22, 39)
++    assert len(new_plan.reviews) == 22 and new_plan.reviews[:19] == old_plan.reviews
+     for current, previous in zip(new_plan.authorities[:59], old_plan.authorities, strict=True):
+         a, b = current.model_dump(), previous.model_dump()
+         if current.record_id in GREELEY_REACQUIRED:
+@@ -522,7 +522,7 @@
+             if current.record_id in GREELEY_REACQUIRED:
+                 assert _without_later_http(current) == _without_later_http(previous)
+             else:
+-                assert current == previous
++                assert _before_ehs_review(current) == previous
+             continue
+         assert previous.reviews is None
+         assert len(current.reviews) == 1
+@@ -595,8 +595,8 @@
+     plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
+     assert len(old.sources) == 59 and len(new.sources) == 61
+     assert (old.rows_with_review, old.rows_without_review) == (20, 39)
+-    assert (new.rows_with_review, new.rows_without_review) == (21, 40)
+-    assert plan.reviews[:20] == old_plan.reviews and len(plan.reviews) == 21
++    assert (new.rows_with_review, new.rows_without_review) == (22, 39)
++    assert plan.reviews[:20] == old_plan.reviews and len(plan.reviews) == 22
+     assert new.unchanged_legacy_ledger == old.unchanged_legacy_ledger
+     changed = set()
+     for a, b in zip(plan.authorities[:59], old_plan.authorities, strict=True):
+@@ -616,7 +616,7 @@
+             assert current.acquisition_method == "received_review_package"
+             assert _without_later_http(current) == _without_later_http(previous)
+         else:
+-            assert current == previous
++            assert _before_ehs_review(current) == previous
+     old_schedule, modern = new.sources[59:]
+     assert old_schedule.record_id == "colorado-springs-code-services-fees-2015-atlas-directed"
+     assert old_schedule.reviews is None
+@@ -662,3 +662,48 @@
+     mutant = join.model_copy(update={"review": inventory.identity(tmp_path, join.review.path)})
+     with pytest.raises((ValueError, jsonschema.ValidationError)):
+         inventory._review(tmp_path, mutant, row)
++
++
++def _before_ehs_review(row: inventory.SourceRow) -> inventory.SourceRow:
++    """Remove only the exact accepted EHS join for an earlier snapshot comparison."""
++    if row.record_id != "el-paso-boh-ehs-fees-sd011":
++        return row
++    assert row.reviews is not None and len(row.reviews) == 1
++    review = row.reviews[0]
++    assert review.review_kind == "checked_tables"
++    assert review.artifact.sha256 == (
++        "55a5e8b088c3b407c20691c71cb62a73491b99e39c0e6d9c0d0e69c2b3746ebf"
++    )
++    assert review.scope_fields["/source_fee_rows"] == 65
++    assert review.limitations["/legal_currentness"] == "not_verified"
++    return row.model_copy(update={"reviews": None,
++                                  "review_status": "metadata_only_review_unknown"})
++
++
++def test_english_ehs_join_preserves_all_61_sources_and_21_prior_reviews() -> None:
++    """The exact English QA is one added review, without custody or authority changes."""
++    root = Path(__file__).resolve().parents[1]
++    before = root / inventory.PACKAGE / "_SNAPSHOTS/BEFORE_EL_PASO_EHS_2026-09-13"
++    old = inventory.Inventory.model_validate_json((before / "inventory.json").read_bytes())
++    old_plan = inventory.JoinPlan.model_validate_json((before / "join-plan.json").read_bytes())
++    new = inventory.build_inventory(root)
++    plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
++    assert len(old.sources) == len(new.sources) == 61
++    assert (old.rows_with_review, old.rows_without_review) == (21, 40)
++    assert (new.rows_with_review, new.rows_without_review) == (22, 39)
++    assert plan.reviews[:-1] == old_plan.reviews and len(plan.reviews) == 22
++    assert plan.authorities == old_plan.authorities
++    assert new.manual_manifest == old.manual_manifest
++    assert new.unchanged_legacy_ledger == old.unchanged_legacy_ledger
++    for current, previous in zip(new.sources, old.sources, strict=True):
++        assert _before_ehs_review(current) == previous
++    row = next(r for r in new.sources if r.record_id == "el-paso-boh-ehs-fees-sd011")
++    review = row.reviews[0]
++    assert row.authority_id == "CO-COUNTY-EL_PASO"
++    assert row.verified_http_acquired_at is None
++    assert review.scope_fields["/source_groups"] == 7
++    assert review.scope_fields["/native_bytes_preserved"] == 8060
++    assert len(review.scope_fields["/contexts"]) == 37
++    assert len(review.scope_fields["/rows"]) == 65
++    assert review.limitations["/translation_equivalence"] == "not_reviewed"
++    assert row.answer_safe is False and row.legal_currentness == "not_verified"

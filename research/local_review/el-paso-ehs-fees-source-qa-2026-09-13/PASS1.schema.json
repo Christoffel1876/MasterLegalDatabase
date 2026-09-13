@@ -1,0 +1,241 @@
+{
+  "$defs": {
+    "Context": {
+      "additionalProperties": false,
+      "description": "Source wording outside the service/fee cells, with explicit applicability links.",
+      "properties": {
+        "context_id": {
+          "title": "Context Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "cover",
+            "heading",
+            "authority",
+            "approval_claim",
+            "note",
+            "definition",
+            "civil_penalty",
+            "group_heading",
+            "column_heading"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "applies_to": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Applies To",
+          "type": "array"
+        }
+      },
+      "required": [
+        "context_id",
+        "physical_page",
+        "kind",
+        "text",
+        "applies_to"
+      ],
+      "title": "Context",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "An exact relative payload identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "Row": {
+      "additionalProperties": false,
+      "description": "A whole visual service/fee row, preserving uncomputed values and conditions.",
+      "properties": {
+        "row_id": {
+          "title": "Row Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 4,
+          "minimum": 2,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "group": {
+          "title": "Group",
+          "type": "string"
+        },
+        "group_physical_page": {
+          "maximum": 4,
+          "minimum": 2,
+          "title": "Group Physical Page",
+          "type": "integer"
+        },
+        "service": {
+          "title": "Service",
+          "type": "string"
+        },
+        "fee": {
+          "title": "Fee",
+          "type": "string"
+        },
+        "linked_context": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Linked Context",
+          "type": "array"
+        }
+      },
+      "required": [
+        "row_id",
+        "physical_page",
+        "group",
+        "group_physical_page",
+        "service",
+        "fee",
+        "linked_context"
+      ],
+      "title": "Row",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Actual source-image-first review, frozen before accessing native text.",
+  "properties": {
+    "frozen_at": {
+      "format": "date-time",
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "status": {
+      "const": "source_first_visual_transcript_frozen",
+      "title": "Status",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "el-paso-boh-ehs-fees-sd011",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Ref"
+    },
+    "capture": {
+      "$ref": "#/$defs/Ref"
+    },
+    "page_images": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "title": "Page Images",
+      "type": "array"
+    },
+    "full_pages_viewed": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Full Pages Viewed",
+      "type": "array"
+    },
+    "native_text_accessed_before_freeze": {
+      "const": false,
+      "title": "Native Text Accessed Before Freeze",
+      "type": "boolean"
+    },
+    "external_review_consulted": {
+      "const": false,
+      "title": "External Review Consulted",
+      "type": "boolean"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/Row"
+      },
+      "maxItems": 65,
+      "minItems": 65,
+      "title": "Rows",
+      "type": "array"
+    },
+    "contexts": {
+      "items": {
+        "$ref": "#/$defs/Context"
+      },
+      "title": "Contexts",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "translation_equivalence": {
+      "const": "not_reviewed",
+      "title": "Translation Equivalence",
+      "type": "string"
+    }
+  },
+  "required": [
+    "frozen_at",
+    "status",
+    "source_id",
+    "source",
+    "capture",
+    "page_images",
+    "full_pages_viewed",
+    "native_text_accessed_before_freeze",
+    "external_review_consulted",
+    "method",
+    "rows",
+    "contexts",
+    "limitations",
+    "legal_currentness",
+    "translation_equivalence"
+  ],
+  "title": "FirstPass",
+  "type": "object"
+}

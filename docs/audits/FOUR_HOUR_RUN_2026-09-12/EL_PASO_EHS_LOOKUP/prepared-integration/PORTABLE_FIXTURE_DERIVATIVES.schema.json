@@ -1,0 +1,56 @@
+{
+  "$defs": {
+    "Change": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "original_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Original Sha256",
+          "type": "string"
+        },
+        "portable_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Portable Sha256",
+          "type": "string"
+        },
+        "replacements": {
+          "minimum": 0,
+          "title": "Replacements",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "original_sha256",
+        "portable_sha256",
+        "replacements"
+      ],
+      "title": "Change",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "normalization": {
+      "title": "Normalization",
+      "type": "string"
+    },
+    "changes": {
+      "items": {
+        "$ref": "#/$defs/Change"
+      },
+      "title": "Changes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "normalization",
+    "changes"
+  ],
+  "title": "Derivatives",
+  "type": "object"
+}

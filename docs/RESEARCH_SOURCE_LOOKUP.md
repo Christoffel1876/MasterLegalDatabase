@@ -2,16 +2,18 @@
 title: Checked source lookup
 created: 2026-09-11
 updated: 2026-09-12
-scope: five_fixed_source_reviews
+scope: seven_fixed_source_reviews
 legal_currentness: not_verified
 ---
 
 # Checked source lookup
 
-Use this command to find and cite evidence in five preserved fee sources:
+Use this command to find and cite evidence in seven preserved fee sources:
 Grand Junction's 57-row fire-prevention table, Greeley's 19-entry building schedule,
 Weld County's 137-row environmental-health schedule, Greeley's 30-row impact-fee
-memorandum, and Greeley's separate seven-plus-one-row proposed water/sewer notice.
+memorandum, Greeley's separate seven-plus-one-row proposed water/sewer notice, Colorado
+Springs' seven-page 128-row Construction Services schedule, and the El Paso County Board
+of Health's five-page, 65-row English EHS schedule.
 Each output structure preserves its source wording and associations. These are transcription scopes, not counts of legal requirements
 or complete jurisdictional fee coverage.
 
@@ -254,10 +256,119 @@ for inspection limits. The [Weld source-review package](../research/local_review
 and [Weld intake receipt](../research/local_review/weld-directed-intake-2026-09-11/intake-receipt.json)
 preserve the county source and its custody. The [manual source/review inventory](../research/local_review/manual-source-review-inventory-2026-09-11/README.md)
 links other preserved evidence and explicitly distinguishes missing review joins
-from reviewed scopes. It does not expand this command's five-source allowlist.
+from reviewed scopes. It does not expand this command's seven-source allowlist.
 
 The [earlier readiness assessment](../research/local_review/project-readiness-2026-09-11/README.md)
 records broader query and coverage blockers. This lookup is an additive
 implementation after that timed assessment. It does not alter frozen reports,
 repair the missing retrieval catalog, enable broad source search or certify the
 remaining manual originals.
+
+
+## Colorado Springs Construction Services
+
+## Immutable input and execution boundary
+
+The fixed accepted package is
+`research/local_review/colorado-springs-construction-fees-qa-2026-09-12/`.
+Source PDF SHA256:
+`e35de501a011fe55f03140bf91aef54226997d896fec0b6308a2eac9bd40909a`.
+SOURCE_QA SHA256:
+`cb27452624c2b1be332a4eb241bee03520046466f95f696dee3a59cd7e94dc70`.
+Its final manifest, schemas, verifier, every file and the separate root acceptance are pinned.
+Missing/extra files, unexpected directories, symlink ancestors, traversal and changed source,
+review, geometry, executable or custody bytes cause failure before a result is generated.
+
+The copied original offline verifier executes using `python -I -B`, without inherited
+credentials, with a 90-second timeout. It explicitly requires **PyMuPDF 1.28.2**, plus Pydantic
+2 and jsonschema. It replays native text/geometry and source-response custody, checks every
+line's assignment and every table/context relationship, and reproduces the twelve retained
+crops. The lookup rechecks file hashes after verification and its contributing native ranges
+before mapping results. Neither stage runs the downloader, OCR, a browser or any network call.
+
+## Exact cells and complete qualifications
+
+JSON keeps the complete label and `fee_as_printed` cell, exact line breaks and trailing spaces,
+physical page, native line IDs, zero-based half-open native UTF-8 ranges, text/file hashes,
+PDF rectangles and corresponding image-pixel rectangles. No candidate-text offset or currency
+field is invented. All 410 native lines and 14,423 native bytes remain reachable through the
+full listing's rows and complete context; footer/whitespace records stay separate.
+
+Every verified response includes the full global plan-review note, implementation statement,
+other-schedule reference and technology-fee row. The plan-review note preserves its
+`Unless otherwise noted` qualification and the possibility of additional reviews/trips/
+re-inspections. The technology row states `$25.00`; this adapter does not add it to another fee.
+All thirteen complete definitions and all three table notes remain in `context`; each fee row
+retains its original explicit links. `DEF-REINSPECTION` retains **both physical pages 6 and 7**.
+The rendering groups complete definitions and notes before matched rows so no page-one-only
+or first-sentence substitute can silently replace a condition.
+
+The full Construction Plan Check Fee definition identifies PPRBD as collector through its
+portal and preserves the conditional deduction wording. Colorado Springs remains the issuer.
+The Accela statement applies to the separate fire-system plan-check definition as printed.
+The lookup does not assign either role or condition to an actual project.
+
+Two rate cells remain `0.04/sq. ft.` without an inserted dollar sign. The performance-based
+label and definition retain the stated `$2,000` minimum separately. The additional-100-head
+sprinkler row remains `$336.00`, with adjacent `$344.00` rows unchanged. Source tier boundaries,
+`50, 000`, `R2`, `sq. Ft`, operators and grammar remain untouched. No total, extra charge,
+classification, discount, rounding operation or IRS rate is computed.
+
+## Matching, dates and custody
+
+Queries are keyword phrases, not legal questions. Case/Unicode/whitespace normalization
+affects matching only. A query searches each label, fee and table heading. Context is searched
+separately; a definition-only hit returns `matched_context_only` without inventing a fee row.
+Repeated labels are retained in source order. Missing matches do not mean free, exempt or
+unregulated. Numeric boundary checks prevent partial-number matches such as `0` inside `500`;
+use the complete printed amount, such as `$336.00`.
+
+`--mode current-law` and obvious legal/applicability/calculation questions return exit 2
+before reading evidence. Every source-mode result remains `answer_safe=false` and
+`legal_currentness=not_verified` regardless of query wording. Evidence failure returns exit 1.
+
+The source's `Effective 07/01/2026` remains a printed claim. Verified adoption and effective
+dates remain null. Atlas's source request was reserved at `2026-09-12T23:10:46.676197Z` and its
+complete HTTP 200 response finished at `2026-09-12T23:10:47.380038Z`, with no redirects.
+Server Date and Last-Modified headers are not legal dates. The exact received PDF and body
+copy are one document, not two sources.
+
+`SD014-02` remains the historical review ID. The canonical intake ID is
+`colorado-springs-construction-fees-atlas-directed`; the lookup keeps that identity separate from the source
+review's historical alias. The accepted completed intake receipt now supplies the distinct
+`intake_received_at=2026-09-12T23:56:16.492216Z` and `canonical_intake_verified=true`.
+The immutable completed-intake package and its safe portable verifier are separately pinned;
+the present canonical PDF must also match the received source hash. Acquisition completed at
+23:10:47.380038Z, independently of the later intake time. Historical proposal text and SD014-02
+remain unchanged; neither event establishes legal currentness.
+
+## El Paso Board of Health English EHS schedule
+
+The exact canonical source `el-paso-boh-ehs-fees-sd011` adds 65 service/fee rows from the
+five-page English Chapter 3 schedule. Its accepted verifier requires PyMuPDF 1.28.2;
+the lookup runs that pinned verifier offline with a 45-second timeout. Use the project
+environment containing that version and the other declared dependencies. Example from
+the repository:
+
+```sh
+python -B scripts/research_source_lookup.py \
+  --source-id el-paso-boh-ehs-fees-sd011 --query 'OWTS New Permit' --format json
+```
+
+All 37 source contexts are returned, including definitions, the new-permit reinspection
+asterisk, per-visit and no-fee-investigation notes, and the civil-penalty Section 2 exception.
+The 23 OWTS rows include 14 on page 3 whose group heading is carried from page 2. Native cell bytes,
+page images and table geometry remain bound separately from normalized display fields.
+
+Printed approval October 25, 2023 and effective January 1, 2024 are source claims. Actual
+repository receipt at 2026-09-12T22:59:48.795762Z is separate from the unverified original
+Sherlock HTTP acquisition claim. No fee arithmetic, current applicability, or translation
+equivalence is supplied. The six-page Spanish source is unsupported. All source exceptions
+and definitions remain context; a context-only match returns no invented fee row.
+No match does not establish free, exempt or unregulated activity.
+
+Use `--list-rows` for all 65 rows. Queries such as `complaint investigations`, `100 per day`,
+and `January 1, 2024` can return source context without a matching fee row. Current-law
+mode/questions remain refused before evidence retrieval. No scheduler or baseline change
+is part of this adapter. The manual review inventory receives one explicit checked-table
+join with the source SHA and exact schema, preserving existing authority/custody joins.

@@ -1,0 +1,45 @@
+..............................F                                          [100%]
+=================================== FAILURES ===================================
+_________________ test_inventory_join_preserves_prior_mapping __________________
+
+    def test_inventory_join_preserves_prior_mapping() -> None:
+        """The draft adds one explicit SHA-backed checked-table join and changes no authority."""
+        sys.path.insert(0, str(ROOT))
+        from geode.pipeline.manual_review_inventory import JoinPlan, SourceRow
+        spec = importlib.util.spec_from_file_location('ehs_inventory_draft',
+                                                      HERE / 'proposed/manual_review_inventory.py')
+        module = importlib.util.module_from_spec(spec); sys.modules[spec.name] = module
+        spec.loader.exec_module(module)
+        prior = JoinPlan.model_validate_json((HERE / 'preimages/join-plan.json').read_bytes())
+        new = JoinPlan.model_validate_json((HERE / 'proposed/join-plan.json').read_bytes())
+        assert new.reviews[:-1] == prior.reviews and new.authorities == prior.authorities
+        assert new.manual_manifest == prior.manual_manifest and new.legacy_ledger == prior.legacy_ledger
+        actual = json.loads((ROOT / module.PACKAGE / 'inventory.json').read_bytes())
+        row = SourceRow.model_validate_json(json.dumps(next(
+            r for r in actual['sources'] if r['record_id'] == lookup.EHS_SOURCE_ID)))
+>       bound = module._review(ROOT, new.reviews[-1], row)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-12/el-paso-ehs-lookup-integration/test_ehs_lookup.py:208: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-12/el-paso-ehs-lookup-integration/proposed/manual_review_inventory.py:274: in _review
+    data = json.loads(_require(root, join.review).read_bytes())
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+artifact = Artifact(path='research/local_review/el-paso-ehs-fees-source-qa-2026-09-13/SOURCE_QA.json', sha256='55a5e8b088c3b407c20691c71cb62a73491b99e39c0e6d9c0d0e69c2b3746ebf', size_bytes=140434)
+
+    def _require(root: Path, artifact: Artifact) -> Path:
+        if identity(root, artifact.path) != artifact:
+>           raise ValueError(f"Evidence hash/size mismatch: {artifact.path}")
+E           ValueError: Evidence hash/size mismatch: research/local_review/el-paso-ehs-fees-source-qa-2026-09-13/SOURCE_QA.json
+
+handoffs/run-2026-09-12/el-paso-ehs-lookup-integration/proposed/manual_review_inventory.py:229: ValueError
+================================ tests coverage ================================
+_______________ coverage: platform darwin, python 3.14.3-final-0 _______________
+
+Coverage JSON written to file /private/tmp/geode-ehs-lookup-coverage.json
+=========================== short test summary info ============================
+FAILED handoffs/run-2026-09-12/el-paso-ehs-lookup-integration/test_ehs_lookup.py::test_inventory_join_preserves_prior_mapping
+1 failed, 30 passed in 30.20s

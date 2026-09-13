@@ -1,0 +1,153 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "status": {
+      "const": "focused_tests_and_independent_replay_passed_pending_root_full_suite",
+      "title": "Status",
+      "type": "string"
+    },
+    "production_files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Production Files",
+      "type": "array"
+    },
+    "supporting_files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Supporting Files",
+      "type": "array"
+    },
+    "focused_tests_passed": {
+      "const": 171,
+      "title": "Focused Tests Passed",
+      "type": "integer"
+    },
+    "focused_warnings": {
+      "const": 5,
+      "title": "Focused Warnings",
+      "type": "integer"
+    },
+    "focused_duration_seconds": {
+      "const": 18.72,
+      "title": "Focused Duration Seconds",
+      "type": "number"
+    },
+    "adapter_branch_inclusive_percent": {
+      "title": "Adapter Branch Inclusive Percent",
+      "type": "number"
+    },
+    "helper_branch_inclusive_percent": {
+      "title": "Helper Branch Inclusive Percent",
+      "type": "number"
+    },
+    "combined_branch_inclusive_percent": {
+      "title": "Combined Branch Inclusive Percent",
+      "type": "number"
+    },
+    "adapter_branch_only_percent": {
+      "title": "Adapter Branch Only Percent",
+      "type": "number"
+    },
+    "helper_branch_only_percent": {
+      "title": "Helper Branch Only Percent",
+      "type": "number"
+    },
+    "command": {
+      "title": "Command",
+      "type": "string"
+    },
+    "independent_cases": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Independent Cases",
+      "type": "array"
+    },
+    "production_live_requests_by_this_preparation": {
+      "const": 0,
+      "title": "Production Live Requests By This Preparation",
+      "type": "integer"
+    },
+    "actual_prior_prototype_live_requests": {
+      "const": 2,
+      "title": "Actual Prior Prototype Live Requests",
+      "type": "integer"
+    },
+    "recurring_deployment": {
+      "const": "not_deployed_by_this_feature",
+      "title": "Recurring Deployment",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "checked_at",
+    "status",
+    "production_files",
+    "supporting_files",
+    "focused_tests_passed",
+    "focused_warnings",
+    "focused_duration_seconds",
+    "adapter_branch_inclusive_percent",
+    "helper_branch_inclusive_percent",
+    "combined_branch_inclusive_percent",
+    "adapter_branch_only_percent",
+    "helper_branch_only_percent",
+    "command",
+    "independent_cases",
+    "production_live_requests_by_this_preparation",
+    "actual_prior_prototype_live_requests",
+    "recurring_deployment",
+    "legal_currentness",
+    "limitations"
+  ],
+  "title": "Check",
+  "type": "object"
+}

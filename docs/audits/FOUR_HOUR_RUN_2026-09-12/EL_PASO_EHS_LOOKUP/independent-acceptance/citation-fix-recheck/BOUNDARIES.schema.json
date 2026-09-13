@@ -1,0 +1,151 @@
+{
+  "$defs": {
+    "Check": {
+      "additionalProperties": false,
+      "properties": {
+        "query": {
+          "title": "Query",
+          "type": "string"
+        },
+        "expected_status": {
+          "title": "Expected Status",
+          "type": "string"
+        },
+        "expected_rows": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Expected Rows",
+          "type": "array"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "event": {
+          "$ref": "#/$defs/Event"
+        }
+      },
+      "required": [
+        "query",
+        "expected_status",
+        "expected_rows",
+        "passed",
+        "event"
+      ],
+      "title": "Check",
+      "type": "object"
+    },
+    "Event": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Command",
+          "type": "array"
+        },
+        "started_at": {
+          "title": "Started At",
+          "type": "string"
+        },
+        "finished_at": {
+          "title": "Finished At",
+          "type": "string"
+        },
+        "exit_code": {
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "stdout_file": {
+          "title": "Stdout File",
+          "type": "string"
+        },
+        "stdout_sha256": {
+          "title": "Stdout Sha256",
+          "type": "string"
+        },
+        "stderr_file": {
+          "title": "Stderr File",
+          "type": "string"
+        },
+        "stderr_sha256": {
+          "title": "Stderr Sha256",
+          "type": "string"
+        },
+        "errors": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Errors",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "command",
+        "started_at",
+        "finished_at",
+        "exit_code",
+        "stdout_file",
+        "stdout_sha256",
+        "stderr_file",
+        "stderr_sha256",
+        "errors"
+      ],
+      "title": "Event",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "tested_script_sha256": {
+      "title": "Tested Script Sha256",
+      "type": "string"
+    },
+    "baseline_definition_changes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Baseline Definition Changes",
+      "type": "array"
+    },
+    "changes_from_first_tested_draft": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Changes From First Tested Draft",
+      "type": "array"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/Check"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "public_requests": {
+      "default": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "tested_script_sha256",
+    "baseline_definition_changes",
+    "changes_from_first_tested_draft",
+    "checks"
+  ],
+  "title": "Checks",
+  "type": "object"
+}

@@ -1,0 +1,554 @@
+{
+  "$defs": {
+    "Anchor": {
+      "additionalProperties": false,
+      "description": "Bind the precise fresh HTML anchor without claiming a rendered label.",
+      "properties": {
+        "parent": {
+          "$ref": "#/$defs/Asset"
+        },
+        "parent_url": {
+          "title": "Parent Url",
+          "type": "string"
+        },
+        "href": {
+          "title": "Href",
+          "type": "string"
+        },
+        "exact_source_start_byte": {
+          "minimum": 0,
+          "title": "Exact Source Start Byte",
+          "type": "integer"
+        },
+        "exact_source_end_byte": {
+          "exclusiveMinimum": 0,
+          "title": "Exact Source End Byte",
+          "type": "integer"
+        },
+        "exact_anchor_html": {
+          "title": "Exact Anchor Html",
+          "type": "string"
+        },
+        "anchor_html_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Anchor Html Sha256",
+          "type": "string"
+        },
+        "normalized_dom_text": {
+          "title": "Normalized Dom Text",
+          "type": "string"
+        },
+        "occurrence_count": {
+          "const": 1,
+          "title": "Occurrence Count",
+          "type": "integer"
+        },
+        "label_scope": {
+          "const": "DOM text including icon-label strings; not a new visual webpage review",
+          "title": "Label Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "parent",
+        "parent_url",
+        "href",
+        "exact_source_start_byte",
+        "exact_source_end_byte",
+        "exact_anchor_html",
+        "anchor_html_sha256",
+        "normalized_dom_text",
+        "occurrence_count",
+        "label_scope"
+      ],
+      "title": "Anchor",
+      "type": "object"
+    },
+    "ArchivedMatch": {
+      "additionalProperties": false,
+      "description": "Existing sources were compared to the retained fresh body, not reacquired again.",
+      "properties": {
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "byte_comparison": {
+          "const": "same_exact_bytes",
+          "title": "Byte Comparison",
+          "type": "string"
+        },
+        "represented_by": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "repository_path",
+        "sha256",
+        "size_bytes",
+        "byte_comparison",
+        "represented_by"
+      ],
+      "title": "ArchivedMatch",
+      "type": "object"
+    },
+    "Asset": {
+      "additionalProperties": false,
+      "description": "One package-relative ordinary file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Copy": {
+      "additionalProperties": false,
+      "description": "Retain the origin label separately from an unchanged copied asset.",
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "copied": {
+          "$ref": "#/$defs/Asset"
+        },
+        "copy_method": {
+          "const": "unchanged_exact_bytes",
+          "default": "unchanged_exact_bytes",
+          "title": "Copy Method",
+          "type": "string"
+        }
+      },
+      "required": [
+        "original_path",
+        "copied"
+      ],
+      "title": "Copy",
+      "type": "object"
+    },
+    "Line": {
+      "additionalProperties": false,
+      "description": "Bind selected raw UTF-8 JSONL bytes, including the original line ending.",
+      "properties": {
+        "original_repository_path": {
+          "title": "Original Repository Path",
+          "type": "string"
+        },
+        "original_whole_file_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Original Whole File Sha256",
+          "type": "string"
+        },
+        "original_whole_file_size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Original Whole File Size Bytes",
+          "type": "integer"
+        },
+        "original_zero_based_row": {
+          "minimum": 0,
+          "title": "Original Zero Based Row",
+          "type": "integer"
+        },
+        "selected_document": {
+          "$ref": "#/$defs/Asset"
+        },
+        "selected_zero_based_row": {
+          "minimum": 0,
+          "title": "Selected Zero Based Row",
+          "type": "integer"
+        },
+        "exact_line_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Exact Line Sha256",
+          "type": "string"
+        },
+        "exact_line_size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Exact Line Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "original_repository_path",
+        "original_whole_file_sha256",
+        "original_whole_file_size_bytes",
+        "original_zero_based_row",
+        "selected_document",
+        "selected_zero_based_row",
+        "exact_line_sha256",
+        "exact_line_size_bytes"
+      ],
+      "title": "Line",
+      "type": "object"
+    },
+    "Scan": {
+      "additionalProperties": false,
+      "description": "Describe what was actually scanned, without certifying absence of all secrets.",
+      "properties": {
+        "public_header_names": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Public Header Names",
+          "type": "array"
+        },
+        "header_dictionary_count": {
+          "const": 8,
+          "title": "Header Dictionary Count",
+          "type": "integer"
+        },
+        "rejected_header_keys_found": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rejected Header Keys Found",
+          "type": "array"
+        },
+        "credential_patterns": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Credential Patterns",
+          "type": "array"
+        },
+        "scanned_text_assets": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Scanned Text Assets",
+          "type": "array"
+        },
+        "credential_pattern_match_count": {
+          "const": 0,
+          "title": "Credential Pattern Match Count",
+          "type": "integer"
+        },
+        "receipt_error_texts_empty": {
+          "const": true,
+          "title": "Receipt Error Texts Empty",
+          "type": "boolean"
+        },
+        "raw_response_headers_available": {
+          "const": false,
+          "title": "Raw Response Headers Available",
+          "type": "boolean"
+        },
+        "original_header_exclusions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Original Header Exclusions",
+          "type": "array"
+        },
+        "limitations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        },
+        "redactions_performed_in_this_package": {
+          "const": 0,
+          "title": "Redactions Performed In This Package",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "public_header_names",
+        "header_dictionary_count",
+        "rejected_header_keys_found",
+        "credential_patterns",
+        "scanned_text_assets",
+        "credential_pattern_match_count",
+        "receipt_error_texts_empty",
+        "raw_response_headers_available",
+        "original_header_exclusions",
+        "limitations",
+        "redactions_performed_in_this_package"
+      ],
+      "title": "Scan",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "description": "Separate a new HTTP custody event from an earlier canonical intake record.",
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-MUNICIPAL-GREELEY",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "const": "10_Municipal_Authorities",
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "body": {
+          "$ref": "#/$defs/Asset"
+        },
+        "reservation": {
+          "$ref": "#/$defs/Asset"
+        },
+        "receipt": {
+          "$ref": "#/$defs/Asset"
+        },
+        "pages": {
+          "exclusiveMinimum": 0,
+          "title": "Pages",
+          "type": "integer"
+        },
+        "anchor": {
+          "$ref": "#/$defs/Anchor"
+        },
+        "archived_source": {
+          "$ref": "#/$defs/ArchivedMatch"
+        },
+        "prior_qa_original": {
+          "$ref": "#/$defs/ArchivedMatch"
+        },
+        "canonical_record": {
+          "$ref": "#/$defs/Line"
+        },
+        "prior_provenance": {
+          "$ref": "#/$defs/Line"
+        },
+        "prior_qa": {
+          "$ref": "#/$defs/Asset"
+        },
+        "prior_qa_schema": {
+          "$ref": "#/$defs/Asset"
+        },
+        "prior_qa_source_sha_pointer": {
+          "title": "Prior Qa Source Sha Pointer",
+          "type": "string"
+        },
+        "source_role": {
+          "title": "Source Role",
+          "type": "string"
+        },
+        "prior_repository_received_at": {
+          "format": "date-time",
+          "title": "Prior Repository Received At",
+          "type": "string"
+        },
+        "prior_acquisition_method": {
+          "const": "received_review_package",
+          "title": "Prior Acquisition Method",
+          "type": "string"
+        },
+        "prior_official_source_url": {
+          "title": "Prior Official Source Url",
+          "type": "null"
+        },
+        "qualifications": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 3,
+          "title": "Qualifications",
+          "type": "array"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "answer_safe": {
+          "const": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "event_id",
+        "record_id",
+        "authority_id",
+        "layer_id",
+        "body",
+        "reservation",
+        "receipt",
+        "pages",
+        "anchor",
+        "archived_source",
+        "prior_qa_original",
+        "canonical_record",
+        "prior_provenance",
+        "prior_qa",
+        "prior_qa_schema",
+        "prior_qa_source_sha_pointer",
+        "source_role",
+        "prior_repository_received_at",
+        "prior_acquisition_method",
+        "prior_official_source_url",
+        "qualifications",
+        "legal_currentness",
+        "answer_safe"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Qualified offline preservation of four recorded complete GET results.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "status": {
+      "const": "public_custody_preserved_no_canonical_change",
+      "title": "Status",
+      "type": "string"
+    },
+    "preserved_at": {
+      "format": "date-time",
+      "title": "Preserved At",
+      "type": "string"
+    },
+    "original_copies": {
+      "items": {
+        "$ref": "#/$defs/Copy"
+      },
+      "title": "Original Copies",
+      "type": "array"
+    },
+    "acquisition_script": {
+      "$ref": "#/$defs/Asset"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Sources",
+      "type": "array"
+    },
+    "fresh_parent": {
+      "$ref": "#/$defs/Asset"
+    },
+    "historical_parent": {
+      "$ref": "#/$defs/Asset"
+    },
+    "parent_byte_identity": {
+      "const": "same_exact_bytes",
+      "title": "Parent Byte Identity",
+      "type": "string"
+    },
+    "privacy_scan": {
+      "$ref": "#/$defs/Scan"
+    },
+    "recorded_public_gets": {
+      "const": 4,
+      "title": "Recorded Public Gets",
+      "type": "integer"
+    },
+    "recorded_redirects": {
+      "const": 0,
+      "title": "Recorded Redirects",
+      "type": "integer"
+    },
+    "requests_by_this_preservation": {
+      "const": 0,
+      "title": "Requests By This Preservation",
+      "type": "integer"
+    },
+    "canonical_writes": {
+      "const": 0,
+      "title": "Canonical Writes",
+      "type": "integer"
+    },
+    "total_pdf_pages": {
+      "const": 6,
+      "title": "Total Pdf Pages",
+      "type": "integer"
+    },
+    "total_pdf_bytes": {
+      "const": 877639,
+      "title": "Total Pdf Bytes",
+      "type": "integer"
+    },
+    "full_source_qa_replayed": {
+      "const": false,
+      "title": "Full Source Qa Replayed",
+      "type": "boolean"
+    },
+    "old_acquisition_claims_changed": {
+      "const": false,
+      "title": "Old Acquisition Claims Changed",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "preserved_at",
+    "original_copies",
+    "acquisition_script",
+    "sources",
+    "fresh_parent",
+    "historical_parent",
+    "parent_byte_identity",
+    "privacy_scan",
+    "recorded_public_gets",
+    "recorded_redirects",
+    "requests_by_this_preservation",
+    "canonical_writes",
+    "total_pdf_pages",
+    "total_pdf_bytes",
+    "full_source_qa_replayed",
+    "old_acquisition_claims_changed",
+    "legal_currentness",
+    "limitations"
+  ],
+  "title": "Preservation",
+  "type": "object"
+}

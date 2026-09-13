@@ -1,0 +1,197 @@
+{
+  "$defs": {
+    "Coverage": {
+      "additionalProperties": false,
+      "description": "Keep combined and branch-only measurements separate.",
+      "properties": {
+        "adapter_branch_inclusive_percent": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Adapter Branch Inclusive Percent",
+          "type": "number"
+        },
+        "helper_branch_inclusive_percent": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Helper Branch Inclusive Percent",
+          "type": "number"
+        },
+        "combined_branch_inclusive_percent": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Combined Branch Inclusive Percent",
+          "type": "number"
+        },
+        "adapter_branch_only_percent": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Adapter Branch Only Percent",
+          "type": "number"
+        },
+        "helper_branch_only_percent": {
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Helper Branch Only Percent",
+          "type": "number"
+        }
+      },
+      "required": [
+        "adapter_branch_inclusive_percent",
+        "helper_branch_inclusive_percent",
+        "combined_branch_inclusive_percent",
+        "adapter_branch_only_percent",
+        "helper_branch_only_percent"
+      ],
+      "title": "Coverage",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Confined immutable file identity.",
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Closed review receipt with explicit historical and fixture limits.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "frozen_at": {
+      "format": "date-time",
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "disposition": {
+      "const": "one_recovery_bug_fixed_focused_checks_passed",
+      "title": "Disposition",
+      "type": "string"
+    },
+    "initial_production_pin_count_verified": {
+      "const": 8,
+      "title": "Initial Production Pin Count Verified",
+      "type": "integer"
+    },
+    "production_files_changed": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Production Files Changed",
+      "type": "array"
+    },
+    "focused_tests_passed": {
+      "const": 173,
+      "title": "Focused Tests Passed",
+      "type": "integer"
+    },
+    "focused_warnings": {
+      "const": 5,
+      "title": "Focused Warnings",
+      "type": "integer"
+    },
+    "focused_duration_seconds": {
+      "const": 23.96,
+      "title": "Focused Duration Seconds",
+      "type": "number"
+    },
+    "coverage": {
+      "$ref": "#/$defs/Coverage"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "original_reproduction_clock": {
+      "const": "injected_fixture_clock",
+      "title": "Original Reproduction Clock",
+      "type": "string"
+    },
+    "regressions": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2,
+      "title": "Regressions",
+      "type": "array"
+    },
+    "full_suite_status": {
+      "const": "parent_running_separately_not_certified_here",
+      "title": "Full Suite Status",
+      "type": "string"
+    },
+    "verifier_scope": {
+      "const": "closed_hash_schema_check_only_no_code_or_network_execution",
+      "title": "Verifier Scope",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 3,
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "frozen_at",
+    "disposition",
+    "initial_production_pin_count_verified",
+    "production_files_changed",
+    "focused_tests_passed",
+    "focused_warnings",
+    "focused_duration_seconds",
+    "coverage",
+    "public_requests",
+    "original_reproduction_clock",
+    "regressions",
+    "full_suite_status",
+    "verifier_scope",
+    "files",
+    "limitations",
+    "legal_currentness"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

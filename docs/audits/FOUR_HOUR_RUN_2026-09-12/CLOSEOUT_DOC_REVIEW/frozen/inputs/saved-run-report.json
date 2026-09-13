@@ -1,0 +1,125 @@
+{
+  "status": "completed",
+  "mode": "live_http",
+  "clock_basis": "actual_utc_clock",
+  "generated_at": "2026-09-13T00:44:43.469133Z",
+  "plan_sha256": "91b4c46f7121de66d70b353405900f9d1ed3a3247718a9471ad2f1a9afa6dabb",
+  "implementation_sha256": "e1958b886a8b164b0cc4e7a890fa70c47679fdb5318c33423ac45254f60f06ea",
+  "invocation": {
+    "path": "INVOCATION.json",
+    "sha256": "b9bb47b83a1ebcec6ae923e15e94f4f88d344fa8cdeb73b5c3f88919ffd82ad1",
+    "size_bytes": 879
+  },
+  "transport_sha256": "c935ee6d74843e9214f27c5fef82d4470ec3c2b55ea5001eade594cc6a8de2ae",
+  "authorization_basis": "operator_supplied_time_and_plan_digest_not_independent_proof",
+  "dispatch_at": "2026-09-13T00:44:41.691307Z",
+  "stop_reason": null,
+  "state": {
+    "request_count": 2,
+    "distinct_urls": [
+      "https://coloradosprings.gov/system/files/2026-07/2026%20Fee%20Schedule%20Construction%20Services.pdf",
+      "https://coloradosprings.gov/system/files/feeschedule_codeservices_final_2015.pdf"
+    ],
+    "charged_bytes": 421075,
+    "source_charged_bytes": {
+      "SD014-01": 162682,
+      "SD014-02": 258393
+    }
+  },
+  "observations": [
+    {
+      "source_id": "SD014-01",
+      "canonical_source_id": "colorado-springs-code-services-fees-2015-atlas-directed",
+      "authority_id": "CO-MUNICIPAL-COLORADO_SPRINGS",
+      "requested_url": "https://coloradosprings.gov/system/files/feeschedule_codeservices_final_2015.pdf",
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/colorado-springs-code-services-fees-2015-atlas-directed/20260912T235616Z_feeschedule_codeservices_final_2015.pdf",
+        "sha256": "555570a62a5a557a824d1bcf3ecd2e60d57e48d19ea401f06a2e5b7ccb177e56",
+        "size_bytes": 162682
+      },
+      "baseline_request_started_at": "2026-09-12T23:10:46.169682Z",
+      "baseline_response_finished_at": "2026-09-12T23:10:46.652367Z",
+      "repository_received_at": "2026-09-12T23:56:16.492216Z",
+      "intake_id": "MSI-20260912T235616492216Z-colorado-springs-code-services-fees-2015-atlas-directed",
+      "source_context": [
+        "City of Colorado Springs / Colorado Springs Fire Department issuer; county and PPRBD are not substituted as issuer.",
+        "Visible source title is 2015 Fee Schedule - Code Services; the year does not establish current applicability.",
+        "Some PDF text-layer material is white-on-white and definition reading order is incomplete. No table or legal-currentness certification is made."
+      ],
+      "status": "unchanged",
+      "reason": "Exact bytes equal the pinned prior original",
+      "events": [
+        1
+      ],
+      "request_started_at": "2026-09-13T00:44:41.859021Z",
+      "response_finished_at": "2026-09-13T00:44:42.707400Z",
+      "response_url": "https://coloradosprings.gov/system/files/feeschedule_codeservices_final_2015.pdf",
+      "http_status": 200,
+      "response_body": {
+        "path": "events/0001/body.bin",
+        "sha256": "555570a62a5a557a824d1bcf3ecd2e60d57e48d19ea401f06a2e5b7ccb177e56",
+        "size_bytes": 162682
+      },
+      "response_public_headers": {
+        "path": "events/0001/public-headers.json",
+        "sha256": "c304b5861d2b250da3a9f4f9e32e2f5b51f6e07edc21274aeb9a1e2b8a2c0ad5",
+        "size_bytes": 389
+      },
+      "valid_pdf_pages": 7,
+      "bytes_equal_to_baseline": true,
+      "review_needed": false,
+      "legal_currentness": "not_verified",
+      "inferred_legal_change": null,
+      "canonical_update": "not_attempted"
+    },
+    {
+      "source_id": "SD014-02",
+      "canonical_source_id": "colorado-springs-construction-fees-atlas-directed",
+      "authority_id": "CO-MUNICIPAL-COLORADO_SPRINGS",
+      "requested_url": "https://coloradosprings.gov/system/files/2026-07/2026%20Fee%20Schedule%20Construction%20Services.pdf",
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/colorado-springs-construction-fees-atlas-directed/20260912T235616Z_2026_Fee_Schedule_Construction_Services.pdf",
+        "sha256": "e35de501a011fe55f03140bf91aef54226997d896fec0b6308a2eac9bd40909a",
+        "size_bytes": 258393
+      },
+      "baseline_request_started_at": "2026-09-12T23:10:46.676197Z",
+      "baseline_response_finished_at": "2026-09-12T23:10:47.380038Z",
+      "repository_received_at": "2026-09-12T23:56:16.492216Z",
+      "intake_id": "MSI-20260912T235616492216Z-colorado-springs-construction-fees-atlas-directed",
+      "source_context": [
+        "City of Colorado Springs / Colorado Springs Fire Department issuer; PPRBD collection role is distinct.",
+        "Effective 07/01/2026 is a source claim, not independently verified adoption or present applicability.",
+        "Code Services cross-reference does not specify its edition; no supersession or combined fee computation is inferred."
+      ],
+      "status": "unchanged",
+      "reason": "Exact bytes equal the pinned prior original",
+      "events": [
+        2
+      ],
+      "request_started_at": "2026-09-13T00:44:42.733508Z",
+      "response_finished_at": "2026-09-13T00:44:43.369709Z",
+      "response_url": "https://coloradosprings.gov/system/files/2026-07/2026%20Fee%20Schedule%20Construction%20Services.pdf",
+      "http_status": 200,
+      "response_body": {
+        "path": "events/0002/body.bin",
+        "sha256": "e35de501a011fe55f03140bf91aef54226997d896fec0b6308a2eac9bd40909a",
+        "size_bytes": 258393
+      },
+      "response_public_headers": {
+        "path": "events/0002/public-headers.json",
+        "sha256": "23354cc4b1a9f24dc2150e7d3f9d7e2c023f76ec8f90f191abbd1ae03595fbe2",
+        "size_bytes": 409
+      },
+      "valid_pdf_pages": 7,
+      "bytes_equal_to_baseline": true,
+      "review_needed": false,
+      "legal_currentness": "not_verified",
+      "inferred_legal_change": null,
+      "canonical_update": "not_attempted"
+    }
+  ],
+  "legal_currentness": "not_verified",
+  "publication_status": "not_attempted",
+  "scheduler_installed": false,
+  "baseline_updated": false
+}

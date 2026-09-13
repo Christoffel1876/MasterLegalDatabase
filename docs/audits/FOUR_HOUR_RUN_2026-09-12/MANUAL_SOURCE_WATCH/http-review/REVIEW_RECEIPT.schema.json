@@ -1,0 +1,145 @@
+{
+  "$defs": {
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "scope": {
+          "title": "Scope",
+          "type": "string"
+        },
+        "observed": {
+          "title": "Observed",
+          "type": "string"
+        },
+        "resolution": {
+          "title": "Resolution",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "scope",
+        "observed",
+        "resolution"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "const": "offline_transport_review",
+      "default": "offline_transport_review",
+      "title": "Kind",
+      "type": "string"
+    },
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "reviewed_sources": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Reviewed Sources",
+      "type": "array"
+    },
+    "tests_passed": {
+      "title": "Tests Passed",
+      "type": "integer"
+    },
+    "covered_statements": {
+      "title": "Covered Statements",
+      "type": "integer"
+    },
+    "total_statements": {
+      "title": "Total Statements",
+      "type": "integer"
+    },
+    "covered_branches": {
+      "title": "Covered Branches",
+      "type": "integer"
+    },
+    "total_branches": {
+      "title": "Total Branches",
+      "type": "integer"
+    },
+    "combined_coverage_percent": {
+      "title": "Combined Coverage Percent",
+      "type": "number"
+    },
+    "test_log": {
+      "$ref": "#/$defs/Ref"
+    },
+    "coverage": {
+      "$ref": "#/$defs/Ref"
+    },
+    "command": {
+      "title": "Command",
+      "type": "string"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "reviewed_sources",
+    "tests_passed",
+    "covered_statements",
+    "total_statements",
+    "covered_branches",
+    "total_branches",
+    "combined_coverage_percent",
+    "test_log",
+    "coverage",
+    "command",
+    "findings",
+    "limits"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

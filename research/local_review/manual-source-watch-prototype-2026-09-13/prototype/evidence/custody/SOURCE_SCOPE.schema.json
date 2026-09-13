@@ -1,0 +1,391 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "InvisibleText": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "const": "SD014-01",
+          "default": "SD014-01",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "exact_text": {
+          "title": "Exact Text",
+          "type": "string"
+        },
+        "pdf_bbox": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Pdf Bbox",
+          "type": "array"
+        },
+        "trace_sequence": {
+          "title": "Trace Sequence",
+          "type": "integer"
+        },
+        "text_rgb": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Text Rgb",
+          "type": "array"
+        },
+        "opacity": {
+          "title": "Opacity",
+          "type": "number"
+        },
+        "rendered_bbox": {
+          "$ref": "#/$defs/Asset"
+        },
+        "rgb_bytes": {
+          "title": "Rgb Bytes",
+          "type": "integer"
+        },
+        "every_rgb_component_255": {
+          "title": "Every Rgb Component 255",
+          "type": "boolean"
+        },
+        "conclusion": {
+          "const": "native_text_present_but_not_visible_in_checked_white_region",
+          "title": "Conclusion",
+          "type": "string"
+        }
+      },
+      "required": [
+        "physical_page",
+        "exact_text",
+        "pdf_bbox",
+        "trace_sequence",
+        "text_rgb",
+        "opacity",
+        "rendered_bbox",
+        "rgb_bytes",
+        "every_rgb_component_255",
+        "conclusion"
+      ],
+      "title": "InvisibleText",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "rendering": {
+          "$ref": "#/$defs/Asset"
+        },
+        "rendering_rgb_reproduced": {
+          "title": "Rendering Rgb Reproduced",
+          "type": "boolean"
+        },
+        "directly_viewed_for_structure": {
+          "title": "Directly Viewed For Structure",
+          "type": "boolean"
+        },
+        "complete_table_cell_qa": {
+          "const": false,
+          "default": false,
+          "title": "Complete Table Cell Qa",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "physical_page",
+        "native",
+        "rendering",
+        "rendering_rgb_reproduced",
+        "directly_viewed_for_structure"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Passage": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "native_file": {
+          "$ref": "#/$defs/Asset"
+        },
+        "start_byte": {
+          "title": "Start Byte",
+          "type": "integer"
+        },
+        "end_byte": {
+          "title": "End Byte",
+          "type": "integer"
+        },
+        "exact_text": {
+          "title": "Exact Text",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "interpretation_limit": {
+          "title": "Interpretation Limit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "physical_page",
+        "label",
+        "native_file",
+        "start_byte",
+        "end_byte",
+        "exact_text",
+        "sha256",
+        "interpretation_limit"
+      ],
+      "title": "Passage",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-MUNICIPAL-COLORADO_SPRINGS",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "original": {
+          "$ref": "#/$defs/Asset"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "request_started_at": {
+          "format": "date-time",
+          "title": "Request Started At",
+          "type": "string"
+        },
+        "response_finished_at": {
+          "format": "date-time",
+          "title": "Response Finished At",
+          "type": "string"
+        },
+        "response_status": {
+          "const": 200,
+          "title": "Response Status",
+          "type": "integer"
+        },
+        "response_complete": {
+          "const": true,
+          "title": "Response Complete",
+          "type": "boolean"
+        },
+        "redirect_count": {
+          "const": 0,
+          "title": "Redirect Count",
+          "type": "integer"
+        },
+        "reservation": {
+          "$ref": "#/$defs/Asset"
+        },
+        "result": {
+          "$ref": "#/$defs/Asset"
+        },
+        "public_headers": {
+          "$ref": "#/$defs/Asset"
+        },
+        "parent_html": {
+          "$ref": "#/$defs/Asset"
+        },
+        "parent_reservation": {
+          "$ref": "#/$defs/Asset"
+        },
+        "parent_result": {
+          "$ref": "#/$defs/Asset"
+        },
+        "parent_public_headers": {
+          "$ref": "#/$defs/Asset"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/Page"
+          },
+          "title": "Pages",
+          "type": "array"
+        },
+        "printed_title": {
+          "title": "Printed Title",
+          "type": "string"
+        },
+        "printed_date_claim": {
+          "title": "Printed Date Claim",
+          "type": "string"
+        },
+        "role_observations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Role Observations",
+          "type": "array"
+        },
+        "verified_effective_date": {
+          "default": null,
+          "title": "Verified Effective Date",
+          "type": "null"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "authority_id",
+        "original",
+        "requested_url",
+        "request_started_at",
+        "response_finished_at",
+        "response_status",
+        "response_complete",
+        "redirect_count",
+        "reservation",
+        "result",
+        "public_headers",
+        "parent_html",
+        "parent_reservation",
+        "parent_result",
+        "parent_public_headers",
+        "pages",
+        "printed_title",
+        "printed_date_claim",
+        "role_observations"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "source_custody_and_bounded_structure_review",
+      "title": "Status",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "selected_passages": {
+      "items": {
+        "$ref": "#/$defs/Passage"
+      },
+      "title": "Selected Passages",
+      "type": "array"
+    },
+    "native_white_text": {
+      "items": {
+        "$ref": "#/$defs/InvisibleText"
+      },
+      "title": "Native White Text",
+      "type": "array"
+    },
+    "acquisition_plan": {
+      "$ref": "#/$defs/Asset"
+    },
+    "acquisition_guard": {
+      "$ref": "#/$defs/Asset"
+    },
+    "acquisition_link_provenance": {
+      "$ref": "#/$defs/Asset"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "canonical_intake_performed": {
+      "const": false,
+      "default": false,
+      "title": "Canonical Intake Performed",
+      "type": "boolean"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "sources",
+    "selected_passages",
+    "native_white_text",
+    "acquisition_plan",
+    "acquisition_guard",
+    "acquisition_link_provenance",
+    "limitations"
+  ],
+  "title": "Scope",
+  "type": "object"
+}

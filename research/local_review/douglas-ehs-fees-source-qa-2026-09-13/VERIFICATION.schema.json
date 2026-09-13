@@ -1,0 +1,140 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "One exact package-relative original or derived file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Bind offline tests and render replay without claiming legal accuracy.",
+  "properties": {
+    "status": {
+      "const": "passed",
+      "title": "Status",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "test_count": {
+      "minimum": 12,
+      "title": "Test Count",
+      "type": "integer"
+    },
+    "tests_stdout": {
+      "$ref": "#/$defs/Asset"
+    },
+    "tests_stderr": {
+      "$ref": "#/$defs/Asset"
+    },
+    "validation_stdout": {
+      "$ref": "#/$defs/Asset"
+    },
+    "validation_stderr": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_qa_unchanged": {
+      "const": true,
+      "title": "Source Qa Unchanged",
+      "type": "boolean"
+    },
+    "frozen_pass1_unchanged": {
+      "const": true,
+      "title": "Frozen Pass1 Unchanged",
+      "type": "boolean"
+    },
+    "source_unchanged": {
+      "const": true,
+      "title": "Source Unchanged",
+      "type": "boolean"
+    },
+    "branch_inclusive_coverage": {
+      "maximum": 100,
+      "minimum": 90,
+      "title": "Branch Inclusive Coverage",
+      "type": "number"
+    },
+    "coverage": {
+      "$ref": "#/$defs/Asset"
+    },
+    "native_replayed": {
+      "const": true,
+      "title": "Native Replayed",
+      "type": "boolean"
+    },
+    "original_full_png_replayed": {
+      "const": true,
+      "title": "Original Full Png Replayed",
+      "type": "boolean"
+    },
+    "five_crops_replayed": {
+      "const": true,
+      "title": "Five Crops Replayed",
+      "type": "boolean"
+    },
+    "independent_poppler_replayed": {
+      "const": true,
+      "title": "Independent Poppler Replayed",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "started_at",
+    "completed_at",
+    "test_count",
+    "tests_stdout",
+    "tests_stderr",
+    "validation_stdout",
+    "validation_stderr",
+    "source_qa_unchanged",
+    "frozen_pass1_unchanged",
+    "source_unchanged",
+    "branch_inclusive_coverage",
+    "coverage",
+    "native_replayed",
+    "original_full_png_replayed",
+    "five_crops_replayed",
+    "independent_poppler_replayed",
+    "limitations"
+  ],
+  "title": "Verification",
+  "type": "object"
+}

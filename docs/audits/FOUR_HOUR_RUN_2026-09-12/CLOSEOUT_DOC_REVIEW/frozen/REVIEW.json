@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-09-13T00:57:51.589125Z",
+  "status": "scoped_no_actionable_findings",
+  "reviewed_files": [
+    {
+      "path": "docs/MANUAL_SOURCE_WATCH.md",
+      "sha256": "6659631153bf7d4232e644b906f737888f3ec2c1d331d97ae186447aa00ea263",
+      "size_bytes": 7085
+    },
+    {
+      "path": "docs/PDF_SOURCE_REVIEW.md",
+      "sha256": "bc9727c0964b21e9e8b48622de88e35922dae5718a46f5164b240cbc1e2d3ce2",
+      "size_bytes": 6137
+    },
+    {
+      "path": "README.md",
+      "sha256": "a67ff0e82b41bf82ca46538da55bbde46a7894f3990d7948c28fcbc06e6a2494",
+      "size_bytes": 8815
+    }
+  ],
+  "supporting_metadata": [
+    {
+      "path": "research/local_review/manual-source-watch-live-2026-09-13/README.md",
+      "sha256": "e079db50edbf3a0529f35ca6e412c2a9a1be053dc9e4ce797e13e415e32ab9c8",
+      "size_bytes": 1242
+    },
+    {
+      "path": "research/local_review/manual-source-watch-live-2026-09-13/FINAL_MANIFEST.json",
+      "sha256": "391d4fb3e05f961609811ce159fef1d09ab189ae157202c079796587264e9454",
+      "size_bytes": 6872
+    },
+    {
+      "path": "research/local_review/manual-source-watch-live-2026-09-13/ACCEPTANCE.json",
+      "sha256": "ccd13655c7df7a17cb00ff616429150b00cca17d62268df048d4147eeb664642",
+      "size_bytes": 8003
+    },
+    {
+      "path": "research/local_review/manual-source-watch-live-2026-09-13/run/report.json",
+      "sha256": "5891947bd35c2f13a6858ef1ac1723edff2ae55aded7e2943fcbaa5c853a32b1",
+      "size_bytes": 5977
+    },
+    {
+      "path": "research/local_review/manual-source-watch-live-2026-09-13/dispatch/EXPIRED_REPLAY.json",
+      "sha256": "2d37b9d7aee3cec5bca1995308b98e82b6e11af35797db5de4e97636f955a80c",
+      "size_bytes": 579
+    },
+    {
+      "path": "research/local_review/manual-source-watch-live-2026-09-13/checks/watch-full-suite.log",
+      "sha256": "4f3e1b6aaac3eee88b3c9278bbfd5ecd7cd977aa43d825f71bea67d1f5cf0b65",
+      "size_bytes": 48724
+    },
+    {
+      "path": "research/local_review/manual-source-watch-live-2026-09-13/verify_copy.py",
+      "sha256": "42788a5b4349fc81b40bbdf79f278fca3bbc8f724271bab512852b771a2bf1ee",
+      "size_bytes": 8105
+    },
+    {
+      "path": "config/manual_source_watch.json",
+      "sha256": "91b4c46f7121de66d70b353405900f9d1ed3a3247718a9471ad2f1a9afa6dabb",
+      "size_bytes": 6483
+    },
+    {
+      "path": "geode/pipeline/manual_source_watch.py",
+      "sha256": "e1958b886a8b164b0cc4e7a890fa70c47679fdb5318c33423ac45254f60f06ea",
+      "size_bytes": 41311
+    },
+    {
+      "path": "geode/pipeline/manual_watch_http.py",
+      "sha256": "c935ee6d74843e9214f27c5fef82d4470ec3c2b55ea5001eade594cc6a8de2ae",
+      "size_bytes": 31734
+    },
+    {
+      "path": "scripts/research_scanned_fee_lookup.py",
+      "sha256": "27ddcafd68cb72c071b072e6caea741a3c62175d07c0a8febe499f5edc522cc3",
+      "size_bytes": 22376
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "e92577980bbab233ac33e675c475e1a985c3a75b31d1aa831df97ebf10feeb33",
+      "size_bytes": 3286
+    },
+    {
+      "path": "geode/connectors/run.py",
+      "sha256": "9cf36c9a79118766df44f849ed102d1ee72487e529e2fac5e95d880210c1e87c",
+      "size_bytes": 12199
+    },
+    {
+      "path": "geode/search/index.py",
+      "sha256": "070ee6b7edc50eeee82d3cc88f19f9d3568a047909f1500d1537d283bfdf37ac",
+      "size_bytes": 17884
+    }
+  ],
+  "checks": [
+    {
+      "check_id": "D01",
+      "method": "executed_offline",
+      "command_or_scope": "/private/tmp/geode-status-venv/bin/python -I -B <repo>/research/local_review/manual-source-watch-live-2026-09-13/verify_copy.py; cwd=/private/tmp",
+      "exit_code": 0,
+      "result": "Portable verifier passed 42 saved files, two recorded unchanged responses, 421075 retained bytes and source/PDF/schema/time/URL/classification bindings; zero verifier requests and no saved implementation execution.",
+      "limits": "This verified saved custody consistency, not a new live check or independent legal-currentness review."
+    },
+    {
+      "check_id": "D02",
+      "method": "executed_offline",
+      "command_or_scope": "PYTHONPATH=<repo> PYTHONDONTWRITEBYTECODE=1 /private/tmp/geode-status-venv/bin/python -B -m geode.pipeline.manual_source_watch --root <repo>; cwd=/private/tmp",
+      "exit_code": 0,
+      "result": "The documented outside-repository readiness command passed at 2026-09-13T00:55:33.592657Z: 61 manual records, 61 locally hash-verified PDFs, two configured and 59 unselected; prior prototype time remains explicitly separate.",
+      "limits": "Readiness is not scheduling, currentness, or a new public acquisition."
+    },
+    {
+      "check_id": "D03",
+      "method": "executed_offline",
+      "command_or_scope": "PYTHONDONTWRITEBYTECODE=1 /private/tmp/geode-status-venv/bin/python -B scripts/research_scanned_fee_lookup.py --root . --source-id el-paso-planning-fees-sd011 --query Erosion --format markdown; cwd=<repo>",
+      "exit_code": 0,
+      "result": "README example passed with four matching rows, source/image/review links, three General Notes, global footnote1, unresolved clipped-tail flag, unknown verified adoption/effectiveness and answer_safe=false.",
+      "limits": "Used the project Python environment in place of its generic python token. No fee was calculated and no new visual review was performed."
+    },
+    {
+      "check_id": "D04",
+      "method": "executed_offline",
+      "command_or_scope": "PYTHONPATH=<repo> PYTHONDONTWRITEBYTECODE=1 /private/tmp/geode-status-venv/bin/python -B -m geode.pipeline.manual_source_watch --root <repo> --verify-run atlas-maintained-20260913T004429Z; cwd=/private/tmp",
+      "exit_code": 0,
+      "result": "Installed maintained offline verifier returned the original completed report, dispatch00:44:41.691307Z, generated00:44:43.469133Z, two unchanged HTTP200 observations and421075bytes.",
+      "limits": "Used the actual retained run ID. The guide uses springs-reviewed-check-001 as an illustrative name paired with its preceding execution example; this review did not run --execute."
+    },
+    {
+      "check_id": "D05",
+      "method": "static_read_only",
+      "command_or_scope": "Resolve Markdown relative links in the three requested documentation files.",
+      "exit_code": null,
+      "result": "All13 relative file targets exist: one in the watch guide, one in the PDF review guide and11 in README.",
+      "limits": "Remote links were not opened; link existence is not certification of linked content."
+    },
+    {
+      "check_id": "D06",
+      "method": "static_read_only",
+      "command_or_scope": "Compare documented run claims with ACCEPTANCE.json, saved report, EXPIRED_REPLAY.json and saved full-suite log.",
+      "exit_code": null,
+      "result": "Exact reported times, two seven-page originals,421075bytes, unchanged statuses, later zero-transport replay, and2548passed/49warnings pre-run suite are supported. Current helper/adapter hashes match the saved implementation.",
+      "limits": "This task did not rerun the full suite or the expired replay. Those historical checks remain separately recorded evidence."
+    },
+    {
+      "check_id": "D07",
+      "method": "static_read_only",
+      "command_or_scope": "Read pyproject console entry points and search-index, bulk connector, watch and scanned-lookup argument declarations.",
+      "exit_code": null,
+      "result": "Documented command names and shown flags are declared. Bulk connector names ccr/colorado_register/all and delay/discovery-delay options are supported; watch execution requires exact digest and run name.",
+      "limits": "Installation, API startup, index rebuild, corpus validation, integrity checks, bulk acquisition and live execution were not run. These broader paths are not certified operational by this review."
+    },
+    {
+      "check_id": "D08",
+      "method": "static_read_only",
+      "command_or_scope": "Read all three complete documentation files and the accepted live-packet README for source/review/currentness and method claims.",
+      "exit_code": null,
+      "result": "Documents distinguish custody, source fidelity and currentness; retain source-only lookup, partial-review and nonblind limits; separate one finite maintained run from prototype and recurring deployment; define unchanged as exact bytes at a fixed URL.",
+      "limits": "No claim of statewide completeness or production answer readiness is accepted through this review. Existing historical corpus blockers remain outside these checks."
+    }
+  ],
+  "actionable_findings": [],
+  "qualifications": [
+    "Scope is the exact three documentation versions and accepted maintained live packet identified here. Later document or code changes require their own assessment.",
+    "Readiness counts reflect its actual00:55:33UTC result. They do not certify ongoing freshness, all-source monitoring, or the evolving number of mapped review packages.",
+    "No scheduler or publisher was activated, no HTTP request was made, and no production, raw, coverage or configuration file was modified.",
+    "The full2548-test claim is supported by the saved pre-run log; those tests were not executed by this documentation review.",
+    "The guide’s hypothetical springs-reviewed-check-001 run name is an example, not a claim that such a saved run exists. The actual saved run was verified under atlas-maintained-20260913T004429Z.",
+    "No substantive visual PDF review was attempted. Package structure/hash checks and the source-only lookup do not authenticate adoption, supersession or legal applicability."
+  ],
+  "production_writes": 0,
+  "new_public_requests": 0,
+  "legal_currentness": "not_verified"
+}

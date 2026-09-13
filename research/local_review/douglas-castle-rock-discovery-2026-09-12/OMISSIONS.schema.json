@@ -1,0 +1,131 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Identify an unchanged file using an exact relative path, size and SHA256.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Omission": {
+      "additionalProperties": false,
+      "description": "Retain custody of an excluded original without exposing its contents.",
+      "properties": {
+        "event_id": {
+          "pattern": "^E\\d{3}$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "original": {
+          "$ref": "#/$defs/Asset"
+        },
+        "retained_public_derivative": {
+          "$ref": "#/$defs/Asset"
+        },
+        "sensitive_header_names": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Sensitive Header Names",
+          "type": "array"
+        },
+        "derivative_verified_locally_before_omission": {
+          "const": true,
+          "default": true,
+          "title": "Derivative Verified Locally Before Omission",
+          "type": "boolean"
+        },
+        "portable_derivation_replay": {
+          "const": false,
+          "default": false,
+          "title": "Portable Derivation Replay",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "event_id",
+        "original",
+        "retained_public_derivative",
+        "sensitive_header_names"
+      ],
+      "title": "Omission",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Record all original response-header omissions, including nonsensitive originals.",
+  "properties": {
+    "status": {
+      "const": "public_subset_private_originals_omitted",
+      "title": "Status",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "original_directory_claim": {
+      "title": "Original Directory Claim",
+      "type": "string"
+    },
+    "original_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_payloads": {
+      "const": 716,
+      "default": 716,
+      "title": "Original Payloads",
+      "type": "integer"
+    },
+    "omitted_private_headers": {
+      "items": {
+        "$ref": "#/$defs/Omission"
+      },
+      "maxItems": 31,
+      "minItems": 31,
+      "title": "Omitted Private Headers",
+      "type": "array"
+    },
+    "locally_observed_sensitive_header_events": {
+      "const": 7,
+      "default": 7,
+      "title": "Locally Observed Sensitive Header Events",
+      "type": "integer"
+    },
+    "qualification": {
+      "title": "Qualification",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "prepared_at",
+    "original_directory_claim",
+    "original_manifest",
+    "omitted_private_headers",
+    "qualification"
+  ],
+  "title": "Omissions",
+  "type": "object"
+}

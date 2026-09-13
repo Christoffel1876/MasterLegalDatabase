@@ -1,0 +1,183 @@
+{
+  "$defs": {
+    "Event": {
+      "additionalProperties": false,
+      "description": "An observed response or transport failure, never inferred HTTP success.",
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "completed_at": {
+          "format": "date-time",
+          "title": "Completed At",
+          "type": "string"
+        },
+        "curl_exit": {
+          "title": "Curl Exit",
+          "type": "integer"
+        },
+        "http_status": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Http Status"
+        },
+        "final_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Final Url"
+        },
+        "content_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Content Type"
+        },
+        "redirect_location": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Redirect Location"
+        },
+        "body": {
+          "$ref": "#/$defs/Ref"
+        },
+        "private_headers": {
+          "$ref": "#/$defs/Ref"
+        },
+        "public_headers": {
+          "$ref": "#/$defs/Ref"
+        },
+        "removed_header_names": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Removed Header Names",
+          "type": "array"
+        },
+        "metadata": {
+          "$ref": "#/$defs/Ref"
+        },
+        "stderr": {
+          "$ref": "#/$defs/Ref"
+        },
+        "outcome": {
+          "title": "Outcome",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "requested_url",
+        "basis",
+        "started_at",
+        "completed_at",
+        "curl_exit",
+        "http_status",
+        "final_url",
+        "content_type",
+        "redirect_location",
+        "body",
+        "private_headers",
+        "public_headers",
+        "removed_header_names",
+        "metadata",
+        "stderr",
+        "outcome"
+      ],
+      "title": "Event",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "An exact retained local file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Ordered actual outcomes, including the failed local DNS attempt.",
+  "properties": {
+    "status": {
+      "const": "closed_no_further_requests",
+      "title": "Status",
+      "type": "string"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
+      "maxItems": 31,
+      "minItems": 31,
+      "title": "Events",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "events"
+  ],
+  "title": "AttemptLog",
+  "type": "object"
+}

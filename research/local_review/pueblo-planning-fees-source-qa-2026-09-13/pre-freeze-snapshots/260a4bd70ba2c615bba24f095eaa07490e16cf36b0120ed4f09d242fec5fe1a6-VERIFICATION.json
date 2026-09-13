@@ -1,0 +1,80 @@
+{
+  "recorded_at": "2026-09-13T00:39:29.801122+00:00",
+  "source_qa": {
+    "path": "SOURCE_QA.json",
+    "sha256": "3d07a5d4de0b89814561e8e40a4bca50501e6c948be0755a57c7bd60fbefdfa2",
+    "size_bytes": 166188
+  },
+  "frozen_initial_inputs": {
+    "path": "PRESERVED_INPUTS.json",
+    "sha256": "9fecc15db682edc6d2ad795238f69dd64670b9836c7bf2cde73f4f1efd4c9da4",
+    "size_bytes": 2542
+  },
+  "implementation": [
+    {
+      "path": "qa_model.py",
+      "sha256": "bcc8b12d47c9e50b51e42d02fcaa5f2c15bbdcb99cddbcc0263d85f376953b6a",
+      "size_bytes": 11496
+    },
+    {
+      "path": "validate_qa.py",
+      "sha256": "8ade7fb6a21bfcf7e7e99880cd314f9e2ed23204544b20be3a2bce39f4ace1f4",
+      "size_bytes": 8105
+    },
+    {
+      "path": "test_qa.py",
+      "sha256": "b86aae8f736da7c4cdace9004e4525abef3fde217e17807fce26555efd0fa96f",
+      "size_bytes": 10594
+    }
+  ],
+  "final_test_log": {
+    "path": "tests-accepted.log",
+    "sha256": "5d3b10f1840b2f923caa49fd33ac7c131f03c1068657e6503974935235976040",
+    "size_bytes": 2065
+  },
+  "final_coverage": {
+    "path": "coverage-accepted.json",
+    "sha256": "208b7abca68b60e1c3916062b5c133dc575bafe6d33eba9fdcd2c7ffe4fd961f",
+    "size_bytes": 28853
+  },
+  "passed_tests": 65,
+  "branch_inclusive_coverage": 92.6829268292683,
+  "module_coverages": {
+    "qa_model.py": 94.56521739130434,
+    "validate_qa.py": 89.71428571428571
+  },
+  "payload_verification": "native_tables_custody_and_source_pixels_replayed_before_closure",
+  "runtime": {
+    "python": "3.14.3",
+    "pymupdf": "1.28.2",
+    "poppler": "pdftoppm version 26.05.0"
+  },
+  "native_method": "Each source PDF page.get_text(\"text\") with PyMuPDF defaults is UTF-8 encoded without cleanup; every retained native file is reproduced exactly. Geometry comes from get_text(\"dict\") and actual table-border drawing rectangles. One page1 whitespace-only native line has no matching dict geometry and is retained with bbox null.",
+  "original_native_extraction_time": null,
+  "render_attempts": [
+    {
+      "renderer": "pdftoppm",
+      "outcome": "interrupted_configuration_errors",
+      "dpi": 160,
+      "exit_status": 130,
+      "observation": "The first local attempt lacked usable fontconfig/cache settings, repeatedly reported configuration errors and was stopped. Its complete output was not archived here; it is not cited as successful image evidence. No original source was changed.",
+      "output_paths": []
+    },
+    {
+      "renderer": "pdftoppm version 26.05.0",
+      "outcome": "completed",
+      "dpi": 160,
+      "exit_status": 0,
+      "observation": "The second local attempt used poppler-fontconfig.xml with system font directories and /private/tmp/pueblo-qa-fontcache. All four resulting full-page images were directly viewed. The cache is not a distributable source artifact; the verifier does not recreate it.",
+      "output_paths": [
+        "poppler/page-1.png",
+        "poppler/page-2.png",
+        "poppler/page-3.png",
+        "poppler/page-4.png"
+      ]
+    }
+  ],
+  "public_requests": 0,
+  "canonical_writes": 0,
+  "legal_currentness": "not_verified"
+}

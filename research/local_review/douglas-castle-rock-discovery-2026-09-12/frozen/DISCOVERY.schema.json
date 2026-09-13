@@ -1,0 +1,670 @@
+{
+  "$defs": {
+    "ChecklistRow": {
+      "additionalProperties": false,
+      "description": "Category discovery status, never a complete law-coverage claim.",
+      "properties": {
+        "authority_id": {
+          "enum": [
+            "CO-COUNTY-DOUGLAS",
+            "CO-MUNICIPAL-CASTLE_ROCK"
+          ],
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            "identity_service_area",
+            "codified_rules",
+            "adopted_changes",
+            "land_use_zoning",
+            "building_fire",
+            "permits_licenses",
+            "fees",
+            "taxes",
+            "health_environment",
+            "roads_utilities",
+            "enforcement_appeals",
+            "policies_guidance"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "candidate_found",
+            "searched_not_found",
+            "access_blocked",
+            "not_searched"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "event_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Event Ids",
+          "type": "array"
+        },
+        "evidence_role": {
+          "title": "Evidence Role",
+          "type": "string"
+        },
+        "substantive_text_retained": {
+          "title": "Substantive Text Retained",
+          "type": "boolean"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "authority_id",
+        "category",
+        "status",
+        "event_ids",
+        "evidence_role",
+        "substantive_text_retained",
+        "qualification"
+      ],
+      "title": "ChecklistRow",
+      "type": "object"
+    },
+    "DiscoveredLink": {
+      "additionalProperties": false,
+      "description": "Distinct discovered URL and actual opened/unopened disposition.",
+      "properties": {
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "observations": {
+          "items": {
+            "$ref": "#/$defs/LinkObservation"
+          },
+          "title": "Observations",
+          "type": "array"
+        },
+        "event_ids_opened": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Event Ids Opened",
+          "type": "array"
+        },
+        "disposition": {
+          "enum": [
+            "opened",
+            "unopened",
+            "not_public_https_source_target"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "url",
+        "observations",
+        "event_ids_opened",
+        "disposition",
+        "reason"
+      ],
+      "title": "DiscoveredLink",
+      "type": "object"
+    },
+    "LinkObservation": {
+      "additionalProperties": false,
+      "description": "A discovered source anchor's exact retained position.",
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "anchor_index_zero_based": {
+          "title": "Anchor Index Zero Based",
+          "type": "integer"
+        },
+        "href": {
+          "title": "Href",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "anchor_index_zero_based",
+        "href",
+        "label"
+      ],
+      "title": "LinkObservation",
+      "type": "object"
+    },
+    "Priority": {
+      "additionalProperties": false,
+      "description": "Exactly one pending source resource; successful response is separate from law text.",
+      "properties": {
+        "priority_id": {
+          "pattern": "^DCR-(0[1-9]|1[0-2])$",
+          "title": "Priority Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "enum": [
+            "CO-COUNTY-DOUGLAS",
+            "CO-MUNICIPAL-CASTLE_ROCK"
+          ],
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "body": {
+          "$ref": "#/$defs/Ref"
+        },
+        "evidence_role": {
+          "title": "Evidence Role",
+          "type": "string"
+        },
+        "substantive_text_retained": {
+          "title": "Substantive Text Retained",
+          "type": "boolean"
+        },
+        "pdf_pages": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pdf Pages"
+        },
+        "categories": {
+          "items": {
+            "enum": [
+              "identity_service_area",
+              "codified_rules",
+              "adopted_changes",
+              "land_use_zoning",
+              "building_fire",
+              "permits_licenses",
+              "fees",
+              "taxes",
+              "health_environment",
+              "roads_utilities",
+              "enforcement_appeals",
+              "policies_guidance"
+            ],
+            "type": "string"
+          },
+          "title": "Categories",
+          "type": "array"
+        },
+        "source_statements": {
+          "items": {
+            "$ref": "#/$defs/Statement"
+          },
+          "title": "Source Statements",
+          "type": "array"
+        },
+        "limits": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limits",
+          "type": "array"
+        },
+        "intake_status": {
+          "const": "pending_root_verification",
+          "default": "pending_root_verification",
+          "title": "Intake Status",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "verified_adoption_date": {
+          "default": null,
+          "title": "Verified Adoption Date",
+          "type": "null"
+        },
+        "verified_effective_date": {
+          "default": null,
+          "title": "Verified Effective Date",
+          "type": "null"
+        }
+      },
+      "required": [
+        "priority_id",
+        "authority_id",
+        "title",
+        "event_id",
+        "url",
+        "body",
+        "evidence_role",
+        "substantive_text_retained",
+        "pdf_pages",
+        "categories",
+        "source_statements",
+        "limits"
+      ],
+      "title": "Priority",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "An exact retained local file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "Referral": {
+      "additionalProperties": false,
+      "description": "One source-opening justification, with no inferred file-name route.",
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "registry_seed",
+            "anchor",
+            "redirect",
+            "dns_route_retry"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "parent_event": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Parent Event"
+        },
+        "seed_source_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Seed Source Id"
+        }
+      },
+      "required": [
+        "event_id",
+        "type",
+        "parent_event",
+        "seed_source_id"
+      ],
+      "title": "Referral",
+      "type": "object"
+    },
+    "Snippet": {
+      "additionalProperties": false,
+      "description": "Exact derived-text bytes traceable to the retained original.",
+      "properties": {
+        "original": {
+          "$ref": "#/$defs/Ref"
+        },
+        "text_file": {
+          "$ref": "#/$defs/Ref"
+        },
+        "physical_page": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Physical Page"
+        },
+        "start_byte": {
+          "title": "Start Byte",
+          "type": "integer"
+        },
+        "end_byte": {
+          "title": "End Byte",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "text_sha256": {
+          "title": "Text Sha256",
+          "type": "string"
+        },
+        "method": {
+          "enum": [
+            "unaltered native PDF extraction",
+            "HTML text derivative"
+          ],
+          "title": "Method",
+          "type": "string"
+        }
+      },
+      "required": [
+        "original",
+        "text_file",
+        "physical_page",
+        "start_byte",
+        "end_byte",
+        "text",
+        "text_sha256",
+        "method"
+      ],
+      "title": "Snippet",
+      "type": "object"
+    },
+    "Statement": {
+      "additionalProperties": false,
+      "description": "A source statement or anomaly, not an adopted-effect conclusion.",
+      "properties": {
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "evidence": {
+          "$ref": "#/$defs/Snippet"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "value",
+        "evidence",
+        "qualification"
+      ],
+      "title": "Statement",
+      "type": "object"
+    },
+    "ViewedPage": {
+      "additionalProperties": false,
+      "description": "A complete rendered physical page inspected during this discovery.",
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "source": {
+          "$ref": "#/$defs/Ref"
+        },
+        "image": {
+          "$ref": "#/$defs/Ref"
+        },
+        "render_dpi": {
+          "const": 150,
+          "title": "Render Dpi",
+          "type": "integer"
+        },
+        "scope": {
+          "const": "source identity/date/layout sampling; not complete transcription review",
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "physical_page",
+        "source",
+        "image",
+        "render_dpi",
+        "scope"
+      ],
+      "title": "ViewedPage",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Finite completed discovery with unresolved source and legal-status gaps.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "completed_pending_root_verification",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "event_count": {
+      "const": 31,
+      "title": "Event Count",
+      "type": "integer"
+    },
+    "distinct_exact_requested_urls": {
+      "const": 30,
+      "title": "Distinct Exact Requested Urls",
+      "type": "integer"
+    },
+    "http_response_count": {
+      "title": "Http Response Count",
+      "type": "integer"
+    },
+    "http_status_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Http Status Counts",
+      "type": "object"
+    },
+    "transport_failures": {
+      "const": 1,
+      "title": "Transport Failures",
+      "type": "integer"
+    },
+    "automatic_redirects_followed": {
+      "const": 0,
+      "title": "Automatic Redirects Followed",
+      "type": "integer"
+    },
+    "public_started_at": {
+      "format": "date-time",
+      "title": "Public Started At",
+      "type": "string"
+    },
+    "public_finished_at": {
+      "format": "date-time",
+      "title": "Public Finished At",
+      "type": "string"
+    },
+    "stopped_below_cap": {
+      "const": true,
+      "title": "Stopped Below Cap",
+      "type": "boolean"
+    },
+    "public_limits": {
+      "title": "Public Limits",
+      "type": "string"
+    },
+    "retained_response_bytes": {
+      "title": "Retained Response Bytes",
+      "type": "integer"
+    },
+    "genuine_pdf_count": {
+      "const": 8,
+      "title": "Genuine Pdf Count",
+      "type": "integer"
+    },
+    "total_pdf_physical_pages": {
+      "const": 403,
+      "title": "Total Pdf Physical Pages",
+      "type": "integer"
+    },
+    "pdf_native_status": {
+      "const": "machine_native_text_unreviewed",
+      "title": "Pdf Native Status",
+      "type": "string"
+    },
+    "referrals": {
+      "items": {
+        "$ref": "#/$defs/Referral"
+      },
+      "maxItems": 31,
+      "minItems": 31,
+      "title": "Referrals",
+      "type": "array"
+    },
+    "priorities": {
+      "items": {
+        "$ref": "#/$defs/Priority"
+      },
+      "maxItems": 12,
+      "minItems": 12,
+      "title": "Priorities",
+      "type": "array"
+    },
+    "checklist": {
+      "items": {
+        "$ref": "#/$defs/ChecklistRow"
+      },
+      "maxItems": 24,
+      "minItems": 24,
+      "title": "Checklist",
+      "type": "array"
+    },
+    "discovered_links": {
+      "items": {
+        "$ref": "#/$defs/DiscoveredLink"
+      },
+      "title": "Discovered Links",
+      "type": "array"
+    },
+    "viewed_pages": {
+      "items": {
+        "$ref": "#/$defs/ViewedPage"
+      },
+      "title": "Viewed Pages",
+      "type": "array"
+    },
+    "remaining_gaps": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Remaining Gaps",
+      "type": "array"
+    },
+    "no_canonical_edits": {
+      "const": true,
+      "title": "No Canonical Edits",
+      "type": "boolean"
+    },
+    "no_git_commands": {
+      "const": true,
+      "title": "No Git Commands",
+      "type": "boolean"
+    },
+    "no_external_messages_or_forms": {
+      "const": true,
+      "title": "No External Messages Or Forms",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "legal_currentness",
+    "event_count",
+    "distinct_exact_requested_urls",
+    "http_response_count",
+    "http_status_counts",
+    "transport_failures",
+    "automatic_redirects_followed",
+    "public_started_at",
+    "public_finished_at",
+    "stopped_below_cap",
+    "public_limits",
+    "retained_response_bytes",
+    "genuine_pdf_count",
+    "total_pdf_physical_pages",
+    "pdf_native_status",
+    "referrals",
+    "priorities",
+    "checklist",
+    "discovered_links",
+    "viewed_pages",
+    "remaining_gaps",
+    "no_canonical_edits",
+    "no_git_commands",
+    "no_external_messages_or_forms"
+  ],
+  "title": "Discovery",
+  "type": "object"
+}

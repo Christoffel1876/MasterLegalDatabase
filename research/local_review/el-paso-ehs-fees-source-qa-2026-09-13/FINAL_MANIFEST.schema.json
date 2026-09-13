@@ -1,0 +1,47 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "An exact relative payload identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Closed set of every package file except the final manifest itself.",
+  "properties": {
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "files"
+  ],
+  "title": "Inventory",
+  "type": "object"
+}

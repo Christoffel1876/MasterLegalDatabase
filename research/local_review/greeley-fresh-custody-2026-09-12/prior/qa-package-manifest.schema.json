@@ -1,0 +1,318 @@
+{
+  "$defs": {
+    "Document": {
+      "additionalProperties": false,
+      "description": "Source and review identities; no operative rule or current-fee classification.",
+      "properties": {
+        "assignment_id": {
+          "title": "Assignment Id",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "expected_physical_pages": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Expected Physical Pages",
+          "type": "integer"
+        },
+        "original_native_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Original Native Bytes",
+          "type": "integer"
+        },
+        "source": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "candidate": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "audit": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "audit_schema": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "audit_directory": {
+          "title": "Audit Directory",
+          "type": "string"
+        },
+        "source_role": {
+          "enum": [
+            "building_fee_schedule",
+            "fee_adjustment_memorandum_with_schedules",
+            "proposed_utility_fee_notice_with_conditional_schedule"
+          ],
+          "title": "Source Role",
+          "type": "string"
+        },
+        "review_mode": {
+          "const": "candidate_aware_not_blind",
+          "title": "Review Mode",
+          "type": "string"
+        },
+        "external_review_status": {
+          "const": "pending_not_intaken",
+          "title": "External Review Status",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "source_changes": {
+          "const": "none",
+          "title": "Source Changes",
+          "type": "string"
+        },
+        "scope_notes": {
+          "items": {
+            "$ref": "#/$defs/ScopeNote"
+          },
+          "title": "Scope Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "assignment_id",
+        "source_id",
+        "expected_physical_pages",
+        "original_native_bytes",
+        "source",
+        "candidate",
+        "audit",
+        "audit_schema",
+        "audit_directory",
+        "source_role",
+        "review_mode",
+        "external_review_status",
+        "legal_currentness",
+        "source_changes",
+        "scope_notes"
+      ],
+      "title": "Document",
+      "type": "object"
+    },
+    "FileRef": {
+      "additionalProperties": false,
+      "description": "An immutable package-local regular file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    },
+    "Payload": {
+      "additionalProperties": false,
+      "description": "A frozen input or a newly authored packaging/verification file.",
+      "properties": {
+        "file": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "original_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Original Path"
+        },
+        "role": {
+          "enum": [
+            "unchanged_packet",
+            "unchanged_source_audit",
+            "package_support"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "file",
+        "original_path",
+        "role"
+      ],
+      "title": "Payload",
+      "type": "object"
+    },
+    "Resolution": {
+      "additionalProperties": false,
+      "description": "Resolve a historical original path to frozen byte-identical evidence.",
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "frozen": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "basis": {
+          "enum": [
+            "packet_custody_identity",
+            "packet_document_identity",
+            "copied_audit_input_identity"
+          ],
+          "title": "Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "original_path",
+        "frozen",
+        "basis"
+      ],
+      "title": "Resolution",
+      "type": "object"
+    },
+    "ScopeNote": {
+      "additionalProperties": false,
+      "description": "Qualified packaging summary anchored to unchanged source-review findings.",
+      "properties": {
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "audit_anchors": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Audit Anchors",
+          "type": "array"
+        }
+      },
+      "required": [
+        "text",
+        "audit_anchors"
+      ],
+      "title": "ScopeNote",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Complete frozen payload inventory and limited source-review scope.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "package_id": {
+      "const": "greeley-fees-atlas-source-review-2026-09-11",
+      "title": "Package Id",
+      "type": "string"
+    },
+    "packaged_at": {
+      "format": "date-time",
+      "title": "Packaged At",
+      "type": "string"
+    },
+    "status": {
+      "const": "atlas_source_reviews_packaged_pending_external_review",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "no_external_report_intake": {
+      "const": true,
+      "title": "No External Report Intake",
+      "type": "boolean"
+    },
+    "new_network_requests": {
+      "const": 0,
+      "title": "New Network Requests",
+      "type": "integer"
+    },
+    "source_or_handoff_changes": {
+      "const": "none",
+      "title": "Source Or Handoff Changes",
+      "type": "string"
+    },
+    "documents": {
+      "items": {
+        "$ref": "#/$defs/Document"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Documents",
+      "type": "array"
+    },
+    "packet_manifest": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "payloads": {
+      "items": {
+        "$ref": "#/$defs/Payload"
+      },
+      "title": "Payloads",
+      "type": "array"
+    },
+    "historical_path_resolutions": {
+      "items": {
+        "$ref": "#/$defs/Resolution"
+      },
+      "title": "Historical Path Resolutions",
+      "type": "array"
+    },
+    "portability_limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Portability Limits",
+      "type": "array"
+    },
+    "downstream_limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Downstream Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "package_id",
+    "packaged_at",
+    "status",
+    "legal_currentness",
+    "no_external_report_intake",
+    "new_network_requests",
+    "source_or_handoff_changes",
+    "documents",
+    "packet_manifest",
+    "payloads",
+    "historical_path_resolutions",
+    "portability_limits",
+    "downstream_limits"
+  ],
+  "title": "Package",
+  "type": "object"
+}

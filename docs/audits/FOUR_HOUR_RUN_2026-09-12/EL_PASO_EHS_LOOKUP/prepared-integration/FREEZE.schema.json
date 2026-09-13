@@ -1,0 +1,195 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Identify one ordinary retained payload.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Record completed local draft checks without implying installation or legal currency.",
+  "properties": {
+    "status": {
+      "const": "prepared_not_installed",
+      "title": "Status",
+      "type": "string"
+    },
+    "frozen_at": {
+      "format": "date-time",
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "el-paso-boh-ehs-fees-sd011",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "const": "1b0529fb7514bcc50c0dd36c903ca361f6ab431712b4aebc48bca8e3f5373622",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "proposed_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Proposed Files",
+      "type": "array"
+    },
+    "production_preimages_unchanged": {
+      "const": true,
+      "title": "Production Preimages Unchanged",
+      "type": "boolean"
+    },
+    "production_checked_at": {
+      "format": "date-time",
+      "title": "Production Checked At",
+      "type": "string"
+    },
+    "source_rows": {
+      "const": 65,
+      "title": "Source Rows",
+      "type": "integer"
+    },
+    "groups": {
+      "const": 7,
+      "title": "Groups",
+      "type": "integer"
+    },
+    "contexts": {
+      "const": 37,
+      "title": "Contexts",
+      "type": "integer"
+    },
+    "unchanged_native_bytes": {
+      "const": 8060,
+      "title": "Unchanged Native Bytes",
+      "type": "integer"
+    },
+    "prior_source_count": {
+      "const": 6,
+      "title": "Prior Source Count",
+      "type": "integer"
+    },
+    "prior_output_files_identical": {
+      "const": 12,
+      "title": "Prior Output Files Identical",
+      "type": "integer"
+    },
+    "focused_tests_passed": {
+      "minimum": 1,
+      "title": "Focused Tests Passed",
+      "type": "integer"
+    },
+    "focused_test_log": {
+      "$ref": "#/$defs/Asset"
+    },
+    "coverage_report": {
+      "$ref": "#/$defs/Asset"
+    },
+    "new_adapter_executed_statements": {
+      "minimum": 0,
+      "title": "New Adapter Executed Statements",
+      "type": "integer"
+    },
+    "new_adapter_missing_statements": {
+      "minimum": 0,
+      "title": "New Adapter Missing Statements",
+      "type": "integer"
+    },
+    "new_adapter_executed_branches": {
+      "minimum": 0,
+      "title": "New Adapter Executed Branches",
+      "type": "integer"
+    },
+    "new_adapter_missing_branches": {
+      "minimum": 0,
+      "title": "New Adapter Missing Branches",
+      "type": "integer"
+    },
+    "new_adapter_branch_inclusive_percent": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "New Adapter Branch Inclusive Percent",
+      "type": "number"
+    },
+    "independent_review": {
+      "title": "Independent Review",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "production_installation": {
+      "const": "not_attempted",
+      "title": "Production Installation",
+      "type": "string"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "frozen_at",
+    "source_id",
+    "source_sha256",
+    "proposed_files",
+    "production_preimages_unchanged",
+    "production_checked_at",
+    "source_rows",
+    "groups",
+    "contexts",
+    "unchanged_native_bytes",
+    "prior_source_count",
+    "prior_output_files_identical",
+    "focused_tests_passed",
+    "focused_test_log",
+    "coverage_report",
+    "new_adapter_executed_statements",
+    "new_adapter_missing_statements",
+    "new_adapter_executed_branches",
+    "new_adapter_missing_branches",
+    "new_adapter_branch_inclusive_percent",
+    "independent_review",
+    "legal_currentness",
+    "production_installation",
+    "public_requests",
+    "limitations"
+  ],
+  "title": "Freeze",
+  "type": "object"
+}

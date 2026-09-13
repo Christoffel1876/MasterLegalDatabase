@@ -1,0 +1,100 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "accepted_at": {
+      "title": "Accepted At",
+      "type": "string"
+    },
+    "status": {
+      "const": "accepted_installed_source_lookup_pending_full_suite",
+      "default": "accepted_installed_source_lookup_pending_full_suite",
+      "title": "Status",
+      "type": "string"
+    },
+    "integration": {
+      "$ref": "#/$defs/Ref"
+    },
+    "installed_lookup": {
+      "$ref": "#/$defs/Ref"
+    },
+    "inventory": {
+      "$ref": "#/$defs/Ref"
+    },
+    "root_cli": {
+      "$ref": "#/$defs/Ref"
+    },
+    "visual_qa": {
+      "$ref": "#/$defs/Ref"
+    },
+    "checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "accepted_at",
+    "integration",
+    "installed_lookup",
+    "inventory",
+    "root_cli",
+    "visual_qa",
+    "checks",
+    "limitations"
+  ],
+  "title": "Review",
+  "type": "object"
+}
