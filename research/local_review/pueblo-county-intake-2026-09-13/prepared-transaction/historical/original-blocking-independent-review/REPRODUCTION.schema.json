@@ -1,0 +1,60 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "network_requests": {
+      "const": 0,
+      "title": "Network Requests",
+      "type": "integer"
+    },
+    "temporary_fixture_only": {
+      "const": true,
+      "title": "Temporary Fixture Only",
+      "type": "boolean"
+    },
+    "returned": {
+      "const": "ValueError",
+      "title": "Returned",
+      "type": "string"
+    },
+    "error": {
+      "title": "Error",
+      "type": "string"
+    },
+    "raw_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Raw Ids",
+      "type": "array"
+    },
+    "ledger_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Ledger Ids",
+      "type": "array"
+    },
+    "unrelated_record_promoted_to_ledger": {
+      "const": true,
+      "title": "Unrelated Record Promoted To Ledger",
+      "type": "boolean"
+    },
+    "report_records": {
+      "const": 3,
+      "title": "Report Records",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "network_requests",
+    "temporary_fixture_only",
+    "returned",
+    "error",
+    "raw_ids",
+    "ledger_ids",
+    "unrelated_record_promoted_to_ledger",
+    "report_records"
+  ],
+  "title": "Reproduction",
+  "type": "object"
+}

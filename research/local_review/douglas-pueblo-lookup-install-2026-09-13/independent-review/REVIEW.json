@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-13T02:17:10.665571Z",
+  "status": "bounded_revision_recheck_passed",
+  "proposal_manifest": {
+    "path": "received/FINAL_MANIFEST.json",
+    "sha256": "e7a292b0774d2c53585836267d97f36854c183f67c3cadd2fdc8bef6a35ebb18",
+    "size_bytes": 8742
+  },
+  "proposed_code": {
+    "path": "received/proposed/research_source_lookup.py",
+    "sha256": "4b3f084eb9bf9a20f3e5c7b7c0c25a3b1bbbfe0de05caff9b626100808dbad6f",
+    "size_bytes": 164740
+  },
+  "checks": {
+    "late_qa": {
+      "path": "LATE_QA_RESULT.json",
+      "sha256": "ca68b8d76a99ec21f6ed0fd093793f7d62ad5a5f341a8bcd8209e71a13e1b344",
+      "size_bytes": 432
+    },
+    "aba": {
+      "path": "ABA_RESULTS.json",
+      "sha256": "766bff15888325c524c636ecad27e7a3f06facc00148f456038cc2e2d81a0c93",
+      "size_bytes": 1296
+    },
+    "positive": {
+      "path": "POSITIVE_RESULTS.json",
+      "sha256": "7d85b890872b6dfb55895cba6b91c5054e0b732563ab982c73a20805a83bcf55",
+      "size_bytes": 4227
+    }
+  },
+  "interpretation": {
+    "late_qa": "Historical probe result label ACCEPTED means lookup returned; status no_matching_row and zero rows prove the injected unverified text was NOT accepted. Approved review SHA retained.",
+    "aba": "Both full 44-row outputs remain byte-identical after temporary QA/native/image substitutions through assembly, followed by restoration.",
+    "legacy": "Seven prior full JSON outputs and seven Markdown outputs exactly match frozen fixtures with only repository path normalization."
+  },
+  "inspected_logic": [
+    "Bounded hash verification and consumption of the same captured buffers.",
+    "QA/schema/native/image identities, acceptance, receipt/intent/records, authority provenance and HTTP event consumed from verified captures.",
+    "Two-source exact native row associations, both Douglas null fees, all Pueblo nested entries and complete contexts for no-match results.",
+    "Distinct acquisition and actual intake times, source-only flags and unknown legal currentness."
+  ],
+  "limitations": [
+    "This is a bounded offline recheck of the previously demonstrated late-read defect and source/legacy output contract, not proof against all concurrent filesystem attacks.",
+    "No new source-page visual QA in this lookup audit; comparisons use accepted source reviews and preserved native bytes.",
+    "Author reports 393 focused tests and 94.8382% coverage; this audit did not rerun that suite.",
+    "No production installation, HTTP request, current-law answer, or legal effect certification.",
+    "Probe scripts refer to historical local paths and are retained as evidence only; portable verifier does not execute them."
+  ],
+  "legal_currentness": "not_verified",
+  "public_requests": 0,
+  "production_writes": 0
+}

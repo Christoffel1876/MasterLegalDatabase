@@ -1,0 +1,79 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Bind exact ordinary bytes under an explicitly supplied package/repository root.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Closed preparation payloads; the manifest itself is externally hash-bound.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "status": {
+      "const": "PREPARED_NOT_INSTALLED_OR_EXECUTED",
+      "title": "Status",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "installation_files": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Installation Files",
+      "type": "array"
+    },
+    "public_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "production_writes": {
+      "const": 0,
+      "default": 0,
+      "title": "Production Writes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "status",
+    "files",
+    "installation_files"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

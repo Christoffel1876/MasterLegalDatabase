@@ -1,0 +1,259 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "File identity; containing fields state its package or repository scope.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "DateRole": {
+      "additionalProperties": false,
+      "description": "A source-stated date, never independently certified legal effect.",
+      "properties": {
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "review_pointer": {
+          "title": "Review Pointer",
+          "type": "string"
+        },
+        "independent_legal_event_verification": {
+          "const": false,
+          "title": "Independent Legal Event Verification",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "value",
+        "role",
+        "review_pointer",
+        "independent_legal_event_verification"
+      ],
+      "title": "DateRole",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Reviewed scope and preserved HTTP/archival custody for one original.",
+  "properties": {
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-WELD",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "intake_id": {
+      "title": "Intake Id",
+      "type": "string"
+    },
+    "source_role": {
+      "enum": [
+        "county_zoning_amendment_instrument",
+        "county_environmental_health_services_fee_schedule"
+      ],
+      "title": "Source Role",
+      "type": "string"
+    },
+    "staged_original": {
+      "$ref": "#/$defs/Asset"
+    },
+    "canonical_original": {
+      "$ref": "#/$defs/Asset"
+    },
+    "exact_requested_url": {
+      "title": "Exact Requested Url",
+      "type": "string"
+    },
+    "exact_final_url": {
+      "title": "Exact Final Url",
+      "type": "string"
+    },
+    "http_started_at": {
+      "format": "date-time",
+      "title": "Http Started At",
+      "type": "string"
+    },
+    "http_completed_at": {
+      "format": "date-time",
+      "title": "Http Completed At",
+      "type": "string"
+    },
+    "http_status": {
+      "const": 200,
+      "title": "Http Status",
+      "type": "integer"
+    },
+    "tls_verified": {
+      "const": true,
+      "title": "Tls Verified",
+      "type": "boolean"
+    },
+    "redirects_followed": {
+      "const": 0,
+      "title": "Redirects Followed",
+      "type": "integer"
+    },
+    "repository_received_at": {
+      "format": "date-time",
+      "title": "Repository Received At",
+      "type": "string"
+    },
+    "acquisition_method": {
+      "const": "manual_official_download",
+      "title": "Acquisition Method",
+      "type": "string"
+    },
+    "acquisition_description": {
+      "title": "Acquisition Description",
+      "type": "string"
+    },
+    "access_receipt": {
+      "$ref": "#/$defs/Asset"
+    },
+    "public_headers": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_header_identity": {
+      "$ref": "#/$defs/Asset"
+    },
+    "header_derivation": {
+      "title": "Header Derivation",
+      "type": "string"
+    },
+    "reviewed_source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "reviewed_source_schema": {
+      "$ref": "#/$defs/Asset"
+    },
+    "reviewed_source_directory": {
+      "title": "Reviewed Source Directory",
+      "type": "string"
+    },
+    "physical_pages": {
+      "enum": [
+        3,
+        5
+      ],
+      "title": "Physical Pages",
+      "type": "integer"
+    },
+    "native_bytes": {
+      "enum": [
+        7367,
+        9284
+      ],
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "legacy_registry_or_container_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Legacy Registry Or Container Ids",
+      "type": "array"
+    },
+    "source_dates": {
+      "items": {
+        "$ref": "#/$defs/DateRole"
+      },
+      "title": "Source Dates",
+      "type": "array"
+    },
+    "legal_adoption_date_independently_verified": {
+      "title": "Legal Adoption Date Independently Verified",
+      "type": "null"
+    },
+    "legal_effective_date_independently_verified": {
+      "title": "Legal Effective Date Independently Verified",
+      "type": "null"
+    },
+    "source_publication_date_independently_verified": {
+      "title": "Source Publication Date Independently Verified",
+      "type": "null"
+    },
+    "reviewed_scope_qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reviewed Scope Qualifications",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "pipeline_status": {
+      "const": "archived_pending_pipeline",
+      "title": "Pipeline Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_id",
+    "authority_id",
+    "intake_id",
+    "source_role",
+    "staged_original",
+    "canonical_original",
+    "exact_requested_url",
+    "exact_final_url",
+    "http_started_at",
+    "http_completed_at",
+    "http_status",
+    "tls_verified",
+    "redirects_followed",
+    "repository_received_at",
+    "acquisition_method",
+    "acquisition_description",
+    "access_receipt",
+    "public_headers",
+    "original_header_identity",
+    "header_derivation",
+    "reviewed_source",
+    "reviewed_source_schema",
+    "reviewed_source_directory",
+    "physical_pages",
+    "native_bytes",
+    "legacy_registry_or_container_ids",
+    "source_dates",
+    "legal_adoption_date_independently_verified",
+    "legal_effective_date_independently_verified",
+    "source_publication_date_independently_verified",
+    "reviewed_scope_qualifications",
+    "legal_currentness",
+    "pipeline_status"
+  ],
+  "title": "Source",
+  "type": "object"
+}

@@ -1,0 +1,123 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "One exact relative file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Actual installation identities and explicit scope of this additive adapter.",
+  "properties": {
+    "status": {
+      "const": "installed_reviewed_captured_buffer_lookup",
+      "title": "Status",
+      "type": "string"
+    },
+    "finished_at": {
+      "format": "date-time",
+      "title": "Finished At",
+      "type": "string"
+    },
+    "proposal_manifest_sha256": {
+      "title": "Proposal Manifest Sha256",
+      "type": "string"
+    },
+    "independent_review_manifest_sha256": {
+      "title": "Independent Review Manifest Sha256",
+      "type": "string"
+    },
+    "installed_files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Installed Files",
+      "type": "array"
+    },
+    "archived_preimages": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Archived Preimages",
+      "type": "array"
+    },
+    "preserved_files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Preserved Files",
+      "type": "array"
+    },
+    "source_ids_added": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Ids Added",
+      "type": "array"
+    },
+    "public_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "source_bytes_changed": {
+      "const": 0,
+      "default": 0,
+      "title": "Source Bytes Changed",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "old_seven_adapter_concurrency_audit": {
+      "const": "separate_pending_work",
+      "title": "Old Seven Adapter Concurrency Audit",
+      "type": "string"
+    },
+    "full_suite": {
+      "const": "pending_after_installation",
+      "title": "Full Suite",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "finished_at",
+    "proposal_manifest_sha256",
+    "independent_review_manifest_sha256",
+    "installed_files",
+    "archived_preimages",
+    "preserved_files",
+    "source_ids_added",
+    "old_seven_adapter_concurrency_audit",
+    "full_suite"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

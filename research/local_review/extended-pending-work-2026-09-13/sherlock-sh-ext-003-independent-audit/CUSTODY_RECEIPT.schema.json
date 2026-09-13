@@ -1,0 +1,116 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "CustodyItem": {
+      "additionalProperties": false,
+      "properties": {
+        "original": {
+          "$ref": "#/$defs/Asset"
+        },
+        "retained": {
+          "$ref": "#/$defs/Asset"
+        },
+        "mode": {
+          "enum": [
+            "exact",
+            "set_cookie_redacted"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "redacted_lines": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Redacted Lines",
+          "type": "array"
+        }
+      },
+      "required": [
+        "original",
+        "retained",
+        "mode",
+        "redacted_lines"
+      ],
+      "title": "CustodyItem",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "captured_at": {
+      "format": "date-time",
+      "title": "Captured At",
+      "type": "string"
+    },
+    "original_delivery": {
+      "title": "Original Delivery",
+      "type": "string"
+    },
+    "supplied_inventory_entries": {
+      "title": "Supplied Inventory Entries",
+      "type": "integer"
+    },
+    "supplied_inventory_mismatches": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Supplied Inventory Mismatches",
+      "type": "array"
+    },
+    "unlisted_original_files": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unlisted Original Files",
+      "type": "array"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/$defs/CustodyItem"
+      },
+      "title": "Items",
+      "type": "array"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    }
+  },
+  "required": [
+    "captured_at",
+    "original_delivery",
+    "supplied_inventory_entries",
+    "supplied_inventory_mismatches",
+    "unlisted_original_files",
+    "items",
+    "scope"
+  ],
+  "title": "Custody",
+  "type": "object"
+}

@@ -1,0 +1,65 @@
+--- installed-preimage/tests/test_manual_source_watch_batches.py
++++ tests/test_manual_source_watch_batches.py
+@@ -15,9 +15,7 @@
+ 
+ from geode.pipeline import manual_source_watch_batches as w
+ 
+-PROPOSED = Path(__file__).resolve().parents[1]
+-SOURCE = (PROPOSED if (PROPOSED / 'AGENTS.md').exists() else
+-          PROPOSED.parents[4] / 'MasterLegalDatabase')
++SOURCE = Path(__file__).resolve().parents[1]
+ NOW = datetime(2026, 9, 13, 0, 10, tzinfo=timezone.utc)
+ 
+ 
+@@ -50,7 +48,7 @@
+ def packet(tmp_path: Path) -> Path:
+     """Copy fixed configurations and exact six-source evidence into an isolated repository."""
+     root = tmp_path / 'packet'
+-    catalog = json.loads((PROPOSED / w.CATALOG).read_bytes())
++    catalog = json.loads((SOURCE / w.CATALOG).read_bytes())
+     copied = set()
+ 
+     def copy(relative: str, base: Path = SOURCE) -> None:
+@@ -62,9 +60,9 @@
+         shutil.copyfile(base / relative, target)
+         copied.add(relative)
+ 
+-    copy(w.CATALOG.as_posix(), PROPOSED)
++    copy(w.CATALOG.as_posix(), SOURCE)
+     for selection in w.SELECTIONS.values():
+-        copy(selection.as_posix(), PROPOSED)
++        copy(selection.as_posix(), SOURCE)
+     for source in catalog['sources']:
+         copy(source['baseline']['path'])
+         for field in ('authority_evidence', 'custody_evidence', 'review_evidence'):
+--- installed-preimage/tests/test_manual_watch_batches_admission.py
++++ tests/test_manual_watch_batches_admission.py
+@@ -9,7 +9,7 @@
+ 
+ import pytest
+ from geode.pipeline import manual_source_watch_batches as w
+-from test_manual_source_watch_batches import NOW, PROPOSED, SOURCE, Response, packet
++from tests.test_manual_source_watch_batches import NOW, SOURCE, Response, packet
+ 
+ 
+ def selected(root: Path, batch: str) -> tuple[Path, w.Plan]:
+@@ -187,7 +187,7 @@
+ 
+ def test_staged_preflight_uses_explicit_canonical_root(packet: Path) -> None:
+     """Preparers can validate staged configs against canonical bytes without installing files."""
+-    staged = PROPOSED / w.SELECTION
++    staged = SOURCE / w.SELECTION
+     assert w.load_plan(staged, root=packet, catalog_path=packet / w.CATALOG).batch_id == (
+         'county-fees-v1')
+     with pytest.raises(ValueError, match='Unsafe repository'):
+--- installed-preimage/tests/test_manual_watch_batches_replay_policy.py
++++ tests/test_manual_watch_batches_replay_policy.py
+@@ -6,7 +6,7 @@
+ 
+ import pytest
+ from geode.pipeline import manual_source_watch_batches as w
+-from test_manual_source_watch_batches import NOW, Response, packet
++from tests.test_manual_source_watch_batches import NOW, Response, packet
+ 
+ 
+ def put(path: Path, data: Any) -> None:

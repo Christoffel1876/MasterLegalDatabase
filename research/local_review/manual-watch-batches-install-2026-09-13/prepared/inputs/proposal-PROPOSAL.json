@@ -1,0 +1,1842 @@
+{
+  "schema_version": 1,
+  "prepared_at": "2026-09-13T00:45:31.107266Z",
+  "status": "PREPARED_NOT_ACTIVATED",
+  "input_pins": {
+    "inventory": {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/inventory.json",
+      "sha256": "c1135eca9634be30a3c2bc3d982326d0437b2eed082005c413c7eabebe8febdb",
+      "size_bytes": 382617
+    },
+    "raw_manifest": {
+      "path": "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+      "sha256": "7814b23e9ddb97e0dbf469497d52ae59a55b485254bb0a5c9f690354a484c367",
+      "size_bytes": 139618
+    },
+    "current_watch_selection": {
+      "path": "config/manual_source_watch.json",
+      "sha256": "91b4c46f7121de66d70b353405900f9d1ed3a3247718a9471ad2f1a9afa6dabb",
+      "size_bytes": 6483
+    },
+    "join_plan": {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/join-plan.json",
+      "sha256": "a72e78a57fff835b55065a81abff7706f5bb742488edf17272f57194d2101223",
+      "size_bytes": 102066
+    },
+    "legacy_coverage_ledger": {
+      "path": "_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+      "sha256": "ad27514fe91659c9914780c7d3e69e48ace742bc31ad67d9c3a3c99945aecde3",
+      "size_bytes": 2066981
+    },
+    "watch_adapter": {
+      "path": "geode/pipeline/manual_source_watch.py",
+      "sha256": "e1958b886a8b164b0cc4e7a890fa70c47679fdb5318c33423ac45254f60f06ea",
+      "size_bytes": 41311
+    },
+    "watch_transport": {
+      "path": "geode/pipeline/manual_watch_http.py",
+      "sha256": "c935ee6d74843e9214f27c5fef82d4470ec3c2b55ea5001eade594cc6a8de2ae",
+      "size_bytes": 31734
+    },
+    "watch_documentation": {
+      "path": "docs/MANUAL_SOURCE_WATCH.md",
+      "sha256": "03aaaa9b0e7f5be5eaa9409c0d4c4d7829c96632263851f9f7bcb98239a85ee7",
+      "size_bytes": 6123
+    }
+  },
+  "metadata_evidence_pins": [
+    {
+      "path": "docs/audits/FOUR_HOUR_RUN_2026-09-12/GREELEY_FRESH_CUSTODY/ACCEPTANCE.json",
+      "sha256": "3db81fd03911eded3c8ca02aaf8b8917ad473be51ee12b306bfcc2cd6687135f",
+      "size_bytes": 1590
+    },
+    {
+      "path": "research/local_review/ebenezer-006-2026-09-10/http-receipt.json",
+      "sha256": "b245e7149c1c6908d634d3713fe30720c8995736aa86c8478e5cdbf555a14919",
+      "size_bytes": 800
+    },
+    {
+      "path": "research/local_review/ebenezer-006-2026-09-10/reviewed-table.json",
+      "sha256": "737fa68330475a096001a93f237054d484b50b2765ca9a44b4f0583d3438fb7b",
+      "size_bytes": 27284
+    },
+    {
+      "path": "research/local_review/ebenezer-006-2026-09-10/reviewed-table.schema.json",
+      "sha256": "d29c8fdee28168161fd2d0e83c10a2d72d0d545cac9525ea17d05bc2549e5b63",
+      "size_bytes": 9970
+    },
+    {
+      "path": "research/local_review/grand-junction-fire-fees-atlas-source-review-2026-09-11/SOURCE_QA.json",
+      "sha256": "8069accad238166936f6ee519eb8cc35dc9a62ceb252597ea21a4ebc5efc520a",
+      "size_bytes": 39466
+    },
+    {
+      "path": "research/local_review/grand-junction-fire-fees-atlas-source-review-2026-09-11/SOURCE_QA.schema.json",
+      "sha256": "13e23d55f3dbccef04bd6fbd113e7ca20ccb91bd8dd5dfa07c0454b68f0b6aeb",
+      "size_bytes": 7176
+    },
+    {
+      "path": "research/local_review/greeley-fees-atlas-source-review-2026-09-11/source-audits/EB-PDF-015/SOURCE_QA.json",
+      "sha256": "6fd2f617a176aa821181a3ef3b52589f1fdc4c7ff64e00477f16149826142979",
+      "size_bytes": 12546
+    },
+    {
+      "path": "research/local_review/greeley-fees-atlas-source-review-2026-09-11/source-audits/EB-PDF-015/SOURCE_QA.schema.json",
+      "sha256": "dbaa6a2026720420bb0007eeba85f71937552dbacf3c9e85a6d57966b5f478ea",
+      "size_bytes": 2993
+    },
+    {
+      "path": "research/local_review/greeley-fees-atlas-source-review-2026-09-11/source-audits/EB-PDF-016/SOURCE_QA.json",
+      "sha256": "1663efc89bfcdf29bba57992664cc2019e933de83a2c3bb80fa49d0142def651",
+      "size_bytes": 197737
+    },
+    {
+      "path": "research/local_review/greeley-fees-atlas-source-review-2026-09-11/source-audits/EB-PDF-016/SOURCE_QA.schema.json",
+      "sha256": "b877596c9b3c7a2a13ea4407b73536bd4011b53db1dcc750fcb3171453d7afe7",
+      "size_bytes": 16605
+    },
+    {
+      "path": "research/local_review/greeley-fresh-custody-2026-09-12/PRESERVATION.json",
+      "sha256": "e84845a2488758d51baf06a794fa2b8b4f4cdfe304f734d0b836bf43a7c34c51",
+      "size_bytes": 35713
+    },
+    {
+      "path": "research/local_review/greeley-fresh-custody-2026-09-12/fresh/GREELEY-PARENT/receipt.json",
+      "sha256": "dcd24437d508b83006c94feb336cf60dde4d11ddbdc6e32a0bfd01bde548a705",
+      "size_bytes": 951
+    },
+    {
+      "path": "research/local_review/greeley-fresh-custody-2026-09-12/fresh/SD008-06/receipt.json",
+      "sha256": "8e3eb28fd1e1f2ae757f9bca252bbac0f1167fc043af629f85ead1753da4e9d4",
+      "size_bytes": 1018
+    },
+    {
+      "path": "research/local_review/greeley-fresh-custody-2026-09-12/fresh/SD008-07/receipt.json",
+      "sha256": "5460643efe9fd3b5ddc6d11d4529e83ae7dedd973534cb829a180a8b50622074",
+      "size_bytes": 1018
+    },
+    {
+      "path": "research/local_review/mesa-building-fees-atlas-source-review-2026-09-11/SOURCE_REVIEW.json",
+      "sha256": "5aeb9abfe5efe1575c9e11b93d812b491f44a3d9b6575b737e91d510b573f275",
+      "size_bytes": 639389
+    },
+    {
+      "path": "research/local_review/mesa-building-fees-atlas-source-review-2026-09-11/SOURCE_REVIEW.schema.json",
+      "sha256": "82e201c93da9a1bcbff5d6486a5fb97e7d4ac22ce7acb4dff20594d61c281bc8",
+      "size_bytes": 15574
+    },
+    {
+      "path": "research/local_review/mesa-grand-junction-directed-intake-2026-09-11/evidence/discovery/ACCESS_AUDIT.json",
+      "sha256": "66314f02a6806b3d93c4c342cefa341affe8a738704e8ad910eacffba63eb480",
+      "size_bytes": 35950
+    },
+    {
+      "path": "research/local_review/mesa-grand-junction-directed-intake-2026-09-11/sources.final.jsonl",
+      "sha256": "c63584f4ac73a1c4f9fe3a721a67c96bde80112699812754e51badbd9a832008",
+      "size_bytes": 7761
+    },
+    {
+      "path": "research/local_review/mesa-grand-junction-intake-2026-09-11/evidence/discovery/REPORT.json",
+      "sha256": "475eba114fcc97eb9e4239b9a9f644efcfb1f4023bb14826b0870e3815d31497",
+      "size_bytes": 29898
+    },
+    {
+      "path": "research/local_review/mesa-grand-junction-intake-2026-09-11/evidence/discovery/events/E004/event.json",
+      "sha256": "ebf5d25393d73882e9eea9234896740232eefca9269d2cb098c1514a5a16e273",
+      "size_bytes": 710
+    },
+    {
+      "path": "research/local_review/mesa-grand-junction-intake-2026-09-11/sources.final.jsonl",
+      "sha256": "8c78cc4da476f11ec5179ac208b3b81bdb36eb195edcda5854057f41712130dc",
+      "size_bytes": 7856
+    },
+    {
+      "path": "research/local_review/weld-directed-intake-2026-09-11/evidence/source-reviews/weld-ehs-fees-2026-atlas-directed/SOURCE_QA.json",
+      "sha256": "468658770c7f755c00dc844a2a62d1ce8c6afd458ba760a20fedfef2480ee97e",
+      "size_bytes": 91145
+    },
+    {
+      "path": "research/local_review/weld-directed-intake-2026-09-11/evidence/source-reviews/weld-ehs-fees-2026-atlas-directed/SOURCE_QA.schema.json",
+      "sha256": "d634dc0aa26fbea08cfa7b41bf46ada615dd8dcdc08e98207d5a8da3cfd0b545",
+      "size_bytes": 7268
+    },
+    {
+      "path": "research/local_review/weld-directed-intake-2026-09-11/source-provenance.final.jsonl",
+      "sha256": "dc18b3cf1561a2690005a10f699ffa1408f15d6c8626378f4534fb8e32217762",
+      "size_bytes": 8946
+    },
+    {
+      "path": "research/local_review/weld-greeley-intake-sherlock008-2026-09-11/source-provenance.jsonl",
+      "sha256": "5535b0ef0e41934295c276f84f94fb82cd30c3339ed9c466a783c039e208bf20",
+      "size_bytes": 14251
+    }
+  ],
+  "currently_selected": [
+    "colorado-springs-code-services-fees-2015-atlas-directed",
+    "colorado-springs-construction-fees-atlas-directed"
+  ],
+  "inventory_records": 61,
+  "inventory_mapped_reviews": 21,
+  "unselected_records": 59,
+  "candidates": [
+    {
+      "rank": 1,
+      "record_id": "arapahoe-planning-fees-sd002-14",
+      "intake_id": "MSI-20260910T215435395404Z-arapahoe-planning-fees-sd002-14",
+      "authority_id": "CO-COUNTY-ARAPAHOE",
+      "layer_id": "08_County_Authorities",
+      "title": "Arapahoe planning review fees",
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/arapahoe-planning-fees-sd002-14/20260910T215435Z_original.pdf",
+        "sha256": "ce519b6fe89546cf85a77934fcbdb6b6bf08473e19c545cf4c51414e1cdcb818",
+        "size_bytes": 220138
+      },
+      "baseline_pages": 2,
+      "raw_manifest_zero_based_row": 0,
+      "raw_manifest_exact_line_sha256": "d519c893126f73191dfa35152d6627a4d59f20984dd760709a0c5c727dc50b17",
+      "historical_raw_url": "https://files.arapahoeco.gov/Public%20Works_Development/planning_land%20development/Planning%20Fees.pdf",
+      "historical_acquisition_method": "manual_official_download",
+      "historical_reported_acquisition": {
+        "/retrieved_at": "2026-09-10T21:28:25.612649Z"
+      },
+      "repository_received_at": "2026-09-10T21:54:35.395404Z",
+      "proposed_url": "https://files.arapahoeco.gov/Public%20Works_Development/planning_land%20development/Planning%20Fees.pdf",
+      "retained_final_url": "https://files.arapahoeco.gov/Public%20Works_Development/planning_land%20development/Planning%20Fees.pdf",
+      "http_started_at": null,
+      "http_finished_at": "2026-09-10T21:28:25.612649Z",
+      "http_time_role": "Receipt observed_at; request-start time was not recorded in this receipt.",
+      "recorded_http_status": 200,
+      "recorded_redirects": 0,
+      "official_link_basis": "Direct official County file-server URL and retained HTTP 200 receipt; parent anchor not newly audited.",
+      "official_parent_url": null,
+      "official_parent_label": null,
+      "authority_evidence": {
+        "artifact": {
+          "path": "research/local_review/ebenezer-006-2026-09-10/reviewed-table.json",
+          "sha256": "737fa68330475a096001a93f237054d484b50b2765ca9a44b4f0583d3438fb7b",
+          "size_bytes": 27284
+        },
+        "jsonl_row": null,
+        "pointers": [
+          "/authority_id"
+        ],
+        "scope": "Explicit pinned authority identity; never inferred from URL or path alone."
+      },
+      "custody_evidence": {
+        "artifact": {
+          "path": "research/local_review/ebenezer-006-2026-09-10/http-receipt.json",
+          "sha256": "b245e7149c1c6908d634d3713fe30720c8995736aa86c8478e5cdbf555a14919",
+          "size_bytes": 800
+        },
+        "jsonl_row": null,
+        "pointers": [
+          "/sha256",
+          "/status_code",
+          "/observed_at"
+        ],
+        "scope": "Receipt observed_at; request-start time was not recorded in this receipt."
+      },
+      "referral_evidence": [],
+      "review_evidence": {
+        "artifact": {
+          "path": "research/local_review/ebenezer-006-2026-09-10/reviewed-table.json",
+          "sha256": "737fa68330475a096001a93f237054d484b50b2765ca9a44b4f0583d3438fb7b",
+          "size_bytes": 27284
+        },
+        "jsonl_row": null,
+        "pointers": [
+          "/scope"
+        ],
+        "scope": "Previously accepted bounded review, not re-performed here; overlaps are not additive coverage."
+      },
+      "review_schema": {
+        "path": "research/local_review/ebenezer-006-2026-09-10/reviewed-table.schema.json",
+        "sha256": "d29c8fdee28168161fd2d0e83c10a2d72d0d545cac9525ea17d05bc2549e5b63",
+        "size_bytes": 9970
+      },
+      "mapped_review_kind": "checked_tables",
+      "mapped_scope_fields": {
+        "/scope": "all_36_fee_rows_and_context_on_two_supplied_pages"
+      },
+      "recorded_source_roles": {
+        "/title": "Planning Review Fee Schedule"
+      },
+      "review_limitations": [
+        "/remaining_questions: [\"Obtain Resolution 26-224 and distinguish its adoption, effectiveness and amendments.\", \"Resolve later changes and application-specific geographic/eligibility scope.\", \"Do not choose between the separate Certificate of Designation rows without authority.\", \"Site Analysis/Conservation indentation has a blank parent cell; no added label or applicability hierarchy is inferred.\", \"Engineering and outside-agency fee schedules are separate; not collected here.\", \"Source anomalies Plan/Plat, 1-.6 DAM and both Preliminary Plat tiers at $2,000 ea remain.\", \"Exact graphic/Unicode/whitespace details and report-end timing are not certified.\"]",
+        "/transcription_convention: Preserve wording, case, printed amounts, units, conditions and row order. Join visual line wraps; use ordinary spaces between cells and dollar amounts. Line wrapping, exact whitespace, font, and original Unicode codepoints are not certified. Visible nonword marks are described in annotations. No fees calculated.",
+        "/legal_review: pending"
+      ],
+      "proposal_reason": "Small reviewed planning-fee baseline with a named revision resolution still to reconcile.",
+      "enrollment_conditions": [
+        "Add an exact source/authority/URL/baseline identity to a separately reviewed watch contract.",
+        "Allow only the exact retained hostname and specific source URLs; reject new cross-host redirects.",
+        "Verify ordinary archived bytes and all custody/review metadata before any future request.",
+        "A changed or unavailable URL needs review; never overwrite this accepted baseline automatically."
+      ],
+      "legal_currentness": "not_verified",
+      "answer_safe": false,
+      "status": "PREPARED_NOT_ACTIVATED"
+    },
+    {
+      "rank": 2,
+      "record_id": "grand-junction-fire-fees-atlas-directed",
+      "intake_id": "MSI-20260911T201938791057Z-grand-junction-fire-fees-atlas-directed",
+      "authority_id": "CO-MUNICIPAL-GRAND_JUNCTION",
+      "layer_id": "10_Municipal_Authorities",
+      "title": "Grand Junction fire-prevention service fees",
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/grand-junction-fire-fees-atlas-directed/20260911T201938Z_grand_junction_fire_prevention_service_fees.pdf",
+        "sha256": "1f7faf078188c26fa803e4ec6225d20caad2fcce48f69d2d2ae9563c96732884",
+        "size_bytes": 802051
+      },
+      "baseline_pages": 2,
+      "raw_manifest_zero_based_row": 42,
+      "raw_manifest_exact_line_sha256": "996ff632264d98ce9d2fab8f22d0e4653ec39ca898d80e3652d92ff01e77a8a4",
+      "historical_raw_url": "https://www.gjcity.org/DocumentCenter/View/15794/Fire-Prevention-Fee-Schedule",
+      "historical_acquisition_method": "manual_official_download",
+      "historical_reported_acquisition": {
+        "/http_started_at": "2026-09-11T20:06:16.887129Z",
+        "/http_completed_at": "2026-09-11T20:06:17.536965Z"
+      },
+      "repository_received_at": "2026-09-11T20:19:38.791057Z",
+      "proposed_url": "https://www.gjcity.org/DocumentCenter/View/15794/Fire-Prevention-Fee-Schedule",
+      "retained_final_url": "https://www.gjcity.org/DocumentCenter/View/15794/Fire-Prevention-Fee-Schedule",
+      "http_started_at": "2026-09-11T20:06:16.887129Z",
+      "http_finished_at": "2026-09-11T20:06:17.536965Z",
+      "http_time_role": "Recorded original response completion, separate from later repository intake.",
+      "recorded_http_status": 200,
+      "recorded_redirects": 0,
+      "official_link_basis": "Exact official government direct URL and retained ordinary TLS HTTP 200 custody.",
+      "official_parent_url": "https://www.gjcity.org/201/Codes-Permits",
+      "official_parent_label": "Fire Prevention Bureau Fees (PDF)",
+      "authority_evidence": {
+        "artifact": {
+          "path": "research/local_review/mesa-grand-junction-intake-2026-09-11/sources.final.jsonl",
+          "sha256": "8c78cc4da476f11ec5179ac208b3b81bdb36eb195edcda5854057f41712130dc",
+          "size_bytes": 7856
+        },
+        "jsonl_row": 2,
+        "pointers": [
+          "/authority_id"
+        ],
+        "scope": "Explicit pinned authority identity; never inferred from URL or path alone."
+      },
+      "custody_evidence": {
+        "artifact": {
+          "path": "research/local_review/mesa-grand-junction-intake-2026-09-11/sources.final.jsonl",
+          "sha256": "8c78cc4da476f11ec5179ac208b3b81bdb36eb195edcda5854057f41712130dc",
+          "size_bytes": 7856
+        },
+        "jsonl_row": 2,
+        "pointers": [
+          "/staged_original/sha256",
+          "/http_status",
+          "/http_completed_at"
+        ],
+        "scope": "Recorded original response completion, separate from later repository intake."
+      },
+      "referral_evidence": [
+        {
+          "artifact": {
+            "path": "research/local_review/mesa-grand-junction-intake-2026-09-11/evidence/discovery/REPORT.json",
+            "sha256": "475eba114fcc97eb9e4239b9a9f644efcfb1f4023bb14826b0870e3815d31497",
+            "size_bytes": 29898
+          },
+          "jsonl_row": null,
+          "pointers": [
+            "/priorities/6/basis"
+          ],
+          "scope": "Earlier discovery identifies exact official parent anchor; later table QA supersedes only its transcription gap."
+        },
+        {
+          "artifact": {
+            "path": "research/local_review/mesa-grand-junction-intake-2026-09-11/evidence/discovery/events/E004/event.json",
+            "sha256": "ebf5d25393d73882e9eea9234896740232eefca9269d2cb098c1514a5a16e273",
+            "size_bytes": 710
+          },
+          "jsonl_row": null,
+          "pointers": [
+            "/requested_url",
+            "/body_sha256"
+          ],
+          "scope": "Recorded official parent HTTP identity; body not reopened in this planning task."
+        }
+      ],
+      "review_evidence": {
+        "artifact": {
+          "path": "research/local_review/grand-junction-fire-fees-atlas-source-review-2026-09-11/SOURCE_QA.json",
+          "sha256": "8069accad238166936f6ee519eb8cc35dc9a62ceb252597ea21a4ebc5efc520a",
+          "size_bytes": 39466
+        },
+        "jsonl_row": null,
+        "pointers": [
+          "/status",
+          "/native_bytes"
+        ],
+        "scope": "Previously accepted bounded review, not re-performed here; overlaps are not additive coverage."
+      },
+      "review_schema": {
+        "path": "research/local_review/grand-junction-fire-fees-atlas-source-review-2026-09-11/SOURCE_QA.schema.json",
+        "sha256": "13e23d55f3dbccef04bd6fbd113e7ca20ccb91bd8dd5dfa07c0454b68f0b6aeb",
+        "size_bytes": 7176
+      },
+      "mapped_review_kind": "checked_tables",
+      "mapped_scope_fields": {
+        "/status": "source_checked_pending_legal_review",
+        "/native_bytes": 3673
+      },
+      "recorded_source_roles": {
+        "/role": "municipal_fire_prevention_service_fee_schedule",
+        "/dates": []
+      },
+      "review_limitations": [
+        "/observations: [{\"id\": \"GJF-O01\", \"pages\": [1, 2], \"statement\": \"All 57 visible fee rows were directly checked against full 144-dpi Poppler renders. Native text has 3,673 bytes and 127 lines; words, amounts, whitespace and ligatures remain unchanged.\"}, {\"id\": \"GJF-O02\", \"pages\": [1], \"statement\": \"The five native group headings occur after all fee rows and in reverse visual order. The reviewed map attaches 2 new-building, 4 tenant-finish, 2 fire-alarm, 2 sprinkler and 24 miscellaneous rows to their visible headings.\"}, {\"id\": \"GJF-O03\", \"pages\": [2], \"statement\": \"The 23 page-two rows visibly continue the table under the page title Fire Prevention Service Fees Continued. Miscellaneous Permits is not reprinted; the cross-page group association is an explicit layout annotation, not inserted source text.\"}, {\"id\": \"GJF-O04\", \"pages\": [1, 2], \"statement\": \"Both page titles and contact lines occur after fee rows in native extraction but are visible at the top. Printed footer text remains separate. Each page has a fire-department emblem; native text does not transcribe its raster lettering. Exact emblem microlettering and font glyph code points are not certified.\"}, {\"id\": \"GJF-O05\", \"pages\": [1], \"statement\": \"New-building tiers begin at 1-5,000 square feet; tenant-finish tiers begin at 1-200 and continue 201-500, 501-5,000 and >5,000. No unstated zero-area tier or calculation rule is added.\"}, {\"id\": \"GJF-O06\", \"pages\": [1], \"statement\": \"The fire-alarm modification row visibly says flate fee= < 5 devices, while sprinkler modification says (=< 20 heads). Preserve these source spellings/operators without replacing them with a normalized inequality or merging their scopes.\"}, {\"id\": \"GJF-O07\", \"pages\": [1], \"statement\": \"Includes inspections applies to the 1-200 tenant-finish row. Other listed per-inspection charges, the per-trip/paid-prior condition, per-tank versus flat charges and per-device wording remain inside their respective fee cells.\"}, {\"id\": \"GJF-O08\", \"pages\": [1], \"statement\": \"Double regular fee belongs to work performed without obtaining a permit. The 1.5 X original plan review fee belongs to plans requiring more than two (2) reviews. Neither multiplier is applied to other rows.\"}, {\"id\": \"GJF-O09\", \"pages\": [1, 2], \"statement\": \"Annual Mobile Food Preparation Vehicles, hourly Alternative Materials/Designs/Methods Review, and Burn Permit per-year labels remain distinct. Repeated storage and spray labels on the source are not deduplicated.\"}, {\"id\": \"GJF-O10\", \"pages\": [1, 2], \"statement\": \"Explosives of blasting agents, PVP Systems and flate are preserved as printed/native source wording. Mixed native ligatures and plain letter sequences are not rewritten as corrections.\"}, {\"id\": \"GJF-O11\", \"pages\": [1, 2], \"statement\": \"No visible edition, adoption or effective date was observed. September 2025 PDF creation/modification metadata do not establish legal dates. The alternate linked fee endpoint and adopting instruments have not been reconciled.\"}, {\"id\": \"GJF-O12\", \"pages\": [1, 2], \"statement\": \"The city referral and printed Grand Junction contact details identify this source; its applicability to a separately named rural fire district or other authority is not established by this document review.\"}]",
+        "/adoption_date: null",
+        "/effective_date: null",
+        "/source_edition_date: null"
+      ],
+      "proposal_reason": "Reviewed fee rows already support source-only lookup; byte changes would identify a review need.",
+      "enrollment_conditions": [
+        "Add an exact source/authority/URL/baseline identity to a separately reviewed watch contract.",
+        "Allow only the exact retained hostname and specific source URLs; reject new cross-host redirects.",
+        "Verify ordinary archived bytes and all custody/review metadata before any future request.",
+        "A changed or unavailable URL needs review; never overwrite this accepted baseline automatically."
+      ],
+      "legal_currentness": "not_verified",
+      "answer_safe": false,
+      "status": "PREPARED_NOT_ACTIVATED"
+    },
+    {
+      "rank": 3,
+      "record_id": "weld-ehs-fees-2026-atlas-directed",
+      "intake_id": "MSI-20260911T200202187060Z-weld-ehs-fees-2026-atlas-directed",
+      "authority_id": "CO-COUNTY-WELD",
+      "layer_id": "08_County_Authorities",
+      "title": "Weld environmental-health services fees",
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/weld-ehs-fees-2026-atlas-directed/20260911T200202Z_2026-ehs-fee-schedule_final.pdf",
+        "sha256": "852801c5ad0056c7b0dde6300e66e86f2e4235ce0efc16471d5210d74aa17ed3",
+        "size_bytes": 174911
+      },
+      "baseline_pages": 3,
+      "raw_manifest_zero_based_row": 39,
+      "raw_manifest_exact_line_sha256": "a5a3f5574da8beb079b36fc967b806342fa6b3cebe4853985e616fed0608d497",
+      "historical_raw_url": "https://www.weld.gov/files/sharedassets/public/v/1/departments/health-and-environment/documents/environmental-health/owts/2026-ehs-fee-schedule_final.pdf",
+      "historical_acquisition_method": "manual_official_download",
+      "historical_reported_acquisition": {
+        "/http_started_at": "2026-09-11T19:49:18.926510Z",
+        "/http_completed_at": "2026-09-11T19:49:19.040662Z"
+      },
+      "repository_received_at": "2026-09-11T20:02:02.187060Z",
+      "proposed_url": "https://www.weld.gov/files/sharedassets/public/v/1/departments/health-and-environment/documents/environmental-health/owts/2026-ehs-fee-schedule_final.pdf",
+      "retained_final_url": "https://www.weld.gov/files/sharedassets/public/v/1/departments/health-and-environment/documents/environmental-health/owts/2026-ehs-fee-schedule_final.pdf",
+      "http_started_at": "2026-09-11T19:49:18.926510Z",
+      "http_finished_at": "2026-09-11T19:49:19.040662Z",
+      "http_time_role": "Recorded original response completion, separate from later repository intake.",
+      "recorded_http_status": 200,
+      "recorded_redirects": 0,
+      "official_link_basis": "Exact official government direct URL and retained ordinary TLS HTTP 200 custody.",
+      "official_parent_url": null,
+      "official_parent_label": null,
+      "authority_evidence": {
+        "artifact": {
+          "path": "research/local_review/weld-directed-intake-2026-09-11/source-provenance.final.jsonl",
+          "sha256": "dc18b3cf1561a2690005a10f699ffa1408f15d6c8626378f4534fb8e32217762",
+          "size_bytes": 8946
+        },
+        "jsonl_row": 1,
+        "pointers": [
+          "/authority_id"
+        ],
+        "scope": "Explicit pinned authority identity; never inferred from URL or path alone."
+      },
+      "custody_evidence": {
+        "artifact": {
+          "path": "research/local_review/weld-directed-intake-2026-09-11/source-provenance.final.jsonl",
+          "sha256": "dc18b3cf1561a2690005a10f699ffa1408f15d6c8626378f4534fb8e32217762",
+          "size_bytes": 8946
+        },
+        "jsonl_row": 1,
+        "pointers": [
+          "/canonical_original/sha256",
+          "/http_status",
+          "/http_completed_at"
+        ],
+        "scope": "Recorded original response completion, separate from later repository intake."
+      },
+      "referral_evidence": [],
+      "review_evidence": {
+        "artifact": {
+          "path": "research/local_review/weld-directed-intake-2026-09-11/evidence/source-reviews/weld-ehs-fees-2026-atlas-directed/SOURCE_QA.json",
+          "sha256": "468658770c7f755c00dc844a2a62d1ce8c6afd458ba760a20fedfef2480ee97e",
+          "size_bytes": 91145
+        },
+        "jsonl_row": null,
+        "pointers": [
+          "/status",
+          "/source_year_assertion"
+        ],
+        "scope": "Previously accepted bounded review, not re-performed here; overlaps are not additive coverage."
+      },
+      "review_schema": {
+        "path": "research/local_review/weld-directed-intake-2026-09-11/evidence/source-reviews/weld-ehs-fees-2026-atlas-directed/SOURCE_QA.schema.json",
+        "sha256": "d634dc0aa26fbea08cfa7b41bf46ada615dd8dcdc08e98207d5a8da3cfd0b545",
+        "size_bytes": 7268
+      },
+      "mapped_review_kind": "checked_tables",
+      "mapped_scope_fields": {
+        "/status": "complete_native_source_review_with_presentation_qualifications",
+        "/source_year_assertion": "2026"
+      },
+      "recorded_source_roles": {
+        "/source_role": "county_environmental_health_services_fee_schedule",
+        "/source_dates": [
+          {
+            "value": "2026",
+            "role": "schedule_year_assertion",
+            "review_pointer": "#/source_year_assertion",
+            "independent_legal_event_verification": false
+          }
+        ]
+      },
+      "review_limitations": [
+        "/observations: [{\"id\": \"EHS-O01\", \"pages\": [1, 2, 3], \"statement\": \"The source identifies Weld County Department of Public Health and Environment and a 2026 Environmental Health Services fee schedule. These pages show no adoption or effective date and no adopting resolution; year is not a legal date.\"}, {\"id\": \"EHS-O02\", \"pages\": [1, 2, 3], \"statement\": \"The two title/header lines are visible at the top of page 1, while native extraction places them near its end. The same lines are native on pages 2 and 3 but not visible in their full-page renders. Preserve all extracted bytes and distinguish these visibility and ordering facts.\"}, {\"id\": \"EHS-O03\", \"pages\": [1], \"statement\": \"The coordinator fee description ends visibly mid-word around if applicab in the checked crop, and native text ends if applicab. Do not complete the word, parenthesis or condition. The adjacent $100.00/hour fee is present.\"}, {\"id\": \"EHS-O04\", \"pages\": [1], \"statement\": \"Body-art plan review has an application fee of $100 plus $100.00/hour. Food plan review, equipment review and HACCP caps are separate $895/$775/$620 row conditions. The zero-fee school/nonprofit/mobile categories keep their own CRS 25-4-1607(9)(a)(III) references and scopes.\"}, {\"id\": \"EHS-O05\", \"pages\": [1], \"statement\": \"Preserve source spelling Temproary and Transportion. Do not infer an exactly-25-person education-course tier between source <25 and >25 conditions. Reciprocal Licensing/Permitting and Reciprocal Permitting remain different rows.\"}, {\"id\": \"EHS-O06\", \"pages\": [2], \"statement\": \"File Review Fees cites Appendix 5-D, Chapter 5, Weld County Code and has a visibly blank amount cell. It is not a zero-dollar fee. Lead investigation retains a one-hour minimum, while the fax row retains $5.00+ and additional-page condition.\"}, {\"id\": \"EHS-O07\", \"pages\": [2], \"statement\": \"The Methamphetamine decontamination permit covers up to four hours for $400.00. Its following parenthetical describes excess review/inspection time and is attached as a note to that row. The $100.00/hour rate is a separate row.\"}, {\"id\": \"EHS-O08\", \"pages\": [2], \"statement\": \"The three-times stated-fee row is beneath the bacteriological assessment heading. Do not silently extend it to every service or to page 3 chemical fees. OWTS Loan Approval with/without Water Sample retain $248.00/$200.00; the OWTS $48.00 collection/analysis row remains distinct from bacteriological $52.50/$54.50.\"}, {\"id\": \"EHS-O09\", \"pages\": [3], \"statement\": \"Additional Metals is one wrapped label continuing Nickel, Silver, with one $23.00 fee. The following market-rate paragraph is a separate note. Haloacetic Acids, Hexavalent Chromium and Zoonotic Testing print Market Rate; no numerical amount is supplied for them.\"}, {\"id\": \"EHS-O10\", \"pages\": [3], \"statement\": \"The final NOTE says analyses are at the cited rates unless the amount is set by a contract approved by the Board of County Commissioners. Preserve the exception as a page-level note; no contract or replacement amount was reviewed.\"}, {\"id\": \"EHS-O11\", \"pages\": [1, 3], \"statement\": \"The Body Art Steam spore test is $13.00 and Chemical Assessment Autoclave Spore Test is $14.00. Different labels and service groups are preserved without harmonizing amounts. Page 3 spellings Atimony, Cholrite, Phenophthalein, mosquitoe and Gasses remain source text.\"}, {\"id\": \"EHS-O12\", \"pages\": [1, 2, 3], \"statement\": \"All complete pages and five targeted crops were directly viewed by Atlas. This is candidate-aware review of the retained source and native text, not a blind transcription or verification of subsequent legal changes. Typographic underline/superscript/spacing is not fully recreated in plain text.\"}]"
+      ],
+      "proposal_reason": "Reviewed environmental-health schedule broadens service coverage beyond planning and fire fees.",
+      "enrollment_conditions": [
+        "Add an exact source/authority/URL/baseline identity to a separately reviewed watch contract.",
+        "Allow only the exact retained hostname and specific source URLs; reject new cross-host redirects.",
+        "Verify ordinary archived bytes and all custody/review metadata before any future request.",
+        "A changed or unavailable URL needs review; never overwrite this accepted baseline automatically."
+      ],
+      "legal_currentness": "not_verified",
+      "answer_safe": false,
+      "status": "PREPARED_NOT_ACTIVATED"
+    },
+    {
+      "rank": 4,
+      "record_id": "greeley-building-fees-sd008-06",
+      "intake_id": "MSI-20260911T191524670419Z-greeley-building-fees-sd008-06",
+      "authority_id": "CO-MUNICIPAL-GREELEY",
+      "layer_id": "10_Municipal_Authorities",
+      "title": "Greeley building-permit fee schedule",
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/greeley-building-fees-sd008-06/20260911T191524Z_building_permit_fee_schedule.pdf",
+        "sha256": "fa8a90dae00525c2dcb62ef4d69aeb84b7032a0fd2dc64f45c1685981e9becd4",
+        "size_bytes": 152164
+      },
+      "baseline_pages": 1,
+      "raw_manifest_zero_based_row": 35,
+      "raw_manifest_exact_line_sha256": "a2661c290c69df56dbff53cab298abac57650ce123211272f05bcca52602a9c5",
+      "historical_raw_url": null,
+      "historical_acquisition_method": "received_review_package",
+      "historical_reported_acquisition": {
+        "/reported_acquisition_at": "2026-09-11T18:50:31Z",
+        "/reported_method": "mac_curl"
+      },
+      "repository_received_at": "2026-09-11T19:15:24.670419Z",
+      "proposed_url": "https://cogy-p-001.sitecorecontenthub.cloud/api/public/content/dad9bcd41d394807be1e339c71367e76?v=f77f3c32",
+      "retained_final_url": "https://cogy-p-001.sitecorecontenthub.cloud/api/public/content/dad9bcd41d394807be1e339c71367e76?v=f77f3c32",
+      "http_started_at": "2026-09-12T23:50:43.688683Z",
+      "http_finished_at": "2026-09-12T23:50:44.491920Z",
+      "http_time_role": "Later reacquisition response completion, not original Sherlock acquisition or intake.",
+      "recorded_http_status": 200,
+      "recorded_redirects": 0,
+      "official_link_basis": "Exact official City-to-CDN anchor retained in accepted later custody; no general CDN trust.",
+      "official_parent_url": "https://greeleyco.gov/business/construction-and-growth/building-permits-and-inspections/",
+      "official_parent_label": "home Building Permit Fee Schedule",
+      "authority_evidence": {
+        "artifact": {
+          "path": "research/local_review/weld-greeley-intake-sherlock008-2026-09-11/source-provenance.jsonl",
+          "sha256": "5535b0ef0e41934295c276f84f94fb82cd30c3339ed9c466a783c039e208bf20",
+          "size_bytes": 14251
+        },
+        "jsonl_row": 1,
+        "pointers": [
+          "/authority_id"
+        ],
+        "scope": "Explicit pinned authority identity; never inferred from URL or path alone."
+      },
+      "custody_evidence": {
+        "artifact": {
+          "path": "research/local_review/greeley-fresh-custody-2026-09-12/fresh/SD008-06/receipt.json",
+          "sha256": "8e3eb28fd1e1f2ae757f9bca252bbac0f1167fc043af629f85ead1753da4e9d4",
+          "size_bytes": 1018
+        },
+        "jsonl_row": null,
+        "pointers": [
+          "/sha256",
+          "/http_status",
+          "/finished_at"
+        ],
+        "scope": "Later reacquisition response completion, not original Sherlock acquisition or intake."
+      },
+      "referral_evidence": [
+        {
+          "artifact": {
+            "path": "research/local_review/greeley-fresh-custody-2026-09-12/PRESERVATION.json",
+            "sha256": "e84845a2488758d51baf06a794fa2b8b4f4cdfe304f734d0b836bf43a7c34c51",
+            "size_bytes": 35713
+          },
+          "jsonl_row": null,
+          "pointers": [
+            "/sources/0/anchor"
+          ],
+          "scope": "Recorded exact City HTML anchor, offsets, label, CDN href and equal archived-source hash."
+        },
+        {
+          "artifact": {
+            "path": "research/local_review/greeley-fresh-custody-2026-09-12/fresh/GREELEY-PARENT/receipt.json",
+            "sha256": "dcd24437d508b83006c94feb336cf60dde4d11ddbdc6e32a0bfd01bde548a705",
+            "size_bytes": 951
+          },
+          "jsonl_row": null,
+          "pointers": [
+            "/requested_url",
+            "/sha256",
+            "/finished_at"
+          ],
+          "scope": "Later recorded official parent retrieval; no new source open in this proposal."
+        },
+        {
+          "artifact": {
+            "path": "docs/audits/FOUR_HOUR_RUN_2026-09-12/GREELEY_FRESH_CUSTODY/ACCEPTANCE.json",
+            "sha256": "3db81fd03911eded3c8ca02aaf8b8917ad473be51ee12b306bfcc2cd6687135f",
+            "size_bytes": 1590
+          },
+          "jsonl_row": null,
+          "pointers": [],
+          "scope": "Root acceptance of the later public custody preservation."
+        }
+      ],
+      "review_evidence": {
+        "artifact": {
+          "path": "research/local_review/greeley-fees-atlas-source-review-2026-09-11/source-audits/EB-PDF-015/SOURCE_QA.json",
+          "sha256": "6fd2f617a176aa821181a3ef3b52589f1fdc4c7ff64e00477f16149826142979",
+          "size_bytes": 12546
+        },
+        "jsonl_row": null,
+        "pointers": [
+          "/physical_pages",
+          "/method"
+        ],
+        "scope": "Previously accepted bounded review, not re-performed here; overlaps are not additive coverage."
+      },
+      "review_schema": {
+        "path": "research/local_review/greeley-fees-atlas-source-review-2026-09-11/source-audits/EB-PDF-015/SOURCE_QA.schema.json",
+        "sha256": "dbaa6a2026720420bb0007eeba85f71937552dbacf3c9e85a6d57966b5f478ea",
+        "size_bytes": 2993
+      },
+      "mapped_review_kind": "checked_tables",
+      "mapped_scope_fields": {
+        "/physical_pages": [
+          1
+        ],
+        "/method": "Atlas directly inspected the complete supplied 300 dpi image (displayed at 1376 by1780) and one 216 dpi original-PDF crop, then compared all native text; candidate-aware, before external EB015 dispatch or report."
+      },
+      "recorded_source_roles": {
+        "/source_role": "municipal_building_fee_schedule",
+        "/document_dates": [
+          {
+            "value": "2024",
+            "role": "schedule_title_year",
+            "qualification": "The title is not evidence that the document is legally current."
+          },
+          {
+            "value": "Effective -2024",
+            "role": "printed_table_header",
+            "qualification": "Source label only; no exact effective day or adoption instrument verified."
+          },
+          {
+            "value": "8/18/2026",
+            "role": "unlabeled_footer",
+            "qualification": "Role unknown; do not label adoption, publication or effectiveness."
+          }
+        ]
+      },
+      "review_limitations": [
+        "/observations: [\"The City Sales Tax and Temporary Electrical Inspection Fee headings are displaced to the start of native text. Their bodies appear after the fee table and footnotes. Source-order labels reconnect each heading without rewriting native bytes.\", \"All eight valuation rows were visually compared: each lower/upper range stays paired with its complete base amount, incremental charge, unit and or-fraction language. No rate arithmetic or smoothing of source differences was performed.\", \"Other rows1-4 each carry $75.00 per hour and superscript1, bound to the greater-of-total-hourly-cost footnote; minimum durations remain distinct. Row5 Actual costs superscript2 binds the administrative/overhead footnote.\", \"Other6 retains Section106, payment-at-submission timing,65 percent, and fee-separation/addition wording. The source ends fees. with an additional short horizontal mark absent from native text; record the visible mark without asserting a Unicode character.\", \"Other7 retains $75 and under1,000 squarefeet; Other8 $175; Other9 separate $175 per application for SFD and $175 for multi-family buildings. No missing eligibility or separate minimum is inferred.\", \"Sales tax body preserves 4.11% of45%, residential $75,000-or-less-per-unit condition, and separate4.11% of50% clause. Temporary electrical body preserves $45.00 per inspection and all three stated building categories.\", \"2024 title, Effective -2024 header and unlabeled8/18/2026 footer have distinct source roles. No adoption or currentness is established.\", \"City of Greeley/Colorado logo artwork is visible at upper left but absent from native text. Other repeated city-title words do not constitute extraction of the logo. Graphic italics, underlines, table borders and superscript styling are not reproduced by plain text.\"]"
+      ],
+      "proposal_reason": "Later exact-byte official reacquisition resolves a watch custody gap without changing the old intake.",
+      "enrollment_conditions": [
+        "Add an exact source/authority/URL/baseline identity to a separately reviewed watch contract.",
+        "Allow only the exact retained hostname and specific source URLs; reject new cross-host redirects.",
+        "Verify ordinary archived bytes and all custody/review metadata before any future request.",
+        "A changed or unavailable URL needs review; never overwrite this accepted baseline automatically.",
+        "Keep raw official_source_url=null and acquisition_method=received_review_package unchanged.",
+        "Use the later City-anchor proof and HTTP receipt as an additive watch binding; retain the old reported mac_curl claim separately.",
+        "Treat version-query URLs as exact targets; do not derive a newer CDN key or remove its query."
+      ],
+      "legal_currentness": "not_verified",
+      "answer_safe": false,
+      "status": "PREPARED_NOT_ACTIVATED"
+    },
+    {
+      "rank": 5,
+      "record_id": "greeley-development-impact-fee-memo-sd008-07",
+      "intake_id": "MSI-20260911T191524670419Z-greeley-development-impact-fee-memo-sd008-07",
+      "authority_id": "CO-MUNICIPAL-GREELEY",
+      "layer_id": "10_Municipal_Authorities",
+      "title": "Greeley development-impact fee memorandum",
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/greeley-development-impact-fee-memo-sd008-07/20260911T191524Z_2026_development_impact_fee_schedule.pdf",
+        "sha256": "9effbd15196898c16105913ee21032db52ad1e259f4f9def0586804726f78709",
+        "size_bytes": 651009
+      },
+      "baseline_pages": 3,
+      "raw_manifest_zero_based_row": 36,
+      "raw_manifest_exact_line_sha256": "ec1032fa4f4ae7812aee1d4333056bf6a7995532ad70f8202e81e0251bd5cef8",
+      "historical_raw_url": null,
+      "historical_acquisition_method": "received_review_package",
+      "historical_reported_acquisition": {
+        "/reported_acquisition_at": "2026-09-11T18:50:31Z",
+        "/reported_method": "mac_curl"
+      },
+      "repository_received_at": "2026-09-11T19:15:24.670419Z",
+      "proposed_url": "https://cogy-p-001.sitecorecontenthub.cloud/api/public/content/610f6e36c19f455d9fb662cc2cdbe1af?v=ef2524cb",
+      "retained_final_url": "https://cogy-p-001.sitecorecontenthub.cloud/api/public/content/610f6e36c19f455d9fb662cc2cdbe1af?v=ef2524cb",
+      "http_started_at": "2026-09-12T23:50:44.516956Z",
+      "http_finished_at": "2026-09-12T23:50:44.993147Z",
+      "http_time_role": "Later reacquisition response completion, not original Sherlock acquisition or intake.",
+      "recorded_http_status": 200,
+      "recorded_redirects": 0,
+      "official_link_basis": "Exact official City-to-CDN anchor retained in accepted later custody; no general CDN trust.",
+      "official_parent_url": "https://greeleyco.gov/business/construction-and-growth/building-permits-and-inspections/",
+      "official_parent_label": "add_business 2026 Development Impact Fee Schedule",
+      "authority_evidence": {
+        "artifact": {
+          "path": "research/local_review/weld-greeley-intake-sherlock008-2026-09-11/source-provenance.jsonl",
+          "sha256": "5535b0ef0e41934295c276f84f94fb82cd30c3339ed9c466a783c039e208bf20",
+          "size_bytes": 14251
+        },
+        "jsonl_row": 2,
+        "pointers": [
+          "/authority_id"
+        ],
+        "scope": "Explicit pinned authority identity; never inferred from URL or path alone."
+      },
+      "custody_evidence": {
+        "artifact": {
+          "path": "research/local_review/greeley-fresh-custody-2026-09-12/fresh/SD008-07/receipt.json",
+          "sha256": "5460643efe9fd3b5ddc6d11d4529e83ae7dedd973534cb829a180a8b50622074",
+          "size_bytes": 1018
+        },
+        "jsonl_row": null,
+        "pointers": [
+          "/sha256",
+          "/http_status",
+          "/finished_at"
+        ],
+        "scope": "Later reacquisition response completion, not original Sherlock acquisition or intake."
+      },
+      "referral_evidence": [
+        {
+          "artifact": {
+            "path": "research/local_review/greeley-fresh-custody-2026-09-12/PRESERVATION.json",
+            "sha256": "e84845a2488758d51baf06a794fa2b8b4f4cdfe304f734d0b836bf43a7c34c51",
+            "size_bytes": 35713
+          },
+          "jsonl_row": null,
+          "pointers": [
+            "/sources/1/anchor"
+          ],
+          "scope": "Recorded exact City HTML anchor, offsets, label, CDN href and equal archived-source hash."
+        },
+        {
+          "artifact": {
+            "path": "research/local_review/greeley-fresh-custody-2026-09-12/fresh/GREELEY-PARENT/receipt.json",
+            "sha256": "dcd24437d508b83006c94feb336cf60dde4d11ddbdc6e32a0bfd01bde548a705",
+            "size_bytes": 951
+          },
+          "jsonl_row": null,
+          "pointers": [
+            "/requested_url",
+            "/sha256",
+            "/finished_at"
+          ],
+          "scope": "Later recorded official parent retrieval; no new source open in this proposal."
+        },
+        {
+          "artifact": {
+            "path": "docs/audits/FOUR_HOUR_RUN_2026-09-12/GREELEY_FRESH_CUSTODY/ACCEPTANCE.json",
+            "sha256": "3db81fd03911eded3c8ca02aaf8b8917ad473be51ee12b306bfcc2cd6687135f",
+            "size_bytes": 1590
+          },
+          "jsonl_row": null,
+          "pointers": [],
+          "scope": "Root acceptance of the later public custody preservation."
+        }
+      ],
+      "review_evidence": {
+        "artifact": {
+          "path": "research/local_review/greeley-fees-atlas-source-review-2026-09-11/source-audits/EB-PDF-016/SOURCE_QA.json",
+          "sha256": "1663efc89bfcdf29bba57992664cc2019e933de83a2c3bb80fa49d0142def651",
+          "size_bytes": 197737
+        },
+        "jsonl_row": null,
+        "pointers": [
+          "/status",
+          "/review_mode",
+          "/expected_pages",
+          "/fee_row_count"
+        ],
+        "scope": "Previously accepted bounded review, not re-performed here; overlaps are not additive coverage."
+      },
+      "review_schema": {
+        "path": "research/local_review/greeley-fees-atlas-source-review-2026-09-11/source-audits/EB-PDF-016/SOURCE_QA.schema.json",
+        "sha256": "b877596c9b3c7a2a13ea4407b73536bd4011b53db1dcc750fcb3171453d7afe7",
+        "size_bytes": 16605
+      },
+      "mapped_review_kind": "checked_tables",
+      "mapped_scope_fields": {
+        "/status": "three_page_candidate_aware_source_qa_complete_pending_parent_integration",
+        "/review_mode": "candidate_aware_not_blind",
+        "/expected_pages": 3,
+        "/fee_row_count": 30
+      },
+      "recorded_source_roles": {
+        "/source_role": "fee_adjustment_memorandum_with_schedules",
+        "/document_dates": [
+          {
+            "value": "November 1, 2025",
+            "role": "memorandum_date",
+            "qualification": "Finance memorandum, not the cited 2023 adopting ordinance."
+          },
+          {
+            "value": "March 1, 2026",
+            "role": "memorandum_stated_effective_date",
+            "qualification": "Page 2 statement; independent adoption and later changes not reconciled."
+          },
+          {
+            "value": "December",
+            "role": "prospective_water_sewer_pif_adoption",
+            "qualification": "Water/Sewer PIFs are separate and stated as future adoption; not included as adopted rates."
+          }
+        ]
+      },
+      "review_limitations": [
+        "/limits: [\"This is a three-page visual/native fidelity review, not an adopted-fee or current-law certification.\", \"The source is a memorandum with schedules, not the independently checked adoption instrument. The quoted code and subsequent amendments were not opened.\", \"No fee totals, recalculated percentages, independent economic checks or jurisdiction-wide completeness claims are produced.\", \"Image-only logo words, non-visible native -A, table layout and native bullet encoding are disclosed separately from unchanged source wording.\"]",
+        "/provenance_limits: [\"The source and candidate are exact copies from the frozen EB015–017 packet. The canonical retained original was byte-equal at review time.\", \"No network acquisition occurred in this review. The packet preserves upstream claims and actual repository intake separately; this review does not independently verify the original HTTP event.\", \"The copied packet manifest contains other assignment references for context. Verification here intentionally checks only this source and its three images and native pages; other packet documents are outside scope.\"]"
+      ],
+      "proposal_reason": "Monitor the received memorandum as a memorandum; later official custody matches its old baseline.",
+      "enrollment_conditions": [
+        "Add an exact source/authority/URL/baseline identity to a separately reviewed watch contract.",
+        "Allow only the exact retained hostname and specific source URLs; reject new cross-host redirects.",
+        "Verify ordinary archived bytes and all custody/review metadata before any future request.",
+        "A changed or unavailable URL needs review; never overwrite this accepted baseline automatically.",
+        "Keep raw official_source_url=null and acquisition_method=received_review_package unchanged.",
+        "Use the later City-anchor proof and HTTP receipt as an additive watch binding; retain the old reported mac_curl claim separately.",
+        "Treat version-query URLs as exact targets; do not derive a newer CDN key or remove its query."
+      ],
+      "legal_currentness": "not_verified",
+      "answer_safe": false,
+      "status": "PREPARED_NOT_ACTIVATED"
+    },
+    {
+      "rank": 6,
+      "record_id": "mesa-building-fees-exhibit-a-atlas-directed",
+      "intake_id": "MSI-20260911T202724633106Z-mesa-building-fees-exhibit-a-atlas-directed",
+      "authority_id": "CO-COUNTY-MESA",
+      "layer_id": "08_County_Authorities",
+      "title": "Mesa Building Department fee Exhibit A",
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/mesa-building-fees-exhibit-a-atlas-directed/20260911T202724Z_mesa_building_department_exhibit_a_fee_schedule.pdf",
+        "sha256": "421aa92efa159b484a091f1ade3589f6abb8a060bb880ec0c0a09e0472e4b9e7",
+        "size_bytes": 191213
+      },
+      "baseline_pages": 5,
+      "raw_manifest_zero_based_row": 45,
+      "raw_manifest_exact_line_sha256": "d7e80457fc6dc2607f9d7d576959911553e63bae3de8b323ceba9356d84640ee",
+      "historical_raw_url": "https://www.mesacounty.us/sites/default/files/2026-04/Exhibit%20A%20Mesa%20County%20Building%20Department%20Fee%20Schedule%202024%20ADA.pdf",
+      "historical_acquisition_method": "manual_official_download",
+      "historical_reported_acquisition": {
+        "/http_started_at": "2026-09-11T20:17:42.887486Z",
+        "/http_completed_at": "2026-09-11T20:17:43.011756Z"
+      },
+      "repository_received_at": "2026-09-11T20:27:24.633106Z",
+      "proposed_url": "https://www.mesacounty.us/sites/default/files/2026-04/Exhibit%20A%20Mesa%20County%20Building%20Department%20Fee%20Schedule%202024%20ADA.pdf",
+      "retained_final_url": "https://www.mesacounty.us/sites/default/files/2026-04/Exhibit%20A%20Mesa%20County%20Building%20Department%20Fee%20Schedule%202024%20ADA.pdf",
+      "http_started_at": "2026-09-11T20:17:42.887486Z",
+      "http_finished_at": "2026-09-11T20:17:43.011756Z",
+      "http_time_role": "Recorded original response completion, separate from later repository intake.",
+      "recorded_http_status": 200,
+      "recorded_redirects": 0,
+      "official_link_basis": "Exact official government direct URL and retained ordinary TLS HTTP 200 custody.",
+      "official_parent_url": "https://www.mesacounty.us/departments-and-services/community-development/building/permit-and-plan-review-fees-building",
+      "official_parent_label": "Adopted Fee Schedule (PDF)",
+      "authority_evidence": {
+        "artifact": {
+          "path": "research/local_review/mesa-grand-junction-directed-intake-2026-09-11/sources.final.jsonl",
+          "sha256": "c63584f4ac73a1c4f9fe3a721a67c96bde80112699812754e51badbd9a832008",
+          "size_bytes": 7761
+        },
+        "jsonl_row": 2,
+        "pointers": [
+          "/authority_id"
+        ],
+        "scope": "Explicit pinned authority identity; never inferred from URL or path alone."
+      },
+      "custody_evidence": {
+        "artifact": {
+          "path": "research/local_review/mesa-grand-junction-directed-intake-2026-09-11/sources.final.jsonl",
+          "sha256": "c63584f4ac73a1c4f9fe3a721a67c96bde80112699812754e51badbd9a832008",
+          "size_bytes": 7761
+        },
+        "jsonl_row": 2,
+        "pointers": [
+          "/staged_original/sha256",
+          "/http_status",
+          "/http_completed_at"
+        ],
+        "scope": "Recorded original response completion, separate from later repository intake."
+      },
+      "referral_evidence": [
+        {
+          "artifact": {
+            "path": "research/local_review/mesa-grand-junction-directed-intake-2026-09-11/evidence/discovery/ACCESS_AUDIT.json",
+            "sha256": "66314f02a6806b3d93c4c342cefa341affe8a738704e8ad910eacffba63eb480",
+            "size_bytes": 35950
+          },
+          "jsonl_row": null,
+          "pointers": [
+            "/basis/5"
+          ],
+          "scope": "Recorded exact parsed anchor from E006; catalog label adopted is not independent adoption proof."
+        }
+      ],
+      "review_evidence": {
+        "artifact": {
+          "path": "research/local_review/mesa-building-fees-atlas-source-review-2026-09-11/SOURCE_REVIEW.json",
+          "sha256": "5aeb9abfe5efe1575c9e11b93d812b491f44a3d9b6575b737e91d510b573f275",
+          "size_bytes": 639389
+        },
+        "jsonl_row": null,
+        "pointers": [
+          "/status",
+          "/native_byte_changes"
+        ],
+        "scope": "Previously accepted bounded review, not re-performed here; overlaps are not additive coverage."
+      },
+      "review_schema": {
+        "path": "research/local_review/mesa-building-fees-atlas-source-review-2026-09-11/SOURCE_REVIEW.schema.json",
+        "sha256": "82e201c93da9a1bcbff5d6486a5fb97e7d4ac22ce7acb4dff20594d61c281bc8",
+        "size_bytes": 15574
+      },
+      "mapped_review_kind": "checked_tables",
+      "mapped_scope_fields": {
+        "/status": "source_text_and_table_associations_reviewed",
+        "/native_byte_changes": 0
+      },
+      "recorded_source_roles": {
+        "/role": "county_building_department_fee_exhibit",
+        "/dates": []
+      },
+      "review_limitations": [
+        "/limits: [\"All five full pages and three focused crops directly viewed; candidate-aware Atlas source QA, not independent external blind review.\", \"No new source request, legal interpretation, fee computation, numeric correction, rule-unit/coverage/currentness promotion or canonical intake.\", \"Geometric cell strings are separate derived extraction, while original native UTF8 bytes and all source glyph positions are retained unchanged. Superscripts/spacing are not a native-text correction.\", \"All physical tables retained, including eight valuation tiers and26valuation rows; absent referenced Table3B is unresolved.\", \"Raw PDF and prior custody files are unchanged. Fresh typed records are research evidence only; no assertion of authenticity of enactment.\"]",
+        "/adoption_effectiveness: not_verified"
+      ],
+      "proposal_reason": "Reviewed county fee exhibit, retaining missing Table 3B and shared-service authority limitations.",
+      "enrollment_conditions": [
+        "Add an exact source/authority/URL/baseline identity to a separately reviewed watch contract.",
+        "Allow only the exact retained hostname and specific source URLs; reject new cross-host redirects.",
+        "Verify ordinary archived bytes and all custody/review metadata before any future request.",
+        "A changed or unavailable URL needs review; never overwrite this accepted baseline automatically."
+      ],
+      "legal_currentness": "not_verified",
+      "answer_safe": false,
+      "status": "PREPARED_NOT_ACTIVATED"
+    }
+  ],
+  "remaining": [
+    {
+      "record_id": "arapahoe-planning-fees-sd002-14",
+      "authority_id": "CO-COUNTY-ARAPAHOE",
+      "inventory_zero_based_row": 0,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/arapahoe-planning-fees-sd002-14/20260910T215435Z_original.pdf",
+        "sha256": "ce519b6fe89546cf85a77934fcbdb6b6bf08473e19c545cf4c51414e1cdcb818",
+        "size_bytes": 220138
+      },
+      "review_mapped": true,
+      "verified_http_mapped": true,
+      "disposition": "proposed",
+      "reason": "Prioritized for a separately reviewed exact-target watch expansion; not enrolled."
+    },
+    {
+      "record_id": "larimer-land-use-code-sd004-01",
+      "authority_id": "CO-COUNTY-LARIMER",
+      "inventory_zero_based_row": 1,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/larimer-land-use-code-sd004-01/20260911T171343Z_luc_dec8.pdf",
+        "sha256": "bdd40451e40f77fc90e15f6428c824cc7ed62c9c0229c6977e289009b8a00d71",
+        "size_bytes": 14622336
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "larimer-building-amendments-sd004-02",
+      "authority_id": "CO-COUNTY-LARIMER",
+      "inventory_zero_based_row": 2,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/larimer-building-amendments-sd004-02/20260911T171343Z_building_amendments.pdf",
+        "sha256": "c0c7337ed4bd06d197e6ccedc94fdc1caa7200bbacdd9b7dcdb4cae6f802df53",
+        "size_bytes": 1526321
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "larimer-wildfire-code-sd004-03",
+      "authority_id": "CO-COUNTY-LARIMER",
+      "inventory_zero_based_row": 3,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/larimer-wildfire-code-sd004-03/20260911T171343Z_wildfire_code.pdf",
+        "sha256": "a2453ff46bc100331b152ee5186c89edcd08393098dbed54ef7beac1bfbffdb7",
+        "size_bytes": 2837723
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "larimer-data-center-moratorium-sd004-04",
+      "authority_id": "CO-COUNTY-LARIMER",
+      "inventory_zero_based_row": 4,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/larimer-data-center-moratorium-sd004-04/20260911T171343Z_moratorium_resolution.pdf",
+        "sha256": "d5de580139ba20bb5e80b4226b583ebc033eef693884dedeff0a8dddcfe3696c",
+        "size_bytes": 185477
+      },
+      "review_mapped": true,
+      "verified_http_mapped": false,
+      "disposition": "reviewed_missing_mapped_http",
+      "reason": "Scoped review is mapped, but verified HTTP custody is null in this pinned inventory. Review does not prove transport or establish a safe direct watch URL; inspect retained custody before enrollment."
+    },
+    {
+      "record_id": "larimer-owts-regulations-sd004-05",
+      "authority_id": "CO-COUNTY-LARIMER",
+      "inventory_zero_based_row": 5,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/larimer-owts-regulations-sd004-05/20260911T171343Z_owts_regs.pdf",
+        "sha256": "6f5e633ab8404a0df44e76047d0ae0bb93afa9aa1ea81059fad48634873e2869",
+        "size_bytes": 1329390
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "larimer-building-fees-sd004-06",
+      "authority_id": "CO-COUNTY-LARIMER",
+      "inventory_zero_based_row": 6,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/larimer-building-fees-sd004-06/20260911T171343Z_building_fee_sched_2022.pdf",
+        "sha256": "1ac4dde1a7bbbd8ebf3b26bf8719c5c6854bbbd4844c221f54729d36bb193b2c",
+        "size_bytes": 269277
+      },
+      "review_mapped": true,
+      "verified_http_mapped": false,
+      "disposition": "reviewed_missing_mapped_http",
+      "reason": "Scoped review is mapped, but verified HTTP custody is null in this pinned inventory. Review does not prove transport or establish a safe direct watch URL; inspect retained custody before enrollment."
+    },
+    {
+      "record_id": "larimer-development-review-fees-sd004-07",
+      "authority_id": "CO-COUNTY-LARIMER",
+      "inventory_zero_based_row": 7,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/larimer-development-review-fees-sd004-07/20260911T171343Z_development_review_fees.pdf",
+        "sha256": "752dec4468ad92f5895a7af53ad0451b21517fb390212dc76b5f358f15fec64b",
+        "size_bytes": 86261
+      },
+      "review_mapped": true,
+      "verified_http_mapped": false,
+      "disposition": "reviewed_missing_mapped_http",
+      "reason": "Scoped review is mapped, but verified HTTP custody is null in this pinned inventory. Review does not prove transport or establish a safe direct watch URL; inspect retained custody before enrollment."
+    },
+    {
+      "record_id": "larimer-rural-road-standards-sd004-08",
+      "authority_id": "CO-COUNTY-LARIMER",
+      "inventory_zero_based_row": 8,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/larimer-rural-road-standards-sd004-08/20260911T171343Z_rural_road_standards.pdf",
+        "sha256": "8e6836d6baae66bf994aa1d9b7e9e4b83a12d502f7249073bc23cf6ff7408f92",
+        "size_bytes": 2081467
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "larimer-comprehensive-plan-volume-1-sd004-09",
+      "authority_id": "CO-COUNTY-LARIMER",
+      "inventory_zero_based_row": 9,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/larimer-comprehensive-plan-volume-1-sd004-09/20260911T171343Z_comprehensive_plan_v1.pdf",
+        "sha256": "42ea32c2969c64b0a5e5ea1c2b1a39ed7d610eedf358ca268d6acbb592ceab08",
+        "size_bytes": 28392003
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "larimer-fee-increase-memo-sd004-lc-09",
+      "authority_id": "CO-COUNTY-LARIMER",
+      "inventory_zero_based_row": 10,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/larimer-fee-increase-memo-sd004-lc-09/20260911T171343Z_fee_increase_memo.pdf",
+        "sha256": "17a50621a9669c37876bef67cbeeba930d95b0520abc6a210a23bfd7f40b1d19",
+        "size_bytes": 121743
+      },
+      "review_mapped": true,
+      "verified_http_mapped": false,
+      "disposition": "reviewed_missing_mapped_http",
+      "reason": "Scoped review is mapped, but verified HTTP custody is null in this pinned inventory. Review does not prove transport or establish a safe direct watch URL; inspect retained custody before enrollment."
+    },
+    {
+      "record_id": "larimer-governing-policies-sd004-lc-14",
+      "authority_id": "CO-COUNTY-LARIMER",
+      "inventory_zero_based_row": 11,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/larimer-governing-policies-sd004-lc-14/20260911T171343Z_governing_policies.pdf",
+        "sha256": "abd6fd2c6285927e580c4361803490bb724c8ee8cdd4446bd0d78aae829b7cea",
+        "size_bytes": 854309
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "fort-collins-ibc-amendments-sd005-02",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "inventory_zero_based_row": 12,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/fort-collins-ibc-amendments-sd005-02/20260911T182900Z_005_www_fortcollins_gov_24-ibc-final-amendments.pdf",
+        "sha256": "405c319be443d472e348eac121fec78e1057a8fc1894c800fbefe4ac4d61d5b8",
+        "size_bytes": 618034
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "fort-collins-irc-amendments-sd005-03",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "inventory_zero_based_row": 13,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/fort-collins-irc-amendments-sd005-03/20260911T182900Z_006_www_fortcollins_gov_24-irc-final-amendments.pdf",
+        "sha256": "88f183426f4ac7995753df423b949342a4ba68e2e9c05dee1a580289d3c983a2",
+        "size_bytes": 919990
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "fort-collins-iecc-amendments-sd005-04",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "inventory_zero_based_row": 14,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/fort-collins-iecc-amendments-sd005-04/20260911T182900Z_007_www_fortcollins_gov_24-iecc-final-amendments.pdf",
+        "sha256": "561320ff6504708e2719626aaa29b663525a571736b1477d7d41e5a0d14b6e9d",
+        "size_bytes": 1771758
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "fort-collins-imc-amendments-sd005-event-08",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "inventory_zero_based_row": 15,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/fort-collins-imc-amendments-sd005-event-08/20260911T182900Z_008_www_fortcollins_gov_24-imc-final-amendments.pdf",
+        "sha256": "b8b7ef5a549e71788683c4d67bce6c13f8e75aa70b4fc10f277bce9e5dba4dd3",
+        "size_bytes": 481147
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "fort-collins-wildfire-code-sd005-05",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "inventory_zero_based_row": 16,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/fort-collins-wildfire-code-sd005-05/20260911T182900Z_009_www_fortcollins_gov_2025-colorado-wildfire-resiliency-code-final-for-brc.pdf",
+        "sha256": "00e7446d7deac3499b86c4b8f15a5d802cc0c14dc2621409845ec13525cb01d2",
+        "size_bytes": 169449
+      },
+      "review_mapped": true,
+      "verified_http_mapped": false,
+      "disposition": "reviewed_missing_mapped_http",
+      "reason": "Scoped review is mapped, but verified HTTP custody is null in this pinned inventory. Review does not prove transport or establish a safe direct watch URL; inspect retained custody before enrollment."
+    },
+    {
+      "record_id": "fort-collins-land-use-article-1-sd005-07",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "inventory_zero_based_row": 17,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/fort-collins-land-use-article-1-sd005-07/20260911T182900Z_010_www_fortcollins_gov_article-1-general-purpose-and-provisions.pdf",
+        "sha256": "555a05553af57619c818c5b9ab90d1b751e161a307d8bb65fc73141991a73d2a",
+        "size_bytes": 340287
+      },
+      "review_mapped": true,
+      "verified_http_mapped": false,
+      "disposition": "reviewed_missing_mapped_http",
+      "reason": "Scoped review is mapped, but verified HTTP custody is null in this pinned inventory. Review does not prove transport or establish a safe direct watch URL; inspect retained custody before enrollment."
+    },
+    {
+      "record_id": "fort-collins-land-use-article-2-sd005-08",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "inventory_zero_based_row": 18,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/fort-collins-land-use-article-2-sd005-08/20260911T182900Z_011_www_fortcollins_gov_article-2-zone-districts.pdf",
+        "sha256": "1ec5deac82b2511d2ae82ee928f887b006db689553181ed1bb717c7c7a421e36",
+        "size_bytes": 15221919
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "fort-collins-land-use-article-3-sd005-event-12",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "inventory_zero_based_row": 19,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/fort-collins-land-use-article-3-sd005-event-12/20260911T182900Z_012_www_fortcollins_gov_article-3-buildingtypes.pdf",
+        "sha256": "b12f6031046c354307685563901bf8981c21554342dd5c39424809cb89654ea6",
+        "size_bytes": 22584310
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "fort-collins-land-use-article-4-sd005-event-13",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "inventory_zero_based_row": 20,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/fort-collins-land-use-article-4-sd005-event-13/20260911T182900Z_013_www_fortcollins_gov_article-4-use-standards.pdf",
+        "sha256": "c46f095d1be1e8ba65d1d5fe325daafcec0f4482bb89846f97a039c80449e757",
+        "size_bytes": 14252023
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "fort-collins-land-use-article-5-sd005-event-14",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "inventory_zero_based_row": 21,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/fort-collins-land-use-article-5-sd005-event-14/20260911T182900Z_014_www_fortcollins_gov_article_5_general_development_and_site_design.pdf",
+        "sha256": "b3e4eb6e9a3f3354f63035430a2c9e4e2ccfbd0fa1c39303b96442da913c0364",
+        "size_bytes": 6306165
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "fort-collins-ifgc-amendments-sd005-event-19",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "inventory_zero_based_row": 22,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/fort-collins-ifgc-amendments-sd005-event-19/20260911T182900Z_019_www_fortcollins_gov_24-ifgc-final-amendments.pdf",
+        "sha256": "dbcfe030e1643892964a6261127f242c16017bc88ac91116c6cb868952fe28ac",
+        "size_bytes": 483615
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "fort-collins-ipc-amendments-sd005-event-20",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "inventory_zero_based_row": 23,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/fort-collins-ipc-amendments-sd005-event-20/20260911T182900Z_020_www_fortcollins_gov_24-ipc-final-amendments.pdf",
+        "sha256": "0bd99bf7b3b1d5bb7c0792c8a791db5a80a3224c7a2c58bfef2a50cb182333ea",
+        "size_bytes": 953468
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "fort-collins-ispsc-amendments-sd005-event-21",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "inventory_zero_based_row": 24,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/fort-collins-ispsc-amendments-sd005-event-21/20260911T182900Z_021_www_fortcollins_gov_24-ispsc-final-amendments.pdf",
+        "sha256": "6704ba29209f86268df1a2ea9b20aba74652fda6b62a9f5d820d1099dab8c900",
+        "size_bytes": 549485
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "fort-collins-iebc-amendments-sd005-event-22",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "inventory_zero_based_row": 25,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/fort-collins-iebc-amendments-sd005-event-22/20260911T182900Z_022_www_fortcollins_gov_24-iebc-final-amendments.pdf",
+        "sha256": "07313c0b4be74f59d4db72703dbd89b53852166b3f0cfc0ad947e7044adfaf5e",
+        "size_bytes": 504193
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "fort-collins-ipmc-amendments-sd005-event-23",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "inventory_zero_based_row": 26,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/fort-collins-ipmc-amendments-sd005-event-23/20260911T182900Z_023_www_fortcollins_gov_24-ipmc-final-amendments.pdf",
+        "sha256": "69a0d3e946866cd72311b0364cd1a97a8ef6c47758be5cf81fee1f61914266b6",
+        "size_bytes": 557620
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "fort-collins-land-use-article-6-sd005-event-24",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "inventory_zero_based_row": 27,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/fort-collins-land-use-article-6-sd005-event-24/20260911T182900Z_024_www_fortcollins_gov_article-6-administration-and-procedures.pdf",
+        "sha256": "fb096c95cbb04a5da339d0e534496ca26df9fb854116ea81cf73281dd3b25b24",
+        "size_bytes": 1529063
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "fort-collins-land-use-article-7-sd005-event-26",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "inventory_zero_based_row": 28,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/fort-collins-land-use-article-7-sd005-event-26/20260911T182900Z_026_www_fortcollins_gov_article-7-rules-of-measurement-and-definitions.pdf",
+        "sha256": "646ebd678a89dd24e8f8c9cc487ecc0e6776265f5f1b847a1ce3e5e3d3cde79f",
+        "size_bytes": 3332684
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "fort-collins-meeting-packet-9909c320-sd005-09",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "inventory_zero_based_row": 29,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/fort-collins-meeting-packet-9909c320-sd005-09/20260911T182900Z_027_mccmeetings_blob_core_usgovcloudapi_net_MEET-Packet-9909c32063cd463990a30436cf0d9096.pdf",
+        "sha256": "95de1b7b623aba3ea062ba1b1e19d10bbb1f32618cde17097db2eab15496e2ad",
+        "size_bytes": 42636309
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "fort-collins-meeting-packet-98ce54e6-sd005-11",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "inventory_zero_based_row": 30,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/fort-collins-meeting-packet-98ce54e6-sd005-11/20260911T182900Z_028_mccmeetings_blob_core_usgovcloudapi_net_MEET-Packet-98ce54e66b3d4da38059730c71b0f1c6.pdf",
+        "sha256": "412acf2984ea86b792dea6b88880ebcd4fb0cd21969b7c0a61672ce65da2bae2",
+        "size_bytes": 90765214
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "larimer-equity-fee-memo-sd007-05",
+      "authority_id": "CO-COUNTY-LARIMER",
+      "inventory_zero_based_row": 31,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/larimer-equity-fee-memo-sd007-05/20260911T190159Z_bcc_equity_fee_reduction_memo_for_december_19_2023.pdf",
+        "sha256": "9b8ba4e32fee82e5d632b53a7da19ad626438ef130b750e73e09b591fc9e7b14",
+        "size_bytes": 2355002
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "larimer-equity-fee-resolution-sd007-04",
+      "authority_id": "CO-COUNTY-LARIMER",
+      "inventory_zero_based_row": 32,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/larimer-equity-fee-resolution-sd007-04/20260911T190159Z_revised_resolution_declaring_equity_fee_reduction_for_planning_and_engineering_development_review_fees_for_certain_application_types_that_achieve_community_benefits.pdf",
+        "sha256": "9ef9ae74a016628f3b8c6fac3f0ce7d0d76579472251c60725e56da524f19437",
+        "size_bytes": 1116210
+      },
+      "review_mapped": true,
+      "verified_http_mapped": false,
+      "disposition": "reviewed_missing_mapped_http",
+      "reason": "Scoped review is mapped, but verified HTTP custody is null in this pinned inventory. Review does not prove transport or establish a safe direct watch URL; inspect retained custody before enrollment."
+    },
+    {
+      "record_id": "larimer-february-meeting-packet-sd007-08",
+      "authority_id": "CO-COUNTY-LARIMER",
+      "inventory_zero_based_row": 33,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/larimer-february-meeting-packet-sd007-08/20260911T190159Z_land_use_hearing_agenda_packet_2026-02-09.pdf",
+        "sha256": "15933b2bbfc05894ab6f6cc49b8f8e1c4490815036f6afab9b22c7dc2cdbf10e",
+        "size_bytes": 27529681
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "weld-building-fees-sd008-01",
+      "authority_id": "CO-COUNTY-WELD",
+      "inventory_zero_based_row": 34,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/weld-building-fees-sd008-01/20260911T191524Z_2026-bldg-fee-schedule.pdf",
+        "sha256": "8fb5dc78f67407a22857160f107a0253da42320e9e502387be573ef53cab9f27",
+        "size_bytes": 213975
+      },
+      "review_mapped": true,
+      "verified_http_mapped": false,
+      "disposition": "reviewed_missing_mapped_http",
+      "reason": "Scoped review is mapped, but verified HTTP custody is null in this pinned inventory. Review does not prove transport or establish a safe direct watch URL; inspect retained custody before enrollment."
+    },
+    {
+      "record_id": "greeley-building-fees-sd008-06",
+      "authority_id": "CO-MUNICIPAL-GREELEY",
+      "inventory_zero_based_row": 35,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/greeley-building-fees-sd008-06/20260911T191524Z_building_permit_fee_schedule.pdf",
+        "sha256": "fa8a90dae00525c2dcb62ef4d69aeb84b7032a0fd2dc64f45c1685981e9becd4",
+        "size_bytes": 152164
+      },
+      "review_mapped": true,
+      "verified_http_mapped": true,
+      "disposition": "proposed",
+      "reason": "Prioritized for a separately reviewed exact-target watch expansion; not enrolled."
+    },
+    {
+      "record_id": "greeley-development-impact-fee-memo-sd008-07",
+      "authority_id": "CO-MUNICIPAL-GREELEY",
+      "inventory_zero_based_row": 36,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/greeley-development-impact-fee-memo-sd008-07/20260911T191524Z_2026_development_impact_fee_schedule.pdf",
+        "sha256": "9effbd15196898c16105913ee21032db52ad1e259f4f9def0586804726f78709",
+        "size_bytes": 651009
+      },
+      "review_mapped": true,
+      "verified_http_mapped": true,
+      "disposition": "proposed",
+      "reason": "Prioritized for a separately reviewed exact-target watch expansion; not enrolled."
+    },
+    {
+      "record_id": "greeley-water-sewer-proposed-pif-notice-sd008-08",
+      "authority_id": "CO-MUNICIPAL-GREELEY",
+      "inventory_zero_based_row": 37,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/greeley-water-sewer-proposed-pif-notice-sd008-08/20260911T191524Z_2021_water_sewer_plant_investment_fees.pdf",
+        "sha256": "edfd4eecc57657bec922b8e0e63597fbf2fc957936d8f26a1a457b195dac145c",
+        "size_bytes": 74466
+      },
+      "review_mapped": true,
+      "verified_http_mapped": true,
+      "disposition": "verified_custody_deferred",
+      "reason": "Verified later custody exists, but this is a conditional proposed 2021 utility-fee notice. Deferred behind newer fee documents; technically suitable only for an explicitly historical/proposal URL watch."
+    },
+    {
+      "record_id": "weld-ordinance-26-01-atlas-directed",
+      "authority_id": "CO-COUNTY-WELD",
+      "inventory_zero_based_row": 38,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/weld-ordinance-26-01-atlas-directed/20260911T200202Z_ord26-01_3rd-adopted.pdf",
+        "sha256": "2ba9073aa06420e41a5dce98fade56278df96729630f5d61d3ab1c910e839eb0",
+        "size_bytes": 125953
+      },
+      "review_mapped": true,
+      "verified_http_mapped": true,
+      "disposition": "verified_custody_deferred",
+      "reason": "Verified custody and bounded source review exist. Fixed adopting ordinance is lower priority than fee schedules; useful in a separate amendment/link-discovery batch."
+    },
+    {
+      "record_id": "weld-ehs-fees-2026-atlas-directed",
+      "authority_id": "CO-COUNTY-WELD",
+      "inventory_zero_based_row": 39,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/weld-ehs-fees-2026-atlas-directed/20260911T200202Z_2026-ehs-fee-schedule_final.pdf",
+        "sha256": "852801c5ad0056c7b0dde6300e66e86f2e4235ce0efc16471d5210d74aa17ed3",
+        "size_bytes": 174911
+      },
+      "review_mapped": true,
+      "verified_http_mapped": true,
+      "disposition": "proposed",
+      "reason": "Prioritized for a separately reviewed exact-target watch expansion; not enrolled."
+    },
+    {
+      "record_id": "mesa-land-development-code-atlas-directed",
+      "authority_id": "CO-COUNTY-MESA",
+      "inventory_zero_based_row": 40,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/mesa-land-development-code-atlas-directed/20260911T201938Z_mesa_land_development_code_amended_2024_04_23.pdf",
+        "sha256": "8b1af5f7ba0383c45304bf134ad88d49faa1d179ffde1959e7d36db9c0a5ca9b",
+        "size_bytes": 2127044
+      },
+      "review_mapped": false,
+      "verified_http_mapped": true,
+      "disposition": "verified_custody_deferred",
+      "reason": "Verified custody exists, but this inventory has no mapped scoped review and its 2,127,044-byte baseline exceeds the existing 2 MB single-source ceiling."
+    },
+    {
+      "record_id": "grand-junction-ifc-ordinance-5269-atlas-directed",
+      "authority_id": "CO-MUNICIPAL-GRAND_JUNCTION",
+      "inventory_zero_based_row": 41,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/grand-junction-ifc-ordinance-5269-atlas-directed/20260911T201938Z_grand_junction_ordinance_5269.pdf",
+        "sha256": "79795d6650664c33808b3877e97b04fd31a84ab1a6bda8ab658c3153cbbe3993",
+        "size_bytes": 6329749
+      },
+      "review_mapped": true,
+      "verified_http_mapped": true,
+      "disposition": "verified_custody_deferred",
+      "reason": "Verified custody and qualified source review exist, but its 6,329,749-byte baseline exceeds the current 2 MB ceiling and explicit effective-date statements remain unresolved."
+    },
+    {
+      "record_id": "grand-junction-fire-fees-atlas-directed",
+      "authority_id": "CO-MUNICIPAL-GRAND_JUNCTION",
+      "inventory_zero_based_row": 42,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/grand-junction-fire-fees-atlas-directed/20260911T201938Z_grand_junction_fire_prevention_service_fees.pdf",
+        "sha256": "1f7faf078188c26fa803e4ec6225d20caad2fcce48f69d2d2ae9563c96732884",
+        "size_bytes": 802051
+      },
+      "review_mapped": true,
+      "verified_http_mapped": true,
+      "disposition": "proposed",
+      "reason": "Prioritized for a separately reviewed exact-target watch expansion; not enrolled."
+    },
+    {
+      "record_id": "grand-junction-ordinance-5340-atlas-directed",
+      "authority_id": "CO-MUNICIPAL-GRAND_JUNCTION",
+      "inventory_zero_based_row": 43,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/grand-junction-ordinance-5340-atlas-directed/20260911T202724Z_grand_junction_ordinance_5340.pdf",
+        "sha256": "ee803ba2d03f7d7ba93b9135812244f904a83ab36a7f06f8434c93554a2eeb78",
+        "size_bytes": 1485560
+      },
+      "review_mapped": true,
+      "verified_http_mapped": true,
+      "disposition": "verified_custody_deferred",
+      "reason": "Verified custody and bounded checked passages exist. Prioritize a separate instrument/amendment watch rather than imply the fee-schedule batch reconciles it."
+    },
+    {
+      "record_id": "mesa-planning-fees-2017-2018-atlas-directed",
+      "authority_id": "CO-COUNTY-MESA",
+      "inventory_zero_based_row": 44,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/mesa-planning-fees-2017-2018-atlas-directed/20260911T202724Z_mesa_planning_fee_schedule_2017_2018.pdf",
+        "sha256": "af11318af2ce3ea5e4b1af313f348ab851a855a76418e3878d1a166c084dadb6",
+        "size_bytes": 66049
+      },
+      "review_mapped": true,
+      "verified_http_mapped": true,
+      "disposition": "verified_custody_deferred",
+      "reason": "Verified custody and checked tables exist, but the catalog/source describe a historical 2017/2018 planning-fee suspension. Defer for edition reconciliation; not a demonstrated current fee schedule."
+    },
+    {
+      "record_id": "mesa-building-fees-exhibit-a-atlas-directed",
+      "authority_id": "CO-COUNTY-MESA",
+      "inventory_zero_based_row": 45,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/mesa-building-fees-exhibit-a-atlas-directed/20260911T202724Z_mesa_building_department_exhibit_a_fee_schedule.pdf",
+        "sha256": "421aa92efa159b484a091f1ade3589f6abb8a060bb880ec0c0a09e0472e4b9e7",
+        "size_bytes": 191213
+      },
+      "review_mapped": true,
+      "verified_http_mapped": true,
+      "disposition": "proposed",
+      "reason": "Prioritized for a separately reviewed exact-target watch expansion; not enrolled."
+    },
+    {
+      "record_id": "el-paso-planning-fees-sd011",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "inventory_zero_based_row": 46,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/el-paso-planning-fees-sd011/20260912T225948795762Z_original.pdf",
+        "sha256": "c3bd819da169a58328e7bdfcd8ea65e4a751326a65dce325ad19e5bc868b3e12",
+        "size_bytes": 1198750
+      },
+      "review_mapped": true,
+      "verified_http_mapped": false,
+      "disposition": "reviewed_missing_mapped_http",
+      "reason": "Scoped review is mapped, but verified HTTP custody is null in this pinned inventory. Review does not prove transport or establish a safe direct watch URL; inspect retained custody before enrollment."
+    },
+    {
+      "record_id": "el-paso-boh-ehs-fees-sd011",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "inventory_zero_based_row": 47,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/el-paso-boh-ehs-fees-sd011/20260912T225948795762Z_original.pdf",
+        "sha256": "1b0529fb7514bcc50c0dd36c903ca361f6ab431712b4aebc48bca8e3f5373622",
+        "size_bytes": 151508
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "el-paso-ordinance-26-01-sd011",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "inventory_zero_based_row": 48,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/el-paso-ordinance-26-01-sd011/20260912T225948795762Z_original.pdf",
+        "sha256": "dd88d0a74d746d28301fd1a2092575d2b19f9f96de1741dbf9e076e87e31b20b",
+        "size_bytes": 8055141
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "el-paso-ldc-wildfire-appendix-e-sd011",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "inventory_zero_based_row": 49,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/el-paso-ldc-wildfire-appendix-e-sd011/20260912T225948795762Z_original.pdf",
+        "sha256": "2ed93562c8317eee9517736175d5bc76d2dc205fc5b65dd36b570d1c79c58d17",
+        "size_bytes": 518107
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "el-paso-open-burning-22-001-sd011",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "inventory_zero_based_row": 50,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/el-paso-open-burning-22-001-sd011/20260912T225948795762Z_original.pdf",
+        "sha256": "e294621d7252886c4820a877470f4d51b1bc1c287064a4253f4d0a4f5dfd859b",
+        "size_bytes": 1084910
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "el-paso-ldc-chapter-1-sd011",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "inventory_zero_based_row": 51,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/el-paso-ldc-chapter-1-sd011/20260912T225948795762Z_original.pdf",
+        "sha256": "2c77fdf9aa7f3fc3bdcd5162b5059d7ceb1e5e04f3f914a1cbb29474a9a035b0",
+        "size_bytes": 389804
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "el-paso-ldc-chapter-2-sd011",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "inventory_zero_based_row": 52,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/el-paso-ldc-chapter-2-sd011/20260912T225948795762Z_original.pdf",
+        "sha256": "f3d527fd6a9da5b0043672582dda812dc9c3dfe9958d8b53eec876957ed10953",
+        "size_bytes": 116324
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "el-paso-ldc-chapter-5-sd011",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "inventory_zero_based_row": 53,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/el-paso-ldc-chapter-5-sd011/20260912T225948795762Z_original.pdf",
+        "sha256": "59d97136afdf3deb606b2c2f223ac17cb71d7aad0d5622769d4de9fc265d920c",
+        "size_bytes": 1521266
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "el-paso-unsafe-buildings-18-03-sd011",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "inventory_zero_based_row": 54,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/el-paso-unsafe-buildings-18-03-sd011/20260912T225948795762Z_original.pdf",
+        "sha256": "86eed9d885a9cec1cb01528318f66f8eed525ddb0860655a1983865bfa196d00",
+        "size_bytes": 327510
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "el-paso-boh-admin-regulations-sd011",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "inventory_zero_based_row": 55,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/el-paso-boh-admin-regulations-sd011/20260912T225948795762Z_original.pdf",
+        "sha256": "64d72ce1f7783dcf7fb5a3f6956e8ba4845c4839318613a1dee09d99716625d7",
+        "size_bytes": 189000
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "el-paso-boh-bylaws-sd011",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "inventory_zero_based_row": 56,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/el-paso-boh-bylaws-sd011/20260912T225948795762Z_original.pdf",
+        "sha256": "5b71fc2ba18d7a11a5c66d691b1f11526cce424cc0eb8fc07cbd37fb7e5c268a",
+        "size_bytes": 204027
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "el-paso-boh-bylaws-spanish-sd011",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "inventory_zero_based_row": 57,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/el-paso-boh-bylaws-spanish-sd011/20260912T225948795762Z_original.pdf",
+        "sha256": "1b8367a5710b5159ea479ad588ee5dee9850e1e9451b0115d2770a2d4aae6c7f",
+        "size_bytes": 64434
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    },
+    {
+      "record_id": "el-paso-boh-ehs-fees-spanish-sd011",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "inventory_zero_based_row": 58,
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/el-paso-boh-ehs-fees-spanish-sd011/20260912T225948795762Z_original.pdf",
+        "sha256": "fd162c37442dc99097a272d9ebbf74fbfd063f2dc2f2226fdeb8b93a53849ec9",
+        "size_bytes": 252997
+      },
+      "review_mapped": false,
+      "verified_http_mapped": false,
+      "disposition": "metadata_only_missing_mapped_http",
+      "reason": "No scoped review or verified HTTP time is mapped here. This is an inventory join gap, not a finding that source bytes or useful acquisition records are absent elsewhere; assess exact authority, direct URL and transport first."
+    }
+  ],
+  "partition_counts": {
+    "proposed": 6,
+    "verified_custody_deferred": 6,
+    "reviewed_missing_mapped_http": 9,
+    "metadata_only_missing_mapped_http": 38
+  },
+  "budget": {
+    "baseline_bytes": 2191486,
+    "baseline_pages": 16,
+    "suggested_sub_batches": [
+      [
+        "arapahoe-planning-fees-sd002-14",
+        "weld-ehs-fees-2026-atlas-directed"
+      ],
+      [
+        "grand-junction-fire-fees-atlas-directed",
+        "mesa-building-fees-exhibit-a-atlas-directed"
+      ],
+      [
+        "greeley-building-fees-sd008-06",
+        "greeley-development-impact-fee-memo-sd008-07"
+      ]
+    ],
+    "each_sub_batch_baseline_bytes": [
+      395049,
+      993264,
+      803173
+    ],
+    "maximum_sources_per_sub_batch": 2,
+    "request_events_per_sub_batch": 4,
+    "distinct_urls_per_sub_batch": 4,
+    "same_host_redirects_per_source": 1,
+    "bytes_per_response_ceiling": 2000000,
+    "total_response_bytes_per_sub_batch": 4000000,
+    "seconds_per_request": 30,
+    "seconds_per_invocation": 300,
+    "retries": 0,
+    "reasoning": "Three manually initiated two-source batches preserve existing transport ceilings after explicit identity/host/custody adapters are added. Exact baselines total 2,191,486 bytes, maximum 802,051 bytes. Each batch permits at most four events, including redirects, with no retries. These are ceilings, not predictions; all response bodies count, and expiration/finalization must remain fail closed."
+  },
+  "activation_gates": [
+    "Current production is hard-bound to exactly SD014-01/02 and Colorado Springs hosts. This proposal is not a runnable config, and copying URLs into the old config must fail.",
+    "Review and test additive source-specific custody, authority, hash, URL and official-host bindings before any implementation/config expansion. Greeley requires the exact City-to-CDN delegation proof, not a broad Sitecore allowlist.",
+    "Revalidate the baseline ordinary files and exact metadata pins at enrollment. No baseline PDF was opened or rehashed by this planning task.",
+    "Require explicit finite execution authorization and a new immutable run directory after readiness checks; this proposal installs no schedule, alerts or publisher.",
+    "Preserve timeouts, denial/refusal, incomplete-body and changed-byte distinctions. Compare only complete verified PDFs; do not promote legal currentness or change the source baseline.",
+    "A null review or legally unresolved date is not by itself a prohibition on a source-byte watch. The six priorities are a bounded choice, not all eligible sources."
+  ],
+  "edition_discovery_gap": [
+    "A stable or versioned URL can keep returning identical old bytes while a replacement appears at a different URL. Unchanged is only byte equality at that URL/time.",
+    "Later, separately authorize parent-hub/link discovery for Greeley building permits, Grand Junction Codes-Permits, and Mesa permit/plan-review fees. Compare exact observed links; do not invent file names or CDN version parameters.",
+    "Weld and Arapahoe have usable official direct custody here, but this proposal did not re-audit a parent-page anchor. A fresh parent/referral and amendment-instrument pass would improve new-edition discovery.",
+    "Adopting resolutions, subsequent amendments, service-area/application conditions and referenced missing schedules remain separate evidence gaps; a PDF watch cannot close them."
+  ],
+  "inspection_scope": [
+    "Offline planning over the pinned 61-row inventory, streamed 61-row raw manifest, current watch selection, and selected accepted JSON custody/review metadata only.",
+    "No PDF, render, HTML body, public URL or network route was opened; no native extraction, visual/numeric QA, corpus-wide absence audit, or new custody assertion was performed.",
+    "Copied input metadata are byte-exact; external metadata evidence hashes were recomputed. Declared source PDF hashes/page counts come from the accepted pinned records, not a new PDF validation.",
+    "All 59 unselected source IDs are partitioned by mapped custody/review fields. The 47 null HTTP mappings may include useful evidence not yet joined; do not call all 47 irrecoverable or missing originals.",
+    "Previously qualified source roles and dates are retained. Later review can resolve transcription gaps in old intake notes without retroactively rewriting their historical review scope."
+  ],
+  "legal_currentness": "not_verified",
+  "answer_safe": false,
+  "public_requests": 0,
+  "production_writes": 0
+}

@@ -1,0 +1,58 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact copied or newly generated artifact identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Closed review payload inventory.",
+  "properties": {
+    "frozen_at": {
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "status": {
+      "const": "complete_source_fidelity_review_pending_root_acceptance",
+      "title": "Status",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "frozen_at",
+    "status",
+    "files"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

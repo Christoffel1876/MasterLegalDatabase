@@ -1,0 +1,652 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact copied or newly generated artifact identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Block": {
+      "additionalProperties": false,
+      "description": "Visually checked wording, preserved independently from raw OCR.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "page": {
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "association": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Association"
+        },
+        "observation_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Observation Ids",
+          "type": "array"
+        },
+        "comparison": {
+          "enum": [
+            "normalized_wording_agrees",
+            "ocr_correction_required",
+            "visual_only_graphic_or_blank"
+          ],
+          "title": "Comparison",
+          "type": "string"
+        },
+        "comparison_note": {
+          "title": "Comparison Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "page",
+        "kind",
+        "text",
+        "association",
+        "observation_ids",
+        "comparison",
+        "comparison_note"
+      ],
+      "title": "Block",
+      "type": "object"
+    },
+    "Crop": {
+      "additionalProperties": false,
+      "description": "A directly inspected pixel slice with reproducible source coordinates.",
+      "properties": {
+        "image_page": {
+          "title": "Image Page",
+          "type": "integer"
+        },
+        "pixel_box": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Pixel Box",
+          "type": "array"
+        },
+        "asset": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "image_page",
+        "pixel_box",
+        "asset"
+      ],
+      "title": "Crop",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "description": "A bounded observed OCR or source-layout issue with no operative-effect inference.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "block_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Block Ids",
+          "type": "array"
+        },
+        "observation_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Observation Ids",
+          "type": "array"
+        },
+        "finding": {
+          "title": "Finding",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "block_ids",
+        "observation_ids",
+        "finding"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "description": "One unaltered engine line, including its original confidence and normalized box.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "index": {
+          "minimum": 0,
+          "title": "Index",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "bbox": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Bbox",
+          "type": "array"
+        },
+        "confidence": {
+          "title": "Confidence",
+          "type": "number"
+        },
+        "page_span": {
+          "$ref": "#/$defs/Span"
+        },
+        "candidate_span": {
+          "$ref": "#/$defs/Span"
+        },
+        "reviewed_block_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reviewed Block Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "index",
+        "text",
+        "bbox",
+        "confidence",
+        "page_span",
+        "candidate_span",
+        "reviewed_block_ids"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "Source and OCR identities for one full physical page.",
+      "properties": {
+        "physical_page": {
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "width": {
+          "const": 2550,
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "const": 3300,
+          "title": "Height",
+          "type": "integer"
+        },
+        "native_attempt": {
+          "$ref": "#/$defs/Asset"
+        },
+        "ocr_json": {
+          "$ref": "#/$defs/Asset"
+        },
+        "ocr_text": {
+          "$ref": "#/$defs/Asset"
+        },
+        "candidate_span": {
+          "$ref": "#/$defs/Span"
+        },
+        "observations": {
+          "items": {
+            "$ref": "#/$defs/Observation"
+          },
+          "title": "Observations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "width",
+        "height",
+        "native_attempt",
+        "ocr_json",
+        "ocr_text",
+        "candidate_span",
+        "observations"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "description": "An exact UTF-8 byte range in an unchanged page or packaged candidate.",
+      "properties": {
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    },
+    "TableFragment": {
+      "additionalProperties": false,
+      "description": "A physical row fragment with explicit column and page associations.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "logical_row": {
+          "enum": [
+            "TIER1",
+            "TIER2",
+            "TIER3",
+            "ROAD"
+          ],
+          "title": "Logical Row",
+          "type": "string"
+        },
+        "page": {
+          "maximum": 4,
+          "minimum": 3,
+          "title": "Page",
+          "type": "integer"
+        },
+        "approximate_pixel_box": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Approximate Pixel Box",
+          "type": "array"
+        },
+        "label_block": {
+          "title": "Label Block",
+          "type": "string"
+        },
+        "fee_block": {
+          "title": "Fee Block",
+          "type": "string"
+        },
+        "characteristic_blocks": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Characteristic Blocks",
+          "type": "array"
+        },
+        "continuation_from": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Continuation From"
+        }
+      },
+      "required": [
+        "id",
+        "logical_row",
+        "page",
+        "approximate_pixel_box",
+        "label_block",
+        "fee_block",
+        "characteristic_blocks",
+        "continuation_from"
+      ],
+      "title": "TableFragment",
+      "type": "object"
+    },
+    "TableRow": {
+      "additionalProperties": false,
+      "description": "One logical source row; never a computed fee or applicability rule.",
+      "properties": {
+        "id": {
+          "enum": [
+            "TIER1",
+            "TIER2",
+            "TIER3",
+            "ROAD"
+          ],
+          "title": "Id",
+          "type": "string"
+        },
+        "fragments": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Fragments",
+          "type": "array"
+        },
+        "event_type": {
+          "title": "Event Type",
+          "type": "string"
+        },
+        "fee_text": {
+          "title": "Fee Text",
+          "type": "string"
+        },
+        "characteristics": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Characteristics",
+          "type": "array"
+        },
+        "header_block": {
+          "const": "P3-T-H",
+          "title": "Header Block",
+          "type": "string"
+        },
+        "proposal_context": {
+          "const": "P3-P2",
+          "title": "Proposal Context",
+          "type": "string"
+        },
+        "conditional_implementation": {
+          "const": "P4-P2",
+          "title": "Conditional Implementation",
+          "type": "string"
+        },
+        "dnr_footnote": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Dnr Footnote"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "fragments",
+        "event_type",
+        "fee_text",
+        "characteristics",
+        "header_block",
+        "proposal_context",
+        "conditional_implementation",
+        "dnr_footnote",
+        "qualification"
+      ],
+      "title": "TableRow",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Complete four-page source-fidelity review, pending independent acceptance.",
+  "properties": {
+    "source_id": {
+      "const": "larimer-equity-fee-memo-sd007-05",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-LARIMER",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "status": {
+      "const": "complete_source_fidelity_review_pending_root_acceptance",
+      "title": "Status",
+      "type": "string"
+    },
+    "reviewed_at": {
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "review_method": {
+      "title": "Review Method",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_first": {
+      "$ref": "#/$defs/Asset"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Asset"
+    },
+    "packet_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "selected_packet_payloads": {
+      "items": {
+        "additionalProperties": {
+          "type": "string"
+        },
+        "type": "object"
+      },
+      "title": "Selected Packet Payloads",
+      "type": "array"
+    },
+    "provenance": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "title": "Provenance",
+      "type": "object"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "blocks": {
+      "items": {
+        "$ref": "#/$defs/Block"
+      },
+      "title": "Blocks",
+      "type": "array"
+    },
+    "table_fragments": {
+      "items": {
+        "$ref": "#/$defs/TableFragment"
+      },
+      "title": "Table Fragments",
+      "type": "array"
+    },
+    "table_rows": {
+      "items": {
+        "$ref": "#/$defs/TableRow"
+      },
+      "title": "Table Rows",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "crops": {
+      "items": {
+        "$ref": "#/$defs/Crop"
+      },
+      "title": "Crops",
+      "type": "array"
+    },
+    "consulted_root_notes": {
+      "$ref": "#/$defs/Asset"
+    },
+    "root_notes_consulted_after_source_freeze": {
+      "const": true,
+      "title": "Root Notes Consulted After Source Freeze",
+      "type": "boolean"
+    },
+    "external_ebenezer_reports_consulted": {
+      "const": false,
+      "title": "External Ebenezer Reports Consulted",
+      "type": "boolean"
+    },
+    "complete_physical_pages": {
+      "const": 4,
+      "title": "Complete Physical Pages",
+      "type": "integer"
+    },
+    "complete_source_blocks": {
+      "const": 82,
+      "title": "Complete Source Blocks",
+      "type": "integer"
+    },
+    "original_ocr_observations": {
+      "const": 181,
+      "title": "Original Ocr Observations",
+      "type": "integer"
+    },
+    "candidate_size_bytes": {
+      "const": 9796,
+      "title": "Candidate Size Bytes",
+      "type": "integer"
+    },
+    "original_ocr_body_bytes": {
+      "const": 9344,
+      "title": "Original Ocr Body Bytes",
+      "type": "integer"
+    },
+    "source_type": {
+      "const": "staff_recommendation_memo",
+      "title": "Source Type",
+      "type": "string"
+    },
+    "adopted_effect": {
+      "const": "not_verified",
+      "title": "Adopted Effect",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_id",
+    "authority_id",
+    "status",
+    "reviewed_at",
+    "review_method",
+    "source",
+    "source_first",
+    "candidate",
+    "packet_manifest",
+    "selected_packet_payloads",
+    "provenance",
+    "pages",
+    "blocks",
+    "table_fragments",
+    "table_rows",
+    "findings",
+    "crops",
+    "consulted_root_notes",
+    "root_notes_consulted_after_source_freeze",
+    "external_ebenezer_reports_consulted",
+    "complete_physical_pages",
+    "complete_source_blocks",
+    "original_ocr_observations",
+    "candidate_size_bytes",
+    "original_ocr_body_bytes",
+    "source_type",
+    "adopted_effect",
+    "legal_currentness",
+    "limitations"
+  ],
+  "title": "SourceQA",
+  "type": "object"
+}

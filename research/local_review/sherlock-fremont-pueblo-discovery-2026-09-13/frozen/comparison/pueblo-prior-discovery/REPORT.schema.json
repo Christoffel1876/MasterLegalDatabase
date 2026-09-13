@@ -1,0 +1,453 @@
+{
+  "$defs": {
+    "DateClaim": {
+      "additionalProperties": false,
+      "description": "Keep printed or file-metadata dates distinct from legal dates.",
+      "properties": {
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "basis": {
+          "enum": [
+            "printed_footer",
+            "content_disposition",
+            "pdf_metadata",
+            "old_url_slug"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "physical_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Physical Pages",
+          "type": "array"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "basis",
+        "physical_pages",
+        "qualification"
+      ],
+      "title": "DateClaim",
+      "type": "object"
+    },
+    "Gap": {
+      "additionalProperties": false,
+      "description": "A failed or intentionally unopened part of the assignment.",
+      "properties": {
+        "authority_id": {
+          "enum": [
+            "CO-COUNTY-PUEBLO",
+            "CO-MUNICIPAL-PUEBLO"
+          ],
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "blocked_http_403",
+            "unverified_reported_lead",
+            "unopened",
+            "not_assessed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Url"
+        },
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        }
+      },
+      "required": [
+        "authority_id",
+        "status",
+        "url",
+        "detail"
+      ],
+      "title": "Gap",
+      "type": "object"
+    },
+    "Limits": {
+      "additionalProperties": false,
+      "description": "This finite assignment's ceilings, not observed counts.",
+      "properties": {
+        "maximum_events": {
+          "const": 12,
+          "title": "Maximum Events",
+          "type": "integer"
+        },
+        "maximum_distinct_urls": {
+          "const": 10,
+          "title": "Maximum Distinct Urls",
+          "type": "integer"
+        },
+        "maximum_source_bytes": {
+          "const": 5000000,
+          "title": "Maximum Source Bytes",
+          "type": "integer"
+        },
+        "maximum_total_body_bytes": {
+          "const": 12000000,
+          "title": "Maximum Total Body Bytes",
+          "type": "integer"
+        },
+        "maximum_request_seconds": {
+          "const": 30,
+          "title": "Maximum Request Seconds",
+          "type": "integer"
+        },
+        "hard_stop": {
+          "format": "date-time",
+          "title": "Hard Stop",
+          "type": "string"
+        }
+      },
+      "required": [
+        "maximum_events",
+        "maximum_distinct_urls",
+        "maximum_source_bytes",
+        "maximum_total_body_bytes",
+        "maximum_request_seconds",
+        "hard_stop"
+      ],
+      "title": "Limits",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Exact packet-relative byte custody.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "description": "One observed city fee source; not a canonical intake or full numeric review.",
+      "properties": {
+        "source_id": {
+          "const": "PUEBLO-FEE-01",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-MUNICIPAL-PUEBLO",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "authority_name": {
+          "const": "City of Pueblo",
+          "title": "Authority Name",
+          "type": "string"
+        },
+        "source_role": {
+          "const": "official_city_planning_fee_schedule",
+          "title": "Source Role",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "official_parent": {
+          "$ref": "#/$defs/Ref"
+        },
+        "parent_url": {
+          "title": "Parent Url",
+          "type": "string"
+        },
+        "anchor_label": {
+          "title": "Anchor Label",
+          "type": "string"
+        },
+        "anchor_href": {
+          "title": "Anchor Href",
+          "type": "string"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "final_url": {
+          "title": "Final Url",
+          "type": "string"
+        },
+        "event_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Event Ids",
+          "type": "array"
+        },
+        "original": {
+          "$ref": "#/$defs/Ref"
+        },
+        "physical_pages": {
+          "const": 4,
+          "title": "Physical Pages",
+          "type": "integer"
+        },
+        "native_bytes": {
+          "const": 4923,
+          "title": "Native Bytes",
+          "type": "integer"
+        },
+        "native_extraction_scope": {
+          "const": "all_four_pages_uncorrected",
+          "title": "Native Extraction Scope",
+          "type": "string"
+        },
+        "directly_viewed_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Directly Viewed Pages",
+          "type": "array"
+        },
+        "rendered_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Rendered Pages",
+          "type": "array"
+        },
+        "date_claims": {
+          "items": {
+            "$ref": "#/$defs/DateClaim"
+          },
+          "title": "Date Claims",
+          "type": "array"
+        },
+        "review_notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Review Notes",
+          "type": "array"
+        },
+        "adoption_date": {
+          "title": "Adoption Date",
+          "type": "null"
+        },
+        "effective_date": {
+          "title": "Effective Date",
+          "type": "null"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "full_table_qa": {
+          "const": false,
+          "title": "Full Table Qa",
+          "type": "boolean"
+        },
+        "answer_safe": {
+          "const": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "source_id",
+        "authority_id",
+        "authority_name",
+        "source_role",
+        "title",
+        "official_parent",
+        "parent_url",
+        "anchor_label",
+        "anchor_href",
+        "requested_url",
+        "final_url",
+        "event_ids",
+        "original",
+        "physical_pages",
+        "native_bytes",
+        "native_extraction_scope",
+        "directly_viewed_pages",
+        "rendered_pages",
+        "date_claims",
+        "review_notes",
+        "adoption_date",
+        "effective_date",
+        "legal_currentness",
+        "full_table_qa",
+        "answer_safe"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Finite acquisition results and their explicit limits.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "complete_bounded_discovery_with_county_gap",
+      "title": "Status",
+      "type": "string"
+    },
+    "limits": {
+      "$ref": "#/$defs/Limits"
+    },
+    "events": {
+      "maximum": 12,
+      "minimum": 0,
+      "title": "Events",
+      "type": "integer"
+    },
+    "distinct_urls": {
+      "maximum": 10,
+      "minimum": 0,
+      "title": "Distinct Urls",
+      "type": "integer"
+    },
+    "retained_body_bytes": {
+      "maximum": 12000000,
+      "minimum": 0,
+      "title": "Retained Body Bytes",
+      "type": "integer"
+    },
+    "http_responses": {
+      "title": "Http Responses",
+      "type": "integer"
+    },
+    "local_transport_failures": {
+      "title": "Local Transport Failures",
+      "type": "integer"
+    },
+    "pdfs_preserved": {
+      "const": 1,
+      "title": "Pdfs Preserved",
+      "type": "integer"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "maxItems": 1,
+      "minItems": 1,
+      "title": "Sources",
+      "type": "array"
+    },
+    "gaps": {
+      "items": {
+        "$ref": "#/$defs/Gap"
+      },
+      "minItems": 2,
+      "title": "Gaps",
+      "type": "array"
+    },
+    "acquisition_notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Acquisition Notes",
+      "type": "array"
+    },
+    "comparison": {
+      "$ref": "#/$defs/Ref"
+    },
+    "comparison_limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Comparison Limits",
+      "type": "array"
+    },
+    "privacy": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Privacy",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "canonical_changes": {
+      "const": false,
+      "title": "Canonical Changes",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "prepared_at",
+    "status",
+    "limits",
+    "events",
+    "distinct_urls",
+    "retained_body_bytes",
+    "http_responses",
+    "local_transport_failures",
+    "pdfs_preserved",
+    "sources",
+    "gaps",
+    "acquisition_notes",
+    "comparison",
+    "comparison_limits",
+    "privacy",
+    "legal_currentness",
+    "answer_safe",
+    "canonical_changes"
+  ],
+  "title": "Report",
+  "type": "object"
+}

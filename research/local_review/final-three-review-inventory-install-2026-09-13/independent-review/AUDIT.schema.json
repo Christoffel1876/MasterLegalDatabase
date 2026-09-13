@@ -1,0 +1,214 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Review": {
+      "additionalProperties": false,
+      "properties": {
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "review_kind": {
+          "enum": [
+            "checked_tables",
+            "checked_passages"
+          ],
+          "title": "Review Kind",
+          "type": "string"
+        },
+        "source_sha256": {
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "qa": {
+          "$ref": "#/$defs/Asset"
+        },
+        "schema_asset": {
+          "$ref": "#/$defs/Asset"
+        },
+        "verified_http_acquired_at": {
+          "title": "Verified Http Acquired At",
+          "type": "null"
+        },
+        "intake_received_at": {
+          "title": "Intake Received At",
+          "type": "string"
+        },
+        "qualifications": {
+          "title": "Qualifications",
+          "type": "string"
+        }
+      },
+      "required": [
+        "record_id",
+        "authority_id",
+        "review_kind",
+        "source_sha256",
+        "qa",
+        "schema_asset",
+        "verified_http_acquired_at",
+        "intake_received_at",
+        "qualifications"
+      ],
+      "title": "Review",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "final-three-inventory-independent-1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "audited_at": {
+      "title": "Audited At",
+      "type": "string"
+    },
+    "status": {
+      "const": "bounded_review_pass_no_actionable_blocker",
+      "title": "Status",
+      "type": "string"
+    },
+    "proposal_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "checked_assets": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Checked Assets",
+      "type": "array"
+    },
+    "reviews": {
+      "items": {
+        "$ref": "#/$defs/Review"
+      },
+      "title": "Reviews",
+      "type": "array"
+    },
+    "old_counts": {
+      "maxItems": 3,
+      "minItems": 3,
+      "prefixItems": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "integer"
+        }
+      ],
+      "title": "Old Counts",
+      "type": "array"
+    },
+    "new_counts": {
+      "maxItems": 3,
+      "minItems": 3,
+      "prefixItems": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "integer"
+        }
+      ],
+      "title": "New Counts",
+      "type": "array"
+    },
+    "passed_checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Passed Checks",
+      "type": "array"
+    },
+    "verifier_command": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Verifier Command",
+      "type": "array"
+    },
+    "verifier_exit": {
+      "const": 0,
+      "title": "Verifier Exit",
+      "type": "integer"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "maintained_changes_made": {
+      "const": false,
+      "title": "Maintained Changes Made",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "audited_at",
+    "status",
+    "proposal_manifest",
+    "checked_assets",
+    "reviews",
+    "old_counts",
+    "new_counts",
+    "passed_checks",
+    "verifier_command",
+    "verifier_exit",
+    "limitations",
+    "legal_currentness",
+    "answer_safe",
+    "maintained_changes_made"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

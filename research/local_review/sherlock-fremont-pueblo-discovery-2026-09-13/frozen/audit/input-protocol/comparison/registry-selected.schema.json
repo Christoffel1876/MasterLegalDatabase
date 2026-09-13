@@ -1,0 +1,39 @@
+{
+  "$defs": {
+    "RegistryRow": {
+      "additionalProperties": false,
+      "properties": {
+        "pointer": {
+          "title": "Pointer",
+          "type": "string"
+        },
+        "record": {
+          "additionalProperties": true,
+          "title": "Record",
+          "type": "object"
+        }
+      },
+      "required": [
+        "pointer",
+        "record"
+      ],
+      "title": "RegistryRow",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/RegistryRow"
+      },
+      "title": "Rows",
+      "type": "array"
+    }
+  },
+  "required": [
+    "rows"
+  ],
+  "title": "RegistryExport",
+  "type": "object"
+}

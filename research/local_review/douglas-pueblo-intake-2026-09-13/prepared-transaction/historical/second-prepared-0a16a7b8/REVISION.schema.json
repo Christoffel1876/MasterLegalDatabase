@@ -1,0 +1,92 @@
+{
+  "$defs": {
+    "File": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "reviewed_at": {
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_APPLIED",
+      "title": "Status",
+      "type": "string"
+    },
+    "prior_manifest": {
+      "$ref": "#/$defs/File"
+    },
+    "prior_file_count": {
+      "const": 100,
+      "title": "Prior File Count",
+      "type": "integer"
+    },
+    "prior_all_files_unchanged": {
+      "const": true,
+      "title": "Prior All Files Unchanged",
+      "type": "boolean"
+    },
+    "source_preparation_unchanged": {
+      "const": true,
+      "title": "Source Preparation Unchanged",
+      "type": "boolean"
+    },
+    "transaction": {
+      "$ref": "#/$defs/File"
+    },
+    "tests": {
+      "$ref": "#/$defs/File"
+    },
+    "changes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Changes",
+      "type": "array"
+    },
+    "canonical_writes": {
+      "const": 0,
+      "title": "Canonical Writes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "reviewed_at",
+    "status",
+    "prior_manifest",
+    "prior_file_count",
+    "prior_all_files_unchanged",
+    "source_preparation_unchanged",
+    "transaction",
+    "tests",
+    "changes",
+    "canonical_writes"
+  ],
+  "title": "Revision",
+  "type": "object"
+}

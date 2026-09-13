@@ -1,0 +1,144 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact portable evidence bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Source-fidelity acceptance bounded by the actual reviewed document.",
+  "properties": {
+    "status": {
+      "const": "accepted_complete_source_fidelity",
+      "title": "Status",
+      "type": "string"
+    },
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_qa": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_qa_schema": {
+      "$ref": "#/$defs/Asset"
+    },
+    "independent_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "full_pages_directly_inspected_by_atlas": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Full Pages Directly Inspected By Atlas",
+      "type": "array"
+    },
+    "root_review": {
+      "title": "Root Review",
+      "type": "string"
+    },
+    "validated_scope": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Validated Scope",
+      "type": "object"
+    },
+    "code_validation": {
+      "title": "Code Validation",
+      "type": "string"
+    },
+    "original_source_and_candidate_unchanged": {
+      "const": true,
+      "title": "Original Source And Candidate Unchanged",
+      "type": "boolean"
+    },
+    "original_review_reports_unchanged": {
+      "const": true,
+      "title": "Original Review Reports Unchanged",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "adoption_date": {
+      "title": "Adoption Date",
+      "type": "null"
+    },
+    "effective_date": {
+      "title": "Effective Date",
+      "type": "null"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "recorded_at",
+    "source_id",
+    "authority_id",
+    "source",
+    "source_qa",
+    "source_qa_schema",
+    "independent_manifest",
+    "full_pages_directly_inspected_by_atlas",
+    "root_review",
+    "validated_scope",
+    "code_validation",
+    "original_source_and_candidate_unchanged",
+    "original_review_reports_unchanged",
+    "legal_currentness",
+    "adoption_date",
+    "effective_date",
+    "answer_safe",
+    "limitations"
+  ],
+  "title": "Acceptance",
+  "type": "object"
+}

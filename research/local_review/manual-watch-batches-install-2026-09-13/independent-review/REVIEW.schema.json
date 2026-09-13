@@ -1,0 +1,114 @@
+{
+  "$defs": {
+    "JsonValue": {},
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "status": {
+      "const": "replay_findings_resolved_scoped_review_passed",
+      "title": "Status",
+      "type": "string"
+    },
+    "input_manifest": {
+      "$ref": "#/$defs/Ref"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "resolved_findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Resolved Findings",
+      "type": "array"
+    },
+    "positive_controls": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Positive Controls",
+      "type": "array"
+    },
+    "results": {
+      "$ref": "#/$defs/JsonValue"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "production_writes": {
+      "const": 0,
+      "title": "Production Writes",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schema_version",
+    "reviewed_at",
+    "status",
+    "input_manifest",
+    "evidence",
+    "resolved_findings",
+    "positive_controls",
+    "results",
+    "limits",
+    "legal_currentness",
+    "production_writes",
+    "public_requests"
+  ],
+  "title": "Review",
+  "type": "object"
+}

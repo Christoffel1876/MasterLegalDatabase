@@ -1,0 +1,17 @@
+--- installed/RESEARCH_SOURCE_LOOKUP.md
++++ prepared/RESEARCH_SOURCE_LOOKUP.md
+@@ -431,3 +431,14 @@
+ artifact and its recorded digest; it does not certify that a file will remain unchanged
+ after the lookup finishes. Original source bytes, legal currentness and monitoring scope
+ are unchanged by this query.
++
++All nine native source adapters now construct evidence from exact captured, hash-verified
++buffers. This includes reviewed display wording, native page text, image references, source
++conditions and the custody metadata each adapter exposes. The original offline source
++verifiers and closed-package checks remain in place. Captured manifest references are
++checked against pinned source and receipt identities before use; later file replacement
++cannot substitute a new displayed fee, context, retrieval date or evidence path.
++
++The references report the captured snapshot's hashes and sizes. They do not promise that
++a file remains unchanged after a lookup returns. No-match results retain their existing
++source qualifications; legal currentness, adoption and applicability stay unverified.

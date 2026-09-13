@@ -1,0 +1,107 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Bind exact ordinary bytes under an explicitly supplied package/repository root.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Current design decision with the earlier rejected option retained in a preimage.",
+  "properties": {
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "DESIGN_PREPARATION_NOT_INSTALLED_OR_EXECUTED",
+      "title": "Status",
+      "type": "string"
+    },
+    "existing_code": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Existing Code",
+      "type": "array"
+    },
+    "pairs": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "title": "Pairs",
+      "type": "object"
+    },
+    "source_baseline_bytes": {
+      "const": 2191486,
+      "title": "Source Baseline Bytes",
+      "type": "integer"
+    },
+    "source_pages": {
+      "const": 16,
+      "title": "Source Pages",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "production_writes": {
+      "const": 0,
+      "title": "Production Writes",
+      "type": "integer"
+    },
+    "notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Notes",
+      "type": "array"
+    },
+    "implementation_decision": {
+      "title": "Implementation Decision",
+      "type": "string"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "status",
+    "existing_code",
+    "pairs",
+    "source_baseline_bytes",
+    "source_pages",
+    "public_requests",
+    "production_writes",
+    "notes",
+    "implementation_decision"
+  ],
+  "title": "Design",
+  "type": "object"
+}

@@ -1,0 +1,22 @@
+ehs_fee: returned_injected_evidence
+ehs_image: returned_injected_evidence
+springs_fee_native: returned_injected_evidence
+Traceback (most recent call last):
+  File "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/extended-run/existing-native-capture-audit/probe_family.py", line 263, in <module>
+    main()
+    ~~~~^^
+  File "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/extended-run/existing-native-capture-audit/probe_family.py", line 243, in main
+    event = probe(module, root, case)
+  File "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/extended-run/existing-native-capture-audit/probe_family.py", line 221, in probe
+    restore()
+    ~~~~~~~^^
+  File "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/extended-run/existing-native-capture-audit/probe_family.py", line 172, in restore
+    path.write_bytes(raw)
+    ~~~~~~~~~~~~~~~~^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 796, in write_bytes
+    with self.open(mode='wb') as f:
+         ~~~~~~~~~^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: '/private/tmp/geode-native-capture-audit-cg7jth3e/research/local_review/weld-directed-atlas-source-review-2026-09-11/frozen/ehs/SOURCE_QA.json'

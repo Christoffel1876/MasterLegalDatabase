@@ -1,0 +1,99 @@
+{
+  "$defs": {
+    "Change": {
+      "additionalProperties": false,
+      "description": "The exact permitted before/after test adaptation.",
+      "properties": {
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "preimage": {
+          "$ref": "#/$defs/File"
+        },
+        "before_sha256": {
+          "title": "Before Sha256",
+          "type": "string"
+        },
+        "after_sha256": {
+          "title": "After Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository_path",
+        "preimage",
+        "before_sha256",
+        "after_sha256"
+      ],
+      "title": "Change",
+      "type": "object"
+    },
+    "File": {
+      "additionalProperties": false,
+      "description": "Bind one ordinary local file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Record test-only scope before applying atomically snapshotted edits.",
+  "properties": {
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "purpose": {
+      "const": "installed_test_import_and_fixture_root_compatibility",
+      "title": "Purpose",
+      "type": "string"
+    },
+    "changes": {
+      "items": {
+        "$ref": "#/$defs/Change"
+      },
+      "title": "Changes",
+      "type": "array"
+    },
+    "unchanged_runtime_config_and_other_installed_inputs": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Unchanged Runtime Config And Other Installed Inputs",
+      "type": "array"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "purpose",
+    "changes",
+    "unchanged_runtime_config_and_other_installed_inputs",
+    "public_requests"
+  ],
+  "title": "Intent",
+  "type": "object"
+}

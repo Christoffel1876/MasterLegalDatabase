@@ -1,0 +1,138 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "IntakeCandidate": {
+      "additionalProperties": false,
+      "properties": {
+        "action_id": {
+          "title": "Action Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-GUNNISON",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "const": "08_County_Authorities",
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Asset"
+        },
+        "received_document_role": {
+          "title": "Received Document Role",
+          "type": "string"
+        },
+        "supplied_requested_url": {
+          "title": "Supplied Requested Url",
+          "type": "string"
+        },
+        "proposed_acquisition_method": {
+          "const": "received_review_package",
+          "title": "Proposed Acquisition Method",
+          "type": "string"
+        },
+        "proposed_official_source_url": {
+          "title": "Proposed Official Source Url",
+          "type": "null"
+        },
+        "canonical_manual_digest_matches": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Canonical Manual Digest Matches",
+          "type": "array"
+        },
+        "historical_digest_matches": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Historical Digest Matches",
+          "type": "array"
+        },
+        "required_preflight": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Preflight",
+          "type": "array"
+        }
+      },
+      "required": [
+        "action_id",
+        "authority_id",
+        "layer_id",
+        "source",
+        "received_document_role",
+        "supplied_requested_url",
+        "proposed_acquisition_method",
+        "proposed_official_source_url",
+        "canonical_manual_digest_matches",
+        "historical_digest_matches",
+        "required_preflight"
+      ],
+      "title": "IntakeCandidate",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "const": "PROPOSAL_ONLY_NOT_APPLIED",
+      "title": "Status",
+      "type": "string"
+    },
+    "candidates": {
+      "items": {
+        "$ref": "#/$defs/IntakeCandidate"
+      },
+      "title": "Candidates",
+      "type": "array"
+    },
+    "canonical_writes_by_audit": {
+      "const": 0,
+      "title": "Canonical Writes By Audit",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "candidates",
+    "canonical_writes_by_audit",
+    "legal_currentness"
+  ],
+  "title": "IntakeRecommendation",
+  "type": "object"
+}

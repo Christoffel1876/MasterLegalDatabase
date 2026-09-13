@@ -1,0 +1,99 @@
+{
+  "$defs": {
+    "FileIdentity": {
+      "additionalProperties": false,
+      "description": "Exact package or repository identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileIdentity",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Exact focused-test outcome and proposed file bindings.",
+  "properties": {
+    "status": {
+      "const": "prepared_not_installed",
+      "title": "Status",
+      "type": "string"
+    },
+    "focused_tests": {
+      "const": 92,
+      "title": "Focused Tests",
+      "type": "integer"
+    },
+    "coverage_percent": {
+      "maximum": 100,
+      "minimum": 90,
+      "title": "Coverage Percent",
+      "type": "number"
+    },
+    "coverage_statements": {
+      "title": "Coverage Statements",
+      "type": "integer"
+    },
+    "coverage_branches": {
+      "title": "Coverage Branches",
+      "type": "integer"
+    },
+    "source_count": {
+      "const": 64,
+      "title": "Source Count",
+      "type": "integer"
+    },
+    "mapped": {
+      "const": 27,
+      "title": "Mapped",
+      "type": "integer"
+    },
+    "unmapped": {
+      "const": 37,
+      "title": "Unmapped",
+      "type": "integer"
+    },
+    "historical_attempts": {
+      "title": "Historical Attempts",
+      "type": "string"
+    },
+    "proposed_files": {
+      "items": {
+        "$ref": "#/$defs/FileIdentity"
+      },
+      "title": "Proposed Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "focused_tests",
+    "coverage_percent",
+    "coverage_statements",
+    "coverage_branches",
+    "source_count",
+    "mapped",
+    "unmapped",
+    "historical_attempts",
+    "proposed_files"
+  ],
+  "title": "TestResult",
+  "type": "object"
+}

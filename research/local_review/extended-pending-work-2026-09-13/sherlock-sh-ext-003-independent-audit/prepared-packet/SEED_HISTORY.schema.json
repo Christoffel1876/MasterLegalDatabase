@@ -1,0 +1,164 @@
+{
+  "$defs": {
+    "Direct": {
+      "additionalProperties": false,
+      "properties": {
+        "original_line_number": {
+          "title": "Original Line Number",
+          "type": "integer"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "recorded_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Recorded Sha256"
+        },
+        "source_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Url"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "final_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Final Url"
+        }
+      },
+      "required": [
+        "original_line_number",
+        "source_id",
+        "status",
+        "recorded_sha256",
+        "source_url",
+        "requested_url",
+        "final_url"
+      ],
+      "title": "Direct",
+      "type": "object"
+    },
+    "History": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "exact_seed_url": {
+          "title": "Exact Seed Url",
+          "type": "string"
+        },
+        "source_id_rows": {
+          "title": "Source Id Rows",
+          "type": "integer"
+        },
+        "any_url_field_rows": {
+          "title": "Any Url Field Rows",
+          "type": "integer"
+        },
+        "source_url_parent_rows": {
+          "title": "Source Url Parent Rows",
+          "type": "integer"
+        },
+        "requested_url_rows": {
+          "title": "Requested Url Rows",
+          "type": "integer"
+        },
+        "final_url_rows": {
+          "title": "Final Url Rows",
+          "type": "integer"
+        },
+        "requested_url_records": {
+          "items": {
+            "$ref": "#/$defs/Direct"
+          },
+          "title": "Requested Url Records",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source_id",
+        "authority_id",
+        "exact_seed_url",
+        "source_id_rows",
+        "any_url_field_rows",
+        "source_url_parent_rows",
+        "requested_url_rows",
+        "final_url_rows",
+        "requested_url_records"
+      ],
+      "title": "History",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "assignment_id": {
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "edition": {
+      "title": "Edition",
+      "type": "string"
+    },
+    "selected_export_sha256": {
+      "title": "Selected Export Sha256",
+      "type": "string"
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/History"
+      },
+      "title": "Rows",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "assignment_id",
+    "edition",
+    "selected_export_sha256",
+    "rows",
+    "limitations"
+  ],
+  "title": "Histories",
+  "type": "object"
+}

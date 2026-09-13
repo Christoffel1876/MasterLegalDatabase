@@ -1,0 +1,146 @@
+{
+  "$defs": {
+    "Document": {
+      "additionalProperties": false,
+      "properties": {
+        "assignment_id": {
+          "enum": [
+            "EB-PDF-019",
+            "EB-PDF-020"
+          ],
+          "title": "Assignment Id",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "expected_pages": {
+          "title": "Expected Pages",
+          "type": "integer"
+        },
+        "original": {
+          "$ref": "#/$defs/File"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/Page"
+          },
+          "title": "Pages",
+          "type": "array"
+        }
+      },
+      "required": [
+        "assignment_id",
+        "source_id",
+        "authority_id",
+        "expected_pages",
+        "original",
+        "pages"
+      ],
+      "title": "Document",
+      "type": "object"
+    },
+    "File": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/File"
+        },
+        "width": {
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "title": "Height",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "width",
+        "height"
+      ],
+      "title": "Page",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "packet_id": {
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_DISPATCHED",
+      "title": "Status",
+      "type": "string"
+    },
+    "documents": {
+      "items": {
+        "$ref": "#/$defs/Document"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Documents",
+      "type": "array"
+    },
+    "authority_limit": {
+      "title": "Authority Limit",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "packet_id",
+    "status",
+    "documents",
+    "authority_limit",
+    "legal_currentness"
+  ],
+  "title": "NeutralSubset",
+  "type": "object"
+}

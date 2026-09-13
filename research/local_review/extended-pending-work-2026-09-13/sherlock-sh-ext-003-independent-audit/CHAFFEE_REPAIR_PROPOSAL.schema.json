@@ -1,0 +1,129 @@
+{
+  "$defs": {
+    "Target": {
+      "additionalProperties": false,
+      "properties": {
+        "rank": {
+          "title": "Rank",
+          "type": "integer"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-CHAFFEE",
+          "default": "CO-COUNTY-CHAFFEE",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "parent_action_id": {
+          "title": "Parent Action Id",
+          "type": "string"
+        },
+        "parent_url": {
+          "title": "Parent Url",
+          "type": "string"
+        },
+        "parent_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Parent Sha256",
+          "type": "string"
+        },
+        "parent_path": {
+          "title": "Parent Path",
+          "type": "string"
+        },
+        "base_href": {
+          "title": "Base Href",
+          "type": "string"
+        },
+        "original_href": {
+          "title": "Original Href",
+          "type": "string"
+        },
+        "visible_label": {
+          "title": "Visible Label",
+          "type": "string"
+        },
+        "resolved_url": {
+          "title": "Resolved Url",
+          "type": "string"
+        },
+        "encoded_requested_url": {
+          "title": "Encoded Requested Url",
+          "type": "string"
+        },
+        "transformation": {
+          "const": "urljoin(first HTML base href, literal anchor href); percent-encode spaces preserving existing escapes",
+          "default": "urljoin(first HTML base href, literal anchor href); percent-encode spaces preserving existing escapes",
+          "title": "Transformation",
+          "type": "string"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        },
+        "limitation": {
+          "title": "Limitation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "rank",
+        "parent_action_id",
+        "parent_url",
+        "parent_sha256",
+        "parent_path",
+        "base_href",
+        "original_href",
+        "visible_label",
+        "resolved_url",
+        "encoded_requested_url",
+        "purpose",
+        "limitation"
+      ],
+      "title": "Target",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "const": "PREPARED_NOT_EXECUTED",
+      "default": "PREPARED_NOT_EXECUTED",
+      "title": "Status",
+      "type": "string"
+    },
+    "public_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "targets": {
+      "items": {
+        "$ref": "#/$defs/Target"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "title": "Targets",
+      "type": "array"
+    },
+    "original_failed_actions_unchanged": {
+      "const": true,
+      "default": true,
+      "title": "Original Failed Actions Unchanged",
+      "type": "boolean"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "targets",
+    "limits"
+  ],
+  "title": "Repair",
+  "type": "object"
+}

@@ -1,0 +1,82 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Closed audit-relative file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A frozen bounded audit, not a claim of source corruption in the actual repository.",
+  "properties": {
+    "frozen_at": {
+      "format": "date-time",
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "status": {
+      "const": "confirmed_temporal_evidence_binding_failures",
+      "title": "Status",
+      "type": "string"
+    },
+    "source_adapters_affected": {
+      "const": 7,
+      "default": 7,
+      "title": "Source Adapters Affected",
+      "type": "integer"
+    },
+    "reproduced_cases": {
+      "const": 9,
+      "default": 9,
+      "title": "Reproduced Cases",
+      "type": "integer"
+    },
+    "production_evidence_mutated": {
+      "const": false,
+      "default": false,
+      "title": "Production Evidence Mutated",
+      "type": "boolean"
+    },
+    "public_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "frozen_at",
+    "status",
+    "files"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

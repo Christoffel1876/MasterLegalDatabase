@@ -1,0 +1,15 @@
+rc=1
+
+Traceback (most recent call last):
+  File "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/extended-run/sherlock-sh-ext-003/budget.py", line 179, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/extended-run/sherlock-sh-ext-003/budget.py", line 169, in main
+    result = reserve(delivery, value, now)
+  File "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/extended-run/sherlock-sh-ext-003/budget.py", line 120, in reserve
+    updated = ActionLog(reservations=[*log.reservations, value], results=log.results)
+  File "/private/tmp/geode-status-venv/lib/python3.14/site-packages/pydantic/main.py", line 263, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for ActionLog
+  Value error, Distinct requested URL cap exceeded [type=value_error, input_value={'reservations': [Reserva...served_body_bytes=207)]}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.13/v/value_error

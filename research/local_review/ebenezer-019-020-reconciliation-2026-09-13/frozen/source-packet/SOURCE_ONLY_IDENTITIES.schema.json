@@ -1,0 +1,156 @@
+{
+  "$defs": {
+    "BlindDocument": {
+      "additionalProperties": false,
+      "description": "Neutral source identities available before candidate release.",
+      "properties": {
+        "assignment_id": {
+          "title": "Assignment Id",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-WELD",
+          "default": "CO-COUNTY-WELD",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "expected_pages": {
+          "exclusiveMinimum": 0,
+          "title": "Expected Pages",
+          "type": "integer"
+        },
+        "original": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/ImageIdentity"
+          },
+          "title": "Pages",
+          "type": "array"
+        }
+      },
+      "required": [
+        "assignment_id",
+        "source_id",
+        "expected_pages",
+        "original",
+        "pages"
+      ],
+      "title": "BlindDocument",
+      "type": "object"
+    },
+    "FileRef": {
+      "additionalProperties": false,
+      "description": "A confined immutable packet file.",
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    },
+    "ImageIdentity": {
+      "additionalProperties": false,
+      "description": "One complete source-page image; no interpretations.",
+      "properties": {
+        "physical_page": {
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "width": {
+          "exclusiveMinimum": 0,
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "title": "Height",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "width",
+        "height"
+      ],
+      "title": "ImageIdentity",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Only source identities and hash bindings, without prior review/candidate content.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "packet_id": {
+      "const": "ebenezer-next-weld-2026-09-12",
+      "default": "ebenezer-next-weld-2026-09-12",
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_DISPATCHED",
+      "default": "PREPARED_NOT_DISPATCHED",
+      "title": "Status",
+      "type": "string"
+    },
+    "documents": {
+      "items": {
+        "$ref": "#/$defs/BlindDocument"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Documents",
+      "type": "array"
+    },
+    "authority_limit": {
+      "const": "Collection identity only; no legal-authority conclusion.",
+      "default": "Collection identity only; no legal-authority conclusion.",
+      "title": "Authority Limit",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "documents"
+  ],
+  "title": "SourceIdentities",
+  "type": "object"
+}

@@ -1,0 +1,370 @@
+{
+  "$defs": {
+    "Custody": {
+      "additionalProperties": false,
+      "description": "Seal prior provenance references from the independent source-first pass.",
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "original_input": {
+          "$ref": "#/$defs/Ref"
+        },
+        "source_sha256": {
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "official_url": {
+          "title": "Official Url",
+          "type": "string"
+        },
+        "earlier_http_completed_at": {
+          "format": "date-time",
+          "title": "Earlier Http Completed At",
+          "type": "string"
+        },
+        "actual_repository_received_at": {
+          "default": null,
+          "title": "Actual Repository Received At",
+          "type": "null"
+        },
+        "repository_intake_binding": {
+          "const": "not_part_of_this_packet",
+          "default": "not_part_of_this_packet",
+          "title": "Repository Intake Binding",
+          "type": "string"
+        },
+        "currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Currentness",
+          "type": "string"
+        },
+        "scope": {
+          "const": "Exact accepted source copy only; no new acquisition or legal finding.",
+          "default": "Exact accepted source copy only; no new acquisition or legal finding.",
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "original_input",
+        "source_sha256",
+        "official_url",
+        "earlier_http_completed_at"
+      ],
+      "title": "Custody",
+      "type": "object"
+    },
+    "Extraction": {
+      "additionalProperties": false,
+      "description": "Retain uncorrected native output and its physical-page packaging boundaries.",
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "source_sha256": {
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "method": {
+          "const": "Page.get_text(\"text\", sort=False, flags=195)",
+          "title": "Method",
+          "type": "string"
+        },
+        "extractor": {
+          "const": "PyMuPDF",
+          "default": "PyMuPDF",
+          "title": "Extractor",
+          "type": "string"
+        },
+        "extractor_version": {
+          "const": "1.28.2",
+          "default": "1.28.2",
+          "title": "Extractor Version",
+          "type": "string"
+        },
+        "candidate_status": {
+          "const": "machine_native_text_unreviewed",
+          "default": "machine_native_text_unreviewed",
+          "title": "Candidate Status",
+          "type": "string"
+        },
+        "candidate": {
+          "$ref": "#/$defs/Ref"
+        },
+        "page_native": {
+          "items": {
+            "$ref": "#/$defs/Ref"
+          },
+          "title": "Page Native",
+          "type": "array"
+        },
+        "prior_native": {
+          "items": {
+            "$ref": "#/$defs/Ref"
+          },
+          "title": "Prior Native",
+          "type": "array"
+        },
+        "prior_native_exact_match": {
+          "const": true,
+          "default": true,
+          "title": "Prior Native Exact Match",
+          "type": "boolean"
+        },
+        "separators_are_packaging_not_source": {
+          "const": true,
+          "default": true,
+          "title": "Separators Are Packaging Not Source",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "source_id",
+        "source_sha256",
+        "method",
+        "candidate",
+        "page_native",
+        "prior_native"
+      ],
+      "title": "Extraction",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "Identify one complete physical-page image without transcription hints.",
+      "properties": {
+        "physical_page": {
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Ref"
+        },
+        "width": {
+          "exclusiveMinimum": 0,
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "title": "Height",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "width",
+        "height"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Bind exact bytes using a package-relative or recorded historical path.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "Render": {
+      "additionalProperties": false,
+      "description": "Record actual bounded renderer execution and complete output image bindings.",
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "source_sha256": {
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "renderer": {
+          "const": "Poppler pdftoppm",
+          "default": "Poppler pdftoppm",
+          "title": "Renderer",
+          "type": "string"
+        },
+        "renderer_version": {
+          "title": "Renderer Version",
+          "type": "string"
+        },
+        "command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Command",
+          "type": "array"
+        },
+        "dpi": {
+          "const": 300,
+          "default": 300,
+          "title": "Dpi",
+          "type": "integer"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "completed_at": {
+          "format": "date-time",
+          "title": "Completed At",
+          "type": "string"
+        },
+        "timeout_seconds": {
+          "const": 30,
+          "default": 30,
+          "title": "Timeout Seconds",
+          "type": "integer"
+        },
+        "returncode": {
+          "const": 0,
+          "default": 0,
+          "title": "Returncode",
+          "type": "integer"
+        },
+        "stderr": {
+          "$ref": "#/$defs/Ref"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/Page"
+          },
+          "title": "Pages",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source_id",
+        "source_sha256",
+        "renderer_version",
+        "command",
+        "started_at",
+        "completed_at",
+        "stderr",
+        "pages"
+      ],
+      "title": "Render",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Bind preparation methods and roles without certifying an external review.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_DISPATCHED",
+      "default": "PREPARED_NOT_DISPATCHED",
+      "title": "Status",
+      "type": "string"
+    },
+    "inputs": {
+      "items": {
+        "$ref": "#/$defs/Custody"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Inputs",
+      "type": "array"
+    },
+    "extraction": {
+      "items": {
+        "$ref": "#/$defs/Extraction"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Extraction",
+      "type": "array"
+    },
+    "renders": {
+      "items": {
+        "$ref": "#/$defs/Render"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Renders",
+      "type": "array"
+    },
+    "prior_findings_in_source_only_materials": {
+      "const": false,
+      "default": false,
+      "title": "Prior Findings In Source Only Materials",
+      "type": "boolean"
+    },
+    "original_pdf_bytes_changed": {
+      "const": false,
+      "default": false,
+      "title": "Original Pdf Bytes Changed",
+      "type": "boolean"
+    },
+    "public_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "no_new_document_at_or_after": {
+      "format": "date-time",
+      "title": "No New Document At Or After",
+      "type": "string"
+    },
+    "stop_at": {
+      "format": "date-time",
+      "title": "Stop At",
+      "type": "string"
+    },
+    "stop_after": {
+      "const": "EB-PDF-022",
+      "default": "EB-PDF-022",
+      "title": "Stop After",
+      "type": "string"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "inputs",
+    "extraction",
+    "renders",
+    "no_new_document_at_or_after",
+    "stop_at"
+  ],
+  "title": "Preparation",
+  "type": "object"
+}

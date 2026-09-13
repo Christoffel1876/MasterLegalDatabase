@@ -1,0 +1,385 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Bind a preserved file or original delivery location to exact bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 1,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "HttpEvidence": {
+      "additionalProperties": false,
+      "description": "Retain exact non-cookie response metadata, not a new acquisition certification.",
+      "properties": {
+        "original_header": {
+          "$ref": "#/$defs/Asset"
+        },
+        "derived_header_without_cookies": {
+          "$ref": "#/$defs/Asset"
+        },
+        "transformation": {
+          "const": "Only Set-Cookie header lines omitted; other bytes unchanged",
+          "title": "Transformation",
+          "type": "string"
+        },
+        "status": {
+          "const": 200,
+          "default": 200,
+          "title": "Status",
+          "type": "integer"
+        },
+        "content_type": {
+          "const": "application/pdf",
+          "default": "application/pdf",
+          "title": "Content Type",
+          "type": "string"
+        },
+        "content_length": {
+          "minimum": 1,
+          "title": "Content Length",
+          "type": "integer"
+        },
+        "response_date": {
+          "title": "Response Date",
+          "type": "string"
+        },
+        "last_modified": {
+          "title": "Last Modified",
+          "type": "string"
+        },
+        "response_metadata_is_legal_date": {
+          "const": false,
+          "default": false,
+          "title": "Response Metadata Is Legal Date",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "original_header",
+        "derived_header_without_cookies",
+        "transformation",
+        "content_length",
+        "response_date",
+        "last_modified"
+      ],
+      "title": "HttpEvidence",
+      "type": "object"
+    },
+    "SourceDate": {
+      "additionalProperties": false,
+      "description": "Preserve literal document date text and its limited evidentiary role.",
+      "properties": {
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "role",
+        "qualification"
+      ],
+      "title": "SourceDate",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Separate measured PDF custody, retained source evidence and unknown legal status.",
+  "properties": {
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "enum": [
+        "CO-COUNTY-WELD",
+        "CO-MUNICIPAL-GREELEY"
+      ],
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "priority_id": {
+      "enum": [
+        "SD008-01",
+        "SD008-06",
+        "SD008-07",
+        "SD008-08"
+      ],
+      "title": "Priority Id",
+      "type": "string"
+    },
+    "event_id": {
+      "enum": [
+        "SD008-B003",
+        "SD008-E035",
+        "SD008-E036",
+        "SD008-E037"
+      ],
+      "title": "Event Id",
+      "type": "string"
+    },
+    "source_role": {
+      "enum": [
+        "county_fee_schedule",
+        "municipal_building_fee_schedule",
+        "fee_adjustment_memorandum_with_schedules",
+        "proposed_utility_fee_notice_with_schedule"
+      ],
+      "title": "Source Role",
+      "type": "string"
+    },
+    "received_original": {
+      "$ref": "#/$defs/Asset"
+    },
+    "canonical_original": {
+      "$ref": "#/$defs/Asset"
+    },
+    "intake_id": {
+      "title": "Intake Id",
+      "type": "string"
+    },
+    "disposition": {
+      "const": "new_original_archived",
+      "default": "new_original_archived",
+      "title": "Disposition",
+      "type": "string"
+    },
+    "repository_received_at": {
+      "format": "date-time",
+      "title": "Repository Received At",
+      "type": "string"
+    },
+    "acquisition_method": {
+      "const": "received_review_package",
+      "default": "received_review_package",
+      "title": "Acquisition Method",
+      "type": "string"
+    },
+    "reported_acquisition_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Reported Acquisition At"
+    },
+    "reported_requested_url": {
+      "title": "Reported Requested Url",
+      "type": "string"
+    },
+    "reported_final_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Reported Final Url"
+    },
+    "reported_method": {
+      "enum": [
+        "mac_curl",
+        "box_browser_reconstructed"
+      ],
+      "title": "Reported Method",
+      "type": "string"
+    },
+    "acquisition_evidence": {
+      "enum": [
+        "retained_curl_body_and_headers",
+        "reconstructed_browser"
+      ],
+      "title": "Acquisition Evidence",
+      "type": "string"
+    },
+    "live_reacquisition_performed": {
+      "const": false,
+      "default": false,
+      "title": "Live Reacquisition Performed",
+      "type": "boolean"
+    },
+    "official_source_url": {
+      "default": null,
+      "title": "Official Source Url",
+      "type": "null"
+    },
+    "null_official_source_url_reason": {
+      "enum": [
+        "successful_version_and_final_url_unconfirmed",
+        "direct_host_not_in_existing_allowlist"
+      ],
+      "title": "Null Official Source Url Reason",
+      "type": "string"
+    },
+    "official_referral_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Official Referral Url"
+    },
+    "official_referral_label": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Official Referral Label"
+    },
+    "official_referral_html": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Asset"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "http_evidence": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/HttpEvidence"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "document_dates": {
+      "items": {
+        "$ref": "#/$defs/SourceDate"
+      },
+      "title": "Document Dates",
+      "type": "array"
+    },
+    "page_count": {
+      "minimum": 1,
+      "title": "Page Count",
+      "type": "integer"
+    },
+    "pdf_is_repaired": {
+      "const": false,
+      "default": false,
+      "title": "Pdf Is Repaired",
+      "type": "boolean"
+    },
+    "pdf_is_encrypted": {
+      "const": false,
+      "default": false,
+      "title": "Pdf Is Encrypted",
+      "type": "boolean"
+    },
+    "prior_visual_audit": {
+      "title": "Prior Visual Audit",
+      "type": "string"
+    },
+    "prior_visual_pages": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Prior Visual Pages",
+      "type": "array"
+    },
+    "this_intake_inspection": {
+      "const": "PDF_structure_and_custody_only",
+      "title": "This Intake Inspection",
+      "type": "string"
+    },
+    "qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Qualifications",
+      "type": "array"
+    },
+    "status": {
+      "const": "archived_pending_pipeline",
+      "default": "archived_pending_pipeline",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "semantic_or_coverage_promotion": {
+      "const": false,
+      "default": false,
+      "title": "Semantic Or Coverage Promotion",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "source_id",
+    "authority_id",
+    "priority_id",
+    "event_id",
+    "source_role",
+    "received_original",
+    "canonical_original",
+    "intake_id",
+    "repository_received_at",
+    "reported_acquisition_at",
+    "reported_requested_url",
+    "reported_final_url",
+    "reported_method",
+    "acquisition_evidence",
+    "null_official_source_url_reason",
+    "official_referral_url",
+    "official_referral_label",
+    "official_referral_html",
+    "http_evidence",
+    "document_dates",
+    "page_count",
+    "prior_visual_audit",
+    "prior_visual_pages",
+    "this_intake_inspection",
+    "qualifications"
+  ],
+  "title": "SourceProvenance",
+  "type": "object"
+}

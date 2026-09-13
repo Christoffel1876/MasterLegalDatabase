@@ -1,0 +1,43 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "old_harness_sha256": {
+      "title": "Old Harness Sha256",
+      "type": "string"
+    },
+    "new_harness_sha256": {
+      "title": "New Harness Sha256",
+      "type": "string"
+    },
+    "checks": {
+      "title": "Checks",
+      "type": "integer"
+    },
+    "changes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Changes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "status",
+    "old_harness_sha256",
+    "new_harness_sha256",
+    "checks",
+    "changes"
+  ],
+  "title": "Preparation",
+  "type": "object"
+}

@@ -1,0 +1,105 @@
+{
+  "$defs": {
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "line": {
+          "title": "Line",
+          "type": "integer"
+        },
+        "classification": {
+          "title": "Classification",
+          "type": "string"
+        },
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "line",
+        "classification",
+        "basis"
+      ],
+      "title": "Finding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "const": "PRELIMINARY_REVIEW_COMPLETE_FINAL_REFRESH_REQUIRED",
+      "title": "Status",
+      "type": "string"
+    },
+    "observed_at": {
+      "title": "Observed At",
+      "type": "string"
+    },
+    "scanned_files": {
+      "title": "Scanned Files",
+      "type": "integer"
+    },
+    "scanned_selected_bytes": {
+      "title": "Scanned Selected Bytes",
+      "type": "integer"
+    },
+    "candidates": {
+      "title": "Candidates",
+      "type": "integer"
+    },
+    "normal_pathspecs": {
+      "title": "Normal Pathspecs",
+      "type": "integer"
+    },
+    "force_add_pathspecs": {
+      "title": "Force Add Pathspecs",
+      "type": "integer"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "detected_actual_secret_values": {
+      "title": "Detected Actual Secret Values",
+      "type": "integer"
+    },
+    "final_gates": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Final Gates",
+      "type": "array"
+    },
+    "omitted_scope": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Omitted Scope",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "observed_at",
+    "scanned_files",
+    "scanned_selected_bytes",
+    "candidates",
+    "normal_pathspecs",
+    "force_add_pathspecs",
+    "findings",
+    "detected_actual_secret_values",
+    "final_gates",
+    "omitted_scope"
+  ],
+  "title": "Review",
+  "type": "object"
+}

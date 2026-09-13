@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-13T01:25:08.748510Z",
+  "status": "ready_for_root_review_not_applied",
+  "tests_passed": 59,
+  "branch_inclusive_coverage_percent": 94.24703891708968,
+  "transaction": {
+    "path": "transaction.py",
+    "sha256": "7fa301f8bf1fecfc8df7b63ebbf7cfc30d35f73585ccaecf6e3596b9e1d49d5a",
+    "size_bytes": 29744
+  },
+  "tests": {
+    "path": "test_transaction.py",
+    "sha256": "4c9b99252f940ace214bd0de29faf924d1326b07ccbefbfdb09312f6a79163f8",
+    "size_bytes": 25899
+  },
+  "preparation": {
+    "path": "evidence/preparation/PREPARATION.json",
+    "sha256": "32cf1280b0d1e0c0bb02c8b2f39c96d45dcfe32554ca11125886b3b3e7fca0db",
+    "size_bytes": 17680
+  },
+  "source_provenance": {
+    "path": "evidence/preparation/source-provenance.jsonl",
+    "sha256": "da99636e06d07b308d1718e7784151d7171c0a77a29c13cca13a803bfda733a8",
+    "size_bytes": 8865
+  },
+  "preserved_prefixes": [
+    {
+      "path": "evidence/preparation/baseline/_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+      "sha256": "7814b23e9ddb97e0dbf469497d52ae59a55b485254bb0a5c9f690354a484c367",
+      "size_bytes": 139618
+    },
+    {
+      "path": "evidence/preparation/baseline/_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl",
+      "sha256": "23fc62ddd5dd7add2bc7557d3f5792fd26913dfab21fd6753ef082fc0adfff63",
+      "size_bytes": 140854
+    }
+  ],
+  "command_receipts": [
+    {
+      "path": "validation/final-focused/ATTEMPT.json",
+      "sha256": "a54c4df74fd1f9abb88b7ef030d9aaa3272bdecf61c6f3f3266debd1f5c00413",
+      "size_bytes": 765
+    },
+    {
+      "path": "validation/actual-read-only/ATTEMPT.json",
+      "sha256": "f82027121028239399668e5ce73cd0a5b346e1751e1899be75206ce191877ed5",
+      "size_bytes": 573
+    },
+    {
+      "path": "validation/actual-cli-dry-run/ATTEMPT.json",
+      "sha256": "dd34b60d9a267ffcb86c378288d3adde23e1d0be4bd79d695412e70e1cbe9d4f",
+      "size_bytes": 567
+    }
+  ],
+  "raw_before": 61,
+  "ledger_before": 62,
+  "raw_after_if_applied": 63,
+  "ledger_after_if_applied": 64,
+  "current_intake_time": null,
+  "legal_currentness": "not_verified",
+  "qualifications": [
+    "Initial host rejection preserved; root subsequently authorized only the verified www.douglasco.gov host with tests.",
+    "First pytest invocation from project root used importlib mode and failed collection because transaction was not on import path; no tests ran in that attempt. Correct package-directory invocation passed56, then59 after mixed-authority additions.",
+    "Accepted source QA metadata and root acceptances are copied subsets; the complete QA image/test packages remain separately preserved in the repository. No new visual review was performed.",
+    "Execution directory is absent. Source acquisition times are actual prior recorded HTTP intervals; future repository receipt remains unknown.",
+    "Current61raw/62ledger prefixes unchanged; one historical ledger-only missing original remains missing."
+  ],
+  "canonical_writes": 0,
+  "public_requests": 0
+}

@@ -1,0 +1,378 @@
+{
+  "$defs": {
+    "Candidate": {
+      "additionalProperties": false,
+      "description": "Preserve custody, review limits and the proposed exact watch target separately.",
+      "properties": {
+        "rank": {
+          "maximum": 6,
+          "minimum": 1,
+          "title": "Rank",
+          "type": "integer"
+        },
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "intake_id": {
+          "title": "Intake Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "baseline": {
+          "$ref": "#/$defs/Ref"
+        },
+        "baseline_pages": {
+          "minimum": 1,
+          "title": "Baseline Pages",
+          "type": "integer"
+        },
+        "raw_manifest_zero_based_row": {
+          "minimum": 0,
+          "title": "Raw Manifest Zero Based Row",
+          "type": "integer"
+        },
+        "raw_manifest_exact_line_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Raw Manifest Exact Line Sha256",
+          "type": "string"
+        },
+        "historical_raw_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Historical Raw Url"
+        },
+        "historical_acquisition_method": {
+          "title": "Historical Acquisition Method",
+          "type": "string"
+        },
+        "historical_reported_acquisition": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Historical Reported Acquisition",
+          "type": "object"
+        },
+        "repository_received_at": {
+          "format": "date-time",
+          "title": "Repository Received At",
+          "type": "string"
+        },
+        "proposed_url": {
+          "title": "Proposed Url",
+          "type": "string"
+        },
+        "retained_final_url": {
+          "title": "Retained Final Url",
+          "type": "string"
+        },
+        "http_started_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Http Started At"
+        },
+        "http_finished_at": {
+          "format": "date-time",
+          "title": "Http Finished At",
+          "type": "string"
+        },
+        "http_time_role": {
+          "title": "Http Time Role",
+          "type": "string"
+        },
+        "recorded_http_status": {
+          "const": 200,
+          "title": "Recorded Http Status",
+          "type": "integer"
+        },
+        "recorded_redirects": {
+          "const": 0,
+          "title": "Recorded Redirects",
+          "type": "integer"
+        },
+        "official_link_basis": {
+          "title": "Official Link Basis",
+          "type": "string"
+        },
+        "official_parent_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Official Parent Url"
+        },
+        "official_parent_label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Official Parent Label"
+        },
+        "authority_evidence": {
+          "$ref": "#/$defs/Evidence"
+        },
+        "custody_evidence": {
+          "$ref": "#/$defs/Evidence"
+        },
+        "referral_evidence": {
+          "items": {
+            "$ref": "#/$defs/Evidence"
+          },
+          "title": "Referral Evidence",
+          "type": "array"
+        },
+        "review_evidence": {
+          "$ref": "#/$defs/Evidence"
+        },
+        "review_schema": {
+          "$ref": "#/$defs/Ref"
+        },
+        "mapped_review_kind": {
+          "title": "Mapped Review Kind",
+          "type": "string"
+        },
+        "mapped_scope_fields": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Mapped Scope Fields",
+          "type": "object"
+        },
+        "recorded_source_roles": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Recorded Source Roles",
+          "type": "object"
+        },
+        "review_limitations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Review Limitations",
+          "type": "array"
+        },
+        "proposal_reason": {
+          "title": "Proposal Reason",
+          "type": "string"
+        },
+        "enrollment_conditions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Enrollment Conditions",
+          "type": "array"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "answer_safe": {
+          "const": false,
+          "default": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        },
+        "status": {
+          "const": "PREPARED_NOT_ACTIVATED",
+          "default": "PREPARED_NOT_ACTIVATED",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "rank",
+        "record_id",
+        "intake_id",
+        "authority_id",
+        "layer_id",
+        "title",
+        "baseline",
+        "baseline_pages",
+        "raw_manifest_zero_based_row",
+        "raw_manifest_exact_line_sha256",
+        "historical_raw_url",
+        "historical_acquisition_method",
+        "historical_reported_acquisition",
+        "repository_received_at",
+        "proposed_url",
+        "retained_final_url",
+        "http_started_at",
+        "http_finished_at",
+        "http_time_role",
+        "recorded_http_status",
+        "recorded_redirects",
+        "official_link_basis",
+        "official_parent_url",
+        "official_parent_label",
+        "authority_evidence",
+        "custody_evidence",
+        "referral_evidence",
+        "review_evidence",
+        "review_schema",
+        "mapped_review_kind",
+        "mapped_scope_fields",
+        "recorded_source_roles",
+        "review_limitations",
+        "proposal_reason",
+        "enrollment_conditions"
+      ],
+      "title": "Candidate",
+      "type": "object"
+    },
+    "Evidence": {
+      "additionalProperties": false,
+      "description": "Identify an exact metadata document and, optionally, a zero-based JSONL row.",
+      "properties": {
+        "artifact": {
+          "$ref": "#/$defs/Ref"
+        },
+        "jsonl_row": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Jsonl Row"
+        },
+        "pointers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Pointers",
+          "type": "array"
+        },
+        "scope": {
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact",
+        "pointers",
+        "scope"
+      ],
+      "title": "Evidence",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Bind a repository-relative metadata file or a declared archived original.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "catalog_version": {
+      "const": "2026-09-13-v1",
+      "title": "Catalog Version",
+      "type": "string"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_INSTALLED",
+      "title": "Status",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Candidate"
+      },
+      "maxItems": 6,
+      "minItems": 6,
+      "title": "Sources",
+      "type": "array"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "catalog_version",
+    "prepared_at",
+    "status",
+    "sources",
+    "public_requests",
+    "legal_currentness"
+  ],
+  "title": "Catalog",
+  "type": "object"
+}

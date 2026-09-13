@@ -1,0 +1,82 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "installed_at": {
+      "format": "date-time",
+      "title": "Installed At",
+      "type": "string"
+    },
+    "manifest_sha256": {
+      "title": "Manifest Sha256",
+      "type": "string"
+    },
+    "inventory_sha256": {
+      "title": "Inventory Sha256",
+      "type": "string"
+    },
+    "previous_fragment_sha256": {
+      "title": "Previous Fragment Sha256",
+      "type": "string"
+    },
+    "installed_fragment_sha256": {
+      "title": "Installed Fragment Sha256",
+      "type": "string"
+    },
+    "roots_images_inspected": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Roots Images Inspected",
+      "type": "array"
+    },
+    "installed_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Installed Files",
+      "type": "array"
+    },
+    "outcome": {
+      "title": "Outcome",
+      "type": "string"
+    }
+  },
+  "required": [
+    "installed_at",
+    "manifest_sha256",
+    "inventory_sha256",
+    "previous_fragment_sha256",
+    "installed_fragment_sha256",
+    "roots_images_inspected",
+    "installed_files",
+    "outcome"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

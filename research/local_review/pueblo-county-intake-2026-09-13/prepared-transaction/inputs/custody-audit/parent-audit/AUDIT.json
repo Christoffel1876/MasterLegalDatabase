@@ -1,0 +1,380 @@
+{
+  "schema_version": 1,
+  "prepared_at": "2026-09-13T01:48:13.433623Z",
+  "assignment_id": "SH-EXT-001",
+  "status": "accepted_for_limited_research_with_qualifications",
+  "legal_currentness": "not_verified",
+  "answer_safe": false,
+  "custody": {
+    "path": "CUSTODY_RECEIPT.json",
+    "sha256": "aebda45a9f2dda2d46ae02ee1adb4e687fac4d59719df9a8714ce32fd9deae0d",
+    "size_bytes": 28753
+  },
+  "comparison_commit": "2f2b450d8ecb3eff5258598d7be27189bc5e4cff",
+  "counts": {
+    "actions": 31,
+    "distinct_requested_urls": 30,
+    "pueblo_actions": 11,
+    "fremont_actions": 20,
+    "original_html": 17,
+    "original_pdfs": 4,
+    "pdf_structural_pages": 749,
+    "pdf_pages_directly_viewed": 4,
+    "http_error_bodies": 8,
+    "transport_errors": 1,
+    "browser_derivatives": 1,
+    "retained_body_bytes": 14821045,
+    "largest_body_bytes": 10756377,
+    "checklist_rows": 24,
+    "priority_ids": 12,
+    "priority_distinct_urls": 11,
+    "backlog_urls": 13,
+    "delivery_files": 170,
+    "stale_hash_summary_entries": 4
+  },
+  "findings": [
+    {
+      "id": "F01",
+      "disposition": "accepted_with_limits",
+      "statement": "31 reservations/results match individual files; 30 distinct requested URLs, Fremont 20 and Pueblo 11. Cumulative retained body bytes 14,821,045; largest body 10,756,377. All visible procedural counts are within 40 actions/20 per county/30 URLs/20MB source/80MB total. Browser hidden traffic and transport byte-enforcement are not measured.",
+      "evidence": [
+        {
+          "path": "received/ACTION_LOG.json",
+          "sha256": "3dff3340662b074bacb70088946ef3c205f939ab4cdbf5369b033377cb02532d",
+          "size_bytes": 45892
+        },
+        {
+          "path": "input-protocol/INSTRUCTIONS.md",
+          "sha256": "ac35b967a138a04afb73f06fe6bcd0ac1e69852297169a8fa650d367e3f14ac1",
+          "size_bytes": 10542
+        }
+      ]
+    },
+    {
+      "id": "F02",
+      "disposition": "accepted_with_limits",
+      "statement": "Current ARTIFACT_INVENTORY has 166 valid member hashes. Frozen delivery contains 170 files: inventory excludes itself and three later R1 files. All 170 are preserved and separately hash-bound here; R1 conclusions are not accepted by this audit.",
+      "evidence": [
+        {
+          "path": "received/ARTIFACT_INVENTORY.json",
+          "sha256": "a1b2d52b78350874b7f25228e635646294501a5529ad1fe9e302a3aaba0b27d0",
+          "size_bytes": 27529
+        },
+        {
+          "path": "CUSTODY_RECEIPT.json",
+          "sha256": "aebda45a9f2dda2d46ae02ee1adb4e687fac4d59719df9a8714ce32fd9deae0d",
+          "size_bytes": 28753
+        }
+      ]
+    },
+    {
+      "id": "F03",
+      "disposition": "correction",
+      "statement": "The original 166-entry hash-summary is stale for ACTION_LOG, ARTIFACT_INVENTORY, the report and A027 result. Current report matches observed UI SHA eba5c06b0e2f0872c7c412101007f1aebbe270cbf31af24d405a8292d8ec2d80. Report explains correction of HTTP 000 to null/transport error; no old bytes for those four prior versions are retained here, only their old digest claims. See analysis-calculations for exact old/current hashes.",
+      "evidence": [
+        {
+          "path": "received/hash-summary-20260913T013911Z.txt",
+          "sha256": "e191cb65e6cc4011a719ed195bef89c556c6faa70e0d26010a9eacc2e169dc8b",
+          "size_bytes": 16256
+        },
+        {
+          "path": "received/report-SH-EXT-001-20260913T013911Z.md",
+          "sha256": "eba5c06b0e2f0872c7c412101007f1aebbe270cbf31af24d405a8292d8ec2d80",
+          "size_bytes": 3013
+        },
+        {
+          "path": "received/results/SHEXT001-A027.json",
+          "sha256": "ac5e00dae09a667621f6d553cdde01ed3b591a6d4cb6df86f65d2d2abe3b1d16",
+          "size_bytes": 569
+        },
+        {
+          "path": "analysis-calculations.json",
+          "sha256": "fdf5e69764ed3ba8cfc832608f25ae4a815913ed946e169b0b2e99c78ccfca86",
+          "size_bytes": 476548
+        }
+      ]
+    },
+    {
+      "id": "F04",
+      "disposition": "correction",
+      "statement": "Four PDF bodies, 749 structural pages, are retained: 190+4+553+2. A016 is the two-page accountability presentation omitted from report highlights, not a new legal instrument. Direct visual scope is four first pages only.",
+      "evidence": [
+        {
+          "path": "received/results/SHEXT001-A016.json",
+          "sha256": "4018602fc0beeb6dd5bec9e064b6d66a943f69d8a51d81126c8e8cf4f52c0a00",
+          "size_bytes": 965
+        },
+        {
+          "path": "SHEXT001-A016-page-1.png",
+          "sha256": "06d2b5397471aae3c176b80996b64126a2d5d78455f90ab88d5350c8d480dcdf",
+          "size_bytes": 451250
+        }
+      ]
+    },
+    {
+      "id": "F05",
+      "disposition": "correction",
+      "statement": "Twelve priority IDs represent eleven distinct resource URLs: priorities 10 and 11 repeat the same planning page with browser-derivative success and curl-403 error. Preserve both events but one resource. Priority 12 is also a blocked/error-body lead; error HTML is not collected legal/catalog text. Priority 10 original_body field references rendered DOM, not HTTP original bytes.",
+      "evidence": [
+        {
+          "path": "received/PRIORITIES.json",
+          "sha256": "e23313b5de2da9e82be1ce507d56a08fc560c9722efb985328962190eaf8fddb",
+          "size_bytes": 15430
+        },
+        {
+          "path": "received/results/SHEXT001-A012.json",
+          "sha256": "89199a1e179a30b0d39512f107370e8459210ec26b021527cf9ad4c613e43f1c",
+          "size_bytes": 996
+        },
+        {
+          "path": "received/results/SHEXT001-A031.json",
+          "sha256": "ef2b88693674dd8636748ae9ee789f5ebd954dd89cddbecae113a1b02c1817cc",
+          "size_bytes": 1399
+        }
+      ]
+    },
+    {
+      "id": "F06",
+      "disposition": "qualification",
+      "statement": "All 24 checklist authority/category pairs are unique. Fremont: 10 candidate_found, 2 not_searched. Pueblo: 4 candidate_found, 3 access_blocked, 5 not_searched. Thirteen backlog URLs are distinct and absent from requested URLs. These lead/checklist statuses do not establish legal completeness; backlog is a selected subset of all discovered links.",
+      "evidence": [
+        {
+          "path": "received/CHECKLIST.json",
+          "sha256": "a6275e329b753ad999f8b39344adb308c42f078d9292748917f333ee5e0cfc77",
+          "size_bytes": 8460
+        },
+        {
+          "path": "received/BACKLOG.json",
+          "sha256": "eb950b8c99daca9532fb291ab875a334a6f3d8ee8238bc1587fb4569c64bfeaf",
+          "size_bytes": 4256
+        }
+      ]
+    },
+    {
+      "id": "F07",
+      "disposition": "qualification",
+      "statement": "Fremont fee HTML explicitly reports adoption at the 10/15/2024 Board meeting and EFFECTIVE DECEMBER 1, 2024. It also mentions uses in a 2025 zoning resolution. Preserve these separate page assertions; cover 2024 claims do not reconcile the zoning edition. No full fee-table QA performed.",
+      "evidence": [
+        {
+          "path": "received/raw/SHEXT001-A025.html",
+          "sha256": "39791a7cab3549111775ce54a92f715b95954c4a1970da4afa0ce01ee3b41525",
+          "size_bytes": 126322
+        },
+        {
+          "path": "SHEXT001-A001-page-1.png",
+          "sha256": "233a38e52f1d244e9dada5ab0e22e95f34acf5ba1739d472f6b084c76263928e",
+          "size_bytes": 186270
+        }
+      ]
+    },
+    {
+      "id": "F08",
+      "disposition": "unsupported_route",
+      "statement": "A012 repeated ordinary curl access to the exact seed already known to return 403; the supplied exception authorized one ordinary browser alternate, not another curl retry. A027 .us homepage and A029/A030 planning paths have no exact match in preserved seed/comparison JSON or earlier retained HTML links. A028 .gov homepage is present in legacy input. No retained search-result proof supports A027/A029/A030. These routes must not be certified as observed-link-only compliance. No evidence here establishes a bypass mechanism.",
+      "evidence": [
+        {
+          "path": "received/reservations/SHEXT001-A012.json",
+          "sha256": "f419ca41354b3807e901d4f4d5c7250349c76a7c6698b186b3ae4e7703b40841",
+          "size_bytes": 404
+        },
+        {
+          "path": "received/reservations/SHEXT001-A027.json",
+          "sha256": "524f8aeb8e7b90b62cfde73929303687155464e386bff06da3eed0d8331adf4c",
+          "size_bytes": 337
+        },
+        {
+          "path": "received/reservations/SHEXT001-A029.json",
+          "sha256": "baac88688765e4779b5a0da455a0311dc3303e75905e1ecf41a50b8fe68be034",
+          "size_bytes": 349
+        },
+        {
+          "path": "received/reservations/SHEXT001-A030.json",
+          "sha256": "4ac397801be4b2d583fe8c062abc68ca0f7a8d4fa2b4df2c7551aa3b84497c80",
+          "size_bytes": 350
+        },
+        {
+          "path": "input-protocol/INSTRUCTIONS.md",
+          "sha256": "ac35b967a138a04afb73f06fe6bcd0ac1e69852297169a8fa650d367e3f14ac1",
+          "size_bytes": 10542
+        }
+      ]
+    },
+    {
+      "id": "F09",
+      "disposition": "accepted_with_limits",
+      "statement": "A031 rendered DOM contains the exact fee-PDF anchor and label copied in DIRECTED_PROPOSAL. Its final URL/status/redirect observations are tool-reported; no original HTTP headers/body are retained for this browser action. Fee PDF was not opened. Link label 5.8.25 is not a verified adoption date.",
+      "evidence": [
+        {
+          "path": "received/raw/SHEXT001-A031.html",
+          "sha256": "bf073a8d0f5f0384eed65d15456bf454596bed95a50f754f124b7a4cf17028c7",
+          "size_bytes": 98877
+        },
+        {
+          "path": "received/derived/SHEXT001-A031-browser-summary.json",
+          "sha256": "6505f4b86f54748fc65143e236360b58301e122cf7807ed5201bdd2515fca617",
+          "size_bytes": 19110
+        },
+        {
+          "path": "received/results/SHEXT001-A031.json",
+          "sha256": "ef2b88693674dd8636748ae9ee789f5ebd954dd89cddbecae113a1b02c1817cc",
+          "size_bytes": 1399
+        }
+      ]
+    },
+    {
+      "id": "F10",
+      "disposition": "qualification",
+      "statement": "Recorded reservation/completion times are sequential and precede the research stop. Times are received log assertions, not independently authenticated wall-clock evidence or proof of pre-action reservation persistence. All visible final URLs equal requests; no exposed redirect is logged. Curl result headers contain no cookie/auth fields; absence is a retained-public-header observation, not proof none existed on the wire.",
+      "evidence": [
+        {
+          "path": "received/ACTION_LOG.json",
+          "sha256": "3dff3340662b074bacb70088946ef3c205f939ab4cdbf5369b033377cb02532d",
+          "size_bytes": 45892
+        },
+        {
+          "path": "analysis-calculations.json",
+          "sha256": "fdf5e69764ed3ba8cfc832608f25ae4a815913ed946e169b0b2e99c78ccfca86",
+          "size_bytes": 476548
+        }
+      ]
+    },
+    {
+      "id": "F11",
+      "disposition": "qualification",
+      "statement": "Fremont exact PDF links A001/A002 appear in later preserved official A003 HTML; other A013-A026 navigation targets have earlier preserved links. Pueblo A007 is an exact historical registry seed with county-labeled cover, but no fresh official parent anchor appears in retained HTML. No City of Pueblo source is treated as county evidence. Historical URL/digest reconciliation is delegated to separately delivered R1, not silently accepted here.",
+      "evidence": [
+        {
+          "path": "received/raw/SHEXT001-A003.html",
+          "sha256": "4cae2c049a62661459a357aec475c5d97b1de68673b95b1ffd9253a291f16bc2",
+          "size_bytes": 48407
+        },
+        {
+          "path": "input-protocol/COMPARISON.json",
+          "sha256": "e29e867d2dfe60efb20181c5e4530ae25f3e0a48b43da6dbdc21372ccf296a7d",
+          "size_bytes": 51939
+        },
+        {
+          "path": "SHEXT001-A007-page-1.png",
+          "sha256": "6449ba5eb1c4ff3e6bb651d9a6a8091b94cfd859b8f9be30e92dc6484417c68a",
+          "size_bytes": 1817277
+        }
+      ]
+    }
+  ],
+  "pdf_observations": [
+    {
+      "action_id": "SHEXT001-A001",
+      "authority_id": "CO-COUNTY-FREMONT",
+      "source": {
+        "path": "received/raw/SHEXT001-A001.pdf",
+        "sha256": "e35556f4b76e39a9ae89833e59a188d4252da5a48e6c2f58c07f6dc7773b3316",
+        "size_bytes": 2372812
+      },
+      "first_page_image": {
+        "path": "SHEXT001-A001-page-1.png",
+        "sha256": "233a38e52f1d244e9dada5ab0e22e95f34acf5ba1739d472f6b084c76263928e",
+        "size_bytes": 186270
+      },
+      "physical_pages": 190,
+      "viewed_pages": [
+        1
+      ],
+      "role": "consolidated zoning resolution as presented",
+      "printed_claims": [
+        "Cover: Updated: 11/12/2024.",
+        "Cover: adopted November 12th 2024, by Resolution 35, Series of 2024.",
+        "Cover warns users to contact Planning and Zoning to determine whether amendments occurred."
+      ],
+      "limitations": [
+        "Blank amendment log does not prove no amendments.",
+        "Only physical page 1 directly inspected at original rendered dimensions; remaining pages not visually reviewed. Source asserts roles/dates; no authentication, legal effect or currentness conclusion."
+      ]
+    },
+    {
+      "action_id": "SHEXT001-A002",
+      "authority_id": "CO-COUNTY-FREMONT",
+      "source": {
+        "path": "received/raw/SHEXT001-A002.pdf",
+        "sha256": "bc683ae721c7dfe5c4c7602012522588caca67450442011d0b74bdc437b3b5fa",
+        "size_bytes": 168559
+      },
+      "first_page_image": {
+        "path": "SHEXT001-A002-page-1.png",
+        "sha256": "f58bd94ee63800f14abe25254cff85ca2927678e5999c6ba065b7ff99f34a967",
+        "size_bytes": 339918
+      },
+      "physical_pages": 4,
+      "viewed_pages": [
+        1
+      ],
+      "role": "right-to-farm/ranch resolution instrument as presented",
+      "printed_claims": [
+        "Title: RESOLUTION NUMBER [handwritten correction], SERIES OF 1998; ESTABLISHING A RIGHT TO FARM AND RANCH POLICY.",
+        "First recital identifies Board of County Commissioners of Fremont County."
+      ],
+      "limitations": [
+        "Handwritten 33 is struck with 40 above; marginal date/initials not certified. Execution pages not viewed.",
+        "Only physical page 1 directly inspected at original rendered dimensions; remaining pages not visually reviewed. Source asserts roles/dates; no authentication, legal effect or currentness conclusion."
+      ]
+    },
+    {
+      "action_id": "SHEXT001-A007",
+      "authority_id": "CO-COUNTY-PUEBLO",
+      "source": {
+        "path": "received/raw/SHEXT001-A007.pdf",
+        "sha256": "fb466fd66b5e0aeea3311c20cc03b263f30de77ea6e75df9cfd13905dced95c3",
+        "size_bytes": 10756377
+      },
+      "first_page_image": {
+        "path": "SHEXT001-A007-page-1.png",
+        "sha256": "6449ba5eb1c4ff3e6bb651d9a6a8091b94cfd859b8f9be30e92dc6484417c68a",
+        "size_bytes": 1817277
+      },
+      "physical_pages": 553,
+      "viewed_pages": [
+        1
+      ],
+      "role": "county unified development code as presented",
+      "printed_claims": [
+        "Cover: Pueblo County Unified Development Code.",
+        "Cover: Adopted: October 22, 2024."
+      ],
+      "limitations": [
+        "Filename and cover are date assertions; no adopting ordinance or later amendment reconciliation. No fresh referring HTML retained for this PDF.",
+        "Only physical page 1 directly inspected at original rendered dimensions; remaining pages not visually reviewed. Source asserts roles/dates; no authentication, legal effect or currentness conclusion."
+      ]
+    },
+    {
+      "action_id": "SHEXT001-A016",
+      "authority_id": "CO-COUNTY-FREMONT",
+      "source": {
+        "path": "received/raw/SHEXT001-A016.pdf",
+        "sha256": "f2f6a6950957bfe0e5f71ad152da1ecc62d4d626ad9db85c0f8ac003184327f0",
+        "size_bytes": 319529
+      },
+      "first_page_image": {
+        "path": "SHEXT001-A016-page-1.png",
+        "sha256": "06d2b5397471aae3c176b80996b64126a2d5d78455f90ab88d5350c8d480dcdf",
+        "size_bytes": 451250
+      },
+      "physical_pages": 2,
+      "viewed_pages": [
+        1
+      ],
+      "role": "planning department statistical/accountability presentation",
+      "printed_claims": [
+        "First page: Department of Planning & Zoning; charts of subdivision, land-use applications, inspections, addresses, MMJ and zoning."
+      ],
+      "limitations": [
+        "This is not a fee schedule, adopted code or amending instrument. Chart values have not received numerical QA.",
+        "Only physical page 1 directly inspected at original rendered dimensions; remaining pages not visually reviewed. Source asserts roles/dates; no authentication, legal effect or currentness conclusion."
+      ]
+    }
+  ],
+  "limits": [
+    "Research preservation only; no canonical intake, legal-currentness, source completeness or rule promotion.",
+    "Original metadata and sidecars are retained unchanged; new audit is additive. The three R1 files are frozen for custody only.",
+    "Four first-page images generated with PyMuPDF 1.28.2 at130dpi and directly viewed; no all749-page QA. Native first-page text consulted before visual inspection, so review is candidate-aware.",
+    "Source response declarations and reported acquisition times remain claims; exact hashes prove retained-byte identity, not publisher authenticity or original-host custody beyond the recorded evidence."
+  ]
+}

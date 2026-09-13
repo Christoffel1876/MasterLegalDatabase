@@ -1,0 +1,127 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact portable file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "HashCheck": {
+      "additionalProperties": false,
+      "description": "A reported expected digest compared with the exact retained file.",
+      "properties": {
+        "claim": {
+          "title": "Claim",
+          "type": "string"
+        },
+        "actual": {
+          "$ref": "#/$defs/Asset"
+        },
+        "expected_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Expected Sha256",
+          "type": "string"
+        },
+        "matches": {
+          "title": "Matches",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "claim",
+        "actual",
+        "expected_sha256",
+        "matches"
+      ],
+      "title": "HashCheck",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Scope and limits of external-report custody, separate from source reading.",
+  "properties": {
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/HashCheck"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "source_candidate_copies_equal": {
+      "title": "Source Candidate Copies Equal",
+      "type": "boolean"
+    },
+    "reported_critical_count": {
+      "title": "Reported Critical Count",
+      "type": "integer"
+    },
+    "reported_classification_count": {
+      "title": "Reported Classification Count",
+      "type": "integer"
+    },
+    "actual_pass2_finding_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Actual Pass2 Finding Ids",
+      "type": "array"
+    },
+    "timeline_as_reported": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Timeline As Reported",
+      "type": "object"
+    },
+    "method_as_reported": {
+      "title": "Method As Reported",
+      "type": "string"
+    },
+    "qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Qualifications",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "checks",
+    "source_candidate_copies_equal",
+    "reported_critical_count",
+    "reported_classification_count",
+    "actual_pass2_finding_ids",
+    "timeline_as_reported",
+    "method_as_reported",
+    "qualifications"
+  ],
+  "title": "Reconciliation",
+  "type": "object"
+}

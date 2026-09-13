@@ -1,0 +1,215 @@
+{
+  "$defs": {
+    "FileRef": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "disposition": {
+          "enum": [
+            "accepted_with_limits",
+            "qualification",
+            "correction",
+            "unsupported_route"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/FileRef"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "disposition",
+        "statement",
+        "evidence"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "PdfObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "action_id": {
+          "title": "Action Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "first_page_image": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "physical_pages": {
+          "minimum": 1,
+          "title": "Physical Pages",
+          "type": "integer"
+        },
+        "viewed_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Viewed Pages",
+          "type": "array"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "printed_claims": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Printed Claims",
+          "type": "array"
+        },
+        "limitations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "action_id",
+        "authority_id",
+        "source",
+        "first_page_image",
+        "physical_pages",
+        "viewed_pages",
+        "role",
+        "printed_claims",
+        "limitations"
+      ],
+      "title": "PdfObservation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "assignment_id": {
+      "const": "SH-EXT-001",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "status": {
+      "const": "accepted_for_limited_research_with_qualifications",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "custody": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "comparison_commit": {
+      "title": "Comparison Commit",
+      "type": "string"
+    },
+    "counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Counts",
+      "type": "object"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "pdf_observations": {
+      "items": {
+        "$ref": "#/$defs/PdfObservation"
+      },
+      "title": "Pdf Observations",
+      "type": "array"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "prepared_at",
+    "assignment_id",
+    "status",
+    "legal_currentness",
+    "answer_safe",
+    "custody",
+    "comparison_commit",
+    "counts",
+    "findings",
+    "pdf_observations",
+    "limits"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

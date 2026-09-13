@@ -1,0 +1,151 @@
+{
+  "$defs": {
+    "FileRef": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    },
+    "Target": {
+      "additionalProperties": false,
+      "properties": {
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        },
+        "parent": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "parent_url": {
+          "title": "Parent Url",
+          "type": "string"
+        },
+        "exact_href": {
+          "title": "Exact Href",
+          "type": "string"
+        },
+        "exact_label": {
+          "title": "Exact Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "url",
+        "purpose",
+        "parent",
+        "parent_url",
+        "exact_href",
+        "exact_label"
+      ],
+      "title": "Target",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "status": {
+      "const": "PREPARED_NOT_DISPATCHED",
+      "title": "Status",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-PUEBLO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "max_public_actions": {
+      "const": 6,
+      "title": "Max Public Actions",
+      "type": "integer"
+    },
+    "max_distinct_urls": {
+      "const": 4,
+      "title": "Max Distinct Urls",
+      "type": "integer"
+    },
+    "max_source_bytes": {
+      "const": 10000000,
+      "title": "Max Source Bytes",
+      "type": "integer"
+    },
+    "max_total_body_bytes": {
+      "const": 20000000,
+      "title": "Max Total Body Bytes",
+      "type": "integer"
+    },
+    "planned_start": {
+      "title": "Planned Start",
+      "type": "null"
+    },
+    "planned_stop": {
+      "title": "Planned Stop",
+      "type": "null"
+    },
+    "targets": {
+      "items": {
+        "$ref": "#/$defs/Target"
+      },
+      "maxItems": 2,
+      "minItems": 1,
+      "title": "Targets",
+      "type": "array"
+    },
+    "restrictions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Restrictions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "authority_id",
+    "legal_currentness",
+    "max_public_actions",
+    "max_distinct_urls",
+    "max_source_bytes",
+    "max_total_body_bytes",
+    "planned_start",
+    "planned_stop",
+    "targets",
+    "restrictions"
+  ],
+  "title": "Proposal",
+  "type": "object"
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "status": "PREPARED_NOT_DISPATCHED",
+  "authority_id": "CO-COUNTY-PUEBLO",
+  "legal_currentness": "not_verified",
+  "max_public_actions": 6,
+  "max_distinct_urls": 4,
+  "max_source_bytes": 10000000,
+  "max_total_body_bytes": 20000000,
+  "planned_start": null,
+  "planned_stop": null,
+  "targets": [
+    {
+      "url": "https://www.pueblocounty.gov/sites/default/files/2025-05/Fee%20Schedule%20Adopted%205.8.25%20-%20Revised%20%282%29.pdf",
+      "purpose": "Retain exact observed county fee PDF; inspect source date/issuer and explicit adoption references only.",
+      "parent": {
+        "path": "received/raw/SHEXT001-A031.html",
+        "sha256": "bf073a8d0f5f0384eed65d15456bf454596bed95a50f754f124b7a4cf17028c7",
+        "size_bytes": 98877
+      },
+      "parent_url": "https://www.pueblocounty.gov/planning-and-development-department/application-information-page-and-checklists",
+      "exact_href": "https://www.pueblocounty.gov/sites/default/files/2025-05/Fee%20Schedule%20Adopted%205.8.25%20-%20Revised%20%282%29.pdf",
+      "exact_label": "Fee Schedule Adopted 5.8.25 - Revised (2).pdf"
+    },
+    {
+      "url": "https://www.pueblocounty.gov/board-county-commissioners/board-county-commissioners",
+      "purpose": "Official commissioner catalog lead for an adopting instrument; not itself an adoption document.",
+      "parent": {
+        "path": "received/raw/SHEXT001-A031.html",
+        "sha256": "bf073a8d0f5f0384eed65d15456bf454596bed95a50f754f124b7a4cf17028c7",
+        "size_bytes": 98877
+      },
+      "parent_url": "https://www.pueblocounty.gov/planning-and-development-department/application-information-page-and-checklists",
+      "exact_href": "/board-county-commissioners/board-county-commissioners",
+      "exact_label": "County Commissioners"
+    }
+  ],
+  "restrictions": [
+    "Prepared only. Atlas must dispatch a fresh timed batch; no requests or automatic follow-up are authorized by saving this proposal.",
+    "At most six public requests/actions including redirects/retries/searches, four distinct exact URLs; 10MB/body and20MB cumulative accepted bodies. Record partial/error bodies and count failed attempts.",
+    "Ordinary verified TLS with unchanged identity; no login, contact, form, proxy, hidden API, guessed filename or endpoint. Stop source on401/403 and do not retry denial.",
+    "Do not reopen A031: its preserved DOM is the referral. Target1 exact percent-encoded href must be used without alternative filename spelling.",
+    "Two remaining distinct slots may be used only for exact official same-host links exposed by these accepted target bodies or a specific adopting-instrument URL printed in the PDF, with recorded parent/hash/label and remaining-budget preflight. If absent, leave adoption gap unresolved.",
+    "No invented resolution number/date from label5.8.25; no full-document table QA, enacted-effect or current-law claim.",
+    "All start/stop times remain unset until Atlas assigns them. Stop after this single directed batch."
+  ]
+}

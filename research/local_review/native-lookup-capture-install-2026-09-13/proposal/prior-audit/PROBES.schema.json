@@ -1,0 +1,139 @@
+{
+  "$defs": {
+    "Event": {
+      "additionalProperties": false,
+      "description": "One actual isolated reproduction, retaining success or failure without relabeling it.",
+      "properties": {
+        "case": {
+          "title": "Case",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "started_at": {
+          "title": "Started At",
+          "type": "string"
+        },
+        "completed_at": {
+          "title": "Completed At",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "returned_injected_evidence",
+            "rejected",
+            "not_reproduced"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "verification_calls": {
+          "title": "Verification Calls",
+          "type": "integer"
+        },
+        "checker_calls": {
+          "title": "Checker Calls",
+          "type": "integer"
+        },
+        "error": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Error"
+        },
+        "result": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Result"
+        },
+        "source_files_restored_in_fixture": {
+          "title": "Source Files Restored In Fixture",
+          "type": "boolean"
+        },
+        "public_requests": {
+          "const": 0,
+          "default": 0,
+          "title": "Public Requests",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "case",
+        "source_id",
+        "started_at",
+        "completed_at",
+        "status",
+        "verification_calls",
+        "checker_calls",
+        "error",
+        "result",
+        "source_files_restored_in_fixture"
+      ],
+      "title": "Event",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Bind the code actually probed, not a later installed revision.",
+  "properties": {
+    "implementation_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Implementation Sha256",
+      "type": "string"
+    },
+    "observed_production_sha256_at_start": {
+      "title": "Observed Production Sha256 At Start",
+      "type": "string"
+    },
+    "observed_production_sha256_at_end": {
+      "title": "Observed Production Sha256 At End",
+      "type": "string"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "public_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "production_writes": {
+      "const": 0,
+      "default": 0,
+      "title": "Production Writes",
+      "type": "integer"
+    },
+    "limit": {
+      "title": "Limit",
+      "type": "string"
+    }
+  },
+  "required": [
+    "implementation_sha256",
+    "observed_production_sha256_at_start",
+    "observed_production_sha256_at_end",
+    "events",
+    "limit"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

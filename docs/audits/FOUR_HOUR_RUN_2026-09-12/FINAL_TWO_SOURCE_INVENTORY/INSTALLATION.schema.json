@@ -1,0 +1,103 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "root_approved_exact_install",
+        "installed_verified"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "package_manifest_sha256": {
+      "title": "Package Manifest Sha256",
+      "type": "string"
+    },
+    "reviewer": {
+      "const": "Atlas root",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "sources": {
+      "const": 63,
+      "title": "Sources",
+      "type": "integer"
+    },
+    "reviews": {
+      "const": 24,
+      "title": "Reviews",
+      "type": "integer"
+    },
+    "unmapped": {
+      "const": 39,
+      "title": "Unmapped",
+      "type": "integer"
+    },
+    "root_review": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Root Review",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "package_manifest_sha256",
+    "reviewer",
+    "files",
+    "sources",
+    "reviews",
+    "unmapped",
+    "root_review",
+    "legal_currentness"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

@@ -1,0 +1,401 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Baseline": {
+      "additionalProperties": false,
+      "properties": {
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "preserved": {
+          "$ref": "#/$defs/Asset"
+        },
+        "records": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Records"
+        }
+      },
+      "required": [
+        "repository_path",
+        "preserved",
+        "records"
+      ],
+      "title": "Baseline",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "proposed_record_id": {
+          "title": "Proposed Record Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "enum": [
+            "08_County_Authorities",
+            "10_Municipal_Authorities"
+          ],
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "original": {
+          "$ref": "#/$defs/Asset"
+        },
+        "http_url": {
+          "title": "Http Url",
+          "type": "string"
+        },
+        "request_started_at": {
+          "format": "date-time",
+          "title": "Request Started At",
+          "type": "string"
+        },
+        "response_completed_at": {
+          "format": "date-time",
+          "title": "Response Completed At",
+          "type": "string"
+        },
+        "http_status": {
+          "const": 200,
+          "title": "Http Status",
+          "type": "integer"
+        },
+        "physical_pages": {
+          "title": "Physical Pages",
+          "type": "integer"
+        },
+        "issuer": {
+          "title": "Issuer",
+          "type": "string"
+        },
+        "source_date_claims": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Date Claims",
+          "type": "array"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "actual_repository_received_at": {
+          "title": "Actual Repository Received At",
+          "type": "null"
+        },
+        "review_scope": {
+          "title": "Review Scope",
+          "type": "string"
+        },
+        "qualifications": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Qualifications",
+          "type": "array"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "referral_parent_url": {
+          "title": "Referral Parent Url",
+          "type": "string"
+        },
+        "referral_parent_body": {
+          "$ref": "#/$defs/Asset"
+        },
+        "referral_label": {
+          "title": "Referral Label",
+          "type": "string"
+        },
+        "referral_href": {
+          "title": "Referral Href",
+          "type": "string"
+        },
+        "referral_selected_url": {
+          "title": "Referral Selected Url",
+          "type": "string"
+        },
+        "redirect_events": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "title": "Redirect Events",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source_id",
+        "proposed_record_id",
+        "authority_id",
+        "layer_id",
+        "original",
+        "http_url",
+        "request_started_at",
+        "response_completed_at",
+        "http_status",
+        "physical_pages",
+        "issuer",
+        "source_date_claims",
+        "legal_currentness",
+        "actual_repository_received_at",
+        "review_scope",
+        "qualifications",
+        "evidence",
+        "referral_parent_url",
+        "referral_parent_body",
+        "referral_label",
+        "referral_href",
+        "referral_selected_url",
+        "redirect_events"
+      ],
+      "title": "Source",
+      "type": "object"
+    },
+    "Template": {
+      "additionalProperties": false,
+      "properties": {
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "official_source_name": {
+          "title": "Official Source Name",
+          "type": "string"
+        },
+        "official_source_url": {
+          "title": "Official Source Url",
+          "type": "string"
+        },
+        "acquisition_method": {
+          "const": "manual_official_download",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "received_from": {
+          "title": "Received From",
+          "type": "string"
+        },
+        "reviewer_name": {
+          "title": "Reviewer Name",
+          "type": "string"
+        },
+        "reviewer_email": {
+          "title": "Reviewer Email",
+          "type": "null"
+        },
+        "custody_note": {
+          "title": "Custody Note",
+          "type": "string"
+        },
+        "expected_sha256": {
+          "title": "Expected Sha256",
+          "type": "string"
+        },
+        "allow_duplicate": {
+          "const": false,
+          "title": "Allow Duplicate",
+          "type": "boolean"
+        },
+        "source_file": {
+          "$ref": "#/$defs/Asset"
+        },
+        "original_filename": {
+          "title": "Original Filename",
+          "type": "string"
+        },
+        "intake_id": {
+          "title": "Intake Id",
+          "type": "null"
+        },
+        "archive_path": {
+          "title": "Archive Path",
+          "type": "null"
+        },
+        "received_at": {
+          "title": "Received At",
+          "type": "null"
+        },
+        "status": {
+          "const": "proposed_not_applied",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "record_id",
+        "layer_id",
+        "official_source_name",
+        "official_source_url",
+        "acquisition_method",
+        "received_from",
+        "reviewer_name",
+        "reviewer_email",
+        "custody_note",
+        "expected_sha256",
+        "allow_duplicate",
+        "source_file",
+        "original_filename",
+        "intake_id",
+        "archive_path",
+        "received_at",
+        "status"
+      ],
+      "title": "Template",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "status": {
+      "const": "PREPARED_NOT_APPLIED",
+      "title": "Status",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "canonical_mutations": {
+      "const": 0,
+      "title": "Canonical Mutations",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "proposed_records": {
+      "items": {
+        "$ref": "#/$defs/Template"
+      },
+      "title": "Proposed Records",
+      "type": "array"
+    },
+    "baseline": {
+      "items": {
+        "$ref": "#/$defs/Baseline"
+      },
+      "title": "Baseline",
+      "type": "array"
+    },
+    "raw_before": {
+      "const": 61,
+      "title": "Raw Before",
+      "type": "integer"
+    },
+    "raw_after": {
+      "const": 63,
+      "title": "Raw After",
+      "type": "integer"
+    },
+    "ledger_before": {
+      "const": 62,
+      "title": "Ledger Before",
+      "type": "integer"
+    },
+    "ledger_after": {
+      "const": 64,
+      "title": "Ledger After",
+      "type": "integer"
+    },
+    "missing_ledger_only_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Ledger Only Ids",
+      "type": "array"
+    },
+    "duplicate_check": {
+      "title": "Duplicate Check",
+      "type": "string"
+    },
+    "legacy_id_check": {
+      "title": "Legacy Id Check",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "prepared_at",
+    "canonical_mutations",
+    "public_requests",
+    "sources",
+    "proposed_records",
+    "baseline",
+    "raw_before",
+    "raw_after",
+    "ledger_before",
+    "ledger_after",
+    "missing_ledger_only_ids",
+    "duplicate_check",
+    "legacy_id_check"
+  ],
+  "title": "Preparation",
+  "type": "object"
+}

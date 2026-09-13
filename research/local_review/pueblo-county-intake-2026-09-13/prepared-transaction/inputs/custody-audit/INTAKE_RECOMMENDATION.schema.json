@@ -1,0 +1,144 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Bind exact local evidence bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A proposal only; actual receipt time and archive filename await an approved transaction.",
+  "properties": {
+    "status": {
+      "const": "proposed_not_applied",
+      "title": "Status",
+      "type": "string"
+    },
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-PUEBLO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "layer_id": {
+      "const": "08_County_Authorities",
+      "title": "Layer Id",
+      "type": "string"
+    },
+    "incoming_source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_filename": {
+      "title": "Original Filename",
+      "type": "string"
+    },
+    "official_source_url": {
+      "title": "Official Source Url",
+      "type": "string"
+    },
+    "official_source_name": {
+      "title": "Official Source Name",
+      "type": "string"
+    },
+    "acquisition_method": {
+      "const": "received_review_package",
+      "title": "Acquisition Method",
+      "type": "string"
+    },
+    "actual_future_received_at": {
+      "title": "Actual Future Received At",
+      "type": "null"
+    },
+    "archive_path": {
+      "title": "Archive Path",
+      "type": "null"
+    },
+    "original_acquisition_time": {
+      "title": "Original Acquisition Time",
+      "type": "null"
+    },
+    "reported_acquisition_interval": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reported Acquisition Interval",
+      "type": "array"
+    },
+    "required_final_status": {
+      "const": "archived_pending_pipeline",
+      "title": "Required Final Status",
+      "type": "string"
+    },
+    "expected_canonical_pdf_count": {
+      "const": 1,
+      "title": "Expected Canonical Pdf Count",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "prerequisites": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Prerequisites",
+      "type": "array"
+    },
+    "exclusions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Exclusions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "source_id",
+    "authority_id",
+    "layer_id",
+    "incoming_source",
+    "original_filename",
+    "official_source_url",
+    "official_source_name",
+    "acquisition_method",
+    "actual_future_received_at",
+    "archive_path",
+    "original_acquisition_time",
+    "reported_acquisition_interval",
+    "required_final_status",
+    "expected_canonical_pdf_count",
+    "legal_currentness",
+    "prerequisites",
+    "exclusions"
+  ],
+  "title": "IntakeRecommendation",
+  "type": "object"
+}

@@ -1,0 +1,153 @@
+{
+  "$defs": {
+    "File": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "status": {
+      "const": "ready_for_root_review_not_applied",
+      "title": "Status",
+      "type": "string"
+    },
+    "tests_passed": {
+      "const": 62,
+      "title": "Tests Passed",
+      "type": "integer"
+    },
+    "branch_inclusive_coverage_percent": {
+      "title": "Branch Inclusive Coverage Percent",
+      "type": "number"
+    },
+    "transaction": {
+      "$ref": "#/$defs/File"
+    },
+    "tests": {
+      "$ref": "#/$defs/File"
+    },
+    "preparation": {
+      "$ref": "#/$defs/File"
+    },
+    "source_provenance": {
+      "$ref": "#/$defs/File"
+    },
+    "preserved_prefixes": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Preserved Prefixes",
+      "type": "array"
+    },
+    "command_receipts": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Command Receipts",
+      "type": "array"
+    },
+    "raw_before": {
+      "const": 61,
+      "title": "Raw Before",
+      "type": "integer"
+    },
+    "ledger_before": {
+      "const": 62,
+      "title": "Ledger Before",
+      "type": "integer"
+    },
+    "raw_after_if_applied": {
+      "const": 63,
+      "title": "Raw After If Applied",
+      "type": "integer"
+    },
+    "ledger_after_if_applied": {
+      "const": 64,
+      "title": "Ledger After If Applied",
+      "type": "integer"
+    },
+    "current_intake_time": {
+      "title": "Current Intake Time",
+      "type": "null"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Qualifications",
+      "type": "array"
+    },
+    "canonical_writes": {
+      "const": 0,
+      "title": "Canonical Writes",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schema_version",
+    "checked_at",
+    "status",
+    "tests_passed",
+    "branch_inclusive_coverage_percent",
+    "transaction",
+    "tests",
+    "preparation",
+    "source_provenance",
+    "preserved_prefixes",
+    "command_receipts",
+    "raw_before",
+    "ledger_before",
+    "raw_after_if_applied",
+    "ledger_after_if_applied",
+    "current_intake_time",
+    "legal_currentness",
+    "qualifications",
+    "canonical_writes",
+    "public_requests"
+  ],
+  "title": "Validation",
+  "type": "object"
+}

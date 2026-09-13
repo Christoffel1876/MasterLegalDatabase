@@ -1,0 +1,124 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact ordinary-file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "const": "PREPARED_NOT_APPLIED",
+      "title": "Status",
+      "type": "string"
+    },
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "tests_passed": {
+      "const": 30,
+      "title": "Tests Passed",
+      "type": "integer"
+    },
+    "combined_coverage_percent": {
+      "title": "Combined Coverage Percent",
+      "type": "number"
+    },
+    "line_coverage_percent": {
+      "title": "Line Coverage Percent",
+      "type": "number"
+    },
+    "branch_coverage_percent": {
+      "title": "Branch Coverage Percent",
+      "type": "number"
+    },
+    "fixture_scope": {
+      "title": "Fixture Scope",
+      "type": "string"
+    },
+    "tests": {
+      "$ref": "#/$defs/Asset"
+    },
+    "test_log": {
+      "$ref": "#/$defs/Asset"
+    },
+    "coverage": {
+      "$ref": "#/$defs/Asset"
+    },
+    "code": {
+      "$ref": "#/$defs/Asset"
+    },
+    "plan": {
+      "$ref": "#/$defs/Asset"
+    },
+    "canonical_mutations": {
+      "const": 0,
+      "title": "Canonical Mutations",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "source_intake_time": {
+      "title": "Source Intake Time",
+      "type": "null"
+    },
+    "current_baseline_unchanged": {
+      "title": "Current Baseline Unchanged",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "recorded_at",
+    "tests_passed",
+    "combined_coverage_percent",
+    "line_coverage_percent",
+    "branch_coverage_percent",
+    "fixture_scope",
+    "tests",
+    "test_log",
+    "coverage",
+    "code",
+    "plan",
+    "canonical_mutations",
+    "public_requests",
+    "source_intake_time",
+    "current_baseline_unchanged",
+    "legal_currentness"
+  ],
+  "title": "Validation",
+  "type": "object"
+}

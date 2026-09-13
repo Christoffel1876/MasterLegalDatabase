@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-09-13T01:33:34.741747Z",
+  "reviewer": "Atlas independent review worker",
+  "historical_transaction": {
+    "path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/final-two-source-independent-revision/historical-transaction.py",
+    "sha256": "7fa301f8bf1fecfc8df7b63ebbf7cfc30d35f73585ccaecf6e3596b9e1d49d5a",
+    "size_bytes": 29744
+  },
+  "original_independent_manifest": {
+    "path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/final-two-source-independent/FINAL_MANIFEST.json",
+    "sha256": "b4a03a0e64db1e2d1e9b34bb8fbb67d0f06f43556b4972677091392959d6da47",
+    "size_bytes": 2847
+  },
+  "final_transaction": {
+    "path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/final-two-source-independent-revision/final-reviewed-transaction.py",
+    "sha256": "aa0689fe06530ec42ce25648529744d8d9072e6582eefa3337ae3f36c58a6e84",
+    "size_bytes": 31746
+  },
+  "final_preparation_manifest": {
+    "path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/final-two-source-intake/evidence/preparation/FINAL_MANIFEST.json",
+    "sha256": "bbae26ff9ded812c81e864b313d4cfa8f2fa99c4e31191d670038ffe2f14ae4b",
+    "size_bytes": 7820
+  },
+  "final_verifier": {
+    "path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/final-two-source-intake/validate_preparation.py",
+    "sha256": "171028ce372700c1722b6ea6efb8d7057adbccd4be8ac4a6b522a31d4c8ae76f",
+    "size_bytes": 5932
+  },
+  "final_tests": {
+    "path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/final-two-source-independent-revision/final-reviewed-tests.py",
+    "sha256": "6b6cf1eb7ac3f582747fff9d488b383b1c8d059d600f02151eced0739413de7f",
+    "size_bytes": 29064
+  },
+  "historical_repro": "The original loader read PREPARATION.json three times. Returning an altered official_source_name only on the third read admitted that unpinned value to Plan. Captured command text and stdout are retained here; no file or production value was changed.",
+  "reproduction_scope": "In-memory substitution on the original 7fa301f8 transaction. This demonstrates a concurrent metadata-reread boundary, not observed production tampering. The original execution timestamp was not separately recorded; the follow-up messages preceded the first intermediate final preflight at 01:30:37Z.",
+  "checked_buffer_confirmation": [
+    "Final loader reads the exact-pinned PREPARATION and FINAL_MANIFEST files once and stores their byte buffers.",
+    "Closed inventory members are individually verified into captured buffers; already captured preparation bytes are checked for consistency with their manifest entry.",
+    "Parsed source/template facts, the source-provenance digest and before/guard bytes come from those captured buffers. No unverified metadata reread is used to construct Plan.",
+    "The semantically accepted and byte-pinned proof replaces the prior embedded verifier invocation only for this frozen two-source transaction. It makes no new official-provenance or visual-review determination.",
+    "Fresh checked source reads remain in preflight and original publication; final records, runtime pins, control preimages, source originals and reconciliation retain their separate validation boundaries.",
+    "Both original_filename fields now equal the actual incoming source_file basename original.pdf; a before-write invariant and failure regression prevent descriptive replacement names. Publisher header filenames remain separate unchanged evidence.",
+    "The unused historical VERIFIER_SHA constant is removed. The actual independently executed preparation verifier is separately hash-bound.",
+    "Final named-reviewer check: one closed-package plus actual canonical dry-run completed with 2 PDFs / 5 pages / 377,549 bytes, 61/62 unchanged baseline, no execution directory and all eleven monitored pins unchanged."
+  ],
+  "read_only_check": {
+    "path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/final-two-source-independent-revision/FINAL_READ_ONLY_CHECK.json",
+    "sha256": "96312324355518d01e0edf2e51a3ee532d381227032ab9373bee6a66a615426c",
+    "size_bytes": 6608
+  },
+  "status": "accepted_in_reviewed_scope",
+  "qualifications": [
+    "The earlier accepted independent audit and the intermediate checked-buffer preflight are historical and retained unchanged. This is additive acceptance of the final prepared revision, not a claim of root application.",
+    "Root must apply and verify separately before claiming 63 originals, 64 ledger records or an actual twenty-fourth scoped review join. Existing raw/manual rows remain 61/62 at this check.",
+    "Source authority, date, blank-value and nested-row qualifications from the original independent review remain in force. There is no legal-currentness, adoption, applicability, arithmetic, monitoring or coverage promotion.",
+    "Private-header omissions, candidate-aware visual scope and process-interruption rather than power-loss durability limits remain unchanged.",
+    "Historical code copies and reproducer text are evidence only. The portable validator never executes them or rechecks current live repository state."
+  ],
+  "public_requests": 0,
+  "production_writes": 0,
+  "legal_currentness": "not_verified"
+}

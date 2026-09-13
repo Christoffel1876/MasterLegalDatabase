@@ -1,0 +1,291 @@
+{
+  "$defs": {
+    "Comparison": {
+      "additionalProperties": false,
+      "description": "Record an exact equality search without claiming global novelty.",
+      "properties": {
+        "input_file": {
+          "$ref": "#/$defs/Ref"
+        },
+        "rows_read": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rows Read"
+        },
+        "exact_matches": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Exact Matches",
+          "type": "array"
+        }
+      },
+      "required": [
+        "input_file",
+        "rows_read",
+        "exact_matches"
+      ],
+      "title": "Comparison",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Pin an evidence file's exact bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "description": "Keep source ownership, transport and accepted review scope distinct.",
+      "properties": {
+        "canonical_id": {
+          "title": "Canonical Id",
+          "type": "string"
+        },
+        "historical_review_id": {
+          "title": "Historical Review Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Ref"
+        },
+        "page_count": {
+          "title": "Page Count",
+          "type": "integer"
+        },
+        "parent_url": {
+          "title": "Parent Url",
+          "type": "string"
+        },
+        "parent_anchor_label": {
+          "title": "Parent Anchor Label",
+          "type": "string"
+        },
+        "parent": {
+          "$ref": "#/$defs/Ref"
+        },
+        "observed_href": {
+          "title": "Observed Href",
+          "type": "string"
+        },
+        "initial_pdf_url": {
+          "title": "Initial Pdf Url",
+          "type": "string"
+        },
+        "final_pdf_url": {
+          "title": "Final Pdf Url",
+          "type": "string"
+        },
+        "redirect_count": {
+          "title": "Redirect Count",
+          "type": "integer"
+        },
+        "acquisition_started_at": {
+          "format": "date-time",
+          "title": "Acquisition Started At",
+          "type": "string"
+        },
+        "acquisition_finished_at": {
+          "format": "date-time",
+          "title": "Acquisition Finished At",
+          "type": "string"
+        },
+        "events": {
+          "items": {
+            "$ref": "#/$defs/Ref"
+          },
+          "title": "Events",
+          "type": "array"
+        },
+        "accepted_review": {
+          "$ref": "#/$defs/Ref"
+        },
+        "accepted_schema": {
+          "$ref": "#/$defs/Ref"
+        },
+        "acceptance": {
+          "$ref": "#/$defs/Ref"
+        },
+        "full_images_directly_viewed": {
+          "items": {
+            "$ref": "#/$defs/Ref"
+          },
+          "title": "Full Images Directly Viewed",
+          "type": "array"
+        },
+        "expected_review_kind": {
+          "const": "checked_tables",
+          "default": "checked_tables",
+          "title": "Expected Review Kind",
+          "type": "string"
+        },
+        "review_scope": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Review Scope",
+          "type": "array"
+        },
+        "required_qualifications": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Qualifications",
+          "type": "array"
+        },
+        "actual_repository_received_at": {
+          "default": null,
+          "title": "Actual Repository Received At",
+          "type": "null"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "answer_safe": {
+          "const": false,
+          "default": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "canonical_id",
+        "historical_review_id",
+        "authority_id",
+        "layer_id",
+        "source",
+        "page_count",
+        "parent_url",
+        "parent_anchor_label",
+        "parent",
+        "observed_href",
+        "initial_pdf_url",
+        "final_pdf_url",
+        "redirect_count",
+        "acquisition_started_at",
+        "acquisition_finished_at",
+        "events",
+        "accepted_review",
+        "accepted_schema",
+        "acceptance",
+        "full_images_directly_viewed",
+        "review_scope",
+        "required_qualifications"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Freeze independent expectations before opening another agent's preparation.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "frozen_at": {
+      "format": "date-time",
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "preparation_read_before_freeze": {
+      "const": false,
+      "default": false,
+      "title": "Preparation Read Before Freeze",
+      "type": "boolean"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Sources",
+      "type": "array"
+    },
+    "exact_compared_values": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Exact Compared Values",
+      "type": "array"
+    },
+    "comparisons": {
+      "items": {
+        "$ref": "#/$defs/Comparison"
+      },
+      "title": "Comparisons",
+      "type": "array"
+    },
+    "validator_results": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Validator Results",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "frozen_at",
+    "sources",
+    "exact_compared_values",
+    "comparisons",
+    "validator_results",
+    "limitations"
+  ],
+  "title": "Expectations",
+  "type": "object"
+}
