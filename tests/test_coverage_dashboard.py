@@ -89,7 +89,7 @@ def test_directory_entries_are_not_collected_legal_coverage(corpus: Path) -> Non
                     {"name": "Sheriden Lake"}, {"name": "Town B"}, {"name": "Town B"}],
     })
     result = report(corpus)
-    assert len(result.jurisdictions) == 2
+    assert len(result.jurisdictions) == 3
     town = result.jurisdictions[0]
     assert town.counts.catalog_sources == town.counts.catalog_urls == 1
     assert town.counts.indexed_rows == 0
@@ -97,10 +97,32 @@ def test_directory_entries_are_not_collected_legal_coverage(corpus: Path) -> Non
     assert next(c for c in town.categories if c.category == "ordinances").status == "catalog_only"
     assert next(c for c in town.categories if c.category == "fees").status == "not_discovered"
     reconciliation = result.municipal_reconciliation
-    assert reconciliation["recounted_directory_names"] == 2
+    assert reconciliation["recounted_directory_names"] == 3
     assert reconciliation["excluded_synthetic_authority_ids"] == ["CO-MUNICIPAL-STATEWIDE"]
     assert reconciliation["inherited_directory_entries"] == 270
     assert "Live currency has not been verified" in dashboard.render_markdown(result)
+
+
+def test_sheridan_lake_alias_stays_in_directory_without_inventing_collection(corpus: Path) -> None:
+    """An official incorporated place cannot be excluded for an upstream misspelling."""
+    put(corpus, "_CONTROL_PLANE/MUNICIPAL_EXPANSION_QUEUE.json", {
+        "source_retrieved_at": None,
+        "source_retrieval_status": "unknown_from_archived_page",
+        "generated_at": "2026-09-10T17:00:00Z",
+        "entries": [{"name": "Sheriden Lake"}, {"name": "Sheridan Lake"}],
+    })
+    result = report(corpus)
+    assert len(result.jurisdictions) == 1
+    town = result.jurisdictions[0]
+    assert town.authority_name == "Sheridan Lake"
+    assert town.counts.catalog_sources == town.counts.indexed_rows == 0
+    reconciliation = result.municipal_reconciliation
+    assert reconciliation["recounted_directory_names"] == 1
+    assert reconciliation["inherited_directory_source_retrieved_at"] is None
+    assert reconciliation["directory_source_retrieval_status"] == "unknown_from_archived_page"
+    assert reconciliation["directory_generated_at"] == "2026-09-10T17:00:00Z"
+    assert "0869700" in reconciliation["explanation"]
+    assert "do not verify today's active-government total" in reconciliation["explanation"]
 
 
 def test_lfs_missing_evidence_and_metadata_units_remain_explicit(corpus: Path) -> None:

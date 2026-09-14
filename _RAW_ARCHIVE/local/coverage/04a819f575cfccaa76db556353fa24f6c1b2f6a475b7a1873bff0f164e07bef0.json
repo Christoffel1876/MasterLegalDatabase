@@ -1,0 +1,228 @@
+{
+  "id" : "dm2a-biqr",
+  "name" : "Map of All Special Districts in Colorado",
+  "assetType" : "map",
+  "attribution" : "DOLA",
+  "attributionLink" : "https://www.colorado.gov/dola",
+  "averageRating" : 0,
+  "category" : "Local Aggregation",
+  "createdAt" : 1456359836,
+  "description" : "Aggregated from thousands of local jurisdictions by the Colorado Department of Local Affairs (DOLA) Demography office. Many of the district boundaries were created from scanned drawings or digitized PDFs, and therefore no guarantee of accuracy can be made for the data.",
+  "diciBackend" : false,
+  "displayType" : "visualization_canvas_map",
+  "downloadCount" : 161,
+  "hideFromCatalog" : false,
+  "hideFromDataJson" : false,
+  "licenseId" : "PUBLIC_DOMAIN",
+  "locked" : false,
+  "modifyingViewUid" : "7rar-v5z8",
+  "newBackend" : true,
+  "numberOfComments" : 0,
+  "oid" : 42415642,
+  "provenance" : "official",
+  "publicationAppendEnabled" : false,
+  "publicationDate" : 1787078470,
+  "publicationGroup" : 13982567,
+  "publicationStage" : "published",
+  "rowsUpdatedAt" : 1783159257,
+  "rowsUpdatedBy" : "azfj-qb4j",
+  "tableId" : 20195322,
+  "totalTimesRated" : 0,
+  "viewCount" : 14311,
+  "viewLastModified" : 1789038147,
+  "viewType" : "tabular",
+  "approvals" : [ {
+    "reviewedAt" : 1456363068,
+    "reviewedAutomatically" : false,
+    "state" : "approved",
+    "submissionId" : 7627041,
+    "submissionObject" : "public_audience_request",
+    "submissionOutcome" : "change_audience",
+    "submittedAt" : 1456363068,
+    "targetAudience" : "public",
+    "workflowId" : 1726,
+    "reviewer" : {
+      "id" : "8cet-tw9x",
+      "displayName" : "Colorado Information Marketplace"
+    },
+    "submissionDetails" : {
+      "permissionType" : "READ"
+    },
+    "submissionOutcomeApplication" : {
+      "failureCount" : 0,
+      "status" : "success"
+    },
+    "submitter" : {
+      "id" : "8cet-tw9x",
+      "displayName" : "Colorado Information Marketplace"
+    }
+  } ],
+  "clientContext" : {
+    "clientContextVariables" : [ ],
+    "inheritedVariables" : { }
+  },
+  "columns" : [ ],
+  "displayFormat" : {
+    "visualizationCanvasMetadata" : {
+      "vifs" : [ {
+        "configuration" : {
+          "viewSourceDataLink" : true,
+          "mapCenterAndZoom" : {
+            "center" : {
+              "lng" : -105.58761779249073,
+              "lat" : 39.008507058809755
+            },
+            "zoom" : 5.932576027968792
+          },
+          "basemapOptions" : {
+            "searchBoundaryLowerRightLongitude" : -102.04118301298898,
+            "searchBoundaryUpperLeftLongitude" : -109.06040337156861,
+            "searchBoundaryUpperLeftLatitude" : 41.00345044100004,
+            "navigationControl" : true,
+            "basemapStyle" : "mapbox://styles/mapbox/streets-v12",
+            "geoCoderControl" : true,
+            "geoLocateControl" : true,
+            "searchBoundaryLowerRightLatitude" : 36.99085868142214
+          },
+          "mapPitchAndBearing" : {
+            "bearing" : 0,
+            "pitch" : 0
+          },
+          "datasetMetadata" : false,
+          "panAndZoom" : true,
+          "locateUser" : false
+        },
+        "series" : [ {
+          "visible" : true,
+          "color" : {
+            "primary" : "#eb6900"
+          },
+          "mapOptions" : {
+            "colorByQuantificationMethod" : "category",
+            "simplificationLevel" : "1",
+            "mapFlyoutTitleColumnName" : "abbrev_nam",
+            "shapeFillOpacity" : 30,
+            "mapType" : "boundaryMap",
+            "shapeFillColor" : "#fac07e",
+            "additionalFlyoutColumns" : [ "lgid", "source", "lastupdate", "name", "lgtype_id", "lgstatus_i", "mail_addre", "alt_addres", "mail_city", "mail_state", "mail_zip", "url", "prev_name" ]
+          },
+          "showLegend" : true,
+          "type" : "map",
+          "dataSource" : {
+            "measure" : {
+              "aggregationFunction" : "count"
+            },
+            "name" : "dlall",
+            "filters" : [ {
+              "dataTypeName" : "text",
+              "columns" : [ {
+                "fieldName" : "lgtype_id",
+                "datasetUid" : "7rar-v5z8"
+              } ],
+              "function" : "noop",
+              "isDrilldown" : false,
+              "isHidden" : false
+            } ],
+            "type" : "socrata.soql",
+            "datasetUid" : "7rar-v5z8",
+            "dimension" : {
+              "columnName" : "geometry"
+            }
+          },
+          "primary" : true
+        } ],
+        "format" : {
+          "type" : "visualization_interchange_format",
+          "version" : 10
+        },
+        "description" : "",
+        "id" : "17d57f5e-e5ae-49c7-ba50-39106f69cb8f",
+        "title" : "",
+        "currentMapLayerIndex" : 0
+      } ],
+      "filters" : [ {
+        "dataTypeName" : "text",
+        "columns" : [ {
+          "fieldName" : "lgtype_id",
+          "datasetUid" : "7rar-v5z8"
+        } ],
+        "function" : "noop",
+        "isDrilldown" : false,
+        "isHidden" : false
+      } ],
+      "version" : 1
+    }
+  },
+  "grants" : [ {
+    "inherited" : false,
+    "type" : "viewer",
+    "flags" : [ "public" ]
+  } ],
+  "license" : {
+    "name" : "Public Domain"
+  },
+  "metadata" : {
+    "custom_fields" : {
+      "Data Quality" : {
+        "Expected Update Frequency" : "Never"
+      },
+      "Point of Contact" : {
+        "Contact Email" : "bic-help@xentity.com",
+        "Contact Name" : "Business Intelligence Center of CO"
+      },
+      "Data Updates" : {
+        "Update Type" : "Automated",
+        "Update Schedule" : "4th of month",
+        "Update Method" : "Staging Server",
+        "Expected Update Frequency" : "monthly",
+        "Total Records At Initial Publish" : 4235
+      },
+      "Dataset Coverage" : {
+        "Geographic Coverage" : "State",
+        "Unit of Analysis" : "Vector polygon"
+      },
+      "Additional Dataset Documentation" : {
+        "Additional Metadata" : "https://docs.google.com/spreadsheets/d/1gaOjeXlLzQankggbhtrQq3HDEPfwwiXiPeSZrP6FjOs/edit?usp=sharing"
+      },
+      "Geospatial" : {
+        "Horizontal Coordinate System" : "WGS84 (EPSG:4326)",
+        "Coordinate System Disclaimer" : "NOTE: To maintain source projection, select “Export Original” from export menu. To display on the web, export using any other option.",
+        "Web Display Coordinate System" : "WGS84"
+      },
+      "Publisher" : {
+        "Publisher Name" : "Business Intelligence Center of CO"
+      },
+      "Data Description" : {
+        "Long Description" : "Boundaries and district names aggregated for this dataset represent a first version of effort toward an authoritative Statewide Special Districts Dataset. Each was aggregated from thousands of local jurisdictions by the Colorado Department of Local Affairs Demography office. Many of the district boundaries were created from scanned drawings or digitized PDFs, and therefore no guarantee of accuracy can be made for the data. Warning: this ’all districts’ layer has overlapping polygons in its geometric data so developers can query this dataset as a single API - individual layers are published separately for use in this viewer.",
+        "Row Label" : "All special district location, name, and contact information",
+        "Collection Method" : "vectorized from maps",
+        "Data Collection Instrument" : "aggregated in GIS",
+        "Collection Mode" : "Digitized from scanned images and pdfs"
+      },
+      "Contributing Agency Information" : {
+        "Data Source" : "https://storage.googleapis.com/co-publicdata/dlall.zip",
+        "Citation" : "DOLA - Department of Local Affairs",
+        "Agency Program Page" : "https://www.colorado.gov/dola"
+      }
+    },
+    "availableDisplayTypes" : [ "visualization" ]
+  },
+  "owner" : {
+    "id" : "azfj-qb4j",
+    "displayName" : "Business Intelligence Center of CO",
+    "screenName" : "Business Intelligence Center of CO",
+    "type" : "interactive",
+    "flags" : [ "acceptedEula", "mayBeStoriesCoOwner" ]
+  },
+  "query" : { },
+  "rights" : [ "read" ],
+  "tableAuthor" : {
+    "id" : "azfj-qb4j",
+    "displayName" : "Business Intelligence Center of CO",
+    "screenName" : "Business Intelligence Center of CO",
+    "type" : "interactive",
+    "flags" : [ "acceptedEula", "mayBeStoriesCoOwner" ]
+  },
+  "tags" : [ "bic", "gocodecolorado", "colorado", "dola", "department of local affairs", "districts", "special districts", "boundaries", "gis" ],
+  "flags" : [ "ownerMayBeContacted", "restorable", "restorePossibleForType" ]
+}
