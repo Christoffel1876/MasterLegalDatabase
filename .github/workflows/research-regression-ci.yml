@@ -1,0 +1,63 @@
+name: Research and orchestration regression checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: research-regression-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      GIT_LFS_SKIP_SMUDGE: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - name: Checkout the event tree without write credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          lfs: false
+          persist-credentials: false
+      - name: Initialize regression evidence
+        run: |
+          mkdir -p .geode_runtime/regression
+          printf '%s\n' 'Regression tests have not completed. Inspect the job log on setup failure.' > .geode_runtime/regression/summary.md
+          git rev-parse HEAD > .geode_runtime/regression/checkout-commit.txt
+      - name: Set up Python 3.11
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.11'
+      - name: Install test-runtime pins
+        run: python -m pip install --disable-pip-version-check -r requirements-test-ci.txt
+      - name: Test maintained research and orchestration behavior
+        run: >-
+          python -B -m pytest tests/ -q --cov=geode --cov-branch
+          --cov-report=term --cov-report=xml:.geode_runtime/regression/coverage.xml
+          --junitxml=.geode_runtime/regression/tests.xml
+      - name: Record the actual regression job result
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          mkdir -p .geode_runtime/regression
+          printf 'Regression job result: %s. Tests do not certify legal currentness or statewide coverage.\n' "$JOB_STATUS" > .geode_runtime/regression/summary.md
+          cat .geode_runtime/regression/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Retain actual test results
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: research-regression-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .geode_runtime/regression/
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 30

@@ -1,14 +1,16 @@
 ---
-status: prepared_not_installed_not_deployed
+status: locally_installed_cloud_validation_pending
 scope: eight_fixed_manual_pdf_sources
 scheduled_http_default: disabled
 manual_http_default: disabled
 legal_currentness: not_verified
 ---
 
-# Prepared daily manual PDF watch
+# Daily manual PDF watch and offline CI
 
-This integration prepares daily fixed-URL comparisons for the existing eight reviewed sources. Local installation does not deploy GitHub Actions. Even after the workflow reaches the default branch, scheduled runs perform **readiness only** unless the repository variable `MANUAL_WATCH_DAILY_ENABLED` is explicitly set to `true`. Manual dispatch also defaults to readiness; its `execute` Boolean must be explicitly selected for public GETs.
+This integration is installed locally for daily fixed-URL comparisons of the existing eight reviewed sources. Local installation does not deploy GitHub Actions. Even after the daily workflow reaches the default branch, scheduled runs perform **readiness only** unless the repository variable `MANUAL_WATCH_DAILY_ENABLED` is explicitly set to `true`. Manual dispatch of that daily workflow also defaults to readiness; its `execute` Boolean must be explicitly selected for public GETs.
+
+The separate `manual-source-watch-ci.yml` workflow validates pull requests, pushes to `main`, and manual dispatches on Ubuntu 24.04/Python 3.11. It checks out the event tree, runs the frozen offline guard/reporting tests with at least 90% runner branch-inclusive coverage, and invokes the runner only with `--event local_readiness` and no `--execute`. It has no live input, schedule, publisher, or write permission. Setup/test/readiness results are retained even after failure. This route permits Linux validation before merge without enabling source HTTP; adding it does not establish that a cloud run has passed.
 
 Before enabling daily GETs, review the exact installed commit/configuration, pass the offline suite on Ubuntu 24.04/Python 3.11, run and review a separately authorized manual live pilot, then approve the repository enable variable. The preparation was tested on macOS/Python 3.14.3 and syntax-checked for Python 3.11. PyPI advertises a compatible CPython 3.10+ Linux x86-64 PyMuPDF wheel and Python-compatible BeautifulSoup/SoupSieve wheels; this is not an executed Linux test.
 

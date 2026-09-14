@@ -3,6 +3,7 @@ from __future__ import annotations
 import importlib.util
 import json
 import sqlite3
+from contextlib import closing
 from pathlib import Path
 
 import pytest
@@ -165,7 +166,7 @@ def test_query_index_keeps_exact_ccr_priority_without_alias(tmp_path: Path) -> N
     root = _write_operational_fixture_corpus(tmp_path)
     database_path = root / "data" / "structured_output" / "commons.sqlite3"
     build_index(root=root, database_path=database_path, rebuild=True)
-    with sqlite3.connect(database_path) as connection:
+    with closing(sqlite3.connect(database_path)) as connection, connection:
         connection.execute("DELETE FROM aliases WHERE geode_id = ?", ("5_CCR_1001-9",))
 
     results = query_index(database_path, "5 CCR 1001-9", limit=3)
