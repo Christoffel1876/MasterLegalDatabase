@@ -6,7 +6,7 @@ answer_safe: false
 
 # Manual source/review inventory
 
-70 custody rows; 35 have an explicit review link and 35 have no allowlisted review link.
+70 custody rows; 36 have an explicit review link and 34 have no allowlisted review link.
 These are source-custody counts, not statewide coverage or current-law readiness.
 
 From the repository root:
@@ -76,7 +76,7 @@ python -m geode.pipeline.manual_review_inventory --root . --check
 | el-paso-boh-bylaws-sd011 | CO-COUNTY-EL_PASO | checked_passages |
 | el-paso-boh-bylaws-spanish-sd011 | CO-COUNTY-EL_PASO | checked_passages |
 | el-paso-boh-ehs-fees-spanish-sd011 | CO-COUNTY-EL_PASO | checked_tables |
-| colorado-springs-code-services-fees-2015-atlas-directed | CO-MUNICIPAL-COLORADO_SPRINGS | metadata only |
+| colorado-springs-code-services-fees-2015-atlas-directed | CO-MUNICIPAL-COLORADO_SPRINGS | checked_tables |
 | colorado-springs-construction-fees-atlas-directed | CO-MUNICIPAL-COLORADO_SPRINGS | checked_tables |
 | douglas-ehs-fees-atlas-directed | CO-COUNTY-DOUGLAS | checked_tables |
 | pueblo-planning-fees-atlas-directed | CO-MUNICIPAL-PUEBLO | checked_tables |

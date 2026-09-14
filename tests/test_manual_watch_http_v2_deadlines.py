@@ -150,7 +150,9 @@ def test_real_slow_response_headers_obey_transport_deadline(monkeypatch) -> None
                             SimpleNamespace(stdout=b'["8.8.8.8"]'))
         monkeypatch.setattr(g.socket, 'create_connection', lambda *a, **k: reader)
         monkeypatch.setattr(g.ssl, 'create_default_context', lambda **k:
-                            SimpleNamespace(wrap_socket=lambda sock, **kwargs: sock))
+                            SimpleNamespace(verify_mode=g.ssl.CERT_REQUIRED,
+                                            check_hostname=True,
+                                            wrap_socket=lambda sock, **kwargs: sock))
         before = timers()
         start = time.monotonic()
         with pytest.raises(TimeoutError):

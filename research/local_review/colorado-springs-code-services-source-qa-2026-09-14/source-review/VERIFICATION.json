@@ -1,0 +1,55 @@
+{
+  "status": "focused_checks_passed_before_seal",
+  "qa": {
+    "path": "SOURCE_QA.json",
+    "sha256": "b79180f72ba3ac542981f2ce09bfcb0b51ad14358a5f4e7382cf9767e3917b02",
+    "size_bytes": 475650
+  },
+  "schema_asset": {
+    "path": "SOURCE_QA.schema.json",
+    "sha256": "168ef2813ef51c6199c39637d6de7569e72949c28edada1d434cb7425645937b",
+    "size_bytes": 9170
+  },
+  "tests": {
+    "argv": [
+      "/Users/mcoors/Documents/Project Geode/.geode-venv/bin/python",
+      "-B",
+      "-m",
+      "pytest",
+      "-p",
+      "no:cacheprovider",
+      "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-14/plato-cs-code-fees-qa/test_review.py",
+      "-q"
+    ],
+    "started_at": "2026-09-14T20:36:06.958218+00:00",
+    "finished_at": "2026-09-14T20:36:10.235099+00:00",
+    "exit_code": 0,
+    "output": {
+      "path": "tests-final.log",
+      "sha256": "d6b904a1ce31e1134a8138752764e1e9a86525081f08d31f5a8c3406d5fcaa0e",
+      "size_bytes": 851
+    }
+  },
+  "structural_verification": {
+    "argv": [
+      "/Users/mcoors/Documents/Project Geode/.geode-venv/bin/python",
+      "-B",
+      "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-14/plato-cs-code-fees-qa/verify_review.py",
+      "--unsealed"
+    ],
+    "started_at": "2026-09-14T20:36:10.239980+00:00",
+    "finished_at": "2026-09-14T20:36:12.196648+00:00",
+    "exit_code": 0,
+    "output": {
+      "path": "verify-before-seal.log",
+      "sha256": "040c428b4da17a5e557d7354168b03d7438c51e6c6a3d857700808859dd94bc8",
+      "size_bytes": 171
+    }
+  },
+  "scope": "7 source pages, 18343 unchanged native bytes, 197 fee associations, 53 two-column rows, 15 contexts, 10 definitions, 14 pixel crops; 33 tests.",
+  "limitations": [
+    "No new HTTP, OCR or canonical writes. No maintained suite repeated.",
+    "Five SWIG warnings plus a shutdown warning; source currentness unverified.",
+    "A separate read-only closed-seal invocation is required after publication."
+  ]
+}

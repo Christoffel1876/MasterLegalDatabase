@@ -348,6 +348,8 @@ def test_production_tls_failure_closes_socket(monkeypatch):
         def settimeout(self,n):pass
         def close(self):closed.append(True)
     class Context:
+        verify_mode = g.ssl.CERT_REQUIRED
+        check_hostname = True
         def wrap_socket(self,*a,**k):raise g.ssl.SSLError('fixture')
     monkeypatch.setattr(g.subprocess,'run',lambda *a,**k:SimpleNamespace(stdout=b'["8.8.8.8"]'))
     monkeypatch.setattr(g.socket,'create_connection',lambda *a,**k:Sock())
