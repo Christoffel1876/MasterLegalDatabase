@@ -1,0 +1,92 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact fixture bytes with only the repository prefix normalized.",
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "proposed_equal": {
+          "title": "Proposed Equal",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "source_id",
+        "path",
+        "sha256",
+        "size_bytes",
+        "proposed_equal"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Actual measured normal-output preservation.",
+  "properties": {
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "original_script_sha256": {
+      "title": "Original Script Sha256",
+      "type": "string"
+    },
+    "proposed_script_sha256": {
+      "title": "Proposed Script Sha256",
+      "type": "string"
+    },
+    "assets": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Assets",
+      "type": "array"
+    },
+    "schema_equal": {
+      "title": "Schema Equal",
+      "type": "boolean"
+    },
+    "public_requests": {
+      "default": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "production_writes": {
+      "default": 0,
+      "title": "Production Writes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "started_at",
+    "completed_at",
+    "original_script_sha256",
+    "proposed_script_sha256",
+    "assets",
+    "schema_equal"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

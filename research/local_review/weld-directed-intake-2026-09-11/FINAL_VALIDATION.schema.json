@@ -1,0 +1,199 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "File identity; containing fields state its package or repository scope.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "CorpusResult": {
+      "additionalProperties": false,
+      "properties": {
+        "checked_at": {
+          "format": "date-time",
+          "title": "Checked At",
+          "type": "string"
+        },
+        "exit_code": {
+          "const": 1,
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "status": {
+          "const": "failed_with_two_inherited_errors",
+          "title": "Status",
+          "type": "string"
+        },
+        "inherited_issue_count": {
+          "const": 2,
+          "title": "Inherited Issue Count",
+          "type": "integer"
+        },
+        "affected_paths": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Affected Paths",
+          "type": "array"
+        },
+        "result_basis": {
+          "const": "root_report_and_preserved_execution_log",
+          "title": "Result Basis",
+          "type": "string"
+        },
+        "new_issue_reported": {
+          "const": false,
+          "title": "New Issue Reported",
+          "type": "boolean"
+        },
+        "log": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "checked_at",
+        "exit_code",
+        "status",
+        "inherited_issue_count",
+        "affected_paths",
+        "result_basis",
+        "new_issue_reported",
+        "log"
+      ],
+      "title": "CorpusResult",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "validated_at": {
+      "format": "date-time",
+      "title": "Validated At",
+      "type": "string"
+    },
+    "status": {
+      "const": "passed_transaction_and_portable_checks",
+      "title": "Status",
+      "type": "string"
+    },
+    "receipt": {
+      "$ref": "#/$defs/Asset"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "raw_manifest_records": {
+      "const": 40,
+      "title": "Raw Manifest Records",
+      "type": "integer"
+    },
+    "ledger_records": {
+      "const": 41,
+      "title": "Ledger Records",
+      "type": "integer"
+    },
+    "physical_pages": {
+      "const": 8,
+      "title": "Physical Pages",
+      "type": "integer"
+    },
+    "native_bytes": {
+      "const": 16651,
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "source_reviews_copied_unchanged": {
+      "const": 71,
+      "title": "Source Reviews Copied Unchanged",
+      "type": "integer"
+    },
+    "live_repository_validation": {
+      "const": "passed",
+      "title": "Live Repository Validation",
+      "type": "string"
+    },
+    "relocated_portable_validation": {
+      "const": "passed_with_original_workspace_reads_denied",
+      "title": "Relocated Portable Validation",
+      "type": "string"
+    },
+    "rejected_mutations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rejected Mutations",
+      "type": "array"
+    },
+    "full_corpus_validation": {
+      "$ref": "#/$defs/CorpusResult"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "coverage_or_rule_unit_changes": {
+      "const": "none",
+      "title": "Coverage Or Rule Unit Changes",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "validated_at",
+    "status",
+    "receipt",
+    "files",
+    "raw_manifest_records",
+    "ledger_records",
+    "physical_pages",
+    "native_bytes",
+    "source_reviews_copied_unchanged",
+    "live_repository_validation",
+    "relocated_portable_validation",
+    "rejected_mutations",
+    "full_corpus_validation",
+    "legal_currentness",
+    "coverage_or_rule_unit_changes",
+    "limitations"
+  ],
+  "title": "Closure",
+  "type": "object"
+}

@@ -1,0 +1,549 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "File identity; containing fields state its package or repository scope.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Copy": {
+      "additionalProperties": false,
+      "description": "Unchanged audit input copied into the portable package.",
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "frozen": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "original_path",
+        "frozen"
+      ],
+      "title": "Copy",
+      "type": "object"
+    },
+    "DateRole": {
+      "additionalProperties": false,
+      "description": "A source-stated date, never independently certified legal effect.",
+      "properties": {
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "review_pointer": {
+          "title": "Review Pointer",
+          "type": "string"
+        },
+        "independent_legal_event_verification": {
+          "const": false,
+          "title": "Independent Legal Event Verification",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "value",
+        "role",
+        "review_pointer",
+        "independent_legal_event_verification"
+      ],
+      "title": "DateRole",
+      "type": "object"
+    },
+    "Reconciliation": {
+      "additionalProperties": false,
+      "description": "Measured narrow reconciliation result, with unrelated history retained.",
+      "properties": {
+        "status": {
+          "enum": [
+            "dry_run",
+            "updated",
+            "no_change"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "added_intake_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Added Intake Ids",
+          "type": "array"
+        },
+        "ledger_records_before": {
+          "title": "Ledger Records Before",
+          "type": "integer"
+        },
+        "ledger_records_after": {
+          "title": "Ledger Records After",
+          "type": "integer"
+        },
+        "report_needs_update": {
+          "title": "Report Needs Update",
+          "type": "boolean"
+        },
+        "raw_manifest_records": {
+          "const": 40,
+          "title": "Raw Manifest Records",
+          "type": "integer"
+        },
+        "missing_ledger_only_originals": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Ledger Only Originals",
+          "type": "array"
+        }
+      },
+      "required": [
+        "status",
+        "added_intake_ids",
+        "ledger_records_before",
+        "ledger_records_after",
+        "report_needs_update",
+        "raw_manifest_records",
+        "missing_ledger_only_originals"
+      ],
+      "title": "Reconciliation",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "description": "Reviewed scope and preserved HTTP/archival custody for one original.",
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-WELD",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "intake_id": {
+          "title": "Intake Id",
+          "type": "string"
+        },
+        "source_role": {
+          "enum": [
+            "county_zoning_amendment_instrument",
+            "county_environmental_health_services_fee_schedule"
+          ],
+          "title": "Source Role",
+          "type": "string"
+        },
+        "staged_original": {
+          "$ref": "#/$defs/Asset"
+        },
+        "canonical_original": {
+          "$ref": "#/$defs/Asset"
+        },
+        "exact_requested_url": {
+          "title": "Exact Requested Url",
+          "type": "string"
+        },
+        "exact_final_url": {
+          "title": "Exact Final Url",
+          "type": "string"
+        },
+        "http_started_at": {
+          "format": "date-time",
+          "title": "Http Started At",
+          "type": "string"
+        },
+        "http_completed_at": {
+          "format": "date-time",
+          "title": "Http Completed At",
+          "type": "string"
+        },
+        "http_status": {
+          "const": 200,
+          "title": "Http Status",
+          "type": "integer"
+        },
+        "tls_verified": {
+          "const": true,
+          "title": "Tls Verified",
+          "type": "boolean"
+        },
+        "redirects_followed": {
+          "const": 0,
+          "title": "Redirects Followed",
+          "type": "integer"
+        },
+        "repository_received_at": {
+          "format": "date-time",
+          "title": "Repository Received At",
+          "type": "string"
+        },
+        "acquisition_method": {
+          "const": "manual_official_download",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "acquisition_description": {
+          "title": "Acquisition Description",
+          "type": "string"
+        },
+        "access_receipt": {
+          "$ref": "#/$defs/Asset"
+        },
+        "public_headers": {
+          "$ref": "#/$defs/Asset"
+        },
+        "original_header_identity": {
+          "$ref": "#/$defs/Asset"
+        },
+        "header_derivation": {
+          "title": "Header Derivation",
+          "type": "string"
+        },
+        "reviewed_source": {
+          "$ref": "#/$defs/Asset"
+        },
+        "reviewed_source_schema": {
+          "$ref": "#/$defs/Asset"
+        },
+        "reviewed_source_directory": {
+          "title": "Reviewed Source Directory",
+          "type": "string"
+        },
+        "physical_pages": {
+          "enum": [
+            3,
+            5
+          ],
+          "title": "Physical Pages",
+          "type": "integer"
+        },
+        "native_bytes": {
+          "enum": [
+            7367,
+            9284
+          ],
+          "title": "Native Bytes",
+          "type": "integer"
+        },
+        "legacy_registry_or_container_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Legacy Registry Or Container Ids",
+          "type": "array"
+        },
+        "source_dates": {
+          "items": {
+            "$ref": "#/$defs/DateRole"
+          },
+          "title": "Source Dates",
+          "type": "array"
+        },
+        "legal_adoption_date_independently_verified": {
+          "title": "Legal Adoption Date Independently Verified",
+          "type": "null"
+        },
+        "legal_effective_date_independently_verified": {
+          "title": "Legal Effective Date Independently Verified",
+          "type": "null"
+        },
+        "source_publication_date_independently_verified": {
+          "title": "Source Publication Date Independently Verified",
+          "type": "null"
+        },
+        "reviewed_scope_qualifications": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reviewed Scope Qualifications",
+          "type": "array"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "pipeline_status": {
+          "const": "archived_pending_pipeline",
+          "title": "Pipeline Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "authority_id",
+        "intake_id",
+        "source_role",
+        "staged_original",
+        "canonical_original",
+        "exact_requested_url",
+        "exact_final_url",
+        "http_started_at",
+        "http_completed_at",
+        "http_status",
+        "tls_verified",
+        "redirects_followed",
+        "repository_received_at",
+        "acquisition_method",
+        "acquisition_description",
+        "access_receipt",
+        "public_headers",
+        "original_header_identity",
+        "header_derivation",
+        "reviewed_source",
+        "reviewed_source_schema",
+        "reviewed_source_directory",
+        "physical_pages",
+        "native_bytes",
+        "legacy_registry_or_container_ids",
+        "source_dates",
+        "legal_adoption_date_independently_verified",
+        "legal_effective_date_independently_verified",
+        "source_publication_date_independently_verified",
+        "reviewed_scope_qualifications",
+        "legal_currentness",
+        "pipeline_status"
+      ],
+      "title": "Source",
+      "type": "object"
+    },
+    "Transaction": {
+      "additionalProperties": false,
+      "description": "Before and after bytes and a canonical preimage snapshot.",
+      "properties": {
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "before": {
+          "$ref": "#/$defs/Asset"
+        },
+        "after": {
+          "$ref": "#/$defs/Asset"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "repository_path",
+        "before",
+        "after",
+        "snapshot"
+      ],
+      "title": "Transaction",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Completed intake with portable source, audit and transaction evidence.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "status": {
+      "const": "completed_archived_pending_pipeline",
+      "title": "Status",
+      "type": "string"
+    },
+    "authorized_by": {
+      "const": "root internal go-ahead after source-role reconciliation",
+      "title": "Authorized By",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "record_stream": {
+      "$ref": "#/$defs/Asset"
+    },
+    "provenance_stream": {
+      "$ref": "#/$defs/Asset"
+    },
+    "record_schema": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_schema": {
+      "$ref": "#/$defs/Asset"
+    },
+    "transactions": {
+      "items": {
+        "$ref": "#/$defs/Transaction"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Transactions",
+      "type": "array"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Sources",
+      "type": "array"
+    },
+    "audit_copies": {
+      "items": {
+        "$ref": "#/$defs/Copy"
+      },
+      "title": "Audit Copies",
+      "type": "array"
+    },
+    "payloads": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Payloads",
+      "type": "array"
+    },
+    "preparation_preimages": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Preparation Preimages",
+      "type": "array"
+    },
+    "raw_manifest_before_records": {
+      "const": 38,
+      "title": "Raw Manifest Before Records",
+      "type": "integer"
+    },
+    "raw_manifest_after_records": {
+      "const": 40,
+      "title": "Raw Manifest After Records",
+      "type": "integer"
+    },
+    "ledger_before_records": {
+      "const": 39,
+      "title": "Ledger Before Records",
+      "type": "integer"
+    },
+    "ledger_after_records": {
+      "const": 41,
+      "title": "Ledger After Records",
+      "type": "integer"
+    },
+    "raw_existing_prefix_unchanged": {
+      "const": true,
+      "title": "Raw Existing Prefix Unchanged",
+      "type": "boolean"
+    },
+    "ledger_existing_prefix_unchanged": {
+      "const": true,
+      "title": "Ledger Existing Prefix Unchanged",
+      "type": "boolean"
+    },
+    "ordinary_raw_files_screened_before": {
+      "const": 542,
+      "title": "Ordinary Raw Files Screened Before",
+      "type": "integer"
+    },
+    "matching_size_raw_files_before": {
+      "const": 0,
+      "title": "Matching Size Raw Files Before",
+      "type": "integer"
+    },
+    "other_raw_files_unchanged": {
+      "const": true,
+      "title": "Other Raw Files Unchanged",
+      "type": "boolean"
+    },
+    "before_reconciliation": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Reconciliation"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "after_reconciliation": {
+      "$ref": "#/$defs/Reconciliation"
+    },
+    "idempotency_reconciliation": {
+      "$ref": "#/$defs/Reconciliation"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "coverage_or_rule_unit_changes": {
+      "const": "none",
+      "title": "Coverage Or Rule Unit Changes",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "authorized_by",
+    "completed_at",
+    "record_stream",
+    "provenance_stream",
+    "record_schema",
+    "source_schema",
+    "transactions",
+    "sources",
+    "audit_copies",
+    "payloads",
+    "preparation_preimages",
+    "raw_manifest_before_records",
+    "raw_manifest_after_records",
+    "ledger_before_records",
+    "ledger_after_records",
+    "raw_existing_prefix_unchanged",
+    "ledger_existing_prefix_unchanged",
+    "ordinary_raw_files_screened_before",
+    "matching_size_raw_files_before",
+    "other_raw_files_unchanged",
+    "before_reconciliation",
+    "after_reconciliation",
+    "idempotency_reconciliation",
+    "legal_currentness",
+    "coverage_or_rule_unit_changes",
+    "limitations"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

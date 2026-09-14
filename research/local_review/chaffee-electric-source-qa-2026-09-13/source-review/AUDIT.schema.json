@@ -1,0 +1,332 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact relative file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "description": "Auditor observation, distinct from original author's claims.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "classification": {
+          "enum": [
+            "structural_omission",
+            "qualified_printed_glyph",
+            "confirmed_scope"
+          ],
+          "title": "Classification",
+          "type": "string"
+        },
+        "original_evidence": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "title": "Original Evidence",
+          "type": "array"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "disposition": {
+          "title": "Disposition",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "classification",
+        "original_evidence",
+        "description",
+        "disposition"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "Fragment": {
+      "additionalProperties": false,
+      "description": "Complete table fragment with original column associations and markup.",
+      "properties": {
+        "table_id": {
+          "title": "Table Id",
+          "type": "string"
+        },
+        "block_id": {
+          "title": "Block Id",
+          "type": "string"
+        },
+        "page": {
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "rows": {
+          "items": {
+            "$ref": "#/$defs/Row"
+          },
+          "title": "Rows",
+          "type": "array"
+        }
+      },
+      "required": [
+        "table_id",
+        "block_id",
+        "page",
+        "rows"
+      ],
+      "title": "Fragment",
+      "type": "object"
+    },
+    "Row": {
+      "additionalProperties": false,
+      "description": "One actual data row, heading row or explicit editorial merged-cell rendering.",
+      "properties": {
+        "kind": {
+          "enum": [
+            "header",
+            "data",
+            "merged_heading_with_editorial_placeholder"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "cells": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "title": "Cells",
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "cells"
+      ],
+      "title": "Row",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "description": "Half-open bytes in the selected transcript, with literal content retained.",
+      "properties": {
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "exclusiveMinimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "text",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Source-fidelity review acceptance is bounded and never current-law approval.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "reviewer": {
+      "const": "Plato",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "accepted_scoped_revision_pending_root_integration",
+      "title": "Status",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "chaffee-electric-ordinance-2026-01-atlas-directed",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-CHAFFEE",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_review": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_transcript": {
+      "$ref": "#/$defs/Asset"
+    },
+    "selected_review": {
+      "$ref": "#/$defs/Asset"
+    },
+    "selected_schema": {
+      "$ref": "#/$defs/Asset"
+    },
+    "selected_transcript": {
+      "$ref": "#/$defs/Asset"
+    },
+    "copy_receipt": {
+      "$ref": "#/$defs/Asset"
+    },
+    "revision_receipt": {
+      "$ref": "#/$defs/Asset"
+    },
+    "inspection": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_draft_files_preserved": {
+      "const": 70,
+      "title": "Original Draft Files Preserved",
+      "type": "integer"
+    },
+    "full_pages_inspected": {
+      "const": 7,
+      "title": "Full Pages Inspected",
+      "type": "integer"
+    },
+    "supplied_crops_inspected": {
+      "const": 9,
+      "title": "Supplied Crops Inspected",
+      "type": "integer"
+    },
+    "additional_crops_inspected": {
+      "title": "Additional Crops Inspected",
+      "type": "integer"
+    },
+    "logical_tables": {
+      "const": 7,
+      "title": "Logical Tables",
+      "type": "integer"
+    },
+    "physical_fragments": {
+      "const": 8,
+      "title": "Physical Fragments",
+      "type": "integer"
+    },
+    "data_rows": {
+      "const": 12,
+      "title": "Data Rows",
+      "type": "integer"
+    },
+    "table_fragments": {
+      "items": {
+        "$ref": "#/$defs/Fragment"
+      },
+      "title": "Table Fragments",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "external_bot_reports_consulted": {
+      "const": false,
+      "title": "External Bot Reports Consulted",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "reviewer",
+    "recorded_at",
+    "status",
+    "source_id",
+    "authority_id",
+    "source",
+    "original_review",
+    "original_transcript",
+    "selected_review",
+    "selected_schema",
+    "selected_transcript",
+    "copy_receipt",
+    "revision_receipt",
+    "inspection",
+    "original_draft_files_preserved",
+    "full_pages_inspected",
+    "supplied_crops_inspected",
+    "additional_crops_inspected",
+    "logical_tables",
+    "physical_fragments",
+    "data_rows",
+    "table_fragments",
+    "findings",
+    "limitations",
+    "legal_currentness",
+    "answer_safe",
+    "external_bot_reports_consulted"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

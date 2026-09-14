@@ -1,0 +1,138 @@
+def pointer(value: Any, path: str) -> Any:
+    """Resolve one local JSON pointer, with no external reference expansion."""
+    if not path.startswith('/'):
+        raise ValueError('Expected an absolute JSON pointer')
+    for part in path[1:].split('/'):
+        key = part.replace('~1', '/').replace('~0', '~')
+        value = value[int(key)] if isinstance(value, list) else value[key]
+    return value
+
+
+def evidence_value(root: Path, evidence: Evidence) -> Any:
+    """Validate a complete file while streaming JSONL, then select the declared row."""
+    if evidence.jsonl_row is None:
+        value = json.loads(checked_bytes(root, evidence.artifact))
+    else:
+        digest = hashlib.sha256()
+        length = 0
+        selected = None
+        path = g.ordinary(root / evidence.artifact.path)
+        with path.open('rb') as handle:
+            for index, raw in enumerate(handle):
+                digest.update(raw)
+                length += len(raw)
+                row = json.loads(raw)
+                if index == evidence.jsonl_row:
+                    selected = row
+        if (digest.hexdigest() != evidence.artifact.sha256 or
+                length != evidence.artifact.size_bytes or selected is None):
+            raise ValueError('JSONL custody file/selected row differs')
+        value = selected
+    for path in evidence.pointers:
+        pointer(value, path)
+    return value
+
+
+def greeley_anchor(root: Path, source: SourceBinding) -> None:
+    """Require the exact retained city anchor before admitting an external CDN URL."""
+    proof = next(e for e in source.referral_evidence
+                 if e.artifact.path.endswith('/PRESERVATION.json'))
+    data = evidence_value(root, proof)
+    index = 0 if source.record_id == 'greeley-building-fees-sd008-06' else 1
+    item = data['sources'][index]
+    anchor = item['anchor']
+    base = (root / proof.artifact.path).parent
+    parent = checked_bytes(base, g.Ref.model_validate(anchor['parent']))
+    start, end = anchor['exact_source_start_byte'], anchor['exact_source_end_byte']
+    exact = parent[start:end]
+    if (not 0 <= start < end <= len(parent) or
+            exact.decode('utf-8') != anchor['exact_anchor_html'] or
+            hashlib.sha256(exact).hexdigest() != anchor['anchor_html_sha256'] or
+            anchor['href'] != source.proposed_url or
+            anchor['parent_url'] != source.official_parent_url):
+        raise ValueError('Greeley city referral bytes/URL differ')
+    nodes = BeautifulSoup(exact, 'html.parser').find_all('a')
+    if (len(nodes) != 1 or nodes[0].get('href') != source.proposed_url or
+            ' '.join(nodes[0].get_text(' ', strip=True).split()) != anchor['normalized_dom_text']):
+        raise ValueError('Greeley exact anchor association differs')
+
+
+def validate_source(root: Path, source: SourceBinding,
+                    records: dict[str, ManualSourceIntakeRecord], hashes: dict[str, str]) -> None:
+    """Cross-check pinned bytes, ownership, receipt roles and bounded source-review metadata."""
+    row = records.get(source.record_id)
+    if (row is None or hashes[source.record_id] != source.raw_manifest_exact_line_sha256 or
+            row.intake_id != source.intake_id or row.archive_path != source.baseline.path or
+            row.sha256 != source.baseline.sha256 or row.size_bytes != source.baseline.size_bytes or
+            row.layer_id != source.layer_id or row.source_format != 'pdf' or
+            row.received_at != source.repository_received_at or
+            row.official_source_url != source.historical_raw_url or
+            row.acquisition_method != source.historical_acquisition_method):
+        raise ValueError('Canonical source/intake binding mismatch')
+    prefix = '_RAW_ARCHIVE/manual_intake/' + source.layer_id + '/' + source.record_id + '/'
+    if not source.baseline.path.startswith(prefix):
+        raise ValueError('Unexpected canonical original path')
+    if pdf_pages(checked_bytes(root, source.baseline)) != source.baseline_pages:
+        raise ValueError('Canonical PDF structure differs')
+    authority = evidence_value(root, source.authority_evidence)
+    if pointer(authority, '/authority_id') != source.authority_id:
+        raise ValueError('Source authority mismatch')
+    custody = evidence_value(root, source.custody_evidence)
+    digest, status, finished = (pointer(custody, p) for p in source.custody_evidence.pointers)
+    if (digest != source.baseline.sha256 or status != 200 or
+            datetime.fromisoformat(finished.replace('Z', '+00:00')) != source.http_finished_at):
+        raise ValueError('Original HTTP/source binding mismatch')
+    if source.record_id.startswith('greeley-'):
+        requested, final = custody['requested_url'], custody['effective_url']
+        started = custody['started_at']
+        if not custody['body_complete'] or custody['returncode'] != 0:
+            raise ValueError('Greeley later response was not complete')
+        greeley_anchor(root, source)
+    elif source.record_id == 'arapahoe-planning-fees-sd002-14':
+        requested, final = custody['requested_url'], custody['final_url']
+        started = None
+        if custody['error'] is not None or custody['redirects']:
+            raise ValueError('Arapahoe response failure or changed routing')
+    else:
+        requested, final = custody['exact_requested_url'], custody['exact_final_url']
+        started = custody['http_started_at']
+        if not custody['tls_verified']:
+            raise ValueError('Original transport trust differs')
+    actual_start = datetime.fromisoformat(started.replace('Z', '+00:00')) if started else None
+    if (requested != source.proposed_url or final != source.retained_final_url or
+            actual_start != source.http_started_at):
+        raise ValueError('Recorded request URL/timing mismatch')
+    review = schema_check(checked_bytes(root, source.review_evidence.artifact),
+                          checked_bytes(root, source.review_schema))
+    for path in source.review_evidence.pointers:
+        pointer(review, path)
+    for evidence in source.referral_evidence:
+        evidence_value(root, evidence)
+
+
+def load_plan(path: Path, *, root: Path | None = None,
+              catalog_path: Path | None = None) -> Plan:
+    """Validate a fixed selected pair; explicit paths support read-only staged preflight."""
+    inferred = repository_root(path)
+    root = inferred if root is None else root.absolute()
+    if not root.is_dir() or any(p.is_symlink() for p in (root, *root.parents)):
+        raise ValueError('Unsafe repository root')
+    plan = Plan.model_validate_json(g.ordinary(path).read_bytes())
+    if path.name != SELECTIONS[plan.batch_id].name:
+        raise ValueError('Batch filename/identity mismatch')
+    catalog_path = catalog_path or root / CATALOG
+    content = g.ordinary(catalog_path).read_bytes()
+    if hashlib.sha256(content).hexdigest() != CATALOG_SHA:
+        raise ValueError('Approved source catalog differs')
+    catalog = Catalog.model_validate_json(content)
+    sources = {s.record_id: s for s in catalog.sources}
+    if set(sources) != set(sum(BATCHES.values(), ())):
+        raise ValueError('Catalog source membership differs')
+    records, hashes, _ = manual_records(root)
+    for target in plan.targets:
+        if target.source != sources[target.source_id]:
+            raise ValueError('Source URL/ID/baseline or custody substitution refused')
+        validate_source(root, target.source, records, hashes)
+    return plan
+
+

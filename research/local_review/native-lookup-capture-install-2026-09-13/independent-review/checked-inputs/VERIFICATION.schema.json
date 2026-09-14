@@ -1,0 +1,190 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "One exact ordinary payload file, relative to the handoff root.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "TestRun": {
+      "additionalProperties": false,
+      "description": "A measured run bound to its actual implementation and unchanged log.",
+      "properties": {
+        "implementation_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Implementation Sha256",
+          "type": "string"
+        },
+        "log": {
+          "$ref": "#/$defs/Asset"
+        },
+        "passed": {
+          "minimum": 0,
+          "title": "Passed",
+          "type": "integer"
+        },
+        "failed": {
+          "minimum": 0,
+          "title": "Failed",
+          "type": "integer"
+        },
+        "deselected": {
+          "minimum": 0,
+          "title": "Deselected",
+          "type": "integer"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "implementation_sha256",
+        "log",
+        "passed",
+        "failed",
+        "deselected",
+        "qualification"
+      ],
+      "title": "TestRun",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Bounded technical results; no installation or legal-effect assertion.",
+  "properties": {
+    "frozen_at": {
+      "format": "date-time",
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "status": {
+      "const": "prepared_pending_independent_root_acceptance",
+      "title": "Status",
+      "type": "string"
+    },
+    "preimage": {
+      "$ref": "#/$defs/Asset"
+    },
+    "proposed": {
+      "$ref": "#/$defs/Asset"
+    },
+    "tests": {
+      "$ref": "#/$defs/Asset"
+    },
+    "documentation": {
+      "$ref": "#/$defs/Asset"
+    },
+    "historical_audit_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "measured_runs": {
+      "items": {
+        "$ref": "#/$defs/TestRun"
+      },
+      "title": "Measured Runs",
+      "type": "array"
+    },
+    "coverage": {
+      "$ref": "#/$defs/Asset"
+    },
+    "branch_inclusive_percent": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Branch Inclusive Percent",
+      "type": "number"
+    },
+    "original_classes_unchanged": {
+      "title": "Original Classes Unchanged",
+      "type": "integer"
+    },
+    "douglas_pueblo_functions_unchanged": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Douglas Pueblo Functions Unchanged",
+      "type": "array"
+    },
+    "main_function_unchanged": {
+      "const": true,
+      "title": "Main Function Unchanged",
+      "type": "boolean"
+    },
+    "normal_output_fixture_files": {
+      "const": 18,
+      "title": "Normal Output Fixture Files",
+      "type": "integer"
+    },
+    "source_schemas_unchanged": {
+      "const": true,
+      "title": "Source Schemas Unchanged",
+      "type": "boolean"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "production_writes": {
+      "const": 0,
+      "title": "Production Writes",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "frozen_at",
+    "status",
+    "preimage",
+    "proposed",
+    "tests",
+    "documentation",
+    "historical_audit_manifest",
+    "measured_runs",
+    "coverage",
+    "branch_inclusive_percent",
+    "original_classes_unchanged",
+    "douglas_pueblo_functions_unchanged",
+    "main_function_unchanged",
+    "normal_output_fixture_files",
+    "source_schemas_unchanged",
+    "public_requests",
+    "production_writes",
+    "legal_currentness",
+    "limitations"
+  ],
+  "title": "Verification",
+  "type": "object"
+}

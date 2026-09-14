@@ -1,0 +1,60 @@
+{
+  "additionalProperties": false,
+  "description": "Report a bounded value/field scan without disclosing removed credential values.",
+  "properties": {
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "verbatim_files_scanned": {
+      "const": 686,
+      "default": 686,
+      "title": "Verbatim Files Scanned",
+      "type": "integer"
+    },
+    "total_bytes_scanned": {
+      "minimum": 0,
+      "title": "Total Bytes Scanned",
+      "type": "integer"
+    },
+    "credential_values_checked": {
+      "minimum": 0,
+      "title": "Credential Values Checked",
+      "type": "integer"
+    },
+    "exact_retained_credential_value_matches": {
+      "const": 0,
+      "default": 0,
+      "title": "Exact Retained Credential Value Matches",
+      "type": "integer"
+    },
+    "sensitive_public_header_fields": {
+      "const": 0,
+      "default": 0,
+      "title": "Sensitive Public Header Fields",
+      "type": "integer"
+    },
+    "private_header_files_copied": {
+      "const": 0,
+      "default": 0,
+      "title": "Private Header Files Copied",
+      "type": "integer"
+    },
+    "scope": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Scope",
+      "type": "array"
+    }
+  },
+  "required": [
+    "checked_at",
+    "total_bytes_scanned",
+    "credential_values_checked",
+    "scope"
+  ],
+  "title": "PrivacyScan",
+  "type": "object"
+}

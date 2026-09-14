@@ -1,0 +1,392 @@
+{
+  "$defs": {
+    "Artifact": {
+      "additionalProperties": false,
+      "description": "Identify immutable local bytes within the selected repository.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Artifact",
+      "type": "object"
+    },
+    "Document": {
+      "additionalProperties": false,
+      "description": "Select one JSON object or a zero-based JSONL row without executing package code.",
+      "properties": {
+        "artifact": {
+          "$ref": "#/$defs/Artifact"
+        },
+        "jsonl_row": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Jsonl Row"
+        }
+      },
+      "required": [
+        "artifact"
+      ],
+      "title": "Document",
+      "type": "object"
+    },
+    "HttpBinding": {
+      "additionalProperties": false,
+      "description": "Identify a recorded successful HTTP acquisition, not a repository intake time.",
+      "properties": {
+        "document": {
+          "$ref": "#/$defs/Document"
+        },
+        "sha_pointer": {
+          "title": "Sha Pointer",
+          "type": "string"
+        },
+        "status_pointer": {
+          "title": "Status Pointer",
+          "type": "string"
+        },
+        "time_pointer": {
+          "title": "Time Pointer",
+          "type": "string"
+        }
+      },
+      "required": [
+        "document",
+        "sha_pointer",
+        "status_pointer",
+        "time_pointer"
+      ],
+      "title": "HttpBinding",
+      "type": "object"
+    },
+    "ReviewBinding": {
+      "additionalProperties": false,
+      "description": "Recorded review evidence; scopes are never summed across overlapping artifacts.",
+      "properties": {
+        "artifact": {
+          "$ref": "#/$defs/Artifact"
+        },
+        "schema_artifact": {
+          "$ref": "#/$defs/Artifact"
+        },
+        "review_kind": {
+          "enum": [
+            "native_candidate",
+            "checked_passages",
+            "checked_tables",
+            "source_structure"
+          ],
+          "title": "Review Kind",
+          "type": "string"
+        },
+        "review_source_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Review Source Id"
+        },
+        "scope_fields": {
+          "additionalProperties": true,
+          "title": "Scope Fields",
+          "type": "object"
+        },
+        "limitations": {
+          "additionalProperties": true,
+          "title": "Limitations",
+          "type": "object"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        },
+        "scope_status": {
+          "const": "as_recorded_not_global_certification",
+          "default": "as_recorded_not_global_certification",
+          "title": "Scope Status",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "answer_safe": {
+          "const": false,
+          "default": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "artifact",
+        "schema_artifact",
+        "review_kind",
+        "review_source_id",
+        "scope_fields",
+        "limitations",
+        "note"
+      ],
+      "title": "ReviewBinding",
+      "type": "object"
+    },
+    "SourceRow": {
+      "additionalProperties": false,
+      "description": "One canonical manual source with retained provenance and nullable review evidence.",
+      "properties": {
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "intake_id": {
+          "title": "Intake Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "enum": [
+            "08_County_Authorities",
+            "10_Municipal_Authorities"
+          ],
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Artifact"
+        },
+        "official_source_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Official Source Url"
+        },
+        "acquisition_method": {
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "intake_received_at": {
+          "format": "date-time",
+          "title": "Intake Received At",
+          "type": "string"
+        },
+        "verified_http_acquired_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Verified Http Acquired At"
+        },
+        "verified_http_evidence": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/HttpBinding"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reported_acquisition": {
+          "additionalProperties": true,
+          "title": "Reported Acquisition",
+          "type": "object"
+        },
+        "source_roles": {
+          "additionalProperties": true,
+          "title": "Source Roles",
+          "type": "object"
+        },
+        "authority_evidence": {
+          "$ref": "#/$defs/Document"
+        },
+        "provenance_qualifications": {
+          "additionalProperties": true,
+          "title": "Provenance Qualifications",
+          "type": "object"
+        },
+        "custody_note": {
+          "title": "Custody Note",
+          "type": "string"
+        },
+        "recorded_intake_status": {
+          "title": "Recorded Intake Status",
+          "type": "string"
+        },
+        "reviews": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/ReviewBinding"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Reviews"
+        },
+        "review_status": {
+          "enum": [
+            "metadata_only_review_unknown",
+            "explicit_review_artifacts_linked"
+          ],
+          "title": "Review Status",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "answer_safe": {
+          "const": false,
+          "default": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "record_id",
+        "intake_id",
+        "authority_id",
+        "layer_id",
+        "source",
+        "official_source_url",
+        "acquisition_method",
+        "intake_received_at",
+        "verified_http_acquired_at",
+        "verified_http_evidence",
+        "reported_acquisition",
+        "source_roles",
+        "authority_evidence",
+        "provenance_qualifications",
+        "custody_note",
+        "recorded_intake_status",
+        "reviews",
+        "review_status"
+      ],
+      "title": "SourceRow",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Research bridge that preserves all custody rows without promoting legal reliance.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "plan": {
+      "$ref": "#/$defs/Artifact"
+    },
+    "manual_manifest": {
+      "$ref": "#/$defs/Artifact"
+    },
+    "unchanged_legacy_ledger": {
+      "$ref": "#/$defs/Artifact"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/SourceRow"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "rows_with_review": {
+      "title": "Rows With Review",
+      "type": "integer"
+    },
+    "rows_without_review": {
+      "title": "Rows Without Review",
+      "type": "integer"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "coverage_promotion": {
+      "const": false,
+      "default": false,
+      "title": "Coverage Promotion",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "plan",
+    "manual_manifest",
+    "unchanged_legacy_ledger",
+    "sources",
+    "rows_with_review",
+    "rows_without_review",
+    "limitations"
+  ],
+  "title": "Inventory",
+  "type": "object"
+}

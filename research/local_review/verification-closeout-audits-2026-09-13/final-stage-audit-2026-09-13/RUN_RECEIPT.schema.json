@@ -1,0 +1,255 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Check": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Command",
+          "type": "array"
+        },
+        "started_at": {
+          "title": "Started At",
+          "type": "string"
+        },
+        "finished_at": {
+          "title": "Finished At",
+          "type": "string"
+        },
+        "expected_exit": {
+          "title": "Expected Exit",
+          "type": "integer"
+        },
+        "actual_exit": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Actual Exit"
+        },
+        "timed_out": {
+          "title": "Timed Out",
+          "type": "boolean"
+        },
+        "stdout": {
+          "$ref": "#/$defs/Asset"
+        },
+        "stderr": {
+          "$ref": "#/$defs/Asset"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "errors": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Errors",
+          "type": "array"
+        },
+        "evidence_paths_checked": {
+          "title": "Evidence Paths Checked",
+          "type": "integer"
+        },
+        "observations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Observations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "command",
+        "started_at",
+        "finished_at",
+        "expected_exit",
+        "actual_exit",
+        "timed_out",
+        "stdout",
+        "stderr",
+        "passed",
+        "errors",
+        "evidence_paths_checked",
+        "observations"
+      ],
+      "title": "Check",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A receipt exists only after an operator actually invokes the harness.",
+  "properties": {
+    "status": {
+      "enum": [
+        "passed",
+        "failed",
+        "blocked"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "finished_at": {
+      "title": "Finished At",
+      "type": "string"
+    },
+    "archive_root": {
+      "title": "Archive Root",
+      "type": "string"
+    },
+    "output_root": {
+      "title": "Output Root",
+      "type": "string"
+    },
+    "commit_label": {
+      "title": "Commit Label",
+      "type": "string"
+    },
+    "harness": {
+      "$ref": "#/$defs/Asset"
+    },
+    "interpreter": {
+      "title": "Interpreter",
+      "type": "string"
+    },
+    "isolation": {
+      "enum": [
+        "sandbox_exec",
+        "unisolated_explicit"
+      ],
+      "title": "Isolation",
+      "type": "string"
+    },
+    "sandbox_profile": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Asset"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "isolation_scope": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Isolation Scope",
+      "type": "array"
+    },
+    "expected_inventory_sources": {
+      "title": "Expected Inventory Sources",
+      "type": "integer"
+    },
+    "expected_reviewed_sources": {
+      "title": "Expected Reviewed Sources",
+      "type": "integer"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/Check"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "archive_evidence_paths": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Archive Evidence Paths",
+      "type": "array"
+    },
+    "public_activity_requested": {
+      "const": false,
+      "default": false,
+      "title": "Public Activity Requested",
+      "type": "boolean"
+    },
+    "watch_execution_requested": {
+      "const": false,
+      "default": false,
+      "title": "Watch Execution Requested",
+      "type": "boolean"
+    },
+    "scheduling_requested": {
+      "const": false,
+      "default": false,
+      "title": "Scheduling Requested",
+      "type": "boolean"
+    },
+    "network_denied_for_child_processes": {
+      "title": "Network Denied For Child Processes",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "started_at",
+    "finished_at",
+    "archive_root",
+    "output_root",
+    "commit_label",
+    "harness",
+    "interpreter",
+    "isolation",
+    "sandbox_profile",
+    "isolation_scope",
+    "expected_inventory_sources",
+    "expected_reviewed_sources",
+    "checks",
+    "archive_evidence_paths",
+    "network_denied_for_child_processes",
+    "limitations"
+  ],
+  "title": "RunReceipt",
+  "type": "object"
+}

@@ -1,0 +1,184 @@
+{
+  "$defs": {
+    "Copy": {
+      "additionalProperties": false,
+      "description": "A byte-exact frozen copy of an explicit historical input.",
+      "properties": {
+        "original": {
+          "$ref": "#/$defs/HistoricalRef"
+        },
+        "frozen": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "original",
+        "frozen",
+        "role"
+      ],
+      "title": "Copy",
+      "type": "object"
+    },
+    "FileRef": {
+      "additionalProperties": false,
+      "description": "A confined immutable packet file.",
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    },
+    "HistoricalRef": {
+      "additionalProperties": false,
+      "description": "Exact original location, retained as history and never opened by this verifier.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "HistoricalRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Measured preparation and render QA, distinct from source transcription review.",
+  "properties": {
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_DISPATCHED",
+      "default": "PREPARED_NOT_DISPATCHED",
+      "title": "Status",
+      "type": "string"
+    },
+    "manifest": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "prior_activation": {
+      "$ref": "#/$defs/Copy"
+    },
+    "documents": {
+      "const": 3,
+      "default": 3,
+      "title": "Documents",
+      "type": "integer"
+    },
+    "physical_pages": {
+      "const": 13,
+      "default": 13,
+      "title": "Physical Pages",
+      "type": "integer"
+    },
+    "native_pages": {
+      "const": 13,
+      "default": 13,
+      "title": "Native Pages",
+      "type": "integer"
+    },
+    "candidate_packages": {
+      "const": 3,
+      "default": 3,
+      "title": "Candidate Packages",
+      "type": "integer"
+    },
+    "native_bytes": {
+      "exclusiveMinimum": 0,
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "render_qa_viewed": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Render Qa Viewed",
+      "type": "array"
+    },
+    "render_qa_scope": {
+      "const": "Complete PNG framing/legibility only; not a fresh text accuracy review.",
+      "default": "Complete PNG framing/legibility only; not a fresh text accuracy review.",
+      "title": "Render Qa Scope",
+      "type": "string"
+    },
+    "original_bytes_changed": {
+      "const": false,
+      "default": false,
+      "title": "Original Bytes Changed",
+      "type": "boolean"
+    },
+    "new_source_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "New Source Requests",
+      "type": "integer"
+    },
+    "dispatched": {
+      "const": false,
+      "default": false,
+      "title": "Dispatched",
+      "type": "boolean"
+    },
+    "source_accuracy_certified": {
+      "const": false,
+      "default": false,
+      "title": "Source Accuracy Certified",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "manifest",
+    "prior_activation",
+    "native_bytes",
+    "render_qa_viewed"
+  ],
+  "title": "CheckReceipt",
+  "type": "object"
+}

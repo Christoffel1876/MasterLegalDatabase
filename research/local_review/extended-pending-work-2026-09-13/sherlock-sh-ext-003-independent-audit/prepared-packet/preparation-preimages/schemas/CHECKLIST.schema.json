@@ -1,0 +1,104 @@
+{
+  "$defs": {
+    "ChecklistRow": {
+      "additionalProperties": false,
+      "description": "One category/authority row with explicit bounded-search status.",
+      "properties": {
+        "authority_id": {
+          "enum": [
+            "CO-COUNTY-CHAFFEE",
+            "CO-COUNTY-GUNNISON"
+          ],
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            "identity_service_area",
+            "codified_rules",
+            "adopted_changes",
+            "land_use_zoning",
+            "building_fire",
+            "permits_licenses",
+            "fees",
+            "taxes",
+            "health_environment",
+            "roads_utilities",
+            "enforcement_appeals",
+            "policies_guidance"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "candidate_found",
+            "searched_not_found",
+            "access_blocked",
+            "not_searched"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "action_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Action Ids",
+          "type": "array"
+        },
+        "candidate_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Candidate Ids",
+          "type": "array"
+        },
+        "notes": {
+          "title": "Notes",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "authority_id",
+        "category",
+        "status",
+        "action_ids",
+        "candidate_ids",
+        "notes"
+      ],
+      "title": "ChecklistRow",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Require all24 different authority/category combinations without implying complete coverage.",
+  "properties": {
+    "assignment_id": {
+      "const": "SH-EXT-003",
+      "default": "SH-EXT-003",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/ChecklistRow"
+      },
+      "maxItems": 24,
+      "minItems": 24,
+      "title": "Rows",
+      "type": "array"
+    }
+  },
+  "required": [
+    "rows"
+  ],
+  "title": "Checklist",
+  "type": "object"
+}

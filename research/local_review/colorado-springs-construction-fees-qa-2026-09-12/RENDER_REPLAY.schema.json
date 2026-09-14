@@ -1,0 +1,83 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "checked_at": {
+      "title": "Checked At",
+      "type": "string"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "renderer": {
+      "title": "Renderer",
+      "type": "string"
+    },
+    "renderer_version": {
+      "title": "Renderer Version",
+      "type": "string"
+    },
+    "command_options": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Command Options",
+      "type": "array"
+    },
+    "full_page_count": {
+      "title": "Full Page Count",
+      "type": "integer"
+    },
+    "byte_identical_images": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Byte Identical Images",
+      "type": "array"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    }
+  },
+  "required": [
+    "checked_at",
+    "source_sha256",
+    "renderer",
+    "renderer_version",
+    "command_options",
+    "full_page_count",
+    "byte_identical_images",
+    "scope"
+  ],
+  "title": "RenderReceipt",
+  "type": "object"
+}

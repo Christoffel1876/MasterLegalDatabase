@@ -1,0 +1,13 @@
+{
+  "source": "agent_transcript_jsonl_tool_use_input",
+  "transcript_line": 1764,
+  "description": "EB-PDF-019 Pass 2 compare",
+  "attachments": [
+    "/workspace/geode-019b/page-0001.png",
+    "/workspace/geode-019b/page-0002.png",
+    "/workspace/geode-019b/page-0003.png",
+    "/workspace/geode-019b/page-0004.png",
+    "/workspace/geode-019b/page-0005.png"
+  ],
+  "prompt": "You are executing EB-PDF-019 Pass 2 for Project Geode (Ebenezer / Grok Bot).\n\n## Context\nPass 1 FROZEN — do not modify:\n- PASS1_frozen.md SHA-256 d2b2aabb572951f86c61743ad387db4bba3de7e2477e2424e6fe7fc9d97f080c\n- PASS1_FREEZE_RECEIPT.json SHA-256 97b96a99e29ca04960c6d55f1515ed7613ba57d770585e71c6d447488f290c76\n- PASS1_NOTES.md SHA-256 c4195bd8ab1f70ab22db1061edcdbbae5a8f6626fda56c74b580163eb9a5f374\n- utc_start 2026-09-13T01:25:59Z; utc_freeze 2026-09-13T01:28:07Z\n- prior_exposure: fresh_attempt_after_interrupted_prior_pass1_with_no_surviving_artifacts (not blind)\n\n## Method\n- review_method: caption_mediated_source_first\n- visual_verification: pending_atlas_direct_image_review\n- NEVER call direct pixel or blind visual transcription\n- Re-disclose prior exposure and caption mediation in Pass2\n- Physical-page markers = packaging, not source-transcription errors\n\n## Assignment\n- EB-PDF-019 / weld-ordinance-26-01-atlas-directed / 5 pages\n- Workdir: /workspace/geode-019b/\n- page SHAs: 04de7735…b4b6, 09f6709e…bdc7, f025c5a7…4846, 68fab481…21c3, 468e7ed7…e5ef\n- candidate.txt expected SHA: 2ba00b91a33612e279a0553f5e573af795df27a11329d695ea307ea78ae2dfee\n- original.pdf: 2ba9073aa06420e41a5dce98fade56278df96729630f5d61d3ab1c910e839eb0\n- data-manifest digest: b9e843e783a65a238d1a7e1106a5d0a49ea08f7ffbb59b9ca02d841e7639a112\n- START_HERE: 35f5dbb4104c1cea73084fa3939228c91a7caf1339540a4033e431849122924f\n- Reviewer: Ebenezer (Grok Bot)\n- legal_currentness: not_verified\n- Hard stop 03:55 UTC; save crops/tool outputs if created\n\n## Rules\n- Verify candidate SHA; reinspect all 5 pages; compare to Pass1\n- Findings EB019-P2-NNN; Pass1 errata separate table only\n- Status completed_pending_atlas_verification if assisted procedure covered all 5 pages both passes\n- Do not open 018/020 materials beyond this candidate\n\n## Deliverables\n1. /workspace/geode-019b/PASS2_REVIEW.md\n2. /workspace/geode-019b/COMPLETION_RECEIPT.json\n3. Keep any Pass2 crops under crops/ or tool_outputs/\n\n## Report back\n- PASS2_REVIEW.md SHA-256\n- COMPLETION_RECEIPT.json SHA-256\n- critical/minor/unresolved counts\n- status + methods\n- PASS1 re-hash confirmation\n- Top findings\n- List of crop/tool_output files created\n"
+}

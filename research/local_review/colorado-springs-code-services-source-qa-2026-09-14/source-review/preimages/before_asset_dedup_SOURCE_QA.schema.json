@@ -1,0 +1,421 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "A byte-bound external packet asset or local audit payload.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Crop": {
+      "additionalProperties": false,
+      "description": "Exact pixel slice of an unchanged full source image.",
+      "properties": {
+        "asset": {
+          "$ref": "#/$defs/Asset"
+        },
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "pixel_box": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Pixel Box",
+          "type": "array"
+        },
+        "inspected_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Inspected At"
+        }
+      },
+      "required": [
+        "asset",
+        "page",
+        "pixel_box",
+        "inspected_at"
+      ],
+      "title": "Crop",
+      "type": "object"
+    },
+    "Line": {
+      "additionalProperties": false,
+      "description": "One complete native line, including its original final LF.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "start": {
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "title": "End",
+          "type": "integer"
+        },
+        "candidate_start": {
+          "title": "Candidate Start",
+          "type": "integer"
+        },
+        "candidate_end": {
+          "title": "Candidate End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bbox": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Bbox",
+          "type": "array"
+        },
+        "colors": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Colors",
+          "type": "array"
+        },
+        "visibility": {
+          "enum": [
+            "visible",
+            "white_encoded_not_visible"
+          ],
+          "title": "Visibility",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "page",
+        "start",
+        "end",
+        "candidate_start",
+        "candidate_end",
+        "text",
+        "sha256",
+        "bbox",
+        "colors",
+        "visibility"
+      ],
+      "title": "Line",
+      "type": "object"
+    },
+    "Paragraph": {
+      "additionalProperties": false,
+      "description": "Heading and body linked according to the rendered source layout.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "heading_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Heading Refs",
+          "type": "array"
+        },
+        "body_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Body Refs",
+          "type": "array"
+        },
+        "kind": {
+          "enum": [
+            "definition",
+            "context"
+          ],
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "page",
+        "heading_refs",
+        "body_refs",
+        "kind"
+      ],
+      "title": "Paragraph",
+      "type": "object"
+    },
+    "Row": {
+      "additionalProperties": false,
+      "description": "Visible fee association with separate, unconverted source cells.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "label_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Label Refs",
+          "type": "array"
+        },
+        "fee_refs": {
+          "items": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "title": "Fee Refs",
+          "type": "array"
+        },
+        "columns": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Columns",
+          "type": "array"
+        },
+        "group_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Group Refs",
+          "type": "array"
+        },
+        "context_refs": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Context Refs",
+          "type": "array"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "page",
+        "label_refs",
+        "fee_refs",
+        "columns",
+        "group_refs",
+        "context_refs",
+        "note"
+      ],
+      "title": "Row",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Complete source-page review with custody and explicit limitations.",
+  "properties": {
+    "schema_version": {
+      "const": "cs-code-fees-qa-1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "colorado-springs-code-services-fees-2015-atlas-directed",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-MUNICIPAL-COLORADO_SPRINGS",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "review_kind": {
+      "const": "checked_tables",
+      "title": "Review Kind",
+      "type": "string"
+    },
+    "status": {
+      "const": "complete_source_fidelity_review_pending_atlas_acceptance",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "source_year_as_printed": {
+      "const": "2015",
+      "title": "Source Year As Printed",
+      "type": "string"
+    },
+    "adoption_date": {
+      "title": "Adoption Date",
+      "type": "null"
+    },
+    "effective_date": {
+      "title": "Effective Date",
+      "type": "null"
+    },
+    "packet_root_claim": {
+      "title": "Packet Root Claim",
+      "type": "string"
+    },
+    "canonical_original_claim": {
+      "title": "Canonical Original Claim",
+      "type": "string"
+    },
+    "assets": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Assets",
+      "type": "array"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "candidate_sha256": {
+      "title": "Candidate Sha256",
+      "type": "string"
+    },
+    "full_pages_inspected": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Full Pages Inspected",
+      "type": "array"
+    },
+    "full_page_inspection_interval": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Full Page Inspection Interval",
+      "type": "array"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "lines": {
+      "items": {
+        "$ref": "#/$defs/Line"
+      },
+      "title": "Lines",
+      "type": "array"
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/Row"
+      },
+      "title": "Rows",
+      "type": "array"
+    },
+    "paragraphs": {
+      "items": {
+        "$ref": "#/$defs/Paragraph"
+      },
+      "title": "Paragraphs",
+      "type": "array"
+    },
+    "crops": {
+      "items": {
+        "$ref": "#/$defs/Crop"
+      },
+      "title": "Crops",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "source_id",
+    "authority_id",
+    "review_kind",
+    "status",
+    "legal_currentness",
+    "answer_safe",
+    "source_year_as_printed",
+    "adoption_date",
+    "effective_date",
+    "packet_root_claim",
+    "canonical_original_claim",
+    "assets",
+    "source_sha256",
+    "candidate_sha256",
+    "full_pages_inspected",
+    "full_page_inspection_interval",
+    "method",
+    "lines",
+    "rows",
+    "paragraphs",
+    "crops",
+    "findings",
+    "limitations"
+  ],
+  "title": "QA",
+  "type": "object"
+}

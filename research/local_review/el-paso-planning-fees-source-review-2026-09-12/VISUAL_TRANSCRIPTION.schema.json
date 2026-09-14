@@ -1,0 +1,359 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Cell": {
+      "additionalProperties": false,
+      "properties": {
+        "column": {
+          "enum": [
+            "application_type",
+            "application_fee",
+            "project_type",
+            "heading",
+            "page_label"
+          ],
+          "title": "Column",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "visible_text",
+            "visibly_blank",
+            "visible_text_with_clipped_unresolved_tail"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "pixel_bbox": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Pixel Bbox",
+          "type": "array"
+        },
+        "superscript_footnotes": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Superscript Footnotes",
+          "type": "array"
+        },
+        "transcript_start_byte": {
+          "minimum": 0,
+          "title": "Transcript Start Byte",
+          "type": "integer"
+        },
+        "transcript_end_byte": {
+          "minimum": 0,
+          "title": "Transcript End Byte",
+          "type": "integer"
+        },
+        "native_start_byte": {
+          "default": null,
+          "title": "Native Start Byte",
+          "type": "null"
+        },
+        "native_end_byte": {
+          "default": null,
+          "title": "Native End Byte",
+          "type": "null"
+        }
+      },
+      "required": [
+        "column",
+        "text",
+        "state",
+        "pixel_bbox",
+        "transcript_start_byte",
+        "transcript_end_byte"
+      ],
+      "title": "Cell",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "source_image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "width_px": {
+          "const": 2200,
+          "default": 2200,
+          "title": "Width Px",
+          "type": "integer"
+        },
+        "height_px": {
+          "const": 1700,
+          "default": 1700,
+          "title": "Height Px",
+          "type": "integer"
+        },
+        "pdf_width_pt": {
+          "const": 792.0,
+          "default": 792.0,
+          "title": "Pdf Width Pt",
+          "type": "number"
+        },
+        "pdf_height_pt": {
+          "const": 612.0,
+          "default": 612.0,
+          "title": "Pdf Height Pt",
+          "type": "number"
+        },
+        "native_file": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_status": {
+          "const": "empty_native_text_layer",
+          "default": "empty_native_text_layer",
+          "title": "Native Status",
+          "type": "string"
+        },
+        "native_size_bytes": {
+          "const": 0,
+          "default": 0,
+          "title": "Native Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "physical_page",
+        "source_image",
+        "native_file"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Row": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "role": {
+          "enum": [
+            "fee_row",
+            "section_header",
+            "column_headers",
+            "title",
+            "footnote",
+            "general_note",
+            "page_label"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "section_header_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Section Header Id"
+        },
+        "fee_header_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fee Header Id"
+        },
+        "note_id": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note Id"
+        },
+        "cells": {
+          "items": {
+            "$ref": "#/$defs/Cell"
+          },
+          "title": "Cells",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "role",
+        "cells"
+      ],
+      "title": "Row",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source_id": {
+      "const": "el-paso-planning-fees-sd011",
+      "default": "el-paso-planning-fees-sd011",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-EL_PASO",
+      "default": "CO-COUNTY-EL_PASO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "const": "c3bd819da169a58328e7bdfcd8ea65e4a751326a65dce325ad19e5bc868b3e12",
+      "default": "c3bd819da169a58328e7bdfcd8ea65e4a751326a65dce325ad19e5bc868b3e12",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "frozen_at": {
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "visual_observations": {
+      "$ref": "#/$defs/Asset"
+    },
+    "review_mode": {
+      "const": "source_images_first_then_empty_native_comparison_before_ocr",
+      "title": "Review Mode",
+      "type": "string"
+    },
+    "ocr_consulted_at_freeze": {
+      "const": false,
+      "default": false,
+      "title": "Ocr Consulted At Freeze",
+      "type": "boolean"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "transcript": {
+      "$ref": "#/$defs/Asset"
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/Row"
+      },
+      "title": "Rows",
+      "type": "array"
+    },
+    "unresolved_row_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unresolved Row Ids",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "source_date_claim": {
+      "title": "Source Date Claim",
+      "type": "string"
+    },
+    "verified_effective_date": {
+      "default": null,
+      "title": "Verified Effective Date",
+      "type": "null"
+    },
+    "currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "frozen_at",
+    "visual_observations",
+    "review_mode",
+    "pages",
+    "transcript",
+    "rows",
+    "unresolved_row_ids",
+    "limitations",
+    "source_date_claim"
+  ],
+  "title": "VisualTranscript",
+  "type": "object"
+}

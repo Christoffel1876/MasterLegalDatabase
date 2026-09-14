@@ -1,0 +1,66 @@
+{
+  "status": "passed",
+  "verified_at": "2026-09-13T02:28:26.678313+00:00",
+  "tests_passed": 17,
+  "tests_command": "PYTHONDONTWRITEBYTECODE=1 python -B -m pytest -q -p no:cacheprovider test_validate_audit.py",
+  "tests_log": {
+    "path": "validation/focused-tests.log",
+    "sha256": "55180a8a3f7dab0cd8e207de435c909df8a9dad010d91a091b0cb605e18b0468",
+    "size_bytes": 851
+  },
+  "full_current_and_pinned_legacy_replayed": true,
+  "original_custody_assets_rechecked": 38,
+  "source_visual_pages": 0,
+  "public_requests": 0,
+  "canonical_intakes": 0,
+  "versions": {
+    "python": "3.14.3",
+    "pymupdf": "1.28.2",
+    "pydantic": "2.13.5",
+    "beautifulsoup4": "4.15.0",
+    "jsonschema": "4.26.0"
+  },
+  "checked_files": [
+    {
+      "path": "AUDIT.json",
+      "sha256": "10635247b79879ddfa77be6770dfb4de79905c2f0342f07db02a4ab709325193",
+      "size_bytes": 18813
+    },
+    {
+      "path": "AUDIT.schema.json",
+      "sha256": "927703e198961c7c0c7c21245db1504d0d060d04317f6b8814fa2e17758a7358",
+      "size_bytes": 17572
+    },
+    {
+      "path": "INTAKE_RECOMMENDATION.json",
+      "sha256": "ed5646261fbd166978ac44e1b2cd4d33ff1ef49322b48ee51df9eb68d21ab459",
+      "size_bytes": 2361
+    },
+    {
+      "path": "CUSTODY_RECEIPT.json",
+      "sha256": "1111f7ce47c007b1283845108ff8ea27d5c9fed7c98e9fe1b70ea727c0ed0d19",
+      "size_bytes": 13902
+    },
+    {
+      "path": "validate_audit.py",
+      "sha256": "dacdd1124c0c813f9af07afe413d83cb15d04e7102a4b42c226028b67a429cf9",
+      "size_bytes": 14046
+    },
+    {
+      "path": "audit_models.py",
+      "sha256": "a7ec4c619e1a36accf5eb4c61644fa37edf775edb8dbe498e162030582a83a58",
+      "size_bytes": 5581
+    },
+    {
+      "path": "test_validate_audit.py",
+      "sha256": "6646ef9c8880648b322843454f78ba6ade47e3ea0649e192af56bf73aa1c8b88",
+      "size_bytes": 3907
+    }
+  ],
+  "limitations": [
+    "No source pixels were reviewed by this auditor. Separate root/Ptolemy source QA is not promoted by this custody receipt.",
+    "The full legacy metadata streams were rechecked locally but are omitted from the portable package; use optional --repository for their read-only replay.",
+    "Original transport commands/full logs and verified source-acquisition times are absent. Reported metadata is retained without relabeling it as a witnessed acquisition.",
+    "The preserved construction scripts are historical records, not portable execution prerequisites. Only validate_audit.py is the read-only portable entry point."
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "$defs": {
+    "InputFile": {
+      "additionalProperties": false,
+      "description": "Bind one read-only input and its relevant-row extract.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "title": "Bytes",
+          "type": "integer"
+        },
+        "matching_rows": {
+          "title": "Matching Rows",
+          "type": "integer"
+        },
+        "extract_path": {
+          "title": "Extract Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes",
+        "matching_rows",
+        "extract_path"
+      ],
+      "title": "InputFile",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Record the comparison commit and exact input file digests.",
+  "properties": {
+    "commit": {
+      "pattern": "^[a-f0-9]{40}$",
+      "title": "Commit",
+      "type": "string"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/InputFile"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "note": {
+      "title": "Note",
+      "type": "string"
+    }
+  },
+  "required": [
+    "commit",
+    "observed_at",
+    "files",
+    "note"
+  ],
+  "title": "Inputs",
+  "type": "object"
+}

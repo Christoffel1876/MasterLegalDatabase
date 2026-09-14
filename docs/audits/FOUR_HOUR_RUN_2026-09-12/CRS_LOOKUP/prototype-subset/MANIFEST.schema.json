@@ -1,0 +1,60 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Exact confined prepared-artifact bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "maximum": 8000000,
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Closed research-prototype inventory, including the unchanged source packet.",
+  "properties": {
+    "status": {
+      "const": "prepared_research_prototype_not_integrated",
+      "title": "Status",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "excluded_files": {
+      "const": "MANIFEST.json only",
+      "title": "Excluded Files",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "files",
+    "excluded_files"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

@@ -1,0 +1,57 @@
+........................................................................ [ 16%]
+........................................................................ [ 33%]
+........................................................................ [ 50%]
+........................................................................ [ 66%]
+.........................................................F.F............ [ 83%]
+......................................................................   [100%]
+=================================== FAILURES ===================================
+_________________ test_source_package_mutation_during_verifier _________________
+
+copied_root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-245/test_source_package_mutation_d0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x1091a50f0>
+
+    def test_source_package_mutation_during_verifier(
+            copied_root: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+        """A changed post-verifier hash set prevents publishing otherwise valid source output."""
+        check = lookup._check_ehs_package
+        calls = []
+    
+        def changed(root: Path) -> dict[str, str]:
+            """Represent a changed identity observed after an actual isolated verifier run."""
+            hashes = check(root)
+            calls.append(True)
+            if len(calls) == 2:
+                hashes['changed'] = '0' * 64
+            return hashes
+    
+        monkeypatch.setattr(lookup, '_check_ehs_package', changed)
+>       with pytest.raises(ValueError, match='changed during verification'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'changed during verification'
+E         Actual message: "'changed' is not in the subpath of '/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-245/test_source_package_mutation_d0'"
+
+MasterLegalDatabase/tests/test_el_paso_ehs_native_lookup.py:288: AssertionError
+______________________ test_canonical_pdf_tamper_refused _______________________
+
+copied_root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-245/test_canonical_pdf_tamper_refu0')
+
+    def test_canonical_pdf_tamper_refused(copied_root: Path) -> None:
+        """A valid copied QA package cannot stand in for a changed actual canonical original."""
+        record = json.loads((copied_root / lookup.EHS_PACKAGE /
+                             'source/canonical-record.jsonl').read_bytes())
+        path = copied_root / record['archive_path']
+        data = bytearray(path.read_bytes())
+        data[-1] ^= 1
+        path.write_bytes(data)
+>       with pytest.raises(ValueError, match='canonical original differs'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'canonical original differs'
+E         Actual message: 'Captured source bytes differ: _RAW_ARCHIVE/manual_intake/08_County_Authorities/el-paso-boh-ehs-fees-sd011/20260912T225948795762Z_original.pdf'
+
+MasterLegalDatabase/tests/test_el_paso_ehs_native_lookup.py:309: AssertionError
+=========================== short test summary info ============================
+FAILED MasterLegalDatabase/tests/test_el_paso_ehs_native_lookup.py::test_source_package_mutation_during_verifier
+FAILED MasterLegalDatabase/tests/test_el_paso_ehs_native_lookup.py::test_canonical_pdf_tamper_refused
+2 failed, 428 passed in 289.34s (0:04:49)

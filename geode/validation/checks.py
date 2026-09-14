@@ -33,6 +33,7 @@ from geode.schemas.ontology import (
 from geode.schemas.validators import require_official_source_url
 from geode.schemas.validators import validate_record
 from geode.utils.file_io import iter_jsonl, load_json
+from geode.utils.lfs_pointer import require_hydrated_file
 
 OPERATIONAL_RECORD_KEYS = frozenset(
     {"crosswalks", "timeline_events", "layer", "publication_year", "source_path"}
@@ -783,43 +784,59 @@ def _validate_local_operating_artifacts(
     summary_path = control / "LOCAL_REVIEW_SUMMARY.json"
     if not summary_path.exists():
         return
+    current_path = summary_path
     try:
         from geode.pipeline.local_review import LocalReviewSummary
 
+        require_hydrated_file(summary_path)
         summary = LocalReviewSummary.model_validate(load_json(summary_path))
         queue_path = control / "LOCAL_REVIEW_QUEUE.jsonl"
+        current_path = queue_path
+        require_hydrated_file(queue_path)
         queue_count = sum(1 for _ in iter_jsonl(queue_path))
         if queue_count != summary.total_review_items:
             raise ValueError("local review summary total does not match queue")
         ocr_path = control / "LOCAL_OCR_QUEUE.jsonl"
+        current_path = ocr_path
+        require_hydrated_file(ocr_path)
         ocr_count = sum(1 for _ in iter_jsonl(ocr_path))
         if ocr_count != summary.ocr_items:
             raise ValueError("local OCR queue count does not match summary")
         freshness_path = control / "LOCAL_SOURCE_FRESHNESS.json"
+        current_path = freshness_path
+        require_hydrated_file(freshness_path)
         freshness = load_json(freshness_path)
         if freshness.get("sources_checked", -1) != len(freshness.get("records", [])):
             raise ValueError("local freshness source count does not match records")
         ocr_report_path = control / "LOCAL_OCR_REPORT.json"
+        current_path = ocr_report_path
+        require_hydrated_file(ocr_report_path)
         ocr_report = load_json(ocr_report_path)
         if ocr_report.get("pending_items", -1) + ocr_report.get("completed_items", -1) != len(
             ocr_report.get("items", [])
         ):
             raise ValueError("local OCR report counts do not match items")
-        stress_report = load_json(control / "LOCAL_STRESS_TEST_REPORT.json")
+        current_path = control / "LOCAL_STRESS_TEST_REPORT.json"
+        require_hydrated_file(current_path)
+        stress_report = load_json(current_path)
         if stress_report.get("passed") is not True:
             raise ValueError("local stress test report is not passing")
         promotion_report_path = control / "LOCAL_PROMOTION_REPORT.json"
         if promotion_report_path.exists():
+            current_path = promotion_report_path
+            require_hydrated_file(promotion_report_path)
             promotion_report = load_json(promotion_report_path)
             if promotion_report.get("blocked", 0) != 0:
                 raise ValueError("local promotion report contains blocked decisions")
         golden_path = control / "LOCAL_GOLDEN_EVALUATION.json"
         if golden_path.exists():
+            current_path = golden_path
+            require_hydrated_file(golden_path)
             golden = load_json(golden_path)
             if golden.get("failed", 1) != 0 or golden.get("passed") != golden.get("total"):
                 raise ValueError("local golden-question evaluation is not passing")
-    except (ValidationError, ValueError, KeyError, json.JSONDecodeError, FileNotFoundError) as exc:
-        result.add_issue("error", _relative(summary_path, root), str(exc))
+    except (ValidationError, ValueError, KeyError, OSError) as exc:
+        result.add_issue("error", _relative(current_path, root), str(exc))
 
 
 def validate_jsonl_file(
@@ -833,8 +850,9 @@ def validate_jsonl_file(
         result.add_issue("error", _relative(path, root), "required JSONL file is missing")
         return []
     try:
+        require_hydrated_file(path)
         return list(iter_jsonl(path))
-    except (json.JSONDecodeError, ValueError) as exc:
+    except (OSError, ValueError) as exc:
         result.add_issue("error", _relative(path, root), str(exc))
         return []
 

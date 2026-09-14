@@ -1,0 +1,376 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Custody": {
+      "additionalProperties": false,
+      "properties": {
+        "acquisition_method": {
+          "const": "received_review_package",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "received_from": {
+          "const": "Sherlock",
+          "title": "Received From",
+          "type": "string"
+        },
+        "claimed_source_url": {
+          "title": "Claimed Source Url",
+          "type": "string"
+        },
+        "claimed_final_url": {
+          "title": "Claimed Final Url",
+          "type": "string"
+        },
+        "claimed_http_acquisition_at": {
+          "title": "Claimed Http Acquisition At",
+          "type": "string"
+        },
+        "verified_http_acquisition_at": {
+          "default": null,
+          "title": "Verified Http Acquisition At",
+          "type": "null"
+        },
+        "actual_repository_received_at": {
+          "title": "Actual Repository Received At",
+          "type": "string"
+        },
+        "intake_status": {
+          "const": "archived_pending_pipeline",
+          "title": "Intake Status",
+          "type": "string"
+        },
+        "intake_receipt": {
+          "$ref": "#/$defs/Asset"
+        },
+        "source_provenance_manifest": {
+          "$ref": "#/$defs/Asset"
+        },
+        "source_provenance_line_number": {
+          "const": 1,
+          "default": 1,
+          "title": "Source Provenance Line Number",
+          "type": "integer"
+        },
+        "source_provenance_line_sha256": {
+          "title": "Source Provenance Line Sha256",
+          "type": "string"
+        },
+        "source_referral_html": {
+          "$ref": "#/$defs/Asset"
+        },
+        "source_public_headers": {
+          "$ref": "#/$defs/Asset"
+        },
+        "limitations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "acquisition_method",
+        "received_from",
+        "claimed_source_url",
+        "claimed_final_url",
+        "claimed_http_acquisition_at",
+        "actual_repository_received_at",
+        "intake_status",
+        "intake_receipt",
+        "source_provenance_manifest",
+        "source_provenance_line_sha256",
+        "source_referral_html",
+        "source_public_headers",
+        "limitations"
+      ],
+      "title": "Custody",
+      "type": "object"
+    },
+    "NativeSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "engine": {
+          "const": "PyMuPDF",
+          "default": "PyMuPDF",
+          "title": "Engine",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        },
+        "method": {
+          "const": "Page.get_text(\"text\", sort=False, flags=195)",
+          "title": "Method",
+          "type": "string"
+        },
+        "page_files": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "title": "Page Files",
+          "type": "array"
+        },
+        "page_count": {
+          "const": 5,
+          "default": 5,
+          "title": "Page Count",
+          "type": "integer"
+        },
+        "total_utf8_bytes": {
+          "const": 0,
+          "default": 0,
+          "title": "Total Utf8 Bytes",
+          "type": "integer"
+        },
+        "status": {
+          "const": "empty_native_text_on_all_five_pages",
+          "default": "empty_native_text_on_all_five_pages",
+          "title": "Status",
+          "type": "string"
+        },
+        "candidate_with_page_markers": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "version",
+        "method",
+        "page_files",
+        "candidate_with_page_markers"
+      ],
+      "title": "NativeSummary",
+      "type": "object"
+    },
+    "OCRSummary": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "machine_ocr_unreviewed_preserved_with_separate_visual_comparison",
+          "title": "Status",
+          "type": "string"
+        },
+        "receipt": {
+          "$ref": "#/$defs/Asset"
+        },
+        "comparison": {
+          "$ref": "#/$defs/Asset"
+        },
+        "engine": {
+          "const": "Apple Vision",
+          "default": "Apple Vision",
+          "title": "Engine",
+          "type": "string"
+        },
+        "revision": {
+          "const": 3,
+          "default": 3,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "actual_os_version": {
+          "title": "Actual Os Version",
+          "type": "string"
+        },
+        "expected_pages": {
+          "const": 5,
+          "default": 5,
+          "title": "Expected Pages",
+          "type": "integer"
+        },
+        "returned_pages": {
+          "const": 5,
+          "default": 5,
+          "title": "Returned Pages",
+          "type": "integer"
+        },
+        "engine_observation_count": {
+          "title": "Engine Observation Count",
+          "type": "integer"
+        },
+        "failed_attempts_before_success": {
+          "const": 2,
+          "default": 2,
+          "title": "Failed Attempts Before Success",
+          "type": "integer"
+        },
+        "engine_rerun_required_for_offline_verification": {
+          "const": false,
+          "default": false,
+          "title": "Engine Rerun Required For Offline Verification",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "status",
+        "receipt",
+        "comparison",
+        "actual_os_version",
+        "engine_observation_count"
+      ],
+      "title": "OCRSummary",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source_id": {
+      "const": "el-paso-planning-fees-sd011",
+      "default": "el-paso-planning-fees-sd011",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-EL_PASO",
+      "default": "CO-COUNTY-EL_PASO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "source_pdf": {
+      "$ref": "#/$defs/Asset"
+    },
+    "initial_visual_transcript": {
+      "$ref": "#/$defs/Asset"
+    },
+    "reviewed_grid": {
+      "$ref": "#/$defs/Asset"
+    },
+    "visual_errata": {
+      "$ref": "#/$defs/Asset"
+    },
+    "completed_at": {
+      "title": "Completed At",
+      "type": "string"
+    },
+    "status": {
+      "const": "five_pages_source_reviewed_with_explicit_unresolved_clipped_tail",
+      "title": "Status",
+      "type": "string"
+    },
+    "page_coverage": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Page Coverage",
+      "type": "array"
+    },
+    "source_fee_rows": {
+      "const": 104,
+      "default": 104,
+      "title": "Source Fee Rows",
+      "type": "integer"
+    },
+    "source_footnotes": {
+      "const": 15,
+      "default": 15,
+      "title": "Source Footnotes",
+      "type": "integer"
+    },
+    "source_general_notes": {
+      "const": 3,
+      "default": 3,
+      "title": "Source General Notes",
+      "type": "integer"
+    },
+    "native_extraction": {
+      "$ref": "#/$defs/NativeSummary"
+    },
+    "ocr_comparison": {
+      "$ref": "#/$defs/OCRSummary"
+    },
+    "custody": {
+      "$ref": "#/$defs/Custody"
+    },
+    "observations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "unresolved_regions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unresolved Regions",
+      "type": "array"
+    },
+    "fully_legible_complete_extraction": {
+      "const": false,
+      "default": false,
+      "title": "Fully Legible Complete Extraction",
+      "type": "boolean"
+    },
+    "currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Currentness",
+      "type": "string"
+    },
+    "verified_adoption_date": {
+      "default": null,
+      "title": "Verified Adoption Date",
+      "type": "null"
+    },
+    "verified_effective_date": {
+      "default": null,
+      "title": "Verified Effective Date",
+      "type": "null"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "source_pdf",
+    "initial_visual_transcript",
+    "reviewed_grid",
+    "visual_errata",
+    "completed_at",
+    "status",
+    "page_coverage",
+    "native_extraction",
+    "ocr_comparison",
+    "custody",
+    "observations",
+    "unresolved_regions"
+  ],
+  "title": "SourceQA",
+  "type": "object"
+}

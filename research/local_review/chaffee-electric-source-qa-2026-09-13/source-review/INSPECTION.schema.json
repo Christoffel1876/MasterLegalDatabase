@@ -1,0 +1,129 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact relative file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Crop": {
+      "additionalProperties": false,
+      "description": "Reproducible full-resolution pixel-slice evidence.",
+      "properties": {
+        "source_image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "xyxy": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Xyxy",
+          "type": "array"
+        },
+        "crop": {
+          "$ref": "#/$defs/Asset"
+        },
+        "method": {
+          "const": "exact_RGB_pixel_slice_no_resampling",
+          "title": "Method",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_image",
+        "xyxy",
+        "crop",
+        "method"
+      ],
+      "title": "Crop",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Actual reviewer image inspection recorded retrospectively.",
+  "properties": {
+    "reviewer": {
+      "const": "Plato",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "full_pages": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Full Pages",
+      "type": "array"
+    },
+    "supplied_crops": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Supplied Crops",
+      "type": "array"
+    },
+    "supplemental_crops": {
+      "items": {
+        "$ref": "#/$defs/Crop"
+      },
+      "title": "Supplemental Crops",
+      "type": "array"
+    },
+    "uncertainty": {
+      "title": "Uncertainty",
+      "type": "string"
+    }
+  },
+  "required": [
+    "reviewer",
+    "recorded_at",
+    "method",
+    "full_pages",
+    "supplied_crops",
+    "supplemental_crops",
+    "uncertainty"
+  ],
+  "title": "Inspection",
+  "type": "object"
+}

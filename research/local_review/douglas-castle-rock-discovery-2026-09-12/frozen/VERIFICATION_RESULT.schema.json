@@ -1,0 +1,98 @@
+{
+  "additionalProperties": false,
+  "description": "Read-only replay results, not source currency certification.",
+  "properties": {
+    "status": {
+      "const": "passed",
+      "title": "Status",
+      "type": "string"
+    },
+    "payload_files": {
+      "title": "Payload Files",
+      "type": "integer"
+    },
+    "event_count": {
+      "const": 31,
+      "title": "Event Count",
+      "type": "integer"
+    },
+    "exact_requested_urls": {
+      "const": 30,
+      "title": "Exact Requested Urls",
+      "type": "integer"
+    },
+    "pdf_count": {
+      "const": 8,
+      "title": "Pdf Count",
+      "type": "integer"
+    },
+    "physical_pages": {
+      "const": 403,
+      "title": "Physical Pages",
+      "type": "integer"
+    },
+    "native_pages_replayed": {
+      "const": 403,
+      "title": "Native Pages Replayed",
+      "type": "integer"
+    },
+    "rendered_pages_replayed": {
+      "title": "Rendered Pages Replayed",
+      "type": "integer"
+    },
+    "viewed_page_records": {
+      "const": 14,
+      "title": "Viewed Page Records",
+      "type": "integer"
+    },
+    "historical_rows_streamed": {
+      "const": 48390,
+      "title": "Historical Rows Streamed",
+      "type": "integer"
+    },
+    "legacy_matching_rows": {
+      "const": 16,
+      "title": "Legacy Matching Rows",
+      "type": "integer"
+    },
+    "unopened_urls": {
+      "const": 381,
+      "title": "Unopened Urls",
+      "type": "integer"
+    },
+    "private_header_events": {
+      "const": 7,
+      "title": "Private Header Events",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "raw_size_probe": {
+      "const": "historical_local_check_not_replayed_portably",
+      "title": "Raw Size Probe",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "payload_files",
+    "event_count",
+    "exact_requested_urls",
+    "pdf_count",
+    "physical_pages",
+    "native_pages_replayed",
+    "rendered_pages_replayed",
+    "viewed_page_records",
+    "historical_rows_streamed",
+    "legacy_matching_rows",
+    "unopened_urls",
+    "private_header_events",
+    "legal_currentness",
+    "raw_size_probe"
+  ],
+  "title": "Verification",
+  "type": "object"
+}

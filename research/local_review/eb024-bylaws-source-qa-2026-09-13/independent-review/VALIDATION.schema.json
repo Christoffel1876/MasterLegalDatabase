@@ -1,0 +1,197 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact portable file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "HashCheck": {
+      "additionalProperties": false,
+      "description": "A reported expected digest compared with the exact retained file.",
+      "properties": {
+        "claim": {
+          "title": "Claim",
+          "type": "string"
+        },
+        "actual": {
+          "$ref": "#/$defs/Asset"
+        },
+        "expected_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Expected Sha256",
+          "type": "string"
+        },
+        "matches": {
+          "title": "Matches",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "claim",
+        "actual",
+        "expected_sha256",
+        "matches"
+      ],
+      "title": "HashCheck",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Actual validation evidence; automated and visual scopes are separate.",
+  "properties": {
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "el-paso-boh-bylaws-sd011",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-EL_PASO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "const": "5b71fc2ba18d7a11a5c66d691b1f11526cce424cc0eb8fc07cbd37fb7e5c268a",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "qa": {
+      "$ref": "#/$defs/Asset"
+    },
+    "qa_schema": {
+      "$ref": "#/$defs/Asset"
+    },
+    "verifier": {
+      "$ref": "#/$defs/Asset"
+    },
+    "final_tests": {
+      "$ref": "#/$defs/Asset"
+    },
+    "tests_passed": {
+      "const": 16,
+      "title": "Tests Passed",
+      "type": "integer"
+    },
+    "warnings": {
+      "const": 5,
+      "title": "Warnings",
+      "type": "integer"
+    },
+    "visual_pages": {
+      "const": 5,
+      "title": "Visual Pages",
+      "type": "integer"
+    },
+    "native_bytes": {
+      "const": 12640,
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "nonblank_native_lines": {
+      "const": 170,
+      "title": "Nonblank Native Lines",
+      "type": "integer"
+    },
+    "nonwhitespace_unicode_characters": {
+      "const": 9999,
+      "title": "Nonwhitespace Unicode Characters",
+      "type": "integer"
+    },
+    "paragraph_portions": {
+      "const": 54,
+      "title": "Paragraph Portions",
+      "type": "integer"
+    },
+    "additional_report_hash_checks": {
+      "items": {
+        "$ref": "#/$defs/HashCheck"
+      },
+      "title": "Additional Report Hash Checks",
+      "type": "array"
+    },
+    "timestamp_texts_match_recorded_claims": {
+      "title": "Timestamp Texts Match Recorded Claims",
+      "type": "boolean"
+    },
+    "structural_replay_passed": {
+      "title": "Structural Replay Passed",
+      "type": "boolean"
+    },
+    "full_png_replay_receipt": {
+      "$ref": "#/$defs/Asset"
+    },
+    "pixel_replay_is_visual_judgment": {
+      "const": false,
+      "title": "Pixel Replay Is Visual Judgment",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "canonical_writes": {
+      "const": 0,
+      "title": "Canonical Writes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "completed_at",
+    "source_id",
+    "authority_id",
+    "source_sha256",
+    "qa",
+    "qa_schema",
+    "verifier",
+    "final_tests",
+    "tests_passed",
+    "warnings",
+    "visual_pages",
+    "native_bytes",
+    "nonblank_native_lines",
+    "nonwhitespace_unicode_characters",
+    "paragraph_portions",
+    "additional_report_hash_checks",
+    "timestamp_texts_match_recorded_claims",
+    "structural_replay_passed",
+    "full_png_replay_receipt",
+    "pixel_replay_is_visual_judgment",
+    "legal_currentness",
+    "public_requests",
+    "canonical_writes"
+  ],
+  "title": "Validation",
+  "type": "object"
+}

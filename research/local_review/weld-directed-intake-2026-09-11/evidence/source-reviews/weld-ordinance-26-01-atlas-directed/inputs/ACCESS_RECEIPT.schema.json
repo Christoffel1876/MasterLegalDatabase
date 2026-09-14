@@ -1,0 +1,344 @@
+{
+  "$defs": {
+    "Attempt": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "target_url": {
+          "title": "Target Url",
+          "type": "string"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "finished_at": {
+          "format": "date-time",
+          "title": "Finished At",
+          "type": "string"
+        },
+        "client": {
+          "const": "curl; ordinary TLS; no redirect following; no retries",
+          "title": "Client",
+          "type": "string"
+        },
+        "curl_exit_code": {
+          "title": "Curl Exit Code",
+          "type": "integer"
+        },
+        "http_status": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Http Status"
+        },
+        "final_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Final Url"
+        },
+        "content_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Content Type"
+        },
+        "outcome": {
+          "enum": [
+            "publisher_http_response",
+            "transport_failure_no_http_response"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        },
+        "stdout_metadata": {
+          "$ref": "#/$defs/File"
+        },
+        "stderr": {
+          "$ref": "#/$defs/File"
+        },
+        "response_headers": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/File"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "response_body": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/File"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "retained_original": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/File"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "pdf_parser": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pdf Parser"
+        },
+        "pdf_magic": {
+          "title": "Pdf Magic",
+          "type": "boolean"
+        },
+        "source_pdf": {
+          "title": "Source Pdf",
+          "type": "boolean"
+        },
+        "pdf_physical_pages": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pdf Physical Pages"
+        },
+        "pdf_native_nonblank_pages": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pdf Native Nonblank Pages"
+        },
+        "pdf_native_utf8_bytes": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pdf Native Utf8 Bytes"
+        },
+        "pdf_repaired": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pdf Repaired"
+        },
+        "pdf_encrypted": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pdf Encrypted"
+        },
+        "historical_recorded_sha256": {
+          "title": "Historical Recorded Sha256",
+          "type": "string"
+        },
+        "historical_digest_equal": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Historical Digest Equal"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "source_status": {
+          "const": "pending_atlas_intake",
+          "title": "Source Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "target_url",
+        "started_at",
+        "finished_at",
+        "client",
+        "curl_exit_code",
+        "http_status",
+        "final_url",
+        "content_type",
+        "outcome",
+        "stdout_metadata",
+        "stderr",
+        "response_headers",
+        "response_body",
+        "retained_original",
+        "pdf_parser",
+        "pdf_magic",
+        "source_pdf",
+        "pdf_physical_pages",
+        "pdf_native_nonblank_pages",
+        "pdf_native_utf8_bytes",
+        "pdf_repaired",
+        "pdf_encrypted",
+        "historical_recorded_sha256",
+        "historical_digest_equal",
+        "legal_currentness",
+        "source_status"
+      ],
+      "title": "Attempt",
+      "type": "object"
+    },
+    "File": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "captured_at": {
+      "format": "date-time",
+      "title": "Captured At",
+      "type": "string"
+    },
+    "activity": {
+      "const": "Atlas directed source-access check; not Sherlock010 activation or completion",
+      "title": "Activity",
+      "type": "string"
+    },
+    "queue": {
+      "$ref": "#/$defs/File"
+    },
+    "network_attempts": {
+      "const": 2,
+      "title": "Network Attempts",
+      "type": "integer"
+    },
+    "automatic_retries": {
+      "const": 0,
+      "title": "Automatic Retries",
+      "type": "integer"
+    },
+    "automatic_redirects_followed": {
+      "const": 0,
+      "title": "Automatic Redirects Followed",
+      "type": "integer"
+    },
+    "attempts": {
+      "items": {
+        "$ref": "#/$defs/Attempt"
+      },
+      "title": "Attempts",
+      "type": "array"
+    },
+    "source_or_repository_changes": {
+      "const": "none",
+      "title": "Source Or Repository Changes",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "captured_at",
+    "activity",
+    "queue",
+    "network_attempts",
+    "automatic_retries",
+    "automatic_redirects_followed",
+    "attempts",
+    "source_or_repository_changes",
+    "legal_currentness",
+    "limits"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

@@ -1,0 +1,85 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "worker": {
+      "const": "Ebenezer",
+      "title": "Worker",
+      "type": "string"
+    },
+    "dispatch_observed_utc": {
+      "format": "date-time",
+      "title": "Dispatch Observed Utc",
+      "type": "string"
+    },
+    "dispatch_observation": {
+      "title": "Dispatch Observation",
+      "type": "string"
+    },
+    "acknowledged_observed_utc": {
+      "format": "date-time",
+      "title": "Acknowledged Observed Utc",
+      "type": "string"
+    },
+    "reported_work_started_utc": {
+      "format": "date-time",
+      "title": "Reported Work Started Utc",
+      "type": "string"
+    },
+    "instruction_sha256": {
+      "title": "Instruction Sha256",
+      "type": "string"
+    },
+    "queue": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Queue",
+      "type": "array"
+    },
+    "stop_utc": {
+      "format": "date-time",
+      "title": "Stop Utc",
+      "type": "string"
+    },
+    "status": {
+      "const": "acknowledged_running",
+      "title": "Status",
+      "type": "string"
+    },
+    "chronology_limit": {
+      "title": "Chronology Limit",
+      "type": "string"
+    },
+    "prior_exposure": {
+      "title": "Prior Exposure",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "worker",
+    "dispatch_observed_utc",
+    "dispatch_observation",
+    "acknowledged_observed_utc",
+    "reported_work_started_utc",
+    "instruction_sha256",
+    "queue",
+    "stop_utc",
+    "status",
+    "chronology_limit",
+    "prior_exposure",
+    "legal_currentness"
+  ],
+  "title": "Dispatch",
+  "type": "object"
+}

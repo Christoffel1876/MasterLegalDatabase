@@ -1,0 +1,2323 @@
+{
+  "kind": "corpus-validation",
+  "argv": [
+    "/private/tmp/geode-status-venv/bin/python",
+    "-B",
+    "-m",
+    "geode.validate",
+    "--root",
+    "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+    "--layer",
+    "all"
+  ],
+  "cwd": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+  "started_at": "2026-09-13T17:04:17.255103+00:00",
+  "input_files": [
+    {
+      "path": "_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+      "sha256": "ad27514fe91659c9914780c7d3e69e48ace742bc31ad67d9c3a3c99945aecde3",
+      "size_bytes": 2066981
+    },
+    {
+      "path": "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl",
+      "sha256": "eb6794c68948b642b5b48534def1315afe224d8eebf2e2b438483bde5a33d043",
+      "size_bytes": 157149
+    },
+    {
+      "path": "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_REPORT.json",
+      "sha256": "c4f9c7d30f84cfb234c76269d23a50e0db81d5a8aa9b714034ae58459796cd38",
+      "size_bytes": 6635
+    },
+    {
+      "path": "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+      "sha256": "d32afb35ca30d113e786ba98768dace04c8e4d433322355a14ab35d7a3810537",
+      "size_bytes": 155913
+    },
+    {
+      "path": "config/manual_source_watch.json",
+      "sha256": "91b4c46f7121de66d70b353405900f9d1ed3a3247718a9471ad2f1a9afa6dabb",
+      "size_bytes": 6483
+    },
+    {
+      "path": "config/manual_source_watch.schema.json",
+      "sha256": "5fd314affa21bf7b39a9542ec7337e2c4902f41f4fdaad34c3567447a8d5a169",
+      "size_bytes": 6621
+    },
+    {
+      "path": "config/manual_source_watch_county_fees_v1.json",
+      "sha256": "1f2536f2f75d0590a6c2f365d6e72a294fd23e5df7f90255384ebe5a0c0d82b5",
+      "size_bytes": 24421
+    },
+    {
+      "path": "config/manual_source_watch_county_fees_v1.schema.json",
+      "sha256": "c34fe06d10eda31e0df249d1e5df4760f0c277b078b5bd7e5ad0868c32207b10",
+      "size_bytes": 13950
+    },
+    {
+      "path": "config/manual_source_watch_greeley_fees_v1.json",
+      "sha256": "27299effdbee8f4e116da2b0b8b0495346c4007a9f56a7e37341f0756292d374",
+      "size_bytes": 26815
+    },
+    {
+      "path": "config/manual_source_watch_greeley_fees_v1.schema.json",
+      "sha256": "c34fe06d10eda31e0df249d1e5df4760f0c277b078b5bd7e5ad0868c32207b10",
+      "size_bytes": 13950
+    },
+    {
+      "path": "config/manual_source_watch_sources_v1.json",
+      "sha256": "d70ab79926513fa01d502ca03b824223fd47cb62f4d5d3a750d2c2633d6e564a",
+      "size_bytes": 48956
+    },
+    {
+      "path": "config/manual_source_watch_sources_v1.schema.json",
+      "sha256": "69f9a215dd4d40158ad5e72cf90d7277039be92829834afa7f99ca94b65dd3c1",
+      "size_bytes": 9486
+    },
+    {
+      "path": "config/manual_source_watch_western_fees_v1.json",
+      "sha256": "163f9ac6099a1e2e764bba5daa5bc2825bf3ae93108a6905312a67c0a0ace113",
+      "size_bytes": 25196
+    },
+    {
+      "path": "config/manual_source_watch_western_fees_v1.schema.json",
+      "sha256": "c34fe06d10eda31e0df249d1e5df4760f0c277b078b5bd7e5ad0868c32207b10",
+      "size_bytes": 13950
+    },
+    {
+      "path": "geode/__init__.py",
+      "sha256": "01e1bd1d54b5dbfea8725799f435d6fd6307601abe866ebbd7e096e9d33cbc04",
+      "size_bytes": 88
+    },
+    {
+      "path": "geode/api/__init__.py",
+      "sha256": "1d7c02abb36f61ce955fbd80972926ec711f94cb44b4b39308a4186384f9b0db",
+      "size_bytes": 201
+    },
+    {
+      "path": "geode/api/admin.py",
+      "sha256": "c2733410fc2d409a12ce245d187caa78a78c44a380282539a5cda72777d3b223",
+      "size_bytes": 15731
+    },
+    {
+      "path": "geode/api/app.py",
+      "sha256": "0e452b46b5d1e766349d6ea82980cfc8d83b1ff5171e381fd53a9167336c327b",
+      "size_bytes": 6010
+    },
+    {
+      "path": "geode/api/auth.py",
+      "sha256": "5d93620a3950112e4e9d83fe0d90a3f7abc39e97b156de2b1e8cc0a598daf826",
+      "size_bytes": 5711
+    },
+    {
+      "path": "geode/api/exports.py",
+      "sha256": "3d96d0aa286f053984752267d3704dee149ab44584d99c34cd796944b134000c",
+      "size_bytes": 4558
+    },
+    {
+      "path": "geode/api/logging.py",
+      "sha256": "1b0fd47f37400b12a74aa7b4c24f9dee292c8c45f9c7b247bc930c98916147ff",
+      "size_bytes": 1193
+    },
+    {
+      "path": "geode/api/rate_limit.py",
+      "sha256": "769aa758a73ad33412a7723c9819c5e7cb2fc2f7a5e96b7d9267b9a9dcc4e519",
+      "size_bytes": 2831
+    },
+    {
+      "path": "geode/api/store.py",
+      "sha256": "c7e55459da92b6550ff1e8dbd6e8bf3690037654bf79ce80dd46db9b691776ef",
+      "size_bytes": 7667
+    },
+    {
+      "path": "geode/connectors/__init__.py",
+      "sha256": "2bd1b0a5e005e8837e762359ce49d4ef12f32655d11b993b4245dceb97866027",
+      "size_bytes": 44
+    },
+    {
+      "path": "geode/connectors/ag_opinions.py",
+      "sha256": "594b33fb3b97828a274caa71db597ab82371211e8b3ff50d4c8d1034d2059071",
+      "size_bytes": 13826
+    },
+    {
+      "path": "geode/connectors/archive_paths.py",
+      "sha256": "b53009dafb595bce894f248d9d2c8f3cc6fba5db6d8442ec430221163ed9d83b",
+      "size_bytes": 3243
+    },
+    {
+      "path": "geode/connectors/ccr_bulk.py",
+      "sha256": "4f4ececd5ba7cc8c72353b13947fb3011efd827a09606cea55e567a23c43c612",
+      "size_bytes": 64242
+    },
+    {
+      "path": "geode/connectors/ccr_dataset.py",
+      "sha256": "372ee3bfc20943fce64a4cc2536227a8e5743976311c8a4a41479fbbb38349be",
+      "size_bytes": 36482
+    },
+    {
+      "path": "geode/connectors/ccr_identity.py",
+      "sha256": "9307041d8ff2bda998ee26e7d156c109e4796d447049939d4966e8532bd99c5d",
+      "size_bytes": 4395
+    },
+    {
+      "path": "geode/connectors/ccr_industry_filter.py",
+      "sha256": "055d9aee867daaaf038b9110104d7c8c14598f8c1b826e7e35b2d41ba6d89bdb",
+      "size_bytes": 26337
+    },
+    {
+      "path": "geode/connectors/ccr_industry_taxonomy.py",
+      "sha256": "e433cb5119e5c01855f4736e9a6f9427b244f7d3383a795fb24b1ba4a290a580",
+      "size_bytes": 15060
+    },
+    {
+      "path": "geode/connectors/ccr_postprocess.py",
+      "sha256": "7e041c5d77248b715ee92b15f61f08c56a3a9d83f2dcaefe47e68cd922d90b4e",
+      "size_bytes": 9329
+    },
+    {
+      "path": "geode/connectors/ccr_scraper.py",
+      "sha256": "3626cc288576a2ade6664a76ced5492e55bc7bbdee67b8e55c1c3fa1f6536f95",
+      "size_bytes": 76664
+    },
+    {
+      "path": "geode/connectors/coprrr.py",
+      "sha256": "0a0d152885763b87f7cd4277fdfa984f598e964f0b322c062b1f8ac0b1a83aa9",
+      "size_bytes": 7915
+    },
+    {
+      "path": "geode/connectors/crs_bulk.py",
+      "sha256": "1bd1f0e5d7c26223ce76f4cea66c799b3b4561c3b8e82cb0ee40953a536f9d09",
+      "size_bytes": 12865
+    },
+    {
+      "path": "geode/connectors/crs_crosswalk.py",
+      "sha256": "17aaa499b09cae84d69af1d612a8095d74df797ebd4bdb46be2d515dd48d2d5d",
+      "size_bytes": 3974
+    },
+    {
+      "path": "geode/connectors/crs_parser.py",
+      "sha256": "1ffe5bb023c14c28f289cd0d01836b0d9d1e078737dad5cd59b00cb8d28badf2",
+      "size_bytes": 29884
+    },
+    {
+      "path": "geode/connectors/download_metadata.py",
+      "sha256": "c76bd8be5936c22a9d025c6fa5849783a68815d724b8e41b728e939fd070fa6b",
+      "size_bytes": 892
+    },
+    {
+      "path": "geode/connectors/exec_orders_scraper.py",
+      "sha256": "841447e9f6d6f675e13412fe5d6e92eb443ef44965a822a92ffb9822bec14b94",
+      "size_bytes": 44023
+    },
+    {
+      "path": "geode/connectors/legiscan_client.py",
+      "sha256": "6121e3b23bc14181170128c147734800181f872abdc351fb8f7e64f571743b80",
+      "size_bytes": 19271
+    },
+    {
+      "path": "geode/connectors/legiscan_documents.py",
+      "sha256": "6790f06fb97ff224a8070fd097ab1a13b9744c52ffc576023a6f8fe4c0ffa8a3",
+      "size_bytes": 46638
+    },
+    {
+      "path": "geode/connectors/legiscan_pipeline.py",
+      "sha256": "3f630ef387dc6c4195529f01f0ed5cf03cb965624e902d5592b7eeeb7a5f7016",
+      "size_bytes": 14668
+    },
+    {
+      "path": "geode/connectors/legiscan_transformer.py",
+      "sha256": "84d9705b23fdc8f4f7762b35389b6f054cafdea3d4d280de3c3e4e8f8db5b61d",
+      "size_bytes": 9300
+    },
+    {
+      "path": "geode/connectors/local_sources.py",
+      "sha256": "5a67a6a67c5021c6c4723a7567c847bceb9d1334ed90b05f850fdf4d001578e9",
+      "size_bytes": 39307
+    },
+    {
+      "path": "geode/connectors/manifest_quality.py",
+      "sha256": "2966279f37c6e9fe1f66b1848763efa18f2948096b3af7811c27b9ea56db27f5",
+      "size_bytes": 10998
+    },
+    {
+      "path": "geode/connectors/orchestrator.py",
+      "sha256": "83fddcf9ef66ffe4bb8398d6dd2311c0c9a6f85751bd83cf8fdd76d074e2eaab",
+      "size_bytes": 14470
+    },
+    {
+      "path": "geode/connectors/quality.py",
+      "sha256": "10770385a70b07ac2c0efe5e92c0bdd1ff70f1bfe0cf8f067b7166ebfba44845",
+      "size_bytes": 16623
+    },
+    {
+      "path": "geode/connectors/register_daily_parser.py",
+      "sha256": "39fd234c190f68f71803d93808db2ba3d7e1fd32a3524419f231b4dbc3dcffa5",
+      "size_bytes": 25267
+    },
+    {
+      "path": "geode/connectors/register_pipeline.py",
+      "sha256": "871a7f6d6b25e7d7183209cd18712732f2578d5a8fb262dc0d6f15f879f9377f",
+      "size_bytes": 57476
+    },
+    {
+      "path": "geode/connectors/register_scraper.py",
+      "sha256": "51197d75c8287b70bb293a9c10ba1c3b411942a7b84a01de5829404ff59a5f31",
+      "size_bytes": 23613
+    },
+    {
+      "path": "geode/connectors/register_table_parser.py",
+      "sha256": "da6548c96d55581b71ecec0d39623900d85d6c452e099afcfce39cb9952746bf",
+      "size_bytes": 7404
+    },
+    {
+      "path": "geode/connectors/run.py",
+      "sha256": "9cf36c9a79118766df44f849ed102d1ee72487e529e2fac5e95d880210c1e87c",
+      "size_bytes": 12199
+    },
+    {
+      "path": "geode/connectors/session_laws.py",
+      "sha256": "9f1cc3ece8e69e65615326d52373f3deb0636ee7d0358214d4286dc36d3e0159",
+      "size_bytes": 14448
+    },
+    {
+      "path": "geode/constants.py",
+      "sha256": "e8045e0cc4d69045f4296ac464a518c43773bc762e747f672a9b5b40a6c56f95",
+      "size_bytes": 22102
+    },
+    {
+      "path": "geode/extractors/__init__.py",
+      "sha256": "ea6efc2e55e08e702aaf499409b87d85fcce931816b0d1c989d1333d6edde2dd",
+      "size_bytes": 45
+    },
+    {
+      "path": "geode/extractors/citation_extractor.py",
+      "sha256": "e7abe0f0ae8e9649d4cc83dec340ee7ee3711cc83c879ec956fefda224cbf69f",
+      "size_bytes": 3633
+    },
+    {
+      "path": "geode/extractors/converter.py",
+      "sha256": "938562fd2d89e3f889ac894398671f508d72db2c6ef02a46725e5fab4cb0edcc",
+      "size_bytes": 7431
+    },
+    {
+      "path": "geode/extractors/ensemble.py",
+      "sha256": "ea84371a5cf39d540e59b5461db7ab9292735332c7c58558ea6557579e936fa5",
+      "size_bytes": 17286
+    },
+    {
+      "path": "geode/extractors/fingerprint.py",
+      "sha256": "f4cf524ab6e5b62da79fb8a4da0e7f712ea6e3b505c247360e84cc11a1b0eeed",
+      "size_bytes": 2825
+    },
+    {
+      "path": "geode/extractors/llm_extractor.py",
+      "sha256": "b37c335e07644dcd8c6366739578ba9806871fc49c42e43039ee78a4befff713",
+      "size_bytes": 5271
+    },
+    {
+      "path": "geode/extractors/regex_patterns.py",
+      "sha256": "0be8c0119bd46b385631044952762c4cb6542ee9bd2e050e30ed5e3b9e0f00e4",
+      "size_bytes": 2068
+    },
+    {
+      "path": "geode/extractors/structure_parser.py",
+      "sha256": "6620696902fdb222b55c0ab759bcee59b2feccb000ecedc9f339fd2f93b335df",
+      "size_bytes": 8910
+    },
+    {
+      "path": "geode/freshness_report.py",
+      "sha256": "02a45376a88490bfe75df44bf30648d7f048b0aaf884bd2ead11304e324cab64",
+      "size_bytes": 2740
+    },
+    {
+      "path": "geode/integrity_check.py",
+      "sha256": "050688700813a9d2cebaf3030f63b1913032d824d5db5c3b3586540d16cda008",
+      "size_bytes": 1171
+    },
+    {
+      "path": "geode/net/__init__.py",
+      "sha256": "92a701b0b1064e9290c4270854f89e5e3cfbb353f12271cc0159b52bbeeb072e",
+      "size_bytes": 830
+    },
+    {
+      "path": "geode/net/http_client.py",
+      "sha256": "276eef54f53dbfd486422644e3420e7f1a02d80a2f447a6707724e2bf53dc1f5",
+      "size_bytes": 34833
+    },
+    {
+      "path": "geode/orchestration/__init__.py",
+      "sha256": "fd9b87e983ef577dfcdff3a24f2109c7fb1e819b81a00fe070d63065e1db4740",
+      "size_bytes": 1330
+    },
+    {
+      "path": "geode/orchestration/config/__init__.py",
+      "sha256": "040effbfa82e5d3be3db4bf6bfce4a43fdcd716d03dd4539989b89a8aa02e1fc",
+      "size_bytes": 168
+    },
+    {
+      "path": "geode/orchestration/config/coverage.yaml",
+      "sha256": "f3a03a83f68a5fa14f33e83342d78dc647badd79561030aff3de8f80dfac8fab",
+      "size_bytes": 9277
+    },
+    {
+      "path": "geode/orchestration/config/defaults.yaml",
+      "sha256": "0de461ed743119cfca1b91647342cb64d83b0871c0956a42a453d4b3992e406f",
+      "size_bytes": 617
+    },
+    {
+      "path": "geode/orchestration/config/entities.yaml",
+      "sha256": "4510ead3c24771395413f5f637096b867709d562b30c83fd0215ca30331cbb71",
+      "size_bytes": 818
+    },
+    {
+      "path": "geode/orchestration/config/golden_questions.json",
+      "sha256": "e7c42a1e834e1027e013b8e957ee2d0f1833dfd0975fad75667667181d4e150b",
+      "size_bytes": 2382
+    },
+    {
+      "path": "geode/orchestration/config/guardrails.yaml",
+      "sha256": "214dd2ffec4d555cbb6dfa67515b73988a59c08b9c53eaa3723587afbb135e74",
+      "size_bytes": 767
+    },
+    {
+      "path": "geode/orchestration/config/loader.py",
+      "sha256": "1ac94818ec6b4bec6db1d234bbb61f62b1d9c01438c1d5f39d928917c2efabf9",
+      "size_bytes": 1203
+    },
+    {
+      "path": "geode/orchestration/config/local_golden_questions.json",
+      "sha256": "e0a6ef13c34adaf81e21732261d1fbeb5381dae7bb82f5b93b9bc8504604ea4e",
+      "size_bytes": 2525
+    },
+    {
+      "path": "geode/orchestration/config/local_jurisdictions.yaml",
+      "sha256": "5523c8c4a8398d892c8aa1ce9b8c98c7b685b6c6ef920fe918c9b1276af06444",
+      "size_bytes": 1329
+    },
+    {
+      "path": "geode/orchestration/config/real_corpus_golden_questions.json",
+      "sha256": "fdf30a70d6e089914c4330ac9518eba9a97aa348a2c10e1c688df91052a09b47",
+      "size_bytes": 12260
+    },
+    {
+      "path": "geode/orchestration/config/retrieval.yaml",
+      "sha256": "2c06ebd31276d7c005eaeee859704a7bbcec4cdf00cd3411d87888cee6aee271",
+      "size_bytes": 1908
+    },
+    {
+      "path": "geode/orchestration/config/rules.yaml",
+      "sha256": "231c89fa8bf45d30cdc908994f19ec76475e208bbe4ee636577af678bdd71251",
+      "size_bytes": 3895
+    },
+    {
+      "path": "geode/orchestration/config/synonyms.yaml",
+      "sha256": "9238afa690bc45b00cfcadd6672d7eba5ea5845910e8fda8cb7044072aaa1b14",
+      "size_bytes": 474
+    },
+    {
+      "path": "geode/orchestration/contracts/__init__.py",
+      "sha256": "91a398603431509807997af65210ddda0817b2fcb8e65ae1d774b31174b29f18",
+      "size_bytes": 2408
+    },
+    {
+      "path": "geode/orchestration/contracts/models.py",
+      "sha256": "ce574d8229615d49fbef5e9187f0940643df62b07fb02ed038f14e0b4efa9cff",
+      "size_bytes": 21617
+    },
+    {
+      "path": "geode/orchestration/entrypoint.py",
+      "sha256": "8026a92efec2aec850b1dbbdb7da50249218558461dfa954c3943f29a08ce51f",
+      "size_bytes": 5431
+    },
+    {
+      "path": "geode/orchestration/evaluation.py",
+      "sha256": "ac015924c87b3e50b78c133042f09da36277093b0f0bfc674182fe0c5c756757",
+      "size_bytes": 14956
+    },
+    {
+      "path": "geode/orchestration/feedback.py",
+      "sha256": "75c0239965e142dc4a4655ba0f3bac75d9f35c32a73aee7780114bc93ec4f222",
+      "size_bytes": 4823
+    },
+    {
+      "path": "geode/orchestration/gates.py",
+      "sha256": "bbb16f350bd215023efd5253b74ed2fc6deee2345fbd927789f945f80d163293",
+      "size_bytes": 15495
+    },
+    {
+      "path": "geode/orchestration/golden_review.py",
+      "sha256": "acba733e5477fce0ae6c47e1d3d3ae718648fca88ca3597abd8d5e8f6ec4ee5e",
+      "size_bytes": 5732
+    },
+    {
+      "path": "geode/orchestration/output_control.py",
+      "sha256": "c95e9db4d4fff2f9d46a0fe9987b8af8e3fc9f0c9f0dfa1a473d1129ed2aa9bb",
+      "size_bytes": 9410
+    },
+    {
+      "path": "geode/orchestration/pipeline/__init__.py",
+      "sha256": "fcc2b5d882c6bb51d87140f5f357d1cabdfc9f7d1a5c5594c0c8c883aff2ebf1",
+      "size_bytes": 218
+    },
+    {
+      "path": "geode/orchestration/pipeline/base.py",
+      "sha256": "6e0223375c9c8680487f22cc7002d09bc1d00d972f624f938bbddee8b5d6fb97",
+      "size_bytes": 758
+    },
+    {
+      "path": "geode/orchestration/pipeline/runner.py",
+      "sha256": "f7f508a8203eba0a9c0f7860f7921b80fdca089a4a4ddeaace86acce5be8b928",
+      "size_bytes": 3711
+    },
+    {
+      "path": "geode/orchestration/services/__init__.py",
+      "sha256": "99e955f22337bdf604766ccbb47842abdc481f3b53b603ec2040fefbbbac0662",
+      "size_bytes": 1561
+    },
+    {
+      "path": "geode/orchestration/services/access_control.py",
+      "sha256": "775b9bf20e317ba9f7cbd1af5a92d3faaa8df4a4045c64365178c3667ae9b8fc",
+      "size_bytes": 936
+    },
+    {
+      "path": "geode/orchestration/services/cache.py",
+      "sha256": "64cba88dec7b57cedf7685cd9d15ba02167097d90e60c84b4c3724d3f2b6177d",
+      "size_bytes": 3412
+    },
+    {
+      "path": "geode/orchestration/services/context_budget_manager.py",
+      "sha256": "491e1806cb9dd69fd81583471c8b44bbeac998030c8ab33f5dd1c8ebed0c9cc5",
+      "size_bytes": 8708
+    },
+    {
+      "path": "geode/orchestration/services/evidence_store.py",
+      "sha256": "23cda6411111e19cd1faa4549e2fe1b90f07084f2d84d566a88f33c91415ff78",
+      "size_bytes": 11581
+    },
+    {
+      "path": "geode/orchestration/services/freshness_monitor.py",
+      "sha256": "1093f26fa0ac31d0d53472b170033126cbe7e64202b9a8447cdc53708cbcfee9",
+      "size_bytes": 815
+    },
+    {
+      "path": "geode/orchestration/services/logging.py",
+      "sha256": "cb81a3883fd1ad705e16533dc35033548fa21dbdc6e0039c4afab33d779c079f",
+      "size_bytes": 1521
+    },
+    {
+      "path": "geode/orchestration/services/model_router.py",
+      "sha256": "30cf7282f292c2eae51077af724c4d3878bafe0072a2734a92dd88f7b619ee2a",
+      "size_bytes": 5261
+    },
+    {
+      "path": "geode/orchestration/services/prompt_cache.py",
+      "sha256": "33ce69b2bab70854d93b23828bb8c5ff50e8f9d5ba552c764c6e1c02abc01132",
+      "size_bytes": 3510
+    },
+    {
+      "path": "geode/orchestration/services/provider_cache.py",
+      "sha256": "9e78e4b836f1975744056ee567c8b422e3d1dcbedf822484408033aed115b03c",
+      "size_bytes": 1725
+    },
+    {
+      "path": "geode/orchestration/services/retrieval.py",
+      "sha256": "4ae406132944cf2ec4d970c6ea76302324ad35becbf4150eb15063247e37ca47",
+      "size_bytes": 23788
+    },
+    {
+      "path": "geode/orchestration/services/token_count.py",
+      "sha256": "b877733af6c401d0e0bd6863c88d4d3512267c201a25d4abd29f4b31337ca3f2",
+      "size_bytes": 2143
+    },
+    {
+      "path": "geode/orchestration/stages/__init__.py",
+      "sha256": "50f51e5f864d2e84efa28f586ece62e88a978e571495ccb0f84d96ff9a02c48c",
+      "size_bytes": 2623
+    },
+    {
+      "path": "geode/orchestration/stages/_stub.py",
+      "sha256": "b3c084f01655ed5548790cb36cbd276dbeb733dcbfe347b89305f7ed4853c7ec",
+      "size_bytes": 185
+    },
+    {
+      "path": "geode/orchestration/stages/absence_verification.py",
+      "sha256": "f16338fbc5052cfacac9e50223049539de305c0079100103464db445dea28443",
+      "size_bytes": 968
+    },
+    {
+      "path": "geode/orchestration/stages/ambiguity_check.py",
+      "sha256": "188bbaed4adaa2cfb1714d5a6d576b10cdb788cb30877668bba40e234b608682",
+      "size_bytes": 3513
+    },
+    {
+      "path": "geode/orchestration/stages/assemble_evidence.py",
+      "sha256": "630d71449836d1d7cdb15e302de914c15648d1d11e98a6e99e11c2e5d777bd55",
+      "size_bytes": 3307
+    },
+    {
+      "path": "geode/orchestration/stages/build_coverage_contract.py",
+      "sha256": "d87e83ee69ddd03b306445fbf6ff94317513a142fb68e9a317293b4873988db3",
+      "size_bytes": 3338
+    },
+    {
+      "path": "geode/orchestration/stages/calibrate_confidence.py",
+      "sha256": "96e375b3b59c9d4cdeeebb7d7e02f54b1cb07f9108029d19c7002a97fc0386bf",
+      "size_bytes": 1101
+    },
+    {
+      "path": "geode/orchestration/stages/check_completeness.py",
+      "sha256": "4253fda9c66e3b6877b69b744ac2596b87338dbbf0059098334f4ccfe071d29e",
+      "size_bytes": 965
+    },
+    {
+      "path": "geode/orchestration/stages/check_faithfulness.py",
+      "sha256": "231dd1a1157c029059cbc1d33033f8b70a9ef32b4bfe08b9e05f3a772bddacf8",
+      "size_bytes": 979
+    },
+    {
+      "path": "geode/orchestration/stages/conflict_detection.py",
+      "sha256": "e2185f9e2954d6ee9e7bece7889d1ba5d5656f1e542ae1f1bce28336641567b7",
+      "size_bytes": 3618
+    },
+    {
+      "path": "geode/orchestration/stages/emit.py",
+      "sha256": "0ea80cc564a89b081b2178ba65ea495a143ba9b0d5f8f1438ebdde6c1553c62c",
+      "size_bytes": 815
+    },
+    {
+      "path": "geode/orchestration/stages/enforce_grounding.py",
+      "sha256": "30118b347663bf725d271c75815108b3b02e88341a9935adf29ce635a17fcd93",
+      "size_bytes": 921
+    },
+    {
+      "path": "geode/orchestration/stages/escalation_hook.py",
+      "sha256": "6838de44e7a6ebb5e6412d27120d80bdbb6fdbeaaf973bba593bfc6cc4834c9e",
+      "size_bytes": 995
+    },
+    {
+      "path": "geode/orchestration/stages/generate_draft.py",
+      "sha256": "043e267122bd998bd8787cf55acec8fb0061eee724effe0146f61c4365db8acb",
+      "size_bytes": 4223
+    },
+    {
+      "path": "geode/orchestration/stages/guardrails.py",
+      "sha256": "65953a404f632fcf56ee9b4438c1f22b8caa7e7073f62874efb48b7f7b9e3e6c",
+      "size_bytes": 914
+    },
+    {
+      "path": "geode/orchestration/stages/inject_reasoning_policies.py",
+      "sha256": "8558671033ee2795c8c0cc514712c91a0e974e4fd2d28ddf83d8a0484653280a",
+      "size_bytes": 2658
+    },
+    {
+      "path": "geode/orchestration/stages/parse_intent.py",
+      "sha256": "607743026c6fe0400b094b026826a0b88c6b38aa76d331847df7e390146affe8",
+      "size_bytes": 2541
+    },
+    {
+      "path": "geode/orchestration/stages/plan_retrieval.py",
+      "sha256": "7a972e5fc11776074b213246cd7997022022539e868a4b479879d22d22f6aa3a",
+      "size_bytes": 2442
+    },
+    {
+      "path": "geode/orchestration/stages/query_normalization.py",
+      "sha256": "6e1a64c92c73d4fbcc3ece295611f05061b6e99759169096bd93e9b188e67a5d",
+      "size_bytes": 2205
+    },
+    {
+      "path": "geode/orchestration/stages/resolve_entities.py",
+      "sha256": "73aa78a5cec6723628ac1dbea4ebf453a01acacefe17964bd2bf41bb83b7af7a",
+      "size_bytes": 3175
+    },
+    {
+      "path": "geode/orchestration/stages/resolve_jurisdiction.py",
+      "sha256": "68cc661738453a3eea21c9522633c255a0e3098bb1af1a7b6a01c19d91a7ad1a",
+      "size_bytes": 8406
+    },
+    {
+      "path": "geode/orchestration/stages/retrieve.py",
+      "sha256": "a0c666df78718cb4e3e2403c65dbc1ebbca2e76016b07cb747b12a0ab3ff7415",
+      "size_bytes": 3697
+    },
+    {
+      "path": "geode/orchestration/stages/scope_temporal.py",
+      "sha256": "26c13697d9af0a58e9492aa438a65ac31b6b8523c0b61880776d0d94a36251b5",
+      "size_bytes": 2945
+    },
+    {
+      "path": "geode/orchestration/stages/validate_answer_contract.py",
+      "sha256": "f15b9494b23d393c79470ecbf49ccce08baa6bcf7a3e0b52ef8b55d2393ddfc3",
+      "size_bytes": 1119
+    },
+    {
+      "path": "geode/orchestration/stages/verify_citations.py",
+      "sha256": "e1946bdf647ecafc95989b0aa65d0d49e918da71ffe8913a2dd7dc84af44504d",
+      "size_bytes": 938
+    },
+    {
+      "path": "geode/orchestration/stages/verify_currency.py",
+      "sha256": "bd014d9c6d8ffa818a975ef7012fc0dac4daac869faa4be51a9d8664c65a9b55",
+      "size_bytes": 936
+    },
+    {
+      "path": "geode/orchestration/tests/__init__.py",
+      "sha256": "8696531fbe66aeca2a95af4371b57c9451a021ca01e42d5eb13731d9ba3ca33e",
+      "size_bytes": 58
+    },
+    {
+      "path": "geode/orchestration/tests/test_accuracy_gates.py",
+      "sha256": "71cb40918d4a104fac6ff37e43f35e80a5784e1fd783bc7fe2b3058728b80f80",
+      "size_bytes": 8769
+    },
+    {
+      "path": "geode/orchestration/tests/test_evidence_policy_generation.py",
+      "sha256": "36f6a249ade86ef39cbabca6dde7a85affc2f00820d3eb5e44203585703ed635",
+      "size_bytes": 8186
+    },
+    {
+      "path": "geode/orchestration/tests/test_input_interpretation.py",
+      "sha256": "650f06dbafbf27f6c551e6026c782ef31960533a24df599033b3d19b0f20e766",
+      "size_bytes": 4677
+    },
+    {
+      "path": "geode/orchestration/tests/test_integration_eval.py",
+      "sha256": "1da66d4c1aa935bebd440d857a7f585b596a219d1f25030a5e398f86b1f2c40e",
+      "size_bytes": 10793
+    },
+    {
+      "path": "geode/orchestration/tests/test_local_authority.py",
+      "sha256": "7899d7a2806bbb5d8f0c90d6783842d2b7f0f13ac92fb061f01ecaa5f43604ef",
+      "size_bytes": 9702
+    },
+    {
+      "path": "geode/orchestration/tests/test_operational_services.py",
+      "sha256": "a48d563aa5c4b32fe5ed47ead637800e5b6e9f07728d2721026930d222052b6a",
+      "size_bytes": 6948
+    },
+    {
+      "path": "geode/orchestration/tests/test_output_control.py",
+      "sha256": "5a73cb1bc72f6bff5156d04b28d781f89bcd44d156fcf2101011220e1cefdbc3",
+      "size_bytes": 6569
+    },
+    {
+      "path": "geode/orchestration/tests/test_planning_retrieval.py",
+      "sha256": "eca3687cacd3bdf95352ca512158f49af008e98a190c0b68314c33afd237849c",
+      "size_bytes": 6242
+    },
+    {
+      "path": "geode/orchestration/tests/test_scaffold.py",
+      "sha256": "ebd8160090363cf190536c1fb8dabb94c05eb99079a5f98cd5d025dd8fd924c3",
+      "size_bytes": 6641
+    },
+    {
+      "path": "geode/pipeline/__init__.py",
+      "sha256": "13207d937dac4a556cd5bd9646f2a6cd87c6adb9b2726997c0c0ea7051da3eb9",
+      "size_bytes": 41
+    },
+    {
+      "path": "geode/pipeline/ai_readiness.py",
+      "sha256": "a466b4d325623206a282a424a2615602610a05489247a82dfbcb9d8df3afe57a",
+      "size_bytes": 8683
+    },
+    {
+      "path": "geode/pipeline/audit_artifacts.py",
+      "sha256": "a7016f800731de252ed2ff7908136ec1e92061666ecc20d12b51353be2fab48f",
+      "size_bytes": 27099
+    },
+    {
+      "path": "geode/pipeline/automated_county_review.py",
+      "sha256": "fe82b3d0acab6bd62ca581a7606e9d1f58b80f1b82f2a7862d0eb55658559dcf",
+      "size_bytes": 13402
+    },
+    {
+      "path": "geode/pipeline/ccr.py",
+      "sha256": "e0d45b124b0ff34b7a693158668eddd1fa20cdae369f1392a0443b5fd434a6e5",
+      "size_bytes": 8952
+    },
+    {
+      "path": "geode/pipeline/ccr_current.py",
+      "sha256": "826651cce63250c8a4fc3714613220e9d7c53e215026cc9a5c9dc37ac2ea28b2",
+      "size_bytes": 36396
+    },
+    {
+      "path": "geode/pipeline/ccr_text.py",
+      "sha256": "0bd874f74efb61a1bd488406662013b93d25da073e78580017f26cbb23d8eafa",
+      "size_bytes": 26307
+    },
+    {
+      "path": "geode/pipeline/change_tracking.py",
+      "sha256": "efaa93fb922fee51c727bc13de70c5b9fd6a1e07e507dadfe7000d5ab79f49c1",
+      "size_bytes": 10996
+    },
+    {
+      "path": "geode/pipeline/contracts.py",
+      "sha256": "37f5110be81993b7e35088d3df87d80967718b4bf9eb65d91a6af3332a5c3fca",
+      "size_bytes": 7862
+    },
+    {
+      "path": "geode/pipeline/corpus_usability_audit.py",
+      "sha256": "e6e20affedb98a45848729434aa6539f82c91707cecf11fa41be54bcb9102aff",
+      "size_bytes": 32924
+    },
+    {
+      "path": "geode/pipeline/county_data_audit.py",
+      "sha256": "754599d0306e2eedf1ea63e3c90233ea2557f8839cb7e8f62ff2cbda2eb2fe0f",
+      "size_bytes": 10405
+    },
+    {
+      "path": "geode/pipeline/county_gap_audit.py",
+      "sha256": "c3fe32adbf5b1ffec9fbfd88ae0d4423137814736c46bcb8230812f15a04bebf",
+      "size_bytes": 8211
+    },
+    {
+      "path": "geode/pipeline/county_inventory.py",
+      "sha256": "91fa5c963efb05b337091309fa2f261f0eba80ab5eb3a3a462a4faf18b088bf4",
+      "size_bytes": 104399
+    },
+    {
+      "path": "geode/pipeline/county_reacquisition.py",
+      "sha256": "ec0478dfcf442401f3113044f458edd9e41687688743164a9468fab454dd087c",
+      "size_bytes": 32330
+    },
+    {
+      "path": "geode/pipeline/county_semantic_final_review.py",
+      "sha256": "01e55bb2c45acc48faebe48c0c3a2734a069e77579fc4edf842232c78dbbe80a",
+      "size_bytes": 4486
+    },
+    {
+      "path": "geode/pipeline/county_semantic_improvement.py",
+      "sha256": "a1e01a990248d2b02dc93695a8d98388f118ab26d80bb93811558dc749383533",
+      "size_bytes": 5678
+    },
+    {
+      "path": "geode/pipeline/county_semantic_mapping.py",
+      "sha256": "852247c2129c0b50c3e986ec5620d07876ecf62b63add5970b6392ccec260729",
+      "size_bytes": 8189
+    },
+    {
+      "path": "geode/pipeline/county_semantic_review.py",
+      "sha256": "fdbadb44e2964c839fee7f14f68a834bbfba9e8160ed0f8193a4446a3eddfbc1",
+      "size_bytes": 4673
+    },
+    {
+      "path": "geode/pipeline/county_source_discovery.py",
+      "sha256": "151f2ddee82c0257f374ef6fed09c716056e1c5d65a43ee8c00580723cb4df68",
+      "size_bytes": 7276
+    },
+    {
+      "path": "geode/pipeline/coverage_dashboard.py",
+      "sha256": "578df4e0b0af323784cd575265c04e6e737b6069a4d2ac308bb81253d7130642",
+      "size_bytes": 34041
+    },
+    {
+      "path": "geode/pipeline/critique.py",
+      "sha256": "0a6d0e6fdbf4340e0a65d367f3cfcd483ae6003db858931b5627ba8dd6efa48b",
+      "size_bytes": 18140
+    },
+    {
+      "path": "geode/pipeline/download_closeout.py",
+      "sha256": "570ef4b0a02a4a835e27babd46906fa045bc1515d4e83475ef1144cd25533b0e",
+      "size_bytes": 9106
+    },
+    {
+      "path": "geode/pipeline/land_use_study.py",
+      "sha256": "ae07c21fa9056e10ad5b2d90729412f06bf2cc1752fed4db225a76c3837f2360",
+      "size_bytes": 10393
+    },
+    {
+      "path": "geode/pipeline/legiscan_repair_intake.py",
+      "sha256": "13676e12baecc3dd01654892152114ded095a87183fe7b22136d46409f1ff3e0",
+      "size_bytes": 17450
+    },
+    {
+      "path": "geode/pipeline/legiscan_repair_progress_dashboard.py",
+      "sha256": "e3f9a8bdf23aa502a34b83c1f5bfc8d2b77d740f43619006d038e041c5df56cf",
+      "size_bytes": 9441
+    },
+    {
+      "path": "geode/pipeline/legiscan_source_finder_checklist.py",
+      "sha256": "47056a0d6f618d61cc7c160cb4c0c875216c167f297da9032746a47af3591e4b",
+      "size_bytes": 7704
+    },
+    {
+      "path": "geode/pipeline/local_coverage.py",
+      "sha256": "2057a8aacbb8705b6894ff1f3d8d27212efc66c8b7c032eafefd075399ad71ff",
+      "size_bytes": 24410
+    },
+    {
+      "path": "geode/pipeline/local_crosswalk.py",
+      "sha256": "b794c902c46b139b631b1151a00e9b5c5ed34ccd1760743663554ca5cafa76b6",
+      "size_bytes": 5016
+    },
+    {
+      "path": "geode/pipeline/local_fee_review.py",
+      "sha256": "9d77922878707755eb8cb73ea380556731b1662be7b15030270a9c5e2d6f84fb",
+      "size_bytes": 9813
+    },
+    {
+      "path": "geode/pipeline/local_freshness.py",
+      "sha256": "7fa3c6eb29d8ab52c1d460edfaba85f4d383cd2e81bab7a30201f4130a5e5299",
+      "size_bytes": 4696
+    },
+    {
+      "path": "geode/pipeline/local_golden.py",
+      "sha256": "9f748956a768094dd7d0a6cd29a06bc89519729a9bc097e69ec7edbdfcc72e5a",
+      "size_bytes": 1321
+    },
+    {
+      "path": "geode/pipeline/local_metadata_control.py",
+      "sha256": "d2439bb78db8e7d34ecddacd39e23c4351ea1f9a194cb2f06d30dfbbce447194",
+      "size_bytes": 2592
+    },
+    {
+      "path": "geode/pipeline/local_ocr.py",
+      "sha256": "869c7d94349e7a0f72c755a61301d0e5e9af1adc7a4ef84298e1c75010cac7bd",
+      "size_bytes": 3978
+    },
+    {
+      "path": "geode/pipeline/local_pilot.py",
+      "sha256": "49dfde48a1dfa6e42c7bb191b600fd6f30ed7831b3bed05c35777478c171393f",
+      "size_bytes": 9354
+    },
+    {
+      "path": "geode/pipeline/local_promotion.py",
+      "sha256": "21e2142d124653fd5abf7671a4a468c87c67809f4f9c9392d7cf02b5a80b0de8",
+      "size_bytes": 12439
+    },
+    {
+      "path": "geode/pipeline/local_release_ownership.py",
+      "sha256": "3aecc95614a4a83c3b4739b9784150799e1324ebc41c8ac72f087a8a3524b97e",
+      "size_bytes": 2295
+    },
+    {
+      "path": "geode/pipeline/local_review.py",
+      "sha256": "3d9b0543cb383c01efc77fc60fe8bd7e3f1e71f8cbf12b51fad0e97a857822be",
+      "size_bytes": 13394
+    },
+    {
+      "path": "geode/pipeline/local_rule_ingest.py",
+      "sha256": "803413303abbab6b38604f2a1d655b28ef1e40eb8eea378716cd90e5148a2984",
+      "size_bytes": 31477
+    },
+    {
+      "path": "geode/pipeline/local_source_ownership.py",
+      "sha256": "36d4314ec1257b53dd1df5d116c76b70cfde8a584b0ec65cb4370a586202124b",
+      "size_bytes": 9655
+    },
+    {
+      "path": "geode/pipeline/local_stress.py",
+      "sha256": "d6184e6fafeb5426e911664ffa0a6ef8c8fa85c13ac8f4150247bb606f42b725",
+      "size_bytes": 4730
+    },
+    {
+      "path": "geode/pipeline/local_text_review.py",
+      "sha256": "6644526395f1ceba9011c2978561ba05d80dc117cda5fbaf63087e3e81fee65a",
+      "size_bytes": 8578
+    },
+    {
+      "path": "geode/pipeline/manual_review_inventory.py",
+      "sha256": "adf0b64905bdf49c29b0bc07a6c80eeb91ae4ec10a9d0962db41bb38b2da5507",
+      "size_bytes": 22312
+    },
+    {
+      "path": "geode/pipeline/manual_source_intake.py",
+      "sha256": "5442b78cf16fb3b24f28a72f1c95753a444d39aaf8a906858e3fdcc9f439e0bd",
+      "size_bytes": 28410
+    },
+    {
+      "path": "geode/pipeline/manual_source_watch.py",
+      "sha256": "e1958b886a8b164b0cc4e7a890fa70c47679fdb5318c33423ac45254f60f06ea",
+      "size_bytes": 41311
+    },
+    {
+      "path": "geode/pipeline/manual_source_watch_batches.py",
+      "sha256": "4d291eb8e14237ae98f059dd38e937cad099ee0964e391b5d6ce1e3acbbb6197",
+      "size_bytes": 43958
+    },
+    {
+      "path": "geode/pipeline/manual_watch_http.py",
+      "sha256": "c935ee6d74843e9214f27c5fef82d4470ec3c2b55ea5001eade594cc6a8de2ae",
+      "size_bytes": 31734
+    },
+    {
+      "path": "geode/pipeline/manual_watch_http_v2.py",
+      "sha256": "2211827c47cba3503b2ed96e898b6427c1471d71f84c7eb53e8bd42efe439ee1",
+      "size_bytes": 32280
+    },
+    {
+      "path": "geode/pipeline/modern_legiscan_repair_queue.py",
+      "sha256": "1be6ddb999c97ddaf0390be12b5d94172a1d0d66bea773e0f3333e4aab060e00",
+      "size_bytes": 10065
+    },
+    {
+      "path": "geode/pipeline/municipal_code_export.py",
+      "sha256": "b3adde4751af1933277ad1605921d1026c3c04f846112bc21d56fa0685b60368",
+      "size_bytes": 26925
+    },
+    {
+      "path": "geode/pipeline/municipal_directory.py",
+      "sha256": "6db3ae0026d49fa7fe6a7f6d5d1ed20511f0bf4d881995fc332c69fb069a672d",
+      "size_bytes": 8454
+    },
+    {
+      "path": "geode/pipeline/official_source_checker.py",
+      "sha256": "0d84419a1a2c23cb0812cf1513886b64b2af5d512ad1987261ca57b40325ddf0",
+      "size_bytes": 22553
+    },
+    {
+      "path": "geode/pipeline/operations_readiness.py",
+      "sha256": "a671965a6d6dcc43e2132922fa5c4eba69bf6d58f7661e1b08f1ccc213939a00",
+      "size_bytes": 13096
+    },
+    {
+      "path": "geode/pipeline/pilot.py",
+      "sha256": "3b38dd05936a12ca9134d65f93f2a23e1e9e91104e928408515eb7be8b571408",
+      "size_bytes": 14889
+    },
+    {
+      "path": "geode/pipeline/recent_download_audit.py",
+      "sha256": "2bd39b7309d8d7b383ea5a058eb6383e777d144b90e50f6df7dd59700246cc54",
+      "size_bytes": 21274
+    },
+    {
+      "path": "geode/pipeline/register_daily.py",
+      "sha256": "04bc5a17531b0c68c8f1fd4ca2332ce51dc8aed3b6b243bb79e2d1513233720c",
+      "size_bytes": 53578
+    },
+    {
+      "path": "geode/pipeline/relationship_backfill.py",
+      "sha256": "c7c4212c51bb5f879200243e01da6ab9643c50247e775f330630e80dffa57c31",
+      "size_bytes": 10445
+    },
+    {
+      "path": "geode/pipeline/relationship_coverage.py",
+      "sha256": "b84e42feaa9dd4cef43113276abc6c0a0eee7deb10cb4f8a0b9bb33239f1dcf2",
+      "size_bytes": 15605
+    },
+    {
+      "path": "geode/pipeline/reliance_policy.py",
+      "sha256": "c0af1a7d52266de5a1755b1fbcab43d221dab9941f83277a78a148ff53a20aec",
+      "size_bytes": 7258
+    },
+    {
+      "path": "geode/pipeline/research_catalog.py",
+      "sha256": "b5cac18949d98ae91477d49dbcedf8abf033b57070b54a8f876a572d610dab54",
+      "size_bytes": 18101
+    },
+    {
+      "path": "geode/pipeline/retrieval_catalog.py",
+      "sha256": "ac59e34c922177ac6822eccd6861f529f7cdcd02ed90c9408f5089b912621666",
+      "size_bytes": 18480
+    },
+    {
+      "path": "geode/pipeline/review_packets.py",
+      "sha256": "fd24038e505a61411a21a99836900cc627129231f98ae8dbcc53e20bddad0a5f",
+      "size_bytes": 8934
+    },
+    {
+      "path": "geode/pipeline/reviewer_operations.py",
+      "sha256": "afcbe7c43a11b4c9e7438cbb3ea0f928478279b0404c2eb8e66d28013b085365",
+      "size_bytes": 10107
+    },
+    {
+      "path": "geode/pipeline/rule_history_backfill.py",
+      "sha256": "5ee583810fd41ec1ad781e3652abb7e5a98f23d0df99e090bd7b8fb4e5d1f39c",
+      "size_bytes": 31377
+    },
+    {
+      "path": "geode/pipeline/rule_units.py",
+      "sha256": "a745e3e08c18522a52fc8d3e3ccf1ebfdc7fc8556385729bb376207674390cef",
+      "size_bytes": 48022
+    },
+    {
+      "path": "geode/pipeline/rulemaking_prompt_comparison.py",
+      "sha256": "fc415c1b70f5874e3c22c9c2b0dc9e2169b77011ec0b9a23a420443f851354ef",
+      "size_bytes": 22214
+    },
+    {
+      "path": "geode/pipeline/rulemaking_search_verification.py",
+      "sha256": "37a9eaa5fc4b5d74f43cdab52f95bf639a8dc2bc66c50b1585dc2f2004a1d13c",
+      "size_bytes": 28119
+    },
+    {
+      "path": "geode/pipeline/run.py",
+      "sha256": "d46f932eb0c6f6398352d36442247f35a15bf01e72d616954fdcf321326de994",
+      "size_bytes": 20773
+    },
+    {
+      "path": "geode/pipeline/source_output_accuracy_audit.py",
+      "sha256": "a777a8315c6a6dfb5964add3b8ce2520ba800cee2b4b3bdcea9bb670f4c552b7",
+      "size_bytes": 31085
+    },
+    {
+      "path": "geode/pipeline/source_quality_operating_layer.py",
+      "sha256": "3a92a30936db4e4ca04ce5efaa7714136305bc60a9e4bbaee610a33f7e94903b",
+      "size_bytes": 43429
+    },
+    {
+      "path": "geode/pipeline/source_update_watcher.py",
+      "sha256": "ec3ef663043174653f115f28657fc1b9e00ba99195a1aea695f5c792501c63bf",
+      "size_bytes": 30930
+    },
+    {
+      "path": "geode/pipeline/update_ledger.py",
+      "sha256": "4b7f03ecf64496f65adaceab2c8187ee05a85f7c4750507c03fcab0573185fe4",
+      "size_bytes": 11396
+    },
+    {
+      "path": "geode/pipeline/verified_local_ocr.py",
+      "sha256": "22146b8f4e07ac82e3532e8ba7d6237ab313893115b19688a3f7d41fe7760175",
+      "size_bytes": 24123
+    },
+    {
+      "path": "geode/pipeline/writer.py",
+      "sha256": "40c4d055949d2119ad882995074a7b874f23c716320a40c2e3f97d52fa6df847",
+      "size_bytes": 19349
+    },
+    {
+      "path": "geode/schemas/__init__.py",
+      "sha256": "02cf97899c9d6995904de627946aa4822d4ae94f7e32af5f0145eef9c383e508",
+      "size_bytes": 1292
+    },
+    {
+      "path": "geode/schemas/local.py",
+      "sha256": "b7c1396ac14c614620d23304af70a10e45dd83d2e51e71a88a28a16a15cf716c",
+      "size_bytes": 6339
+    },
+    {
+      "path": "geode/schemas/models.py",
+      "sha256": "914e719767f1a7cf7c2dc4465ac08450d1d9f2f71b3cd2e9388a78977e3773b9",
+      "size_bytes": 37435
+    },
+    {
+      "path": "geode/schemas/ontology.py",
+      "sha256": "b2a4e9eb203a6d898002ff93afcd0ef671a5429a5ea472e544fff2a5b8eef676",
+      "size_bytes": 6132
+    },
+    {
+      "path": "geode/schemas/validators.py",
+      "sha256": "26708c26fa757a0981fed78c473bcaf84c0498c8c414c0a7003764f639a8c45b",
+      "size_bytes": 6448
+    },
+    {
+      "path": "geode/scoring/__init__.py",
+      "sha256": "1a18e950dc7566ea52837771fbe5415a51ac5ced3907d606305f9ea44eee7704",
+      "size_bytes": 681
+    },
+    {
+      "path": "geode/scoring/confidence.py",
+      "sha256": "440f31630996aab5158a5ad421dabf5238743648da6bc5644a94a76c0dadc9ec",
+      "size_bytes": 3192
+    },
+    {
+      "path": "geode/scoring/industry_tagger.py",
+      "sha256": "cd1384d8c0dfec989a44e5c2b1a72ac4353805a77a0037000415e741a0c20ae6",
+      "size_bytes": 26748
+    },
+    {
+      "path": "geode/search/__init__.py",
+      "sha256": "405c22f8e53ca0720841e74597e25696038cab07c53e89621eaa9b9b3dad1973",
+      "size_bytes": 53
+    },
+    {
+      "path": "geode/search/app.py",
+      "sha256": "f0e3be66687db36e2674db571c850a3f9042048b868775d345ac77f77d5d994b",
+      "size_bytes": 718
+    },
+    {
+      "path": "geode/search/db.py",
+      "sha256": "af77a27870bb7dbd946fd00d083a6519bc83c190d1391633699f43e5ac8c91f9",
+      "size_bytes": 9618
+    },
+    {
+      "path": "geode/search/detail_index.py",
+      "sha256": "e9b0c7bfe5296d6a2776dfc8bf33f2bdf23ab1eb6558880fd581c6ac59a85e8f",
+      "size_bytes": 2220
+    },
+    {
+      "path": "geode/search/index.py",
+      "sha256": "070ee6b7edc50eeee82d3cc88f19f9d3568a047909f1500d1537d283bfdf37ac",
+      "size_bytes": 17884
+    },
+    {
+      "path": "geode/search/query_index.py",
+      "sha256": "f78e1cf05135aae1a5b5fbcba9cccd2d4f185275b3a1edd236be12474ecbb9ed",
+      "size_bytes": 58123
+    },
+    {
+      "path": "geode/utils/__init__.py",
+      "sha256": "14522d5ce89c48bbb78f44d99287998ccc6f45124ca45031225d4e19d3107711",
+      "size_bytes": 42
+    },
+    {
+      "path": "geode/utils/file_io.py",
+      "sha256": "4c68fdfe1158ad64fbd86cc91ed561244c5effe6454a34fa1138ed474ac41620",
+      "size_bytes": 6556
+    },
+    {
+      "path": "geode/utils/hashing.py",
+      "sha256": "0ea3b5ffe0fc0740914466204e42b8fb0bd59e2fd3917bceba5ff11c0b06cd7e",
+      "size_bytes": 1678
+    },
+    {
+      "path": "geode/utils/lfs_pointer.py",
+      "sha256": "be3d158de11c6e214694d365c5ede7b60bb41f3c53e118cb149852297c87a7bb",
+      "size_bytes": 2272
+    },
+    {
+      "path": "geode/utils/logging.py",
+      "sha256": "b5c2e85e8804d1c451e0badf88ade1cc6e35253645df32c2ae16d13faafa30f4",
+      "size_bytes": 498
+    },
+    {
+      "path": "geode/validate.py",
+      "sha256": "8183115437eae166358c0cf3b2c0338c1f1e7870f8c313d7a4a7989499398b04",
+      "size_bytes": 1305
+    },
+    {
+      "path": "geode/validation/__init__.py",
+      "sha256": "ec8d34a8195648fbf371047e4ec2180a7627066969c388ee656d7b657ecf63cd",
+      "size_bytes": 45
+    },
+    {
+      "path": "geode/validation/checks.py",
+      "sha256": "28fc80e06ff70c371b7e50357941b96088ca0bc8d6dcb198cc26b8f6499b33ba",
+      "size_bytes": 39359
+    },
+    {
+      "path": "geode/validation/integrity.py",
+      "sha256": "904a106057d086451c6d0686522f3ec6266738d500ebb5ade6d5b1e22fa37e7a",
+      "size_bytes": 10667
+    },
+    {
+      "path": "geode/validation/secret_safety.py",
+      "sha256": "842e2e5d24e9cb96b6fd95258dd7868b34271a4c72b0ee45882dd5f85dd71210",
+      "size_bytes": 7590
+    },
+    {
+      "path": "geode/validation/step1_gate.py",
+      "sha256": "c39eabc1fbc0a448a02b3953284fbb4a1ec038c8c78119cb6eaae691815ac2ac",
+      "size_bytes": 10561
+    },
+    {
+      "path": "geode/validation/step2_gate.py",
+      "sha256": "33e709ef791320966e12235102bb28f83ebf5f3a4e86278d207cbec9a94a1abf",
+      "size_bytes": 11907
+    },
+    {
+      "path": "geode/validation/step3_gate.py",
+      "sha256": "8f3acd9b17c7f9f9c56fc475a50f36dcd093b9744c8b304737db5de35ba78ebf",
+      "size_bytes": 8603
+    },
+    {
+      "path": "geode/validation/step4_gate.py",
+      "sha256": "f00ff7c364ff7d83e6032b82bb08717177b02b3bd9315def1488f3601c9fef76",
+      "size_bytes": 7959
+    },
+    {
+      "path": "geode/validation/step5_gate.py",
+      "sha256": "2302f0ed3c436547cb3337ada6fd03aaa1c1b68de4990725bba5a5d2c715d1dc",
+      "size_bytes": 8744
+    },
+    {
+      "path": "geode/validation/step6_gate.py",
+      "sha256": "e1465724c7bcdd101f2f08a24609bf88d2a74be3b4c8493f7af2b2a7bc3b01cf",
+      "size_bytes": 8592
+    },
+    {
+      "path": "geode/validation/step8_gate.py",
+      "sha256": "ff80ddfc6ac107ca61e935382fd06b35d56d6054c7f54b3fd4a7bb241a072dbb",
+      "size_bytes": 7986
+    },
+    {
+      "path": "geode/validation/step9_gate.py",
+      "sha256": "bda65bd2092aa9cc2873bd4eede1b2402a800618c72d101f2eadc077d097874d",
+      "size_bytes": 10448
+    },
+    {
+      "path": "geode/web/__init__.py",
+      "sha256": "87269a51eb30a9ad14a3f3331150e0921a32579533f632568156fca51adc4ba8",
+      "size_bytes": 157
+    },
+    {
+      "path": "geode/web/app.py",
+      "sha256": "e4739048f018d6581f9b535c927dc0435251378a93a0451488bb5662ea297a02",
+      "size_bytes": 1729
+    },
+    {
+      "path": "geode/web/config.py",
+      "sha256": "d6b4b1672ef10aae169b2a3946827c63e89151670a6f9a59f11f27ac98d13e13",
+      "size_bytes": 1259
+    },
+    {
+      "path": "geode/web/db.py",
+      "sha256": "a81d367b2b9bfa1e691b62bc36cf6129651aa450657cc2d0e8acff1416381efd",
+      "size_bytes": 23901
+    },
+    {
+      "path": "geode/web/index.py",
+      "sha256": "37875bce219fe5fd2098d8b8c6b25975371be4174f6ba49e17a523074a090112",
+      "size_bytes": 25111
+    },
+    {
+      "path": "geode/web/models.py",
+      "sha256": "34dda91a234815f290ff54b0d43f05a5ca8656d7ea46528719244961337e776a",
+      "size_bytes": 4084
+    },
+    {
+      "path": "geode/web/routes/__init__.py",
+      "sha256": "a6aa5570b1d5c6b40a9c24be177bc20f256c758e528acb6d6a469be20a1dfc9c",
+      "size_bytes": 104
+    },
+    {
+      "path": "geode/web/routes/entities.py",
+      "sha256": "6f92e48d1edc2491fcfb7509c152b6e0d6efbccf2299b7052a4654048c4243d8",
+      "size_bytes": 2832
+    },
+    {
+      "path": "geode/web/routes/search.py",
+      "sha256": "7edf25297847419c571e45513d9eb3ca744cfcf3f89dec1ecc25dd63d4460c95",
+      "size_bytes": 580
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "e92577980bbab233ac33e675c475e1a985c3a75b31d1aa831df97ebf10feeb33",
+      "size_bytes": 3286
+    },
+    {
+      "path": "requirements-ci.txt",
+      "sha256": "28da8926920351dee0c4f16ea72ae7d6a608e640a794934d0f0e75f28cb2c854",
+      "size_bytes": 333
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/inventory.json",
+      "sha256": "ed1d3386d9710d0a4bccfb368a9212fcf6fafb599b184f57886da6c5d40263ce",
+      "size_bytes": 2775691
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/join-plan.json",
+      "sha256": "d578114258168590cd0b3759685a1a8133aba6930b0685586c5e0828566920d7",
+      "size_bytes": 136630
+    },
+    {
+      "path": "schemas/bill_schema.json",
+      "sha256": "3c1cef2ea83956d5234680d484066232733681ae264b2d5f314b32438c09cecf",
+      "size_bytes": 7990
+    },
+    {
+      "path": "schemas/committee_lookup.json",
+      "sha256": "24aee3f5acb6394c17313669d2827f3311813817e070e8ba4bd47598297a2d5c",
+      "size_bytes": 4626
+    },
+    {
+      "path": "schemas/industry_index_schema.json",
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "size_bytes": 3
+    },
+    {
+      "path": "scripts/__init__.py",
+      "sha256": "ef1832133e6aa30cdbb79bb5608102950f902fbb44d61687ee37134fbb94caf9",
+      "size_bytes": 140
+    },
+    {
+      "path": "scripts/bill_parser.py",
+      "sha256": "926a24ad450b495e2d2ace356beae0b6b53145b880e918764495ca9f55659438",
+      "size_bytes": 24111
+    },
+    {
+      "path": "scripts/crs_source_lookup.py",
+      "sha256": "0dd62f447ec46bd9d8a9a3a205c07f6fc899a6d3befb93c9c487777fc2d55a31",
+      "size_bytes": 20996
+    },
+    {
+      "path": "scripts/data/extracted_text/HB25-1001_extracted.json",
+      "sha256": "147f8bb1911b7c142f0f13e418ff0ff3790be2ae3dd0151a5f13e06c77e59418",
+      "size_bytes": 4168
+    },
+    {
+      "path": "scripts/data/extracted_text/HB25-1042_extracted.json",
+      "sha256": "167a8847378144e1bb9d501fa8b6c7da5c1492f68ed8a8353338e92c39c5bf5b",
+      "size_bytes": 4262
+    },
+    {
+      "path": "scripts/data/extracted_text/HB25-1099_extracted.json",
+      "sha256": "8b33e0a3108510cb01e4739b47f7e80cbb162ebd74db3b2fc971f718ecf85f39",
+      "size_bytes": 3582
+    },
+    {
+      "path": "scripts/data/extracted_text/SB25-0055_extracted.json",
+      "sha256": "6ed0a805c688d10f88b4451b1f3267042ec0e589aec4e43b4c3c5b84032b5791",
+      "size_bytes": 2938
+    },
+    {
+      "path": "scripts/data/extracted_text/SB25-0123_extracted.json",
+      "sha256": "97c9546d9f0f77e3ac2e29a08b5f3e8fd8b9fbf22eede4c8e2eb2f878155d898",
+      "size_bytes": 3050
+    },
+    {
+      "path": "scripts/data/sample/HB25-1001_extracted.json",
+      "sha256": "147f8bb1911b7c142f0f13e418ff0ff3790be2ae3dd0151a5f13e06c77e59418",
+      "size_bytes": 4168
+    },
+    {
+      "path": "scripts/data/sample/HB25-1042_extracted.json",
+      "sha256": "167a8847378144e1bb9d501fa8b6c7da5c1492f68ed8a8353338e92c39c5bf5b",
+      "size_bytes": 4262
+    },
+    {
+      "path": "scripts/data/sample/HB25-1099_extracted.json",
+      "sha256": "8b33e0a3108510cb01e4739b47f7e80cbb162ebd74db3b2fc971f718ecf85f39",
+      "size_bytes": 3582
+    },
+    {
+      "path": "scripts/data/sample/SB25-0055_extracted.json",
+      "sha256": "6ed0a805c688d10f88b4451b1f3267042ec0e589aec4e43b4c3c5b84032b5791",
+      "size_bytes": 2938
+    },
+    {
+      "path": "scripts/data/sample/SB25-0123_extracted.json",
+      "sha256": "97c9546d9f0f77e3ac2e29a08b5f3e8fd8b9fbf22eede4c8e2eb2f878155d898",
+      "size_bytes": 3050
+    },
+    {
+      "path": "scripts/diagnose_fetch.py",
+      "sha256": "67b63a1017da0fd685ae981c0ec56fa6f6853d7768dfe601de243971e93f710b",
+      "size_bytes": 10515
+    },
+    {
+      "path": "scripts/entity_extractor.py",
+      "sha256": "a9e6b48df9f9bc3bbc98bb637f1ce84a2a09efba53ef7cc247929065cddf89c7",
+      "size_bytes": 19676
+    },
+    {
+      "path": "scripts/extractor.py",
+      "sha256": "2a1f19d3011fd3a301a45f11e24bfbfcac80461f2d0c9bedd344af6250d7a056",
+      "size_bytes": 10895
+    },
+    {
+      "path": "scripts/formatter.py",
+      "sha256": "84eb9825b49f40f570f99c14d65c959ff2fee8a016b77ad1941fcedf4193693d",
+      "size_bytes": 14472
+    },
+    {
+      "path": "scripts/generate_sample_data.py",
+      "sha256": "c31d235928011075f1cafd84dcb26fc7f8762ca3d15e35546e2d295d7f8e1d30",
+      "size_bytes": 26361
+    },
+    {
+      "path": "scripts/graph_builder.py",
+      "sha256": "4cdac417b4f856348fe9780f62da7ed02624d0ba198ea93f667b97fde078d263",
+      "size_bytes": 11191
+    },
+    {
+      "path": "scripts/industry_tagger.py",
+      "sha256": "a05f73982190fcdd14e2e605516576ca813227d544c7be96ed4c9aad8457c9d2",
+      "size_bytes": 22997
+    },
+    {
+      "path": "scripts/publish_ccr_current.py",
+      "sha256": "e45b2f0037423350052e1bfe9aa19c17a8bd0e4582cf22bee8cf28483025f8db",
+      "size_bytes": 11488
+    },
+    {
+      "path": "scripts/publish_county_update.py",
+      "sha256": "a2d92f094476d82f1a39cd58a79625f19fbc43a87c880eb7f14b429afd4d196e",
+      "size_bytes": 14033
+    },
+    {
+      "path": "scripts/publish_register_update.py",
+      "sha256": "d98385d9e9edd565a746e373d3714e94911b0b9ee84d4df8816e12c09dbaf774",
+      "size_bytes": 13058
+    },
+    {
+      "path": "scripts/research_scanned_fee_lookup.py",
+      "sha256": "27ddcafd68cb72c071b072e6caea741a3c62175d07c0a8febe499f5edc522cc3",
+      "size_bytes": 22376
+    },
+    {
+      "path": "scripts/research_source_lookup.py",
+      "sha256": "1f4da2ec117996c21a2676bdd82226018ecf4ad0e583297c1f52ece43d1ffe55",
+      "size_bytes": 171574
+    },
+    {
+      "path": "scripts/scraper.py",
+      "sha256": "f1dd49b9bbc9fbd31707c4b147da251e3a457f26d16a9d5dca95f66cddecd987",
+      "size_bytes": 23485
+    },
+    {
+      "path": "scripts/validator.py",
+      "sha256": "cccea416c9b69f491add4c1fa165e6b270d1053cc3f2afbc3c7e78439fdf76ee",
+      "size_bytes": 13145
+    },
+    {
+      "path": "tests/__init__.py",
+      "sha256": "b23c31fbc7eb01459562162480bf49cae8e0a38c6c7f5a8a0bb2c19288a9044d",
+      "size_bytes": 115
+    },
+    {
+      "path": "tests/conftest.py",
+      "sha256": "c50b9a4da291005db4f2ac84980b427ea16e0d34d7311743ed85ca93d6ea9c7f",
+      "size_bytes": 5980
+    },
+    {
+      "path": "tests/fixtures/douglas_pueblo_native_lookup/seven-native-sources/colorado-springs-construction-fees-atlas-directed.json",
+      "sha256": "4e90c4905769a9dcfb62536c235d827e823e39fc53a005bbfdf910ae5c804c40",
+      "size_bytes": 591388
+    },
+    {
+      "path": "tests/fixtures/douglas_pueblo_native_lookup/seven-native-sources/el-paso-boh-ehs-fees-sd011.json",
+      "sha256": "ebfed0229c4efeeb25f8a8693c5716d40fb0c60ffdcbf5b83eff52d946d2b167",
+      "size_bytes": 249594
+    },
+    {
+      "path": "tests/fixtures/douglas_pueblo_native_lookup/seven-native-sources/grand-junction-fire-fees-atlas-directed.json",
+      "sha256": "de6ed0bdca42869fd86a73e233ef294ae615faa42bc779a3dedd68685b26e04a",
+      "size_bytes": 87149
+    },
+    {
+      "path": "tests/fixtures/douglas_pueblo_native_lookup/seven-native-sources/greeley-building-fees-sd008-06.json",
+      "sha256": "421eabf05ec87d6e1ad2926e545efa2e5dfdf52e982e02e0ed6b5fd547914317",
+      "size_bytes": 72198
+    },
+    {
+      "path": "tests/fixtures/douglas_pueblo_native_lookup/seven-native-sources/greeley-development-impact-fee-memo-sd008-07.json",
+      "sha256": "3487934d017b88f5a1ccf17e17ea07cc055c8fe2497929e6b90da8f8823a2fa1",
+      "size_bytes": 455041
+    },
+    {
+      "path": "tests/fixtures/douglas_pueblo_native_lookup/seven-native-sources/greeley-water-sewer-proposed-pif-notice-sd008-08.json",
+      "sha256": "24c9bd23b71d46005ba8fdc90a0d3913861b936d163571fcf65257f9f1ecb03d",
+      "size_bytes": 92058
+    },
+    {
+      "path": "tests/fixtures/douglas_pueblo_native_lookup/seven-native-sources/weld-ehs-fees-2026-atlas-directed.json",
+      "sha256": "6ecb99acd4854e048942070a7d0294eca3a08db914ff08935fad6a1dfecf6552",
+      "size_bytes": 229967
+    },
+    {
+      "path": "tests/fixtures/el_paso_ehs_native_lookup/legacy-fixtures/colorado-springs-construction-fees-atlas-directed.json",
+      "sha256": "4e90c4905769a9dcfb62536c235d827e823e39fc53a005bbfdf910ae5c804c40",
+      "size_bytes": 591388
+    },
+    {
+      "path": "tests/fixtures/el_paso_ehs_native_lookup/legacy-fixtures/grand-junction-fire-fees-atlas-directed.json",
+      "sha256": "de6ed0bdca42869fd86a73e233ef294ae615faa42bc779a3dedd68685b26e04a",
+      "size_bytes": 87149
+    },
+    {
+      "path": "tests/fixtures/el_paso_ehs_native_lookup/legacy-fixtures/greeley-building-fees-sd008-06.json",
+      "sha256": "421eabf05ec87d6e1ad2926e545efa2e5dfdf52e982e02e0ed6b5fd547914317",
+      "size_bytes": 72198
+    },
+    {
+      "path": "tests/fixtures/el_paso_ehs_native_lookup/legacy-fixtures/greeley-development-impact-fee-memo-sd008-07.json",
+      "sha256": "3487934d017b88f5a1ccf17e17ea07cc055c8fe2497929e6b90da8f8823a2fa1",
+      "size_bytes": 455041
+    },
+    {
+      "path": "tests/fixtures/el_paso_ehs_native_lookup/legacy-fixtures/greeley-water-sewer-proposed-pif-notice-sd008-08.json",
+      "sha256": "24c9bd23b71d46005ba8fdc90a0d3913861b936d163571fcf65257f9f1ecb03d",
+      "size_bytes": 92058
+    },
+    {
+      "path": "tests/fixtures/el_paso_ehs_native_lookup/legacy-fixtures/weld-ehs-fees-2026-atlas-directed.json",
+      "sha256": "6ecb99acd4854e048942070a7d0294eca3a08db914ff08935fad6a1dfecf6552",
+      "size_bytes": 229967
+    },
+    {
+      "path": "tests/fixtures/legiscan/sb23_016.json",
+      "sha256": "5915e705089c51bf198334587152d9e1f84d9356d55e268b7746f7212ab40ff1",
+      "size_bytes": 922
+    },
+    {
+      "path": "tests/fixtures/native_lookup_capture/nine-native-sources/colorado-springs-construction-fees-atlas-directed.json",
+      "sha256": "4e90c4905769a9dcfb62536c235d827e823e39fc53a005bbfdf910ae5c804c40",
+      "size_bytes": 591388
+    },
+    {
+      "path": "tests/fixtures/native_lookup_capture/nine-native-sources/douglas-ehs-fees-atlas-directed.json",
+      "sha256": "883ad04d2c7542a8150ddefb9d383cbd9c82a509af8463f67b66ba7acd1d353a",
+      "size_bytes": 411461
+    },
+    {
+      "path": "tests/fixtures/native_lookup_capture/nine-native-sources/el-paso-boh-ehs-fees-sd011.json",
+      "sha256": "ebfed0229c4efeeb25f8a8693c5716d40fb0c60ffdcbf5b83eff52d946d2b167",
+      "size_bytes": 249594
+    },
+    {
+      "path": "tests/fixtures/native_lookup_capture/nine-native-sources/grand-junction-fire-fees-atlas-directed.json",
+      "sha256": "de6ed0bdca42869fd86a73e233ef294ae615faa42bc779a3dedd68685b26e04a",
+      "size_bytes": 87149
+    },
+    {
+      "path": "tests/fixtures/native_lookup_capture/nine-native-sources/greeley-building-fees-sd008-06.json",
+      "sha256": "421eabf05ec87d6e1ad2926e545efa2e5dfdf52e982e02e0ed6b5fd547914317",
+      "size_bytes": 72198
+    },
+    {
+      "path": "tests/fixtures/native_lookup_capture/nine-native-sources/greeley-development-impact-fee-memo-sd008-07.json",
+      "sha256": "3487934d017b88f5a1ccf17e17ea07cc055c8fe2497929e6b90da8f8823a2fa1",
+      "size_bytes": 455041
+    },
+    {
+      "path": "tests/fixtures/native_lookup_capture/nine-native-sources/greeley-water-sewer-proposed-pif-notice-sd008-08.json",
+      "sha256": "24c9bd23b71d46005ba8fdc90a0d3913861b936d163571fcf65257f9f1ecb03d",
+      "size_bytes": 92058
+    },
+    {
+      "path": "tests/fixtures/native_lookup_capture/nine-native-sources/pueblo-planning-fees-atlas-directed.json",
+      "sha256": "b5515bf5f4ea748ed0cbcf37fb9d71795cd86dc41a23393a06467d33939884b1",
+      "size_bytes": 351820
+    },
+    {
+      "path": "tests/fixtures/native_lookup_capture/nine-native-sources/weld-ehs-fees-2026-atlas-directed.json",
+      "sha256": "6ecb99acd4854e048942070a7d0294eca3a08db914ff08935fad6a1dfecf6552",
+      "size_bytes": 229967
+    },
+    {
+      "path": "tests/fixtures/register_daily_discrepancy/selection.json",
+      "sha256": "c5a912a925029d5d9f044533fe80ff94289bca35d86ecee840fef7f0c7cfe7eb",
+      "size_bytes": 2811
+    },
+    {
+      "path": "tests/fixtures/register_daily_discrepancy/selection.schema.json",
+      "sha256": "fb4d257bb7136fec065282f4b1981e2ac94cdde1b57ea1b823387cf194021b12",
+      "size_bytes": 1190
+    },
+    {
+      "path": "tests/fixtures/research_source_lookup_before_springs.json",
+      "sha256": "8df7616220f4c4b31acba68f1a147fbec0cdc390639683c3f883937e96a93e2a",
+      "size_bytes": 1077
+    },
+    {
+      "path": "tests/ownership_support.py",
+      "sha256": "cf4492e718cf6c6dff302451769c2b70817d9086fc7c8e19080f15fee19be679",
+      "size_bytes": 650
+    },
+    {
+      "path": "tests/test_api_access.py",
+      "sha256": "b97c7b8308342fa5f195f56245be8a5affa87420c1de2c833fbb92187e17fd10",
+      "size_bytes": 12069
+    },
+    {
+      "path": "tests/test_archive_paths.py",
+      "sha256": "82cbf6e3706a9eb8c0c89b17799a03b62a58000c6f46dfec6ab2cd084492b8e1",
+      "size_bytes": 2463
+    },
+    {
+      "path": "tests/test_artifact_readiness.py",
+      "sha256": "59d3ed1b7b1ffc11f151af511cd64f37d8c20a76a0938ef264a6bda441eca68d",
+      "size_bytes": 11565
+    },
+    {
+      "path": "tests/test_audit_artifacts.py",
+      "sha256": "957785471079ae6d768f397f657f461bc34dc59304300032779a7c188a05f16e",
+      "size_bytes": 3688
+    },
+    {
+      "path": "tests/test_automated_county_review.py",
+      "sha256": "4ce5145c12cbfe3826ca63b49a9e42d4ec3f2cec7545b7aade607f1b66660e31",
+      "size_bytes": 5753
+    },
+    {
+      "path": "tests/test_bulk_download_cli.py",
+      "sha256": "0cc82f055351e56f30141cb22a19fd3d45e78619025cfe7aa4b639fb105e7972",
+      "size_bytes": 6511
+    },
+    {
+      "path": "tests/test_ccr_bulk.py",
+      "sha256": "79ae1f74a0d86e6b8ada08e49ffe9fb1bbd868abd71c198bc416a630edfbb44c",
+      "size_bytes": 13646
+    },
+    {
+      "path": "tests/test_ccr_current.py",
+      "sha256": "f55f007e049568082015674eaaac7b9d2d976fe6bd889b04a4297a6b999006a9",
+      "size_bytes": 24063
+    },
+    {
+      "path": "tests/test_ccr_dataset.py",
+      "sha256": "0052817b649671c82eed921c970c1bbcf7f4ffa1e38a4190eca82ef636e5eb26",
+      "size_bytes": 9077
+    },
+    {
+      "path": "tests/test_ccr_industry_filter.py",
+      "sha256": "1a5d47346620b407ad8d94904b46ba997121dac7e3db562890e282afb4c81f02",
+      "size_bytes": 8492
+    },
+    {
+      "path": "tests/test_ccr_pipeline.py",
+      "sha256": "df09bcaa8e686614cf6f423f33dc09e617bfe97e669ea7dfd7ead5c3bd759e44",
+      "size_bytes": 4937
+    },
+    {
+      "path": "tests/test_ccr_postprocess.py",
+      "sha256": "b21f44f2fdfbd6ea380624e8027242f8999f06fb9a6e130fc1d375aba670c249",
+      "size_bytes": 6506
+    },
+    {
+      "path": "tests/test_ccr_scraper.py",
+      "sha256": "eb9338855e5cce3dc61c5aa00e069c356ada03c39573ba8b3f1d01652da8f023",
+      "size_bytes": 26864
+    },
+    {
+      "path": "tests/test_ccr_text_normalization.py",
+      "sha256": "40c47b66d643a392909b576627db4e49e4f5479a7ac1408c35926f1d930c00d1",
+      "size_bytes": 9242
+    },
+    {
+      "path": "tests/test_chaffee_source_path.py",
+      "sha256": "858d4452a0eb72bcb98eb449778a3e652fa5acf0092ad23bbb7ec4c8627f7c98",
+      "size_bytes": 3540
+    },
+    {
+      "path": "tests/test_change_tracking.py",
+      "sha256": "afd4034d77547db48dfece032228dfc3df17a97f6fb94353e5c6b4b7ab9df297",
+      "size_bytes": 2859
+    },
+    {
+      "path": "tests/test_colorado_springs_native_lookup.py",
+      "sha256": "51b9261254db98a3802d216db938282d62dbfed92c248a501d5b2ae0e634d6ca",
+      "size_bytes": 22027
+    },
+    {
+      "path": "tests/test_conditional_evidence.py",
+      "sha256": "ea846829b052cd7b878b6d33c87f82c77329b554ba3f2d2cb7ac741a0564184d",
+      "size_bytes": 5636
+    },
+    {
+      "path": "tests/test_context_safety.py",
+      "sha256": "df4a0144288bb6a6a05665e7c2e7dc0b20c47ec38a7b4f754c13b28a2decd478",
+      "size_bytes": 11733
+    },
+    {
+      "path": "tests/test_conversion.py",
+      "sha256": "922ec56dfd658b9d04782a9059868402328a250c269c0537e5e98ef0ebcbe085",
+      "size_bytes": 1815
+    },
+    {
+      "path": "tests/test_converter_dispatch.py",
+      "sha256": "6a90461c2dd577d9f1e0ed46c01ce05c1f294dc8c83a483bb16f1315568d5ce1",
+      "size_bytes": 2403
+    },
+    {
+      "path": "tests/test_corpus_usability_audit.py",
+      "sha256": "1806dda019c93b6c92a442dacd0c58226b39f6457eda5a3623391bab9c218508",
+      "size_bytes": 4939
+    },
+    {
+      "path": "tests/test_county_critical_repairs.py",
+      "sha256": "c2e9249b60b19243a24e90ec5562b4dafefc3eb38562464ba4f278a5a308d2f6",
+      "size_bytes": 4135
+    },
+    {
+      "path": "tests/test_county_data_audit.py",
+      "sha256": "3a0616bf29f13029e7c2f96feedb6e912765fa7dd1bf8bb6cec6f97b73799176",
+      "size_bytes": 659
+    },
+    {
+      "path": "tests/test_county_reacquisition.py",
+      "sha256": "20b6021504c4e5d90faa6c81cc2e6b28f4e48ba7681c6dfa05aefd4bc355a3c2",
+      "size_bytes": 29312
+    },
+    {
+      "path": "tests/test_county_semantic_final_review.py",
+      "sha256": "f02eae676fab5fa7c5f5009e810dc7c6b506a51a997bf3ffa9352a7e57a9b8a7",
+      "size_bytes": 488
+    },
+    {
+      "path": "tests/test_county_semantic_improvement.py",
+      "sha256": "afb97f22e0c83872824753d8a002428a951692a2d3f0c5bc6bab4de41b4e0355",
+      "size_bytes": 1382
+    },
+    {
+      "path": "tests/test_county_semantic_mapping.py",
+      "sha256": "99e2f953b8f5c17ce992a4ea0328cfc79442fcc0ee62e69a308051d7402d217c",
+      "size_bytes": 2868
+    },
+    {
+      "path": "tests/test_county_semantic_review.py",
+      "sha256": "bfbf35b6297e21cf4f4a0a18fbad93d47287fec502414030de90fe69b927a11c",
+      "size_bytes": 1453
+    },
+    {
+      "path": "tests/test_coverage_dashboard.py",
+      "sha256": "00c0bbd78dfbc438d825d458141b3962035b24aa05520ad10fbd9f24722fcccc",
+      "size_bytes": 19943
+    },
+    {
+      "path": "tests/test_critique.py",
+      "sha256": "4e9cbbfacee04728c5687f5055c207dcc1a23bf3c44933bfe79dad84a6bde2e4",
+      "size_bytes": 3841
+    },
+    {
+      "path": "tests/test_crs_bulk.py",
+      "sha256": "b41da75a481b8579a6dd2e8b38fb600d86520adc7933477ffea4944d26381b62",
+      "size_bytes": 8054
+    },
+    {
+      "path": "tests/test_crs_source_lookup.py",
+      "sha256": "902ae41d069d5681728373328a01fbb92df10ac0318f9c93e93d4010155a3ece",
+      "size_bytes": 16774
+    },
+    {
+      "path": "tests/test_douglas_pueblo_native_lookup.py",
+      "sha256": "2756c74408b55d2ff00df382439a60268d5f29972e3831260ee5366a23959c9b",
+      "size_bytes": 23026
+    },
+    {
+      "path": "tests/test_douglas_source_host.py",
+      "sha256": "2e0dfbd5f6e611c721d51bf9ea640bbda75c894d66e9c894b2993cd7b2ce3efa",
+      "size_bytes": 2437
+    },
+    {
+      "path": "tests/test_download_closeout.py",
+      "sha256": "ee4e2e9026f7dcf951c58a2636fb6f2249430dc747162a43dcf07fc7b1ad12fe",
+      "size_bytes": 3016
+    },
+    {
+      "path": "tests/test_el_paso_ehs_native_lookup.py",
+      "sha256": "d93492f9429c24e75e18cf2d5797f4c4e127010e083894f3f14955659916d23e",
+      "size_bytes": 15273
+    },
+    {
+      "path": "tests/test_el_paso_source_host.py",
+      "sha256": "be14f7c6fdee03273798e9e196b131778553279ba34ac90101ebb9cf638509c1",
+      "size_bytes": 2902
+    },
+    {
+      "path": "tests/test_exec_orders_source_anchoring.py",
+      "sha256": "de01e997c53daf9495908f6c009070b96b732a794e754d8abd82ca16c19490fb",
+      "size_bytes": 579
+    },
+    {
+      "path": "tests/test_extractors.py",
+      "sha256": "fe5cb13975c417826f88cc560caa6464a98926e31b72a84405a2b4031a0fca0a",
+      "size_bytes": 8396
+    },
+    {
+      "path": "tests/test_file_io.py",
+      "sha256": "123cf5518128f8f08c76c757290346feff71490e5f3da0381e49651a086604b7",
+      "size_bytes": 2814
+    },
+    {
+      "path": "tests/test_freshness_report.py",
+      "sha256": "b3df98483698fb44ef7f700541636e9cc4f48eb7aa2cab17a17a24e780f4fef3",
+      "size_bytes": 3414
+    },
+    {
+      "path": "tests/test_http_client.py",
+      "sha256": "380c2bf119691911ff92193afb7c770b6eafff5aa635d192b198cd71d4a18be6",
+      "size_bytes": 9303
+    },
+    {
+      "path": "tests/test_industry_tagger.py",
+      "sha256": "28abb1d8e3c50d01cedbe8987760d82ed535a3649c984fb6bb3fe44aec632b3a",
+      "size_bytes": 4418
+    },
+    {
+      "path": "tests/test_land_use_study.py",
+      "sha256": "06d479fe9a422bad0117cfc0b8684b5e395e311ba0be3ae5940d16e86c5decfb",
+      "size_bytes": 13187
+    },
+    {
+      "path": "tests/test_legiscan.py",
+      "sha256": "1dbe30da4106604a0528446fdd6c206c6ed07c5610a0d268202ff7928860ebdd",
+      "size_bytes": 11379
+    },
+    {
+      "path": "tests/test_legiscan_documents.py",
+      "sha256": "9c02ead8cda44d3ea0e2b514158943f01101c611541fada3fc0300a8f13b97f8",
+      "size_bytes": 26347
+    },
+    {
+      "path": "tests/test_legiscan_repair_intake.py",
+      "sha256": "ffad4f444cd5abfd70f075740783b1447f9d7c430c8e983dd72612b35a3af0e3",
+      "size_bytes": 5804
+    },
+    {
+      "path": "tests/test_legiscan_repair_progress_dashboard.py",
+      "sha256": "ac3fe86df183516a9a7c821449ab2cf52da01feeba2254386f845b186c557160",
+      "size_bytes": 4288
+    },
+    {
+      "path": "tests/test_legiscan_source_finder_checklist.py",
+      "sha256": "a5d3d3123013ff546793f26fd739b7f28bac6e3945add372e7dee64dd22289a7",
+      "size_bytes": 2994
+    },
+    {
+      "path": "tests/test_legislation_pipeline.py",
+      "sha256": "c9f9332c6028392671c02be16de24633f4f05135e2c2eedbc3a9e37ae82c5b47",
+      "size_bytes": 3169
+    },
+    {
+      "path": "tests/test_llm_ensemble.py",
+      "sha256": "2a945ee4e5cc78985c932b2845a7d3086342d3c5ca6404633348efb31513e2fe",
+      "size_bytes": 5126
+    },
+    {
+      "path": "tests/test_local_coverage.py",
+      "sha256": "5cc9af8713fcea8cfd7096331cc459c5a7dac130f23e03b126a96a9b9be52a64",
+      "size_bytes": 18562
+    },
+    {
+      "path": "tests/test_local_coverage_exports.py",
+      "sha256": "9d6d514626838fe9a920f4d48e44638ce460ba4bca4507644fee88bc217df36f",
+      "size_bytes": 14801
+    },
+    {
+      "path": "tests/test_local_fee_review.py",
+      "sha256": "4aa7e11fc5f56e2c1eee78553cbf9015b7e872203503d7af8b3b7ae1e48dd0c0",
+      "size_bytes": 11971
+    },
+    {
+      "path": "tests/test_local_link_retry.py",
+      "sha256": "961a78c5deb1ff947f66bfb2a2d031703b55ebd7706879c1dd77b72c2e8fc954",
+      "size_bytes": 2609
+    },
+    {
+      "path": "tests/test_local_pilot_index_preservation.py",
+      "sha256": "a8016069281152d202a0b64ea01ca4afa9ea26f624085528cbc5f8566fe7237a",
+      "size_bytes": 15742
+    },
+    {
+      "path": "tests/test_local_promotion.py",
+      "sha256": "63a44cfc0affa1e536a4e37d321a04599777a46df5646ed842ce53aa9e67d47b",
+      "size_bytes": 4261
+    },
+    {
+      "path": "tests/test_local_release_ownership.py",
+      "sha256": "971f9137ee190c4ca43998f7c246079565fb5265b86fce2f81245263d4747a23",
+      "size_bytes": 15851
+    },
+    {
+      "path": "tests/test_local_source_ownership.py",
+      "sha256": "c1fc9c6790cb0f5ab870630c3c91da1d4377bc13169f948a398676da4cabe85f",
+      "size_bytes": 23678
+    },
+    {
+      "path": "tests/test_local_stress.py",
+      "sha256": "45840fe7965f365859b44a652619ad4361cfda06da5a9b476d2f5c34139118ec",
+      "size_bytes": 6361
+    },
+    {
+      "path": "tests/test_local_text_review.py",
+      "sha256": "639f3e00ba1dc59fdd97a65df5668cb55afcd9701a11779ff8d3faa0c5b1658a",
+      "size_bytes": 23907
+    },
+    {
+      "path": "tests/test_manifest_quality.py",
+      "sha256": "c9903bec2a3099d4af9ad8bf191c6eb20d8c54a195290247c8f57ba6d7fb5107",
+      "size_bytes": 5142
+    },
+    {
+      "path": "tests/test_manual_review_inventory.py",
+      "sha256": "12226a47273aad0691c83ae9021f05ea4f0cda6d5c1fc5cde9768a286883886c",
+      "size_bytes": 65611
+    },
+    {
+      "path": "tests/test_manual_source_intake.py",
+      "sha256": "b1330ce78144435a9c122213ba13d74bba84567951df9abac3de7c0cfee5f5c0",
+      "size_bytes": 5730
+    },
+    {
+      "path": "tests/test_manual_source_reconciliation.py",
+      "sha256": "782fceba1f3b0e165a45820d8bdfde9264707f8e9a0f0353fc4d55ea41da0129",
+      "size_bytes": 16918
+    },
+    {
+      "path": "tests/test_manual_source_watch.py",
+      "sha256": "04195ac409b0ba991c78121f6d1e071309e98baf7c55a48f7710fdeb03723ce3",
+      "size_bytes": 33979
+    },
+    {
+      "path": "tests/test_manual_source_watch_batches.py",
+      "sha256": "376e4cba0f89083bfd0d03bdf6ce159d22c20982ca2b52e23b1d7884d749b930",
+      "size_bytes": 33195
+    },
+    {
+      "path": "tests/test_manual_watch_batches_admission.py",
+      "sha256": "91f641d4a66ab2ef85dfe7c45a1a444dc254e215cd7407505e9585b7d8282226",
+      "size_bytes": 12131
+    },
+    {
+      "path": "tests/test_manual_watch_batches_replay_policy.py",
+      "sha256": "0d8f2487961d992b05cf31763fda787305b58ac50f796b7d7ecd9167f45ffa7a",
+      "size_bytes": 7187
+    },
+    {
+      "path": "tests/test_manual_watch_http.py",
+      "sha256": "6e94d5b6ad99d21f357ac4474ec8024b884581cd9c1175e1a343de98ca253109",
+      "size_bytes": 33814
+    },
+    {
+      "path": "tests/test_manual_watch_http_deadlines.py",
+      "sha256": "4d01a0b5e9fd925ac6e030383f2ac0b3cf8d92dae72c8d8beb04a35f7f6f531c",
+      "size_bytes": 7845
+    },
+    {
+      "path": "tests/test_manual_watch_http_v2.py",
+      "sha256": "22f6ed5c0c33544fb5a3348189a9ecd5a0c076fcacc8485a4e8d7f6f9d528c3b",
+      "size_bytes": 33646
+    },
+    {
+      "path": "tests/test_manual_watch_http_v2_deadlines.py",
+      "sha256": "e710c5ff3be58a9ad6dea8ab8ed9f9248621d66c1135d8dc0cb0360d8c915b26",
+      "size_bytes": 7838
+    },
+    {
+      "path": "tests/test_modern_legiscan_repair_queue.py",
+      "sha256": "7e50d8db195f19b39d65e0b9824352c52dbfd34d0496ab5a58b6ebe8bd572db7",
+      "size_bytes": 3024
+    },
+    {
+      "path": "tests/test_municipal_code_export.py",
+      "sha256": "0a969d8de82557c62cf0321c68309dd8bd630797c5fe2555e4611363a26fa9a8",
+      "size_bytes": 20940
+    },
+    {
+      "path": "tests/test_municipal_directory.py",
+      "sha256": "73f52d49673cb756afd437fe399d32bc0143bdb24d7ffe5253cae6857befeba2",
+      "size_bytes": 5873
+    },
+    {
+      "path": "tests/test_native_lookup_capture.py",
+      "sha256": "4c5fb91a23eca9bb0faa1d7c2f3f768058d6bd3cde5886b7a9250967d2c80399",
+      "size_bytes": 14571
+    },
+    {
+      "path": "tests/test_official_source_checker.py",
+      "sha256": "567e20ba53d199a2c61fe0cef1b694d43a3121ff64db9a5862771a1e81390832",
+      "size_bytes": 10047
+    },
+    {
+      "path": "tests/test_operations_readiness.py",
+      "sha256": "d64304bb01827aabb0f57eb29287194f1bc01f105bb3896d24c0d2873b398170",
+      "size_bytes": 3363
+    },
+    {
+      "path": "tests/test_orchestration_accuracy_gates.py",
+      "sha256": "b54ba48a81f0d08549ed2064dfd59b870e43de6036629bd0fd8cf8292fb9bc2d",
+      "size_bytes": 923
+    },
+    {
+      "path": "tests/test_orchestration_evidence_policy_generation.py",
+      "sha256": "c9a8634033a720c8388f0621c392d46919c8d91c4f6311bb1264bd7587dcb598",
+      "size_bytes": 695
+    },
+    {
+      "path": "tests/test_orchestration_input_interpretation.py",
+      "sha256": "c18a9979381d471df6b56855d5d56a5978b015b998a7ded0aafd18a0fcb3fd69",
+      "size_bytes": 543
+    },
+    {
+      "path": "tests/test_orchestration_integration_eval.py",
+      "sha256": "be2c3dc67eb3e08c5c86612042c0b128ada9d40570054c6b8675cff4e881ff99",
+      "size_bytes": 1511
+    },
+    {
+      "path": "tests/test_orchestration_operational_services.py",
+      "sha256": "8a1e974ca5e248dd8af562978c7bf494db4af8702eeab25b786a2232650e80f0",
+      "size_bytes": 696
+    },
+    {
+      "path": "tests/test_orchestration_output_control.py",
+      "sha256": "bc4a6485b3f52d5e078395782b325eec5162f0fc7f4e71d9a012634970ccaf38",
+      "size_bytes": 641
+    },
+    {
+      "path": "tests/test_orchestration_planning_retrieval.py",
+      "sha256": "8dc8c0f1199aed81ed13fdfccef8aeed3e30cf213276a1001d4e20803dadfdda",
+      "size_bytes": 547
+    },
+    {
+      "path": "tests/test_orchestration_scaffold.py",
+      "sha256": "5411644c6122c233b07a940124ab9e1549a5c495a30661885ef15fe78ff67b1c",
+      "size_bytes": 433
+    },
+    {
+      "path": "tests/test_ownership_regeneration.py",
+      "sha256": "367c852c74cd2488d94270f0c59386607776c9bc337ff7082c4f47b5edd81602",
+      "size_bytes": 27694
+    },
+    {
+      "path": "tests/test_ownership_release_gates.py",
+      "sha256": "fe4d7bb653aff9687e040703286e3c3258a5d28dd356365d59dc962a262e0179",
+      "size_bytes": 7490
+    },
+    {
+      "path": "tests/test_parser.py",
+      "sha256": "0cc3d4d32569fe4e5f5bcaaede5d421a45bfbb942d1c8d1e5344081ec86b2b81",
+      "size_bytes": 13465
+    },
+    {
+      "path": "tests/test_pilot.py",
+      "sha256": "68f49f6302b3b6505f2cade644a8ff4fe220f9d72bb3a8ec07e28c274705001b",
+      "size_bytes": 4376
+    },
+    {
+      "path": "tests/test_pipeline.py",
+      "sha256": "2ea72c3cc874ad4d5bb04d49164748c778c63e435d04d98592bfbdab8ae99ca8",
+      "size_bytes": 1826
+    },
+    {
+      "path": "tests/test_pipeline_contracts.py",
+      "sha256": "2de654b06285209ae8614ba8d6e8b3d44cb9bd9fe39a6f9fc79011f2c9819441",
+      "size_bytes": 2993
+    },
+    {
+      "path": "tests/test_publish_ccr_current.py",
+      "sha256": "3a393224b5a0549090506ad694f9305b560d2bcf755325d974b4d83caa143682",
+      "size_bytes": 23067
+    },
+    {
+      "path": "tests/test_publish_county_update.py",
+      "sha256": "30fa5461b2ea2b22555666bc3703fb8ce44c9789624f413616c58184e78ffd3e",
+      "size_bytes": 24188
+    },
+    {
+      "path": "tests/test_publish_register_update.py",
+      "sha256": "8838de24bdfc37fc66258a13cef6f7c9190f33a923e329ede9fd64de587eac2e",
+      "size_bytes": 14026
+    },
+    {
+      "path": "tests/test_recent_download_audit.py",
+      "sha256": "d58f397757fce3f3deba81d6235e0d2ebf9095613b5b44dd6cf53d2f69505a99",
+      "size_bytes": 1988
+    },
+    {
+      "path": "tests/test_register_daily.py",
+      "sha256": "70b765470bd38eba40a2bbc561dcaf302c1fb0b55f0c5dba8add92e53a64b18c",
+      "size_bytes": 32742
+    },
+    {
+      "path": "tests/test_register_daily_discrepancy.py",
+      "sha256": "73b83d90e9c70773276fb7ba36982a36ab280ba8670f4572c1dab7a399ad7595",
+      "size_bytes": 28913
+    },
+    {
+      "path": "tests/test_register_daily_parser.py",
+      "sha256": "da45147a933fb9bb2273183e60404056ddfd739feb8bb7526d4efd88d181de69",
+      "size_bytes": 13307
+    },
+    {
+      "path": "tests/test_register_daily_schema.py",
+      "sha256": "cc3e4988ff34dd3d4439941d623f2c38d99367ad9da4c9e4b459300965b1adf5",
+      "size_bytes": 10000
+    },
+    {
+      "path": "tests/test_register_daily_transport.py",
+      "sha256": "2672e19cdbc756eedff3490ec1e89e11a53176cda4dc1eeac876389b7b775ccf",
+      "size_bytes": 7956
+    },
+    {
+      "path": "tests/test_register_pipeline.py",
+      "sha256": "8b2a00d83ff279f0dbcc4a7b65b6a2549e5645ee7151da462aefd7c51034518c",
+      "size_bytes": 7679
+    },
+    {
+      "path": "tests/test_register_table_parser.py",
+      "sha256": "b2ae8c54da8202989557b0f3acd31b4f76ad6000932ef1e42f06b88e3f50750d",
+      "size_bytes": 1269
+    },
+    {
+      "path": "tests/test_relationship_backfill.py",
+      "sha256": "c5044e8330b7a0b7775eb2432610cad13a3a0d60e3256409071515c4b2cbbdf9",
+      "size_bytes": 3378
+    },
+    {
+      "path": "tests/test_relationship_coverage.py",
+      "sha256": "a86a086611aecb7a146523a396dd3577e6526e93412147be1e2d1b76196f56ae",
+      "size_bytes": 4461
+    },
+    {
+      "path": "tests/test_reliance_policy.py",
+      "sha256": "6f668300d9be3d303542c3a24e3cd16805d8586603d9fc20fb431c17da882eb6",
+      "size_bytes": 1116
+    },
+    {
+      "path": "tests/test_remaining_connectors.py",
+      "sha256": "9c1952a2b912093e4496082c678191a0caee5aea3c4ce9ab6554ad73c22f8da8",
+      "size_bytes": 34619
+    },
+    {
+      "path": "tests/test_research_catalog.py",
+      "sha256": "257a9ab8c21d11d4cc28d71a582e4b9181f3b9d6bfe8221a4dab0e37cdc4b3ed",
+      "size_bytes": 17587
+    },
+    {
+      "path": "tests/test_research_scanned_fee_lookup.py",
+      "sha256": "dcbb759c5d5c8b0a95fbf11930ee1bb2b82889539114cab62630ad6de05acb2b",
+      "size_bytes": 18928
+    },
+    {
+      "path": "tests/test_research_source_lookup.py",
+      "sha256": "479c678632457079d9698e225fe077bae08878fb7e58d7983e0887d8e666bef2",
+      "size_bytes": 71547
+    },
+    {
+      "path": "tests/test_retrieval_catalog.py",
+      "sha256": "9991562ea532cbd2c5f083d77355f1f687aabcbcdc5a49ba2982ca74059656cd",
+      "size_bytes": 2102
+    },
+    {
+      "path": "tests/test_review_packets.py",
+      "sha256": "c3159ef5418b32a9732387e5fc717ad6a67b34007eebdcc15aae5bcbd8650d94",
+      "size_bytes": 3725
+    },
+    {
+      "path": "tests/test_reviewer_operations.py",
+      "sha256": "536e9755508182a8c0b06becfa1d5cdfe2cbf8834f59e2566608a7d1859195ad",
+      "size_bytes": 2931
+    },
+    {
+      "path": "tests/test_rule_history_backfill.py",
+      "sha256": "59344b512f34e4fdecdad9fb63108156c7d697ef1e157182e89aa84b19ca8b3a",
+      "size_bytes": 5450
+    },
+    {
+      "path": "tests/test_rule_units_pipeline.py",
+      "sha256": "c48f8687d1d59e7b5b98a90dfc568f8e645ced05fe39863d7e6bdfc2060fd29a",
+      "size_bytes": 18021
+    },
+    {
+      "path": "tests/test_rulemaking_prompt_comparison.py",
+      "sha256": "41e4e4865de5d26008772e1666964575e82a4d6c95a8f094c3e53d6b9fa78a01",
+      "size_bytes": 3332
+    },
+    {
+      "path": "tests/test_rulemaking_search_verification.py",
+      "sha256": "7344f0c1cd38fb5fc4a860eb915af8bc33e740e54c4f0b8cfadb60e075ecc308",
+      "size_bytes": 5121
+    },
+    {
+      "path": "tests/test_runtime_ownership_regressions.py",
+      "sha256": "c1cbb8c7dea9c1ad5e58e0d13be9242f43f1cc9a954251c876b75364263642eb",
+      "size_bytes": 4373
+    },
+    {
+      "path": "tests/test_sample_data.py",
+      "sha256": "a9515769bc16a23e246c35b9fa3b8c938435fa1dc56326f6814718bad5494c1a",
+      "size_bytes": 2600
+    },
+    {
+      "path": "tests/test_schemas.py",
+      "sha256": "23182199ad27d963bf5eb285bf246670396895f89567670869f0f4d1e37c55ec",
+      "size_bytes": 11765
+    },
+    {
+      "path": "tests/test_scoring.py",
+      "sha256": "2d185d0f293a25d8211547ccc51ed31e15fc1f8f87e0a3e7d9bdf13d9e36fcac",
+      "size_bytes": 1822
+    },
+    {
+      "path": "tests/test_search_index.py",
+      "sha256": "bc5ed9314c266670474e66222d0a4c7c3d1a9e820d6ab3de6c92515524475a0c",
+      "size_bytes": 36310
+    },
+    {
+      "path": "tests/test_secret_safety.py",
+      "sha256": "bb31c90fca01ae920a5c5539c121d89b0aff2730c9b970247233246c9d602c96",
+      "size_bytes": 1779
+    },
+    {
+      "path": "tests/test_session_freshness_onboarding.py",
+      "sha256": "04982aafdee31fdfcdd8b25329016c695adf1359225867bc0cc185ddc9dfc1e0",
+      "size_bytes": 2362
+    },
+    {
+      "path": "tests/test_session_laws.py",
+      "sha256": "311360023e9223bdffcd61bbb86b9af64c10a34ee9a30a15c912062b45864a36",
+      "size_bytes": 3458
+    },
+    {
+      "path": "tests/test_source_output_accuracy_audit.py",
+      "sha256": "e3e41122c2585651c6512d4b25d99a8b22442110f41cd966b43776f52dee0fda",
+      "size_bytes": 3692
+    },
+    {
+      "path": "tests/test_source_quality_operating_layer.py",
+      "sha256": "b3d0203d76a7ad3699a68ae9091a997e9dc81039b97e6d7c1526e48cccbbc975",
+      "size_bytes": 6785
+    },
+    {
+      "path": "tests/test_source_update_watcher.py",
+      "sha256": "a717f99eae3330097920b8f754a9f5ba93011f015f079829237a239ca4ffc417",
+      "size_bytes": 10789
+    },
+    {
+      "path": "tests/test_step1_gate.py",
+      "sha256": "6d97b0085c2a6dfbe7216f06d9be58813d50f26008ee8f0e8a4b3275662d24fa",
+      "size_bytes": 3650
+    },
+    {
+      "path": "tests/test_step2_gate.py",
+      "sha256": "4c4b0ce039cfcc155f5bef1aaeeed8968410813606c4e2cb9bd9e003466dd2cd",
+      "size_bytes": 7258
+    },
+    {
+      "path": "tests/test_step3_gate.py",
+      "sha256": "c6121754cd57f21c7d39880609cc583119af8ec9fa4ce88eb93f60c8ab3d8bc6",
+      "size_bytes": 2105
+    },
+    {
+      "path": "tests/test_step4_gate.py",
+      "sha256": "7945ffec481b23c8560b67e548c8287d3f5090f6d913618e49a85c10b11b6bd6",
+      "size_bytes": 2297
+    },
+    {
+      "path": "tests/test_step5_gate.py",
+      "sha256": "abe86af3086ddceeaf3f19aecd4a14e813006896e2b463483c058fade2003939",
+      "size_bytes": 1610
+    },
+    {
+      "path": "tests/test_step6_gate.py",
+      "sha256": "13e70417ce9725f2a4a84739bbf0118e9e75fc8334705612c3d1fde4e60e8f1c",
+      "size_bytes": 2810
+    },
+    {
+      "path": "tests/test_step8_gate.py",
+      "sha256": "2ddf6b5ab3695a18ee62821883effb00a3cf49cf2ca086248dd2e783612de007",
+      "size_bytes": 2916
+    },
+    {
+      "path": "tests/test_step9_gate.py",
+      "sha256": "dd961ce1ea4815fe5d1942ceeae40d5be55fa96962a70a514c779303e8ba65fb",
+      "size_bytes": 3173
+    },
+    {
+      "path": "tests/test_update_ledger.py",
+      "sha256": "e25a84d0e1dc7d52df5a83ddf11a77c1e0ddf61bd39355cac9b7b06266cbd237",
+      "size_bytes": 3197
+    },
+    {
+      "path": "tests/test_utils.py",
+      "sha256": "951aba92f3d7b10a25ce6999a04cbfffc24a7cef03a65d1ca30e0fa0b3349032",
+      "size_bytes": 1538
+    },
+    {
+      "path": "tests/test_validation.py",
+      "sha256": "101925ddca1574d7d78996530460636ad0c186da4d85c01941b8d4555890003a",
+      "size_bytes": 5459
+    },
+    {
+      "path": "tests/test_verified_local_ocr.py",
+      "sha256": "5b283947c23c9d449dd2e3aa223d5d74501a7e7e4574ff06326ee7751c67b19b",
+      "size_bytes": 20166
+    },
+    {
+      "path": "tests/test_web_index.py",
+      "sha256": "b8dd5c71e2463189e920ff21e8056eae6357e8441695143811e1b2a6b3a860ec",
+      "size_bytes": 6021
+    },
+    {
+      "path": "tests/test_writer_validation_phase2j.py",
+      "sha256": "df5a21882ead709b93e8e2a830cc70f556a268cdb17b8037b28fb2bcff9918ee",
+      "size_bytes": 5854
+    }
+  ],
+  "environment_overrides": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+    "COVERAGE_FILE": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13/atlas-final-validation/corpus-validation/coverage.sqlite"
+  },
+  "boundary": "Actual local check, not source visual verification or legal currentness. Code/config and selected intake/control/inventory metadata are pinned; frozen research evidence is verified separately. User models 2.py is excluded from tracked code identity and remains untouched."
+}

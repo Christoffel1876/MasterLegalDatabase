@@ -1,0 +1,268 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "One immutable repository file binding.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "HashClaim": {
+      "additionalProperties": false,
+      "description": "A named external hash claim checked against measured local bytes.",
+      "properties": {
+        "receipt_name": {
+          "title": "Receipt Name",
+          "type": "string"
+        },
+        "claim_key": {
+          "title": "Claim Key",
+          "type": "string"
+        },
+        "claimed_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Claimed Sha256",
+          "type": "string"
+        },
+        "bound_file": {
+          "$ref": "#/$defs/Asset"
+        },
+        "matches": {
+          "const": true,
+          "default": true,
+          "title": "Matches",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "receipt_name",
+        "claim_key",
+        "claimed_sha256",
+        "bound_file"
+      ],
+      "title": "HashClaim",
+      "type": "object"
+    },
+    "ReceiptDefect": {
+      "additionalProperties": false,
+      "description": "A receipt summary error, separate from the full review's source claims.",
+      "properties": {
+        "defect_id": {
+          "title": "Defect Id",
+          "type": "string"
+        },
+        "receipt_file": {
+          "$ref": "#/$defs/Asset"
+        },
+        "json_pointer": {
+          "title": "Json Pointer",
+          "type": "string"
+        },
+        "received_text": {
+          "title": "Received Text",
+          "type": "string"
+        },
+        "source_amount_as_printed": {
+          "title": "Source Amount As Printed",
+          "type": "string"
+        },
+        "full_report_finding_id": {
+          "title": "Full Report Finding Id",
+          "type": "string"
+        },
+        "disposition": {
+          "const": "rejected_as_fee_literal",
+          "default": "rejected_as_fee_literal",
+          "title": "Disposition",
+          "type": "string"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "defect_id",
+        "receipt_file",
+        "json_pointer",
+        "received_text",
+        "source_amount_as_printed",
+        "full_report_finding_id",
+        "qualification"
+      ],
+      "title": "ReceiptDefect",
+      "type": "object"
+    },
+    "ReceivedCopy": {
+      "additionalProperties": false,
+      "description": "Exact received bytes; the original location is historical custody metadata.",
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "received_at": {
+          "format": "date-time",
+          "title": "Received At",
+          "type": "string"
+        },
+        "file": {
+          "$ref": "#/$defs/Asset"
+        },
+        "exact_copy_verified": {
+          "const": true,
+          "default": true,
+          "title": "Exact Copy Verified",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "original_path",
+        "received_at",
+        "file"
+      ],
+      "title": "ReceivedCopy",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Verified delivery identity without certification of the claimed review process.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "assignment_id": {
+      "const": "EB-PDF-010",
+      "default": "EB-PDF-010",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "larimer-development-review-fees-sd004-07",
+      "default": "larimer-development-review-fees-sd004-07",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "received_at": {
+      "format": "date-time",
+      "title": "Received At",
+      "type": "string"
+    },
+    "copies": {
+      "items": {
+        "$ref": "#/$defs/ReceivedCopy"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "title": "Copies",
+      "type": "array"
+    },
+    "hash_claims": {
+      "items": {
+        "$ref": "#/$defs/HashClaim"
+      },
+      "maxItems": 23,
+      "minItems": 23,
+      "title": "Hash Claims",
+      "type": "array"
+    },
+    "all_embedded_hashes_resolve_to_preserved_assets": {
+      "const": true,
+      "default": true,
+      "title": "All Embedded Hashes Resolve To Preserved Assets",
+      "type": "boolean"
+    },
+    "claimed_pass1_start": {
+      "format": "date-time",
+      "title": "Claimed Pass1 Start",
+      "type": "string"
+    },
+    "claimed_pass1_freeze": {
+      "format": "date-time",
+      "title": "Claimed Pass1 Freeze",
+      "type": "string"
+    },
+    "claimed_pass2_start": {
+      "format": "date-time",
+      "title": "Claimed Pass2 Start",
+      "type": "string"
+    },
+    "claimed_pass2_end": {
+      "format": "date-time",
+      "title": "Claimed Pass2 End",
+      "type": "string"
+    },
+    "timing_and_blind_order_independently_proven": {
+      "const": false,
+      "default": false,
+      "title": "Timing And Blind Order Independently Proven",
+      "type": "boolean"
+    },
+    "caption_mediation": {
+      "const": "reported_by_external_reviewer",
+      "title": "Caption Mediation",
+      "type": "string"
+    },
+    "missing_referenced_support": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Referenced Support",
+      "type": "array"
+    },
+    "receipt_defects": {
+      "items": {
+        "$ref": "#/$defs/ReceiptDefect"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Receipt Defects",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "received_at",
+    "copies",
+    "hash_claims",
+    "claimed_pass1_start",
+    "claimed_pass1_freeze",
+    "claimed_pass2_start",
+    "claimed_pass2_end",
+    "caption_mediation",
+    "missing_referenced_support",
+    "receipt_defects",
+    "limitations"
+  ],
+  "title": "Custody",
+  "type": "object"
+}

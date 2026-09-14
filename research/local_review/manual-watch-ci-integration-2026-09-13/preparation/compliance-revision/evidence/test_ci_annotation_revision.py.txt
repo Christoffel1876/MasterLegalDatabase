@@ -1,0 +1,21 @@
+from pathlib import Path
+from datetime import datetime,timezone
+import hashlib,json,subprocess,sys,tempfile,shutil
+B=Path('/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13');S=B/'ptolemy-manual-watch-ci-preparation';A=B/'ptolemy-manual-watch-ci-compliance-revision'
+manifest=json.loads((S/'FINAL_MANIFEST.json').read_bytes())
+def check_original():
+ for ref in manifest['files']:
+  data=(S/ref['path']).read_bytes();assert len(data)==ref['size_bytes'] and hashlib.sha256(data).hexdigest()==ref['sha256']
+ assert {p.relative_to(S).as_posix() for p in S.rglob('*') if p.is_file()}=={ref['path'] for ref in manifest['files']}|{'FINAL_MANIFEST.json'}
+check_original()
+with tempfile.TemporaryDirectory(prefix='geode-ci-annotation-check-',dir='/private/tmp') as name:
+ T=Path(name)
+ shutil.copytree(S/'proposed',T,dirs_exist_ok=True)
+ for p in (A/'proposed').rglob('*'):
+  if p.is_file():shutil.copyfile(p,T/p.relative_to(A/'proposed'))
+ argv=[sys.executable,'-B','-m','pytest',str(T/'tests/test_manual_source_watch_ci.py'),'-q','-o','cache_dir='+str(T/'cache')]
+ started=datetime.now(timezone.utc).isoformat();result=subprocess.run(argv,cwd=T,capture_output=True,timeout=90);ended=datetime.now(timezone.utc).isoformat()
+ (A/'evidence/focused.stdout').write_bytes(result.stdout);(A/'evidence/focused.stderr').write_bytes(result.stderr)
+ assert result.returncode==0 and b'44 passed' in result.stdout,(result.returncode,result.stdout,result.stderr)
+ record={'status':'PASS','started_at':started,'finished_at':ended,'argv':argv,'returncode':result.returncode,'tests_passed':44,'python':sys.version,'frozen_runner_sha256':hashlib.sha256((T/'scripts/manual_source_watch_ci.py').read_bytes()).hexdigest(),'source_requests':0,'temporary_fixture_root_removed_after_run':True,'predecessor_payloads_verified_unchanged':154}
+check_original();(A/'evidence/FOCUSED_TEST.json').write_text(json.dumps(record,indent=2)+'\n');print(json.dumps(record,indent=2))

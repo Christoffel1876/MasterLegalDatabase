@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import sqlite3
+from contextlib import closing
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -97,7 +98,7 @@ class CorpusRepository:
         """Resolve an ID, citation, or alias to a corpus entity."""
 
         normalized = _normalize_alias(value)
-        with self._connect() as connection:
+        with closing(self._connect()) as connection, connection:
             row = connection.execute(
                 """
                 SELECT e.*
@@ -128,7 +129,7 @@ class CorpusRepository:
             results.append(SearchResult(entity=entity, match_reason="alias matched"))
             seen.add(entity.geode_id)
 
-        with self._connect() as connection:
+        with closing(self._connect()) as connection, connection:
             for row in connection.execute("SELECT * FROM entities ORDER BY geode_id"):
                 candidate = _entity_from_row(row)
                 haystack = _normalize_alias(
@@ -165,7 +166,7 @@ class CorpusRepository:
     def list_chunks(self, geode_id: str) -> list[CorpusChunk]:
         """Return searchable chunks for one entity."""
 
-        with self._connect() as connection:
+        with closing(self._connect()) as connection, connection:
             rows = connection.execute(
                 """
                 SELECT geode_id, chunk_index, text, path
@@ -188,7 +189,7 @@ class CorpusRepository:
     def list_relations(self, geode_id: str) -> list[CorpusRelation]:
         """Return relationships connected to one entity."""
 
-        with self._connect() as connection:
+        with closing(self._connect()) as connection, connection:
             rows = connection.execute(
                 """
                 SELECT source_geode_id, target_geode_id, relationship, confidence, evidence
@@ -212,7 +213,7 @@ class CorpusRepository:
     def list_timeline_events(self, geode_id: str) -> list[TimelineEvent]:
         """Return timeline events connected to one entity."""
 
-        with self._connect() as connection:
+        with closing(self._connect()) as connection, connection:
             rows = connection.execute(
                 """
                 SELECT event_id, event_date, event_type, entity_id, description, file_path
@@ -237,7 +238,7 @@ class CorpusRepository:
     def list_source_versions(self, geode_id: str) -> list[SourceVersion]:
         """Return source versions known for one entity."""
 
-        with self._connect() as connection:
+        with closing(self._connect()) as connection, connection:
             rows = connection.execute(
                 """
                 SELECT geode_id, version_label, path, sha256
@@ -260,7 +261,7 @@ class CorpusRepository:
     def latest_index_run(self) -> IndexRun | None:
         """Return the latest index-run summary."""
 
-        with self._connect() as connection:
+        with closing(self._connect()) as connection, connection:
             row = connection.execute(
                 """
                 SELECT entity_count, alias_count, chunk_count, relation_count, timeline_count

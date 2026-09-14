@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "status": "source_snapshot_structured_pending_semantic_review",
+  "legal_currentness": "not_verified",
+  "source_id": "fort-collins-fee-catalog-atlas-sd004-14",
+  "recorded_at": "2026-09-11T18:49:58.603881Z",
+  "source_capture_completed_at": "2026-09-10T22:06:37.843075Z",
+  "originals": [
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/atlas-reviews/sherlock-source-discovery-004/source-check-2026-09-10/network-retry/SD004-14.html",
+      "frozen_file": {
+        "path": "source/SD004-14.html",
+        "size_bytes": 142539,
+        "sha256": "a10bcc173cd8e20bbfa83dd06292203c6c4ddd4720a58338c6f2b5f1eaeceb55"
+      },
+      "exact_byte_equality_checked": true,
+      "observed_destination_birthtime": "2026-09-11T18:44:46.190398Z",
+      "birthtime_role": "filesystem birthtime observed after copy; not source retrieval"
+    },
+    {
+      "original_path": "/Users/mcoors/Documents/Project Geode/handoffs/atlas-reviews/sherlock-source-discovery-004/source-check-2026-09-10/network-retry/SD004-14.json",
+      "frozen_file": {
+        "path": "source/SD004-14.json",
+        "size_bytes": 677,
+        "sha256": "3f45ce34672ff46a8d012379106dd09c1ad92c456ceeb06d6349be80f4e82a8f"
+      },
+      "exact_byte_equality_checked": true,
+      "observed_destination_birthtime": "2026-09-11T18:44:46.190670Z",
+      "birthtime_role": "filesystem birthtime observed after copy; not source retrieval"
+    }
+  ],
+  "package_files": [
+    {
+      "path": "README.md",
+      "size_bytes": 6462,
+      "sha256": "3c0150019b5d3ab81137086caf7ead82c146088d229a661c4afd06158bb3473b"
+    },
+    {
+      "path": "extract_catalog.py",
+      "size_bytes": 31253,
+      "sha256": "cb96d64a178fc94e5e3745b1c72455de1d27ee33a14e48777ab6396e15489e2f"
+    },
+    {
+      "path": "test_extract_catalog.py",
+      "size_bytes": 9600,
+      "sha256": "dbfc74af5f05567c3d40146576c954b2f79da9f45aadf30c4793b288ffedae2b"
+    },
+    {
+      "path": "extraction.json",
+      "size_bytes": 2388958,
+      "sha256": "b01c631a0c6641a2627e943639fdeb7ede67b44837ba1a8bc9c49d38d0a4a288"
+    },
+    {
+      "path": "extraction.schema.json",
+      "size_bytes": 20788,
+      "sha256": "c5f5c5a7969c25dcad4c619a42bd8922dd1b15d94e9ce5dcaa88b3a555b3f754"
+    },
+    {
+      "path": "source/SD004-14.html",
+      "size_bytes": 142539,
+      "sha256": "a10bcc173cd8e20bbfa83dd06292203c6c4ddd4720a58338c6f2b5f1eaeceb55"
+    },
+    {
+      "path": "source/SD004-14.json",
+      "size_bytes": 677,
+      "sha256": "3f45ce34672ff46a8d012379106dd09c1ad92c456ceeb06d6349be80f4e82a8f"
+    }
+  ],
+  "python_version": "3.14.3",
+  "pydantic_version": "2.13.5",
+  "checks_passed": [
+    "Both source custody copies equal the original Atlas capture artifacts byte for byte.",
+    "Strict Pydantic output and independent exported JSON Schema validation passed.",
+    "Offline extraction replay and exported schema are byte-identical to the final files.",
+    "All 5144 source slice hashes and token decoding projections passed independent checks.",
+    "All 674 nonblank fragments have exactly one content owner; source order is preserved.",
+    "All nine tables, 76 rows, 238 cells, 213 list fragments and 48 anchors are retained.",
+    "Printed date phrases bind to their exact local content and source panel.",
+    "Source, output and schema tampering are rejected; existing outputs are not overwritten.",
+    "Eleven final pytest cases passed; coverage includes branches."
+  ],
+  "pytest_passed": 11,
+  "branch_inclusive_coverage_percent": 96.37305699481865,
+  "source_slice_hash_checks": 5144,
+  "semantic_review_completed": false,
+  "network_requests_performed": 0,
+  "excluded_package_files": [
+    "_SNAPSHOTS/ contains superseded development files, not active extraction payloads.",
+    "This receipt and its exported schema are not included in their own package-file hashes."
+  ],
+  "limitations": [
+    "Source date is the prior HTTP receipt capture time, not current retrieval time.",
+    "No new linked source requests, operative fee interpretations or currentness review.",
+    "Completeness is confined to the selected source HTML content region.",
+    "JSON Schema validation alone does not replace exact offline source replay."
+  ]
+}

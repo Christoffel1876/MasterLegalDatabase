@@ -1,0 +1,137 @@
+{
+  "$defs": {
+    "FileRef": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    },
+    "FontSpan": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "font": {
+          "title": "Font",
+          "type": "string"
+        },
+        "flags": {
+          "title": "Flags",
+          "type": "integer"
+        },
+        "bbox": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Bbox",
+          "type": "array"
+        }
+      },
+      "required": [
+        "physical_page",
+        "text",
+        "font",
+        "flags",
+        "bbox"
+      ],
+      "title": "FontSpan",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "source_pdf": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "pymupdf_version": {
+      "const": "1.28.2",
+      "title": "Pymupdf Version",
+      "type": "string"
+    },
+    "selected_font_spans": {
+      "items": {
+        "$ref": "#/$defs/FontSpan"
+      },
+      "title": "Selected Font Spans",
+      "type": "array"
+    },
+    "page2_uri_annotations": {
+      "items": {
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            }
+          ]
+        },
+        "type": "object"
+      },
+      "title": "Page2 Uri Annotations",
+      "type": "array"
+    },
+    "purpose": {
+      "title": "Purpose",
+      "type": "string"
+    },
+    "network_requests": {
+      "const": 0,
+      "title": "Network Requests",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_pdf",
+    "pymupdf_version",
+    "selected_font_spans",
+    "page2_uri_annotations",
+    "purpose",
+    "network_requests",
+    "legal_currentness"
+  ],
+  "title": "SourceSupport",
+  "type": "object"
+}

@@ -1,0 +1,28 @@
+{
+  "recorded_at": "2026-09-13T17:27:57.262313+00:00",
+  "reviewer": "Atlas",
+  "status": "accepted_bounded_scanner_revision_pending_final_use",
+  "frozen_audit": {
+    "path": "independent-audit/FINAL_MANIFEST.json",
+    "sha256": "20f11e610e448823d1882476f4260e4f784239695910ab254fba0a4e56968b82",
+    "size_bytes": 5174
+  },
+  "proposed_scanner": {
+    "path": "independent-audit/proposed/geode_packaging_scan.py",
+    "sha256": "6970412367b108fda28516ecdf27c3e8a4467ebd58180475103facd1c5499194",
+    "size_bytes": 12981
+  },
+  "checks": [
+    "Root read the full AUDIT/README, complete original-to-proposed diff, all nine focused guard tests and preserved reproduction output.",
+    "Root portable audit verification passed: exact closed audit, both scan inventories, retained synthetic reproduction and nine tests.",
+    "The expected-identity map rejects later drift, conflicting pins and unbound metadata rather than publishing a replacement digest. New raw originals are explicitly enumerated and previous manifest bytes must remain a prefix.",
+    "The local proposed scan passed19wrappers/2511files/6neworiginals. This historical snapshot precedes CI installation and the final tests; final packaging is separate."
+  ],
+  "limitations": [
+    "The reproduced defect used synthetic isolated files; no canonical source corruption is asserted.",
+    "This is a bounded session packager, not a general hostile-filesystem or permission engine. Root must bind exact final CI receipt/schema/targets and review later wrappers before final use.",
+    "The frozen proposed scanner must not be rerun into this closed audit. A separately preserved root adaptation may change only its output destination and explicitly reviewed final pins.",
+    "No Git staging, commit or public publication is certified here. Exact staged-blob comparison and portable checkout checks remain separate required actions."
+  ],
+  "legal_currentness": "not_verified"
+}

@@ -1,0 +1,160 @@
+{
+  "$defs": {
+    "CandidatePage": {
+      "additionalProperties": false,
+      "description": "Exact native emptiness and uncorrected OCR candidate placement.",
+      "properties": {
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "empty_native": {
+          "$ref": "#/$defs/Ref"
+        },
+        "raw_ocr": {
+          "$ref": "#/$defs/Ref"
+        },
+        "ocr_text": {
+          "$ref": "#/$defs/Ref"
+        },
+        "observation_spans": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "title": "Observation Spans",
+          "type": "array"
+        },
+        "candidate_start": {
+          "minimum": 0,
+          "title": "Candidate Start",
+          "type": "integer"
+        },
+        "candidate_end": {
+          "minimum": 0,
+          "title": "Candidate End",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "physical_page",
+        "empty_native",
+        "raw_ocr",
+        "ocr_text",
+        "observation_spans",
+        "candidate_start",
+        "candidate_end"
+      ],
+      "title": "CandidatePage",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "An exact, packet-relative ordinary-file payload.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "description": "Half-open exact UTF-8 byte range.",
+      "properties": {
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Machine-only candidate; markers are packaging, not source.",
+  "properties": {
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "status": {
+      "const": "machine_ocr_unreviewed",
+      "default": "machine_ocr_unreviewed",
+      "title": "Status",
+      "type": "string"
+    },
+    "native_status": {
+      "const": "all_pages_empty_image_only",
+      "default": "all_pages_empty_image_only",
+      "title": "Native Status",
+      "type": "string"
+    },
+    "method": {
+      "const": "Apple Vision revision 3; exact raw observations joined with LF",
+      "title": "Method",
+      "type": "string"
+    },
+    "normalization": {
+      "const": "none; physical-page markers are packaging",
+      "title": "Normalization",
+      "type": "string"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Ref"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/CandidatePage"
+      },
+      "title": "Pages",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_id",
+    "source_sha256",
+    "method",
+    "normalization",
+    "candidate",
+    "pages"
+  ],
+  "title": "Extraction",
+  "type": "object"
+}

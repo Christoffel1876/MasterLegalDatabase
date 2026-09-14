@@ -1,0 +1,701 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Bind exact local evidence bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "CurrentIntakeComparison": {
+      "additionalProperties": false,
+      "description": "A full current manual-manifest/ledger scan at the audit time.",
+      "properties": {
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "file": {
+          "$ref": "#/$defs/Asset"
+        },
+        "rows": {
+          "title": "Rows",
+          "type": "integer"
+        },
+        "sha256_matches": {
+          "title": "Sha256 Matches",
+          "type": "integer"
+        },
+        "exact_url_matches": {
+          "title": "Exact Url Matches",
+          "type": "integer"
+        },
+        "proposed_id_matches": {
+          "title": "Proposed Id Matches",
+          "type": "integer"
+        },
+        "proposed_source_id": {
+          "title": "Proposed Source Id",
+          "type": "string"
+        },
+        "captured_at": {
+          "format": "date-time",
+          "title": "Captured At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository_path",
+        "file",
+        "rows",
+        "sha256_matches",
+        "exact_url_matches",
+        "proposed_id_matches",
+        "proposed_source_id",
+        "captured_at"
+      ],
+      "title": "CurrentIntakeComparison",
+      "type": "object"
+    },
+    "Event": {
+      "additionalProperties": false,
+      "description": "Separate reported transport observations from independently checked retained bytes.",
+      "properties": {
+        "action_id": {
+          "title": "Action Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-PUEBLO",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "reported_final_url": {
+          "title": "Reported Final Url",
+          "type": "string"
+        },
+        "reported_reserved_at": {
+          "format": "date-time",
+          "title": "Reported Reserved At",
+          "type": "string"
+        },
+        "reported_finished_at": {
+          "format": "date-time",
+          "title": "Reported Finished At",
+          "type": "string"
+        },
+        "reported_http_status": {
+          "title": "Reported Http Status",
+          "type": "integer"
+        },
+        "reported_visible_redirects": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reported Visible Redirects",
+          "type": "array"
+        },
+        "retained_role": {
+          "enum": [
+            "received_pdf",
+            "received_access_denial_html"
+          ],
+          "title": "Retained Role",
+          "type": "string"
+        },
+        "body": {
+          "$ref": "#/$defs/Asset"
+        },
+        "byte_identical_duplicate": {
+          "$ref": "#/$defs/Asset"
+        },
+        "reservation": {
+          "$ref": "#/$defs/Asset"
+        },
+        "result": {
+          "$ref": "#/$defs/Asset"
+        },
+        "headers": {
+          "$ref": "#/$defs/Asset"
+        },
+        "structural_pdf_pages": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Structural Pdf Pages"
+        },
+        "pdf_encrypted": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pdf Encrypted"
+        },
+        "pdf_repaired": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pdf Repaired"
+        },
+        "terminal_pdf_eof_present": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Terminal Pdf Eof Present"
+        },
+        "html_title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Html Title"
+        },
+        "observed_header_names": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Observed Header Names",
+          "type": "array"
+        },
+        "private_header_names_detected": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Private Header Names Detected",
+          "type": "array"
+        },
+        "headers_and_result_byte_counts_match": {
+          "title": "Headers And Result Byte Counts Match",
+          "type": "boolean"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "action_id",
+        "authority_id",
+        "requested_url",
+        "reported_final_url",
+        "reported_reserved_at",
+        "reported_finished_at",
+        "reported_http_status",
+        "reported_visible_redirects",
+        "retained_role",
+        "body",
+        "byte_identical_duplicate",
+        "reservation",
+        "result",
+        "headers",
+        "structural_pdf_pages",
+        "pdf_encrypted",
+        "pdf_repaired",
+        "terminal_pdf_eof_present",
+        "html_title",
+        "observed_header_names",
+        "private_header_names_detected",
+        "headers_and_result_byte_counts_match",
+        "notes"
+      ],
+      "title": "Event",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "description": "A bounded observation with supporting retained inputs and explicit limits.",
+      "properties": {
+        "finding_id": {
+          "title": "Finding Id",
+          "type": "string"
+        },
+        "disposition": {
+          "enum": [
+            "verified",
+            "qualified",
+            "intake_eligible_with_conditions"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "limits": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limits",
+          "type": "array"
+        }
+      },
+      "required": [
+        "finding_id",
+        "disposition",
+        "statement",
+        "evidence",
+        "limits"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "LegacyComparison": {
+      "additionalProperties": false,
+      "description": "A complete streamed metadata comparison, with no implied original-byte availability.",
+      "properties": {
+        "edition": {
+          "enum": [
+            "pinned_commit",
+            "working_tree"
+          ],
+          "title": "Edition",
+          "type": "string"
+        },
+        "pinned_commit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pinned Commit"
+        },
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "full_file_sha256": {
+          "title": "Full File Sha256",
+          "type": "string"
+        },
+        "full_file_bytes": {
+          "title": "Full File Bytes",
+          "type": "integer"
+        },
+        "full_rows": {
+          "title": "Full Rows",
+          "type": "integer"
+        },
+        "compared_urls": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Compared Urls",
+          "type": "array"
+        },
+        "compared_sha256s": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Compared Sha256S",
+          "type": "array"
+        },
+        "exact_url_field_matches": {
+          "title": "Exact Url Field Matches",
+          "type": "integer"
+        },
+        "digest_matches": {
+          "title": "Digest Matches",
+          "type": "integer"
+        },
+        "decoded_url_matches": {
+          "title": "Decoded Url Matches",
+          "type": "integer"
+        },
+        "proposed_id_matches": {
+          "title": "Proposed Id Matches",
+          "type": "integer"
+        },
+        "matching_original_lines": {
+          "$ref": "#/$defs/Asset"
+        },
+        "original_line_numbers": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Original Line Numbers",
+          "type": "array"
+        },
+        "full_stream_included": {
+          "const": false,
+          "title": "Full Stream Included",
+          "type": "boolean"
+        },
+        "actual_historical_original_bytes_compared": {
+          "const": false,
+          "title": "Actual Historical Original Bytes Compared",
+          "type": "boolean"
+        },
+        "limitations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "edition",
+        "pinned_commit",
+        "repository_path",
+        "full_file_sha256",
+        "full_file_bytes",
+        "full_rows",
+        "compared_urls",
+        "compared_sha256s",
+        "exact_url_field_matches",
+        "digest_matches",
+        "decoded_url_matches",
+        "proposed_id_matches",
+        "matching_original_lines",
+        "original_line_numbers",
+        "full_stream_included",
+        "actual_historical_original_bytes_compared",
+        "limitations"
+      ],
+      "title": "LegacyComparison",
+      "type": "object"
+    },
+    "Referral": {
+      "additionalProperties": false,
+      "description": "An exact retained rendered-DOM anchor, not an authenticated raw HTTP response.",
+      "properties": {
+        "authority_id": {
+          "const": "CO-COUNTY-PUEBLO",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "parent_url": {
+          "title": "Parent Url",
+          "type": "string"
+        },
+        "parent": {
+          "$ref": "#/$defs/Asset"
+        },
+        "parent_role": {
+          "const": "retained_browser_rendered_dom",
+          "title": "Parent Role",
+          "type": "string"
+        },
+        "parent_title": {
+          "title": "Parent Title",
+          "type": "string"
+        },
+        "parent_h1": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Parent H1",
+          "type": "array"
+        },
+        "exact_href": {
+          "title": "Exact Href",
+          "type": "string"
+        },
+        "exact_label": {
+          "title": "Exact Label",
+          "type": "string"
+        },
+        "resolved_url": {
+          "title": "Resolved Url",
+          "type": "string"
+        },
+        "anchor_match_count": {
+          "title": "Anchor Match Count",
+          "type": "integer"
+        },
+        "target_role": {
+          "enum": [
+            "fee_schedule_link",
+            "commissioner_catalog_lead"
+          ],
+          "title": "Target Role",
+          "type": "string"
+        },
+        "limitations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "authority_id",
+        "parent_url",
+        "parent",
+        "parent_role",
+        "parent_title",
+        "parent_h1",
+        "exact_href",
+        "exact_label",
+        "resolved_url",
+        "anchor_match_count",
+        "target_role",
+        "limitations"
+      ],
+      "title": "Referral",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Independent custody verification, not PDF fee-table or legal-currentness certification.",
+  "properties": {
+    "assignment_id": {
+      "const": "SH-EXT-002",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "status": {
+      "const": "custody_verified_with_qualifications_pending_intake",
+      "title": "Status",
+      "type": "string"
+    },
+    "audited_at": {
+      "format": "date-time",
+      "title": "Audited At",
+      "type": "string"
+    },
+    "delivery_captured_at": {
+      "format": "date-time",
+      "title": "Delivery Captured At",
+      "type": "string"
+    },
+    "authorization": {
+      "$ref": "#/$defs/Asset"
+    },
+    "directed_proposal": {
+      "$ref": "#/$defs/Asset"
+    },
+    "parent_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "referrals": {
+      "items": {
+        "$ref": "#/$defs/Referral"
+      },
+      "title": "Referrals",
+      "type": "array"
+    },
+    "legacy": {
+      "items": {
+        "$ref": "#/$defs/LegacyComparison"
+      },
+      "title": "Legacy",
+      "type": "array"
+    },
+    "current_intake": {
+      "items": {
+        "$ref": "#/$defs/CurrentIntakeComparison"
+      },
+      "title": "Current Intake",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "inventory_listed_files": {
+      "const": 25,
+      "title": "Inventory Listed Files",
+      "type": "integer"
+    },
+    "inventory_claims_verified": {
+      "const": true,
+      "title": "Inventory Claims Verified",
+      "type": "boolean"
+    },
+    "actual_delivery_files": {
+      "const": 27,
+      "title": "Actual Delivery Files",
+      "type": "integer"
+    },
+    "unlisted_delivery_files": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unlisted Delivery Files",
+      "type": "array"
+    },
+    "independent_distinct_response_bodies": {
+      "const": 2,
+      "title": "Independent Distinct Response Bodies",
+      "type": "integer"
+    },
+    "retained_response_body_bytes": {
+      "const": 81082,
+      "title": "Retained Response Body Bytes",
+      "type": "integer"
+    },
+    "declared_actions": {
+      "const": 2,
+      "title": "Declared Actions",
+      "type": "integer"
+    },
+    "declared_distinct_urls": {
+      "const": 2,
+      "title": "Declared Distinct Urls",
+      "type": "integer"
+    },
+    "declared_visible_redirects": {
+      "const": 0,
+      "title": "Declared Visible Redirects",
+      "type": "integer"
+    },
+    "recorded_serial_order_consistent": {
+      "const": true,
+      "title": "Recorded Serial Order Consistent",
+      "type": "boolean"
+    },
+    "reported_research_completed_before_cutoff": {
+      "const": true,
+      "title": "Reported Research Completed Before Cutoff",
+      "type": "boolean"
+    },
+    "delivery_bytes_captured_before_report_cutoff": {
+      "const": true,
+      "title": "Delivery Bytes Captured Before Report Cutoff",
+      "type": "boolean"
+    },
+    "hidden_network_requests_measured": {
+      "const": false,
+      "title": "Hidden Network Requests Measured",
+      "type": "boolean"
+    },
+    "transport_command_retained": {
+      "const": false,
+      "title": "Transport Command Retained",
+      "type": "boolean"
+    },
+    "independent_source_visual_pages": {
+      "const": 0,
+      "title": "Independent Source Visual Pages",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "public_requests_by_auditor": {
+      "const": 0,
+      "title": "Public Requests By Auditor",
+      "type": "integer"
+    },
+    "canonical_intakes_by_auditor": {
+      "const": 0,
+      "title": "Canonical Intakes By Auditor",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "assignment_id",
+    "status",
+    "audited_at",
+    "delivery_captured_at",
+    "authorization",
+    "directed_proposal",
+    "parent_manifest",
+    "events",
+    "referrals",
+    "legacy",
+    "current_intake",
+    "findings",
+    "inventory_listed_files",
+    "inventory_claims_verified",
+    "actual_delivery_files",
+    "unlisted_delivery_files",
+    "independent_distinct_response_bodies",
+    "retained_response_body_bytes",
+    "declared_actions",
+    "declared_distinct_urls",
+    "declared_visible_redirects",
+    "recorded_serial_order_consistent",
+    "reported_research_completed_before_cutoff",
+    "delivery_bytes_captured_before_report_cutoff",
+    "hidden_network_requests_measured",
+    "transport_command_retained",
+    "independent_source_visual_pages",
+    "legal_currentness",
+    "answer_safe",
+    "public_requests_by_auditor",
+    "canonical_intakes_by_auditor"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

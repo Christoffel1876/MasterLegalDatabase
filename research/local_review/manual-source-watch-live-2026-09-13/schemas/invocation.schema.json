@@ -1,0 +1,101 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Immutable confined local evidence identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Bound operator-supplied invocation metadata, distinct from HTTP evidence.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "dispatch_at": {
+      "format": "date-time",
+      "title": "Dispatch At",
+      "type": "string"
+    },
+    "plan_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Plan Sha256",
+      "type": "string"
+    },
+    "implementation_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Implementation Sha256",
+      "type": "string"
+    },
+    "transport_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Transport Sha256",
+      "type": "string"
+    },
+    "mode": {
+      "enum": [
+        "live_http",
+        "offline_fixture"
+      ],
+      "title": "Mode",
+      "type": "string"
+    },
+    "clock_basis": {
+      "enum": [
+        "actual_utc_clock",
+        "injected_fixture_clock"
+      ],
+      "title": "Clock Basis",
+      "type": "string"
+    },
+    "authorization_basis": {
+      "const": "operator_supplied_time_and_plan_digest_not_independent_proof",
+      "title": "Authorization Basis",
+      "type": "string"
+    },
+    "selection_snapshot": {
+      "$ref": "#/$defs/Ref"
+    },
+    "manual_manifest_snapshot": {
+      "$ref": "#/$defs/Ref"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "dispatch_at",
+    "plan_sha256",
+    "implementation_sha256",
+    "transport_sha256",
+    "mode",
+    "clock_basis",
+    "authorization_basis",
+    "selection_snapshot",
+    "manual_manifest_snapshot"
+  ],
+  "title": "Invocation",
+  "type": "object"
+}

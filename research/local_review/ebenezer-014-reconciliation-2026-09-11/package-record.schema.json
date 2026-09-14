@@ -1,0 +1,259 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "A confined ordinary file with its exact byte identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Additive status for the unchanged frozen reconciliation and prior source review.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "assignment": {
+      "const": "EB-PDF-014",
+      "title": "Assignment",
+      "type": "string"
+    },
+    "status": {
+      "const": "external_report_reconciled_with_qualifications",
+      "title": "Status",
+      "type": "string"
+    },
+    "frozen_directory": {
+      "const": "frozen",
+      "title": "Frozen Directory",
+      "type": "string"
+    },
+    "frozen_file_count": {
+      "const": 85,
+      "title": "Frozen File Count",
+      "type": "integer"
+    },
+    "frozen_final_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "frozen_reconciliation": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_package_directory": {
+      "const": "frozen/comparison/committed-package",
+      "title": "Source Package Directory",
+      "type": "string"
+    },
+    "external_reports": {
+      "const": 4,
+      "title": "External Reports",
+      "type": "integer"
+    },
+    "findings": {
+      "const": 21,
+      "title": "Findings",
+      "type": "integer"
+    },
+    "errata": {
+      "const": 3,
+      "title": "Errata",
+      "type": "integer"
+    },
+    "unresolved_themes": {
+      "const": 5,
+      "title": "Unresolved Themes",
+      "type": "integer"
+    },
+    "dispositions": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Dispositions",
+      "type": "object"
+    },
+    "inspected_physical_pages": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Inspected Physical Pages",
+      "type": "array"
+    },
+    "inspected_crops": {
+      "const": 11,
+      "title": "Inspected Crops",
+      "type": "integer"
+    },
+    "native_bytes_preserved": {
+      "const": 13579,
+      "title": "Native Bytes Preserved",
+      "type": "integer"
+    },
+    "candidate_bytes_preserved": {
+      "const": 14370,
+      "title": "Candidate Bytes Preserved",
+      "type": "integer"
+    },
+    "source_pdf_bytes_preserved": {
+      "const": 340287,
+      "title": "Source Pdf Bytes Preserved",
+      "type": "integer"
+    },
+    "native_word_or_number_corrections_required": {
+      "const": 0,
+      "title": "Native Word Or Number Corrections Required",
+      "type": "integer"
+    },
+    "all_frozen_inputs_copied_unchanged": {
+      "const": true,
+      "title": "All Frozen Inputs Copied Unchanged",
+      "type": "boolean"
+    },
+    "excluded_frozen_inputs": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Excluded Frozen Inputs",
+      "type": "array"
+    },
+    "original_reports_changed": {
+      "const": false,
+      "title": "Original Reports Changed",
+      "type": "boolean"
+    },
+    "original_source_package_changed": {
+      "const": false,
+      "title": "Original Source Package Changed",
+      "type": "boolean"
+    },
+    "source_and_candidate_changed": {
+      "const": false,
+      "title": "Source And Candidate Changed",
+      "type": "boolean"
+    },
+    "prior_source_pending_status_is_historical": {
+      "const": true,
+      "title": "Prior Source Pending Status Is Historical",
+      "type": "boolean"
+    },
+    "historical_absolute_paths_used_for_portable_validation": {
+      "const": false,
+      "title": "Historical Absolute Paths Used For Portable Validation",
+      "type": "boolean"
+    },
+    "new_visual_review_during_packaging": {
+      "const": false,
+      "title": "New Visual Review During Packaging",
+      "type": "boolean"
+    },
+    "external_pdf_rehash_independently_certified": {
+      "const": false,
+      "title": "External Pdf Rehash Independently Certified",
+      "type": "boolean"
+    },
+    "atlas_pdf_hash_checked": {
+      "const": true,
+      "title": "Atlas Pdf Hash Checked",
+      "type": "boolean"
+    },
+    "external_blindness_independently_certified": {
+      "const": false,
+      "title": "External Blindness Independently Certified",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "operative_effect_verified": {
+      "const": false,
+      "title": "Operative Effect Verified",
+      "type": "boolean"
+    },
+    "coverage_promoted": {
+      "const": false,
+      "title": "Coverage Promoted",
+      "type": "boolean"
+    },
+    "public_opens": {
+      "const": 0,
+      "title": "Public Opens",
+      "type": "integer"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "prepared_at",
+    "assignment",
+    "status",
+    "frozen_directory",
+    "frozen_file_count",
+    "frozen_final_manifest",
+    "frozen_reconciliation",
+    "source_package_directory",
+    "external_reports",
+    "findings",
+    "errata",
+    "unresolved_themes",
+    "dispositions",
+    "inspected_physical_pages",
+    "inspected_crops",
+    "native_bytes_preserved",
+    "candidate_bytes_preserved",
+    "source_pdf_bytes_preserved",
+    "native_word_or_number_corrections_required",
+    "all_frozen_inputs_copied_unchanged",
+    "excluded_frozen_inputs",
+    "original_reports_changed",
+    "original_source_package_changed",
+    "source_and_candidate_changed",
+    "prior_source_pending_status_is_historical",
+    "historical_absolute_paths_used_for_portable_validation",
+    "new_visual_review_during_packaging",
+    "external_pdf_rehash_independently_certified",
+    "atlas_pdf_hash_checked",
+    "external_blindness_independently_certified",
+    "legal_currentness",
+    "operative_effect_verified",
+    "coverage_promoted",
+    "public_opens",
+    "limits"
+  ],
+  "title": "PackageRecord",
+  "type": "object"
+}

@@ -1,0 +1,114 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Copy": {
+      "additionalProperties": false,
+      "properties": {
+        "original_relative_path": {
+          "title": "Original Relative Path",
+          "type": "string"
+        },
+        "retained": {
+          "$ref": "#/$defs/Asset"
+        },
+        "observed_mtime_ns": {
+          "title": "Observed Mtime Ns",
+          "type": "integer"
+        },
+        "copy_mode": {
+          "const": "exact_bytes",
+          "title": "Copy Mode",
+          "type": "string"
+        }
+      },
+      "required": [
+        "original_relative_path",
+        "retained",
+        "observed_mtime_ns",
+        "copy_mode"
+      ],
+      "title": "Copy",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "status": {
+      "const": "frozen_before_report_interpretation",
+      "title": "Status",
+      "type": "string"
+    },
+    "copies": {
+      "items": {
+        "$ref": "#/$defs/Copy"
+      },
+      "title": "Copies",
+      "type": "array"
+    },
+    "source_review_pin": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_files_unchanged_at_capture": {
+      "const": true,
+      "title": "Original Files Unchanged At Capture",
+      "type": "boolean"
+    },
+    "ui_execution_witnessed_by_this_auditor": {
+      "const": false,
+      "title": "Ui Execution Witnessed By This Auditor",
+      "type": "boolean"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "started_at",
+    "completed_at",
+    "status",
+    "copies",
+    "source_review_pin",
+    "original_files_unchanged_at_capture",
+    "ui_execution_witnessed_by_this_auditor",
+    "public_requests"
+  ],
+  "title": "Custody",
+  "type": "object"
+}

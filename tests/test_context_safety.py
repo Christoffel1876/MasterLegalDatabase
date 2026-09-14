@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import sqlite3
+from contextlib import closing
 from datetime import datetime, timedelta, timezone
 
 import pytest
@@ -147,7 +148,7 @@ def test_expired_evidence_reference_is_rejected(tmp_path) -> None:
     store = EvidenceStore(tmp_path / "evidence.sqlite")
     reference = store.put(evidence, "corpus-1", retention_seconds=1)
     expired_at = (datetime.now(timezone.utc) - timedelta(seconds=1)).isoformat()
-    with sqlite3.connect(store.path) as connection:
+    with closing(sqlite3.connect(store.path)) as connection, connection:
         connection.execute(
             "UPDATE evidence_store SET expires_at = ? WHERE reference_id = ?",
             (expired_at, reference.reference_id),

@@ -1,0 +1,79 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "installed_style_only",
+      "title": "Status",
+      "type": "string"
+    },
+    "before": {
+      "$ref": "#/$defs/Asset"
+    },
+    "after": {
+      "$ref": "#/$defs/Asset"
+    },
+    "executable_ast_unchanged": {
+      "const": true,
+      "title": "Executable Ast Unchanged",
+      "type": "boolean"
+    },
+    "source_urls_unchanged": {
+      "const": true,
+      "title": "Source Urls Unchanged",
+      "type": "boolean"
+    },
+    "maximum_line_length": {
+      "title": "Maximum Line Length",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "before",
+    "after",
+    "executable_ast_unchanged",
+    "source_urls_unchanged",
+    "maximum_line_length",
+    "legal_currentness"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

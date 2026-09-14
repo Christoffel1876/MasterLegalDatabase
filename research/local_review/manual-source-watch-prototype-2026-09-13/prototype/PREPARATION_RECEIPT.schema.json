@@ -1,0 +1,210 @@
+{
+  "$defs": {
+    "Example": {
+      "additionalProperties": false,
+      "description": "A closed injected-HTTP example, never an actual publisher check.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "manifest": {
+          "$ref": "#/$defs/Ref"
+        },
+        "report": {
+          "$ref": "#/$defs/Ref"
+        },
+        "expected_statuses": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Expected Statuses",
+          "type": "array"
+        },
+        "public_requests_made": {
+          "const": 0,
+          "default": 0,
+          "title": "Public Requests Made",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "manifest",
+        "report",
+        "expected_statuses"
+      ],
+      "title": "Example",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Immutable confined local evidence identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "The handoff's exact plan, code, evidence subset and offline-test outcome.",
+  "properties": {
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_DISPATCHED",
+      "title": "Status",
+      "type": "string"
+    },
+    "plan": {
+      "$ref": "#/$defs/Ref"
+    },
+    "implementation": {
+      "$ref": "#/$defs/Ref"
+    },
+    "reused_guard": {
+      "$ref": "#/$defs/Ref"
+    },
+    "tests": {
+      "$ref": "#/$defs/Ref"
+    },
+    "test_log": {
+      "$ref": "#/$defs/Ref"
+    },
+    "test_exit_code": {
+      "const": 0,
+      "title": "Test Exit Code",
+      "type": "integer"
+    },
+    "focused_tests_passed": {
+      "const": 71,
+      "title": "Focused Tests Passed",
+      "type": "integer"
+    },
+    "focused_coverage_percent": {
+      "maximum": 100,
+      "minimum": 90,
+      "title": "Focused Coverage Percent",
+      "type": "number"
+    },
+    "coverage_basis": {
+      "const": "new watch.py statements and branches; reused frozen guard excluded",
+      "title": "Coverage Basis",
+      "type": "string"
+    },
+    "coverage_summary": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          }
+        ]
+      },
+      "title": "Coverage Summary",
+      "type": "object"
+    },
+    "original_source_package": {
+      "title": "Original Source Package",
+      "type": "string"
+    },
+    "copied_source_subset": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Copied Source Subset",
+      "type": "array"
+    },
+    "original_packet_completely_copied": {
+      "const": false,
+      "title": "Original Packet Completely Copied",
+      "type": "boolean"
+    },
+    "examples": {
+      "items": {
+        "$ref": "#/$defs/Example"
+      },
+      "title": "Examples",
+      "type": "array"
+    },
+    "public_requests_made": {
+      "const": 0,
+      "title": "Public Requests Made",
+      "type": "integer"
+    },
+    "scheduler_installed": {
+      "const": false,
+      "title": "Scheduler Installed",
+      "type": "boolean"
+    },
+    "canonical_updates": {
+      "const": false,
+      "title": "Canonical Updates",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "status",
+    "plan",
+    "implementation",
+    "reused_guard",
+    "tests",
+    "test_log",
+    "test_exit_code",
+    "focused_tests_passed",
+    "focused_coverage_percent",
+    "coverage_basis",
+    "coverage_summary",
+    "original_source_package",
+    "copied_source_subset",
+    "original_packet_completely_copied",
+    "examples",
+    "public_requests_made",
+    "scheduler_installed",
+    "canonical_updates",
+    "legal_currentness",
+    "limitations"
+  ],
+  "title": "Preparation",
+  "type": "object"
+}

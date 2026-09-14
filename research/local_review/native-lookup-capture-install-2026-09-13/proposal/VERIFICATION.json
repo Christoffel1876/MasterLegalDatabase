@@ -1,0 +1,98 @@
+{
+  "frozen_at": "2026-09-13T04:37:53.003277Z",
+  "status": "prepared_pending_independent_root_acceptance",
+  "preimage": {
+    "path": "preimages/research_source_lookup.py",
+    "sha256": "4b3f084eb9bf9a20f3e5c7b7c0c25a3b1bbbfe0de05caff9b626100808dbad6f",
+    "size_bytes": 164740
+  },
+  "proposed": {
+    "path": "proposed/research_source_lookup.py",
+    "sha256": "1f4da2ec117996c21a2676bdd82226018ecf4ad0e583297c1f52ece43d1ffe55",
+    "size_bytes": 171574
+  },
+  "tests": {
+    "path": "proposed/test_native_lookup_capture.py",
+    "sha256": "4c5fb91a23eca9bb0faa1d7c2f3f768058d6bd3cde5886b7a9250967d2c80399",
+    "size_bytes": 14571
+  },
+  "documentation": {
+    "path": "proposed/RESEARCH_SOURCE_LOOKUP.md",
+    "sha256": "f929bd466f0d5ca54ad382bbbf0e0f4952b57d6f59edf6ecb77b91a9cf74026b",
+    "size_bytes": 26833
+  },
+  "historical_audit_manifest": {
+    "path": "prior-audit/FINAL_MANIFEST.json",
+    "sha256": "c2bd545cff504369102d24aa3b62e40277f92dd4384a2728950fe89cf88bd46a",
+    "size_bytes": 2020
+  },
+  "measured_runs": [
+    {
+      "implementation_sha256": "bfa815248ad7109181dea7d4890f7c48659b6b82a875ad7f6f8eeb870c6c3125",
+      "log": {
+        "path": "tests-final.log",
+        "sha256": "c25df9e1a0a848d94db450952215bcd593dcf3f06267fd8dfcb1b5ddda0d834f",
+        "size_bytes": 3590
+      },
+      "passed": 428,
+      "failed": 2,
+      "deselected": 0,
+      "qualification": "Both failures were existing El Paso diagnostic message assertions."
+    },
+    {
+      "implementation_sha256": "1f4da2ec117996c21a2676bdd82226018ecf4ad0e583297c1f52ece43d1ffe55",
+      "log": {
+        "path": "tests-diagnostic-compatibility.log",
+        "sha256": "fbd258ed4f71cfe967ba850e79b7095a78032e6ee852ee33fba42857b7f6e14e",
+        "size_bytes": 114
+      },
+      "passed": 2,
+      "failed": 0,
+      "deselected": 428,
+      "qualification": "Both unchanged previously failing assertions passed."
+    },
+    {
+      "implementation_sha256": "1f4da2ec117996c21a2676bdd82226018ecf4ad0e583297c1f52ece43d1ffe55",
+      "log": {
+        "path": "tests-release.log",
+        "sha256": "be0c1ea832a4adb293454bd09efc01eb4d1e9843673a801d67b3c84d2c78af4b",
+        "size_bytes": 512
+      },
+      "passed": 430,
+      "failed": 0,
+      "deselected": 0,
+      "qualification": "Final combined run includes all 37 captured-buffer regressions."
+    }
+  ],
+  "coverage": {
+    "path": "coverage.json",
+    "sha256": "c55b4e105f323a403b8cb07a7ed8f676e1f0434fc4f75a3e44e6e1abb1b29405",
+    "size_bytes": 132315
+  },
+  "branch_inclusive_percent": 94.47429009976976,
+  "original_classes_unchanged": 44,
+  "douglas_pueblo_functions_unchanged": [
+    "_dp_capture",
+    "_dp_asset",
+    "_check_dp_package",
+    "_load_dp_verified",
+    "_dp_span",
+    "_dp_douglas",
+    "_dp_pueblo",
+    "_lookup_dp",
+    "_render_dp"
+  ],
+  "main_function_unchanged": true,
+  "normal_output_fixture_files": 18,
+  "source_schemas_unchanged": true,
+  "public_requests": 0,
+  "production_writes": 0,
+  "legal_currentness": "not_verified",
+  "limitations": [
+    "Prepared only; root acceptance, installation and full repository suite are separate.",
+    "Historical BASELINES.json binds its earlier prepared implementation; it is unchanged.",
+    "Final normal outputs are checked against those same 18 fixtures in the final test run.",
+    "File paths identify captured evidence; later disk immutability is not guaranteed.",
+    "Original source QA and verifiers remain unchanged; no legal currentness is certified."
+  ]
+}

@@ -1,0 +1,89 @@
+# PASS 2 — Source vs Native Extraction Comparison
+
+## Metadata
+
+| Field | Value |
+|-------|-------|
+| assignment_id | EB-PDF-006 |
+| source_id | arapahoe-planning-fees-sd002-14 |
+| reviewer | Ebenezer (Grok Bot) |
+| model | unknown |
+| utc_pass2_start | 2026-09-10T21:44:00Z |
+| utc_pass2_end | 2026-09-10T21:52:00Z |
+| time_cost | unknown |
+| status | completed_pending_atlas_verification |
+| legal_currentness | not_verified |
+| candidate_status | machine_native_text_unreviewed (PyMuPDF native text; not OCR) |
+| prior_atlas_sherlock_consultation | none for this document |
+
+## Hash references (unchanged)
+
+| Artifact | SHA-256 |
+|----------|---------|
+| PASS1_frozen.md (unchanged) | 40ef2eb1f0feaf0d42e975424eeb67d79a7aa2b71c480bbf0d38a208e9c31592 |
+| packet manifest.json | add7110a9b579b32cbfcae9b34e5f184ab159cd421e9f3fee40ecb7e4810cd1b |
+| original.pdf | ce519b6fe89546cf85a77934fcbdb6b6bf08473e19c545cf4c51414e1cdcb818 |
+| page-0001.png | ff18951b9c9d5357dc77143ca2f7448af3e26362909bfb2e492a14baea680847 |
+| page-0002.png | e279858ce97c79244cb35521e327d62fe10e18e7100592339924119d9a2531ae |
+| candidate.txt | 6a02ba8f7fc92ecac8f82886666f0a286d5c9856200b1049f012bc63a0bd59f1 |
+
+Candidate hash verified against manifest after pass-1 freeze. Packaging markers `===== PHYSICAL PDF PAGE … =====` are **not** source text.
+
+## Image-viewing method / limits
+
+Caption-mediated Read on full pages and sectional crops (same limitation as pass 1). Captions are not source quotations. Regions of agreement and disagreement were re-inspected via crops. Not certified pixel-perfect coverage.
+
+## Page coverage
+
+| source_id | physical_page | image_inspected | comparison_complete | status | unchecked_regions |
+|-----------|---------------|-----------------|---------------------|--------|--------------------|
+| arapahoe-planning-fees-sd002-14 | 1 | yes | yes | differences_found | Exact Unicode of diamond separator; any logo-embedded text beyond printed ARAPAHOE COUNTY header |
+| arapahoe-planning-fees-sd002-14 | 2 | yes | yes | differences_found | Exact end punctuation on Affordable/Attainable Housing sentence; indent hierarchy of Site Analysis / Conservation rows (layout only) |
+
+## Findings
+
+Finding IDs use prefix `EB006-P2-`. `source_pdf_sha256` for all rows: `ce519b6fe89546cf85a77934fcbdb6b6bf08473e19c545cf4c51414e1cdcb818`.
+
+| finding_id | physical_page | location | candidate_text | text_visibly_supported_by_image | proposed_correction_or_alternatives | error_type | severity | explanation |
+|---|---:|---|---|---|---|---|---|---|
+| EB006-P2-001 | 1 | page footer agency NOTE vs extraction start | NOTE block appears at **top** of page-1 candidate (before address) | NOTE is at **bottom** of page 1 (and repeated bottom page 2), under the fee table | Move NOTE to after Major Cases table / before or with Revised line; treat current top placement as extraction order artifact | reading_order | critical | Native extract floated footer/header-adjacent note ahead of body. Meaning of note unchanged if relocated; association with page bottom is lost. |
+| EB006-P2-002 | 1 | left header | *(omitted)* | Printed `ARAPAHOE COUNTY` / `PUBLIC WORKS & DEVELOPMENT` beside logo | Insert those two printed lines | omission | critical | Department identity text is visible as printed words, not only a graphic. |
+| EB006-P2-003 | 1 | contact line | `Phone: 720-874-6650  ѕ  Email:  planning@arapahoegov.com` | `Phone: 720-874-6650` + diamond/lozenge separator + `Email: planning@arapahoegov.com` | Replace Cyrillic/`ѕ` artifact with the visible separator (diamond/lozenge; exact Unicode unresolved). Normalize odd double spaces if desired (cosmetic). | substitution | critical | Candidate inserts a non-Latin character for the phone/email separator. |
+| EB006-P2-004 | 1 | revision line | `Resolution No.26-224` | `Resolution No. 26-224` (space after `No.`) | Insert space: `Resolution No. 26-224` | substitution | minor | Missing space after `No.` |
+| EB006-P2-005 | 1 | Admin Amendment row 3 (Use by Special Review…) | Description text appears **after** `Revised 09-08-2026` and after Wireless lines (orphan block at end of page-1 extract); row body earlier shows only `Administrative Amendment` + Per Case $1,500 without the Use-by-Special-Review list | Description belongs in the third Administrative Amendment row (between Before-Construction Plat row and Minor row) | Reattach description to that $1,500 row; remove from post-footer orphan position | reading_order / table_alignment | critical | Fee row association broken; reader cannot see what the $1,500 amendment covers. |
+| EB006-P2-006 | 1 | Wireless Communication Facilities ($1,500) | Label appears late (after Revised); earlier orphan `Per Case` / `$` / `1,500` sits between Energy Case and Small Cell | Row is Wireless Communication Facilities / Per Case / $1,500, **above** Small Cell, still in Administrative Cases | Place label with its fee above Small Cell; do not leave after Revised | reading_order / table_alignment | critical | Native order detaches the Wireless $1,500 label from its fee and relocates it past the page footer stamp. |
+| EB006-P2-007 | 1 | EFR fee | `645` without `$` on its own line pattern inconsistent with neighbors | `$` then `645` (or `$ 645`) | Restore `$` column association | omission / number_or_unit | minor | Dollar sign present in table for this row; candidate drops it for EFR only among nearby rows. |
+| EB006-P2-008 | 1 | EFR / Wireless order relative to Extension and Major Cases header | EFR block appears after Plat Correction/Extension in source; candidate places Wireless label + EFR after Revised footer | Extension → then Major Cases header → Admin Site Plan Oil & Gas…; Wireless $1,500 and EFR are still in Administrative Cases **before** Major Cases | Restore Administrative Cases order: … Extension; Wireless $1,500; EFR $645; then Major Cases | reading_order | critical | EFR and Wireless labels misplaced relative to Major Cases section break. |
+| EB006-P2-009 | 1 | Small Cell parenthetical | Parenthetical appears after fee lines | Parenthetical sits under the Small Cell title in-cell | Prefer in-cell association under title (candidate wording of parenthetical matches) | table_alignment | minor | Wording of `(1-5 locations = $1,500.00; 6-10 locations = $3,000; etc.)` agrees; placement within cell is flattened. |
+| EB006-P2-010 | 1 | Oil & Gas note line break | `required-` then newline `unless` | Same hyphenation across line: `required-` / `unless` | none (faithful) | — | — | Agrees with image hyphenation; not an error. |
+| EB006-P2-011 | 1 | Plan vs Plat | `…Development Plan` (During) vs `…Development Plat` (Before) | Same Plan / Plat distinction | none — preserve anomaly | — | — | Candidate faithfully preserves source anomaly. |
+| EB006-P2-012 | 1 | Extension citation | `1-.6 DAM` | `1-.6 DAM` | none — preserve; fragment remains uncertain as to intended citation form | citation | unresolved | Candidate matches visible odd `1-.6`; not a candidate invention. |
+| EB006-P2-013 | 2 | page footer NOTE | NOTE at top of page-2 candidate | NOTE at bottom of page 2 | Same as EB006-P2-001 for page 2 | reading_order | critical | Footer floated to extract head. |
+| EB006-P2-014 | 2 | Conservation Area Management Plan row | Label split at end of extract as `Conservation Area Management` / backtick / `Plan`; fee pair `Setup…750` appears earlier without label | Full label `Conservation Area Management Plan` with Setup fee not required / Per Case / $750, indented near Site Analysis under Rural Cluster area | Reattach full label to the unlabeled $750 fee block; remove trailing orphan + stray `` ` `` | reading_order / table_alignment / insertion | critical | Label omitted from fee row and dumped after Affordable Housing with a backtick artifact. |
+| EB006-P2-015 | 2 | Preliminary Plat Sheets 11-X | `$` / `2,000 ea` | `$ 2,000 ea` for Sheets 11-X | none — preserve | number_or_unit | — | Agrees with image; unusual vs neighboring $500 tiers but printed. |
+| EB006-P2-016 | 2 | Special District Requests | `whichever is less - Per Case` | Supports spaced hyphen/dash before Per Case | none for substance; exact dash Unicode unresolved | — | — | Resolves PASS1 dash-vs-period uncertainty in favor of hyphen/dash (not period). |
+| EB006-P2-017 | 2 | Resubmittal Charges lead-in | `Resubmittal Charges (after three or more reviews)…` | Same — **no colon** after Charges in image crop | none | — | — | Candidate matches; PASS1 incorrectly added a colon (see errata). |
+| EB006-P2-018 | 2 | Affordable/Attainable Housing | Ends at `…reduction of the fees` (no terminal period in extract) | Caption likewise shows no clear terminal period | unresolved alternatives: period present vs absent | illegible / unresolved | unresolved | End punctuation not established under caption mediation. |
+| EB006-P2-019 | 1–2 | Revised stamp | `Revised 09-08-2026` | Same typeset stamp bottom-right both pages | none | date | — | Final year digit read as typeset **6**; not handwriting. |
+| EB006-P2-020 | 1 | agency NOTE internal spacing | `PROJECT.  PLEASE` (two spaces) | Single or double space uncertain under caption; double space plausible in extract | unresolved | substitution | unresolved | Cosmetic if present. |
+
+## PASS1 errata (do not edit PASS1_frozen.md)
+
+| original_PASS1_wording | source_supported_correction | page/location | reason |
+|---|---|---|---|
+| Contact block omitted explicit `Phone:` / diamond separator / `Email:` labels (address + phone + email + URL only in condensed form) | Include `Phone: 720-874-6650`, diamond/lozenge separator, and `Email: planning@arapahoegov.com` as printed | p1 header | Header crop confirms Phone:/Email: labels |
+| `Resubmittal Charges:` (with colon) | `Resubmittal Charges (` — **no colon** | p2 policy box | Footer crop shows no colon after Charges |
+| Special District “dash vs period” left open | Prefer `whichever is less - Per Case` (hyphen/dash) | p2 | Candidate + captions agree on dash form |
+| (implicit) ARAPAHOE COUNTY header was noted only as logo graphic | Printed words `ARAPAHOE COUNTY` / `PUBLIC WORKS & DEVELOPMENT` are part of transcript | p1 header | Visible printed text beside logo |
+
+## Agreements worth recording
+
+- Plan vs **Plat** distinction on Administrative Amendment rows.
+- Extension Request Fee odd citation `5-2.1.H LDC and 1-.6 DAM`.
+- Preliminary Plat **$2,000 ea** for both Sheets 1-10 and Sheets 11-X.
+- Fee amounts for Certificate of Designation ($15,000), Comp Plan / Development Agreement ($7,500), Planned Sign Program tiers ($7,500 / $10,500), 1041 deposit narrative, Title 32 formula, vesting tiers ($500 / $1,500).
+- No wet-ink signatures on either page.
+
+## Completion
+
+Both expected pages received pass 1 and pass 2. Status: **completed_pending_atlas_verification**. **legal_currentness: not_verified**. No repository or packet files modified.

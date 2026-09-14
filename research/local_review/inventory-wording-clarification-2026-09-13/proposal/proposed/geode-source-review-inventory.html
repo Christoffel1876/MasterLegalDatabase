@@ -1,0 +1,166 @@
+<div id="geode-review-inventory" data-inventory-sha256="9bab20a523dccec8cf8438dfcef041045fb7e0c79f4edcf1ddd2bb4d8c8c7911">
+  <style>
+    #geode-review-inventory { display: grid; gap: 14px; }
+    #geode-review-inventory .inv-summary { display: grid; gap: 6px; }
+    #geode-review-inventory .inv-heading { font-weight: 500; }
+    #geode-review-inventory .inv-groups { display: grid; gap: 12px; }
+    #geode-review-inventory .inv-group { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 10px; align-items: start; }
+    #geode-review-inventory .inv-authority { padding-block: 8px; }
+    #geode-review-inventory .inv-cells { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 6px; }
+    #geode-review-inventory .inv-cell[data-mapped="true"] { --secondary: color-mix(in srgb, var(--viz-series-1) 16%, var(--background)); }
+    #geode-review-inventory .inv-legend { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; }
+    #geode-review-inventory .inv-key { display: inline-flex; gap: 6px; align-items: center; }
+    #geode-review-inventory .inv-swatch { display: inline-block; inline-size: 12px; block-size: 12px; background: color-mix(in srgb, var(--viz-series-1) 16%, var(--background)); }
+    #geode-review-inventory .inv-swatch-unmapped { background: var(--secondary); }
+    #geode-review-inventory .inv-summary-text { overflow-wrap: anywhere; }
+    @media (max-width: 480px) {
+      #geode-review-inventory .inv-group { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+      #geode-review-inventory .inv-authority { padding-block: 0; }
+    }
+  </style>
+  <div class="text-small">Manual PDF review-map snapshot · 13 September 2026</div>
+  <div class="card inv-summary" aria-live="polite" aria-atomic="true">
+    <div class="viz-row"><span id="inv-selected-name" class="inv-heading"></span><span id="inv-selected-status" class="text-small"></span></div>
+    <div id="inv-selected-scope" class="inv-summary-text"></div>
+    <div id="inv-selected-limit" class="text-small inv-summary-text"></div>
+  </div>
+  <div id="inv-authorities" class="inv-groups" role="group" aria-label="64 preserved PDF sources grouped by twelve authorities"></div>
+  <div class="inv-legend text-small" aria-label="Source inventory legend">
+    <span class="inv-key"><span class="inv-swatch" aria-hidden="true"></span><span><span id="inv-reviewed-count" class="tabular-nums">27</span> mapped reviews</span></span>
+    <span class="inv-key"><span class="inv-swatch inv-swatch-unmapped" aria-hidden="true"></span><span><span id="inv-unmapped-count" class="tabular-nums">37</span> no mapped review</span></span>
+    <span><span id="inv-total-count" class="tabular-nums">64</span> PDFs preserved · current law unknown for all</span>
+  </div>
+  <script type="application/json" id="inv-source-data">
+  [
+    {"id":"arapahoe-planning-fees-sd002-14","a":"CO-COUNTY-ARAPAHOE","label":"Planning fees","kind":"checked_tables","scope":"All 36 fee rows and context on the two supplied pages.","limit":"Resolution 26-224, later changes and applicability remain unresolved."},
+    {"id":"larimer-land-use-code-sd004-01","a":"CO-COUNTY-LARIMER","label":"Land use","kind":null},
+    {"id":"larimer-building-amendments-sd004-02","a":"CO-COUNTY-LARIMER","label":"Bldg amdt.","kind":null},
+    {"id":"larimer-wildfire-code-sd004-03","a":"CO-COUNTY-LARIMER","label":"Wildfire","kind":null},
+    {"id":"larimer-data-center-moratorium-sd004-04","a":"CO-COUNTY-LARIMER","label":"Moratorium","kind":"checked_passages","scope":"Body text checked on two pages; execution block qualified.","limit":"Handwriting and signer identities unresolved; no present extension status inferred."},
+    {"id":"larimer-owts-regulations-sd004-05","a":"CO-COUNTY-LARIMER","label":"OWTS","kind":null},
+    {"id":"larimer-building-fees-sd004-06","a":"CO-COUNTY-LARIMER","label":"Bldg fees","kind":"checked_passages","scope":"Partial review: complete page 5 and four page 1 context blocks.","limit":"Remaining candidate text stays unreviewed. Printed date and filename do not prove effectiveness."},
+    {"id":"larimer-development-review-fees-sd004-07","a":"CO-COUNTY-LARIMER","label":"Dev. fees","kind":"checked_tables","scope":"Seven pages: checked reading order and source associations preserved.","limit":"Source anomalies retained; exact typography, current effectiveness and applicability unverified."},
+    {"id":"larimer-rural-road-standards-sd004-08","a":"CO-COUNTY-LARIMER","label":"Roads","kind":null},
+    {"id":"larimer-comprehensive-plan-volume-1-sd004-09","a":"CO-COUNTY-LARIMER","label":"Plan v1","kind":null},
+    {"id":"larimer-fee-increase-memo-sd004-lc-09","a":"CO-COUNTY-LARIMER","label":"Fee memo","kind":"source_structure","scope":"One-page agency fee-increase memo: native text checked with presentation qualifications.","limit":"Referenced 2008 resolution is not attached; no adopting instrument established by this review."},
+    {"id":"larimer-governing-policies-sd004-lc-14","a":"CO-COUNTY-LARIMER","label":"Policies","kind":null},
+    {"id":"fort-collins-ibc-amendments-sd005-02","a":"CO-MUNICIPAL-FORT_COLLINS","label":"IBC amdt.","kind":null},
+    {"id":"fort-collins-irc-amendments-sd005-03","a":"CO-MUNICIPAL-FORT_COLLINS","label":"IRC amdt.","kind":null},
+    {"id":"fort-collins-iecc-amendments-sd005-04","a":"CO-MUNICIPAL-FORT_COLLINS","label":"IECC amdt.","kind":null},
+    {"id":"fort-collins-imc-amendments-sd005-event-08","a":"CO-MUNICIPAL-FORT_COLLINS","label":"IMC amdt.","kind":null},
+    {"id":"fort-collins-wildfire-code-sd005-05","a":"CO-MUNICIPAL-FORT_COLLINS","label":"Wildfire","kind":"source_structure","scope":"Eight-page discussion draft: source text and visible markup reviewed.","limit":"Draft, strikes, highlights and blank fields do not establish adoption or legal effect."},
+    {"id":"fort-collins-land-use-article-1-sd005-07","a":"CO-MUNICIPAL-FORT_COLLINS","label":"Article 1","kind":"source_structure","scope":"Seven-page Article 1 only; source review preserves visible-order qualifications.","limit":"Other articles and adopting instruments are outside this review. Edition and legal dates unknown."},
+    {"id":"fort-collins-land-use-article-2-sd005-08","a":"CO-MUNICIPAL-FORT_COLLINS","label":"Article 2","kind":null},
+    {"id":"fort-collins-land-use-article-3-sd005-event-12","a":"CO-MUNICIPAL-FORT_COLLINS","label":"Article 3","kind":null},
+    {"id":"fort-collins-land-use-article-4-sd005-event-13","a":"CO-MUNICIPAL-FORT_COLLINS","label":"Article 4","kind":null},
+    {"id":"fort-collins-land-use-article-5-sd005-event-14","a":"CO-MUNICIPAL-FORT_COLLINS","label":"Article 5","kind":null},
+    {"id":"fort-collins-ifgc-amendments-sd005-event-19","a":"CO-MUNICIPAL-FORT_COLLINS","label":"IFGC amdt.","kind":null},
+    {"id":"fort-collins-ipc-amendments-sd005-event-20","a":"CO-MUNICIPAL-FORT_COLLINS","label":"IPC amdt.","kind":null},
+    {"id":"fort-collins-ispsc-amendments-sd005-event-21","a":"CO-MUNICIPAL-FORT_COLLINS","label":"ISPSC amdt.","kind":null},
+    {"id":"fort-collins-iebc-amendments-sd005-event-22","a":"CO-MUNICIPAL-FORT_COLLINS","label":"IEBC amdt.","kind":null},
+    {"id":"fort-collins-ipmc-amendments-sd005-event-23","a":"CO-MUNICIPAL-FORT_COLLINS","label":"IPMC amdt.","kind":null},
+    {"id":"fort-collins-land-use-article-6-sd005-event-24","a":"CO-MUNICIPAL-FORT_COLLINS","label":"Article 6","kind":null},
+    {"id":"fort-collins-land-use-article-7-sd005-event-26","a":"CO-MUNICIPAL-FORT_COLLINS","label":"Article 7","kind":null},
+    {"id":"fort-collins-meeting-packet-9909c320-sd005-09","a":"CO-MUNICIPAL-FORT_COLLINS","label":"Packet 9909","kind":null,"limit":"Meeting-packet custody does not establish a final adopted instrument."},
+    {"id":"fort-collins-meeting-packet-98ce54e6-sd005-11","a":"CO-MUNICIPAL-FORT_COLLINS","label":"Packet 98ce","kind":null,"limit":"Meeting-packet custody does not establish a final adopted instrument."},
+    {"id":"larimer-equity-fee-memo-sd007-05","a":"CO-COUNTY-LARIMER","label":"Equity memo","kind":"checked_tables","scope":"Four-page staff recommendation memo: 82 source blocks and four logical table rows in five fragments reviewed.","limit":"Proposed fees and implementation conditions remain attached. OCR is retained separately; adoption and current applicability unverified."},
+    {"id":"larimer-equity-fee-resolution-sd007-04","a":"CO-COUNTY-LARIMER","label":"Equity res.","kind":"checked_passages","scope":"Two scanned pages: 21 printed-body blocks manually transcribed; five execution regions qualified.","limit":"Received package; acquisition unknown. Literal 20243 retained; signatures and legal dates unverified. No attachments reconstructed."},
+    {"id":"larimer-february-meeting-packet-sd007-08","a":"CO-COUNTY-LARIMER","label":"Feb. packet","kind":null,"limit":"Meeting-packet custody does not resolve the executed extension chain."},
+    {"id":"weld-building-fees-sd008-01","a":"CO-COUNTY-WELD","label":"Bldg fees","kind":"checked_tables","scope":"All five physical pages: source text and fee associations reviewed.","limit":"Publisher acquisition and official source URL remain unconfirmed; adoption unverified."},
+    {"id":"greeley-building-fees-sd008-06","a":"CO-MUNICIPAL-GREELEY","label":"Bldg fees","kind":"checked_tables","scope":"One-page source: native order, fee associations and footnote links reviewed.","limit":"Source dates retain their recorded roles; later changes and legal effect are unverified."},
+    {"id":"greeley-development-impact-fee-memo-sd008-07","a":"CO-MUNICIPAL-GREELEY","label":"Impact memo","kind":"checked_tables","scope":"Three-page memo: 30 fee rows and source context reviewed.","limit":"Memo and stated schedule do not independently establish current applicability or amendments."},
+    {"id":"greeley-water-sewer-proposed-pif-notice-sd008-08","a":"CO-MUNICIPAL-GREELEY","label":"PIF notice","kind":"checked_tables","scope":"Two-page proposed-fee notice: 24 table cells and exact row associations checked.","limit":"March 1, 2021 schedule is expressly conditional on adoption; adoption is not established."},
+    {"id":"weld-ordinance-26-01-atlas-directed","a":"CO-COUNTY-WELD","label":"Ord. 26-01","kind":"source_structure","scope":"Five-page amendment instrument; not the complete consolidated chapter.","limit":"Dates remain source statements; later amendments and present legal effect unverified."},
+    {"id":"weld-ehs-fees-2026-atlas-directed","a":"CO-COUNTY-WELD","label":"EHS fees","kind":"checked_tables","scope":"Three-page Environmental Health Services fee schedule; native source review qualified.","limit":"Printed 2026 is a schedule-year assertion, not a verified adoption or effective date."},
+    {"id":"mesa-land-development-code-atlas-directed","a":"CO-COUNTY-MESA","label":"Land dev.","kind":null,"limit":"Cover and amendment dates are source statements; no complete review is mapped here."},
+    {"id":"grand-junction-ifc-ordinance-5269-atlas-directed","a":"CO-MUNICIPAL-GRAND_JUNCTION","label":"Ord. 5269","kind":"source_structure","scope":"All 29 pages viewed for structure and selected language; no word-level certification.","limit":"Conflicting effective-date statements remain unresolved; graphic dimensions are not all certified."},
+    {"id":"grand-junction-fire-fees-atlas-directed","a":"CO-MUNICIPAL-GRAND_JUNCTION","label":"Fire fees","kind":"checked_tables","scope":"57 fee rows on two pages checked; page-two continuation is an explicit layout annotation.","limit":"Edition, adoption and effective dates unknown. No fee calculation or applicability determination."},
+    {"id":"grand-junction-ordinance-5340-atlas-directed","a":"CO-MUNICIPAL-GRAND_JUNCTION","label":"Ord. 5340","kind":"checked_passages","scope":"Bounded passages checked; heavy strike marks and graphical limits preserved.","limit":"Full transcription is not certified. Source effect was stated in the future at acquisition."},
+    {"id":"mesa-planning-fees-2017-2018-atlas-directed","a":"CO-COUNTY-MESA","label":"Planning fees","kind":"checked_tables","scope":"Three-page historical 2017/2018 exhibit: source rows and associations reviewed.","limit":"PDF/HTML dates and fee-suspension statement remain unreconciled; other agencies are distinct."},
+    {"id":"mesa-building-fees-exhibit-a-atlas-directed","a":"CO-COUNTY-MESA","label":"Bldg fees","kind":"checked_tables","scope":"Five-page fee exhibit: source text and table associations reviewed.","limit":"Referenced Table 3B is absent; adoption, effectiveness and current applicability unverified."},
+    {"id":"el-paso-planning-fees-sd011","a":"CO-COUNTY-EL_PASO","label":"Planning fees","kind":"checked_tables","scope":"Five scanned pages: 104 fee rows, 15 footnotes and three General Notes checked against images.","limit":"Native text is empty; one label remains clipped. The $37 technology fee is included. Adoption and current applicability unverified."},
+    {"id":"el-paso-boh-ehs-fees-sd011","a":"CO-COUNTY-EL_PASO","label":"EHS fees EN","kind":"checked_tables","scope":"Five English pages: 65 service/fee rows, seven groups and 37 context records checked against the source.","limit":"2024/2025 fee cells remain source claims; current applicability and Spanish equivalence unverified."},
+    {"id":"el-paso-ordinance-26-01-sd011","a":"CO-COUNTY-EL_PASO","label":"Ord. 26-01","kind":null},
+    {"id":"el-paso-ldc-wildfire-appendix-e-sd011","a":"CO-COUNTY-EL_PASO","label":"Wildfire E","kind":null,"limit":"Appendix concerns areas outside a fire district; district rules and present applicability remain separate questions."},
+    {"id":"el-paso-open-burning-22-001-sd011","a":"CO-COUNTY-EL_PASO","label":"Open burning","kind":null},
+    {"id":"el-paso-ldc-chapter-1-sd011","a":"CO-COUNTY-EL_PASO","label":"LDC ch. 1","kind":null,"limit":"Inherited source URL; no fresh official referral captured. Full chapter review and current legal effect are unverified."},
+    {"id":"el-paso-ldc-chapter-2-sd011","a":"CO-COUNTY-EL_PASO","label":"LDC ch. 2","kind":null,"limit":"Inherited source URL; no fresh official referral captured. Full chapter review and current legal effect are unverified."},
+    {"id":"el-paso-ldc-chapter-5-sd011","a":"CO-COUNTY-EL_PASO","label":"LDC ch. 5","kind":null,"limit":"Inherited source URL; no fresh official referral captured. Full chapter review and current legal effect are unverified."},
+    {"id":"el-paso-unsafe-buildings-18-03-sd011","a":"CO-COUNTY-EL_PASO","label":"Unsafe bldg.","kind":null},
+    {"id":"el-paso-boh-admin-regulations-sd011","a":"CO-COUNTY-EL_PASO","label":"BoH admin","kind":null},
+    {"id":"el-paso-boh-bylaws-sd011","a":"CO-COUNTY-EL_PASO","label":"Bylaws EN","kind":"checked_passages","scope":"All five English pages: 12,640 native bytes and 170 nonblank lines reviewed in paragraph context.","limit":"Visible 5/23/2012 footers are unlabeled dates. Adoption, effectiveness and Spanish equivalence remain unverified."},
+    {"id":"el-paso-boh-bylaws-spanish-sd011","a":"CO-COUNTY-EL_PASO","label":"Bylaws ES","kind":null,"limit":"Spanish source version preserved; translation equivalence and current legal effect are unverified."},
+    {"id":"el-paso-boh-ehs-fees-spanish-sd011","a":"CO-COUNTY-EL_PASO","label":"EHS fees ES","kind":null,"limit":"Spanish source version preserved; approval-year clipping, translation equivalence and current legal effect remain unresolved."},
+    {"id":"colorado-springs-code-services-fees-2015-atlas-directed","a":"CO-MUNICIPAL-COLORADO_SPRINGS","label":"Code fees 2015","kind":null,"limit":"Historical schedule has structural and selected-context review only; numeric tables and connection to newer schedules remain unverified."},
+    {"id":"colorado-springs-construction-fees-atlas-directed","a":"CO-MUNICIPAL-COLORADO_SPRINGS","label":"Construction fees","kind":"checked_tables","scope":"Seven pages: 128 fee rows, nine tables, 13 definitions and three table notes checked against the source.","limit":"Printed July 1, 2026 date is unverified. PPRBD collection conditions remain intact; the separate Code Services schedule is outside this review."},
+    {"id":"douglas-ehs-fees-atlas-directed","a":"CO-COUNTY-DOUGLAS","label":"EHS fees","kind":"checked_tables","scope":"One page: 44 rows and seven context records checked; two blank fee cells remain unknown.","limit":"County-issued schedule distinguishes county and state fee captions. Printed dates, adoption and current applicability unverified."},
+    {"id":"pueblo-planning-fees-atlas-directed","a":"CO-MUNICIPAL-PUEBLO","label":"Planning fees","kind":"checked_tables","scope":"Four pages: 44 physical application rows with 43 nested entries; fee and subcategory associations preserved.","limit":"City of Pueblo only. Printed 2-13-26 is a source date; adoption, later changes and applicability unverified."},
+    {"id":"pueblo-county-planning-fees-sh-ext-002","a":"CO-COUNTY-PUEBLO","label":"Planning fees","kind":"checked_tables","scope":"Two complete pages: 88 physical rows, conditional markers and continuation associations reviewed.","limit":"County of Pueblo only. Received package; reported HTTP times unverified. Catalog access and adopting-document gaps remain; no current-law claim."}
+  ]
+  </script>
+  <script>
+    (() => {
+      const root = document.getElementById('geode-review-inventory');
+      const rows = JSON.parse(root.querySelector('#inv-source-data').textContent);
+      const groups = [
+        ['CO-COUNTY-ARAPAHOE', 'Arapahoe County'],
+        ['CO-COUNTY-LARIMER', 'Larimer County'],
+        ['CO-MUNICIPAL-FORT_COLLINS', 'Fort Collins'],
+        ['CO-COUNTY-WELD', 'Weld County'],
+        ['CO-MUNICIPAL-GREELEY', 'Greeley'],
+        ['CO-COUNTY-MESA', 'Mesa County'],
+        ['CO-MUNICIPAL-GRAND_JUNCTION', 'Grand Junction'],
+        ['CO-COUNTY-EL_PASO', 'El Paso County'],
+        ['CO-MUNICIPAL-COLORADO_SPRINGS', 'Colorado Springs'],
+        ['CO-COUNTY-DOUGLAS', 'Douglas County'],
+        ['CO-MUNICIPAL-PUEBLO', 'City of Pueblo'],
+        ['CO-COUNTY-PUEBLO', 'Pueblo County']
+      ];
+      const kinds = {checked_tables: 'Checked tables', checked_passages: 'Checked passages', source_structure: 'Source structure reviewed'};
+      const targets = new Map();
+      const container = root.querySelector('#inv-authorities');
+      function select(row) {
+        for (const [id, button] of targets) button.setAttribute('aria-pressed', String(id === row.id));
+        root.dataset.selectedSource = row.id;
+        root.querySelector('#inv-selected-name').textContent = groups.find(group => group[0] === row.a)[1] + ' · ' + row.label;
+        root.querySelector('#inv-selected-status').textContent = 'PDF preserved · ' + (row.kind ? kinds[row.kind] : 'No mapped review');
+        root.querySelector('#inv-selected-scope').textContent = row.scope || 'No review artifact is mapped in this inventory; prior inspection may still exist.';
+        root.querySelector('#inv-selected-limit').textContent = row.limit || 'Current legal effect, completeness and applicability remain unverified.';
+      }
+      for (const [authority, name] of groups) {
+        const members = rows.filter(row => row.a === authority);
+        const section = document.createElement('div');
+        section.className = 'inv-group';
+        const label = document.createElement('div');
+        label.className = 'inv-authority text-small';
+        label.textContent = name + ' · ' + members.length;
+        const cells = document.createElement('div');
+        cells.className = 'inv-cells';
+        cells.setAttribute('role', 'group');
+        cells.setAttribute('aria-label', name);
+        for (const row of members) {
+          const cell = document.createElement('div');
+          cell.className = 'inv-cell';
+          cell.dataset.mapped = String(row.kind !== null);
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'btn viz-tile';
+          button.textContent = row.label;
+          button.dataset.sourceId = row.id;
+          button.setAttribute('aria-pressed', 'false');
+          button.setAttribute('aria-label', name + ', ' + row.id + ', PDF preserved, ' + (row.kind ? kinds[row.kind] : 'no mapped review') + ', current law unknown');
+          button.addEventListener('click', () => select(row));
+          targets.set(row.id, button);
+          cell.append(button);
+          cells.append(cell);
+        }
+        section.append(label, cells);
+        container.append(section);
+      }
+      root.querySelector('#inv-total-count').textContent = rows.length;
+      root.querySelector('#inv-reviewed-count').textContent = rows.filter(row => row.kind !== null).length;
+      root.querySelector('#inv-unmapped-count').textContent = rows.filter(row => row.kind === null).length;
+      select(rows.find(row => row.id === 'pueblo-county-planning-fees-sh-ext-002'));
+    })();
+  </script>
+</div>

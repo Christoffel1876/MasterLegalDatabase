@@ -1,0 +1,144 @@
+{
+  "$defs": {
+    "File": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "tracked": {
+          "title": "Tracked",
+          "type": "boolean"
+        },
+        "ignored": {
+          "title": "Ignored",
+          "type": "boolean"
+        },
+        "ignore_rule": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Ignore Rule"
+        },
+        "lfs_filter": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Lfs Filter"
+        },
+        "issues": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Issues",
+          "type": "array"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes",
+        "tracked",
+        "ignored",
+        "ignore_rule",
+        "lfs_filter",
+        "issues"
+      ],
+      "title": "File",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "git_head": {
+      "title": "Git Head",
+      "type": "string"
+    },
+    "selection_rule": {
+      "title": "Selection Rule",
+      "type": "string"
+    },
+    "roots": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Roots",
+      "type": "array"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "missing_references": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing References",
+      "type": "array"
+    },
+    "protected_private_candidates": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Protected Private Candidates",
+      "type": "array"
+    },
+    "soft_limit_bytes": {
+      "title": "Soft Limit Bytes",
+      "type": "integer"
+    },
+    "hard_limit_bytes": {
+      "title": "Hard Limit Bytes",
+      "type": "integer"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "git_head",
+    "selection_rule",
+    "roots",
+    "files",
+    "missing_references",
+    "protected_private_candidates",
+    "soft_limit_bytes",
+    "hard_limit_bytes",
+    "limits"
+  ],
+  "title": "Packaging",
+  "type": "object"
+}

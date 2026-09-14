@@ -1,0 +1,30 @@
+{
+  "reviewed_at": "2026-09-13T01:29:35.364431+00:00",
+  "status": "PREPARED_NOT_APPLIED",
+  "prior_manifest": {
+    "path": "historical/first-prepared-9a12c339/FINAL_MANIFEST.json",
+    "sha256": "9a12c339721adb98f7c952081437a1958a45f74c66e39f5f705ba089ae11fe52",
+    "size_bytes": 19424
+  },
+  "prior_file_count": 100,
+  "prior_all_files_unchanged": true,
+  "source_preparation_unchanged": true,
+  "transaction": {
+    "path": "transaction.py",
+    "sha256": "8ab73c4288e48590bf60759969e75f44a58dec9d782f10c2e0ec92a749cf7189",
+    "size_bytes": 31575
+  },
+  "tests": {
+    "path": "test_transaction.py",
+    "sha256": "6aaf9024a10aaf038981e2740845cd5707bdae19db6d8134ea0858586aafcd63",
+    "size_bytes": 28365
+  },
+  "changes": [
+    "Format all transaction lines to at most100 characters; name fixed source identity map and format runtime pins.",
+    "Remove unused predecessor VERIFIER_SHA and explain direct frozen-manifest checking.",
+    "Consume only the exact PREPARATION, manifest, provenance and baseline buffers that passed verification; no unchecked metadata reread.",
+    "Keep fresh source-byte verification before writes; regression rejects source mutation after metadata capture.",
+    "61 focused tests and actual canonical read-only preflight passed; unchanged source bytes and original61/62prefixes."
+  ],
+  "canonical_writes": 0
+}

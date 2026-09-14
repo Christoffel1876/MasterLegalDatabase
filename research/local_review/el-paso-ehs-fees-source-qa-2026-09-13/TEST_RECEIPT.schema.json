@@ -1,0 +1,91 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "An exact relative payload identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "phase": {
+      "const": "semantic_and_adversarial_validation_before_final_inventory",
+      "title": "Phase",
+      "type": "string"
+    },
+    "tests_passed": {
+      "const": 15,
+      "title": "Tests Passed",
+      "type": "integer"
+    },
+    "warnings": {
+      "const": 5,
+      "title": "Warnings",
+      "type": "integer"
+    },
+    "duration_seconds": {
+      "const": 1.94,
+      "title": "Duration Seconds",
+      "type": "number"
+    },
+    "log": {
+      "$ref": "#/$defs/Ref"
+    },
+    "tests": {
+      "$ref": "#/$defs/Ref"
+    },
+    "source_qa": {
+      "$ref": "#/$defs/Ref"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "external_full_suite_claim": {
+      "const": false,
+      "title": "External Full Suite Claim",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "completed_at",
+    "phase",
+    "tests_passed",
+    "warnings",
+    "duration_seconds",
+    "log",
+    "tests",
+    "source_qa",
+    "source_sha256",
+    "external_full_suite_claim"
+  ],
+  "title": "TestReceipt",
+  "type": "object"
+}

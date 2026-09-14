@@ -1,0 +1,57 @@
+{
+  "status": "passed",
+  "events": [
+    {
+      "name": "seal",
+      "command": [
+        "/private/tmp/geode-status-venv/bin/python",
+        "-B",
+        "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13/popper-gunnison-intake-preparation/validate_preparation.py"
+      ],
+      "started_at": "2026-09-13T15:54:14.504630+00:00",
+      "finished_at": "2026-09-13T15:54:15.041418+00:00",
+      "exit_code": 0,
+      "stdout_path": "seal.stdout.txt",
+      "stdout_sha256": "8c5067fb2912efd5aed34b903ab735ac763aa709f835a1b78341b7e3ebac2df0",
+      "stderr_path": "seal.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "live-preflight",
+      "command": [
+        "/private/tmp/geode-status-venv/bin/python",
+        "-B",
+        "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13/popper-gunnison-intake-preparation/transaction.py",
+        "--dry-run",
+        "--root",
+        "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase"
+      ],
+      "started_at": "2026-09-13T15:54:15.041572+00:00",
+      "finished_at": "2026-09-13T15:54:15.802355+00:00",
+      "exit_code": 0,
+      "stdout_path": "live-preflight.stdout.txt",
+      "stdout_sha256": "e1f791dbaa838e805e97ef672e6b77c2ed39e17bc9490f51cce4a8409a5a8823",
+      "stderr_path": "live-preflight.stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "managed_before": {
+    "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl": "7b8f882ec45286f69713a023345d8c5ef7f5859ecdb5f8d4036c8d8900eb8570",
+    "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl": "dc4dd0096e6eee5bed75b13b9f7990dc1735212b9835bbf645f390235be69f3c",
+    "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_REPORT.json": "d59fe2a04ed9ad278d5d9a0313d3909a830dae1d43c0c46bfb5e68b96006d2c5",
+    "_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json": "ad27514fe91659c9914780c7d3e69e48ace742bc31ad67d9c3a3c99945aecde3",
+    "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_POLICY.json": "9cd00825fcb7a8ab905fefcebe3575355b41eb4cf3e3168b1b83c7ef56aba205",
+    "_CONTROL_PLANE/BLOCKED_DOWNLOAD_QUEUE.json": "d195fdff2b686d51dc4e3e22bb8f2d6f6098fd8e2cdf7b83be088964a7a9f4be",
+    "_CONTROL_PLANE/LOCAL_SOURCE_REGISTRY.json": "05f9bb13489109027556728e91a75ad438fdfeb6e5e7cb4027b4d4dbaf66f64f"
+  },
+  "managed_after": {
+    "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl": "7b8f882ec45286f69713a023345d8c5ef7f5859ecdb5f8d4036c8d8900eb8570",
+    "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl": "dc4dd0096e6eee5bed75b13b9f7990dc1735212b9835bbf645f390235be69f3c",
+    "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_REPORT.json": "d59fe2a04ed9ad278d5d9a0313d3909a830dae1d43c0c46bfb5e68b96006d2c5",
+    "_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json": "ad27514fe91659c9914780c7d3e69e48ace742bc31ad67d9c3a3c99945aecde3",
+    "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_POLICY.json": "9cd00825fcb7a8ab905fefcebe3575355b41eb4cf3e3168b1b83c7ef56aba205",
+    "_CONTROL_PLANE/BLOCKED_DOWNLOAD_QUEUE.json": "d195fdff2b686d51dc4e3e22bb8f2d6f6098fd8e2cdf7b83be088964a7a9f4be",
+    "_CONTROL_PLANE/LOCAL_SOURCE_REGISTRY.json": "05f9bb13489109027556728e91a75ad438fdfeb6e5e7cb4027b4d4dbaf66f64f"
+  },
+  "execution_directory_present": false
+}

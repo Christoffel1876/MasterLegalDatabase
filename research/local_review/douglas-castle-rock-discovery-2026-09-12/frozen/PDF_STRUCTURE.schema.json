@@ -1,0 +1,131 @@
+{
+  "$defs": {
+    "Page": {
+      "additionalProperties": false,
+      "description": "One unchanged native extraction and optional complete-page rendering.",
+      "properties": {
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "native": {
+          "$ref": "#/$defs/Ref"
+        },
+        "width_points": {
+          "title": "Width Points",
+          "type": "number"
+        },
+        "height_points": {
+          "title": "Height Points",
+          "type": "number"
+        },
+        "render": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "physical_page",
+        "native",
+        "width_points",
+        "height_points",
+        "render"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "An exact retained local file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Structure, not a full transcription or legal-currentness certificate.",
+  "properties": {
+    "event_id": {
+      "title": "Event Id",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Ref"
+    },
+    "page_count": {
+      "title": "Page Count",
+      "type": "integer"
+    },
+    "repaired": {
+      "title": "Repaired",
+      "type": "boolean"
+    },
+    "encrypted": {
+      "title": "Encrypted",
+      "type": "boolean"
+    },
+    "engine": {
+      "title": "Engine",
+      "type": "string"
+    },
+    "native_method": {
+      "title": "Native Method",
+      "type": "string"
+    },
+    "native_review_status": {
+      "title": "Native Review Status",
+      "type": "string"
+    },
+    "render_dpi": {
+      "title": "Render Dpi",
+      "type": "integer"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Pages",
+      "type": "array"
+    }
+  },
+  "required": [
+    "event_id",
+    "source",
+    "page_count",
+    "repaired",
+    "encrypted",
+    "engine",
+    "native_method",
+    "native_review_status",
+    "render_dpi",
+    "pages"
+  ],
+  "title": "Document",
+  "type": "object"
+}

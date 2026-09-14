@@ -1,0 +1,272 @@
+{
+  "$defs": {
+    "Artifact": {
+      "additionalProperties": false,
+      "description": "Identify immutable local bytes within the selected repository.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Artifact",
+      "type": "object"
+    },
+    "ReviewJoin": {
+      "additionalProperties": false,
+      "description": "Allow one exact schema-backed review and its recorded, bounded scope.",
+      "properties": {
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "review": {
+          "$ref": "#/$defs/Artifact"
+        },
+        "review_schema": {
+          "$ref": "#/$defs/Artifact"
+        },
+        "source_sha_pointer": {
+          "title": "Source Sha Pointer",
+          "type": "string"
+        },
+        "source_id_pointer": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Id Pointer"
+        },
+        "expected_review_source_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expected Review Source Id"
+        },
+        "authority_pointer": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Authority Pointer"
+        },
+        "scope_pointers": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Scope Pointers",
+          "type": "array"
+        },
+        "limitation_pointers": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Limitation Pointers",
+          "type": "array"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "record_id",
+        "review",
+        "review_schema",
+        "source_sha_pointer",
+        "scope_pointers",
+        "limitation_pointers",
+        "note"
+      ],
+      "title": "ReviewJoin",
+      "type": "object"
+    },
+    "Selected": {
+      "additionalProperties": false,
+      "properties": {
+        "canonical_id": {
+          "title": "Canonical Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "source_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "source_review_alias": {
+          "title": "Source Review Alias",
+          "type": "string"
+        },
+        "review": {
+          "$ref": "#/$defs/Artifact"
+        },
+        "review_schema": {
+          "$ref": "#/$defs/Artifact"
+        },
+        "acceptance": {
+          "$ref": "#/$defs/Artifact"
+        },
+        "actual_intake_id": {
+          "default": null,
+          "title": "Actual Intake Id",
+          "type": "null"
+        },
+        "actual_repository_received_at": {
+          "default": null,
+          "title": "Actual Repository Received At",
+          "type": "null"
+        },
+        "status": {
+          "const": "awaiting_actual_intake_receipt",
+          "default": "awaiting_actual_intake_receipt",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "canonical_id",
+        "authority_id",
+        "layer_id",
+        "source_sha256",
+        "source_review_alias",
+        "review",
+        "review_schema",
+        "acceptance"
+      ],
+      "title": "Selected",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "preliminary_pending_actual_intake",
+      "default": "preliminary_pending_actual_intake",
+      "title": "Status",
+      "type": "string"
+    },
+    "prior_sources": {
+      "const": 61,
+      "default": 61,
+      "title": "Prior Sources",
+      "type": "integer"
+    },
+    "prior_reviews": {
+      "const": 22,
+      "default": 22,
+      "title": "Prior Reviews",
+      "type": "integer"
+    },
+    "prior_unknown": {
+      "const": 39,
+      "default": 39,
+      "title": "Prior Unknown",
+      "type": "integer"
+    },
+    "intended_sources": {
+      "const": 63,
+      "default": 63,
+      "title": "Intended Sources",
+      "type": "integer"
+    },
+    "intended_reviews": {
+      "const": 24,
+      "default": 24,
+      "title": "Intended Reviews",
+      "type": "integer"
+    },
+    "intended_unknown": {
+      "const": 39,
+      "default": 39,
+      "title": "Intended Unknown",
+      "type": "integer"
+    },
+    "inputs": {
+      "items": {
+        "$ref": "#/$defs/Artifact"
+      },
+      "title": "Inputs",
+      "type": "array"
+    },
+    "selections": {
+      "items": {
+        "$ref": "#/$defs/Selected"
+      },
+      "title": "Selections",
+      "type": "array"
+    },
+    "review_joins": {
+      "items": {
+        "$ref": "#/$defs/ReviewJoin"
+      },
+      "title": "Review Joins",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "production_writes": {
+      "const": 0,
+      "default": 0,
+      "title": "Production Writes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "inputs",
+    "selections",
+    "review_joins"
+  ],
+  "title": "Preparation",
+  "type": "object"
+}

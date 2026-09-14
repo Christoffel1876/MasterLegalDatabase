@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0",
+  "source_id": "chaffee-planning-application-fees-atlas-directed",
+  "authority_id": "CO-COUNTY-CHAFFEE",
+  "source_sha256": "8c6b6176f8617a43c4f4eb422f5c9c7287ffba8f2daee4af803c6831d2682205",
+  "draft_qa": {
+    "path": "received/SOURCE_QA.json",
+    "sha256": "34eb66bf9aa073cb065fbc26bdac800f943f39010119010719b123bf36821375",
+    "size_bytes": 117157
+  },
+  "examined_pages": 2,
+  "examined_existing_crops": 8,
+  "fee_rows": 49,
+  "groups": 10,
+  "legal_currentness": "not_verified",
+  "answer_safe": false,
+  "method": "candidate_aware_independent_direct_image_review",
+  "created_at": "2026-09-13T16:58:34.391598+00:00",
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "no_issue",
+      "statement": "All 49 row labels, literal fee expressions, ten groups and the page-1-to-page-2 subdivision-exemptions continuation agree with both full source images and all eight retained crops. Native fee intervals immediately follow their own application intervals; repeated same-value fees have not been swapped.",
+      "evidence": [
+        "received/SOURCE_QA.json",
+        "ROW_GEOMETRY.json",
+        "received/pages/page-1.png",
+        "received/pages/page-2.png"
+      ]
+    },
+    {
+      "id": "F02",
+      "severity": "no_issue",
+      "statement": "The appeal refund note remains with R38; the rental-license-in-addition/prior-to-issuance note remains with R41; the entire discretionary planning review and mandatory GIS hourly condition remains with R48/R49; the full Section 5.2.5.5 escrow paragraph qualifies all 49 rows. No formula or exact-2,500 threshold is invented.",
+      "evidence": [
+        "received/crops/p2-appeal-rental.png",
+        "received/crops/p2-hourly-notes.png",
+        "received/SOURCE_QA.json"
+      ]
+    },
+    {
+      "id": "F03",
+      "severity": "qualification",
+      "statement": "Replace the draft phrase Two new observed publicGET/receipt chains when describing this source with: one fresh successful fee-PDF GET at 2026-09-13T16:44:32.759460Z to 16:44:33.133961Z, following the separately retained earlier actual county A003 302 Location. Earlier A001/A002 requests concern different ordinance PDFs; the original catalog capture is received referral evidence. This clarification does not change source bytes, fees or review findings.",
+      "evidence": [
+        "custody/PLAN.json",
+        "custody/events/A001/RESULT.json",
+        "custody/evidence/prior-retrieval/events/A003/RESULT.json"
+      ]
+    },
+    {
+      "id": "F04",
+      "severity": "qualification",
+      "statement": "The source draft initially said its eight generated crops awaited separate inspection. Atlas subsequently recorded crop inspection. The captured 27-file draft already includes that later receipt; it is additionally duplicated under root-addendum for explicit navigation. Popper directly viewed all eight crops and both full pages. No receipt or source-review process history is rewritten.",
+      "evidence": [
+        "root-addendum/ATLAS_CROP_INSPECTION.json",
+        "DRAFT_INVENTORY.json"
+      ]
+    },
+    {
+      "id": "F05",
+      "severity": "no_issue",
+      "statement": "A separately generated direct crop confirms that page 2 visibly includes the county emblem and both heading lines. The existing p2 hourly-notes crop confirms Updated December 2024. Native order places those footer lines near the head; it does not imply source invisibility. Effective January 1, 2025 remains a source-printed claim, not verified currentness.",
+      "evidence": [
+        "proofs/page2-header.png",
+        "received/crops/p2-hourly-notes.png"
+      ]
+    }
+  ],
+  "custody_evidence": [
+    {
+      "path": "custody/FINAL_MANIFEST.json",
+      "sha256": "ecfdc65448dd2cc58d00eec7ec1ba3e9987457d5d9270d5e3362c165602ab8f3",
+      "size_bytes": 12441
+    },
+    {
+      "path": "custody/PLAN.json",
+      "sha256": "625456a31e03b482924bfe4e8430bf897e0960e8dceda34cc1153b725570ba01",
+      "size_bytes": 3485
+    },
+    {
+      "path": "custody/events/A001/RESULT.json",
+      "sha256": "2b29272dc5712781b8e9e4971bcaceb44327b27bb905a6fc0ab68a25e1be14f4",
+      "size_bytes": 2697
+    },
+    {
+      "path": "custody/events/A001/RESERVATION.json",
+      "sha256": "57c843f213e4be9a695f663fbbb4aa47da922ad0625410c84515896b7aba1889",
+      "size_bytes": 2602
+    },
+    {
+      "path": "custody/evidence/prior-retrieval/events/A003/RESULT.json",
+      "sha256": "72289f393b0526b6b5fba4777a239217e17bb51c8e1af21a2d55e7d4e8770d2e",
+      "size_bytes": 2796
+    }
+  ],
+  "limitations": [
+    "Candidate-aware direct image audit, not blind review, external model diversity or an independent legal opinion.",
+    "Full prior public retrieval packet is retained for portable custody. Its other two ordinance PDFs are not reviewed by this two-page fee-source audit.",
+    "Preserved public header subsets exclude specified original response fields; excluded original header values cannot be replayed. No secret headers, tokens or credentials were introduced.",
+    "Hashes, schemas and geometry bind evidence; they do not independently prove visual judgment or legal currentness.",
+    "This audit does not apply intake or invent an actual repository received_at. GET completion, printed effective/update dates and prospective intake remain separate."
+  ]
+}

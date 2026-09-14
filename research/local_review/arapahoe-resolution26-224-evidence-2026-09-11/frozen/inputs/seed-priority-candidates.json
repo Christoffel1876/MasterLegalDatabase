@@ -1,0 +1,828 @@
+{
+  "assignment": "geode-source-discovery-002",
+  "comparison_commit": "1d2a95f8eca5ca1c1626d6f4dbc591ad4f1938a7",
+  "candidate_count": 20,
+  "candidates": [
+    {
+      "id": "SD002-01",
+      "source_discovery_id": "SD002-AD-04",
+      "authority_id": "CO-COUNTY-ADAMS",
+      "categories": [
+        "land_use_zoning",
+        "codified_rules"
+      ],
+      "title": "Development Standards and Regulations (current) \u2014 adamscounty.municipalcodeonline.com",
+      "document_number": "Chapters 1\u201311 (current book)",
+      "requested_url": "https://adamscounty.municipalcodeonline.com/",
+      "final_public_url": "https://adamscounty.municipalcodeonline.com/book?type=temp",
+      "official_referral_url": "https://adamscountyco.gov/our-county/community-economic-development/planning-development/development-standards-regulations/",
+      "official_referral_link_label": "View the current Development Standards & Regulations in Municode",
+      "observed_at_utc": "2026-09-10T21:12:25Z",
+      "dates": {
+        "edition_cutoff": null,
+        "adoption": null,
+        "effective": null,
+        "posting": null
+      },
+      "inspection_scope": "part_of_document",
+      "content_opened": true,
+      "evidence": [
+        "Official DSR page links solely to https://adamscounty.municipalcodeonline.com/ as 'View the current Development Standards & Regulations in Municode'. Landing lists Available Books: Development Standards and Regulations ('Outlines permitted uses of land...'). Book URL book?type=temp title 'Development Standards and Regulations'. Chrome dump TOC/body shows CHAPTER 1 ADMINISTRATION through CHAPTER 11 DEFINITIONS including Ch.2 Application and Permitting Procedures, Ch.3 Zone District Regulations, Ch.4 Design Requirements and Performance Standards, Ch.5 Subdivision..., Ch.7 Roadway Standards, Ch.8 Access Design and Traffic, Ch.9 Storm Drainage..., Ch.10 Special District Guidelines. Ch.1 text states regulations control development of the County / divide unincorporated area into zone districts; Board of Adjustment grants variances (not use variances); Director may issue notices for violations. Disclaimer: online informational; official hard copy governs."
+      ],
+      "amendment_relationships": [
+        "Separate EncodePlus book online.encodeplus.com/regs/adamscounty-co/ labeled 'Draft Development Standards and Regulations' (Modules 1\u20132)\u2014draft rewrite, not treated as current adopted DSR. Legacy chapter PDFs under /wp-content/uploads/2025/08/dsr-chapter-*.pdf still hosted (opened headers)."
+      ],
+      "obstacles": [
+        "Supplement/cutoff date not shown on dumped TOC. Full chapter bodies not archived. Draft EncodePlus DSR must not be confused with current municipalcodeonline book."
+      ],
+      "repository_comparison": {
+        "status": "new_candidate",
+        "matched_registry_source_id": "county_adams_development_standards",
+        "note": "Similar to registry county_adams_development_standards / county_adams_homepage (DSR hub URL). Ledger collection:missing \u2014 similar URL \u2260 preserved DSR book bytes; new_candidate."
+      },
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake"
+    },
+    {
+      "id": "SD002-02",
+      "source_discovery_id": "SD002-AD-02",
+      "authority_id": "CO-COUNTY-ADAMS",
+      "categories": [
+        "codified_rules",
+        "adopted_changes"
+      ],
+      "title": "Adams County Code (County Ordinances and Resolutions) \u2014 EncodePlus / Municipal Code Online County Code book",
+      "document_number": null,
+      "requested_url": "https://online.encodeplus.com/regs/adamscounty-co-cc/doc-viewer.aspx?secid=-1",
+      "final_public_url": "https://online.encodeplus.com/regs/adamscounty-co-cc/doc-viewer.aspx?secid=-1",
+      "official_referral_url": "https://adamscountyco.gov/our-county/community-economic-development/permits-licensing/codes-information/",
+      "official_referral_link_label": "Codes & Information (Ordinances / ICC note)",
+      "observed_at_utc": "2026-09-10T21:08:20Z",
+      "dates": {
+        "edition_cutoff": "online_toc_observed_2026-09-10",
+        "adoption": null,
+        "effective": null,
+        "posting": null
+      },
+      "inspection_scope": "catalog",
+      "content_opened": true,
+      "evidence": [
+        "Headless Chrome TOC for County Code lists COUNTY ORDINANCES AND RESOLUTIONS including Ord. 1\u201318 (with gaps), Resolutions (marijuana, parks, firearms, animal control), and ZONING REGULATIONS node. Ord. 4 title: Repealing 2018 IFC and replacing with 2024 Edition. Ord. 12 title: Repealing 2018 International Building Codes and 2017 NEC, replacing with 2024 I-Codes and 2023 NEC. Ord. 14: Adopting 2025 Colorado Wildfire Resiliency Code. Section headings for Ord. 12 include ADOPTION, BOARD OF APPEALS, AMENDMENTS, DATE OF EFFECT. WebFetch returns TOC-only shell; body text of individual sections not fully extracted after disk/Chrome abort on secid=186."
+      ],
+      "amendment_relationships": [
+        "Ord. 4 and Ord. 12 titles supersede 2018-era adoptions; older PDF compilation (SD002-AD-03) still shows 2018 language as of cover date April 6, 2023."
+      ],
+      "obstacles": [
+        "EncodePlus body panes need JS; WebFetch TOC-only. Deep section text (DATE OF EFFECT wording) not captured this pass\u2014effective date corroborated via Codes & Information HTML (SD002-AD-06)."
+      ],
+      "repository_comparison": {
+        "status": "new_candidate",
+        "matched_registry_source_id": "county_adams_county_ordinances_95c11f92f08d",
+        "note": "EncodePlus County Code URL similar to registry county_adams_county_ordinances_95c11f92f08d. Ledger missing \u2014 similar URL \u2260 bytes; new_candidate."
+      },
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake"
+    },
+    {
+      "id": "SD002-03",
+      "source_discovery_id": "SD002-AD-06",
+      "authority_id": "CO-COUNTY-ADAMS",
+      "categories": [
+        "building_fire",
+        "adopted_changes"
+      ],
+      "title": "Codes & Information \u2014 2024 I-Codes / IFC / NEC / Wildfire Resiliency adoption notice + Ord. 4 / Ord. 12 pointers",
+      "document_number": "Ord. 4 (Fire); Ord. 12 (Building); Ord. 14 (Wildfire Resiliency per County Code TOC)",
+      "requested_url": "https://adamscountyco.gov/our-county/community-economic-development/permits-licensing/codes-information/",
+      "final_public_url": "https://adamscountyco.gov/our-county/community-economic-development/permits-licensing/codes-information/",
+      "official_referral_url": "https://adamscountyco.gov/our-county/community-economic-development/permits-licensing/codes-information/",
+      "official_referral_link_label": "Codes & Information",
+      "observed_at_utc": "2026-09-10T21:07:45Z",
+      "dates": {
+        "edition_cutoff": "2024_I-Codes_transition",
+        "adoption": "2026-04-21 (BOCC per page)",
+        "effective": "2026-07-01 (per page)",
+        "posting": null
+      },
+      "inspection_scope": "all_pages",
+      "content_opened": true,
+      "evidence": [
+        "Page banner and ICC section: On April 21, 2026, BOCC adopted 2024 editions of International Codes; effective July 1, 2026. Lists: 2024 IBC, IRC, Colorado Model Low Energy and Carbon Code, 2024 IFC, IFGC, IMC, IPC, IEBC, ISPSC, IPMC, 2023 NEC, Colorado Wildfire Resiliency Code. Ordinances section links labels: Ordinance 4 Fire Code Adoption; Ordinance 12 Building Code Adoption. Contractor registration required for unincorporated Adams County; no fee. EncodePlus County Code TOC confirms Ord. 4 (2024 IFC), Ord. 12 (2024 I-Codes / 2023 NEC), Ord. 14 (2025 Wildfire Resiliency Code) with Board of Appeals sections."
+      ],
+      "amendment_relationships": [
+        "Supersedes 2018 IFC/IBC and 2017 NEC adoptions in April 6, 2023 ordinance book PDF."
+      ],
+      "obstacles": [
+        "ICC model code books are third-party (page points to ICC website). Fire plan review/enforcement by fire districts\u2014see SD002-AD-07 lead. Ord. 4/12 full amendment text/DATE OF EFFECT section body not extracted from EncodePlus."
+      ],
+      "repository_comparison": {
+        "status": "new_candidate",
+        "matched_registry_source_id": "county_adams_county_codes_961b32fe84b7",
+        "note": "Codes & Information URL matches registry county_adams_county_codes_961b32fe84b7 / near county_adams_building_codes. Ledger missing \u2014 new_candidate (similar URL \u2260 bytes)."
+      },
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake"
+    },
+    {
+      "id": "SD002-04",
+      "source_discovery_id": "SD002-AD-03",
+      "authority_id": "CO-COUNTY-ADAMS",
+      "categories": [
+        "adopted_changes"
+      ],
+      "title": "CA Book of County Ordinances and Regulations (PDF compilation) + online County Code ordinance catalog",
+      "document_number": "Cover dated April 6, 2023",
+      "requested_url": "https://adamscountyco.gov/wp-content/uploads/2025/09/CA-Book-of-County-Ordinances-2025.pdf",
+      "final_public_url": "https://adamscountyco.gov/wp-content/uploads/2025/09/CA-Book-of-County-Ordinances-2025.pdf",
+      "official_referral_url": "https://adamscountyco.gov/our-county/community-economic-development/permits-licensing/codes-information/",
+      "official_referral_link_label": "Codes & Information \u2014 Ordinances links",
+      "observed_at_utc": "2026-09-10T21:08:05Z",
+      "dates": {
+        "edition_cutoff": "2023-04-06 (cover)",
+        "adoption": null,
+        "effective": null,
+        "posting": "path /wp-content/uploads/2025/09/"
+      },
+      "inspection_scope": "part_of_document",
+      "content_opened": true,
+      "evidence": [
+        "Opened PDF (~15MB). Cover: COUNTY ORDINANCES AND REGULATIONS, April 6, 2023. TOC lists Ord. 1\u201316+ including Ord. 4 Re-Enacting 2018 IFC; Ord. 12 Re-Enacting 2018 I-Codes and 2017 NEC; Ord. 11 illicit discharges with links to adcogov.org stormwater/DSR Ch.9 and Stormwater-Utility-PolicyManual_v2022.pdf; Zoning Regulations refer to Development Standards and Regulations. Online EncodePlus County Code TOC (same session) shows updated Ord. 4/12/14 titles for 2024/2025 codes\u2014use online County Code as current adopted-changes catalog; treat this PDF as historical compilation."
+      ],
+      "amendment_relationships": [
+        "PDF 2018 building/fire ordinances superseded by online Ord. 4/12 (2024 editions) per Codes & Information and EncodePlus titles."
+      ],
+      "obstacles": [
+        "Filename '2025' vs cover 2023 mismatch. Full PDF not retained after disk pressure; pages 1\u20135 text extracted. BOCC resolution search API used for fees (separate candidate) not for building-code adopting resolution number beyond Codes page statement."
+      ],
+      "repository_comparison": {
+        "status": "new_candidate",
+        "matched_registry_source_id": "county_adams_county_codes_961b32fe84b7",
+        "note": "URL/title similar to registry source_id=county_adams_county_codes_961b32fe84b7; recovery ledger shows collection:missing for all categories \u2014 similar URL \u2260 preserved bytes; treat as new_candidate pending atlas verification."
+      },
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake"
+    },
+    {
+      "id": "SD002-05",
+      "source_discovery_id": "SD002-AD-09",
+      "authority_id": "CO-COUNTY-ADAMS",
+      "categories": [
+        "fees"
+      ],
+      "title": "BOCC Resolution 2024-601 (2025 Fee Schedule) + CED Planning Fee Schedule PDF + Building Permit Fee Schedule PDF",
+      "document_number": "Resolution 2024-601; CED-2024-Fee-Schedule-Planning_CED-FINAL.pdf",
+      "requested_url": "https://apps.adcogov.org/BOCCResolutionDocs/api/document?id=6699466",
+      "final_public_url": "https://apps.adcogov.org/BOCCResolutionDocs/api/document?id=6699466",
+      "official_referral_url": "https://adamscountyco.gov/our-county/community-economic-development/building-safety/permit-fees-contractor-registration/",
+      "official_referral_link_label": "Permit Fees & Contractor Registration (Building Permit Fee Schedule link)",
+      "observed_at_utc": "2026-09-10T21:09:20Z",
+      "dates": {
+        "edition_cutoff": "2025_fee_year",
+        "adoption": "2024-11-19 (clerk certification date on Res. 2024-601)",
+        "effective": "2025-01-01 through 2025-12-31 (resolution title)",
+        "posting": null
+      },
+      "inspection_scope": "part_of_document",
+      "content_opened": true,
+      "evidence": [
+        "Opened Res. 2024-601 PDF via BOCCResolutionDocs API: approves Adams County 2025 Fee Schedule Exhibit A; votes all Aye; certified Nov 19, 2024 by County Clerk Josh Zygielbaum. Exhibit A Section 1 Building/Electrical/Plumbing/Mechanical Permit Fees (valuation table starting $1\u2013$500 permit $24). Also opened https://adamscountyco.gov/wp-content/uploads/2025/11/CED-2024-Fee-Schedule-Planning_CED-FINAL.pdf (planning/engineering fees: conceptual review, rezoning $1600, etc.) and Building-Permit-Fee-Schedule_0-1.pdf (valuation table + plan review 65%). Permit Fees page links Building Permit Fee Schedule and 2020 Traffic Impact Fee Schedule (TIF PDF not opened)."
+      ],
+      "amendment_relationships": [
+        "Annual BOCC fee resolution; may amend by later resolution. Stormwater Quality Permit fees separately stated on SWQ page ($300/$100)."
+      ],
+      "obstacles": [
+        "Whether a 2026 successor fee resolution exists not confirmed this pass. CED PDF filename says 2024 while Res is 2025 schedule\u2014crosswalk incomplete. Traffic Impact Fee Schedule PDF not opened."
+      ],
+      "repository_comparison": {
+        "status": "new_candidate",
+        "matched_registry_source_id": null,
+        "note": "No close registry URL/title match for this authority; ledger collection:missing \u2014 new_candidate."
+      },
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake"
+    },
+    {
+      "id": "SD002-06",
+      "source_discovery_id": "SD002-AD-07",
+      "authority_id": "CO-COUNTY-ADAMS",
+      "categories": [
+        "building_fire"
+      ],
+      "title": "Fire Districts serving Adams County (related-authority lead page)",
+      "document_number": null,
+      "requested_url": "https://adamscountyco.gov/about-adams-county/fire-districts/",
+      "final_public_url": "https://adamscountyco.gov/about-adams-county/fire-districts/",
+      "official_referral_url": "https://adamscountyco.gov/about-adams-county/fire-districts/",
+      "official_referral_link_label": "Adams County Fire Districts",
+      "observed_at_utc": "2026-09-10T21:10:45Z",
+      "dates": {
+        "edition_cutoff": null,
+        "adoption": "2018-12-12 (IGA for fire impact fees per page)",
+        "effective": "2018-01-01 (collection began\u2014page text)",
+        "posting": null
+      },
+      "inspection_scope": "all_pages",
+      "content_opened": true,
+      "evidence": [
+        "Page states 10 fire districts serve unincorporated Adams County; each district responsible for plan review and enforcement of the International Fire Code within its district. Building Safety coordinates with districts. Lists districts (Adams County FPD, Bennett Fire Rescue, Byers VFD, Deer Trail, Greater Brighton FPD, North Metro Fire Rescue, Sable Altura, South Adams County Fire, Southeast Weld FPD, Strasburg Fire Rescue) plus municipal fire departments as separate. Fire district impact fees collected by districts; county will not issue final building permit without proof of payment. Related authorities as leads only\u2014do not expand batch into district codes."
+      ],
+      "amendment_relationships": [
+        "County Ord. 4 adopts IFC countywide for unincorporated areas; districts enforce IFC in their territories."
+      ],
+      "obstacles": [
+        "District-specific IFC amendments/fee schedules not opened (out of CO-COUNTY-ADAMS batch). Page notes map link at bottom\u2014map URL not separately fetched."
+      ],
+      "repository_comparison": {
+        "status": "new_candidate",
+        "matched_registry_source_id": null,
+        "note": "Related-authority / district lead kept distinct from county corpus; ledger collection:missing. Similar county homepage URLs do not preserve district IFC bytes."
+      },
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake"
+    },
+    {
+      "id": "SD002-07",
+      "source_discovery_id": "SD002-AD-12",
+      "authority_id": "CO-COUNTY-ADAMS",
+      "categories": [
+        "roads_utilities"
+      ],
+      "title": "Stormwater Utility Policy Manual + Roads & Transportation hub + DSR Ch.7/8/9 (roadway/storm)",
+      "document_number": "SWU Policy Manual 3rd Revision",
+      "requested_url": "https://adamscountyco.gov/wp-content/uploads/2026/02/PW-Stormwater-Utility-Policy-Manual-020926.pdf",
+      "final_public_url": "https://adamscountyco.gov/wp-content/uploads/2026/02/PW-Stormwater-Utility-Policy-Manual-020926.pdf",
+      "official_referral_url": "https://adamscountyco.gov/residents/roads-transportation/",
+      "official_referral_link_label": "Roads & Transportation",
+      "observed_at_utc": "2026-09-10T21:09:25Z",
+      "dates": {
+        "edition_cutoff": "2021-11-15",
+        "adoption": "2021-11-15 (3rd revision); prior 2019-09-10, 2017-03-07; created 2013-01-01",
+        "effective": null,
+        "posting": "wp path /2026/02/"
+      },
+      "inspection_scope": "part_of_document",
+      "content_opened": true,
+      "evidence": [
+        "Opened SWU Policy Manual PDF: Adams County Stormwater Utility Enterprise policies\u2014authority, service area, budget, fee structure, billing. Roads & Transportation page: Capital Improvement Program for roadway/bridge/traffic/drainage in county ROW; parking program; RTD regional transit (external); Community Transit; SeeClickFix reporting. DSR Ch.7 Roadway Standards and Ch.8 Access/Traffic and Ch.9 Storm Drainage confirmed in municipalcodeonline TOC; legacy chapter PDFs under uploads/2025/08 opened (headers). Utility providers (water/sanitation) are generally special districts\u2014not county pubs; not expanded."
+      ],
+      "amendment_relationships": [
+        "SWU Manual policy for utility enterprise; design standards in DSR Ch.9; illicit discharge Ord. 11."
+      ],
+      "obstacles": [
+        "Full 39-page SWU manual not retained after cleanup; pages 1\u20133 text extracted. Whether a post-2021 revision exists beyond 2026/02 re-post unknown. Traffic Impact Fee 2020 PDF linked from fees page not opened."
+      ],
+      "repository_comparison": {
+        "status": "new_candidate",
+        "matched_registry_source_id": "county_adams_roads_transportation_access_b6814b48cfd7",
+        "note": "Roads hub similar to registry county_adams_roads_transportation_access_b6814b48cfd7; SWU PDF itself not in registry. Ledger missing \u2014 new_candidate."
+      },
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake"
+    },
+    {
+      "id": "SD002-08",
+      "source_discovery_id": "SD002-AD-11",
+      "authority_id": "CO-COUNTY-ADAMS",
+      "categories": [
+        "health_environment"
+      ],
+      "title": "Environmental Programs + Stormwater Quality Permits + Ord. 11 illicit discharge (via ordinance book) + DSR Ch.9",
+      "document_number": "Ord. 11; DSR Chapter 9",
+      "requested_url": "https://adamscountyco.gov/our-county/public-works/infrastructure-stormwater/stormwater-quality-permits/",
+      "final_public_url": "https://adamscountyco.gov/our-county/public-works/infrastructure-stormwater/stormwater-quality-permits/",
+      "official_referral_url": "https://adamscountyco.gov/our-county/community-economic-development/environmental-programs/",
+      "official_referral_link_label": "Environmental Programs",
+      "observed_at_utc": "2026-09-10T21:10:15Z",
+      "dates": {
+        "edition_cutoff": "Ch9_revisions_2020-12-08",
+        "adoption": "2020-12-08 (Ch.9 revisions); 2017-08-15 (earlier Ch.9)",
+        "effective": "2018-01-01 (SWQ permit fees)",
+        "posting": null
+      },
+      "inspection_scope": "all_pages",
+      "content_opened": true,
+      "evidence": [
+        "Environmental Programs Division administers/enforces county regulations mitigating offsite industrial/land-use environmental impacts. SWQ Permits page: Ch.9 DSR updates; SWMP template; fees $300 issuance / $100 renewal-transfer (double if work without permit); applications to swq@adamscountyco.gov; failure delays grading/ROW/building permits. Ordinance book lists Ord. 11 illicit discharges to public storm drainage / waters of the state in unincorporated Adams County. DSR Ch.9 on municipalcodeonline (and legacy dsr-chapter-09.pdf opened). Related: Adams County Health Department is separate site (adamscountyhealthdepartment.org)\u2014lead only, not expanded."
+      ],
+      "amendment_relationships": [
+        "Ord. 11 + DSR Ch.9 + SWU Policy Manual (SD002-AD-12) form stormwater regulatory stack."
+      ],
+      "obstacles": [
+        "Health department regulations not opened (separate authority). SWQ application PDF packet via 'click here' request portal not downloaded."
+      ],
+      "repository_comparison": {
+        "status": "new_candidate",
+        "matched_registry_source_id": null,
+        "note": "No close registry URL/title match for this authority; ledger collection:missing \u2014 new_candidate."
+      },
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake"
+    },
+    {
+      "id": "SD002-09",
+      "source_discovery_id": "SD002-AD-08",
+      "authority_id": "CO-COUNTY-ADAMS",
+      "categories": [
+        "permits_licenses"
+      ],
+      "title": "Permits & Licensing hub / E-Permit Center guidance / Submittal Checklists",
+      "document_number": null,
+      "requested_url": "https://adamscountyco.gov/our-county/community-economic-development/permits-licensing/",
+      "final_public_url": "https://adamscountyco.gov/our-county/community-economic-development/permits-licensing/",
+      "official_referral_url": "https://adamscountyco.gov/our-county/community-economic-development/permits-licensing/",
+      "official_referral_link_label": "Permits & Licensing",
+      "observed_at_utc": "2026-09-10T21:10:40Z",
+      "dates": {
+        "edition_cutoff": "checklists_updated_2026-07-07 (stated)",
+        "adoption": null,
+        "effective": null,
+        "posting": null
+      },
+      "inspection_scope": "all_pages",
+      "content_opened": true,
+      "evidence": [
+        "Permits & Licensing: E-Permit Center for apply/review/pay/print building permits; One Stop Permitting 720-523-6800; epermitcenter@adamscountyco.gov; Eye on Adams tool for permits/violations in unincorporated areas. Same 2024 I-Codes adoption note. Submittal Checklists page lists Building Safety submittal requirements and extensive Current Planning application packets (rezoning, CUP, variance, subdivisions, oil & gas, etc.) and links 2024 Development Services Fee Schedule / Building Permit Fee Schedule. Contractor licensing via E-Permit Center module (Codes page)."
+      ],
+      "amendment_relationships": [
+        "Permit procedures tie to DSR Ch.2 Application and Permitting Procedures and building ordinances."
+      ],
+      "obstacles": [
+        "E-Permit Center is a filing portal (account); public informational pages opened without login. Individual checklist PDFs not each opened."
+      ],
+      "repository_comparison": {
+        "status": "new_candidate",
+        "matched_registry_source_id": "county_adams_county_codes_961b32fe84b7",
+        "note": "URL/title similar to registry source_id=county_adams_county_codes_961b32fe84b7; recovery ledger shows collection:missing for all categories \u2014 similar URL \u2260 preserved bytes; treat as new_candidate pending atlas verification."
+      },
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake"
+    },
+    {
+      "id": "SD002-10",
+      "source_discovery_id": "SD002-AR-03",
+      "authority_id": "CO-COUNTY-ARAPAHOE",
+      "categories": [
+        "codified_rules",
+        "land_use_zoning"
+      ],
+      "title": "Arapahoe County Land Development Code",
+      "document_number": "LDC (as amended; cover MARCH 16, 2026)",
+      "requested_url": "https://files.arapahoeco.gov/Public%20Works_Development/zoning/Land%20Development%20Code/LandDevelopmentCodeRev12102024.pdf?t=202603161224210",
+      "final_public_url": "https://files.arapahoeco.gov/Public%20Works_Development/zoning/Land%20Development%20Code/LandDevelopmentCodeRev12102024.pdf?t=202603161224210",
+      "official_referral_url": "https://arapahoeco.gov/your_county/county_departments/public_works_and_development/divisions/planning_and_land_development/land_development_code_and_regulations/land_development_code.php",
+      "official_referral_link_label": "Land Development Code hub page",
+      "observed_at_utc": null,
+      "dates": {
+        "edition_cutoff": "2026-03-16",
+        "adoption": "2001-04-02",
+        "effective": "2019-08-15",
+        "posting": null
+      },
+      "inspection_scope": "part_of_document",
+      "content_opened": true,
+      "evidence": [
+        "Applies to development and use of land throughout unincorporated Arapahoe County (\u00a71-4)",
+        "Includes Zoning and Subdivision Regulations; known as Arapahoe County Land Development Code",
+        "Authority C.R.S. Title 30 Art 28 and other cited statutes",
+        "Incorporates Development Application Manual; references IDCS, Stormwater Manual, GESC Manual, etc.",
+        "Chapter 6 Enforcement, Violations, and Nonconformities; Chapter 5 Procedures including Board of Adjustment"
+      ],
+      "amendment_relationships": [
+        "Extensive case/resolution revision table from W02-001 through LDC25-001/LDC23-001 (opened)",
+        "Supersedes prior LDC provisions effective 2019-08-15",
+        "DAM adopted with LDC18-004 Res 190390"
+      ],
+      "obstacles": [
+        "Very large PDF; WebFetch truncated mid-document after substantial front matter and early chapters \u2014 enough to confirm applicability, structure, and amendment table."
+      ],
+      "repository_comparison": {
+        "status": "new_candidate",
+        "matched_registry_source_id": "county_arapahoe_land_development_code",
+        "note": "LDC PDF path similar to registry county_arapahoe_land_development_code (query string / cover Mar 16 2026 may differ). Ledger missing \u2014 similar URL \u2260 bytes; prefer new_candidate (possible newer edition)."
+      },
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake"
+    },
+    {
+      "id": "SD002-11",
+      "source_discovery_id": "SD002-AR-04",
+      "authority_id": "CO-COUNTY-ARAPAHOE",
+      "categories": [
+        "codified_rules",
+        "permits_licenses"
+      ],
+      "title": "Development Application Manual (Supplement to LDC)",
+      "document_number": "DAM; adopted Res 190390",
+      "requested_url": "http://files.arapahoeco.gov/Public%20Works_Development/zoning/Land%20Development%20Code/DevelopmentApplicationManualRev08132024.pdf?t=202603261221050",
+      "final_public_url": "http://files.arapahoeco.gov/Public%20Works_Development/zoning/Land%20Development%20Code/DevelopmentApplicationManualRev08132024.pdf?t=202603261221050",
+      "official_referral_url": "https://arapahoeco.gov/your_county/county_departments/public_works_and_development/divisions/planning_and_land_development/land_development_code_and_regulations/land_development_code.php",
+      "official_referral_link_label": "Land Development Code hub (lists DAM Effective March 17, 2026)",
+      "observed_at_utc": null,
+      "dates": {
+        "edition_cutoff": "2026-03-17",
+        "adoption": "2019-07-30",
+        "effective": "2019-08-15",
+        "posting": null
+      },
+      "inspection_scope": "part_of_document",
+      "content_opened": true,
+      "evidence": [
+        "Adopted by BOCC as supplemental manual to LDC; incorporated into and made part of LDC",
+        "Part 1 common procedures; Part 2 submittal requirements for ~40 application types",
+        "Links Planning Fees PDF and Engineering fee schedules",
+        "Lists engineering permits: Public Improvements, Floodplain, Street Cut/ROW, GESC, Oversize/Overweight, Traffic Signing"
+      ],
+      "amendment_relationships": [
+        "Supplement to LDC; amended with LDC landscaping amendments"
+      ],
+      "obstacles": [
+        "Large PDF truncated by fetch after substantial content"
+      ],
+      "repository_comparison": {
+        "status": "new_candidate",
+        "matched_registry_source_id": null,
+        "note": "No close registry URL/title match for this authority; ledger collection:missing \u2014 new_candidate."
+      },
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake"
+    },
+    {
+      "id": "SD002-12",
+      "source_discovery_id": "SD002-AR-10",
+      "authority_id": "CO-COUNTY-ARAPAHOE",
+      "categories": [
+        "building_fire"
+      ],
+      "title": "Resolution No. 21-394 \u2013 Adopted Building Codes and Amendments (2021 I-Codes)",
+      "document_number": "Resolution No. 21-394",
+      "requested_url": "https://files.arapahoeco.gov/Public%20Works_Development/Building/Adopted%20Building%20Codes%20and%20Amendments.pdf",
+      "final_public_url": "https://files.arapahoeco.gov/Public%20Works_Development/Building/Adopted%20Building%20Codes%20and%20Amendments.pdf",
+      "official_referral_url": "https://arapahoeco.gov/your_county/county_departments/public_works_and_development/divisions/building/code_central_/index.php",
+      "official_referral_link_label": "Code Central",
+      "observed_at_utc": null,
+      "dates": {
+        "edition_cutoff": "2021 I-Codes (errata as of November 2021)",
+        "adoption": "Resolution 21-394 (hearing 2021-11-23)",
+        "effective": "2022-04-01",
+        "posting": null
+      },
+      "inspection_scope": "part_of_document",
+      "content_opened": true,
+      "evidence": [
+        "Adopts 2021 IBC, IRC, IPC, IMC, IFGC, IEBC, ISPSC, IECC with amendments; ANSI A117.1-2017; elevator codes previously adopted",
+        "Applies to unincorporated territory of Arapahoe County",
+        "IBC 101.4.5 Fire prevention amendment: IFC provisions enforced by Local Fire District having Jurisdiction; Building Official may use IFC as reference only \u2014 'in no case should it be construed to imply that these codes have been adopted in any form'",
+        "Creates Building Division and Board of Review (appeals of Building Code)",
+        "Table 1-A Building Permit Fees; plan review 65% of permit fee; investigation/reinspection $125/hr"
+      ],
+      "amendment_relationships": [
+        "Supersedes prior 2015 I-code adoption described in WHEREAS",
+        "Code Central separately notes 2023 NEC adopted July 9, 2024"
+      ],
+      "obstacles": [
+        "Effective-date inconsistency between PDF body text (Oct 1, 2016) and Code Central (Apr 1, 2022) \u2014 flagged, not invented",
+        "PDF fetch truncated before end"
+      ],
+      "repository_comparison": {
+        "status": "new_candidate",
+        "matched_registry_source_id": "county_arapahoe_building_resolution",
+        "note": "Building adoption package related to registry county_arapahoe_building_resolution (different PDF filename: Adopted Building Codes and Amendments.pdf vs Resolution.2021.Building.I-Codes.FinaltoSet.pdf). Ledger missing \u2014 new_candidate; URL similar \u2260 bytes."
+      },
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake"
+    },
+    {
+      "id": "SD002-13",
+      "source_discovery_id": "SD002-AR-05",
+      "authority_id": "CO-COUNTY-ARAPAHOE",
+      "categories": [
+        "adopted_changes"
+      ],
+      "title": "County Ordinances and Resolutions Document Center",
+      "document_number": null,
+      "requested_url": "https://arapahoeco.gov/your_county/codes_criteria_and_ordinances/county_ordinances_and_resolutions.php",
+      "final_public_url": "https://arapahoeco.gov/your_county/codes_criteria_and_ordinances/county_ordinances_and_resolutions.php",
+      "official_referral_url": "https://arapahoe.legistar.com/",
+      "official_referral_link_label": "Legistar Portal (Dec 2020\u2013Present)",
+      "observed_at_utc": null,
+      "dates": {
+        "edition_cutoff": null,
+        "adoption": null,
+        "effective": null,
+        "posting": null
+      },
+      "inspection_scope": "catalog",
+      "content_opened": true,
+      "evidence": [
+        "Resolutions: 124 documents listed (BOCC resolution sets by date)",
+        "Ordinances: 16 documents including Stormwater 2019-02, Weeds and Brush 2021-01, Model Traffic Code 2021-03, Parking 2024-02, Fireworks Prohibition 2025-01, Limited Retail Marijuana 2022-01",
+        "Repealed ordinances section (4 docs)",
+        "Clerk and Recorder contact for hard-to-find items: clerk@arapahoegov.com / 303-795-4200"
+      ],
+      "amendment_relationships": [
+        "Primary catalog of adopted ordinances/resolutions; Legistar for process history Dec 2020+"
+      ],
+      "obstacles": [
+        "Individual ordinance PDFs mostly linked via document center UI; full PDF URLs not all exposed in HTML fetch"
+      ],
+      "repository_comparison": {
+        "status": "new_candidate",
+        "matched_registry_source_id": "county_arapahoe_codes_criteria_ordinances",
+        "note": "Ordinances hub related to registry county_arapahoe_codes_criteria_ordinances / county_arapahoe_county_codes_7d486d67b4b4. Ledger missing \u2014 new_candidate."
+      },
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake"
+    },
+    {
+      "id": "SD002-14",
+      "source_discovery_id": "SD002-AR-14",
+      "authority_id": "CO-COUNTY-ARAPAHOE",
+      "categories": [
+        "fees"
+      ],
+      "title": "Planning Review Fee Schedule",
+      "document_number": "Resolution No. 26-224 (revision)",
+      "requested_url": "https://files.arapahoeco.gov/Public%20Works_Development/planning_land%20development/Planning%20Fees.pdf",
+      "final_public_url": "https://files.arapahoeco.gov/Public%20Works_Development/planning_land%20development/Planning%20Fees.pdf",
+      "official_referral_url": "http://files.arapahoeco.gov/Public%20Works_Development/zoning/Land%20Development%20Code/DevelopmentApplicationManualRev08132024.pdf?t=202603261221050",
+      "official_referral_link_label": "DAM \u00a71-3.2 Application Fees (links this schedule)",
+      "observed_at_utc": null,
+      "dates": {
+        "edition_cutoff": "2026-09-08",
+        "adoption": "2026-09-08",
+        "effective": "2026-09-08",
+        "posting": null
+      },
+      "inspection_scope": "all_pages",
+      "content_opened": true,
+      "evidence": [
+        "Administrative cases: e.g. ASP during construction $3,000; before construction $1,500; minor admin amendment $500",
+        "Major cases: sheet-based fees $2,000 ea sheets 1-10 then $500; Comp Plan Amendment $7,500; Certificate of Designation $15,000; LDC Rewrite $10,000",
+        "1041: $10,000 initial deposit then hourly; Title 32 special district fee formula",
+        "Affordable/attainable housing fee reduction up to 50%",
+        "Outside agency fees billed separately (fire, water/sewer, CGS)"
+      ],
+      "amendment_relationships": [
+        "Amended by listed resolutions culminating in Res 26-224"
+      ],
+      "obstacles": [],
+      "repository_comparison": {
+        "status": "new_candidate",
+        "matched_registry_source_id": null,
+        "note": "No close registry URL/title match for this authority; ledger collection:missing \u2014 new_candidate."
+      },
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake"
+    },
+    {
+      "id": "SD002-15",
+      "source_discovery_id": "SD002-AR-15",
+      "authority_id": "CO-COUNTY-ARAPAHOE",
+      "categories": [
+        "fees",
+        "building_fire"
+      ],
+      "title": "Arapahoe County Building Permit Fees as of 1-1-2021",
+      "document_number": "Fee table as of 1-1-2021 (Table 1-A related)",
+      "requested_url": "https://files.arapahoeco.gov/Public%20Works_Development/Building/Arapahoe%20County%20Building%20Permit%20Fees%201-1-2021.pdf?t=202401081303520",
+      "final_public_url": "https://files.arapahoeco.gov/Public%20Works_Development/Building/Arapahoe%20County%20Building%20Permit%20Fees%201-1-2021.pdf?t=202401081303520",
+      "official_referral_url": "https://www.arapahoeco.gov/your_county/county_departments/public_works_and_development/divisions/building/building_permit_application_and_fees.php",
+      "official_referral_link_label": "Building Permit Application and Fees (View current permit fees)",
+      "observed_at_utc": null,
+      "dates": {
+        "edition_cutoff": "2021-01-01",
+        "adoption": null,
+        "effective": "2021-01-01",
+        "posting": null
+      },
+      "inspection_scope": "all_pages",
+      "content_opened": true,
+      "evidence": [
+        "Valuation-based permit + plan check fee tables for ranges up to $100,000",
+        "Formulas for $100,001\u2013500,000; $500,001\u20131,000,000; $1,000,001 and over with +65% plan review component"
+      ],
+      "amendment_relationships": [
+        "Referenced as County Fee and Valuation Schedule / Table 1-A in Res 21-394; Building Official may update periodically with ICC valuation"
+      ],
+      "obstacles": [
+        "May not be the absolute latest printed schedule; permit page says 'View current permit fees' without exposing a newer PDF URL in the HTML fetch"
+      ],
+      "repository_comparison": {
+        "status": "new_candidate",
+        "matched_registry_source_id": "county_arapahoe_homepage",
+        "note": "URL/title similar to registry source_id=county_arapahoe_homepage; recovery ledger shows collection:missing for all categories \u2014 similar URL \u2260 preserved bytes; treat as new_candidate pending atlas verification."
+      },
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake"
+    },
+    {
+      "id": "SD002-16",
+      "source_discovery_id": "SD002-AR-18",
+      "authority_id": "CO-COUNTY-ARAPAHOE",
+      "categories": [
+        "health_environment",
+        "adopted_changes"
+      ],
+      "title": "Ordinance No. 2019-02 \u2013 Stormwater Illegal Discharges / Illicit Connections",
+      "document_number": "Ordinance No. 2019-02; related Res 190347 hearing 2019-06-25",
+      "requested_url": "https://files.arapahoeco.gov/Your%20County/ordinances/Stormwater%20-%20Ordinance%20No.%202019-02.pdf?t=202309071112380",
+      "final_public_url": "https://files.arapahoeco.gov/Your%20County/ordinances/Stormwater%20-%20Ordinance%20No.%202019-02.pdf?t=202309071112380",
+      "official_referral_url": "https://arapahoeco.gov/your_county/codes_criteria_and_ordinances/county_ordinances_and_resolutions.php",
+      "official_referral_link_label": "Ordinances list \u2013 Stormwater Ordinance No. 2019-02",
+      "observed_at_utc": null,
+      "dates": {
+        "edition_cutoff": null,
+        "adoption": "2019-06-25",
+        "effective": null,
+        "posting": null
+      },
+      "inspection_scope": "part_of_document",
+      "content_opened": true,
+      "evidence": [
+        "MS4 Permit condition; prohibits illegal discharges and illicit connections into public storm sewer system",
+        "Applies in unincorporated area of Arapahoe County",
+        "Defines Illegal Discharge, Illicit Connection, MS4, Non-Stormwater Discharge",
+        "Establishes enforcement procedures and penalties (per title)"
+      ],
+      "amendment_relationships": [
+        "Update of existing County Stormwater Ordinance for MS4"
+      ],
+      "obstacles": [
+        "Fetch truncated after early sections"
+      ],
+      "repository_comparison": {
+        "status": "new_candidate",
+        "matched_registry_source_id": null,
+        "note": "No close registry URL/title match for this authority; ledger collection:missing \u2014 new_candidate."
+      },
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake"
+    },
+    {
+      "id": "SD002-17",
+      "source_discovery_id": "SD002-AR-07",
+      "authority_id": "CO-COUNTY-ARAPAHOE",
+      "categories": [
+        "adopted_changes",
+        "roads_utilities"
+      ],
+      "title": "Ordinance No. 2024-02 \u2013 Parking on County Highways/Roads and County Properties",
+      "document_number": "Ordinance No. 2024-02",
+      "requested_url": "https://files.arapahoeco.gov/Clerk%20and%20Recorder/Public%20Notices/2024/Ordinance%2024-02.pdf",
+      "final_public_url": "https://files.arapahoeco.gov/Clerk%20and%20Recorder/Public%20Notices/2024/Ordinance%2024-02.pdf",
+      "official_referral_url": "https://arapahoeco.gov/your_county/codes_criteria_and_ordinances/county_ordinances_and_resolutions.php",
+      "official_referral_link_label": "Ordinances list (Effective Jan. 1, 2025 \u2013 Parking Ordinance No. 2024-02)",
+      "observed_at_utc": null,
+      "dates": {
+        "edition_cutoff": null,
+        "adoption": null,
+        "effective": "2025-01-01",
+        "posting": null
+      },
+      "inspection_scope": "part_of_document",
+      "content_opened": true,
+      "evidence": [
+        "Regulates parking on County highways/roads and County-owned properties in unincorporated Arapahoe County",
+        "Repeals Ordinance No. 91-01 Oversized Vehicles and Unattended Trailers",
+        "Supplements Model Traffic Code Ordinance 2021-03",
+        "Applies also to fire lanes on private property established under LDC approvals"
+      ],
+      "amendment_relationships": [
+        "Repeals Ord 91-01; supplements Ord 2021-03 Model Traffic Code"
+      ],
+      "obstacles": [
+        "Fetch truncated mid-definitions"
+      ],
+      "repository_comparison": {
+        "status": "new_candidate",
+        "matched_registry_source_id": "county_arapahoe_parking_ordinance",
+        "note": "Parking ordinance related to registry county_arapahoe_parking_ordinance (catalog URL). Direct Ord 2024-02 PDF not in registry. Ledger missing \u2014 new_candidate."
+      },
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake"
+    },
+    {
+      "id": "SD002-18",
+      "source_discovery_id": "SD002-AR-21",
+      "authority_id": "CO-COUNTY-ARAPAHOE",
+      "categories": [
+        "roads_utilities"
+      ],
+      "title": "Infrastructure Design and Construction Standards (IDCS)",
+      "document_number": "Resolution No. 190242 (edition opened); newer Res 25-085 (2024 IDCS) PDF blocked",
+      "requested_url": "https://files.arapahoeco.gov/Public%20Works_Development/Infrastructure%20Design%20and%20Construction%20Standards/Infrastructure%20Design%20&%20Construction%20Standards%20(IDCS).pdf?t=202507301717570",
+      "final_public_url": "https://files.arapahoeco.gov/Public%20Works_Development/Infrastructure%20Design%20and%20Construction%20Standards/Infrastructure%20Design%20&%20Construction%20Standards%20(IDCS).pdf?t=202507301717570",
+      "official_referral_url": "https://www.arapahoeco.gov/your_county/county_departments/public_works_and_development/divisions/engineering_services/utility_installations.php",
+      "official_referral_link_label": "Utility Installations (ROW)",
+      "observed_at_utc": null,
+      "dates": {
+        "edition_cutoff": null,
+        "adoption": "2019-04-19",
+        "effective": null,
+        "posting": null
+      },
+      "inspection_scope": "part_of_document",
+      "content_opened": true,
+      "evidence": [
+        "Applies to all land within unincorporated Arapahoe County except where superseded by State/other jurisdiction",
+        "Minimum roadway design/technical criteria; part of Subdivision Regulations by reference",
+        "Chapters include roadway design, pavement, bridges, permits/bonding, utility locations, access, small cell WCF",
+        "Enforcement by PWD Director on behalf of BOCC"
+      ],
+      "amendment_relationships": [
+        "LDC \u00a71-5 lists IDCS as incorporated standards",
+        "DAM links IDCS 2024 Reso 25-085 Adopted 20250311.pdf as current construction standards URL"
+      ],
+      "obstacles": [
+        "Attempted IDCS 2024 Res 25-085 PDF: HTTP 500 \u2014 access_blocked for that specific newer file",
+        "Opened alternate/older IDCS file successfully"
+      ],
+      "repository_comparison": {
+        "status": "new_candidate",
+        "matched_registry_source_id": "county_arapahoe_homepage",
+        "note": "URL/title similar to registry source_id=county_arapahoe_homepage; recovery ledger shows collection:missing for all categories \u2014 similar URL \u2260 preserved bytes; treat as new_candidate pending atlas verification."
+      },
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake"
+    },
+    {
+      "id": "SD002-19",
+      "source_discovery_id": "SD002-AR-11",
+      "authority_id": "CO-COUNTY-ARAPAHOE",
+      "categories": [
+        "building_fire",
+        "policies_guidance"
+      ],
+      "title": "Code Central / Building Instructions and Guidelines",
+      "document_number": null,
+      "requested_url": "https://arapahoeco.gov/your_county/county_departments/public_works_and_development/divisions/building/code_central_/index.php",
+      "final_public_url": "https://arapahoeco.gov/your_county/county_departments/public_works_and_development/divisions/building/code_central_/index.php",
+      "official_referral_url": "https://www.arapahoeco.gov/your_county/county_departments/public_works_and_development/divisions/building/building_permit_instructions_and_guidelines/index.php",
+      "official_referral_link_label": "Building Instructions and Guidelines",
+      "observed_at_utc": null,
+      "dates": {
+        "edition_cutoff": "2021 IBC/IRC; 2023 NEC",
+        "adoption": "Res 21-394 (I-codes); NEC stated adopted 2024-07-09",
+        "effective": "2022-04-01",
+        "posting": null
+      },
+      "inspection_scope": "all_pages",
+      "content_opened": true,
+      "evidence": [
+        "Lists adopted ICC codes, ANSI accessibility, 2023 NEC",
+        "State-mandated Colorado Electric and Solar Ready Code and related HBs referenced",
+        "Guidelines page links Adopted Building Codes and Amendments \u2013 Effective April 1, 2022 and Building Policies and Procedures"
+      ],
+      "amendment_relationships": [
+        "Hub for Res 21-394 package and later NEC update"
+      ],
+      "obstacles": [],
+      "repository_comparison": {
+        "status": "new_candidate",
+        "matched_registry_source_id": "county_arapahoe_building_division",
+        "note": "Code Central URL similar to registry county_arapahoe_building_division. Ledger missing \u2014 new_candidate."
+      },
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake"
+    },
+    {
+      "id": "SD002-20",
+      "source_discovery_id": "SD002-AR-06",
+      "authority_id": "CO-COUNTY-ARAPAHOE",
+      "categories": [
+        "adopted_changes"
+      ],
+      "title": "Arapahoe County Legistar Legislative Portal",
+      "document_number": null,
+      "requested_url": "https://arapahoe.legistar.com/",
+      "final_public_url": "https://arapahoe.legistar.com/",
+      "official_referral_url": "https://arapahoeco.gov/your_county/codes_criteria_and_ordinances/county_ordinances_and_resolutions.php",
+      "official_referral_link_label": "County Ordinances And Resolutions page",
+      "observed_at_utc": null,
+      "dates": {
+        "edition_cutoff": null,
+        "adoption": null,
+        "effective": null,
+        "posting": null
+      },
+      "inspection_scope": "catalog",
+      "content_opened": true,
+      "evidence": [
+        "Meeting calendar for BOCC, Planning Commission, Board of Adjustment, Board of Health, etc.",
+        "Agendas/packets/minutes/resolution sets/audio-video columns",
+        "County ordinances page states Dec 2020\u2013Present resolutions/ordinances searchable here"
+      ],
+      "amendment_relationships": [
+        "Authoritative process trail for recent adoptions"
+      ],
+      "obstacles": [],
+      "repository_comparison": {
+        "status": "new_candidate",
+        "matched_registry_source_id": null,
+        "note": "No close registry URL/title match for this authority; ledger collection:missing \u2014 new_candidate."
+      },
+      "legal_currentness": "not_verified",
+      "review_status": "pending_intake"
+    }
+  ]
+}

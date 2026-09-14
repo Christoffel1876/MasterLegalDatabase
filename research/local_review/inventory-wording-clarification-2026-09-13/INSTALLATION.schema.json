@@ -1,0 +1,68 @@
+{
+  "additionalProperties": false,
+  "description": "Evidence of an additive metadata clarification with unchanged source records.",
+  "properties": {
+    "status": {
+      "const": "installed_verified",
+      "title": "Status",
+      "type": "string"
+    },
+    "installed_at": {
+      "format": "date-time",
+      "title": "Installed At",
+      "type": "string"
+    },
+    "proposal_manifest_sha256": {
+      "title": "Proposal Manifest Sha256",
+      "type": "string"
+    },
+    "full_suite_status_before_install": {
+      "const": "passed",
+      "title": "Full Suite Status Before Install",
+      "type": "string"
+    },
+    "inventory_sha256": {
+      "title": "Inventory Sha256",
+      "type": "string"
+    },
+    "visual_sha256": {
+      "title": "Visual Sha256",
+      "type": "string"
+    },
+    "unchanged_code_and_custody": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Unchanged Code And Custody",
+      "type": "object"
+    },
+    "all_source_rows_and_joins_unchanged": {
+      "const": true,
+      "title": "All Source Rows And Joins Unchanged",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "installed_at",
+    "proposal_manifest_sha256",
+    "full_suite_status_before_install",
+    "inventory_sha256",
+    "visual_sha256",
+    "unchanged_code_and_custody",
+    "all_source_rows_and_joins_unchanged",
+    "legal_currentness",
+    "scope"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

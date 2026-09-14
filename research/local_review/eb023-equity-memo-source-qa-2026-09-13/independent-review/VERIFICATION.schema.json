@@ -1,0 +1,219 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact copied or newly generated artifact identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Measured validation and honest limits for this source review alone.",
+  "properties": {
+    "frozen_at": {
+      "format": "date-time",
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "status": {
+      "const": "complete_source_fidelity_review_pending_root_acceptance",
+      "title": "Status",
+      "type": "string"
+    },
+    "qa": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_first": {
+      "$ref": "#/$defs/Asset"
+    },
+    "transcript": {
+      "$ref": "#/$defs/Asset"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Asset"
+    },
+    "tests": {
+      "$ref": "#/$defs/Asset"
+    },
+    "rerender_validation": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_pdf_sha256": {
+      "title": "Source Pdf Sha256",
+      "type": "string"
+    },
+    "complete_source_pages": {
+      "const": 4,
+      "title": "Complete Source Pages",
+      "type": "integer"
+    },
+    "source_blocks": {
+      "const": 82,
+      "title": "Source Blocks",
+      "type": "integer"
+    },
+    "original_ocr_observations": {
+      "const": 181,
+      "title": "Original Ocr Observations",
+      "type": "integer"
+    },
+    "original_candidate_bytes": {
+      "const": 9796,
+      "title": "Original Candidate Bytes",
+      "type": "integer"
+    },
+    "logical_table_rows": {
+      "const": 4,
+      "title": "Logical Table Rows",
+      "type": "integer"
+    },
+    "physical_table_fragments": {
+      "const": 5,
+      "title": "Physical Table Fragments",
+      "type": "integer"
+    },
+    "prose_bullets": {
+      "const": 19,
+      "title": "Prose Bullets",
+      "type": "integer"
+    },
+    "table_bullets": {
+      "const": 14,
+      "title": "Table Bullets",
+      "type": "integer"
+    },
+    "attachment_bullets": {
+      "const": 2,
+      "title": "Attachment Bullets",
+      "type": "integer"
+    },
+    "corrected_ocr_wording_blocks": {
+      "const": 5,
+      "title": "Corrected Ocr Wording Blocks",
+      "type": "integer"
+    },
+    "tests_passed": {
+      "const": 15,
+      "title": "Tests Passed",
+      "type": "integer"
+    },
+    "in_memory_corruptions_rejected": {
+      "const": 14,
+      "title": "In Memory Corruptions Rejected",
+      "type": "integer"
+    },
+    "exact_full_page_rerenders": {
+      "const": 4,
+      "title": "Exact Full Page Rerenders",
+      "type": "integer"
+    },
+    "source_first_review_was_blind": {
+      "const": false,
+      "title": "Source First Review Was Blind",
+      "type": "boolean"
+    },
+    "external_report_consulted": {
+      "const": false,
+      "title": "External Report Consulted",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "adoption": {
+      "const": "not_verified",
+      "title": "Adoption",
+      "type": "string"
+    },
+    "original_acquisition_time": {
+      "title": "Original Acquisition Time",
+      "type": "null"
+    },
+    "repository_received_at": {
+      "const": "2026-09-11T19:01:59.855958Z",
+      "title": "Repository Received At",
+      "type": "string"
+    },
+    "selected_packet_subset_only": {
+      "const": true,
+      "title": "Selected Packet Subset Only",
+      "type": "boolean"
+    },
+    "production_writes": {
+      "const": 0,
+      "title": "Production Writes",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "frozen_at",
+    "status",
+    "qa",
+    "source_first",
+    "transcript",
+    "candidate",
+    "tests",
+    "rerender_validation",
+    "source_pdf_sha256",
+    "complete_source_pages",
+    "source_blocks",
+    "original_ocr_observations",
+    "original_candidate_bytes",
+    "logical_table_rows",
+    "physical_table_fragments",
+    "prose_bullets",
+    "table_bullets",
+    "attachment_bullets",
+    "corrected_ocr_wording_blocks",
+    "tests_passed",
+    "in_memory_corruptions_rejected",
+    "exact_full_page_rerenders",
+    "source_first_review_was_blind",
+    "external_report_consulted",
+    "legal_currentness",
+    "adoption",
+    "original_acquisition_time",
+    "repository_received_at",
+    "selected_packet_subset_only",
+    "production_writes",
+    "public_requests",
+    "limitations"
+  ],
+  "title": "Verification",
+  "type": "object"
+}

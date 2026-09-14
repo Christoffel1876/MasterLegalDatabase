@@ -1,0 +1,207 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Match": {
+      "additionalProperties": false,
+      "properties": {
+        "line": {
+          "title": "Line",
+          "type": "integer"
+        },
+        "raw_line_sha256": {
+          "title": "Raw Line Sha256",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "requested_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Requested Url"
+        },
+        "source_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Url"
+        },
+        "recorded_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Recorded Sha256"
+        },
+        "recorded_raw_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Recorded Raw Path"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "mapped_repository_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Mapped Repository Path"
+        },
+        "mapped_path_state": {
+          "enum": [
+            "not_checked",
+            "missing",
+            "ordinary_present",
+            "nonordinary"
+          ],
+          "title": "Mapped Path State",
+          "type": "string"
+        },
+        "available_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Available Sha256"
+        }
+      },
+      "required": [
+        "line",
+        "raw_line_sha256",
+        "source_id",
+        "requested_url",
+        "source_url",
+        "recorded_sha256",
+        "recorded_raw_path",
+        "reasons",
+        "mapped_repository_path",
+        "mapped_path_state",
+        "available_sha256"
+      ],
+      "title": "Match",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "current_commit_observed": {
+      "title": "Current Commit Observed",
+      "type": "string"
+    },
+    "pinned_commit": {
+      "title": "Pinned Commit",
+      "type": "string"
+    },
+    "stream": {
+      "$ref": "#/$defs/Asset"
+    },
+    "pinned_stream_sha256": {
+      "title": "Pinned Stream Sha256",
+      "type": "string"
+    },
+    "current_rows": {
+      "title": "Current Rows",
+      "type": "integer"
+    },
+    "pinned_rows": {
+      "title": "Pinned Rows",
+      "type": "integer"
+    },
+    "identical_streams": {
+      "title": "Identical Streams",
+      "type": "boolean"
+    },
+    "matching_rows": {
+      "items": {
+        "$ref": "#/$defs/Match"
+      },
+      "title": "Matching Rows",
+      "type": "array"
+    },
+    "comparison_scope": {
+      "title": "Comparison Scope",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "current_commit_observed",
+    "pinned_commit",
+    "stream",
+    "pinned_stream_sha256",
+    "current_rows",
+    "pinned_rows",
+    "identical_streams",
+    "matching_rows",
+    "comparison_scope",
+    "limitations"
+  ],
+  "title": "Legacy",
+  "type": "object"
+}

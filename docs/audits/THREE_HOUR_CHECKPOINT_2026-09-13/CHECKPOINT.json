@@ -1,0 +1,91 @@
+{
+  "recorded_at": "2026-09-13T17:52:10.707783+00:00",
+  "comparison_commit": "512684a65ae3c4eb51509b23520cfe41823ca0b9",
+  "status": "verified_local_checkpoint_precommit",
+  "manual_originals": 70,
+  "intake_ledger_rows": 71,
+  "scoped_review_links": 35,
+  "sources_without_mapped_review": 35,
+  "new_county_originals": 6,
+  "accepted_qa_packages": 8,
+  "qa_physical_pages": 58,
+  "tests_passed": 3131,
+  "full_suite_exit": 0,
+  "full_suite_inputs_unchanged": true,
+  "coverage_percent": {
+    "scripts/manual_source_watch_ci.py": 97.63593380614657,
+    "geode/pipeline/manual_review_inventory.py": 99.25373134328358
+  },
+  "suite_warning_count": 49,
+  "repository_branch_inclusive_coverage": 79.17449990494498,
+  "evidence": [
+    {
+      "path": "checks/full-tests/RECEIPT.json",
+      "sha256": "ff791f2574bed735f6cdd48b53dc4d8535e12ee971e315c90858f7f70d59ee96",
+      "size_bytes": 686
+    },
+    {
+      "path": "checks/corpus-validation/RECEIPT.json",
+      "sha256": "2cbf8446dbbff336f1caafa289e35a8cf01b3234bf20aac24e0f3db2b8ae7992",
+      "size_bytes": 689
+    },
+    {
+      "path": "checks/inventory-check/RECEIPT.json",
+      "sha256": "5abd29b4a3f700607812bb7f577e2fee2080dbbc587857e09be54d6f81cbe419",
+      "size_bytes": 685
+    },
+    {
+      "path": "staged-export/RECEIPT.json",
+      "sha256": "b274c55bcb55579b1029f737e4eb894ca0b96730d5dd2372662982f72995d006",
+      "size_bytes": 10588
+    },
+    {
+      "path": "packaging-scan/FINAL_MANIFEST.json",
+      "sha256": "c6e8601ba1aff5f51a9638d5aa235baf94b528b262d7241f4adea247dd10a545",
+      "size_bytes": 3011
+    }
+  ],
+  "missing_lfs": [
+    {
+      "path": "_CONTROL_PLANE/LOCAL_REVIEW_QUEUE.jsonl",
+      "sha256": "c65a0f190fd5d5dca7810c47afc7e6843cd78520242add1fe6951545fe92ad00",
+      "size_bytes": 72395471
+    },
+    {
+      "path": "08_County_Authorities/_index.jsonl",
+      "sha256": "e896fc157617cfd9cd9839bf2bf955d893b66d7de514107e8b3c98dc4795c806",
+      "size_bytes": 172131787
+    }
+  ],
+  "facts": [
+    "Six county PDFs were added with immutable exact originals and separate acquisition/intake custody: three received Gunnison originals and three directly retrieved Chaffee originals.",
+    "Eight source-fidelity reviews cover58 physical pages, including the two existing Spanish El Paso PDFs. Spanish fidelity is not English-equivalence certification.",
+    "The maintained inventory verifies70 sources/35 scoped review links/35 without an allowlisted mapped review. The71-row intake ledger includes one inherited missing original.",
+    "Ten reviewed daily-watch files are installed locally for eight fixed PDF URLs in four pairs, with87 exact tracked dependencies and default-off scheduled/manual HTTP.",
+    "The corrected public CI proposal excludes the unrelated untracked user file; the previous88-pin ordinary-checkout claim is expressly withdrawn. Both user originals remain untouched.",
+    "Exact staged blobs were exported without Git filters and verified independently; offline inventory and CI readiness passed from that export. Final full-suite execution was concurrent and its completion separately recorded.",
+    "The final documentation/evidence wrapper is additive after the operational export. It does not change source/code/configuration and will receive a separate exact staged-blob check before commit."
+  ],
+  "next_steps": [
+    "Review the final local commit before any public push. GitHub deployment and Linux/Python3.11 offline verification remain pending.",
+    "After a separately approved manual live pilot, inspect all eight outcomes and retained artifacts before deciding whether to enable daily source HTTP. Decide a notification route separately.",
+    "Issue fresh bounded Grok activations only after UI access is restored; EB027028 remains prepared but undispatched and old deadlines must not be reused.",
+    "Prioritize the35 sources without mapped reviews and document adoption/amendment/currentness chains separately. Fixed-URL equality alone cannot establish current law or discover relocated editions.",
+    "Recover the two exact missing LFS bodies from an authorized known-good copy when available; do not substitute reconstructed text.",
+    "Track the49 reported warnings (SQLite connection ResourceWarning, runpy RuntimeWarning and SWIG deprecations) as separate cleanup. Their exact allocation origins were not established by this run; no claim that all are new or inherited."
+  ],
+  "qualifications": [
+    "Source review is scoped evidence, not100% statewide regulatory coverage, applicability, interpretation or current-law certification.",
+    "The original report/schema bodies and frozen histories remain immutable; explicit later decisions qualify them without rewriting prior records.",
+    "The full corpus validation still exits1 with exactly the two inherited LFS failures; code-test success does not override that limitation.",
+    "Whole-repository branch-inclusive coverage is79.17%, below the general90% project aspiration; the changed inventory and new CI runner separately exceed90%. This checkpoint does not claim repository-wide90% coverage.",
+    "Local macOS tests/export are not executed Linux/GitHub tests. No scheduler activation, public push, external notifications, original-baseline promotion or unavailable always-on Mac deployment occurred.",
+    "Full temporary exported repository and coverage SQLite database are not copied here; selected actual receipts, logs, coverage JSON and index metadata are preserved explicitly.",
+    "Repository-wide git diff --check also sees preserved HTTP/HTML/extraction whitespace and returns2. The separate maintained-code/config/metadata diff check passed. Immutable evidence was not whitespace-normalized.",
+    "This precommit checkpoint cannot contain its own resulting commit identifier. The external handoff records the final local commit and worker/heartbeat stop status."
+  ],
+  "public_push": false,
+  "scheduled_http_enabled": false,
+  "legal_currentness": "not_verified",
+  "answer_safe": false
+}

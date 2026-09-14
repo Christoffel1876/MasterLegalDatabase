@@ -1,0 +1,2158 @@
+{
+  "schema_version": 1,
+  "assignment": "geode-source-discovery-005",
+  "prepared_at": "2026-09-11T17:31:54.593066Z",
+  "comparison_commit": "be73a9c2bbc00c81f73392d847f8dc8c6234735c",
+  "compared_head_commit": "12b05e8be98c5861ed5a3c98d54a6209801b8125",
+  "status": "historical_metadata_comparison_complete_content_pending",
+  "legal_currentness": "not_verified",
+  "source_http_acquisition_verified": false,
+  "historical_windows_source_bytes_opened": false,
+  "pinned_manifest_path": "_CONTROL_PLANE/LOCAL_DOWNLOAD_MANIFEST.jsonl",
+  "pinned_manifest_sha256": "dce2b392bc3e81bbb21e31f2a837fdb498d5aa9a79f5b034942a777a82041c51",
+  "pinned_manifest_bytes": 33903546,
+  "methodology": [
+    "Streamed every JSONL row from git show at the full pinned commit; no source-owner filter limited the comparison.",
+    "Matched the exact current requested/final URL strings to historical requested/final fields, without case, query, host, path or version normalization. No historical row contains a final_url field; source_url is retained as parent-source context, not used as the PDF download identity.",
+    "Independently computed SHA-256 and size from every inventory-listed local file, and compared all 19 PDF digests against every historical digest across all owners, including records at other URLs.",
+    "Verified the supplied 45-row extract equals the complete Fort Collins subset, while preserving duplicate rows and multiple historical digests rather than relying on the single-value URL map.",
+    "Read only local metadata and hashed local bytes. Did not open network sources, ingest files, read the old Windows source paths, or review legal content."
+  ],
+  "inputs": [
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/report-20260911T172611Z.md",
+      "sha256": "5ce48b5f95758466fef99e5c4c7ea773c6e349ab7a9828f869882ebdc85cf856",
+      "size_bytes": 5049
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/artifact_inventory.json",
+      "sha256": "a42da64c2c0cb338e852b5b4aed7a83766a147b266eec0607dfe32d6c00c9813",
+      "size_bytes": 16950
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/exports/artifact_inventory_20260911T172611Z.json",
+      "sha256": "a42da64c2c0cb338e852b5b4aed7a83766a147b266eec0607dfe32d6c00c9813",
+      "size_bytes": 16950
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/priority_candidates_final.json",
+      "sha256": "6754e9bbb3b9e19daa105811bd4eb14bb4a42b538328e00f8868b58c59c23bda",
+      "size_bytes": 25739
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/backlog.json",
+      "sha256": "fcbc97ed65fe1812a125fd9f6618803566a673b71c97f57d517298d85702b655",
+      "size_bytes": 1874
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/logs/attempted_urls.json",
+      "sha256": "76bff20333643a83cc4971268afa0280bf5b412eac775924873befe257d74201",
+      "size_bytes": 40882
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/meta/fc_historical_manifest_extract.json",
+      "sha256": "76dc9d1b69d17f6b920e02f0d19f0d9b3b8bec93d0edc84298a31f1334931008",
+      "size_bytes": 38655
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/meta/historical_digest_by_url.json",
+      "sha256": "ae18e69bffe93c5e77846745fb025c0d5b2f6a15dc70b0ae830d6e17818c0cd7",
+      "size_bytes": 18121
+    }
+  ],
+  "metadata_comparisons": [
+    {
+      "path": "_CONTROL_PLANE/LOCAL_DOWNLOAD_MANIFEST.jsonl",
+      "pinned_git_blob": "8f282bb13094055a163d006884cce014a3a9a46f",
+      "compared_head_git_blob": "8f282bb13094055a163d006884cce014a3a9a46f",
+      "identical": true
+    },
+    {
+      "path": "_CONTROL_PLANE/LOCAL_SOURCE_REGISTRY.json",
+      "pinned_git_blob": "63ce3938b37b195e5a2b4133000bafbda56a61cf",
+      "compared_head_git_blob": "63ce3938b37b195e5a2b4133000bafbda56a61cf",
+      "identical": true
+    },
+    {
+      "path": "_CONTROL_PLANE/MUNICIPAL_SOURCE_REGISTRY.json",
+      "pinned_git_blob": "193657b8ad4d98b4f3592e98acf2bd691a55ef25",
+      "compared_head_git_blob": "193657b8ad4d98b4f3592e98acf2bd691a55ef25",
+      "identical": true
+    },
+    {
+      "path": "_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+      "pinned_git_blob": "82847e24774c8576275dbd63f509f66c37daa5d4",
+      "compared_head_git_blob": "82847e24774c8576275dbd63f509f66c37daa5d4",
+      "identical": true
+    },
+    {
+      "path": "_CONTROL_PLANE/LOCAL_SOURCE_OWNERSHIP_CORRECTIONS.json",
+      "pinned_git_blob": "aa0f67a2a692ecb83f0a98864a7066fa5552b475",
+      "compared_head_git_blob": "aa0f67a2a692ecb83f0a98864a7066fa5552b475",
+      "identical": true
+    }
+  ],
+  "summary": {
+    "manifest_rows": 48390,
+    "manifest_downloaded_rows": 39050,
+    "manifest_failed_rows": 9340,
+    "historical_final_url_field_rows": 0,
+    "fort_collins_manifest_rows": 45,
+    "supplied_extract_rows": 45,
+    "supplied_extract_matches_full_fort_collins_slice": true,
+    "inventory_files": 40,
+    "inventory_hashes_valid": 40,
+    "delivered_pdf_files": 19,
+    "matching_pdf_files": 10,
+    "matching_pdf_historical_rows": 14,
+    "unmatched_pdf_files": 9,
+    "historical_rows_matched_by_all_queried_urls_or_current_pdf_hashes": 18,
+    "historical_match_authority_ids": [
+      "CO-MUNICIPAL-FORT_COLLINS"
+    ],
+    "contradicted_new_priority_claims": 0
+  },
+  "inventory_integrity": [
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/001_www.fortcollins.gov_Building-Code.html",
+      "sha256": "ee3537e6692f799438ef630c4a9734af9bb4c01d7620b4e13a2d4278b8eedd2d",
+      "size_bytes": 443,
+      "kind": "error_shell",
+      "declared_sha256": "ee3537e6692f799438ef630c4a9734af9bb4c01d7620b4e13a2d4278b8eedd2d",
+      "declared_size_bytes": 443,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/002_www.fortcollins.gov_Land-Use-Code.html",
+      "sha256": "ad6054c52fcf3b607e2d8bb705b9aa79311fed5a6938324a8627f33a7233f833",
+      "size_bytes": 447,
+      "kind": "error_shell",
+      "declared_sha256": "ad6054c52fcf3b607e2d8bb705b9aa79311fed5a6938324a8627f33a7233f833",
+      "declared_size_bytes": 447,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/003_www.fortcollins.gov_Fee-Schedules.html",
+      "sha256": "92003e91025a048475eb6702fcf35dc9ec2171145d8519fce26d138fda9ad883",
+      "size_bytes": 436,
+      "kind": "error_shell",
+      "declared_sha256": "92003e91025a048475eb6702fcf35dc9ec2171145d8519fce26d138fda9ad883",
+      "declared_size_bytes": 436,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/004_www.fortcollins.gov_Public-Notices.html",
+      "sha256": "723fa73c8b647328016630c3712a859b7b599763f0a27f00a08237d99ac147b2",
+      "size_bytes": 436,
+      "kind": "error_shell",
+      "declared_sha256": "723fa73c8b647328016630c3712a859b7b599763f0a27f00a08237d99ac147b2",
+      "declared_size_bytes": 436,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/005_www.fortcollins.gov_24-ibc-final-amendments.pdf",
+      "sha256": "405c319be443d472e348eac121fec78e1057a8fc1894c800fbefe4ac4d61d5b8",
+      "size_bytes": 618034,
+      "kind": "pdf_original",
+      "declared_sha256": "405c319be443d472e348eac121fec78e1057a8fc1894c800fbefe4ac4d61d5b8",
+      "declared_size_bytes": 618034,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/006_www.fortcollins.gov_24-irc-final-amendments.pdf",
+      "sha256": "88f183426f4ac7995753df423b949342a4ba68e2e9c05dee1a580289d3c983a2",
+      "size_bytes": 919990,
+      "kind": "pdf_original",
+      "declared_sha256": "88f183426f4ac7995753df423b949342a4ba68e2e9c05dee1a580289d3c983a2",
+      "declared_size_bytes": 919990,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/007_www.fortcollins.gov_24-iecc-final-amendments.pdf",
+      "sha256": "561320ff6504708e2719626aaa29b663525a571736b1477d7d41e5a0d14b6e9d",
+      "size_bytes": 1771758,
+      "kind": "pdf_original",
+      "declared_sha256": "561320ff6504708e2719626aaa29b663525a571736b1477d7d41e5a0d14b6e9d",
+      "declared_size_bytes": 1771758,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/008_www.fortcollins.gov_24-imc-final-amendments.pdf",
+      "sha256": "b8b7ef5a549e71788683c4d67bce6c13f8e75aa70b4fc10f277bce9e5dba4dd3",
+      "size_bytes": 481147,
+      "kind": "pdf_original",
+      "declared_sha256": "b8b7ef5a549e71788683c4d67bce6c13f8e75aa70b4fc10f277bce9e5dba4dd3",
+      "declared_size_bytes": 481147,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/009_www.fortcollins.gov_2025-colorado-wildfire-resiliency-code-final-for-brc.pdf",
+      "sha256": "00e7446d7deac3499b86c4b8f15a5d802cc0c14dc2621409845ec13525cb01d2",
+      "size_bytes": 169449,
+      "kind": "pdf_original",
+      "declared_sha256": "00e7446d7deac3499b86c4b8f15a5d802cc0c14dc2621409845ec13525cb01d2",
+      "declared_size_bytes": 169449,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/010_www.fortcollins.gov_article-1-general-purpose-and-provisions.pdf",
+      "sha256": "555a05553af57619c818c5b9ab90d1b751e161a307d8bb65fc73141991a73d2a",
+      "size_bytes": 340287,
+      "kind": "pdf_original",
+      "declared_sha256": "555a05553af57619c818c5b9ab90d1b751e161a307d8bb65fc73141991a73d2a",
+      "declared_size_bytes": 340287,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/011_www.fortcollins.gov_article-2-zone-districts.pdf",
+      "sha256": "1ec5deac82b2511d2ae82ee928f887b006db689553181ed1bb717c7c7a421e36",
+      "size_bytes": 15221919,
+      "kind": "pdf_original",
+      "declared_sha256": "1ec5deac82b2511d2ae82ee928f887b006db689553181ed1bb717c7c7a421e36",
+      "declared_size_bytes": 15221919,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/012_www.fortcollins.gov_article-3-buildingtypes.pdf",
+      "sha256": "b12f6031046c354307685563901bf8981c21554342dd5c39424809cb89654ea6",
+      "size_bytes": 22584310,
+      "kind": "pdf_original",
+      "declared_sha256": "b12f6031046c354307685563901bf8981c21554342dd5c39424809cb89654ea6",
+      "declared_size_bytes": 22584310,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/013_www.fortcollins.gov_article-4-use-standards.pdf",
+      "sha256": "c46f095d1be1e8ba65d1d5fe325daafcec0f4482bb89846f97a039c80449e757",
+      "size_bytes": 14252023,
+      "kind": "pdf_original",
+      "declared_sha256": "c46f095d1be1e8ba65d1d5fe325daafcec0f4482bb89846f97a039c80449e757",
+      "declared_size_bytes": 14252023,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/014_www.fortcollins.gov_article_5_general_development_and_site_design.pdf",
+      "sha256": "b3e4eb6e9a3f3354f63035430a2c9e4e2ccfbd0fa1c39303b96442da913c0364",
+      "size_bytes": 6306165,
+      "kind": "pdf_original",
+      "declared_sha256": "b3e4eb6e9a3f3354f63035430a2c9e4e2ccfbd0fa1c39303b96442da913c0364",
+      "declared_size_bytes": 6306165,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/015_webfetch_catalog_catalog_building_code.webfetch.md",
+      "sha256": "05c142c3db4643df2697aaafbfea44fe3349f310660cdb1dd8bdc745f69aac8a",
+      "size_bytes": 2568,
+      "kind": "webfetch_export",
+      "declared_sha256": "05c142c3db4643df2697aaafbfea44fe3349f310660cdb1dd8bdc745f69aac8a",
+      "declared_size_bytes": 2568,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/016_webfetch_catalog_catalog_land_use_code.webfetch.md",
+      "sha256": "c9d59f53e669d2036e2963f7268d597a3e9ff1eae3c43c1995d16935b19cbf0f",
+      "size_bytes": 1529,
+      "kind": "webfetch_export",
+      "declared_sha256": "c9d59f53e669d2036e2963f7268d597a3e9ff1eae3c43c1995d16935b19cbf0f",
+      "declared_size_bytes": 1529,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/017_webfetch_catalog_catalog_fee_schedules.webfetch.md",
+      "sha256": "64263c4079117d9a6538ac3def2742ec24a2fb3ccb8151b4ca2c6896b7b1b971",
+      "size_bytes": 889,
+      "kind": "webfetch_export",
+      "declared_sha256": "64263c4079117d9a6538ac3def2742ec24a2fb3ccb8151b4ca2c6896b7b1b971",
+      "declared_size_bytes": 889,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/018_webfetch_catalog_catalog_public_notices.webfetch.md",
+      "sha256": "553f411e366f9a1e994f020b37430294f7d19bde925af750cf1798f9c1f8342c",
+      "size_bytes": 511,
+      "kind": "webfetch_export",
+      "declared_sha256": "553f411e366f9a1e994f020b37430294f7d19bde925af750cf1798f9c1f8342c",
+      "declared_size_bytes": 511,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/019_www.fortcollins.gov_24-ifgc-final-amendments.pdf",
+      "sha256": "dbcfe030e1643892964a6261127f242c16017bc88ac91116c6cb868952fe28ac",
+      "size_bytes": 483615,
+      "kind": "pdf_original",
+      "declared_sha256": "dbcfe030e1643892964a6261127f242c16017bc88ac91116c6cb868952fe28ac",
+      "declared_size_bytes": 483615,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/020_www.fortcollins.gov_24-ipc-final-amendments.pdf",
+      "sha256": "0bd99bf7b3b1d5bb7c0792c8a791db5a80a3224c7a2c58bfef2a50cb182333ea",
+      "size_bytes": 953468,
+      "kind": "pdf_original",
+      "declared_sha256": "0bd99bf7b3b1d5bb7c0792c8a791db5a80a3224c7a2c58bfef2a50cb182333ea",
+      "declared_size_bytes": 953468,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/021_www.fortcollins.gov_24-ispsc-final-amendments.pdf",
+      "sha256": "6704ba29209f86268df1a2ea9b20aba74652fda6b62a9f5d820d1099dab8c900",
+      "size_bytes": 549485,
+      "kind": "pdf_original",
+      "declared_sha256": "6704ba29209f86268df1a2ea9b20aba74652fda6b62a9f5d820d1099dab8c900",
+      "declared_size_bytes": 549485,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/022_www.fortcollins.gov_24-iebc-final-amendments.pdf",
+      "sha256": "07313c0b4be74f59d4db72703dbd89b53852166b3f0cfc0ad947e7044adfaf5e",
+      "size_bytes": 504193,
+      "kind": "pdf_original",
+      "declared_sha256": "07313c0b4be74f59d4db72703dbd89b53852166b3f0cfc0ad947e7044adfaf5e",
+      "declared_size_bytes": 504193,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/023_www.fortcollins.gov_24-ipmc-final-amendments.pdf",
+      "sha256": "69a0d3e946866cd72311b0364cd1a97a8ef6c47758be5cf81fee1f61914266b6",
+      "size_bytes": 557620,
+      "kind": "pdf_original",
+      "declared_sha256": "69a0d3e946866cd72311b0364cd1a97a8ef6c47758be5cf81fee1f61914266b6",
+      "declared_size_bytes": 557620,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/024_www.fortcollins.gov_article-6-administration-and-procedures.pdf",
+      "sha256": "fb096c95cbb04a5da339d0e534496ca26df9fb854116ea81cf73281dd3b25b24",
+      "size_bytes": 1529063,
+      "kind": "pdf_original",
+      "declared_sha256": "fb096c95cbb04a5da339d0e534496ca26df9fb854116ea81cf73281dd3b25b24",
+      "declared_size_bytes": 1529063,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/025_www.fortcollins.gov_article-7-rules-of-measurement-and-definitions.pdf.html",
+      "sha256": "93602b408717506f6152004c91f486c6cfcc459e21f8d2db725a72260efa5d56",
+      "size_bytes": 92894,
+      "kind": "html_or_shell",
+      "declared_sha256": "93602b408717506f6152004c91f486c6cfcc459e21f8d2db725a72260efa5d56",
+      "declared_size_bytes": 92894,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/026_www.fortcollins.gov_article-7-rules-of-measurement-and-definitions.pdf",
+      "sha256": "646ebd678a89dd24e8f8c9cc487ecc0e6776265f5f1b847a1ce3e5e3d3cde79f",
+      "size_bytes": 3332684,
+      "kind": "pdf_original",
+      "declared_sha256": "646ebd678a89dd24e8f8c9cc487ecc0e6776265f5f1b847a1ce3e5e3d3cde79f",
+      "declared_size_bytes": 3332684,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/027_mccmeetings.blob.core.usgovcloudapi.net_MEET-Packet-9909c32063cd463990a30436cf0d9096.pdf",
+      "sha256": "95de1b7b623aba3ea062ba1b1e19d10bbb1f32618cde17097db2eab15496e2ad",
+      "size_bytes": 42636309,
+      "kind": "pdf_original",
+      "declared_sha256": "95de1b7b623aba3ea062ba1b1e19d10bbb1f32618cde17097db2eab15496e2ad",
+      "declared_size_bytes": 42636309,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/028_mccmeetings.blob.core.usgovcloudapi.net_MEET-Packet-98ce54e66b3d4da38059730c71b0f1c6.pdf",
+      "sha256": "412acf2984ea86b792dea6b88880ebcd4fb0cd21969b7c0a61672ce65da2bae2",
+      "size_bytes": 90765214,
+      "kind": "pdf_original",
+      "declared_sha256": "412acf2984ea86b792dea6b88880ebcd4fb0cd21969b7c0a61672ce65da2bae2",
+      "declared_size_bytes": 90765214,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/029_www.poudre-fire.org_fire-code-adoption.html",
+      "sha256": "5d660ff10b220f14246dd177f7d3626a47e974958958f1f760cd023d1f01e339",
+      "size_bytes": 529,
+      "kind": "error_shell",
+      "declared_sha256": "5d660ff10b220f14246dd177f7d3626a47e974958958f1f760cd023d1f01e339",
+      "declared_size_bytes": 529,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/mac_101_Building-Code.html",
+      "sha256": "5454a8464ca255fb6ffe87238c0048289b64af4d3dd7508e750e5265c0c2b54f",
+      "size_bytes": 439,
+      "kind": "error_shell",
+      "declared_sha256": "5454a8464ca255fb6ffe87238c0048289b64af4d3dd7508e750e5265c0c2b54f",
+      "declared_size_bytes": 439,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/mac_102_Land-Use-Code.html",
+      "sha256": "9afe8600c76f8649069b2af013d40543bd85ee85d1f7d55fa6a04447bedbefac",
+      "size_bytes": 443,
+      "kind": "error_shell",
+      "declared_sha256": "9afe8600c76f8649069b2af013d40543bd85ee85d1f7d55fa6a04447bedbefac",
+      "declared_size_bytes": 443,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/mac_103_Fee-Schedules.html",
+      "sha256": "cee7ac001fdf2e119510be62e794f8b2741819eac2a823475ebe10d487a94f31",
+      "size_bytes": 440,
+      "kind": "error_shell",
+      "declared_sha256": "cee7ac001fdf2e119510be62e794f8b2741819eac2a823475ebe10d487a94f31",
+      "declared_size_bytes": 440,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/mac_104_Public-Notices.html",
+      "sha256": "d191c219fbe31178ee8bfd5c738a65e0e15e83e66f7a5af2912671809187ff73",
+      "size_bytes": 436,
+      "kind": "error_shell",
+      "declared_sha256": "d191c219fbe31178ee8bfd5c738a65e0e15e83e66f7a5af2912671809187ff73",
+      "declared_size_bytes": 436,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/mac_105_poudre-fire-code-adoption.html",
+      "sha256": "2673a2ef14ca1b41999dc3f594e36ac5db3f3363190d0c9d9415df95c64341d7",
+      "size_bytes": 529,
+      "kind": "error_shell",
+      "declared_sha256": "2673a2ef14ca1b41999dc3f594e36ac5db3f3363190d0c9d9415df95c64341d7",
+      "declared_size_bytes": 529,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/mac_106_OrdRes-19288428.html",
+      "sha256": "c308fb5a3b976bd60ee8a1aa783adc78d8f940ca0bc8c1155ad527c60de8318a",
+      "size_bytes": 1895,
+      "kind": "viewer_shell",
+      "declared_sha256": "c308fb5a3b976bd60ee8a1aa783adc78d8f940ca0bc8c1155ad527c60de8318a",
+      "declared_size_bytes": 1895,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/mac_107_OrdRes-23389379.html",
+      "sha256": "c308fb5a3b976bd60ee8a1aa783adc78d8f940ca0bc8c1155ad527c60de8318a",
+      "size_bytes": 1895,
+      "kind": "viewer_shell",
+      "declared_sha256": "c308fb5a3b976bd60ee8a1aa783adc78d8f940ca0bc8c1155ad527c60de8318a",
+      "declared_size_bytes": 1895,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/exports/catalog_building_code.webfetch.md",
+      "sha256": "05c142c3db4643df2697aaafbfea44fe3349f310660cdb1dd8bdc745f69aac8a",
+      "size_bytes": 2568,
+      "kind": "webfetch_export",
+      "declared_sha256": "05c142c3db4643df2697aaafbfea44fe3349f310660cdb1dd8bdc745f69aac8a",
+      "declared_size_bytes": 2568,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/exports/catalog_fee_schedules.webfetch.md",
+      "sha256": "64263c4079117d9a6538ac3def2742ec24a2fb3ccb8151b4ca2c6896b7b1b971",
+      "size_bytes": 889,
+      "kind": "webfetch_export",
+      "declared_sha256": "64263c4079117d9a6538ac3def2742ec24a2fb3ccb8151b4ca2c6896b7b1b971",
+      "declared_size_bytes": 889,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/exports/catalog_land_use_code.webfetch.md",
+      "sha256": "c9d59f53e669d2036e2963f7268d597a3e9ff1eae3c43c1995d16935b19cbf0f",
+      "size_bytes": 1529,
+      "kind": "webfetch_export",
+      "declared_sha256": "c9d59f53e669d2036e2963f7268d597a3e9ff1eae3c43c1995d16935b19cbf0f",
+      "declared_size_bytes": 1529,
+      "matches_declared": true
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/exports/catalog_public_notices.webfetch.md",
+      "sha256": "553f411e366f9a1e994f020b37430294f7d19bde925af750cf1798f9c1f8342c",
+      "size_bytes": 511,
+      "kind": "webfetch_export",
+      "declared_sha256": "553f411e366f9a1e994f020b37430294f7d19bde925af750cf1798f9c1f8342c",
+      "declared_size_bytes": 511,
+      "matches_declared": true
+    }
+  ],
+  "historical_rows": [
+    {
+      "line_number": 17896,
+      "source_id": "municipal_fort_collins_building_code",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "authority_level": "municipal",
+      "source_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Building-Code",
+      "requested_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Building-Code",
+      "final_url": null,
+      "status": "downloaded",
+      "http_status": 200,
+      "sha256": "5c730e726765a679b6819f33264b4cad0f828938c97ced7c6ddf3fd6908f28ef",
+      "recorded_retrieved_at": "2026-07-16T20:47:39.132179Z",
+      "recorded_raw_path": "C:/Users/jpfeifer/OneDrive - CoorsTek/Documents/Geode/_RAW_ARCHIVE/local/municipal/municipal_fort_collins_building_code/landing_page.html",
+      "historical_bytes_opened": false
+    },
+    {
+      "line_number": 17897,
+      "source_id": "municipal_fort_collins_building_code",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "authority_level": "municipal",
+      "source_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Building-Code",
+      "requested_url": "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-ibc-final-amendments.pdf",
+      "final_url": null,
+      "status": "downloaded",
+      "http_status": 200,
+      "sha256": "405c319be443d472e348eac121fec78e1057a8fc1894c800fbefe4ac4d61d5b8",
+      "recorded_retrieved_at": "2026-07-16T20:47:39.132179Z",
+      "recorded_raw_path": "C:/Users/jpfeifer/OneDrive - CoorsTek/Documents/Geode/_RAW_ARCHIVE/local/municipal/municipal_fort_collins_building_code/24-ibc-final-amendments.pdf",
+      "historical_bytes_opened": false
+    },
+    {
+      "line_number": 17898,
+      "source_id": "municipal_fort_collins_building_code",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "authority_level": "municipal",
+      "source_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Building-Code",
+      "requested_url": "https://www.fortcollins.gov/files/sharedassets/city/v/6/planning-development-amp-transportation/community-development/building-services/building-code/24-irc-final-amendments.pdf",
+      "final_url": null,
+      "status": "downloaded",
+      "http_status": 200,
+      "sha256": "88f183426f4ac7995753df423b949342a4ba68e2e9c05dee1a580289d3c983a2",
+      "recorded_retrieved_at": "2026-07-16T20:47:39.132179Z",
+      "recorded_raw_path": "C:/Users/jpfeifer/OneDrive - CoorsTek/Documents/Geode/_RAW_ARCHIVE/local/municipal/municipal_fort_collins_building_code/24-irc-final-amendments.pdf",
+      "historical_bytes_opened": false
+    },
+    {
+      "line_number": 17899,
+      "source_id": "municipal_fort_collins_building_code",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "authority_level": "municipal",
+      "source_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Building-Code",
+      "requested_url": "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-iecc-final-amendments.pdf",
+      "final_url": null,
+      "status": "downloaded",
+      "http_status": 200,
+      "sha256": "561320ff6504708e2719626aaa29b663525a571736b1477d7d41e5a0d14b6e9d",
+      "recorded_retrieved_at": "2026-07-16T20:47:39.132179Z",
+      "recorded_raw_path": "C:/Users/jpfeifer/OneDrive - CoorsTek/Documents/Geode/_RAW_ARCHIVE/local/municipal/municipal_fort_collins_building_code/24-iecc-final-amendments.pdf",
+      "historical_bytes_opened": false
+    },
+    {
+      "line_number": 17900,
+      "source_id": "municipal_fort_collins_building_code",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "authority_level": "municipal",
+      "source_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Building-Code",
+      "requested_url": "https://www.fortcollins.gov/files/sharedassets/city/v/4/planning-development-amp-transportation/community-development/building-services/building-code/2025-colorado-wildfire-resiliency-code-final-for-brc.pdf",
+      "final_url": null,
+      "status": "downloaded",
+      "http_status": 200,
+      "sha256": "00e7446d7deac3499b86c4b8f15a5d802cc0c14dc2621409845ec13525cb01d2",
+      "recorded_retrieved_at": "2026-07-16T20:47:39.132179Z",
+      "recorded_raw_path": "C:/Users/jpfeifer/OneDrive - CoorsTek/Documents/Geode/_RAW_ARCHIVE/local/municipal/municipal_fort_collins_building_code/2025-colorado-wildfire-resiliency-code-final-for-brc.pdf",
+      "historical_bytes_opened": false
+    },
+    {
+      "line_number": 17901,
+      "source_id": "municipal_fort_collins_building_code",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "authority_level": "municipal",
+      "source_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Building-Code",
+      "requested_url": "https://www.fortcollins.gov/files/sharedassets/city/v/6/planning-development-amp-transportation/community-development/building-services/building-code/24-imc-final-amendments.pdf",
+      "final_url": null,
+      "status": "downloaded",
+      "http_status": 200,
+      "sha256": "b8b7ef5a549e71788683c4d67bce6c13f8e75aa70b4fc10f277bce9e5dba4dd3",
+      "recorded_retrieved_at": "2026-07-16T20:47:39.132179Z",
+      "recorded_raw_path": "C:/Users/jpfeifer/OneDrive - CoorsTek/Documents/Geode/_RAW_ARCHIVE/local/municipal/municipal_fort_collins_building_code/24-imc-final-amendments.pdf",
+      "historical_bytes_opened": false
+    },
+    {
+      "line_number": 17904,
+      "source_id": "municipal_fort_collins_land_use_code",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "authority_level": "municipal",
+      "source_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Land-Use-Code",
+      "requested_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Land-Use-Code",
+      "final_url": null,
+      "status": "downloaded",
+      "http_status": 200,
+      "sha256": "125e6b18665e55e0659298015d449d0ea8737b5725267a6a9a2bc02612732af0",
+      "recorded_retrieved_at": "2026-07-16T20:47:42.268798Z",
+      "recorded_raw_path": "C:/Users/jpfeifer/OneDrive - CoorsTek/Documents/Geode/_RAW_ARCHIVE/local/municipal/municipal_fort_collins_land_use_code/landing_page.html",
+      "historical_bytes_opened": false
+    },
+    {
+      "line_number": 17905,
+      "source_id": "municipal_fort_collins_land_use_code",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "authority_level": "municipal",
+      "source_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Land-Use-Code",
+      "requested_url": "https://www.fortcollins.gov/files/sharedassets/city/v/3/planning-development-amp-transportation/community-development/planning/land-use-code/article-1-general-purpose-and-provisions.pdf",
+      "final_url": null,
+      "status": "downloaded",
+      "http_status": 200,
+      "sha256": "555a05553af57619c818c5b9ab90d1b751e161a307d8bb65fc73141991a73d2a",
+      "recorded_retrieved_at": "2026-07-16T20:47:42.268798Z",
+      "recorded_raw_path": "C:/Users/jpfeifer/OneDrive - CoorsTek/Documents/Geode/_RAW_ARCHIVE/local/municipal/municipal_fort_collins_land_use_code/article-1-general-purpose-and-provisions.pdf",
+      "historical_bytes_opened": false
+    },
+    {
+      "line_number": 17906,
+      "source_id": "municipal_fort_collins_land_use_code",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "authority_level": "municipal",
+      "source_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Land-Use-Code",
+      "requested_url": "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/planning/land-use-code/article-2-zone-districts.pdf",
+      "final_url": null,
+      "status": "downloaded",
+      "http_status": 200,
+      "sha256": "1ec5deac82b2511d2ae82ee928f887b006db689553181ed1bb717c7c7a421e36",
+      "recorded_retrieved_at": "2026-07-16T20:47:42.268798Z",
+      "recorded_raw_path": "C:/Users/jpfeifer/OneDrive - CoorsTek/Documents/Geode/_RAW_ARCHIVE/local/municipal/municipal_fort_collins_land_use_code/article-2-zone-districts.pdf",
+      "historical_bytes_opened": false
+    },
+    {
+      "line_number": 17907,
+      "source_id": "municipal_fort_collins_land_use_code",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "authority_level": "municipal",
+      "source_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Land-Use-Code",
+      "requested_url": "https://www.fortcollins.gov/files/sharedassets/city/v/2/planning-development-amp-transportation/community-development/planning/land-use-code/article-3-buildingtypes.pdf",
+      "final_url": null,
+      "status": "downloaded",
+      "http_status": 200,
+      "sha256": "b12f6031046c354307685563901bf8981c21554342dd5c39424809cb89654ea6",
+      "recorded_retrieved_at": "2026-07-16T20:47:42.268798Z",
+      "recorded_raw_path": "C:/Users/jpfeifer/OneDrive - CoorsTek/Documents/Geode/_RAW_ARCHIVE/local/municipal/municipal_fort_collins_land_use_code/article-3-buildingtypes.pdf",
+      "historical_bytes_opened": false
+    },
+    {
+      "line_number": 17908,
+      "source_id": "municipal_fort_collins_land_use_code",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "authority_level": "municipal",
+      "source_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Land-Use-Code",
+      "requested_url": "https://www.fortcollins.gov/files/sharedassets/city/v/3/planning-development-amp-transportation/community-development/planning/land-use-code/article-4-use-standards.pdf",
+      "final_url": null,
+      "status": "downloaded",
+      "http_status": 200,
+      "sha256": "c46f095d1be1e8ba65d1d5fe325daafcec0f4482bb89846f97a039c80449e757",
+      "recorded_retrieved_at": "2026-07-16T20:47:42.268798Z",
+      "recorded_raw_path": "C:/Users/jpfeifer/OneDrive - CoorsTek/Documents/Geode/_RAW_ARCHIVE/local/municipal/municipal_fort_collins_land_use_code/article-4-use-standards.pdf",
+      "historical_bytes_opened": false
+    },
+    {
+      "line_number": 17909,
+      "source_id": "municipal_fort_collins_land_use_code",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "authority_level": "municipal",
+      "source_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Land-Use-Code",
+      "requested_url": "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/planning/land-use-code/article_5_general_development_and_site_design.pdf",
+      "final_url": null,
+      "status": "downloaded",
+      "http_status": 200,
+      "sha256": "b3e4eb6e9a3f3354f63035430a2c9e4e2ccfbd0fa1c39303b96442da913c0364",
+      "recorded_retrieved_at": "2026-07-16T20:47:42.268798Z",
+      "recorded_raw_path": "C:/Users/jpfeifer/OneDrive - CoorsTek/Documents/Geode/_RAW_ARCHIVE/local/municipal/municipal_fort_collins_land_use_code/article_5_general_development_and_site_design.pdf",
+      "historical_bytes_opened": false
+    },
+    {
+      "line_number": 17988,
+      "source_id": "municipal_fort_collins_fire_authority",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "authority_level": "municipal",
+      "source_url": "https://www.poudre-fire.org/programs-services/community-safety-services-fire-prevention/fire-code-adoption",
+      "requested_url": "https://www.poudre-fire.org/programs-services/community-safety-services-fire-prevention/fire-code-adoption",
+      "final_url": null,
+      "status": "downloaded",
+      "http_status": 200,
+      "sha256": "34708baa82151c9348dd225dd061cfd4c2a184344560e74a864d6242abce37c5",
+      "recorded_retrieved_at": "2026-07-16T20:55:40.045281Z",
+      "recorded_raw_path": "C:/Users/jpfeifer/OneDrive - CoorsTek/Documents/Geode/_RAW_ARCHIVE/local/municipal/municipal_fort_collins_fire_authority/landing_page.html",
+      "historical_bytes_opened": false
+    },
+    {
+      "line_number": 18051,
+      "source_id": "municipal_fort_collins_ordinances",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "authority_level": "municipal",
+      "source_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Land-Use-Code",
+      "requested_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Land-Use-Code",
+      "final_url": null,
+      "status": "downloaded",
+      "http_status": 200,
+      "sha256": "78b87b137d77a0c3f622f4cc0d32b9d38d87e12b2f164ff0cafaaab7b814c8d4",
+      "recorded_retrieved_at": "2026-07-16T20:59:51.070225Z",
+      "recorded_raw_path": "C:/Users/jpfeifer/OneDrive - CoorsTek/Documents/Geode/_RAW_ARCHIVE/local/municipal/municipal_fort_collins_ordinances/landing_page.html",
+      "historical_bytes_opened": false
+    },
+    {
+      "line_number": 18052,
+      "source_id": "municipal_fort_collins_ordinances",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "authority_level": "municipal",
+      "source_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Land-Use-Code",
+      "requested_url": "https://www.fortcollins.gov/files/sharedassets/city/v/3/planning-development-amp-transportation/community-development/planning/land-use-code/article-1-general-purpose-and-provisions.pdf",
+      "final_url": null,
+      "status": "downloaded",
+      "http_status": 200,
+      "sha256": "555a05553af57619c818c5b9ab90d1b751e161a307d8bb65fc73141991a73d2a",
+      "recorded_retrieved_at": "2026-07-16T20:59:51.070225Z",
+      "recorded_raw_path": "C:/Users/jpfeifer/OneDrive - CoorsTek/Documents/Geode/_RAW_ARCHIVE/local/municipal/municipal_fort_collins_ordinances/article-1-general-purpose-and-provisions.pdf",
+      "historical_bytes_opened": false
+    },
+    {
+      "line_number": 18053,
+      "source_id": "municipal_fort_collins_ordinances",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "authority_level": "municipal",
+      "source_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Land-Use-Code",
+      "requested_url": "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/planning/land-use-code/article-2-zone-districts.pdf",
+      "final_url": null,
+      "status": "downloaded",
+      "http_status": 200,
+      "sha256": "1ec5deac82b2511d2ae82ee928f887b006db689553181ed1bb717c7c7a421e36",
+      "recorded_retrieved_at": "2026-07-16T20:59:51.070225Z",
+      "recorded_raw_path": "C:/Users/jpfeifer/OneDrive - CoorsTek/Documents/Geode/_RAW_ARCHIVE/local/municipal/municipal_fort_collins_ordinances/article-2-zone-districts.pdf",
+      "historical_bytes_opened": false
+    },
+    {
+      "line_number": 18054,
+      "source_id": "municipal_fort_collins_ordinances",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "authority_level": "municipal",
+      "source_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Land-Use-Code",
+      "requested_url": "https://www.fortcollins.gov/files/sharedassets/city/v/2/planning-development-amp-transportation/community-development/planning/land-use-code/article-3-buildingtypes.pdf",
+      "final_url": null,
+      "status": "downloaded",
+      "http_status": 200,
+      "sha256": "b12f6031046c354307685563901bf8981c21554342dd5c39424809cb89654ea6",
+      "recorded_retrieved_at": "2026-07-16T20:59:51.070225Z",
+      "recorded_raw_path": "C:/Users/jpfeifer/OneDrive - CoorsTek/Documents/Geode/_RAW_ARCHIVE/local/municipal/municipal_fort_collins_ordinances/article-3-buildingtypes.pdf",
+      "historical_bytes_opened": false
+    },
+    {
+      "line_number": 18055,
+      "source_id": "municipal_fort_collins_ordinances",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "authority_level": "municipal",
+      "source_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Land-Use-Code",
+      "requested_url": "https://www.fortcollins.gov/files/sharedassets/city/v/3/planning-development-amp-transportation/community-development/planning/land-use-code/article-4-use-standards.pdf",
+      "final_url": null,
+      "status": "downloaded",
+      "http_status": 200,
+      "sha256": "c46f095d1be1e8ba65d1d5fe325daafcec0f4482bb89846f97a039c80449e757",
+      "recorded_retrieved_at": "2026-07-16T20:59:51.070225Z",
+      "recorded_raw_path": "C:/Users/jpfeifer/OneDrive - CoorsTek/Documents/Geode/_RAW_ARCHIVE/local/municipal/municipal_fort_collins_ordinances/article-4-use-standards.pdf",
+      "historical_bytes_opened": false
+    }
+  ],
+  "pdf_comparisons": [
+    {
+      "file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/005_www.fortcollins.gov_24-ibc-final-amendments.pdf",
+        "sha256": "405c319be443d472e348eac121fec78e1057a8fc1894c800fbefe4ac4d61d5b8",
+        "size_bytes": 618034
+      },
+      "meta_file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/meta/005_www.fortcollins.gov_24-ibc-final-amendments.pdf.meta.json",
+        "sha256": "0b413e86f539aba8a16e137f30752f1efbc59a7d1c65546a3765d41cdc5bd663",
+        "size_bytes": 817
+      },
+      "priority_ids": [
+        "SD005-02"
+      ],
+      "requested_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-ibc-final-amendments.pdf"
+      ],
+      "claimed_final_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-ibc-final-amendments.pdf"
+      ],
+      "actual_magic_is_pdf": true,
+      "metadata_and_event_hashes_match": true,
+      "exact_url_historical_lines": [
+        17897
+      ],
+      "global_digest_historical_lines": [
+        17897
+      ],
+      "exact_url_and_digest_historical_lines": [
+        17897
+      ],
+      "historical_source_ids": [
+        "municipal_fort_collins_building_code"
+      ],
+      "historical_authority_ids": [
+        "CO-MUNICIPAL-FORT_COLLINS"
+      ],
+      "disposition": "exact_historical_digest_match"
+    },
+    {
+      "file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/006_www.fortcollins.gov_24-irc-final-amendments.pdf",
+        "sha256": "88f183426f4ac7995753df423b949342a4ba68e2e9c05dee1a580289d3c983a2",
+        "size_bytes": 919990
+      },
+      "meta_file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/meta/006_www.fortcollins.gov_24-irc-final-amendments.pdf.meta.json",
+        "sha256": "9cb32158adb9470742cfed86a3911afbac2ccb9b72030f681a343f9ea98081ed",
+        "size_bytes": 817
+      },
+      "priority_ids": [
+        "SD005-03"
+      ],
+      "requested_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/6/planning-development-amp-transportation/community-development/building-services/building-code/24-irc-final-amendments.pdf"
+      ],
+      "claimed_final_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/6/planning-development-amp-transportation/community-development/building-services/building-code/24-irc-final-amendments.pdf"
+      ],
+      "actual_magic_is_pdf": true,
+      "metadata_and_event_hashes_match": true,
+      "exact_url_historical_lines": [
+        17898
+      ],
+      "global_digest_historical_lines": [
+        17898
+      ],
+      "exact_url_and_digest_historical_lines": [
+        17898
+      ],
+      "historical_source_ids": [
+        "municipal_fort_collins_building_code"
+      ],
+      "historical_authority_ids": [
+        "CO-MUNICIPAL-FORT_COLLINS"
+      ],
+      "disposition": "exact_historical_digest_match"
+    },
+    {
+      "file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/007_www.fortcollins.gov_24-iecc-final-amendments.pdf",
+        "sha256": "561320ff6504708e2719626aaa29b663525a571736b1477d7d41e5a0d14b6e9d",
+        "size_bytes": 1771758
+      },
+      "meta_file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/meta/007_www.fortcollins.gov_24-iecc-final-amendments.pdf.meta.json",
+        "sha256": "b97a8255d8497031d42710896c2305f2d1a46c2d5804f8aa1882833ab77351cb",
+        "size_bytes": 821
+      },
+      "priority_ids": [
+        "SD005-04"
+      ],
+      "requested_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-iecc-final-amendments.pdf"
+      ],
+      "claimed_final_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-iecc-final-amendments.pdf"
+      ],
+      "actual_magic_is_pdf": true,
+      "metadata_and_event_hashes_match": true,
+      "exact_url_historical_lines": [
+        17899
+      ],
+      "global_digest_historical_lines": [
+        17899
+      ],
+      "exact_url_and_digest_historical_lines": [
+        17899
+      ],
+      "historical_source_ids": [
+        "municipal_fort_collins_building_code"
+      ],
+      "historical_authority_ids": [
+        "CO-MUNICIPAL-FORT_COLLINS"
+      ],
+      "disposition": "exact_historical_digest_match"
+    },
+    {
+      "file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/008_www.fortcollins.gov_24-imc-final-amendments.pdf",
+        "sha256": "b8b7ef5a549e71788683c4d67bce6c13f8e75aa70b4fc10f277bce9e5dba4dd3",
+        "size_bytes": 481147
+      },
+      "meta_file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/meta/008_www.fortcollins.gov_24-imc-final-amendments.pdf.meta.json",
+        "sha256": "f8cea4bd187171af3a310ca6f71696491df6c5cfbf785779692bf6cd47f2265a",
+        "size_bytes": 817
+      },
+      "priority_ids": [],
+      "requested_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/6/planning-development-amp-transportation/community-development/building-services/building-code/24-imc-final-amendments.pdf"
+      ],
+      "claimed_final_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/6/planning-development-amp-transportation/community-development/building-services/building-code/24-imc-final-amendments.pdf"
+      ],
+      "actual_magic_is_pdf": true,
+      "metadata_and_event_hashes_match": true,
+      "exact_url_historical_lines": [
+        17901
+      ],
+      "global_digest_historical_lines": [
+        17901
+      ],
+      "exact_url_and_digest_historical_lines": [
+        17901
+      ],
+      "historical_source_ids": [
+        "municipal_fort_collins_building_code"
+      ],
+      "historical_authority_ids": [
+        "CO-MUNICIPAL-FORT_COLLINS"
+      ],
+      "disposition": "exact_historical_digest_match"
+    },
+    {
+      "file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/009_www.fortcollins.gov_2025-colorado-wildfire-resiliency-code-final-for-brc.pdf",
+        "sha256": "00e7446d7deac3499b86c4b8f15a5d802cc0c14dc2621409845ec13525cb01d2",
+        "size_bytes": 169449
+      },
+      "meta_file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/meta/009_www.fortcollins.gov_2025-colorado-wildfire-resiliency-code-final-for-brc.pdf.meta.json",
+        "sha256": "11e627c0d82a2105335df3d1151f3c5f45d9934698b1ea45d8ef1d78b4bbc967",
+        "size_bytes": 904
+      },
+      "priority_ids": [
+        "SD005-05"
+      ],
+      "requested_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/4/planning-development-amp-transportation/community-development/building-services/building-code/2025-colorado-wildfire-resiliency-code-final-for-brc.pdf"
+      ],
+      "claimed_final_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/4/planning-development-amp-transportation/community-development/building-services/building-code/2025-colorado-wildfire-resiliency-code-final-for-brc.pdf"
+      ],
+      "actual_magic_is_pdf": true,
+      "metadata_and_event_hashes_match": true,
+      "exact_url_historical_lines": [
+        17900
+      ],
+      "global_digest_historical_lines": [
+        17900
+      ],
+      "exact_url_and_digest_historical_lines": [
+        17900
+      ],
+      "historical_source_ids": [
+        "municipal_fort_collins_building_code"
+      ],
+      "historical_authority_ids": [
+        "CO-MUNICIPAL-FORT_COLLINS"
+      ],
+      "disposition": "exact_historical_digest_match"
+    },
+    {
+      "file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/010_www.fortcollins.gov_article-1-general-purpose-and-provisions.pdf",
+        "sha256": "555a05553af57619c818c5b9ab90d1b751e161a307d8bb65fc73141991a73d2a",
+        "size_bytes": 340287
+      },
+      "meta_file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/meta/010_www.fortcollins.gov_article-1-general-purpose-and-provisions.pdf.meta.json",
+        "sha256": "1c7a81a1cd104f84b675b318185ba737818681bd1451a6d45c6a5f226e63a98f",
+        "size_bytes": 850
+      },
+      "priority_ids": [
+        "SD005-07"
+      ],
+      "requested_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/3/planning-development-amp-transportation/community-development/planning/land-use-code/article-1-general-purpose-and-provisions.pdf"
+      ],
+      "claimed_final_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/3/planning-development-amp-transportation/community-development/planning/land-use-code/article-1-general-purpose-and-provisions.pdf"
+      ],
+      "actual_magic_is_pdf": true,
+      "metadata_and_event_hashes_match": true,
+      "exact_url_historical_lines": [
+        17905,
+        18052
+      ],
+      "global_digest_historical_lines": [
+        17905,
+        18052
+      ],
+      "exact_url_and_digest_historical_lines": [
+        17905,
+        18052
+      ],
+      "historical_source_ids": [
+        "municipal_fort_collins_land_use_code",
+        "municipal_fort_collins_ordinances"
+      ],
+      "historical_authority_ids": [
+        "CO-MUNICIPAL-FORT_COLLINS"
+      ],
+      "disposition": "exact_historical_digest_match"
+    },
+    {
+      "file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/011_www.fortcollins.gov_article-2-zone-districts.pdf",
+        "sha256": "1ec5deac82b2511d2ae82ee928f887b006db689553181ed1bb717c7c7a421e36",
+        "size_bytes": 15221919
+      },
+      "meta_file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/meta/011_www.fortcollins.gov_article-2-zone-districts.pdf.meta.json",
+        "sha256": "b3b30b2f92e454b0dfa0c85d26b8c0dd5f49d47185e8eb08b0598f1f172deabf",
+        "size_bytes": 804
+      },
+      "priority_ids": [
+        "SD005-08"
+      ],
+      "requested_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/planning/land-use-code/article-2-zone-districts.pdf"
+      ],
+      "claimed_final_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/planning/land-use-code/article-2-zone-districts.pdf"
+      ],
+      "actual_magic_is_pdf": true,
+      "metadata_and_event_hashes_match": true,
+      "exact_url_historical_lines": [
+        17906,
+        18053
+      ],
+      "global_digest_historical_lines": [
+        17906,
+        18053
+      ],
+      "exact_url_and_digest_historical_lines": [
+        17906,
+        18053
+      ],
+      "historical_source_ids": [
+        "municipal_fort_collins_land_use_code",
+        "municipal_fort_collins_ordinances"
+      ],
+      "historical_authority_ids": [
+        "CO-MUNICIPAL-FORT_COLLINS"
+      ],
+      "disposition": "exact_historical_digest_match"
+    },
+    {
+      "file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/012_www.fortcollins.gov_article-3-buildingtypes.pdf",
+        "sha256": "b12f6031046c354307685563901bf8981c21554342dd5c39424809cb89654ea6",
+        "size_bytes": 22584310
+      },
+      "meta_file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/meta/012_www.fortcollins.gov_article-3-buildingtypes.pdf.meta.json",
+        "sha256": "27c36d97321ce4923b5ba3a83c7ed8305a2de7852c1dc1360ea039f918f93dc8",
+        "size_bytes": 801
+      },
+      "priority_ids": [],
+      "requested_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/2/planning-development-amp-transportation/community-development/planning/land-use-code/article-3-buildingtypes.pdf"
+      ],
+      "claimed_final_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/2/planning-development-amp-transportation/community-development/planning/land-use-code/article-3-buildingtypes.pdf"
+      ],
+      "actual_magic_is_pdf": true,
+      "metadata_and_event_hashes_match": true,
+      "exact_url_historical_lines": [
+        17907,
+        18054
+      ],
+      "global_digest_historical_lines": [
+        17907,
+        18054
+      ],
+      "exact_url_and_digest_historical_lines": [
+        17907,
+        18054
+      ],
+      "historical_source_ids": [
+        "municipal_fort_collins_land_use_code",
+        "municipal_fort_collins_ordinances"
+      ],
+      "historical_authority_ids": [
+        "CO-MUNICIPAL-FORT_COLLINS"
+      ],
+      "disposition": "exact_historical_digest_match"
+    },
+    {
+      "file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/013_www.fortcollins.gov_article-4-use-standards.pdf",
+        "sha256": "c46f095d1be1e8ba65d1d5fe325daafcec0f4482bb89846f97a039c80449e757",
+        "size_bytes": 14252023
+      },
+      "meta_file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/meta/013_www.fortcollins.gov_article-4-use-standards.pdf.meta.json",
+        "sha256": "e224dd35e396f689b2f31dadc386afe341408f93b79d8ef3cdd1b8ea6d2debbd",
+        "size_bytes": 801
+      },
+      "priority_ids": [],
+      "requested_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/3/planning-development-amp-transportation/community-development/planning/land-use-code/article-4-use-standards.pdf"
+      ],
+      "claimed_final_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/3/planning-development-amp-transportation/community-development/planning/land-use-code/article-4-use-standards.pdf"
+      ],
+      "actual_magic_is_pdf": true,
+      "metadata_and_event_hashes_match": true,
+      "exact_url_historical_lines": [
+        17908,
+        18055
+      ],
+      "global_digest_historical_lines": [
+        17908,
+        18055
+      ],
+      "exact_url_and_digest_historical_lines": [
+        17908,
+        18055
+      ],
+      "historical_source_ids": [
+        "municipal_fort_collins_land_use_code",
+        "municipal_fort_collins_ordinances"
+      ],
+      "historical_authority_ids": [
+        "CO-MUNICIPAL-FORT_COLLINS"
+      ],
+      "disposition": "exact_historical_digest_match"
+    },
+    {
+      "file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/014_www.fortcollins.gov_article_5_general_development_and_site_design.pdf",
+        "sha256": "b3e4eb6e9a3f3354f63035430a2c9e4e2ccfbd0fa1c39303b96442da913c0364",
+        "size_bytes": 6306165
+      },
+      "meta_file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/meta/014_www.fortcollins.gov_article_5_general_development_and_site_design.pdf.meta.json",
+        "sha256": "4481b3a81583db2eeb861d5c674487fc4a4181337e4ce5a136ba325b4483ad0a",
+        "size_bytes": 866
+      },
+      "priority_ids": [],
+      "requested_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/planning/land-use-code/article_5_general_development_and_site_design.pdf"
+      ],
+      "claimed_final_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/planning/land-use-code/article_5_general_development_and_site_design.pdf"
+      ],
+      "actual_magic_is_pdf": true,
+      "metadata_and_event_hashes_match": true,
+      "exact_url_historical_lines": [
+        17909
+      ],
+      "global_digest_historical_lines": [
+        17909
+      ],
+      "exact_url_and_digest_historical_lines": [
+        17909
+      ],
+      "historical_source_ids": [
+        "municipal_fort_collins_land_use_code"
+      ],
+      "historical_authority_ids": [
+        "CO-MUNICIPAL-FORT_COLLINS"
+      ],
+      "disposition": "exact_historical_digest_match"
+    },
+    {
+      "file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/019_www.fortcollins.gov_24-ifgc-final-amendments.pdf",
+        "sha256": "dbcfe030e1643892964a6261127f242c16017bc88ac91116c6cb868952fe28ac",
+        "size_bytes": 483615
+      },
+      "meta_file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/meta/019_www.fortcollins.gov_24-ifgc-final-amendments.pdf.meta.json",
+        "sha256": "0e4dae411e2d540bd8aca98f2df5d4983b731ac22de09e95048c26e2a966e3bf",
+        "size_bytes": 827
+      },
+      "priority_ids": [],
+      "requested_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-ifgc-final-amendments.pdf"
+      ],
+      "claimed_final_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-ifgc-final-amendments.pdf"
+      ],
+      "actual_magic_is_pdf": true,
+      "metadata_and_event_hashes_match": true,
+      "exact_url_historical_lines": [],
+      "global_digest_historical_lines": [],
+      "exact_url_and_digest_historical_lines": [],
+      "historical_source_ids": [],
+      "historical_authority_ids": [],
+      "disposition": "no_exact_url_or_digest_in_pinned_manifest"
+    },
+    {
+      "file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/020_www.fortcollins.gov_24-ipc-final-amendments.pdf",
+        "sha256": "0bd99bf7b3b1d5bb7c0792c8a791db5a80a3224c7a2c58bfef2a50cb182333ea",
+        "size_bytes": 953468
+      },
+      "meta_file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/meta/020_www.fortcollins.gov_24-ipc-final-amendments.pdf.meta.json",
+        "sha256": "fb175af2045427428c9d211e99c146d3fc62173847ea6376b72510df7d6a861d",
+        "size_bytes": 824
+      },
+      "priority_ids": [],
+      "requested_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-ipc-final-amendments.pdf"
+      ],
+      "claimed_final_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/6/planning-development-amp-transportation/community-development/building-services/building-code/24-ipc-final-amendments.pdf"
+      ],
+      "actual_magic_is_pdf": true,
+      "metadata_and_event_hashes_match": true,
+      "exact_url_historical_lines": [],
+      "global_digest_historical_lines": [],
+      "exact_url_and_digest_historical_lines": [],
+      "historical_source_ids": [],
+      "historical_authority_ids": [],
+      "disposition": "no_exact_url_or_digest_in_pinned_manifest"
+    },
+    {
+      "file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/021_www.fortcollins.gov_24-ispsc-final-amendments.pdf",
+        "sha256": "6704ba29209f86268df1a2ea9b20aba74652fda6b62a9f5d820d1099dab8c900",
+        "size_bytes": 549485
+      },
+      "meta_file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/meta/021_www.fortcollins.gov_24-ispsc-final-amendments.pdf.meta.json",
+        "sha256": "b59102250c68e8ee03b4c8839caa24515a375c0d843639a5ad8340dbb3762ff1",
+        "size_bytes": 830
+      },
+      "priority_ids": [],
+      "requested_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-ispsc-final-amendments.pdf"
+      ],
+      "claimed_final_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/6/planning-development-amp-transportation/community-development/building-services/building-code/24-ispsc-final-amendments.pdf"
+      ],
+      "actual_magic_is_pdf": true,
+      "metadata_and_event_hashes_match": true,
+      "exact_url_historical_lines": [],
+      "global_digest_historical_lines": [],
+      "exact_url_and_digest_historical_lines": [],
+      "historical_source_ids": [],
+      "historical_authority_ids": [],
+      "disposition": "no_exact_url_or_digest_in_pinned_manifest"
+    },
+    {
+      "file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/022_www.fortcollins.gov_24-iebc-final-amendments.pdf",
+        "sha256": "07313c0b4be74f59d4db72703dbd89b53852166b3f0cfc0ad947e7044adfaf5e",
+        "size_bytes": 504193
+      },
+      "meta_file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/meta/022_www.fortcollins.gov_24-iebc-final-amendments.pdf.meta.json",
+        "sha256": "cb51e54e1b4e5fcf64a19db2434f783fabcef51aea467a1f11ca10c85e74956f",
+        "size_bytes": 827
+      },
+      "priority_ids": [],
+      "requested_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-iebc-final-amendments.pdf"
+      ],
+      "claimed_final_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-iebc-final-amendments.pdf"
+      ],
+      "actual_magic_is_pdf": true,
+      "metadata_and_event_hashes_match": true,
+      "exact_url_historical_lines": [],
+      "global_digest_historical_lines": [],
+      "exact_url_and_digest_historical_lines": [],
+      "historical_source_ids": [],
+      "historical_authority_ids": [],
+      "disposition": "no_exact_url_or_digest_in_pinned_manifest"
+    },
+    {
+      "file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/023_www.fortcollins.gov_24-ipmc-final-amendments.pdf",
+        "sha256": "69a0d3e946866cd72311b0364cd1a97a8ef6c47758be5cf81fee1f61914266b6",
+        "size_bytes": 557620
+      },
+      "meta_file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/meta/023_www.fortcollins.gov_24-ipmc-final-amendments.pdf.meta.json",
+        "sha256": "8651098008d49ce827c3d6a787d6ef22ca4ec38ee4b493d1c75a352adcc7ff1d",
+        "size_bytes": 827
+      },
+      "priority_ids": [],
+      "requested_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-ipmc-final-amendments.pdf"
+      ],
+      "claimed_final_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/7/planning-development-amp-transportation/community-development/building-services/building-code/24-ipmc-final-amendments.pdf"
+      ],
+      "actual_magic_is_pdf": true,
+      "metadata_and_event_hashes_match": true,
+      "exact_url_historical_lines": [],
+      "global_digest_historical_lines": [],
+      "exact_url_and_digest_historical_lines": [],
+      "historical_source_ids": [],
+      "historical_authority_ids": [],
+      "disposition": "no_exact_url_or_digest_in_pinned_manifest"
+    },
+    {
+      "file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/024_www.fortcollins.gov_article-6-administration-and-procedures.pdf",
+        "sha256": "fb096c95cbb04a5da339d0e534496ca26df9fb854116ea81cf73281dd3b25b24",
+        "size_bytes": 1529063
+      },
+      "meta_file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/meta/024_www.fortcollins.gov_article-6-administration-and-procedures.pdf.meta.json",
+        "sha256": "5d3cdfba5ac1a6e66f48db830f60c36cff688dfff3e9d23c6b6b495ba4a3342c",
+        "size_bytes": 855
+      },
+      "priority_ids": [],
+      "requested_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/3/planning-development-amp-transportation/community-development/planning/land-use-code/article-6-administration-and-procedures.pdf"
+      ],
+      "claimed_final_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/3/planning-development-amp-transportation/community-development/planning/land-use-code/article-6-administration-and-procedures.pdf"
+      ],
+      "actual_magic_is_pdf": true,
+      "metadata_and_event_hashes_match": true,
+      "exact_url_historical_lines": [],
+      "global_digest_historical_lines": [],
+      "exact_url_and_digest_historical_lines": [],
+      "historical_source_ids": [],
+      "historical_authority_ids": [],
+      "disposition": "no_exact_url_or_digest_in_pinned_manifest"
+    },
+    {
+      "file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/026_www.fortcollins.gov_article-7-rules-of-measurement-and-definitions.pdf",
+        "sha256": "646ebd678a89dd24e8f8c9cc487ecc0e6776265f5f1b847a1ce3e5e3d3cde79f",
+        "size_bytes": 3332684
+      },
+      "meta_file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/meta/026_www.fortcollins.gov_article-7-rules-of-measurement-and-definitions.pdf.meta.json",
+        "sha256": "2a5a5376ae8de082c93d64bf8be693e89666ec8a2c9183ce700d423bfcf22e96",
+        "size_bytes": 877
+      },
+      "priority_ids": [],
+      "requested_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/2/planning-development-amp-transportation/community-development/planning/land-use-code/article-7-rules-of-measurement-and-definitions.pdf"
+      ],
+      "claimed_final_urls": [
+        "https://www.fortcollins.gov/files/sharedassets/city/v/4/planning-development-amp-transportation/community-development/planning/land-use-code/article-7-rules-and-measurement-and-definitions.pdf"
+      ],
+      "actual_magic_is_pdf": true,
+      "metadata_and_event_hashes_match": true,
+      "exact_url_historical_lines": [],
+      "global_digest_historical_lines": [],
+      "exact_url_and_digest_historical_lines": [],
+      "historical_source_ids": [],
+      "historical_authority_ids": [],
+      "disposition": "no_exact_url_or_digest_in_pinned_manifest"
+    },
+    {
+      "file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/027_mccmeetings.blob.core.usgovcloudapi.net_MEET-Packet-9909c32063cd463990a30436cf0d9096.pdf",
+        "sha256": "95de1b7b623aba3ea062ba1b1e19d10bbb1f32618cde17097db2eab15496e2ad",
+        "size_bytes": 42636309
+      },
+      "meta_file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/meta/027_mccmeetings.blob.core.usgovcloudapi.net_MEET-Packet-9909c32063cd463990a30436cf0d9096.pdf.meta.json",
+        "sha256": "b45ed6cbd25506a2a8a02fd1aeccea3d0597d3429eeefe3b63b7d20cc57af4c4",
+        "size_bytes": 739
+      },
+      "priority_ids": [
+        "SD005-09"
+      ],
+      "requested_urls": [
+        "https://mccmeetings.blob.core.usgovcloudapi.net/fortcollco-pubu/MEET-Packet-9909c32063cd463990a30436cf0d9096.pdf"
+      ],
+      "claimed_final_urls": [
+        "https://mccmeetings.blob.core.usgovcloudapi.net/fortcollco-pubu/MEET-Packet-9909c32063cd463990a30436cf0d9096.pdf"
+      ],
+      "actual_magic_is_pdf": true,
+      "metadata_and_event_hashes_match": true,
+      "exact_url_historical_lines": [],
+      "global_digest_historical_lines": [],
+      "exact_url_and_digest_historical_lines": [],
+      "historical_source_ids": [],
+      "historical_authority_ids": [],
+      "disposition": "no_exact_url_or_digest_in_pinned_manifest"
+    },
+    {
+      "file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/raw/028_mccmeetings.blob.core.usgovcloudapi.net_MEET-Packet-98ce54e66b3d4da38059730c71b0f1c6.pdf",
+        "sha256": "412acf2984ea86b792dea6b88880ebcd4fb0cd21969b7c0a61672ce65da2bae2",
+        "size_bytes": 90765214
+      },
+      "meta_file": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/meta/028_mccmeetings.blob.core.usgovcloudapi.net_MEET-Packet-98ce54e66b3d4da38059730c71b0f1c6.pdf.meta.json",
+        "sha256": "d0b32391993686b45a3dc54d0f68ad79a9cd907b460d467f04de341baa78c3cc",
+        "size_bytes": 739
+      },
+      "priority_ids": [
+        "SD005-11"
+      ],
+      "requested_urls": [
+        "https://mccmeetings.blob.core.usgovcloudapi.net/fortcollco-pubu/MEET-Packet-98ce54e66b3d4da38059730c71b0f1c6.pdf"
+      ],
+      "claimed_final_urls": [
+        "https://mccmeetings.blob.core.usgovcloudapi.net/fortcollco-pubu/MEET-Packet-98ce54e66b3d4da38059730c71b0f1c6.pdf"
+      ],
+      "actual_magic_is_pdf": true,
+      "metadata_and_event_hashes_match": true,
+      "exact_url_historical_lines": [],
+      "global_digest_historical_lines": [],
+      "exact_url_and_digest_historical_lines": [],
+      "historical_source_ids": [],
+      "historical_authority_ids": [],
+      "disposition": "no_exact_url_or_digest_in_pinned_manifest"
+    }
+  ],
+  "url_comparisons": [
+    {
+      "url": "https://library.municode.com/co/fort_collins/codes/municipal_code",
+      "event_indices": [],
+      "priority_ids": [],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://library.municode.com/co/fort_collins/codes/transitional_land_use_code_(for_project_before_may_17,_2024)",
+      "event_indices": [],
+      "priority_ids": [],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://mccmeetings.blob.core.usgovcloudapi.net/fortcollco-pubu/MEET-Packet-98ce54e66b3d4da38059730c71b0f1c6.pdf",
+      "event_indices": [
+        28
+      ],
+      "priority_ids": [
+        "SD005-11"
+      ],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [
+        "412acf2984ea86b792dea6b88880ebcd4fb0cd21969b7c0a61672ce65da2bae2"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://mccmeetings.blob.core.usgovcloudapi.net/fortcollco-pubu/MEET-Packet-9909c32063cd463990a30436cf0d9096.pdf",
+      "event_indices": [
+        27
+      ],
+      "priority_ids": [
+        "SD005-09"
+      ],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [
+        "95de1b7b623aba3ea062ba1b1e19d10bbb1f32618cde17097db2eab15496e2ad"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://records.fcgov.com/OrdRes/DocView.aspx?id=19288428&dbid=0&repo=FortCollins",
+      "event_indices": [
+        35
+      ],
+      "priority_ids": [],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [
+        "c308fb5a3b976bd60ee8a1aa783adc78d8f940ca0bc8c1155ad527c60de8318a"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://records.fcgov.com/OrdRes/DocView.aspx?id=23389379&dbid=0&repo=FortCollins",
+      "event_indices": [
+        36
+      ],
+      "priority_ids": [],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [
+        "c308fb5a3b976bd60ee8a1aa783adc78d8f940ca0bc8c1155ad527c60de8318a"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://records.fcgov.com:443/OrdRes/DocView.aspx?id=19288428&dbid=0&repo=FortCollins&cr=1",
+      "event_indices": [
+        35
+      ],
+      "priority_ids": [],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [
+        "c308fb5a3b976bd60ee8a1aa783adc78d8f940ca0bc8c1155ad527c60de8318a"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://records.fcgov.com:443/OrdRes/DocView.aspx?id=23389379&dbid=0&repo=FortCollins&cr=1",
+      "event_indices": [
+        36
+      ],
+      "priority_ids": [],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [
+        "c308fb5a3b976bd60ee8a1aa783adc78d8f940ca0bc8c1155ad527c60de8318a"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules",
+      "event_indices": [
+        3,
+        17,
+        32
+      ],
+      "priority_ids": [
+        "SD005-10"
+      ],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [
+        "64263c4079117d9a6538ac3def2742ec24a2fb3ccb8151b4ca2c6896b7b1b971",
+        "92003e91025a048475eb6702fcf35dc9ec2171145d8519fce26d138fda9ad883",
+        "cee7ac001fdf2e119510be62e794f8b2741819eac2a823475ebe10d487a94f31"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Building-Code",
+      "event_indices": [
+        1,
+        15,
+        30
+      ],
+      "priority_ids": [
+        "SD005-01"
+      ],
+      "historical_lines": [
+        17896
+      ],
+      "downloadable_historical_lines": [
+        17896
+      ],
+      "current_artifact_hashes": [
+        "05c142c3db4643df2697aaafbfea44fe3349f310660cdb1dd8bdc745f69aac8a",
+        "5454a8464ca255fb6ffe87238c0048289b64af4d3dd7508e750e5265c0c2b54f",
+        "ee3537e6692f799438ef630c4a9734af9bb4c01d7620b4e13a2d4278b8eedd2d"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "historical_url_only_current_bytes_different_or_nonoriginal"
+    },
+    {
+      "url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Land-Use-Code",
+      "event_indices": [
+        2,
+        16,
+        31
+      ],
+      "priority_ids": [
+        "SD005-06"
+      ],
+      "historical_lines": [
+        17904,
+        18051
+      ],
+      "downloadable_historical_lines": [
+        17904,
+        18051
+      ],
+      "current_artifact_hashes": [
+        "9afe8600c76f8649069b2af013d40543bd85ee85d1f7d55fa6a04447bedbefac",
+        "ad6054c52fcf3b607e2d8bb705b9aa79311fed5a6938324a8627f33a7233f833",
+        "c9d59f53e669d2036e2963f7268d597a3e9ff1eae3c43c1995d16935b19cbf0f"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "historical_url_only_current_bytes_different_or_nonoriginal"
+    },
+    {
+      "url": "https://www.fortcollins.gov/Government/Records-and-Documents/Public-Notices",
+      "event_indices": [
+        4,
+        18,
+        33
+      ],
+      "priority_ids": [
+        "SD005-12"
+      ],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [
+        "553f411e366f9a1e994f020b37430294f7d19bde925af750cf1798f9c1f8342c",
+        "723fa73c8b647328016630c3712a859b7b599763f0a27f00a08237d99ac147b2",
+        "d191c219fbe31178ee8bfd5c738a65e0e15e83e66f7a5af2912671809187ff73"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/2/planning-development-amp-transportation/community-development/planning/land-use-code/article-3-buildingtypes.pdf",
+      "event_indices": [
+        12
+      ],
+      "priority_ids": [],
+      "historical_lines": [
+        17907,
+        18054
+      ],
+      "downloadable_historical_lines": [
+        17907,
+        18054
+      ],
+      "current_artifact_hashes": [
+        "b12f6031046c354307685563901bf8981c21554342dd5c39424809cb89654ea6"
+      ],
+      "current_digest_matches_at_this_url": [
+        "b12f6031046c354307685563901bf8981c21554342dd5c39424809cb89654ea6"
+      ],
+      "disposition": "historical_pdf_digest_recovered"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/2/planning-development-amp-transportation/community-development/planning/land-use-code/article-7-rules-of-measurement-and-definitions.pdf",
+      "event_indices": [
+        26
+      ],
+      "priority_ids": [],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [
+        "646ebd678a89dd24e8f8c9cc487ecc0e6776265f5f1b847a1ce3e5e3d3cde79f"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/3/planning-development-amp-transportation/community-development/planning/land-use-code/article-1-general-purpose-and-provisions.pdf",
+      "event_indices": [
+        10
+      ],
+      "priority_ids": [
+        "SD005-07"
+      ],
+      "historical_lines": [
+        17905,
+        18052
+      ],
+      "downloadable_historical_lines": [
+        17905,
+        18052
+      ],
+      "current_artifact_hashes": [
+        "555a05553af57619c818c5b9ab90d1b751e161a307d8bb65fc73141991a73d2a"
+      ],
+      "current_digest_matches_at_this_url": [
+        "555a05553af57619c818c5b9ab90d1b751e161a307d8bb65fc73141991a73d2a"
+      ],
+      "disposition": "historical_pdf_digest_recovered"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/3/planning-development-amp-transportation/community-development/planning/land-use-code/article-4-use-standards.pdf",
+      "event_indices": [
+        13
+      ],
+      "priority_ids": [],
+      "historical_lines": [
+        17908,
+        18055
+      ],
+      "downloadable_historical_lines": [
+        17908,
+        18055
+      ],
+      "current_artifact_hashes": [
+        "c46f095d1be1e8ba65d1d5fe325daafcec0f4482bb89846f97a039c80449e757"
+      ],
+      "current_digest_matches_at_this_url": [
+        "c46f095d1be1e8ba65d1d5fe325daafcec0f4482bb89846f97a039c80449e757"
+      ],
+      "disposition": "historical_pdf_digest_recovered"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/3/planning-development-amp-transportation/community-development/planning/land-use-code/article-6-administration-and-procedures.pdf",
+      "event_indices": [
+        24
+      ],
+      "priority_ids": [],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [
+        "fb096c95cbb04a5da339d0e534496ca26df9fb854116ea81cf73281dd3b25b24"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/3/planning-development-amp-transportation/community-development/planning/land-use-code/article-7-rules-of-measurement-and-definitions.pdf",
+      "event_indices": [
+        25
+      ],
+      "priority_ids": [],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [
+        "93602b408717506f6152004c91f486c6cfcc459e21f8d2db725a72260efa5d56"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/4/planning-development-amp-transportation/community-development/building-services/building-code/2025-colorado-wildfire-resiliency-code-final-for-brc.pdf",
+      "event_indices": [
+        9
+      ],
+      "priority_ids": [
+        "SD005-05"
+      ],
+      "historical_lines": [
+        17900
+      ],
+      "downloadable_historical_lines": [
+        17900
+      ],
+      "current_artifact_hashes": [
+        "00e7446d7deac3499b86c4b8f15a5d802cc0c14dc2621409845ec13525cb01d2"
+      ],
+      "current_digest_matches_at_this_url": [
+        "00e7446d7deac3499b86c4b8f15a5d802cc0c14dc2621409845ec13525cb01d2"
+      ],
+      "disposition": "historical_pdf_digest_recovered"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/4/planning-development-amp-transportation/community-development/planning/land-use-code/article-7-rules-and-measurement-and-definitions.pdf",
+      "event_indices": [
+        26
+      ],
+      "priority_ids": [],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [
+        "646ebd678a89dd24e8f8c9cc487ecc0e6776265f5f1b847a1ce3e5e3d3cde79f"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-ibc-final-amendments.pdf",
+      "event_indices": [
+        5
+      ],
+      "priority_ids": [
+        "SD005-02"
+      ],
+      "historical_lines": [
+        17897
+      ],
+      "downloadable_historical_lines": [
+        17897
+      ],
+      "current_artifact_hashes": [
+        "405c319be443d472e348eac121fec78e1057a8fc1894c800fbefe4ac4d61d5b8"
+      ],
+      "current_digest_matches_at_this_url": [
+        "405c319be443d472e348eac121fec78e1057a8fc1894c800fbefe4ac4d61d5b8"
+      ],
+      "disposition": "historical_pdf_digest_recovered"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-iebc-final-amendments.pdf",
+      "event_indices": [
+        22
+      ],
+      "priority_ids": [],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [
+        "07313c0b4be74f59d4db72703dbd89b53852166b3f0cfc0ad947e7044adfaf5e"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-iecc-final-amendments.pdf",
+      "event_indices": [
+        7
+      ],
+      "priority_ids": [
+        "SD005-04"
+      ],
+      "historical_lines": [
+        17899
+      ],
+      "downloadable_historical_lines": [
+        17899
+      ],
+      "current_artifact_hashes": [
+        "561320ff6504708e2719626aaa29b663525a571736b1477d7d41e5a0d14b6e9d"
+      ],
+      "current_digest_matches_at_this_url": [
+        "561320ff6504708e2719626aaa29b663525a571736b1477d7d41e5a0d14b6e9d"
+      ],
+      "disposition": "historical_pdf_digest_recovered"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-ifgc-final-amendments.pdf",
+      "event_indices": [
+        19
+      ],
+      "priority_ids": [],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [
+        "dbcfe030e1643892964a6261127f242c16017bc88ac91116c6cb868952fe28ac"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-ipc-final-amendments.pdf",
+      "event_indices": [
+        20
+      ],
+      "priority_ids": [],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [
+        "0bd99bf7b3b1d5bb7c0792c8a791db5a80a3224c7a2c58bfef2a50cb182333ea"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-ipmc-final-amendments.pdf",
+      "event_indices": [
+        23
+      ],
+      "priority_ids": [],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [
+        "69a0d3e946866cd72311b0364cd1a97a8ef6c47758be5cf81fee1f61914266b6"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-ispsc-final-amendments.pdf",
+      "event_indices": [
+        21
+      ],
+      "priority_ids": [],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [
+        "6704ba29209f86268df1a2ea9b20aba74652fda6b62a9f5d820d1099dab8c900"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/planning/land-use-code/article-2-zone-districts.pdf",
+      "event_indices": [
+        11
+      ],
+      "priority_ids": [
+        "SD005-08"
+      ],
+      "historical_lines": [
+        17906,
+        18053
+      ],
+      "downloadable_historical_lines": [
+        17906,
+        18053
+      ],
+      "current_artifact_hashes": [
+        "1ec5deac82b2511d2ae82ee928f887b006db689553181ed1bb717c7c7a421e36"
+      ],
+      "current_digest_matches_at_this_url": [
+        "1ec5deac82b2511d2ae82ee928f887b006db689553181ed1bb717c7c7a421e36"
+      ],
+      "disposition": "historical_pdf_digest_recovered"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/planning/land-use-code/article_5_general_development_and_site_design.pdf",
+      "event_indices": [
+        14
+      ],
+      "priority_ids": [],
+      "historical_lines": [
+        17909
+      ],
+      "downloadable_historical_lines": [
+        17909
+      ],
+      "current_artifact_hashes": [
+        "b3e4eb6e9a3f3354f63035430a2c9e4e2ccfbd0fa1c39303b96442da913c0364"
+      ],
+      "current_digest_matches_at_this_url": [
+        "b3e4eb6e9a3f3354f63035430a2c9e4e2ccfbd0fa1c39303b96442da913c0364"
+      ],
+      "disposition": "historical_pdf_digest_recovered"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/6/planning-development-amp-transportation/community-development/building-services/building-code/24-imc-final-amendments.pdf",
+      "event_indices": [
+        8
+      ],
+      "priority_ids": [],
+      "historical_lines": [
+        17901
+      ],
+      "downloadable_historical_lines": [
+        17901
+      ],
+      "current_artifact_hashes": [
+        "b8b7ef5a549e71788683c4d67bce6c13f8e75aa70b4fc10f277bce9e5dba4dd3"
+      ],
+      "current_digest_matches_at_this_url": [
+        "b8b7ef5a549e71788683c4d67bce6c13f8e75aa70b4fc10f277bce9e5dba4dd3"
+      ],
+      "disposition": "historical_pdf_digest_recovered"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/6/planning-development-amp-transportation/community-development/building-services/building-code/24-ipc-final-amendments.pdf",
+      "event_indices": [
+        20
+      ],
+      "priority_ids": [],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [
+        "0bd99bf7b3b1d5bb7c0792c8a791db5a80a3224c7a2c58bfef2a50cb182333ea"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/6/planning-development-amp-transportation/community-development/building-services/building-code/24-irc-final-amendments.pdf",
+      "event_indices": [
+        6
+      ],
+      "priority_ids": [
+        "SD005-03"
+      ],
+      "historical_lines": [
+        17898
+      ],
+      "downloadable_historical_lines": [
+        17898
+      ],
+      "current_artifact_hashes": [
+        "88f183426f4ac7995753df423b949342a4ba68e2e9c05dee1a580289d3c983a2"
+      ],
+      "current_digest_matches_at_this_url": [
+        "88f183426f4ac7995753df423b949342a4ba68e2e9c05dee1a580289d3c983a2"
+      ],
+      "disposition": "historical_pdf_digest_recovered"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/6/planning-development-amp-transportation/community-development/building-services/building-code/24-ispsc-final-amendments.pdf",
+      "event_indices": [
+        21
+      ],
+      "priority_ids": [],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [
+        "6704ba29209f86268df1a2ea9b20aba74652fda6b62a9f5d820d1099dab8c900"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://www.fortcollins.gov/files/sharedassets/city/v/7/planning-development-amp-transportation/community-development/building-services/building-code/24-ipmc-final-amendments.pdf",
+      "event_indices": [
+        23
+      ],
+      "priority_ids": [],
+      "historical_lines": [],
+      "downloadable_historical_lines": [],
+      "current_artifact_hashes": [
+        "69a0d3e946866cd72311b0364cd1a97a8ef6c47758be5cf81fee1f61914266b6"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "no_exact_url_in_pinned_manifest"
+    },
+    {
+      "url": "https://www.poudre-fire.org/programs-services/community-safety-services-fire-prevention/fire-code-adoption",
+      "event_indices": [
+        29,
+        34
+      ],
+      "priority_ids": [],
+      "historical_lines": [
+        17988
+      ],
+      "downloadable_historical_lines": [
+        17988
+      ],
+      "current_artifact_hashes": [
+        "2673a2ef14ca1b41999dc3f594e36ac5db3f3363190d0c9d9415df95c64341d7",
+        "5d660ff10b220f14246dd177f7d3626a47e974958958f1f760cd023d1f01e339"
+      ],
+      "current_digest_matches_at_this_url": [],
+      "disposition": "historical_url_only_current_bytes_different_or_nonoriginal"
+    }
+  ],
+  "priority_comparisons": [
+    {
+      "candidate_id": "SD005-01",
+      "requested_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Building-Code",
+      "reported_status": "landing_page_historically_downloaded",
+      "historical_lines": [
+        17896
+      ],
+      "disposition": "Historical URL capture confirmed. Current error/WebFetch artifacts do not recover the original publisher HTML bytes.",
+      "reported_status_contradicted": false
+    },
+    {
+      "candidate_id": "SD005-02",
+      "requested_url": "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-ibc-final-amendments.pdf",
+      "reported_status": "exact_historical_digest_match",
+      "historical_lines": [
+        17897
+      ],
+      "disposition": "Claim confirmed against full manifest and actual delivered PDF bytes; recorded historical digest comparison only.",
+      "reported_status_contradicted": false
+    },
+    {
+      "candidate_id": "SD005-03",
+      "requested_url": "https://www.fortcollins.gov/files/sharedassets/city/v/6/planning-development-amp-transportation/community-development/building-services/building-code/24-irc-final-amendments.pdf",
+      "reported_status": "exact_historical_digest_match",
+      "historical_lines": [
+        17898
+      ],
+      "disposition": "Claim confirmed against full manifest and actual delivered PDF bytes; recorded historical digest comparison only.",
+      "reported_status_contradicted": false
+    },
+    {
+      "candidate_id": "SD005-04",
+      "requested_url": "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/building-services/building-code/24-iecc-final-amendments.pdf",
+      "reported_status": "exact_historical_digest_match",
+      "historical_lines": [
+        17899
+      ],
+      "disposition": "Claim confirmed against full manifest and actual delivered PDF bytes; recorded historical digest comparison only.",
+      "reported_status_contradicted": false
+    },
+    {
+      "candidate_id": "SD005-05",
+      "requested_url": "https://www.fortcollins.gov/files/sharedassets/city/v/4/planning-development-amp-transportation/community-development/building-services/building-code/2025-colorado-wildfire-resiliency-code-final-for-brc.pdf",
+      "reported_status": "exact_historical_digest_match",
+      "historical_lines": [
+        17900
+      ],
+      "disposition": "Claim confirmed against full manifest and actual delivered PDF bytes; recorded historical digest comparison only.",
+      "reported_status_contradicted": false
+    },
+    {
+      "candidate_id": "SD005-06",
+      "requested_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Land-Use-Code",
+      "reported_status": "landing_page_historically_downloaded",
+      "historical_lines": [
+        17904,
+        18051
+      ],
+      "disposition": "Historical URL capture confirmed. Current error/WebFetch artifacts do not recover the original publisher HTML bytes.",
+      "reported_status_contradicted": false
+    },
+    {
+      "candidate_id": "SD005-07",
+      "requested_url": "https://www.fortcollins.gov/files/sharedassets/city/v/3/planning-development-amp-transportation/community-development/planning/land-use-code/article-1-general-purpose-and-provisions.pdf",
+      "reported_status": "exact_historical_digest_match",
+      "historical_lines": [
+        17905,
+        18052
+      ],
+      "disposition": "Claim confirmed against full manifest and actual delivered PDF bytes; recorded historical digest comparison only.",
+      "reported_status_contradicted": false
+    },
+    {
+      "candidate_id": "SD005-08",
+      "requested_url": "https://www.fortcollins.gov/files/sharedassets/city/v/5/planning-development-amp-transportation/community-development/planning/land-use-code/article-2-zone-districts.pdf",
+      "reported_status": "exact_historical_digest_match",
+      "historical_lines": [
+        17906,
+        18053
+      ],
+      "disposition": "Claim confirmed against full manifest and actual delivered PDF bytes; recorded historical digest comparison only.",
+      "reported_status_contradicted": false
+    },
+    {
+      "candidate_id": "SD005-09",
+      "requested_url": "https://mccmeetings.blob.core.usgovcloudapi.net/fortcollco-pubu/MEET-Packet-9909c32063cd463990a30436cf0d9096.pdf",
+      "reported_status": "no_exact_requested_url_in_pinned_manifest_sample",
+      "historical_lines": [],
+      "disposition": "No exact requested/final URL record in the full pinned manifest. This is not proof that the document was never collected elsewhere or under another URL.",
+      "reported_status_contradicted": false
+    },
+    {
+      "candidate_id": "SD005-10",
+      "requested_url": "https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules",
+      "reported_status": "no_exact_fee_page_in_directed_historical_url_sample",
+      "historical_lines": [],
+      "disposition": "No exact requested/final URL record in the full pinned manifest. This is not proof that the document was never collected elsewhere or under another URL.",
+      "reported_status_contradicted": false
+    },
+    {
+      "candidate_id": "SD005-11",
+      "requested_url": "https://mccmeetings.blob.core.usgovcloudapi.net/fortcollco-pubu/MEET-Packet-98ce54e66b3d4da38059730c71b0f1c6.pdf",
+      "reported_status": "no_exact_requested_url_in_pinned_manifest_sample",
+      "historical_lines": [],
+      "disposition": "No exact requested/final URL record in the full pinned manifest. This is not proof that the document was never collected elsewhere or under another URL.",
+      "reported_status_contradicted": false
+    },
+    {
+      "candidate_id": "SD005-12",
+      "requested_url": "https://www.fortcollins.gov/Government/Records-and-Documents/Public-Notices",
+      "reported_status": "not_in_directed_historical_url_sample",
+      "historical_lines": [],
+      "disposition": "No exact requested/final URL record in the full pinned manifest. This is not proof that the document was never collected elsewhere or under another URL.",
+      "reported_status_contradicted": false
+    }
+  ],
+  "issues": [
+    {
+      "code": "duplicate_historical_rows_not_extra_documents",
+      "evidence": "LUC Articles 1–4 each occur under municipal_fort_collins_land_use_code and municipal_fort_collins_ordinances, all labeled CO-MUNICIPAL-FORT_COLLINS. Ten recovered PDF digests therefore match 14 downloaded rows.",
+      "consequence": "Count ten distinct recovered PDFs, not fourteen documents or additional authorities."
+    },
+    {
+      "code": "single_digest_map_discards_alternative_history",
+      "evidence": "The 45-row extract exactly equals the full Fort Collins slice. The separate historical_digest_by_url.json stores one record per URL; the Land-Use-Code URL has two downloaded historical hashes (125e6b18…32af0 and 78b87b13…c8d4) in full manifest lines 17904 and 18051.",
+      "consequence": "Retain all historical rows and digests per URL. A single-value lookup is not a complete change history."
+    },
+    {
+      "code": "related_authority_tag_requires_care",
+      "evidence": "Full-manifest line 17988 stores the Poudre Fire code-adoption URL under municipal_fort_collins_fire_authority / CO-MUNICIPAL-FORT_COLLINS. The municipal registry explicitly calls it a linked Poudre Fire Authority source and warns that its jurisdiction and city adoption relationship must remain explicit. Sherlock005 appropriately labels it a related-authority blocked lead.",
+      "consequence": "Treat the city tag as legacy indexing context, not proof that Poudre Fire content is city-owned law. Independent ownership/adoption reconciliation remains needed; no source-owner correction is made here."
+    },
+    {
+      "code": "input_locations_resolved",
+      "evidence": "artifact_inventory.json and backlog.json are at the delivery parent, not directly inside the timestamped attempt folder. They are byte-identical to exports/artifact_inventory_20260911T172611Z.json and logs/backlog.json respectively.",
+      "consequence": "The exact input paths and hashes are recorded; no delivery file was relocated or rewritten."
+    }
+  ],
+  "missing_predecessor_and_access_gaps": [
+    "Nine PDFs have no exact URL or digest predecessor in this pinned manifest: IFGC, IPC, ISPSC, IEBC, IPMC, LUC Articles 6 and 7, and the two council meeting packets. Absence is scoped to this file/commit and exact comparison.",
+    "Original adopting/amending Ordinance 055 and 166 PDFs remain unreceived according to the backlog; the two OrdRes captures are viewer shells, and their exact viewer URLs have no historical record here. Meeting packets are separately labeled proxies, not substituted certified ordinances.",
+    "The Building-Code and Land-Use-Code URLs have prior downloaded HTML records. Current 403 shells and WebFetch text exports do not reproduce those original HTML bytes.",
+    "The Poudre Fire adoption URL has a historical downloaded HTML digest, but current delivered captures are blocked responses. No historical-source-byte recovery or ownership resolution occurred.",
+    "The exact fee-page, public-notices, and two unopened Municode URLs have no matching requested/final URL record in this pinned manifest. This does not imply that no related codes, earlier versions, or fees were ever collected."
+  ],
+  "limitations": [
+    "A matching newly computed digest equals the digest recorded in the historical manifest; the historical Windows PDF/HTML bytes were not opened or directly compared. No claim is made that those bytes exist nowhere else.",
+    "The local files are delivered source evidence. Network acquisition, retrieval timing and upstream URL attribution remain reporter/log claims, not independently witnessed HTTP transactions in this audit.",
+    "Matching bytes do not prove current law, complete amendment chains, effective dates, publisher originality for WebFetch exports, jurisdictional applicability or legal accuracy.",
+    "No exact URL/digest match is not evidence of never-collected content. Different URLs, alternate encodings/versions, unrecorded captures, other manifests and archive gaps remain possible.",
+    "Pinned-versus-HEAD comparisons cover the named Git blobs at the recorded HEAD commit. They do not certify unrelated files or later commits.",
+    "No full legal-content or transcription review was performed, and no repository or delivered-source file was modified."
+  ]
+}

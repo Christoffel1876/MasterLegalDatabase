@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -17,6 +18,10 @@ def test_retry_failed_linked_sources_preserves_each_attempt(tmp_path: Path, monk
 
     manifest = tmp_path / "_CONTROL_PLANE" / "LOCAL_DOWNLOAD_MANIFEST.jsonl"
     manifest.parent.mkdir(parents=True)
+    shutil.copyfile(
+        Path(__file__).parents[1] / "_CONTROL_PLANE/LOCAL_SOURCE_OWNERSHIP_CORRECTIONS.json",
+        manifest.parent / "LOCAL_SOURCE_OWNERSHIP_CORRECTIONS.json",
+    )
     raw_dir = tmp_path / "_RAW_ARCHIVE" / "local" / "county" / "county_test"
     raw_dir.mkdir(parents=True)
     prior = {
@@ -34,6 +39,7 @@ def test_retry_failed_linked_sources_preserves_each_attempt(tmp_path: Path, monk
     manifest.write_text(json.dumps(prior) + "\n", encoding="utf-8")
 
     response = SimpleNamespace(
+        url=prior["requested_url"],
         status_code=200,
         headers={"Content-Type": "application/pdf"},
         content=b"%PDF-1.7 official county document",
@@ -47,6 +53,7 @@ def test_retry_failed_linked_sources_preserves_each_attempt(tmp_path: Path, monk
     rows = list(iter_jsonl(manifest))
     assert len(rows) == 2
     assert rows[-1]["status"] == "downloaded"
+    assert rows[-1]["final_url"] == prior["requested_url"]
     assert Path(rows[-1]["raw_path"]).exists()
 
 

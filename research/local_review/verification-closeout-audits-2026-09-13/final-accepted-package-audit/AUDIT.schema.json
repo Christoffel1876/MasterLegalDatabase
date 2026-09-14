@@ -1,0 +1,242 @@
+{
+  "$defs": {
+    "Command": {
+      "additionalProperties": false,
+      "properties": {
+        "command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Command",
+          "type": "array"
+        },
+        "exit_code": {
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "started_at": {
+          "title": "Started At",
+          "type": "string"
+        },
+        "completed_at": {
+          "title": "Completed At",
+          "type": "string"
+        },
+        "stdout": {
+          "$ref": "#/$defs/Ref"
+        },
+        "stderr": {
+          "$ref": "#/$defs/Ref"
+        }
+      },
+      "required": [
+        "command",
+        "exit_code",
+        "started_at",
+        "completed_at",
+        "stdout",
+        "stderr"
+      ],
+      "title": "Command",
+      "type": "object"
+    },
+    "Package": {
+      "additionalProperties": false,
+      "properties": {
+        "package": {
+          "title": "Package",
+          "type": "string"
+        },
+        "root_acceptance": {
+          "$ref": "#/$defs/Ref"
+        },
+        "original_handoff": {
+          "title": "Original Handoff",
+          "type": "string"
+        },
+        "primary_manifest": {
+          "$ref": "#/$defs/Ref"
+        },
+        "copied_files_verified": {
+          "title": "Copied Files Verified",
+          "type": "integer"
+        },
+        "reports_and_candidates": {
+          "items": {
+            "$ref": "#/$defs/Ref"
+          },
+          "title": "Reports And Candidates",
+          "type": "array"
+        },
+        "all_package_files": {
+          "items": {
+            "$ref": "#/$defs/Ref"
+          },
+          "title": "All Package Files",
+          "type": "array"
+        },
+        "scope": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Scope",
+          "type": "object"
+        },
+        "qualifications": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Qualifications",
+          "type": "array"
+        }
+      },
+      "required": [
+        "package",
+        "root_acceptance",
+        "original_handoff",
+        "primary_manifest",
+        "copied_files_verified",
+        "reports_and_candidates",
+        "all_package_files",
+        "scope",
+        "qualifications"
+      ],
+      "title": "Package",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "enum": [
+        "PASS",
+        "BLOCKED"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "title": "Completed At",
+      "type": "string"
+    },
+    "packages": {
+      "items": {
+        "$ref": "#/$defs/Package"
+      },
+      "title": "Packages",
+      "type": "array"
+    },
+    "validators": {
+      "items": {
+        "$ref": "#/$defs/Command"
+      },
+      "title": "Validators",
+      "type": "array"
+    },
+    "current_raw_records": {
+      "title": "Current Raw Records",
+      "type": "integer"
+    },
+    "current_ledger_records": {
+      "title": "Current Ledger Records",
+      "type": "integer"
+    },
+    "county_record": {
+      "additionalProperties": true,
+      "title": "County Record",
+      "type": "object"
+    },
+    "city_record": {
+      "additionalProperties": true,
+      "title": "City Record",
+      "type": "object"
+    },
+    "exact_prior_prefixes": {
+      "title": "Exact Prior Prefixes",
+      "type": "boolean"
+    },
+    "exact_snapshots": {
+      "title": "Exact Snapshots",
+      "type": "boolean"
+    },
+    "actual_execution_receipt_matches": {
+      "title": "Actual Execution Receipt Matches",
+      "type": "boolean"
+    },
+    "canonical_guards_unchanged": {
+      "title": "Canonical Guards Unchanged",
+      "type": "boolean"
+    },
+    "manifest_bound_cache_named_files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Manifest Bound Cache Named Files",
+      "type": "array"
+    },
+    "issues": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Issues",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "started_at",
+    "completed_at",
+    "packages",
+    "validators",
+    "current_raw_records",
+    "current_ledger_records",
+    "county_record",
+    "city_record",
+    "exact_prior_prefixes",
+    "exact_snapshots",
+    "actual_execution_receipt_matches",
+    "canonical_guards_unchanged",
+    "manifest_bound_cache_named_files",
+    "issues",
+    "limitations"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

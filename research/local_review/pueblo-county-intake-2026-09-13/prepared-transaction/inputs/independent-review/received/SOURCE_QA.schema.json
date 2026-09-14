@@ -1,0 +1,340 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Cell": {
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "enum": [
+            "application",
+            "fee",
+            "full_row"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "spans": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "title": "Spans",
+          "type": "array"
+        },
+        "native_text": {
+          "title": "Native Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "spans",
+        "native_text"
+      ],
+      "title": "Cell",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_lines": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "title": "Native Lines",
+          "type": "array"
+        },
+        "horizontal_boundaries": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Horizontal Boundaries",
+          "type": "array"
+        },
+        "rows": {
+          "items": {
+            "$ref": "#/$defs/Row"
+          },
+          "title": "Rows",
+          "type": "array"
+        }
+      },
+      "required": [
+        "physical_page",
+        "native",
+        "image",
+        "native_lines",
+        "horizontal_boundaries",
+        "rows"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Row": {
+      "additionalProperties": false,
+      "properties": {
+        "row_id": {
+          "title": "Row Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "column_header",
+            "section_header",
+            "subheading",
+            "fee",
+            "continuation",
+            "note"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "bbox": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Bbox",
+          "type": "array"
+        },
+        "cells": {
+          "items": {
+            "$ref": "#/$defs/Cell"
+          },
+          "title": "Cells",
+          "type": "array"
+        },
+        "section_context_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Section Context Ids",
+          "type": "array"
+        },
+        "continues_row_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Continues Row Id"
+        },
+        "explicit_markers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Explicit Markers",
+          "type": "array"
+        },
+        "note_ids_from_explicit_marker": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Note Ids From Explicit Marker",
+          "type": "array"
+        },
+        "group_marker_context_only": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Group Marker Context Only",
+          "type": "array"
+        }
+      },
+      "required": [
+        "row_id",
+        "physical_page",
+        "kind",
+        "bbox",
+        "cells",
+        "section_context_ids",
+        "continues_row_id",
+        "explicit_markers",
+        "note_ids_from_explicit_marker",
+        "group_marker_context_only"
+      ],
+      "title": "Row",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "properties": {
+        "line_id": {
+          "title": "Line Id",
+          "type": "string"
+        },
+        "start": {
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "title": "End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "bbox": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Bbox",
+          "type": "array"
+        }
+      },
+      "required": [
+        "line_id",
+        "start",
+        "end",
+        "text",
+        "bbox"
+      ],
+      "title": "Span",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "prepared_root_compared_pending_independent_review",
+      "title": "Status",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "pueblo-county-planning-fees-sh-ext-002",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "collection_authority_id": {
+      "const": "CO-COUNTY-PUEBLO",
+      "title": "Collection Authority Id",
+      "type": "string"
+    },
+    "attribution_basis": {
+      "title": "Attribution Basis",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Counts",
+      "type": "object"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "observations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "adoption_date": {
+      "default": null,
+      "title": "Adoption Date",
+      "type": "null"
+    },
+    "effective_date": {
+      "default": null,
+      "title": "Effective Date",
+      "type": "null"
+    },
+    "public_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "canonical_intakes": {
+      "const": 0,
+      "default": 0,
+      "title": "Canonical Intakes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "source_id",
+    "collection_authority_id",
+    "attribution_basis",
+    "source",
+    "pages",
+    "counts",
+    "method",
+    "observations"
+  ],
+  "title": "Review",
+  "type": "object"
+}

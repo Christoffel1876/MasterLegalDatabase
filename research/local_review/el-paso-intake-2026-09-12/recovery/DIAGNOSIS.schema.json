@@ -1,0 +1,323 @@
+{
+  "$defs": {
+    "Anchor": {
+      "additionalProperties": false,
+      "description": "Record one exact anchor destination in an already approved official parent.",
+      "properties": {
+        "parent_url": {
+          "title": "Parent Url",
+          "type": "string"
+        },
+        "parent_html": {
+          "$ref": "#/$defs/Ref"
+        },
+        "href": {
+          "title": "Href",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "resolved_url": {
+          "title": "Resolved Url",
+          "type": "string"
+        }
+      },
+      "required": [
+        "parent_url",
+        "parent_html",
+        "href",
+        "label",
+        "resolved_url"
+      ],
+      "title": "Anchor",
+      "type": "object"
+    },
+    "HostRow": {
+      "additionalProperties": false,
+      "description": "Separate approved host identity from source-date and original-custody certainty.",
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-EL_PASO",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "host": {
+          "title": "Host",
+          "type": "string"
+        },
+        "old_policy_accepted": {
+          "title": "Old Policy Accepted",
+          "type": "boolean"
+        },
+        "new_policy_accepted": {
+          "const": true,
+          "title": "New Policy Accepted",
+          "type": "boolean"
+        },
+        "old_error": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Old Error"
+        },
+        "anchors": {
+          "items": {
+            "$ref": "#/$defs/Anchor"
+          },
+          "title": "Anchors",
+          "type": "array"
+        },
+        "referral_limitation": {
+          "title": "Referral Limitation",
+          "type": "string"
+        },
+        "source_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "authority_id",
+        "url",
+        "host",
+        "old_policy_accepted",
+        "new_policy_accepted",
+        "old_error",
+        "anchors",
+        "referral_limitation",
+        "source_sha256",
+        "legal_currentness"
+      ],
+      "title": "HostRow",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Bind local retained bytes without certifying upstream acquisition.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "StateFile": {
+      "additionalProperties": false,
+      "description": "Bind the interrupted bytes to the original intent's exact before/after state.",
+      "properties": {
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "preserved": {
+          "$ref": "#/$defs/Ref"
+        },
+        "position": {
+          "enum": [
+            "before",
+            "after"
+          ],
+          "title": "Position",
+          "type": "string"
+        },
+        "original_intent_expected_sha256": {
+          "title": "Original Intent Expected Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository_path",
+        "preserved",
+        "position",
+        "original_intent_expected_sha256"
+      ],
+      "title": "StateFile",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Record the actual failure and reviewed repair proposal without claiming recovery ran.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "recovery_prepared_not_executed",
+      "title": "Status",
+      "type": "string"
+    },
+    "original_transaction": {
+      "$ref": "#/$defs/Ref"
+    },
+    "original_intent": {
+      "$ref": "#/$defs/Ref"
+    },
+    "original_actual_repository_received_at": {
+      "format": "date-time",
+      "title": "Original Actual Repository Received At",
+      "type": "string"
+    },
+    "old_constants": {
+      "$ref": "#/$defs/Ref"
+    },
+    "approved_constants": {
+      "$ref": "#/$defs/Ref"
+    },
+    "old_constants_snapshot_repository_path": {
+      "title": "Old Constants Snapshot Repository Path",
+      "type": "string"
+    },
+    "exact_added_host": {
+      "const": "epc-assets.elpasoco.com",
+      "title": "Exact Added Host",
+      "type": "string"
+    },
+    "removed_hosts": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 0,
+      "title": "Removed Hosts",
+      "type": "array"
+    },
+    "before_raw_records": {
+      "const": 46,
+      "title": "Before Raw Records",
+      "type": "integer"
+    },
+    "before_ledger_records": {
+      "const": 47,
+      "title": "Before Ledger Records",
+      "type": "integer"
+    },
+    "interrupted_raw_records": {
+      "const": 59,
+      "title": "Interrupted Raw Records",
+      "type": "integer"
+    },
+    "interrupted_ledger_records": {
+      "const": 47,
+      "title": "Interrupted Ledger Records",
+      "type": "integer"
+    },
+    "archived_new_originals": {
+      "const": 13,
+      "title": "Archived New Originals",
+      "type": "integer"
+    },
+    "state_files": {
+      "items": {
+        "$ref": "#/$defs/StateFile"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "State Files",
+      "type": "array"
+    },
+    "host_matrix": {
+      "items": {
+        "$ref": "#/$defs/HostRow"
+      },
+      "maxItems": 13,
+      "minItems": 13,
+      "title": "Host Matrix",
+      "type": "array"
+    },
+    "old_policy_rejections": {
+      "const": 9,
+      "title": "Old Policy Rejections",
+      "type": "integer"
+    },
+    "cause": {
+      "title": "Cause",
+      "type": "string"
+    },
+    "correction": {
+      "title": "Correction",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "prepared_at",
+    "status",
+    "original_transaction",
+    "original_intent",
+    "original_actual_repository_received_at",
+    "old_constants",
+    "approved_constants",
+    "old_constants_snapshot_repository_path",
+    "exact_added_host",
+    "removed_hosts",
+    "before_raw_records",
+    "before_ledger_records",
+    "interrupted_raw_records",
+    "interrupted_ledger_records",
+    "archived_new_originals",
+    "state_files",
+    "host_matrix",
+    "old_policy_rejections",
+    "cause",
+    "correction",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Diagnosis",
+  "type": "object"
+}

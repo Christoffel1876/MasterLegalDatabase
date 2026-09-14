@@ -1,0 +1,272 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Check": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "expected_sha256": {
+          "title": "Expected Sha256",
+          "type": "string"
+        },
+        "actual_sha256": {
+          "title": "Actual Sha256",
+          "type": "string"
+        },
+        "matches": {
+          "title": "Matches",
+          "type": "boolean"
+        },
+        "evidence_path": {
+          "title": "Evidence Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "expected_sha256",
+        "actual_sha256",
+        "matches",
+        "evidence_path"
+      ],
+      "title": "Check",
+      "type": "object"
+    },
+    "Document": {
+      "additionalProperties": false,
+      "properties": {
+        "assignment_id": {
+          "enum": [
+            "EB-PDF-023",
+            "EB-PDF-024"
+          ],
+          "title": "Assignment Id",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "original_delivery": {
+          "title": "Original Delivery",
+          "type": "string"
+        },
+        "expected_pages": {
+          "title": "Expected Pages",
+          "type": "integer"
+        },
+        "worker_status": {
+          "const": "completed_pending_atlas_verification",
+          "title": "Worker Status",
+          "type": "string"
+        },
+        "reported_completion_at": {
+          "format": "date-time",
+          "title": "Reported Completion At",
+          "type": "string"
+        },
+        "reported_candidate_release_at": {
+          "format": "date-time",
+          "title": "Reported Candidate Release At",
+          "type": "string"
+        },
+        "reported_pass1_freeze_at": {
+          "format": "date-time",
+          "title": "Reported Pass1 Freeze At",
+          "type": "string"
+        },
+        "checks": {
+          "items": {
+            "$ref": "#/$defs/Check"
+          },
+          "title": "Checks",
+          "type": "array"
+        },
+        "pass2_reopened_pages_claim": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Pass2 Reopened Pages Claim",
+          "type": "array"
+        },
+        "independent_execution_witness": {
+          "const": false,
+          "title": "Independent Execution Witness",
+          "type": "boolean"
+        },
+        "retained_reopen_report": {
+          "title": "Retained Reopen Report",
+          "type": "string"
+        },
+        "retained_individual_reopen_read_notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Retained Individual Reopen Read Notes",
+          "type": "array"
+        },
+        "method": {
+          "const": "caption_mediated_assisted_review",
+          "title": "Method",
+          "type": "string"
+        },
+        "limitations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        },
+        "content_findings_accepted_by_this_receipt": {
+          "const": false,
+          "title": "Content Findings Accepted By This Receipt",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "assignment_id",
+        "source_id",
+        "original_delivery",
+        "expected_pages",
+        "worker_status",
+        "reported_completion_at",
+        "reported_candidate_release_at",
+        "reported_pass1_freeze_at",
+        "checks",
+        "pass2_reopened_pages_claim",
+        "independent_execution_witness",
+        "retained_reopen_report",
+        "retained_individual_reopen_read_notes",
+        "method",
+        "limitations",
+        "content_findings_accepted_by_this_receipt"
+      ],
+      "title": "Document",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    },
+    "completed_worker_documents": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Completed Worker Documents",
+      "type": "array"
+    },
+    "pending_worker_documents": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Pending Worker Documents",
+      "type": "array"
+    },
+    "pending_atlas_verification": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Pending Atlas Verification",
+      "type": "array"
+    },
+    "documents": {
+      "items": {
+        "$ref": "#/$defs/Document"
+      },
+      "title": "Documents",
+      "type": "array"
+    },
+    "packet_manifest_sha256": {
+      "title": "Packet Manifest Sha256",
+      "type": "string"
+    },
+    "packet_payloads_hash_checked": {
+      "title": "Packet Payloads Hash Checked",
+      "type": "integer"
+    },
+    "packet_payloads_copied": {
+      "const": "manifest_and_identity_metadata_only",
+      "title": "Packet Payloads Copied",
+      "type": "string"
+    },
+    "original_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Original Files",
+      "type": "array"
+    },
+    "retained_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Retained Files",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "source_pages_visually_reviewed_by_this_task": {
+      "const": 0,
+      "title": "Source Pages Visually Reviewed By This Task",
+      "type": "integer"
+    },
+    "network_requests": {
+      "const": 0,
+      "title": "Network Requests",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "observed_at",
+    "completed_worker_documents",
+    "pending_worker_documents",
+    "pending_atlas_verification",
+    "documents",
+    "packet_manifest_sha256",
+    "packet_payloads_hash_checked",
+    "packet_payloads_copied",
+    "original_files",
+    "retained_files",
+    "limitations",
+    "source_pages_visually_reviewed_by_this_task",
+    "network_requests"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

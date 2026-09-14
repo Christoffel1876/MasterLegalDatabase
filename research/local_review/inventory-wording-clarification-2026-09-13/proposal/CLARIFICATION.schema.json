@@ -1,0 +1,157 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact ordinary-file bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Metadata-only clarification with explicit equivalence scope.",
+  "properties": {
+    "status": {
+      "const": "prepared_not_installed",
+      "title": "Status",
+      "type": "string"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "historical_inventory_prepared_at": {
+      "title": "Historical Inventory Prepared At",
+      "type": "string"
+    },
+    "old_limitation": {
+      "title": "Old Limitation",
+      "type": "string"
+    },
+    "new_limitation": {
+      "title": "New Limitation",
+      "type": "string"
+    },
+    "sources": {
+      "const": 64,
+      "title": "Sources",
+      "type": "integer"
+    },
+    "mapped": {
+      "const": 27,
+      "title": "Mapped",
+      "type": "integer"
+    },
+    "unmapped": {
+      "const": 37,
+      "title": "Unmapped",
+      "type": "integer"
+    },
+    "authorities": {
+      "const": 12,
+      "title": "Authorities",
+      "type": "integer"
+    },
+    "all_source_rows_typed_equal": {
+      "const": true,
+      "title": "All Source Rows Typed Equal",
+      "type": "boolean"
+    },
+    "all_source_rows_serialized_array_equal": {
+      "const": true,
+      "title": "All Source Rows Serialized Array Equal",
+      "type": "boolean"
+    },
+    "all_authority_and_review_joins_equal": {
+      "const": true,
+      "title": "All Authority And Review Joins Equal",
+      "type": "boolean"
+    },
+    "inventory_changed_fields": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Inventory Changed Fields",
+      "type": "array"
+    },
+    "schema_unchanged": {
+      "const": true,
+      "title": "Schema Unchanged",
+      "type": "boolean"
+    },
+    "visual_only_digest_attribute_changed": {
+      "const": true,
+      "title": "Visual Only Digest Attribute Changed",
+      "type": "boolean"
+    },
+    "visual_all_ids_authorities_review_kinds_equal": {
+      "const": true,
+      "title": "Visual All Ids Authorities Review Kinds Equal",
+      "type": "boolean"
+    },
+    "inputs": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Inputs",
+      "type": "array"
+    },
+    "outputs": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Outputs",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "prepared_at",
+    "historical_inventory_prepared_at",
+    "old_limitation",
+    "new_limitation",
+    "sources",
+    "mapped",
+    "unmapped",
+    "authorities",
+    "all_source_rows_typed_equal",
+    "all_source_rows_serialized_array_equal",
+    "all_authority_and_review_joins_equal",
+    "inventory_changed_fields",
+    "schema_unchanged",
+    "visual_only_digest_attribute_changed",
+    "visual_all_ids_authorities_review_kinds_equal",
+    "inputs",
+    "outputs",
+    "limitations"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

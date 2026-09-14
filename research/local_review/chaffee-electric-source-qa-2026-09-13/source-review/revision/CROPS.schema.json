@@ -1,0 +1,79 @@
+{
+  "$defs": {
+    "Crop": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "xyxy": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Xyxy",
+          "type": "array"
+        },
+        "parent_sha256": {
+          "title": "Parent Sha256",
+          "type": "string"
+        },
+        "crop_sha256": {
+          "title": "Crop Sha256",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "page",
+        "xyxy",
+        "parent_sha256",
+        "crop_sha256",
+        "path"
+      ],
+      "title": "Crop",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/$defs/Crop"
+      },
+      "title": "Items",
+      "type": "array"
+    }
+  },
+  "required": [
+    "method",
+    "items"
+  ],
+  "title": "Crops",
+  "type": "object"
+}

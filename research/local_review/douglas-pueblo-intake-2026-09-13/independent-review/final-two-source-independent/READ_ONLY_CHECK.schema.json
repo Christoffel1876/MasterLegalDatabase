@@ -1,0 +1,110 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Pin an evidence file's exact bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Keep the exact command, timestamps and unchanged-file observations.",
+  "properties": {
+    "command": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Command",
+      "type": "array"
+    },
+    "cwd": {
+      "title": "Cwd",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "returncode": {
+      "const": 0,
+      "title": "Returncode",
+      "type": "integer"
+    },
+    "before": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Before",
+      "type": "array"
+    },
+    "after": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "After",
+      "type": "array"
+    },
+    "monitored_files_unchanged": {
+      "const": true,
+      "title": "Monitored Files Unchanged",
+      "type": "boolean"
+    },
+    "execution_directory_created": {
+      "const": false,
+      "title": "Execution Directory Created",
+      "type": "boolean"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "production_writes": {
+      "const": 0,
+      "title": "Production Writes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "command",
+    "cwd",
+    "started_at",
+    "completed_at",
+    "returncode",
+    "before",
+    "after",
+    "monitored_files_unchanged",
+    "execution_directory_created",
+    "public_requests",
+    "production_writes"
+  ],
+  "title": "ReadOnlyCheck",
+  "type": "object"
+}

@@ -1,0 +1,200 @@
+{
+  "$defs": {
+    "File": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "selection_reason": {
+          "title": "Selection Reason",
+          "type": "string"
+        },
+        "tracked": {
+          "title": "Tracked",
+          "type": "boolean"
+        },
+        "ignored_rule": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Ignored Rule"
+        },
+        "lfs_filter": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Lfs Filter"
+        },
+        "changed_during_read": {
+          "title": "Changed During Read",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes",
+        "selection_reason",
+        "tracked",
+        "ignored_rule",
+        "lfs_filter",
+        "changed_during_read"
+      ],
+      "title": "File",
+      "type": "object"
+    },
+    "Match": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "line": {
+          "title": "Line",
+          "type": "integer"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "classification": {
+          "title": "Classification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "line",
+        "kind",
+        "classification"
+      ],
+      "title": "Match",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "const": "PRELIMINARY_NOT_STAGED",
+      "title": "Status",
+      "type": "string"
+    },
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "finished_at": {
+      "title": "Finished At",
+      "type": "string"
+    },
+    "repository": {
+      "title": "Repository",
+      "type": "string"
+    },
+    "head": {
+      "title": "Head",
+      "type": "string"
+    },
+    "status_capture_sha256": {
+      "title": "Status Capture Sha256",
+      "type": "string"
+    },
+    "source_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Source Counts",
+      "type": "object"
+    },
+    "excluded_user_paths": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Excluded User Paths",
+      "type": "array"
+    },
+    "candidates": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Candidates",
+      "type": "array"
+    },
+    "excluded_generated_paths": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Excluded Generated Paths",
+      "type": "array"
+    },
+    "older_untracked_snapshots_not_selected": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Older Untracked Snapshots Not Selected",
+      "type": "array"
+    },
+    "secret_scan": {
+      "items": {
+        "$ref": "#/$defs/Match"
+      },
+      "title": "Secret Scan",
+      "type": "array"
+    },
+    "blockers": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Blockers",
+      "type": "array"
+    },
+    "scope": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Scope",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "started_at",
+    "finished_at",
+    "repository",
+    "head",
+    "status_capture_sha256",
+    "source_counts",
+    "excluded_user_paths",
+    "candidates",
+    "excluded_generated_paths",
+    "older_untracked_snapshots_not_selected",
+    "secret_scan",
+    "blockers",
+    "scope"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

@@ -1,0 +1,339 @@
+{
+  "$defs": {
+    "Case": {
+      "additionalProperties": false,
+      "description": "A source requirement; output field names are deliberately not prescribed.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        },
+        "source_id": {
+          "default": "el-paso-boh-ehs-fees-sd011",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "query": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Query"
+        },
+        "list_rows": {
+          "default": false,
+          "title": "List Rows",
+          "type": "boolean"
+        },
+        "mode": {
+          "default": "source",
+          "enum": [
+            "source",
+            "current-law"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "expected_kind": {
+          "enum": [
+            "rows",
+            "context_only",
+            "no_match",
+            "refused"
+          ],
+          "title": "Expected Kind",
+          "type": "string"
+        },
+        "expected_exit": {
+          "title": "Expected Exit",
+          "type": "integer"
+        },
+        "expected_rows": {
+          "items": {
+            "$ref": "#/$defs/Row"
+          },
+          "title": "Expected Rows",
+          "type": "array"
+        },
+        "required_context": {
+          "items": {
+            "$ref": "#/$defs/Context"
+          },
+          "title": "Required Context",
+          "type": "array"
+        },
+        "directly_matched_context_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Directly Matched Context Ids",
+          "type": "array"
+        },
+        "forbidden_context_links": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "title": "Forbidden Context Links",
+          "type": "object"
+        },
+        "prohibited_inferences": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Prohibited Inferences",
+          "type": "array"
+        },
+        "expected_evidence_verified": {
+          "title": "Expected Evidence Verified",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "purpose",
+        "expected_kind",
+        "expected_exit",
+        "expected_rows",
+        "required_context",
+        "directly_matched_context_ids",
+        "forbidden_context_links",
+        "prohibited_inferences",
+        "expected_evidence_verified"
+      ],
+      "title": "Case",
+      "type": "object"
+    },
+    "Context": {
+      "additionalProperties": false,
+      "description": "A complete source passage with its declared association scope.",
+      "properties": {
+        "context_id": {
+          "title": "Context Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "applies_to": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Applies To",
+          "type": "array"
+        }
+      },
+      "required": [
+        "context_id",
+        "physical_page",
+        "kind",
+        "text",
+        "applies_to"
+      ],
+      "title": "Context",
+      "type": "object"
+    },
+    "Evidence": {
+      "additionalProperties": false,
+      "description": "A source input whose full bytes were hashed before adapter review.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Evidence",
+      "type": "object"
+    },
+    "Row": {
+      "additionalProperties": false,
+      "description": "The complete source row expected in a selected lookup result.",
+      "properties": {
+        "row_id": {
+          "title": "Row Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "group": {
+          "title": "Group",
+          "type": "string"
+        },
+        "group_physical_page": {
+          "title": "Group Physical Page",
+          "type": "integer"
+        },
+        "service": {
+          "title": "Service",
+          "type": "string"
+        },
+        "fee": {
+          "title": "Fee",
+          "type": "string"
+        },
+        "linked_context": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Linked Context",
+          "type": "array"
+        }
+      },
+      "required": [
+        "row_id",
+        "physical_page",
+        "group",
+        "group_physical_page",
+        "service",
+        "fee",
+        "linked_context"
+      ],
+      "title": "Row",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A finite acceptance specification, not an execution receipt.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "source_expectations_frozen_before_new_adapter_review",
+      "title": "Status",
+      "type": "string"
+    },
+    "adapter_draft_read": {
+      "const": false,
+      "default": false,
+      "title": "Adapter Draft Read",
+      "type": "boolean"
+    },
+    "adapter_executed": {
+      "const": false,
+      "default": false,
+      "title": "Adapter Executed",
+      "type": "boolean"
+    },
+    "source_id": {
+      "const": "el-paso-boh-ehs-fees-sd011",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-EL_PASO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "issuer": {
+      "const": "El Paso County Board of Health",
+      "title": "Issuer",
+      "type": "string"
+    },
+    "administering_agency": {
+      "const": "El Paso County Public Health",
+      "title": "Administering Agency",
+      "type": "string"
+    },
+    "source_sha256": {
+      "const": "1b0529fb7514bcc50c0dd36c903ca361f6ab431712b4aebc48bca8e3f5373622",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "package_repo_path": {
+      "title": "Package Repo Path",
+      "type": "string"
+    },
+    "inputs": {
+      "items": {
+        "$ref": "#/$defs/Evidence"
+      },
+      "title": "Inputs",
+      "type": "array"
+    },
+    "cases": {
+      "items": {
+        "$ref": "#/$defs/Case"
+      },
+      "title": "Cases",
+      "type": "array"
+    },
+    "shared_requirements": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Shared Requirements",
+      "type": "array"
+    },
+    "custody_requirements": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Custody Requirements",
+      "type": "array"
+    },
+    "untouched_scope": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Untouched Scope",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "source_id",
+    "authority_id",
+    "issuer",
+    "administering_agency",
+    "source_sha256",
+    "package_repo_path",
+    "inputs",
+    "cases",
+    "shared_requirements",
+    "custody_requirements",
+    "untouched_scope"
+  ],
+  "title": "Expectations",
+  "type": "object"
+}

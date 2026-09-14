@@ -1,0 +1,191 @@
+{
+  "$defs": {
+    "Receipt": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "finished_at": {
+          "format": "date-time",
+          "title": "Finished At",
+          "type": "string"
+        },
+        "returncode": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Returncode"
+        },
+        "http_status": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Http Status"
+        },
+        "effective_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Effective Url"
+        },
+        "source_body": {
+          "title": "Source Body",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "content_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Content Type"
+        },
+        "headers": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Headers",
+          "type": "object"
+        },
+        "error_text": {
+          "title": "Error Text",
+          "type": "string"
+        },
+        "body_complete": {
+          "title": "Body Complete",
+          "type": "boolean"
+        },
+        "historical_digest_match": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Historical Digest Match"
+        },
+        "pdf_pages": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pdf Pages"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "requested_url",
+        "started_at",
+        "finished_at",
+        "returncode",
+        "http_status",
+        "effective_url",
+        "source_body",
+        "sha256",
+        "size_bytes",
+        "content_type",
+        "headers",
+        "error_text",
+        "body_complete",
+        "historical_digest_match",
+        "pdf_pages"
+      ],
+      "title": "Receipt",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "receipts": {
+      "items": {
+        "$ref": "#/$defs/Receipt"
+      },
+      "title": "Receipts",
+      "type": "array"
+    },
+    "public_requests": {
+      "maximum": 4,
+      "minimum": 1,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "redirects_followed": {
+      "const": 0,
+      "default": 0,
+      "title": "Redirects Followed",
+      "type": "integer"
+    },
+    "canonical_writes": {
+      "const": 0,
+      "default": 0,
+      "title": "Canonical Writes",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "limitation": {
+      "title": "Limitation",
+      "type": "string"
+    }
+  },
+  "required": [
+    "receipts",
+    "public_requests",
+    "limitation"
+  ],
+  "title": "Summary",
+  "type": "object"
+}

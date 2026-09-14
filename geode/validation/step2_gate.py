@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import sqlite3
+from contextlib import closing
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -141,7 +142,7 @@ def _check_database_exists(database_path: Path) -> Step2Check:
 def _check_index_run(database_path: Path) -> Step2Check:
     """Check that the read index has meaningful corpus counts."""
 
-    with sqlite3.connect(database_path) as connection:
+    with closing(sqlite3.connect(database_path)) as connection, connection:
         row = connection.execute(
             """
             SELECT entity_count, chunk_count, relation_count, timeline_count

@@ -4,6 +4,8 @@
 
 This SOP explains how review packets, review decisions, canonical apply, and external reliance should be handled.
 
+For PDF transcription and table evidence, use the [source-fidelity review method](PDF_SOURCE_REVIEW.md), including source-first freezes, focused visibility checks and additive errata.
+
 ## Non-Negotiable Boundaries
 
 - Do not treat review packets as legal advice.

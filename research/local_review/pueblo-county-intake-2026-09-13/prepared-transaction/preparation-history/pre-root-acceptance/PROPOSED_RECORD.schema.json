@@ -1,0 +1,103 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact ordinary-file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Only future repository receipt fields are unresolved.",
+  "properties": {
+    "record_id": {
+      "const": "pueblo-county-planning-fees-sh-ext-002",
+      "title": "Record Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-PUEBLO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "layer_id": {
+      "const": "08_County_Authorities",
+      "title": "Layer Id",
+      "type": "string"
+    },
+    "official_source_name": {
+      "title": "Official Source Name",
+      "type": "string"
+    },
+    "official_source_url": {
+      "title": "Official Source Url",
+      "type": "null"
+    },
+    "acquisition_method": {
+      "const": "received_review_package",
+      "title": "Acquisition Method",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_filename": {
+      "const": "original.pdf",
+      "title": "Original Filename",
+      "type": "string"
+    },
+    "custody_note": {
+      "title": "Custody Note",
+      "type": "string"
+    },
+    "actual_repository_received_at": {
+      "title": "Actual Repository Received At",
+      "type": "null"
+    },
+    "intake_id": {
+      "title": "Intake Id",
+      "type": "null"
+    },
+    "archive_path": {
+      "title": "Archive Path",
+      "type": "null"
+    }
+  },
+  "required": [
+    "record_id",
+    "authority_id",
+    "layer_id",
+    "official_source_name",
+    "official_source_url",
+    "acquisition_method",
+    "source",
+    "original_filename",
+    "custody_note",
+    "actual_repository_received_at",
+    "intake_id",
+    "archive_path"
+  ],
+  "title": "Template",
+  "type": "object"
+}

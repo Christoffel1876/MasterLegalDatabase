@@ -1,0 +1,175 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact retained ordinary file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "description": "Actionable source or evidence qualification, never a silent correction.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "correction",
+            "qualification",
+            "no_issue"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "severity",
+        "statement",
+        "evidence"
+      ],
+      "title": "Finding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Source checks distinguished from original reviewer process claims.",
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "chaffee-planning-application-fees-atlas-directed",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-CHAFFEE",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "draft_qa": {
+      "$ref": "#/$defs/Asset"
+    },
+    "examined_pages": {
+      "const": 2,
+      "title": "Examined Pages",
+      "type": "integer"
+    },
+    "examined_existing_crops": {
+      "const": 8,
+      "title": "Examined Existing Crops",
+      "type": "integer"
+    },
+    "fee_rows": {
+      "const": 49,
+      "title": "Fee Rows",
+      "type": "integer"
+    },
+    "groups": {
+      "const": 10,
+      "title": "Groups",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "method": {
+      "const": "candidate_aware_independent_direct_image_review",
+      "title": "Method",
+      "type": "string"
+    },
+    "created_at": {
+      "title": "Created At",
+      "type": "string"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "custody_evidence": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Custody Evidence",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "source_id",
+    "authority_id",
+    "source_sha256",
+    "draft_qa",
+    "examined_pages",
+    "examined_existing_crops",
+    "fee_rows",
+    "groups",
+    "legal_currentness",
+    "answer_safe",
+    "method",
+    "created_at",
+    "findings",
+    "custody_evidence",
+    "limitations"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

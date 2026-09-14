@@ -1,0 +1,130 @@
+{
+  "additionalProperties": false,
+  "description": "An unchanged native text page bound to its source and rendered image.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source_id": {
+      "enum": [
+        "greeley-building-fees-sd008-06",
+        "greeley-development-impact-fee-memo-sd008-07",
+        "greeley-water-sewer-proposed-pif-notice-sd008-08"
+      ],
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "physical_page": {
+      "maximum": 8,
+      "minimum": 1,
+      "title": "Physical Page",
+      "type": "integer"
+    },
+    "expected_pages": {
+      "maximum": 8,
+      "minimum": 1,
+      "title": "Expected Pages",
+      "type": "integer"
+    },
+    "source_image_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Image Sha256",
+      "type": "string"
+    },
+    "extracted_at": {
+      "format": "date-time",
+      "title": "Extracted At",
+      "type": "string"
+    },
+    "text": {
+      "minLength": 1,
+      "title": "Text",
+      "type": "string"
+    },
+    "text_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Text Sha256",
+      "type": "string"
+    },
+    "text_size_bytes": {
+      "exclusiveMinimum": 0,
+      "title": "Text Size Bytes",
+      "type": "integer"
+    },
+    "meaningful_native_text_preflight": {
+      "const": true,
+      "default": true,
+      "title": "Meaningful Native Text Preflight",
+      "type": "boolean"
+    },
+    "changes": {
+      "const": "none",
+      "default": "none",
+      "title": "Changes",
+      "type": "string"
+    },
+    "method_family": {
+      "const": "native",
+      "default": "native",
+      "title": "Method Family",
+      "type": "string"
+    },
+    "engine": {
+      "const": "PyMuPDF",
+      "default": "PyMuPDF",
+      "title": "Engine",
+      "type": "string"
+    },
+    "engine_version": {
+      "const": "1.28.2",
+      "default": "1.28.2",
+      "title": "Engine Version",
+      "type": "string"
+    },
+    "method": {
+      "const": "Page.get_text(\"text\", sort=False, flags=195)",
+      "default": "Page.get_text(\"text\", sort=False, flags=195)",
+      "title": "Method",
+      "type": "string"
+    },
+    "sort": {
+      "const": false,
+      "default": false,
+      "title": "Sort",
+      "type": "boolean"
+    },
+    "flags": {
+      "const": 195,
+      "default": 195,
+      "title": "Flags",
+      "type": "integer"
+    },
+    "status": {
+      "const": "machine_native_text_unreviewed",
+      "default": "machine_native_text_unreviewed",
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_id",
+    "source_sha256",
+    "physical_page",
+    "expected_pages",
+    "source_image_sha256",
+    "extracted_at",
+    "text",
+    "text_sha256",
+    "text_size_bytes"
+  ],
+  "title": "NativePage",
+  "type": "object"
+}

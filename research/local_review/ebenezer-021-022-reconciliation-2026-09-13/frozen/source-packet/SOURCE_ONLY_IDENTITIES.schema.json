@@ -1,0 +1,167 @@
+{
+  "$defs": {
+    "Identity": {
+      "additionalProperties": false,
+      "description": "Expose only source identity and complete page images before pass one.",
+      "properties": {
+        "assignment_id": {
+          "enum": [
+            "EB-PDF-021",
+            "EB-PDF-022"
+          ],
+          "title": "Assignment Id",
+          "type": "string"
+        },
+        "source_id": {
+          "enum": [
+            "douglas-ehs-fees-atlas-directed",
+            "pueblo-planning-fees-atlas-directed"
+          ],
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "enum": [
+            "CO-COUNTY-DOUGLAS",
+            "CO-MUNICIPAL-PUEBLO"
+          ],
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "expected_pages": {
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Expected Pages",
+          "type": "integer"
+        },
+        "original": {
+          "$ref": "#/$defs/Ref"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/Page"
+          },
+          "title": "Pages",
+          "type": "array"
+        }
+      },
+      "required": [
+        "assignment_id",
+        "source_id",
+        "authority_id",
+        "expected_pages",
+        "original",
+        "pages"
+      ],
+      "title": "Identity",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "Identify one complete physical-page image without transcription hints.",
+      "properties": {
+        "physical_page": {
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Ref"
+        },
+        "width": {
+          "exclusiveMinimum": 0,
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "title": "Height",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "width",
+        "height"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Bind exact bytes using a package-relative or recorded historical path.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "The only pre-freeze metadata for the two queued sources.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "packet_id": {
+      "const": "ebenezer-021-022-2026-09-13",
+      "default": "ebenezer-021-022-2026-09-13",
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_DISPATCHED",
+      "default": "PREPARED_NOT_DISPATCHED",
+      "title": "Status",
+      "type": "string"
+    },
+    "documents": {
+      "items": {
+        "$ref": "#/$defs/Identity"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Documents",
+      "type": "array"
+    },
+    "authority_limit": {
+      "const": "Collection identity only; no legal-authority conclusion.",
+      "default": "Collection identity only; no legal-authority conclusion.",
+      "title": "Authority Limit",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "documents"
+  ],
+  "title": "Identities",
+  "type": "object"
+}

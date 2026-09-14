@@ -1,0 +1,111 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact relative file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "description": "Half-open bytes in the selected transcript, with literal content retained.",
+      "properties": {
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "exclusiveMinimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "text",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Reproducible historical failure without editing the initial record.",
+  "properties": {
+    "checked_at": {
+      "title": "Checked At",
+      "type": "string"
+    },
+    "original_review": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_transcript": {
+      "$ref": "#/$defs/Asset"
+    },
+    "last_recorded_block_end": {
+      "title": "Last Recorded Block End",
+      "type": "integer"
+    },
+    "transcript_bytes": {
+      "title": "Transcript Bytes",
+      "type": "integer"
+    },
+    "unrepresented_suffix": {
+      "$ref": "#/$defs/Span"
+    },
+    "observed_error": {
+      "const": "Uncovered terminal paragraph",
+      "title": "Observed Error",
+      "type": "string"
+    },
+    "disposition": {
+      "const": "repaired_only_in_separate_root_revision",
+      "title": "Disposition",
+      "type": "string"
+    }
+  },
+  "required": [
+    "checked_at",
+    "original_review",
+    "original_transcript",
+    "last_recorded_block_end",
+    "transcript_bytes",
+    "unrepresented_suffix",
+    "observed_error",
+    "disposition"
+  ],
+  "title": "GapProof",
+  "type": "object"
+}

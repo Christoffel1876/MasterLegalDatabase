@@ -1,0 +1,86 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "CustodyRow": {
+      "additionalProperties": false,
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "local": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "original_path",
+        "local"
+      ],
+      "title": "CustodyRow",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "copied_at": {
+      "format": "date-time",
+      "title": "Copied At",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/CustodyRow"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "original_files_unchanged": {
+      "const": true,
+      "title": "Original Files Unchanged",
+      "type": "boolean"
+    },
+    "source_response_body_identical_to_pdf": {
+      "const": true,
+      "title": "Source Response Body Identical To Pdf",
+      "type": "boolean"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    }
+  },
+  "required": [
+    "copied_at",
+    "files",
+    "original_files_unchanged",
+    "source_response_body_identical_to_pdf",
+    "scope"
+  ],
+  "title": "Custody",
+  "type": "object"
+}

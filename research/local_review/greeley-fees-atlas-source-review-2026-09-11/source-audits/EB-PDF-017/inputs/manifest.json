@@ -1,0 +1,667 @@
+{
+  "schema_version": 1,
+  "packet_id": "grok-pdf-review-2026-09-11-batch-5",
+  "prepared_at": "2026-09-11T19:22:33.358385Z",
+  "status": "PREPARED_NOT_DISPATCHED",
+  "purpose": "independent_pdf_transcription_review",
+  "start_no_document_at_or_after": "2026-09-11T20:50:00Z",
+  "finish_by": "2026-09-11T21:20:00Z",
+  "stop_after": "EB-PDF-017",
+  "independence": "procedural source-first pass; per-document frozen receipt before candidate",
+  "legal_currentness": "not_verified",
+  "documents": [
+    {
+      "queue_order": 1,
+      "assignment_id": "EB-PDF-015",
+      "source_id": "greeley-building-fees-sd008-06",
+      "authority_id": "CO-MUNICIPAL-GREELEY",
+      "authority_basis": "collection context only; not a legal-authority finding",
+      "expected_pages": 1,
+      "original": {
+        "path": "01-source-only/greeley-building-fees-sd008-06/original.pdf",
+        "sha256": "fa8a90dae00525c2dcb62ef4d69aeb84b7032a0fd2dc64f45c1685981e9becd4",
+        "size_bytes": 152164
+      },
+      "provenance": {
+        "canonical_raw_pdf": {
+          "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/greeley-building-fees-sd008-06/20260911T191524Z_building_permit_fee_schedule.pdf",
+          "sha256": "fa8a90dae00525c2dcb62ef4d69aeb84b7032a0fd2dc64f45c1685981e9becd4",
+          "size_bytes": 152164
+        },
+        "received_original": {
+          "path": "/Users/mcoors/Documents/Project Geode/handoffs/atlas-reviews/sherlock-source-discovery-008/check-2026-09-11/received/20260911T184800Z/raw/greeley/building_permit_fee_schedule.pdf",
+          "sha256": "fa8a90dae00525c2dcb62ef4d69aeb84b7032a0fd2dc64f45c1685981e9becd4",
+          "size_bytes": 152164
+        },
+        "original_acquisition_time": null,
+        "upstream_http_acquisition_independently_verified_in_this_preparation": false,
+        "actual_repository_received_at": "2026-09-11T19:15:24.670419Z",
+        "intake_record_id": "MSI-20260911T191524670419Z-greeley-building-fees-sd008-06",
+        "intake_status": "archived_pending_pipeline",
+        "acquisition_method": "received_review_package",
+        "frozen_raw_manifest": {
+          "path": "03-custody/manual-source-intake-manifest.4561e7c18d2732b9d8c683c41405950d79126b40a79ab2dd1c73103cd6c26094.jsonl",
+          "sha256": "4561e7c18d2732b9d8c683c41405950d79126b40a79ab2dd1c73103cd6c26094",
+          "size_bytes": 81303
+        },
+        "raw_manifest_line_number": 36,
+        "raw_manifest_line_sha256": "a2661c290c69df56dbff53cab298abac57650ce123211272f05bcca52602a9c5",
+        "raw_manifest_line_size_bytes": 1704,
+        "frozen_intake_receipt": {
+          "path": "03-custody/intake-receipt.json",
+          "sha256": "835a58f0afce16f5b00eab35bde9cb6dcf6ccfde5e21f9380d9c926305bce79e",
+          "size_bytes": 32171
+        },
+        "frozen_source_provenance": {
+          "path": "03-custody/source-provenance.jsonl",
+          "sha256": "5535b0ef0e41934295c276f84f94fb82cd30c3339ed9c466a783c039e208bf20",
+          "size_bytes": 14251
+        },
+        "provenance_line_number": 2,
+        "provenance_line_sha256": "1dca3b3f05568d4dacb665b70b7d118cd99d20c5f1a7264b437b7284479dbcb2",
+        "provenance_line_size_bytes": 3804,
+        "reported_requested_url": "https://cogy-p-001.sitecorecontenthub.cloud/api/public/content/dad9bcd41d394807be1e339c71367e76?v=f77f3c32",
+        "reported_final_url": "https://cogy-p-001.sitecorecontenthub.cloud/api/public/content/dad9bcd41d394807be1e339c71367e76?v=f77f3c32",
+        "reported_acquisition_at": "2026-09-11T18:50:31Z",
+        "reported_method": "mac_curl",
+        "acquisition_evidence_label": "retained_curl_body_and_headers",
+        "canonical_official_source_url": null,
+        "null_official_source_url_reason": "direct_host_not_in_existing_allowlist",
+        "official_referral_url": "https://greeleyco.gov/business/construction-and-growth/building-permits-and-inspections/",
+        "reported_referral_label": "home Building Permit Fee Schedule",
+        "frozen_referral_html": {
+          "path": "03-custody/referrals/building_permits_and_inspections.html",
+          "sha256": "ff4608777bcf73f12decc5ab995303de7b14cf6dd8742c4a4843e89dfae52dc2",
+          "size_bytes": 238295
+        },
+        "requested_url_found_in_saved_referral_anchor": true,
+        "frozen_derived_response_headers": {
+          "path": "03-custody/http/SD008-E035.headers-without-cookies.txt",
+          "sha256": "5f47c98b17b097e54c42a54f2733f5463b2b224cdbfa3b73752df179572b2e2a",
+          "size_bytes": 786
+        },
+        "original_response_header_identity": {
+          "path": "/Users/mcoors/Documents/Project Geode/handoffs/atlas-reviews/sherlock-source-discovery-008/check-2026-09-11/received/20260911T184800Z/logs/SD008-E035.headers.txt",
+          "sha256": "600c6617960b497e849f4ed52341036d47ebddfebbdcf3b9019d32694f941806",
+          "size_bytes": 1120
+        },
+        "header_transformation": "Only Set-Cookie header lines omitted; other bytes unchanged",
+        "full_response_headers_in_packet": false,
+        "source_role_claim": "municipal_building_fee_schedule",
+        "role_basis": "supplied intake label; no adopted/current legal effect established",
+        "caveats": [
+          "This preparation performed no HTTP requests. Reported acquisition time, method and response metadata are carried from retained package evidence, not newly witnessed network events.",
+          "Exact saved official referral HTML contains the reported Sitecore target anchor. The direct host remains outside the existing intake allowlist; canonical official_source_url stays null. No allowlist or intake status was changed.",
+          "Canonical and received original bytes are equal. The 38-record raw manifest, SD008 receipt, source provenance, referral HTML and derived response headers are frozen inside this packet.",
+          "The response-header copies are the already-derived versions with Set-Cookie lines omitted; original full header identities are preserved as context but their full bytes are not included.",
+          "Source roles, dates, headings and filenames do not establish adoption, current applicability or amendment completeness. A proposed notice is not certified as adopted."
+        ]
+      },
+      "rendering_engine": "Poppler pdftoppm",
+      "rendering_version": "26.05.0",
+      "rendering_command": "pdftoppm -r 300 -png original.pdf page",
+      "rendering_dpi": 300,
+      "rendering_scope": "entire physical pages; no crop, annotation or rescaling",
+      "candidate": {
+        "path": "02-candidate-text/greeley-building-fees-sd008-06/candidate.txt",
+        "sha256": "aec7efa7edbd9e26a8ce7bbd9685431c386043fc074567a1b3db334e9f528334",
+        "size_bytes": 3349
+      },
+      "candidate_status": "machine_native_text_unreviewed",
+      "candidate_changes": "none",
+      "candidate_packaging": "UTF-8 page markers outside unchanged native byte slices",
+      "page_evidence_schema": {
+        "path": "02-candidate-text/page-evidence.schema.json",
+        "sha256": "15e48ff261360e10571b14a5393b1e12c99b810c6e071fc3e99042585deaae22",
+        "size_bytes": 3012
+      },
+      "pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "01-source-only/greeley-building-fees-sd008-06/page-0001.png",
+            "sha256": "051102365c1fc699736227afacc4065c157e32ac6d7d8dd77b4becb9698d8210",
+            "size_bytes": 535417
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/greeley-building-fees-sd008-06/native-evidence/page-0001.json",
+            "sha256": "e2fcadb16bc232300e2c973708b3460c25463cb45e4b862d52f83ac8063bb47d",
+            "size_bytes": 4063
+          },
+          "text_sha256": "35f7b7448e487369c1874fc31ec7292fe6c9c4bc6210abcac4cac2face620dff",
+          "text_size_bytes": 3236,
+          "candidate_text_offset_bytes": 56,
+          "candidate_text_end_byte_exclusive": 3292
+        }
+      ],
+      "legal_currentness": "not_verified",
+      "legal_review": "pending"
+    },
+    {
+      "queue_order": 2,
+      "assignment_id": "EB-PDF-016",
+      "source_id": "greeley-development-impact-fee-memo-sd008-07",
+      "authority_id": "CO-MUNICIPAL-GREELEY",
+      "authority_basis": "collection context only; not a legal-authority finding",
+      "expected_pages": 3,
+      "original": {
+        "path": "01-source-only/greeley-development-impact-fee-memo-sd008-07/original.pdf",
+        "sha256": "9effbd15196898c16105913ee21032db52ad1e259f4f9def0586804726f78709",
+        "size_bytes": 651009
+      },
+      "provenance": {
+        "canonical_raw_pdf": {
+          "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/greeley-development-impact-fee-memo-sd008-07/20260911T191524Z_2026_development_impact_fee_schedule.pdf",
+          "sha256": "9effbd15196898c16105913ee21032db52ad1e259f4f9def0586804726f78709",
+          "size_bytes": 651009
+        },
+        "received_original": {
+          "path": "/Users/mcoors/Documents/Project Geode/handoffs/atlas-reviews/sherlock-source-discovery-008/check-2026-09-11/received/20260911T184800Z/raw/greeley/2026_development_impact_fee_schedule.pdf",
+          "sha256": "9effbd15196898c16105913ee21032db52ad1e259f4f9def0586804726f78709",
+          "size_bytes": 651009
+        },
+        "original_acquisition_time": null,
+        "upstream_http_acquisition_independently_verified_in_this_preparation": false,
+        "actual_repository_received_at": "2026-09-11T19:15:24.670419Z",
+        "intake_record_id": "MSI-20260911T191524670419Z-greeley-development-impact-fee-memo-sd008-07",
+        "intake_status": "archived_pending_pipeline",
+        "acquisition_method": "received_review_package",
+        "frozen_raw_manifest": {
+          "path": "03-custody/manual-source-intake-manifest.4561e7c18d2732b9d8c683c41405950d79126b40a79ab2dd1c73103cd6c26094.jsonl",
+          "sha256": "4561e7c18d2732b9d8c683c41405950d79126b40a79ab2dd1c73103cd6c26094",
+          "size_bytes": 81303
+        },
+        "raw_manifest_line_number": 37,
+        "raw_manifest_line_sha256": "ec1032fa4f4ae7812aee1d4333056bf6a7995532ad70f8202e81e0251bd5cef8",
+        "raw_manifest_line_size_bytes": 1792,
+        "frozen_intake_receipt": {
+          "path": "03-custody/intake-receipt.json",
+          "sha256": "835a58f0afce16f5b00eab35bde9cb6dcf6ccfde5e21f9380d9c926305bce79e",
+          "size_bytes": 32171
+        },
+        "frozen_source_provenance": {
+          "path": "03-custody/source-provenance.jsonl",
+          "sha256": "5535b0ef0e41934295c276f84f94fb82cd30c3339ed9c466a783c039e208bf20",
+          "size_bytes": 14251
+        },
+        "provenance_line_number": 3,
+        "provenance_line_sha256": "6658b01df3339cd1df18d3f2f100a68966aa52c09c3cf29973aaf4691c8394bb",
+        "provenance_line_size_bytes": 3976,
+        "reported_requested_url": "https://cogy-p-001.sitecorecontenthub.cloud/api/public/content/610f6e36c19f455d9fb662cc2cdbe1af?v=ef2524cb",
+        "reported_final_url": "https://cogy-p-001.sitecorecontenthub.cloud/api/public/content/610f6e36c19f455d9fb662cc2cdbe1af?v=ef2524cb",
+        "reported_acquisition_at": "2026-09-11T18:50:31Z",
+        "reported_method": "mac_curl",
+        "acquisition_evidence_label": "retained_curl_body_and_headers",
+        "canonical_official_source_url": null,
+        "null_official_source_url_reason": "direct_host_not_in_existing_allowlist",
+        "official_referral_url": "https://greeleyco.gov/business/construction-and-growth/building-permits-and-inspections/",
+        "reported_referral_label": "add_business 2026 Development Impact Fee Schedule",
+        "frozen_referral_html": {
+          "path": "03-custody/referrals/building_permits_and_inspections.html",
+          "sha256": "ff4608777bcf73f12decc5ab995303de7b14cf6dd8742c4a4843e89dfae52dc2",
+          "size_bytes": 238295
+        },
+        "requested_url_found_in_saved_referral_anchor": true,
+        "frozen_derived_response_headers": {
+          "path": "03-custody/http/SD008-E036.headers-without-cookies.txt",
+          "sha256": "d6dd4529734faabd744e72a5e6251daa14a1aad683ed8b227193e80af7cda458",
+          "size_bytes": 800
+        },
+        "original_response_header_identity": {
+          "path": "/Users/mcoors/Documents/Project Geode/handoffs/atlas-reviews/sherlock-source-discovery-008/check-2026-09-11/received/20260911T184800Z/logs/SD008-E036.headers.txt",
+          "sha256": "507245006cc4835ea44bf74a7fb782c627c52bef976fd04381861d891da7b158",
+          "size_bytes": 1133
+        },
+        "header_transformation": "Only Set-Cookie header lines omitted; other bytes unchanged",
+        "full_response_headers_in_packet": false,
+        "source_role_claim": "fee_adjustment_memorandum_with_schedules",
+        "role_basis": "supplied intake label; no adopted/current legal effect established",
+        "caveats": [
+          "This preparation performed no HTTP requests. Reported acquisition time, method and response metadata are carried from retained package evidence, not newly witnessed network events.",
+          "Exact saved official referral HTML contains the reported Sitecore target anchor. The direct host remains outside the existing intake allowlist; canonical official_source_url stays null. No allowlist or intake status was changed.",
+          "Canonical and received original bytes are equal. The 38-record raw manifest, SD008 receipt, source provenance, referral HTML and derived response headers are frozen inside this packet.",
+          "The response-header copies are the already-derived versions with Set-Cookie lines omitted; original full header identities are preserved as context but their full bytes are not included.",
+          "Source roles, dates, headings and filenames do not establish adoption, current applicability or amendment completeness. A proposed notice is not certified as adopted."
+        ]
+      },
+      "rendering_engine": "Poppler pdftoppm",
+      "rendering_version": "26.05.0",
+      "rendering_command": "pdftoppm -r 300 -png original.pdf page",
+      "rendering_dpi": 300,
+      "rendering_scope": "entire physical pages; no crop, annotation or rescaling",
+      "candidate": {
+        "path": "02-candidate-text/greeley-development-impact-fee-memo-sd008-07/candidate.txt",
+        "sha256": "1c45252c6c814258f5a2e8380001f282a609ad9db81ec3947655b871346296f9",
+        "size_bytes": 7530
+      },
+      "candidate_status": "machine_native_text_unreviewed",
+      "candidate_changes": "none",
+      "candidate_packaging": "UTF-8 page markers outside unchanged native byte slices",
+      "page_evidence_schema": {
+        "path": "02-candidate-text/page-evidence.schema.json",
+        "sha256": "15e48ff261360e10571b14a5393b1e12c99b810c6e071fc3e99042585deaae22",
+        "size_bytes": 3012
+      },
+      "pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "01-source-only/greeley-development-impact-fee-memo-sd008-07/page-0001.png",
+            "sha256": "897dddf6df53617e3a20a252adf1a70151dcc11722cda9719227e20bd894e17c",
+            "size_bytes": 567833
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/greeley-development-impact-fee-memo-sd008-07/native-evidence/page-0001.json",
+            "sha256": "3bcef80b4a33fb7348a488346cf35e6e76e5f2f29c53159beea49d943efaf0f3",
+            "size_bytes": 3790
+          },
+          "text_sha256": "2127571d8efdb63da69f4c277e2b134d5698d2f2c66c6e14fd954385d24bf169",
+          "text_size_bytes": 2664,
+          "candidate_text_offset_bytes": 56,
+          "candidate_text_end_byte_exclusive": 2720
+        },
+        {
+          "physical_page": 2,
+          "image": {
+            "path": "01-source-only/greeley-development-impact-fee-memo-sd008-07/page-0002.png",
+            "sha256": "aac84312750eeafac8e707fda7f9d4f215be0dcbcb11c1b1b086c355ad350d2e",
+            "size_bytes": 536314
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/greeley-development-impact-fee-memo-sd008-07/native-evidence/page-0002.json",
+            "sha256": "f2e10e745d6eb7095d5105c77d61609be1b370d5ea30528c4266e1e07e162e27",
+            "size_bytes": 4992
+          },
+          "text_sha256": "9fd2f0b2ecf36ceb23ad6e352441043217f16700aea1e3b52ec7a84806577a40",
+          "text_size_bytes": 3667,
+          "candidate_text_offset_bytes": 2833,
+          "candidate_text_end_byte_exclusive": 6500
+        },
+        {
+          "physical_page": 3,
+          "image": {
+            "path": "01-source-only/greeley-development-impact-fee-memo-sd008-07/page-0003.png",
+            "sha256": "98513c20960e97d94bae033957e0b75b95e32572b0eb74ce6a136103b3e8cb60",
+            "size_bytes": 157212
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/greeley-development-impact-fee-memo-sd008-07/native-evidence/page-0003.json",
+            "sha256": "7f5e8ef55386e164ec809617576ad57a229e84551b1dc46f3c476065266f2303",
+            "size_bytes": 1766
+          },
+          "text_sha256": "35f777dfc486122072173e0038f44091b9cdb49d9a30e4c27aab80df436aa94a",
+          "text_size_bytes": 860,
+          "candidate_text_offset_bytes": 6613,
+          "candidate_text_end_byte_exclusive": 7473
+        }
+      ],
+      "legal_currentness": "not_verified",
+      "legal_review": "pending"
+    },
+    {
+      "queue_order": 3,
+      "assignment_id": "EB-PDF-017",
+      "source_id": "greeley-water-sewer-proposed-pif-notice-sd008-08",
+      "authority_id": "CO-MUNICIPAL-GREELEY",
+      "authority_basis": "collection context only; not a legal-authority finding",
+      "expected_pages": 2,
+      "original": {
+        "path": "01-source-only/greeley-water-sewer-proposed-pif-notice-sd008-08/original.pdf",
+        "sha256": "edfd4eecc57657bec922b8e0e63597fbf2fc957936d8f26a1a457b195dac145c",
+        "size_bytes": 74466
+      },
+      "provenance": {
+        "canonical_raw_pdf": {
+          "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/greeley-water-sewer-proposed-pif-notice-sd008-08/20260911T191524Z_2021_water_sewer_plant_investment_fees.pdf",
+          "sha256": "edfd4eecc57657bec922b8e0e63597fbf2fc957936d8f26a1a457b195dac145c",
+          "size_bytes": 74466
+        },
+        "received_original": {
+          "path": "/Users/mcoors/Documents/Project Geode/handoffs/atlas-reviews/sherlock-source-discovery-008/check-2026-09-11/received/20260911T184800Z/raw/greeley/2021_water_sewer_plant_investment_fees.pdf",
+          "sha256": "edfd4eecc57657bec922b8e0e63597fbf2fc957936d8f26a1a457b195dac145c",
+          "size_bytes": 74466
+        },
+        "original_acquisition_time": null,
+        "upstream_http_acquisition_independently_verified_in_this_preparation": false,
+        "actual_repository_received_at": "2026-09-11T19:15:24.670419Z",
+        "intake_record_id": "MSI-20260911T191524670419Z-greeley-water-sewer-proposed-pif-notice-sd008-08",
+        "intake_status": "archived_pending_pipeline",
+        "acquisition_method": "received_review_package",
+        "frozen_raw_manifest": {
+          "path": "03-custody/manual-source-intake-manifest.4561e7c18d2732b9d8c683c41405950d79126b40a79ab2dd1c73103cd6c26094.jsonl",
+          "sha256": "4561e7c18d2732b9d8c683c41405950d79126b40a79ab2dd1c73103cd6c26094",
+          "size_bytes": 81303
+        },
+        "raw_manifest_line_number": 38,
+        "raw_manifest_line_sha256": "6c7dffdcb4a6a356ff2d4e58de13a2741fe5d7a44b55783af0fbfb86a0e34829",
+        "raw_manifest_line_size_bytes": 1795,
+        "frozen_intake_receipt": {
+          "path": "03-custody/intake-receipt.json",
+          "sha256": "835a58f0afce16f5b00eab35bde9cb6dcf6ccfde5e21f9380d9c926305bce79e",
+          "size_bytes": 32171
+        },
+        "frozen_source_provenance": {
+          "path": "03-custody/source-provenance.jsonl",
+          "sha256": "5535b0ef0e41934295c276f84f94fb82cd30c3339ed9c466a783c039e208bf20",
+          "size_bytes": 14251
+        },
+        "provenance_line_number": 4,
+        "provenance_line_sha256": "e4af016b49bb2b1831cd88df3a6a926558235e3291944396f1f84332d300d00f",
+        "provenance_line_size_bytes": 4003,
+        "reported_requested_url": "https://cogy-p-001.sitecorecontenthub.cloud/api/public/content/43b3c7a9134e4881babf60501311ea21?v=be391228",
+        "reported_final_url": "https://cogy-p-001.sitecorecontenthub.cloud/api/public/content/43b3c7a9134e4881babf60501311ea21?v=be391228",
+        "reported_acquisition_at": "2026-09-11T18:50:32Z",
+        "reported_method": "mac_curl",
+        "acquisition_evidence_label": "retained_curl_body_and_headers",
+        "canonical_official_source_url": null,
+        "null_official_source_url_reason": "direct_host_not_in_existing_allowlist",
+        "official_referral_url": "https://greeleyco.gov/business/construction-and-growth/building-permits-and-inspections/",
+        "reported_referral_label": "water_drop 2021 Water/Sewer Plant Investment Fees",
+        "frozen_referral_html": {
+          "path": "03-custody/referrals/building_permits_and_inspections.html",
+          "sha256": "ff4608777bcf73f12decc5ab995303de7b14cf6dd8742c4a4843e89dfae52dc2",
+          "size_bytes": 238295
+        },
+        "requested_url_found_in_saved_referral_anchor": true,
+        "frozen_derived_response_headers": {
+          "path": "03-custody/http/SD008-E037.headers-without-cookies.txt",
+          "sha256": "008ee7fe80550e876969006b691ed77263506b7b8965111b6efcaa03bd5a4493",
+          "size_bytes": 909
+        },
+        "original_response_header_identity": {
+          "path": "/Users/mcoors/Documents/Project Geode/handoffs/atlas-reviews/sherlock-source-discovery-008/check-2026-09-11/received/20260911T184800Z/logs/SD008-E037.headers.txt",
+          "sha256": "3033181014c815298d91e3a6f7cc9f3397a93059b3c588738a945379c7b681b7",
+          "size_bytes": 1243
+        },
+        "header_transformation": "Only Set-Cookie header lines omitted; other bytes unchanged",
+        "full_response_headers_in_packet": false,
+        "source_role_claim": "proposed_utility_fee_notice_with_schedule",
+        "role_basis": "supplied intake label; no adopted/current legal effect established",
+        "caveats": [
+          "This preparation performed no HTTP requests. Reported acquisition time, method and response metadata are carried from retained package evidence, not newly witnessed network events.",
+          "Exact saved official referral HTML contains the reported Sitecore target anchor. The direct host remains outside the existing intake allowlist; canonical official_source_url stays null. No allowlist or intake status was changed.",
+          "Canonical and received original bytes are equal. The 38-record raw manifest, SD008 receipt, source provenance, referral HTML and derived response headers are frozen inside this packet.",
+          "The response-header copies are the already-derived versions with Set-Cookie lines omitted; original full header identities are preserved as context but their full bytes are not included.",
+          "Source roles, dates, headings and filenames do not establish adoption, current applicability or amendment completeness. A proposed notice is not certified as adopted."
+        ]
+      },
+      "rendering_engine": "Poppler pdftoppm",
+      "rendering_version": "26.05.0",
+      "rendering_command": "pdftoppm -r 300 -png original.pdf page",
+      "rendering_dpi": 300,
+      "rendering_scope": "entire physical pages; no crop, annotation or rescaling",
+      "candidate": {
+        "path": "02-candidate-text/greeley-water-sewer-proposed-pif-notice-sd008-08/candidate.txt",
+        "sha256": "b1bbe00ab454ec987faa397abd811b5981fe7ffb05f1d9b20ee0932f10e12ef8",
+        "size_bytes": 1542
+      },
+      "candidate_status": "machine_native_text_unreviewed",
+      "candidate_changes": "none",
+      "candidate_packaging": "UTF-8 page markers outside unchanged native byte slices",
+      "page_evidence_schema": {
+        "path": "02-candidate-text/page-evidence.schema.json",
+        "sha256": "15e48ff261360e10571b14a5393b1e12c99b810c6e071fc3e99042585deaae22",
+        "size_bytes": 3012
+      },
+      "pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "01-source-only/greeley-water-sewer-proposed-pif-notice-sd008-08/page-0001.png",
+            "sha256": "b0b7286c93903ef7e290b155d2b0e7aec29873bbb026933fb8553f9fcb1112c5",
+            "size_bytes": 503504
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/greeley-water-sewer-proposed-pif-notice-sd008-08/native-evidence/page-0001.json",
+            "sha256": "4ed3fa7720fc72adec036c718d7dc137071db6c4bc808088506b1de1cbbd1253",
+            "size_bytes": 1615
+          },
+          "text_sha256": "209dd3dc4aefa51272c7885edaab8450f51a8660f9a8bfcfce14bc627f15bfac",
+          "text_size_bytes": 797,
+          "candidate_text_offset_bytes": 56,
+          "candidate_text_end_byte_exclusive": 853
+        },
+        {
+          "physical_page": 2,
+          "image": {
+            "path": "01-source-only/greeley-water-sewer-proposed-pif-notice-sd008-08/page-0002.png",
+            "sha256": "e3c95387f25424a5620ed74dcbeacc657aaab5310f8b299f214d483ff8368d82",
+            "size_bytes": 174573
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/greeley-water-sewer-proposed-pif-notice-sd008-08/native-evidence/page-0002.json",
+            "sha256": "67f37dc108bb26ace5de3c6de58fcd1ef37804db72d25a474d4a58a2e5e807a6",
+            "size_bytes": 1377
+          },
+          "text_sha256": "9e839c9d02e0e940da0c58d712c9e76c21857e6ceca365794f16f837e9472a44",
+          "text_size_bytes": 519,
+          "candidate_text_offset_bytes": 966,
+          "candidate_text_end_byte_exclusive": 1485
+        }
+      ],
+      "legal_currentness": "not_verified",
+      "legal_review": "pending"
+    }
+  ],
+  "custody_copies": [
+    {
+      "original": {
+        "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+        "sha256": "4561e7c18d2732b9d8c683c41405950d79126b40a79ab2dd1c73103cd6c26094",
+        "size_bytes": 81303
+      },
+      "frozen": {
+        "path": "03-custody/manual-source-intake-manifest.4561e7c18d2732b9d8c683c41405950d79126b40a79ab2dd1c73103cd6c26094.jsonl",
+        "sha256": "4561e7c18d2732b9d8c683c41405950d79126b40a79ab2dd1c73103cd6c26094",
+        "size_bytes": 81303
+      },
+      "role": "Exact 38-record snapshot; verify this frozen copy if the original later appends",
+      "captured_at": "2026-09-11T19:21:19.944761Z"
+    },
+    {
+      "original": {
+        "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/weld-greeley-intake-sherlock008-2026-09-11/intake-receipt.json",
+        "sha256": "835a58f0afce16f5b00eab35bde9cb6dcf6ccfde5e21f9380d9c926305bce79e",
+        "size_bytes": 32171
+      },
+      "frozen": {
+        "path": "03-custody/intake-receipt.json",
+        "sha256": "835a58f0afce16f5b00eab35bde9cb6dcf6ccfde5e21f9380d9c926305bce79e",
+        "size_bytes": 32171
+      },
+      "role": "Exact SD008 intake receipt; withheld before each source-first freeze",
+      "captured_at": "2026-09-11T19:21:19.944761Z"
+    },
+    {
+      "original": {
+        "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/weld-greeley-intake-sherlock008-2026-09-11/intake-receipt.schema.json",
+        "sha256": "8661a7c1a74445c0b884cb8173e488be771009412dc3fb9aaad408227d82217a",
+        "size_bytes": 12192
+      },
+      "frozen": {
+        "path": "03-custody/intake-receipt.schema.json",
+        "sha256": "8661a7c1a74445c0b884cb8173e488be771009412dc3fb9aaad408227d82217a",
+        "size_bytes": 12192
+      },
+      "role": "Exported receipt schema",
+      "captured_at": "2026-09-11T19:21:19.944761Z"
+    },
+    {
+      "original": {
+        "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/weld-greeley-intake-sherlock008-2026-09-11/source-provenance.jsonl",
+        "sha256": "5535b0ef0e41934295c276f84f94fb82cd30c3339ed9c466a783c039e208bf20",
+        "size_bytes": 14251
+      },
+      "frozen": {
+        "path": "03-custody/source-provenance.jsonl",
+        "sha256": "5535b0ef0e41934295c276f84f94fb82cd30c3339ed9c466a783c039e208bf20",
+        "size_bytes": 14251
+      },
+      "role": "Exact SD008 source provenance, including qualified prior findings; withheld before source-first freeze",
+      "captured_at": "2026-09-11T19:21:19.944761Z"
+    },
+    {
+      "original": {
+        "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/weld-greeley-intake-sherlock008-2026-09-11/source-provenance.schema.json",
+        "sha256": "177070fe0bd7218202233a62795a2ddf9185a6ff290a4ec1a38daa15ce11e557",
+        "size_bytes": 9006
+      },
+      "frozen": {
+        "path": "03-custody/source-provenance.schema.json",
+        "sha256": "177070fe0bd7218202233a62795a2ddf9185a6ff290a4ec1a38daa15ce11e557",
+        "size_bytes": 9006
+      },
+      "role": "Exported source provenance schema",
+      "captured_at": "2026-09-11T19:21:19.944761Z"
+    },
+    {
+      "original": {
+        "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/weld-greeley-intake-sherlock008-2026-09-11/root-validation-supplement.json",
+        "sha256": "c16acaf399fd8cd9150ab3ce8f275f80e8aa8c595d0bc82bd52fe0f5d5403473",
+        "size_bytes": 780
+      },
+      "frozen": {
+        "path": "03-custody/root-validation-supplement.json",
+        "sha256": "c16acaf399fd8cd9150ab3ce8f275f80e8aa8c595d0bc82bd52fe0f5d5403473",
+        "size_bytes": 780
+      },
+      "role": "Exact additional intake validation evidence; withheld before source-first freeze",
+      "captured_at": "2026-09-11T19:21:19.944761Z"
+    },
+    {
+      "original": {
+        "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/weld-greeley-intake-sherlock008-2026-09-11/root-validation-supplement.schema.json",
+        "sha256": "7f618abab57c18c92e1647f105b94573b249136d4bf26ebfb2d05f1017278448",
+        "size_bytes": 1609
+      },
+      "frozen": {
+        "path": "03-custody/root-validation-supplement.schema.json",
+        "sha256": "7f618abab57c18c92e1647f105b94573b249136d4bf26ebfb2d05f1017278448",
+        "size_bytes": 1609
+      },
+      "role": "Exact additional intake validation evidence; withheld before source-first freeze",
+      "captured_at": "2026-09-11T19:21:19.944761Z"
+    },
+    {
+      "original": {
+        "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/weld-greeley-intake-sherlock008-2026-09-11/evidence/referrals/building_permits_and_inspections.html",
+        "sha256": "ff4608777bcf73f12decc5ab995303de7b14cf6dd8742c4a4843e89dfae52dc2",
+        "size_bytes": 238295
+      },
+      "frozen": {
+        "path": "03-custody/referrals/building_permits_and_inspections.html",
+        "sha256": "ff4608777bcf73f12decc5ab995303de7b14cf6dd8742c4a4843e89dfae52dc2",
+        "size_bytes": 238295
+      },
+      "role": "Exact saved official referral HTML; not a new visit",
+      "captured_at": "2026-09-11T19:21:19.944761Z"
+    },
+    {
+      "original": {
+        "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/weld-greeley-intake-sherlock008-2026-09-11/evidence/http/SD008-E035.headers-without-cookies.txt",
+        "sha256": "5f47c98b17b097e54c42a54f2733f5463b2b224cdbfa3b73752df179572b2e2a",
+        "size_bytes": 786
+      },
+      "frozen": {
+        "path": "03-custody/http/SD008-E035.headers-without-cookies.txt",
+        "sha256": "5f47c98b17b097e54c42a54f2733f5463b2b224cdbfa3b73752df179572b2e2a",
+        "size_bytes": 786
+      },
+      "role": "Exact previously derived response headers; Set-Cookie lines omitted at intake, not original full HTTP header bytes",
+      "captured_at": "2026-09-11T19:21:19.944761Z"
+    },
+    {
+      "original": {
+        "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/weld-greeley-intake-sherlock008-2026-09-11/evidence/http/SD008-E036.headers-without-cookies.txt",
+        "sha256": "d6dd4529734faabd744e72a5e6251daa14a1aad683ed8b227193e80af7cda458",
+        "size_bytes": 800
+      },
+      "frozen": {
+        "path": "03-custody/http/SD008-E036.headers-without-cookies.txt",
+        "sha256": "d6dd4529734faabd744e72a5e6251daa14a1aad683ed8b227193e80af7cda458",
+        "size_bytes": 800
+      },
+      "role": "Exact previously derived response headers; Set-Cookie lines omitted at intake, not original full HTTP header bytes",
+      "captured_at": "2026-09-11T19:21:19.944761Z"
+    },
+    {
+      "original": {
+        "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/weld-greeley-intake-sherlock008-2026-09-11/evidence/http/SD008-E037.headers-without-cookies.txt",
+        "sha256": "008ee7fe80550e876969006b691ed77263506b7b8965111b6efcaa03bd5a4493",
+        "size_bytes": 909
+      },
+      "frozen": {
+        "path": "03-custody/http/SD008-E037.headers-without-cookies.txt",
+        "sha256": "008ee7fe80550e876969006b691ed77263506b7b8965111b6efcaa03bd5a4493",
+        "size_bytes": 909
+      },
+      "role": "Exact previously derived response headers; Set-Cookie lines omitted at intake, not original full HTTP header bytes",
+      "captured_at": "2026-09-11T19:21:19.944761Z"
+    }
+  ],
+  "supporting_payloads": [
+    {
+      "path": "START_HERE.md",
+      "sha256": "061a9e2c827f98e75583c439a8dcdaadbc7fb67f37d73c07d2b302271f30fbbf",
+      "size_bytes": 3035
+    },
+    {
+      "path": "PASS_1_PROMPT.md",
+      "sha256": "95e42cb97fc5eebbb0ff3844a9060129f5ff7c573b46f8efd2dfc5da15b932e4",
+      "size_bytes": 3367
+    },
+    {
+      "path": "PASS_2_PROMPT.md",
+      "sha256": "c33a4decfbf7510b48ac7e8d6a347a0f4480d35137de71bd0c05f503e5526628",
+      "size_bytes": 3093
+    },
+    {
+      "path": "04-verification/verify_packet.py",
+      "sha256": "65f930c52cc712682d0eb734ed65ffcfb954e2e1a9f5b90b53a8db47a725c818",
+      "size_bytes": 19315
+    },
+    {
+      "path": "02-candidate-text/page-evidence.schema.json",
+      "sha256": "15e48ff261360e10571b14a5393b1e12c99b810c6e071fc3e99042585deaae22",
+      "size_bytes": 3012
+    },
+    {
+      "path": "03-custody/manual-record.schema.json",
+      "sha256": "9404ca35ead3d1c70813ed5f58143bf1c19e13e4ea7463b2befbd6d616aa1a7d",
+      "size_bytes": 2435
+    }
+  ],
+  "assignment": {
+    "original": {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/EBENEZER_QUEUE_015_017_2026-09-11.md",
+      "sha256": "a8b779688d07506ec18ceef483db893cf7154b1f888e01348cea70b348af966c",
+      "size_bytes": 3488
+    },
+    "frozen": {
+      "path": "ASSIGNMENT.md",
+      "sha256": "a8b779688d07506ec18ceef483db893cf7154b1f888e01348cea70b348af966c",
+      "size_bytes": 3488
+    },
+    "role": "Exact packet-local copy of proposed external assignment; not dispatched",
+    "captured_at": "2026-09-11T19:21:19.944761Z"
+  },
+  "limitations": [
+    "PREPARED_NOT_DISPATCHED: Mac lock reported by Atlas; an explicit dispatch before 20:50 UTC is required.",
+    "All six pages have nonblank meaningful native text, but native extraction is unreviewed and may lose table associations, logos, marks or layout. No corrections were applied.",
+    "Prior intake provenance includes qualified findings and must remain withheld until each document’s pass-1 freeze. No such findings are inserted into source-only files or neutral instructions.",
+    "No currentness, adoption, applicability, amendment completeness or canonical pipeline status is certified.",
+    "This packet performs no network requests and does not alter the repository, raw archive, ledger or source bytes."
+  ]
+}

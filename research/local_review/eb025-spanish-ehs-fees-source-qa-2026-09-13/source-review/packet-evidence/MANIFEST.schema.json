@@ -1,0 +1,83 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Exact packet-relative ordinary-file bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Closed payload inventory; only itself and its opaque digest are outside the list.",
+  "properties": {
+    "packet_id": {
+      "const": "ebenezer-025-026-2026-09-13",
+      "default": "ebenezer-025-026-2026-09-13",
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_DISPATCHED",
+      "default": "PREPARED_NOT_DISPATCHED",
+      "title": "Status",
+      "type": "string"
+    },
+    "frozen_at": {
+      "format": "date-time",
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "identities": {
+      "$ref": "#/$defs/Ref"
+    },
+    "preparation": {
+      "$ref": "#/$defs/Ref"
+    },
+    "instructions": {
+      "$ref": "#/$defs/Ref"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "frozen_at",
+    "files",
+    "identities",
+    "preparation",
+    "instructions"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

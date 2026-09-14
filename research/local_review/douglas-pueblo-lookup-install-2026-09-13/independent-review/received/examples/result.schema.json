@@ -1,0 +1,807 @@
+{
+  "$defs": {
+    "DpAnnotation": {
+      "additionalProperties": false,
+      "description": "Keep source graphics and reviewer corrections separate from source wording.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "affected_rows": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Affected Rows",
+          "type": "array"
+        },
+        "pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Pages",
+          "type": "array"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "limitation": {
+          "title": "Limitation",
+          "type": "string"
+        },
+        "proofs": {
+          "items": {
+            "$ref": "#/$defs/EhsAsset"
+          },
+          "title": "Proofs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "affected_rows",
+        "pages",
+        "statement",
+        "limitation",
+        "proofs"
+      ],
+      "title": "DpAnnotation",
+      "type": "object"
+    },
+    "DpCell": {
+      "additionalProperties": false,
+      "description": "One intact source cell; visual normalization is distinct from native bytes.",
+      "properties": {
+        "field": {
+          "enum": [
+            "authority",
+            "program",
+            "fee_type",
+            "unit",
+            "fee",
+            "application"
+          ],
+          "title": "Field",
+          "type": "string"
+        },
+        "displayed_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Displayed Text"
+        },
+        "native_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Native Text"
+        },
+        "native_spans": {
+          "items": {
+            "$ref": "#/$defs/DpSpan"
+          },
+          "title": "Native Spans",
+          "type": "array"
+        },
+        "native_line_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Native Line Ids",
+          "type": "array"
+        },
+        "unrotated_bbox": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unrotated Bbox"
+        },
+        "displayed_bbox": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Displayed Bbox"
+        },
+        "pixel_bbox": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pixel Bbox"
+        },
+        "blank_region": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Blank Region"
+        }
+      },
+      "required": [
+        "field",
+        "displayed_text",
+        "native_text",
+        "native_spans",
+        "native_line_ids"
+      ],
+      "title": "DpCell",
+      "type": "object"
+    },
+    "DpContext": {
+      "additionalProperties": false,
+      "description": "All checked captions, notes and page headers, including image-only qualifications.",
+      "properties": {
+        "context_id": {
+          "title": "Context Id",
+          "type": "string"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "applies_to": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Applies To",
+          "type": "array"
+        },
+        "native_lines": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Native Lines",
+          "type": "array"
+        },
+        "native_spans": {
+          "items": {
+            "$ref": "#/$defs/DpSpan"
+          },
+          "title": "Native Spans",
+          "type": "array"
+        },
+        "image": {
+          "$ref": "#/$defs/EhsAsset"
+        },
+        "unrotated_bbox": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unrotated Bbox"
+        },
+        "displayed_bbox": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Displayed Bbox"
+        },
+        "native_status": {
+          "enum": [
+            "bound_native",
+            "image_only_wordmark"
+          ],
+          "title": "Native Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "context_id",
+        "kind",
+        "physical_page",
+        "text",
+        "applies_to",
+        "native_lines",
+        "native_spans",
+        "image",
+        "native_status"
+      ],
+      "title": "DpContext",
+      "type": "object"
+    },
+    "DpNested": {
+      "additionalProperties": false,
+      "description": "A paired subcategory or bullet, still attached to its enclosing physical row.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "paired_subcategory",
+            "fee_bullet"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "application_line_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Application Line Ids",
+          "type": "array"
+        },
+        "fee_line_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Fee Line Ids",
+          "type": "array"
+        },
+        "application_display": {
+          "title": "Application Display",
+          "type": "string"
+        },
+        "fee_display": {
+          "title": "Fee Display",
+          "type": "string"
+        },
+        "inherited_note_line_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Inherited Note Line Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "application_line_ids",
+        "fee_line_ids",
+        "application_display",
+        "fee_display",
+        "inherited_note_line_ids"
+      ],
+      "title": "DpNested",
+      "type": "object"
+    },
+    "DpRow": {
+      "additionalProperties": false,
+      "description": "Complete cells and nested links without flattening or calculating any fee.",
+      "properties": {
+        "row_id": {
+          "title": "Row Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "table": {
+          "enum": [
+            "county",
+            "state",
+            "city_applications"
+          ],
+          "title": "Table",
+          "type": "string"
+        },
+        "table_caption_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Table Caption Id"
+        },
+        "footnote_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Footnote Id"
+        },
+        "linked_context_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Linked Context Ids",
+          "type": "array"
+        },
+        "cells": {
+          "items": {
+            "$ref": "#/$defs/DpCell"
+          },
+          "title": "Cells",
+          "type": "array"
+        },
+        "nested": {
+          "items": {
+            "$ref": "#/$defs/DpNested"
+          },
+          "title": "Nested",
+          "type": "array"
+        }
+      },
+      "required": [
+        "row_id",
+        "physical_page",
+        "table",
+        "table_caption_id",
+        "footnote_id",
+        "linked_context_ids",
+        "cells",
+        "nested"
+      ],
+      "title": "DpRow",
+      "type": "object"
+    },
+    "DpSource": {
+      "additionalProperties": false,
+      "description": "Separate government identity, witnessed HTTP, actual intake and source-date claims.",
+      "properties": {
+        "source_id": {
+          "enum": [
+            "douglas-ehs-fees-atlas-directed",
+            "pueblo-planning-fees-atlas-directed"
+          ],
+          "title": "Source Id",
+          "type": "string"
+        },
+        "review_alias": {
+          "title": "Review Alias",
+          "type": "string"
+        },
+        "authority_id": {
+          "enum": [
+            "CO-COUNTY-DOUGLAS",
+            "CO-MUNICIPAL-PUEBLO"
+          ],
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "issuer": {
+          "title": "Issuer",
+          "type": "string"
+        },
+        "official_url": {
+          "title": "Official Url",
+          "type": "string"
+        },
+        "physical_pages": {
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Physical Pages",
+          "type": "integer"
+        },
+        "native_bytes": {
+          "const": 4923,
+          "default": 4923,
+          "title": "Native Bytes",
+          "type": "integer"
+        },
+        "source": {
+          "$ref": "#/$defs/EhsAsset"
+        },
+        "review": {
+          "$ref": "#/$defs/EhsAsset"
+        },
+        "review_schema": {
+          "$ref": "#/$defs/EhsAsset"
+        },
+        "manifest": {
+          "$ref": "#/$defs/EhsAsset"
+        },
+        "acceptance": {
+          "$ref": "#/$defs/EhsAsset"
+        },
+        "intake_receipt": {
+          "$ref": "#/$defs/EhsAsset"
+        },
+        "canonical_original": {
+          "$ref": "#/$defs/EhsAsset"
+        },
+        "provenance": {
+          "$ref": "#/$defs/EhsAsset"
+        },
+        "http_event": {
+          "$ref": "#/$defs/EhsAsset"
+        },
+        "intake_id": {
+          "title": "Intake Id",
+          "type": "string"
+        },
+        "intake_received_at": {
+          "format": "date-time",
+          "title": "Intake Received At",
+          "type": "string"
+        },
+        "acquisition_method": {
+          "const": "manual_official_download",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "http_request_started_at": {
+          "format": "date-time",
+          "title": "Http Request Started At",
+          "type": "string"
+        },
+        "http_response_completed_at": {
+          "format": "date-time",
+          "title": "Http Response Completed At",
+          "type": "string"
+        },
+        "http_status": {
+          "const": 200,
+          "title": "Http Status",
+          "type": "integer"
+        },
+        "reviewed_at": {
+          "format": "date-time",
+          "title": "Reviewed At",
+          "type": "string"
+        },
+        "accepted_at": {
+          "format": "date-time",
+          "title": "Accepted At",
+          "type": "string"
+        },
+        "source_date_claims": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Date Claims",
+          "type": "array"
+        },
+        "recorded_custody_note": {
+          "title": "Recorded Custody Note",
+          "type": "string"
+        },
+        "public_header_evidence": {
+          "additionalProperties": true,
+          "title": "Public Header Evidence",
+          "type": "object"
+        },
+        "original_filename": {
+          "const": "original.pdf",
+          "title": "Original Filename",
+          "type": "string"
+        },
+        "date_verification": {
+          "const": "printed_claims_only_not_legal_effect",
+          "default": "printed_claims_only_not_legal_effect",
+          "title": "Date Verification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "review_alias",
+        "authority_id",
+        "issuer",
+        "official_url",
+        "physical_pages",
+        "source",
+        "review",
+        "review_schema",
+        "manifest",
+        "acceptance",
+        "intake_receipt",
+        "canonical_original",
+        "provenance",
+        "http_event",
+        "intake_id",
+        "intake_received_at",
+        "acquisition_method",
+        "http_request_started_at",
+        "http_response_completed_at",
+        "http_status",
+        "reviewed_at",
+        "accepted_at",
+        "source_date_claims",
+        "recorded_custody_note",
+        "public_header_evidence",
+        "original_filename"
+      ],
+      "title": "DpSource",
+      "type": "object"
+    },
+    "DpSpan": {
+      "additionalProperties": false,
+      "description": "An unchanged native substring, with its page, line and exact source evidence.",
+      "properties": {
+        "line_id": {
+          "title": "Line Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "exclusiveMinimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "native": {
+          "$ref": "#/$defs/EhsAsset"
+        },
+        "image": {
+          "$ref": "#/$defs/EhsAsset"
+        },
+        "bbox": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Bbox"
+        }
+      },
+      "required": [
+        "line_id",
+        "physical_page",
+        "start",
+        "end",
+        "text",
+        "sha256",
+        "native",
+        "image",
+        "bbox"
+      ],
+      "title": "DpSpan",
+      "type": "object"
+    },
+    "EhsAsset": {
+      "additionalProperties": false,
+      "description": "An exact local evidence asset for the checked English EHS source.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "EhsAsset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Only source evidence; even an empty match retains the verified source context.",
+  "properties": {
+    "status": {
+      "enum": [
+        "matched",
+        "matched_context_only",
+        "no_matching_row",
+        "refused_current_law"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "source_id": {
+      "enum": [
+        "douglas-ehs-fees-atlas-directed",
+        "pueblo-planning-fees-atlas-directed"
+      ],
+      "title": "Source Id",
+      "type": "string"
+    },
+    "query": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Query"
+    },
+    "evidence_verified": {
+      "title": "Evidence Verified",
+      "type": "boolean"
+    },
+    "source": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/DpSource"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/DpRow"
+      },
+      "maxItems": 44,
+      "title": "Rows",
+      "type": "array"
+    },
+    "context": {
+      "items": {
+        "$ref": "#/$defs/DpContext"
+      },
+      "title": "Context",
+      "type": "array"
+    },
+    "annotations": {
+      "items": {
+        "$ref": "#/$defs/DpAnnotation"
+      },
+      "title": "Annotations",
+      "type": "array"
+    },
+    "matched_context_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Matched Context Ids",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "boundary": {
+      "default": "Source-only recorded schedule evidence, not a current-law or applicability answer. Complete physical rows, native bytes, source contexts and review qualifications remain attached. Blank cells are not zero. Dates and fee-setting captions are printed claims; no arithmetic, inferred waiver, legal effect or complete jurisdiction coverage is supplied. A missing match is not evidence of a free, exempt or unregulated activity. Douglas County and the City of Pueblo are separate issuers; Pueblo County is not this city.",
+      "title": "Boundary",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "adoption_date": {
+      "default": null,
+      "title": "Adoption Date",
+      "type": "null"
+    },
+    "effective_date": {
+      "default": null,
+      "title": "Effective Date",
+      "type": "null"
+    }
+  },
+  "required": [
+    "status",
+    "source_id",
+    "query",
+    "evidence_verified",
+    "rows",
+    "context",
+    "annotations",
+    "matched_context_ids",
+    "observations"
+  ],
+  "title": "DpLookupResult",
+  "type": "object"
+}

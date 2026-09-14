@@ -1,0 +1,198 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An immutable package-relative byte binding.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "FindingCheck": {
+      "additionalProperties": false,
+      "description": "A reported claim and the scope of this independent check.",
+      "properties": {
+        "finding_id": {
+          "pattern": "^EB02[56]-P2-00[1-9]$",
+          "title": "Finding Id",
+          "type": "string"
+        },
+        "reported_classification": {
+          "enum": [
+            "critical",
+            "minor"
+          ],
+          "title": "Reported Classification",
+          "type": "string"
+        },
+        "disposition": {
+          "title": "Disposition",
+          "type": "string"
+        },
+        "report_claim_matches": {
+          "const": true,
+          "title": "Report Claim Matches",
+          "type": "boolean"
+        },
+        "evidence_hashes_match": {
+          "const": true,
+          "title": "Evidence Hashes Match",
+          "type": "boolean"
+        },
+        "visual_evidence": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Visual Evidence",
+          "type": "array"
+        },
+        "observation": {
+          "title": "Observation",
+          "type": "string"
+        },
+        "actionable_issue": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Actionable Issue"
+        }
+      },
+      "required": [
+        "finding_id",
+        "reported_classification",
+        "disposition",
+        "report_claim_matches",
+        "evidence_hashes_match",
+        "visual_evidence",
+        "observation",
+        "actionable_issue"
+      ],
+      "title": "FindingCheck",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "No assertion of process independence or current law.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "reviewer": {
+      "const": "Popper",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "status": {
+      "const": "no_actionable_issue_in_recorded_scope",
+      "title": "Status",
+      "type": "string"
+    },
+    "reconciliation": {
+      "$ref": "#/$defs/Asset"
+    },
+    "reconciliation_inventory": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_audit_manifest_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Audit Manifest Sha256",
+      "type": "string"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/FindingCheck"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "directly_viewed": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Directly Viewed",
+      "type": "array"
+    },
+    "delivered_bindings_checked": {
+      "const": 124,
+      "title": "Delivered Bindings Checked",
+      "type": "integer"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "repository_edits": {
+      "const": false,
+      "title": "Repository Edits",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "translation_equivalence_verified": {
+      "const": false,
+      "title": "Translation Equivalence Verified",
+      "type": "boolean"
+    },
+    "historical_execution_independence_established": {
+      "const": false,
+      "title": "Historical Execution Independence Established",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "reviewer",
+    "status",
+    "reconciliation",
+    "reconciliation_inventory",
+    "source_audit_manifest_sha256",
+    "findings",
+    "directly_viewed",
+    "delivered_bindings_checked",
+    "limitations",
+    "public_requests",
+    "repository_edits",
+    "legal_currentness",
+    "translation_equivalence_verified",
+    "historical_execution_independence_established"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

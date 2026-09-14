@@ -1,0 +1,311 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "A confined file and exact byte identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "SourceBinding": {
+      "additionalProperties": false,
+      "description": "Explicit link from an unchanged source-audit ID to its pending intake ID.",
+      "properties": {
+        "slug": {
+          "enum": [
+            "ordinance",
+            "ehs"
+          ],
+          "title": "Slug",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-WELD",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "historical_audit_source_id": {
+          "title": "Historical Audit Source Id",
+          "type": "string"
+        },
+        "pending_intake_source_id": {
+          "title": "Pending Intake Source Id",
+          "type": "string"
+        },
+        "frozen_directory": {
+          "title": "Frozen Directory",
+          "type": "string"
+        },
+        "frozen_file_count": {
+          "title": "Frozen File Count",
+          "type": "integer"
+        },
+        "source_pdf": {
+          "$ref": "#/$defs/Asset"
+        },
+        "source_review": {
+          "$ref": "#/$defs/Asset"
+        },
+        "frozen_manifest": {
+          "$ref": "#/$defs/Asset"
+        },
+        "pages": {
+          "title": "Pages",
+          "type": "integer"
+        },
+        "native_bytes": {
+          "title": "Native Bytes",
+          "type": "integer"
+        },
+        "source_role": {
+          "title": "Source Role",
+          "type": "string"
+        },
+        "adoption_date_as_stated": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Adoption Date As Stated"
+        },
+        "effective_date_as_stated": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Effective Date As Stated"
+        },
+        "role_and_date_limits": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Role And Date Limits",
+          "type": "array"
+        },
+        "original_audit_id_changed": {
+          "const": false,
+          "title": "Original Audit Id Changed",
+          "type": "boolean"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "slug",
+        "authority_id",
+        "historical_audit_source_id",
+        "pending_intake_source_id",
+        "frozen_directory",
+        "frozen_file_count",
+        "source_pdf",
+        "source_review",
+        "frozen_manifest",
+        "pages",
+        "native_bytes",
+        "source_role",
+        "adoption_date_as_stated",
+        "effective_date_as_stated",
+        "role_and_date_limits",
+        "original_audit_id_changed",
+        "legal_currentness"
+      ],
+      "title": "SourceBinding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Additive source-review status, separate from canonical intake and currentness.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "source_reviews_complete_pending_separate_intake",
+      "title": "Status",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/SourceBinding"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Sources",
+      "type": "array"
+    },
+    "frozen_files_preserved": {
+      "const": 71,
+      "title": "Frozen Files Preserved",
+      "type": "integer"
+    },
+    "source_pages": {
+      "const": 8,
+      "title": "Source Pages",
+      "type": "integer"
+    },
+    "native_bytes_preserved": {
+      "const": 16651,
+      "title": "Native Bytes Preserved",
+      "type": "integer"
+    },
+    "ordinance_observations": {
+      "const": 18,
+      "title": "Ordinance Observations",
+      "type": "integer"
+    },
+    "ordinance_source_dates": {
+      "const": 11,
+      "title": "Ordinance Source Dates",
+      "type": "integer"
+    },
+    "ehs_rows": {
+      "const": 137,
+      "title": "Ehs Rows",
+      "type": "integer"
+    },
+    "ehs_groups": {
+      "const": 11,
+      "title": "Ehs Groups",
+      "type": "integer"
+    },
+    "ehs_native_lines": {
+      "const": 313,
+      "title": "Ehs Native Lines",
+      "type": "integer"
+    },
+    "ehs_printed_fee_cells": {
+      "const": 136,
+      "title": "Ehs Printed Fee Cells",
+      "type": "integer"
+    },
+    "ehs_blank_fee_cells": {
+      "const": 1,
+      "title": "Ehs Blank Fee Cells",
+      "type": "integer"
+    },
+    "new_visual_review_during_packaging": {
+      "const": false,
+      "title": "New Visual Review During Packaging",
+      "type": "boolean"
+    },
+    "external_reports_consulted": {
+      "const": false,
+      "title": "External Reports Consulted",
+      "type": "boolean"
+    },
+    "all_frozen_bytes_unchanged": {
+      "const": true,
+      "title": "All Frozen Bytes Unchanged",
+      "type": "boolean"
+    },
+    "source_or_native_edits": {
+      "const": false,
+      "title": "Source Or Native Edits",
+      "type": "boolean"
+    },
+    "canonical_intake_performed_by_this_package": {
+      "const": false,
+      "title": "Canonical Intake Performed By This Package",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "operative_effect_verified": {
+      "const": false,
+      "title": "Operative Effect Verified",
+      "type": "boolean"
+    },
+    "coverage_promoted": {
+      "const": false,
+      "title": "Coverage Promoted",
+      "type": "boolean"
+    },
+    "public_opens": {
+      "const": 0,
+      "title": "Public Opens",
+      "type": "integer"
+    },
+    "historical_absolute_paths_used_for_portable_validation": {
+      "const": false,
+      "title": "Historical Absolute Paths Used For Portable Validation",
+      "type": "boolean"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "prepared_at",
+    "status",
+    "sources",
+    "frozen_files_preserved",
+    "source_pages",
+    "native_bytes_preserved",
+    "ordinance_observations",
+    "ordinance_source_dates",
+    "ehs_rows",
+    "ehs_groups",
+    "ehs_native_lines",
+    "ehs_printed_fee_cells",
+    "ehs_blank_fee_cells",
+    "new_visual_review_during_packaging",
+    "external_reports_consulted",
+    "all_frozen_bytes_unchanged",
+    "source_or_native_edits",
+    "canonical_intake_performed_by_this_package",
+    "legal_currentness",
+    "operative_effect_verified",
+    "coverage_promoted",
+    "public_opens",
+    "historical_absolute_paths_used_for_portable_validation",
+    "limits"
+  ],
+  "title": "PackageRecord",
+  "type": "object"
+}

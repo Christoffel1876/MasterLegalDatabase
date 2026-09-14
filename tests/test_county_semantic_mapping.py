@@ -6,6 +6,7 @@ from pathlib import Path
 
 from geode.pipeline.county_semantic_mapping import build_candidate_mappings
 from geode.utils.file_io import atomic_write_jsonl, iter_jsonl
+from tests.ownership_support import ownership_policy
 
 
 HASH = "a" * 64

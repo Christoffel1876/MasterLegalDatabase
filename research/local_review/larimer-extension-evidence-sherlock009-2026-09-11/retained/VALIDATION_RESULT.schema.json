@@ -1,0 +1,113 @@
+{
+  "$defs": {
+    "FileRef": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "validated_at": {
+      "format": "date-time",
+      "title": "Validated At",
+      "type": "string"
+    },
+    "audit": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "custody_receipt": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "checks_passed": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks Passed",
+      "type": "array"
+    },
+    "original_and_received_file_pairs": {
+      "const": 97,
+      "title": "Original And Received File Pairs",
+      "type": "integer"
+    },
+    "inventoried_files": {
+      "const": 51,
+      "title": "Inventoried Files",
+      "type": "integer"
+    },
+    "checked_tar_file_members": {
+      "const": 87,
+      "title": "Checked Tar File Members",
+      "type": "integer"
+    },
+    "source_pdfs": {
+      "const": 3,
+      "title": "Source Pdfs",
+      "type": "integer"
+    },
+    "structural_pages": {
+      "const": 27,
+      "title": "Structural Pages",
+      "type": "integer"
+    },
+    "visual_pages_previously_inspected": {
+      "const": 10,
+      "title": "Visual Pages Previously Inspected",
+      "type": "integer"
+    },
+    "exact_publisher_acquisition_verified": {
+      "const": false,
+      "title": "Exact Publisher Acquisition Verified",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "validated_at",
+    "audit",
+    "custody_receipt",
+    "checks_passed",
+    "original_and_received_file_pairs",
+    "inventoried_files",
+    "checked_tar_file_members",
+    "source_pdfs",
+    "structural_pages",
+    "visual_pages_previously_inspected",
+    "exact_publisher_acquisition_verified",
+    "legal_currentness"
+  ],
+  "title": "ValidationResult",
+  "type": "object"
+}

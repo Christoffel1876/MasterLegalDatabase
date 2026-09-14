@@ -1,0 +1,72 @@
+{
+  "kind": "offline_transport_review",
+  "recorded_at": "2026-09-13T00:22:48.593277Z",
+  "reviewed_sources": [
+    {
+      "path": "implementation/manual_watch_http.py",
+      "sha256": "c1d5c660a6365a4ac3cd950360fd592b800dd7f9910587df3920506c70f64265",
+      "size_bytes": 30400
+    },
+    {
+      "path": "tests/test_manual_watch_http.py",
+      "sha256": "6e94d5b6ad99d21f357ac4474ec8024b884581cd9c1175e1a343de98ca253109",
+      "size_bytes": 33814
+    },
+    {
+      "path": "tests/test_manual_watch_http_deadlines.py",
+      "sha256": "4d01a0b5e9fd925ac6e030383f2ac0b3cf8d92dae72c8d8beb04a35f7f6f531c",
+      "size_bytes": 7845
+    }
+  ],
+  "tests_passed": 94,
+  "covered_statements": 471,
+  "total_statements": 489,
+  "covered_branches": 162,
+  "total_branches": 178,
+  "combined_coverage_percent": 94.90254872563717,
+  "test_log": {
+    "path": "focused-tests.log",
+    "sha256": "374ae0f8ddcafd739b2831c2c95d5f2992ecaf6996c623dc7dec01df54170860",
+    "size_bytes": 918
+  },
+  "coverage": {
+    "path": "coverage.json",
+    "sha256": "725fe62e863806e3912763431fb4d675be2586c1a33cbd6da8dd0d9e4052bedd",
+    "size_bytes": 39272
+  },
+  "command": "PYTHONPATH=. PYTHONDONTWRITEBYTECODE=1 COVERAGE_FILE=/private/tmp/geode-watch-deadline.coverage /private/tmp/geode-status-venv/bin/python -B -m pytest -q -p no:cacheprovider tests/test_manual_watch_http.py tests/test_manual_watch_http_deadlines.py --cov=geode.pipeline.manual_watch_http --cov-branch --cov-report=term-missing",
+  "findings": [
+    {
+      "id": "HTTP-FRAMING",
+      "scope": "Conflicting Transfer-Encoding and Content-Length at a retained-body cap",
+      "observed": "A real local HTTPResponse accepted four bytes of an eight-byte chunked body as complete when conflicting Content-Length was four and the cap was four.",
+      "resolution": "Root added validate_framing to both real Response construction and injected request paths; retained in the frozen helper and covered by the combined focused suite."
+    },
+    {
+      "id": "HTTP-DEADLINE",
+      "scope": "Complete header/trailer parser operation, late EOF and completion",
+      "observed": "A local socket-pair response supplied exact baseline PDF bytes plus slow chunk trailers. Before repair it finished in 1.846214 seconds despite a one-second deadline, was marked complete/unchanged, and passed adapter verification.",
+      "resolution": "A bounded operation watchdog now shuts down an independently retained descriptor; it is cancelled and joined on every exit. Post-read and final classification refuse late completion. Original reproduction after repair retained the prior body, reported timeout/partial in 1.013505 seconds, and the adapter returned stopped/transport_error with a valid stopped receipt. The wire producer received BrokenPipe because shutdown was intentional."
+    },
+    {
+      "id": "ADAPTER-FINAL-SEAL",
+      "scope": "Report saved before final inventory",
+      "observed": "Injected seal failure left report.json without RUN_MANIFEST.json; replay failed instead of finalizing.",
+      "resolution": "Sent to adapter owner Plato for a separate repair; this helper receipt does not certify that adapter fix."
+    },
+    {
+      "id": "ADAPTER-EXPIRY",
+      "scope": "Dispatch expires between adapter preflight and run initialization",
+      "observed": "A zero-request stopped report lacked run.json and failed its own verifier.",
+      "resolution": "Sent to adapter owner Plato; independent final adapter review remains separate."
+    }
+  ],
+  "limits": [
+    "No public HTTP, DNS, TLS session, source acquisition or legal-currentness review was performed by these tests. Real framing tests use only local AF_UNIX socket pairs; transport endpoint dependencies are mocked.",
+    "The source adapter was changing concurrently and is not frozen by this receipt. Its pending recovery/custody/CLI findings were reported to its owner.",
+    "Retained-body accounting is not a count of all HTTP/TLS wire bytes. Earlier accepted blocks remain immutable when a subsequent operation times out.",
+    "The timer is an operational bound, subject to OS scheduling and cleanup latency; it does not claim mathematical zero overshoot. Late returns cannot be classified complete.",
+    "Reproduction scripts preserve the reviewed pre-fix cases and import repository fixture helpers. They are audit inputs, not standalone public collectors and not promises that a fixed implementation still produces the prior failure.",
+    "This package records a focused suite only; no full repository suite or live watch was run."
+  ]
+}

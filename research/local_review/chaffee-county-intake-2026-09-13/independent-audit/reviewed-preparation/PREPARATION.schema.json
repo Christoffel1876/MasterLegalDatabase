@@ -1,0 +1,470 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact package-relative retained file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Baseline": {
+      "additionalProperties": false,
+      "description": "A preserved exact canonical predecessor.",
+      "properties": {
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "preserved": {
+          "$ref": "#/$defs/Asset"
+        },
+        "records": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Records"
+        }
+      },
+      "required": [
+        "repository_path",
+        "preserved",
+        "records"
+      ],
+      "title": "Baseline",
+      "type": "object"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "description": "Observed acquisition and supplied earlier referrals remain separate.",
+      "properties": {
+        "source_id": {
+          "enum": [
+            "chaffee-cwrc-ordinance-2026-02-atlas-directed",
+            "chaffee-electric-ordinance-2026-01-atlas-directed"
+          ],
+          "title": "Source Id",
+          "type": "string"
+        },
+        "action_id": {
+          "enum": [
+            "A001",
+            "A002"
+          ],
+          "title": "Action Id",
+          "type": "string"
+        },
+        "target_id": {
+          "enum": [
+            "CHAFFEE-D001",
+            "CHAFFEE-D002"
+          ],
+          "title": "Target Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-CHAFFEE",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Asset"
+        },
+        "response_body": {
+          "$ref": "#/$defs/Asset"
+        },
+        "physical_pages": {
+          "minimum": 1,
+          "title": "Physical Pages",
+          "type": "integer"
+        },
+        "parent": {
+          "$ref": "#/$defs/Asset"
+        },
+        "parent_url": {
+          "title": "Parent Url",
+          "type": "string"
+        },
+        "base_href": {
+          "title": "Base Href",
+          "type": "string"
+        },
+        "original_href": {
+          "title": "Original Href",
+          "type": "string"
+        },
+        "visible_label": {
+          "title": "Visible Label",
+          "type": "string"
+        },
+        "prior_redirect_notice": {
+          "$ref": "#/$defs/Asset"
+        },
+        "prior_header_summary": {
+          "$ref": "#/$defs/Asset"
+        },
+        "original_location": {
+          "title": "Original Location",
+          "type": "string"
+        },
+        "reservation": {
+          "$ref": "#/$defs/Asset"
+        },
+        "result": {
+          "$ref": "#/$defs/Asset"
+        },
+        "public_headers": {
+          "$ref": "#/$defs/Asset"
+        },
+        "curl_writeout": {
+          "$ref": "#/$defs/Asset"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "final_url": {
+          "title": "Final Url",
+          "type": "string"
+        },
+        "http_status": {
+          "const": 200,
+          "title": "Http Status",
+          "type": "integer"
+        },
+        "http_started_at": {
+          "format": "date-time",
+          "title": "Http Started At",
+          "type": "string"
+        },
+        "http_completed_at": {
+          "format": "date-time",
+          "title": "Http Completed At",
+          "type": "string"
+        },
+        "tls_verified": {
+          "const": true,
+          "title": "Tls Verified",
+          "type": "boolean"
+        },
+        "redirects_followed": {
+          "const": 0,
+          "title": "Redirects Followed",
+          "type": "integer"
+        },
+        "original_tool_command_retained": {
+          "const": true,
+          "title": "Original Tool Command Retained",
+          "type": "boolean"
+        },
+        "acquisition_method": {
+          "const": "manual_official_download",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "actual_repository_received_at": {
+          "title": "Actual Repository Received At",
+          "type": "null"
+        },
+        "source_content_reviewed_in_this_intake": {
+          "const": false,
+          "title": "Source Content Reviewed In This Intake",
+          "type": "boolean"
+        },
+        "document_role": {
+          "title": "Document Role",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "limitations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source_id",
+        "action_id",
+        "target_id",
+        "authority_id",
+        "source",
+        "response_body",
+        "physical_pages",
+        "parent",
+        "parent_url",
+        "base_href",
+        "original_href",
+        "visible_label",
+        "prior_redirect_notice",
+        "prior_header_summary",
+        "original_location",
+        "reservation",
+        "result",
+        "public_headers",
+        "curl_writeout",
+        "requested_url",
+        "final_url",
+        "http_status",
+        "http_started_at",
+        "http_completed_at",
+        "tls_verified",
+        "redirects_followed",
+        "original_tool_command_retained",
+        "acquisition_method",
+        "actual_repository_received_at",
+        "source_content_reviewed_in_this_intake",
+        "document_role",
+        "legal_currentness",
+        "limitations"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "Template": {
+      "additionalProperties": false,
+      "description": "Prospective final-record values with receipt-only fields unset.",
+      "properties": {
+        "record_id": {
+          "enum": [
+            "chaffee-cwrc-ordinance-2026-02-atlas-directed",
+            "chaffee-electric-ordinance-2026-01-atlas-directed"
+          ],
+          "title": "Record Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-CHAFFEE",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "const": "08_County_Authorities",
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "official_source_name": {
+          "title": "Official Source Name",
+          "type": "string"
+        },
+        "official_source_url": {
+          "title": "Official Source Url",
+          "type": "string"
+        },
+        "acquisition_method": {
+          "const": "manual_official_download",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Asset"
+        },
+        "original_filename": {
+          "title": "Original Filename",
+          "type": "string"
+        },
+        "custody_note": {
+          "title": "Custody Note",
+          "type": "string"
+        },
+        "actual_repository_received_at": {
+          "title": "Actual Repository Received At",
+          "type": "null"
+        },
+        "intake_id": {
+          "title": "Intake Id",
+          "type": "null"
+        },
+        "archive_path": {
+          "title": "Archive Path",
+          "type": "null"
+        }
+      },
+      "required": [
+        "record_id",
+        "authority_id",
+        "layer_id",
+        "official_source_name",
+        "official_source_url",
+        "acquisition_method",
+        "source",
+        "original_filename",
+        "custody_note",
+        "actual_repository_received_at",
+        "intake_id",
+        "archive_path"
+      ],
+      "title": "Template",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Exactly two custody records on an immutable canonical prefix.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_APPLIED",
+      "title": "Status",
+      "type": "string"
+    },
+    "comparison_commit": {
+      "pattern": "^[a-f0-9]{40}$",
+      "title": "Comparison Commit",
+      "type": "string"
+    },
+    "templates": {
+      "items": {
+        "$ref": "#/$defs/Template"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Templates",
+      "type": "array"
+    },
+    "provenance": {
+      "items": {
+        "$ref": "#/$defs/Provenance"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Provenance",
+      "type": "array"
+    },
+    "baseline": {
+      "items": {
+        "$ref": "#/$defs/Baseline"
+      },
+      "title": "Baseline",
+      "type": "array"
+    },
+    "runtime_pins": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Runtime Pins",
+      "type": "object"
+    },
+    "custody_subset": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Custody Subset",
+      "type": "array"
+    },
+    "retrieval_plan": {
+      "$ref": "#/$defs/Asset"
+    },
+    "retrieval_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "deduplication": {
+      "$ref": "#/$defs/Asset"
+    },
+    "legacy_guard": {
+      "$ref": "#/$defs/Asset"
+    },
+    "raw_before": {
+      "minimum": 0,
+      "title": "Raw Before",
+      "type": "integer"
+    },
+    "ledger_before": {
+      "minimum": 0,
+      "title": "Ledger Before",
+      "type": "integer"
+    },
+    "raw_after": {
+      "minimum": 2,
+      "title": "Raw After",
+      "type": "integer"
+    },
+    "ledger_after": {
+      "minimum": 2,
+      "title": "Ledger After",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "canonical_mutations": {
+      "const": 0,
+      "title": "Canonical Mutations",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "prepared_at",
+    "status",
+    "comparison_commit",
+    "templates",
+    "provenance",
+    "baseline",
+    "runtime_pins",
+    "custody_subset",
+    "retrieval_plan",
+    "retrieval_manifest",
+    "deduplication",
+    "legacy_guard",
+    "raw_before",
+    "ledger_before",
+    "raw_after",
+    "ledger_after",
+    "public_requests",
+    "canonical_mutations",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Preparation",
+  "type": "object"
+}

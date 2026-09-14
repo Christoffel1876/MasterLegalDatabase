@@ -1,0 +1,182 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "CodeChange": {
+      "additionalProperties": false,
+      "properties": {
+        "production_path": {
+          "title": "Production Path",
+          "type": "string"
+        },
+        "frozen": {
+          "$ref": "#/$defs/Asset"
+        },
+        "preimage": {
+          "$ref": "#/$defs/Asset"
+        },
+        "maximum_line_length": {
+          "title": "Maximum Line Length",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "production_path",
+        "frozen",
+        "preimage",
+        "maximum_line_length"
+      ],
+      "title": "CodeChange",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "frozen_at": {
+      "format": "date-time",
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "status": {
+      "const": "ready_for_independent_review",
+      "title": "Status",
+      "type": "string"
+    },
+    "code_changes": {
+      "items": {
+        "$ref": "#/$defs/CodeChange"
+      },
+      "title": "Code Changes",
+      "type": "array"
+    },
+    "sources_added": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Sources Added",
+      "type": "array"
+    },
+    "verified_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Verified Counts",
+      "type": "object"
+    },
+    "focused_tests_passed": {
+      "title": "Focused Tests Passed",
+      "type": "integer"
+    },
+    "focused_command": {
+      "title": "Focused Command",
+      "type": "string"
+    },
+    "post_format_test_passed": {
+      "title": "Post Format Test Passed",
+      "type": "integer"
+    },
+    "coverage": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "number"
+          }
+        ]
+      },
+      "title": "Coverage",
+      "type": "object"
+    },
+    "changed_executable_lines": {
+      "title": "Changed Executable Lines",
+      "type": "integer"
+    },
+    "changed_executable_lines_covered": {
+      "title": "Changed Executable Lines Covered",
+      "type": "integer"
+    },
+    "inherited_json_and_markdown_byte_equal": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Inherited Json And Markdown Byte Equal",
+      "type": "array"
+    },
+    "test_artifacts": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Test Artifacts",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "full_suite_run": {
+      "const": false,
+      "title": "Full Suite Run",
+      "type": "boolean"
+    },
+    "network_requests": {
+      "const": 0,
+      "title": "Network Requests",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "frozen_at",
+    "status",
+    "code_changes",
+    "sources_added",
+    "verified_counts",
+    "focused_tests_passed",
+    "focused_command",
+    "post_format_test_passed",
+    "coverage",
+    "changed_executable_lines",
+    "changed_executable_lines_covered",
+    "inherited_json_and_markdown_byte_equal",
+    "test_artifacts",
+    "limitations",
+    "full_suite_run",
+    "network_requests",
+    "legal_currentness"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

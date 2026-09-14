@@ -1,0 +1,57 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "source_path": {
+      "title": "Source Path",
+      "type": "string"
+    },
+    "source_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "selected_publication_url": {
+      "title": "Selected Publication Url",
+      "type": "string"
+    },
+    "selected_notice_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Selected Notice Ids",
+      "type": "array"
+    },
+    "output_sha256": {
+      "title": "Output Sha256",
+      "type": "string"
+    },
+    "record_count": {
+      "title": "Record Count",
+      "type": "integer"
+    },
+    "fixture_hashes": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Fixture Hashes",
+      "type": "object"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "source_path",
+    "source_sha256",
+    "selected_publication_url",
+    "selected_notice_ids",
+    "output_sha256",
+    "record_count",
+    "fixture_hashes"
+  ],
+  "title": "Selection",
+  "type": "object"
+}

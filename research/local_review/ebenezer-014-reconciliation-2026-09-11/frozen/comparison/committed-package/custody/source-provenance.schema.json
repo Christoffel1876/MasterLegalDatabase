@@ -1,0 +1,445 @@
+{
+  "$defs": {
+    "Artifact": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Artifact",
+      "type": "object"
+    },
+    "Claims": {
+      "additionalProperties": false,
+      "properties": {
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "final_url": {
+          "title": "Final Url",
+          "type": "string"
+        },
+        "logged_at": {
+          "format": "date-time",
+          "title": "Logged At",
+          "type": "string"
+        },
+        "supplied_http_status": {
+          "title": "Supplied Http Status",
+          "type": "integer"
+        },
+        "supplied_content_type": {
+          "title": "Supplied Content Type",
+          "type": "string"
+        },
+        "event_index": {
+          "title": "Event Index",
+          "type": "integer"
+        },
+        "claimed_referral_url": {
+          "title": "Claimed Referral Url",
+          "type": "string"
+        },
+        "referral_basis": {
+          "enum": [
+            "inferred_filename_pattern_current_anchor_unverified",
+            "historical_metadata_route_current_anchor_unverified",
+            "supplied_catalog_referral_not_reverified"
+          ],
+          "title": "Referral Basis",
+          "type": "string"
+        },
+        "original_http_acquisition_at": {
+          "default": null,
+          "title": "Original Http Acquisition At",
+          "type": "null"
+        },
+        "original_http_acquisition_verified": {
+          "const": false,
+          "default": false,
+          "title": "Original Http Acquisition Verified",
+          "type": "boolean"
+        },
+        "metadata_copy_path": {
+          "title": "Metadata Copy Path",
+          "type": "string"
+        },
+        "metadata_sha256": {
+          "title": "Metadata Sha256",
+          "type": "string"
+        },
+        "package_log_copy_path": {
+          "title": "Package Log Copy Path",
+          "type": "string"
+        },
+        "package_log_sha256": {
+          "title": "Package Log Sha256",
+          "type": "string"
+        },
+        "upstream_origin_caveat": {
+          "title": "Upstream Origin Caveat",
+          "type": "string"
+        }
+      },
+      "required": [
+        "requested_url",
+        "final_url",
+        "logged_at",
+        "supplied_http_status",
+        "supplied_content_type",
+        "event_index",
+        "claimed_referral_url",
+        "referral_basis",
+        "metadata_copy_path",
+        "metadata_sha256",
+        "package_log_copy_path",
+        "package_log_sha256",
+        "upstream_origin_caveat"
+      ],
+      "title": "Claims",
+      "type": "object"
+    },
+    "History": {
+      "additionalProperties": false,
+      "properties": {
+        "comparison_commit": {
+          "title": "Comparison Commit",
+          "type": "string"
+        },
+        "exact_url_historical_lines": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Exact Url Historical Lines",
+          "type": "array"
+        },
+        "global_digest_historical_lines": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Global Digest Historical Lines",
+          "type": "array"
+        },
+        "exact_url_and_digest_historical_lines": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Exact Url And Digest Historical Lines",
+          "type": "array"
+        },
+        "historical_source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Historical Source Ids",
+          "type": "array"
+        },
+        "historical_authority_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Historical Authority Ids",
+          "type": "array"
+        },
+        "disposition": {
+          "title": "Disposition",
+          "type": "string"
+        },
+        "historical_originals_opened": {
+          "const": false,
+          "default": false,
+          "title": "Historical Originals Opened",
+          "type": "boolean"
+        },
+        "limit": {
+          "title": "Limit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "comparison_commit",
+        "exact_url_historical_lines",
+        "global_digest_historical_lines",
+        "exact_url_and_digest_historical_lines",
+        "historical_source_ids",
+        "historical_authority_ids",
+        "disposition",
+        "limit"
+      ],
+      "title": "History",
+      "type": "object"
+    },
+    "ManualSourceIntakeRecord": {
+      "additionalProperties": false,
+      "description": "Durable record for one archived manual source artifact.",
+      "properties": {
+        "intake_id": {
+          "title": "Intake Id",
+          "type": "string"
+        },
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "official_source_name": {
+          "title": "Official Source Name",
+          "type": "string"
+        },
+        "official_source_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Official Source Url"
+        },
+        "acquisition_method": {
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "received_from": {
+          "title": "Received From",
+          "type": "string"
+        },
+        "reviewer_name": {
+          "title": "Reviewer Name",
+          "type": "string"
+        },
+        "reviewer_email": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewer Email"
+        },
+        "custody_note": {
+          "title": "Custody Note",
+          "type": "string"
+        },
+        "original_filename": {
+          "title": "Original Filename",
+          "type": "string"
+        },
+        "archive_path": {
+          "title": "Archive Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 1,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "source_format": {
+          "title": "Source Format",
+          "type": "string"
+        },
+        "received_at": {
+          "format": "date-time",
+          "title": "Received At",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "blocked_queue_match": {
+          "title": "Blocked Queue Match",
+          "type": "boolean"
+        },
+        "boundary": {
+          "title": "Boundary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "intake_id",
+        "record_id",
+        "layer_id",
+        "official_source_name",
+        "acquisition_method",
+        "received_from",
+        "reviewer_name",
+        "custody_note",
+        "original_filename",
+        "archive_path",
+        "sha256",
+        "size_bytes",
+        "source_format",
+        "received_at",
+        "status",
+        "blocked_queue_match",
+        "boundary"
+      ],
+      "title": "ManualSourceIntakeRecord",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-MUNICIPAL-FORT_COLLINS",
+      "default": "CO-MUNICIPAL-FORT_COLLINS",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "authority_assignment_basis": {
+      "title": "Authority Assignment Basis",
+      "type": "string"
+    },
+    "layer_id": {
+      "const": "10_Municipal_Authorities",
+      "default": "10_Municipal_Authorities",
+      "title": "Layer Id",
+      "type": "string"
+    },
+    "source_label": {
+      "title": "Source Label",
+      "type": "string"
+    },
+    "label_basis": {
+      "title": "Label Basis",
+      "type": "string"
+    },
+    "source_role": {
+      "enum": [
+        "local_amendment_candidate",
+        "related_code_candidate",
+        "code_article_candidate",
+        "meeting_packet"
+      ],
+      "title": "Source Role",
+      "type": "string"
+    },
+    "manual_intake": {
+      "$ref": "#/$defs/ManualSourceIntakeRecord"
+    },
+    "archive_member": {
+      "title": "Archive Member",
+      "type": "string"
+    },
+    "original": {
+      "$ref": "#/$defs/Artifact"
+    },
+    "structural_pages": {
+      "exclusiveMinimum": 0,
+      "title": "Structural Pages",
+      "type": "integer"
+    },
+    "pdf_repaired": {
+      "const": false,
+      "default": false,
+      "title": "Pdf Repaired",
+      "type": "boolean"
+    },
+    "pdf_encrypted": {
+      "const": false,
+      "default": false,
+      "title": "Pdf Encrypted",
+      "type": "boolean"
+    },
+    "terminal_eof": {
+      "const": true,
+      "default": true,
+      "title": "Terminal Eof",
+      "type": "boolean"
+    },
+    "page_tree_accessible": {
+      "const": true,
+      "default": true,
+      "title": "Page Tree Accessible",
+      "type": "boolean"
+    },
+    "claims": {
+      "$ref": "#/$defs/Claims"
+    },
+    "historical_comparison": {
+      "$ref": "#/$defs/History"
+    },
+    "status": {
+      "const": "archived_pending_pipeline",
+      "default": "archived_pending_pipeline",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "legal_review": {
+      "const": "pending",
+      "default": "pending",
+      "title": "Legal Review",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_id",
+    "authority_assignment_basis",
+    "source_label",
+    "label_basis",
+    "source_role",
+    "manual_intake",
+    "archive_member",
+    "original",
+    "structural_pages",
+    "claims",
+    "historical_comparison",
+    "limitations"
+  ],
+  "title": "Source",
+  "type": "object"
+}

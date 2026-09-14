@@ -1,0 +1,90 @@
+name: Manual PDF offline readiness checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: manual-pdf-offline-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  GIT_LFS_SKIP_SMUDGE: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+  PYTHONUNBUFFERED: '1'
+
+jobs:
+  offline-readiness:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout event tree without persistent credentials or LFS downloads
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          lfs: false
+      - name: Initialize setup evidence before installing dependencies
+        run: |
+          mkdir -p .geode_runtime/manual-watch-offline-ci
+          message='Offline readiness has not completed. No source HTTP result is established.'
+          printf '%s\n' "$message" > .geode_runtime/manual-watch-offline-ci/summary.md
+          git rev-parse HEAD > .geode_runtime/manual-watch-offline-ci/checkout-commit.txt
+      - name: Set up Python 3.11
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.11'
+      - name: Install frozen offline watch dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements-manual-watch-ci.txt
+      - name: Run offline guards and reporting tests
+        run: >-
+          python -B -m pytest tests/test_manual_watch*.py tests/test_manual_source_watch*.py
+          -q --cov=scripts.manual_source_watch_ci --cov-branch --cov-fail-under=90
+          --cov-report=term-missing
+          --cov-report=xml:.geode_runtime/manual-watch-offline-ci/coverage.xml
+          --junitxml=.geode_runtime/manual-watch-offline-ci/tests.xml
+      - name: Verify the eight fixed baselines offline
+        env:
+          WATCH_RUN_ID: ${{ github.run_id }}
+          WATCH_RUN_ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          python -B scripts/manual_source_watch_ci.py --root "$GITHUB_WORKSPACE" \
+            --run-name "offline-${WATCH_RUN_ID}-${WATCH_RUN_ATTEMPT}" \
+            --event local_readiness --commit "$(git rev-parse HEAD)"
+      - name: Show offline readiness or setup failure
+        if: always()
+        env:
+          WATCH_RUN_ID: ${{ github.run_id }}
+          WATCH_RUN_ATTEMPT: ${{ github.run_attempt }}
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          printf '## Manual PDF offline readiness\n\nJob result: %s\n\n' "$JOB_STATUS" \
+            >> "$GITHUB_STEP_SUMMARY"
+          printf '%s\n\n' 'No source HTTP was requested by this workflow.' \
+            >> "$GITHUB_STEP_SUMMARY"
+          run_name="offline-${WATCH_RUN_ID}-${WATCH_RUN_ATTEMPT}"
+          report=".geode_runtime/manual_source_watch_ci/${run_name}/summary.md"
+          if test -f "$report"; then
+            cat "$report" >> "$GITHUB_STEP_SUMMARY"
+          elif test -f .geode_runtime/manual-watch-offline-ci/summary.md; then
+            cat .geode_runtime/manual-watch-offline-ci/summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            printf '%s\n' 'Setup failed before a retained readiness report existed.' \
+              'No readiness or source outcome is established.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Retain offline results even after setup or test failure
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: manual-watch-offline-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .geode_runtime/manual-watch-offline-ci/
+            .geode_runtime/manual_source_watch_ci/
+          retention-days: 30
+          if-no-files-found: warn
+          include-hidden-files: true

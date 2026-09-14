@@ -1,0 +1,325 @@
+{
+  "$defs": {
+    "FileRef": {
+      "additionalProperties": false,
+      "description": "Exact package-relative byte identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    },
+    "HeaderCustody": {
+      "additionalProperties": false,
+      "description": "Original header digest and public exact-line subset; no secret values.",
+      "properties": {
+        "original_sha256": {
+          "title": "Original Sha256",
+          "type": "string"
+        },
+        "original_size_bytes": {
+          "title": "Original Size Bytes",
+          "type": "integer"
+        },
+        "public_subset": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "retained_field_names": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Retained Field Names",
+          "type": "array"
+        },
+        "omitted_field_names": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Omitted Field Names",
+          "type": "array"
+        },
+        "omitted_line_count": {
+          "title": "Omitted Line Count",
+          "type": "integer"
+        },
+        "original_retained": {
+          "const": false,
+          "title": "Original Retained",
+          "type": "boolean"
+        },
+        "limitation": {
+          "title": "Limitation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "original_sha256",
+        "original_size_bytes",
+        "public_subset",
+        "retained_field_names",
+        "omitted_field_names",
+        "omitted_line_count",
+        "original_retained",
+        "limitation"
+      ],
+      "title": "HeaderCustody",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Actual local invocation and structural result, without source QA.",
+  "properties": {
+    "action_id": {
+      "title": "Action Id",
+      "type": "string"
+    },
+    "target_id": {
+      "title": "Target Id",
+      "type": "string"
+    },
+    "requested_url": {
+      "title": "Requested Url",
+      "type": "string"
+    },
+    "final_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Final Url"
+    },
+    "location": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Location"
+    },
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "title": "Completed At",
+      "type": "string"
+    },
+    "elapsed_monotonic_seconds": {
+      "title": "Elapsed Monotonic Seconds",
+      "type": "number"
+    },
+    "process_exit": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Process Exit"
+    },
+    "outer_timeout": {
+      "title": "Outer Timeout",
+      "type": "boolean"
+    },
+    "http_status": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Http Status"
+    },
+    "curl_reported_download_bytes": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Curl Reported Download Bytes"
+    },
+    "curl_reported_redirects": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Curl Reported Redirects"
+    },
+    "tls_verify_result": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Tls Verify Result"
+    },
+    "body": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "stdout": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "stderr": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "headers": {
+      "$ref": "#/$defs/HeaderCustody"
+    },
+    "body_complete": {
+      "title": "Body Complete",
+      "type": "boolean"
+    },
+    "partial_or_unknown": {
+      "title": "Partial Or Unknown",
+      "type": "boolean"
+    },
+    "cap_reached": {
+      "title": "Cap Reached",
+      "type": "boolean"
+    },
+    "must_stop": {
+      "title": "Must Stop",
+      "type": "boolean"
+    },
+    "pdf_magic": {
+      "title": "Pdf Magic",
+      "type": "boolean"
+    },
+    "pdf_parse_ok": {
+      "title": "Pdf Parse Ok",
+      "type": "boolean"
+    },
+    "pdf_pages": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Pdf Pages"
+    },
+    "parser_version": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Parser Version"
+    },
+    "structural_error": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Structural Error"
+    },
+    "disposition": {
+      "title": "Disposition",
+      "type": "string"
+    },
+    "evidence_role": {
+      "const": "directed_original_response_custody_only",
+      "title": "Evidence Role",
+      "type": "string"
+    },
+    "reviewed_pages": {
+      "const": 0,
+      "title": "Reviewed Pages",
+      "type": "integer"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "action_id",
+    "target_id",
+    "requested_url",
+    "final_url",
+    "location",
+    "started_at",
+    "completed_at",
+    "elapsed_monotonic_seconds",
+    "process_exit",
+    "outer_timeout",
+    "http_status",
+    "curl_reported_download_bytes",
+    "curl_reported_redirects",
+    "tls_verify_result",
+    "body",
+    "stdout",
+    "stderr",
+    "headers",
+    "body_complete",
+    "partial_or_unknown",
+    "cap_reached",
+    "must_stop",
+    "pdf_magic",
+    "pdf_parse_ok",
+    "pdf_pages",
+    "parser_version",
+    "structural_error",
+    "disposition",
+    "evidence_role",
+    "reviewed_pages",
+    "answer_safe",
+    "legal_currentness"
+  ],
+  "title": "Attempt",
+  "type": "object"
+}

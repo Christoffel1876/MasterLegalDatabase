@@ -1,0 +1,408 @@
+{
+  "$defs": {
+    "Observation": {
+      "additionalProperties": false,
+      "description": "Transport/byte observations only; an absent response is never an unchanged source.",
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "canonical_source_id": {
+          "title": "Canonical Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-MUNICIPAL-COLORADO_SPRINGS",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "baseline": {
+          "$ref": "#/$defs/Ref"
+        },
+        "baseline_request_started_at": {
+          "format": "date-time",
+          "title": "Baseline Request Started At",
+          "type": "string"
+        },
+        "baseline_response_finished_at": {
+          "format": "date-time",
+          "title": "Baseline Response Finished At",
+          "type": "string"
+        },
+        "repository_received_at": {
+          "format": "date-time",
+          "title": "Repository Received At",
+          "type": "string"
+        },
+        "intake_id": {
+          "title": "Intake Id",
+          "type": "string"
+        },
+        "source_context": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Context",
+          "type": "array"
+        },
+        "status": {
+          "enum": [
+            "unchanged",
+            "changed",
+            "access_denied",
+            "not_found",
+            "transport_error",
+            "invalid_response",
+            "refused",
+            "not_checked"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "events": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Events",
+          "type": "array"
+        },
+        "request_started_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Request Started At"
+        },
+        "response_finished_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Response Finished At"
+        },
+        "response_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Response Url"
+        },
+        "http_status": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Http Status"
+        },
+        "response_body": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "response_public_headers": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "valid_pdf_pages": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Valid Pdf Pages"
+        },
+        "bytes_equal_to_baseline": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Bytes Equal To Baseline"
+        },
+        "review_needed": {
+          "title": "Review Needed",
+          "type": "boolean"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "inferred_legal_change": {
+          "default": null,
+          "title": "Inferred Legal Change",
+          "type": "null"
+        },
+        "canonical_update": {
+          "const": "not_attempted",
+          "default": "not_attempted",
+          "title": "Canonical Update",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "canonical_source_id",
+        "authority_id",
+        "requested_url",
+        "baseline",
+        "baseline_request_started_at",
+        "baseline_response_finished_at",
+        "repository_received_at",
+        "intake_id",
+        "source_context",
+        "status",
+        "reason",
+        "events",
+        "request_started_at",
+        "response_finished_at",
+        "response_url",
+        "http_status",
+        "response_body",
+        "response_public_headers",
+        "valid_pdf_pages",
+        "bytes_equal_to_baseline",
+        "review_needed"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Immutable confined local evidence identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "State": {
+      "additionalProperties": false,
+      "description": "Reconstructed validated accounting; immutable event files are authoritative.",
+      "properties": {
+        "request_count": {
+          "maximum": 4,
+          "minimum": 0,
+          "title": "Request Count",
+          "type": "integer"
+        },
+        "distinct_urls": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Distinct Urls",
+          "type": "array"
+        },
+        "charged_bytes": {
+          "maximum": 4000000,
+          "minimum": 0,
+          "title": "Charged Bytes",
+          "type": "integer"
+        },
+        "source_charged_bytes": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Source Charged Bytes",
+          "type": "object"
+        }
+      },
+      "required": [
+        "request_count",
+        "distinct_urls",
+        "charged_bytes",
+        "source_charged_bytes"
+      ],
+      "title": "State",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Immutable per-invocation result with time/clock origin and incomplete scope explicit.",
+  "properties": {
+    "status": {
+      "enum": [
+        "completed",
+        "stopped"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "mode": {
+      "enum": [
+        "live_http",
+        "offline_fixture"
+      ],
+      "title": "Mode",
+      "type": "string"
+    },
+    "clock_basis": {
+      "enum": [
+        "actual_utc_clock",
+        "injected_fixture_clock"
+      ],
+      "title": "Clock Basis",
+      "type": "string"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "plan_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Plan Sha256",
+      "type": "string"
+    },
+    "implementation_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Implementation Sha256",
+      "type": "string"
+    },
+    "invocation": {
+      "$ref": "#/$defs/Ref"
+    },
+    "transport_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Transport Sha256",
+      "type": "string"
+    },
+    "authorization_basis": {
+      "const": "operator_supplied_time_and_plan_digest_not_independent_proof",
+      "title": "Authorization Basis",
+      "type": "string"
+    },
+    "dispatch_at": {
+      "format": "date-time",
+      "title": "Dispatch At",
+      "type": "string"
+    },
+    "stop_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Stop Reason"
+    },
+    "state": {
+      "$ref": "#/$defs/State"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Observations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "publication_status": {
+      "const": "not_attempted",
+      "default": "not_attempted",
+      "title": "Publication Status",
+      "type": "string"
+    },
+    "scheduler_installed": {
+      "const": false,
+      "default": false,
+      "title": "Scheduler Installed",
+      "type": "boolean"
+    },
+    "baseline_updated": {
+      "const": false,
+      "default": false,
+      "title": "Baseline Updated",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "status",
+    "mode",
+    "clock_basis",
+    "generated_at",
+    "plan_sha256",
+    "implementation_sha256",
+    "invocation",
+    "transport_sha256",
+    "authorization_basis",
+    "dispatch_at",
+    "stop_reason",
+    "state",
+    "observations"
+  ],
+  "title": "Report",
+  "type": "object"
+}

@@ -1,0 +1,130 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Bind package-relative exact bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Withdraw exact earlier conclusions without overwriting their history.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "superseding_visibility_disposition",
+      "title": "Status",
+      "type": "string"
+    },
+    "supersedes": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Supersedes",
+      "type": "array"
+    },
+    "withdrawn_claim_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Withdrawn Claim Ids",
+      "type": "array"
+    },
+    "retained_baseline": {
+      "$ref": "#/$defs/Asset"
+    },
+    "retained_text": {
+      "title": "Retained Text",
+      "type": "string"
+    },
+    "corrected_observation": {
+      "const": "running_title_visible_on_pages_1_2_3",
+      "title": "Corrected Observation",
+      "type": "string"
+    },
+    "affected_pages": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Affected Pages",
+      "type": "array"
+    },
+    "source_and_candidate_changed": {
+      "const": false,
+      "title": "Source And Candidate Changed",
+      "type": "boolean"
+    },
+    "prior_records_changed": {
+      "const": false,
+      "title": "Prior Records Changed",
+      "type": "boolean"
+    },
+    "does_not_withdraw": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Does Not Withdraw",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "supersedes",
+    "withdrawn_claim_ids",
+    "retained_baseline",
+    "retained_text",
+    "corrected_observation",
+    "affected_pages",
+    "source_and_candidate_changed",
+    "prior_records_changed",
+    "does_not_withdraw",
+    "limitations",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Superseding",
+  "type": "object"
+}

@@ -1,0 +1,265 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "A confined relative path with exact original bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "InputDisposition": {
+      "additionalProperties": false,
+      "description": "Explicit account of a frozen handoff input, including excluded helper code.",
+      "properties": {
+        "original": {
+          "$ref": "#/$defs/Asset"
+        },
+        "local": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Asset"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "disposition": {
+          "enum": [
+            "unchanged_copy",
+            "excluded_historical_helper"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "original_bytes_recomputed_offline": {
+          "title": "Original Bytes Recomputed Offline",
+          "type": "boolean"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "original",
+        "local",
+        "disposition",
+        "original_bytes_recomputed_offline",
+        "note"
+      ],
+      "title": "InputDisposition",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Additive reconciliation status; the prior source-review package stays unchanged.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "assignment": {
+      "const": "EB-PDF-013",
+      "default": "EB-PDF-013",
+      "title": "Assignment",
+      "type": "string"
+    },
+    "status": {
+      "const": "external_report_reconciled_with_qualifications",
+      "title": "Status",
+      "type": "string"
+    },
+    "frozen_reconciliation": {
+      "$ref": "#/$defs/Asset"
+    },
+    "frozen_final_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_package_directory": {
+      "const": "frozen/comparison/committed-package",
+      "title": "Source Package Directory",
+      "type": "string"
+    },
+    "inputs": {
+      "items": {
+        "$ref": "#/$defs/InputDisposition"
+      },
+      "title": "Inputs",
+      "type": "array"
+    },
+    "external_findings": {
+      "const": 23,
+      "default": 23,
+      "title": "External Findings",
+      "type": "integer"
+    },
+    "external_errata": {
+      "const": 4,
+      "default": 4,
+      "title": "External Errata",
+      "type": "integer"
+    },
+    "atlas_supplements": {
+      "const": 3,
+      "default": 3,
+      "title": "Atlas Supplements",
+      "type": "integer"
+    },
+    "dispositions": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Dispositions",
+      "type": "object"
+    },
+    "e03_disposition": {
+      "const": "rejected",
+      "default": "rejected",
+      "title": "E03 Disposition",
+      "type": "string"
+    },
+    "e04_disposition": {
+      "const": "rejected",
+      "default": "rejected",
+      "title": "E04 Disposition",
+      "type": "string"
+    },
+    "native_word_or_number_corrections_required": {
+      "const": 0,
+      "default": 0,
+      "title": "Native Word Or Number Corrections Required",
+      "type": "integer"
+    },
+    "source_and_candidate_changed": {
+      "const": false,
+      "default": false,
+      "title": "Source And Candidate Changed",
+      "type": "boolean"
+    },
+    "prior_source_package_changed": {
+      "const": false,
+      "default": false,
+      "title": "Prior Source Package Changed",
+      "type": "boolean"
+    },
+    "external_reports_changed": {
+      "const": false,
+      "default": false,
+      "title": "External Reports Changed",
+      "type": "boolean"
+    },
+    "prior_package_pending_status_is_historical": {
+      "const": true,
+      "default": true,
+      "title": "Prior Package Pending Status Is Historical",
+      "type": "boolean"
+    },
+    "source_document_status": {
+      "const": "visibly_draft",
+      "default": "visibly_draft",
+      "title": "Source Document Status",
+      "type": "string"
+    },
+    "green_blank_redaction_proven": {
+      "const": false,
+      "default": false,
+      "title": "Green Blank Redaction Proven",
+      "type": "boolean"
+    },
+    "hidden_dates_inferred": {
+      "const": false,
+      "default": false,
+      "title": "Hidden Dates Inferred",
+      "type": "boolean"
+    },
+    "exact_unicode_certified_from_images": {
+      "const": false,
+      "default": false,
+      "title": "Exact Unicode Certified From Images",
+      "type": "boolean"
+    },
+    "external_blind_method_independently_verified": {
+      "const": false,
+      "default": false,
+      "title": "External Blind Method Independently Verified",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "operative_effect_verified": {
+      "const": false,
+      "default": false,
+      "title": "Operative Effect Verified",
+      "type": "boolean"
+    },
+    "coverage_promoted": {
+      "const": false,
+      "default": false,
+      "title": "Coverage Promoted",
+      "type": "boolean"
+    },
+    "public_opens": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Opens",
+      "type": "integer"
+    },
+    "new_visual_review_performed_during_packaging": {
+      "const": false,
+      "default": false,
+      "title": "New Visual Review Performed During Packaging",
+      "type": "boolean"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "status",
+    "frozen_reconciliation",
+    "frozen_final_manifest",
+    "source_package_directory",
+    "inputs",
+    "dispositions",
+    "limits"
+  ],
+  "title": "PackageRecord",
+  "type": "object"
+}

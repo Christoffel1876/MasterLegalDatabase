@@ -1,0 +1,110 @@
+{
+  "$defs": {
+    "ScanAsset": {
+      "additionalProperties": false,
+      "description": "One expected final-scan member.",
+      "properties": {
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "tracked": {
+          "title": "Tracked",
+          "type": "boolean"
+        },
+        "ignored": {
+          "title": "Ignored",
+          "type": "boolean"
+        },
+        "basis": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Basis",
+          "type": "array"
+        }
+      },
+      "required": [
+        "sha256",
+        "size_bytes",
+        "path",
+        "tracked",
+        "ignored",
+        "basis"
+      ],
+      "title": "ScanAsset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "The previously reviewed root scanner output contract.",
+  "properties": {
+    "status": {
+      "const": "prepared_exact_paths_not_staged",
+      "title": "Status",
+      "type": "string"
+    },
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "head": {
+      "pattern": "^[a-f0-9]{40}$",
+      "title": "Head",
+      "type": "string"
+    },
+    "wrappers": {
+      "minimum": 0,
+      "title": "Wrappers",
+      "type": "integer"
+    },
+    "new_raw_originals": {
+      "const": 6,
+      "title": "New Raw Originals",
+      "type": "integer"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/ScanAsset"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "excluded_user_paths": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Excluded User Paths",
+      "type": "array"
+    },
+    "qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Qualifications",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "recorded_at",
+    "head",
+    "wrappers",
+    "new_raw_originals",
+    "files",
+    "excluded_user_paths",
+    "qualifications"
+  ],
+  "title": "Scan",
+  "type": "object"
+}

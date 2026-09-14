@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13/plato-gunnison-intake-audit/independent_probes.py", line 117, in <module>
+    sys.stdout.write('\n'.join(run()) + '\n')
+                               ~~~^^
+  File "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13/plato-gunnison-intake-audit/independent_probes.py", line 35, in run
+    root, base, plan = setup(Path(temp), patch)
+                       ~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13/plato-gunnison-intake-audit/independent_probes.py", line 22, in setup
+    return provided.fixture.__wrapped__(path, patch)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13/popper-gunnison-intake-preparation/test_transaction.py", line 46, in fixture
+    tx.mi.reconcile_manual_source_intake(root, dry_run=False)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/geode/pipeline/manual_source_intake.py", line 226, in reconcile_manual_source_intake
+    _reconciliation_path(root, path)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/geode/pipeline/manual_source_intake.py", line 180, in _reconciliation_path
+    raise ValueError(f"symlink in reconciliation path: {path}")
+ValueError: symlink in reconciliation path: /var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/plato-gunnison-idempotence-9sftw2u2/corpus/_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl

@@ -1,0 +1,148 @@
+{
+  "additionalProperties": false,
+  "description": "Keep session completion separate from corpus and legal readiness.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "authorized_start": {
+      "format": "date-time",
+      "title": "Authorized Start",
+      "type": "string"
+    },
+    "authorized_hard_end": {
+      "format": "date-time",
+      "title": "Authorized Hard End",
+      "type": "string"
+    },
+    "code_commit": {
+      "const": "753179306d9b4f353e446a892a48e9d34bc4f255",
+      "title": "Code Commit",
+      "type": "string"
+    },
+    "inventory_commit": {
+      "const": "adc24f6",
+      "title": "Inventory Commit",
+      "type": "string"
+    },
+    "local_worker_status": {
+      "additionalProperties": {
+        "const": "completed",
+        "type": "string"
+      },
+      "title": "Local Worker Status",
+      "type": "object"
+    },
+    "heartbeat_id": {
+      "const": "geode-three-hour-work-session",
+      "title": "Heartbeat Id",
+      "type": "string"
+    },
+    "heartbeat_status": {
+      "const": "PAUSED",
+      "title": "Heartbeat Status",
+      "type": "string"
+    },
+    "full_test_passed": {
+      "const": 2011,
+      "title": "Full Test Passed",
+      "type": "integer"
+    },
+    "full_test_warnings": {
+      "const": 153,
+      "title": "Full Test Warnings",
+      "type": "integer"
+    },
+    "full_geode_coverage_percent": {
+      "const": 78,
+      "title": "Full Geode Coverage Percent",
+      "type": "integer"
+    },
+    "source_originals": {
+      "const": 46,
+      "title": "Source Originals",
+      "type": "integer"
+    },
+    "mapped_review_scopes": {
+      "const": 19,
+      "title": "Mapped Review Scopes",
+      "type": "integer"
+    },
+    "unmapped_reviews": {
+      "const": 27,
+      "title": "Unmapped Reviews",
+      "type": "integer"
+    },
+    "next_implementation_plan": {
+      "title": "Next Implementation Plan",
+      "type": "string"
+    },
+    "next_plan_implemented": {
+      "const": false,
+      "title": "Next Plan Implemented",
+      "type": "boolean"
+    },
+    "canonical_retrieval_ready": {
+      "const": false,
+      "title": "Canonical Retrieval Ready",
+      "type": "boolean"
+    },
+    "external_last_confirmed": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "External Last Confirmed",
+      "type": "object"
+    },
+    "new_external_dispatch": {
+      "const": false,
+      "title": "New External Dispatch",
+      "type": "boolean"
+    },
+    "public_push": {
+      "const": false,
+      "title": "Public Push",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "preserved_preexisting_untracked": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Preserved Preexisting Untracked",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "authorized_start",
+    "authorized_hard_end",
+    "code_commit",
+    "inventory_commit",
+    "local_worker_status",
+    "heartbeat_id",
+    "heartbeat_status",
+    "full_test_passed",
+    "full_test_warnings",
+    "full_geode_coverage_percent",
+    "source_originals",
+    "mapped_review_scopes",
+    "unmapped_reviews",
+    "next_implementation_plan",
+    "next_plan_implemented",
+    "canonical_retrieval_ready",
+    "external_last_confirmed",
+    "new_external_dispatch",
+    "public_push",
+    "legal_currentness",
+    "preserved_preexisting_untracked"
+  ],
+  "title": "Closeout",
+  "type": "object"
+}

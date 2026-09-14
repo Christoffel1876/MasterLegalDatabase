@@ -1,0 +1,94 @@
+{
+  "$defs": {
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "candidate": {
+          "title": "Candidate",
+          "type": "string"
+        },
+        "observed": {
+          "title": "Observed",
+          "type": "string"
+        },
+        "disposition": {
+          "title": "Disposition",
+          "type": "string"
+        }
+      },
+      "required": [
+        "page",
+        "candidate",
+        "observed",
+        "disposition"
+      ],
+      "title": "Finding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "inspected_at": {
+      "title": "Inspected At",
+      "type": "string"
+    },
+    "status": {
+      "const": "atlas_source_check_external_review_pending",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "files": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Files",
+      "type": "object"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "source_observations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Observations",
+      "type": "array"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "inspected_at",
+    "status",
+    "legal_currentness",
+    "method",
+    "files",
+    "findings",
+    "source_observations",
+    "limits"
+  ],
+  "title": "Check",
+  "type": "object"
+}

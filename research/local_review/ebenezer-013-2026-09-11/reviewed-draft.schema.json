@@ -1,0 +1,683 @@
+{
+  "$defs": {
+    "Annotation": {
+      "additionalProperties": false,
+      "description": "A visual or contextual annotation anchored outside the native text.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "observation_id": {
+          "title": "Observation Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 8,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "category": {
+          "enum": [
+            "strikethrough",
+            "yellow_highlight",
+            "green_blank",
+            "blank_field",
+            "draft_label",
+            "source_anomaly",
+            "date_wording",
+            "reading_order",
+            "outline",
+            "source_association",
+            "lexical_or_condition",
+            "typography",
+            "page_continuation"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "bound_scope": {
+          "enum": [
+            "marked_text",
+            "containing_source_region",
+            "context"
+          ],
+          "title": "Bound Scope",
+          "type": "string"
+        },
+        "spans": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "minItems": 1,
+          "title": "Spans",
+          "type": "array"
+        },
+        "explanation": {
+          "title": "Explanation",
+          "type": "string"
+        },
+        "changes_native_text": {
+          "const": false,
+          "default": false,
+          "title": "Changes Native Text",
+          "type": "boolean"
+        },
+        "establishes_legal_effect": {
+          "const": false,
+          "default": false,
+          "title": "Establishes Legal Effect",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "observation_id",
+        "physical_page",
+        "category",
+        "bound_scope",
+        "spans",
+        "explanation"
+      ],
+      "title": "Annotation",
+      "type": "object"
+    },
+    "Asset": {
+      "additionalProperties": false,
+      "description": "A confined package-relative file binding.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Chunk": {
+      "additionalProperties": false,
+      "description": "One interval in an exhaustive native page partition.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "span": {
+          "$ref": "#/$defs/Span"
+        }
+      },
+      "required": [
+        "id",
+        "span"
+      ],
+      "title": "Chunk",
+      "type": "object"
+    },
+    "Custody": {
+      "additionalProperties": false,
+      "description": "Frozen historical custody, separate from unverified upstream acquisition claims.",
+      "properties": {
+        "frozen_raw_manifest": {
+          "$ref": "#/$defs/Asset"
+        },
+        "raw_manifest_line_number": {
+          "const": 17,
+          "default": 17,
+          "title": "Raw Manifest Line Number",
+          "type": "integer"
+        },
+        "raw_manifest_line_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Raw Manifest Line Sha256",
+          "type": "string"
+        },
+        "raw_manifest_line_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Raw Manifest Line Bytes",
+          "type": "integer"
+        },
+        "selected_intake_record": {
+          "$ref": "#/$defs/IntakeRecord"
+        },
+        "frozen_intake_receipt": {
+          "$ref": "#/$defs/Asset"
+        },
+        "frozen_source_provenance": {
+          "$ref": "#/$defs/Asset"
+        },
+        "provenance_line_number": {
+          "const": 5,
+          "default": 5,
+          "title": "Provenance Line Number",
+          "type": "integer"
+        },
+        "provenance_line_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Provenance Line Sha256",
+          "type": "string"
+        },
+        "provenance_line_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Provenance Line Bytes",
+          "type": "integer"
+        },
+        "source_original_acquisition_time": {
+          "default": null,
+          "title": "Source Original Acquisition Time",
+          "type": "null"
+        },
+        "upstream_http_acquisition_verified": {
+          "const": false,
+          "default": false,
+          "title": "Upstream Http Acquisition Verified",
+          "type": "boolean"
+        },
+        "claimed_official_url": {
+          "title": "Claimed Official Url",
+          "type": "string"
+        },
+        "claimed_final_url": {
+          "title": "Claimed Final Url",
+          "type": "string"
+        },
+        "claimed_referral_url": {
+          "title": "Claimed Referral Url",
+          "type": "string"
+        },
+        "claimed_attempt_time": {
+          "title": "Claimed Attempt Time",
+          "type": "string"
+        },
+        "claimed_status": {
+          "const": 200,
+          "default": 200,
+          "title": "Claimed Status",
+          "type": "integer"
+        },
+        "claim_qualification": {
+          "title": "Claim Qualification",
+          "type": "string"
+        },
+        "upstream_archive_reopened": {
+          "const": false,
+          "default": false,
+          "title": "Upstream Archive Reopened",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "frozen_raw_manifest",
+        "raw_manifest_line_sha256",
+        "raw_manifest_line_bytes",
+        "selected_intake_record",
+        "frozen_intake_receipt",
+        "frozen_source_provenance",
+        "provenance_line_sha256",
+        "provenance_line_bytes",
+        "claimed_official_url",
+        "claimed_final_url",
+        "claimed_referral_url",
+        "claimed_attempt_time",
+        "claim_qualification"
+      ],
+      "title": "Custody",
+      "type": "object"
+    },
+    "IntakeRecord": {
+      "additionalProperties": false,
+      "description": "Original manual-intake record schema, retained without repo-module dependencies.",
+      "properties": {
+        "intake_id": {
+          "title": "Intake Id",
+          "type": "string"
+        },
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "official_source_name": {
+          "title": "Official Source Name",
+          "type": "string"
+        },
+        "official_source_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Official Source Url"
+        },
+        "acquisition_method": {
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "received_from": {
+          "title": "Received From",
+          "type": "string"
+        },
+        "reviewer_name": {
+          "title": "Reviewer Name",
+          "type": "string"
+        },
+        "reviewer_email": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Reviewer Email"
+        },
+        "custody_note": {
+          "title": "Custody Note",
+          "type": "string"
+        },
+        "original_filename": {
+          "title": "Original Filename",
+          "type": "string"
+        },
+        "archive_path": {
+          "title": "Archive Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "source_format": {
+          "title": "Source Format",
+          "type": "string"
+        },
+        "received_at": {
+          "format": "date-time",
+          "title": "Received At",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "blocked_queue_match": {
+          "title": "Blocked Queue Match",
+          "type": "boolean"
+        },
+        "boundary": {
+          "title": "Boundary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "intake_id",
+        "record_id",
+        "layer_id",
+        "official_source_name",
+        "official_source_url",
+        "acquisition_method",
+        "received_from",
+        "reviewer_name",
+        "reviewer_email",
+        "custody_note",
+        "original_filename",
+        "archive_path",
+        "sha256",
+        "size_bytes",
+        "source_format",
+        "received_at",
+        "status",
+        "blocked_queue_match",
+        "boundary"
+      ],
+      "title": "IntakeRecord",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "description": "Preserved independent source finding; never an enacted legal rule.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 8,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "audit": {
+          "$ref": "#/$defs/Asset"
+        },
+        "audit_observation_id": {
+          "title": "Audit Observation Id",
+          "type": "string"
+        },
+        "spans": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "minItems": 1,
+          "title": "Spans",
+          "type": "array"
+        },
+        "finding": {
+          "title": "Finding",
+          "type": "string"
+        },
+        "qualifications": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Qualifications",
+          "type": "array"
+        },
+        "review_mode": {
+          "const": "candidate_aware_not_blind",
+          "default": "candidate_aware_not_blind",
+          "title": "Review Mode",
+          "type": "string"
+        },
+        "legal_effect": {
+          "const": "not_determined",
+          "default": "not_determined",
+          "title": "Legal Effect",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "audit",
+        "audit_observation_id",
+        "spans",
+        "finding",
+        "qualifications"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "A complete native page plus separate display-order references.",
+      "properties": {
+        "physical_page": {
+          "maximum": 8,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_receipt": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_text": {
+          "title": "Native Text",
+          "type": "string"
+        },
+        "native_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Native Sha256",
+          "type": "string"
+        },
+        "native_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Native Bytes",
+          "type": "integer"
+        },
+        "candidate_start_byte": {
+          "minimum": 0,
+          "title": "Candidate Start Byte",
+          "type": "integer"
+        },
+        "candidate_end_byte_exclusive": {
+          "exclusiveMinimum": 0,
+          "title": "Candidate End Byte Exclusive",
+          "type": "integer"
+        },
+        "chunks_in_native_order": {
+          "items": {
+            "$ref": "#/$defs/Chunk"
+          },
+          "title": "Chunks In Native Order",
+          "type": "array"
+        },
+        "visual_reading_order_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Visual Reading Order Ids",
+          "type": "array"
+        },
+        "source_review_audit": {
+          "$ref": "#/$defs/Asset"
+        },
+        "full_image_review_recorded": {
+          "const": true,
+          "default": true,
+          "title": "Full Image Review Recorded",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "native_receipt",
+        "native_text",
+        "native_sha256",
+        "native_bytes",
+        "candidate_start_byte",
+        "candidate_end_byte_exclusive",
+        "chunks_in_native_order",
+        "visual_reading_order_ids",
+        "source_review_audit"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "description": "Exact page-native UTF-8 bytes, with no inserted annotation characters.",
+      "properties": {
+        "start_byte": {
+          "minimum": 0,
+          "title": "Start Byte",
+          "type": "integer"
+        },
+        "end_byte_exclusive": {
+          "exclusiveMinimum": 0,
+          "title": "End Byte Exclusive",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start_byte",
+        "end_byte_exclusive",
+        "text",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Eight-page source-reviewed draft evidence; external review is explicitly pending.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "assignment_id": {
+      "const": "EB-PDF-013",
+      "default": "EB-PDF-013",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "fort-collins-wildfire-code-sd005-05",
+      "default": "fort-collins-wildfire-code-sd005-05",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "document_status": {
+      "const": "visibly_draft_not_adopted_effect_verified",
+      "title": "Document Status",
+      "type": "string"
+    },
+    "extraction_review_status": {
+      "const": "atlas_eight_page_source_review_complete",
+      "title": "Extraction Review Status",
+      "type": "string"
+    },
+    "external_review_status": {
+      "const": "pending_receipt_and_reconciliation",
+      "title": "External Review Status",
+      "type": "string"
+    },
+    "external_reports_consulted": {
+      "const": false,
+      "default": false,
+      "title": "External Reports Consulted",
+      "type": "boolean"
+    },
+    "candidate_changes": {
+      "const": "none",
+      "default": "none",
+      "title": "Candidate Changes",
+      "type": "string"
+    },
+    "candidate_status_unchanged": {
+      "const": "machine_native_text_unreviewed",
+      "title": "Candidate Status Unchanged",
+      "type": "string"
+    },
+    "original_intake_status": {
+      "const": "archived_pending_pipeline",
+      "title": "Original Intake Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "legal_effect_verified": {
+      "const": false,
+      "default": false,
+      "title": "Legal Effect Verified",
+      "type": "boolean"
+    },
+    "semantic_or_coverage_promotion": {
+      "const": false,
+      "default": false,
+      "title": "Semantic Or Coverage Promotion",
+      "type": "boolean"
+    },
+    "original": {
+      "$ref": "#/$defs/Asset"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_packet_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "custody": {
+      "$ref": "#/$defs/Custody"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "annotations": {
+      "items": {
+        "$ref": "#/$defs/Annotation"
+      },
+      "title": "Annotations",
+      "type": "array"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "document_status",
+    "extraction_review_status",
+    "external_review_status",
+    "candidate_status_unchanged",
+    "original_intake_status",
+    "original",
+    "candidate",
+    "original_packet_manifest",
+    "custody",
+    "pages",
+    "observations",
+    "annotations",
+    "limits"
+  ],
+  "title": "Review",
+  "type": "object"
+}

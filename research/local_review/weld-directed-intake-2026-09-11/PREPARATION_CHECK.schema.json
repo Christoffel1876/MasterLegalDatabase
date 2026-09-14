@@ -1,0 +1,116 @@
+{
+  "$defs": {
+    "File": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "status": {
+      "const": "prepared_not_applied",
+      "title": "Status",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "raw_manifest_records": {
+      "const": 38,
+      "title": "Raw Manifest Records",
+      "type": "integer"
+    },
+    "manual_ledger_records": {
+      "const": 39,
+      "title": "Manual Ledger Records",
+      "type": "integer"
+    },
+    "ordinary_raw_files_screened": {
+      "const": 542,
+      "title": "Ordinary Raw Files Screened",
+      "type": "integer"
+    },
+    "matching_size_files": {
+      "const": 0,
+      "title": "Matching Size Files",
+      "type": "integer"
+    },
+    "legacy_metadata_references": {
+      "const": 18,
+      "title": "Legacy Metadata References",
+      "type": "integer"
+    },
+    "source_role_review": {
+      "const": "pending_root_reconciliation",
+      "title": "Source Role Review",
+      "type": "string"
+    },
+    "explicit_internal_go_ahead_received": {
+      "const": false,
+      "title": "Explicit Internal Go Ahead Received",
+      "type": "boolean"
+    },
+    "source_or_control_mutations": {
+      "const": "none",
+      "title": "Source Or Control Mutations",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "checked_at",
+    "status",
+    "files",
+    "raw_manifest_records",
+    "manual_ledger_records",
+    "ordinary_raw_files_screened",
+    "matching_size_files",
+    "legacy_metadata_references",
+    "source_role_review",
+    "explicit_internal_go_ahead_received",
+    "source_or_control_mutations",
+    "legal_currentness"
+  ],
+  "title": "Check",
+  "type": "object"
+}

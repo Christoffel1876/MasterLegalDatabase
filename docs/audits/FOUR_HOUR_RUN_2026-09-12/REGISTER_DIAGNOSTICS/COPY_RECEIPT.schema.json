@@ -1,0 +1,94 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An immutable copied ordinary file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "original_path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Exact-copy custody, distinct from pending root full-suite acceptance.",
+  "properties": {
+    "copied_at": {
+      "format": "date-time",
+      "title": "Copied At",
+      "type": "string"
+    },
+    "source_manifest_sha256": {
+      "title": "Source Manifest Sha256",
+      "type": "string"
+    },
+    "source_payload_count": {
+      "const": 33,
+      "title": "Source Payload Count",
+      "type": "integer"
+    },
+    "copied_file_count": {
+      "const": 34,
+      "title": "Copied File Count",
+      "type": "integer"
+    },
+    "status": {
+      "const": "frozen_implementation_copied_full_suite_acceptance_separate",
+      "title": "Status",
+      "type": "string"
+    },
+    "source_root": {
+      "title": "Source Root",
+      "type": "string"
+    },
+    "scope": {
+      "const": "closed implementation subdirectory only; parent permits later acceptance",
+      "title": "Scope",
+      "type": "string"
+    },
+    "assets": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "maxItems": 34,
+      "minItems": 34,
+      "title": "Assets",
+      "type": "array"
+    }
+  },
+  "required": [
+    "copied_at",
+    "source_manifest_sha256",
+    "source_payload_count",
+    "copied_file_count",
+    "status",
+    "source_root",
+    "scope",
+    "assets"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

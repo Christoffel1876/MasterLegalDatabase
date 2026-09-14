@@ -1,0 +1,121 @@
+{
+  "$defs": {
+    "Change": {
+      "additionalProperties": false,
+      "description": "One exact reviewed maintained file with an optional archived predecessor.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "before_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Before Sha256"
+        },
+        "after_sha256": {
+          "title": "After Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "before_sha256",
+        "after_sha256",
+        "size_bytes"
+      ],
+      "title": "Change",
+      "type": "object"
+    },
+    "File": {
+      "additionalProperties": false,
+      "description": "One exact file copied without editing its contents.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Installation is separate from the final full-suite execution.",
+  "properties": {
+    "installed_at": {
+      "format": "date-time",
+      "title": "Installed At",
+      "type": "string"
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "proposal_manifest_sha256": {
+      "title": "Proposal Manifest Sha256",
+      "type": "string"
+    },
+    "review_manifest_sha256": {
+      "title": "Review Manifest Sha256",
+      "type": "string"
+    },
+    "changes": {
+      "items": {
+        "$ref": "#/$defs/Change"
+      },
+      "title": "Changes",
+      "type": "array"
+    },
+    "frozen_files": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Frozen Files",
+      "type": "array"
+    },
+    "source_data_changed": {
+      "default": false,
+      "title": "Source Data Changed",
+      "type": "boolean"
+    },
+    "full_suite_status": {
+      "default": "pending_separate_installed_run",
+      "title": "Full Suite Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "installed_at",
+    "status",
+    "proposal_manifest_sha256",
+    "review_manifest_sha256",
+    "changes",
+    "frozen_files"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

@@ -1,0 +1,29 @@
+# Sherlock SH-EXT-004 — Chaffee corrected links
+
+This is a NEW four-target retrieval packet, prepared for Michael's September13 three-hour session. It is active only when Atlas explicitly sends this path and its hash in the existing Sherlock Grok Bot conversation. Prior SH-EXT-003 and all original failed URL attempts remain unchanged. Stop after this packet; no SH-EXT-005 is assigned.
+
+## Assignment
+
+Read PLAN.json, TARGETS.json and COMPARISON.json. Open exactly the four `encoded_requested_url` targets in TARGETS.json once each, serially: two official county fee catalogs and two recorded ordinance links corrected using their source HTML base URL. Preserve the listed parent evidence, literal href, link label and encoded request independently. Parent filename/anchor year differences are not errors to repair. Authority: CO-COUNTY-CHAFFEE only, not the nearby municipalities or districts.
+
+Public activity stops by17:45UTC September13 (11:45a.m. Mountain); preserve and deliver by18:00UTC (noon Mountain), or immediately after all4attempts. Atlas finishes the session by18:26UTC. No old cutoff applies to this packet.
+
+## Before every public action
+
+1. Verify the packet with `python -B verify_packet.py`. Use an existing environment with Pydantic2; the shared Mac has `/private/tmp/geode-status-venv/bin/python`. If no usable runtime/access, stop and report the limitation. Do not silently substitute manual counting for the helper.
+2. Use one new delivery directory OUTSIDE this frozen packet: `/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13/sherlock-deliveries/SH-EXT-004/`. Mirror to a separate remote workdir only if necessary; preserve all files back at this delivery path. Never reset accounting by changing directory.
+3. Write one Reservation JSON using Reservation.schema.json. IDs SHEXT004-A001 through A004 in actual order. The CLI inserts actual reservation time. Run `python -B budget.py reserve --delivery DELIVERY --input RESERVATION.json` and proceed only on success with can_reserve true or the granted pending action. A successful reservation grants exactly that one request; an unclosed reservation blocks the next.
+4. Fetch that exact HTTPS URL once. Disable automatic redirects and retries. With curl, omit -L/--location and use `--retry 0 --max-redirs 0 --connect-timeout 15 --max-time 90 --max-filesize 20000000 --proto =https`; save raw response body, response headers and status separately under that action ID. If a different tool cannot avoid automatic redirects or provide bounded retained-body accounting, stop and report rather than guessing. Avoid printing credentials/cookies; preserve any original headers locally for custody and flag them for Atlas before public packaging.
+5. Save actual observed Result JSON using Result.schema.json, rehash/count retained bytes, then `python -B budget.py complete --delivery DELIVERY --input RESULT.json`. Preserve errors, denial bodies and partial downloads truthfully. Unknown or partial response accounting, unexpected hops, size overrun or identity failure stops the packet. Stop retrying a denied or failed target. Do not silently relabel HTML as PDF. Check PDF magic, parser and physical page count only when actual bytes support it; parsing is not source QA.
+
+The hard limits are4primary actions,4distinct targets,20MBper response and60MBtotal observed response bodies. The local helper reserves before request, enforces one pending action, hashes actual retained assets, rejects duplicate/foreign targets and stops at cutoff. It performs zero network requests and cannot certify hidden traffic in external tools. A real overrun result is saved before the continuation check; never delete or truncate it to appear compliant.
+
+## Scope and delivery
+
+Do not follow redirects automatically. Record status and Location as an UNOPENED lead. The two HTML catalogs may reveal documents: record literal link, base URL and resolved URL without opening them. Do not invent URL spellings, search externally, crawl neighboring pages, bypass blocks, sign in, contact officials, create accounts, change security settings or edit the repository. No PDF OCR/transcription or legal interpretation is assigned. Retain only observed source evidence and bounded metadata.
+
+Keep preparation, actual retrieval, issue/adoption/effective/revision dates and final intake time separate. Missing times remain null with a reason. This packet's exact comparison export covers the64manual PDF subset at512684a; it does not prove statewide or full legacy absence. Preserve every old attempt rather than claiming the corrected request was historically successful. Current bytes must be hashed before equality with any digest claim.
+
+Return REPORT.md, immutable reservations/results, raw bodies/headers, observed-link backlog, and an artifact inventory with path/SHA256/size for every delivered file. Schema exports cover reservations/results; validate them with models.py and budget.py status. The report should state actual action/distinct/body counts, every attempted target outcome, source vs tool-derived content, method limitations and remaining unopened exact links. Status completed_pending_atlas_verification only for completed bounded attempts with evidence; otherwise partial/blocked. legal_currentness not_verified; answer_safe false.
+
+Deliver a concise result and exact paths/hashes in this same Sherlock Grok Bot conversation. Atlas brings it into the existing Codex task Assess Colorado project status, ID01a08848-5f8e-7c51-9b66-fd82eff860fe. No new task or other contact. Stop after SH-EXT-004 and await fresh instructions.

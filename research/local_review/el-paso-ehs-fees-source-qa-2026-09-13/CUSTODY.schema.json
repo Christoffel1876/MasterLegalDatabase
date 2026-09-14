@@ -1,0 +1,131 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "An exact relative payload identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "el-paso-boh-ehs-fees-sd011",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-EL_PASO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "issuer": {
+      "const": "El Paso County Board of Health",
+      "title": "Issuer",
+      "type": "string"
+    },
+    "administering_agency": {
+      "const": "El Paso County Public Health",
+      "title": "Administering Agency",
+      "type": "string"
+    },
+    "layer_id": {
+      "const": "08_County_Authorities",
+      "title": "Layer Id",
+      "type": "string"
+    },
+    "official_source_url": {
+      "title": "Official Source Url",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Ref"
+    },
+    "copied_canonical_record": {
+      "$ref": "#/$defs/Ref"
+    },
+    "acquisition_method": {
+      "const": "received_review_package",
+      "title": "Acquisition Method",
+      "type": "string"
+    },
+    "original_http_acquisition_independently_witnessed": {
+      "const": false,
+      "title": "Original Http Acquisition Independently Witnessed",
+      "type": "boolean"
+    },
+    "actual_repository_received_at": {
+      "format": "date-time",
+      "title": "Actual Repository Received At",
+      "type": "string"
+    },
+    "preserved_custody_limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Preserved Custody Limitations",
+      "type": "array"
+    },
+    "new_public_source_requests": {
+      "const": 0,
+      "title": "New Public Source Requests",
+      "type": "integer"
+    },
+    "canonical_changes": {
+      "const": false,
+      "title": "Canonical Changes",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "source_id",
+    "authority_id",
+    "issuer",
+    "administering_agency",
+    "layer_id",
+    "official_source_url",
+    "source",
+    "copied_canonical_record",
+    "acquisition_method",
+    "original_http_acquisition_independently_witnessed",
+    "actual_repository_received_at",
+    "preserved_custody_limitations",
+    "new_public_source_requests",
+    "canonical_changes",
+    "legal_currentness"
+  ],
+  "title": "Custody",
+  "type": "object"
+}

@@ -1,0 +1,124 @@
+{
+  "$defs": {
+    "Page": {
+      "additionalProperties": false,
+      "description": "Complete original native bytes with reproducible extraction settings.",
+      "properties": {
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "native": {
+          "$ref": "#/$defs/Ref"
+        },
+        "image": {
+          "$ref": "#/$defs/Ref"
+        },
+        "candidate_start": {
+          "minimum": 0,
+          "title": "Candidate Start",
+          "type": "integer"
+        },
+        "candidate_end": {
+          "minimum": 0,
+          "title": "Candidate End",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "physical_page",
+        "native",
+        "image",
+        "candidate_start",
+        "candidate_end"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "An exact relative payload identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "finished_at": {
+      "format": "date-time",
+      "title": "Finished At",
+      "type": "string"
+    },
+    "prior_freeze": {
+      "$ref": "#/$defs/Ref"
+    },
+    "source": {
+      "$ref": "#/$defs/Ref"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Ref"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "method": {
+      "const": "PyMuPDF get_text text; flags=195; sort=False; UTF-8 unchanged per page",
+      "title": "Method",
+      "type": "string"
+    },
+    "pymupdf_version": {
+      "title": "Pymupdf Version",
+      "type": "string"
+    },
+    "status": {
+      "const": "machine_native_text_unreviewed",
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "started_at",
+    "finished_at",
+    "prior_freeze",
+    "source",
+    "candidate",
+    "pages",
+    "method",
+    "pymupdf_version",
+    "status"
+  ],
+  "title": "Extraction",
+  "type": "object"
+}

@@ -1,0 +1,148 @@
+{
+  "$defs": {
+    "F": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "F",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "additive_header_render_verification_no_frozen_files_changed",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "manifest": {
+      "$ref": "#/$defs/F"
+    },
+    "source_pdf": {
+      "$ref": "#/$defs/F"
+    },
+    "full_page_image": {
+      "$ref": "#/$defs/F"
+    },
+    "header_crop": {
+      "$ref": "#/$defs/F"
+    },
+    "page": {
+      "title": "Page",
+      "type": "integer"
+    },
+    "media_box": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Media Box",
+      "type": "array"
+    },
+    "crop_box": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Crop Box",
+      "type": "array"
+    },
+    "rotation": {
+      "title": "Rotation",
+      "type": "integer"
+    },
+    "draft_span_bbox": {
+      "items": {
+        "type": "number"
+      },
+      "title": "Draft Span Bbox",
+      "type": "array"
+    },
+    "subject_span_bbox": {
+      "items": {
+        "type": "number"
+      },
+      "title": "Subject Span Bbox",
+      "type": "array"
+    },
+    "png_header_dark_row_bands": {
+      "items": {
+        "items": {
+          "type": "integer"
+        },
+        "type": "array"
+      },
+      "title": "Png Header Dark Row Bands",
+      "type": "array"
+    },
+    "top_260_png_rows_equal_page1": {
+      "const": true,
+      "default": true,
+      "title": "Top 260 Png Rows Equal Page1",
+      "type": "boolean"
+    },
+    "observation": {
+      "title": "Observation",
+      "type": "string"
+    },
+    "inference": {
+      "title": "Inference",
+      "type": "string"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "manifest",
+    "source_pdf",
+    "full_page_image",
+    "header_crop",
+    "page",
+    "media_box",
+    "crop_box",
+    "rotation",
+    "draft_span_bbox",
+    "subject_span_bbox",
+    "png_header_dark_row_bands",
+    "observation",
+    "inference",
+    "limits"
+  ],
+  "title": "Note",
+  "type": "object"
+}

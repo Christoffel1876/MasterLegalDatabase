@@ -1,0 +1,83 @@
+{
+  "$defs": {
+    "RawEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "same_size_candidate": {
+          "title": "Same Size Candidate",
+          "type": "boolean"
+        },
+        "sha256_if_candidate_size": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Sha256 If Candidate Size"
+        }
+      },
+      "required": [
+        "path",
+        "size_bytes",
+        "same_size_candidate",
+        "sha256_if_candidate_size"
+      ],
+      "title": "RawEntry",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "measured_at": {
+      "format": "date-time",
+      "title": "Measured At",
+      "type": "string"
+    },
+    "regular_files": {
+      "items": {
+        "$ref": "#/$defs/RawEntry"
+      },
+      "title": "Regular Files",
+      "type": "array"
+    },
+    "nonordinary_paths": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Nonordinary Paths",
+      "type": "array"
+    },
+    "matching_paths": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Matching Paths",
+      "type": "array"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    }
+  },
+  "required": [
+    "measured_at",
+    "regular_files",
+    "nonordinary_paths",
+    "matching_paths",
+    "scope"
+  ],
+  "title": "RawScan",
+  "type": "object"
+}

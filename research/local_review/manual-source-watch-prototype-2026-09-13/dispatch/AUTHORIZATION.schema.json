@@ -1,0 +1,49 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "reviewer": {
+      "const": "Atlas",
+      "default": "Atlas",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "dispatch_at": {
+      "title": "Dispatch At",
+      "type": "string"
+    },
+    "run_name": {
+      "title": "Run Name",
+      "type": "string"
+    },
+    "pins": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Pins",
+      "type": "object"
+    },
+    "basis": {
+      "title": "Basis",
+      "type": "string"
+    },
+    "limits": {
+      "title": "Limits",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "dispatch_at",
+    "run_name",
+    "pins",
+    "basis",
+    "limits"
+  ],
+  "title": "Authorization",
+  "type": "object"
+}

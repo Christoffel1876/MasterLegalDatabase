@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import sqlite3
+from contextlib import closing
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -37,7 +38,7 @@ def build_index(root: Path, database_path: Path, rebuild: bool = False) -> Index
     target = database_path.resolve()
     ensure_not_raw_archive(target, project_root)
     target.parent.mkdir(parents=True, exist_ok=True)
-    with sqlite3.connect(target) as connection:
+    with closing(sqlite3.connect(target)) as connection, connection:
         connection.row_factory = sqlite3.Row
         _create_schema(connection)
         if rebuild:
@@ -59,7 +60,7 @@ def build_index(root: Path, database_path: Path, rebuild: bool = False) -> Index
             ),
         )
     if rebuild:
-        with sqlite3.connect(target) as vacuum_connection:
+        with closing(sqlite3.connect(target)) as vacuum_connection, vacuum_connection:
             vacuum_connection.execute("VACUUM")
     return IndexBuildResult(
         entity_count=counts.entity_count,

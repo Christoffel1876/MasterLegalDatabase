@@ -1,0 +1,82 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "source_path": {
+          "title": "Source Path",
+          "type": "string"
+        },
+        "preserved_path": {
+          "title": "Preserved Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "source_path",
+        "preserved_path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "captured_at": {
+      "title": "Captured At",
+      "type": "string"
+    },
+    "delivery_original_path": {
+      "title": "Delivery Original Path",
+      "type": "string"
+    },
+    "assets": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Assets",
+      "type": "array"
+    },
+    "inventory_listed_payloads": {
+      "title": "Inventory Listed Payloads",
+      "type": "integer"
+    },
+    "inventory_claims_verified": {
+      "title": "Inventory Claims Verified",
+      "type": "boolean"
+    },
+    "unlisted_delivery_files": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unlisted Delivery Files",
+      "type": "array"
+    },
+    "public_requests": {
+      "title": "Public Requests",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "captured_at",
+    "delivery_original_path",
+    "assets",
+    "inventory_listed_payloads",
+    "inventory_claims_verified",
+    "unlisted_delivery_files",
+    "public_requests"
+  ],
+  "title": "Custody",
+  "type": "object"
+}

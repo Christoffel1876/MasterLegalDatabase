@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "status": "PREPARED_NOT_DISPATCHED",
+  "targets": [
+    {
+      "source_id": "SD014-01",
+      "parent_priority_id": "SD013-01",
+      "parent_url": "https://coloradosprings.gov/document/feeschedulecodeservicesfinal2015.pdf",
+      "parent_html": {
+        "path": "evidence/sd013/runtime/events/0001/body.bin",
+        "sha256": "f2b445eaad868c912d1250dd71a49d35b4dc8727f316108dd3636cc504147717",
+        "size_bytes": 27767
+      },
+      "element": "iframe_data_src_and_pdfjs_file",
+      "original_attribute": "https://coloradosprings.gov/system/files/feeschedule_codeservices_final_2015.pdf",
+      "viewer_src": "/libraries/pdf.js/web/viewer.html?file=https%3A%2F%2Fcoloradosprings.gov%2Fsystem%2Ffiles%2Ffeeschedule_codeservices_final_2015.pdf",
+      "encoded_file_argument": "https%3A%2F%2Fcoloradosprings.gov%2Fsystem%2Ffiles%2Ffeeschedule_codeservices_final_2015.pdf",
+      "transformation": "read data-src; percent-decode viewer file argument once; exact compare",
+      "iframe_title": "feeschedule_codeservices_final_2015.pdf",
+      "document_heading": "Document Viewer",
+      "url": "https://coloradosprings.gov/system/files/feeschedule_codeservices_final_2015.pdf"
+    },
+    {
+      "source_id": "SD014-02",
+      "parent_priority_id": "SD013-02",
+      "parent_url": "https://coloradosprings.gov/document/2026-fee-schedule-construction-services.pdf",
+      "parent_html": {
+        "path": "evidence/sd013/runtime/events/0002/body.bin",
+        "sha256": "e4cf6c2cf11f599102316b31da52729a0a8c18c31d0e84fe331de4fb32f817c8",
+        "size_bytes": 27842
+      },
+      "element": "iframe_data_src_and_pdfjs_file",
+      "original_attribute": "https://coloradosprings.gov/system/files/2026-07/2026%20Fee%20Schedule%20Construction%20Services.pdf",
+      "viewer_src": "/libraries/pdf.js/web/viewer.html?file=https%3A%2F%2Fcoloradosprings.gov%2Fsystem%2Ffiles%2F2026-07%2F2026%2520Fee%2520Schedule%2520Construction%2520Services.pdf",
+      "encoded_file_argument": "https%3A%2F%2Fcoloradosprings.gov%2Fsystem%2Ffiles%2F2026-07%2F2026%2520Fee%2520Schedule%2520Construction%2520Services.pdf",
+      "transformation": "read data-src; percent-decode viewer file argument once; exact compare",
+      "iframe_title": "2026 Fee Schedule Construction Services.pdf",
+      "document_heading": "Document Viewer",
+      "url": "https://coloradosprings.gov/system/files/2026-07/2026%20Fee%20Schedule%20Construction%20Services.pdf"
+    }
+  ],
+  "limits": {
+    "requests": 6,
+    "distinct_urls": 6,
+    "redirects_per_source": 2,
+    "bytes_per_source": 25000000,
+    "total_bytes": 50000000,
+    "request_seconds": 30
+  },
+  "proposed_finish_by": "2026-09-12T23:40:00Z",
+  "no_new_source_at": "2026-09-13T01:25:00Z",
+  "hard_stop": "2026-09-13T01:55:00Z",
+  "max_minutes_after_dispatch": 30,
+  "stop_after": "SD014",
+  "qualifications": [
+    "Prepared only; root supplies actual authorization time before execution. No SD015 or automatic follow-up.",
+    "Exactly two iframe data-src destinations, each corroborated by one percent-decoding of its matching pdf.js file argument. The viewer itself is not requested.",
+    "Six HTTP requests including every redirect, at most six distinct exact URLs, two redirects per source; 25,000,000 retained body bytes per source and 50,000,000 total. No retries, login, auth, cookie reuse, impersonation, or denial bypass.",
+    "Deadline is earliest of actual authorization plus 30 minutes, 2026-09-12T23:40:00Z, and global hard stop.",
+    "2015/2026 filename strings, July path, prior 2020 filename and April 2026 link label are not verified adoption/effective dates. Source roles and currentness await direct PDF review.",
+    "Ordinary verified TLS, public-IP checks, same official allowed hosts only. HTTP failures, partial bytes and content magic retain their actual meaning; .pdf suffix does not certify PDF bytes."
+  ]
+}

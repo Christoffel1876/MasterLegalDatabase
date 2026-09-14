@@ -1,0 +1,73 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Exact approved repository payload identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Frozen accepted-wrapper set and final CI installation pins.",
+  "properties": {
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "inherited_scan": {
+      "$ref": "#/$defs/Ref"
+    },
+    "scanner_decision": {
+      "$ref": "#/$defs/Ref"
+    },
+    "wrappers": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Wrappers",
+      "type": "array"
+    },
+    "installation": {
+      "$ref": "#/$defs/Ref"
+    },
+    "installation_schema": {
+      "$ref": "#/$defs/Ref"
+    },
+    "legal_currentness": {
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "inherited_scan",
+    "scanner_decision",
+    "wrappers",
+    "installation",
+    "installation_schema",
+    "legal_currentness"
+  ],
+  "title": "Approval",
+  "type": "object"
+}

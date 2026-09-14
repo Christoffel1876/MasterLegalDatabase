@@ -1,0 +1,82 @@
+{
+  "completed_at": "2026-09-11T20:46:00.093734Z",
+  "source_oid": "e12d942b4c8098281d86a8e0db7a76b22512a8a75d050ff590a8e876c7b840b4",
+  "expected_bytes": 225796201,
+  "configured_repository": "Christoffel1876/MasterLegalDatabase",
+  "first_attempt": {
+    "path": "RECOVERY_RECEIPT.json",
+    "sha256": "16c71c2675d4be186c865a0b3a1a7fd7c973f8788ca3489ba33258665939779e",
+    "bytes": 2063
+  },
+  "retry_attempt": {
+    "path": "certifi-retry/RECOVERY_RECEIPT.json",
+    "sha256": "d74dba6669d0e2d5bf024be5ca66a5c63a110e7ec04b9025bd7114b8343c1a97",
+    "bytes": 2503
+  },
+  "first_attempt_result": "transport_failed_without_http_response",
+  "retry_result": "batch_http_200_exact_object_error_404",
+  "returned_error_message": "Object does not exist on the server",
+  "object_bytes_downloaded": 0,
+  "source_catalog_replaced": false,
+  "prior_files_unchanged": [
+    {
+      "path": "ATTEMPT_STARTED.json",
+      "sha256": "d7647cc4d8ec7f3748abac5cdb7f6ae017dd9d3bcd0205f47331768a5398d258",
+      "bytes": 573
+    },
+    {
+      "path": "LOCAL_TLS_DIAGNOSTICS.json",
+      "sha256": "9b61da05cbdf63bdd05565ffa858e8e4c282590bebbac0c7e5d2fe6026c0047b",
+      "bytes": 923
+    },
+    {
+      "path": "LOCAL_TLS_DIAGNOSTICS.schema.json",
+      "sha256": "18b1dfa6ae99610af79e5e92f02438b1478648ebe3bd9dfb6c87fa8e962c49a9",
+      "bytes": 1659
+    },
+    {
+      "path": "RECOVERY_RECEIPT.json",
+      "sha256": "16c71c2675d4be186c865a0b3a1a7fd7c973f8788ca3489ba33258665939779e",
+      "bytes": 2063
+    },
+    {
+      "path": "RECOVERY_RECEIPT.schema.json",
+      "sha256": "dbc650e589e0de25defe30a77d9931f4198244104b7b32ebe88c66398e8ab86c",
+      "bytes": 7392
+    },
+    {
+      "path": "RECOVERY_REPORT.md",
+      "sha256": "e862ef4e9edf289231a1b6965db951c7f0841180dd69273910f9ef169ef8b3ef",
+      "bytes": 2076
+    },
+    {
+      "path": "recover_catalog.py",
+      "sha256": "78b999a95ff4dff1ba91a37aecea9904815903c11dc58aea15de9c70098084d8",
+      "bytes": 10854
+    },
+    {
+      "path": "retrieval-catalog.pointer.txt",
+      "sha256": "ac7d8682a5d3199841c8452c4c7cac00384881e3068fc67c74a22df53bbbf1e3",
+      "bytes": 134
+    },
+    {
+      "path": "validate_receipts.py",
+      "sha256": "be3f8380fd72d685a642e4c97aeb8d3dff61d2f1b82c52e72392156d286d2597",
+      "bytes": 2140
+    },
+    {
+      "path": "evidence-manifest.json",
+      "sha256": "314ec26d47f3214ce9f1f6219ed257792c6234585d34e2cf26c80453062f1db7",
+      "bytes": 1491
+    }
+  ],
+  "tls_method": "installed_certifi_ca_bundle_with_verification_enabled",
+  "object_absence_scope": "GitHub LFS response for this exact object under the configured origin and existing gh authentication. Not a claim about every remote, backup, historic archive or possible authorization context.",
+  "limitations": [
+    "Two distinct attempts: initial URLError without an HTTP response, then one explicitly authorized populated-CA transport retry. No subsequent retries or other missing objects checked.",
+    "All first-attempt files and receipt remain byte-identical. The original inventory describes that ten-file snapshot; use this combined inventory/validator for the additive retry folder.",
+    "Batch raw response is represented only by measured SHA256, length and allowlisted metadata; no token, authorization header or action URL is retained.",
+    "No object bytes were downloaded, so source SHA/size and JSONL validation could not be performed. Expected identity/size are pointer declarations, not recovered-byte verification.",
+    "The repository catalog pointer was rechecked unchanged. No installation, .git/index/catalog write, reconstruction, push or external contact occurred."
+  ]
+}

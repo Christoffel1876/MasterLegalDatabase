@@ -1,0 +1,474 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "DateRole": {
+      "additionalProperties": false,
+      "properties": {
+        "literal": {
+          "title": "Literal",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "source_event_or_excerpt": {
+          "title": "Source Event Or Excerpt",
+          "type": "string"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "literal",
+        "role",
+        "source_event_or_excerpt",
+        "qualification"
+      ],
+      "title": "DateRole",
+      "type": "object"
+    },
+    "Event": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "web_tool_open",
+            "web_tool_click",
+            "reported_redirect",
+            "ordinary_http_get"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "parent_event": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Parent Event"
+        },
+        "observed_link_label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Observed Link Label"
+        },
+        "referral_evidence": {
+          "title": "Referral Evidence",
+          "type": "string"
+        },
+        "result": {
+          "title": "Result",
+          "type": "string"
+        },
+        "output_assets": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "title": "Output Assets",
+          "type": "array"
+        },
+        "raw_http_status": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Raw Http Status"
+        },
+        "started_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Started At"
+        },
+        "completed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Completed At"
+        },
+        "tool_crawl_label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Tool Crawl Label"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "requested_url",
+        "kind",
+        "parent_event",
+        "observed_link_label",
+        "referral_evidence",
+        "result",
+        "output_assets",
+        "raw_http_status",
+        "started_at",
+        "completed_at",
+        "tool_crawl_label",
+        "qualification"
+      ],
+      "title": "Event",
+      "type": "object"
+    },
+    "Excerpt": {
+      "additionalProperties": false,
+      "properties": {
+        "excerpt_id": {
+          "title": "Excerpt Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 2,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "source_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "start_byte": {
+          "minimum": 0,
+          "title": "Start Byte",
+          "type": "integer"
+        },
+        "end_byte_exclusive": {
+          "exclusiveMinimum": 0,
+          "title": "End Byte Exclusive",
+          "type": "integer"
+        },
+        "exact_native": {
+          "title": "Exact Native",
+          "type": "string"
+        },
+        "observation": {
+          "title": "Observation",
+          "type": "string"
+        },
+        "limit": {
+          "title": "Limit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "excerpt_id",
+        "physical_page",
+        "source_sha256",
+        "native",
+        "image",
+        "start_byte",
+        "end_byte_exclusive",
+        "exact_native",
+        "observation",
+        "limit"
+      ],
+      "title": "Excerpt",
+      "type": "object"
+    },
+    "Input": {
+      "additionalProperties": false,
+      "properties": {
+        "historical_path": {
+          "title": "Historical Path",
+          "type": "string"
+        },
+        "preserved_copy": {
+          "$ref": "#/$defs/Asset"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        }
+      },
+      "required": [
+        "historical_path",
+        "preserved_copy",
+        "purpose"
+      ],
+      "title": "Input",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "audit_id": {
+      "const": "ARAPAHOE-RESOLUTION-26-224-ACCESS-2026-09-11",
+      "title": "Audit Id",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "deadline": {
+      "format": "date-time",
+      "title": "Deadline",
+      "type": "string"
+    },
+    "stop_reason": {
+      "const": "eight_counted_public_events_reached",
+      "title": "Stop Reason",
+      "type": "string"
+    },
+    "public_events_counted": {
+      "const": 8,
+      "title": "Public Events Counted",
+      "type": "integer"
+    },
+    "distinct_observed_targets": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 6,
+      "minItems": 6,
+      "title": "Distinct Observed Targets",
+      "type": "array"
+    },
+    "event_counting_limit": {
+      "title": "Event Counting Limit",
+      "type": "string"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "title": "Events",
+      "type": "array"
+    },
+    "retained_inputs": {
+      "items": {
+        "$ref": "#/$defs/Input"
+      },
+      "title": "Retained Inputs",
+      "type": "array"
+    },
+    "subject_fee_source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "subject_fee_source_id": {
+      "const": "arapahoe-planning-fees-sd002-14",
+      "title": "Subject Fee Source Id",
+      "type": "string"
+    },
+    "related_resolution_response": {
+      "$ref": "#/$defs/Asset"
+    },
+    "related_resolution_pdf_copy": {
+      "$ref": "#/$defs/Asset"
+    },
+    "related_resolution_pages": {
+      "const": 2,
+      "title": "Related Resolution Pages",
+      "type": "integer"
+    },
+    "related_resolution_sha256": {
+      "const": "8f1e94f6332fc9c36ee479f4673e2f85a533b2b777f29cbfc9757c2adcd41e6c",
+      "title": "Related Resolution Sha256",
+      "type": "string"
+    },
+    "related_resolution_status": {
+      "const": "unnumbered_unfilled_resolution_attachment",
+      "title": "Related Resolution Status",
+      "type": "string"
+    },
+    "physical_pages_directly_viewed": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Physical Pages Directly Viewed",
+      "type": "array"
+    },
+    "extraction_settings": {
+      "title": "Extraction Settings",
+      "type": "string"
+    },
+    "rendering_settings": {
+      "title": "Rendering Settings",
+      "type": "string"
+    },
+    "excerpts": {
+      "items": {
+        "$ref": "#/$defs/Excerpt"
+      },
+      "title": "Excerpts",
+      "type": "array"
+    },
+    "date_roles": {
+      "items": {
+        "$ref": "#/$defs/DateRole"
+      },
+      "title": "Date Roles",
+      "type": "array"
+    },
+    "confirmed_resolution_26_224_identity": {
+      "const": false,
+      "title": "Confirmed Resolution 26 224 Identity",
+      "type": "boolean"
+    },
+    "confirmed_adoption_date": {
+      "title": "Confirmed Adoption Date",
+      "type": "null"
+    },
+    "confirmed_effective_date": {
+      "title": "Confirmed Effective Date",
+      "type": "null"
+    },
+    "final_minutes_preserved": {
+      "const": false,
+      "title": "Final Minutes Preserved",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "repository_or_packet_changed": {
+      "const": false,
+      "title": "Repository Or Packet Changed",
+      "type": "boolean"
+    },
+    "external_assignment": {
+      "title": "External Assignment",
+      "type": "null"
+    },
+    "findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "unresolved": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unresolved",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "audit_id",
+    "completed_at",
+    "deadline",
+    "stop_reason",
+    "public_events_counted",
+    "distinct_observed_targets",
+    "event_counting_limit",
+    "events",
+    "retained_inputs",
+    "subject_fee_source",
+    "subject_fee_source_id",
+    "related_resolution_response",
+    "related_resolution_pdf_copy",
+    "related_resolution_pages",
+    "related_resolution_sha256",
+    "related_resolution_status",
+    "physical_pages_directly_viewed",
+    "extraction_settings",
+    "rendering_settings",
+    "excerpts",
+    "date_roles",
+    "confirmed_resolution_26_224_identity",
+    "confirmed_adoption_date",
+    "confirmed_effective_date",
+    "final_minutes_preserved",
+    "legal_currentness",
+    "repository_or_packet_changed",
+    "external_assignment",
+    "findings",
+    "unresolved",
+    "limitations"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

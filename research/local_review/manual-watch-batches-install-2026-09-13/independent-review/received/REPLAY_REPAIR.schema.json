@@ -1,0 +1,75 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "prepared_revision_pending_independent_recheck",
+      "title": "Status",
+      "type": "string"
+    },
+    "predecessor_manifest_sha256": {
+      "title": "Predecessor Manifest Sha256",
+      "type": "string"
+    },
+    "predecessor_payloads_rechecked": {
+      "const": 70,
+      "title": "Predecessor Payloads Rechecked",
+      "type": "integer"
+    },
+    "predecessor_unchanged": {
+      "const": true,
+      "title": "Predecessor Unchanged",
+      "type": "boolean"
+    },
+    "changes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Changes",
+      "type": "array"
+    },
+    "tests_added": {
+      "const": 6,
+      "title": "Tests Added",
+      "type": "integer"
+    },
+    "total_tests_passed": {
+      "const": 205,
+      "title": "Total Tests Passed",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "production_writes": {
+      "const": 0,
+      "title": "Production Writes",
+      "type": "integer"
+    },
+    "old_springs_generic_verifier_hardened": {
+      "const": false,
+      "title": "Old Springs Generic Verifier Hardened",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "status",
+    "predecessor_manifest_sha256",
+    "predecessor_payloads_rechecked",
+    "predecessor_unchanged",
+    "changes",
+    "tests_added",
+    "total_tests_passed",
+    "public_requests",
+    "production_writes",
+    "old_springs_generic_verifier_hardened"
+  ],
+  "title": "Repair",
+  "type": "object"
+}

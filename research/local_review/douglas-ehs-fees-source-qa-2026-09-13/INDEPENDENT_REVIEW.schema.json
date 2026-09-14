@@ -1,0 +1,355 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "One exact package-relative original or derived file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Crop": {
+      "additionalProperties": false,
+      "description": "Exact reproducible crop settings and declared source of those settings.",
+      "properties": {
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "physical_page": {
+          "const": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "displayed_pdf_clip": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Displayed Pdf Clip",
+          "type": "array"
+        },
+        "matrix_scale": {
+          "const": 4,
+          "title": "Matrix Scale",
+          "type": "integer"
+        },
+        "renderer": {
+          "const": "PyMuPDF 1.28.2",
+          "title": "Renderer",
+          "type": "string"
+        },
+        "alpha": {
+          "const": false,
+          "title": "Alpha",
+          "type": "boolean"
+        },
+        "settings_provenance": {
+          "title": "Settings Provenance",
+          "type": "string"
+        },
+        "original_creation_timestamp": {
+          "title": "Original Creation Timestamp",
+          "type": "null"
+        },
+        "visual_scope": {
+          "title": "Visual Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "image",
+        "physical_page",
+        "displayed_pdf_clip",
+        "matrix_scale",
+        "renderer",
+        "alpha",
+        "settings_provenance",
+        "original_creation_timestamp",
+        "visual_scope"
+      ],
+      "title": "Crop",
+      "type": "object"
+    },
+    "RowCheck": {
+      "additionalProperties": false,
+      "description": "A bounded comparison of five displayed positions, not an applicability decision.",
+      "properties": {
+        "row_id": {
+          "title": "Row Id",
+          "type": "string"
+        },
+        "source_qa_row_index": {
+          "exclusiveMaximum": 44,
+          "minimum": 0,
+          "title": "Source Qa Row Index",
+          "type": "integer"
+        },
+        "displayed_fields": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": "Displayed Fields",
+          "type": "object"
+        },
+        "cell_positions_reviewed": {
+          "const": 5,
+          "title": "Cell Positions Reviewed",
+          "type": "integer"
+        },
+        "physical_page": {
+          "const": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "result": {
+          "const": "supported_at_review_resolution",
+          "title": "Result",
+          "type": "string"
+        }
+      },
+      "required": [
+        "row_id",
+        "source_qa_row_index",
+        "displayed_fields",
+        "cell_positions_reviewed",
+        "physical_page",
+        "result"
+      ],
+      "title": "RowCheck",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Record independent source/candidate-aware QA without changing earlier evidence.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source_id": {
+      "const": "douglas-county-ehs-fees-dcr03",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "issuer": {
+      "const": "Douglas County Health Department",
+      "title": "Issuer",
+      "type": "string"
+    },
+    "source_authority_id": {
+      "const": "CO-COUNTY-DOUGLAS",
+      "title": "Source Authority Id",
+      "type": "string"
+    },
+    "authority_scope": {
+      "const": "issuer identity only; row citations and state/county captions remain source claims",
+      "title": "Authority Scope",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "review_mode": {
+      "const": "candidate-aware independent source check; not blind or a new external review",
+      "title": "Review Mode",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "frozen_pass1": {
+      "$ref": "#/$defs/Asset"
+    },
+    "frozen_qa": {
+      "$ref": "#/$defs/Asset"
+    },
+    "native": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_full_image": {
+      "$ref": "#/$defs/Asset"
+    },
+    "independent_poppler_image": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_input_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Original Input Files",
+      "type": "array"
+    },
+    "reviewed_rows": {
+      "items": {
+        "$ref": "#/$defs/RowCheck"
+      },
+      "maxItems": 44,
+      "minItems": 44,
+      "title": "Reviewed Rows",
+      "type": "array"
+    },
+    "checked_context_ids": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 7,
+      "minItems": 7,
+      "title": "Checked Context Ids",
+      "type": "array"
+    },
+    "crops": {
+      "items": {
+        "$ref": "#/$defs/Crop"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "title": "Crops",
+      "type": "array"
+    },
+    "nonblank_native_cell_lines": {
+      "const": 218,
+      "title": "Nonblank Native Cell Lines",
+      "type": "integer"
+    },
+    "blank_fee_positions": {
+      "const": 2,
+      "title": "Blank Fee Positions",
+      "type": "integer"
+    },
+    "total_native_lines": {
+      "const": 232,
+      "title": "Total Native Lines",
+      "type": "integer"
+    },
+    "total_native_bytes": {
+      "const": 4923,
+      "title": "Total Native Bytes",
+      "type": "integer"
+    },
+    "display_normalizations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Display Normalizations",
+      "type": "array"
+    },
+    "additional_transcription_errata": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Additional Transcription Errata",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "source_printed_dates": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Printed Dates",
+      "type": "array"
+    },
+    "acquisition_started_at": {
+      "format": "date-time",
+      "title": "Acquisition Started At",
+      "type": "string"
+    },
+    "acquisition_completed_at": {
+      "format": "date-time",
+      "title": "Acquisition Completed At",
+      "type": "string"
+    },
+    "canonical_intake_performed_by_this_task": {
+      "const": false,
+      "title": "Canonical Intake Performed By This Task",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "source_id",
+    "issuer",
+    "source_authority_id",
+    "authority_scope",
+    "completed_at",
+    "review_mode",
+    "source",
+    "frozen_pass1",
+    "frozen_qa",
+    "native",
+    "original_full_image",
+    "independent_poppler_image",
+    "original_input_files",
+    "reviewed_rows",
+    "checked_context_ids",
+    "crops",
+    "nonblank_native_cell_lines",
+    "blank_fee_positions",
+    "total_native_lines",
+    "total_native_bytes",
+    "display_normalizations",
+    "additional_transcription_errata",
+    "observations",
+    "source_printed_dates",
+    "acquisition_started_at",
+    "acquisition_completed_at",
+    "canonical_intake_performed_by_this_task",
+    "legal_currentness",
+    "answer_safe",
+    "limitations"
+  ],
+  "title": "Review",
+  "type": "object"
+}

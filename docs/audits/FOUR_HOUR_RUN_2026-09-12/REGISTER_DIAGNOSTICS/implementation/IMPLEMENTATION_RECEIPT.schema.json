@@ -1,0 +1,174 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "frozen_at": {
+      "format": "date-time",
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "status": {
+      "const": "frozen_pending_independent_review",
+      "title": "Status",
+      "type": "string"
+    },
+    "changed_production": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Changed Production",
+      "type": "array"
+    },
+    "new_fixtures": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "New Fixtures",
+      "type": "array"
+    },
+    "prior_snapshot": {
+      "title": "Prior Snapshot",
+      "type": "string"
+    },
+    "focused_tests_passed": {
+      "title": "Focused Tests Passed",
+      "type": "integer"
+    },
+    "elapsed_seconds": {
+      "title": "Elapsed Seconds",
+      "type": "number"
+    },
+    "pipeline_combined_coverage": {
+      "title": "Pipeline Combined Coverage",
+      "type": "number"
+    },
+    "pipeline_statements": {
+      "maxItems": 2,
+      "minItems": 2,
+      "prefixItems": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "integer"
+        }
+      ],
+      "title": "Pipeline Statements",
+      "type": "array"
+    },
+    "pipeline_branches": {
+      "maxItems": 2,
+      "minItems": 2,
+      "prefixItems": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "integer"
+        }
+      ],
+      "title": "Pipeline Branches",
+      "type": "array"
+    },
+    "changed_executable_lines": {
+      "maxItems": 2,
+      "minItems": 2,
+      "prefixItems": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "integer"
+        }
+      ],
+      "title": "Changed Executable Lines",
+      "type": "array"
+    },
+    "full_suite_run": {
+      "const": false,
+      "title": "Full Suite Run",
+      "type": "boolean"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "actual_corpus_refresh": {
+      "const": false,
+      "title": "Actual Corpus Refresh",
+      "type": "boolean"
+    },
+    "actual_repository_git_operations": {
+      "const": false,
+      "title": "Actual Repository Git Operations",
+      "type": "boolean"
+    },
+    "publisher_tests_use_temporary_git_repositories": {
+      "const": true,
+      "title": "Publisher Tests Use Temporary Git Repositories",
+      "type": "boolean"
+    },
+    "source_legal_status": {
+      "const": "not_verified",
+      "title": "Source Legal Status",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "frozen_at",
+    "status",
+    "changed_production",
+    "new_fixtures",
+    "prior_snapshot",
+    "focused_tests_passed",
+    "elapsed_seconds",
+    "pipeline_combined_coverage",
+    "pipeline_statements",
+    "pipeline_branches",
+    "changed_executable_lines",
+    "full_suite_run",
+    "public_requests",
+    "actual_corpus_refresh",
+    "actual_repository_git_operations",
+    "publisher_tests_use_temporary_git_repositories",
+    "source_legal_status",
+    "limitations"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

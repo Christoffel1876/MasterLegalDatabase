@@ -1,0 +1,71 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "previous_harness_sha256": {
+      "title": "Previous Harness Sha256",
+      "type": "string"
+    },
+    "prepared_harness_sha256": {
+      "title": "Prepared Harness Sha256",
+      "type": "string"
+    },
+    "native_sources": {
+      "items": {
+        "maxItems": 4,
+        "minItems": 4,
+        "prefixItems": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "type": "array"
+      },
+      "title": "Native Sources",
+      "type": "array"
+    },
+    "expected_check_count": {
+      "title": "Expected Check Count",
+      "type": "integer"
+    },
+    "archive_executions": {
+      "title": "Archive Executions",
+      "type": "integer"
+    },
+    "public_requests": {
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "changes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Changes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "previous_harness_sha256",
+    "prepared_harness_sha256",
+    "native_sources",
+    "expected_check_count",
+    "archive_executions",
+    "public_requests",
+    "changes"
+  ],
+  "title": "Prep",
+  "type": "object"
+}

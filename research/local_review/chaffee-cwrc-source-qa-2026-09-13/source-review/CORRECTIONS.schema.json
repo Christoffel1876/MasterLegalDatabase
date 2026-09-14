@@ -1,0 +1,45 @@
+{
+  "additionalProperties": false,
+  "description": "Image-reviewed replacement of an OCR line, preserved separately from candidate.",
+  "properties": {
+    "page": {
+      "maximum": 14,
+      "minimum": 1,
+      "title": "Page",
+      "type": "integer"
+    },
+    "line": {
+      "exclusiveMinimum": 0,
+      "title": "Line",
+      "type": "integer"
+    },
+    "raw_ocr": {
+      "title": "Raw Ocr",
+      "type": "string"
+    },
+    "checked": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Checked"
+    },
+    "reason": {
+      "title": "Reason",
+      "type": "string"
+    }
+  },
+  "required": [
+    "page",
+    "line",
+    "raw_ocr",
+    "checked",
+    "reason"
+  ],
+  "title": "Correction",
+  "type": "object"
+}

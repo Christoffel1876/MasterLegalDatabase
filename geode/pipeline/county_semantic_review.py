@@ -8,6 +8,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from geode.pipeline.local_release_ownership import ownership_reason_with_parents
+from geode.pipeline.local_source_ownership import load_ownership_policy
 from geode.pipeline.rule_units import extract_rule_units_from_markdown, score_rule_unit_quality
 from geode.utils.file_io import atomic_write_json, atomic_write_jsonl, iter_jsonl
 
@@ -21,12 +23,22 @@ def build_county_semantic_review(root: Path, max_units_per_rule: int = 24) -> di
     """Create source-linked deterministic candidates without changing canonical data."""
 
     resolved = root.resolve()
+    ownership = load_ownership_policy(resolved)
+    exclusions: list[str] = []
+    index_path = resolved / "08_County_Authorities" / "_index.jsonl"
+    indexed = {
+        str(row["id"]): row for row in iter_jsonl(index_path) if row.get("id")
+    } if index_path.exists() else {}
     source_path = resolved / "08_County_Authorities" / "_meta" / "local_rules.jsonl"
     candidates: list[dict[str, Any]] = []
     rules_seen = 0
     rules_with_candidates = 0
     quality_levels: Counter[str] = Counter()
     for rule in iter_jsonl(source_path):
+        reason = ownership_reason_with_parents(ownership, rule, indexed)
+        if reason:
+            exclusions.append(reason)
+            continue
         rules_seen += 1
         units = extract_rule_units_from_markdown(
             str(rule["id"]),
@@ -68,6 +80,8 @@ def build_county_semantic_review(root: Path, max_units_per_rule: int = 24) -> di
         "generated_at": generated_at,
         "layer": "08_County_Authorities",
         "rules_seen": rules_seen,
+        "ownership_excluded": len(exclusions),
+        "ownership_exclusion_reasons": exclusions,
         "rules_with_candidates": rules_with_candidates,
         "candidate_rule_units": len(candidates),
         "quality_levels": dict(quality_levels),

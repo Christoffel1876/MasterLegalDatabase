@@ -1,0 +1,153 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Bind immutable source bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One request, including each redirect hop, is one counted public event.",
+  "properties": {
+    "event_id": {
+      "title": "Event Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "enum": [
+        "CO-COUNTY-PUEBLO",
+        "CO-MUNICIPAL-PUEBLO"
+      ],
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "requested_url": {
+      "title": "Requested Url",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "http_status": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Http Status"
+    },
+    "outcome": {
+      "enum": [
+        "complete",
+        "http_denied",
+        "http_error",
+        "transport_error",
+        "partial"
+      ],
+      "title": "Outcome",
+      "type": "string"
+    },
+    "body_complete": {
+      "title": "Body Complete",
+      "type": "boolean"
+    },
+    "body": {
+      "$ref": "#/$defs/Ref"
+    },
+    "public_headers": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Public Headers",
+      "type": "object"
+    },
+    "redirect_to": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Redirect To"
+    },
+    "error_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Error Type"
+    },
+    "tls_verified": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Tls Verified"
+    },
+    "transport_description": {
+      "const": "ordinary_TLS_GET_no_retry_no_cookie_or_auth",
+      "title": "Transport Description",
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "authority_id",
+    "requested_url",
+    "started_at",
+    "completed_at",
+    "http_status",
+    "outcome",
+    "body_complete",
+    "body",
+    "public_headers",
+    "redirect_to",
+    "error_type",
+    "tls_verified",
+    "transport_description"
+  ],
+  "title": "Event",
+  "type": "object"
+}

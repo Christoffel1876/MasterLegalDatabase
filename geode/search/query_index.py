@@ -6,6 +6,7 @@ import argparse
 import json
 import re
 import sqlite3
+from contextlib import closing
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Iterable
@@ -113,7 +114,7 @@ def query_index(database_path: Path, query: str, limit: int = 8) -> list[QueryRe
         return []
     intent = _query_intent(query)
     search_terms = _search_terms(tokens, intent)
-    with sqlite3.connect(database_path) as connection:
+    with closing(sqlite3.connect(database_path)) as connection, connection:
         connection.row_factory = sqlite3.Row
         relation_counts = _relation_counts(connection)
         scored: dict[str, QueryResult] = {}

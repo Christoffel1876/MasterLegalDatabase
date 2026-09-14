@@ -1,0 +1,149 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "OCRCell": {
+      "additionalProperties": false,
+      "properties": {
+        "row_id": {
+          "title": "Row Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "column": {
+          "enum": [
+            "application_type",
+            "application_fee",
+            "project_type"
+          ],
+          "title": "Column",
+          "type": "string"
+        },
+        "ocr_observation_indices": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Ocr Observation Indices",
+          "type": "array"
+        },
+        "ocr_text": {
+          "title": "Ocr Text",
+          "type": "string"
+        },
+        "visual_text_with_footnote_markers": {
+          "title": "Visual Text With Footnote Markers",
+          "type": "string"
+        },
+        "equal_after_whitespace_collapse": {
+          "title": "Equal After Whitespace Collapse",
+          "type": "boolean"
+        },
+        "disposition": {
+          "enum": [
+            "comparison_agreement_not_proof",
+            "ocr_omitted_visible_project_code",
+            "ocr_superscript_misread_or_omitted",
+            "ocr_fee_punctuation_error",
+            "source_spacing_or_line_wrap_preserved"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        }
+      },
+      "required": [
+        "row_id",
+        "physical_page",
+        "column",
+        "ocr_observation_indices",
+        "ocr_text",
+        "visual_text_with_footnote_markers",
+        "equal_after_whitespace_collapse",
+        "disposition"
+      ],
+      "title": "OCRCell",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "const": "uncorrected_ocr_compared_to_image_reviewed_grid",
+      "title": "Status",
+      "type": "string"
+    },
+    "reviewed_grid": {
+      "$ref": "#/$defs/Asset"
+    },
+    "ocr_receipt": {
+      "$ref": "#/$defs/Asset"
+    },
+    "method": {
+      "const": "observation_bbox_center_in_recorded_cell_then_engine_order; comparison only",
+      "title": "Method",
+      "type": "string"
+    },
+    "cells": {
+      "items": {
+        "$ref": "#/$defs/OCRCell"
+      },
+      "title": "Cells",
+      "type": "array"
+    },
+    "final_differences": {
+      "minimum": 0,
+      "title": "Final Differences",
+      "type": "integer"
+    },
+    "original_visual_errors_corrected_additively": {
+      "const": 3,
+      "default": 3,
+      "title": "Original Visual Errors Corrected Additively",
+      "type": "integer"
+    },
+    "confidence_interpretation": {
+      "const": "Engine scores are not verification or a probability of legal accuracy.",
+      "title": "Confidence Interpretation",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "reviewed_grid",
+    "ocr_receipt",
+    "method",
+    "cells",
+    "final_differences",
+    "confidence_interpretation"
+  ],
+  "title": "OCRComparison",
+  "type": "object"
+}

@@ -1,0 +1,77 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "captured_at": {
+      "format": "date-time",
+      "title": "Captured At",
+      "type": "string"
+    },
+    "status": {
+      "const": "accepted_finite_live_check_not_recurring_deployment",
+      "title": "Status",
+      "type": "string"
+    },
+    "originals": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Originals",
+      "type": "object"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "no_private_header_files": {
+      "const": true,
+      "title": "No Private Header Files",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "captured_at",
+    "status",
+    "originals",
+    "files",
+    "no_private_header_files",
+    "legal_currentness"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

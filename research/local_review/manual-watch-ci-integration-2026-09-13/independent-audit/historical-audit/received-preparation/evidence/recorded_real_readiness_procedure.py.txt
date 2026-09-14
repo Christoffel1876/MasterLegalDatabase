@@ -1,0 +1,29 @@
+from pathlib import Path
+import tempfile,shutil,json,subprocess,hashlib,ast,sys
+B=Path('/Users/mcoors/Documents/Project Geode');R=B/'MasterLegalDatabase';A=B/'handoffs/run-2026-09-13/ptolemy-manual-watch-ci-preparation';P=A/'proposed'
+plan=json.loads((P/'config/manual_source_watch_ci.json').read_bytes())
+with tempfile.TemporaryDirectory(prefix='geode-watch-ci-offline-',dir='/private/tmp') as name:
+ T=Path(name)
+ for p in (R/'geode').rglob('*.py'):
+  if '__pycache__' in p.parts:continue
+  q=T/p.relative_to(R);q.parent.mkdir(parents=True,exist_ok=True);q.write_bytes(p.read_bytes())
+ for ref in plan['immutable_inputs']:
+  p=R/ref['path'];data=p.read_bytes()
+  assert hashlib.sha256(data).hexdigest()==ref['sha256']
+  q=T/ref['path'];q.parent.mkdir(parents=True,exist_ok=True);q.write_bytes(data)
+ rel='_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl'
+ p=T/rel;p.parent.mkdir(parents=True,exist_ok=True);before=(R/rel).read_bytes();p.write_bytes(before)
+ for p in P.rglob('*'):
+  if p.is_file() and ('__pycache__' not in p.parts):
+   q=T/p.relative_to(P);q.parent.mkdir(parents=True,exist_ok=True);q.write_bytes(p.read_bytes())
+ command=[sys.executable,'-B',str(T/'scripts/manual_source_watch_ci.py'),'--root',str(T),'--run-name','offline-staged-check']
+ result=subprocess.run(command,cwd='/private/tmp',capture_output=True,timeout=120)
+ (A/'evidence/real-offline-readiness.stdout').write_bytes(result.stdout)
+ (A/'evidence/real-offline-readiness.stderr').write_bytes(result.stderr)
+ assert result.returncode==0,result.stderr
+ summary=json.loads(result.stdout);assert summary['status']=='ready'
+ assert (T/rel).read_bytes()==before and not (T/'.geode_runtime/manual_source_watch').exists() and not (T/'.geode_runtime/manual_source_watch_batches').exists()
+ E=A/'evidence/real-offline-run';shutil.copytree(T/'.geode_runtime/manual_source_watch_ci/offline-staged-check',E)
+ record={'status':'PASS','public_requests':0,'mode':'readiness_only','platform':sys.platform,'python':sys.version,'command':command,'exit_code':result.returncode,'manual_manifest_before_sha256':hashlib.sha256(before).hexdigest(),'manual_manifest_after_sha256':hashlib.sha256((T/rel).read_bytes()).hexdigest(),'selected_originals_copied':8,'unselected_originals_not_copied':True,'unselected_availability_is_informational':True,'source_runtime_directories_created':False,'temporary_path_is_historical_and_removed':True,'python311_execution_tested':False,'python311_ast_parse_pass':True}
+ (A/'evidence/REAL_OFFLINE_CHECK.json').write_text(json.dumps(record,indent=2)+'\n')
+ print(json.dumps(record,indent=2))

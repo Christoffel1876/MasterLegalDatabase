@@ -1,0 +1,88 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "actual_capture_started_at": {
+      "title": "Actual Capture Started At",
+      "type": "string"
+    },
+    "actual_capture_completed_at": {
+      "title": "Actual Capture Completed At",
+      "type": "string"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "source_trees": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Source Trees",
+      "type": "object"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "delivered_originals_changed": {
+      "title": "Delivered Originals Changed",
+      "type": "boolean"
+    },
+    "witnessed_original_http": {
+      "title": "Witnessed Original Http",
+      "type": "boolean"
+    },
+    "external_agent_stopped_verified": {
+      "title": "External Agent Stopped Verified",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "actual_capture_started_at",
+    "actual_capture_completed_at",
+    "method",
+    "source_trees",
+    "files",
+    "delivered_originals_changed",
+    "witnessed_original_http",
+    "external_agent_stopped_verified",
+    "legal_currentness"
+  ],
+  "title": "Capture",
+  "type": "object"
+}

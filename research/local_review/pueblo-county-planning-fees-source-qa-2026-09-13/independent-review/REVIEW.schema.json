@@ -1,0 +1,206 @@
+{
+  "$defs": {
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "disposition": {
+          "enum": [
+            "accepted_source_association",
+            "qualified_custody",
+            "source_owned_anomaly"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "row_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Row Ids",
+          "type": "array"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "limitation": {
+          "title": "Limitation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "disposition",
+        "row_ids",
+        "statement",
+        "limitation"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "status": {
+      "const": "bounded_source_qa_accepted_with_custody_limits",
+      "title": "Status",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Ref"
+    },
+    "source_qa": {
+      "$ref": "#/$defs/Ref"
+    },
+    "source_schema": {
+      "$ref": "#/$defs/Ref"
+    },
+    "structural_verifier": {
+      "$ref": "#/$defs/Ref"
+    },
+    "checks": {
+      "$ref": "#/$defs/Ref"
+    },
+    "direct_visual_pages": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Direct Visual Pages",
+      "type": "array"
+    },
+    "direct_physical_rows": {
+      "const": 88,
+      "title": "Direct Physical Rows",
+      "type": "integer"
+    },
+    "labeled_fee_rows": {
+      "const": 69,
+      "title": "Labeled Fee Rows",
+      "type": "integer"
+    },
+    "source_native_bytes": {
+      "const": 3187,
+      "title": "Source Native Bytes",
+      "type": "integer"
+    },
+    "source_native_lines": {
+      "const": 145,
+      "title": "Source Native Lines",
+      "type": "integer"
+    },
+    "review_method": {
+      "title": "Review Method",
+      "type": "string"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "acquisition_limit": {
+      "title": "Acquisition Limit",
+      "type": "string"
+    },
+    "legacy_limit": {
+      "title": "Legacy Limit",
+      "type": "string"
+    },
+    "adoption_date": {
+      "title": "Adoption Date",
+      "type": "null"
+    },
+    "effective_date": {
+      "title": "Effective Date",
+      "type": "null"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "production_writes": {
+      "const": 0,
+      "title": "Production Writes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schema_version",
+    "checked_at",
+    "status",
+    "source",
+    "source_qa",
+    "source_schema",
+    "structural_verifier",
+    "checks",
+    "direct_visual_pages",
+    "direct_physical_rows",
+    "labeled_fee_rows",
+    "source_native_bytes",
+    "source_native_lines",
+    "review_method",
+    "findings",
+    "acquisition_limit",
+    "legacy_limit",
+    "adoption_date",
+    "effective_date",
+    "legal_currentness",
+    "answer_safe",
+    "public_requests",
+    "production_writes"
+  ],
+  "title": "Review",
+  "type": "object"
+}

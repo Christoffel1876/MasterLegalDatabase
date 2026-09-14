@@ -1,0 +1,1332 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Escaped Register source evidence</title></head><body><pre>&lt;!DOCTYPE html&gt;
+
+
+
+
+
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+	&lt;title&gt;Register Details &lt;/title&gt;
+	&lt;script language=&quot;JavaScript1.2&quot; src=&#x27;https://www.coloradosos.gov/pubs/Phoenix_js_functions.js&#x27; &gt;&lt;/script&gt;
+	&lt;SCRIPT language=&quot;JavaScript&quot; src=&quot;/CCR/javascripts/multipleupdates.js&quot;&gt;&lt;/SCRIPT&gt;
+	&lt;link href=&quot;/CCR/theme/common.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+	&lt;link href=&quot;/CCR/theme/style.css?v=5&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
+	&lt;link href=&quot;/CCR/theme/static.css?v=5&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;
+	
+
+	&lt;script language=&quot;javascript&quot;&gt;
+	function DisplayOpinion(trackingNum) {
+		//var trackingNum=window.document.getElementById(&quot;trackingNumber&quot;).value;
+	   var newWin = window.open(&#x27;/CCR/Opinion.do?forview=true&amp;trackingNum=&#x27;+trackingNum, &quot;Opinion&quot;,&quot;hight=1000,width=600,resizable=yes,scrollbars=yes&quot;); 
+	}
+	function gotoID(id) {
+		window.parent.location.href=&quot;RegisterContents.jsp#&quot;+id;
+	}
+	function OpenDetailsWindow(trackingNumber) {
+		var newWin = window.open(&#x27;/CCR/DisplayHearingDetails.do?trackingNumber=&#x27;+trackingNumber, &quot;HearingDetails&quot;,&quot;hight=1000,width=600,resizable=yes,scrollbars=yes&quot;); 
+	}
+	function OpenWindow(url) {
+		window.open(url); 
+	}
+	function backIssues() {
+		document.forms[&#x27;RegisterContentsForm&#x27;].action = &quot;RegisterHome.do&quot;;
+		document.forms[&#x27;RegisterContentsForm&#x27;].submit();
+	}
+	&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+	
+	&lt;!-- /apps/banner --&gt;
+&lt;style type=&quot;text/css&quot;&gt;
+#pageHeader { 
+    width: expression( document.body.clientWidth &lt; 1000 ? &quot;1000px&quot; : &quot;auto&quot; ); /* sets max-width for IE */
+}
+
+@media print {
+                #printHeader {
+                                width: 1000px;
+                }
+}
+
+body {
+    margin: 0px;
+    min-width: 1000px;
+
+
+}
+
+.toplinks {
+    color: #FFFFFF;
+}
+
+.toplinks a {
+    text-decoration: none;
+    font-family: verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    line-height: 18px;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.toplinks a:hover {
+    text-decoration: underline;
+}
+
+
+
+.pageBand {
+    background-color: #003767;
+    text-align: center;
+    
+}
+.ADAhidden	{position:absolute; left:-10000px; top:auto; width:1px; height:1px;}
+
+--&gt;&lt;/style&gt;
+&lt;div id=&quot;banner&quot; aria-label=&quot;Header&quot; role=&quot;region&quot;&gt;
+&lt;div id=&quot;printHeader&quot;&gt;
+    
+&lt;div id=&quot;pageHeader&quot; style=&quot;position: relative;&quot;&gt;
+&lt;div style=&quot;background-color: #2c5990; height: 140px;&quot;&gt;
+    
+    	&lt;div class=&quot;toplinks&quot; style=&quot;position: absolute; top: 1px; right: 5px;&quot;&gt;
+				&lt;a style=&quot;background-color: #003767;&quot; href=&quot;#main&quot;&gt;Skip to content&lt;/a&gt; &amp;#160;|&amp;#160; 
+				&lt;a style=&quot;background-color: #003767;&quot; href=&quot;https://www.coloradosos.gov/pubs/info_center/biography.html&quot;&gt;About Secretary Griswold&lt;/a&gt; &amp;#160;|&amp;#160; 
+				&lt;a  style=&quot;background-color: #003767;&quot; href=&quot;https://www.coloradosos.gov/pubs/spanish/spanishHome.html&quot;&gt;Espa&amp;#241;ol&lt;/a&gt;&amp;#160;
+			&lt;/div&gt;
+&lt;div style=&quot;float: left;&quot;&gt;&lt;a href=&quot;https://www.coloradosos.gov/&quot;&gt; &lt;img alt=&quot;Colorado Secretary of State - Go to home page&quot; src=&quot;https://www.coloradosos.gov/pubs/images/Banner/bannerLeft.png&quot; style=&quot;text-decoration: none; border: 0 none; border-width: 0px;&quot; width=&quot;332&quot; height=&quot;140&quot; /&gt; &lt;/a&gt;&lt;/div&gt;
+&lt;div style=&quot;float: right;&quot;&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.coloradosos.gov/pubs/images/Banner/bannerRight.png&quot; /&gt;
+
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;
+&lt;a aria-label=&quot;Main content&quot; role=&quot;region&quot; id=&quot;main&quot; name=&quot;main&quot;&gt;&lt;/a&gt;
+&lt;div id=&quot;application&quot; style=&quot;position: absolute; top: 165px; width: 100%&quot;&gt;
+
+	
+	&lt;table class=&quot;fullNoPadding&quot;&gt;
+		&lt;tr&gt; 
+			  &lt;td style=&quot;width: 10%; vertical-align: top;&quot; class=&quot;grayBackground&quot;&gt;
+				&lt;FORM NAME=&quot;logoutForm&quot; METHOD=&quot;POST&quot; ACTION=&quot;ibm_security_logout&quot; style=&quot;margin: 0; padding: 0;&quot;&gt;&lt;INPUT
+	TYPE=&quot;HIDDEN&quot; NAME=&quot;logoutExitPage&quot; value=&quot;/Welcome.do&quot;&gt;&lt;/FORM&gt;
+&lt;FORM NAME=&quot;loginForm&quot; METHOD=&quot;POST&quot; ACTION=&quot;ibm_security_logout&quot; style=&quot;margin: 0; padding: 0;&quot;&gt;&lt;INPUT
+	TYPE=&quot;HIDDEN&quot; NAME=&quot;logoutExitPage&quot; value=&quot;/Welcome.do&quot;&gt;&lt;/FORM&gt;
+ 
+&lt;table style=&quot;width: 158px; border: 0; float: right; border-collapse: collapse;&quot;&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt; 
+	  &lt;td&gt;&amp;nbsp;&lt;a href=&quot;/CCR/Welcome.do&quot; class=&quot;leftNav&quot;&gt;Home&lt;/a&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt; 
+	  &lt;td&gt;&amp;nbsp;&lt;a href=&quot;http://www.lexisnexis.com/hottopics/colorado/&quot; target=&quot;_blank&quot; class=&quot;leftNav&quot;&gt;Colorado Revised Statutes&lt;/a&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt; 
+	  &lt;td&gt;&amp;nbsp;&lt;a href=&quot;/CCR/KeywordSearch.do&quot; class=&quot;leftNav&quot;&gt;Search&lt;/a&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt; 
+	  &lt;td&gt;&amp;nbsp;&lt;a href=&quot;/CCR/NumericalDeptList.do&quot; class=&quot;leftNav&quot;&gt;Browse&lt;/a&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt; 
+	  &lt;td&gt;&amp;nbsp;&lt;a href=&quot;/CCR/RegisterHome.do&quot; class=&quot;leftNav&quot;&gt;Colorado Register&lt;/a&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt; 
+	  &lt;td&gt;&amp;nbsp;&lt;a href=&quot;/CCR/eDocketCriteria.do&quot; class=&quot;leftNav&quot;&gt;eDocket&lt;/a&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt; 
+	  &lt;td&gt;&amp;nbsp;&lt;a href=&quot;/CCR/auth/loginHome.do&quot; class=&quot;leftNav&quot;&gt;Log in&lt;/a&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt;&lt;td&gt;&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;
+	&lt;tr&gt; 
+	  &lt;td&gt;&amp;nbsp;&lt;a href=&#x27;https://www.coloradosos.gov/pubs/info_center/contact.html&#x27; class=&quot;leftNav&quot;&gt;Contact Us&lt;/a&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;tr&gt; 
+	  &lt;td&gt;&lt;br&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;
+
+			  &lt;/td&gt;
+			&lt;td style=&quot;width: 100%; vertical-align: top;&quot; class=&quot;whiteBackground&quot;&gt; 
+				&lt;table style=&quot;text-align: left; height:285px&quot; class=&quot;fullNoPadding&quot;&gt;
+					&lt;tr&gt;
+						&lt;td style=&quot;width: 100%; height: 95px; vertical-align: top;&quot;&gt;
+							 
+							&lt;h1 id=&quot;6&quot; style=&quot;text-align: center;&quot;&gt;Colorado Register&lt;br&gt;
+                               &lt;span class=&quot;smallheader&quot;&gt;Official Publication of the State Administrative Rules (24-4-103(11) C.R.S.)&lt;/span&gt;&lt;a id=&quot;#6&quot;&gt;&lt;/a&gt;
+                            &lt;/h1&gt;
+							&lt;p class=&quot;centered&quot; style=&quot;background:#FFFFFF;&quot;&gt; August 10, 2026 - Volume 49 , No. 15&lt;/p&gt;
+							&lt;table style=&quot;width: 95%; margin-left:3em; border: 0;&quot;&gt;
+							&lt;tr&gt; &lt;td colspan=&quot;2&quot;&gt; &amp;nbsp;&amp;nbsp; &lt;/td&gt; &lt;/tr&gt;
+							  	&lt;tr&gt;
+							        &lt;td&gt;
+										&lt;a href=&quot;/CCR/Welcome.do&quot;&gt;Home&lt;/a&gt; &amp;gt; Colorado Register  
+								    &lt;/td&gt;
+								  &lt;form name=&quot;registerContentsForm&quot; id=&quot;RegisterContentsForm&quot; method=&quot;post&quot; action=&quot;/CCR/RegisterHome.do&quot;&gt;
+								    &lt;td style=&quot;float: right;&quot;&gt;&lt;b&gt;&lt;label for=&quot;pyear&quot;&gt;Back Issues&lt;/label&gt;&lt;/b&gt; 
+										   &lt;select name=&quot;pyear&quot; onchange=&quot;backIssues()&quot; id=&quot;pyear&quot;&gt;&lt;option value=&quot;&quot;&gt;Select year&lt;/option&gt;
+											    
+													&lt;option value=&quot;2026&quot;&gt;2026&lt;/option&gt;
+												
+													&lt;option value=&quot;2025&quot;&gt;2025&lt;/option&gt;
+												
+													&lt;option value=&quot;2024&quot;&gt;2024&lt;/option&gt;
+												
+													&lt;option value=&quot;2023&quot;&gt;2023&lt;/option&gt;
+												
+													&lt;option value=&quot;2022&quot;&gt;2022&lt;/option&gt;
+												
+													&lt;option value=&quot;2021&quot;&gt;2021&lt;/option&gt;
+												
+													&lt;option value=&quot;2020&quot;&gt;2020&lt;/option&gt;
+												
+													&lt;option value=&quot;2019&quot;&gt;2019&lt;/option&gt;
+												
+													&lt;option value=&quot;2018&quot;&gt;2018&lt;/option&gt;
+												
+													&lt;option value=&quot;2017&quot;&gt;2017&lt;/option&gt;
+												
+													&lt;option value=&quot;2016&quot;&gt;2016&lt;/option&gt;
+												
+													&lt;option value=&quot;2015&quot;&gt;2015&lt;/option&gt;
+												
+													&lt;option value=&quot;2014&quot;&gt;2014&lt;/option&gt;
+												
+													&lt;option value=&quot;2013&quot;&gt;2013&lt;/option&gt;
+												
+													&lt;option value=&quot;2012&quot;&gt;2012&lt;/option&gt;
+												
+													&lt;option value=&quot;2011&quot;&gt;2011&lt;/option&gt;
+												
+													&lt;option value=&quot;2010&quot;&gt;2010&lt;/option&gt;
+												
+													&lt;option value=&quot;2009&quot;&gt;2009&lt;/option&gt;
+												
+													&lt;option value=&quot;2008&quot;&gt;2008&lt;/option&gt;
+												
+													&lt;option value=&quot;2007&quot;&gt;2007&lt;/option&gt;
+												
+													&lt;option value=&quot;2006&quot;&gt;2006&lt;/option&gt;&lt;/select&gt;
+									&lt;/td&gt; 
+							     &lt;/form&gt;
+								 &lt;/tr&gt;
+								 &lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt;&lt;hr style=&quot;width: 100%;&quot;/&gt;&lt;/td&gt;&lt;/tr&gt;
+								&lt;tr&gt;&lt;td style=&quot;float: right;&quot; colspan=&quot;2&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+								
+								&lt;tr&gt;&lt;td&gt;&lt;b&gt;&lt;span class=&quot;smallFont&quot;&gt;Contents &lt;/span&gt;&lt;/b&gt; &lt;/td&gt;&lt;/tr&gt;
+								
+								
+															
+								&lt;tr&gt;&lt;td&gt;&lt;a href=&quot;#1&quot;&gt;&lt;span class=&quot;smallFont&quot; style=&quot;text-decoration: underline;&quot;&gt;Notices of proposed rulemaking&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;								
+								&lt;tr&gt;&lt;td&gt;&lt;a href=&quot;#2&quot;&gt;&lt;span class=&quot;smallFont&quot; style=&quot;text-decoration: underline;&quot;&gt;Permanent Rules Adopted&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+								&lt;tr&gt;&lt;td&gt;&lt;a href=&quot;#3&quot;&gt;&lt;span class=&quot;smallFont&quot; style=&quot;text-decoration: underline;&quot;&gt;Emergency Rules Adopted&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+								
+								
+								&lt;tr&gt;&lt;td&gt;&lt;a href=&quot;#4&quot;&gt;&lt;span class=&quot;smallFont&quot; style=&quot;text-decoration: underline;&quot;&gt;Nonrulemaking public notices and other miscellaneous rulemaking notices&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+								
+								&lt;tr&gt;&lt;td&gt;&lt;a href=&quot;#5&quot;&gt;&lt;span class=&quot;smallFont&quot; style=&quot;text-decoration: underline;&quot;&gt;Calendar of Hearings&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+							&lt;/table&gt;
+						    &lt;br/&gt;
+							
+							
+							
+							
+                            &lt;br/&gt;
+							&lt;table style=&quot;width: 100%; margin-left:3em;&quot;&gt;
+								&lt;tr&gt;
+									&lt;td style=&quot;width: 250px;&quot;&gt;&lt;p id=&quot;1&quot; class=&quot;pagehead5&quot;&gt; Notices of proposed rulemaking &lt;/p&gt;&lt;/td&gt;
+									&lt;td&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+										&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/td&gt;
+								&lt;/tr&gt;
+							&lt;/table&gt;
+							
+
+							
+							
+							&lt;br/&gt;
+							&lt;table style=&quot;margin-left:3em; width: 80%;&quot; class=&quot;noStripes&quot;&gt; 
+							  &lt;thead&gt;
+						  		&lt;tr style=&quot;background-color: #b0c4de;&quot;&gt;
+						  		 	&lt;th&gt;&lt;b&gt;Department&lt;/b&gt;&lt;/th&gt;
+						  		 	&lt;th style=&quot;width: 250px;&quot; class=&quot;headerLeft&quot;&gt;&lt;b&gt;Agency&lt;/b&gt;&lt;/th&gt;
+						  		 	&lt;th class=&quot;headerLeft&quot;&gt;&lt;b&gt;Proposed rules&lt;/b&gt;&lt;/th&gt;
+						  		 	&lt;th style=&quot;width: 150px;&quot;&gt;&lt;b&gt;Hearing&lt;/b&gt;&lt;/th&gt;
+								&lt;/tr&gt;
+							  &lt;/thead&gt;
+							  &lt;tbody&gt;
+									
+									&lt;tr&gt;
+							  		 	&lt;td&gt; Department of Revenue &lt;/td&gt;
+							  		 	&lt;td&gt; Division of Gaming - Rules promulgated by Gaming Commission &lt;/td&gt;
+							  		 	&lt;td&gt; 
+							  		 	
+											&lt;a href=&quot;/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00338.docx&quot; target=&quot;_blank&quot;&gt;
+											&lt;span style=&quot;text-decoration: underline;&quot;&gt;SPORTS BETTING REGULATIONS&lt;/span&gt;&lt;/a&gt;
+										
+										
+										
+
+							  		 	&lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00338&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/17/2026 09:15 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								   
+									&lt;tr&gt;
+							  		 	&lt;td&gt; Department of Education &lt;/td&gt;
+							  		 	&lt;td&gt; Colorado State Board of Education &lt;/td&gt;
+							  		 	&lt;td&gt; 
+							  		 	
+											&lt;a href=&quot;/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00317.docx&quot; target=&quot;_blank&quot;&gt;
+											&lt;span style=&quot;text-decoration: underline;&quot;&gt;ADMINISTRATION OF THE STATE PUBLICATIONS DEPOSITORY AND DISTRIBUTION CENTER&lt;/span&gt;&lt;/a&gt;
+										
+										
+										
+
+							  		 	&lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00317&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;10/14/2026 09:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								   
+									&lt;tr&gt;
+							  		 	&lt;td&gt; Department of Natural Resources &lt;/td&gt;
+							  		 	&lt;td&gt; Colorado Parks and Wildlife (405 Series, Parks) &lt;/td&gt;
+							  		 	&lt;td&gt; 
+							  		 	
+											&lt;a href=&quot;/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00339.docx&quot; target=&quot;_blank&quot;&gt;
+											&lt;span style=&quot;text-decoration: underline;&quot;&gt;CHAPTER P-1 - PARKS AND OUTDOOR RECREATION LANDS&lt;/span&gt;&lt;/a&gt;
+										
+										
+										
+
+							  		 	&lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00339&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/02/2026 08:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								   
+									&lt;tr&gt;
+							  		 	&lt;td&gt; Department of Human Services &lt;/td&gt;
+							  		 	&lt;td&gt; Behavioral Health &lt;/td&gt;
+							  		 	&lt;td&gt; 
+							  		 	
+											&lt;a href=&quot;/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00340.docx&quot; target=&quot;_blank&quot;&gt;
+											&lt;span style=&quot;text-decoration: underline;&quot;&gt;BEHAVIORAL HEALTH&lt;/span&gt;&lt;/a&gt;
+										
+										
+										
+
+							  		 	&lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00340&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/04/2026 08:30 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								   
+									&lt;tr&gt;
+							  		 	&lt;td&gt; Department of Regulatory Agencies &lt;/td&gt;
+							  		 	&lt;td&gt; Public Utilities Commission &lt;/td&gt;
+							  		 	&lt;td&gt; 
+							  		 	
+											&lt;a href=&quot;/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00329.docx&quot; target=&quot;_blank&quot;&gt;
+											&lt;span style=&quot;text-decoration: underline;&quot;&gt;RULES REGULATING RAILROADS, RAIL FIXED GUIDEWAYS, TRANSPORTATION BY RAIL, AND RAIL CROSSINGS&lt;/span&gt;&lt;/a&gt;
+										
+										
+										
+
+							  		 	&lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00329&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;10/08/2026 11:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								   
+									&lt;tr&gt;
+							  		 	&lt;td&gt; Department of Regulatory Agencies &lt;/td&gt;
+							  		 	&lt;td&gt; Public Utilities Commission &lt;/td&gt;
+							  		 	&lt;td&gt; 
+							  		 	
+											&lt;a href=&quot;/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00330.docx&quot; target=&quot;_blank&quot;&gt;
+											&lt;span style=&quot;text-decoration: underline;&quot;&gt;RULES FOR SAFETY PROGRAM STANDARDS FOR RAIL FIXED GUIDEWAY SYSTEMS [Repealed eff. 04/01/2006]&lt;/span&gt;&lt;/a&gt;
+										
+										
+										
+
+							  		 	&lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00330&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;10/08/2026 11:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								   
+									&lt;tr&gt;
+							  		 	&lt;td&gt; Department of Public Health and Environment &lt;/td&gt;
+							  		 	&lt;td&gt; Air Quality Control Commission &lt;/td&gt;
+							  		 	&lt;td&gt; 
+							  		 	
+											&lt;a href=&quot;/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00327.docx&quot; target=&quot;_blank&quot;&gt;
+											&lt;span style=&quot;text-decoration: underline;&quot;&gt;PROCEDURAL RULES&lt;/span&gt;&lt;/a&gt;
+										
+										
+										
+
+							  		 	&lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00327&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;10/15/2026 09:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								   
+									&lt;tr&gt;
+							  		 	&lt;td&gt; Department of Public Health and Environment &lt;/td&gt;
+							  		 	&lt;td&gt; Air Quality Control Commission &lt;/td&gt;
+							  		 	&lt;td&gt; 
+							  		 	
+											&lt;a href=&quot;/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00323.docx&quot; target=&quot;_blank&quot;&gt;
+											&lt;span style=&quot;text-decoration: underline;&quot;&gt;COMMON PROVISIONS REGULATION&lt;/span&gt;&lt;/a&gt;
+										
+										
+										
+
+							  		 	&lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00323&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;10/15/2026 09:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								   
+									&lt;tr&gt;
+							  		 	&lt;td&gt; Department of Public Health and Environment &lt;/td&gt;
+							  		 	&lt;td&gt; Air Quality Control Commission &lt;/td&gt;
+							  		 	&lt;td&gt; 
+							  		 	
+											&lt;a href=&quot;/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00324.docx&quot; target=&quot;_blank&quot;&gt;
+											&lt;span style=&quot;text-decoration: underline;&quot;&gt;REGULATION NUMBER 6 STANDARDS OF PERFORMANCE FOR NEW STATIONARY SOURCES&lt;/span&gt;&lt;/a&gt;
+										
+										
+										
+
+							  		 	&lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00324&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;10/15/2026 09:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								   
+									&lt;tr&gt;
+							  		 	&lt;td&gt; Department of Public Health and Environment &lt;/td&gt;
+							  		 	&lt;td&gt; Air Quality Control Commission &lt;/td&gt;
+							  		 	&lt;td&gt; 
+							  		 	
+											&lt;a href=&quot;/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00325.docx&quot; target=&quot;_blank&quot;&gt;
+											&lt;span style=&quot;text-decoration: underline;&quot;&gt;REGULATION NUMBER 8 CONTROL OF HAZARDOUS AIR POLLUTANTS&lt;/span&gt;&lt;/a&gt;
+										
+										
+										
+
+							  		 	&lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00325&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;10/15/2026 09:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								   
+									&lt;tr&gt;
+							  		 	&lt;td&gt; Department of Public Health and Environment &lt;/td&gt;
+							  		 	&lt;td&gt; Air Quality Control Commission &lt;/td&gt;
+							  		 	&lt;td&gt; 
+							  		 	
+											&lt;a href=&quot;/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00326.docx&quot; target=&quot;_blank&quot;&gt;
+											&lt;span style=&quot;text-decoration: underline;&quot;&gt;REGULATION NUMBER 10 CRITERIA FOR ANALYSIS OF CONFORMITY&lt;/span&gt;&lt;/a&gt;
+										
+										
+										
+
+							  		 	&lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00326&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;10/15/2026 09:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								   
+									&lt;tr&gt;
+							  		 	&lt;td&gt; Department of Public Health and Environment &lt;/td&gt;
+							  		 	&lt;td&gt; Air Quality Control Commission &lt;/td&gt;
+							  		 	&lt;td&gt; 
+							  		 	
+											&lt;a href=&quot;/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00322.docx&quot; target=&quot;_blank&quot;&gt;
+											&lt;span style=&quot;text-decoration: underline;&quot;&gt;REGULATION NUMBER 29 EMISSION REDUCTION REQUIREMENTS FOR LAWN AND GARDEN EQUIPMENT&lt;/span&gt;&lt;/a&gt;
+										
+										
+										
+
+							  		 	&lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00322&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;11/18/2026 04:30 PM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								   
+									&lt;tr&gt;
+							  		 	&lt;td&gt; Department of Public Health and Environment &lt;/td&gt;
+							  		 	&lt;td&gt; Prevention Services Division (1009, 1015, 1016 Series) &lt;/td&gt;
+							  		 	&lt;td&gt; 
+							  		 	
+											&lt;a href=&quot;/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00318.docx&quot; target=&quot;_blank&quot;&gt;
+											&lt;span style=&quot;text-decoration: underline;&quot;&gt;STATE-DESIGNATED HEALTH PROFESSIONAL SHORTAGE AREA DESIGNATION&lt;/span&gt;&lt;/a&gt;
+										
+										
+										
+
+							  		 	&lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00318&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/16/2026 10:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								   
+									&lt;tr&gt;
+							  		 	&lt;td&gt; Department of Agriculture &lt;/td&gt;
+							  		 	&lt;td&gt; Pesticide Disposal Enterprise Board &lt;/td&gt;
+							  		 	&lt;td&gt; 
+							  		 	
+											&lt;a href=&quot;/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00333.docx&quot; target=&quot;_blank&quot;&gt;
+											&lt;span style=&quot;text-decoration: underline;&quot;&gt;RULES AND REGULATIONS PERTAINING TO ADMINISTRATION OF THE PESTICIDE PRODUCT DISPOSAL AND CONTAINER RECYCLING PROGRAM&lt;/span&gt;&lt;/a&gt;
+										
+										
+										
+
+							  		 	&lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00333&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/23/2026 12:30 PM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								   
+									&lt;tr&gt;
+							  		 	&lt;td&gt; Department of Public Safety &lt;/td&gt;
+							  		 	&lt;td&gt; Colorado Bureau of Investigation &lt;/td&gt;
+							  		 	&lt;td&gt; 
+							  		 	
+											&lt;a href=&quot;/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00345.docx&quot; target=&quot;_blank&quot;&gt;
+											&lt;span style=&quot;text-decoration: underline;&quot;&gt;IMPLEMENTATION OF THE NATIONAL INSTANT CRIMINAL BACKGROUND CHECK SYSTEM WITH THE COLORADO BUREAU OF INVESTIGATION SERVING AS THE POINT OF CONTACT&lt;/span&gt;&lt;/a&gt;
+										
+										
+										
+
+							  		 	&lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00345&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/01/2026 01:00 PM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								   
+									&lt;tr&gt;
+							  		 	&lt;td&gt; Department of Public Safety &lt;/td&gt;
+							  		 	&lt;td&gt; Division of Fire Prevention and Control &lt;/td&gt;
+							  		 	&lt;td&gt; 
+							  		 	
+											&lt;a href=&quot;/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00331.docx&quot; target=&quot;_blank&quot;&gt;
+											&lt;span style=&quot;text-decoration: underline;&quot;&gt;COLORADO WILDFIRE RESILIENT HOMES GRANT PROGRAM&lt;/span&gt;&lt;/a&gt;
+										
+										
+										
+
+							  		 	&lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00331&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/01/2026 11:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								   
+									&lt;tr&gt;
+							  		 	&lt;td&gt; Department of Human Services &lt;/td&gt;
+							  		 	&lt;td&gt; Social Services Rules (Volume 7; Child Welfare, Child Care Facilities) &lt;/td&gt;
+							  		 	&lt;td&gt; 
+							  		 	
+											&lt;a href=&quot;/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00341.docx&quot; target=&quot;_blank&quot;&gt;
+											&lt;span style=&quot;text-decoration: underline;&quot;&gt;PROGRAM AREAS, CASE CONTACTS, AND ONGOING CASE REQUIREMENTS&lt;/span&gt;&lt;/a&gt;
+										
+										
+										
+
+							  		 	&lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00341&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/04/2026 08:30 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								   
+									&lt;tr&gt;
+							  		 	&lt;td&gt; Department of Human Services &lt;/td&gt;
+							  		 	&lt;td&gt; Social Services Rules (Volume 7; Child Welfare, Child Care Facilities) &lt;/td&gt;
+							  		 	&lt;td&gt; 
+							  		 	
+											&lt;a href=&quot;/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00342.docx&quot; target=&quot;_blank&quot;&gt;
+											&lt;span style=&quot;text-decoration: underline;&quot;&gt;CHILD WELFARE SERVICES&lt;/span&gt;&lt;/a&gt;
+										
+										
+										
+
+							  		 	&lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00342&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/04/2026 08:30 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								   
+									&lt;tr&gt;
+							  		 	&lt;td&gt; Department of Human Services &lt;/td&gt;
+							  		 	&lt;td&gt; Social Services Rules (Volume 7; Child Welfare, Child Care Facilities) &lt;/td&gt;
+							  		 	&lt;td&gt; 
+							  		 	
+											&lt;a href=&quot;/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00343.docx&quot; target=&quot;_blank&quot;&gt;
+											&lt;span style=&quot;text-decoration: underline;&quot;&gt;RESOURCES, REIMBURSEMENT, REPORTING, AND PROVIDER REQUIREMENTS&lt;/span&gt;&lt;/a&gt;
+										
+										
+										
+
+							  		 	&lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00343&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/04/2026 08:30 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								   
+									&lt;tr&gt;
+							  		 	&lt;td&gt; Department of Human Services &lt;/td&gt;
+							  		 	&lt;td&gt; Social Services Rules (Volume 7; Child Welfare, Child Care Facilities) &lt;/td&gt;
+							  		 	&lt;td&gt; 
+							  		 	
+											&lt;a href=&quot;/CCR/Upload/NoticeOfRulemaking/ProposedRuleAttach2026-00344.docx&quot; target=&quot;_blank&quot;&gt;
+											&lt;span style=&quot;text-decoration: underline;&quot;&gt;COUNTY RESPONSIBILITIES, STAFF TRAINING AND QUALIFICATIONS, CLIENT RIGHTS, CONFIDENTIALITY&lt;/span&gt;&lt;/a&gt;
+										
+										
+										
+
+							  		 	&lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00344&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/04/2026 08:30 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								   
+									
+								&lt;/tbody&gt;
+							&lt;/table&gt;
+							
+							
+							
+							&lt;br/&gt;
+
+							&lt;table style=&quot;margin-left:3em; width:95%;&quot;&gt;
+								&lt;tr&gt;
+									&lt;td style=&quot;width: 250px;&quot;&gt;&lt;p id=&quot;2&quot; class=&quot;pagehead5&quot;&gt;Permanent Rules Adopted &lt;/p&gt;&lt;/td&gt;
+									&lt;td style=&quot;float: right;&quot;&gt;
+										&lt;table&gt;
+											&lt;tr&gt; &lt;td&gt;&lt;a href=&quot;#6&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;Top&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt; 
+										&lt;/table&gt;
+									&lt;/td&gt;
+								&lt;/tr&gt;
+							&lt;/table&gt;
+
+							
+
+							
+							&lt;br/&gt;
+									 &lt;table style=&quot;margin-left:3em; width: 80%;&quot; class=&quot;noStripes&quot;&gt; 
+									 	&lt;thead&gt;
+									 		&lt;tr style=&quot;background-color: #b0c4de;&quot;&gt;
+									  		 	&lt;th style=&quot;width: 15%;&quot; class=&quot;headerLeft&quot;&gt;&lt;b&gt;Department&lt;/b&gt;&lt;/th&gt;
+									  		 	&lt;th style=&quot;width: 20%;&quot; class=&quot;headerLeft&quot;&gt;&lt;b&gt;Agency&lt;/b&gt;&lt;/th&gt;
+									  		 	&lt;th style=&quot;width: 30%;&quot; class=&quot;headerLeft&quot;&gt;&lt;b&gt;Rules adopted&lt;/b&gt;&lt;/th&gt;
+									  		 	&lt;th style=&quot;width: 8%;&quot; class=&quot;headerLeft&quot;&gt;&lt;b&gt;AG opinion&lt;/b&gt;&lt;/th&gt;
+									  		 	&lt;th style=&quot;width: 7%;&quot; class=&quot;headerLeft&quot;&gt;&lt;b&gt;Effective date&lt;/b&gt;&lt;/th&gt;
+											&lt;/tr&gt;
+									 	&lt;/thead&gt;
+								  		&lt;tbody&gt; 
+												
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Revenue &lt;/td&gt;
+											  		 	&lt;td&gt; Taxation Division &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules02026-00182.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;1 CCR 201-4 SALES AND USE TAX  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00182&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/27/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 08/30/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Revenue &lt;/td&gt;
+											  		 	&lt;td&gt; Taxation Division &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules02026-00181.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;1 CCR 201-4 SALES AND USE TAX  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00181&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/27/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 08/30/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Revenue &lt;/td&gt;
+											  		 	&lt;td&gt; Taxation Division &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules02026-00180.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;1 CCR 201-5 SALES AND USE TAX - SPECIAL RULES FOR SPECIFIC BUSINESSES  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00180&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/27/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 08/30/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Revenue &lt;/td&gt;
+											  		 	&lt;td&gt; Taxation Division &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules02026-00156.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;1 CCR 201-7 CIGARETTE TAX, TOBACCO ESCROW FUNDS - MASTER SETTLEMENT AGREEMENT, TOBACCO PRODUCTS TAX, NICOTINE PRODUCTS TAX  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00156&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/17/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 08/30/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Revenue &lt;/td&gt;
+											  		 	&lt;td&gt; Taxation Division &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules02026-00157.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;1 CCR 201-7 CIGARETTE TAX, TOBACCO ESCROW FUNDS - MASTER SETTLEMENT AGREEMENT, TOBACCO PRODUCTS TAX, NICOTINE PRODUCTS TAX  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00157&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/17/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 08/30/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Revenue &lt;/td&gt;
+											  		 	&lt;td&gt; Taxation Division &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules12026-00155.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;1 CCR 201-7 CIGARETTE TAX, TOBACCO ESCROW FUNDS - MASTER SETTLEMENT AGREEMENT, TOBACCO PRODUCTS TAX, NICOTINE PRODUCTS TAX  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00155&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/17/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 08/30/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Revenue &lt;/td&gt;
+											  		 	&lt;td&gt; Taxation Division &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules02026-00158.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;1 CCR 201-7 CIGARETTE TAX, TOBACCO ESCROW FUNDS - MASTER SETTLEMENT AGREEMENT, TOBACCO PRODUCTS TAX, NICOTINE PRODUCTS TAX  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00158&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/17/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 08/30/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Revenue &lt;/td&gt;
+											  		 	&lt;td&gt; Taxation Division &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules02026-00164.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;1 CCR 201-7 CIGARETTE TAX, TOBACCO ESCROW FUNDS - MASTER SETTLEMENT AGREEMENT, TOBACCO PRODUCTS TAX, NICOTINE PRODUCTS TAX  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00164&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/17/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 08/30/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Revenue &lt;/td&gt;
+											  		 	&lt;td&gt; Taxation Division &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules02026-00159.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;1 CCR 201-7 CIGARETTE TAX, TOBACCO ESCROW FUNDS - MASTER SETTLEMENT AGREEMENT, TOBACCO PRODUCTS TAX, NICOTINE PRODUCTS TAX  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00159&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/17/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 08/30/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Revenue &lt;/td&gt;
+											  		 	&lt;td&gt; Taxation Division &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules02026-00160.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;1 CCR 201-7 CIGARETTE TAX, TOBACCO ESCROW FUNDS - MASTER SETTLEMENT AGREEMENT, TOBACCO PRODUCTS TAX, NICOTINE PRODUCTS TAX  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00160&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/17/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 08/30/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Revenue &lt;/td&gt;
+											  		 	&lt;td&gt; Taxation Division &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules02026-00161.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;1 CCR 201-7 CIGARETTE TAX, TOBACCO ESCROW FUNDS - MASTER SETTLEMENT AGREEMENT, TOBACCO PRODUCTS TAX, NICOTINE PRODUCTS TAX  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00161&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/17/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 08/30/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Revenue &lt;/td&gt;
+											  		 	&lt;td&gt; Taxation Division &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules02026-00162.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;1 CCR 201-7 CIGARETTE TAX, TOBACCO ESCROW FUNDS - MASTER SETTLEMENT AGREEMENT, TOBACCO PRODUCTS TAX, NICOTINE PRODUCTS TAX  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00162&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/17/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 08/30/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Revenue &lt;/td&gt;
+											  		 	&lt;td&gt; Taxation Division &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules02026-00163.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;1 CCR 201-7 CIGARETTE TAX, TOBACCO ESCROW FUNDS - MASTER SETTLEMENT AGREEMENT, TOBACCO PRODUCTS TAX, NICOTINE PRODUCTS TAX  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00163&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/17/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 08/30/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Revenue &lt;/td&gt;
+											  		 	&lt;td&gt; Taxation Division &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules02026-00165.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;1 CCR 201-20 FEES AND SURCHARGES ADMINISTERED BY THE TAXATION DIVISION  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00165&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/17/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 08/30/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Revenue &lt;/td&gt;
+											  		 	&lt;td&gt; Colorado Lottery &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules02026-00238.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;1 CCR 206-1 LOTTERY RULES AND REGULATIONS  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00238&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/28/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 08/30/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Natural Resources &lt;/td&gt;
+											  		 	&lt;td&gt; Colorado Parks and Wildlife (405 Series, Parks) &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules22026-00235.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;2 CCR 405-1 CHAPTER P-1 - PARKS AND OUTDOOR RECREATION LANDS  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00235&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/31/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 09/01/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Natural Resources &lt;/td&gt;
+											  		 	&lt;td&gt; Colorado Parks and Wildlife (406 Series, Wildlife) &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules12026-00237.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;2 CCR 406-3 CHAPTER W-3 - FURBEARERS AND SMALL GAME, EXCEPT MIGRATORY BIRDS  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00237&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/31/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 09/01/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Natural Resources &lt;/td&gt;
+											  		 	&lt;td&gt; Colorado Parks and Wildlife (406 Series, Wildlife) &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules12026-00236.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;2 CCR 406-9 CHAPTER W-9 - WILDLIFE PROPERTIES  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00236&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/31/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 09/01/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Regulatory Agencies &lt;/td&gt;
+											  		 	&lt;td&gt; Division of Professions and Occupations - Colorado Dental Board &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules02026-00234.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;3 CCR 709-1 DENTISTS, DENTAL THERAPISTS &amp;amp; DENTAL HYGIENISTS RULES AND REGULATIONS  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00234&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/28/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 08/30/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Regulatory Agencies &lt;/td&gt;
+											  		 	&lt;td&gt; Public Utilities Commission &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules02025-00488.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;4 CCR 723-7 RULES REGULATING RAILROADS, RAIL FIXED GUIDEWAYS, TRANSPORTATION BY RAIL, AND RAIL CROSSINGS  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2025-00488&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/27/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 08/30/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Higher Education &lt;/td&gt;
+											  		 	&lt;td&gt; Higher Education Commission &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules12026-00200.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;8 CCR 1504-9 2026 RULES FOR THE ADMINISTRATION OF THE COLORADO OPPORTUNITY SCHOLARSHIP INITIATIVE  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00200&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/24/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 09/15/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Public Safety &lt;/td&gt;
+											  		 	&lt;td&gt; Division of Homeland Security and Emergency Management &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules12026-00241.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;8 CCR 1507-48 PREVENTING IDENTITY-BASED VIOLENCE GRANT PROGRAM  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00241&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/28/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 08/30/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Public Safety &lt;/td&gt;
+											  		 	&lt;td&gt; Division of Homeland Security and Emergency Management &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules02026-00226.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;8 CCR 1507-83 Civil Defense Qualified Volunteer Program  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00226&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/29/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 08/30/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Health Care Policy and Financing &lt;/td&gt;
+											  		 	&lt;td&gt; Medical Services Board (Volume 8; Medical Assistance, Children&amp;#39;s Health Plan) &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules42026-00229.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;10 CCR 2505-3 FINANCIAL MANAGEMENT OF THE CHILDREN&amp;#39;S BASIC HEALTH PLAN 1 (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules52026-00229.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;10 CCR 2505-3 FINANCIAL MANAGEMENT OF THE CHILDREN&amp;#39;S BASIC HEALTH PLAN 2 (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00229&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/30/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 08/30/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Health Care Policy and Financing &lt;/td&gt;
+											  		 	&lt;td&gt; Medical Services Board (Volume 8; Medical Assistance, Children&amp;#39;s Health Plan) &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules12026-00228.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;10 CCR 2505-10 MEDICAL ASSISTANCE - STATEMENTS OF BASIS AND PURPOSE AND RULE HISTORY  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00228&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/29/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 10/01/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Human Services &lt;/td&gt;
+											  		 	&lt;td&gt; Social Services Rules (Volume 7; Child Welfare, Child Care Facilities) &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules02026-00187.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;12 CCR 2509-8 CHILD CARE FACILITY LICENSING  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00187&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/29/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 09/01/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+													&lt;tr&gt;
+											  		 	&lt;td&gt; Department of Human Services &lt;/td&gt;
+											  		 	&lt;td&gt; Services for the Aging (Volume 10; Older Americans Act (OAA) Programs) &lt;/td&gt;
+											  		 	&lt;td&gt; 
+												  		 	
+											 					
+											 						&lt;a href=&quot;/CCR/Upload/AGORequest/AdoptedRules12025-00650.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;12 CCR 2510-1 RULE MANUAL VOLUME 10, OLDER AMERICANS ACT (OAA) PROGRAMS  (DOCX)&lt;/span&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+											 					
+											 					
+															
+											  		    &lt;/td&gt;
+											  		    &lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2025-00650&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/29/2026 &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+											  		 	&lt;td&gt; 08/30/2026 &lt;/td&gt;
+											  		 	
+													&lt;/tr&gt;
+									   			
+										&lt;/tbody&gt;
+									&lt;/table&gt;
+							
+							&lt;br/&gt;
+
+							&lt;table style=&quot;width: 95%; margin-left:3em;&quot;&gt;
+								&lt;tr&gt;
+									&lt;td style=&quot;width: 250px;&quot;&gt;&lt;p id=&quot;3&quot; class=&quot;pagehead5&quot;&gt;Emergency Rules Adopted&lt;/p&gt;&lt;/td&gt;
+									&lt;td style=&quot;float: right;&quot;&gt;
+										&lt;table&gt;&lt;tr&gt; &lt;td&gt;&lt;a href=&quot;#6&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;Top&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+									&lt;/td&gt;
+								&lt;/tr&gt;
+							&lt;/table&gt;
+
+							
+
+							
+							&lt;br/&gt;	
+							&lt;table style=&quot;margin-left:3em; width: 80%;&quot; class=&quot;noStripes&quot; &gt; 
+							  &lt;thead&gt;
+						  		&lt;tr style=&quot;background-color: #b0c4de;&quot;&gt;
+						  		 	&lt;th style=&quot;width: 10%;&quot; class=&quot;headerLeft&quot;&gt;&lt;b&gt;Department&lt;/b&gt;&lt;/th&gt;
+						  		 	&lt;th style=&quot;width: 20%;&quot; class=&quot;headerLeft&quot;&gt;&lt;b&gt;Agency&lt;/b&gt;&lt;/th&gt;
+						  		 	&lt;th style=&quot;width: 35%;&quot; class=&quot;headerLeft&quot;&gt;&lt;b&gt;Rules adopted&lt;/b&gt;&lt;/th&gt;
+						  		 	&lt;th style=&quot;width: 25%;&quot; class=&quot;headerLeft&quot;&gt;&lt;b&gt;Justification&lt;/b&gt;&lt;/th&gt;
+						  		 	&lt;th style=&quot;width: 5%;&quot; class=&quot;headerLeft&quot;&gt;&lt;b&gt;AG opinion&lt;/b&gt;&lt;/th&gt;
+						  		 	&lt;th style=&quot;width: 5%;&quot; class=&quot;headerLeft&quot;&gt;&lt;b&gt;Effective date&lt;/b&gt;&lt;/th&gt;
+						  		 	&lt;th style=&quot;width: 5%;&quot; class=&quot;headerLeft&quot;&gt;&lt;b&gt;Expiration date&lt;/b&gt;&lt;/th&gt;
+								&lt;/tr&gt;
+							  &lt;/thead&gt;
+							  &lt;tbody&gt; 
+								
+									&lt;tr&gt;
+							  		 	&lt;td&gt; Department of Health Care Policy and Financing &lt;/td&gt;
+							  		 	&lt;td&gt; Medical Services Board (Volume 8; Medical Assistance, Children&amp;#39;s Health Plan) &lt;/td&gt;
+							  		 	&lt;td&gt; 
+							  		 	
+							  		 		&lt;a href=&quot;/CCR/Upload/AGORequestEmergency/AdoptedRules22026-00296.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;10 CCR 2505-10 MEDICAL ASSISTANCE - STATEMENTS OF BASIS AND PURPOSE AND RULE HISTORY 1 (DOCX)&lt;/span&gt;&lt;/a&gt; 
+							  		 	
+							  		 		&lt;a href=&quot;/CCR/Upload/AGORequestEmergency/AdoptedRules32026-00296.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;10 CCR 2505-10 MEDICAL ASSISTANCE - STATEMENTS OF BASIS AND PURPOSE AND RULE HISTORY 2 (DOCX)&lt;/span&gt;&lt;/a&gt; 
+							  		 	
+							  		 	&lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;/CCR/Upload/AGORequestEmergency/EmergencyJustificationPathAttach2026-00296.docx&quot; target=&quot;_blank&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;EmergencyJustificationPathAttach2026-00296.docx&lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+							  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;DisplayOpinion(&#x27;2026-00296&#x27;)&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;07/30/2026&lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+							  		 	&lt;td&gt; 07/10/2026&lt;/td&gt;
+							  		 	&lt;td&gt; 11/07/2026&lt;/td&gt;
+									&lt;/tr&gt;
+								 
+									
+								&lt;/tbody&gt;
+							&lt;/table&gt;			
+							
+							&lt;br/&gt;
+							&lt;br/&gt;
+							
+							
+							&lt;table style=&quot;margin-left:3em; width:95%;border: 0&quot;&gt;
+								&lt;tr&gt;
+									&lt;td&gt;&lt;p id=&quot;4&quot; class=&quot;pagehead5&quot;&gt;Non-Rulemaking Public Notices and Other Miscellaneous Rulemaking Notices&lt;/p&gt;&lt;/td&gt;
+									&lt;td style=&quot;float: right;&quot;&gt;
+										&lt;table style=&quot;border: 0;&quot;&gt;
+											&lt;tr&gt;&lt;td&gt;&lt;a href=&quot;#6&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;Top&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt; 
+										&lt;/table&gt;
+									&lt;/td&gt;
+								&lt;/tr&gt;
+							&lt;/table&gt;
+							
+							
+							&lt;br/&gt;
+							&lt;table style=&quot;margin-left:3em; width: 80%;&quot; class=&quot;noStripes&quot; &gt; 
+							  &lt;thead&gt;
+									&lt;tr style=&quot;background-color: #b0c4de;&quot;&gt;
+							  		 	&lt;th style=&quot;width: 12%%;&quot; class=&quot;headerLeft&quot;&gt;&lt;b&gt;Department / Agency&lt;/b&gt;&lt;/th&gt;
+							  		 	&lt;th style=&quot;width: 8%;&quot; class=&quot;headerLeft&quot;&gt;&lt;b&gt;Filed date&lt;/b&gt;&lt;/th&gt;
+							  		 	&lt;th style=&quot;width: 70%;&quot; class=&quot;headerLeft&quot;&gt;&lt;b&gt;Notice&lt;/b&gt;&lt;/th&gt;
+									&lt;/tr&gt;
+							  &lt;/thead&gt;
+							  &lt;tbody&gt; 
+
+									 
+									&lt;tr&gt;
+							  		 	&lt;td style=&quot;text-align:left;&quot;&gt;Department of Health Care Policy and Financing&lt;/td&gt;
+							  		 	&lt;td style=&quot;text-align:left;&quot;&gt;08/05/2026&lt;/td&gt;
+							  		 	&lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenWindow(&#x27;https://www.coloradosos.gov/CCR/NonRule/7/CO-26-0015 Rural Support Fund Public Notice.docx&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;Rural Support Fund&lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								 	 
+									&lt;tr&gt;
+							  		 	&lt;td style=&quot;text-align:left;&quot;&gt;Department of Health Care Policy and Financing&lt;/td&gt;
+							  		 	&lt;td style=&quot;text-align:left;&quot;&gt;08/06/2026&lt;/td&gt;
+							  		 	&lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenWindow(&#x27;https://www.coloradosos.gov/CCR/NonRule/7/2026 Fall Cycle Waiver CO Register.docx&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;Home and Community-Based Services (HCBS) Waiver Amendments&lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								 	 
+									&lt;tr&gt;
+							  		 	&lt;td style=&quot;text-align:left;&quot;&gt;Department of Health Care Policy and Financing&lt;/td&gt;
+							  		 	&lt;td style=&quot;text-align:left;&quot;&gt;08/06/2026&lt;/td&gt;
+							  		 	&lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenWindow(&#x27;https://www.coloradosos.gov/CCR/NonRule/7/SPA 26-0021 - Public Notice - CFC Rate Decrease.docx&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;Community First Choice (CFC) Services Reimbursement Rate Decreases&lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								 	 
+									&lt;tr&gt;
+							  		 	&lt;td style=&quot;text-align:left;&quot;&gt;Department of Health Care Policy and Financing&lt;/td&gt;
+							  		 	&lt;td style=&quot;text-align:left;&quot;&gt;08/06/2026&lt;/td&gt;
+							  		 	&lt;td&gt;&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenWindow(&#x27;https://www.coloradosos.gov/CCR/NonRule/7/SPA 26-0022 - Public Notice - LTHH Rate Decrease.docx&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;Long Term Home Health (LTHH) Daily Maximum Coverage Limit Reduction&lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+									&lt;/tr&gt;
+								 	
+									
+								&lt;/tbody&gt;
+							&lt;/table&gt;		
+												
+							
+		
+							&lt;br/&gt;	
+							&lt;br/&gt;
+							&lt;table style=&quot;margin-left:3em; width:95%;border: 0;&quot;&gt;
+								&lt;tr&gt;
+									&lt;td&gt;&lt;p id=&quot;5&quot; class=&quot;pagehead5&quot;&gt;Calendar of Hearings&lt;/p&gt;&lt;/td&gt;
+									&lt;td style=&quot;float: right;&quot;&gt;
+										&lt;table style=&quot;border: 0;&quot;&gt;
+											&lt;tr&gt; &lt;td&gt;&lt;a href=&quot;#6&quot;&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;Top&lt;/span&gt;&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt; 
+										&lt;/table&gt;
+									&lt;/td&gt;
+								&lt;/tr&gt;
+							&lt;/table&gt;
+							&lt;br/&gt;
+							
+								&lt;table style=&quot;margin-left:3em; width: 80%;&quot; class=&quot;noStripes&quot; &gt;
+									&lt;thead&gt;
+										&lt;tr style=&quot;background-color: #b0c4de;&quot;&gt;
+								  		 	&lt;th style=&quot;width: 25%;&quot; class=&quot;headerLeft&quot;&gt;&lt;b&gt;Agency&lt;/b&gt;&lt;/th&gt;
+								  		 	&lt;th style=&quot;width: 40%;&quot; class=&quot;headerLeft&quot;&gt;&lt;b&gt;Rule&lt;/b&gt;&lt;/th&gt;
+								  		 	&lt;th style=&quot;width: 15%;&quot; class=&quot;headerLeft&quot;&gt;&lt;b&gt;Hearing&lt;/b&gt;&lt;/th&gt;
+										&lt;/tr&gt;
+									&lt;/thead&gt;
+									&lt;tbody&gt;
+										
+										&lt;tr&gt;
+								  		 	&lt;td style=&quot;text-align:left;&quot;&gt; Division of Gaming - Rules promulgated by Gaming Commission &lt;/td&gt;
+								  		 	&lt;td&gt; SPORTS BETTING REGULATIONS &lt;/td&gt;
+								  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00338&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/17/2026 09:15 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+										&lt;/tr&gt;
+									   
+										&lt;tr&gt;
+								  		 	&lt;td style=&quot;text-align:left;&quot;&gt; Colorado State Board of Education &lt;/td&gt;
+								  		 	&lt;td&gt; ADMINISTRATION OF THE STATE PUBLICATIONS DEPOSITORY AND DISTRIBUTION CENTER &lt;/td&gt;
+								  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00317&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;10/14/2026 09:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+										&lt;/tr&gt;
+									   
+										&lt;tr&gt;
+								  		 	&lt;td style=&quot;text-align:left;&quot;&gt; Colorado Parks and Wildlife (405 Series, Parks) &lt;/td&gt;
+								  		 	&lt;td&gt; CHAPTER P-1 - PARKS AND OUTDOOR RECREATION LANDS &lt;/td&gt;
+								  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00339&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/02/2026 08:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+										&lt;/tr&gt;
+									   
+										&lt;tr&gt;
+								  		 	&lt;td style=&quot;text-align:left;&quot;&gt; Behavioral Health &lt;/td&gt;
+								  		 	&lt;td&gt; BEHAVIORAL HEALTH &lt;/td&gt;
+								  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00340&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/04/2026 08:30 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+										&lt;/tr&gt;
+									   
+										&lt;tr&gt;
+								  		 	&lt;td style=&quot;text-align:left;&quot;&gt; Public Utilities Commission &lt;/td&gt;
+								  		 	&lt;td&gt; RULES REGULATING RAILROADS, RAIL FIXED GUIDEWAYS, TRANSPORTATION BY RAIL, AND RAIL CROSSINGS &lt;/td&gt;
+								  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00329&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;10/08/2026 11:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+										&lt;/tr&gt;
+									   
+										&lt;tr&gt;
+								  		 	&lt;td style=&quot;text-align:left;&quot;&gt; Public Utilities Commission &lt;/td&gt;
+								  		 	&lt;td&gt; RULES FOR SAFETY PROGRAM STANDARDS FOR RAIL FIXED GUIDEWAY SYSTEMS [Repealed eff. 04/01/2006] &lt;/td&gt;
+								  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00330&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;10/08/2026 11:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+										&lt;/tr&gt;
+									   
+										&lt;tr&gt;
+								  		 	&lt;td style=&quot;text-align:left;&quot;&gt; Air Quality Control Commission &lt;/td&gt;
+								  		 	&lt;td&gt; PROCEDURAL RULES &lt;/td&gt;
+								  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00327&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;10/15/2026 09:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+										&lt;/tr&gt;
+									   
+										&lt;tr&gt;
+								  		 	&lt;td style=&quot;text-align:left;&quot;&gt; Air Quality Control Commission &lt;/td&gt;
+								  		 	&lt;td&gt; COMMON PROVISIONS REGULATION &lt;/td&gt;
+								  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00323&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;10/15/2026 09:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+										&lt;/tr&gt;
+									   
+										&lt;tr&gt;
+								  		 	&lt;td style=&quot;text-align:left;&quot;&gt; Air Quality Control Commission &lt;/td&gt;
+								  		 	&lt;td&gt; REGULATION NUMBER 6 STANDARDS OF PERFORMANCE FOR NEW STATIONARY SOURCES &lt;/td&gt;
+								  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00324&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;10/15/2026 09:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+										&lt;/tr&gt;
+									   
+										&lt;tr&gt;
+								  		 	&lt;td style=&quot;text-align:left;&quot;&gt; Air Quality Control Commission &lt;/td&gt;
+								  		 	&lt;td&gt; REGULATION NUMBER 8 CONTROL OF HAZARDOUS AIR POLLUTANTS &lt;/td&gt;
+								  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00325&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;10/15/2026 09:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+										&lt;/tr&gt;
+									   
+										&lt;tr&gt;
+								  		 	&lt;td style=&quot;text-align:left;&quot;&gt; Air Quality Control Commission &lt;/td&gt;
+								  		 	&lt;td&gt; REGULATION NUMBER 10 CRITERIA FOR ANALYSIS OF CONFORMITY &lt;/td&gt;
+								  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00326&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;10/15/2026 09:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+										&lt;/tr&gt;
+									   
+										&lt;tr&gt;
+								  		 	&lt;td style=&quot;text-align:left;&quot;&gt; Air Quality Control Commission &lt;/td&gt;
+								  		 	&lt;td&gt; REGULATION NUMBER 29 EMISSION REDUCTION REQUIREMENTS FOR LAWN AND GARDEN EQUIPMENT &lt;/td&gt;
+								  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00322&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;11/18/2026 04:30 PM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+										&lt;/tr&gt;
+									   
+										&lt;tr&gt;
+								  		 	&lt;td style=&quot;text-align:left;&quot;&gt; Prevention Services Division (1009, 1015, 1016 Series) &lt;/td&gt;
+								  		 	&lt;td&gt; STATE-DESIGNATED HEALTH PROFESSIONAL SHORTAGE AREA DESIGNATION &lt;/td&gt;
+								  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00318&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/16/2026 10:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+										&lt;/tr&gt;
+									   
+										&lt;tr&gt;
+								  		 	&lt;td style=&quot;text-align:left;&quot;&gt; Pesticide Disposal Enterprise Board &lt;/td&gt;
+								  		 	&lt;td&gt; RULES AND REGULATIONS PERTAINING TO ADMINISTRATION OF THE PESTICIDE PRODUCT DISPOSAL AND CONTAINER RECYCLING PROGRAM &lt;/td&gt;
+								  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00333&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/23/2026 12:30 PM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+										&lt;/tr&gt;
+									   
+										&lt;tr&gt;
+								  		 	&lt;td style=&quot;text-align:left;&quot;&gt; Colorado Bureau of Investigation &lt;/td&gt;
+								  		 	&lt;td&gt; IMPLEMENTATION OF THE NATIONAL INSTANT CRIMINAL BACKGROUND CHECK SYSTEM WITH THE COLORADO BUREAU OF INVESTIGATION SERVING AS THE POINT OF CONTACT &lt;/td&gt;
+								  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00345&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/01/2026 01:00 PM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+										&lt;/tr&gt;
+									   
+										&lt;tr&gt;
+								  		 	&lt;td style=&quot;text-align:left;&quot;&gt; Division of Fire Prevention and Control &lt;/td&gt;
+								  		 	&lt;td&gt; COLORADO WILDFIRE RESILIENT HOMES GRANT PROGRAM &lt;/td&gt;
+								  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00331&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/01/2026 11:00 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+										&lt;/tr&gt;
+									   
+										&lt;tr&gt;
+								  		 	&lt;td style=&quot;text-align:left;&quot;&gt; Social Services Rules (Volume 7; Child Welfare, Child Care Facilities) &lt;/td&gt;
+								  		 	&lt;td&gt; PROGRAM AREAS, CASE CONTACTS, AND ONGOING CASE REQUIREMENTS &lt;/td&gt;
+								  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00341&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/04/2026 08:30 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+										&lt;/tr&gt;
+									   
+										&lt;tr&gt;
+								  		 	&lt;td style=&quot;text-align:left;&quot;&gt; Social Services Rules (Volume 7; Child Welfare, Child Care Facilities) &lt;/td&gt;
+								  		 	&lt;td&gt; CHILD WELFARE SERVICES &lt;/td&gt;
+								  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00342&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/04/2026 08:30 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+										&lt;/tr&gt;
+									   
+										&lt;tr&gt;
+								  		 	&lt;td style=&quot;text-align:left;&quot;&gt; Social Services Rules (Volume 7; Child Welfare, Child Care Facilities) &lt;/td&gt;
+								  		 	&lt;td&gt; RESOURCES, REIMBURSEMENT, REPORTING, AND PROVIDER REQUIREMENTS &lt;/td&gt;
+								  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00343&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/04/2026 08:30 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+										&lt;/tr&gt;
+									   
+										&lt;tr&gt;
+								  		 	&lt;td style=&quot;text-align:left;&quot;&gt; Social Services Rules (Volume 7; Child Welfare, Child Care Facilities) &lt;/td&gt;
+								  		 	&lt;td&gt; COUNTY RESPONSIBILITIES, STAFF TRAINING AND QUALIFICATIONS, CLIENT RIGHTS, CONFIDENTIALITY &lt;/td&gt;
+								  		 	&lt;td&gt; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;OpenDetailsWindow(&#x27;2026-00344&#x27;)&quot; &gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;09/04/2026 08:30 AM &lt;/span&gt;&lt;/a&gt; &lt;/td&gt;
+										&lt;/tr&gt;
+									   
+									&lt;/tbody&gt;
+								&lt;/table&gt;
+							
+							
+						&lt;/td&gt;
+					&lt;/tr&gt;
+					&lt;tr&gt; &lt;td&gt; &amp;nbsp;&amp;nbsp; &lt;/td&gt; &lt;/tr&gt;
+		            &lt;tr&gt; &lt;td&gt; &amp;nbsp;&amp;nbsp; &lt;/td&gt; &lt;/tr&gt;
+		            &lt;tr&gt; &lt;td&gt; &amp;nbsp;&amp;nbsp; &lt;/td&gt; &lt;/tr&gt;
+	 			&lt;/table&gt;
+			&lt;/td&gt;
+			&lt;td style=&quot;width: 58px; vertical-align: top;&quot; class=&quot;whiteBackground&quot;&gt;&lt;img alt=&quot;clear image&quot; src=&#x27;https://www.coloradosos.gov/pubs/images/general/clrdot.gif&#x27; style=&quot;width: 1px; height: 350px;&quot; border=&quot;0&quot;&gt;&lt;/td&gt;
+		&lt;/tr&gt;
+		
+	&lt;/table&gt;
+&lt;p style=&quot;margin-left:20em;&quot;&gt;&lt;input type=&quot;button&quot; value=&quot;Back&quot; onclick=&quot;window.history.go(-1); return false;&quot;/&gt;&lt;/p&gt;
+&lt;table style=&quot;width: 95%; margin-left:3em; border: 0&quot;&gt;
+&lt;tr&gt;&lt;td&gt;
+&lt;p style=&quot;float: right;&quot;&gt;&lt;a href=&quot;#6&quot;&gt;Top&lt;/a&gt;&lt;/p&gt;
+&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;!-- /apps/footer.html --&gt;
+&lt;div aria-label=&quot;Footer&quot; role=&quot;region&quot; style=&quot;padding-top: 50px;&quot;&gt;
+&lt;div id=&quot;pageFooter&quot; class=&quot;toplinks pageBand&quot; style=&quot;text-align: center;&quot;&gt;
+    &lt;a href=&quot;https://www.coloradosos.gov/pubs/info_center/terms.html&quot;&gt;Terms &amp; conditions&lt;/a&gt; | &lt;a href=&quot;https://coloradosos.gov/pubs/info_center/accessibility.html&quot;&gt;Accessibility statement&lt;/a&gt; | &lt;a href=&quot;https://www.coloradosos.gov/pubs/info_center/compatibility.html&quot;&gt;Browser compatibility&lt;/a&gt;
+&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;!-- NEW Google tag (gtag.js) --&gt;
+&lt;script async=&quot;&quot; src=&quot;https://www.googletagmanager.com/gtag/js?id=G-JDK6PLVHDW&quot;&gt;&lt;/script&gt;
+&lt;script&gt;// &lt;![CDATA[
+window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag(&#x27;js&#x27;, new Date());
+
+  gtag(&#x27;config&#x27;, &#x27;G-JDK6PLVHDW&#x27;);
+// ]]&gt;&lt;/script&gt;
+&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+	
+&lt;script&gt;(function(){function c(){var b=a.contentDocument||(a.contentWindow&amp;&amp;a.contentWindow.document);if(b){var d=b.createElement(&#x27;script&#x27;);d.innerHTML=&quot;window.__CF$cv$params={r:&#x27;a3a28242ed49e673&#x27;,t:&#x27;MTc4OTI1MzgyMQ==&#x27;};var a=document.createElement(&#x27;script&#x27;);a.src=&#x27;/cdn-cgi/challenge-platform/scripts/jsd/main.js&#x27;;document.getElementsByTagName(&#x27;head&#x27;)[0].appendChild(a);&quot;;b.getElementsByTagName(&#x27;head&#x27;)[0].appendChild(d)}}if(document.body){var a=document.createElement(&#x27;iframe&#x27;);a.height=1;a.width=1;a.style.position=&#x27;absolute&#x27;;a.style.top=0;a.style.left=0;a.style.border=&#x27;none&#x27;;a.style.visibility=&#x27;hidden&#x27;;document.body.appendChild(a);if(&#x27;loading&#x27;!==document.readyState)c();else if(window.addEventListener)document.addEventListener(&#x27;DOMContentLoaded&#x27;,c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);&#x27;loading&#x27;!==document.readyState&amp;&amp;(document.onreadystatechange=e,c())}}}})();&lt;/script&gt;&lt;/body&gt;
+&lt;/html&gt;</pre></body></html>

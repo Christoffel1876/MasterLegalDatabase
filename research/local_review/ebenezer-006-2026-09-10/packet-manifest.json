@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "packet_id": "grok-pdf-review-2026-09-10-batch-2",
+  "prepared_at": "2026-09-10T21:35:35.594566Z",
+  "status": "prepared_not_sent",
+  "purpose": "independent_pdf_transcription_review",
+  "instructions": "PASS_1_PROMPT.md then freeze pass 1 before PASS_2_PROMPT.md",
+  "independence": "procedural_separation_only; candidate accessible but withheld until pass-1 freeze",
+  "documents": [
+    {
+      "assignment_id": "EB-PDF-006",
+      "source_id": "arapahoe-planning-fees-sd002-14",
+      "authority_id": "CO-COUNTY-ARAPAHOE",
+      "title": "Planning Review Fee Schedule",
+      "official_url": "https://files.arapahoeco.gov/Public%20Works_Development/planning_land%20development/Planning%20Fees.pdf",
+      "final_url": "https://files.arapahoeco.gov/Public%20Works_Development/planning_land%20development/Planning%20Fees.pdf",
+      "retrieved_at": "2026-09-10T21:28:25.612649Z",
+      "source_sha256": "ce519b6fe89546cf85a77934fcbdb6b6bf08473e19c545cf4c51414e1cdcb818",
+      "source_size_bytes": 220138,
+      "original_path": "01-source-only/arapahoe-planning-fees-sd002-14/original.pdf",
+      "expected_pages": 2,
+      "intake_status": "staged_outside_coverage_ledger",
+      "repository_original_path": null,
+      "legal_currentness": "not_verified",
+      "rendering_method": "Poppler pdftoppm -r 300 -png",
+      "rendering_version": "pdftoppm version 26.05.0",
+      "rendering_dpi": 300,
+      "rendering_annotations": "renderer_default_included",
+      "rendering_crop": "no_crop_or_postprocessing",
+      "candidate_text_path": "02-candidate-text/arapahoe-planning-fees-sd002-14/candidate.txt",
+      "candidate_text_sha256": "6a02ba8f7fc92ecac8f82886666f0a286d5c9856200b1049f012bc63a0bd59f1",
+      "candidate_text_size_bytes": 6244,
+      "candidate_status": "machine_native_text_unreviewed",
+      "extraction_method": "PyMuPDF Page.get_text(\"text\", sort=False)",
+      "extraction_version": "1.28.2",
+      "extraction_flags": 195,
+      "extraction_sort": false,
+      "extraction_encoding": "UTF-8 without BOM",
+      "extraction_transformations": "none; only explicit page boundary packaging markers added",
+      "pages": [
+        {
+          "physical_page": 1,
+          "image_path": "01-source-only/arapahoe-planning-fees-sd002-14/page-0001.png",
+          "image_sha256": "ff18951b9c9d5357dc77143ca2f7448af3e26362909bfb2e492a14baea680847",
+          "image_size_bytes": 755968,
+          "image_width_pixels": 2550,
+          "image_height_pixels": 3300,
+          "native_text_sha256": "e50e8ff487613b5f99269e9fd5e241f59072d62989851b0ba0b89f78fa3f2d84",
+          "native_text_size_bytes": 2855,
+          "candidate_native_text_offset_bytes": 56
+        },
+        {
+          "physical_page": 2,
+          "image_path": "01-source-only/arapahoe-planning-fees-sd002-14/page-0002.png",
+          "image_sha256": "e279858ce97c79244cb35521e327d62fe10e18e7100592339924119d9a2531ae",
+          "image_size_bytes": 690623,
+          "image_width_pixels": 2550,
+          "image_height_pixels": 3300,
+          "native_text_sha256": "b7ff0e52f51258684756435380e6d70cf5e93e02e2582ebd8edb0b4dc488cc41",
+          "native_text_size_bytes": 3163,
+          "candidate_native_text_offset_bytes": 3024
+        }
+      ]
+    }
+  ]
+}

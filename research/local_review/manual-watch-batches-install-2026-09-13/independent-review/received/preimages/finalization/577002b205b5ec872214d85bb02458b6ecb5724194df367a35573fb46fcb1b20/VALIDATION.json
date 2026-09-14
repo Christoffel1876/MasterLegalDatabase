@@ -1,0 +1,335 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-13T01:50:59.036561Z",
+  "status": "PREPARED_NOT_INSTALLED_OR_EXECUTED",
+  "proposed_implementation": [
+    {
+      "path": "proposed/config/manual_source_watch_county_fees_v1.json",
+      "sha256": "1f2536f2f75d0590a6c2f365d6e72a294fd23e5df7f90255384ebe5a0c0d82b5",
+      "size_bytes": 24421
+    },
+    {
+      "path": "proposed/config/manual_source_watch_county_fees_v1.schema.json",
+      "sha256": "c34fe06d10eda31e0df249d1e5df4760f0c277b078b5bd7e5ad0868c32207b10",
+      "size_bytes": 13950
+    },
+    {
+      "path": "proposed/config/manual_source_watch_greeley_fees_v1.json",
+      "sha256": "27299effdbee8f4e116da2b0b8b0495346c4007a9f56a7e37341f0756292d374",
+      "size_bytes": 26815
+    },
+    {
+      "path": "proposed/config/manual_source_watch_greeley_fees_v1.schema.json",
+      "sha256": "c34fe06d10eda31e0df249d1e5df4760f0c277b078b5bd7e5ad0868c32207b10",
+      "size_bytes": 13950
+    },
+    {
+      "path": "proposed/config/manual_source_watch_sources_v1.json",
+      "sha256": "d70ab79926513fa01d502ca03b824223fd47cb62f4d5d3a750d2c2633d6e564a",
+      "size_bytes": 48956
+    },
+    {
+      "path": "proposed/config/manual_source_watch_sources_v1.schema.json",
+      "sha256": "69f9a215dd4d40158ad5e72cf90d7277039be92829834afa7f99ca94b65dd3c1",
+      "size_bytes": 9486
+    },
+    {
+      "path": "proposed/config/manual_source_watch_western_fees_v1.json",
+      "sha256": "163f9ac6099a1e2e764bba5daa5bc2825bf3ae93108a6905312a67c0a0ace113",
+      "size_bytes": 25196
+    },
+    {
+      "path": "proposed/config/manual_source_watch_western_fees_v1.schema.json",
+      "sha256": "c34fe06d10eda31e0df249d1e5df4760f0c277b078b5bd7e5ad0868c32207b10",
+      "size_bytes": 13950
+    },
+    {
+      "path": "proposed/docs/MANUAL_SOURCE_WATCH_BATCHES.md",
+      "sha256": "1e7bc6a011b8161582991bf13c445b8f0396f43dd36754e2f71ea6f01370d884",
+      "size_bytes": 6103
+    },
+    {
+      "path": "proposed/geode/pipeline/manual_source_watch_batches.py",
+      "sha256": "4bed93109ae0fcd979722421017cb268f6ca7dd973b2f13850b9c22662b9cb4f",
+      "size_bytes": 43672
+    },
+    {
+      "path": "proposed/geode/pipeline/manual_watch_http_v2.py",
+      "sha256": "acb62a492dd9da289b549826381f62164603ca4dae25801ba5a9b396eee12950",
+      "size_bytes": 31971
+    },
+    {
+      "path": "proposed/tests/test_manual_source_watch_batches.py",
+      "sha256": "0b06dd2c1e1aec143135b91082e7396ac82334ecb1d84e4f66c2640ebc1f40e5",
+      "size_bytes": 33319
+    },
+    {
+      "path": "proposed/tests/test_manual_watch_batches_admission.py",
+      "sha256": "3d3fb40fcbbb26b9314683153dffa59c4df5f4ae7ef7f9f7beb0bba12b6c444e",
+      "size_bytes": 12137
+    },
+    {
+      "path": "proposed/tests/test_manual_watch_http_v2.py",
+      "sha256": "22f6ed5c0c33544fb5a3348189a9ecd5a0c076fcacc8485a4e8d7f6f9d528c3b",
+      "size_bytes": 33646
+    },
+    {
+      "path": "proposed/tests/test_manual_watch_http_v2_deadlines.py",
+      "sha256": "e710c5ff3be58a9ad6dea8ab8ed9f9248621d66c1135d8dc0cb0360d8c915b26",
+      "size_bytes": 7838
+    }
+  ],
+  "current_manual_manifest": {
+    "path": "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+    "sha256": "9fb073ac96e611311c1cdb633fde846aef9cbd6f64521a1ab59f96916af04c13",
+    "size_bytes": 144068
+  },
+  "current_manual_records": 63,
+  "source_checks": [
+    {
+      "batch_id": "county-fees-v1",
+      "source_id": "arapahoe-planning-fees-sd002-14",
+      "authority_id": "CO-COUNTY-ARAPAHOE",
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/arapahoe-planning-fees-sd002-14/20260910T215435Z_original.pdf",
+        "sha256": "ce519b6fe89546cf85a77934fcbdb6b6bf08473e19c545cf4c51414e1cdcb818",
+        "size_bytes": 220138
+      },
+      "pages": 2,
+      "exact_requested_url": "https://files.arapahoeco.gov/Public%20Works_Development/planning_land%20development/Planning%20Fees.pdf",
+      "baseline_request_started_at": null,
+      "baseline_recorded_http_time": "2026-09-10T21:28:25.612649Z",
+      "baseline_http_time_role": "Receipt observed_at; request-start time was not recorded in this receipt.",
+      "repository_received_at": "2026-09-10T21:54:35.395404Z",
+      "raw_manifest_line_sha256": "d519c893126f73191dfa35152d6627a4d59f20984dd760709a0c5c727dc50b17",
+      "legal_currentness": "not_verified"
+    },
+    {
+      "batch_id": "county-fees-v1",
+      "source_id": "weld-ehs-fees-2026-atlas-directed",
+      "authority_id": "CO-COUNTY-WELD",
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/weld-ehs-fees-2026-atlas-directed/20260911T200202Z_2026-ehs-fee-schedule_final.pdf",
+        "sha256": "852801c5ad0056c7b0dde6300e66e86f2e4235ce0efc16471d5210d74aa17ed3",
+        "size_bytes": 174911
+      },
+      "pages": 3,
+      "exact_requested_url": "https://www.weld.gov/files/sharedassets/public/v/1/departments/health-and-environment/documents/environmental-health/owts/2026-ehs-fee-schedule_final.pdf",
+      "baseline_request_started_at": "2026-09-11T19:49:18.926510Z",
+      "baseline_recorded_http_time": "2026-09-11T19:49:19.040662Z",
+      "baseline_http_time_role": "Recorded original response completion, separate from later repository intake.",
+      "repository_received_at": "2026-09-11T20:02:02.187060Z",
+      "raw_manifest_line_sha256": "a5a3f5574da8beb079b36fc967b806342fa6b3cebe4853985e616fed0608d497",
+      "legal_currentness": "not_verified"
+    },
+    {
+      "batch_id": "western-fees-v1",
+      "source_id": "grand-junction-fire-fees-atlas-directed",
+      "authority_id": "CO-MUNICIPAL-GRAND_JUNCTION",
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/grand-junction-fire-fees-atlas-directed/20260911T201938Z_grand_junction_fire_prevention_service_fees.pdf",
+        "sha256": "1f7faf078188c26fa803e4ec6225d20caad2fcce48f69d2d2ae9563c96732884",
+        "size_bytes": 802051
+      },
+      "pages": 2,
+      "exact_requested_url": "https://www.gjcity.org/DocumentCenter/View/15794/Fire-Prevention-Fee-Schedule",
+      "baseline_request_started_at": "2026-09-11T20:06:16.887129Z",
+      "baseline_recorded_http_time": "2026-09-11T20:06:17.536965Z",
+      "baseline_http_time_role": "Recorded original response completion, separate from later repository intake.",
+      "repository_received_at": "2026-09-11T20:19:38.791057Z",
+      "raw_manifest_line_sha256": "996ff632264d98ce9d2fab8f22d0e4653ec39ca898d80e3652d92ff01e77a8a4",
+      "legal_currentness": "not_verified"
+    },
+    {
+      "batch_id": "western-fees-v1",
+      "source_id": "mesa-building-fees-exhibit-a-atlas-directed",
+      "authority_id": "CO-COUNTY-MESA",
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/mesa-building-fees-exhibit-a-atlas-directed/20260911T202724Z_mesa_building_department_exhibit_a_fee_schedule.pdf",
+        "sha256": "421aa92efa159b484a091f1ade3589f6abb8a060bb880ec0c0a09e0472e4b9e7",
+        "size_bytes": 191213
+      },
+      "pages": 5,
+      "exact_requested_url": "https://www.mesacounty.us/sites/default/files/2026-04/Exhibit%20A%20Mesa%20County%20Building%20Department%20Fee%20Schedule%202024%20ADA.pdf",
+      "baseline_request_started_at": "2026-09-11T20:17:42.887486Z",
+      "baseline_recorded_http_time": "2026-09-11T20:17:43.011756Z",
+      "baseline_http_time_role": "Recorded original response completion, separate from later repository intake.",
+      "repository_received_at": "2026-09-11T20:27:24.633106Z",
+      "raw_manifest_line_sha256": "d7e80457fc6dc2607f9d7d576959911553e63bae3de8b323ceba9356d84640ee",
+      "legal_currentness": "not_verified"
+    },
+    {
+      "batch_id": "greeley-fees-v1",
+      "source_id": "greeley-building-fees-sd008-06",
+      "authority_id": "CO-MUNICIPAL-GREELEY",
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/greeley-building-fees-sd008-06/20260911T191524Z_building_permit_fee_schedule.pdf",
+        "sha256": "fa8a90dae00525c2dcb62ef4d69aeb84b7032a0fd2dc64f45c1685981e9becd4",
+        "size_bytes": 152164
+      },
+      "pages": 1,
+      "exact_requested_url": "https://cogy-p-001.sitecorecontenthub.cloud/api/public/content/dad9bcd41d394807be1e339c71367e76?v=f77f3c32",
+      "baseline_request_started_at": "2026-09-12T23:50:43.688683Z",
+      "baseline_recorded_http_time": "2026-09-12T23:50:44.491920Z",
+      "baseline_http_time_role": "Later reacquisition response completion, not original Sherlock acquisition or intake.",
+      "repository_received_at": "2026-09-11T19:15:24.670419Z",
+      "raw_manifest_line_sha256": "a2661c290c69df56dbff53cab298abac57650ce123211272f05bcca52602a9c5",
+      "legal_currentness": "not_verified"
+    },
+    {
+      "batch_id": "greeley-fees-v1",
+      "source_id": "greeley-development-impact-fee-memo-sd008-07",
+      "authority_id": "CO-MUNICIPAL-GREELEY",
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/greeley-development-impact-fee-memo-sd008-07/20260911T191524Z_2026_development_impact_fee_schedule.pdf",
+        "sha256": "9effbd15196898c16105913ee21032db52ad1e259f4f9def0586804726f78709",
+        "size_bytes": 651009
+      },
+      "pages": 3,
+      "exact_requested_url": "https://cogy-p-001.sitecorecontenthub.cloud/api/public/content/610f6e36c19f455d9fb662cc2cdbe1af?v=ef2524cb",
+      "baseline_request_started_at": "2026-09-12T23:50:44.516956Z",
+      "baseline_recorded_http_time": "2026-09-12T23:50:44.993147Z",
+      "baseline_http_time_role": "Later reacquisition response completion, not original Sherlock acquisition or intake.",
+      "repository_received_at": "2026-09-11T19:15:24.670419Z",
+      "raw_manifest_line_sha256": "ec1032fa4f4ae7812aee1d4333056bf6a7995532ad70f8202e81e0251bd5cef8",
+      "legal_currentness": "not_verified"
+    }
+  ],
+  "tests": {
+    "command": [
+      "python",
+      "-B",
+      "-m",
+      "pytest",
+      "proposed/tests",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--cov=proposed/geode/pipeline",
+      "--cov-branch"
+    ],
+    "return_code": 0,
+    "passed": 199,
+    "branch_inclusive_coverage_percent": 93.76623376623377,
+    "log": {
+      "path": "focused-tests.log",
+      "sha256": "52e913c8be752189681f9e1a3b81e40d01f14bfd0a3d1162841609e408c805ca",
+      "size_bytes": 1798
+    },
+    "coverage": {
+      "path": "validation/coverage.json",
+      "sha256": "7765b98b545cc52be9241ffbf3d9ffe911307d229451347f7af400f382da49b6",
+      "size_bytes": 81472
+    },
+    "scope": "Offline injected HTTP and local socket-pair tests; no public requests"
+  },
+  "old_springs_inputs": [
+    {
+      "path": "geode/pipeline/manual_source_watch.py",
+      "sha256": "e1958b886a8b164b0cc4e7a890fa70c47679fdb5318c33423ac45254f60f06ea",
+      "size_bytes": 41311
+    },
+    {
+      "path": "geode/pipeline/manual_watch_http.py",
+      "sha256": "c935ee6d74843e9214f27c5fef82d4470ec3c2b55ea5001eade594cc6a8de2ae",
+      "size_bytes": 31734
+    },
+    {
+      "path": "config/manual_source_watch.json",
+      "sha256": "91b4c46f7121de66d70b353405900f9d1ed3a3247718a9471ad2f1a9afa6dabb",
+      "size_bytes": 6483
+    }
+  ],
+  "old_springs_run_files": [
+    {
+      "path": ".geode_runtime/manual_source_watch/atlas-maintained-20260913T004429Z/.guard.lock",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": ".geode_runtime/manual_source_watch/atlas-maintained-20260913T004429Z/INVOCATION.json",
+      "sha256": "b9bb47b83a1ebcec6ae923e15e94f4f88d344fa8cdeb73b5c3f88919ffd82ad1",
+      "size_bytes": 879
+    },
+    {
+      "path": ".geode_runtime/manual_source_watch/atlas-maintained-20260913T004429Z/RUN_MANIFEST.json",
+      "sha256": "ed551e6199ad79b9e79bd86d2dc947c3f628f3d8d192ad0c42ed8b481d907f8b",
+      "size_bytes": 2290
+    },
+    {
+      "path": ".geode_runtime/manual_source_watch/atlas-maintained-20260913T004429Z/events/0001/body.bin",
+      "sha256": "555570a62a5a557a824d1bcf3ecd2e60d57e48d19ea401f06a2e5b7ccb177e56",
+      "size_bytes": 162682
+    },
+    {
+      "path": ".geode_runtime/manual_source_watch/atlas-maintained-20260913T004429Z/events/0001/public-headers.json",
+      "sha256": "c304b5861d2b250da3a9f4f9e32e2f5b51f6e07edc21274aeb9a1e2b8a2c0ad5",
+      "size_bytes": 389
+    },
+    {
+      "path": ".geode_runtime/manual_source_watch/atlas-maintained-20260913T004429Z/events/0001/reservation.json",
+      "sha256": "dcc4304e67f2ce26323d0a845b77ec5ad0659d6bb842b330bf6989eab622005b",
+      "size_bytes": 356
+    },
+    {
+      "path": ".geode_runtime/manual_source_watch/atlas-maintained-20260913T004429Z/events/0001/result.json",
+      "sha256": "d28c3ba5b6cae1bbcbf6c03e257db61632f68a68b7df07248a5a679320ca8f76",
+      "size_bytes": 805
+    },
+    {
+      "path": ".geode_runtime/manual_source_watch/atlas-maintained-20260913T004429Z/events/0002/body.bin",
+      "sha256": "e35de501a011fe55f03140bf91aef54226997d896fec0b6308a2eac9bd40909a",
+      "size_bytes": 258393
+    },
+    {
+      "path": ".geode_runtime/manual_source_watch/atlas-maintained-20260913T004429Z/events/0002/public-headers.json",
+      "sha256": "23354cc4b1a9f24dc2150e7d3f9d7e2c023f76ec8f90f191abbd1ae03595fbe2",
+      "size_bytes": 409
+    },
+    {
+      "path": ".geode_runtime/manual_source_watch/atlas-maintained-20260913T004429Z/events/0002/reservation.json",
+      "sha256": "f495fee04b8f564528650145a12559c3c6455c3fb5ae9ffe500f01d5a10347ad",
+      "size_bytes": 376
+    },
+    {
+      "path": ".geode_runtime/manual_source_watch/atlas-maintained-20260913T004429Z/events/0002/result.json",
+      "sha256": "f8dbb895915d5a2adddc13710028c173e0ce332983f8b80162d72ae5965f8452",
+      "size_bytes": 805
+    },
+    {
+      "path": ".geode_runtime/manual_source_watch/atlas-maintained-20260913T004429Z/inputs/manual_manifest.jsonl",
+      "sha256": "7814b23e9ddb97e0dbf469497d52ae59a55b485254bb0a5c9f690354a484c367",
+      "size_bytes": 139618
+    },
+    {
+      "path": ".geode_runtime/manual_source_watch/atlas-maintained-20260913T004429Z/inputs/selection.json",
+      "sha256": "91b4c46f7121de66d70b353405900f9d1ed3a3247718a9471ad2f1a9afa6dabb",
+      "size_bytes": 6483
+    },
+    {
+      "path": ".geode_runtime/manual_source_watch/atlas-maintained-20260913T004429Z/report.json",
+      "sha256": "5891947bd35c2f13a6858ef1ac1723edff2ae55aded7e2943fcbaa5c853a32b1",
+      "size_bytes": 5977
+    },
+    {
+      "path": ".geode_runtime/manual_source_watch/atlas-maintained-20260913T004429Z/run.json",
+      "sha256": "8d9f0e48219b80aa18d0dae68ab09de22f0e55cffc33f945c02bb0bf89975a8a",
+      "size_bytes": 306
+    }
+  ],
+  "old_springs_report_status": "completed",
+  "old_springs_readonly_replay": "passed_with_transport_disabled",
+  "old_springs_bytes_unchanged": true,
+  "public_requests": 0,
+  "production_writes": 0,
+  "schedule_installed": false,
+  "legal_currentness": "not_verified",
+  "limits": [
+    "Prepared-only implementation; root must separately review and install or execute.",
+    "Current catalog fixes six source identities, URLs, bytes and custody evidence.",
+    "Arapahoe observed time is not called a witnessed response completion.",
+    "Greeley later reacquisition does not rewrite earlier package-acquisition claims.",
+    "No new source reading, transcription, adoption, legal-currentness or coverage review.",
+    "The historical preparation input manifest may precede later unrelated raw intake."
+  ]
+}

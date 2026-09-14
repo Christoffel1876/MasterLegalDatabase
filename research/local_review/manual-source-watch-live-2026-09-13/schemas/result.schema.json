@@ -1,0 +1,150 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Immutable confined local evidence identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Immutable event result, including exact retained partial bytes and accounting.",
+  "properties": {
+    "event": {
+      "title": "Event",
+      "type": "integer"
+    },
+    "reservation_sha256": {
+      "title": "Reservation Sha256",
+      "type": "string"
+    },
+    "finished_at": {
+      "format": "date-time",
+      "title": "Finished At",
+      "type": "string"
+    },
+    "outcome": {
+      "enum": [
+        "complete",
+        "http_error",
+        "redirect",
+        "refused_redirect",
+        "byte_limit",
+        "incomplete_body",
+        "timeout",
+        "transport_error",
+        "interrupted",
+        "hard_stop"
+      ],
+      "title": "Outcome",
+      "type": "string"
+    },
+    "http_status": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Http Status"
+    },
+    "body": {
+      "$ref": "#/$defs/Ref"
+    },
+    "public_headers": {
+      "$ref": "#/$defs/Ref"
+    },
+    "partial_body": {
+      "title": "Partial Body",
+      "type": "boolean"
+    },
+    "content_magic": {
+      "enum": [
+        "pdf",
+        "html",
+        "empty",
+        "other"
+      ],
+      "title": "Content Magic",
+      "type": "string"
+    },
+    "charged_bytes": {
+      "minimum": 0,
+      "title": "Charged Bytes",
+      "type": "integer"
+    },
+    "redirect_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Redirect Url"
+    },
+    "error_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Error Type"
+    },
+    "byte_basis": {
+      "const": "retained response-body bytes; interrupted reservations charged at full allowance",
+      "default": "retained response-body bytes; interrupted reservations charged at full allowance",
+      "title": "Byte Basis",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "event",
+    "reservation_sha256",
+    "finished_at",
+    "outcome",
+    "http_status",
+    "body",
+    "public_headers",
+    "partial_body",
+    "content_magic",
+    "charged_bytes",
+    "redirect_url",
+    "error_type"
+  ],
+  "title": "Result",
+  "type": "object"
+}

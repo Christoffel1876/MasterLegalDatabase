@@ -1,0 +1,122 @@
+{
+  "$defs": {
+    "Pair": {
+      "additionalProperties": false,
+      "properties": {
+        "batch_id": {
+          "title": "Batch Id",
+          "type": "string"
+        },
+        "module": {
+          "enum": [
+            "geode.pipeline.manual_source_watch",
+            "geode.pipeline.manual_source_watch_batches"
+          ],
+          "title": "Module",
+          "type": "string"
+        },
+        "selection": {
+          "$ref": "#/$defs/Ref"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "title": "Source Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "batch_id",
+        "module",
+        "selection",
+        "source_ids"
+      ],
+      "title": "Pair",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "manual-watch-ci-v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "pairs": {
+      "items": {
+        "$ref": "#/$defs/Pair"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "title": "Pairs",
+      "type": "array"
+    },
+    "immutable_inputs": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Immutable Inputs",
+      "type": "array"
+    },
+    "max_source_events": {
+      "const": 16,
+      "title": "Max Source Events",
+      "type": "integer"
+    },
+    "max_source_body_bytes": {
+      "const": 16000000,
+      "title": "Max Source Body Bytes",
+      "type": "integer"
+    },
+    "max_source_seconds": {
+      "const": 1200,
+      "title": "Max Source Seconds",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "pairs",
+    "immutable_inputs",
+    "max_source_events",
+    "max_source_body_bytes",
+    "max_source_seconds",
+    "legal_currentness"
+  ],
+  "title": "Plan",
+  "type": "object"
+}

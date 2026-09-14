@@ -1,0 +1,85 @@
+# PASS 2 — Source vs OCR Comparison
+
+## Metadata
+
+| Field | Value |
+|-------|-------|
+| assignment_id | EB-PDF-008 |
+| source_id | cc-ordinance-11627 |
+| reviewer | Ebenezer (Grok Bot) |
+| model | unknown |
+| utc_pass2_start | 2026-09-10T22:26:30Z |
+| utc_pass2_end | 2026-09-10T22:27:04Z |
+| time_cost | unknown |
+| status | completed_pending_atlas_verification |
+| legal_currentness | not_verified |
+| candidate_status | machine_ocr_unreviewed |
+| prior_atlas_sherlock_consultation | none for this document |
+
+## Hash references (unchanged)
+
+| Artifact | SHA-256 |
+|----------|---------|
+| PASS1_frozen.md (unchanged) | e890af3f0b89b9eef474cc9fa5f555a5c3fdb960c41c0c882fd5efd159af8b5e |
+| packet manifest.json | b110afd3e93e60e3a9202dfdc2ef9af202edcadf1de31a2223d73951e0bdeeaf |
+| original.pdf | ac80f382ea66f743cd35240c9065a190971195d24660a9579e281b6ba06dc0f2 |
+| page-0001.png | 2a3d4752c59f38e0bc82ea4633202a15f8ee237edac231714aa2ded9db84b877 |
+| page-0002.png | caee71740596300c34d877d25aa6de7be2f604566b85e0da0379efb025595738 |
+| candidate.txt | dda2846e1f627965ba6ce9f6fb32a87e5261717502a3acd02dad933ad3937d10 |
+
+Candidate hash verified against manifest after pass-1 freeze. Packaging markers are **not** source text.
+
+## Image-viewing method / limits
+
+Caption-mediated Read on full pages and sectional crops (same as pass 1). Captions are not source quotations. Prefer file mtime over any later narrative stamp if they disagree.
+
+## Page coverage
+
+| source_id | physical_page | image_inspected | comparison_complete | status | unchecked_regions |
+|-----------|---------------|-----------------|---------------------|--------|--------------------|
+| cc-ordinance-11627 | 1 | yes | yes | differences_found | Exact stamp punctuation under hole punch; ATTEST signature letterforms |
+| cc-ordinance-11627 | 2 | yes | yes | differences_found | Exact stamp punctuation under hole punch; closing signature letterforms |
+
+## Findings
+
+Finding IDs use prefix `EB008-P2-`. source_pdf_sha256 for all rows: `ac80f382ea66f743cd35240c9065a190971195d24660a9579e281b6ba06dc0f2`.
+
+| finding_id | physical_page | location | candidate_text | text_visibly_supported_by_image | proposed_correction_or_alternatives | error_type | severity | explanation |
+|---|---:|---|---|---|---|---|---|---|
+| EB008-P2-001 | 1 | recorder stamp | Garbage (`t0 00` / `.00 70.00 23 ar reek` / mixed-script line) | Reception ~245166, 06/27/2007, ~3:48 PM, B 776 P 23, Page 1 of 2, zero R/D/T displays, Clear Creek + barcode (hole punch obscures some glyphs) | Replace with punctuation-light stamp reading; do not invent colons/decimals | substitution / omission / graphic_or_annotation | critical | Stamp metadata destroyed. |
+| EB008-P2-002 | 1 | title line 2 | `ORDINANCE NO. T` | `ORDINANCE NO. 7` | Restore `7` | substitution | critical | Repealed ordinance number corrupted to T. |
+| EB008-P2-003 | 1 | intro fills | `THIS6TH` / `_DAY OF JUNE, 2007.` | `THIS 6th DAY OF JUNE, 2007.` (handwritten 6th / JUNE on blanks) | Restore spacing and day suffix layout | date / illegible | critical | Day fill smashed into THIS. |
+| EB008-P2-004 | 1 | Chairman label | `Foan Drury, Chairman` (+ noise `banN`) | Printed `Joan Drury, Chairman` + signature-mark presence | Restore Joan; annotate signature presence; ignore OCR name inventions | substitution / graphic_or_annotation | critical | First letter J→F; signature noise. |
+| EB008-P2-005 | 1 | Harry Dale placement | Harry Dale block appears after Absent/O'Malley in extract | Harry Dale is a signed commissioner row (layout with Joan; Absent is on O'Malley) | Restore reading order / association | reading_order | minor | Labels still present; association scrambled. |
+| EB008-P2-006 | 1 | Absent | `Absent` near O'Malley | Handwritten Absent across O'Malley signature line | Keep as notation, not personal-name signature | — | — | Faithful enough. |
+| EB008-P2-007 | 1 | ATTEST signature | `Exthutther` | Signature-mark presence above `Deputy Clerk and Recorder` (no printed personal name under line observed) | Replace invented token with signature-presence annotation | substitution / graphic_or_annotation | critical | OCR invents a name from the mark. |
+| EB008-P2-008 | 1 | APPROVED AS TO FORM | `APPROVED AS FO FORM:` + noise `Ollen`/`ICOEA` | `APPROVED AS TO FORM:` + signature presence + printed `Robert W. Loeffler, County Attorney` | Restore TO; annotate signature; keep printed Loeffler | substitution / graphic_or_annotation | critical | TO→FO; signature noise. |
+| EB008-P2-009 | 1 | footer path | Path with `G:I` / missing separators / smashed Ordinance | Printed WordPerfect path ending `Ordinance 7A.wpd` | Restore readable path separators | substitution | minor | Path mostly recoverable. |
+| EB008-P2-010 | 1 | body WHEREAS / RESOLVED | Matches substance including `C.R.S.§30-28-124` and `; and,` | Same anomalies | none — preserve | — | — | Faithful on operative repeal and citations. |
+| EB008-P2-011 | 2 | recorder stamp | *(omitted at head of page-2 extract)* | Stamp present (245166 / 06/27/2007 / B 776 P 24 / Page 2 of 2 …) | Insert stamp transcription (punctuation-light) | omission | critical | Entire stamp missing from candidate page-2 start. |
+| EB008-P2-012 | 2 | adoption day/month | `THISLTIDAY OI` / `sure, 2007` | `THIS 27th DAY OF June, 2007.` | Restore 27th / June | date / illegible | critical | Day and month destroyed. |
+| EB008-P2-013 | 2 | Joan Drury label | `Fpan Drury,` / `hairman` | `Joan Drury, Chairman` | Restore Joan / Chairman | substitution | critical | Name/title corrupted. |
+| EB008-P2-014 | 2 | Absent | `Absent` on O'Malley | Same | Keep as notation | — | — | Faithful. |
+| EB008-P2-015 | 2 | Loeffler / Harry Dale | Garbled Loeffler; Harry Dale after APPROVED block | Printed Loeffler under APPROVED AS TO FORM; Harry Dale among commissioners | Restore labels and associations | reading_order / substitution | critical | Commissioner/attorney blocks scrambled. |
+| EB008-P2-016 | 2 | acknowledgment name fill | `E.A.Lutther` | Handwritten fill **E. A. Luther** (spacing/periods uncertain) | Prefer E. A. Luther; do not certify from closing mark | substitution | minor | Extra t; spacing. |
+| EB008-P2-017 | 2 | second meeting year | `June 27, 2006` | Handwritten June 27 + printed **2006** | none — preserve 2006 anomaly | date | — | Candidate faithfully keeps printed 2006; do not normalize to 2007. |
+| EB008-P2-018 | 2 | Courant publication | `June 13,2007` | Handwritten June 13 + printed 2007 | Optional space after comma (cosmetic) | substitution | minor | Missing space after comma. |
+| EB008-P2-019 | 2 | closing signature / date | Noise `aubuttter` ; date `6-27-07` | Signature-mark presence above Deputy Clerk and Recorder; handwritten **6-27-07** | Annotate presence; keep 6-27-07; do not invent name from OCR | graphic_or_annotation / date | critical | Date faithful; signature token invented. |
+
+## PASS1 errata (do not edit PASS1_frozen.md)
+
+| original_PASS1_wording | source_supported_correction | page/location | reason |
+|---|---|---|---|
+| (none material beyond already-flagged stamp punctuation uncertainty) | — | — | Candidate agrees on 2006 anomaly and Absent |
+
+## Agreements worth recording
+
+- Titles `ORDINANCE NO. 7-A` / repeal of Ordinance No. 7 (page-1 title line 1).
+- WHEREAS body and `BE IT RESOLVED` repeal largely intact in OCR.
+- Handwritten **Absent** on Kevin J. O'Malley (both pages).
+- Acknowledgment printed year **2006** after second meeting date preserved in OCR.
+- Closing date `6-27-07` present.
+
+## Completion
+
+Both expected pages received pass 1 and pass 2. Status: **completed_pending_atlas_verification**. **legal_currentness: not_verified**. No repository or packet files modified. Stop after 008 (no 009 assigned).

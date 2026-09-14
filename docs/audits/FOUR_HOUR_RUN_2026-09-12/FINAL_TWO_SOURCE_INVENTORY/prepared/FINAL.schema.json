@@ -1,0 +1,154 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact local file, relative to its declared root.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Completed metadata proposal without claiming installation or current law.",
+  "properties": {
+    "status": {
+      "const": "prepared_tested_not_installed",
+      "title": "Status",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "actual_repository_received_at": {
+      "format": "date-time",
+      "title": "Actual Repository Received At",
+      "type": "string"
+    },
+    "intake_completed_at": {
+      "format": "date-time",
+      "title": "Intake Completed At",
+      "type": "string"
+    },
+    "original_sources": {
+      "const": 63,
+      "title": "Original Sources",
+      "type": "integer"
+    },
+    "review_mappings": {
+      "const": 24,
+      "title": "Review Mappings",
+      "type": "integer"
+    },
+    "unmapped": {
+      "const": 39,
+      "title": "Unmapped",
+      "type": "integer"
+    },
+    "old_source_rows_preserved": {
+      "const": 61,
+      "title": "Old Source Rows Preserved",
+      "type": "integer"
+    },
+    "old_review_joins_preserved": {
+      "const": 22,
+      "title": "Old Review Joins Preserved",
+      "type": "integer"
+    },
+    "test_cases_passed": {
+      "const": 79,
+      "title": "Test Cases Passed",
+      "type": "integer"
+    },
+    "branch_inclusive_coverage_percent": {
+      "maximum": 100,
+      "minimum": 90,
+      "title": "Branch Inclusive Coverage Percent",
+      "type": "number"
+    },
+    "canonical_receipt": {
+      "$ref": "#/$defs/Asset"
+    },
+    "repository_bindings": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Repository Bindings",
+      "type": "array"
+    },
+    "source_record_ids": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Source Record Ids",
+      "type": "array"
+    },
+    "production_changes_by_preparation": {
+      "const": false,
+      "title": "Production Changes By Preparation",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "prepared_at",
+    "actual_repository_received_at",
+    "intake_completed_at",
+    "original_sources",
+    "review_mappings",
+    "unmapped",
+    "old_source_rows_preserved",
+    "old_review_joins_preserved",
+    "test_cases_passed",
+    "branch_inclusive_coverage_percent",
+    "canonical_receipt",
+    "repository_bindings",
+    "source_record_ids",
+    "production_changes_by_preparation",
+    "legal_currentness",
+    "answer_safe",
+    "limitations"
+  ],
+  "title": "Final",
+  "type": "object"
+}

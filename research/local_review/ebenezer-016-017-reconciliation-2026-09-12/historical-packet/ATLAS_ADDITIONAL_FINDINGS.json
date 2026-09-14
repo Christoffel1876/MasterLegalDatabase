@@ -1,0 +1,63 @@
+{
+  "recorded_at": "2026-09-12T22:29:59.259449Z",
+  "status": "additive_baseline_visibility_correction",
+  "bindings": [
+    {
+      "path": "baseline/EB-PDF-016/SOURCE_QA.json",
+      "line": 4773,
+      "line_sha256": "d0ff53afd37fcb72b56ba8958a36b4d2350131ad4d417d3175903f5d1d078bc9"
+    },
+    {
+      "path": "reports/EB-PDF-016/PASS2_REVIEW.md",
+      "line": 49,
+      "line_sha256": "0575b71ff46456d84a9326081522b3e2a17faada9eaa6653862f7766146c4488"
+    },
+    {
+      "path": "reports/EB-PDF-016/PASS2_REVIEW.md",
+      "line": 50,
+      "line_sha256": "d22476d81f161522911350b100b8231bc2cecedd156fee97dedd6b847c979b74"
+    }
+  ],
+  "native_title_artifacts": [
+    {
+      "physical_page": 2,
+      "image": {
+        "path": "baseline/EB-PDF-016/inputs/page-0002.png",
+        "sha256": "aac84312750eeafac8e707fda7f9d4f215be0dcbcb11c1b1b086c355ad350d2e",
+        "size_bytes": 536314
+      },
+      "native_text": "2026 Development Impact Fee Schedule \n",
+      "native_start_byte": 885,
+      "native_end_byte_exclusive": 923,
+      "candidate_start_byte": 3718,
+      "candidate_end_byte_exclusive": 3756,
+      "text_sha256": "c406d7eeba71995b55212c5ed6280bedf3c4af927937a9f68eeb8d15f221a9d7",
+      "prior_visibility_claim": "visible",
+      "atlas_render_observation": "not_visible_in_checked_render"
+    },
+    {
+      "physical_page": 3,
+      "image": {
+        "path": "baseline/EB-PDF-016/inputs/page-0003.png",
+        "sha256": "98513c20960e97d94bae033957e0b75b95e32572b0eb74ce6a136103b3e8cb60",
+        "size_bytes": 157212
+      },
+      "native_text": "2026 Development Impact Fee Schedule \n",
+      "native_start_byte": 193,
+      "native_end_byte_exclusive": 231,
+      "candidate_start_byte": 6806,
+      "candidate_end_byte_exclusive": 6844,
+      "text_sha256": "c406d7eeba71995b55212c5ed6280bedf3c4af927937a9f68eeb8d15f221a9d7",
+      "prior_visibility_claim": "visible",
+      "atlas_render_observation": "not_visible_in_checked_render"
+    }
+  ],
+  "findings": [
+    "The frozen baseline also labels the page 2 and page 3 repeated native title as visible. Direct full-page inspection shows it only on page 1. Retain the later-page native title bytes but classify them separately from visible text when presenting source passages.",
+    "This corrects the baseline visibility assertions and the external coverage-table description. It does not remove native text or change the 30 fee rows, their printed values, or the page 2 to page 3 heading relationship.",
+    "The reason for the non-visible text has not been established. This is a finding about the checked Poppler full-page render, not a proof that the text cannot appear in any other PDF renderer."
+  ],
+  "source_and_candidate_changed": false,
+  "frozen_baseline_changed": false,
+  "legal_currentness": "not_verified"
+}

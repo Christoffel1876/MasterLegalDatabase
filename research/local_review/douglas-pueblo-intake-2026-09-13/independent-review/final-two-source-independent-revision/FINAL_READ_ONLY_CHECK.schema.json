@@ -1,0 +1,105 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "command": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Command",
+      "type": "array"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "returncode": {
+      "const": 0,
+      "title": "Returncode",
+      "type": "integer"
+    },
+    "stdout": {
+      "$ref": "#/$defs/Ref"
+    },
+    "stderr": {
+      "$ref": "#/$defs/Ref"
+    },
+    "before": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Before",
+      "type": "array"
+    },
+    "after": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "After",
+      "type": "array"
+    },
+    "execution_directory_created": {
+      "const": false,
+      "title": "Execution Directory Created",
+      "type": "boolean"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "production_writes": {
+      "const": 0,
+      "title": "Production Writes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "command",
+    "started_at",
+    "completed_at",
+    "returncode",
+    "stdout",
+    "stderr",
+    "before",
+    "after",
+    "execution_directory_created",
+    "public_requests",
+    "production_writes"
+  ],
+  "title": "Check",
+  "type": "object"
+}

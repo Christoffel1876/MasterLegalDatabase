@@ -1,0 +1,93 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "enum": [
+        "full-tests",
+        "corpus-validation",
+        "inventory-check"
+      ],
+      "title": "Kind",
+      "type": "string"
+    },
+    "ended_at": {
+      "title": "Ended At",
+      "type": "string"
+    },
+    "elapsed_seconds": {
+      "title": "Elapsed Seconds",
+      "type": "number"
+    },
+    "exit_code": {
+      "title": "Exit Code",
+      "type": "integer"
+    },
+    "invocation": {
+      "$ref": "#/$defs/Asset"
+    },
+    "stdout": {
+      "$ref": "#/$defs/Asset"
+    },
+    "stderr": {
+      "$ref": "#/$defs/Asset"
+    },
+    "inputs_unchanged": {
+      "title": "Inputs Unchanged",
+      "type": "boolean"
+    },
+    "changed_paths": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Changed Paths",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "kind",
+    "ended_at",
+    "elapsed_seconds",
+    "exit_code",
+    "invocation",
+    "stdout",
+    "stderr",
+    "inputs_unchanged",
+    "changed_paths",
+    "legal_currentness"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

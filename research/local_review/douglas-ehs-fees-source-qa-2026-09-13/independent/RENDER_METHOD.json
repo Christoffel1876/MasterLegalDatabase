@@ -1,0 +1,31 @@
+{
+  "source": {
+    "path": "original.pdf",
+    "sha256": "35e90b9c3b73b414155ed965898c8c270757f1c367cbe50d7645956039dbb687",
+    "size_bytes": 149173
+  },
+  "output": {
+    "path": "independent/poppler-page-0001.png",
+    "sha256": "40e9f4378acdb3934a558b142a94980a987027fb59a7d7a28e25bf84b603fc14",
+    "size_bytes": 396568
+  },
+  "command_template": [
+    "pdftoppm",
+    "-r",
+    "150",
+    "-f",
+    "1",
+    "-l",
+    "1",
+    "-singlefile",
+    "-png",
+    "<package>/original.pdf",
+    "<output-prefix>"
+  ],
+  "observed_version": "pdftoppm version 26.05.0",
+  "originally_executed": true,
+  "original_invocation_timestamp": null,
+  "physical_page": 1,
+  "dpi": 150,
+  "evidence_scope": "The command and version were observed in this task. No independent per-command start timestamp was retained; the later verifier repeats the exact output in temporary storage."
+}

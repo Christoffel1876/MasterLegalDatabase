@@ -1,0 +1,167 @@
+{
+  "$defs": {
+    "Check": {
+      "additionalProperties": false,
+      "description": "Record an executed offline check or explicitly static source inspection.",
+      "properties": {
+        "check_id": {
+          "title": "Check Id",
+          "type": "string"
+        },
+        "method": {
+          "enum": [
+            "executed_offline",
+            "static_read_only"
+          ],
+          "title": "Method",
+          "type": "string"
+        },
+        "command_or_scope": {
+          "title": "Command Or Scope",
+          "type": "string"
+        },
+        "exit_code": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Exit Code"
+        },
+        "result": {
+          "title": "Result",
+          "type": "string"
+        },
+        "limits": {
+          "title": "Limits",
+          "type": "string"
+        }
+      },
+      "required": [
+        "check_id",
+        "method",
+        "command_or_scope",
+        "exit_code",
+        "result",
+        "limits"
+      ],
+      "title": "Check",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Bind the precise file version read for this documentation review.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Keep scoped acceptance separate from claims of overall project readiness.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "scoped_no_actionable_findings",
+      "default": "scoped_no_actionable_findings",
+      "title": "Status",
+      "type": "string"
+    },
+    "reviewed_files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Reviewed Files",
+      "type": "array"
+    },
+    "supporting_metadata": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Supporting Metadata",
+      "type": "array"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/Check"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "actionable_findings": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 0,
+      "title": "Actionable Findings",
+      "type": "array"
+    },
+    "qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Qualifications",
+      "type": "array"
+    },
+    "production_writes": {
+      "const": 0,
+      "default": 0,
+      "title": "Production Writes",
+      "type": "integer"
+    },
+    "new_public_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "New Public Requests",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "reviewed_files",
+    "supporting_metadata",
+    "checks",
+    "actionable_findings",
+    "qualifications"
+  ],
+  "title": "Review",
+  "type": "object"
+}

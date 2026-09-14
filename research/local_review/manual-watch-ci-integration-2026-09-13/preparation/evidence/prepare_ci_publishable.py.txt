@@ -1,0 +1,38 @@
+from pathlib import Path
+from datetime import datetime,timezone
+import json,hashlib,shutil,subprocess,os,sys
+B=Path('/Users/mcoors/Documents/Project Geode');R=B/'MasterLegalDatabase';H=B/'handoffs/run-2026-09-13';S=H/'ptolemy-manual-watch-ci-preparation';C=H/'ptolemy-manual-watch-ci-compliance-revision';A=H/'ptolemy-manual-watch-ci-publishable-revision';A.mkdir(exist_ok=False)
+for n in ['received-preparation','compliance-revision','proposed','evidence']:(A/n).mkdir()
+omitted='preimages/geode/schemas/models 2.py';data=(S/omitted).read_bytes();bad_sha=hashlib.sha256(data).hexdigest();assert bad_sha=='24554bb0b1dd44a41e6dcb7db72e17e9f4a739a6b7d5ccd9fd59a4edd12aa411'
+manifest_bytes=(S/'FINAL_MANIFEST.json').read_bytes();assert hashlib.sha256(manifest_bytes).hexdigest()=='d4b387d43fcbd44e36b17f37dd0e643350b5efa6f42096dfce12eae0fbf6265d'
+manifest=json.loads(manifest_bytes)
+for ref in manifest['files']:
+ body=(S/ref['path']).read_bytes();assert len(body)==ref['size_bytes'] and hashlib.sha256(body).hexdigest()==ref['sha256']
+ if ref['path']==omitted:continue
+ path=A/'received-preparation'/ref['path'];path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(body)
+(A/'received-preparation/FINAL_MANIFEST.json').write_bytes(manifest_bytes)
+for p in C.rglob('*'):
+ if p.is_file():
+  q=A/'compliance-revision'/p.relative_to(C);q.parent.mkdir(parents=True,exist_ok=True);q.write_bytes(p.read_bytes())
+shutil.copytree(S/'proposed',A/'proposed',dirs_exist_ok=True)
+for p in (C/'proposed').rglob('*'):
+ if p.is_file():shutil.copyfile(p,A/'proposed'/p.relative_to(C/'proposed'))
+P=A/'proposed';path=P/'config/manual_source_watch_ci.json';plan=json.loads(path.read_bytes());before_plan=hashlib.sha256(path.read_bytes()).hexdigest()
+removed=[r for r in plan['immutable_inputs'] if r['path']=='geode/schemas/models 2.py'];assert len(removed)==1 and removed[0]['sha256']==bad_sha
+plan['immutable_inputs']=[r for r in plan['immutable_inputs'] if r not in removed];assert len(plan['immutable_inputs'])==87
+body=(json.dumps(plan,indent=2)+'\n').encode();path.write_bytes(body);newsha=hashlib.sha256(body).hexdigest()
+f=P/'scripts/manual_source_watch_ci.py';text=f.read_text();assert text.count(before_plan)==1;text=text.replace(before_plan,newsha);f.write_text(text)
+f=P/'docs/MANUAL_SOURCE_WATCH_CI.md';text=f.read_text();assert 'The 88 explicit pins' in text;text=text.replace('The 88 explicit pins','The 87 explicit pins');f.write_text(text)
+env=os.environ.copy();env['GIT_OPTIONAL_LOCKS']='0';tracked=set(subprocess.check_output(['git','ls-files','-z'],cwd=R,env=env).decode().split('\0'));checks=[]
+for ref in plan['immutable_inputs']:
+ original=(R/ref['path']).read_bytes();assert len(original)==ref['size_bytes'] and hashlib.sha256(original).hexdigest()==ref['sha256'];assert ref['path'] in tracked,ref['path']
+ indexed=subprocess.check_output(['git','show',':'+ref['path']],cwd=R,env=env)
+ checks.append({**ref,'git_tracked':True,'index_matches_current_pin':hashlib.sha256(indexed).hexdigest()==ref['sha256']})
+(A/'evidence/TRACKED_INPUTS.json').write_text(json.dumps({'checked_at':datetime.now(timezone.utc).isoformat(),'status':'PASS','inputs':checks,'count':87,'limitation':'Tracked means locally registered in Git; this does not certify remote default-branch deployment. Working-tree policy updates must be reviewed and committed before future cloud execution.'},indent=2)+'\n')
+assert hashlib.sha256((R/'geode/schemas/models 2.py').read_bytes()).hexdigest()==bad_sha
+omission={'status':'EXCLUDED_USER_OWNED_FILE_CONTENT','original_manifest_sha256':hashlib.sha256(manifest_bytes).hexdigest(),'original_member_path':omitted,'sha256':bad_sha,'size_bytes':len(data),'original_user_path':'geode/schemas/models 2.py','capture_cause':'The package-startup expansion used geode/schemas/*.py instead of an explicit tracked import list. This accidentally copied and pinned the unrelated untracked user file.','original_unchanged_at_check':True,'was_imported':False,'removed_from_final_runtime_pins':True,'historical_full_packet_preserved_locally':True,'historical_public_copy_scope':'153 of154 original payloads plus original manifest; the omitted content is not distributable. Old full-closure validator is historical only and must not be invoked on this subset.','original_content_copy_locations_in_base':[omitted]}
+(A/'evidence/EXCLUSION.json').write_text(json.dumps(omission,indent=2)+'\n')
+for p in A.rglob('*'):
+ if p.is_file():
+  body=p.read_bytes();assert hashlib.sha256(body).hexdigest()!=bad_sha and data not in body,p
+print(json.dumps({'new_config_sha256':newsha,'runner_sha256':hashlib.sha256((P/'scripts/manual_source_watch_ci.py').read_bytes()).hexdigest(),'test_sha256':hashlib.sha256((P/'tests/test_manual_source_watch_ci.py').read_bytes()).hexdigest(),'docs_sha256':hashlib.sha256((P/'docs/MANUAL_SOURCE_WATCH_CI.md').read_bytes()).hexdigest(),'tracked_inputs':len(checks),'different_from_index':[r['path'] for r in checks if not r['index_matches_current_pin']]},indent=2))

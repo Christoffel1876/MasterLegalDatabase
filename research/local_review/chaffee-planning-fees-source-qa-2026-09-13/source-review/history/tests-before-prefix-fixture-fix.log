@@ -1,0 +1,189 @@
+.......................................FF.F.F.............               [100%]
+=================================== FAILURES ===================================
+__________________________ test_actual_closed_package __________________________
+
+    def test_actual_closed_package() -> None:
+        """The standalone closed validator reads no original-workspace inputs."""
+>       assert v.validate(ROOT)['native_bytes'] == 3769
+               ^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/test_audit.py:171: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/validate_audit.py:333: in validate
+    verify_audit_records(root)
+handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/validate_audit.py:277: in verify_audit_records
+    read_asset(root / 'received', asset)
+handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/validate_audit.py:42: in read_asset
+    data = safe(root, asset.path).read_bytes()
+           ^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/received')
+name = 'received/ATLAS_CROP_INSPECTION.json'
+
+    def safe(root: Path, name: str) -> Path:
+        """Admit only ordinary canonical relative files beneath the packet."""
+        pure = PurePosixPath(name)
+        if (not name or pure.is_absolute() or '\\' in name or
+                any(p in ['', '.', '..'] for p in name.split('/'))):
+            raise ValueError('Unsafe path')
+        result = root.joinpath(*pure.parts)
+        if any(p.is_symlink() for p in [result, *result.parents]) or not result.is_file():
+>           raise ValueError('Nonordinary path')
+E           ValueError: Nonordinary path
+
+handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/validate_audit.py:36: ValueError
+_____________________________ test_actual_rerender _____________________________
+
+    def test_actual_rerender() -> None:
+        """Both full Poppler pages reproduce from the exact retained PDF."""
+        binary = ('/Users/mcoors/.cache/codex-runtimes/codex-primary-runtime/'
+                  'dependencies/bin/override/pdftoppm')
+>       assert v.validate(ROOT, binary)['pages'] == 2
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+
+handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/test_audit.py:178: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/validate_audit.py:333: in validate
+    verify_audit_records(root)
+handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/validate_audit.py:277: in verify_audit_records
+    read_asset(root / 'received', asset)
+handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/validate_audit.py:42: in read_asset
+    data = safe(root, asset.path).read_bytes()
+           ^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/received')
+name = 'received/ATLAS_CROP_INSPECTION.json'
+
+    def safe(root: Path, name: str) -> Path:
+        """Admit only ordinary canonical relative files beneath the packet."""
+        pure = PurePosixPath(name)
+        if (not name or pure.is_absolute() or '\\' in name or
+                any(p in ['', '.', '..'] for p in name.split('/'))):
+            raise ValueError('Unsafe path')
+        result = root.joinpath(*pure.parts)
+        if any(p.is_symlink() for p in [result, *result.parents]) or not result.is_file():
+>           raise ValueError('Nonordinary path')
+E           ValueError: Nonordinary path
+
+handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/validate_audit.py:36: ValueError
+___________________________________ test_cli ___________________________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10b1f6d70>
+capsys = <_pytest.capture.CaptureFixture object at 0x10b4ec2f0>
+
+    def test_cli(monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture) -> None:
+        """Ordinary CLI verifies the actual two-page source package."""
+        monkeypatch.setattr(sys, 'argv', ['validate_audit.py', '--root', str(ROOT)])
+>       v.main()
+
+handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/test_audit.py:191: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/validate_audit.py:354: in main
+    sys.stdout.write(json.dumps({'status': 'pass', **validate(args.root, args.pdftoppm)}) + '\n')
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/validate_audit.py:333: in validate
+    verify_audit_records(root)
+handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/validate_audit.py:277: in verify_audit_records
+    read_asset(root / 'received', asset)
+handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/validate_audit.py:42: in read_asset
+    data = safe(root, asset.path).read_bytes()
+           ^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/received')
+name = 'received/ATLAS_CROP_INSPECTION.json'
+
+    def safe(root: Path, name: str) -> Path:
+        """Admit only ordinary canonical relative files beneath the packet."""
+        pure = PurePosixPath(name)
+        if (not name or pure.is_absolute() or '\\' in name or
+                any(p in ['', '.', '..'] for p in name.split('/'))):
+            raise ValueError('Unsafe path')
+        result = root.joinpath(*pure.parts)
+        if any(p.is_symlink() for p in [result, *result.parents]) or not result.is_file():
+>           raise ValueError('Nonordinary path')
+E           ValueError: Nonordinary path
+
+handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/validate_audit.py:36: ValueError
+____________________ test_resealed_custody_joins[location] _____________________
+
+copy = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-287/test_resealed_custody_joins_lo0/packet')
+change = 'location'
+
+    @pytest.mark.parametrize('change', ['prior_url', 'location', 'result', 'redirect_body',
+                                        'catalog', 'body'])
+    def test_resealed_custody_joins(copy: Path, change: str) -> None:
+        """Rehashed but false URL/response joins cannot replace the retained evidence."""
+        folder = copy / 'custody'
+        plan_path = folder / 'PLAN.json'
+        plan = json.loads(plan_path.read_bytes())
+        target = plan['targets'][0]
+        if change == 'prior_url':
+            asset = target['prior_actual_result']
+            path = folder / asset['path']
+            data = json.loads(path.read_bytes())
+            data['requested_url'] += 'different'
+            path.write_text(json.dumps(data))
+        elif change == 'location':
+            asset = target['prior_public_headers']
+            path = folder / asset['path']
+            path.write_bytes(path.read_bytes().replace(b'Location:', b'Other:'))
+        elif change == 'result':
+            path = folder / 'events/A001/RESULT.json'
+            data = json.loads(path.read_bytes()); data['body_complete'] = False
+            path.write_text(json.dumps(data)); asset = None
+        elif change == 'redirect_body':
+            asset = target['prior_response_body']
+            path = folder / asset['path']; path.write_text('<html>no link</html>')
+        elif change == 'catalog':
+            target['prior_request_url'] += 'different'; asset = None
+        else:
+            path = folder / 'events/A001/RESULT.json'
+            data = json.loads(path.read_bytes()); body = folder / data['body']['path']
+            body.write_bytes(b'not source')
+            data['body']['sha256'] = v.sha(body.read_bytes()); data['body']['size_bytes'] = 10
+            path.write_text(json.dumps(data)); asset = None
+        if asset:
+            asset['sha256'] = v.sha(path.read_bytes()); asset['size_bytes'] = path.stat().st_size
+        plan_path.write_text(json.dumps(plan))
+        reservation = folder / 'events/A001/RESERVATION.json'
+        data = json.loads(reservation.read_bytes()); data['plan_sha256'] = v.sha(plan_path.read_bytes())
+        reservation.write_text(json.dumps(data))
+        reseal_custody(copy)
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/test_audit.py:247: Failed
+=============================== warnings summary ===============================
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+  <frozen importlib._bootstrap>:491: DeprecationWarning: builtin type SwigPyPacked has no __module__ attribute
+
+<frozen importlib._bootstrap>:491
+<frozen importlib._bootstrap>:491
+  <frozen importlib._bootstrap>:491: DeprecationWarning: builtin type SwigPyObject has no __module__ attribute
+
+<frozen importlib._bootstrap>:491
+  <frozen importlib._bootstrap>:491: DeprecationWarning: builtin type swigvarlink has no __module__ attribute
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================================ tests coverage ================================
+_______________ coverage: platform darwin, python 3.14.3-final-0 _______________
+
+Name                                                                           Stmts   Miss Branch BrPart  Cover   Missing
+--------------------------------------------------------------------------------------------------------------------------
+handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/audit_models.py        15      0      0      0   100%
+handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/validate_audit.py     294     41    168     20    84%   60, 72, 75, 81, 94, 100, 102, 117, 122, 124, 126, 178, 269, 278-289, 297, 301, 312, 316, 331, 334-345, 358
+--------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                            309     41    168     20    85%
+Coverage JSON written to file /private/tmp/chaffee-fee-audit-coverage2.json
+=========================== short test summary info ============================
+FAILED handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/test_audit.py::test_actual_closed_package
+FAILED handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/test_audit.py::test_actual_rerender
+FAILED handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/test_audit.py::test_cli
+FAILED handoffs/run-2026-09-13/popper-chaffee-planning-fees-audit/test_audit.py::test_resealed_custody_joins[location]
+4 failed, 54 passed, 5 warnings in 8.96s
+<sys>:0: DeprecationWarning: builtin type swigvarlink has no __module__ attribute

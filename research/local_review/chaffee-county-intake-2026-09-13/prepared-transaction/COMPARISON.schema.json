@@ -1,0 +1,142 @@
+{
+  "$defs": {
+    "ExactMatch": {
+      "additionalProperties": false,
+      "description": "An exact value match, with a physical JSONL row when available.",
+      "properties": {
+        "physical_line": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Physical Line"
+        },
+        "matched_values": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Matched Values",
+          "type": "array"
+        }
+      },
+      "required": [
+        "matched_values"
+      ],
+      "title": "ExactMatch",
+      "type": "object"
+    },
+    "Scan": {
+      "additionalProperties": false,
+      "description": "A complete local file comparison and its qualified matches.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "jsonl_rows": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Jsonl Rows"
+        },
+        "exact_value_matches": {
+          "items": {
+            "$ref": "#/$defs/ExactMatch"
+          },
+          "title": "Exact Value Matches",
+          "type": "array"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes",
+        "jsonl_rows",
+        "exact_value_matches"
+      ],
+      "title": "Scan",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Exact local metadata comparisons with explicit unavailable-byte limits.",
+  "properties": {
+    "compared_at": {
+      "title": "Compared At",
+      "type": "string"
+    },
+    "source_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Ids",
+      "type": "array"
+    },
+    "source_sha256": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Sha256",
+      "type": "array"
+    },
+    "scans": {
+      "items": {
+        "$ref": "#/$defs/Scan"
+      },
+      "title": "Scans",
+      "type": "array"
+    },
+    "raw_ordinary_files_seen": {
+      "title": "Raw Ordinary Files Seen",
+      "type": "integer"
+    },
+    "raw_equal_size_files_hashed": {
+      "title": "Raw Equal Size Files Hashed",
+      "type": "integer"
+    },
+    "raw_digest_matches": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Raw Digest Matches",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "compared_at",
+    "source_ids",
+    "source_sha256",
+    "scans",
+    "raw_ordinary_files_seen",
+    "raw_equal_size_files_hashed",
+    "raw_digest_matches",
+    "limitations"
+  ],
+  "title": "Comparison",
+  "type": "object"
+}

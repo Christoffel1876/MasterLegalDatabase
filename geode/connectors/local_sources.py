@@ -21,6 +21,7 @@ from geode.net.http_client import (
     GeodeHttpResponse,
     build_session,
 )
+from geode.pipeline.local_source_ownership import OwnershipPolicy, load_ownership_policy
 from geode.utils.file_io import (
     _replace_with_retry,
     atomic_write_json,
@@ -48,6 +49,7 @@ class LocalDownloadRecord(BaseModel):
     authority_level: str
     source_url: HttpUrl
     requested_url: HttpUrl
+    final_url: HttpUrl | None = None
     raw_path: str
     status: str
     http_status: int | None = None
@@ -75,6 +77,8 @@ class LocalDownloadSummary(BaseModel):
     records_path: str
     coverage_boundary: str
     batch_id: str | None = None
+    ownership_excluded: int = 0
+    ownership_exclusion_reasons: list[str] = Field(default_factory=list)
 
 
 def download_pilot_sources(
@@ -99,6 +103,7 @@ def download_pilot_sources(
     """
 
     resolved_root = root.resolve()
+    ownership = load_ownership_policy(resolved_root)
     registry_path = resolved_root / REGISTRY_PATH
     registry = load_json(registry_path) if registry_path.exists() else {"pilot": {}}
     municipal_registry_path = resolved_root / MUNICIPAL_REGISTRY_PATH
@@ -148,12 +153,27 @@ def download_pilot_sources(
         entries = [item for item in entries if item.get("authority_level") == authority_level]
     if source_ids:
         entries = [item for item in entries if item.get("source_id") in source_ids]
+    eligible = []
+    exclusions: list[str] = []
+    for entry in entries:
+        reason = ownership.entity_exclusion_reason(entry)
+        if reason:
+            exclusions.append(reason)
+            LOGGER.warning("Ownership exclusion during pilot download: %s", reason)
+        else:
+            eligible.append(entry)
+    entries = eligible
     archive_root = resolved_root / "_RAW_ARCHIVE" / "local"
     archive_root.mkdir(parents=True, exist_ok=True)
     record_path = resolved_root / "_CONTROL_PLANE" / "LOCAL_DOWNLOAD_MANIFEST.jsonl"
     prior_by_url: dict[tuple[str, str], LocalDownloadRecord] = {}
     if unattempted_registered and record_path.exists():
         for row in iter_jsonl(record_path):
+            reason = ownership.entity_exclusion_reason(row)
+            if reason:
+                exclusions.append(reason)
+                LOGGER.warning("Ownership exclusion from download reuse: %s", reason)
+                continue
             if row.get("source_url") and row.get("requested_url"):
                 prior_by_url[(str(row["source_url"]), str(row["requested_url"]))] = LocalDownloadRecord.model_validate(row)
     started = datetime.now(timezone.utc)
@@ -183,10 +203,13 @@ def download_pilot_sources(
                     max_links=max_links_per_source,
                     max_pages=max_pages_per_source,
                     timeout_seconds=timeout_seconds,
+                    ownership=ownership,
                 )
+            entry_records = [_observed_ownership(record, ownership) for record in entry_records]
             records.extend(_stamp_records(entry_records, batch_id))
     finally:
         client.close()
+    exclusions.extend(record.message for record in records if record.status == "ownership_excluded")
     if not dry_run and records:
         existing = list(iter_jsonl(record_path)) if record_path.exists() else []
         atomic_write_jsonl(record_path, [*existing, *records], resolved_root)
@@ -206,6 +229,8 @@ def download_pilot_sources(
         records_path=record_path.as_posix(),
         coverage_boundary=coverage_boundary,
         batch_id=batch_id,
+        ownership_excluded=len(exclusions),
+        ownership_exclusion_reasons=exclusions,
     )
 
 
@@ -222,6 +247,7 @@ def retry_failed_linked_sources(
     """Retry every original failed county record in the append-only manifest."""
 
     resolved_root = root.resolve()
+    ownership = load_ownership_policy(resolved_root)
     manifest_path = resolved_root / "_CONTROL_PLANE" / "LOCAL_DOWNLOAD_MANIFEST.jsonl"
     prior_rows = list(iter_jsonl(manifest_path)) if manifest_path.exists() else []
     recoverable_classes = {"access_denied", "network_or_transport_failure"}
@@ -233,6 +259,16 @@ def retry_failed_linked_sources(
         and (authority_level is None or row.get("authority_level") == authority_level)
         and (not source_ids or str(row.get("source_id")) in source_ids)
     ]
+    eligible = []
+    exclusions = []
+    for row in candidates:
+        reason = ownership.source_exclusion_reason(row)
+        if reason:
+            exclusions.append(reason)
+            LOGGER.warning("Ownership exclusion during linked-source retry: %s", reason)
+        else:
+            eligible.append(row)
+    candidates = eligible
     archive_root = resolved_root / "_RAW_ARCHIVE" / "local"
     archive_root.mkdir(parents=True, exist_ok=True)
     started = datetime.now(timezone.utc)
@@ -306,10 +342,16 @@ def retry_failed_linked_sources(
                     linked.status_code,
                     linked.content,
                     now,
+                    final_url=linked.url,
                 )
-                records.append(record.model_copy(update={
-                    "message": "Retry of a previously failed linked-document attempt."
-                }))
+                record = _observed_ownership(record, ownership)
+                if record.status == "ownership_excluded":
+                    exclusions.append(record.message)
+                    records.append(record)
+                else:
+                    records.append(record.model_copy(update={
+                        "message": "Retry of a previously failed linked-document attempt."
+                    }))
             except (GeodeHttpError, requests.RequestException, ValueError) as exc:
                 records.append(_failed_record(
                     source_id,
@@ -327,7 +369,7 @@ def retry_failed_linked_sources(
     if not dry_run and records:
         existing = list(iter_jsonl(manifest_path)) if manifest_path.exists() else []
         atomic_write_jsonl(manifest_path, [*existing, *records], resolved_root)
-    write_county_retry_report(resolved_root, records)
+    write_county_retry_report(resolved_root, records, ownership_exclusions=exclusions)
     completed = datetime.now(timezone.utc)
     return LocalDownloadSummary(
         started_at=started,
@@ -343,10 +385,14 @@ def retry_failed_linked_sources(
             "404 historical links remain preserved without repeated requests."
         ),
         batch_id=batch_id,
+        ownership_excluded=len(exclusions),
+        ownership_exclusion_reasons=sorted(set(exclusions)),
     )
 
 
-def write_county_retry_report(root: Path, records: list[LocalDownloadRecord]) -> Path:
+def write_county_retry_report(
+    root: Path, records: list[LocalDownloadRecord], *, ownership_exclusions: list[str] | None = None,
+) -> Path:
     """Write the durable report for one county retry batch."""
 
     resolved_root = root.resolve()
@@ -359,6 +405,8 @@ def write_county_retry_report(root: Path, records: list[LocalDownloadRecord]) ->
             "attempted": len(records),
             "downloaded": sum(record.status == "downloaded" for record in records),
             "failed": sum(record.status == "failed" for record in records),
+            "ownership_excluded": len(ownership_exclusions or []),
+            "ownership_exclusion_reasons": sorted(set(ownership_exclusions or [])),
             "failed_unique_urls": len({str(record.requested_url) for record in records if record.status == "failed"}),
             "failed_records": [
                 record.model_dump(mode="json") for record in records if record.status == "failed"
@@ -436,6 +484,7 @@ def _download_entry(
     max_links: int,
     max_pages: int,
     timeout_seconds: float,
+    ownership: OwnershipPolicy,
 ) -> list[LocalDownloadRecord]:
     """Download one registered local source and approved linked documents."""
 
@@ -455,31 +504,51 @@ def _download_entry(
             retrieved_at=now, message="dry_run: source was inventoried but not fetched",
         )]
     try:
-        response = _fetch(client, source_url, timeout_seconds=timeout_seconds)
+        response = _fetch_owned(
+            ownership, authority_id, client, source_url, timeout_seconds=timeout_seconds,
+        )
         content_type = _header(response.headers, "Content-Type")
         landing_path = base_dir / ("landing_page" + _extension(content_type, source_url))
         landing_path = _write_immutable(landing_path, response.content)
-        records = [_record(source_id, authority_id, level, source_url, source_url, landing_path, response.status_code, response.content, now)]
+        records = [_observed_ownership(_record(
+            source_id, authority_id, level, source_url, source_url, landing_path,
+            response.status_code, response.content, now, final_url=response.url,
+        ), ownership)]
+        if records[0].status == "ownership_excluded":
+            return records
         if "html" in content_type.lower():
             document_links = _linked_documents(source_url, response.text, max_links)
-            page_links = _linked_pages(source_url, response.text, max_pages) if max_links > 0 else []
+            page_links = (
+                _linked_pages(source_url, response.text, max_pages) if max_links > 0 else []
+            )
             seen_documents: set[str] = set()
             for link in document_links:
                 seen_documents.add(link)
                 try:
-                    linked = _fetch(client, link, referer=source_url, timeout_seconds=timeout_seconds)
+                    linked = _fetch_owned(
+                        ownership, authority_id, client, link, referer=source_url,
+                        timeout_seconds=timeout_seconds,
+                    )
                     linked_name = Path(urlparse(link).path).name or "linked_source"
                     linked_path = base_dir / _safe_filename(linked_name)
                     linked_path = _write_immutable(linked_path, linked.content)
-                    records.append(_record(source_id, authority_id, level, source_url, link, linked_path, linked.status_code, linked.content, now))
+                    records.append(_observed_ownership(_record(
+                        source_id, authority_id, level, source_url, link, linked_path,
+                        linked.status_code, linked.content, now, final_url=linked.url,
+                    ), ownership))
                 except (GeodeHttpError, requests.RequestException, ValueError) as exc:
-                    records.append(_failed_record(source_id, authority_id, level, source_url, link, base_dir, now, str(exc)))
+                    records.append(_failed_record(
+                        source_id, authority_id, level, source_url, link, base_dir, now, str(exc),
+                    ))
             for page_link in page_links:
                 try:
-                    page_response = _fetch(client, page_link, referer=source_url, timeout_seconds=timeout_seconds)
+                    page_response = _fetch_owned(
+                        ownership, authority_id, client, page_link, referer=source_url,
+                        timeout_seconds=timeout_seconds,
+                    )
                     page_path = base_dir / _page_filename(page_link)
                     page_path = _write_immutable(page_path, page_response.content)
-                    records.append(
+                    page_record = _observed_ownership(
                         _record(
                             source_id,
                             authority_id,
@@ -490,8 +559,12 @@ def _download_entry(
                             page_response.status_code,
                             page_response.content,
                             now,
-                        )
+                            final_url=page_response.url,
+                        ), ownership,
                     )
+                    records.append(page_record)
+                    if page_record.status == "ownership_excluded":
+                        continue
                     if "html" not in _header(page_response.headers, "Content-Type").lower():
                         continue
                     for link in _linked_documents(page_link, page_response.text, max_links):
@@ -499,12 +572,15 @@ def _download_entry(
                             continue
                         seen_documents.add(link)
                         try:
-                            linked = _fetch(client, link, referer=page_link, timeout_seconds=timeout_seconds)
+                            linked = _fetch_owned(
+                                ownership, authority_id, client, link, referer=page_link,
+                                timeout_seconds=timeout_seconds,
+                            )
                             linked_name = Path(urlparse(link).path).name or "linked_source"
                             linked_path = base_dir / _safe_filename(linked_name)
                             linked_path = _write_immutable(linked_path, linked.content)
                             records.append(
-                                _record(
+                                _observed_ownership(_record(
                                     source_id,
                                     authority_id,
                                     level,
@@ -514,19 +590,40 @@ def _download_entry(
                                     linked.status_code,
                                     linked.content,
                                     now,
-                                )
+                                    final_url=linked.url,
+                                ), ownership)
                             )
                         except (GeodeHttpError, requests.RequestException, ValueError) as exc:
                             records.append(
-                                _failed_record(source_id, authority_id, level, source_url, link, base_dir, now, str(exc))
+                                _failed_record(
+                                    source_id, authority_id, level, source_url, link,
+                                    base_dir, now, str(exc),
+                                )
                             )
                 except (GeodeHttpError, requests.RequestException, ValueError) as exc:
                     records.append(
-                        _failed_record(source_id, authority_id, level, source_url, page_link, base_dir, now, str(exc))
+                        _failed_record(
+                            source_id, authority_id, level, source_url, page_link,
+                            base_dir, now, str(exc),
+                        )
                     )
         return records
     except (GeodeHttpError, requests.RequestException, ValueError) as exc:
-        return [_failed_record(source_id, authority_id, level, source_url, source_url, base_dir, now, str(exc))]
+        return [_failed_record(
+            source_id, authority_id, level, source_url, source_url, base_dir, now, str(exc),
+        )]
+
+
+
+def _fetch_owned(
+    ownership: OwnershipPolicy, authority_id: str, client: GeodeHttpClient, url: str,
+    *, referer: str | None = None, timeout_seconds: float,
+) -> GeodeHttpResponse:
+    """Reject an exact wrong-owner link before requesting its bytes."""
+    reason = ownership.source_exclusion_reason({"authority_id": authority_id, "url": url})
+    if reason:
+        raise ValueError(reason)
+    return _fetch(client, url, referer=referer, timeout_seconds=timeout_seconds)
 
 
 def _fetch(
@@ -623,10 +720,30 @@ def _normalize_link_url(url: str) -> str:
     return re.sub(r"%25([0-9A-Fa-f]{2})", r"%\1", url)
 
 
-def _record(source_id: str, authority_id: str, level: str, source_url: str, requested_url: str, path: Path, status: int, content: bytes, now: datetime) -> LocalDownloadRecord:
+def _record(
+    source_id: str, authority_id: str, level: str, source_url: str, requested_url: str,
+    path: Path, status: int, content: bytes, now: datetime, *, final_url: str,
+) -> LocalDownloadRecord:
     """Build a successful download record."""
 
-    return LocalDownloadRecord(source_id=source_id, authority_id=authority_id, authority_level=level, source_url=source_url, requested_url=requested_url, raw_path=path.as_posix(), status="downloaded", http_status=status, sha256=hashlib.sha256(content).hexdigest(), retrieved_at=now, link_kind=_link_kind(source_url, requested_url))
+    return LocalDownloadRecord(
+        source_id=source_id, authority_id=authority_id, authority_level=level,
+        source_url=source_url, requested_url=requested_url, final_url=final_url,
+        raw_path=path.as_posix(), status="downloaded", http_status=status,
+        sha256=hashlib.sha256(content).hexdigest(), retrieved_at=now,
+        link_kind=_link_kind(source_url, requested_url),
+    )
+
+
+def _observed_ownership(
+    record: LocalDownloadRecord, ownership: OwnershipPolicy,
+) -> LocalDownloadRecord:
+    """Preserve observed bytes but stop discovery or successful-source claims for wrong owners."""
+    reason = ownership.entity_exclusion_reason(record.model_dump(mode="json"))
+    if reason:
+        LOGGER.warning("Ownership exclusion after source response: %s", reason)
+        return record.model_copy(update={"status": "ownership_excluded", "message": reason})
+    return record
 
 
 def _reuse_record(entry: dict[str, object], prior: LocalDownloadRecord) -> LocalDownloadRecord:
@@ -638,6 +755,7 @@ def _reuse_record(entry: dict[str, object], prior: LocalDownloadRecord) -> Local
         authority_level=str(entry["authority_level"]),
         source_url=str(entry["url"]),
         requested_url=str(entry["url"]),
+        final_url=prior.final_url,
         raw_path=prior.raw_path,
         status=prior.status,
         http_status=prior.http_status,

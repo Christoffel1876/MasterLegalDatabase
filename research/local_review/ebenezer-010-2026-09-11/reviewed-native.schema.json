@@ -1,0 +1,398 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "One immutable repository file binding.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Disposition": {
+      "additionalProperties": false,
+      "description": "Atlas's bounded disposition of one external report finding or receipt defect.",
+      "properties": {
+        "finding_id": {
+          "title": "Finding Id",
+          "type": "string"
+        },
+        "physical_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Physical Pages",
+          "type": "array"
+        },
+        "external_severity": {
+          "enum": [
+            "critical",
+            "minor",
+            "receipt_defect"
+          ],
+          "title": "External Severity",
+          "type": "string"
+        },
+        "disposition": {
+          "enum": [
+            "accepted",
+            "qualified",
+            "rejected"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "external_claim_scope": {
+          "title": "External Claim Scope",
+          "type": "string"
+        },
+        "source_review_basis": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Review Basis",
+          "type": "array"
+        },
+        "atlas_result": {
+          "title": "Atlas Result",
+          "type": "string"
+        },
+        "action_in_this_package": {
+          "title": "Action In This Package",
+          "type": "string"
+        }
+      },
+      "required": [
+        "finding_id",
+        "physical_pages",
+        "external_severity",
+        "disposition",
+        "external_claim_scope",
+        "source_review_basis",
+        "atlas_result",
+        "action_in_this_package"
+      ],
+      "title": "Disposition",
+      "type": "object"
+    },
+    "PageReview": {
+      "additionalProperties": false,
+      "description": "All native characters on one page, partitioned exhaustively without normalization.",
+      "properties": {
+        "physical_page": {
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "printed_page_label": {
+          "title": "Printed Page Label",
+          "type": "string"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "image_width": {
+          "const": 2550,
+          "default": 2550,
+          "title": "Image Width",
+          "type": "integer"
+        },
+        "image_height": {
+          "const": 3301,
+          "default": 3301,
+          "title": "Image Height",
+          "type": "integer"
+        },
+        "native_evidence": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_text_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Native Text Sha256",
+          "type": "string"
+        },
+        "native_text_size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Native Text Size Bytes",
+          "type": "integer"
+        },
+        "candidate_start_byte": {
+          "minimum": 0,
+          "title": "Candidate Start Byte",
+          "type": "integer"
+        },
+        "candidate_end_byte_exclusive": {
+          "exclusiveMinimum": 0,
+          "title": "Candidate End Byte Exclusive",
+          "type": "integer"
+        },
+        "review_basis": {
+          "$ref": "#/$defs/Asset"
+        },
+        "source_image_inspected_by": {
+          "title": "Source Image Inspected By",
+          "type": "string"
+        },
+        "segments_in_reviewed_order": {
+          "items": {
+            "$ref": "#/$defs/Segment"
+          },
+          "title": "Segments In Reviewed Order",
+          "type": "array"
+        },
+        "reordered_native_text": {
+          "title": "Reordered Native Text",
+          "type": "string"
+        },
+        "reordered_text_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Reordered Text Sha256",
+          "type": "string"
+        },
+        "association_annotations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Association Annotations",
+          "type": "array"
+        },
+        "source_anomalies_preserved": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Anomalies Preserved",
+          "type": "array"
+        },
+        "glyph_perfect_typography_certified": {
+          "const": false,
+          "default": false,
+          "title": "Glyph Perfect Typography Certified",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "physical_page",
+        "printed_page_label",
+        "image",
+        "native_evidence",
+        "native_text_sha256",
+        "native_text_size_bytes",
+        "candidate_start_byte",
+        "candidate_end_byte_exclusive",
+        "review_basis",
+        "source_image_inspected_by",
+        "segments_in_reviewed_order",
+        "reordered_native_text",
+        "reordered_text_sha256",
+        "association_annotations",
+        "source_anomalies_preserved"
+      ],
+      "title": "PageReview",
+      "type": "object"
+    },
+    "Segment": {
+      "additionalProperties": false,
+      "description": "An unchanged native UTF-8 interval placed in reviewed source order.",
+      "properties": {
+        "segment_id": {
+          "title": "Segment Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "original_start_byte": {
+          "minimum": 0,
+          "title": "Original Start Byte",
+          "type": "integer"
+        },
+        "original_end_byte_exclusive": {
+          "exclusiveMinimum": 0,
+          "title": "Original End Byte Exclusive",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "segment_id",
+        "name",
+        "original_start_byte",
+        "original_end_byte_exclusive",
+        "text"
+      ],
+      "title": "Segment",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Source-ordered native text and separate annotations, without legal promotion.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "review_id": {
+      "const": "EB-PDF-010-ATLAS-NATIVE",
+      "default": "EB-PDF-010-ATLAS-NATIVE",
+      "title": "Review Id",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "larimer-development-review-fees-sd004-07",
+      "default": "larimer-development-review-fees-sd004-07",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-LARIMER",
+      "default": "CO-COUNTY-LARIMER",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "seven_page_native_order_review_preserved",
+      "title": "Status",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "manual_intake": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_intake_line": {
+      "$ref": "#/$defs/Asset"
+    },
+    "packet_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Asset"
+    },
+    "reviewed_text_file": {
+      "$ref": "#/$defs/Asset"
+    },
+    "custody": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_intake_status": {
+      "const": "archived_pending_pipeline",
+      "default": "archived_pending_pipeline",
+      "title": "Source Intake Status",
+      "type": "string"
+    },
+    "claimed_official_url": {
+      "title": "Claimed Official Url",
+      "type": "string"
+    },
+    "original_acquisition_time": {
+      "default": null,
+      "title": "Original Acquisition Time",
+      "type": "null"
+    },
+    "source_http_acquisition_verified": {
+      "const": false,
+      "default": false,
+      "title": "Source Http Acquisition Verified",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "legal_review": {
+      "const": "pending",
+      "default": "pending",
+      "title": "Legal Review",
+      "type": "string"
+    },
+    "semantic_rule_unit_promotion": {
+      "const": false,
+      "default": false,
+      "title": "Semantic Rule Unit Promotion",
+      "type": "boolean"
+    },
+    "coverage_promotion": {
+      "const": false,
+      "default": false,
+      "title": "Coverage Promotion",
+      "type": "boolean"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/PageReview"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "external_finding_dispositions": {
+      "items": {
+        "$ref": "#/$defs/Disposition"
+      },
+      "title": "External Finding Dispositions",
+      "type": "array"
+    },
+    "external_report_consulted_after_independent_source_reviews": {
+      "const": true,
+      "default": true,
+      "title": "External Report Consulted After Independent Source Reviews",
+      "type": "boolean"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "status",
+    "source",
+    "manual_intake",
+    "original_intake_line",
+    "packet_manifest",
+    "candidate",
+    "reviewed_text_file",
+    "custody",
+    "claimed_official_url",
+    "pages",
+    "external_finding_dispositions",
+    "limits"
+  ],
+  "title": "ReviewedNative",
+  "type": "object"
+}

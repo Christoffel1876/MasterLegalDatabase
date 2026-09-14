@@ -1,0 +1,135 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "observed_at": {
+      "title": "Observed At",
+      "type": "string"
+    },
+    "result": {
+      "const": "passed",
+      "default": "passed",
+      "title": "Result",
+      "type": "string"
+    },
+    "script": {
+      "$ref": "#/$defs/Asset"
+    },
+    "tests": {
+      "$ref": "#/$defs/Asset"
+    },
+    "full_test_command": {
+      "title": "Full Test Command",
+      "type": "string"
+    },
+    "full_passed": {
+      "const": 1814,
+      "default": 1814,
+      "title": "Full Passed",
+      "type": "integer"
+    },
+    "full_warnings": {
+      "const": 32,
+      "default": 32,
+      "title": "Full Warnings",
+      "type": "integer"
+    },
+    "full_seconds": {
+      "const": 201.88,
+      "default": 201.88,
+      "title": "Full Seconds",
+      "type": "number"
+    },
+    "new_focused_tests": {
+      "const": 36,
+      "default": 36,
+      "title": "New Focused Tests",
+      "type": "integer"
+    },
+    "changed_script_line_and_branch_coverage": {
+      "title": "Changed Script Line And Branch Coverage",
+      "type": "number"
+    },
+    "full_geode_coverage_percent": {
+      "const": 77,
+      "default": 77,
+      "title": "Full Geode Coverage Percent",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "normal_query_integrated": {
+      "const": false,
+      "default": false,
+      "title": "Normal Query Integrated",
+      "type": "boolean"
+    },
+    "independent_review": {
+      "title": "Independent Review",
+      "type": "string"
+    },
+    "root_probes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Root Probes",
+      "type": "array"
+    },
+    "evidence_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Evidence Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "observed_at",
+    "script",
+    "tests",
+    "full_test_command",
+    "changed_script_line_and_branch_coverage",
+    "independent_review",
+    "root_probes",
+    "evidence_files"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

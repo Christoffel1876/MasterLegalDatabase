@@ -1,0 +1,434 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Cell": {
+      "additionalProperties": false,
+      "properties": {
+        "field": {
+          "title": "Field",
+          "type": "string"
+        },
+        "displayed_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Displayed Text"
+        },
+        "native_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Native Text"
+        },
+        "native_line": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Native Line"
+        },
+        "utf8_start": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Utf8 Start"
+        },
+        "utf8_end": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Utf8 End"
+        },
+        "unrotated_bbox": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Unrotated Bbox"
+        },
+        "displayed_bbox": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Displayed Bbox"
+        },
+        "blank_region": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Blank Region"
+        }
+      },
+      "required": [
+        "field",
+        "displayed_text",
+        "native_text",
+        "native_line",
+        "utf8_start",
+        "utf8_end",
+        "unrotated_bbox",
+        "displayed_bbox",
+        "blank_region"
+      ],
+      "title": "Cell",
+      "type": "object"
+    },
+    "Context": {
+      "additionalProperties": false,
+      "properties": {
+        "context_id": {
+          "title": "Context Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "caption",
+            "footnote",
+            "column_header",
+            "image_only_wordmark"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "native_lines": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Native Lines",
+          "type": "array"
+        },
+        "unrotated_bbox": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Unrotated Bbox"
+        },
+        "displayed_bbox": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Displayed Bbox"
+        },
+        "applies_to": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Applies To",
+          "type": "array"
+        }
+      },
+      "required": [
+        "context_id",
+        "kind",
+        "text",
+        "native_lines",
+        "unrotated_bbox",
+        "displayed_bbox",
+        "applies_to"
+      ],
+      "title": "Context",
+      "type": "object"
+    },
+    "Erratum": {
+      "additionalProperties": false,
+      "properties": {
+        "row_id": {
+          "title": "Row Id",
+          "type": "string"
+        },
+        "field": {
+          "title": "Field",
+          "type": "string"
+        },
+        "frozen_text": {
+          "title": "Frozen Text",
+          "type": "string"
+        },
+        "image_supported_text": {
+          "title": "Image Supported Text",
+          "type": "string"
+        },
+        "evidence": {
+          "$ref": "#/$defs/Asset"
+        },
+        "explanation": {
+          "title": "Explanation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "row_id",
+        "field",
+        "frozen_text",
+        "image_supported_text",
+        "evidence",
+        "explanation"
+      ],
+      "title": "Erratum",
+      "type": "object"
+    },
+    "Row": {
+      "additionalProperties": false,
+      "properties": {
+        "row_id": {
+          "title": "Row Id",
+          "type": "string"
+        },
+        "table": {
+          "enum": [
+            "county",
+            "state"
+          ],
+          "title": "Table",
+          "type": "string"
+        },
+        "table_caption_id": {
+          "title": "Table Caption Id",
+          "type": "string"
+        },
+        "footnote_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Footnote Id"
+        },
+        "cells": {
+          "items": {
+            "$ref": "#/$defs/Cell"
+          },
+          "maxItems": 5,
+          "minItems": 5,
+          "title": "Cells",
+          "type": "array"
+        }
+      },
+      "required": [
+        "row_id",
+        "table",
+        "table_caption_id",
+        "footnote_id",
+        "cells"
+      ],
+      "title": "Row",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source_id": {
+      "const": "douglas-county-ehs-fees-dcr03",
+      "default": "douglas-county-ehs-fees-dcr03",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "reviewer": {
+      "const": "Atlas",
+      "default": "Atlas",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "completed_at": {
+      "title": "Completed At",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_url": {
+      "title": "Source Url",
+      "type": "string"
+    },
+    "physical_pages": {
+      "const": 1,
+      "default": 1,
+      "title": "Physical Pages",
+      "type": "integer"
+    },
+    "page_rotation_degrees": {
+      "const": 90,
+      "default": 90,
+      "title": "Page Rotation Degrees",
+      "type": "integer"
+    },
+    "native": {
+      "$ref": "#/$defs/Asset"
+    },
+    "full_image": {
+      "$ref": "#/$defs/Asset"
+    },
+    "pass1": {
+      "$ref": "#/$defs/Asset"
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/Row"
+      },
+      "maxItems": 44,
+      "minItems": 44,
+      "title": "Rows",
+      "type": "array"
+    },
+    "contexts": {
+      "items": {
+        "$ref": "#/$defs/Context"
+      },
+      "title": "Contexts",
+      "type": "array"
+    },
+    "errata": {
+      "items": {
+        "$ref": "#/$defs/Erratum"
+      },
+      "title": "Errata",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "review_status": {
+      "const": "source_checked_pending_intake",
+      "default": "source_checked_pending_intake",
+      "title": "Review Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "completed_at",
+    "source",
+    "source_url",
+    "native",
+    "full_image",
+    "pass1",
+    "rows",
+    "contexts",
+    "errata",
+    "observations",
+    "limitations"
+  ],
+  "title": "QA",
+  "type": "object"
+}

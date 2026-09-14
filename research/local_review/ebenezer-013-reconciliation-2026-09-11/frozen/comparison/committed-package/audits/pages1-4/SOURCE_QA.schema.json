@@ -1,0 +1,458 @@
+{
+  "$defs": {
+    "ByteSpan": {
+      "additionalProperties": false,
+      "description": "An exact page-native span bound to the corresponding candidate bytes.",
+      "properties": {
+        "start_byte": {
+          "minimum": 0,
+          "title": "Start Byte",
+          "type": "integer"
+        },
+        "end_byte_exclusive": {
+          "exclusiveMinimum": 0,
+          "title": "End Byte Exclusive",
+          "type": "integer"
+        },
+        "candidate_start_byte": {
+          "minimum": 0,
+          "title": "Candidate Start Byte",
+          "type": "integer"
+        },
+        "candidate_end_byte_exclusive": {
+          "exclusiveMinimum": 0,
+          "title": "Candidate End Byte Exclusive",
+          "type": "integer"
+        },
+        "exact_native_text": {
+          "title": "Exact Native Text",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start_byte",
+        "end_byte_exclusive",
+        "candidate_start_byte",
+        "candidate_end_byte_exclusive",
+        "exact_native_text",
+        "sha256"
+      ],
+      "title": "ByteSpan",
+      "type": "object"
+    },
+    "Chunk": {
+      "additionalProperties": false,
+      "description": "Exhaustive native chunk; display order references do not rewrite it.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "header",
+            "footer",
+            "body"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "span": {
+          "$ref": "#/$defs/ByteSpan"
+        }
+      },
+      "required": [
+        "id",
+        "role",
+        "span"
+      ],
+      "title": "Chunk",
+      "type": "object"
+    },
+    "Crop": {
+      "additionalProperties": false,
+      "description": "A directly rendered inspection aid, not a replacement source image.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "pdf_rect_points": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Pdf Rect Points",
+          "type": "array"
+        },
+        "file": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "rendering": {
+          "const": "PyMuPDF 1.28.2; Matrix(300/72,300/72); clip; alpha=False",
+          "title": "Rendering",
+          "type": "string"
+        },
+        "visually_inspected": {
+          "const": true,
+          "title": "Visually Inspected",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "pdf_rect_points",
+        "file",
+        "rendering",
+        "visually_inspected"
+      ],
+      "title": "Crop",
+      "type": "object"
+    },
+    "FileRef": {
+      "additionalProperties": false,
+      "description": "An immutable file identity; paths are absolute local custody references.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 1,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "description": "Source wording and separate physical marks without legal-effect inference.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "lexical_verified",
+            "source_marking",
+            "source_anomaly",
+            "reading_order",
+            "scope_boundary"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "region": {
+          "title": "Region",
+          "type": "string"
+        },
+        "pdf_rect_points": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Pdf Rect Points",
+          "type": "array"
+        },
+        "spans": {
+          "items": {
+            "$ref": "#/$defs/ByteSpan"
+          },
+          "minItems": 1,
+          "title": "Spans",
+          "type": "array"
+        },
+        "finding": {
+          "title": "Finding",
+          "type": "string"
+        },
+        "risk_or_limit": {
+          "title": "Risk Or Limit",
+          "type": "string"
+        },
+        "crop_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Crop Ids",
+          "type": "array"
+        },
+        "legal_effect": {
+          "const": "not_determined",
+          "title": "Legal Effect",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "kind",
+        "region",
+        "pdf_rect_points",
+        "spans",
+        "finding",
+        "risk_or_limit",
+        "crop_ids",
+        "legal_effect"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "Full native page and its immutable image/evidence binding.",
+      "properties": {
+        "physical_page": {
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "source_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "image": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "native_evidence": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "original_native_file": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "original_native_text": {
+          "title": "Original Native Text",
+          "type": "string"
+        },
+        "original_native_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Original Native Sha256",
+          "type": "string"
+        },
+        "candidate_start_byte": {
+          "title": "Candidate Start Byte",
+          "type": "integer"
+        },
+        "candidate_end_byte_exclusive": {
+          "title": "Candidate End Byte Exclusive",
+          "type": "integer"
+        },
+        "native_chunks": {
+          "items": {
+            "$ref": "#/$defs/Chunk"
+          },
+          "title": "Native Chunks",
+          "type": "array"
+        },
+        "suggested_visual_order": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Suggested Visual Order",
+          "type": "array"
+        },
+        "full_image_visually_inspected": {
+          "const": true,
+          "title": "Full Image Visually Inspected",
+          "type": "boolean"
+        },
+        "lexical_result": {
+          "const": "no_word_or_number_correction_identified",
+          "title": "Lexical Result",
+          "type": "string"
+        },
+        "native_reextraction_matches": {
+          "const": true,
+          "title": "Native Reextraction Matches",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "physical_page",
+        "source_sha256",
+        "image",
+        "native_evidence",
+        "original_native_file",
+        "original_native_text",
+        "original_native_sha256",
+        "candidate_start_byte",
+        "candidate_end_byte_exclusive",
+        "native_chunks",
+        "suggested_visual_order",
+        "full_image_visually_inspected",
+        "lexical_result",
+        "native_reextraction_matches"
+      ],
+      "title": "Page",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A bounded candidate-aware source review, not a legal consolidation.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "fort-collins-wildfire-code-sd005-05",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "assignment_id": {
+      "const": "EB-PDF-013",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "status": {
+      "const": "pages_1_4_candidate_aware_source_qa_complete_pending_parent_integration",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "review_mode": {
+      "const": "candidate_aware_not_blind",
+      "title": "Review Mode",
+      "type": "string"
+    },
+    "external_review_consulted": {
+      "const": false,
+      "title": "External Review Consulted",
+      "type": "boolean"
+    },
+    "prior_source_exposure": {
+      "title": "Prior Source Exposure",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "packet_manifest": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "candidate": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "source_page_count": {
+      "const": 8,
+      "title": "Source Page Count",
+      "type": "integer"
+    },
+    "reviewed_pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Reviewed Pages",
+      "type": "array"
+    },
+    "crops": {
+      "items": {
+        "$ref": "#/$defs/Crop"
+      },
+      "title": "Crops",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "text_corrections": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 0,
+      "title": "Text Corrections",
+      "type": "array"
+    },
+    "preservation_policy": {
+      "title": "Preservation Policy",
+      "type": "string"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    },
+    "verification_checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Verification Checks",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "reviewed_at",
+    "source_id",
+    "assignment_id",
+    "status",
+    "legal_currentness",
+    "review_mode",
+    "external_review_consulted",
+    "prior_source_exposure",
+    "source",
+    "packet_manifest",
+    "candidate",
+    "source_page_count",
+    "reviewed_pages",
+    "crops",
+    "observations",
+    "text_corrections",
+    "preservation_policy",
+    "limits",
+    "verification_checks"
+  ],
+  "title": "Review",
+  "type": "object"
+}

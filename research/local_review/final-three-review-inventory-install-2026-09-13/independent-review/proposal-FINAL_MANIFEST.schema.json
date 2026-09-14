@@ -1,0 +1,142 @@
+{
+  "$defs": {
+    "FileIdentity": {
+      "additionalProperties": false,
+      "description": "Exact package or repository identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileIdentity",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Closed preparation payload inventory; never an installation instruction.",
+  "properties": {
+    "schema_version": {
+      "const": "final-three-inventory-preparation-1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "const": "prepared_not_installed",
+      "title": "Status",
+      "type": "string"
+    },
+    "created_at": {
+      "title": "Created At",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/FileIdentity"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "repository_inputs": {
+      "items": {
+        "$ref": "#/$defs/FileIdentity"
+      },
+      "title": "Repository Inputs",
+      "type": "array"
+    },
+    "source_count": {
+      "const": 64,
+      "title": "Source Count",
+      "type": "integer"
+    },
+    "mapped_count": {
+      "const": 27,
+      "title": "Mapped Count",
+      "type": "integer"
+    },
+    "unmapped_count": {
+      "const": 37,
+      "title": "Unmapped Count",
+      "type": "integer"
+    },
+    "changed_existing_review_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Changed Existing Review Ids",
+      "type": "array"
+    },
+    "new_source_id": {
+      "const": "pueblo-county-planning-fees-sh-ext-002",
+      "title": "New Source Id",
+      "type": "string"
+    },
+    "original_metadata_unchanged_except_two_reviews": {
+      "const": true,
+      "title": "Original Metadata Unchanged Except Two Reviews",
+      "type": "boolean"
+    },
+    "prior_authority_joins_unchanged": {
+      "const": 63,
+      "title": "Prior Authority Joins Unchanged",
+      "type": "integer"
+    },
+    "prior_review_joins_unchanged": {
+      "const": 24,
+      "title": "Prior Review Joins Unchanged",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "created_at",
+    "files",
+    "repository_inputs",
+    "source_count",
+    "mapped_count",
+    "unmapped_count",
+    "changed_existing_review_ids",
+    "new_source_id",
+    "original_metadata_unchanged_except_two_reviews",
+    "prior_authority_joins_unchanged",
+    "prior_review_joins_unchanged",
+    "legal_currentness",
+    "answer_safe",
+    "limitations"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

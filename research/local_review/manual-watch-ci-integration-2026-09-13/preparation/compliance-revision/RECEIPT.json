@@ -1,0 +1,61 @@
+{
+  "status": "PREPARED_ADDITIVE_COMPLIANCE_REVISION",
+  "prepared_at": "2026-09-13T17:29:23.465905+00:00",
+  "predecessor_manifest": {
+    "path": "evidence/PREDECESSOR_MANIFEST.json",
+    "sha256": "d4b387d43fcbd44e36b17f37dd0e643350b5efa6f42096dfce12eae0fbf6265d",
+    "size_bytes": 30331
+  },
+  "changes": [
+    {
+      "install_path": "tests/test_manual_source_watch_ci.py",
+      "before": {
+        "path": "before/tests/test_manual_source_watch_ci.py",
+        "sha256": "9b2b0141b450c29c09887e3b0e0c2ee6717d96109714a191128f42e90204288a",
+        "size_bytes": 23509
+      },
+      "after": {
+        "path": "proposed/tests/test_manual_source_watch_ci.py",
+        "sha256": "c040a16b0a052c3d42179105ad4e566d71799b5c64c6072a919e77ee0fd7c516",
+        "size_bytes": 25044
+      },
+      "scope": "annotations_only"
+    },
+    {
+      "install_path": "docs/MANUAL_SOURCE_WATCH_CI.md",
+      "before": {
+        "path": "before/docs/MANUAL_SOURCE_WATCH_CI.md",
+        "sha256": "730a4ea2789ecdd6c7d5eea21beac1b2960a5dbbdadccd1f133a926c468fd9f6",
+        "size_bytes": 6743
+      },
+      "after": {
+        "path": "proposed/docs/MANUAL_SOURCE_WATCH_CI.md",
+        "sha256": "9590c251662c24f0bfdd534ebc1e82943e8d8cb1bf5736afd2476871709bb303",
+        "size_bytes": 6929
+      },
+      "scope": "yaml_frontmatter_only"
+    }
+  ],
+  "ast_equivalence": {
+    "path": "evidence/AST_EQUIVALENCE.json",
+    "sha256": "58ae91e146a57fd2fcf9acb8c493d292a4ae7ca5751b7be615814751c9471535",
+    "size_bytes": 658
+  },
+  "focused_test": {
+    "path": "evidence/FOCUSED_TEST.json",
+    "sha256": "0a36e204dde81309cb9dc3e1e885bab1562e76e1e03a2005ce6fdeb3eb7f38fd",
+    "size_bytes": 773
+  },
+  "focused_tests_passed": 44,
+  "predecessor_payloads_unchanged": 154,
+  "runner_changed": false,
+  "workflow_changed": false,
+  "source_configs_changed": false,
+  "installed_or_deployed": false,
+  "source_requests": 0,
+  "limitations": [
+    "The added from typing import Any statement supports deferred annotations. AST equivalence explicitly excludes this annotation-only import as well as annotations; no body/assertion/decorator/default/string change is hidden.",
+    "44 tests ran on macOS Python3.14.3 in a temporary staging copy with the exact frozen runner and workflow; Python3.11 syntax parses but Linux execution remains untested.",
+    "Only the proposed test file and docs frontmatter differ from the accepted predecessor. Root owns installation; this revision does not deploy or activate a schedule."
+  ]
+}

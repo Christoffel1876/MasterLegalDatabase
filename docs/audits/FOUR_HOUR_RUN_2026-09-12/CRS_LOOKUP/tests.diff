@@ -1,0 +1,105 @@
+--- frozen-prototype/test_lookup.py
++++ tests/test_crs_source_lookup.py
+@@ -2,7 +2,6 @@
+ 
+ import copy
+ import hashlib
+-import importlib.util
+ import io
+ import json
+ import shutil
+@@ -13,30 +12,28 @@
+ 
+ import pytest
+ 
+-HERE = Path(__file__).parent
+-spec = importlib.util.spec_from_file_location("crs_lookup", HERE / "lookup.py")
+-m = importlib.util.module_from_spec(spec)
+-sys.modules[spec.name] = m
+-spec.loader.exec_module(m)
++from scripts import crs_source_lookup as m
++
++SOURCE = m.DEFAULT_SOURCE
+ 
+ 
+ @pytest.fixture
+ def packet(tmp_path):
+     root = tmp_path / "source"
+-    shutil.copytree(HERE / "source", root)
++    shutil.copytree(SOURCE, root)
+     return root
+ 
+ 
+ @pytest.fixture
+ def raw():
+-    root = HERE / "source"
++    root = SOURCE
+     return root, json.loads((root / "SOURCE_QA.json").read_bytes()), json.loads(
+         (root / "events/E001.json").read_bytes())
+ 
+ 
+ @pytest.fixture(scope="module")
+ def actual_results():
+-    return {sid: m.lookup(HERE / "source", sid) for sid in m.IDS}
++    return {sid: m.lookup(SOURCE, sid) for sid in m.IDS}
+ 
+ 
+ def test_actual_all_three_sections_complete_and_roundtrip(actual_results):
+@@ -197,13 +194,13 @@
+         raise failure
+     monkeypatch.setattr(m.subprocess, "run", fail)
+     with pytest.raises(ValueError, match="semantic verifier failed"):
+-        m.semantic_verify(HERE / "source")
++        m.semantic_verify(SOURCE)
+ 
+ 
+ def test_semantic_unexpected_output(monkeypatch):
+     monkeypatch.setattr(m.subprocess, "run", lambda *a, **k: SimpleNamespace(stdout="not passed"))
+     with pytest.raises(ValueError, match="Unexpected"):
+-        m.semantic_verify(HERE / "source")
++        m.semantic_verify(SOURCE)
+ 
+ 
+ def test_child_rechecks_code_without_executing_mutation(packet):
+@@ -345,3 +342,41 @@
+         m.main()
+     assert exc.value.code == 2
+     assert json.loads(capsys.readouterr().out)["status"] == "refused_mode"
++
++
++@pytest.mark.parametrize("sid", m.IDS)
++def test_real_cli_default_source_outside_checkout(tmp_path, sid):
++    """An unrelated working directory still uses the one existing repository source packet."""
++    run = subprocess.run(
++        [sys.executable, "-I", "-B", str(Path(m.__file__)), "--section", sid],
++        cwd=tmp_path, capture_output=True, check=True, timeout=30,
++    )
++    result = m.Result.model_validate_json(run.stdout)
++    assert result.status == "matched" and result.section.section_id == sid
++    assert result.custody.source_manifest_sha256 == m.MANIFEST_SHA
++    assert result.custody.source_review_sha256 == m.QA_SHA
++    assert not list(tmp_path.iterdir())
++
++
++@pytest.mark.parametrize("args,status", [
++    (["--section", "CRS-1-1-104"], "outside_scope"),
++    (["--section", "CRS-1-1-101", "--mode", "current_law"], "refused_mode"),
++])
++def test_real_cli_refusal_outside_checkout(tmp_path, args, status):
++    """Unsupported selections and current-law mode emit no evidence or local files."""
++    run = subprocess.run(
++        [sys.executable, "-I", "-B", str(Path(m.__file__)), *args],
++        cwd=tmp_path, capture_output=True, check=False, timeout=30,
++    )
++    assert run.returncode == 2
++    result = m.Result.model_validate_json(run.stdout)
++    assert result.status == status and result.section is None and result.custody is None
++    assert not list(tmp_path.iterdir())
++
++
++def test_default_source_is_existing_repo_packet():
++    """Integration cannot silently substitute the old prototype or duplicate its source."""
++    repo = Path(m.__file__).resolve().parents[1]
++    assert m.DEFAULT_SOURCE == repo / (
++        "research/local_review/crs-2026-title1-source-review-2026-09-12")
++    assert m.SOURCE_PACKAGE == m.DEFAULT_SOURCE.relative_to(repo)

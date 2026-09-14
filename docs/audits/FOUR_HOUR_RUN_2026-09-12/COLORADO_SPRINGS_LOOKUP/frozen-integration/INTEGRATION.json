@@ -1,0 +1,332 @@
+{
+  "schema_version": 1,
+  "prepared_at": "2026-09-13T00:18:41.683314Z",
+  "scope": "six_source_lookup_and_61_source_review_inventory",
+  "source_id": "colorado-springs-construction-fees-atlas-directed",
+  "historical_review_alias": "SD014-02",
+  "source_rows": 128,
+  "source_tables": 9,
+  "native_lines": 410,
+  "mandatory_context_blocks": 80,
+  "inventory_sources": 61,
+  "inventory_mapped": 21,
+  "inventory_unmapped": 40,
+  "unchanged_old_review_joins": 20,
+  "unchanged_old_lookup_outputs": 5,
+  "new_authority_joins": [
+    "colorado-springs-code-services-fees-2015-atlas-directed",
+    "colorado-springs-construction-fees-atlas-directed"
+  ],
+  "later_http_binding_sources": [
+    "greeley-building-fees-sd008-06",
+    "greeley-development-impact-fee-memo-sd008-07",
+    "greeley-water-sewer-proposed-pif-notice-sd008-08"
+  ],
+  "tests": {
+    "passed": 331,
+    "failed": 0,
+    "elapsed_seconds": 154.56,
+    "combined_coverage_percent": 96.31087063453025,
+    "lookup_coverage_percent": 95.58553034947884,
+    "lookup_branch_percent": 91.04477611940298,
+    "inventory_coverage_percent": 99.25373134328358
+  },
+  "limitations": [
+    "This integrates existing accepted evidence only; no new collection, raw intake, canonical index or coverage-ledger change.",
+    "All source text and lookup outputs remain research-only, legal_currentness not_verified and answer_safe false; fees are not calculated and applicability is not decided.",
+    "The modern source has 128 rows and 80 complete context blocks. The 2015 source has only an authority/custody join and remains unmapped to full numeric QA.",
+    "Three Greeley verified HTTP times describe later September 12 reacquisition, not the original receipt or original Sherlock acquisition; old null URLs, methods, receipt times and five old lookup outputs remain unchanged.",
+    "Inventory counts are custody/review-map counts, not complete geographic, regulatory or legal coverage. Prior twenty reviews and legacy coverage pin are preserved.",
+    "First installed run rejected an existing empty .staging directory. It is now allowed only at the exact accepted transaction path and only empty; tests reject unknown paths and contents. The accepted intake package was unchanged.",
+    "Examples were produced from /private/tmp using the installed CLI. Current-law refused exit2; no-match returned no source fee rows. Scoped evidence validators were rerun; no new human visual review is claimed.",
+    "Completed intake validation binds receipt time to immutable accepted receipts and present canonical source bytes. It does not establish adoption, effective date, continuing availability or legal currentness.",
+    "Focused tests passed. Parent repository-wide validation and commit decisions are separate; this receipt does not report unrun full-suite checks."
+  ],
+  "files": [
+    {
+      "domain": "handoff",
+      "path": "FINAL_TESTS.log",
+      "sha256": "b27204a86be18e76e0b678a8bd153fec1a2ac7f368e3bc7a975f8ce5d80c81c1",
+      "size_bytes": 1382
+    },
+    {
+      "domain": "handoff",
+      "path": "INSTALLED_TESTS.log",
+      "sha256": "033bf3820b6c96a91f321ab45f5df7f12de9ab2d32ae73cd7a5e383d0c6eceb3",
+      "size_bytes": 95393
+    },
+    {
+      "domain": "handoff",
+      "path": "README.md",
+      "sha256": "cdf62f5cb98705a39f66908e6c612c821bdef89ed1f5531ee3cddb316c42b3ed",
+      "size_bytes": 3750
+    },
+    {
+      "domain": "handoff",
+      "path": "SPRINGS_RESULT.schema.json",
+      "sha256": "9745f599301693646a597403a1c4575747216cba0103ec3ba76a3795c19bcf0d",
+      "size_bytes": 18134
+    },
+    {
+      "domain": "handoff",
+      "path": "STAGING_FIX_TESTS.log",
+      "sha256": "7c042294d9e84adede243ca7f162f9e21ff0c756d7ffe81df4d2e7af798bdc5f",
+      "size_bytes": 180
+    },
+    {
+      "domain": "handoff",
+      "path": "coverage.json",
+      "sha256": "f6c8e6754870a190615597d50dd8e3890ecc914a3db7e22ecf1b3a77f07a6773",
+      "size_bytes": 108985
+    },
+    {
+      "domain": "handoff",
+      "path": "examples/current-law.json",
+      "sha256": "3acf4855d7cfc5b9286cc17c46d681786a4c5b006f91382bead84a0caf8a3114",
+      "size_bytes": 946
+    },
+    {
+      "domain": "handoff",
+      "path": "examples/no-match.json",
+      "sha256": "4e2cd0eaecea51aaa8963e0e71a4a90dca76c35ffb3a3e3a1d9d65b39120e9df",
+      "size_bytes": 178804
+    },
+    {
+      "domain": "handoff",
+      "path": "examples/rates.json",
+      "sha256": "80aa326a8ccfd802cee911e459ea813b9b48be53f52d304688c1e29497868d15",
+      "size_bytes": 186126
+    },
+    {
+      "domain": "handoff",
+      "path": "examples/technology.md",
+      "sha256": "771f29f0e7cb00cfe3ebd6a44e9c05d2fd4bbb74ee6ff74b9c9e1a41ecb16f4c",
+      "size_bytes": 17102
+    },
+    {
+      "domain": "handoff",
+      "path": "verify_integration.py",
+      "sha256": "e96fdd909b8e39c3c83e2d49b597ad73395032e5d256e96e75d1ae76760f1d45",
+      "size_bytes": 6021
+    },
+    {
+      "domain": "repository",
+      "path": "_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+      "sha256": "ad27514fe91659c9914780c7d3e69e48ace742bc31ad67d9c3a3c99945aecde3",
+      "size_bytes": 2066981
+    },
+    {
+      "domain": "repository",
+      "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/colorado-springs-code-services-fees-2015-atlas-directed/20260912T235616Z_feeschedule_codeservices_final_2015.pdf",
+      "sha256": "555570a62a5a557a824d1bcf3ecd2e60d57e48d19ea401f06a2e5b7ccb177e56",
+      "size_bytes": 162682
+    },
+    {
+      "domain": "repository",
+      "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/colorado-springs-construction-fees-atlas-directed/20260912T235616Z_2026_Fee_Schedule_Construction_Services.pdf",
+      "sha256": "e35de501a011fe55f03140bf91aef54226997d896fec0b6308a2eac9bd40909a",
+      "size_bytes": 258393
+    },
+    {
+      "domain": "repository",
+      "path": "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+      "sha256": "7814b23e9ddb97e0dbf469497d52ae59a55b485254bb0a5c9f690354a484c367",
+      "size_bytes": 139618
+    },
+    {
+      "domain": "repository",
+      "path": "_SNAPSHOTS/snapshot_2026-09-13T000607435384Z/docs/RESEARCH_SOURCE_LOOKUP.md",
+      "sha256": "1dfa9ed4d72ca5b7c24cb661321ac0e9f3adbae1d34b06386ecba74c85e154c7",
+      "size_bytes": 15294
+    },
+    {
+      "domain": "repository",
+      "path": "_SNAPSHOTS/snapshot_2026-09-13T000607435384Z/geode/pipeline/manual_review_inventory.py",
+      "sha256": "491006e018dd5263f49ce2c46ac1109e610f8238340d35ff4349c9075d96df46",
+      "size_bytes": 21128
+    },
+    {
+      "domain": "repository",
+      "path": "_SNAPSHOTS/snapshot_2026-09-13T000607435384Z/scripts/research_source_lookup.py",
+      "sha256": "2a1e2f3a82214dc1fc85511b4dda13b53ff171bb02aa530a5ed837005ec3a33e",
+      "size_bytes": 79190
+    },
+    {
+      "domain": "repository",
+      "path": "_SNAPSHOTS/snapshot_2026-09-13T000607435384Z/tests/test_manual_review_inventory.py",
+      "sha256": "530b2ee7cf522bf2a2ac44e5ffe0f77112a02d0c15199569529d27dc3e3fe878",
+      "size_bytes": 27630
+    },
+    {
+      "domain": "repository",
+      "path": "_SNAPSHOTS/snapshot_2026-09-13T000607435384Z/tests/test_research_source_lookup.py",
+      "sha256": "479c678632457079d9698e225fe077bae08878fb7e58d7983e0887d8e666bef2",
+      "size_bytes": 71547
+    },
+    {
+      "domain": "repository",
+      "path": "docs/RESEARCH_SOURCE_LOOKUP.md",
+      "sha256": "9ef785b9b2f1de2bb94ce8504474c2cdda877fe56fb7e2029e00a6fb3eba4f4b",
+      "size_bytes": 20491
+    },
+    {
+      "domain": "repository",
+      "path": "docs/audits/FOUR_HOUR_RUN_2026-09-12/COLORADO_SPRINGS_CONSTRUCTION_QA/ACCEPTANCE.json",
+      "sha256": "7c415b46fb5e2c0a317bb9071c9f58c21405564b92360791cb3aa617c1a2c659",
+      "size_bytes": 1817
+    },
+    {
+      "domain": "repository",
+      "path": "docs/audits/FOUR_HOUR_RUN_2026-09-12/GREELEY_FRESH_CUSTODY/ACCEPTANCE.json",
+      "sha256": "3db81fd03911eded3c8ca02aaf8b8917ad473be51ee12b306bfcc2cd6687135f",
+      "size_bytes": 1590
+    },
+    {
+      "domain": "repository",
+      "path": "geode/pipeline/manual_review_inventory.py",
+      "sha256": "c77a7640bb893e1ee0fca5076881274600ed9791c9e9e131edd4d1bd3f8d46c2",
+      "size_bytes": 21218
+    },
+    {
+      "domain": "repository",
+      "path": "research/local_review/colorado-springs-construction-fees-qa-2026-09-12/FINAL_MANIFEST.json",
+      "sha256": "9b691fafa9c734adc5b7be1f475ae2946826111b5ac569b45c22e023fdf320b5",
+      "size_bytes": 14731
+    },
+    {
+      "domain": "repository",
+      "path": "research/local_review/colorado-springs-intake-2026-09-12/ACCEPTANCE.json",
+      "sha256": "503b98fb62561d3cee436f938c0555554a458547ef546f94576cf0abcafe5f12",
+      "size_bytes": 1978
+    },
+    {
+      "domain": "repository",
+      "path": "research/local_review/colorado-springs-intake-2026-09-12/INVENTORY.json",
+      "sha256": "4bc0e43c6bd61243353b653880c87835461e2d272a3d1739ef1dd0a3010dc50e",
+      "size_bytes": 27015
+    },
+    {
+      "domain": "repository",
+      "path": "research/local_review/colorado-springs-intake-2026-09-12/INVENTORY.schema.json",
+      "sha256": "a750cd8f6c05a2531c47950dc1129e6fca93b2a55c0cf143dffaa48f4a1834ff",
+      "size_bytes": 1206
+    },
+    {
+      "domain": "repository",
+      "path": "research/local_review/colorado-springs-intake-2026-09-12/prepared-transaction/execution/INTENT.json",
+      "sha256": "fa9ab7c7a44b2836a8f2fd149472bdf52b872828a21794ee8d903faceebe70ce",
+      "size_bytes": 9301
+    },
+    {
+      "domain": "repository",
+      "path": "research/local_review/colorado-springs-intake-2026-09-12/prepared-transaction/execution/RECEIPT.json",
+      "sha256": "59efef8ab0b90059004f85054acca3b82bcf613c34eaaba20b37d5a521b8d5ff",
+      "size_bytes": 10770
+    },
+    {
+      "domain": "repository",
+      "path": "research/local_review/colorado-springs-intake-2026-09-12/validate_package.py",
+      "sha256": "fc80d0255bcd1b1f18fa7b265b6bab0e6c4a61709e45baab4e198763f642c7c1",
+      "size_bytes": 3603
+    },
+    {
+      "domain": "repository",
+      "path": "research/local_review/greeley-fresh-custody-2026-09-12/FINAL_MANIFEST.json",
+      "sha256": "ccb72a10c9955b33fb8dc6afbe0b55e7624fd7f91544fc027dd4a5485367ee8a",
+      "size_bytes": 10117
+    },
+    {
+      "domain": "repository",
+      "path": "research/local_review/greeley-fresh-custody-2026-09-12/PRESERVATION.json",
+      "sha256": "e84845a2488758d51baf06a794fa2b8b4f4cdfe304f734d0b836bf43a7c34c51",
+      "size_bytes": 35713
+    },
+    {
+      "domain": "repository",
+      "path": "research/local_review/greeley-fresh-custody-2026-09-12/http-bindings.jsonl",
+      "sha256": "1890ad9e5c186172aa992a9420933c8a79169adf9853e39f3944f91c5a244cf3",
+      "size_bytes": 1634
+    },
+    {
+      "domain": "repository",
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/README.md",
+      "sha256": "203bb0f2ac44e7e6e2a4fc7cd3728c3a137c30ca6c8456c345b77a356ee82bbf",
+      "size_bytes": 9105
+    },
+    {
+      "domain": "repository",
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/_SNAPSHOTS/BEFORE_SPRINGS_2026-09-13/README.md",
+      "sha256": "42348f7ae61f4b749a3561920a99a6910d29dc4eb0c67d53ca166561c8331bd5",
+      "size_bytes": 8005
+    },
+    {
+      "domain": "repository",
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/_SNAPSHOTS/BEFORE_SPRINGS_2026-09-13/inventory.json",
+      "sha256": "49ce32d06edacbf3d43ec0d02647a85b7253c403d7240765c6f9c554f8510e9a",
+      "size_bytes": 352276
+    },
+    {
+      "domain": "repository",
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/_SNAPSHOTS/BEFORE_SPRINGS_2026-09-13/inventory.schema.json",
+      "sha256": "4418485d2a0dfe3a4e9f9a6a392a4309bae9774dc1c2a9c1ff8ed8479ec34f14",
+      "size_bytes": 9654
+    },
+    {
+      "domain": "repository",
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/_SNAPSHOTS/BEFORE_SPRINGS_2026-09-13/join-plan.json",
+      "sha256": "01e9583267409a616def5d03ac829f05526087a3b062d56a3ad026edddcaf420",
+      "size_bytes": 94094
+    },
+    {
+      "domain": "repository",
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/inventory.json",
+      "sha256": "c1135eca9634be30a3c2bc3d982326d0437b2eed082005c413c7eabebe8febdb",
+      "size_bytes": 382617
+    },
+    {
+      "domain": "repository",
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/inventory.schema.json",
+      "sha256": "4418485d2a0dfe3a4e9f9a6a392a4309bae9774dc1c2a9c1ff8ed8479ec34f14",
+      "size_bytes": 9654
+    },
+    {
+      "domain": "repository",
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/join-plan.json",
+      "sha256": "a72e78a57fff835b55065a81abff7706f5bb742488edf17272f57194d2101223",
+      "size_bytes": 102066
+    },
+    {
+      "domain": "repository",
+      "path": "scripts/research_source_lookup.py",
+      "sha256": "80818552913862eecad4059e7584e27237b9eef21d6c51dc1ec1504342442c86",
+      "size_bytes": 108904
+    },
+    {
+      "domain": "repository",
+      "path": "tests/fixtures/research_source_lookup_before_springs.json",
+      "sha256": "8df7616220f4c4b31acba68f1a147fbec0cdc390639683c3f883937e96a93e2a",
+      "size_bytes": 1077
+    },
+    {
+      "domain": "repository",
+      "path": "tests/test_colorado_springs_native_lookup.py",
+      "sha256": "51b9261254db98a3802d216db938282d62dbfed92c248a501d5b2ae0e634d6ca",
+      "size_bytes": 22027
+    },
+    {
+      "domain": "repository",
+      "path": "tests/test_manual_review_inventory.py",
+      "sha256": "fa78e117e8bd09d7c870b3b1f3e7e64502b255b68cd17a6a5fd445dd7e29fa3a",
+      "size_bytes": 33366
+    },
+    {
+      "domain": "repository",
+      "path": "tests/test_research_source_lookup.py",
+      "sha256": "479c678632457079d9698e225fe077bae08878fb7e58d7983e0887d8e666bef2",
+      "size_bytes": 71547
+    }
+  ],
+  "legal_currentness": "not_verified",
+  "answer_safe": false,
+  "canonical_writes_by_integration": false
+}

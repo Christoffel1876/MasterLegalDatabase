@@ -1,0 +1,540 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact portable file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Disposition": {
+      "additionalProperties": false,
+      "description": "One external finding assessed against the independent source reading.",
+      "properties": {
+        "external_id": {
+          "title": "External Id",
+          "type": "string"
+        },
+        "disposition": {
+          "enum": [
+            "accepted_source_anomaly",
+            "accepted_packaging_classification",
+            "resolved_by_direct_visual_review"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Pages",
+          "type": "array"
+        },
+        "source_evidence": {
+          "title": "Source Evidence",
+          "type": "string"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "external_id",
+        "disposition",
+        "pages",
+        "source_evidence",
+        "qualification"
+      ],
+      "title": "Disposition",
+      "type": "object"
+    },
+    "Line": {
+      "additionalProperties": false,
+      "description": "One complete nonblank native line, with genuine page-byte and geometry bindings.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "native_line_number": {
+          "minimum": 1,
+          "title": "Native Line Number",
+          "type": "integer"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "exclusiveMinimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "bbox_pdf_points": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Bbox Pdf Points",
+          "type": "array"
+        },
+        "paragraph_id": {
+          "title": "Paragraph Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "native_line_number",
+        "start",
+        "end",
+        "text",
+        "bbox_pdf_points",
+        "paragraph_id"
+      ],
+      "title": "Line",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "description": "A bounded direct-source observation, not an interpretation of legal effect.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Pages",
+          "type": "array"
+        },
+        "paragraph_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Paragraph Ids",
+          "type": "array"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "limitation": {
+          "title": "Limitation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "pages",
+        "paragraph_ids",
+        "statement",
+        "limitation"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "The complete native page and its source-visible line/paragraph allocation.",
+      "properties": {
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "source_pdf_sha256": {
+          "const": "5b71fc2ba18d7a11a5c66d691b1f11526cce424cc0eb8fc07cbd37fb7e5c268a",
+          "title": "Source Pdf Sha256",
+          "type": "string"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "candidate_start": {
+          "title": "Candidate Start",
+          "type": "integer"
+        },
+        "candidate_end": {
+          "title": "Candidate End",
+          "type": "integer"
+        },
+        "native_line_count": {
+          "title": "Native Line Count",
+          "type": "integer"
+        },
+        "nonblank_line_count": {
+          "title": "Nonblank Line Count",
+          "type": "integer"
+        },
+        "visual_judgment": {
+          "const": "all_printed_lines_compared_to_complete_page_image",
+          "title": "Visual Judgment",
+          "type": "string"
+        },
+        "lines": {
+          "items": {
+            "$ref": "#/$defs/Line"
+          },
+          "title": "Lines",
+          "type": "array"
+        },
+        "paragraphs": {
+          "items": {
+            "$ref": "#/$defs/Paragraph"
+          },
+          "title": "Paragraphs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "physical_page",
+        "source_pdf_sha256",
+        "image",
+        "native",
+        "candidate_start",
+        "candidate_end",
+        "native_line_count",
+        "nonblank_line_count",
+        "visual_judgment",
+        "lines",
+        "paragraphs"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Paragraph": {
+      "additionalProperties": false,
+      "description": "A visually checked heading, paragraph portion or date footer.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "logical_id": {
+          "title": "Logical Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "role": {
+          "enum": [
+            "cover_text",
+            "running_heading",
+            "section_heading",
+            "body",
+            "footer"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "section_heading": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Section Heading"
+        },
+        "paragraph_label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Paragraph Label"
+        },
+        "continuation_from": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Continuation From"
+        },
+        "line_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Line Ids",
+          "type": "array"
+        },
+        "exact_native_text": {
+          "title": "Exact Native Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "logical_id",
+        "physical_page",
+        "role",
+        "section_heading",
+        "paragraph_label",
+        "continuation_from",
+        "line_ids",
+        "exact_native_text"
+      ],
+      "title": "Paragraph",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Complete five-page research-only transcription and contextual source review.",
+  "properties": {
+    "schema_version": {
+      "const": "eb024-source-fidelity-1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "el-paso-boh-bylaws-sd011",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-EL_PASO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_first_notes": {
+      "$ref": "#/$defs/Asset"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "full_pages_directly_viewed": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Full Pages Directly Viewed",
+      "type": "array"
+    },
+    "crops_directly_viewed": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Crops Directly Viewed",
+      "type": "array"
+    },
+    "extractor": {
+      "const": "PyMuPDF 1.28.2; get_text(text), flags=195, sort=False",
+      "title": "Extractor",
+      "type": "string"
+    },
+    "native_bytes": {
+      "const": 12640,
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "native_lines": {
+      "const": 400,
+      "title": "Native Lines",
+      "type": "integer"
+    },
+    "nonblank_lines": {
+      "const": 170,
+      "title": "Nonblank Lines",
+      "type": "integer"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "title": "Pages",
+      "type": "array"
+    },
+    "metadata_as_received": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "title": "Metadata As Received",
+      "type": "object"
+    },
+    "printed_date": {
+      "const": "5/23/2012",
+      "title": "Printed Date",
+      "type": "string"
+    },
+    "printed_date_role": {
+      "const": "unlabeled_footer_on_all_five_pages",
+      "title": "Printed Date Role",
+      "type": "string"
+    },
+    "adoption_date": {
+      "title": "Adoption Date",
+      "type": "null"
+    },
+    "effective_date": {
+      "title": "Effective Date",
+      "type": "null"
+    },
+    "original_acquisition_at": {
+      "title": "Original Acquisition At",
+      "type": "null"
+    },
+    "acquisition_method": {
+      "const": "received_review_package",
+      "title": "Acquisition Method",
+      "type": "string"
+    },
+    "repository_received_at_claim": {
+      "const": "2026-09-12T22:59:48.795762Z",
+      "title": "Repository Received At Claim",
+      "type": "string"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "external_dispositions": {
+      "items": {
+        "$ref": "#/$defs/Disposition"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "title": "External Dispositions",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "canonical_writes": {
+      "const": 0,
+      "title": "Canonical Writes",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schema_version",
+    "source_id",
+    "authority_id",
+    "prepared_at",
+    "source",
+    "candidate",
+    "source_first_notes",
+    "method",
+    "full_pages_directly_viewed",
+    "crops_directly_viewed",
+    "extractor",
+    "native_bytes",
+    "native_lines",
+    "nonblank_lines",
+    "pages",
+    "metadata_as_received",
+    "printed_date",
+    "printed_date_role",
+    "adoption_date",
+    "effective_date",
+    "original_acquisition_at",
+    "acquisition_method",
+    "repository_received_at_claim",
+    "observations",
+    "external_dispositions",
+    "limitations",
+    "legal_currentness",
+    "answer_safe",
+    "canonical_writes",
+    "public_requests"
+  ],
+  "title": "Review",
+  "type": "object"
+}

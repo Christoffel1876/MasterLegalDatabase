@@ -1,0 +1,20 @@
+{
+  "recorded_at": "2026-09-13T16:37:08.805548+00:00",
+  "reviewer": "Atlas",
+  "disposition": "preserved_audit_with_recorded_limits",
+  "original_manifest": {
+    "path": "evidence/FINAL_MANIFEST.json",
+    "sha256": "473620b2969925ee5e25faaece59b8c95e270e6829eae4359bb6196d6ef01c92",
+    "size_bytes": 1634
+  },
+  "summary": "The authorized origin retry returned client-reported object404 for both exact missing object IDs; zero bytes recovered and no restoration proposed.",
+  "root_checks": [
+    "Root read the public README and full DISPOSITION, then validate_public.py passed: nine public payloads, two exact object404 diagnostics, zero recovered bytes."
+  ],
+  "limitations": [
+    "Only the frozen public subset is retained here. Private paths in copied metadata are identity references, not portable files or permission to copy those streams.",
+    "The client diagnostic does not establish raw HTTP batch status, exact wire count or permanent/global absence. Both original pointers remain unchanged; reconstructed or older files are not substitutions."
+  ],
+  "legal_currentness": "not_verified",
+  "answer_safe": false
+}

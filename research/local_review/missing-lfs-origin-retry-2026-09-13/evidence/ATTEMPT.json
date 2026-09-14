@@ -1,0 +1,87 @@
+{
+  "schema_version": "lfs-origin-escalated-dry-run-1",
+  "started_at": "2026-09-13T15:37:48.781849Z",
+  "finished_at": "2026-09-13T15:37:49.775559Z",
+  "elapsed_seconds": 0.9927839589945506,
+  "environment": "require_escalated_authorized_sandbox_route_retry",
+  "command": [
+    "/usr/bin/git",
+    "--exec-path=/Users/mcoors/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/git/libexec/git-core",
+    "-c",
+    "lfs.storage=/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13/plato-lfs-origin-escalated-attempt/isolated-lfs-storage",
+    "-c",
+    "lfs.fetchrecentalways=false",
+    "-c",
+    "lfs.fetchrecentrefsdays=0",
+    "-c",
+    "lfs.fetchrecentcommitsdays=0",
+    "-c",
+    "lfs.remote.searchall=false",
+    "-c",
+    "lfs.remote.autodetect=false",
+    "-c",
+    "lfs.concurrenttransfers=1",
+    "-c",
+    "lfs.basictransfersonly=true",
+    "-C",
+    "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+    "lfs",
+    "fetch",
+    "--dry-run",
+    "--json",
+    "--include=_CONTROL_PLANE/LOCAL_REVIEW_QUEUE.jsonl,08_County_Authorities/_index.jsonl",
+    "--exclude=",
+    "origin",
+    "512684a65ae3c4eb51509b23520cfe41823ca0b9"
+  ],
+  "environment_overrides": {
+    "GIT_OPTIONAL_LOCKS": "0",
+    "GIT_TERMINAL_PROMPT": "0"
+  },
+  "requested_commit": "512684a65ae3c4eb51509b23520cfe41823ca0b9",
+  "targets": [
+    {
+      "path": "_CONTROL_PLANE/LOCAL_REVIEW_QUEUE.jsonl",
+      "object_sha256": "c65a0f190fd5d5dca7810c47afc7e6843cd78520242add1fe6951545fe92ad00",
+      "object_size_bytes": 72395471,
+      "pointer_sha256": "568c4b70e3c2e1c02e440fac609c1c9efefb9306102c64e7ff85fa0cecd83d92"
+    },
+    {
+      "path": "08_County_Authorities/_index.jsonl",
+      "object_sha256": "e896fc157617cfd9cd9839bf2bf955d893b66d7de514107e8b3c98dc4795c806",
+      "object_size_bytes": 172131787,
+      "pointer_sha256": "15b951f27e06a07dbb77208f5d7f12a9aa5eb27f1c50f4640722f9485fab4f20"
+    }
+  ],
+  "process_exit_code": 2,
+  "timed_out": false,
+  "status": "failed_requires_sanitized_error_review",
+  "outputs": [
+    {
+      "path": "private/stdout.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "visibility": "private_unreviewed_cli_output_not_public_payload"
+    },
+    {
+      "path": "private/stderr.bin",
+      "sha256": "bec81eb27de2db2de7876be3f3d21a5293faceefb846ae1a69aae606cd90d9fb",
+      "size_bytes": 463,
+      "visibility": "private_unreviewed_cli_output_not_public_payload"
+    }
+  ],
+  "retained_storage_file_count": 0,
+  "retained_storage_bytes": 0,
+  "canonical_pointer_bytes_unchanged": true,
+  "repository_config_bytes_unchanged": true,
+  "logical_cli_invocations": 1,
+  "independent_object_downloads_attempted": 0,
+  "publisher_http_status": null,
+  "object_availability": "not_inferred_from_cli_exit_alone",
+  "limitations": [
+    "The CLI dry run can contact the LFS batch endpoint. No separate download action will be followed by Atlas in this attempt.",
+    "No raw child output is published here; private stream files require explicit redaction and source-bound interpretation before sharing.",
+    "The exact low-level network request count is not observed by this wrapper; one CLI invocation and its actual wall-clock interval are recorded.",
+    "No publisher status or object availability is inferred from process exit."
+  ]
+}

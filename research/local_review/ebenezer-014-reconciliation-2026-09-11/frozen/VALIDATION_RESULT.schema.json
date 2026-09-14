@@ -1,0 +1,144 @@
+{
+  "$defs": {
+    "FileRef": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "validated_at": {
+      "format": "date-time",
+      "title": "Validated At",
+      "type": "string"
+    },
+    "reconciliation": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "external_reports": {
+      "const": 4,
+      "title": "External Reports",
+      "type": "integer"
+    },
+    "comparison_files": {
+      "const": 58,
+      "title": "Comparison Files",
+      "type": "integer"
+    },
+    "committed_files": {
+      "const": 56,
+      "title": "Committed Files",
+      "type": "integer"
+    },
+    "distinct_asset_hash_claims": {
+      "const": 14,
+      "title": "Distinct Asset Hash Claims",
+      "type": "integer"
+    },
+    "reconciled_findings": {
+      "const": 21,
+      "title": "Reconciled Findings",
+      "type": "integer"
+    },
+    "reconciled_errata": {
+      "const": 3,
+      "title": "Reconciled Errata",
+      "type": "integer"
+    },
+    "reconciled_unresolved_themes": {
+      "const": 5,
+      "title": "Reconciled Unresolved Themes",
+      "type": "integer"
+    },
+    "directly_inspected_full_pages": {
+      "const": 7,
+      "title": "Directly Inspected Full Pages",
+      "type": "integer"
+    },
+    "directly_inspected_crops": {
+      "const": 11,
+      "title": "Directly Inspected Crops",
+      "type": "integer"
+    },
+    "original_pdf_bytes": {
+      "const": 340287,
+      "title": "Original Pdf Bytes",
+      "type": "integer"
+    },
+    "native_bytes": {
+      "const": 13579,
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "original_paths_checked": {
+      "title": "Original Paths Checked",
+      "type": "boolean"
+    },
+    "candidate_changed": {
+      "const": false,
+      "title": "Candidate Changed",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "committed_package_validation": {
+      "additionalProperties": true,
+      "title": "Committed Package Validation",
+      "type": "object"
+    },
+    "checks_passed": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks Passed",
+      "type": "array"
+    }
+  },
+  "required": [
+    "validated_at",
+    "reconciliation",
+    "external_reports",
+    "comparison_files",
+    "committed_files",
+    "distinct_asset_hash_claims",
+    "reconciled_findings",
+    "reconciled_errata",
+    "reconciled_unresolved_themes",
+    "directly_inspected_full_pages",
+    "directly_inspected_crops",
+    "original_pdf_bytes",
+    "native_bytes",
+    "original_paths_checked",
+    "candidate_changed",
+    "legal_currentness",
+    "committed_package_validation",
+    "checks_passed"
+  ],
+  "title": "ValidationResult",
+  "type": "object"
+}

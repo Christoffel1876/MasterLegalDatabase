@@ -1,0 +1,73 @@
+{
+  "additionalProperties": false,
+  "description": "Record one completed read-only validation.",
+  "properties": {
+    "task_id": {
+      "const": "atlas-mesa-grand-junction-discovery-2026-09-11",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "validated_at": {
+      "format": "date-time",
+      "title": "Validated At",
+      "type": "string"
+    },
+    "passed": {
+      "const": true,
+      "title": "Passed",
+      "type": "boolean"
+    },
+    "checked_files": {
+      "title": "Checked Files",
+      "type": "integer"
+    },
+    "event_count": {
+      "title": "Event Count",
+      "type": "integer"
+    },
+    "distinct_targets": {
+      "title": "Distinct Targets",
+      "type": "integer"
+    },
+    "priority_count": {
+      "title": "Priority Count",
+      "type": "integer"
+    },
+    "checklist_rows": {
+      "title": "Checklist Rows",
+      "type": "integer"
+    },
+    "pdf_count": {
+      "title": "Pdf Count",
+      "type": "integer"
+    },
+    "pdf_pages": {
+      "title": "Pdf Pages",
+      "type": "integer"
+    },
+    "viewed_pages": {
+      "title": "Viewed Pages",
+      "type": "integer"
+    },
+    "note": {
+      "title": "Note",
+      "type": "string"
+    }
+  },
+  "required": [
+    "task_id",
+    "validated_at",
+    "passed",
+    "checked_files",
+    "event_count",
+    "distinct_targets",
+    "priority_count",
+    "checklist_rows",
+    "pdf_count",
+    "pdf_pages",
+    "viewed_pages",
+    "note"
+  ],
+  "title": "Validation",
+  "type": "object"
+}

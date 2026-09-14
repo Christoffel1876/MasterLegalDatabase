@@ -1,0 +1,116 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Bind exact local evidence bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "const": "passed",
+      "title": "Status",
+      "type": "string"
+    },
+    "verified_at": {
+      "title": "Verified At",
+      "type": "string"
+    },
+    "tests_passed": {
+      "title": "Tests Passed",
+      "type": "integer"
+    },
+    "tests_command": {
+      "title": "Tests Command",
+      "type": "string"
+    },
+    "tests_log": {
+      "$ref": "#/$defs/Asset"
+    },
+    "full_current_and_pinned_legacy_replayed": {
+      "const": true,
+      "title": "Full Current And Pinned Legacy Replayed",
+      "type": "boolean"
+    },
+    "original_custody_assets_rechecked": {
+      "title": "Original Custody Assets Rechecked",
+      "type": "integer"
+    },
+    "source_visual_pages": {
+      "const": 0,
+      "title": "Source Visual Pages",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "canonical_intakes": {
+      "const": 0,
+      "title": "Canonical Intakes",
+      "type": "integer"
+    },
+    "versions": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Versions",
+      "type": "object"
+    },
+    "checked_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Checked Files",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "verified_at",
+    "tests_passed",
+    "tests_command",
+    "tests_log",
+    "full_current_and_pinned_legacy_replayed",
+    "original_custody_assets_rechecked",
+    "source_visual_pages",
+    "public_requests",
+    "canonical_intakes",
+    "versions",
+    "checked_files",
+    "limitations"
+  ],
+  "title": "Validation",
+  "type": "object"
+}

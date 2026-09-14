@@ -1,0 +1,131 @@
+{
+  "additionalProperties": false,
+  "description": "Report exactly the public checks replayed, keeping historical limits explicit.",
+  "properties": {
+    "status": {
+      "const": "passed_public_subset_limited_replay",
+      "title": "Status",
+      "type": "string"
+    },
+    "public_files": {
+      "title": "Public Files",
+      "type": "integer"
+    },
+    "copied_original_files": {
+      "const": 686,
+      "default": 686,
+      "title": "Copied Original Files",
+      "type": "integer"
+    },
+    "omitted_private_headers": {
+      "const": 31,
+      "default": 31,
+      "title": "Omitted Private Headers",
+      "type": "integer"
+    },
+    "events": {
+      "const": 31,
+      "default": 31,
+      "title": "Events",
+      "type": "integer"
+    },
+    "exact_requested_urls": {
+      "const": 30,
+      "default": 30,
+      "title": "Exact Requested Urls",
+      "type": "integer"
+    },
+    "retained_response_bytes": {
+      "const": 14428668,
+      "default": 14428668,
+      "title": "Retained Response Bytes",
+      "type": "integer"
+    },
+    "pdfs": {
+      "const": 8,
+      "default": 8,
+      "title": "Pdfs",
+      "type": "integer"
+    },
+    "physical_native_pages_replayed": {
+      "const": 403,
+      "default": 403,
+      "title": "Physical Native Pages Replayed",
+      "type": "integer"
+    },
+    "saved_full_page_renders_replayed": {
+      "const": 18,
+      "default": 18,
+      "title": "Saved Full Page Renders Replayed",
+      "type": "integer"
+    },
+    "historical_viewed_page_records": {
+      "const": 14,
+      "default": 14,
+      "title": "Historical Viewed Page Records",
+      "type": "integer"
+    },
+    "new_visual_page_reviews": {
+      "const": 0,
+      "default": 0,
+      "title": "New Visual Page Reviews",
+      "type": "integer"
+    },
+    "historical_legacy_rows_streamed": {
+      "const": 48390,
+      "default": 48390,
+      "title": "Historical Legacy Rows Streamed",
+      "type": "integer"
+    },
+    "priority_records": {
+      "const": 12,
+      "default": 12,
+      "title": "Priority Records",
+      "type": "integer"
+    },
+    "checklist_rows": {
+      "const": 24,
+      "default": 24,
+      "title": "Checklist Rows",
+      "type": "integer"
+    },
+    "header_derivation_replayed": {
+      "const": false,
+      "default": false,
+      "title": "Header Derivation Replayed",
+      "type": "boolean"
+    },
+    "original_size_probe_replayed": {
+      "const": false,
+      "default": false,
+      "title": "Original Size Probe Replayed",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "public_files",
+    "limitations"
+  ],
+  "title": "Verification",
+  "type": "object"
+}

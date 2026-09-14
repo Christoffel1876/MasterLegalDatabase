@@ -1,0 +1,43 @@
+{
+  "additionalProperties": false,
+  "description": "Size-screen every file for exact excluded-byte identity without broad body reads.",
+  "properties": {
+    "path": {
+      "title": "Path",
+      "type": "string"
+    },
+    "size_bytes": {
+      "minimum": 0,
+      "title": "Size Bytes",
+      "type": "integer"
+    },
+    "excluded_basename_match": {
+      "title": "Excluded Basename Match",
+      "type": "boolean"
+    },
+    "excluded_size_match": {
+      "title": "Excluded Size Match",
+      "type": "boolean"
+    },
+    "sha256_if_size_matches": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Sha256 If Size Matches"
+    }
+  },
+  "required": [
+    "path",
+    "size_bytes",
+    "excluded_basename_match",
+    "excluded_size_match",
+    "sha256_if_size_matches"
+  ],
+  "title": "ScanEntry",
+  "type": "object"
+}

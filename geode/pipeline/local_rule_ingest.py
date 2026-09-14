@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-import hashlib
 import argparse
+import hashlib
 import json
+import logging
 import re
 from datetime import datetime, timezone
 from html import unescape
@@ -14,9 +15,10 @@ from typing import Any
 
 import fitz
 
-from geode.schemas import ConfidenceScores, LayerIndexRecord, LocalRule, RuleUnit
+from geode.pipeline.local_source_ownership import load_ownership_policy
 from geode.pipeline.retrieval_catalog import write_retrieval_catalog
 from geode.pipeline.writer import _refresh_manifest
+from geode.schemas import ConfidenceScores, LayerIndexRecord, LocalRule, RuleUnit
 from geode.utils.file_io import atomic_write_jsonl, iter_jsonl, load_json
 
 LOCAL_LAYERS = {
@@ -24,6 +26,7 @@ LOCAL_LAYERS = {
     "municipal": "10_Municipal_Authorities",
     "district": "09_District_Authorities",
 }
+LOGGER = logging.getLogger(__name__)
 CRS_PATTERN = re.compile(
     r"(?:C\.R\.S\.|CRS)[^0-9]{0,20}"
     r"(\d{1,2})-(\d+)-(\d+(?:\.\d+)?)",
@@ -46,6 +49,7 @@ def ingest_local_rules(root: Path, authority_level: str | None = None) -> dict[s
     """Extract, validate, index, and cross-reference pilot local rules."""
 
     resolved_root = root.resolve()
+    ownership = load_ownership_policy(resolved_root)
     manifest_rows = _download_rows(resolved_root)
     known_state_ids = _known_state_ids(resolved_root)
     authorities = _authority_lookup(resolved_root)
@@ -59,9 +63,15 @@ def ingest_local_rules(root: Path, authority_level: str | None = None) -> dict[s
     records_by_layer: dict[str, list[LocalRule]] = {layer: [] for layer in LOCAL_LAYERS.values()}
     units_by_layer: dict[str, list[RuleUnit]] = {layer: [] for layer in LOCAL_LAYERS.values()}
     quarantine: list[dict[str, Any]] = []
+    ownership_excluded = 0
 
     for row in manifest_rows:
         if authority_level is not None and str(row.get("authority_level")) != authority_level:
+            continue
+        reason = ownership.entity_exclusion_reason(row)
+        if reason:
+            ownership_excluded += 1
+            LOGGER.warning("Ownership exclusion during local ingestion: %s", reason)
             continue
         source_entry = source_registry.get(str(row.get("source_id")), {})
         if str(row.get("authority_id")) not in authorities and source_entry:
@@ -71,6 +81,14 @@ def ingest_local_rules(root: Path, authority_level: str | None = None) -> dict[s
                 "authority_level": source_entry.get("authority_level", row.get("authority_level")),
                 "category": source_entry.get("category", row.get("category")),
             }
+        reason = (
+            ownership.source_exclusion_reason(source_entry)
+            or ownership.entity_exclusion_reason(row)
+        )
+        if reason:
+            ownership_excluded += 1
+            LOGGER.warning("Ownership exclusion after registry lookup: %s", reason)
+            continue
         raw_path = Path(str(row["raw_path"]))
         if raw_path.suffix.casefold() not in {".pdf", ".html", ".htm", ".txt", ".docx", ".bin"} or not raw_path.exists():
             continue
@@ -149,6 +167,7 @@ def ingest_local_rules(root: Path, authority_level: str | None = None) -> dict[s
         "county_rules": len(records_by_layer[LOCAL_LAYERS["county"]]),
         "district_rules": len(records_by_layer[LOCAL_LAYERS["district"]]),
         "quarantined": len(quarantine),
+        "ownership_excluded": ownership_excluded,
     }
 
 

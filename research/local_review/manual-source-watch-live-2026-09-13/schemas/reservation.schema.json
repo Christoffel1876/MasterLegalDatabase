@@ -1,0 +1,58 @@
+{
+  "additionalProperties": false,
+  "description": "Durable request and maximum body-byte capacity reserved before any HTTP attempt.",
+  "properties": {
+    "event": {
+      "maximum": 4,
+      "minimum": 1,
+      "title": "Event",
+      "type": "integer"
+    },
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "url": {
+      "title": "Url",
+      "type": "string"
+    },
+    "hop": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Hop",
+      "type": "integer"
+    },
+    "plan_sha256": {
+      "title": "Plan Sha256",
+      "type": "string"
+    },
+    "reserved_at": {
+      "format": "date-time",
+      "title": "Reserved At",
+      "type": "string"
+    },
+    "deadline": {
+      "format": "date-time",
+      "title": "Deadline",
+      "type": "string"
+    },
+    "byte_allowance": {
+      "exclusiveMinimum": 0,
+      "maximum": 2000000,
+      "title": "Byte Allowance",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "event",
+    "source_id",
+    "url",
+    "hop",
+    "plan_sha256",
+    "reserved_at",
+    "deadline",
+    "byte_allowance"
+  ],
+  "title": "Reservation",
+  "type": "object"
+}

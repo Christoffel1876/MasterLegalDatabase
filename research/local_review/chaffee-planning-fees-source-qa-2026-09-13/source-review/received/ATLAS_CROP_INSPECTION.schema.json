@@ -1,0 +1,56 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "reviewer",
+    "recorded_at",
+    "inspected_crop_assets",
+    "assessment",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "properties": {
+    "reviewer": {
+      "const": "Atlas"
+    },
+    "recorded_at": {
+      "type": "string"
+    },
+    "inspected_crop_assets": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "sha256",
+          "size_bytes"
+        ],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    },
+    "assessment": {
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified"
+    },
+    "answer_safe": {
+      "const": false
+    }
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "started_at": "2026-09-13T15:59:05.904802Z",
+  "completed_at": "2026-09-13T15:59:09.383031Z",
+  "status": "structural_source_replay_passed_visual_judgments_not_repeated",
+  "source_review_sha256": "2372e6bde1fa544c56dbaed1a808a7389bf943006f8d2d4c65dd5fa10a8ad46f",
+  "result": {
+    "status": "passed_structural_source_bindings_only",
+    "source_sha256": "fd162c37442dc99097a272d9ebbf74fbfd063f2dc2f2226fdeb8b93a53849ec9",
+    "source_pages": 6,
+    "native_bytes": 10216,
+    "candidate_bytes": 10894,
+    "physical_table_fragments": 5,
+    "physical_rows": 75,
+    "fee_rows": 65,
+    "native_spans_checked": 168,
+    "visibly_blank_cells_as_recorded": 1,
+    "merged_placeholder_cells": 8,
+    "passage_bindings": 27,
+    "link_bindings": 11,
+    "crop_pixel_replays": 15,
+    "footer_limitations_preserved": 6,
+    "visually_certified_footer_year": null,
+    "new_visual_review_pages": 0,
+    "legal_currentness": "not_verified",
+    "answer_safe": false,
+    "translation_equivalence_verified": false,
+    "external_reports_consulted": false,
+    "full_page_png_replays": 6,
+    "public_requests": 0
+  },
+  "tests_passed": 54,
+  "combined_branch_coverage_percent": 96.67519181585678,
+  "code_and_test_evidence": [
+    {
+      "path": "validate_eb025.py",
+      "sha256": "415d8e532075d9fd68ebd91f65a215ada0221c2af9a9629fb7a99ca9de240305",
+      "size_bytes": 22135
+    },
+    {
+      "path": "audit_models.py",
+      "sha256": "7923b5619b0f5e8b9a8e074cd6a98747afb52b97e723bf8510eafc5b6df82465",
+      "size_bytes": 2421
+    },
+    {
+      "path": "review_models.py",
+      "sha256": "38c849b1f46d38ad6580e792d369d0ee9fd31f2dd661d096076288c991d902a1",
+      "size_bytes": 2847
+    },
+    {
+      "path": "test_validate_eb025.py",
+      "sha256": "7fe61fd86a65527db3544de4d7da2f6c548088406c539753fb05e7b82ac60a9e",
+      "size_bytes": 11712
+    },
+    {
+      "path": "validation/tests.log",
+      "sha256": "53a239786e2a0dfaf26424e3bb68f20b57e8d1217c21c913d0d0c7bff4c2199c",
+      "size_bytes": 1772
+    },
+    {
+      "path": "validation/coverage.json",
+      "sha256": "8d2680d9ad03a0f80098e3c66275c3da4536840b6fd1b0a210bcd1193da28b8b",
+      "size_bytes": 22428
+    }
+  ],
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 COVERAGE_FILE=/private/tmp/popper-eb025-coverage /private/tmp/geode-status-venv/bin/python -B -m pytest -q -p no:cacheprovider handoffs/run-2026-09-13/popper-eb025-validator/test_validate_eb025.py --cov=validate_eb025 --cov=audit_models --cov-branch --cov-report=term-missing --cov-report=json:handoffs/run-2026-09-13/popper-eb025-validator/validation/coverage.json",
+    "Before the closed manifest was sealed: check_review_payload(package, corrected SOURCE_QA bytes), then rerender_pages(package); the typed result below records those actual calls."
+  ],
+  "discrepancy_and_resolution": "The earlier root draft bound only Aprobado rather than the complete first footer line. Atlas preserved that draft and corrected six spans before this capture. The corrected exact QA pin passes; a dedicated historical-draft regression rejects the old bindings. No other structural discrepancy found within this scope.",
+  "interpretation_limits": [
+    "No new visual page review, external review consultation, legal interpretation or currentness verification.",
+    "The exact native table and passage bytes plus source geometry are replayed. Root visual observations remain attributed claims, not independently certified here.",
+    "All six footer year certifications remain null; d\\n2023 is separately classified as native text without complete visual support.",
+    "2024 printed source wording, repository receipt and unverified historical HTTP acquisition claims remain distinct.",
+    "The complete current root draft is captured. Only EB025 metadata is selected from the shared packet; EB026 source/candidate/image assets are excluded."
+  ],
+  "canonical_changes": 0,
+  "public_requests": 0
+}

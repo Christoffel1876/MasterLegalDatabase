@@ -1,0 +1,609 @@
+{
+  "$defs": {
+    "DailyNoticeRow": {
+      "additionalProperties": false,
+      "description": "A source row, including unresolved proposals and source-specific dates.",
+      "properties": {
+        "notice_type": {
+          "title": "Notice Type",
+          "type": "string"
+        },
+        "department": {
+          "minLength": 1,
+          "title": "Department",
+          "type": "string"
+        },
+        "agency": {
+          "minLength": 1,
+          "title": "Agency",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "ccr_citation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ccr Citation"
+        },
+        "ccr_rule_affected": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ccr Rule Affected"
+        },
+        "edocket_tracking_number": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Edocket Tracking Number"
+        },
+        "edocket_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Edocket Url"
+        },
+        "hearing_detail_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Hearing Detail Url"
+        },
+        "opinion_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Opinion Url"
+        },
+        "document_urls": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Document Urls",
+          "type": "array"
+        },
+        "hearing_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Hearing Date"
+        },
+        "effective_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Effective Date"
+        },
+        "expiration_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expiration Date"
+        },
+        "termination_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Termination Date"
+        },
+        "publication_date": {
+          "format": "date",
+          "title": "Publication Date",
+          "type": "string"
+        },
+        "section": {
+          "title": "Section",
+          "type": "string"
+        },
+        "row_number": {
+          "minimum": 1,
+          "title": "Row Number",
+          "type": "integer"
+        },
+        "source_evidence": {
+          "minLength": 1,
+          "title": "Source Evidence",
+          "type": "string"
+        },
+        "source_url": {
+          "title": "Source Url",
+          "type": "string"
+        }
+      },
+      "required": [
+        "notice_type",
+        "department",
+        "agency",
+        "title",
+        "publication_date",
+        "section",
+        "row_number",
+        "source_evidence",
+        "source_url"
+      ],
+      "title": "DailyNoticeRow",
+      "type": "object"
+    },
+    "DiagnosticArtifact": {
+      "additionalProperties": false,
+      "description": "Hash-bound run evidence, kept outside the canonical corpus transaction.",
+      "properties": {
+        "path": {
+          "pattern": "^evidence/[a-f0-9]{64}\\.(json|py|html|html\\.txt)$",
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "maximum": 300000000,
+          "minimum": 1,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "DiagnosticArtifact",
+      "type": "object"
+    },
+    "IssueDiagnostic": {
+      "additionalProperties": false,
+      "description": "Observed issue evidence and a failure stage, without a removal authorization.",
+      "properties": {
+        "stage": {
+          "enum": [
+            "parse_error",
+            "source_row_preflight",
+            "final_identity",
+            "row_processing"
+          ],
+          "title": "Stage",
+          "type": "string"
+        },
+        "issue_url": {
+          "title": "Issue Url",
+          "type": "string"
+        },
+        "final_url": {
+          "title": "Final Url",
+          "type": "string"
+        },
+        "checked_at": {
+          "format": "date-time",
+          "title": "Checked At",
+          "type": "string"
+        },
+        "content_type": {
+          "title": "Content Type",
+          "type": "string"
+        },
+        "old_source_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Old Source Sha256"
+        },
+        "fresh_source_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Fresh Source Sha256",
+          "type": "string"
+        },
+        "old_row_count": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Old Row Count"
+        },
+        "fresh_row_count": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Fresh Row Count"
+        },
+        "missing_notices": {
+          "items": {
+            "$ref": "#/$defs/MissingNotice"
+          },
+          "title": "Missing Notices",
+          "type": "array"
+        },
+        "observed_rows": {
+          "items": {
+            "$ref": "#/$defs/DailyNoticeRow"
+          },
+          "title": "Observed Rows",
+          "type": "array"
+        },
+        "original": {
+          "$ref": "#/$defs/DiagnosticArtifact"
+        },
+        "passive_view": {
+          "$ref": "#/$defs/DiagnosticArtifact"
+        },
+        "view_method": {
+          "default": "escaped_source_in_passive_pre",
+          "enum": [
+            "escaped_source_in_passive_pre",
+            "hex_source_in_passive_pre"
+          ],
+          "title": "View Method",
+          "type": "string"
+        },
+        "disposition": {
+          "const": "review_required_no_notice_status_change",
+          "default": "review_required_no_notice_status_change",
+          "title": "Disposition",
+          "type": "string"
+        }
+      },
+      "required": [
+        "stage",
+        "issue_url",
+        "final_url",
+        "checked_at",
+        "content_type",
+        "fresh_source_sha256",
+        "original",
+        "passive_view"
+      ],
+      "title": "IssueDiagnostic",
+      "type": "object"
+    },
+    "MissingNotice": {
+      "additionalProperties": false,
+      "description": "Historical identity requiring review; absence never changes legal status.",
+      "properties": {
+        "notice_id": {
+          "title": "Notice Id",
+          "type": "string"
+        },
+        "docket": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Docket"
+        },
+        "notice_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notice Type"
+        },
+        "ccr_citation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ccr Citation"
+        },
+        "old_row_number": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Old Row Number"
+        },
+        "old_source_evidence": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Old Source Evidence"
+        }
+      },
+      "required": [
+        "notice_id"
+      ],
+      "title": "MissingNotice",
+      "type": "object"
+    },
+    "PreparedBaseline": {
+      "additionalProperties": false,
+      "description": "Only the publisher's non-secret prepared branch identities are admitted.",
+      "properties": {
+        "main": {
+          "pattern": "^[a-f0-9]{40}$",
+          "title": "Main",
+          "type": "string"
+        },
+        "pending": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{40}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pending"
+        }
+      },
+      "required": [
+        "main"
+      ],
+      "title": "PreparedBaseline",
+      "type": "object"
+    },
+    "RunBaseline": {
+      "additionalProperties": false,
+      "description": "Exact validated input state and executing implementation, before source checks.",
+      "properties": {
+        "captured_at": {
+          "format": "date-time",
+          "title": "Captured At",
+          "type": "string"
+        },
+        "state": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DiagnosticArtifact"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "implementation": {
+          "additionalProperties": {
+            "$ref": "#/$defs/DiagnosticArtifact"
+          },
+          "title": "Implementation",
+          "type": "object"
+        },
+        "prepared": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PreparedBaseline"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "prepared_artifact": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DiagnosticArtifact"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "captured_at",
+        "implementation"
+      ],
+      "title": "RunBaseline",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Per-run operational result; a failed run is never a no-change result.",
+  "properties": {
+    "source": {
+      "const": "colorado_register",
+      "default": "colorado_register",
+      "title": "Source",
+      "type": "string"
+    },
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "since": {
+      "format": "date",
+      "title": "Since",
+      "type": "string"
+    },
+    "status": {
+      "default": "failed",
+      "enum": [
+        "updated",
+        "no_change",
+        "failed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "validation_passed": {
+      "default": false,
+      "title": "Validation Passed",
+      "type": "boolean"
+    },
+    "publications_checked": {
+      "default": 0,
+      "title": "Publications Checked",
+      "type": "integer"
+    },
+    "sources_checked": {
+      "default": 0,
+      "title": "Sources Checked",
+      "type": "integer"
+    },
+    "notices_added": {
+      "default": 0,
+      "title": "Notices Added",
+      "type": "integer"
+    },
+    "notices_updated": {
+      "default": 0,
+      "title": "Notices Updated",
+      "type": "integer"
+    },
+    "changed_paths": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Changed Paths",
+      "type": "array"
+    },
+    "errors": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Errors",
+      "type": "array"
+    },
+    "baseline": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RunBaseline"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "issue_diagnostics": {
+      "items": {
+        "$ref": "#/$defs/IssueDiagnostic"
+      },
+      "title": "Issue Diagnostics",
+      "type": "array"
+    },
+    "boundary": {
+      "default": "Pilot Register issues only; historical notices and current CCR legal status are not reverified. Linked documents are preserved as source evidence.",
+      "title": "Boundary",
+      "type": "string"
+    }
+  },
+  "required": [
+    "checked_at",
+    "since"
+  ],
+  "title": "RefreshReport",
+  "type": "object"
+}

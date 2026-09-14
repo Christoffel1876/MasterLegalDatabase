@@ -1,0 +1,454 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Copy": {
+      "additionalProperties": false,
+      "properties": {
+        "original": {
+          "$ref": "#/$defs/Asset"
+        },
+        "preserved": {
+          "$ref": "#/$defs/Asset"
+        },
+        "method": {
+          "enum": [
+            "exact_copy",
+            "set_cookie_lines_omitted"
+          ],
+          "title": "Method",
+          "type": "string"
+        },
+        "omitted_lines": {
+          "minimum": 0,
+          "title": "Omitted Lines",
+          "type": "integer"
+        },
+        "original_retained_at": {
+          "title": "Original Retained At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "original",
+        "preserved",
+        "method",
+        "omitted_lines",
+        "original_retained_at"
+      ],
+      "title": "Copy",
+      "type": "object"
+    },
+    "DateAssertion": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "physical_page": {
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "qualification": {
+          "const": "source_statement_only_not_independently_verified",
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "role",
+        "physical_page",
+        "qualification"
+      ],
+      "title": "DateAssertion",
+      "type": "object"
+    },
+    "Dedupe": {
+      "additionalProperties": false,
+      "properties": {
+        "checked_at": {
+          "format": "date-time",
+          "title": "Checked At",
+          "type": "string"
+        },
+        "raw_manifest": {
+          "$ref": "#/$defs/Asset"
+        },
+        "manual_ledger": {
+          "$ref": "#/$defs/Asset"
+        },
+        "raw_records": {
+          "const": 43,
+          "title": "Raw Records",
+          "type": "integer"
+        },
+        "ledger_records": {
+          "const": 44,
+          "title": "Ledger Records",
+          "type": "integer"
+        },
+        "ordinary_raw_files_screened": {
+          "title": "Ordinary Raw Files Screened",
+          "type": "integer"
+        },
+        "candidate_sizes": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Candidate Sizes",
+          "type": "array"
+        },
+        "matching_size_files": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "title": "Matching Size Files",
+          "type": "array"
+        },
+        "raw_manifest_matches": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Raw Manifest Matches",
+          "type": "array"
+        },
+        "ledger_matches": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ledger Matches",
+          "type": "array"
+        },
+        "source_id_collisions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Id Collisions",
+          "type": "array"
+        },
+        "metadata_inputs": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "title": "Metadata Inputs",
+          "type": "array"
+        },
+        "boundary": {
+          "title": "Boundary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "checked_at",
+        "raw_manifest",
+        "manual_ledger",
+        "raw_records",
+        "ledger_records",
+        "ordinary_raw_files_screened",
+        "candidate_sizes",
+        "matching_size_files",
+        "raw_manifest_matches",
+        "ledger_matches",
+        "source_id_collisions",
+        "metadata_inputs",
+        "boundary"
+      ],
+      "title": "Dedupe",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "enum": [
+            "CO-COUNTY-MESA",
+            "CO-MUNICIPAL-GRAND_JUNCTION"
+          ],
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "enum": [
+            "08_County_Authorities",
+            "10_Municipal_Authorities"
+          ],
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "municipal_significant_tree_amendment_instrument",
+            "county_historical_planning_fee_exhibit",
+            "county_building_department_fee_exhibit"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "priority_id": {
+          "title": "Priority Id",
+          "type": "string"
+        },
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "staged_original": {
+          "$ref": "#/$defs/Asset"
+        },
+        "event": {
+          "$ref": "#/$defs/Asset"
+        },
+        "http_started_at": {
+          "format": "date-time",
+          "title": "Http Started At",
+          "type": "string"
+        },
+        "http_completed_at": {
+          "format": "date-time",
+          "title": "Http Completed At",
+          "type": "string"
+        },
+        "exact_requested_url": {
+          "title": "Exact Requested Url",
+          "type": "string"
+        },
+        "exact_final_url": {
+          "title": "Exact Final Url",
+          "type": "string"
+        },
+        "tls_verified": {
+          "const": true,
+          "title": "Tls Verified",
+          "type": "boolean"
+        },
+        "http_status": {
+          "const": 200,
+          "title": "Http Status",
+          "type": "integer"
+        },
+        "redirects": {
+          "const": 0,
+          "title": "Redirects",
+          "type": "integer"
+        },
+        "physical_pages": {
+          "title": "Physical Pages",
+          "type": "integer"
+        },
+        "native_utf8_bytes": {
+          "title": "Native Utf8 Bytes",
+          "type": "integer"
+        },
+        "discovery_visually_reviewed_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Discovery Visually Reviewed Pages",
+          "type": "array"
+        },
+        "intake_title_scope_pages_viewed": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Intake Title Scope Pages Viewed",
+          "type": "array"
+        },
+        "full_text_semantically_reviewed": {
+          "const": false,
+          "title": "Full Text Semantically Reviewed",
+          "type": "boolean"
+        },
+        "native_extraction_gap_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Native Extraction Gap Pages",
+          "type": "array"
+        },
+        "legacy_registry_source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Legacy Registry Source Ids",
+          "type": "array"
+        },
+        "historical_digest_match_records": {
+          "minimum": 0,
+          "title": "Historical Digest Match Records",
+          "type": "integer"
+        },
+        "dates": {
+          "items": {
+            "$ref": "#/$defs/DateAssertion"
+          },
+          "title": "Dates",
+          "type": "array"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "status": {
+          "const": "archived_pending_pipeline",
+          "title": "Status",
+          "type": "string"
+        },
+        "scope_qualifications": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Scope Qualifications",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source_id",
+        "authority_id",
+        "layer_id",
+        "role",
+        "priority_id",
+        "event_id",
+        "staged_original",
+        "event",
+        "http_started_at",
+        "http_completed_at",
+        "exact_requested_url",
+        "exact_final_url",
+        "tls_verified",
+        "http_status",
+        "redirects",
+        "physical_pages",
+        "native_utf8_bytes",
+        "discovery_visually_reviewed_pages",
+        "intake_title_scope_pages_viewed",
+        "full_text_semantically_reviewed",
+        "native_extraction_gap_pages",
+        "legacy_registry_source_ids",
+        "historical_digest_match_records",
+        "dates",
+        "legal_currentness",
+        "status",
+        "scope_qualifications"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "validated_before_authorized_append",
+      "title": "Status",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Sources",
+      "type": "array"
+    },
+    "copied_discovery_files": {
+      "items": {
+        "$ref": "#/$defs/Copy"
+      },
+      "title": "Copied Discovery Files",
+      "type": "array"
+    },
+    "requests": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Requests",
+      "type": "array"
+    },
+    "request_schema": {
+      "$ref": "#/$defs/Asset"
+    },
+    "record_schema": {
+      "$ref": "#/$defs/Asset"
+    },
+    "dedupe": {
+      "$ref": "#/$defs/Dedupe"
+    },
+    "discovery_validation_passed": {
+      "const": true,
+      "title": "Discovery Validation Passed",
+      "type": "boolean"
+    },
+    "discovery_public_events": {
+      "const": 7,
+      "title": "Discovery Public Events",
+      "type": "integer"
+    },
+    "discovery_distinct_targets": {
+      "const": 7,
+      "title": "Discovery Distinct Targets",
+      "type": "integer"
+    },
+    "no_network_during_intake": {
+      "const": true,
+      "title": "No Network During Intake",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "status",
+    "sources",
+    "copied_discovery_files",
+    "requests",
+    "request_schema",
+    "record_schema",
+    "dedupe",
+    "discovery_validation_passed",
+    "discovery_public_events",
+    "discovery_distinct_targets",
+    "no_network_during_intake"
+  ],
+  "title": "Preparation",
+  "type": "object"
+}

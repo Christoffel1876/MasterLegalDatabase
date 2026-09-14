@@ -1,0 +1,214 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An ordinary package-relative file and its exact byte identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Packaging status without replacing the retained review or provenance.",
+  "properties": {
+    "package_id": {
+      "const": "weld-building-fees-atlas-source-review-2026-09-11",
+      "title": "Package Id",
+      "type": "string"
+    },
+    "packaged_at": {
+      "format": "date-time",
+      "title": "Packaged At",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "weld-building-fees-sd008-01",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "const": "8fb5dc78f67407a22857160f107a0253da42320e9e502387be573ef53cab9f27",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "historical_handoff_path": {
+      "title": "Historical Handoff Path",
+      "type": "string"
+    },
+    "frozen_file_count": {
+      "const": 49,
+      "title": "Frozen File Count",
+      "type": "integer"
+    },
+    "frozen_total_bytes": {
+      "const": 5634545,
+      "title": "Frozen Total Bytes",
+      "type": "integer"
+    },
+    "frozen_inventory": {
+      "$ref": "#/$defs/Asset"
+    },
+    "frozen_review": {
+      "$ref": "#/$defs/Asset"
+    },
+    "physical_pages_reviewed": {
+      "const": 5,
+      "title": "Physical Pages Reviewed",
+      "type": "integer"
+    },
+    "native_bytes_retained": {
+      "const": 14311,
+      "title": "Native Bytes Retained",
+      "type": "integer"
+    },
+    "native_byte_changes": {
+      "const": 0,
+      "title": "Native Byte Changes",
+      "type": "integer"
+    },
+    "fee_value_referral_rows": {
+      "const": 107,
+      "title": "Fee Value Referral Rows",
+      "type": "integer"
+    },
+    "valuation_matrix_cells": {
+      "const": 252,
+      "title": "Valuation Matrix Cells",
+      "type": "integer"
+    },
+    "review_mode": {
+      "const": "atlas_candidate_aware_not_blind",
+      "title": "Review Mode",
+      "type": "string"
+    },
+    "source_qa_status": {
+      "const": "internal_source_qa_complete",
+      "title": "Source Qa Status",
+      "type": "string"
+    },
+    "external_assignment": {
+      "title": "External Assignment",
+      "type": "null"
+    },
+    "acquisition_method": {
+      "const": "received_review_package",
+      "title": "Acquisition Method",
+      "type": "string"
+    },
+    "successful_requested_version_and_final_url": {
+      "const": "unconfirmed",
+      "title": "Successful Requested Version And Final Url",
+      "type": "string"
+    },
+    "original_http_acquisition_time": {
+      "title": "Original Http Acquisition Time",
+      "type": "null"
+    },
+    "official_source_url": {
+      "title": "Official Source Url",
+      "type": "null"
+    },
+    "repository_received_at": {
+      "format": "date-time",
+      "title": "Repository Received At",
+      "type": "string"
+    },
+    "source_face_label": {
+      "const": "JANUARY 2026",
+      "title": "Source Face Label",
+      "type": "string"
+    },
+    "source_revision_notation": {
+      "const": "Revised 012/25",
+      "title": "Source Revision Notation",
+      "type": "string"
+    },
+    "date_interpretation": {
+      "const": "schedule_label_and_unparsed_revision_only",
+      "title": "Date Interpretation",
+      "type": "string"
+    },
+    "source_pipeline_status": {
+      "const": "archived_pending_pipeline",
+      "title": "Source Pipeline Status",
+      "type": "string"
+    },
+    "adopted_status": {
+      "const": "not_verified",
+      "title": "Adopted Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "semantic_or_coverage_promotion": {
+      "const": false,
+      "title": "Semantic Or Coverage Promotion",
+      "type": "boolean"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "package_id",
+    "packaged_at",
+    "source_id",
+    "source_sha256",
+    "historical_handoff_path",
+    "frozen_file_count",
+    "frozen_total_bytes",
+    "frozen_inventory",
+    "frozen_review",
+    "physical_pages_reviewed",
+    "native_bytes_retained",
+    "native_byte_changes",
+    "fee_value_referral_rows",
+    "valuation_matrix_cells",
+    "review_mode",
+    "source_qa_status",
+    "external_assignment",
+    "acquisition_method",
+    "successful_requested_version_and_final_url",
+    "original_http_acquisition_time",
+    "official_source_url",
+    "repository_received_at",
+    "source_face_label",
+    "source_revision_notation",
+    "date_interpretation",
+    "source_pipeline_status",
+    "adopted_status",
+    "legal_currentness",
+    "semantic_or_coverage_promotion",
+    "limits"
+  ],
+  "title": "PackageStatus",
+  "type": "object"
+}

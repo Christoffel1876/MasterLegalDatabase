@@ -1,0 +1,124 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact relative-file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "verified_at": {
+      "format": "date-time",
+      "title": "Verified At",
+      "type": "string"
+    },
+    "source_qa": {
+      "$ref": "#/$defs/Asset"
+    },
+    "builder": {
+      "$ref": "#/$defs/Asset"
+    },
+    "native_bytes": {
+      "const": 7367,
+      "default": 7367,
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "pages": {
+      "const": 3,
+      "default": 3,
+      "title": "Pages",
+      "type": "integer"
+    },
+    "groups": {
+      "const": 11,
+      "default": 11,
+      "title": "Groups",
+      "type": "integer"
+    },
+    "rows": {
+      "const": 137,
+      "default": 137,
+      "title": "Rows",
+      "type": "integer"
+    },
+    "printed_fee_cells": {
+      "const": 136,
+      "default": 136,
+      "title": "Printed Fee Cells",
+      "type": "integer"
+    },
+    "blank_fee_cells": {
+      "const": 1,
+      "default": 1,
+      "title": "Blank Fee Cells",
+      "type": "integer"
+    },
+    "native_lines": {
+      "const": 313,
+      "default": 313,
+      "title": "Native Lines",
+      "type": "integer"
+    },
+    "geometry_checked": {
+      "const": true,
+      "default": true,
+      "title": "Geometry Checked",
+      "type": "boolean"
+    },
+    "displaced_fee_tamper_rejected": {
+      "const": true,
+      "default": true,
+      "title": "Displaced Fee Tamper Rejected",
+      "type": "boolean"
+    },
+    "full_pages_directly_viewed": {
+      "const": 3,
+      "default": 3,
+      "title": "Full Pages Directly Viewed",
+      "type": "integer"
+    },
+    "crops_directly_viewed": {
+      "const": 5,
+      "default": 5,
+      "title": "Crops Directly Viewed",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "verified_at",
+    "source_qa",
+    "builder"
+  ],
+  "title": "Proof",
+  "type": "object"
+}

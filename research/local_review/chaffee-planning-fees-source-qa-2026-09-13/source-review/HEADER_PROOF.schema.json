@@ -1,0 +1,77 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact retained ordinary file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Exact added pixel crop, separate from native or source text.",
+  "properties": {
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "crop": {
+      "$ref": "#/$defs/Asset"
+    },
+    "rect": {
+      "maxItems": 4,
+      "minItems": 4,
+      "prefixItems": [
+        {
+          "const": 0,
+          "type": "integer"
+        },
+        {
+          "const": 0,
+          "type": "integer"
+        },
+        {
+          "const": 2550,
+          "type": "integer"
+        },
+        {
+          "const": 350,
+          "type": "integer"
+        }
+      ],
+      "title": "Rect",
+      "type": "array"
+    },
+    "observation": {
+      "title": "Observation",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source",
+    "crop",
+    "rect",
+    "observation"
+  ],
+  "title": "HeaderProof",
+  "type": "object"
+}

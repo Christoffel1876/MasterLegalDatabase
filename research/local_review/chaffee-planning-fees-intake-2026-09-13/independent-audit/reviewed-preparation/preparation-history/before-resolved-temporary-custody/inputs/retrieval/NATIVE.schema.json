@@ -1,0 +1,91 @@
+{
+  "$defs": {
+    "FileRef": {
+      "additionalProperties": false,
+      "description": "Exact package-relative byte identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "source": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "method": {
+      "const": "PyMuPDF get_text(text), flags=195, sort=False, UTF-8 unchanged",
+      "title": "Method",
+      "type": "string"
+    },
+    "extractor_version": {
+      "title": "Extractor Version",
+      "type": "string"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/FileRef"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "combined": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "physical_pages": {
+      "const": 2,
+      "title": "Physical Pages",
+      "type": "integer"
+    },
+    "visually_reviewed_pages": {
+      "const": 0,
+      "title": "Visually Reviewed Pages",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source",
+    "method",
+    "extractor_version",
+    "pages",
+    "combined",
+    "physical_pages",
+    "visually_reviewed_pages",
+    "legal_currentness",
+    "limitations"
+  ],
+  "title": "Native",
+  "type": "object"
+}

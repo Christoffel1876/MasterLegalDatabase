@@ -1,0 +1,145 @@
+{
+  "$defs": {
+    "Match": {
+      "additionalProperties": false,
+      "properties": {
+        "action_id": {
+          "title": "Action Id",
+          "type": "string"
+        },
+        "source_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "original_lines": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Original Lines",
+          "type": "array"
+        },
+        "exact_byte_rows": {
+          "title": "Exact Byte Rows",
+          "type": "integer"
+        },
+        "url_only_rows": {
+          "title": "Url Only Rows",
+          "type": "integer"
+        },
+        "conclusion": {
+          "title": "Conclusion",
+          "type": "string"
+        }
+      },
+      "required": [
+        "action_id",
+        "source_sha256",
+        "size_bytes",
+        "original_lines",
+        "exact_byte_rows",
+        "url_only_rows",
+        "conclusion"
+      ],
+      "title": "Match",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "reviewed_at": {
+      "format": "date-time",
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "status": {
+      "const": "accepted_for_bounded_research_with_qualifications",
+      "title": "Status",
+      "type": "string"
+    },
+    "historical_rows_per_stream": {
+      "title": "Historical Rows Per Stream",
+      "type": "integer"
+    },
+    "streams_identical": {
+      "title": "Streams Identical",
+      "type": "boolean"
+    },
+    "matches": {
+      "items": {
+        "$ref": "#/$defs/Match"
+      },
+      "title": "Matches",
+      "type": "array"
+    },
+    "reservations": {
+      "title": "Reservations",
+      "type": "integer"
+    },
+    "results": {
+      "title": "Results",
+      "type": "integer"
+    },
+    "distinct_requested_urls": {
+      "title": "Distinct Requested Urls",
+      "type": "integer"
+    },
+    "retained_body_hashes": {
+      "title": "Retained Body Hashes",
+      "type": "integer"
+    },
+    "observation_body_bytes": {
+      "title": "Observation Body Bytes",
+      "type": "integer"
+    },
+    "unique_body_bytes": {
+      "title": "Unique Body Bytes",
+      "type": "integer"
+    },
+    "qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Qualifications",
+      "type": "array"
+    },
+    "canonical_intakes": {
+      "const": 0,
+      "default": 0,
+      "title": "Canonical Intakes",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "reviewed_at",
+    "status",
+    "historical_rows_per_stream",
+    "streams_identical",
+    "matches",
+    "reservations",
+    "results",
+    "distinct_requested_urls",
+    "retained_body_hashes",
+    "observation_body_bytes",
+    "unique_body_bytes",
+    "qualifications"
+  ],
+  "title": "RootReview",
+  "type": "object"
+}

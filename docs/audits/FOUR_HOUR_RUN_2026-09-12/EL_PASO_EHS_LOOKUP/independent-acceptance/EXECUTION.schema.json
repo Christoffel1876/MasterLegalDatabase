@@ -1,0 +1,149 @@
+{
+  "$defs": {
+    "Event": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Command",
+          "type": "array"
+        },
+        "started_at": {
+          "title": "Started At",
+          "type": "string"
+        },
+        "finished_at": {
+          "title": "Finished At",
+          "type": "string"
+        },
+        "exit_code": {
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "stdout_file": {
+          "title": "Stdout File",
+          "type": "string"
+        },
+        "stdout_sha256": {
+          "title": "Stdout Sha256",
+          "type": "string"
+        },
+        "stderr_file": {
+          "title": "Stderr File",
+          "type": "string"
+        },
+        "stderr_sha256": {
+          "title": "Stderr Sha256",
+          "type": "string"
+        },
+        "errors": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Errors",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "command",
+        "started_at",
+        "finished_at",
+        "exit_code",
+        "stdout_file",
+        "stdout_sha256",
+        "stderr_file",
+        "stderr_sha256",
+        "errors"
+      ],
+      "title": "Event",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "passed",
+        "issues"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "expected_cases_sha256": {
+      "title": "Expected Cases Sha256",
+      "type": "string"
+    },
+    "draft_start_sha256": {
+      "title": "Draft Start Sha256",
+      "type": "string"
+    },
+    "draft_finish_sha256": {
+      "title": "Draft Finish Sha256",
+      "type": "string"
+    },
+    "immutable_tested_copy_sha256": {
+      "title": "Immutable Tested Copy Sha256",
+      "type": "string"
+    },
+    "draft_unchanged_during_run": {
+      "title": "Draft Unchanged During Run",
+      "type": "boolean"
+    },
+    "source_cases": {
+      "title": "Source Cases",
+      "type": "integer"
+    },
+    "compatibility_comparisons": {
+      "title": "Compatibility Comparisons",
+      "type": "integer"
+    },
+    "compatibility_errors": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Compatibility Errors",
+      "type": "array"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "expected_cases_sha256",
+    "draft_start_sha256",
+    "draft_finish_sha256",
+    "immutable_tested_copy_sha256",
+    "draft_unchanged_during_run",
+    "source_cases",
+    "compatibility_comparisons",
+    "compatibility_errors",
+    "events",
+    "limitations"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

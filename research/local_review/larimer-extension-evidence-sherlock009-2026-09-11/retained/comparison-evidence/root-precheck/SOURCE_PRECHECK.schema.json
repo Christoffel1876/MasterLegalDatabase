@@ -1,0 +1,119 @@
+{
+  "$defs": {
+    "Source": {
+      "additionalProperties": false,
+      "description": "Exact locally observed source and bounded physical-page inspection.",
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "retained_path": {
+          "title": "Retained Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        },
+        "total_pages": {
+          "exclusiveMinimum": 0,
+          "title": "Total Pages",
+          "type": "integer"
+        },
+        "inspected_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Inspected Pages",
+          "type": "array"
+        },
+        "image_sha256": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Image Sha256",
+          "type": "object"
+        },
+        "observations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Observations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "original_path",
+        "retained_path",
+        "sha256",
+        "bytes",
+        "total_pages",
+        "inspected_pages",
+        "image_sha256",
+        "observations"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Source-first visual check, not completed discovery intake.",
+  "properties": {
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "partial_source_review_pending_frozen_discovery_delivery",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "final_discovery_report_consulted": {
+      "const": false,
+      "title": "Final Discovery Report Consulted",
+      "type": "boolean"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "status",
+    "legal_currentness",
+    "final_discovery_report_consulted",
+    "method",
+    "sources",
+    "limitations"
+  ],
+  "title": "Review",
+  "type": "object"
+}

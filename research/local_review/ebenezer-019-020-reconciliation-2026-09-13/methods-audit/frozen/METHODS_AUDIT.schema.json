@@ -1,0 +1,444 @@
+{
+  "$defs": {
+    "Issue": {
+      "additionalProperties": false,
+      "properties": {
+        "issue_id": {
+          "title": "Issue Id",
+          "type": "string"
+        },
+        "classification": {
+          "enum": [
+            "identity_verified_now",
+            "method_limit",
+            "procedure_deviation",
+            "addendum_clarification",
+            "inherited_visual_disposition"
+          ],
+          "title": "Classification",
+          "type": "string"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "consequence": {
+          "title": "Consequence",
+          "type": "string"
+        },
+        "new_visual_finding": {
+          "const": false,
+          "default": false,
+          "title": "New Visual Finding",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "issue_id",
+        "classification",
+        "statement",
+        "evidence",
+        "consequence"
+      ],
+      "title": "Issue",
+      "type": "object"
+    },
+    "PageCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Ref"
+        },
+        "dimensions": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Dimensions",
+          "type": "array"
+        },
+        "evidence": {
+          "$ref": "#/$defs/Ref"
+        },
+        "native_sha256": {
+          "title": "Native Sha256",
+          "type": "string"
+        },
+        "native_bytes": {
+          "title": "Native Bytes",
+          "type": "integer"
+        },
+        "candidate_start_byte": {
+          "title": "Candidate Start Byte",
+          "type": "integer"
+        },
+        "candidate_end_byte_exclusive": {
+          "title": "Candidate End Byte Exclusive",
+          "type": "integer"
+        },
+        "native_reproduction": {
+          "const": "exact",
+          "title": "Native Reproduction",
+          "type": "string"
+        },
+        "external_receipt_image_match": {
+          "const": true,
+          "title": "External Receipt Image Match",
+          "type": "boolean"
+        },
+        "direct_visual_review_in_this_audit": {
+          "const": false,
+          "default": false,
+          "title": "Direct Visual Review In This Audit",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "dimensions",
+        "evidence",
+        "native_sha256",
+        "native_bytes",
+        "candidate_start_byte",
+        "candidate_end_byte_exclusive",
+        "native_reproduction",
+        "external_receipt_image_match"
+      ],
+      "title": "PageCheck",
+      "type": "object"
+    },
+    "PromptCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact": {
+          "$ref": "#/$defs/Ref"
+        },
+        "supplied_transcript_line": {
+          "title": "Supplied Transcript Line",
+          "type": "integer"
+        },
+        "prompt_utf8_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Prompt Utf8 Sha256",
+          "type": "string"
+        },
+        "prompt_utf8_bytes": {
+          "title": "Prompt Utf8 Bytes",
+          "type": "integer"
+        },
+        "prompt_characters": {
+          "title": "Prompt Characters",
+          "type": "integer"
+        },
+        "attachment_count": {
+          "title": "Attachment Count",
+          "type": "integer"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        },
+        "exact_parent_transcript_available": {
+          "const": false,
+          "default": false,
+          "title": "Exact Parent Transcript Available",
+          "type": "boolean"
+        },
+        "provenance": {
+          "const": "received_transcript_extract_claim_not_independently_authenticated",
+          "default": "received_transcript_extract_claim_not_independently_authenticated",
+          "title": "Provenance",
+          "type": "string"
+        },
+        "observations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Observations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "artifact",
+        "supplied_transcript_line",
+        "prompt_utf8_sha256",
+        "prompt_utf8_bytes",
+        "prompt_characters",
+        "attachment_count",
+        "purpose",
+        "observations"
+      ],
+      "title": "PromptCheck",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "SourceCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "assignment_id": {
+          "enum": [
+            "EB-PDF-019",
+            "EB-PDF-020"
+          ],
+          "title": "Assignment Id",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-WELD",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Ref"
+        },
+        "source_canonical_path": {
+          "title": "Source Canonical Path",
+          "type": "string"
+        },
+        "canonical_sha256_match": {
+          "const": true,
+          "title": "Canonical Sha256 Match",
+          "type": "boolean"
+        },
+        "source_pdf_pages": {
+          "title": "Source Pdf Pages",
+          "type": "integer"
+        },
+        "candidate": {
+          "$ref": "#/$defs/Ref"
+        },
+        "external_reported_candidate_sha_match": {
+          "const": true,
+          "title": "External Reported Candidate Sha Match",
+          "type": "boolean"
+        },
+        "actual_manifest_identity_match_now": {
+          "const": true,
+          "title": "Actual Manifest Identity Match Now",
+          "type": "boolean"
+        },
+        "historical_worker_pdf_rehash": {
+          "const": "not_performed_reported_absent",
+          "title": "Historical Worker Pdf Rehash",
+          "type": "string"
+        },
+        "historical_worker_manifest_identity_lookup": {
+          "const": "not_performed_reported_unopened",
+          "title": "Historical Worker Manifest Identity Lookup",
+          "type": "string"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/PageCheck"
+          },
+          "title": "Pages",
+          "type": "array"
+        }
+      },
+      "required": [
+        "assignment_id",
+        "source_id",
+        "authority_id",
+        "source",
+        "source_canonical_path",
+        "canonical_sha256_match",
+        "source_pdf_pages",
+        "candidate",
+        "external_reported_candidate_sha_match",
+        "actual_manifest_identity_match_now",
+        "historical_worker_pdf_rehash",
+        "historical_worker_manifest_identity_lookup",
+        "pages"
+      ],
+      "title": "SourceCheck",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "audited_at": {
+      "format": "date-time",
+      "title": "Audited At",
+      "type": "string"
+    },
+    "status": {
+      "const": "custody_verified_methods_qualified_pending_root_disposition",
+      "title": "Status",
+      "type": "string"
+    },
+    "reviewed_scope": {
+      "title": "Reviewed Scope",
+      "type": "string"
+    },
+    "original_manifest": {
+      "$ref": "#/$defs/Ref"
+    },
+    "received_package_receipt": {
+      "$ref": "#/$defs/Ref"
+    },
+    "frozen_receipt_files_verified": {
+      "title": "Frozen Receipt Files Verified",
+      "type": "integer"
+    },
+    "clarification_tar": {
+      "$ref": "#/$defs/Ref"
+    },
+    "tar_regular_members": {
+      "title": "Tar Regular Members",
+      "type": "integer"
+    },
+    "tar_directory_members": {
+      "title": "Tar Directory Members",
+      "type": "integer"
+    },
+    "supplied_inventory_files_verified": {
+      "title": "Supplied Inventory Files Verified",
+      "type": "integer"
+    },
+    "loose_clarification_matches_tar": {
+      "const": true,
+      "title": "Loose Clarification Matches Tar",
+      "type": "boolean"
+    },
+    "prompt_checks": {
+      "items": {
+        "$ref": "#/$defs/PromptCheck"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "title": "Prompt Checks",
+      "type": "array"
+    },
+    "source_checks": {
+      "items": {
+        "$ref": "#/$defs/SourceCheck"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Source Checks",
+      "type": "array"
+    },
+    "received_report_files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Received Report Files",
+      "type": "array"
+    },
+    "issues": {
+      "items": {
+        "$ref": "#/$defs/Issue"
+      },
+      "title": "Issues",
+      "type": "array"
+    },
+    "public_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "source_edits": {
+      "const": 0,
+      "default": 0,
+      "title": "Source Edits",
+      "type": "integer"
+    },
+    "direct_visual_pages_reviewed": {
+      "const": 0,
+      "default": 0,
+      "title": "Direct Visual Pages Reviewed",
+      "type": "integer"
+    },
+    "source_accuracy_certification": {
+      "const": false,
+      "default": false,
+      "title": "Source Accuracy Certification",
+      "type": "boolean"
+    },
+    "historical_blindness_certification": {
+      "const": false,
+      "default": false,
+      "title": "Historical Blindness Certification",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "audited_at",
+    "status",
+    "reviewed_scope",
+    "original_manifest",
+    "received_package_receipt",
+    "frozen_receipt_files_verified",
+    "clarification_tar",
+    "tar_regular_members",
+    "tar_directory_members",
+    "supplied_inventory_files_verified",
+    "loose_clarification_matches_tar",
+    "prompt_checks",
+    "source_checks",
+    "received_report_files",
+    "issues"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

@@ -1,0 +1,116 @@
+{
+  "$defs": {
+    "File": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "checked_at": {
+      "title": "Checked At",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_APPLIED",
+      "title": "Status",
+      "type": "string"
+    },
+    "prior_manifest": {
+      "$ref": "#/$defs/File"
+    },
+    "prior_file_count": {
+      "const": 228,
+      "title": "Prior File Count",
+      "type": "integer"
+    },
+    "prior_all_files_unchanged": {
+      "const": true,
+      "title": "Prior All Files Unchanged",
+      "type": "boolean"
+    },
+    "source_and_custody_bytes_unchanged": {
+      "const": true,
+      "title": "Source And Custody Bytes Unchanged",
+      "type": "boolean"
+    },
+    "source_provenance_unchanged": {
+      "const": true,
+      "title": "Source Provenance Unchanged",
+      "type": "boolean"
+    },
+    "changed_preparation_members": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Changed Preparation Members",
+      "type": "array"
+    },
+    "incoming_basename": {
+      "const": "original.pdf",
+      "title": "Incoming Basename",
+      "type": "string"
+    },
+    "publisher_filename_inferred": {
+      "const": false,
+      "title": "Publisher Filename Inferred",
+      "type": "boolean"
+    },
+    "transaction": {
+      "$ref": "#/$defs/File"
+    },
+    "tests": {
+      "$ref": "#/$defs/File"
+    },
+    "canonical_writes": {
+      "const": 0,
+      "title": "Canonical Writes",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "checked_at",
+    "status",
+    "prior_manifest",
+    "prior_file_count",
+    "prior_all_files_unchanged",
+    "source_and_custody_bytes_unchanged",
+    "source_provenance_unchanged",
+    "changed_preparation_members",
+    "incoming_basename",
+    "publisher_filename_inferred",
+    "transaction",
+    "tests",
+    "canonical_writes",
+    "legal_currentness"
+  ],
+  "title": "Revision",
+  "type": "object"
+}

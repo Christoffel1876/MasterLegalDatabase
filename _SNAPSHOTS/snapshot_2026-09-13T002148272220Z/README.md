@@ -1,0 +1,218 @@
+# Project Geode
+
+Project Geode is a backend-first regulatory intelligence database for Colorado
+law and regulation. It is built for AI retrieval, agentic workflows, search,
+ingestion, legal data analysis, and source-backed answer generation.
+
+The working repository is
+[Christoffel1876/MasterLegalDatabase](https://github.com/Christoffel1876/MasterLegalDatabase).
+Development, update review, and the daily source-check pilots are managed there.
+The fork preserves the original project's data and Git history.
+
+Geode stores official legal source material, normalized metadata, relationship
+records, freshness state, provenance, and audit trails. AI systems use those
+records through deterministic retrieval and verification layers before any
+answer is written.
+
+## Product Direction
+
+Geode is the backend knowledge layer for Colorado legal authority.
+
+Current coverage is state-first:
+
+- Colorado Revised Statutes
+- Code of Colorado Regulations
+- legislation and bill history
+- Colorado Register and rulemaking notices
+- executive orders
+- session laws
+- AG opinions, COPRRR reviews, and other supplementary sources
+- county authorities and ordinances (pilot coverage)
+- municipal authorities and ordinances (priority-city pilot coverage)
+- district authorities and policies (school and water-family pilot coverage)
+
+The jurisdiction model expands from state authority to county and municipal
+authority. New county and local sources must be added through the same source
+registry, schema, ingestion, validation, freshness, and provenance controls used
+for state sources.
+
+## Core Architecture
+
+Geode separates source preservation, normalized records, retrieval, and answer
+control.
+
+- `_RAW_ARCHIVE/` preserves original source files and must not be modified.
+- Numbered corpus directories hold canonical Markdown and JSONL records.
+- `_CONTROL_PLANE/` records manifests, schemas, source registries, freshness,
+  audits, timelines, and operational state.
+- `_CROSSWALKS/` stores relationships between laws, regulations, agencies,
+  bills, rulemaking events, and amendments.
+- `08_County_Authorities/`, `09_District_Authorities/`, and
+  `10_Municipal_Authorities/` store local authority
+  identities and normalized local rules.
+- `geode/` contains ingestion, parsing, validation, retrieval, search, API, and
+  orchestration code.
+- `tests/` verifies schemas, ingestion behavior, retrieval, gates, and backend
+  operations.
+
+## AI Retrieval Model
+
+AI agents should not choose legal sources from memory. Retrieval follows a fixed
+sequence:
+
+1. Read `_CONTROL_PLANE/MASTER_MANIFEST.json`.
+2. Search relevant layer indexes and retrieval catalogs.
+3. Load only the needed canonical text and metadata sidecars.
+4. Traverse `_CROSSWALKS/` for relationships.
+5. Check freshness, provenance, and audit state.
+6. Pass hard verification gates before producing an answer.
+
+The LLM is the writer and synthesizer. Deterministic Python code decides what
+evidence is needed and whether the answer is allowed.
+
+## Ingestion And Normalization
+
+Ingestion starts from official or approved sources, writes raw material into the
+archive, converts source formats, extracts structure, validates records, updates
+indexes, and records provenance.
+
+Important ingestion rules:
+
+- Preserve raw source files before writing derived records.
+- Validate records with schemas before writing.
+- Use JSONL for streamable metadata and relationship records.
+- Use Markdown for canonical legal text.
+- Use atomic writes and snapshots for overwrite protection.
+- Record source URLs, retrieval dates, hashes, and confidence.
+
+## Search And Indexing
+
+Geode uses lightweight indexes for discovery and targeted retrieval. Search and
+API layers are derived from the canonical corpus and can be rebuilt.
+
+Relevant commands include:
+
+```powershell
+geode-search-index --root . --rebuild
+geode-api
+geode-validate --layer all
+geode-integrity-check
+```
+
+## Source Freshness And Auditability
+
+Freshness is tracked per source layer. The system distinguishes local freshness
+from live official-source refresh. Audit trails are kept for updates, API usage,
+key administration, relationship checks, source limitations, review queues, and
+remaining work.
+
+Geode should state missing coverage directly. It must not imply that a county,
+municipality, source, date range, or legal topic is covered until it appears in
+the manifest and has passed validation.
+
+## Explore Reviewed Sources
+
+Three research commands expose the reviewed source material with its page references,
+original wording and qualifications:
+
+- [Local fee-source lookup](docs/RESEARCH_SOURCE_LOOKUP.md): keyword searches within
+  selected fee tables from Grand Junction, Greeley and Weld County.
+- [El Paso scanned-fee lookup](docs/RESEARCH_SCANNED_FEE_LOOKUP.md): 104 planning-fee
+  rows with their complete notes, image references and unresolved clipped text.
+- [CRS passage lookup](docs/CRS_SOURCE_LOOKUP.md): three reviewed sections from the
+  preserved 2026 Title 1 source.
+
+For example, from the repository root using the project's Python environment:
+
+```sh
+python scripts/research_scanned_fee_lookup.py --root . \
+  --source-id el-paso-planning-fees-sd011 --query "Erosion" --format markdown
+```
+
+These commands report what the preserved sources say. They do not calculate a
+project's fees or establish current legal requirements. The
+[manual-source review inventory](research/local_review/manual-source-review-inventory-2026-09-11/README.md)
+distinguishes preserved PDFs from bounded source reviews; it is not a measure of
+complete statewide coverage.
+
+## Setup
+
+The [coverage inventory and CCR guide](docs/COVERAGE_AND_CCR_PILOT.md) explains
+the generated jurisdiction/category dashboard and the bounded daily Department
+of Local Affairs source check. It keeps missing local evidence and unreviewed
+source designations visible. See the
+[coverage baseline](docs/audits/COVERAGE_BASELINE_2026-09-09.md) and
+[county recovery findings](docs/audits/COUNTY_RECOVERY_2026-09-09.md).
+
+The [county source recovery pilot](docs/COUNTY_REACQUISITION_PILOT.md) preserves
+four official catalogs and 30 selected Jefferson/Clear Creek documents through
+an explicit manifest and a separate daily review workflow. Its source evidence
+does not replace missing historical county records or establish complete coverage.
+
+For the daily Colorado Register refresh, start with the
+[pilot setup and activation guide](docs/DAILY_REGISTER_PILOT.md). It provides a
+small, frozen dependency set, preserves original evidence, and proposes data
+updates through review pull requests. Its scope begins July 1, 2026; it does not
+certify the historical corpus or calculate regulatory burden. The GitHub schedule
+becomes active only after the workflow is merged into `main` and Actions is enabled.
+
+Install Python 3.11+ and create a virtual environment:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -e ".[dev]"
+```
+
+Optional extras:
+
+```powershell
+python -m pip install -e ".[api]"
+python -m pip install -e ".[scraping]"
+```
+
+Run tests:
+
+```powershell
+pytest tests/
+```
+
+Run validation:
+
+```powershell
+python -m geode.validate --layer all
+python -m geode.integrity_check
+```
+
+## Bulk Source Collection
+
+Use connector commands for controlled source collection:
+
+```powershell
+$env:GEODE_DATA_ROOT = "C:\GeodeData"
+python -m geode.connectors.run --connectors ccr,colorado_register --root $env:GEODE_DATA_ROOT
+python -m geode.connectors.run --connectors all --root $env:GEODE_DATA_ROOT --delay 1 --discovery-delay 0.25
+```
+
+LegiScan downloads require `LEGISCAN_API_KEY` or `--legiscan-api-key`.
+
+Generated bulk data should normally live outside the source checkout and outside
+sync-managed folders. Source code, schemas, curated docs, tests, and curated
+control-plane files belong in Git; large generated outputs do not.
+
+## Current Priority
+
+The immediate priority is to reconcile official source versions, rebuild missing
+county evidence, and establish complete local source inventories under the
+[coverage roadmap](docs/audits/UPDATE_ROADMAP_2026-09-09.md). The backend retrieval
+and orchestration work depends on that verified evidence:
+
+- formal retrieval plans
+- evidence packet format
+- citation and grounding gates
+- absence verification
+- source freshness checks
+- county and municipal source registry expansion
+- county and district source collection, geography-aware retrieval, and
+  local-to-state crosswalks
+- stronger search/indexing over canonical and metadata records

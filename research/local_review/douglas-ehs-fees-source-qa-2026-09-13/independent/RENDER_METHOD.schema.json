@@ -1,0 +1,89 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "One exact package-relative original or derived file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Separate originally observed settings from later exact-byte reproduction.",
+  "properties": {
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "output": {
+      "$ref": "#/$defs/Asset"
+    },
+    "command_template": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Command Template",
+      "type": "array"
+    },
+    "observed_version": {
+      "const": "pdftoppm version 26.05.0",
+      "title": "Observed Version",
+      "type": "string"
+    },
+    "originally_executed": {
+      "const": true,
+      "title": "Originally Executed",
+      "type": "boolean"
+    },
+    "original_invocation_timestamp": {
+      "title": "Original Invocation Timestamp",
+      "type": "null"
+    },
+    "physical_page": {
+      "const": 1,
+      "title": "Physical Page",
+      "type": "integer"
+    },
+    "dpi": {
+      "const": 150,
+      "title": "Dpi",
+      "type": "integer"
+    },
+    "evidence_scope": {
+      "title": "Evidence Scope",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source",
+    "output",
+    "command_template",
+    "observed_version",
+    "originally_executed",
+    "original_invocation_timestamp",
+    "physical_page",
+    "dpi",
+    "evidence_scope"
+  ],
+  "title": "RenderMethod",
+  "type": "object"
+}

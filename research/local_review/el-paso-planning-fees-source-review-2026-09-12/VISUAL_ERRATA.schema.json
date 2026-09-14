@@ -1,0 +1,132 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Erratum": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "row_id": {
+          "title": "Row Id",
+          "type": "string"
+        },
+        "column": {
+          "const": "application_type",
+          "title": "Column",
+          "type": "string"
+        },
+        "before": {
+          "title": "Before",
+          "type": "string"
+        },
+        "after": {
+          "title": "After",
+          "type": "string"
+        },
+        "source_crop": {
+          "$ref": "#/$defs/Asset"
+        },
+        "source_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Source Page",
+          "type": "integer"
+        },
+        "pixel_bbox": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Pixel Bbox",
+          "type": "array"
+        },
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "row_id",
+        "column",
+        "before",
+        "after",
+        "source_crop",
+        "source_page",
+        "pixel_bbox",
+        "basis"
+      ],
+      "title": "Erratum",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "frozen_original": {
+      "$ref": "#/$defs/Asset"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "entries": {
+      "items": {
+        "$ref": "#/$defs/Erratum"
+      },
+      "title": "Entries",
+      "type": "array"
+    },
+    "originals_modified": {
+      "const": false,
+      "default": false,
+      "title": "Originals Modified",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "frozen_original",
+    "prepared_at",
+    "entries"
+  ],
+  "title": "VisualErrata",
+  "type": "object"
+}

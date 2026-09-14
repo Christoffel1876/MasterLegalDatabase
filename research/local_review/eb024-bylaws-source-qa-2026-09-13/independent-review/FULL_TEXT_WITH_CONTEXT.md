@@ -1,0 +1,462 @@
+---
+status: reviewed_source_only
+legal_currentness: not_verified
+answer_safe: false
+---
+
+# Full native text with reviewed page context
+
+All native files remain unchanged. The display below removes only blank native lines between displayed paragraph portions; exact whitespace, UTF-8 ranges and line geometry remain in SOURCE_QA.json and candidate/page files. This is not a current-law answer.
+
+## Physical page 1
+
+### P1-B01 — cover-1
+
+```text
+REGULATIONS OF THE EL PASO  
+```
+
+### P1-B02 — cover-2
+
+```text
+COUNTY BOARD OF HEALTH  
+```
+
+### P1-B03 — cover-3
+
+```text
+EL PASO COUNTY, COLORADO  
+```
+
+### P1-B04 — cover-4
+
+```text
+Chapter 1  
+```
+
+### P1-B05 — cover-5
+
+```text
+Bylaws  
+```
+
+### P1-B06 — cover-6
+
+```text
+El Paso County Board of Health  
+```
+
+### P1-B07 — cover-7
+
+```text
+El Paso County Public Health 
+```
+
+### P1-B08 — footer-1
+
+```text
+5/23/2012 
+```
+
+## Physical page 2
+
+### P2-B01 — p2-heading-1
+
+```text
+CHAPTER 1 
+```
+
+### P2-B02 — p2-heading-2
+
+```text
+BYLAWS 
+```
+
+### P2-B03 — p2-heading-3
+
+```text
+EL PASO COUNTY BOARD OF HEALTH 
+```
+
+### P2-B04 — SECTION 1.1/body/heading
+
+```text
+SECTION 1.1: ORGANIZATION 
+```
+
+### P2-B05 — SECTION 1.1/A
+
+```text
+A. Board of Health: El Paso County Public Health (hereafter “Public Health”) shall be 
+governed by the Board of Health of El Paso County, hereinafter referred to as the Board. 
+The Board shall consist of nine members, as appointed by the Board of County 
+Commissioners of El Paso County, Colorado, in accordance with the provisions of 
+Article 1 of Title 25, C.R.S. Board members shall serve with no remuneration, except that 
+they may be reimbursed for actual expenses when on official Public Health business. 
+```
+
+### P2-B06 — SECTION 1.1/B
+
+```text
+B. Place of Business: The principal office of the Board shall be located in the El Paso 
+County Public Health building located at 1675 W. Garden of the Gods Road, Suite 1044, 
+Colorado Springs, Colorado. 
+```
+
+### P2-B07 — SECTION 1.1/C
+
+```text
+C. Authority of the Board of Health: 
+```
+
+### P2-B08 — SECTION 1.1/C/1
+
+```text
+1. The authority of the Board shall be in accordance with those powers and duties set 
+forth in Part 5 of Article 1 of Title 25, C.R.S. 
+```
+
+### P2-B09 — SECTION 1.1/C/2
+
+```text
+2. The Board shall be held responsible for the selection and appointment of an 
+experienced Executive Director with knowledge in public health, public administration or 
+closely related discipline. The Executive Director shall hold the position at the will and 
+pleasure of the Board. 
+```
+
+### P2-B10 — SECTION 1.1/C/3
+
+```text
+3. The Board shall have the power and duty of determining, devising and setting general 
+policies to guide the Executive Director and Public Health. 
+```
+
+### P2-B11 — SECTION 1.1/D
+
+```text
+D. Mission: The Board of Health’s mission is to promote and protect public health and 
+environmental quality in the community through people, prevention and partnerships, 
+subject to availability of funding; and, to work toward providing the 10 essential services 
+as outlined by the National Association of Local Boards of Health (NALBOH). 
+```
+
+### P2-B12 — SECTION 1.2/body/heading
+
+```text
+SECTION 1.2: OFFICERS 
+```
+
+### P2-B13 — SECTION 1.2/body
+
+```text
+The regular officers of the Board shall be President, Vice President, Secretary, and 
+Treasurer. The President and Vice President shall serve a term not to exceed one (1) 
+calendar year. The Board shall elect a new President and Vice President, the election of 
+which shall occur at the regular meeting of the Board each December, or as otherwise 
+determined appropriate by the Board. The duties of the regular officers of the Board shall 
+be as follows: 
+```
+
+### P2-B14 — SECTION 1.2/A
+
+```text
+A. President: The President shall preside at all meetings of the Board, shall take an 
+interest in all affairs of Public Health, and shall be an ex-officio member of all 
+committees, without vote. The President of the Board shall have the authority to sign 
+deeds and other instruments on behalf of Public Health, unless such power is otherwise 
+delegated by the Board or by the Colorado Revised Statutes. 
+```
+
+### P2-B15 — SECTION 1.2/B
+
+```text
+B. Vice President: The Vice President of the Board shall perform the duties of the 
+President of the Board in the event of absence, resignation, death, or disability of the 
+President. 
+```
+
+### P2-B16 — footer-2
+
+```text
+5/23/2012 
+```
+
+## Physical page 3
+
+### P3-B01 — SECTION 1.2/C
+
+```text
+C. Secretary: The Secretary of the Board shall be the Executive Director, or assigned 
+staff. The Executive Director shall have the authority and responsibility as determined by 
+the Board of Health and as set forth in Part 5 of Article 1 of Title 25, C.R.S. The 
+Executive Director and the County Administrator shall consult throughout the budget 
+year regarding the coordination of administrative and support services, and concerning 
+the integration of support services in order to create operating and cost efficiencies.  
+```
+
+### P3-B02 — SECTION 1.2/D
+
+```text
+D. Treasurer: The Treasurer of El Paso County shall serve as Treasurer of El Paso County 
+Public Health. The Treasurer shall hold all funds of Public Health in an account in a 
+depository as authorized by Colorado law and in accordance with the Public Deposit 
+Protection Act, Section 11-10.5-10 1, et seq. C.R.S. Said account shall be an “El Paso 
+County Public Health” fund, created by the Treasurer as provided by Section 25-1-5 11, 
+C.R.S. All withdrawals from such funds shall be allowed only if certified by the President 
+or, by any Board member designated by the President, and the Executive Director.  
+```
+
+### P3-B03 — SECTION 1.3/body/heading
+
+```text
+SECTION 1.3: MEETINGS 
+```
+
+### P3-B04 — SECTION 1.3/A
+
+```text
+A. Regular Meetings: The Board shall establish a regular meeting schedule each year at a 
+place to be designated by the Board. Such schedule may be amended from time to time 
+by the Board, as necessary. In order to facilitate digital recording, and Internet and 
+television broadcasting, the Board of Health shall normally conduct its regular meetings 
+at the Pikes Peak Regional Development Center Hearing Room 2880 International Circle, 
+Colorado Springs, CO. All meetings of the Board shall be digitally recorded. If service is 
+available, all meetings shall also be broadcast live over the Internet. Furthermore, if 
+service is available, the video and audio recording of all meetings shall be rebroadcast 
+over a cable television local access channel. Regular meetings for each year shall be as 
+determined by the Board of Health. 
+```
+
+### P3-B05 — SECTION 1.3/B
+
+```text
+B. Special Meetings: Special meetings may be called by the President, the Executive 
+Director, or a majority of the Board at any time on three days prior notice, or in case of 
+emergency, 24 hours notice by telephone or other electronic means. 
+```
+
+### P3-B06 — SECTION 1.3/C
+
+```text
+C. Quorum: A majority of the Board members shall constitute a quorum for the 
+transaction of business at any meeting, but if no quorum exists, those members in 
+attendance may adjourn the meeting to a time certain. 
+```
+
+### P3-B07 — SECTION 1.3/D
+
+```text
+D. Attendance at Meetings/Removal of Member: Board members are expected to attend 
+at least eighty percent (80%) of all regular meetings and special meetings. The reasons 
+for any absences shall be communicated in advance, if possible, to the President. If a 
+Board member has more than three (3) absences during any calendar year, it shall be the 
+duty of the President and Vice President to consult with such member concerning his or 
+her continued willingness and ability to serve on the Board. Notwithstanding the 
+President and Vice President’s commitment to consult, nothing precludes the Board of 
+Health from recommending to the Board of County Commissioners the removal of a 
+member who receives more than three (3) absences in any calendar year. Only the Board 
+of County Commissioners shall have the authority to remove a member. The authority of 
+the Board of Health is limited to making recommendations for removal to the Board of 
+County Commissioners. 
+```
+
+### P3-B08 — footer-3
+
+```text
+5/23/2012 
+```
+
+## Physical page 4
+
+### P4-B01 — SECTION 1.3/E
+
+```text
+E. Meeting Agenda: A written agenda, to the extent required by law, shall be prepared by 
+the Secretary or assistant secretary for each regular and special meeting of the Board, and 
+posted at least 24 hours prior to the meeting at the place or places established each year 
+by the Board as required by law. The regular meeting agenda shall generally be prepared 
+and sent by electronic means to all Board members at least five (5) days prior to each 
+regular meeting. The agendas for each regular and special meeting shall consist of items 
+requested by the President of the Board or, in the absence of the President, the Vice 
+President, the Executive Director, or at least three (3) members of the Board. Board 
+members shall submit requests for agenda items to the President or, in the President’s 
+absence, the Vice President and the Executive Director. The agenda may be changed by 
+the President or by majority vote of the Board members present.  
+```
+
+### P4-B02 — SECTION 1.3/F
+
+```text
+F. Executive Sessions: The President shall poll Board members, and, upon consent of 
+two-thirds (2/3) of the Board members present, may hold a closed executive session. If 
+consent for the closed executive session is not given, the item may be discussed in open 
+session or withdrawn from consideration. The reasons for going into executive session 
+shall only be those allowed for a local public body under Section 24-6-402, C.R.S. 
+```
+
+### P4-B03 — SECTION 1.3/G
+
+```text
+G. No Administrative Authority: The Board shall act only by motion or resolution at a 
+regular or special meeting of the Board. No individual member of the Board shall give 
+individual administrative direction to the Executive Director or Public Health staff or in 
+any manner exercise individually any administrative authority with respect to Public 
+Health. 
+```
+
+### P4-B04 — SECTION 1.3/H
+
+```text
+H. Policy Statements: No individual member of the Board shall make a statement of 
+policy which purports to be that of the Board unless the Board shall have adopted such 
+policy, but no Board member shall be prohibited from stating his or her personal 
+opinions, provided they are clearly identified as being personal.  
+```
+
+### P4-B05 — SECTION 1.3/I
+
+```text
+I. Board Responsibilities: It is the responsibility of the Board to understand and carry out 
+powers and duties pursuant to Part 5 of Article I of Title 25, C.R.S., relating to public 
+health. As such, each Board member must recognize his or her responsibilities as a Board 
+member, and the administrative roles and responsibilities of the Executive Director. 
+```
+
+### P4-B06 — SECTION 1.4/body/heading
+
+```text
+SECTION 1.4: COMMITTEES 
+```
+
+### P4-B07 — SECTION 1.4/body
+
+```text
+A majority of the Board shall have the power to appoint regular, temporary or ad hoc 
+committees as deemed necessary to study matters coming before the Board and to make 
+recommendations to the full Board. The Board may appoint itself as a Committee of the 
+Whole to hear any matters that may be brought before it. The creation of all such 
+committees and appointments thereto shall be done in an open and public meeting. All 
+committee meetings shall be held in compliance with the Colorado Open Meetings Law, 
+Section 24-6-402, C.R.S. 
+```
+
+### P4-B08 — SECTION 1.5/body/heading
+
+```text
+SECTION 1.5: ANNUAL AUDIT AND ANNUAL BUDGET 
+```
+
+### P4-B09 — SECTION 1.5/body
+
+```text
+As soon as practical following approval of an annual audit of Public Health, the Secretary 
+shall file in the offices of the El Paso County Board of County Commissioners a report of 
+the preceding year’s activities of Public Health, which audit shall include a copy of the 
+auditor’s recommendations, if any. On or before September 1 of each year, Public Health 
+shall present to the Board of County Commissioners a proposed budget for the next 
+Public Health fiscal year in order to provide the Board of County Commissioners with an 
+```
+
+### P4-B10 — footer-4
+
+```text
+5/23/2012 
+```
+
+## Physical page 5
+
+### P5-B01 — SECTION 1.5/body
+
+Continues P4-B09.
+
+```text
+opportunity to provide any moneys necessary, over estimated moneys from surpluses, 
+grants, and donations, to cover the total cost of maintaining Public Health for the ensuing 
+fiscal year by an appropriation from the county general fund. 
+```
+
+### P5-B02 — SECTION 1.6/body/heading
+
+```text
+SECTION 1.6: COUNTY HEALTH PLAN 
+```
+
+### P5-B03 — SECTION 1.6/body
+
+```text
+As soon as practicable after adoption of the statewide public health improvement plan 
+required under Section 25-1-504, C.R.S., Public Health shall commence development of 
+a countywide public health improvement plan. The Board shall not adopt such a 
+countywide public health improvement plan until it shall have made available to the 
+public for review and comment a draft that is materially complete. As soon as the draft of 
+a countywide public health improvement plan is available for public review and 
+comment, the Board shall present to the Board of County Commissioners a copy of such 
+draft in order to provide the Board of County Commissioners with an opportunity for 
+review and comment. 
+```
+
+### P5-B04 — SECTION 1.7/body/heading
+
+```text
+SECTION 1.7: ANNUAL UPDATE 
+```
+
+### P5-B05 — SECTION 1.7/body
+
+```text
+Once per year, Public Health shall prepare and the Board shall provide a written Annual 
+Update to the Board of County Commissioners concerning the previous year’s activities 
+of Public Health. 
+```
+
+### P5-B06 — SECTION 1.8/body/heading
+
+```text
+SECTION 1.8: PARLIAMENTARY AUTHORITY 
+```
+
+### P5-B07 — SECTION 1.8/body
+
+```text
+The rules contained in the current edition of Robert’s Rules of Order Newly Revised shall 
+govern the Board in all cases to which they are applicable and in which they are not 
+inconsistent with the Colorado Revised Statutes. 
+```
+
+### P5-B08 — SECTION 1.9/body/heading
+
+```text
+SECTION 1.9: AMENDMENT OF BYLAWS 
+```
+
+### P5-B09 — SECTION 1.9/body
+
+```text
+The Bylaws may be amended at any regular or special meeting of the Board by a majority 
+vote of at least five (5) members of the Board. Except in case of an exigent circumstance 
+that requires immediate amendment to the Bylaws, any proposed amendments to the 
+Bylaws shall be presented to the Board in draft form at a regular meeting at least one 
+month prior to final consideration by the Board. 
+```
+
+### P5-B10 — SECTION 1.10/body/heading
+
+```text
+SECTION 1.10: SEVERABILITY 
+```
+
+### P5-B11 — SECTION 1.10/body
+
+```text
+To the extent any part of these Bylaws are declared to be unenforceable by a court of 
+competent jurisdiction, it shall not make unenforceable the remaining provisions of the 
+Bylaws. 
+```
+
+### P5-B12 — footer-5
+
+```text
+5/23/2012 
+```
+

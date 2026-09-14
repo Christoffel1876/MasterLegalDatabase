@@ -1,0 +1,243 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact ordinary file identity, interpreted relative to its declared scope.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Bounded current installation evidence; neither deployment nor source certification.",
+  "properties": {
+    "status": {
+      "const": "accepted_with_recorded_limits",
+      "title": "Status",
+      "type": "string"
+    },
+    "checked_at": {
+      "title": "Checked At",
+      "type": "string"
+    },
+    "repository_head": {
+      "title": "Repository Head",
+      "type": "string"
+    },
+    "installed_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "maxItems": 10,
+      "minItems": 10,
+      "title": "Installed Files",
+      "type": "array"
+    },
+    "immutable_inputs": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "maxItems": 87,
+      "minItems": 87,
+      "title": "Immutable Inputs",
+      "type": "array"
+    },
+    "all_87_inputs_tracked_non_lfs": {
+      "const": true,
+      "title": "All 87 Inputs Tracked Non Lfs",
+      "type": "boolean"
+    },
+    "wrapper_path": {
+      "title": "Wrapper Path",
+      "type": "string"
+    },
+    "wrapper_inventory": {
+      "$ref": "#/$defs/Asset"
+    },
+    "wrapper_payload_count": {
+      "const": 494,
+      "title": "Wrapper Payload Count",
+      "type": "integer"
+    },
+    "installation": {
+      "$ref": "#/$defs/Asset"
+    },
+    "proposal_manifest_sha256": {
+      "title": "Proposal Manifest Sha256",
+      "type": "string"
+    },
+    "independent_manifest_sha256": {
+      "title": "Independent Manifest Sha256",
+      "type": "string"
+    },
+    "discovered_untracked_path_count": {
+      "title": "Discovered Untracked Path Count",
+      "type": "integer"
+    },
+    "discovered_staged_added_path_count": {
+      "title": "Discovered Staged Added Path Count",
+      "type": "integer"
+    },
+    "wrapper_discovery_method": {
+      "const": "staged_additions_union_untracked_paths",
+      "title": "Wrapper Discovery Method",
+      "type": "string"
+    },
+    "scanned_wrapper_roots": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Scanned Wrapper Roots",
+      "type": "array"
+    },
+    "scanned_file_count": {
+      "title": "Scanned File Count",
+      "type": "integer"
+    },
+    "scanned_byte_sizes_total": {
+      "title": "Scanned Byte Sizes Total",
+      "type": "integer"
+    },
+    "exact_digest_candidates": {
+      "title": "Exact Digest Candidates",
+      "type": "integer"
+    },
+    "excluded_basename_hits": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 0,
+      "title": "Excluded Basename Hits",
+      "type": "array"
+    },
+    "excluded_content_hits": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 0,
+      "title": "Excluded Content Hits",
+      "type": "array"
+    },
+    "original_user_file": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_matches_prior_identity": {
+      "const": true,
+      "title": "Original Matches Prior Identity",
+      "type": "boolean"
+    },
+    "schema_validation_passed": {
+      "const": true,
+      "title": "Schema Validation Passed",
+      "type": "boolean"
+    },
+    "copied_public_verifiers_passed": {
+      "const": true,
+      "title": "Copied Public Verifiers Passed",
+      "type": "boolean"
+    },
+    "source_requests": {
+      "const": 0,
+      "title": "Source Requests",
+      "type": "integer"
+    },
+    "canonical_writes": {
+      "const": false,
+      "title": "Canonical Writes",
+      "type": "boolean"
+    },
+    "full_suite_rerun": {
+      "const": false,
+      "title": "Full Suite Rerun",
+      "type": "boolean"
+    },
+    "deployment_verified": {
+      "const": false,
+      "title": "Deployment Verified",
+      "type": "boolean"
+    },
+    "linux_execution_verified": {
+      "const": false,
+      "title": "Linux Execution Verified",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "findings": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 0,
+      "title": "Findings",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "checked_at",
+    "repository_head",
+    "installed_files",
+    "immutable_inputs",
+    "all_87_inputs_tracked_non_lfs",
+    "wrapper_path",
+    "wrapper_inventory",
+    "wrapper_payload_count",
+    "installation",
+    "proposal_manifest_sha256",
+    "independent_manifest_sha256",
+    "discovered_untracked_path_count",
+    "discovered_staged_added_path_count",
+    "wrapper_discovery_method",
+    "scanned_wrapper_roots",
+    "scanned_file_count",
+    "scanned_byte_sizes_total",
+    "exact_digest_candidates",
+    "excluded_basename_hits",
+    "excluded_content_hits",
+    "original_user_file",
+    "original_matches_prior_identity",
+    "schema_validation_passed",
+    "copied_public_verifiers_passed",
+    "source_requests",
+    "canonical_writes",
+    "full_suite_rerun",
+    "deployment_verified",
+    "linux_execution_verified",
+    "legal_currentness",
+    "findings",
+    "limitations"
+  ],
+  "title": "Acceptance",
+  "type": "object"
+}

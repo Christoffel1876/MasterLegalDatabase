@@ -1,0 +1,504 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Corpus": {
+      "additionalProperties": false,
+      "properties": {
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "completed_at": {
+          "format": "date-time",
+          "title": "Completed At",
+          "type": "string"
+        },
+        "command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Command",
+          "type": "array"
+        },
+        "exit_code": {
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "stdout": {
+          "$ref": "#/$defs/Asset"
+        },
+        "stderr": {
+          "$ref": "#/$defs/Asset"
+        },
+        "inherited_issue_paths": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Inherited Issue Paths",
+          "type": "array"
+        },
+        "unexpected_issues": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Unexpected Issues",
+          "type": "array"
+        }
+      },
+      "required": [
+        "started_at",
+        "completed_at",
+        "command",
+        "exit_code",
+        "stdout",
+        "stderr",
+        "inherited_issue_paths",
+        "unexpected_issues"
+      ],
+      "title": "Corpus",
+      "type": "object"
+    },
+    "DateAssertion": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "physical_page": {
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "qualification": {
+          "const": "source_statement_only_not_independently_verified",
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "role",
+        "physical_page",
+        "qualification"
+      ],
+      "title": "DateAssertion",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "enum": [
+            "CO-COUNTY-MESA",
+            "CO-MUNICIPAL-GRAND_JUNCTION"
+          ],
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "enum": [
+            "08_County_Authorities",
+            "10_Municipal_Authorities"
+          ],
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "municipal_significant_tree_amendment_instrument",
+            "county_historical_planning_fee_exhibit",
+            "county_building_department_fee_exhibit"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "priority_id": {
+          "title": "Priority Id",
+          "type": "string"
+        },
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "staged_original": {
+          "$ref": "#/$defs/Asset"
+        },
+        "event": {
+          "$ref": "#/$defs/Asset"
+        },
+        "http_started_at": {
+          "format": "date-time",
+          "title": "Http Started At",
+          "type": "string"
+        },
+        "http_completed_at": {
+          "format": "date-time",
+          "title": "Http Completed At",
+          "type": "string"
+        },
+        "exact_requested_url": {
+          "title": "Exact Requested Url",
+          "type": "string"
+        },
+        "exact_final_url": {
+          "title": "Exact Final Url",
+          "type": "string"
+        },
+        "tls_verified": {
+          "const": true,
+          "title": "Tls Verified",
+          "type": "boolean"
+        },
+        "http_status": {
+          "const": 200,
+          "title": "Http Status",
+          "type": "integer"
+        },
+        "redirects": {
+          "const": 0,
+          "title": "Redirects",
+          "type": "integer"
+        },
+        "physical_pages": {
+          "title": "Physical Pages",
+          "type": "integer"
+        },
+        "native_utf8_bytes": {
+          "title": "Native Utf8 Bytes",
+          "type": "integer"
+        },
+        "discovery_visually_reviewed_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Discovery Visually Reviewed Pages",
+          "type": "array"
+        },
+        "intake_title_scope_pages_viewed": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Intake Title Scope Pages Viewed",
+          "type": "array"
+        },
+        "full_text_semantically_reviewed": {
+          "const": false,
+          "title": "Full Text Semantically Reviewed",
+          "type": "boolean"
+        },
+        "native_extraction_gap_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Native Extraction Gap Pages",
+          "type": "array"
+        },
+        "legacy_registry_source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Legacy Registry Source Ids",
+          "type": "array"
+        },
+        "historical_digest_match_records": {
+          "minimum": 0,
+          "title": "Historical Digest Match Records",
+          "type": "integer"
+        },
+        "dates": {
+          "items": {
+            "$ref": "#/$defs/DateAssertion"
+          },
+          "title": "Dates",
+          "type": "array"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "status": {
+          "const": "archived_pending_pipeline",
+          "title": "Status",
+          "type": "string"
+        },
+        "scope_qualifications": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Scope Qualifications",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source_id",
+        "authority_id",
+        "layer_id",
+        "role",
+        "priority_id",
+        "event_id",
+        "staged_original",
+        "event",
+        "http_started_at",
+        "http_completed_at",
+        "exact_requested_url",
+        "exact_final_url",
+        "tls_verified",
+        "http_status",
+        "redirects",
+        "physical_pages",
+        "native_utf8_bytes",
+        "discovery_visually_reviewed_pages",
+        "intake_title_scope_pages_viewed",
+        "full_text_semantically_reviewed",
+        "native_extraction_gap_pages",
+        "legacy_registry_source_ids",
+        "historical_digest_match_records",
+        "dates",
+        "legal_currentness",
+        "status",
+        "scope_qualifications"
+      ],
+      "title": "Source",
+      "type": "object"
+    },
+    "Transaction": {
+      "additionalProperties": false,
+      "properties": {
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "before": {
+          "$ref": "#/$defs/Asset"
+        },
+        "after": {
+          "$ref": "#/$defs/Asset"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "repository_path",
+        "before",
+        "after",
+        "snapshot"
+      ],
+      "title": "Transaction",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "status": {
+      "const": "completed_archived_pending_pipeline",
+      "title": "Status",
+      "type": "string"
+    },
+    "preparation": {
+      "$ref": "#/$defs/Asset"
+    },
+    "records": {
+      "$ref": "#/$defs/Asset"
+    },
+    "provenance": {
+      "$ref": "#/$defs/Asset"
+    },
+    "record_schema": {
+      "$ref": "#/$defs/Asset"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Sources",
+      "type": "array"
+    },
+    "canonical_originals": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Canonical Originals",
+      "type": "array"
+    },
+    "transactions": {
+      "items": {
+        "$ref": "#/$defs/Transaction"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Transactions",
+      "type": "array"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "actual_repository_received_at": {
+      "format": "date-time",
+      "title": "Actual Repository Received At",
+      "type": "string"
+    },
+    "raw_before_records": {
+      "const": 43,
+      "title": "Raw Before Records",
+      "type": "integer"
+    },
+    "raw_after_records": {
+      "const": 46,
+      "title": "Raw After Records",
+      "type": "integer"
+    },
+    "ledger_before_records": {
+      "const": 44,
+      "title": "Ledger Before Records",
+      "type": "integer"
+    },
+    "ledger_after_records": {
+      "const": 47,
+      "title": "Ledger After Records",
+      "type": "integer"
+    },
+    "exact_raw_prefix_preserved": {
+      "const": true,
+      "title": "Exact Raw Prefix Preserved",
+      "type": "boolean"
+    },
+    "exact_ledger_prefix_preserved": {
+      "const": true,
+      "title": "Exact Ledger Prefix Preserved",
+      "type": "boolean"
+    },
+    "other_raw_files_unchanged": {
+      "const": true,
+      "title": "Other Raw Files Unchanged",
+      "type": "boolean"
+    },
+    "reconciliation_replay_added_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reconciliation Replay Added Ids",
+      "type": "array"
+    },
+    "reconciliation_replay_report_changed": {
+      "const": false,
+      "title": "Reconciliation Replay Report Changed",
+      "type": "boolean"
+    },
+    "full_corpus": {
+      "$ref": "#/$defs/Corpus"
+    },
+    "source_pages": {
+      "const": 13,
+      "title": "Source Pages",
+      "type": "integer"
+    },
+    "original_pdf_bytes": {
+      "const": 1742822,
+      "title": "Original Pdf Bytes",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "coverage_or_rule_unit_changes": {
+      "const": "none",
+      "title": "Coverage Or Rule Unit Changes",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "completed_at",
+    "status",
+    "preparation",
+    "records",
+    "provenance",
+    "record_schema",
+    "sources",
+    "canonical_originals",
+    "transactions",
+    "files",
+    "actual_repository_received_at",
+    "raw_before_records",
+    "raw_after_records",
+    "ledger_before_records",
+    "ledger_after_records",
+    "exact_raw_prefix_preserved",
+    "exact_ledger_prefix_preserved",
+    "other_raw_files_unchanged",
+    "reconciliation_replay_added_ids",
+    "reconciliation_replay_report_changed",
+    "full_corpus",
+    "source_pages",
+    "original_pdf_bytes",
+    "legal_currentness",
+    "coverage_or_rule_unit_changes",
+    "limitations"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

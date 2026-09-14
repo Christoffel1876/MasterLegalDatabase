@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "finalized_at": "2026-09-11T19:50:41.154605Z",
+  "activity": "independent_Atlas_directed_access_check",
+  "sherlock010_dispatched": false,
+  "sherlock010_completed": false,
+  "status": "two_exact_pdf_sources_recovered_pending_intake",
+  "network_event_count": 4,
+  "distinct_exact_targets": 2,
+  "tool_preflight_rejections": 0,
+  "publisher_http_responses": 2,
+  "transport_failures_without_http_response": 2,
+  "events": [
+    {
+      "event_id": "ATLAS-WELD-01",
+      "exact_target_url": "https://www.weld.gov/files/sharedassets/public/v/3/departments/planning-and-zoning/documents/long-range/code-changes/ord26-01.3rd-adopted.pdf",
+      "target_attempt_number": 1,
+      "started_at": "2026-09-11T19:48:36.826007Z",
+      "finished_at": "2026-09-11T19:48:36.854648Z",
+      "outcome": "transport_failure_without_http_response",
+      "curl_exit_code": 6,
+      "http_status": null,
+      "stderr_text": "curl: (6) Could not resolve host: www.weld.gov\n",
+      "redirects_followed": 0,
+      "tls_certificate_verification": "not_established_no_http_response",
+      "retained_body": null,
+      "retained_original": null,
+      "round_receipt": {
+        "path": "ACCESS_RECEIPT.json",
+        "sha256": "8c5a7f93018aa0c6cf08337e5e958ac09098ceb2f27ae3f5a36dd25c49f9e36f",
+        "size_bytes": 4774
+      }
+    },
+    {
+      "event_id": "ATLAS-WELD-02",
+      "exact_target_url": "https://www.weld.gov/files/sharedassets/public/v/1/departments/health-and-environment/documents/environmental-health/owts/2026-ehs-fee-schedule_final.pdf",
+      "target_attempt_number": 1,
+      "started_at": "2026-09-11T19:48:36.865122Z",
+      "finished_at": "2026-09-11T19:48:36.880543Z",
+      "outcome": "transport_failure_without_http_response",
+      "curl_exit_code": 6,
+      "http_status": null,
+      "stderr_text": "curl: (6) Could not resolve host: www.weld.gov\n",
+      "redirects_followed": 0,
+      "tls_certificate_verification": "not_established_no_http_response",
+      "retained_body": null,
+      "retained_original": null,
+      "round_receipt": {
+        "path": "ACCESS_RECEIPT.json",
+        "sha256": "8c5a7f93018aa0c6cf08337e5e958ac09098ceb2f27ae3f5a36dd25c49f9e36f",
+        "size_bytes": 4774
+      }
+    },
+    {
+      "event_id": "ATLAS-WELD-03",
+      "exact_target_url": "https://www.weld.gov/files/sharedassets/public/v/3/departments/planning-and-zoning/documents/long-range/code-changes/ord26-01.3rd-adopted.pdf",
+      "target_attempt_number": 2,
+      "started_at": "2026-09-11T19:49:18.249796Z",
+      "finished_at": "2026-09-11T19:49:18.706875Z",
+      "outcome": "http_200_pdf_received",
+      "curl_exit_code": 0,
+      "http_status": 200,
+      "stderr_text": "",
+      "redirects_followed": 0,
+      "tls_certificate_verification": "verified_on_successful_https_connection",
+      "retained_body": {
+        "path": "authorized-http-retry/ATLAS-WELD-03/response-body.bin",
+        "sha256": "2ba9073aa06420e41a5dce98fade56278df96729630f5d61d3ab1c910e839eb0",
+        "size_bytes": 125953
+      },
+      "retained_original": {
+        "path": "authorized-http-retry/ATLAS-WELD-03/ord26-01.3rd-adopted.pdf",
+        "sha256": "2ba9073aa06420e41a5dce98fade56278df96729630f5d61d3ab1c910e839eb0",
+        "size_bytes": 125953
+      },
+      "round_receipt": {
+        "path": "authorized-http-retry/ACCESS_RECEIPT.json",
+        "sha256": "be5aa0ff91e1b2da33bbd21627fe03d91e19f9751dcabe7ebc36e04b061a297e",
+        "size_bytes": 5867
+      }
+    },
+    {
+      "event_id": "ATLAS-WELD-04",
+      "exact_target_url": "https://www.weld.gov/files/sharedassets/public/v/1/departments/health-and-environment/documents/environmental-health/owts/2026-ehs-fee-schedule_final.pdf",
+      "target_attempt_number": 2,
+      "started_at": "2026-09-11T19:49:18.926510Z",
+      "finished_at": "2026-09-11T19:49:19.040662Z",
+      "outcome": "http_200_pdf_received",
+      "curl_exit_code": 0,
+      "http_status": 200,
+      "stderr_text": "",
+      "redirects_followed": 0,
+      "tls_certificate_verification": "verified_on_successful_https_connection",
+      "retained_body": {
+        "path": "authorized-http-retry/ATLAS-WELD-04/response-body.bin",
+        "sha256": "852801c5ad0056c7b0dde6300e66e86f2e4235ce0efc16471d5210d74aa17ed3",
+        "size_bytes": 174911
+      },
+      "retained_original": {
+        "path": "authorized-http-retry/ATLAS-WELD-04/2026-ehs-fee-schedule_final.pdf",
+        "sha256": "852801c5ad0056c7b0dde6300e66e86f2e4235ce0efc16471d5210d74aa17ed3",
+        "size_bytes": 174911
+      },
+      "round_receipt": {
+        "path": "authorized-http-retry/ACCESS_RECEIPT.json",
+        "sha256": "be5aa0ff91e1b2da33bbd21627fe03d91e19f9751dcabe7ebc36e04b061a297e",
+        "size_bytes": 5867
+      }
+    }
+  ],
+  "sources": [
+    {
+      "prepared_queue_reference": "SD010-01",
+      "exact_source_url": "https://www.weld.gov/files/sharedassets/public/v/3/departments/planning-and-zoning/documents/long-range/code-changes/ord26-01.3rd-adopted.pdf",
+      "captured_at": "2026-09-11T19:49:18.706875Z",
+      "original": {
+        "path": "authorized-http-retry/ATLAS-WELD-03/ord26-01.3rd-adopted.pdf",
+        "sha256": "2ba9073aa06420e41a5dce98fade56278df96729630f5d61d3ab1c910e839eb0",
+        "size_bytes": 125953
+      },
+      "physical_pages": 5,
+      "native_nonblank_pages": 5,
+      "native_utf8_bytes": 9284,
+      "source_parser": "PyMuPDF 1.28.2; Page.get_text(text, sort=False, flags=195)",
+      "source_repaired": false,
+      "source_encrypted": false,
+      "queue_recorded_historical_sha256": "2ba9073aa06420e41a5dce98fade56278df96729630f5d61d3ab1c910e839eb0",
+      "measured_digest_equals_queue_historical_digest": true,
+      "old_historical_bytes_reopened": false,
+      "publication_or_adoption_verified": false,
+      "legal_currentness": "not_verified"
+    },
+    {
+      "prepared_queue_reference": "SD010-02",
+      "exact_source_url": "https://www.weld.gov/files/sharedassets/public/v/1/departments/health-and-environment/documents/environmental-health/owts/2026-ehs-fee-schedule_final.pdf",
+      "captured_at": "2026-09-11T19:49:19.040662Z",
+      "original": {
+        "path": "authorized-http-retry/ATLAS-WELD-04/2026-ehs-fee-schedule_final.pdf",
+        "sha256": "852801c5ad0056c7b0dde6300e66e86f2e4235ce0efc16471d5210d74aa17ed3",
+        "size_bytes": 174911
+      },
+      "physical_pages": 3,
+      "native_nonblank_pages": 3,
+      "native_utf8_bytes": 7367,
+      "source_parser": "PyMuPDF 1.28.2; Page.get_text(text, sort=False, flags=195)",
+      "source_repaired": false,
+      "source_encrypted": false,
+      "queue_recorded_historical_sha256": "852801c5ad0056c7b0dde6300e66e86f2e4235ce0efc16471d5210d74aa17ed3",
+      "measured_digest_equals_queue_historical_digest": true,
+      "old_historical_bytes_reopened": false,
+      "publication_or_adoption_verified": false,
+      "legal_currentness": "not_verified"
+    }
+  ],
+  "inventory": [
+    {
+      "path": "ACCESS_RECEIPT.json",
+      "sha256": "8c5a7f93018aa0c6cf08337e5e958ac09098ceb2f27ae3f5a36dd25c49f9e36f",
+      "size_bytes": 4774
+    },
+    {
+      "path": "ACCESS_RECEIPT.schema.json",
+      "sha256": "825be394f99c85ed902668977ef21d26f62038eb88693b56ce73c17af1ff56db",
+      "size_bytes": 7174
+    },
+    {
+      "path": "ATLAS-WELD-01/curl-metadata.json",
+      "sha256": "cddc52b97f5c880ec8ccf73eed0e52e2edd39a406f90e236d3009ec61fbb975e",
+      "size_bytes": 1938
+    },
+    {
+      "path": "ATLAS-WELD-01/curl-stderr.txt",
+      "sha256": "c784a94dbe314ddc65418303ad3da2c3298c9d76370bdcb472a002e7e8041c2f",
+      "size_bytes": 47
+    },
+    {
+      "path": "ATLAS-WELD-01/response-headers.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "ATLAS-WELD-02/curl-metadata.json",
+      "sha256": "015459815437d6db0ca83005bf70b74f6b6575412a39ee0b2cd500a31956306f",
+      "size_bytes": 1986
+    },
+    {
+      "path": "ATLAS-WELD-02/curl-stderr.txt",
+      "sha256": "c784a94dbe314ddc65418303ad3da2c3298c9d76370bdcb472a002e7e8041c2f",
+      "size_bytes": 47
+    },
+    {
+      "path": "ATLAS-WELD-02/response-headers.bin",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "RESULT.md",
+      "sha256": "c57510c45bc1369f93b48c12f99794f3b67916d8d026be46c4537cfa27e82173",
+      "size_bytes": 2955
+    },
+    {
+      "path": "authorized-http-retry/ACCESS_RECEIPT.json",
+      "sha256": "be5aa0ff91e1b2da33bbd21627fe03d91e19f9751dcabe7ebc36e04b061a297e",
+      "size_bytes": 5867
+    },
+    {
+      "path": "authorized-http-retry/ACCESS_RECEIPT.schema.json",
+      "sha256": "9814d628a7b7ea0208fec65f4a32bb8c0de505166b8843500e6da5a672ee1e7c",
+      "size_bytes": 7641
+    },
+    {
+      "path": "authorized-http-retry/ATLAS-WELD-03/curl-metadata.json",
+      "sha256": "706f61d04535bf0702a486aa1af982b643982128452a30a36b524dd2a60c9fc3",
+      "size_bytes": 22662
+    },
+    {
+      "path": "authorized-http-retry/ATLAS-WELD-03/curl-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "authorized-http-retry/ATLAS-WELD-03/ord26-01.3rd-adopted.pdf",
+      "sha256": "2ba9073aa06420e41a5dce98fade56278df96729630f5d61d3ab1c910e839eb0",
+      "size_bytes": 125953
+    },
+    {
+      "path": "authorized-http-retry/ATLAS-WELD-03/response-body.bin",
+      "sha256": "2ba9073aa06420e41a5dce98fade56278df96729630f5d61d3ab1c910e839eb0",
+      "size_bytes": 125953
+    },
+    {
+      "path": "authorized-http-retry/ATLAS-WELD-03/response-headers.bin",
+      "sha256": "e6304fb348d0b2d52ba5679a0aabc934d295501055204a7046f697a33f4dd171",
+      "size_bytes": 620
+    },
+    {
+      "path": "authorized-http-retry/ATLAS-WELD-04/2026-ehs-fee-schedule_final.pdf",
+      "sha256": "852801c5ad0056c7b0dde6300e66e86f2e4235ce0efc16471d5210d74aa17ed3",
+      "size_bytes": 174911
+    },
+    {
+      "path": "authorized-http-retry/ATLAS-WELD-04/curl-metadata.json",
+      "sha256": "a251a39be50ac83890842cdcf6ff3d0401703090aaf631e4d588628b99d0b47c",
+      "size_bytes": 22711
+    },
+    {
+      "path": "authorized-http-retry/ATLAS-WELD-04/curl-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "authorized-http-retry/ATLAS-WELD-04/response-body.bin",
+      "sha256": "852801c5ad0056c7b0dde6300e66e86f2e4235ce0efc16471d5210d74aa17ed3",
+      "size_bytes": 174911
+    },
+    {
+      "path": "authorized-http-retry/ATLAS-WELD-04/response-headers.bin",
+      "sha256": "abd19c719780fb288c666bcd6eba002b9b8b397387a757eb2fb7b07f2286406d",
+      "size_bytes": 614
+    },
+    {
+      "path": "authorized-http-retry/queue.md",
+      "sha256": "149f62f5f46540c589a89a51acb1623aa4c7fb841fa8a095343d87c821b23aaf",
+      "size_bytes": 8422
+    },
+    {
+      "path": "queue.md",
+      "sha256": "149f62f5f46540c589a89a51acb1623aa4c7fb841fa8a095343d87c821b23aaf",
+      "size_bytes": 8422
+    }
+  ],
+  "scope_limits": [
+    "Only the two exact prepared-queue URLs were requested, twice each; there are no remaining attempts in this bounded Atlas check.",
+    "The initial curl DNS failures are not publisher HTTP responses or tool preflight rejections. Their network cause is not inferred.",
+    "The successful attempts used narrow authorized network access with ordinary TLS, no redirect following and no identity or authentication changes.",
+    "Native structural counts are not transcription or visual fidelity review. Neither source was assessed for legal effect, currentness or amendment completeness.",
+    "The matched historical strings were supplied by the queue; historical original files were not reopened.",
+    "This preserves received evidence outside the repository. Canonical intake, source-referral verification, adoption evidence and any later review remain separate authorized work."
+  ],
+  "legal_currentness": "not_verified"
+}

@@ -1,0 +1,60 @@
+from pathlib import Path
+from datetime import datetime,timezone
+import ast,json,hashlib,shutil
+B=Path('/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13');S=B/'ptolemy-manual-watch-ci-preparation';A=B/'ptolemy-manual-watch-ci-compliance-revision';A.mkdir(exist_ok=False)
+for folder in ['proposed/tests','proposed/docs','before/tests','before/docs','evidence']:(A/folder).mkdir(parents=True)
+source=S/'proposed/tests/test_manual_source_watch_ci.py';data=source.read_bytes();text=data.decode();tree=ast.parse(text)
+(A/'before/tests'/source.name).write_bytes(data)
+lines=text.splitlines();replacements=[]
+types={'self':'Process','root':'Path','plan':'dict[str, Any]','status':'str','fail':'str | None','argv':'list[str]','kwargs':'Any','tmp_path':'Path','monkeypatch':'pytest.MonkeyPatch','packet':'tuple[Path, dict[str, Any]]','expected':'str','failure':'str','name':'str','capsys':'pytest.CaptureFixture[str]','change':'str','field':'str','value':'Any','path':'str','data':'bytes'}
+for node in ast.walk(tree):
+ if not isinstance(node,(ast.FunctionDef,ast.AsyncFunctionDef)):continue
+ args=node.args.args;nd=len(node.args.defaults);parts=[]
+ for i,arg in enumerate(args):
+  anno=types[arg.arg]
+  part=arg.arg+': '+anno
+  if i>=len(args)-nd:part+=' = '+ast.get_source_segment(text,node.args.defaults[i-len(args)+nd])
+  parts.append(part)
+ if node.args.vararg:raise ValueError('Unexpected positional varargs')
+ if node.args.kwarg:parts.append('**'+node.args.kwarg.arg+': Any')
+ ret='None'
+ if node.name=='packet':ret='tuple[Path, dict[str, Any]]'
+ elif node.name=='ref':ret='dict[str, Any]'
+ elif node.name in {'__call__','mutate','mixed','forged','tamper','inspect','stopped','inconsistent'}:ret='SimpleNamespace'
+ indent=' '*node.col_offset
+ header=indent+'def '+node.name+'('+', '.join(parts)+') -> '+ret+':'
+ if len(header)>100:
+  header=indent+'def '+node.name+'(\n'+''.join(indent+'    '+p+',\n' for p in parts)+indent+') -> '+ret+':'
+ start=node.lineno-1;end=node.body[0].lineno-1
+ replacements.append((start,end,header.splitlines()))
+for start,end,new in sorted(replacements,reverse=True):lines[start:end]=new
+out='\n'.join(lines)+'\n';out=out.replace('from types import SimpleNamespace\n','from types import SimpleNamespace\nfrom typing import Any\n')
+assert all(len(line)<=100 for line in out.splitlines())
+(A/'proposed/tests'/source.name).write_text(out)
+source=S/'proposed/docs/MANUAL_SOURCE_WATCH_CI.md';data=source.read_bytes();(A/'before/docs'/source.name).write_bytes(data)
+front='''---
+status: prepared_not_installed_not_deployed
+scope: eight_fixed_manual_pdf_sources
+scheduled_http_default: disabled
+manual_http_default: disabled
+legal_currentness: not_verified
+---
+
+'''
+(A/'proposed/docs'/source.name).write_bytes(front.encode()+data)
+class RemoveAnnotations(ast.NodeTransformer):
+ def visit_arg(self,node):
+  node.annotation=None;return node
+ def visit_FunctionDef(self,node):
+  node.returns=None;node.type_comment=None;self.generic_visit(node);return node
+ def visit_ImportFrom(self,node):
+  if node.module=='typing' and [n.name for n in node.names]==['Any']:return None
+  return node
+old=RemoveAnnotations().visit(ast.parse(text));new=RemoveAnnotations().visit(ast.parse(out));assert ast.dump(old,include_attributes=False)==ast.dump(new,include_attributes=False)
+newtree=ast.parse(out,feature_version=(3,11));funcs=[n for n in ast.walk(newtree) if isinstance(n,ast.FunctionDef)]
+assert all(n.returns is not None for n in funcs)
+assert all(a.annotation is not None for n in funcs for a in [*n.args.args,*n.args.kwonlyargs]+([n.args.kwarg] if n.args.kwarg else []))
+record={'status':'PASS','checked_at':datetime.now(timezone.utc).isoformat(),'old_test_sha256':hashlib.sha256(text.encode()).hexdigest(),'new_test_sha256':hashlib.sha256(out.encode()).hexdigest(),'equivalence':'All AST nodes equal after removing parameter/return annotations and the added annotation-only from typing import Any statement. Function bodies, assertions, decorators, defaults and string values remain equal.','function_definitions':len(funcs),'all_parameters_and_returns_annotated':True,'python311_syntax_pass':True,'max_line_length':max(map(len,out.splitlines())),'doc_only_added_frontmatter':True}
+(A/'evidence/AST_EQUIVALENCE.json').write_text(json.dumps(record,indent=2)+'\n')
+shutil.copyfile(S/'FINAL_MANIFEST.json',A/'evidence/PREDECESSOR_MANIFEST.json')
+print(json.dumps(record,indent=2))

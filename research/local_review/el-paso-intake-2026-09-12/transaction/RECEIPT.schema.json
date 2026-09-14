@@ -1,0 +1,375 @@
+{
+  "$defs": {
+    "Change": {
+      "additionalProperties": false,
+      "description": "Allow only exact before/after bytes and a write-once preimage.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "before": {
+          "$ref": "#/$defs/File"
+        },
+        "after": {
+          "$ref": "#/$defs/File"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/File"
+        }
+      },
+      "required": [
+        "path",
+        "before",
+        "after",
+        "snapshot"
+      ],
+      "title": "Change",
+      "type": "object"
+    },
+    "File": {
+      "additionalProperties": false,
+      "description": "One source or transaction file bound to its exact bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    },
+    "Intent": {
+      "additionalProperties": false,
+      "description": "Persist actual application time before any repository writes.",
+      "properties": {
+        "schema_version": {
+          "const": 1,
+          "title": "Schema Version",
+          "type": "integer"
+        },
+        "transaction_id": {
+          "title": "Transaction Id",
+          "type": "string"
+        },
+        "root": {
+          "title": "Root",
+          "type": "string"
+        },
+        "preparation_sha256": {
+          "title": "Preparation Sha256",
+          "type": "string"
+        },
+        "actual_repository_received_at": {
+          "format": "date-time",
+          "title": "Actual Repository Received At",
+          "type": "string"
+        },
+        "records": {
+          "items": {
+            "$ref": "#/$defs/NewRecord"
+          },
+          "maxItems": 13,
+          "minItems": 13,
+          "title": "Records",
+          "type": "array"
+        },
+        "suffix": {
+          "$ref": "#/$defs/File"
+        },
+        "changes": {
+          "items": {
+            "$ref": "#/$defs/Change"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Changes",
+          "type": "array"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "answer_safe": {
+          "const": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        },
+        "source_provenance_sha256": {
+          "title": "Source Provenance Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema_version",
+        "transaction_id",
+        "root",
+        "preparation_sha256",
+        "actual_repository_received_at",
+        "records",
+        "suffix",
+        "changes",
+        "legal_currentness",
+        "answer_safe",
+        "source_provenance_sha256"
+      ],
+      "title": "Intent",
+      "type": "object"
+    },
+    "NewRecord": {
+      "additionalProperties": false,
+      "description": "Constrain final records to the approved source-only custody method.",
+      "properties": {
+        "intake_id": {
+          "title": "Intake Id",
+          "type": "string"
+        },
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "const": "08_County_Authorities",
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "official_source_name": {
+          "title": "Official Source Name",
+          "type": "string"
+        },
+        "official_source_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Official Source Url"
+        },
+        "acquisition_method": {
+          "const": "received_review_package",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "received_from": {
+          "title": "Received From",
+          "type": "string"
+        },
+        "reviewer_name": {
+          "title": "Reviewer Name",
+          "type": "string"
+        },
+        "reviewer_email": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewer Email"
+        },
+        "custody_note": {
+          "title": "Custody Note",
+          "type": "string"
+        },
+        "original_filename": {
+          "title": "Original Filename",
+          "type": "string"
+        },
+        "archive_path": {
+          "title": "Archive Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 1,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "source_format": {
+          "const": "pdf",
+          "title": "Source Format",
+          "type": "string"
+        },
+        "received_at": {
+          "format": "date-time",
+          "title": "Received At",
+          "type": "string"
+        },
+        "status": {
+          "const": "archived_pending_pipeline",
+          "title": "Status",
+          "type": "string"
+        },
+        "blocked_queue_match": {
+          "const": false,
+          "title": "Blocked Queue Match",
+          "type": "boolean"
+        },
+        "boundary": {
+          "title": "Boundary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "intake_id",
+        "record_id",
+        "layer_id",
+        "official_source_name",
+        "acquisition_method",
+        "received_from",
+        "reviewer_name",
+        "custody_note",
+        "original_filename",
+        "archive_path",
+        "sha256",
+        "size_bytes",
+        "source_format",
+        "received_at",
+        "status",
+        "blocked_queue_match",
+        "boundary"
+      ],
+      "title": "NewRecord",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Describe completed custody, preserving all acquisition and review limits.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "status": {
+      "const": "completed_archived_pending_pipeline",
+      "title": "Status",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "actual_repository_received_at": {
+      "format": "date-time",
+      "title": "Actual Repository Received At",
+      "type": "string"
+    },
+    "intent_sha256": {
+      "title": "Intent Sha256",
+      "type": "string"
+    },
+    "intent": {
+      "$ref": "#/$defs/Intent"
+    },
+    "originals": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "maxItems": 13,
+      "minItems": 13,
+      "title": "Originals",
+      "type": "array"
+    },
+    "raw_before": {
+      "const": 46,
+      "title": "Raw Before",
+      "type": "integer"
+    },
+    "raw_after": {
+      "const": 59,
+      "title": "Raw After",
+      "type": "integer"
+    },
+    "ledger_before": {
+      "const": 47,
+      "title": "Ledger Before",
+      "type": "integer"
+    },
+    "ledger_after": {
+      "const": 60,
+      "title": "Ledger After",
+      "type": "integer"
+    },
+    "exact_prefixes_preserved": {
+      "const": true,
+      "title": "Exact Prefixes Preserved",
+      "type": "boolean"
+    },
+    "reconciliation_added_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reconciliation Added Ids",
+      "type": "array"
+    },
+    "reconciliation_report_changed": {
+      "const": false,
+      "title": "Reconciliation Report Changed",
+      "type": "boolean"
+    },
+    "full_corpus_validation": {
+      "const": "not_run_by_this_transaction",
+      "title": "Full Corpus Validation",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "completed_at",
+    "actual_repository_received_at",
+    "intent_sha256",
+    "intent",
+    "originals",
+    "raw_before",
+    "raw_after",
+    "ledger_before",
+    "ledger_after",
+    "exact_prefixes_preserved",
+    "reconciliation_added_ids",
+    "reconciliation_report_changed",
+    "full_corpus_validation",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

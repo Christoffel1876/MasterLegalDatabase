@@ -1,0 +1,76 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "accepted_scoped_source_review",
+      "title": "Status",
+      "type": "string"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "review_manifest_sha256": {
+      "title": "Review Manifest Sha256",
+      "type": "string"
+    },
+    "reviewed_grid_sha256": {
+      "title": "Reviewed Grid Sha256",
+      "type": "string"
+    },
+    "original_files": {
+      "title": "Original Files",
+      "type": "integer"
+    },
+    "exact_copy": {
+      "title": "Exact Copy",
+      "type": "boolean"
+    },
+    "directly_inspected_pages": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Directly Inspected Pages",
+      "type": "array"
+    },
+    "directly_inspected_crops": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Directly Inspected Crops",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "source_sha256",
+    "review_manifest_sha256",
+    "reviewed_grid_sha256",
+    "original_files",
+    "exact_copy",
+    "directly_inspected_pages",
+    "directly_inspected_crops",
+    "observations",
+    "legal_currentness"
+  ],
+  "title": "Acceptance",
+  "type": "object"
+}

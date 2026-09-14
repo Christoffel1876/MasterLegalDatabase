@@ -1,0 +1,53 @@
+{
+  "schema_version": "cwrc-validation-1",
+  "recorded_at": "2026-09-13T16:39:24.099889Z",
+  "source_qa": {
+    "path": "SOURCE_QA.json",
+    "sha256": "510cb7269a17a82222a1d0c1f18a7f519e95fb1aee15afd85ab5649cd9435ea9",
+    "size_bytes": 303552
+  },
+  "verifier": {
+    "path": "verify_source_review.py",
+    "sha256": "4f610116e3bb24e99f1352211b78fe4571a74d4703a40cd68779ef19b44a8dd4",
+    "size_bytes": 15074
+  },
+  "models": {
+    "path": "models.py",
+    "sha256": "7bb54c6ea7c26e5608015d486318af6a292d04d1b1f36007034786f1484b81a5",
+    "size_bytes": 4609
+  },
+  "tests": {
+    "path": "test_review.py",
+    "sha256": "3a3acfe6abba18176248be800be12a2df3af184477380977fe7bbe9593afc777",
+    "size_bytes": 8998
+  },
+  "test_log": {
+    "path": "validation/focused-seal.log",
+    "sha256": "0fa2412ae67eda4fc0de8229aa469994367742856c92a1f858329f81a7bee596",
+    "size_bytes": 1911
+  },
+  "coverage": {
+    "path": "validation/coverage-seal.json",
+    "sha256": "b5f46539247ae1560409d2af1235b2b46427b6020ccb0a0e90e0e5d3fff943b2",
+    "size_bytes": 21116
+  },
+  "passed_tests": 63,
+  "measured_line_and_branch_coverage": 94.13793103448276,
+  "coverage_subjects": [
+    "models.py",
+    "verify_source_review.py"
+  ],
+  "structural_result": {
+    "status": "PASS",
+    "physical_pages": 14,
+    "full_pages_visually_reviewed": 14,
+    "exact_half_page_crops": 28,
+    "segments": 174,
+    "ocr_lines": 432,
+    "native_bytes": 0,
+    "checked_transcript_bytes": 27198,
+    "answer_safe": false,
+    "legal_currentness": "not_verified"
+  },
+  "limitation": "Tests are offline, use temporary/in-memory corruption fixtures and include all fourteen fresh Poppler render comparisons. Coverage excludes historical retrieval, OCR execution and one-time construction; neither tests nor hashes independently prove human visual fidelity or legal currentness. Root acceptance is separately recorded."
+}

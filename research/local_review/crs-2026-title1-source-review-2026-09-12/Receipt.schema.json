@@ -1,0 +1,181 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "An exact retained byte identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Actual HTTP evidence with cookie-free public header derivatives.",
+  "properties": {
+    "event_id": {
+      "title": "Event Id",
+      "type": "string"
+    },
+    "method": {
+      "const": "GET",
+      "default": "GET",
+      "title": "Method",
+      "type": "string"
+    },
+    "requested_url": {
+      "title": "Requested Url",
+      "type": "string"
+    },
+    "observed_response_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Observed Response Url"
+    },
+    "redirect_location": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Redirect Location"
+    },
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "title": "Completed At",
+      "type": "string"
+    },
+    "curl_exit": {
+      "title": "Curl Exit",
+      "type": "integer"
+    },
+    "http_status": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Http Status"
+    },
+    "content_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Content Type"
+    },
+    "tls_verification_result": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Tls Verification Result"
+    },
+    "body": {
+      "$ref": "#/$defs/Ref"
+    },
+    "headers_derivative": {
+      "$ref": "#/$defs/Ref"
+    },
+    "header_original_sha256": {
+      "title": "Header Original Sha256",
+      "type": "string"
+    },
+    "header_original_size_bytes": {
+      "title": "Header Original Size Bytes",
+      "type": "integer"
+    },
+    "redacted_header_lines": {
+      "title": "Redacted Header Lines",
+      "type": "integer"
+    },
+    "original_headers_retained": {
+      "const": false,
+      "default": false,
+      "title": "Original Headers Retained",
+      "type": "boolean"
+    },
+    "curl_metadata": {
+      "$ref": "#/$defs/Ref"
+    },
+    "stderr": {
+      "$ref": "#/$defs/Ref"
+    },
+    "response_complete": {
+      "title": "Response Complete",
+      "type": "boolean"
+    },
+    "automatic_redirects": {
+      "const": false,
+      "default": false,
+      "title": "Automatic Redirects",
+      "type": "boolean"
+    },
+    "qualification": {
+      "title": "Qualification",
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "requested_url",
+    "observed_response_url",
+    "redirect_location",
+    "started_at",
+    "completed_at",
+    "curl_exit",
+    "http_status",
+    "content_type",
+    "tls_verification_result",
+    "body",
+    "headers_derivative",
+    "header_original_sha256",
+    "header_original_size_bytes",
+    "redacted_header_lines",
+    "curl_metadata",
+    "stderr",
+    "response_complete",
+    "qualification"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

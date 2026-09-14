@@ -1,0 +1,253 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact ordinary package-relative file binding.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Redaction": {
+      "additionalProperties": false,
+      "description": "One omitted original and its explicitly marked distributable derivative.",
+      "properties": {
+        "excluded_original": {
+          "$ref": "#/$defs/Asset"
+        },
+        "derivative": {
+          "$ref": "#/$defs/Asset"
+        },
+        "reason": {
+          "const": "Set-Cookie session value excluded from distribution",
+          "title": "Reason",
+          "type": "string"
+        },
+        "transformation": {
+          "title": "Transformation",
+          "type": "string"
+        },
+        "original_checked_against_handoff_before_packaging": {
+          "const": true,
+          "title": "Original Checked Against Handoff Before Packaging",
+          "type": "boolean"
+        },
+        "original_digest_recomputed_by_portable_validator": {
+          "const": false,
+          "title": "Original Digest Recomputed By Portable Validator",
+          "type": "boolean"
+        },
+        "sensitive_lines_replaced": {
+          "const": 1,
+          "title": "Sensitive Lines Replaced",
+          "type": "integer"
+        },
+        "original_retained_in_handoff": {
+          "const": true,
+          "title": "Original Retained In Handoff",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "excluded_original",
+        "derivative",
+        "reason",
+        "transformation",
+        "original_checked_against_handoff_before_packaging",
+        "original_digest_recomputed_by_portable_validator",
+        "sensitive_lines_replaced",
+        "original_retained_in_handoff"
+      ],
+      "title": "Redaction",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Research-only status without closing the missing legal-instrument chain.",
+  "properties": {
+    "package_id": {
+      "const": "arapahoe-resolution26-224-evidence-2026-09-11",
+      "title": "Package Id",
+      "type": "string"
+    },
+    "packaged_at": {
+      "format": "date-time",
+      "title": "Packaged At",
+      "type": "string"
+    },
+    "historical_handoff": {
+      "title": "Historical Handoff",
+      "type": "string"
+    },
+    "frozen_handoff_inventory": {
+      "$ref": "#/$defs/Asset"
+    },
+    "frozen_audit": {
+      "$ref": "#/$defs/Asset"
+    },
+    "handoff_files_total": {
+      "const": 36,
+      "title": "Handoff Files Total",
+      "type": "integer"
+    },
+    "exact_handoff_files_included": {
+      "const": 35,
+      "title": "Exact Handoff Files Included",
+      "type": "integer"
+    },
+    "exact_handoff_bytes_included": {
+      "const": 1513543,
+      "title": "Exact Handoff Bytes Included",
+      "type": "integer"
+    },
+    "redactions": {
+      "items": {
+        "$ref": "#/$defs/Redaction"
+      },
+      "maxItems": 1,
+      "minItems": 1,
+      "title": "Redactions",
+      "type": "array"
+    },
+    "source_attachment_sha256": {
+      "const": "8f1e94f6332fc9c36ee479f4673e2f85a533b2b777f29cbfc9757c2adcd41e6c",
+      "title": "Source Attachment Sha256",
+      "type": "string"
+    },
+    "source_attachment_pages": {
+      "const": 2,
+      "title": "Source Attachment Pages",
+      "type": "integer"
+    },
+    "original_access_events_counted": {
+      "const": 8,
+      "title": "Original Access Events Counted",
+      "type": "integer"
+    },
+    "original_distinct_targets": {
+      "const": 6,
+      "title": "Original Distinct Targets",
+      "type": "integer"
+    },
+    "new_public_access_events": {
+      "const": 0,
+      "title": "New Public Access Events",
+      "type": "integer"
+    },
+    "scope": {
+      "const": "preserve_completed_bounded_source_review_only",
+      "title": "Scope",
+      "type": "string"
+    },
+    "item_metadata": {
+      "const": "26-403: Passed; final action 9/8/2026",
+      "title": "Item Metadata",
+      "type": "string"
+    },
+    "item_metadata_qualification": {
+      "title": "Item Metadata Qualification",
+      "type": "string"
+    },
+    "attachment_status": {
+      "const": "unnumbered_unfilled_resolution_attachment",
+      "title": "Attachment Status",
+      "type": "string"
+    },
+    "numbered_executed_resolution_26_224_confirmed": {
+      "const": false,
+      "title": "Numbered Executed Resolution 26 224 Confirmed",
+      "type": "boolean"
+    },
+    "adoption_date": {
+      "title": "Adoption Date",
+      "type": "null"
+    },
+    "effective_date": {
+      "title": "Effective Date",
+      "type": "null"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "raw_manifest_or_ledger_intake": {
+      "const": false,
+      "title": "Raw Manifest Or Ledger Intake",
+      "type": "boolean"
+    },
+    "semantic_or_coverage_promotion": {
+      "const": false,
+      "title": "Semantic Or Coverage Promotion",
+      "type": "boolean"
+    },
+    "external_assignment": {
+      "title": "External Assignment",
+      "type": "null"
+    },
+    "privacy_check": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Privacy Check",
+      "type": "array"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "package_id",
+    "packaged_at",
+    "historical_handoff",
+    "frozen_handoff_inventory",
+    "frozen_audit",
+    "handoff_files_total",
+    "exact_handoff_files_included",
+    "exact_handoff_bytes_included",
+    "redactions",
+    "source_attachment_sha256",
+    "source_attachment_pages",
+    "original_access_events_counted",
+    "original_distinct_targets",
+    "new_public_access_events",
+    "scope",
+    "item_metadata",
+    "item_metadata_qualification",
+    "attachment_status",
+    "numbered_executed_resolution_26_224_confirmed",
+    "adoption_date",
+    "effective_date",
+    "legal_currentness",
+    "raw_manifest_or_ledger_intake",
+    "semantic_or_coverage_promotion",
+    "external_assignment",
+    "privacy_check",
+    "limits"
+  ],
+  "title": "Status",
+  "type": "object"
+}

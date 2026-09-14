@@ -1,0 +1,181 @@
+{
+  "recorded_at": "2026-09-11T21:18:56.075215Z",
+  "baseline_commit": "0681fcc",
+  "full_test_command": "COVERAGE_FILE=/private/tmp/geode-session2-full.coverage PYTHONDONTWRITEBYTECODE=1 /private/tmp/geode-status-venv/bin/python -m pytest tests/ geode/orchestration/tests/ -q --cov=geode --cov-report=term-missing",
+  "full_test_exit_code": 0,
+  "full_test_passed": 1951,
+  "full_test_warnings": 136,
+  "full_test_seconds": 231.23,
+  "full_geode_coverage_percent": 78,
+  "focused_checks": [
+    "Root: 28 artifact-readiness tests, 100% coverage of lfs_pointer and ai_readiness.",
+    "Ptolemy: 59 inventory tests, 99% module coverage; actual CLI --check passed.",
+    "Popper: 86 lookup tests, 95.77% module coverage; 36 earlier GJ cases retained.",
+    "Root: actual Greeley CLI from outside the repository; all 29 exact spans cover 3,236 native bytes, with candidate offset 56 and five footnote associations.",
+    "Root: copied all 24 Larimer access-package files byte-for-byte and ran its isolated offline validator: passed, 22 inventoried payload files, no acquired original."
+  ],
+  "actual_readiness_status": "needs_review",
+  "actual_readiness_passed": 13,
+  "actual_readiness_total": 16,
+  "unavailable_content_files": [
+    "_CONTROL_PLANE/RETRIEVAL_CATALOG.jsonl",
+    "08_County_Authorities/_index.jsonl",
+    "_CONTROL_PLANE/LOCAL_REVIEW_QUEUE.jsonl"
+  ],
+  "actual_corpus_validator_exit": 1,
+  "actual_corpus_validator_issues": 2,
+  "corpus_qualification": "python -m geode.validate --layer all logs to stderr. The two actual issues are the unavailable county index and review queue. This is an expected corpus failure, distinct from passing implementation tests and from the readiness report, which also checks the retrieval catalog.",
+  "source_inventory_counts": {
+    "distinct_originals": 46,
+    "explicit_review_links": 18,
+    "no_mapped_review_link": 28,
+    "verified_http_times": 9,
+    "received_time_only": 37
+  },
+  "independent_reviews": [
+    {
+      "reviewer": "Popper",
+      "scope": "Frozen manual-source inventory metadata and joins",
+      "result": "No actionable mismatch; 92 referenced artifacts and all46 raw hashes checked.",
+      "qualification": "Not a new visual transcription review or legal-currentness check."
+    },
+    {
+      "reviewer": "Plato",
+      "scope": "Frozen Greeley lookup and retained GJ behavior",
+      "result": "No actionable mismatch; all19 entries, 29spans, dates, refusals, footnotes and127package files checked without evidence mutation.",
+      "qualification": "Only the two exposed source slices; external EB015–017 review is pending."
+    },
+    {
+      "reviewer": "Plato",
+      "scope": "Readiness helper and missing-input attribution",
+      "result": "No actionable mismatch; state-only fixture retrieval preserved, malformed dependent input attributed correctly.",
+      "qualification": "Does not recover original missing content or make broad retrieval ready."
+    }
+  ],
+  "implementation": [
+    {
+      "path": "geode/utils/lfs_pointer.py",
+      "sha256": "be3d158de11c6e214694d365c5ede7b60bb41f3c53e118cb149852297c87a7bb",
+      "size_bytes": 2272
+    },
+    {
+      "path": "geode/pipeline/ai_readiness.py",
+      "sha256": "a466b4d325623206a282a424a2615602610a05489247a82dfbcb9d8df3afe57a",
+      "size_bytes": 8683
+    },
+    {
+      "path": "geode/validation/checks.py",
+      "sha256": "28fc80e06ff70c371b7e50357941b96088ca0bc8d6dcb198cc26b8f6499b33ba",
+      "size_bytes": 39359
+    },
+    {
+      "path": "geode/orchestration/services/retrieval.py",
+      "sha256": "4ae406132944cf2ec4d970c6ea76302324ad35becbf4150eb15063247e37ca47",
+      "size_bytes": 23788
+    },
+    {
+      "path": "geode/pipeline/manual_review_inventory.py",
+      "sha256": "8fc5ba763e065ae3d821b12e4d9e0449d59b3312b86074fa94fb2875f66dfb5e",
+      "size_bytes": 20946
+    },
+    {
+      "path": "scripts/research_source_lookup.py",
+      "sha256": "2d25d13d938b0e89f5f64cda5ec927a460f1f58d9d4ee698fcbdb2ebce03ebc9",
+      "size_bytes": 31014
+    },
+    {
+      "path": "tests/test_artifact_readiness.py",
+      "sha256": "1d3f2925ce9c5421cb2c34a48846240c83b968e93dc4b45a6875037ba2809898",
+      "size_bytes": 11558
+    },
+    {
+      "path": "tests/test_manual_review_inventory.py",
+      "sha256": "60d5e6c1b72cf118d60844938ec5e5c8ef18bc07b0abc21414717cf52ccbc57b",
+      "size_bytes": 19654
+    },
+    {
+      "path": "tests/test_research_source_lookup.py",
+      "sha256": "3d6d39b01b9731c4751830fde00c9b254896cba8c68fe72b98d43fdd8a7dc83f",
+      "size_bytes": 31025
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs/audits/ONE_HOUR_CONTINUATION_2026-09-11/corpus-validation.stderr.log",
+      "sha256": "692ef436ad8bb849efa04976df37b7c92e31a839f986b528248c1e77b62ed64d",
+      "size_bytes": 793
+    },
+    {
+      "path": "docs/audits/ONE_HOUR_CONTINUATION_2026-09-11/full-tests.log",
+      "sha256": "66e74405a6aa6a0483847c18556cc5f423311525ee25dbb2d1ff2e8b5aef8b7b",
+      "size_bytes": 97710
+    },
+    {
+      "path": "docs/audits/ONE_HOUR_CONTINUATION_2026-09-11/greeley-all-entries.json",
+      "sha256": "09eebf3ed928b36344f2d602649508956c06fdcd11e3f7d9b8f8c0e1fc23de2a",
+      "size_bytes": 77057
+    },
+    {
+      "path": "docs/audits/ONE_HOUR_CONTINUATION_2026-09-11/greeley-result.schema.json",
+      "sha256": "9dc8ee888ced786f8a59eddba90e60daa674a82c82c8ce9161a97d44654d6240",
+      "size_bytes": 11465
+    },
+    {
+      "path": "docs/audits/ONE_HOUR_CONTINUATION_2026-09-11/readiness-report.json",
+      "sha256": "72637ed95e998c707231b806483c43186a821aa70a861c44c18b868a002e7950",
+      "size_bytes": 5950
+    },
+    {
+      "path": "docs/audits/ONE_HOUR_CONTINUATION_2026-09-11/readiness-report.schema.json",
+      "sha256": "bdc2b4da7858fe6bde1058698f6393c025cc890dc44e107623dafabe213abe8c",
+      "size_bytes": 3315
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/inventory.json",
+      "sha256": "8ed3b8f5f63177d6cdcb39fdbf582fd2d2cfaff09781c9a34645413a43c8296a",
+      "size_bytes": 267875
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/inventory.schema.json",
+      "sha256": "4418485d2a0dfe3a4e9f9a6a392a4309bae9774dc1c2a9c1ff8ed8479ec34f14",
+      "size_bytes": 9654
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/join-plan.json",
+      "sha256": "cb3b70b9fcf272321a59843e805cc6418fb308b08413f1ace3fbac5f29635e23",
+      "size_bytes": 70795
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/README.md",
+      "sha256": "b44fdad53c91c90f87bf3758c739c2f95504a0e0e8013a31a0e9b81c5eeabe8e",
+      "size_bytes": 6196
+    },
+    {
+      "path": "research/local_review/larimer-extension-access-session2-2026-09-11/FINAL_MANIFEST.json",
+      "sha256": "9ae6b9ad4823ea8c4375248be2d35b0f3ea9c564e328f7e87a61dc362f148dcf",
+      "size_bytes": 3781
+    },
+    {
+      "path": "research/local_review/larimer-extension-access-session2-2026-09-11/AUDIT.json",
+      "sha256": "ce600a6b3851caece9c6956c456df5b70834fc696c151a703fe83806b55faa24",
+      "size_bytes": 17771
+    },
+    {
+      "path": "research/local_review/larimer-extension-access-session2-2026-09-11/REPORT.md",
+      "sha256": "e5f85a7b06e799fa2377b7325fe04bec25cd77386fbe8d5e363ebe3310d53aa6",
+      "size_bytes": 4065
+    }
+  ],
+  "legal_currentness": "not_verified",
+  "answer_safe": false,
+  "canonical_coverage_promotion": false,
+  "limitations": [
+    "The 46-source inventory is an additive custody/review join; the older coverage ledger is unchanged.",
+    "A null review join means no allowlisted mapping, not proof that nobody inspected the source.",
+    "Grand Junction57rows and Greeley19entries are separate source slices, not jurisdiction coverage.",
+    "The three original Git LFS content objects remain unavailable; no replacement is represented as recovery.",
+    "Larimer access/search failure is bounded and does not prove an extension or final Board action absent.",
+    "Focused coverage values include author-reported runs; the saved full-suite log binds final implementation.",
+    "The full geode package remains below90% coverage; changed new modules exceed90%."
+  ]
+}

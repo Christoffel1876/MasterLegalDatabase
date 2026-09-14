@@ -1,0 +1,83 @@
+{
+  "status": "NO_BLOCKING_FINDING_IN_REVIEWED_FIXED_SOURCE_REVISION",
+  "observed_at": "2026-09-13T04:49:36.225592Z",
+  "reviewed_inputs": [
+    {
+      "path": "transaction.py",
+      "sha256": "dcacd5e6de2cb8bc7b3e37a8dcc20b705f97c8e90747768227b4b8b8b478c5f2",
+      "size_bytes": 19806
+    },
+    {
+      "path": "models.py",
+      "sha256": "c68cbcfbeeede53c539707b08ae4c607e7b18d56056c09f18fa13c352ef22281",
+      "size_bytes": 2733
+    },
+    {
+      "path": "PREPARATION.json",
+      "sha256": "175175020710c897000cbba4560dc4da45bbe1d0e146cb5058c9d98bd60d17c5",
+      "size_bytes": 7330
+    },
+    {
+      "path": "test_transaction.py",
+      "sha256": "d78f7de967fa77e64e5750716828d0bb50cdeeb5d18ade0d4a74af0b3290ed14",
+      "size_bytes": 14261
+    }
+  ],
+  "input_hashes_unchanged_during_final_test_and_preflight": true,
+  "canonical_guard_hashes": [
+    {
+      "path": "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+      "sha256": "9fb073ac96e611311c1cdb633fde846aef9cbd6f64521a1ab59f96916af04c13",
+      "size_bytes": 144068
+    },
+    {
+      "path": "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl",
+      "sha256": "1d930dd8dbf78130c70f89d56ca87c5c6675589be757ba84c02dc47451dbe3b8",
+      "size_bytes": 145304
+    },
+    {
+      "path": "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_REPORT.json",
+      "sha256": "093689395f0df4b119d3701467711e31404353721db4afa4dd0fe23d2dac38b2",
+      "size_bytes": 6035
+    },
+    {
+      "path": "_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+      "sha256": "ad27514fe91659c9914780c7d3e69e48ace742bc31ad67d9c3a3c99945aecde3",
+      "size_bytes": 2066981
+    },
+    {
+      "path": "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_POLICY.json",
+      "sha256": "9cd00825fcb7a8ab905fefcebe3575355b41eb4cf3e3168b1b83c7ef56aba205",
+      "size_bytes": 1345
+    },
+    {
+      "path": "_CONTROL_PLANE/BLOCKED_DOWNLOAD_QUEUE.json",
+      "sha256": "d195fdff2b686d51dc4e3e22bb8f2d6f6098fd8e2cdf7b83be088964a7a9f4be",
+      "size_bytes": 1666
+    }
+  ],
+  "canonical_guards_unchanged_by_readonly_preflight": true,
+  "independent_tests_passed": 13,
+  "resolved_counterexample_seams": [
+    "foreign raw arrival after raw append",
+    "foreign raw arrival after fixed ledger append",
+    "foreign raw arrival after fixed report write"
+  ],
+  "other_checks": [
+    "Generic reconciliation forced read-only by fixture spy.",
+    "Five interruption boundaries replay exact intent, source, prefix, snapshots and report.",
+    "Four valid-schema report modifications reject before canonical write.",
+    "Missing ledger-only historical original stays missing, including unchanged historical metadata.",
+    "Repeat apply/verify preserves all synthetic corpus bytes."
+  ],
+  "actual_readonly_preflight": "Passed:63 raw/64 ledger before,64 raw/65 ledger expected; actual receipt timestamp null; canonical mutations0.",
+  "original_blocking_audit_manifest_sha256": "5766cc46bfb853f2e6d23f2a3e579a13ba26f82fb91cb685852fd585882a368c",
+  "revision_final_manifest_included_in_this_review": false,
+  "scope_limits": [
+    "Root must seal the final package and independently authorize/apply. This review binds code/plan/test hashes, not a not-yet-sealed root manifest.",
+    "No promise of a global noncooperating-writer lock, power-loss durability or atomicity across multiple files.",
+    "No fresh source visual review, currentness conclusion, discovery or network."
+  ],
+  "canonical_writes": 0,
+  "public_requests": 0
+}

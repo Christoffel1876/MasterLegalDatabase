@@ -1,0 +1,107 @@
+{
+  "$defs": {
+    "Row": {
+      "additionalProperties": false,
+      "properties": {
+        "row_id": {
+          "title": "Row Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "application": {
+          "title": "Application",
+          "type": "string"
+        },
+        "fee": {
+          "title": "Fee",
+          "type": "string"
+        }
+      },
+      "required": [
+        "row_id",
+        "physical_page",
+        "application",
+        "fee"
+      ],
+      "title": "Row",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "source_sha256": {
+      "const": "0ba13c07bede5bf07c24dd8bbbe604c61745e8a73be773a7987e26dfa601414b",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "frozen_at": {
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "source_header": {
+      "title": "Source Header",
+      "type": "string"
+    },
+    "date_claims": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Date Claims",
+      "type": "array"
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/Row"
+      },
+      "title": "Rows",
+      "type": "array"
+    },
+    "uncertainties": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Uncertainties",
+      "type": "array"
+    },
+    "visual_notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Visual Notes",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "source_sha256",
+    "frozen_at",
+    "method",
+    "source_header",
+    "date_claims",
+    "rows",
+    "uncertainties",
+    "visual_notes"
+  ],
+  "title": "Pass1",
+  "type": "object"
+}

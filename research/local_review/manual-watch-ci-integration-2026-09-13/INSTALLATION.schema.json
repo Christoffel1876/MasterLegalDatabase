@@ -1,0 +1,109 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "title": "Completed At",
+      "type": "string"
+    },
+    "reviewer": {
+      "const": "Atlas",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "status": {
+      "const": "installed_locally_not_deployed",
+      "title": "Status",
+      "type": "string"
+    },
+    "proposal_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "audit_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "installed_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Installed Files",
+      "type": "array"
+    },
+    "prior_targets_present": {
+      "const": false,
+      "title": "Prior Targets Present",
+      "type": "boolean"
+    },
+    "checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "started_at",
+    "completed_at",
+    "reviewer",
+    "status",
+    "proposal_manifest",
+    "audit_manifest",
+    "installed_files",
+    "prior_targets_present",
+    "checks",
+    "limitations",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Installation",
+  "type": "object"
+}

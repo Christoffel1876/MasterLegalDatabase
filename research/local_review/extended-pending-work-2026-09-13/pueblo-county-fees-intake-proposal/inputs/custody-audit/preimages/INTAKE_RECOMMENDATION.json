@@ -1,0 +1,37 @@
+{
+  "status": "proposed_not_applied",
+  "source_id": "pueblo-county-planning-fees-sh-ext-002",
+  "authority_id": "CO-COUNTY-PUEBLO",
+  "layer_id": "08_County_Authorities",
+  "incoming_source": {
+    "path": "received/raw/SHEXT002-A001.pdf",
+    "sha256": "1c9fda2c8bacb414468947664d6edb6640845081fcb1a5366dccf0c58720a084",
+    "size_bytes": 75214
+  },
+  "original_filename": "SHEXT002-A001.pdf",
+  "official_source_url": "https://www.pueblocounty.gov/sites/default/files/2025-05/Fee%20Schedule%20Adopted%205.8.25%20-%20Revised%20%282%29.pdf",
+  "official_source_name": "Pueblo County planning fee schedule; official parent label: Fee Schedule Adopted 5.8.25 - Revised (2).pdf",
+  "acquisition_method": "received_review_package",
+  "actual_future_received_at": null,
+  "archive_path": null,
+  "original_acquisition_time": null,
+  "reported_acquisition_interval": [
+    "2026-09-13 01:57:19.462000+00:00",
+    "2026-09-13 01:57:20.393000+00:00"
+  ],
+  "required_final_status": "archived_pending_pipeline",
+  "expected_canonical_pdf_count": 1,
+  "legal_currentness": "not_verified",
+  "prerequisites": [
+    "Root reviews this independent custody audit and the separately owned complete source QA.",
+    "A separately reviewed transaction checks exact current raw/ledger prefixes and duplicate source IDs/hashes immediately before any write.",
+    "Use actual eventual repository receipt time. Preserve reported curl times as supplied claims, not verified acquisition timestamps.",
+    "Use the existing typed manual-record received_review_package pattern and validation/reconciliation; the generic ManualSourceIntakeRequest CLI enum does not admit that method. Do not change the enum or relabel the method to fit it.",
+    "Keep original_filename equal to the actual incoming basename; copy exact bytes write-once and preserve atomic manifest/ledger snapshots."
+  ],
+  "exclusions": [
+    "Do not intake the403 HTML, either duplicate.bin file, derived text, rasters, or parent DOM as a second canonical fee original.",
+    "No adoption or effective date is proved by the filename5.8.25 or Last-Modified header.",
+    "No legal-currentness, answer-safe, complete-county or monitoring promotion."
+  ]
+}

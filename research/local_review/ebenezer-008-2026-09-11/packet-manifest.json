@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "packet_id": "grok-pdf-review-2026-09-10-batch-4",
+  "prepared_at": "2026-09-10T22:18:46.346710Z",
+  "repository_commit": "49a1b5bdaf43279e0cca2ac9f8a990f278c653b7",
+  "ledger_path": "_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+  "ledger_sha256": "ad27514fe91659c9914780c7d3e69e48ace742bc31ad67d9c3a3c99945aecde3",
+  "status": "prepared_not_sent",
+  "purpose": "independent_pdf_transcription_review",
+  "independence": "procedural_separation_only; candidate withheld until frozen pass 1",
+  "documents": [
+    {
+      "assignment_id": "EB-PDF-008",
+      "source_id": "cc-ordinance-11627",
+      "authority_id": "CO-COUNTY-CLEAR_CREEK",
+      "title": "Clear Creek County official document 11627",
+      "official_url": "https://www.clearcreekcounty.us/DocumentCenter/View/11627/Ord-7a-Repealing-Ord-7-RECORDED",
+      "final_url": "https://www.clearcreekcounty.us/DocumentCenter/View/11627/Ord-7a-Repealing-Ord-7-RECORDED",
+      "retrieved_at": "2026-09-10T17:46:25.853009Z",
+      "original": {
+        "path": "01-source-only/cc-ordinance-11627/original.pdf",
+        "sha256": "ac80f382ea66f743cd35240c9065a190971195d24660a9579e281b6ba06dc0f2",
+        "size_bytes": 194238
+      },
+      "repository_original_path": "_RAW_ARCHIVE/local/coverage/ac80f382ea66f743cd35240c9065a190971195d24660a9579e281b6ba06dc0f2.pdf",
+      "expected_pages": 2,
+      "source_ocr_manifest": {
+        "path": "02-candidate-text/cc-ordinance-11627/ocr-evidence/source-manifest.json",
+        "sha256": "0fd76cee1c2be3dbd81b69df798045b20d4709f1eab8753e9efc2cff6bbdcf20",
+        "size_bytes": 1211
+      },
+      "repository_source_ocr_manifest_path": "_DERIVED/local_ocr/scans-2026-09-10/ac80f382ea66f743cd35240c9065a190971195d24660a9579e281b6ba06dc0f2/manifest.json",
+      "repository_selection_path": "_DERIVED/local_ocr/scans-2026-09-10/selection.json",
+      "repository_selection_sha256": "83a69820e5e39d2c4caddb378eba661055a85b917c078af7a471d99b7de441dc",
+      "candidate": {
+        "path": "02-candidate-text/cc-ordinance-11627/candidate.txt",
+        "sha256": "dda2846e1f627965ba6ce9f6fb32a87e5261717502a3acd02dad933ad3937d10",
+        "size_bytes": 2986
+      },
+      "candidate_status": "machine_ocr_unreviewed",
+      "candidate_method": "Existing OCRPage.text in physical-page order; exact UTF-8 text with explicit page packaging markers only",
+      "candidate_changes": "none",
+      "render_method": "PyMuPDF Page.get_pixmap(dpi=300, colorspace=csRGB, alpha=False).tobytes(\"png\")",
+      "render_version": "1.28.2",
+      "rendered_image_binding": "each PNG hash equals its original OCRPage.image_sha256",
+      "legal_currentness": "not_verified",
+      "legal_review": "pending",
+      "pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "01-source-only/cc-ordinance-11627/page-0001.png",
+            "sha256": "2a3d4752c59f38e0bc82ea4633202a15f8ee237edac231714aa2ded9db84b877",
+            "size_bytes": 219734
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "image_dpi": 300,
+          "ocr": {
+            "path": "02-candidate-text/cc-ordinance-11627/ocr-evidence/page-0001.json",
+            "sha256": "c5b61ee2341ead087504d61b4c9177054e9f473debcb3fc4d3ec145d19c552e5",
+            "size_bytes": 13180
+          },
+          "repository_ocr_path": "_DERIVED/local_ocr/scans-2026-09-10/ac80f382ea66f743cd35240c9065a190971195d24660a9579e281b6ba06dc0f2/page-0001.json",
+          "ocr_text_sha256": "9cfc74ff4ae789cb5dcf0ae07a5764ff91d0e4f7c2ac056f5ff91e51f59b0c5a",
+          "ocr_text_size_bytes": 1827,
+          "candidate_text_offset_bytes": 56
+        },
+        {
+          "physical_page": 2,
+          "image": {
+            "path": "01-source-only/cc-ordinance-11627/page-0002.png",
+            "sha256": "caee71740596300c34d877d25aa6de7be2f604566b85e0da0379efb025595738",
+            "size_bytes": 159176
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "image_dpi": 300,
+          "ocr": {
+            "path": "02-candidate-text/cc-ordinance-11627/ocr-evidence/page-0002.json",
+            "sha256": "3122ffaafb62b15d2c8174e0625fa445d34bbb6c04faa8e34c3d0134a4c74c82",
+            "size_bytes": 9014
+          },
+          "repository_ocr_path": "_DERIVED/local_ocr/scans-2026-09-10/ac80f382ea66f743cd35240c9065a190971195d24660a9579e281b6ba06dc0f2/page-0002.json",
+          "ocr_text_sha256": "49e3be8d6bb5e6681b59935a0578969042b45c177c12d12e330616da54a2f36d",
+          "ocr_text_size_bytes": 933,
+          "candidate_text_offset_bytes": 1996
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "observer": {
+      "const": "Atlas root agent",
+      "title": "Observer",
+      "type": "string"
+    },
+    "observation_time": {
+      "title": "Observation Time",
+      "type": "null"
+    },
+    "evidence_origin": {
+      "const": "parent agent message to this subagent",
+      "title": "Evidence Origin",
+      "type": "string"
+    },
+    "statement": {
+      "title": "Statement",
+      "type": "string"
+    },
+    "observed_directly_by_receipt_author": {
+      "const": false,
+      "title": "Observed Directly By Receipt Author",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "observer",
+    "observation_time",
+    "evidence_origin",
+    "statement",
+    "observed_directly_by_receipt_author"
+  ],
+  "title": "RootObservation",
+  "type": "object"
+}

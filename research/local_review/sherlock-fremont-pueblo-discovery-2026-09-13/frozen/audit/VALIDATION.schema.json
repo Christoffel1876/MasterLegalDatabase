@@ -1,0 +1,59 @@
+{
+  "$defs": {
+    "Case": {
+      "additionalProperties": false,
+      "properties": {
+        "case": {
+          "title": "Case",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "rejection": {
+          "title": "Rejection",
+          "type": "string"
+        }
+      },
+      "required": [
+        "case",
+        "status",
+        "rejection"
+      ],
+      "title": "Case",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "verified_at": {
+      "format": "date-time",
+      "title": "Verified At",
+      "type": "string"
+    },
+    "positive_validation": {
+      "title": "Positive Validation",
+      "type": "string"
+    },
+    "mutation_results": {
+      "items": {
+        "$ref": "#/$defs/Case"
+      },
+      "title": "Mutation Results",
+      "type": "array"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    }
+  },
+  "required": [
+    "verified_at",
+    "positive_validation",
+    "mutation_results",
+    "scope"
+  ],
+  "title": "Verification",
+  "type": "object"
+}

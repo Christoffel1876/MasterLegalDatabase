@@ -1,0 +1,215 @@
+{
+  "$defs": {
+    "Copy": {
+      "additionalProperties": false,
+      "description": "Retain bytes and distinguish their original location from the local copy.",
+      "properties": {
+        "historical_path": {
+          "title": "Historical Path",
+          "type": "string"
+        },
+        "frozen_path": {
+          "title": "Frozen Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "historical_path",
+        "frozen_path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Copy",
+      "type": "object"
+    },
+    "Decision": {
+      "additionalProperties": false,
+      "description": "One review disposition with an exact report line and source-page basis.",
+      "properties": {
+        "claim_id": {
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "report_path": {
+          "const": "reports/PASS2_REVIEW.md",
+          "title": "Report Path",
+          "type": "string"
+        },
+        "report_line": {
+          "minimum": 1,
+          "title": "Report Line",
+          "type": "integer"
+        },
+        "report_line_sha256": {
+          "title": "Report Line Sha256",
+          "type": "string"
+        },
+        "disposition": {
+          "enum": [
+            "confirmed",
+            "qualified",
+            "packaging_observation",
+            "unresolved"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "source_physical_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Source Physical Pages",
+          "type": "array"
+        },
+        "source_span_labels": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Span Labels",
+          "type": "array"
+        },
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim_id",
+        "report_path",
+        "report_line",
+        "report_line_sha256",
+        "disposition",
+        "source_physical_pages",
+        "source_span_labels",
+        "basis"
+      ],
+      "title": "Decision",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Scoped root decisions never authenticate unseen external tool operations.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "greeley-building-fees-sd008-06",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "assignment_id": {
+      "const": "EB-PDF-015",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-MUNICIPAL-GREELEY",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "status": {
+      "const": "external_review_reconciled_with_qualifications",
+      "title": "Status",
+      "type": "string"
+    },
+    "original_pdf_sha256": {
+      "title": "Original Pdf Sha256",
+      "type": "string"
+    },
+    "candidate_sha256": {
+      "title": "Candidate Sha256",
+      "type": "string"
+    },
+    "source_pages_directly_viewed": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Source Pages Directly Viewed",
+      "type": "array"
+    },
+    "atlas_method": {
+      "title": "Atlas Method",
+      "type": "string"
+    },
+    "external_method": {
+      "const": "caption_mediated_source_first",
+      "title": "External Method",
+      "type": "string"
+    },
+    "external_chronology": {
+      "const": "reviewer_reported_not_independently_authenticated",
+      "title": "External Chronology",
+      "type": "string"
+    },
+    "source_and_candidate_changed": {
+      "const": false,
+      "title": "Source And Candidate Changed",
+      "type": "boolean"
+    },
+    "copies": {
+      "items": {
+        "$ref": "#/$defs/Copy"
+      },
+      "title": "Copies",
+      "type": "array"
+    },
+    "decisions": {
+      "items": {
+        "$ref": "#/$defs/Decision"
+      },
+      "title": "Decisions",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "source_id",
+    "assignment_id",
+    "authority_id",
+    "status",
+    "original_pdf_sha256",
+    "candidate_sha256",
+    "source_pages_directly_viewed",
+    "atlas_method",
+    "external_method",
+    "external_chronology",
+    "source_and_candidate_changed",
+    "copies",
+    "decisions",
+    "limitations",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Reconciliation",
+  "type": "object"
+}

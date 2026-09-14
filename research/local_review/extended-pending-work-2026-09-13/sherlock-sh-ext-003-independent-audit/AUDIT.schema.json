@@ -1,0 +1,416 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Budget": {
+      "additionalProperties": false,
+      "properties": {
+        "actions": {
+          "title": "Actions",
+          "type": "integer"
+        },
+        "distinct_urls": {
+          "title": "Distinct Urls",
+          "type": "integer"
+        },
+        "chaffee_actions": {
+          "title": "Chaffee Actions",
+          "type": "integer"
+        },
+        "gunnison_actions": {
+          "title": "Gunnison Actions",
+          "type": "integer"
+        },
+        "accepted_body_bytes": {
+          "title": "Accepted Body Bytes",
+          "type": "integer"
+        },
+        "maximum_body_bytes": {
+          "title": "Maximum Body Bytes",
+          "type": "integer"
+        },
+        "response_bodies": {
+          "title": "Response Bodies",
+          "type": "integer"
+        },
+        "no_body_results": {
+          "title": "No Body Results",
+          "type": "integer"
+        },
+        "first_reservation": {
+          "title": "First Reservation",
+          "type": "string"
+        },
+        "last_result": {
+          "title": "Last Result",
+          "type": "string"
+        },
+        "serial_nonoverlap": {
+          "title": "Serial Nonoverlap",
+          "type": "boolean"
+        },
+        "pending_actions": {
+          "title": "Pending Actions",
+          "type": "integer"
+        },
+        "actual_reservation31": {
+          "const": false,
+          "title": "Actual Reservation31",
+          "type": "boolean"
+        },
+        "rejected_next_input": {
+          "$ref": "#/$defs/Asset"
+        },
+        "rejected_next_log": {
+          "$ref": "#/$defs/Asset"
+        },
+        "stale_status_actions": {
+          "title": "Stale Status Actions",
+          "type": "integer"
+        },
+        "command_log_actions": {
+          "title": "Command Log Actions",
+          "type": "integer"
+        },
+        "hidden_wire_requests_measured": {
+          "const": false,
+          "title": "Hidden Wire Requests Measured",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "actions",
+        "distinct_urls",
+        "chaffee_actions",
+        "gunnison_actions",
+        "accepted_body_bytes",
+        "maximum_body_bytes",
+        "response_bodies",
+        "no_body_results",
+        "first_reservation",
+        "last_result",
+        "serial_nonoverlap",
+        "pending_actions",
+        "actual_reservation31",
+        "rejected_next_input",
+        "rejected_next_log",
+        "stale_status_actions",
+        "command_log_actions",
+        "hidden_wire_requests_measured"
+      ],
+      "title": "Budget",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "finding_id": {
+          "title": "Finding Id",
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "qualification",
+            "correction",
+            "gap"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "finding_id",
+        "severity",
+        "statement",
+        "evidence"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "PDF": {
+      "additionalProperties": false,
+      "properties": {
+        "action_id": {
+          "title": "Action Id",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Asset"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-GUNNISON",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "physical_pages": {
+          "title": "Physical Pages",
+          "type": "integer"
+        },
+        "is_repaired": {
+          "title": "Is Repaired",
+          "type": "boolean"
+        },
+        "encrypted": {
+          "title": "Encrypted",
+          "type": "boolean"
+        },
+        "terminal_eof": {
+          "title": "Terminal Eof",
+          "type": "boolean"
+        },
+        "first_page_image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "render_command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Render Command",
+          "type": "array"
+        },
+        "reviewed_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Reviewed Pages",
+          "type": "array"
+        },
+        "role_observations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Role Observations",
+          "type": "array"
+        },
+        "historical_digest_lines": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Historical Digest Lines",
+          "type": "array"
+        },
+        "historical_exact_request_lines": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Historical Exact Request Lines",
+          "type": "array"
+        },
+        "canonical_manual_digest_lines": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Canonical Manual Digest Lines",
+          "type": "array"
+        },
+        "limitations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "action_id",
+        "source",
+        "authority_id",
+        "physical_pages",
+        "is_repaired",
+        "encrypted",
+        "terminal_eof",
+        "first_page_image",
+        "render_command",
+        "reviewed_pages",
+        "role_observations",
+        "historical_digest_lines",
+        "historical_exact_request_lines",
+        "canonical_manual_digest_lines",
+        "limitations"
+      ],
+      "title": "PDF",
+      "type": "object"
+    },
+    "Referral": {
+      "additionalProperties": false,
+      "properties": {
+        "action_id": {
+          "title": "Action Id",
+          "type": "string"
+        },
+        "parent_action_id": {
+          "title": "Parent Action Id",
+          "type": "string"
+        },
+        "parent": {
+          "$ref": "#/$defs/Asset"
+        },
+        "parent_url": {
+          "title": "Parent Url",
+          "type": "string"
+        },
+        "original_href": {
+          "title": "Original Href",
+          "type": "string"
+        },
+        "html_base_href": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Html Base Href"
+        },
+        "visible_label": {
+          "title": "Visible Label",
+          "type": "string"
+        },
+        "resolved_url": {
+          "title": "Resolved Url",
+          "type": "string"
+        },
+        "attempted_url": {
+          "title": "Attempted Url",
+          "type": "string"
+        },
+        "exact_browser_resolution_match": {
+          "title": "Exact Browser Resolution Match",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "action_id",
+        "parent_action_id",
+        "parent",
+        "parent_url",
+        "original_href",
+        "html_base_href",
+        "visible_label",
+        "resolved_url",
+        "attempted_url",
+        "exact_browser_resolution_match"
+      ],
+      "title": "Referral",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "assignment_id": {
+      "const": "SH-EXT-003",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "prepared_packet_manifest_sha256": {
+      "title": "Prepared Packet Manifest Sha256",
+      "type": "string"
+    },
+    "actual_dispatch_claim": {
+      "title": "Actual Dispatch Claim",
+      "type": "string"
+    },
+    "worker_timing_claims_independently_witnessed": {
+      "const": false,
+      "title": "Worker Timing Claims Independently Witnessed",
+      "type": "boolean"
+    },
+    "measured_local_audit_at": {
+      "format": "date-time",
+      "title": "Measured Local Audit At",
+      "type": "string"
+    },
+    "budget": {
+      "$ref": "#/$defs/Budget"
+    },
+    "referrals": {
+      "items": {
+        "$ref": "#/$defs/Referral"
+      },
+      "title": "Referrals",
+      "type": "array"
+    },
+    "pdfs": {
+      "items": {
+        "$ref": "#/$defs/PDF"
+      },
+      "title": "Pdfs",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "public_requests_by_audit": {
+      "const": 0,
+      "title": "Public Requests By Audit",
+      "type": "integer"
+    },
+    "source_review_scope": {
+      "const": "first physical page of each of three PDFs; 3 of 23 pages",
+      "title": "Source Review Scope",
+      "type": "string"
+    }
+  },
+  "required": [
+    "assignment_id",
+    "prepared_packet_manifest_sha256",
+    "actual_dispatch_claim",
+    "worker_timing_claims_independently_witnessed",
+    "measured_local_audit_at",
+    "budget",
+    "referrals",
+    "pdfs",
+    "findings",
+    "legal_currentness",
+    "public_requests_by_audit",
+    "source_review_scope"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

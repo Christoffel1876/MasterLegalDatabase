@@ -1,0 +1,516 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Cell": {
+      "additionalProperties": false,
+      "properties": {
+        "column": {
+          "title": "Column",
+          "type": "integer"
+        },
+        "span_columns": {
+          "title": "Span Columns",
+          "type": "integer"
+        },
+        "bbox": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Bbox"
+        },
+        "representation": {
+          "title": "Representation",
+          "type": "string"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Text"
+        },
+        "native_span": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Span"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "column",
+        "span_columns",
+        "bbox",
+        "representation",
+        "text",
+        "native_span"
+      ],
+      "title": "Cell",
+      "type": "object"
+    },
+    "Crop": {
+      "additionalProperties": false,
+      "properties": {
+        "asset": {
+          "$ref": "#/$defs/Asset"
+        },
+        "source_page": {
+          "title": "Source Page",
+          "type": "integer"
+        },
+        "source_sha256": {
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "box_pixels": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Box Pixels",
+          "type": "array"
+        },
+        "method": {
+          "const": "exact source pixels via PyMuPDF Pixmap.copy; no resampling",
+          "title": "Method",
+          "type": "string"
+        }
+      },
+      "required": [
+        "asset",
+        "source_page",
+        "source_sha256",
+        "box_pixels",
+        "method"
+      ],
+      "title": "Crop",
+      "type": "object"
+    },
+    "Link": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "source_rows": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Rows",
+          "type": "array"
+        },
+        "target_passages": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Target Passages",
+          "type": "array"
+        },
+        "kind": {
+          "enum": [
+            "footnote",
+            "continuation",
+            "section_context"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "source_rows",
+        "target_passages",
+        "kind",
+        "note"
+      ],
+      "title": "Link",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "properties": {
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "png": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "full_image_directly_viewed": {
+          "const": true,
+          "default": true,
+          "title": "Full Image Directly Viewed",
+          "type": "boolean"
+        },
+        "limits": {
+          "title": "Limits",
+          "type": "string"
+        }
+      },
+      "required": [
+        "page",
+        "png",
+        "native",
+        "text",
+        "limits"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Passage": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "span": {
+          "$ref": "#/$defs/Span"
+        },
+        "visual_note": {
+          "title": "Visual Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "role",
+        "span",
+        "visual_note"
+      ],
+      "title": "Passage",
+      "type": "object"
+    },
+    "Row": {
+      "additionalProperties": false,
+      "properties": {
+        "row_id": {
+          "title": "Row Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "physical_table": {
+          "title": "Physical Table",
+          "type": "integer"
+        },
+        "physical_row": {
+          "title": "Physical Row",
+          "type": "integer"
+        },
+        "role": {
+          "enum": [
+            "title",
+            "column_headers",
+            "category",
+            "fee",
+            "continuation"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "category_source_row": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Category Source Row"
+        },
+        "cells": {
+          "items": {
+            "$ref": "#/$defs/Cell"
+          },
+          "title": "Cells",
+          "type": "array"
+        }
+      },
+      "required": [
+        "row_id",
+        "physical_page",
+        "physical_table",
+        "physical_row",
+        "role",
+        "category_source_row",
+        "cells"
+      ],
+      "title": "Row",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "properties": {
+        "page": {
+          "maximum": 6,
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "start_byte": {
+          "minimum": 0,
+          "title": "Start Byte",
+          "type": "integer"
+        },
+        "end_byte": {
+          "minimum": 0,
+          "title": "End Byte",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "page",
+        "start_byte",
+        "end_byte",
+        "text",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "assignment": {
+      "const": "EB-PDF-025",
+      "default": "EB-PDF-025",
+      "title": "Assignment",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "el-paso-boh-ehs-fees-spanish-sd011",
+      "default": "el-paso-boh-ehs-fees-spanish-sd011",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-EL_PASO",
+      "default": "CO-COUNTY-EL_PASO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "language": {
+      "const": "Spanish",
+      "default": "Spanish",
+      "title": "Language",
+      "type": "string"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Asset"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/Row"
+      },
+      "title": "Rows",
+      "type": "array"
+    },
+    "passages": {
+      "items": {
+        "$ref": "#/$defs/Passage"
+      },
+      "title": "Passages",
+      "type": "array"
+    },
+    "links": {
+      "items": {
+        "$ref": "#/$defs/Link"
+      },
+      "title": "Links",
+      "type": "array"
+    },
+    "crops": {
+      "items": {
+        "$ref": "#/$defs/Crop"
+      },
+      "title": "Crops",
+      "type": "array"
+    },
+    "native_bytes": {
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "candidate_bytes": {
+      "title": "Candidate Bytes",
+      "type": "integer"
+    },
+    "physical_table_rows": {
+      "const": 75,
+      "default": 75,
+      "title": "Physical Table Rows",
+      "type": "integer"
+    },
+    "fee_rows": {
+      "const": 65,
+      "default": 65,
+      "title": "Fee Rows",
+      "type": "integer"
+    },
+    "full_pages_directly_viewed": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Full Pages Directly Viewed",
+      "type": "array"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "observations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "translation_equivalence_verified": {
+      "const": false,
+      "default": false,
+      "title": "Translation Equivalence Verified",
+      "type": "boolean"
+    },
+    "source_modified": {
+      "const": false,
+      "default": false,
+      "title": "Source Modified",
+      "type": "boolean"
+    },
+    "native_modified": {
+      "const": false,
+      "default": false,
+      "title": "Native Modified",
+      "type": "boolean"
+    },
+    "external_reports_consulted": {
+      "const": false,
+      "default": false,
+      "title": "External Reports Consulted",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "source",
+    "candidate",
+    "pages",
+    "rows",
+    "passages",
+    "links",
+    "crops",
+    "native_bytes",
+    "candidate_bytes",
+    "full_pages_directly_viewed",
+    "method",
+    "observations",
+    "limitations"
+  ],
+  "title": "Review",
+  "type": "object"
+}

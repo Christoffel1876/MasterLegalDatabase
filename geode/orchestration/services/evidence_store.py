@@ -6,6 +6,7 @@ import hashlib
 import json
 import re
 import sqlite3
+from contextlib import closing
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from uuid import uuid4
@@ -42,7 +43,7 @@ class EvidenceStore:
         now = datetime.now(timezone.utc)
         expires_at = now + timedelta(seconds=retention_seconds)
         payload = json.dumps(evidence.model_dump(mode="json"), sort_keys=True)
-        with self._connect() as connection:
+        with closing(self._connect()) as connection, connection:
             connection.execute(
                 """
                 INSERT INTO evidence_store (
@@ -94,7 +95,7 @@ class EvidenceStore:
     ) -> Evidence:
         """Retrieve original evidence after checking reference and corpus version."""
 
-        with self._connect() as connection:
+        with closing(self._connect()) as connection, connection:
             row = connection.execute(
                 "SELECT * FROM evidence_store WHERE reference_id = ?",
                 (reference_id,),
@@ -134,7 +135,7 @@ class EvidenceStore:
     def history(self, reference_id: str) -> list[dict[str, str | None]]:
         """Return the recorded retrieval history for one reference."""
 
-        with self._connect() as connection:
+        with closing(self._connect()) as connection, connection:
             rows = connection.execute(
                 """
                 SELECT retrieved_at, query
@@ -158,7 +159,7 @@ class EvidenceStore:
     def _initialize(self) -> None:
         """Create the evidence store schema."""
 
-        with self._connect() as connection:
+        with closing(self._connect()) as connection, connection:
             connection.execute(
                 """
                 CREATE TABLE IF NOT EXISTS evidence_store (

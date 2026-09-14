@@ -1,0 +1,146 @@
+{
+  "$defs": {
+    "File": {
+      "additionalProperties": false,
+      "description": "An exact repository-relative artifact identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Completed checks with explicit source-only scope and baseline limitations.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "passed_scoped_change",
+      "title": "Status",
+      "type": "string"
+    },
+    "baseline_commit": {
+      "title": "Baseline Commit",
+      "type": "string"
+    },
+    "changed_files": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Changed Files",
+      "type": "array"
+    },
+    "evidence_files": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Evidence Files",
+      "type": "array"
+    },
+    "full_test_command": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Full Test Command",
+      "type": "array"
+    },
+    "full_test_summary": {
+      "title": "Full Test Summary",
+      "type": "string"
+    },
+    "full_test_exit_code": {
+      "const": 0,
+      "title": "Full Test Exit Code",
+      "type": "integer"
+    },
+    "focused_test_count": {
+      "const": 144,
+      "title": "Focused Test Count",
+      "type": "integer"
+    },
+    "focused_combined_coverage_percent": {
+      "title": "Focused Combined Coverage Percent",
+      "type": "number"
+    },
+    "full_geode_combined_coverage_percent": {
+      "title": "Full Geode Combined Coverage Percent",
+      "type": "number"
+    },
+    "independent_cli_cases_passed": {
+      "const": 8,
+      "title": "Independent Cli Cases Passed",
+      "type": "integer"
+    },
+    "source_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Source Counts",
+      "type": "object"
+    },
+    "source_evidence_unchanged": {
+      "const": true,
+      "title": "Source Evidence Unchanged",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "baseline_commit",
+    "changed_files",
+    "evidence_files",
+    "full_test_command",
+    "full_test_summary",
+    "full_test_exit_code",
+    "focused_test_count",
+    "focused_combined_coverage_percent",
+    "full_geode_combined_coverage_percent",
+    "independent_cli_cases_passed",
+    "source_counts",
+    "source_evidence_unchanged",
+    "limitations",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Verification",
+  "type": "object"
+}

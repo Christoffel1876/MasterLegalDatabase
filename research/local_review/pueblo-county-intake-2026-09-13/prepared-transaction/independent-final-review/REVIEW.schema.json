@@ -1,0 +1,134 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "const": "NO_BLOCKING_FINDING_IN_REVIEWED_FIXED_SOURCE_REVISION",
+      "title": "Status",
+      "type": "string"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    },
+    "reviewed_inputs": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Reviewed Inputs",
+      "type": "array"
+    },
+    "input_hashes_unchanged_during_final_test_and_preflight": {
+      "const": true,
+      "title": "Input Hashes Unchanged During Final Test And Preflight",
+      "type": "boolean"
+    },
+    "canonical_guard_hashes": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Canonical Guard Hashes",
+      "type": "array"
+    },
+    "canonical_guards_unchanged_by_readonly_preflight": {
+      "const": true,
+      "title": "Canonical Guards Unchanged By Readonly Preflight",
+      "type": "boolean"
+    },
+    "independent_tests_passed": {
+      "const": 13,
+      "title": "Independent Tests Passed",
+      "type": "integer"
+    },
+    "resolved_counterexample_seams": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Resolved Counterexample Seams",
+      "type": "array"
+    },
+    "other_checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Other Checks",
+      "type": "array"
+    },
+    "actual_readonly_preflight": {
+      "title": "Actual Readonly Preflight",
+      "type": "string"
+    },
+    "original_blocking_audit_manifest_sha256": {
+      "title": "Original Blocking Audit Manifest Sha256",
+      "type": "string"
+    },
+    "revision_final_manifest_included_in_this_review": {
+      "const": false,
+      "title": "Revision Final Manifest Included In This Review",
+      "type": "boolean"
+    },
+    "scope_limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Scope Limits",
+      "type": "array"
+    },
+    "canonical_writes": {
+      "const": 0,
+      "title": "Canonical Writes",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "status",
+    "observed_at",
+    "reviewed_inputs",
+    "input_hashes_unchanged_during_final_test_and_preflight",
+    "canonical_guard_hashes",
+    "canonical_guards_unchanged_by_readonly_preflight",
+    "independent_tests_passed",
+    "resolved_counterexample_seams",
+    "other_checks",
+    "actual_readonly_preflight",
+    "original_blocking_audit_manifest_sha256",
+    "revision_final_manifest_included_in_this_review",
+    "scope_limits",
+    "canonical_writes",
+    "public_requests"
+  ],
+  "title": "Review",
+  "type": "object"
+}

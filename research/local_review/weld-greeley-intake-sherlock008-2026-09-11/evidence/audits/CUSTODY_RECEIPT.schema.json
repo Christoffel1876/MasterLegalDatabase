@@ -1,0 +1,68 @@
+{
+  "$defs": {
+    "Receipt": {
+      "additionalProperties": false,
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "received_path": {
+          "title": "Received Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "original_path",
+        "received_path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Receipt",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "received_at": {
+      "format": "date-time",
+      "title": "Received At",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Receipt"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "originals_rechecked_unchanged": {
+      "const": true,
+      "default": true,
+      "title": "Originals Rechecked Unchanged",
+      "type": "boolean"
+    },
+    "copies_rehashed_and_write_protected": {
+      "const": true,
+      "default": true,
+      "title": "Copies Rehashed And Write Protected",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "received_at",
+    "files"
+  ],
+  "title": "Custody",
+  "type": "object"
+}

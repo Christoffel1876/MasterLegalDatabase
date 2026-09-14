@@ -1,0 +1,323 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Bind a relative file to its exact bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Correction": {
+      "additionalProperties": false,
+      "description": "Keep checked print separate from unchanged OCR and handwritten marks.",
+      "properties": {
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "candidate": {
+          "title": "Candidate",
+          "type": "string"
+        },
+        "checked_print": {
+          "title": "Checked Print",
+          "type": "string"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "physical_page",
+        "candidate",
+        "checked_print",
+        "qualification"
+      ],
+      "title": "Correction",
+      "type": "object"
+    },
+    "DateStatement": {
+      "additionalProperties": false,
+      "description": "A source statement, not an independently verified legal date.",
+      "properties": {
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "date": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+          "title": "Date",
+          "type": "string"
+        },
+        "native_anchor": {
+          "title": "Native Anchor",
+          "type": "string"
+        },
+        "status": {
+          "const": "source_assertion_only",
+          "default": "source_assertion_only",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "physical_page",
+        "role",
+        "date",
+        "native_anchor"
+      ],
+      "title": "DateStatement",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "Distinguish visual inspection from native extraction usability.",
+      "properties": {
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "full_page_viewed": {
+          "const": true,
+          "default": true,
+          "title": "Full Page Viewed",
+          "type": "boolean"
+        },
+        "native_status": {
+          "enum": [
+            "partial_ocr_with_errors",
+            "empty_despite_visible_text",
+            "largely_unusable_ocr",
+            "printed_body_readable_graphics_separate"
+          ],
+          "title": "Native Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "native",
+        "native_status"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Passage": {
+      "additionalProperties": false,
+      "description": "Bind a manually reviewed passage to its original page image.",
+      "properties": {
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "start": {
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "title": "End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "image_path": {
+          "title": "Image Path",
+          "type": "string"
+        },
+        "evidence_scope": {
+          "const": "full_page_image_manual_check",
+          "default": "full_page_image_manual_check",
+          "title": "Evidence Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "physical_page",
+        "start",
+        "end",
+        "text",
+        "image_path"
+      ],
+      "title": "Passage",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Qualified complete page inspection with partial passage transcription.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "receipt": {
+      "$ref": "#/$defs/Asset"
+    },
+    "passages_file": {
+      "$ref": "#/$defs/Asset"
+    },
+    "mode": {
+      "const": "atlas_candidate_aware_direct_image_review",
+      "title": "Mode",
+      "type": "string"
+    },
+    "status": {
+      "const": "bounded_passages_checked_graphical_limits_preserved",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "adoption_date_verified": {
+      "default": null,
+      "title": "Adoption Date Verified",
+      "type": "null"
+    },
+    "effective_date_verified": {
+      "default": null,
+      "title": "Effective Date Verified",
+      "type": "null"
+    },
+    "full_diplomatic_transcription": {
+      "const": false,
+      "default": false,
+      "title": "Full Diplomatic Transcription",
+      "type": "boolean"
+    },
+    "external_blind_review": {
+      "const": false,
+      "default": false,
+      "title": "External Blind Review",
+      "type": "boolean"
+    },
+    "original_and_native_edited": {
+      "const": false,
+      "default": false,
+      "title": "Original And Native Edited",
+      "type": "boolean"
+    },
+    "native_bytes": {
+      "const": 4465,
+      "default": 4465,
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "title": "Pages",
+      "type": "array"
+    },
+    "derivatives": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Derivatives",
+      "type": "array"
+    },
+    "derivative_recipe": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Derivative Recipe",
+      "type": "array"
+    },
+    "passages": {
+      "items": {
+        "$ref": "#/$defs/Passage"
+      },
+      "title": "Passages",
+      "type": "array"
+    },
+    "corrections": {
+      "items": {
+        "$ref": "#/$defs/Correction"
+      },
+      "title": "Corrections",
+      "type": "array"
+    },
+    "dates": {
+      "items": {
+        "$ref": "#/$defs/DateStatement"
+      },
+      "title": "Dates",
+      "type": "array"
+    },
+    "unresolved": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unresolved",
+      "type": "array"
+    }
+  },
+  "required": [
+    "reviewed_at",
+    "source",
+    "receipt",
+    "passages_file",
+    "mode",
+    "status",
+    "pages",
+    "derivatives",
+    "derivative_recipe",
+    "passages",
+    "corrections",
+    "dates",
+    "unresolved"
+  ],
+  "title": "Review",
+  "type": "object"
+}

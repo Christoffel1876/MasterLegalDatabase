@@ -1,0 +1,131 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact ordinary-file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Measured installation, without modification of canonical custody or source QA.",
+  "properties": {
+    "status": {
+      "const": "installed_verified_inventory",
+      "title": "Status",
+      "type": "string"
+    },
+    "installed_at": {
+      "format": "date-time",
+      "title": "Installed At",
+      "type": "string"
+    },
+    "proposal_manifest_sha256": {
+      "title": "Proposal Manifest Sha256",
+      "type": "string"
+    },
+    "independent_review_manifest_sha256": {
+      "title": "Independent Review Manifest Sha256",
+      "type": "string"
+    },
+    "installed": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Installed",
+      "type": "array"
+    },
+    "preserved_preimages": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Preserved Preimages",
+      "type": "array"
+    },
+    "unchanged_guards": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Unchanged Guards",
+      "type": "object"
+    },
+    "sources": {
+      "const": 64,
+      "title": "Sources",
+      "type": "integer"
+    },
+    "mapped": {
+      "const": 27,
+      "title": "Mapped",
+      "type": "integer"
+    },
+    "unmapped": {
+      "const": 37,
+      "title": "Unmapped",
+      "type": "integer"
+    },
+    "old_authorities_preserved": {
+      "const": 63,
+      "title": "Old Authorities Preserved",
+      "type": "integer"
+    },
+    "old_reviews_preserved": {
+      "const": 24,
+      "title": "Old Reviews Preserved",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "next_check": {
+      "const": "full_installed_suite_required",
+      "title": "Next Check",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "installed_at",
+    "proposal_manifest_sha256",
+    "independent_review_manifest_sha256",
+    "installed",
+    "preserved_preimages",
+    "unchanged_guards",
+    "sources",
+    "mapped",
+    "unmapped",
+    "old_authorities_preserved",
+    "old_reviews_preserved",
+    "legal_currentness",
+    "answer_safe",
+    "next_check"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

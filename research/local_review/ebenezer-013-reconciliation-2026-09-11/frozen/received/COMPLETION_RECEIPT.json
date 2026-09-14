@@ -1,0 +1,94 @@
+{
+  "assignment_id": "EB-PDF-013",
+  "source_id": "fort-collins-wildfire-code-sd005-05",
+  "auth_packet": "EBENEZER_QUEUE_013_014_2026-09-11",
+  "reviewer": "Ebenezer (Grok Bot)",
+  "model": "unknown",
+  "pass": "PASS2",
+  "expected_pages": 8,
+  "pages_covered_pass1": 8,
+  "pages_covered_pass2": 8,
+  "pages_inspected_pass2": [
+    "page-0001.png",
+    "page-0002.png",
+    "page-0003.png",
+    "page-0004.png",
+    "page-0005.png",
+    "page-0006.png",
+    "page-0007.png",
+    "page-0008.png"
+  ],
+  "status": "completed_pending_atlas_verification",
+  "legal_currentness": "not_verified",
+  "utc_pass1_start": "2026-09-11T19:03:46Z",
+  "utc_pass1_freeze": "2026-09-11T19:14:20Z",
+  "utc_pass2_start": "2026-09-11T19:15:26Z",
+  "utc_pass2_complete": "2026-09-11T19:21:01Z",
+  "prior_candidate_exposure_at_pass1_freeze": "none",
+  "finding_counts": {
+    "critical": 10,
+    "minor": 7,
+    "unresolved": 2,
+    "info_preserved": 4,
+    "pass1_errata": 4
+  },
+  "top_findings_summary": [
+    "EB013-P2-001: green date redactions vs candidate underscores (J/K)",
+    "EB013-P2-002/003: strike+yellow omitted; concatenation (NAME OF JURISDICTION / variance modification)",
+    "EB013-P2-004/005/006/009/010: deleted/struck bodies appear as live text",
+    "EB013-P2-007/008: findings of fact + CWRC Map concatenation",
+    "EB013-P2-011\u2013016: italics/underline/border/yellow omission (minor)",
+    "Source anomalies preserved: XXX, duplicate C., Chapter X, DRAFT banner, blanks"
+  ],
+  "unresolved_regions": [
+    "Green redaction interiors on page-0002 (month/day under three green blocks)",
+    "Exact Unicode for quotes/apostrophes/dashes/ellipsis from raster",
+    "Mild italics UNCERTAIN: some struck Tree crowns lines; struck 502.1.2 Exception terms",
+    "Exact underscore lengths on page-0008 signature/effective-date blanks"
+  ],
+  "hashes": {
+    "packet_manifest_sha256_assignment_supplied": "ee87ef2806e3cf9b955dbceca927087918ed0906894879a8597d7436ad67db0b",
+    "packet_manifest_independently_hashed": false,
+    "queue_auth_sha256_assignment_supplied": "26de06e50f00a940202cecd8e4f2b603927d5e8befb986282f46f9cbb02064a0",
+    "queue_auth_independently_hashed": false,
+    "original_pdf_sha256": "00e7446d7deac3499b86c4b8f15a5d802cc0c14dc2621409845ec13525cb01d2",
+    "original_pdf_hash_source": "/workspace/geode-discovery-005/raw/009_www.fortcollins.gov_2025-colorado-wildfire-resiliency-code-final-for-brc.pdf",
+    "original_pdf_text_extracted": false,
+    "candidate.txt": "9fc7fe62d1d678407db0d228a6e5ddc2397765a1d2f6d5ab4430a7cac3922ea7",
+    "PASS1_frozen.md": "5db47cffa3ce52a65417707c1a8f084d1051e6af38e0b71307db422c09ebda2d",
+    "PASS1_FREEZE_RECEIPT.json": "93a4561defaea1b41ab683dad5a762a8f3f83434e292216f612c6949084f8180",
+    "PASS2_REVIEW.md": "61b4fc2f313c60af9428f9bd7bea508f19218cd090cef395e58fe0da471670d9",
+    "page-0001.png": "784847fd40560671999a74f7adc1b1149f8192347298515b2e8d5df40ebb39b9",
+    "page-0002.png": "55c794cba773f3b968d087d9be19215b641f333b551c583d6dca9d104cc30d0b",
+    "page-0003.png": "c1241404a5fb4132569df2a431a68d25a3d2db701d2305b496e8bb8b4cc751f7",
+    "page-0004.png": "658cd341c98bc92bc241e48ae82d7efd118394c0a48c0194d0e535697ad39052",
+    "page-0005.png": "9061ea1354b1c71178d2ed10c62a9e3444fa963cabd2271fea8f5ed26a2dd849",
+    "page-0006.png": "8df50a9b6e245c7c45f07ce1739fb5c9cba2d6d99d935c68db9d0db8d6316931",
+    "page-0007.png": "08c0444d4ea6ff1def3209a63be2383dfe12cecd52c5c408312eab393b3cf8d3",
+    "page-0008.png": "7d6ae0f60370b4adf01e818d8dc2368a5791b66aad2f0535e542554feb76c0af"
+  },
+  "pass1_frozen_rehash_confirmation": {
+    "expected": "5db47cffa3ce52a65417707c1a8f084d1051e6af38e0b71307db422c09ebda2d",
+    "observed": "5db47cffa3ce52a65417707c1a8f084d1051e6af38e0b71307db422c09ebda2d",
+    "untouched": true
+  },
+  "pass1_freeze_receipt_rehash_confirmation": {
+    "expected": "93a4561defaea1b41ab683dad5a762a8f3f83434e292216f612c6949084f8180",
+    "observed": "93a4561defaea1b41ab683dad5a762a8f3f83434e292216f612c6949084f8180",
+    "untouched": true
+  },
+  "image_method": "Read tool on all 8 full-page PNGs plus Pillow crops (crops/ and crops_p2/); caption-mediated vision; pixel probes for green/yellow band locations",
+  "caption_mediation_disclosure": "Read captions are NOT source quotations. Rejected caption inventions (variance not struck; 503.2.3; 503.4.2 Materials; yellow+strike on new penalties). Tight crops used for green dates, variance/NAME strikes, yellow exceptions, defs, item 19, signature block.",
+  "custody_03_opened": false,
+  "verification_04_opened": false,
+  "ocr_evidence_opened": false,
+  "sherlock_atlas_opened": false,
+  "eb_pdf_014_opened": false,
+  "cost_usd": "unknown",
+  "time_cost": "unknown",
+  "cutoffs": {
+    "start_no_new_doc": "2026-09-11T20:50:00Z",
+    "hard_stop": "2026-09-11T21:20:00Z",
+    "completed_before_hard_stop": true
+  }
+}

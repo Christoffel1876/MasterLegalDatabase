@@ -1,0 +1,90 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "copied_at": {
+      "format": "date-time",
+      "title": "Copied At",
+      "type": "string"
+    },
+    "status": {
+      "const": "copied_prepared_intake_not_applied",
+      "title": "Status",
+      "type": "string"
+    },
+    "source_directory": {
+      "title": "Source Directory",
+      "type": "string"
+    },
+    "destination_directory": {
+      "title": "Destination Directory",
+      "type": "string"
+    },
+    "external_manifest_sha256": {
+      "title": "External Manifest Sha256",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "canonical_writes": {
+      "const": 0,
+      "title": "Canonical Writes",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "copied_at",
+    "status",
+    "source_directory",
+    "destination_directory",
+    "external_manifest_sha256",
+    "files",
+    "canonical_writes",
+    "public_requests",
+    "legal_currentness"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

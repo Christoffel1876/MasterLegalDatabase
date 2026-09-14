@@ -1,0 +1,251 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Referral": {
+      "additionalProperties": false,
+      "properties": {
+        "parent_url": {
+          "title": "Parent Url",
+          "type": "string"
+        },
+        "parent_html": {
+          "$ref": "#/$defs/Asset"
+        },
+        "original_data_src": {
+          "title": "Original Data Src",
+          "type": "string"
+        },
+        "original_viewer_src": {
+          "title": "Original Viewer Src",
+          "type": "string"
+        },
+        "encoded_file_argument": {
+          "title": "Encoded File Argument",
+          "type": "string"
+        },
+        "resolved_url": {
+          "title": "Resolved Url",
+          "type": "string"
+        },
+        "transformation": {
+          "const": "Read data-src; decode the pdf.js file argument exactly once; require both to equal the exact requested PDF URL.",
+          "title": "Transformation",
+          "type": "string"
+        },
+        "parent_reservation": {
+          "$ref": "#/$defs/Asset"
+        },
+        "parent_result": {
+          "$ref": "#/$defs/Asset"
+        },
+        "parent_public_headers": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "parent_url",
+        "parent_html",
+        "original_data_src",
+        "original_viewer_src",
+        "encoded_file_argument",
+        "resolved_url",
+        "transformation",
+        "parent_reservation",
+        "parent_result",
+        "parent_public_headers"
+      ],
+      "title": "Referral",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "source_id": {
+      "enum": [
+        "SD014-01",
+        "SD014-02"
+      ],
+      "title": "Source Id",
+      "type": "string"
+    },
+    "proposed_record_id": {
+      "title": "Proposed Record Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-MUNICIPAL-COLORADO_SPRINGS",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "layer_id": {
+      "const": "10_Municipal_Authorities",
+      "title": "Layer Id",
+      "type": "string"
+    },
+    "issuer": {
+      "title": "Issuer",
+      "type": "string"
+    },
+    "document_role": {
+      "title": "Document Role",
+      "type": "string"
+    },
+    "original": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_received_body_path": {
+      "title": "Original Received Body Path",
+      "type": "string"
+    },
+    "page_count": {
+      "const": 7,
+      "title": "Page Count",
+      "type": "integer"
+    },
+    "http_url": {
+      "title": "Http Url",
+      "type": "string"
+    },
+    "request_started_at": {
+      "format": "date-time",
+      "title": "Request Started At",
+      "type": "string"
+    },
+    "response_completed_at": {
+      "format": "date-time",
+      "title": "Response Completed At",
+      "type": "string"
+    },
+    "http_status": {
+      "const": 200,
+      "title": "Http Status",
+      "type": "integer"
+    },
+    "redirect_count": {
+      "const": 0,
+      "title": "Redirect Count",
+      "type": "integer"
+    },
+    "complete_response": {
+      "const": true,
+      "title": "Complete Response",
+      "type": "boolean"
+    },
+    "acquisition_method": {
+      "const": "manual_official_download",
+      "title": "Acquisition Method",
+      "type": "string"
+    },
+    "response_receipts": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Response Receipts",
+      "type": "array"
+    },
+    "referral": {
+      "$ref": "#/$defs/Referral"
+    },
+    "source_printed_date_claim": {
+      "title": "Source Printed Date Claim",
+      "type": "string"
+    },
+    "date_role": {
+      "title": "Date Role",
+      "type": "string"
+    },
+    "verified_adoption_date": {
+      "title": "Verified Adoption Date",
+      "type": "null"
+    },
+    "verified_effective_date": {
+      "title": "Verified Effective Date",
+      "type": "null"
+    },
+    "actual_future_repository_received_at": {
+      "title": "Actual Future Repository Received At",
+      "type": "null"
+    },
+    "source_qa_scope": {
+      "title": "Source Qa Scope",
+      "type": "string"
+    },
+    "source_qa_metadata": {
+      "$ref": "#/$defs/Asset"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Qualifications",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_id",
+    "proposed_record_id",
+    "authority_id",
+    "layer_id",
+    "issuer",
+    "document_role",
+    "original",
+    "original_received_body_path",
+    "page_count",
+    "http_url",
+    "request_started_at",
+    "response_completed_at",
+    "http_status",
+    "redirect_count",
+    "complete_response",
+    "acquisition_method",
+    "response_receipts",
+    "referral",
+    "source_printed_date_claim",
+    "date_role",
+    "verified_adoption_date",
+    "verified_effective_date",
+    "actual_future_repository_received_at",
+    "source_qa_scope",
+    "source_qa_metadata",
+    "legal_currentness",
+    "answer_safe",
+    "qualifications"
+  ],
+  "title": "Source",
+  "type": "object"
+}

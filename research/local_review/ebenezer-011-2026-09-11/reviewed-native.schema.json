@@ -1,0 +1,257 @@
+{
+  "$defs": {
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "finding_id": {
+          "title": "Finding Id",
+          "type": "string"
+        },
+        "disposition": {
+          "enum": [
+            "qualified_presentation_only",
+            "accepted_presentation_only",
+            "expected_format_limit",
+            "unresolved_nonsemantic"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "finding_id",
+        "disposition",
+        "reason"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "MemoTopic": {
+      "additionalProperties": false,
+      "properties": {
+        "heading": {
+          "title": "Heading",
+          "type": "string"
+        },
+        "heading_start_byte": {
+          "title": "Heading Start Byte",
+          "type": "integer"
+        },
+        "heading_end_byte": {
+          "title": "Heading End Byte",
+          "type": "integer"
+        },
+        "body": {
+          "title": "Body",
+          "type": "string"
+        },
+        "body_start_byte": {
+          "title": "Body Start Byte",
+          "type": "integer"
+        },
+        "body_end_byte": {
+          "title": "Body End Byte",
+          "type": "integer"
+        },
+        "printed_effective_date": {
+          "title": "Printed Effective Date",
+          "type": "string"
+        },
+        "scope_note": {
+          "title": "Scope Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "heading",
+        "heading_start_byte",
+        "heading_end_byte",
+        "body",
+        "body_start_byte",
+        "body_end_byte",
+        "printed_effective_date",
+        "scope_note"
+      ],
+      "title": "MemoTopic",
+      "type": "object"
+    },
+    "Receipt": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes",
+        "original_path",
+        "role"
+      ],
+      "title": "Receipt",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source_id": {
+      "const": "larimer-fee-increase-memo-sd004-lc-09",
+      "default": "larimer-fee-increase-memo-sd004-lc-09",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "assignment_id": {
+      "const": "EB-PDF-011",
+      "default": "EB-PDF-011",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "atlas_verified_native_text_with_presentation_qualifications",
+      "default": "atlas_verified_native_text_with_presentation_qualifications",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "source_role": {
+      "const": "agency_fee_increase_memo",
+      "default": "agency_fee_increase_memo",
+      "title": "Source Role",
+      "type": "string"
+    },
+    "physical_pages": {
+      "const": 1,
+      "default": 1,
+      "title": "Physical Pages",
+      "type": "integer"
+    },
+    "all_pages_visually_checked": {
+      "const": true,
+      "default": true,
+      "title": "All Pages Visually Checked",
+      "type": "boolean"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "candidate_sha256": {
+      "title": "Candidate Sha256",
+      "type": "string"
+    },
+    "text": {
+      "title": "Text",
+      "type": "string"
+    },
+    "text_sha256": {
+      "title": "Text Sha256",
+      "type": "string"
+    },
+    "candidate_text_offset_bytes": {
+      "title": "Candidate Text Offset Bytes",
+      "type": "integer"
+    },
+    "candidate_text_end_byte_exclusive": {
+      "title": "Candidate Text End Byte Exclusive",
+      "type": "integer"
+    },
+    "text_changes": {
+      "const": "none",
+      "default": "none",
+      "title": "Text Changes",
+      "type": "string"
+    },
+    "receipts": {
+      "items": {
+        "$ref": "#/$defs/Receipt"
+      },
+      "title": "Receipts",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "topics": {
+      "items": {
+        "$ref": "#/$defs/MemoTopic"
+      },
+      "title": "Topics",
+      "type": "array"
+    },
+    "review_method": {
+      "title": "Review Method",
+      "type": "string"
+    },
+    "independence_note": {
+      "title": "Independence Note",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "source_sha256",
+    "candidate_sha256",
+    "text",
+    "text_sha256",
+    "candidate_text_offset_bytes",
+    "candidate_text_end_byte_exclusive",
+    "receipts",
+    "findings",
+    "topics",
+    "review_method",
+    "independence_note",
+    "limitations"
+  ],
+  "title": "Review",
+  "type": "object"
+}

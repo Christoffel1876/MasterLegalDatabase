@@ -1,0 +1,188 @@
+{
+  "$defs": {
+    "Case": {
+      "additionalProperties": false,
+      "description": "Record the actual rejection reached by a temporary tamper probe.",
+      "properties": {
+        "case": {
+          "title": "Case",
+          "type": "string"
+        },
+        "result": {
+          "const": "rejected",
+          "title": "Result",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "case",
+        "result",
+        "reason"
+      ],
+      "title": "Case",
+      "type": "object"
+    },
+    "Check": {
+      "additionalProperties": false,
+      "description": "Record the earlier exact packet verification result before receipt sealing.",
+      "properties": {
+        "status": {
+          "const": "verified_prepared_not_dispatched",
+          "title": "Status",
+          "type": "string"
+        },
+        "documents": {
+          "const": 2,
+          "title": "Documents",
+          "type": "integer"
+        },
+        "physical_pages": {
+          "const": 5,
+          "title": "Physical Pages",
+          "type": "integer"
+        },
+        "native_bytes": {
+          "const": 9846,
+          "title": "Native Bytes",
+          "type": "integer"
+        },
+        "images_dpi": {
+          "const": 300,
+          "title": "Images Dpi",
+          "type": "integer"
+        },
+        "payloads": {
+          "title": "Payloads",
+          "type": "integer"
+        },
+        "manifest_sha256": {
+          "title": "Manifest Sha256",
+          "type": "string"
+        },
+        "public_requests": {
+          "const": 0,
+          "title": "Public Requests",
+          "type": "integer"
+        },
+        "source_fidelity_review_performed_by_validator": {
+          "const": false,
+          "title": "Source Fidelity Review Performed By Validator",
+          "type": "boolean"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "documents",
+        "physical_pages",
+        "native_bytes",
+        "images_dpi",
+        "payloads",
+        "manifest_sha256",
+        "public_requests",
+        "source_fidelity_review_performed_by_validator",
+        "legal_currentness"
+      ],
+      "title": "Check",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Retain exact command output and honest rendering/fixture limits.",
+  "properties": {
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "initial_manifest_sha256": {
+      "title": "Initial Manifest Sha256",
+      "type": "string"
+    },
+    "status": {
+      "const": "passed",
+      "title": "Status",
+      "type": "string"
+    },
+    "portable_cli_exit": {
+      "const": 0,
+      "title": "Portable Cli Exit",
+      "type": "integer"
+    },
+    "portable_stdout": {
+      "title": "Portable Stdout",
+      "type": "string"
+    },
+    "portable_stderr": {
+      "title": "Portable Stderr",
+      "type": "string"
+    },
+    "tamper_checks": {
+      "items": {
+        "$ref": "#/$defs/Case"
+      },
+      "title": "Tamper Checks",
+      "type": "array"
+    },
+    "packet_check": {
+      "$ref": "#/$defs/Check"
+    },
+    "all_five_full_images_directly_viewed_for_render_completeness": {
+      "const": true,
+      "title": "All Five Full Images Directly Viewed For Render Completeness",
+      "type": "boolean"
+    },
+    "review_scope": {
+      "title": "Review Scope",
+      "type": "string"
+    },
+    "initial_local_setup_failures": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Initial Local Setup Failures",
+      "type": "array"
+    },
+    "source_or_repository_writes": {
+      "const": 0,
+      "title": "Source Or Repository Writes",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "started_at",
+    "completed_at",
+    "initial_manifest_sha256",
+    "status",
+    "portable_cli_exit",
+    "portable_stdout",
+    "portable_stderr",
+    "tamper_checks",
+    "packet_check",
+    "all_five_full_images_directly_viewed_for_render_completeness",
+    "review_scope",
+    "initial_local_setup_failures",
+    "source_or_repository_writes",
+    "public_requests"
+  ],
+  "title": "Validation",
+  "type": "object"
+}

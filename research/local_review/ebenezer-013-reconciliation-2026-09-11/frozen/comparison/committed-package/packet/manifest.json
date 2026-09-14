@@ -1,0 +1,603 @@
+{
+  "schema_version": 1,
+  "packet_id": "grok-pdf-review-2026-09-11-batch-4",
+  "prepared_at": "2026-09-11T18:56:45.220685Z",
+  "status": "prepared_not_sent",
+  "purpose": "independent_pdf_transcription_review",
+  "start_no_document_at_or_after": "2026-09-11T20:50:00Z",
+  "finish_by": "2026-09-11T21:20:00Z",
+  "stop_after": "EB-PDF-014",
+  "independence": "procedural source-first pass; per-document frozen receipt before candidate",
+  "legal_currentness": "not_verified",
+  "documents": [
+    {
+      "queue_order": 1,
+      "assignment_id": "EB-PDF-013",
+      "source_id": "fort-collins-wildfire-code-sd005-05",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "authority_basis": "collection context only; not a legal-authority finding",
+      "expected_pages": 8,
+      "original": {
+        "path": "01-source-only/fort-collins-wildfire-code-sd005-05/original.pdf",
+        "sha256": "00e7446d7deac3499b86c4b8f15a5d802cc0c14dc2621409845ec13525cb01d2",
+        "size_bytes": 169449
+      },
+      "provenance": {
+        "canonical_raw_pdf": {
+          "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/fort-collins-wildfire-code-sd005-05/20260911T182900Z_009_www_fortcollins_gov_2025-colorado-wildfire-resiliency-code-final-for-brc.pdf",
+          "sha256": "00e7446d7deac3499b86c4b8f15a5d802cc0c14dc2621409845ec13525cb01d2",
+          "size_bytes": 169449
+        },
+        "original_acquisition_time": null,
+        "upstream_http_acquisition_independently_verified": false,
+        "actual_repository_received_at": "2026-09-11T18:29:00.820696Z",
+        "intake_record_id": "MSI-20260911T182900820696Z-fort-collins-wildfire-code-sd005-05",
+        "intake_status": "archived_pending_pipeline",
+        "acquisition_method": "received_review_package",
+        "frozen_raw_manifest": {
+          "path": "03-custody/manual-source-intake-manifest.56d29eed452da8724ededf0c85fe93789402530090ee30fa826645978b89ca88.jsonl",
+          "sha256": "56d29eed452da8724ededf0c85fe93789402530090ee30fa826645978b89ca88",
+          "size_bytes": 68748
+        },
+        "raw_manifest_line_number": 17,
+        "raw_manifest_line_sha256": "84bbec2f6f00a0e5c76d97b1d34cf865e40854544109cf36add82dd1b216cdc5",
+        "raw_manifest_line_size_bytes": 2430,
+        "frozen_intake_receipt": {
+          "path": "03-custody/intake-receipt.json",
+          "sha256": "ae837cb2a3ed603c0e2e336d99022893805880932dadf7264fe1645b534a088b",
+          "size_bytes": 182178
+        },
+        "frozen_source_provenance": {
+          "path": "03-custody/source-provenance.jsonl",
+          "sha256": "c8ba6727abf9972a52bd5855fac6154062b0882decf81883c47963493d1bc0f9",
+          "size_bytes": 109874
+        },
+        "provenance_line_number": 5,
+        "provenance_line_sha256": "0c4aece3075036ca88af8449aedca6a98592958cd8ff9e07e7165984989e4196",
+        "provenance_line_size_bytes": 5994,
+        "claimed_official_source_url": "https://www.fortcollins.gov/files/sharedassets/city/v/4/planning-development-amp-transportation/community-development/building-services/building-code/2025-colorado-wildfire-resiliency-code-final-for-brc.pdf",
+        "claimed_final_url": "https://www.fortcollins.gov/files/sharedassets/city/v/4/planning-development-amp-transportation/community-development/building-services/building-code/2025-colorado-wildfire-resiliency-code-final-for-brc.pdf",
+        "claimed_attempt_time": "2026-09-11T17:14:14Z",
+        "claimed_http_status": 200,
+        "claimed_referral_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Building-Code",
+        "claimed_referral_basis": "historical_metadata_route_current_anchor_unverified",
+        "source_role_claim": "related_code_candidate",
+        "role_basis": "supplied intake label; no adopted/current legal effect established",
+        "archive_identity_from_intake_receipt": {
+          "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/geode-discovery-005-package.tar.gz",
+          "sha256": "34ff40001ce67434ddab4f8f1450f9e711296e6b557753622e6f0f41f19c27ee",
+          "size_bytes": 193493914
+        },
+        "archive_member_from_intake_record": "raw/009_www.fortcollins.gov_2025-colorado-wildfire-resiliency-code-final-for-brc.pdf",
+        "archive_reopened_for_this_packet": false,
+        "caveats": [
+          "Original acquisition time is unknown. Supplied HTTP URL, status, time and referral are claims, not a new witnessed HTTP retrieval.",
+          "Canonical raw bytes, selected manifest lines and source-provenance/intake-receipt records agree. Immutable custody copies are inside this packet.",
+          "The source archive was previously verified at intake; this preparation does not reread the 193 MB archive or repeat that check. Its identity/member is carried from the frozen intake receipt.",
+          "Code labels, dates, filenames and visible amendment markup do not establish adopted effect, currentness, applicability or amendment completeness."
+        ]
+      },
+      "rendering_engine": "Poppler pdftoppm",
+      "rendering_version": "26.05.0",
+      "rendering_command": "pdftoppm -r 300 -png original.pdf page",
+      "rendering_dpi": 300,
+      "rendering_scope": "entire physical pages; no crop, annotation or rescaling",
+      "candidate": {
+        "path": "02-candidate-text/fort-collins-wildfire-code-sd005-05/candidate.txt",
+        "sha256": "9fc7fe62d1d678407db0d228a6e5ddc2397765a1d2f6d5ab4430a7cac3922ea7",
+        "size_bytes": 19785
+      },
+      "candidate_status": "machine_native_text_unreviewed",
+      "candidate_changes": "none",
+      "candidate_packaging": "UTF-8 page markers outside unchanged native byte slices",
+      "page_evidence_schema": {
+        "path": "02-candidate-text/page-evidence.schema.json",
+        "sha256": "4f46baf7e2952ac811fb16f6123b4900e64b45ce040a7a067082571a4ac5825c",
+        "size_bytes": 2953
+      },
+      "pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "01-source-only/fort-collins-wildfire-code-sd005-05/page-0001.png",
+            "sha256": "784847fd40560671999a74f7adc1b1149f8192347298515b2e8d5df40ebb39b9",
+            "size_bytes": 594429
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/fort-collins-wildfire-code-sd005-05/native-evidence/page-0001.json",
+            "sha256": "38d64694cbd51239427dfc8a86cb47887306157b2a51ffd1e1d4edb96f5be558",
+            "size_bytes": 3634
+          },
+          "text_sha256": "1a51fea69a4c1c2a8274c9f73f28c2d4774c24d8670f5b7904a9eae10c8fb9da",
+          "text_size_bytes": 2798,
+          "candidate_text_offset_bytes": 56,
+          "candidate_text_end_byte_exclusive": 2854
+        },
+        {
+          "physical_page": 2,
+          "image": {
+            "path": "01-source-only/fort-collins-wildfire-code-sd005-05/page-0002.png",
+            "sha256": "55c794cba773f3b968d087d9be19215b641f333b551c583d6dca9d104cc30d0b",
+            "size_bytes": 529888
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/fort-collins-wildfire-code-sd005-05/native-evidence/page-0002.json",
+            "sha256": "ad9fed125493214db299b54f0bbcd7972bc316e3f10d239a7991667b52c2495d",
+            "size_bytes": 3520
+          },
+          "text_sha256": "65ad952a66606af7f9ee799a3703f8d41980bbeebed88e131ceb8112d3b204d2",
+          "text_size_bytes": 2693,
+          "candidate_text_offset_bytes": 2967,
+          "candidate_text_end_byte_exclusive": 5660
+        },
+        {
+          "physical_page": 3,
+          "image": {
+            "path": "01-source-only/fort-collins-wildfire-code-sd005-05/page-0003.png",
+            "sha256": "c1241404a5fb4132569df2a431a68d25a3d2db701d2305b496e8bb8b4cc751f7",
+            "size_bytes": 496743
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/fort-collins-wildfire-code-sd005-05/native-evidence/page-0003.json",
+            "sha256": "e573a06a01ef9b91f1b8d2cdb9c89be0330ab35d450496ab6d18f0b90e1384dd",
+            "size_bytes": 3160
+          },
+          "text_sha256": "01320cd167c0cc7508c6805afde7db08cec671e00d142edde67509a1dc3d7968",
+          "text_size_bytes": 2341,
+          "candidate_text_offset_bytes": 5773,
+          "candidate_text_end_byte_exclusive": 8114
+        },
+        {
+          "physical_page": 4,
+          "image": {
+            "path": "01-source-only/fort-collins-wildfire-code-sd005-05/page-0004.png",
+            "sha256": "658cd341c98bc92bc241e48ae82d7efd118394c0a48c0194d0e535697ad39052",
+            "size_bytes": 601292
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/fort-collins-wildfire-code-sd005-05/native-evidence/page-0004.json",
+            "sha256": "f3c297a1eca410b7d205c39ec5e7a890c855be43cd5efecd7e9720257057812b",
+            "size_bytes": 3700
+          },
+          "text_sha256": "ad081d3443d641756c32218229b8d2e01b9c5a6950b98970c65d9235bd1dd805",
+          "text_size_bytes": 2872,
+          "candidate_text_offset_bytes": 8227,
+          "candidate_text_end_byte_exclusive": 11099
+        },
+        {
+          "physical_page": 5,
+          "image": {
+            "path": "01-source-only/fort-collins-wildfire-code-sd005-05/page-0005.png",
+            "sha256": "9061ea1354b1c71178d2ed10c62a9e3444fa963cabd2271fea8f5ed26a2dd849",
+            "size_bytes": 450046
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/fort-collins-wildfire-code-sd005-05/native-evidence/page-0005.json",
+            "sha256": "5e8b52ed5280d6d9a5d53d66d80b94b4fd17dd1fbb886ad51156f7d2224948f0",
+            "size_bytes": 2759
+          },
+          "text_sha256": "e1cb15981270bcb4c58a5dd76b082ef0f11700687181b0f174d04b16e0660ff8",
+          "text_size_bytes": 1939,
+          "candidate_text_offset_bytes": 11212,
+          "candidate_text_end_byte_exclusive": 13151
+        },
+        {
+          "physical_page": 6,
+          "image": {
+            "path": "01-source-only/fort-collins-wildfire-code-sd005-05/page-0006.png",
+            "sha256": "8df50a9b6e245c7c45f07ce1739fb5c9cba2d6d99d935c68db9d0db8d6316931",
+            "size_bytes": 593874
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/fort-collins-wildfire-code-sd005-05/native-evidence/page-0006.json",
+            "sha256": "da03fa3abe103b4cf8970928eef6a53cf4481c1b96e2a1d93c26de1f0ea7d14d",
+            "size_bytes": 3639
+          },
+          "text_sha256": "72ebe0d63e1bc17e27d1e704ec67f2677cce877f0d550be86529f0eff82dc853",
+          "text_size_bytes": 2820,
+          "candidate_text_offset_bytes": 13264,
+          "candidate_text_end_byte_exclusive": 16084
+        },
+        {
+          "physical_page": 7,
+          "image": {
+            "path": "01-source-only/fort-collins-wildfire-code-sd005-05/page-0007.png",
+            "sha256": "08c0444d4ea6ff1def3209a63be2383dfe12cecd52c5c408312eab393b3cf8d3",
+            "size_bytes": 504609
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/fort-collins-wildfire-code-sd005-05/native-evidence/page-0007.json",
+            "sha256": "1494452db07fe8f49514a7168b6781f63ea5886267019af2c19bada9e609549d",
+            "size_bytes": 2959
+          },
+          "text_sha256": "2259548ceb2c50fada294744eb4fcd1c2bee93321314ab86d6871943451e3f12",
+          "text_size_bytes": 2142,
+          "candidate_text_offset_bytes": 16197,
+          "candidate_text_end_byte_exclusive": 18339
+        },
+        {
+          "physical_page": 8,
+          "image": {
+            "path": "01-source-only/fort-collins-wildfire-code-sd005-05/page-0008.png",
+            "sha256": "7d6ae0f60370b4adf01e818d8dc2368a5791b66aad2f0535e542554feb76c0af",
+            "size_bytes": 249052
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/fort-collins-wildfire-code-sd005-05/native-evidence/page-0008.json",
+            "sha256": "1734232bbf6fff8c86f0d3a1e8f76ed4d6d6c32addb9a1dd3aaebde302a589e3",
+            "size_bytes": 2077
+          },
+          "text_sha256": "cc0e5435e65f6764d7fbd8ddf84d8b27f1ca87024d8e465a399a44f39c707a00",
+          "text_size_bytes": 1276,
+          "candidate_text_offset_bytes": 18452,
+          "candidate_text_end_byte_exclusive": 19728
+        }
+      ],
+      "legal_currentness": "not_verified",
+      "legal_review": "pending"
+    },
+    {
+      "queue_order": 2,
+      "assignment_id": "EB-PDF-014",
+      "source_id": "fort-collins-land-use-article-1-sd005-07",
+      "authority_id": "CO-MUNICIPAL-FORT_COLLINS",
+      "authority_basis": "collection context only; not a legal-authority finding",
+      "expected_pages": 7,
+      "original": {
+        "path": "01-source-only/fort-collins-land-use-article-1-sd005-07/original.pdf",
+        "sha256": "555a05553af57619c818c5b9ab90d1b751e161a307d8bb65fc73141991a73d2a",
+        "size_bytes": 340287
+      },
+      "provenance": {
+        "canonical_raw_pdf": {
+          "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/fort-collins-land-use-article-1-sd005-07/20260911T182900Z_010_www_fortcollins_gov_article-1-general-purpose-and-provisions.pdf",
+          "sha256": "555a05553af57619c818c5b9ab90d1b751e161a307d8bb65fc73141991a73d2a",
+          "size_bytes": 340287
+        },
+        "original_acquisition_time": null,
+        "upstream_http_acquisition_independently_verified": false,
+        "actual_repository_received_at": "2026-09-11T18:29:00.820696Z",
+        "intake_record_id": "MSI-20260911T182900820696Z-fort-collins-land-use-article-1-sd005-07",
+        "intake_status": "archived_pending_pipeline",
+        "acquisition_method": "received_review_package",
+        "frozen_raw_manifest": {
+          "path": "03-custody/manual-source-intake-manifest.56d29eed452da8724ededf0c85fe93789402530090ee30fa826645978b89ca88.jsonl",
+          "sha256": "56d29eed452da8724ededf0c85fe93789402530090ee30fa826645978b89ca88",
+          "size_bytes": 68748
+        },
+        "raw_manifest_line_number": 18,
+        "raw_manifest_line_sha256": "1fcad4470fd0a851376c7b891c84ff44acbd2cf3f9972f8855bee4c555314e0c",
+        "raw_manifest_line_size_bytes": 2377,
+        "frozen_intake_receipt": {
+          "path": "03-custody/intake-receipt.json",
+          "sha256": "ae837cb2a3ed603c0e2e336d99022893805880932dadf7264fe1645b534a088b",
+          "size_bytes": 182178
+        },
+        "frozen_source_provenance": {
+          "path": "03-custody/source-provenance.jsonl",
+          "sha256": "c8ba6727abf9972a52bd5855fac6154062b0882decf81883c47963493d1bc0f9",
+          "size_bytes": 109874
+        },
+        "provenance_line_number": 6,
+        "provenance_line_sha256": "7b48d3917a879ed3acc600d3ad3f510c9a22600e1956d86903a1f241532141c3",
+        "provenance_line_size_bytes": 5938,
+        "claimed_official_source_url": "https://www.fortcollins.gov/files/sharedassets/city/v/3/planning-development-amp-transportation/community-development/planning/land-use-code/article-1-general-purpose-and-provisions.pdf",
+        "claimed_final_url": "https://www.fortcollins.gov/files/sharedassets/city/v/3/planning-development-amp-transportation/community-development/planning/land-use-code/article-1-general-purpose-and-provisions.pdf",
+        "claimed_attempt_time": "2026-09-11T17:14:14Z",
+        "claimed_http_status": 200,
+        "claimed_referral_url": "https://www.fortcollins.gov/Government/City-Code-and-Charter/Land-Use-Code",
+        "claimed_referral_basis": "historical_metadata_route_current_anchor_unverified",
+        "source_role_claim": "code_article_candidate",
+        "role_basis": "supplied intake label; no adopted/current legal effect established",
+        "archive_identity_from_intake_receipt": {
+          "path": "/Users/mcoors/Documents/Project Geode/handoffs/sherlock-source-discovery-005/20260911T171254Z/geode-discovery-005-package.tar.gz",
+          "sha256": "34ff40001ce67434ddab4f8f1450f9e711296e6b557753622e6f0f41f19c27ee",
+          "size_bytes": 193493914
+        },
+        "archive_member_from_intake_record": "raw/010_www.fortcollins.gov_article-1-general-purpose-and-provisions.pdf",
+        "archive_reopened_for_this_packet": false,
+        "caveats": [
+          "Original acquisition time is unknown. Supplied HTTP URL, status, time and referral are claims, not a new witnessed HTTP retrieval.",
+          "Canonical raw bytes, selected manifest lines and source-provenance/intake-receipt records agree. Immutable custody copies are inside this packet.",
+          "The source archive was previously verified at intake; this preparation does not reread the 193 MB archive or repeat that check. Its identity/member is carried from the frozen intake receipt.",
+          "Code labels, dates, filenames and visible amendment markup do not establish adopted effect, currentness, applicability or amendment completeness."
+        ]
+      },
+      "rendering_engine": "Poppler pdftoppm",
+      "rendering_version": "26.05.0",
+      "rendering_command": "pdftoppm -r 300 -png original.pdf page",
+      "rendering_dpi": 300,
+      "rendering_scope": "entire physical pages; no crop, annotation or rescaling",
+      "candidate": {
+        "path": "02-candidate-text/fort-collins-land-use-article-1-sd005-07/candidate.txt",
+        "sha256": "a31bfdec7d300e43690236b7fdacd9dd89c9f431fc48fe9077e9ae09c13a1105",
+        "size_bytes": 14370
+      },
+      "candidate_status": "machine_native_text_unreviewed",
+      "candidate_changes": "none",
+      "candidate_packaging": "UTF-8 page markers outside unchanged native byte slices",
+      "page_evidence_schema": {
+        "path": "02-candidate-text/page-evidence.schema.json",
+        "sha256": "4f46baf7e2952ac811fb16f6123b4900e64b45ce040a7a067082571a4ac5825c",
+        "size_bytes": 2953
+      },
+      "pages": [
+        {
+          "physical_page": 1,
+          "image": {
+            "path": "01-source-only/fort-collins-land-use-article-1-sd005-07/page-0001.png",
+            "sha256": "7ed3f49842c2039bb73f2776d3ad373a7955e6d0b36ebebd5ae4c2e23f141b2c",
+            "size_bytes": 191146
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/fort-collins-land-use-article-1-sd005-07/native-evidence/page-0001.json",
+            "sha256": "0bcdd130b18e5e84111ce10bb0665e00491debe2f4d33e2f400a27fc7904f9af",
+            "size_bytes": 962
+          },
+          "text_sha256": "f368774a7cce379ca1bda3e7041904023ed467410efbca7e90d0e3904dbec53b",
+          "text_size_bytes": 174,
+          "candidate_text_offset_bytes": 56,
+          "candidate_text_end_byte_exclusive": 230
+        },
+        {
+          "physical_page": 2,
+          "image": {
+            "path": "01-source-only/fort-collins-land-use-article-1-sd005-07/page-0002.png",
+            "sha256": "a3c3dbe905ac1901d482f474671c474f10d30ed8d33ee11219f332e4a2e5248e",
+            "size_bytes": 809680
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/fort-collins-land-use-article-1-sd005-07/native-evidence/page-0002.json",
+            "sha256": "12cb97c92eade706b457e3e83731194774c25ba44791de48270eba051f25bf7d",
+            "size_bytes": 1230
+          },
+          "text_sha256": "c01780f7fd0ac37c2eb94a1e3ac9b5a5878135513901238e854b70de730ae9dc",
+          "text_size_bytes": 448,
+          "candidate_text_offset_bytes": 343,
+          "candidate_text_end_byte_exclusive": 791
+        },
+        {
+          "physical_page": 3,
+          "image": {
+            "path": "01-source-only/fort-collins-land-use-article-1-sd005-07/page-0003.png",
+            "sha256": "6c4696f83452f7eafd6f3f8c79a762f37f01bedd8c6e8ac6f6be61ec040a0ca3",
+            "size_bytes": 148910
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/fort-collins-land-use-article-1-sd005-07/native-evidence/page-0003.json",
+            "sha256": "6759968921c5e63a09a4a14f755e1536b0f5b0651ca2b2dd17a5f778c03260ac",
+            "size_bytes": 1349
+          },
+          "text_sha256": "2b18d542313cc22588a8d3c3d95738eb87872273518bc4514cd8400cdd4abd1d",
+          "text_size_bytes": 547,
+          "candidate_text_offset_bytes": 904,
+          "candidate_text_end_byte_exclusive": 1451
+        },
+        {
+          "physical_page": 4,
+          "image": {
+            "path": "01-source-only/fort-collins-land-use-article-1-sd005-07/page-0004.png",
+            "sha256": "812fc96f8f1a01e7301aaf6f7a725201e2fdfd666a8e0e62c89d65a224c234fc",
+            "size_bytes": 472852
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/fort-collins-land-use-article-1-sd005-07/native-evidence/page-0004.json",
+            "sha256": "e9d45ecb65888d068d0a83af9630b3c85f8def5a3b95ef753ef8efaf75394ec2",
+            "size_bytes": 3760
+          },
+          "text_sha256": "df19562cc8e0840c4a3f76b0eb23a15b742fd41fff6056309d5b14bc35d62694",
+          "text_size_bytes": 2946,
+          "candidate_text_offset_bytes": 1564,
+          "candidate_text_end_byte_exclusive": 4510
+        },
+        {
+          "physical_page": 5,
+          "image": {
+            "path": "01-source-only/fort-collins-land-use-article-1-sd005-07/page-0005.png",
+            "sha256": "4c3e9b0d1e956212d3c025fb0c2936358b5f596d3f91c5c8045fdce38476fb3f",
+            "size_bytes": 368031
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/fort-collins-land-use-article-1-sd005-07/native-evidence/page-0005.json",
+            "sha256": "98b7561652c5f69f1b80c45fc57ce83d410a306dbd06b8d217fc59cdff3b5ba7",
+            "size_bytes": 3213
+          },
+          "text_sha256": "b6e4af5fef15f5a453b4972d80125137ea35c905d9b073d0c5509a1f1870642d",
+          "text_size_bytes": 2387,
+          "candidate_text_offset_bytes": 4623,
+          "candidate_text_end_byte_exclusive": 7010
+        },
+        {
+          "physical_page": 6,
+          "image": {
+            "path": "01-source-only/fort-collins-land-use-article-1-sd005-07/page-0006.png",
+            "sha256": "b84cd01abd9808f61997c651f2810de27df956ca46d09b391fa15bc9f5decbc9",
+            "size_bytes": 500400
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/fort-collins-land-use-article-1-sd005-07/native-evidence/page-0006.json",
+            "sha256": "62925709883db0473afd200eaacad32b6fb32e627714927ea4c9af5e36de1fc8",
+            "size_bytes": 4936
+          },
+          "text_sha256": "a9a00a9bfe01e67e673d13ff7a0284bc7be5e0ac017f260d9b77658fe1b019c4",
+          "text_size_bytes": 4114,
+          "candidate_text_offset_bytes": 7123,
+          "candidate_text_end_byte_exclusive": 11237
+        },
+        {
+          "physical_page": 7,
+          "image": {
+            "path": "01-source-only/fort-collins-land-use-article-1-sd005-07/page-0007.png",
+            "sha256": "dadd797082f6f669395a1a230fac4a40fd324befe7f8a4d48f2afd2db4ea1288",
+            "size_bytes": 398417
+          },
+          "image_width": 2550,
+          "image_height": 3300,
+          "evidence": {
+            "path": "02-candidate-text/fort-collins-land-use-article-1-sd005-07/native-evidence/page-0007.json",
+            "sha256": "75001a6ce4ec7de49659e61c79b4bea29b88f571c51e6c1acfb5b2903493c62b",
+            "size_bytes": 3775
+          },
+          "text_sha256": "406ce53fb08684e3ef874f1408c9771815baa4f6fda7c4259e3797850e228ce0",
+          "text_size_bytes": 2963,
+          "candidate_text_offset_bytes": 11350,
+          "candidate_text_end_byte_exclusive": 14313
+        }
+      ],
+      "legal_currentness": "not_verified",
+      "legal_review": "pending"
+    }
+  ],
+  "custody_copies": [
+    {
+      "original": {
+        "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+        "sha256": "56d29eed452da8724ededf0c85fe93789402530090ee30fa826645978b89ca88",
+        "size_bytes": 68748
+      },
+      "frozen": {
+        "path": "03-custody/manual-source-intake-manifest.56d29eed452da8724ededf0c85fe93789402530090ee30fa826645978b89ca88.jsonl",
+        "sha256": "56d29eed452da8724ededf0c85fe93789402530090ee30fa826645978b89ca88",
+        "size_bytes": 68748
+      },
+      "role": "Exact immutable 31-record raw-manifest snapshot; original path may later append",
+      "captured_at": "2026-09-11T18:56:35.847417Z"
+    },
+    {
+      "original": {
+        "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/fort-collins-intake-2026-09-11/intake-receipt.json",
+        "sha256": "ae837cb2a3ed603c0e2e336d99022893805880932dadf7264fe1645b534a088b",
+        "size_bytes": 182178
+      },
+      "frozen": {
+        "path": "03-custody/intake-receipt.json",
+        "sha256": "ae837cb2a3ed603c0e2e336d99022893805880932dadf7264fe1645b534a088b",
+        "size_bytes": 182178
+      },
+      "role": "Exact current Fort Collins intake receipt; prior claims are not new checks",
+      "captured_at": "2026-09-11T18:56:35.847417Z"
+    },
+    {
+      "original": {
+        "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/fort-collins-intake-2026-09-11/intake-receipt.schema.json",
+        "sha256": "4c7bea412fc6ae1ccd7127452c59a8c3fe25c11403333025eaade76548c61193",
+        "size_bytes": 21460
+      },
+      "frozen": {
+        "path": "03-custody/intake-receipt.schema.json",
+        "sha256": "4c7bea412fc6ae1ccd7127452c59a8c3fe25c11403333025eaade76548c61193",
+        "size_bytes": 21460
+      },
+      "role": "Original receipt schema",
+      "captured_at": "2026-09-11T18:56:35.847417Z"
+    },
+    {
+      "original": {
+        "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/fort-collins-intake-2026-09-11/source-provenance.jsonl",
+        "sha256": "c8ba6727abf9972a52bd5855fac6154062b0882decf81883c47963493d1bc0f9",
+        "size_bytes": 109874
+      },
+      "frozen": {
+        "path": "03-custody/source-provenance.jsonl",
+        "sha256": "c8ba6727abf9972a52bd5855fac6154062b0882decf81883c47963493d1bc0f9",
+        "size_bytes": 109874
+      },
+      "role": "Exact previously validated source provenance; do not open before own pass1 freeze",
+      "captured_at": "2026-09-11T18:56:35.847417Z"
+    },
+    {
+      "original": {
+        "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/fort-collins-intake-2026-09-11/source-provenance.schema.json",
+        "sha256": "db1a6b55d0367371de326c9aca9ca4718ed19ff4bca099e7d7190c934b6073b3",
+        "size_bytes": 10947
+      },
+      "frozen": {
+        "path": "03-custody/source-provenance.schema.json",
+        "sha256": "db1a6b55d0367371de326c9aca9ca4718ed19ff4bca099e7d7190c934b6073b3",
+        "size_bytes": 10947
+      },
+      "role": "Original source-provenance schema",
+      "captured_at": "2026-09-11T18:56:35.847417Z"
+    }
+  ],
+  "supporting_payloads": [
+    {
+      "path": "START_HERE.md",
+      "sha256": "8969b23aa452aa5a77b3b3ac88d9f5b343c1d06a1efa582204910083ce1f6975",
+      "size_bytes": 2133
+    },
+    {
+      "path": "PASS_1_PROMPT.md",
+      "sha256": "5fd769a59f0f963bfed5ab82a7be643c9ac7ecb4032b01edf54f93c861b519df",
+      "size_bytes": 3248
+    },
+    {
+      "path": "PASS_2_PROMPT.md",
+      "sha256": "4fc26ad8bd6cd6bef114dc55c74c34a95ececf7d82bad9bae7ab14e4f38a62b5",
+      "size_bytes": 2974
+    },
+    {
+      "path": "04-verification/verify_packet.py",
+      "sha256": "6990785b81a90fac80b564ccb158051efb462e23b4255addd1e97b9a738d783f",
+      "size_bytes": 16014
+    },
+    {
+      "path": "02-candidate-text/page-evidence.schema.json",
+      "sha256": "4f46baf7e2952ac811fb16f6123b4900e64b45ce040a7a067082571a4ac5825c",
+      "size_bytes": 2953
+    },
+    {
+      "path": "03-custody/manual-record.schema.json",
+      "sha256": "9404ca35ead3d1c70813ed5f58143bf1c19e13e4ea7463b2befbd6d616aa1a7d",
+      "size_bytes": 2435
+    }
+  ],
+  "assignment": {
+    "original": {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/EBENEZER_QUEUE_013_014_2026-09-11.md",
+      "sha256": "26de06e50f00a940202cecd8e4f2b603927d5e8befb986282f46f9cbb02064a0",
+      "size_bytes": 2913
+    },
+    "frozen": {
+      "path": "ASSIGNMENT.md",
+      "sha256": "26de06e50f00a940202cecd8e4f2b603927d5e8befb986282f46f9cbb02064a0",
+      "size_bytes": 2913
+    },
+    "role": "Exact package-local copy of external assignment",
+    "captured_at": "2026-09-11T18:56:35.847417Z"
+  },
+  "limitations": [
+    "Packet only prepared, not dispatched; downstream review and adoption/currentness remain unverified.",
+    "Source and candidate separation is procedural; reviewer must disclose early exposure and captions.",
+    "All 15 physical pages have meaningful native text. No OCR substituted; source anomalies/graphics are not corrected in the native candidate.",
+    "Canonical PDFs remain archived_pending_pipeline. This packet changes no repository, law, coverage or review status."
+  ]
+}

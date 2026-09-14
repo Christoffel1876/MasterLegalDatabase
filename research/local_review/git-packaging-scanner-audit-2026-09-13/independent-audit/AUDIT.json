@@ -1,0 +1,105 @@
+{
+  "reviewer": "Plato",
+  "recorded_at": "2026-09-13T17:26:40.586758Z",
+  "status": "proposed_revision_validated_not_installed",
+  "original_scanner": {
+    "path": "original/geode_packaging_scan.py",
+    "sha256": "791a53843f732069cee577e305acb13df394055f344bab6787c0af777305c860",
+    "size_bytes": 7264
+  },
+  "proposed_scanner": {
+    "path": "proposed/geode_packaging_scan.py",
+    "sha256": "6970412367b108fda28516ecdf27c3e8a4467ebd58180475103facd1c5499194",
+    "size_bytes": 12981
+  },
+  "original_scan": {
+    "path": "before-final-install/SCAN.json",
+    "sha256": "007dabab13e582340c415d8029b5f09bb50ec3ca6d5f838b5188c3897e9d030b",
+    "size_bytes": 992040
+  },
+  "proposed_scan": {
+    "path": "proposed-runs/reviewed-current-no-staging/SCAN.json",
+    "sha256": "cb6b6e42115eb8df248c26ae6509c24983b361790c3c0f89e1b51d8a25ba08fa",
+    "size_bytes": 1020547
+  },
+  "findings": [
+    {
+      "id": "F01",
+      "status": "reproduced",
+      "statement": "Original final assembly restamps a changed synthetic wrapper payload while retaining its prior approved basis; no actual production corruption asserted.",
+      "evidence": [
+        "original_repro.py",
+        "replay_original_repro.py",
+        "original-reproduction.stdout.log",
+        "original-reproduction.stderr.log",
+        "reproduction-clock.txt"
+      ]
+    },
+    {
+      "id": "F02",
+      "status": "verified",
+      "statement": "Actual old scan resolves case-insensitive inventory naming, both wrapper path forms, exact user exclusions, ignored selections and six appended original identities.",
+      "evidence": [
+        "before-final-install/SCAN.json",
+        "before-final-install/paths.nul",
+        "before-final-install/force-add.nul"
+      ]
+    },
+    {
+      "id": "F03",
+      "status": "proposed",
+      "statement": "Expected identity map carries wrapper, prior audit, raw, preimage and installed receipt pins through final assets; conflicting identities and final drift refuse.",
+      "evidence": [
+        "proposed/geode_packaging_scan.py",
+        "test_expected_identities.py",
+        "focused-tests.log"
+      ]
+    },
+    {
+      "id": "F04",
+      "status": "verified",
+      "statement": "Proposed actual local scan passed with nineteen closed wrappers, 2511 assets, 87 ignored/untracked payloads and exactly six approved originals, without staging.",
+      "evidence": [
+        "proposed-runs/reviewed-current-no-staging/SCAN.json"
+      ]
+    },
+    {
+      "id": "F05",
+      "status": "proposed",
+      "statement": "Inventory snapshots are selected from pinned prior audit and final installation/preimage receipts; new unbound files fail instead of wildcard admission.",
+      "evidence": [
+        "inputs/UNTRACKED_ORDINARY.json",
+        "inputs/RECEIPT.json",
+        "inputs/RECEIPT.schema.json",
+        "inputs/PREIMAGE_RECEIPT.json",
+        "inputs/PREIMAGE_RECEIPT.schema.json"
+      ]
+    },
+    {
+      "id": "F06",
+      "status": "qualified",
+      "statement": "The optional future CI receipt must be closed-wrapper bound with its schema and installed-file pins. Actual CI branch awaits a reviewed receipt; only unbound refusal is covered here.",
+      "evidence": [
+        "proposed/geode_packaging_scan.py",
+        "test_expected_identities.py"
+      ]
+    }
+  ],
+  "commands": [
+    "/private/tmp/geode-status-venv/bin/python -B replay_original_repro.py",
+    "/private/tmp/geode-status-venv/bin/python -B -m pytest -q -p no:cacheprovider test_expected_identities.py",
+    "/private/tmp/geode-status-venv/bin/python -B proposed/geode_packaging_scan.py reviewed-current-no-staging"
+  ],
+  "focused_tests_passed": 9,
+  "production_mutations": 0,
+  "public_requests": 0,
+  "git_mutations": 0,
+  "limitations": [
+    "Actual scan requires the fixed repository, HEAD and source metadata; the closed audit verifier itself uses only copied payloads.",
+    "No canonical corruption, legal truth, later staging or publication is certified.",
+    "Other maintained file selections are observed snapshots unless independently installation-bound.",
+    "Future CI receipt and schema must be reviewed and exactly pinned before use; actual CI installation was absent during this successful scan.",
+    "This bounded revision does not comprehensively harden ancestor symlinks or general wrapper authorization.",
+    "The source scanner and proposed revision retain one-off formatting; no maintained module was edited."
+  ]
+}

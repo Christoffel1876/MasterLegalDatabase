@@ -1,0 +1,83 @@
+{
+  "$defs": {
+    "Baseline": {
+      "additionalProperties": false,
+      "description": "Selected local baseline identity and read-only Git storage observations.",
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "tracked": {
+          "title": "Tracked",
+          "type": "boolean"
+        },
+        "git_filter": {
+          "title": "Git Filter",
+          "type": "string"
+        },
+        "begins_pdf_magic": {
+          "title": "Begins Pdf Magic",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "source_id",
+        "repository_path",
+        "sha256",
+        "size_bytes",
+        "tracked",
+        "git_filter",
+        "begins_pdf_magic"
+      ],
+      "title": "Baseline",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Storage check does not reverify legal content or unselected corpus availability.",
+  "properties": {
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/Baseline"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "title": "Rows",
+      "type": "array"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "limitation": {
+      "title": "Limitation",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "rows",
+    "public_requests",
+    "limitation"
+  ],
+  "title": "BaselineProbe",
+  "type": "object"
+}

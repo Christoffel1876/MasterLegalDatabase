@@ -1,0 +1,434 @@
+{
+  "$defs": {
+    "GreeleyBlock": {
+      "additionalProperties": false,
+      "description": "Bind an unchanged source block to native and packaged candidate UTF-8 bytes.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "physical_page": {
+          "const": 1,
+          "default": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "byte_basis": {
+          "const": "utf8_candidate_file_with_page_marker",
+          "default": "utf8_candidate_file_with_page_marker",
+          "title": "Byte Basis",
+          "type": "string"
+        },
+        "candidate_path": {
+          "title": "Candidate Path",
+          "type": "string"
+        },
+        "candidate_native_offset": {
+          "const": 56,
+          "default": 56,
+          "title": "Candidate Native Offset",
+          "type": "integer"
+        },
+        "native_start": {
+          "minimum": 0,
+          "title": "Native Start",
+          "type": "integer"
+        },
+        "native_end": {
+          "maximum": 3236,
+          "title": "Native End",
+          "type": "integer"
+        },
+        "candidate_start": {
+          "title": "Candidate Start",
+          "type": "integer"
+        },
+        "candidate_end": {
+          "title": "Candidate End",
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "text",
+        "candidate_path",
+        "native_start",
+        "native_end",
+        "candidate_start",
+        "candidate_end",
+        "sha256"
+      ],
+      "title": "GreeleyBlock",
+      "type": "object"
+    },
+    "GreeleyDateStatement": {
+      "additionalProperties": false,
+      "description": "Quote a date label without turning it into a verified legal date.",
+      "properties": {
+        "role": {
+          "enum": [
+            "schedule_title_year",
+            "effective_heading_year",
+            "unlabeled_footer"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "evidence": {
+          "$ref": "#/$defs/GreeleyBlock"
+        },
+        "interpretation": {
+          "const": "source_claim_only_not_verified_legal_date",
+          "default": "source_claim_only_not_verified_legal_date",
+          "title": "Interpretation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "evidence"
+      ],
+      "title": "GreeleyDateStatement",
+      "type": "object"
+    },
+    "GreeleyEntry": {
+      "additionalProperties": false,
+      "description": "Keep a complete fee clause and its reviewed headings and footnotes together.",
+      "properties": {
+        "entry_id": {
+          "title": "Entry Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "valuation_fee",
+            "other_fee",
+            "sales_tax",
+            "temporary_electrical"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "statement": {
+          "$ref": "#/$defs/GreeleyBlock"
+        },
+        "headings": {
+          "items": {
+            "$ref": "#/$defs/GreeleyBlock"
+          },
+          "title": "Headings",
+          "type": "array"
+        },
+        "footnotes": {
+          "items": {
+            "$ref": "#/$defs/GreeleyBlock"
+          },
+          "title": "Footnotes",
+          "type": "array"
+        },
+        "page_image_path": {
+          "title": "Page Image Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "entry_id",
+        "kind",
+        "statement",
+        "headings",
+        "footnotes",
+        "page_image_path"
+      ],
+      "title": "GreeleyEntry",
+      "type": "object"
+    },
+    "GreeleySourceBinding": {
+      "additionalProperties": false,
+      "description": "Separate received custody, reported HTTP claims and the municipal source owner.",
+      "properties": {
+        "canonical_source_id": {
+          "const": "greeley-building-fees-sd008-06",
+          "default": "greeley-building-fees-sd008-06",
+          "title": "Canonical Source Id",
+          "type": "string"
+        },
+        "review_source_id": {
+          "const": "greeley-building-fees-sd008-06",
+          "default": "greeley-building-fees-sd008-06",
+          "title": "Review Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-MUNICIPAL-GREELEY",
+          "default": "CO-MUNICIPAL-GREELEY",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "authority_basis": {
+          "title": "Authority Basis",
+          "type": "string"
+        },
+        "official_source_url": {
+          "default": null,
+          "title": "Official Source Url",
+          "type": "null"
+        },
+        "official_referral_url": {
+          "title": "Official Referral Url",
+          "type": "string"
+        },
+        "reported_requested_url": {
+          "title": "Reported Requested Url",
+          "type": "string"
+        },
+        "reported_final_url": {
+          "title": "Reported Final Url",
+          "type": "string"
+        },
+        "reported_acquisition_at": {
+          "format": "date-time",
+          "title": "Reported Acquisition At",
+          "type": "string"
+        },
+        "original_acquisition_time": {
+          "default": null,
+          "title": "Original Acquisition Time",
+          "type": "null"
+        },
+        "received_at": {
+          "format": "date-time",
+          "title": "Received At",
+          "type": "string"
+        },
+        "reviewed_at": {
+          "format": "date-time",
+          "title": "Reviewed At",
+          "type": "string"
+        },
+        "acquisition_method": {
+          "const": "received_review_package",
+          "default": "received_review_package",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "intake_status": {
+          "const": "archived_pending_pipeline",
+          "default": "archived_pending_pipeline",
+          "title": "Intake Status",
+          "type": "string"
+        },
+        "upstream_http_acquisition_independently_verified": {
+          "const": false,
+          "default": false,
+          "title": "Upstream Http Acquisition Independently Verified",
+          "type": "boolean"
+        },
+        "review_mode": {
+          "const": "candidate_aware_not_blind",
+          "default": "candidate_aware_not_blind",
+          "title": "Review Mode",
+          "type": "string"
+        },
+        "acquisition_qualification": {
+          "title": "Acquisition Qualification",
+          "type": "string"
+        },
+        "pdf_sha256": {
+          "title": "Pdf Sha256",
+          "type": "string"
+        },
+        "review_sha256": {
+          "title": "Review Sha256",
+          "type": "string"
+        },
+        "manifest_sha256": {
+          "title": "Manifest Sha256",
+          "type": "string"
+        },
+        "verifier_sha256": {
+          "title": "Verifier Sha256",
+          "type": "string"
+        },
+        "candidate_sha256": {
+          "title": "Candidate Sha256",
+          "type": "string"
+        },
+        "packet_manifest_sha256": {
+          "title": "Packet Manifest Sha256",
+          "type": "string"
+        },
+        "pdf_path": {
+          "title": "Pdf Path",
+          "type": "string"
+        },
+        "review_path": {
+          "title": "Review Path",
+          "type": "string"
+        },
+        "provenance_path": {
+          "title": "Provenance Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "authority_basis",
+        "official_referral_url",
+        "reported_requested_url",
+        "reported_final_url",
+        "reported_acquisition_at",
+        "received_at",
+        "reviewed_at",
+        "acquisition_qualification",
+        "pdf_sha256",
+        "review_sha256",
+        "manifest_sha256",
+        "verifier_sha256",
+        "candidate_sha256",
+        "packet_manifest_sha256",
+        "pdf_path",
+        "review_path",
+        "provenance_path"
+      ],
+      "title": "GreeleySourceBinding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Report EB015 source evidence using its own whole-clause structure.",
+  "properties": {
+    "status": {
+      "enum": [
+        "matched",
+        "no_matching_row",
+        "refused_current_law"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "greeley-building-fees-sd008-06",
+      "default": "greeley-building-fees-sd008-06",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-MUNICIPAL-GREELEY",
+      "default": "CO-MUNICIPAL-GREELEY",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "query": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Query"
+    },
+    "evidence_verified": {
+      "title": "Evidence Verified",
+      "type": "boolean"
+    },
+    "source": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/GreeleySourceBinding"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "entries": {
+      "items": {
+        "$ref": "#/$defs/GreeleyEntry"
+      },
+      "title": "Entries",
+      "type": "array"
+    },
+    "context": {
+      "items": {
+        "$ref": "#/$defs/GreeleyBlock"
+      },
+      "title": "Context",
+      "type": "array"
+    },
+    "date_statements": {
+      "items": {
+        "$ref": "#/$defs/GreeleyDateStatement"
+      },
+      "title": "Date Statements",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "boundary": {
+      "default": "The preserved source states these complete source blocks. This is a lookup of one checked page with 19 entries and 29 native spans, not current law, an applicability decision or a fee calculation. No matching entry does not establish that a service is free, exempt or unregulated. Other sources in the evidence package are outside this lookup.",
+      "title": "Boundary",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "external_review_status": {
+      "const": "pending_not_intaken",
+      "default": "pending_not_intaken",
+      "title": "External Review Status",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "adoption_date": {
+      "default": null,
+      "title": "Adoption Date",
+      "type": "null"
+    },
+    "effective_date": {
+      "default": null,
+      "title": "Effective Date",
+      "type": "null"
+    },
+    "source_edition_date": {
+      "default": null,
+      "title": "Source Edition Date",
+      "type": "null"
+    }
+  },
+  "required": [
+    "status",
+    "query",
+    "evidence_verified",
+    "entries",
+    "context",
+    "date_statements",
+    "observations"
+  ],
+  "title": "GreeleyLookupResult",
+  "type": "object"
+}

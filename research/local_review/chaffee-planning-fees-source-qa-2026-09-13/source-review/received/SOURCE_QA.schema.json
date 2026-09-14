@@ -1,0 +1,515 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Graphic": {
+      "additionalProperties": false,
+      "properties": {
+        "page": {
+          "enum": [
+            1,
+            2
+          ],
+          "title": "Page",
+          "type": "integer"
+        },
+        "observation": {
+          "title": "Observation",
+          "type": "string"
+        },
+        "identity_or_authenticity_verified": {
+          "const": false,
+          "title": "Identity Or Authenticity Verified",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "page",
+        "observation",
+        "identity_or_authenticity_verified"
+      ],
+      "title": "Graphic",
+      "type": "object"
+    },
+    "Group": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "heading": {
+          "title": "Heading",
+          "type": "string"
+        },
+        "parent_heading": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Parent Heading"
+        },
+        "pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Pages",
+          "type": "array"
+        },
+        "row_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Row Ids",
+          "type": "array"
+        },
+        "heading_native": {
+          "$ref": "#/$defs/Span"
+        },
+        "column_headings": {
+          "anyOf": [
+            {
+              "maxItems": 2,
+              "minItems": 2,
+              "prefixItems": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Column Headings"
+        },
+        "heading_on_page2": {
+          "title": "Heading On Page2",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "heading",
+        "parent_heading",
+        "pages",
+        "row_ids",
+        "heading_native",
+        "column_headings",
+        "heading_on_page2"
+      ],
+      "title": "Group",
+      "type": "object"
+    },
+    "NativeLine": {
+      "additionalProperties": false,
+      "properties": {
+        "page": {
+          "enum": [
+            1,
+            2
+          ],
+          "title": "Page",
+          "type": "integer"
+        },
+        "line": {
+          "exclusiveMinimum": 0,
+          "title": "Line",
+          "type": "integer"
+        },
+        "span": {
+          "$ref": "#/$defs/Span"
+        },
+        "associated_with": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Associated With"
+        }
+      },
+      "required": [
+        "page",
+        "line",
+        "span",
+        "associated_with"
+      ],
+      "title": "NativeLine",
+      "type": "object"
+    },
+    "Passage": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "page": {
+          "enum": [
+            1,
+            2
+          ],
+          "title": "Page",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "header",
+            "title",
+            "footer",
+            "note",
+            "hourly_condition",
+            "parent_heading",
+            "column_heading"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "native": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "minItems": 1,
+          "title": "Native",
+          "type": "array"
+        },
+        "applies_to_rows": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Applies To Rows",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "page",
+        "kind",
+        "text",
+        "native",
+        "applies_to_rows"
+      ],
+      "title": "Passage",
+      "type": "object"
+    },
+    "Row": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "page": {
+          "enum": [
+            1,
+            2
+          ],
+          "title": "Page",
+          "type": "integer"
+        },
+        "group_id": {
+          "title": "Group Id",
+          "type": "string"
+        },
+        "application": {
+          "title": "Application",
+          "type": "string"
+        },
+        "fee": {
+          "title": "Fee",
+          "type": "string"
+        },
+        "application_native": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "minItems": 1,
+          "title": "Application Native",
+          "type": "array"
+        },
+        "fee_native": {
+          "$ref": "#/$defs/Span"
+        },
+        "related_note_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Related Note Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "page",
+        "group_id",
+        "application",
+        "fee",
+        "application_native",
+        "fee_native",
+        "related_note_ids"
+      ],
+      "title": "Row",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "exclusiveMinimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "start",
+        "end",
+        "text",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "source_id": {
+      "const": "chaffee-planning-application-fees-atlas-directed",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-CHAFFEE",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "reviewed_at": {
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "reviewer": {
+      "const": "Atlas",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "status": {
+      "const": "complete_source_fidelity_pending_independent_review",
+      "title": "Status",
+      "type": "string"
+    },
+    "review_kind": {
+      "const": "checked_tables",
+      "title": "Review Kind",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "source_pages": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Source Pages",
+      "type": "array"
+    },
+    "native_pages": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Native Pages",
+      "type": "array"
+    },
+    "native_lines": {
+      "items": {
+        "$ref": "#/$defs/NativeLine"
+      },
+      "title": "Native Lines",
+      "type": "array"
+    },
+    "groups": {
+      "items": {
+        "$ref": "#/$defs/Group"
+      },
+      "maxItems": 10,
+      "minItems": 10,
+      "title": "Groups",
+      "type": "array"
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/Row"
+      },
+      "maxItems": 49,
+      "minItems": 49,
+      "title": "Rows",
+      "type": "array"
+    },
+    "passages": {
+      "items": {
+        "$ref": "#/$defs/Passage"
+      },
+      "title": "Passages",
+      "type": "array"
+    },
+    "graphics": {
+      "items": {
+        "$ref": "#/$defs/Graphic"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Graphics",
+      "type": "array"
+    },
+    "inspected_full_pages": {
+      "maxItems": 2,
+      "minItems": 2,
+      "prefixItems": [
+        {
+          "const": 1,
+          "type": "integer"
+        },
+        {
+          "const": 2,
+          "type": "integer"
+        }
+      ],
+      "title": "Inspected Full Pages",
+      "type": "array"
+    },
+    "crops": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Crops",
+      "type": "array"
+    },
+    "source_date_claims": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Date Claims",
+      "type": "array"
+    },
+    "verified_effective_date": {
+      "title": "Verified Effective Date",
+      "type": "null"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "custody": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Custody",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_id",
+    "authority_id",
+    "source",
+    "reviewed_at",
+    "reviewer",
+    "status",
+    "review_kind",
+    "legal_currentness",
+    "answer_safe",
+    "method",
+    "source_pages",
+    "native_pages",
+    "native_lines",
+    "groups",
+    "rows",
+    "passages",
+    "graphics",
+    "inspected_full_pages",
+    "crops",
+    "source_date_claims",
+    "verified_effective_date",
+    "limitations",
+    "custody"
+  ],
+  "title": "Review",
+  "type": "object"
+}

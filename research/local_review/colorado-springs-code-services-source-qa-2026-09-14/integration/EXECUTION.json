@@ -1,0 +1,172 @@
+{
+  "status": "installed_and_focused_verified",
+  "started_at": "2026-09-14T20:40:01.293113+00:00",
+  "finished_at": "2026-09-14T20:44:47.381690+00:00",
+  "preparation": {
+    "path": "PREPARATION.json",
+    "sha256": "f72aa1d3d1e3e157132244d2332f39cee186382015f9ec416b858a8cb10b3612",
+    "size_bytes": 2844
+  },
+  "acceptance": {
+    "path": "research/local_review/colorado-springs-code-services-source-qa-2026-09-14/ACCEPTANCE.json",
+    "sha256": "2646226371121ff4ad750600829ec7c84ad4332203d6bf8ac3e8ef973f6960e3",
+    "size_bytes": 2036
+  },
+  "before": [
+    {
+      "path": "geode/pipeline/manual_review_inventory.py",
+      "sha256": "c0cc3b53541cf2a09c99ee74adc8fdc5d9fca05e3094b33bc8f451ff59e7726b",
+      "size_bytes": 22494
+    },
+    {
+      "path": "tests/test_manual_review_inventory.py",
+      "sha256": "17c6d2f94b9c0a4fec65df83f3c2098d201bca0816a7f550b1f1ab0618b8987b",
+      "size_bytes": 75524
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/join-plan.json",
+      "sha256": "e3094bc15d83267d4735e39843eb22d7da185eab6f77dff8efa5ed1ebbe8a565",
+      "size_bytes": 143009
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/inventory.json",
+      "sha256": "9066146662bc6a37f2bd098cb18e1b523b57822ac43ee6dc9793dc7b2ca87207",
+      "size_bytes": 3131545
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/README.md",
+      "sha256": "58312098fbe762578a0462243deaa00e220fb0556241598e3d0f95bdcc657645",
+      "size_bytes": 11967
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/inventory.schema.json",
+      "sha256": "4418485d2a0dfe3a4e9f9a6a392a4309bae9774dc1c2a9c1ff8ed8479ec34f14",
+      "size_bytes": 9654
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/join-plan.schema.json",
+      "sha256": "be55b2c14ea3fa714ffdd4f2b7bf3e6db2374c0425a82c51725874f0a9d351b5",
+      "size_bytes": 6962
+    }
+  ],
+  "after": [
+    {
+      "path": "geode/pipeline/manual_review_inventory.py",
+      "sha256": "2a15e4162dd2da299941cffed2dbe6f3ffb5341066874922b5e3df4b19307999",
+      "size_bytes": 22584
+    },
+    {
+      "path": "tests/test_manual_review_inventory.py",
+      "sha256": "74228cbd6513d4dc5cdbc1325104a1f2a93066d15d20cb5fb37f834ea4c64a4d",
+      "size_bytes": 82577
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/join-plan.json",
+      "sha256": "a9982e39ad36ab29be00f097be0a9e5c1e2bc7ef29f9c5de5a5144de6a3c3b23",
+      "size_bytes": 144748
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/inventory.json",
+      "sha256": "2d77650fc978f6fefb2922df102b332caece3de599e7279c047e6fd9e27f2a4b",
+      "size_bytes": 3138839
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/README.md",
+      "sha256": "04046e72ecb76405129b3d369f2498d74bc1c3b79fa0ab302aec6796214e4237",
+      "size_bytes": 11968
+    }
+  ],
+  "unchanged_schemas": [
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/inventory.schema.json",
+      "sha256": "4418485d2a0dfe3a4e9f9a6a392a4309bae9774dc1c2a9c1ff8ed8479ec34f14",
+      "size_bytes": 9654
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/join-plan.schema.json",
+      "sha256": "be55b2c14ea3fa714ffdd4f2b7bf3e6db2374c0425a82c51725874f0a9d351b5",
+      "size_bytes": 6962
+    }
+  ],
+  "source_id": "colorado-springs-code-services-fees-2015-atlas-directed",
+  "counts": [
+    70,
+    36,
+    34
+  ],
+  "preserved_other_source_rows": 69,
+  "preserved_prior_review_joins": 35,
+  "preserved_authority_joins": 70,
+  "source_row_comparison": "Exact deterministic per-row model JSON UTF-8 equality for all 69 other rows; selected source identical after removing only its new reviews/review_status fields. This is not a claim of unchanged whole inventory bytes.",
+  "prior_review_comparison": "Exact deterministic ReviewJoin JSON UTF-8 equality for all 35 prior mappings; all 70 authority/provenance joins unchanged.",
+  "raw_manifest_unchanged": true,
+  "legacy_ledger_unchanged": true,
+  "tests": [
+    {
+      "argv": [
+        "/Users/mcoors/Documents/Project Geode/.geode-venv/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "-p",
+        "no:cacheprovider",
+        "tests/test_manual_review_inventory.py",
+        "-q",
+        "--cov=geode.pipeline.manual_review_inventory",
+        "--cov-branch",
+        "--cov-report=term-missing",
+        "--cov-report=json:/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-14/plato-cs-code-fees-inventory-integration/coverage.json"
+      ],
+      "started_at": "2026-09-14T20:42:34.304928+00:00",
+      "finished_at": "2026-09-14T20:43:52.297773+00:00",
+      "exit_code": 0,
+      "log": {
+        "path": "focused-tests.log",
+        "sha256": "e11e380f3ef28e16ce382035cfac0d89faaff8a813622f68f4159da86f67ee04",
+        "size_bytes": 1011
+      }
+    },
+    {
+      "argv": [
+        "/Users/mcoors/Documents/Project Geode/.geode-venv/bin/python",
+        "-B",
+        "-m",
+        "geode.pipeline.manual_review_inventory",
+        "--root",
+        ".",
+        "--check"
+      ],
+      "started_at": "2026-09-14T20:43:52.303347+00:00",
+      "finished_at": "2026-09-14T20:43:53.840021+00:00",
+      "exit_code": 0,
+      "log": {
+        "path": "inventory-check.log",
+        "sha256": "ea735b53116fe5e9805f7a6f9fe5c7e53539096fa748cadc7f5e34292fa3df0d",
+        "size_bytes": 80
+      }
+    },
+    {
+      "argv": [
+        "/Users/mcoors/Documents/Project Geode/.geode-venv/bin/python",
+        "-B",
+        "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/research/local_review/colorado-springs-code-services-source-qa-2026-09-14/source-review/verify_review.py"
+      ],
+      "started_at": "2026-09-14T20:43:53.856731+00:00",
+      "finished_at": "2026-09-14T20:43:56.245052+00:00",
+      "exit_code": 0,
+      "log": {
+        "path": "copied-qa-verifier.log",
+        "sha256": "040c428b4da17a5e557d7354168b03d7438c51e6c6a3d857700808859dd94bc8",
+        "size_bytes": 171
+      }
+    }
+  ],
+  "legal_currentness": "not_verified",
+  "answer_safe": false,
+  "limitations": [
+    "Only one schema identity and review join added. No raw or ledger writes.",
+    "First attempted test append had an incorrect relative path and wrote no file; the subsequent inventory regeneration succeeded. Corrected append is tested.",
+    "No maintained full suite, Git action, public request, lookup support or deployment.",
+    "Original frozen QA and pending-at-creation status remain exact. Acceptance is separate."
+  ]
+}

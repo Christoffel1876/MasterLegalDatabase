@@ -1,0 +1,318 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "ManualSourceIntakeRecord": {
+      "additionalProperties": false,
+      "description": "Durable record for one archived manual source artifact.",
+      "properties": {
+        "intake_id": {
+          "title": "Intake Id",
+          "type": "string"
+        },
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "official_source_name": {
+          "title": "Official Source Name",
+          "type": "string"
+        },
+        "official_source_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Official Source Url"
+        },
+        "acquisition_method": {
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "received_from": {
+          "title": "Received From",
+          "type": "string"
+        },
+        "reviewer_name": {
+          "title": "Reviewer Name",
+          "type": "string"
+        },
+        "reviewer_email": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewer Email"
+        },
+        "custody_note": {
+          "title": "Custody Note",
+          "type": "string"
+        },
+        "original_filename": {
+          "title": "Original Filename",
+          "type": "string"
+        },
+        "archive_path": {
+          "title": "Archive Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 1,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "source_format": {
+          "title": "Source Format",
+          "type": "string"
+        },
+        "received_at": {
+          "format": "date-time",
+          "title": "Received At",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "blocked_queue_match": {
+          "title": "Blocked Queue Match",
+          "type": "boolean"
+        },
+        "boundary": {
+          "title": "Boundary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "intake_id",
+        "record_id",
+        "layer_id",
+        "official_source_name",
+        "acquisition_method",
+        "received_from",
+        "reviewer_name",
+        "custody_note",
+        "original_filename",
+        "archive_path",
+        "sha256",
+        "size_bytes",
+        "source_format",
+        "received_at",
+        "status",
+        "blocked_queue_match",
+        "boundary"
+      ],
+      "title": "ManualSourceIntakeRecord",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "source_sha256": {
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "layout": {
+          "$ref": "#/$defs/Asset"
+        },
+        "width_points": {
+          "title": "Width Points",
+          "type": "number"
+        },
+        "height_points": {
+          "title": "Height Points",
+          "type": "number"
+        },
+        "image_width": {
+          "title": "Image Width",
+          "type": "integer"
+        },
+        "image_height": {
+          "title": "Image Height",
+          "type": "integer"
+        },
+        "native_bytes": {
+          "title": "Native Bytes",
+          "type": "integer"
+        },
+        "candidate_start_byte": {
+          "title": "Candidate Start Byte",
+          "type": "integer"
+        },
+        "candidate_end_byte_exclusive": {
+          "title": "Candidate End Byte Exclusive",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "physical_page",
+        "source_sha256",
+        "image",
+        "native",
+        "layout",
+        "width_points",
+        "height_points",
+        "image_width",
+        "image_height",
+        "native_bytes",
+        "candidate_start_byte",
+        "candidate_end_byte_exclusive"
+      ],
+      "title": "Page",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "weld-building-fees-sd008-01",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "canonical_original_path": {
+      "title": "Canonical Original Path",
+      "type": "string"
+    },
+    "original_manual_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "manual_manifest_line": {
+      "const": 35,
+      "title": "Manual Manifest Line",
+      "type": "integer"
+    },
+    "manual_record_line_sha256": {
+      "title": "Manual Record Line Sha256",
+      "type": "string"
+    },
+    "selected_manual_record": {
+      "$ref": "#/$defs/ManualSourceIntakeRecord"
+    },
+    "custody_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Custody Files",
+      "type": "array"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Asset"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "extraction_engine": {
+      "title": "Extraction Engine",
+      "type": "string"
+    },
+    "extraction_settings": {
+      "title": "Extraction Settings",
+      "type": "string"
+    },
+    "rendering_settings": {
+      "title": "Rendering Settings",
+      "type": "string"
+    },
+    "source_review_mode": {
+      "const": "atlas_candidate_aware_not_blind",
+      "title": "Source Review Mode",
+      "type": "string"
+    },
+    "external_assignment": {
+      "default": null,
+      "title": "External Assignment",
+      "type": "null"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "source_id",
+    "source",
+    "canonical_original_path",
+    "original_manual_manifest",
+    "manual_manifest_line",
+    "manual_record_line_sha256",
+    "selected_manual_record",
+    "custody_files",
+    "candidate",
+    "pages",
+    "extraction_engine",
+    "extraction_settings",
+    "rendering_settings",
+    "source_review_mode",
+    "legal_currentness"
+  ],
+  "title": "Preparation",
+  "type": "object"
+}

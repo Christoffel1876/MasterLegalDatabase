@@ -1,0 +1,97 @@
+{
+  "$defs": {
+    "File": {
+      "additionalProperties": false,
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "frozen_path": {
+          "title": "Frozen Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "original_path",
+        "frozen_path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "captured_at": {
+      "format": "date-time",
+      "title": "Captured At",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "assignment": {
+      "title": "Assignment",
+      "type": "string"
+    },
+    "comparison_commit": {
+      "title": "Comparison Commit",
+      "type": "string"
+    },
+    "delivery_basis": {
+      "title": "Delivery Basis",
+      "type": "string"
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "source_bytes_received": {
+      "title": "Source Bytes Received",
+      "type": "boolean"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "original_tree_unchanged_during_copy": {
+      "title": "Original Tree Unchanged During Copy",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "captured_at",
+    "completed_at",
+    "assignment",
+    "comparison_commit",
+    "delivery_basis",
+    "status",
+    "legal_currentness",
+    "source_bytes_received",
+    "files",
+    "original_tree_unchanged_during_copy"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}
