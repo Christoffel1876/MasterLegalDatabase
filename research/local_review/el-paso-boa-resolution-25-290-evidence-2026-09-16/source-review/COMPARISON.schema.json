@@ -1,0 +1,143 @@
+{
+  "$defs": {
+    "Compared": {
+      "additionalProperties": false,
+      "description": "One pinned Git blob, streamed completely for exact equality only.",
+      "properties": {
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "git_blob_oid": {
+          "title": "Git Blob Oid",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "line_count": {
+          "title": "Line Count",
+          "type": "integer"
+        },
+        "parsed_json_rows": {
+          "title": "Parsed Json Rows",
+          "type": "integer"
+        },
+        "parse_errors": {
+          "title": "Parse Errors",
+          "type": "integer"
+        },
+        "is_lfs_pointer": {
+          "title": "Is Lfs Pointer",
+          "type": "boolean"
+        },
+        "matches": {
+          "items": {
+            "$ref": "#/$defs/Match"
+          },
+          "title": "Matches",
+          "type": "array"
+        }
+      },
+      "required": [
+        "repository_path",
+        "git_blob_oid",
+        "sha256",
+        "size_bytes",
+        "line_count",
+        "parsed_json_rows",
+        "parse_errors",
+        "is_lfs_pointer",
+        "matches"
+      ],
+      "title": "Compared",
+      "type": "object"
+    },
+    "Match": {
+      "additionalProperties": false,
+      "description": "Exact matching tracked JSONL row retained as source bytes.",
+      "properties": {
+        "line_number": {
+          "title": "Line Number",
+          "type": "integer"
+        },
+        "matched_values": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Matched Values",
+          "type": "array"
+        },
+        "row_sha256": {
+          "title": "Row Sha256",
+          "type": "string"
+        },
+        "raw_line": {
+          "title": "Raw Line",
+          "type": "string"
+        }
+      },
+      "required": [
+        "line_number",
+        "matched_values",
+        "row_sha256",
+        "raw_line"
+      ],
+      "title": "Match",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Bounded local historical comparison, not proof of universal absence.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "repository_main_commit": {
+      "title": "Repository Main Commit",
+      "type": "string"
+    },
+    "urls": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Urls",
+      "type": "array"
+    },
+    "acquired_pdf_sha256": {
+      "title": "Acquired Pdf Sha256",
+      "type": "string"
+    },
+    "manifests": {
+      "items": {
+        "$ref": "#/$defs/Compared"
+      },
+      "title": "Manifests",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "repository_main_commit",
+    "urls",
+    "acquired_pdf_sha256",
+    "manifests",
+    "limitations"
+  ],
+  "title": "Comparison",
+  "type": "object"
+}

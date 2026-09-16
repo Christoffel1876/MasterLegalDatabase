@@ -1,0 +1,79 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact relative payload identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Preserve the initially written draft and explain annotation-only corrections.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "draft_annotation_corrections_before_freeze",
+      "title": "Status",
+      "type": "string"
+    },
+    "preimages": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Preimages",
+      "type": "array"
+    },
+    "changes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Changes",
+      "type": "array"
+    },
+    "source_and_candidate_unchanged": {
+      "const": true,
+      "title": "Source And Candidate Unchanged",
+      "type": "boolean"
+    },
+    "independent_model_family_review": {
+      "const": false,
+      "title": "Independent Model Family Review",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "preimages",
+    "changes",
+    "source_and_candidate_unchanged",
+    "independent_model_family_review"
+  ],
+  "title": "Revision",
+  "type": "object"
+}
