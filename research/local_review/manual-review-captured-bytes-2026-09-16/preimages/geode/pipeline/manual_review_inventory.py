@@ -4,18 +4,17 @@ from __future__ import annotations
 
 import argparse
 import hashlib
-import io
 import json
 import logging
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Iterator, Literal
+from typing import Any, Literal
 
 import jsonschema
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, model_validator
 
 from geode.pipeline.manual_source_intake import ManualSourceIntakeRecord
-from geode.utils.file_io import atomic_write_text
+from geode.utils.file_io import atomic_write_text, iter_jsonl
 
 PACKAGE = Path("research/local_review/manual-source-review-inventory-2026-09-11")
 PLAN = PACKAGE / "join-plan.json"
@@ -249,29 +248,6 @@ def _require(root: Path, artifact: Artifact) -> Path:
     return safe_path(root, artifact.path)
 
 
-def _verified_bytes(root: Path, artifact: Artifact) -> bytes:
-    """Return the same captured bytes whose exact identity is verified."""
-    path = safe_path(root, artifact.path)
-    with path.open("rb") as handle:
-        raw = handle.read(artifact.size_bytes + 1)
-    if (len(raw), hashlib.sha256(raw).hexdigest()) != (artifact.size_bytes, artifact.sha256):
-        raise ValueError(f"Evidence hash/size mismatch: {artifact.path}")
-    return raw
-
-
-def _jsonl_bytes(raw: bytes, path: str) -> Iterator[dict[str, Any]]:
-    """Yield objects from verified captured text with the existing JSONL semantics."""
-    with io.StringIO(raw.decode("utf-8"), newline=None) as handle:
-        for line_number, line in enumerate(handle, start=1):
-            stripped = line.strip()
-            if not stripped:
-                raise ValueError(f"blank JSONL line at {path}:{line_number}")
-            payload = json.loads(stripped)
-            if not isinstance(payload, dict):
-                raise ValueError(f"JSONL row must be an object at {path}:{line_number}")
-            yield payload
-
-
 def pointer(data: Any, value: str) -> Any:
     """Read an explicit JSON pointer; no expressions, recursive search or inference."""
     if value == "":
@@ -285,10 +261,10 @@ def pointer(data: Any, value: str) -> Any:
 
 
 def _document(root: Path, spec: Document) -> Any:
-    raw = _verified_bytes(root, spec.artifact)
+    path = _require(root, spec.artifact)
     if spec.jsonl_row is None:
-        return json.loads(raw)
-    for number, row in enumerate(_jsonl_bytes(raw, spec.artifact.path)):
+        return json.loads(path.read_bytes())
+    for number, row in enumerate(iter_jsonl(path)):
         if number == spec.jsonl_row:
             return row
     raise ValueError("Provenance JSONL row is missing")
@@ -313,8 +289,8 @@ def _review(root: Path, join: ReviewJoin, row: SourceRow) -> ReviewBinding:
     kind = ALLOWED_REVIEW_SCHEMAS.get(join.review_schema.sha256)
     if kind is None:
         raise ValueError("Review schema is not in the explicit allowlist")
-    data = json.loads(_verified_bytes(root, join.review))
-    schema = json.loads(_verified_bytes(root, join.review_schema))
+    data = json.loads(_require(root, join.review).read_bytes())
+    schema = json.loads(_require(root, join.review_schema).read_bytes())
     _local_schema(schema)
     jsonschema.validate(data, schema)
     if pointer(data, join.source_sha_pointer) != row.source.sha256:
@@ -335,14 +311,14 @@ def build_inventory(root: Path, plan_path: str = PLAN.as_posix()) -> Inventory:
     """Verify every raw/provenance/review join and build deterministic research records."""
     root = normalize_root(root)
     plan_asset = identity(root, plan_path)
-    plan = JoinPlan.model_validate_json(_verified_bytes(root, plan_asset))
-    manifest = _verified_bytes(root, plan.manual_manifest)
+    plan = JoinPlan.model_validate_json(safe_path(root, plan_path).read_bytes())
+    manifest = _require(root, plan.manual_manifest)
     _require(root, plan.legacy_ledger)
     joins = {join.record_id: join for join in plan.authorities}
     if len(joins) != len(plan.authorities):
         raise ValueError("Duplicate authority join")
     records, intake_ids, archive_paths = {}, set(), set()
-    for value in _jsonl_bytes(manifest, plan.manual_manifest.path):
+    for value in iter_jsonl(manifest):
         record = ManualSourceIntakeRecord.model_validate_json(json.dumps(value), strict=True)
         if record.record_id in records or record.intake_id in intake_ids:
             raise ValueError("Duplicate or colliding manual source identity")
