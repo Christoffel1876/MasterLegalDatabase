@@ -444,9 +444,9 @@ def test_accepted_equity_review_is_one_bounded_additive_join() -> None:
     assert len(old.sources) == 46
     assert len(new.sources) == 70
     assert (old.rows_with_review, old.rows_without_review) == (18, 28)
-    assert (new.rows_with_review, new.rows_without_review) == (37, 33)
+    assert (new.rows_with_review, new.rows_without_review) == (38, 32)
     assert [r.model_dump(mode="json") for r in new_plan.reviews[:18]] == old_plan["reviews"]
-    assert len(new_plan.reviews) == 37
+    assert len(new_plan.reviews) == 38
     previous = {s.record_id: s for s in old.sources}
     added = [row for row in new.sources if row.record_id not in previous
              and row.authority_id == "CO-COUNTY-EL_PASO"]
@@ -460,7 +460,7 @@ def test_accepted_equity_review_is_one_bounded_additive_join() -> None:
             assert len(row.reviews) == 1 and row.reviews[0].review_kind == "checked_tables"
         elif row.record_id in {
             "el-paso-boh-bylaws-sd011", "el-paso-boh-bylaws-spanish-sd011",
-            "el-paso-boh-admin-regulations-sd011",
+            "el-paso-boh-admin-regulations-sd011", "el-paso-ldc-chapter-2-sd011",
         }:
             assert len(row.reviews) == 1 and row.reviews[0].review_kind == "checked_passages"
         else:
@@ -513,8 +513,8 @@ def test_planning_scan_join_preserves_prior_59_sources_and_19_reviews() -> None:
     new = inventory.build_inventory(root)
     assert len(old.sources) == 59 and len(new.sources) == 70
     assert (old.rows_with_review, old.rows_without_review) == (19, 40)
-    assert (new.rows_with_review, new.rows_without_review) == (37, 33)
-    assert len(new_plan.reviews) == 37 and new_plan.reviews[:19] == old_plan.reviews
+    assert (new.rows_with_review, new.rows_without_review) == (38, 32)
+    assert len(new_plan.reviews) == 38 and new_plan.reviews[:19] == old_plan.reviews
     for current, previous in zip(new_plan.authorities[:59], old_plan.authorities, strict=True):
         a, b = current.model_dump(), previous.model_dump()
         if current.record_id in GREELEY_REACQUIRED:
@@ -603,8 +603,8 @@ def test_springs_and_later_greeley_preserve_all_prior_review_and_custody_fields(
     plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
     assert len(old.sources) == 59 and len(new.sources) == 70
     assert (old.rows_with_review, old.rows_without_review) == (20, 39)
-    assert (new.rows_with_review, new.rows_without_review) == (37, 33)
-    assert plan.reviews[:20] == old_plan.reviews and len(plan.reviews) == 37
+    assert (new.rows_with_review, new.rows_without_review) == (38, 32)
+    assert plan.reviews[:20] == old_plan.reviews and len(plan.reviews) == 38
     assert new.unchanged_legacy_ledger == old.unchanged_legacy_ledger
     changed = set()
     for a, b in zip(plan.authorities[:59], old_plan.authorities, strict=True):
@@ -701,8 +701,8 @@ def test_english_ehs_join_preserves_all_61_sources_and_21_prior_reviews() -> Non
     plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
     assert len(old.sources) == 61 and len(new.sources) == 70
     assert (old.rows_with_review, old.rows_without_review) == (21, 40)
-    assert (new.rows_with_review, new.rows_without_review) == (37, 33)
-    assert plan.reviews[:21] == old_plan.reviews and len(plan.reviews) == 37
+    assert (new.rows_with_review, new.rows_without_review) == (38, 32)
+    assert plan.reviews[:21] == old_plan.reviews and len(plan.reviews) == 38
     assert plan.authorities[:61] == old_plan.authorities
     assert new.manual_manifest.path == old.manual_manifest.path
     assert new.manual_manifest.sha256 != old.manual_manifest.sha256
@@ -731,8 +731,8 @@ def test_final_two_sources_preserve_prior_61_sources_and_22_reviews() -> None:
     plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
     assert len(old.sources) == 61 and len(new.sources) == 70
     assert (old.rows_with_review, old.rows_without_review) == (22, 39)
-    assert (new.rows_with_review, new.rows_without_review) == (37, 33)
-    assert plan.reviews[:22] == old_plan.reviews and len(plan.reviews) == 37
+    assert (new.rows_with_review, new.rows_without_review) == (38, 32)
+    assert plan.reviews[:22] == old_plan.reviews and len(plan.reviews) == 38
     assert plan.authorities[:61] == old_plan.authorities and len(plan.authorities) == 70
     assert [_before_final_reviews(r) for r in new.sources[:61]] == old.sources
     assert new.unchanged_legacy_ledger == old.unchanged_legacy_ledger
@@ -833,9 +833,9 @@ def test_final_three_preserve_63_custody_rows_and_24_old_review_joins() -> None:
     new = inventory.build_inventory(root)
     plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
     assert (len(old.sources), old.rows_with_review, old.rows_without_review) == (63, 24, 39)
-    assert (len(new.sources), new.rows_with_review, new.rows_without_review) == (70, 37, 33)
+    assert (len(new.sources), new.rows_with_review, new.rows_without_review) == (70, 38, 32)
     assert plan.authorities[:63] == old_plan.authorities and len(plan.authorities) == 70
-    assert plan.reviews[:24] == old_plan.reviews and len(plan.reviews) == 37
+    assert plan.reviews[:24] == old_plan.reviews and len(plan.reviews) == 38
     assert [_before_final_reviews(r) for r in new.sources[:63]] == old.sources
     assert new.unchanged_legacy_ledger == old.unchanged_legacy_ledger
     by_id = {r.record_id: r for r in new.sources}
@@ -936,10 +936,10 @@ def test_gunnison_and_spanish_joins_preserve_exact_64_source_baseline() -> None:
     plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
     assert (len(old.sources), old.rows_with_review, old.rows_without_review) == (64, 27, 37)
     assert (len(current.sources), current.rows_with_review, current.rows_without_review) == (
-        70, 37, 33,
+        70, 38, 32,
     )
     assert plan.authorities[:64] == old_plan.authorities and len(plan.authorities) == 70
-    assert plan.reviews[:27] == old_plan.reviews and len(plan.reviews) == 37
+    assert plan.reviews[:27] == old_plan.reviews and len(plan.reviews) == 38
     assert [_before_september13_reviews(r) for r in current.sources[:64]] == old.sources
     assert current.unchanged_legacy_ledger == old.unchanged_legacy_ledger
     assert tuple(r.record_id for r in current.sources[64:67]) == GUNNISON_SEPTEMBER13
@@ -1099,10 +1099,10 @@ def test_chaffee_iwuic_preserves_all_67_prior_sources_and_30_review_joins() -> N
     plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
     assert (len(old.sources), old.rows_with_review, old.rows_without_review) == (67, 30, 37)
     assert (len(current.sources), current.rows_with_review, current.rows_without_review) == (
-        70, 37, 33,
+        70, 38, 32,
     )
     assert plan.authorities[:67] == old_plan.authorities and len(plan.authorities) == 70
-    assert plan.reviews[:30] == old_plan.reviews and len(plan.reviews) == 37
+    assert plan.reviews[:30] == old_plan.reviews and len(plan.reviews) == 38
     assert {r.record_id for r in plan.reviews[30:33]} == set(CHAFFEE_IWUIC_REVIEWS)
     for previous, row in zip(old.sources, current.sources[:67], strict=True):
         row = _before_final_fee_code_reviews(row)
@@ -1261,10 +1261,10 @@ def test_final_fee_code_preserves_69_authorities_and_33_review_joins() -> None:
     plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
     assert (len(old.sources), old.rows_with_review, old.rows_without_review) == (69, 33, 36)
     assert (len(current.sources), current.rows_with_review, current.rows_without_review) == (
-        70, 37, 33,
+        70, 38, 32,
     )
     assert plan.authorities[:69] == old_plan.authorities and len(plan.authorities) == 70
-    assert plan.reviews[:33] == old_plan.reviews and len(plan.reviews) == 37
+    assert plan.reviews[:33] == old_plan.reviews and len(plan.reviews) == 38
     assert {r.record_id for r in plan.reviews[33:35]} == set(FINAL_FEE_CODE_REVIEWS)
     assert [_before_final_fee_code_reviews(r) for r in current.sources[:69]] == old.sources
     assert current.unchanged_legacy_ledger == old.unchanged_legacy_ledger
@@ -1422,10 +1422,10 @@ def test_code_services_preserves_other_69_rows_and_all_35_prior_joins() -> None:
     plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
     assert (len(old.sources), old.rows_with_review, old.rows_without_review) == (70, 35, 35)
     assert (len(current.sources), current.rows_with_review, current.rows_without_review) == (
-        70, 37, 33,
+        70, 38, 32,
     )
     assert plan.authorities == old_plan.authorities and len(plan.authorities) == 70
-    assert plan.reviews[:35] == old_plan.reviews and len(plan.reviews) == 37
+    assert plan.reviews[:35] == old_plan.reviews and len(plan.reviews) == 38
     assert plan.reviews[35].record_id == CODE_SERVICES_ID
     assert [r.model_dump_json() for r in plan.reviews[:35]] == [
         r.model_dump_json() for r in old_plan.reviews
@@ -1526,6 +1526,7 @@ BOH_ADMIN_SCHEMA = "9110ce453b2dbf7f72b6cc30686653428f610d2f98a72e679b84c64c3734
 
 def _before_boh_admin_review(row: inventory.SourceRow) -> inventory.SourceRow:
     """Strip only the exact later administrative-regulations review for old comparisons."""
+    row = _before_ldc_chapter_review(row)
     if row.record_id != BOH_ADMIN_ID:
         return row
     assert row.reviews is not None and len(row.reviews) == 1
@@ -1549,9 +1550,9 @@ def test_boh_admin_preserves_69_rows_70_authorities_and_36_prior_reviews() -> No
     plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
     assert (len(old.sources), old.rows_with_review, old.rows_without_review) == (70, 36, 34)
     assert (len(current.sources), current.rows_with_review, current.rows_without_review) == (
-        70, 37, 33,
+        70, 38, 32,
     )
-    assert len(plan.authorities) == 70 and len(plan.reviews) == 37
+    assert len(plan.authorities) == 70 and len(plan.reviews) == 38
     assert [a.model_dump_json() for a in plan.authorities] == [
         a.model_dump_json() for a in old_plan.authorities
     ]
@@ -1643,6 +1644,138 @@ def test_boh_admin_rehashed_legal_and_http_promotions_are_rejected(
         data["answer_safe"] = True
     elif mutation == "date":
         data["dates"][0]["operative_date_certified"] = True
+    else:
+        data["provenance"]["original_http_independently_verified"] = True
+    save(tmp_path / join.review.path, data)
+    altered = join.model_copy(update={"review": inventory.identity(tmp_path, join.review.path)})
+    with pytest.raises((ValueError, jsonschema.ValidationError)):
+        inventory._review(tmp_path, altered, row)
+
+
+LDC_CHAPTER_ID = "el-paso-ldc-chapter-2-sd011"
+LDC_CHAPTER_QA = "b550d50b5feae1e5e3b4e1f3afb1789ac808affa2b7cacc273b08c6db8d3f40a"
+LDC_CHAPTER_SCHEMA = "efa342b2cbe01d5c6a3f8e2f897b94da782ebbeac0dd4dea4b0328225938e93f"
+
+
+def _before_ldc_chapter_review(row: inventory.SourceRow) -> inventory.SourceRow:
+    """Strip only the exact accepted later LDC review for historical comparisons."""
+    if row.record_id != LDC_CHAPTER_ID:
+        return row
+    assert row.reviews is not None and len(row.reviews) == 1
+    review = row.reviews[0]
+    assert review.artifact.sha256 == LDC_CHAPTER_QA
+    assert review.schema_artifact.sha256 == LDC_CHAPTER_SCHEMA
+    assert review.review_kind == "checked_passages"
+    assert row.authority_id == "CO-COUNTY-EL_PASO"
+    assert row.legal_currentness == "not_verified" and row.answer_safe is False
+    return row.model_copy(update={"reviews": None,
+                                  "review_status": "metadata_only_review_unknown"})
+
+
+def test_ldc_preserves_69_rows_70_authorities_and_37_prior_reviews() -> None:
+    """Only the accepted source's previously unknown review fields may change."""
+    root = Path(__file__).resolve().parents[1]
+    before = root / inventory.PACKAGE / "_SNAPSHOTS/BEFORE_EL_PASO_LDC_CHAPTER_2_2026-09-16"
+    old = inventory.Inventory.model_validate_json((before / "inventory.json").read_bytes())
+    old_plan = inventory.JoinPlan.model_validate_json((before / "join-plan.json").read_bytes())
+    current = inventory.build_inventory(root)
+    plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
+    assert (len(old.sources), old.rows_with_review, old.rows_without_review) == (70, 37, 33)
+    assert (len(current.sources), current.rows_with_review, current.rows_without_review) == (
+        70, 38, 32,
+    )
+    assert plan.authorities == old_plan.authorities and len(plan.authorities) == 70
+    assert plan.reviews[:37] == old_plan.reviews and len(plan.reviews) == 38
+    assert plan.reviews[37].record_id == LDC_CHAPTER_ID
+    for prior, row in zip(old.sources, current.sources, strict=True):
+        assert _before_ldc_chapter_review(row).model_dump_json() == prior.model_dump_json()
+    assert current.manual_manifest == old.manual_manifest
+    assert current.unchanged_legacy_ledger == old.unchanged_legacy_ledger
+    assert not current.answer_safe and not current.coverage_promotion
+
+
+def test_ldc_scope_date_role_and_original_custody_remain_attached() -> None:
+    """Source fidelity does not certify dates, HTTP acquisition or legal applicability."""
+    root = Path(__file__).resolve().parents[1]
+    row = next(r for r in inventory.build_inventory(root).sources if r.record_id == LDC_CHAPTER_ID)
+    review = row.reviews[0]
+    assert row.authority_id == "CO-COUNTY-EL_PASO" and row.layer_id == "08_County_Authorities"
+    assert row.acquisition_method == "received_review_package"
+    assert row.intake_received_at.isoformat() == "2026-09-12T22:59:48.795762+00:00"
+    assert row.verified_http_acquired_at is None and row.verified_http_evidence is None
+    assert row.recorded_intake_status == "archived_pending_pipeline"
+    assert row.provenance_qualifications["/full_text_reviewed"] is False
+    assert len(review.scope_fields["/checked_passages"]) == 119
+    assert len(review.scope_fields["/structural_links"]) == 5
+    assert review.scope_fields["/table_count"] == 0
+    assert review.scope_fields["/substantive_candidate_corrections"] == []
+    assert review.limitations["/external_reports_consulted"] is False
+    assert review.limitations["/legal_currentness"] == "not_verified"
+    assert review.limitations["/answer_safe"] is False
+    dates = review.limitations["/dates"]
+    assert len(dates) == 1 and dates[0]["literal"] == "Effective 12/12/2017"
+    assert dates[0]["role"] == "source_stated_effective_date_unverified"
+    assert dates[0]["operative_date_certified"] is False
+    assert dates[0]["passage_ids"] == [f"P{n}-DATE" for n in range(1, 8)]
+    provenance = review.limitations["/provenance"]
+    assert provenance["original_http_independently_verified"] is False
+    assert provenance["verified_http_acquired_at"] is None
+    assert "no fresh retained official referral anchor" in provenance["source_referral_evidence"]
+    assert "86dfb20c2e0522100b6ee96794e9a53a782413d55181735bce1daa0b8a5c556b" in review.note
+
+
+@pytest.mark.parametrize("mutation", ["source_sha", "authority", "alias", "schema"])
+def test_ldc_exact_identity_refuses_cross_source_join(mutation: str) -> None:
+    """The new review cannot be reassigned to another source, schema or issuer."""
+    root = Path(__file__).resolve().parents[1]
+    plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
+    current = inventory.Inventory.model_validate_json(
+        (root / inventory.PACKAGE / "inventory.json").read_bytes()
+    )
+    row = next(r for r in current.sources if r.record_id == LDC_CHAPTER_ID)
+    join = next(r for r in plan.reviews if r.record_id == LDC_CHAPTER_ID)
+    if mutation == "source_sha":
+        row = row.model_copy(update={"source": row.source.model_copy(update={"sha256": "0" * 64})})
+    elif mutation == "authority":
+        row = row.model_copy(update={"authority_id": "CO-MUNICIPAL-COLORADO_SPRINGS"})
+    elif mutation == "alias":
+        join = join.model_copy(update={"expected_review_source_id": "el-paso-boh-bylaws-sd011"})
+    else:
+        join = join.model_copy(update={"review_schema": join.review_schema.model_copy(
+            update={"sha256": "0" * 64})})
+    with pytest.raises(ValueError):
+        inventory._review(root, join, row)
+
+
+@pytest.mark.parametrize("mutation", [
+    "currentness", "answer_safe", "date", "date_role", "date_literal", "http",
+])
+def test_ldc_rehashed_legal_and_http_promotions_are_rejected(
+    tmp_path: Path, mutation: str,
+) -> None:
+    """A newly computed artifact hash cannot bypass the exact restrictive source schema."""
+    root = Path(__file__).resolve().parents[1]
+    plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
+    current = inventory.Inventory.model_validate_json(
+        (root / inventory.PACKAGE / "inventory.json").read_bytes()
+    )
+    row = next(r for r in current.sources if r.record_id == LDC_CHAPTER_ID)
+    join = next(r for r in plan.reviews if r.record_id == LDC_CHAPTER_ID)
+    for ref in [join.review, join.review_schema]:
+        path = tmp_path / ref.path
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes((root / ref.path).read_bytes())
+    data = json.loads((tmp_path / join.review.path).read_bytes())
+    if mutation == "currentness":
+        data["legal_currentness"] = "verified"
+    elif mutation == "answer_safe":
+        data["answer_safe"] = True
+    elif mutation == "date":
+        data["dates"][0]["operative_date_certified"] = True
+    elif mutation == "date_role":
+        data["dates"][0]["role"] = "verified_effective_date"
+    elif mutation == "date_literal":
+        data["dates"][0]["literal"] = "Effective 12/12/2026"
     else:
         data["provenance"]["original_http_independently_verified"] = True
     save(tmp_path / join.review.path, data)
