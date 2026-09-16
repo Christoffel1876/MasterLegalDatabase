@@ -1,0 +1,77 @@
+{
+  "additionalProperties": false,
+  "description": "Recorded mechanical checks, separate from the visual attestation.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "passed",
+      "title": "Status",
+      "type": "string"
+    },
+    "pages": {
+      "const": 7,
+      "title": "Pages",
+      "type": "integer"
+    },
+    "native_bytes": {
+      "const": 19118,
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "candidate_bytes": {
+      "const": 19272,
+      "title": "Candidate Bytes",
+      "type": "integer"
+    },
+    "passages": {
+      "title": "Passages",
+      "type": "integer"
+    },
+    "native_lines": {
+      "title": "Native Lines",
+      "type": "integer"
+    },
+    "crop_count": {
+      "const": 4,
+      "title": "Crop Count",
+      "type": "integer"
+    },
+    "tests_run": {
+      "title": "Tests Run",
+      "type": "integer"
+    },
+    "checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "pages",
+    "native_bytes",
+    "candidate_bytes",
+    "passages",
+    "native_lines",
+    "crop_count",
+    "tests_run",
+    "checks",
+    "limitations"
+  ],
+  "title": "Validation",
+  "type": "object"
+}

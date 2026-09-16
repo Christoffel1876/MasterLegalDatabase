@@ -1,0 +1,2 @@
+Full pages 1–7 inspected directly with view_image before native candidate read. Tool displayed resized 1376×1780 versions of each 2550×3300 full PNG. No external reports consulted. This note recorded after those actions at 2026-09-16T18:22:37.899853+00:00. Crops pending subsequent direct inspection.
+Initial attempted Pixmap rectangle-constructor invocation failed before writing any crop; corrected by copying exact sample row slices. No source/page bytes changed.

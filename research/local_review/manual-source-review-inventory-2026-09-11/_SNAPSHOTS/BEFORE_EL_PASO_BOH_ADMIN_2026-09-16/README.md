@@ -6,7 +6,7 @@ answer_safe: false
 
 # Manual source/review inventory
 
-70 custody rows; 37 have an explicit review link and 33 have no allowlisted review link.
+70 custody rows; 36 have an explicit review link and 34 have no allowlisted review link.
 These are source-custody counts, not statewide coverage or current-law readiness.
 
 From the repository root:
@@ -72,7 +72,7 @@ python -m geode.pipeline.manual_review_inventory --root . --check
 | el-paso-ldc-chapter-2-sd011 | CO-COUNTY-EL_PASO | metadata only |
 | el-paso-ldc-chapter-5-sd011 | CO-COUNTY-EL_PASO | metadata only |
 | el-paso-unsafe-buildings-18-03-sd011 | CO-COUNTY-EL_PASO | metadata only |
-| el-paso-boh-admin-regulations-sd011 | CO-COUNTY-EL_PASO | checked_passages |
+| el-paso-boh-admin-regulations-sd011 | CO-COUNTY-EL_PASO | metadata only |
 | el-paso-boh-bylaws-sd011 | CO-COUNTY-EL_PASO | checked_passages |
 | el-paso-boh-bylaws-spanish-sd011 | CO-COUNTY-EL_PASO | checked_passages |
 | el-paso-boh-ehs-fees-spanish-sd011 | CO-COUNTY-EL_PASO | checked_tables |

@@ -1,0 +1,197 @@
+{
+  "version": 1,
+  "prepared_at": "2026-09-16T18:25:26.274236Z",
+  "status": "prepared_not_applied_pending_atlas_acceptance",
+  "observed_head": "fa19da8eb9ea52030b93ec2fa378912905065338",
+  "before": {
+    "originals": 70,
+    "reviewed": 36,
+    "unmapped": 34,
+    "authority_joins": 70,
+    "review_joins": 36
+  },
+  "conditional_after": {
+    "originals": 70,
+    "reviewed": 37,
+    "unmapped": 33,
+    "authority_joins": 70,
+    "review_joins": 37
+  },
+  "pending_join": {
+    "record_id": "el-paso-boh-admin-regulations-sd011",
+    "authority_id": "CO-COUNTY-EL_PASO",
+    "source": {
+      "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/el-paso-boh-admin-regulations-sd011/20260912T225948795762Z_original.pdf",
+      "sha256": "64d72ce1f7783dcf7fb5a3f6956e8ba4845c4839318613a1dee09d99716625d7",
+      "size_bytes": 189000
+    },
+    "source_row_zero_based": 55,
+    "review_artifact": null,
+    "review_schema": null,
+    "acceptance_artifact": null,
+    "review_kind": null,
+    "required_before_join": [
+      "Atlas accepts a frozen, portable source-QA package for the exact 189000-byte PDF SHA64d72ce1f7783dcf7fb5a3f6956e8ba4845c4839318613a1dee09d99716625d7; no acceptance is recorded in this preparation.",
+      "Use actual accepted repository-relative review JSON and schema paths, exact SHA256 and sizes, and separate acceptance/closed-manifest pins. Do not derive the schema digest from a draft or filename.",
+      "ReviewJoin.record_id is the exact canonical source ID. Set source_sha_pointer, source_id_pointer, expected_review_source_id and authority_pointer to real fields in the accepted schema; require exact source and CO-COUNTY-EL_PASO identity.",
+      "Choose checked_passages only if the final schema and accepted scope support it; otherwise root must choose the correct existing ReviewKind. This plan leaves review_kind and all QA/acceptance artifacts null.",
+      "Select actual scope_pointers for reviewed pages/sections/paragraphs, native or OCR method, execution observations, omissions, and any scope exclusions. No assumed full-document certification.",
+      "Select actual limitation_pointers for legal_currentness, answer_safe, source-printed dates versus verified adoption/effect, execution/signature identity uncertainty, provenance and review-method qualifications.",
+      "ReviewJoin.note describes this accepted scope, cites separate acceptance, and preserves historical creation-time statuses. Inventory does not itself re-run the source visual/native/crop verifier; run the accepted package verifier separately first."
+    ]
+  },
+  "pins": [
+    {
+      "path": "geode/pipeline/manual_review_inventory.py",
+      "sha256": "2a15e4162dd2da299941cffed2dbe6f3ffb5341066874922b5e3df4b19307999",
+      "size_bytes": 22584
+    },
+    {
+      "path": "tests/test_manual_review_inventory.py",
+      "sha256": "74228cbd6513d4dc5cdbc1325104a1f2a93066d15d20cb5fb37f834ea4c64a4d",
+      "size_bytes": 82577
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/join-plan.json",
+      "sha256": "a9982e39ad36ab29be00f097be0a9e5c1e2bc7ef29f9c5de5a5144de6a3c3b23",
+      "size_bytes": 144748
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/join-plan.schema.json",
+      "sha256": "be55b2c14ea3fa714ffdd4f2b7bf3e6db2374c0425a82c51725874f0a9d351b5",
+      "size_bytes": 6962
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/inventory.json",
+      "sha256": "2d77650fc978f6fefb2922df102b332caece3de599e7279c047e6fd9e27f2a4b",
+      "size_bytes": 3138839
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/inventory.schema.json",
+      "sha256": "4418485d2a0dfe3a4e9f9a6a392a4309bae9774dc1c2a9c1ff8ed8479ec34f14",
+      "size_bytes": 9654
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/README.md",
+      "sha256": "04046e72ecb76405129b3d369f2498d74bc1c3b79fa0ab302aec6796214e4237",
+      "size_bytes": 11968
+    },
+    {
+      "path": "geode/pipeline/manual_source_intake.py",
+      "sha256": "5442b78cf16fb3b24f28a72f1c95753a444d39aaf8a906858e3fdcc9f439e0bd",
+      "size_bytes": 28410
+    },
+    {
+      "path": "geode/schemas/models.py",
+      "sha256": "914e719767f1a7cf7c2dc4465ac08450d1d9f2f71b3cd2e9388a78977e3773b9",
+      "size_bytes": 37435
+    },
+    {
+      "path": "geode/schemas/validators.py",
+      "sha256": "26708c26fa757a0981fed78c473bcaf84c0498c8c414c0a7003764f639a8c45b",
+      "size_bytes": 6448
+    },
+    {
+      "path": "geode/constants.py",
+      "sha256": "e8045e0cc4d69045f4296ac464a518c43773bc762e747f672a9b5b40a6c56f95",
+      "size_bytes": 22102
+    },
+    {
+      "path": "geode/utils/file_io.py",
+      "sha256": "4c68fdfe1158ad64fbd86cc91ed561244c5effe6454a34fa1138ed474ac41620",
+      "size_bytes": 6556
+    },
+    {
+      "path": "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+      "sha256": "d32afb35ca30d113e786ba98768dace04c8e4d433322355a14ab35d7a3810537",
+      "size_bytes": 155913
+    },
+    {
+      "path": "_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+      "sha256": "ad27514fe91659c9914780c7d3e69e48ace742bc31ad67d9c3a3c99945aecde3",
+      "size_bytes": 2066981
+    },
+    {
+      "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/el-paso-boh-admin-regulations-sd011/20260912T225948795762Z_original.pdf",
+      "sha256": "64d72ce1f7783dcf7fb5a3f6956e8ba4845c4839318613a1dee09d99716625d7",
+      "size_bytes": 189000
+    },
+    {
+      "path": "research/local_review/el-paso-intake-2026-09-12/transaction/evidence/preparation/source-provenance.jsonl",
+      "sha256": "8ec86c270fb6ac504f430a8d65aa22c039e697ce637e27f69667b1d3132f0155",
+      "size_bytes": 67238
+    },
+    {
+      "path": "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl",
+      "sha256": "eb6794c68948b642b5b48534def1315afe224d8eebf2e2b438483bde5a33d043",
+      "size_bytes": 157149
+    },
+    {
+      "path": "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_REPORT.json",
+      "sha256": "c4f9c7d30f84cfb234c76269d23a50e0db81d5a8aa9b714034ae58459796cd38",
+      "size_bytes": 6635
+    }
+  ],
+  "convention_refs": [
+    {
+      "path": "handoffs/run-2026-09-14/plato-cs-code-fees-inventory-integration/README.md",
+      "sha256": "0d139dfd122407e7418d7d76da9d6246f0c59ff9f615d5c232d01099a0dcb3e5",
+      "size_bytes": 2527
+    },
+    {
+      "path": "handoffs/run-2026-09-14/plato-cs-code-fees-inventory-integration/EXECUTION.json",
+      "sha256": "480a46f8aa0001d2cdeebfa7e3f424780536fe90ac246690425819149e8bc22f",
+      "size_bytes": 6755
+    }
+  ],
+  "prospective_changed_paths": [
+    "geode/pipeline/manual_review_inventory.py",
+    "tests/test_manual_review_inventory.py",
+    "research/local_review/manual-source-review-inventory-2026-09-11/join-plan.json",
+    "research/local_review/manual-source-review-inventory-2026-09-11/inventory.json",
+    "research/local_review/manual-source-review-inventory-2026-09-11/README.md"
+  ],
+  "preimage_paths": [
+    "geode/pipeline/manual_review_inventory.py",
+    "tests/test_manual_review_inventory.py",
+    "research/local_review/manual-source-review-inventory-2026-09-11/join-plan.json",
+    "research/local_review/manual-source-review-inventory-2026-09-11/join-plan.schema.json",
+    "research/local_review/manual-source-review-inventory-2026-09-11/inventory.json",
+    "research/local_review/manual-source-review-inventory-2026-09-11/inventory.schema.json",
+    "research/local_review/manual-source-review-inventory-2026-09-11/README.md"
+  ],
+  "preserve": [
+    "All 70 AuthorityJoin records and all first 36 ReviewJoin records, including list order and exact serialized content.",
+    "All 69 other inventory source rows. On the target row, only reviews and review_status may change.",
+    "Raw source bytes, raw manual manifest, manual intake ledger/report, legacy LOCAL_COVERAGE_LEDGER, authority provenance and acquisition/intake times.",
+    "received_review_package, verified_http_acquired_at=null, verified_http_evidence=null and archived_pending_pipeline status.",
+    "Historical provenance /full_text_reviewed=false and no-full-review qualification remain frozen intake observations, even after a later explicit QA link is added; do not rewrite the old custody source.",
+    "All source and inventory legal_currentness=not_verified, answer_safe=false, coverage_promotion=false. No lookup enrollment, legal rule/unit, effective-date or current-law promotion.",
+    "Both companion schema bytes should remain identical because no inventory model change is required."
+  ],
+  "steps": [
+    "Run preflight.py immediately before preparing the actual integration. A changed Git HEAD alone is informational; any pinned file drift requires a fresh reviewed plan. PR15 Register-only changes need not invalidate unchanged inventory pins.",
+    "After Atlas acceptance, validate the copied QA closure/source bindings and obtain exact schema/JSON/acceptance pins. Do not execute downloaded reviewer code.",
+    "Snapshot the seven listed preimage files byte-for-byte in one newly named package _SNAPSHOTS directory before edits; pin unchanged raw/control/custody artifacts without copying unnecessary historical reports.",
+    "Add exactly the accepted schema digest to ALLOWED_REVIEW_SCHEMAS with its reviewed existing kind, unless the identical digest/kind is already allowlisted. Do not add a generic schema bypass.",
+    "Pydantic-validate one ReviewJoin and an updated JoinPlan; append exactly one review (index36), preserve all old joins/limitations/manual_manifest/legacy_ledger, set actual preparation timestamp.",
+    "Use atomic_write_text for the approved module/tests/plan changes after verifying their exact preimages. Run build_inventory first without writes and inspect the only-row delta.",
+    "Only after that delta passes, use python -m geode.pipeline.manual_review_inventory --root . --write for deterministic companions. It preflights companions and snapshots changed outputs; no generic raw intake/reconciliation call is needed.",
+    "Run focused inventory tests and python -m geode.pipeline.manual_review_inventory --root . --check. Verify exact 70/37/33, unchanged source/control pins and 36 prior joins. Root owns full-suite/commit/publication.",
+    "Keep a compact typed before/after receipt with test/check results and accepted QA pointers; do not copy the Sept14 report layers or old apply script into the new package."
+  ],
+  "tests": [
+    "Add one integration test against the new 70/36/34 preimage: 70 authority joins unchanged; first36 reviews unchanged; only target reviews/review_status differ; after70/37/33.",
+    "Update only live-count expectations from36/34 to37/33 and live review-list length37. Leave every historical snapshot count and prefix length intact.",
+    "Extend the later-review normalization chain to strip only this exact source/digest/schema binding for historical row comparisons, including the Sept14 Code Services comparison. Its former last join remains index35, not plan.reviews[-1] after append.",
+    "Update the explicit El Paso reviewed-ID branch in test_accepted_equity_review_is_one_bounded_additive_join (current lines455-466) so the accepted admin source has the actual review kind; do not loosen the other unmapped IDs.",
+    "Add source-SHA, source-alias, authority and schema-tamper refusal cases; altered limitation/currentness fields must be refused by the exact accepted schema where constrained.",
+    "Assert accepted scope pointers preserve every material review limitation and source date role, with verified HTTP still null and intake status/currentness unchanged. Do not invent adoption or signature identity assertions."
+  ],
+  "limitations": [
+    "Read-only preparation. No QA was ingested or accepted, no canonical file changed, and no public request occurred.",
+    "Final accepted QA path, schema digest, kind, pointers, scope counts and acceptance remain intentionally unknown until root acceptance.",
+    "Current inventory --check validates recorded joins and exact bytes; it does not certify source law, visual review, or all prior package verifiers.",
+    "Exact current pins are point-in-time evidence. Root may merge PR15/16 while this plan is prepared; rerun preflight and refresh on relevant drift."
+  ]
+}
