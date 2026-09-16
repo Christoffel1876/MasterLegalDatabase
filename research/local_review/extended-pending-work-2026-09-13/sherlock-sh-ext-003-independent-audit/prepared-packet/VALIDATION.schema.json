@@ -1,0 +1,98 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Bind an exact prepared payload.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "assignment_id": {
+      "const": "SH-EXT-003",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_DISPATCHED",
+      "title": "Status",
+      "type": "string"
+    },
+    "verified_at": {
+      "title": "Verified At",
+      "type": "string"
+    },
+    "tests_passed": {
+      "title": "Tests Passed",
+      "type": "integer"
+    },
+    "combined_branch_coverage": {
+      "title": "Combined Branch Coverage",
+      "type": "number"
+    },
+    "test_command": {
+      "title": "Test Command",
+      "type": "string"
+    },
+    "public_actions": {
+      "const": 0,
+      "title": "Public Actions",
+      "type": "integer"
+    },
+    "production_edits": {
+      "const": 0,
+      "title": "Production Edits",
+      "type": "integer"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "assignment_id",
+    "status",
+    "verified_at",
+    "tests_passed",
+    "combined_branch_coverage",
+    "test_command",
+    "public_actions",
+    "production_edits",
+    "limits",
+    "files"
+  ],
+  "title": "Validation",
+  "type": "object"
+}

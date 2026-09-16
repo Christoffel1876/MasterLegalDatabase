@@ -1,0 +1,100 @@
+{
+  "additionalProperties": false,
+  "description": "Observed suite outcome and the exact code/test snapshot it exercised.",
+  "properties": {
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "finished_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Finished At"
+    },
+    "command": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Command",
+      "type": "array"
+    },
+    "status": {
+      "enum": [
+        "running",
+        "passed",
+        "failed",
+        "code_changed_during_run"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "code_test_hashes": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Code Test Hashes",
+      "type": "object"
+    },
+    "changed_during_run": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Changed During Run",
+      "type": "array"
+    },
+    "exit_code": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Exit Code"
+    },
+    "log_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Log Sha256"
+    },
+    "coverage_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Coverage Sha256"
+    }
+  },
+  "required": [
+    "started_at",
+    "command",
+    "status",
+    "code_test_hashes"
+  ],
+  "title": "Run",
+  "type": "object"
+}

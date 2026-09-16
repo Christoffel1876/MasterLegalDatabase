@@ -1,0 +1,174 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "One exact relative file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Complete document fidelity approval remains separate from intake and currentness.",
+  "properties": {
+    "accepted_at": {
+      "format": "date-time",
+      "title": "Accepted At",
+      "type": "string"
+    },
+    "status": {
+      "const": "accepted_complete_source_fidelity_pending_separate_intake",
+      "title": "Status",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "pueblo-county-planning-fees-sh-ext-002",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-PUEBLO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Ref"
+    },
+    "source_qa": {
+      "$ref": "#/$defs/Ref"
+    },
+    "independent_manifest_sha256": {
+      "title": "Independent Manifest Sha256",
+      "type": "string"
+    },
+    "root_direct_visual_pages": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Root Direct Visual Pages",
+      "type": "array"
+    },
+    "independent_direct_visual_pages": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Independent Direct Visual Pages",
+      "type": "array"
+    },
+    "physical_rows": {
+      "const": 88,
+      "default": 88,
+      "title": "Physical Rows",
+      "type": "integer"
+    },
+    "labeled_fee_rows": {
+      "const": 69,
+      "default": 69,
+      "title": "Labeled Fee Rows",
+      "type": "integer"
+    },
+    "native_lines": {
+      "const": 145,
+      "default": 145,
+      "title": "Native Lines",
+      "type": "integer"
+    },
+    "native_bytes": {
+      "const": 3187,
+      "default": 3187,
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "structural_tests_passed": {
+      "const": 34,
+      "default": 34,
+      "title": "Structural Tests Passed",
+      "type": "integer"
+    },
+    "structural_coverage_combined_percent": {
+      "title": "Structural Coverage Combined Percent",
+      "type": "number"
+    },
+    "root_review_method": {
+      "title": "Root Review Method",
+      "type": "string"
+    },
+    "qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Qualifications",
+      "type": "array"
+    },
+    "canonical_intakes": {
+      "const": 0,
+      "default": 0,
+      "title": "Canonical Intakes",
+      "type": "integer"
+    },
+    "public_requests_by_acceptance": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Requests By Acceptance",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "adoption_date": {
+      "default": null,
+      "title": "Adoption Date",
+      "type": "null"
+    },
+    "effective_date": {
+      "default": null,
+      "title": "Effective Date",
+      "type": "null"
+    }
+  },
+  "required": [
+    "accepted_at",
+    "status",
+    "source_id",
+    "authority_id",
+    "source",
+    "source_qa",
+    "independent_manifest_sha256",
+    "root_direct_visual_pages",
+    "independent_direct_visual_pages",
+    "structural_coverage_combined_percent",
+    "root_review_method",
+    "qualifications"
+  ],
+  "title": "Acceptance",
+  "type": "object"
+}

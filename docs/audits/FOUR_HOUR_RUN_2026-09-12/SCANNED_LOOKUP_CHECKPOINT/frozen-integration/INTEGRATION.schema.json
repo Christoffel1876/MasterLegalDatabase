@@ -1,0 +1,230 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "status": {
+      "const": "installed_source_only_lookup_and_one_additive_review_join",
+      "default": "installed_source_only_lookup_and_one_additive_review_join",
+      "title": "Status",
+      "type": "string"
+    },
+    "frozen_at": {
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "repository_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Repository Files",
+      "type": "array"
+    },
+    "support_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Support Files",
+      "type": "array"
+    },
+    "snapshot_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Snapshot Files",
+      "type": "array"
+    },
+    "exact_prototype_copies": {
+      "const": 3,
+      "default": 3,
+      "title": "Exact Prototype Copies",
+      "type": "integer"
+    },
+    "sources": {
+      "const": 59,
+      "default": 59,
+      "title": "Sources",
+      "type": "integer"
+    },
+    "previously_mapped_reviews": {
+      "const": 19,
+      "default": 19,
+      "title": "Previously Mapped Reviews",
+      "type": "integer"
+    },
+    "mapped_reviews": {
+      "const": 20,
+      "default": 20,
+      "title": "Mapped Reviews",
+      "type": "integer"
+    },
+    "unmapped_sources": {
+      "const": 39,
+      "default": 39,
+      "title": "Unmapped Sources",
+      "type": "integer"
+    },
+    "unchanged_authority_joins": {
+      "const": 59,
+      "default": 59,
+      "title": "Unchanged Authority Joins",
+      "type": "integer"
+    },
+    "unchanged_prior_review_joins": {
+      "const": 19,
+      "default": 19,
+      "title": "Unchanged Prior Review Joins",
+      "type": "integer"
+    },
+    "only_source_row_changed": {
+      "const": "el-paso-planning-fees-sd011",
+      "default": "el-paso-planning-fees-sd011",
+      "title": "Only Source Row Changed",
+      "type": "string"
+    },
+    "only_source_fields_changed": {
+      "items": {
+        "enum": [
+          "reviews",
+          "review_status"
+        ],
+        "type": "string"
+      },
+      "title": "Only Source Fields Changed",
+      "type": "array"
+    },
+    "installed_tests_passed": {
+      "const": 132,
+      "default": 132,
+      "title": "Installed Tests Passed",
+      "type": "integer"
+    },
+    "final_inventory_scope_tests_passed": {
+      "const": 7,
+      "default": 7,
+      "title": "Final Inventory Scope Tests Passed",
+      "type": "integer"
+    },
+    "lookup_combined_coverage_percent": {
+      "title": "Lookup Combined Coverage Percent",
+      "type": "number"
+    },
+    "lookup_branch_coverage_percent": {
+      "title": "Lookup Branch Coverage Percent",
+      "type": "number"
+    },
+    "inventory_combined_coverage_percent": {
+      "title": "Inventory Combined Coverage Percent",
+      "type": "number"
+    },
+    "inventory_branch_coverage_percent": {
+      "title": "Inventory Branch Coverage Percent",
+      "type": "number"
+    },
+    "raw_manifest_unchanged": {
+      "$ref": "#/$defs/Asset"
+    },
+    "legacy_coverage_ledger_unchanged": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_pdf_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Pdf Sha256",
+      "type": "string"
+    },
+    "source_review_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Review Sha256",
+      "type": "string"
+    },
+    "source_schema_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Schema Sha256",
+      "type": "string"
+    },
+    "currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "normal_retrieval_modified": {
+      "const": false,
+      "default": false,
+      "title": "Normal Retrieval Modified",
+      "type": "boolean"
+    },
+    "remaining_root_work": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Remaining Root Work",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "frozen_at",
+    "repository_files",
+    "support_files",
+    "snapshot_files",
+    "only_source_fields_changed",
+    "lookup_combined_coverage_percent",
+    "lookup_branch_coverage_percent",
+    "inventory_combined_coverage_percent",
+    "inventory_branch_coverage_percent",
+    "raw_manifest_unchanged",
+    "legacy_coverage_ledger_unchanged",
+    "source_pdf_sha256",
+    "source_review_sha256",
+    "source_schema_sha256",
+    "remaining_root_work",
+    "limitations"
+  ],
+  "title": "Integration",
+  "type": "object"
+}

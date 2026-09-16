@@ -1,0 +1,862 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Bind a locally preserved artifact to its exact bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Body": {
+      "additionalProperties": false,
+      "description": "Measured byte format and structural PDF result, without text review.",
+      "properties": {
+        "asset": {
+          "$ref": "#/$defs/Asset"
+        },
+        "event_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Event Ids",
+          "type": "array"
+        },
+        "named_pdf": {
+          "title": "Named Pdf",
+          "type": "boolean"
+        },
+        "actual_format": {
+          "enum": [
+            "pdf",
+            "html",
+            "other"
+          ],
+          "title": "Actual Format",
+          "type": "string"
+        },
+        "pages": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pages"
+        },
+        "repaired": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Repaired"
+        },
+        "encrypted": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Encrypted"
+        },
+        "parser_result": {
+          "enum": [
+            "parsed",
+            "not_pdf",
+            "parse_failed"
+          ],
+          "title": "Parser Result",
+          "type": "string"
+        },
+        "page_content_reviewed": {
+          "const": false,
+          "default": false,
+          "title": "Page Content Reviewed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "asset",
+        "event_ids",
+        "named_pdf",
+        "actual_format",
+        "pages",
+        "repaired",
+        "encrypted",
+        "parser_result"
+      ],
+      "title": "Body",
+      "type": "object"
+    },
+    "Event": {
+      "additionalProperties": false,
+      "description": "Separate supplied HTTP claims from measured retained evidence and header hops.",
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "authority_label_claim": {
+          "title": "Authority Label Claim",
+          "type": "string"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "final_url_claim": {
+          "title": "Final Url Claim",
+          "type": "string"
+        },
+        "started_at_claim": {
+          "format": "date-time",
+          "title": "Started At Claim",
+          "type": "string"
+        },
+        "completed_at_claim": {
+          "format": "date-time",
+          "title": "Completed At Claim",
+          "type": "string"
+        },
+        "http_status_claim": {
+          "title": "Http Status Claim",
+          "type": "integer"
+        },
+        "outcome_claim": {
+          "title": "Outcome Claim",
+          "type": "string"
+        },
+        "body_size_claim": {
+          "title": "Body Size Claim",
+          "type": "integer"
+        },
+        "body_sha256_claim": {
+          "title": "Body Sha256 Claim",
+          "type": "string"
+        },
+        "body": {
+          "$ref": "#/$defs/Asset"
+        },
+        "body_matches_claim": {
+          "title": "Body Matches Claim",
+          "type": "boolean"
+        },
+        "headers": {
+          "$ref": "#/$defs/Asset"
+        },
+        "observed_response_statuses": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Observed Response Statuses",
+          "type": "array"
+        },
+        "observed_location_values": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Observed Location Values",
+          "type": "array"
+        },
+        "resolved_redirect_destinations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Resolved Redirect Destinations",
+          "type": "array"
+        },
+        "reported_redirect_count": {
+          "title": "Reported Redirect Count",
+          "type": "integer"
+        },
+        "header_chain_matches_logged_final": {
+          "title": "Header Chain Matches Logged Final",
+          "type": "boolean"
+        },
+        "upstream_acquisition_independently_witnessed": {
+          "const": false,
+          "default": false,
+          "title": "Upstream Acquisition Independently Witnessed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "event_id",
+        "authority_label_claim",
+        "requested_url",
+        "final_url_claim",
+        "started_at_claim",
+        "completed_at_claim",
+        "http_status_claim",
+        "outcome_claim",
+        "body_size_claim",
+        "body_sha256_claim",
+        "body",
+        "body_matches_claim",
+        "headers",
+        "observed_response_statuses",
+        "observed_location_values",
+        "resolved_redirect_destinations",
+        "reported_redirect_count",
+        "header_chain_matches_logged_final"
+      ],
+      "title": "Event",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "description": "An actionable audit finding supported by frozen local evidence.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "failure",
+            "qualification",
+            "correction"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "evidence_paths": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Paths",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "severity",
+        "statement",
+        "evidence_paths"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "HeaderDerivative": {
+      "additionalProperties": false,
+      "description": "Public-safe header derivative bound to its immutable private original.",
+      "properties": {
+        "original": {
+          "$ref": "#/$defs/Asset"
+        },
+        "derivative": {
+          "$ref": "#/$defs/Asset"
+        },
+        "removed_field_names": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Removed Field Names",
+          "type": "array"
+        },
+        "removed_line_count": {
+          "title": "Removed Line Count",
+          "type": "integer"
+        },
+        "bytes_changed": {
+          "title": "Bytes Changed",
+          "type": "boolean"
+        },
+        "transformation": {
+          "const": "omit_cookie_and_authorization_fields_and_continuations",
+          "title": "Transformation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "original",
+        "derivative",
+        "removed_field_names",
+        "removed_line_count",
+        "bytes_changed",
+        "transformation"
+      ],
+      "title": "HeaderDerivative",
+      "type": "object"
+    },
+    "LegacyHit": {
+      "additionalProperties": false,
+      "description": "One exact matching recorded legacy attempt; its old raw path was not opened.",
+      "properties": {
+        "line": {
+          "title": "Line",
+          "type": "integer"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "source_url": {
+          "title": "Source Url",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "historical_original_opened": {
+          "const": false,
+          "default": false,
+          "title": "Historical Original Opened",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "line",
+        "source_id",
+        "authority_id",
+        "requested_url",
+        "source_url",
+        "sha256"
+      ],
+      "title": "LegacyHit",
+      "type": "object"
+    },
+    "PdfProposal": {
+      "additionalProperties": false,
+      "description": "A real original proposed for later typed preservation, not an intake operation.",
+      "properties": {
+        "rank": {
+          "title": "Rank",
+          "type": "integer"
+        },
+        "proposed_source_id": {
+          "title": "Proposed Source Id",
+          "type": "string"
+        },
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "priority_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Priority Ids",
+          "type": "array"
+        },
+        "authority_context": {
+          "title": "Authority Context",
+          "type": "string"
+        },
+        "issuer_and_role_qualification": {
+          "title": "Issuer And Role Qualification",
+          "type": "string"
+        },
+        "title_from_supplied_candidate_or_observed_anchor": {
+          "title": "Title From Supplied Candidate Or Observed Anchor",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Asset"
+        },
+        "pages": {
+          "title": "Pages",
+          "type": "integer"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "final_url": {
+          "title": "Final Url",
+          "type": "string"
+        },
+        "acquisition_started_at_claim": {
+          "format": "date-time",
+          "title": "Acquisition Started At Claim",
+          "type": "string"
+        },
+        "acquisition_completed_at_claim": {
+          "format": "date-time",
+          "title": "Acquisition Completed At Claim",
+          "type": "string"
+        },
+        "custody_captured_at": {
+          "format": "date-time",
+          "title": "Custody Captured At",
+          "type": "string"
+        },
+        "upstream_acquisition_independently_verified": {
+          "const": false,
+          "default": false,
+          "title": "Upstream Acquisition Independently Verified",
+          "type": "boolean"
+        },
+        "source_referrals": {
+          "items": {
+            "$ref": "#/$defs/Referral"
+          },
+          "title": "Source Referrals",
+          "type": "array"
+        },
+        "historical_matching_rows": {
+          "title": "Historical Matching Rows",
+          "type": "integer"
+        },
+        "historical_source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Historical Source Ids",
+          "type": "array"
+        },
+        "preservation_status": {
+          "const": "proposed_only_pending_typed_intake_and_role_review",
+          "title": "Preservation Status",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "adoption_date": {
+          "default": null,
+          "title": "Adoption Date",
+          "type": "null"
+        },
+        "effective_date": {
+          "default": null,
+          "title": "Effective Date",
+          "type": "null"
+        }
+      },
+      "required": [
+        "rank",
+        "proposed_source_id",
+        "event_id",
+        "priority_ids",
+        "authority_context",
+        "issuer_and_role_qualification",
+        "title_from_supplied_candidate_or_observed_anchor",
+        "source",
+        "pages",
+        "requested_url",
+        "final_url",
+        "acquisition_started_at_claim",
+        "acquisition_completed_at_claim",
+        "custody_captured_at",
+        "source_referrals",
+        "historical_matching_rows",
+        "historical_source_ids",
+        "preservation_status"
+      ],
+      "title": "PdfProposal",
+      "type": "object"
+    },
+    "Priority": {
+      "additionalProperties": false,
+      "description": "Reconcile a priority record against one actual body and event.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "authority_label_claim": {
+          "title": "Authority Label Claim",
+          "type": "string"
+        },
+        "title_claim": {
+          "title": "Title Claim",
+          "type": "string"
+        },
+        "role_claim": {
+          "title": "Role Claim",
+          "type": "string"
+        },
+        "actual_format": {
+          "title": "Actual Format",
+          "type": "string"
+        },
+        "exact_event_and_body_binding": {
+          "title": "Exact Event And Body Binding",
+          "type": "boolean"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "event_id",
+        "authority_label_claim",
+        "title_claim",
+        "role_claim",
+        "actual_format",
+        "exact_event_and_body_binding",
+        "qualification"
+      ],
+      "title": "Priority",
+      "type": "object"
+    },
+    "Referral": {
+      "additionalProperties": false,
+      "description": "An observed anchor in a hash-bound retained HTML body, not a new public open.",
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "parent_url": {
+          "title": "Parent Url",
+          "type": "string"
+        },
+        "parent": {
+          "$ref": "#/$defs/Asset"
+        },
+        "line": {
+          "title": "Line",
+          "type": "integer"
+        },
+        "href": {
+          "title": "Href",
+          "type": "string"
+        },
+        "resolved_url": {
+          "title": "Resolved Url",
+          "type": "string"
+        },
+        "anchor_text": {
+          "title": "Anchor Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "parent_url",
+        "parent",
+        "line",
+        "href",
+        "resolved_url",
+        "anchor_text"
+      ],
+      "title": "Referral",
+      "type": "object"
+    },
+    "UnopenedLead": {
+      "additionalProperties": false,
+      "description": "An iframe's exact public PDF reference, decoded once without requesting it.",
+      "properties": {
+        "priority_id": {
+          "title": "Priority Id",
+          "type": "string"
+        },
+        "html": {
+          "$ref": "#/$defs/Asset"
+        },
+        "parent_url": {
+          "title": "Parent Url",
+          "type": "string"
+        },
+        "physical_html_line": {
+          "title": "Physical Html Line",
+          "type": "integer"
+        },
+        "raw_iframe_tag": {
+          "title": "Raw Iframe Tag",
+          "type": "string"
+        },
+        "iframe_src": {
+          "title": "Iframe Src",
+          "type": "string"
+        },
+        "decoded_file_parameter_once": {
+          "title": "Decoded File Parameter Once",
+          "type": "string"
+        },
+        "is_in_requested_urls": {
+          "title": "Is In Requested Urls",
+          "type": "boolean"
+        },
+        "is_in_final_urls": {
+          "title": "Is In Final Urls",
+          "type": "boolean"
+        },
+        "public_open_during_audit": {
+          "const": false,
+          "default": false,
+          "title": "Public Open During Audit",
+          "type": "boolean"
+        },
+        "role_limit": {
+          "title": "Role Limit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "priority_id",
+        "html",
+        "parent_url",
+        "physical_html_line",
+        "raw_iframe_tag",
+        "iframe_src",
+        "decoded_file_parameter_once",
+        "is_in_requested_urls",
+        "is_in_final_urls",
+        "role_limit"
+      ],
+      "title": "UnopenedLead",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Qualified intake decision without currentness or transcript certification.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "audited_at": {
+      "format": "date-time",
+      "title": "Audited At",
+      "type": "string"
+    },
+    "assignment": {
+      "const": "geode-source-discovery-011",
+      "default": "geode-source-discovery-011",
+      "title": "Assignment",
+      "type": "string"
+    },
+    "comparison_commit": {
+      "title": "Comparison Commit",
+      "type": "string"
+    },
+    "custody_receipt": {
+      "$ref": "#/$defs/Asset"
+    },
+    "decision": {
+      "const": "qualified_partial_delivery_with_failed_cap_and_custody_gaps",
+      "title": "Decision",
+      "type": "string"
+    },
+    "public_distinct_cap_status": {
+      "const": "FAILED",
+      "default": "FAILED",
+      "title": "Public Distinct Cap Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "production_intake_performed": {
+      "const": false,
+      "default": false,
+      "title": "Production Intake Performed",
+      "type": "boolean"
+    },
+    "new_public_opens": {
+      "const": 0,
+      "default": 0,
+      "title": "New Public Opens",
+      "type": "integer"
+    },
+    "pdf_review_scope": {
+      "const": "magic_and_parseability_only_no_text_or_visual_certification",
+      "title": "Pdf Review Scope",
+      "type": "string"
+    },
+    "counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Counts",
+      "type": "object"
+    },
+    "inventory_mismatches": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Inventory Mismatches",
+      "type": "array"
+    },
+    "tar_differences": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Tar Differences",
+      "type": "array"
+    },
+    "tar_additional_uninventoried_members": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Tar Additional Uninventoried Members",
+      "type": "array"
+    },
+    "log_versions_events_identical": {
+      "title": "Log Versions Events Identical",
+      "type": "boolean"
+    },
+    "public_event_records_identical": {
+      "title": "Public Event Records Identical",
+      "type": "boolean"
+    },
+    "non_public_stop_metadata_changed": {
+      "title": "Non Public Stop Metadata Changed",
+      "type": "boolean"
+    },
+    "missing_earlier_body_digests": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Earlier Body Digests",
+      "type": "array"
+    },
+    "historical_digest_matches": {
+      "items": {
+        "$ref": "#/$defs/LegacyHit"
+      },
+      "title": "Historical Digest Matches",
+      "type": "array"
+    },
+    "manual_raw_match_count": {
+      "title": "Manual Raw Match Count",
+      "type": "integer"
+    },
+    "manual_ledger_match_count": {
+      "title": "Manual Ledger Match Count",
+      "type": "integer"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "bodies": {
+      "items": {
+        "$ref": "#/$defs/Body"
+      },
+      "title": "Bodies",
+      "type": "array"
+    },
+    "priorities": {
+      "items": {
+        "$ref": "#/$defs/Priority"
+      },
+      "title": "Priorities",
+      "type": "array"
+    },
+    "header_derivatives": {
+      "items": {
+        "$ref": "#/$defs/HeaderDerivative"
+      },
+      "title": "Header Derivatives",
+      "type": "array"
+    },
+    "exact_unopened_pdf_leads": {
+      "items": {
+        "$ref": "#/$defs/UnopenedLead"
+      },
+      "title": "Exact Unopened Pdf Leads",
+      "type": "array"
+    },
+    "pdf_intake_proposals": {
+      "items": {
+        "$ref": "#/$defs/PdfProposal"
+      },
+      "title": "Pdf Intake Proposals",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "audited_at",
+    "comparison_commit",
+    "custody_receipt",
+    "decision",
+    "pdf_review_scope",
+    "counts",
+    "inventory_mismatches",
+    "tar_differences",
+    "tar_additional_uninventoried_members",
+    "log_versions_events_identical",
+    "public_event_records_identical",
+    "non_public_stop_metadata_changed",
+    "missing_earlier_body_digests",
+    "historical_digest_matches",
+    "manual_raw_match_count",
+    "manual_ledger_match_count",
+    "events",
+    "bodies",
+    "priorities",
+    "header_derivatives",
+    "exact_unopened_pdf_leads",
+    "pdf_intake_proposals",
+    "findings",
+    "limitations"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

@@ -1,0 +1,93 @@
+{
+  "$defs": {
+    "Fragment": {
+      "additionalProperties": false,
+      "properties": {
+        "docket": {
+          "title": "Docket",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "source_path": {
+          "title": "Source Path",
+          "type": "string"
+        },
+        "source_sha256": {
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "byte_start": {
+          "minimum": 0,
+          "title": "Byte Start",
+          "type": "integer"
+        },
+        "byte_end": {
+          "exclusiveMinimum": 0,
+          "title": "Byte End",
+          "type": "integer"
+        },
+        "first_line": {
+          "exclusiveMinimum": 0,
+          "title": "First Line",
+          "type": "integer"
+        },
+        "last_line": {
+          "exclusiveMinimum": 0,
+          "title": "Last Line",
+          "type": "integer"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "docket",
+        "role",
+        "source_path",
+        "source_sha256",
+        "byte_start",
+        "byte_end",
+        "first_line",
+        "last_line",
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Fragment",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "normalization": {
+      "title": "Normalization",
+      "type": "string"
+    },
+    "fragments": {
+      "items": {
+        "$ref": "#/$defs/Fragment"
+      },
+      "title": "Fragments",
+      "type": "array"
+    }
+  },
+  "required": [
+    "normalization",
+    "fragments"
+  ],
+  "title": "Fragments",
+  "type": "object"
+}

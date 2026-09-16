@@ -1,0 +1,63 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "captured_at": {
+      "format": "date-time",
+      "title": "Captured At",
+      "type": "string"
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "originals": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Originals",
+      "type": "array"
+    },
+    "copies": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Copies",
+      "type": "array"
+    }
+  },
+  "required": [
+    "captured_at",
+    "status",
+    "originals",
+    "copies"
+  ],
+  "title": "Snapshot",
+  "type": "object"
+}

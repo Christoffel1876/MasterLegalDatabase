@@ -1,0 +1,62 @@
+{
+  "additionalProperties": false,
+  "description": "Measured offline verification; no automatic visual/legal certification.",
+  "properties": {
+    "status": {
+      "const": "passed",
+      "title": "Status",
+      "type": "string"
+    },
+    "physical_pages": {
+      "const": 6,
+      "title": "Physical Pages",
+      "type": "integer"
+    },
+    "native_bytes": {
+      "const": 13558,
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "native_lines": {
+      "const": 180,
+      "title": "Native Lines",
+      "type": "integer"
+    },
+    "paragraph_segments": {
+      "title": "Paragraph Segments",
+      "type": "integer"
+    },
+    "crop_replays": {
+      "const": 15,
+      "title": "Crop Replays",
+      "type": "integer"
+    },
+    "full_page_render_replays": {
+      "title": "Full Page Render Replays",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "visual_judgment_automatically_certified": {
+      "const": false,
+      "title": "Visual Judgment Automatically Certified",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "status",
+    "physical_pages",
+    "native_bytes",
+    "native_lines",
+    "paragraph_segments",
+    "crop_replays",
+    "full_page_render_replays",
+    "legal_currentness",
+    "visual_judgment_automatically_certified"
+  ],
+  "title": "Validation",
+  "type": "object"
+}

@@ -1,0 +1,78 @@
+{
+  "reviewer": "Plato",
+  "recorded_at": "2026-09-13T17:01:17.474098Z",
+  "disposition": "no_blocker_found_in_fixed_one_source_preapply_scope",
+  "reviewed_preparation": {
+    "path": "reviewed-preparation/PREPARATION.json",
+    "sha256": "a25b2071c9275af9b7299edf198b96870a79ba5ac8e0c412f6b8647774d683ca",
+    "size_bytes": 24974
+  },
+  "reviewed_transaction": {
+    "path": "reviewed-preparation/transaction.py",
+    "sha256": "d4342c76031ebcebb7948a137f96bf0f563be72d24ec76e0a5b7718074e127ef",
+    "size_bytes": 29734
+  },
+  "reviewed_manifest": {
+    "path": "reviewed-preparation/FINAL_MANIFEST.json",
+    "sha256": "8033006a57280b2ea897baa3bb3121e195edd3885ea9fa84c55af5998f83b2b1",
+    "size_bytes": 54324
+  },
+  "copy_receipt": {
+    "path": "COPY_RECEIPT.json",
+    "sha256": "6f88e7df1b3cc83eae847e02c615a9799965297e46e01ad1eb04ff58de055744",
+    "size_bytes": 60145
+  },
+  "checks": {
+    "path": "CHECKS.json",
+    "sha256": "503c77ceee9f9e722598eea43910ae9fcd88db5d01cbab67b7df1e22a1e08557",
+    "size_bytes": 84509
+  },
+  "sources": [
+    {
+      "source_id": "chaffee-planning-application-fees-atlas-directed",
+      "authority_id": "CO-COUNTY-CHAFFEE",
+      "layer_id": "08_County_Authorities",
+      "original": {
+        "path": "reviewed-preparation/sources/chaffee-planning-application-fees-atlas-directed/original.pdf",
+        "sha256": "8c6b6176f8617a43c4f4eb422f5c9c7287ffba8f2daee4af803c6831d2682205",
+        "size_bytes": 206144
+      },
+      "physical_pages": 2,
+      "official_source_url": "https://cms2.revize.com/revize/chaffeecounty/Documents/Departments/Planning%20&%20Zoning/Application%20Forms%20&%20Fees/app_fee_schedule.pdf?t=202503011142110",
+      "acquisition_method": "manual_official_download",
+      "observed_get_started_at": "2026-09-13T16:44:32.759460Z",
+      "observed_get_completed_at": "2026-09-13T16:44:33.133961Z",
+      "future_repository_received_at": null,
+      "status": "archived_pending_pipeline"
+    }
+  ],
+  "baseline_raw_records": 69,
+  "baseline_ledger_records": 70,
+  "proposed_raw_records": 70,
+  "proposed_ledger_records": 71,
+  "actual_intake_occurred_in_this_audit": false,
+  "independent_probe_cases": 8,
+  "observations": [
+    "All 252 prepared payloads and their manifest were captured and copied exactly. The supplied strict schema and complete public retrieval subset pass offline verification.",
+    "The one County source is exactly the 206,144-byte two-page PDF. Its incoming basename is original.pdf. The model and runtime bind its single source ID, county layer, exact official-linked Revize URL, PDF digest and preserved observed download body.",
+    "The county parent HTML/base/anchor is supplied historical evidence. The prior actual county 302 result, public Location header and body anchor independently agree on the Revize endpoint. The new actual A001 HTTP200 evidence is a distinct later GET.",
+    "Observed GET completion is 2026-09-13T16:44:33.133961Z. No intake time is prepared. A synthetic intake clock before acquisition completion is refused before an intent exists.",
+    "The live dry-run recomputed baseline report/available originals and checked immutable preimages, runtime and exact source policy; it reported 69/70 to 70/71 with zero writes.",
+    "Temporary application preserves old JSONL prefixes exactly, writes the original once, derives the report only from captured records, and resumes a missing completion receipt without changing canonical bytes or original file modification times.",
+    "Independent original/referral ABA probes use only captured verified buffers. Report-ahead states, foreign suffixes and linked incoming originals are refused without promoting them.",
+    "Independent local comparison confirms no exact selected ID, URL or digest among the full 48,390 legacy rows, current raw/ledger and two registries. All 573 present ordinary raw files were size-screened; none matched 206,144 bytes.",
+    "Eight retained header files contained no Authorization, Proxy-Authorization, Cookie or Set-Cookie field names. Only names were inspected; omitted header values cannot be replayed."
+  ],
+  "limitations": [
+    "This is a bounded single-agent read-only preapply audit, not canonical execution, a full fee transcription, legal effect, currentness, coverage or answer-safety approval.",
+    "The declared 77-test/92.236842-percent preparation result is producer evidence. This audit ran its own eight-case temporary replay suite, portable verifier and live read-only preflight.",
+    "The author synthetic one-record baseline constructor is reused explicitly. Assertions are independent; fixture application is only temporary and never targets the real corpus.",
+    "The first probe adaptation accidentally duplicated a selector, omitted the parent case and reported eight lines without uniqueness. Its exact code/outputs are historical under initial-probe-adaptation; the corrected final run requires eight unique case outcomes.",
+    "Exact duplicate absence is limited to present local metadata/ordinary raw files; it does not include missing LFS bodies, external research copies or alternate URL spellings.",
+    "The transaction is a fixed reviewed batch with serialized authorized writers, not a general multi-writer database. Process-failure replay does not prove power-loss durability or directory fsync. An unexpected canonical change must stop for review.",
+    "The public header derivatives are a retained subset. This audit does not authenticate unavailable original header values or the historical parent acquisition chronology."
+  ],
+  "legal_currentness": "not_verified",
+  "answer_safe": false,
+  "public_requests": 0
+}

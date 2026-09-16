@@ -1,0 +1,194 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Bind package-relative exact bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "description": "Keep a candidate-aware visual finding separate from automated checks.",
+      "properties": {
+        "assignment_id": {
+          "enum": [
+            "EB-PDF-016",
+            "EB-PDF-017"
+          ],
+          "title": "Assignment Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "directly_viewed": {
+          "const": true,
+          "title": "Directly Viewed",
+          "type": "boolean"
+        },
+        "observation": {
+          "title": "Observation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "assignment_id",
+        "physical_page",
+        "image",
+        "directly_viewed",
+        "observation"
+      ],
+      "title": "Observation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Record custody, checks and the limited integration recommendation.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "accept_with_superseding_correction_attached",
+      "title": "Status",
+      "type": "string"
+    },
+    "method": {
+      "const": "candidate_aware_independent_local_audit",
+      "title": "Method",
+      "type": "string"
+    },
+    "original_packet_path_claim": {
+      "title": "Original Packet Path Claim",
+      "type": "string"
+    },
+    "original_packet_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_packet_files": {
+      "title": "Original Packet Files",
+      "type": "integer"
+    },
+    "original_packet_unchanged": {
+      "const": true,
+      "title": "Original Packet Unchanged",
+      "type": "boolean"
+    },
+    "header_crop_original_path_claim": {
+      "title": "Header Crop Original Path Claim",
+      "type": "string"
+    },
+    "header_crops": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Header Crops",
+      "type": "array"
+    },
+    "pixel_crop_rectangle": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Pixel Crop Rectangle",
+      "type": "array"
+    },
+    "crop_method": {
+      "title": "Crop Method",
+      "type": "string"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "automated_results": {
+      "additionalProperties": true,
+      "title": "Automated Results",
+      "type": "object"
+    },
+    "known_validator_gaps": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Known Validator Gaps",
+      "type": "array"
+    },
+    "missing_claimed_artifacts": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Claimed Artifacts",
+      "type": "array"
+    },
+    "integration_conditions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Integration Conditions",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "method",
+    "original_packet_path_claim",
+    "original_packet_manifest",
+    "original_packet_files",
+    "original_packet_unchanged",
+    "header_crop_original_path_claim",
+    "header_crops",
+    "pixel_crop_rectangle",
+    "crop_method",
+    "observations",
+    "automated_results",
+    "known_validator_gaps",
+    "missing_claimed_artifacts",
+    "integration_conditions",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

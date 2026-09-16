@@ -1,0 +1,324 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact relative-file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "FeeRow": {
+      "additionalProperties": false,
+      "description": "Source row association, with no numeric conversion or invented fee.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "group_span": {
+          "title": "Group Span",
+          "type": "string"
+        },
+        "label_spans": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Label Spans",
+          "type": "array"
+        },
+        "fee_span": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Fee Span"
+        },
+        "fee_cell_status": {
+          "enum": [
+            "printed_text",
+            "visibly_blank"
+          ],
+          "title": "Fee Cell Status",
+          "type": "string"
+        },
+        "note_spans": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Note Spans",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "group_span",
+        "label_spans",
+        "fee_span",
+        "fee_cell_status",
+        "note_spans"
+      ],
+      "title": "FeeRow",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "description": "A bounded direct-image observation, separate from native source text.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Pages",
+          "type": "array"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "pages",
+        "statement"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "Native extraction and the directly viewed original-page image.",
+      "properties": {
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "full_page_directly_viewed": {
+          "const": true,
+          "default": true,
+          "title": "Full Page Directly Viewed",
+          "type": "boolean"
+        },
+        "header_visible": {
+          "title": "Header Visible",
+          "type": "boolean"
+        },
+        "spans": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "title": "Spans",
+          "type": "array"
+        }
+      },
+      "required": [
+        "physical_page",
+        "native",
+        "image",
+        "header_visible",
+        "spans"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "description": "One exhaustive native line, including its original whitespace.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "exclusiveMinimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "blank",
+            "header",
+            "footer",
+            "group",
+            "label",
+            "fee",
+            "note"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "start",
+        "end",
+        "text",
+        "role"
+      ],
+      "title": "Span",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Complete native evidence and qualified source-row associations.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_id": {
+      "const": "weld-ehs-fees-2026-atlas-directed",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "review_mode": {
+      "const": "atlas_candidate_aware_direct_source_review",
+      "title": "Review Mode",
+      "type": "string"
+    },
+    "status": {
+      "const": "complete_native_source_review_with_presentation_qualifications",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "adoption_date": {
+      "default": null,
+      "title": "Adoption Date",
+      "type": "null"
+    },
+    "effective_date": {
+      "default": null,
+      "title": "Effective Date",
+      "type": "null"
+    },
+    "source_year_assertion": {
+      "const": "2026",
+      "default": "2026",
+      "title": "Source Year Assertion",
+      "type": "string"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Pages",
+      "type": "array"
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/FeeRow"
+      },
+      "title": "Rows",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "native_bytes": {
+      "const": 7367,
+      "default": 7367,
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "edited_source_bytes": {
+      "const": false,
+      "default": false,
+      "title": "Edited Source Bytes",
+      "type": "boolean"
+    },
+    "numerical_corrections": {
+      "const": false,
+      "default": false,
+      "title": "Numerical Corrections",
+      "type": "boolean"
+    },
+    "external_review_consulted": {
+      "const": false,
+      "default": false,
+      "title": "External Review Consulted",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "reviewed_at",
+    "source",
+    "source_id",
+    "review_mode",
+    "status",
+    "pages",
+    "rows",
+    "observations"
+  ],
+  "title": "Review",
+  "type": "object"
+}

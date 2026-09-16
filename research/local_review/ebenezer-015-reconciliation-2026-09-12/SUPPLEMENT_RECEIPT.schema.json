@@ -1,0 +1,148 @@
+{
+  "$defs": {
+    "Copy": {
+      "additionalProperties": false,
+      "description": "Retain an original path as a historical claim, never as an open target.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "packet_provenance",
+            "external_note",
+            "external_crop"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "supplied_inventory_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Supplied Inventory Sha256"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes",
+        "original_path",
+        "role",
+        "supplied_inventory_sha256"
+      ],
+      "title": "Copy",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Record additive custody without revising frozen review decisions.",
+  "properties": {
+    "captured_at": {
+      "format": "date-time",
+      "title": "Captured At",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "greeley-building-fees-sd008-06",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "status": {
+      "const": "supplement_received_byte_integrity_only",
+      "title": "Status",
+      "type": "string"
+    },
+    "source_and_candidate_changed": {
+      "const": false,
+      "title": "Source And Candidate Changed",
+      "type": "boolean"
+    },
+    "supplied_created_at_claim": {
+      "title": "Supplied Created At Claim",
+      "type": "string"
+    },
+    "external_history_authenticated": {
+      "const": false,
+      "title": "External History Authenticated",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "copies": {
+      "items": {
+        "$ref": "#/$defs/Copy"
+      },
+      "title": "Copies",
+      "type": "array"
+    },
+    "crop_paths_reported": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Crop Paths Reported",
+      "type": "array"
+    },
+    "crop_paths_received": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Crop Paths Received",
+      "type": "array"
+    },
+    "missing_reported_crop_paths": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Reported Crop Paths",
+      "type": "array"
+    },
+    "scope_and_limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Scope And Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "captured_at",
+    "source_id",
+    "status",
+    "source_and_candidate_changed",
+    "supplied_created_at_claim",
+    "external_history_authenticated",
+    "legal_currentness",
+    "copies",
+    "crop_paths_reported",
+    "crop_paths_received",
+    "missing_reported_crop_paths",
+    "scope_and_limits"
+  ],
+  "title": "Supplement",
+  "type": "object"
+}

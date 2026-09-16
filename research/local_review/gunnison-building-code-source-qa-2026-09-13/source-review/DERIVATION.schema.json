@@ -1,0 +1,183 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact ordinary package file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Attempt": {
+      "additionalProperties": false,
+      "description": "An actual command receipt with explicit retention-path mapping.",
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "receipt": {
+          "$ref": "#/$defs/Asset"
+        },
+        "retained_stdout": {
+          "$ref": "#/$defs/Asset"
+        },
+        "retained_stderr": {
+          "$ref": "#/$defs/Asset"
+        },
+        "original_paths_relocated": {
+          "title": "Original Paths Relocated",
+          "type": "boolean"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "page",
+        "receipt",
+        "retained_stdout",
+        "retained_stderr",
+        "original_paths_relocated",
+        "note"
+      ],
+      "title": "Attempt",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Known local engine settings and complete candidate outcomes.",
+  "properties": {
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "poppler_binary_sha256": {
+      "title": "Poppler Binary Sha256",
+      "type": "string"
+    },
+    "poppler_version_output": {
+      "$ref": "#/$defs/Asset"
+    },
+    "render_dpi": {
+      "const": 150,
+      "title": "Render Dpi",
+      "type": "integer"
+    },
+    "pymupdf_version": {
+      "title": "Pymupdf Version",
+      "type": "string"
+    },
+    "ocr_binary": {
+      "$ref": "#/$defs/Asset"
+    },
+    "ocr_swift": {
+      "$ref": "#/$defs/Asset"
+    },
+    "os_version_reported": {
+      "title": "Os Version Reported",
+      "type": "string"
+    },
+    "vision_revision": {
+      "const": 3,
+      "title": "Vision Revision",
+      "type": "integer"
+    },
+    "recognition_level": {
+      "const": "accurate",
+      "title": "Recognition Level",
+      "type": "string"
+    },
+    "languages": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Languages",
+      "type": "array"
+    },
+    "language_correction": {
+      "const": false,
+      "title": "Language Correction",
+      "type": "boolean"
+    },
+    "automatic_language_detection": {
+      "const": false,
+      "title": "Automatic Language Detection",
+      "type": "boolean"
+    },
+    "minimum_text_height": {
+      "const": 0,
+      "title": "Minimum Text Height",
+      "type": "integer"
+    },
+    "cpu_only": {
+      "const": true,
+      "title": "Cpu Only",
+      "type": "boolean"
+    },
+    "initial_failed_attempt": {
+      "$ref": "#/$defs/Attempt"
+    },
+    "successful_attempts": {
+      "items": {
+        "$ref": "#/$defs/Attempt"
+      },
+      "title": "Successful Attempts",
+      "type": "array"
+    },
+    "method_limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Method Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_sha256",
+    "poppler_binary_sha256",
+    "poppler_version_output",
+    "render_dpi",
+    "pymupdf_version",
+    "ocr_binary",
+    "ocr_swift",
+    "os_version_reported",
+    "vision_revision",
+    "recognition_level",
+    "languages",
+    "language_correction",
+    "automatic_language_detection",
+    "minimum_text_height",
+    "cpu_only",
+    "initial_failed_attempt",
+    "successful_attempts",
+    "method_limits"
+  ],
+  "title": "Derivation",
+  "type": "object"
+}

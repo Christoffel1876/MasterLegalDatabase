@@ -1,0 +1,86 @@
+{
+  "$defs": {
+    "Crop": {
+      "additionalProperties": false,
+      "description": "Exact top-left pixel rectangle and both byte identities.",
+      "properties": {
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "image_path": {
+          "title": "Image Path",
+          "type": "string"
+        },
+        "image_sha256": {
+          "title": "Image Sha256",
+          "type": "string"
+        },
+        "rectangle": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Rectangle",
+          "type": "array"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "page",
+        "image_path",
+        "image_sha256",
+        "rectangle",
+        "path",
+        "sha256"
+      ],
+      "title": "Crop",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Local crop generation, distinct from subsequent inspection.",
+  "properties": {
+    "created_at": {
+      "title": "Created At",
+      "type": "string"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "crops": {
+      "items": {
+        "$ref": "#/$defs/Crop"
+      },
+      "title": "Crops",
+      "type": "array"
+    }
+  },
+  "required": [
+    "created_at",
+    "method",
+    "crops"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

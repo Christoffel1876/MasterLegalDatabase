@@ -1,0 +1,228 @@
+{
+  "completed_at": "2026-09-13T16:11:11.558444Z",
+  "status": "inventory_supplement_validated_no_legal_promotion",
+  "previous_counts": [
+    64,
+    27,
+    37
+  ],
+  "current_counts": [
+    67,
+    30,
+    37
+  ],
+  "raw_manifest_records": 67,
+  "intake_ledger_records": 68,
+  "unchanged_authority_joins": 64,
+  "unchanged_review_joins": 27,
+  "new_authorities": [
+    "gunnison-building-fees-resolution-2025-24-sh-ext-003",
+    "gunnison-building-code-resolution-2023-22-sh-ext-003",
+    "gunnison-iwuic-resolution-2022-33-sh-ext-003"
+  ],
+  "new_reviews": [
+    "el-paso-boh-ehs-fees-spanish-sd011",
+    "el-paso-boh-bylaws-spanish-sd011",
+    "gunnison-building-fees-resolution-2025-24-sh-ext-003"
+  ],
+  "new_allowlist_entries": {
+    "a72178f3e772c6c9e8ff99869c37af57491d334a71b1dd1b3d9908c32cb0b12f": "checked_tables",
+    "ac4dbc9e55528f36d9ec21ffc12e040a5b3e237e0afcbf4842ce074b26fc776c": "checked_passages",
+    "d18073c509964d2a78ce0fd226d61dadec8fe03f5dfa88c00a05ed158c4f0d19": "checked_passages"
+  },
+  "focused_tests_passed": 112,
+  "branch_inclusive_module_coverage": 99.25373134328358,
+  "actual_check_passed": true,
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 /private/tmp/geode-status-venv/bin/python -B -m geode.pipeline.manual_review_inventory --root . --write",
+    "PYTHONDONTWRITEBYTECODE=1 COVERAGE_FILE=/private/tmp/pop-inventory-sep13-coverage /private/tmp/geode-status-venv/bin/python -B -m pytest -q -p no:cacheprovider tests/test_manual_review_inventory.py --cov=geode.pipeline.manual_review_inventory --cov-branch --cov-report=term-missing --cov-report=json:/private/tmp/pop-inventory-sep13-coverage.json",
+    "PYTHONDONTWRITEBYTECODE=1 /private/tmp/geode-status-venv/bin/python -B -m geode.pipeline.manual_review_inventory --root . --check"
+  ],
+  "final_artifacts": [
+    {
+      "path": "geode/pipeline/manual_review_inventory.py",
+      "sha256": "9ed83bdb2509bcc74cf08547bffaccdfa6a0bdaf154d82079d2ac2ed5acf6925",
+      "size_bytes": 22036
+    },
+    {
+      "path": "tests/test_manual_review_inventory.py",
+      "sha256": "66016115d9a08f0d18d49b845ee597120d3bd0f238834bfcf34511ea2bf40b55",
+      "size_bytes": 56573
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/join-plan.json",
+      "sha256": "a4fef6d879f813d96915ce1f7ef9b8a44b0c19d0a9f957f0d87fbc936967fe10",
+      "size_bytes": 126915
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/join-plan.schema.json",
+      "sha256": "be55b2c14ea3fa714ffdd4f2b7bf3e6db2374c0425a82c51725874f0a9d351b5",
+      "size_bytes": 6962
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/inventory.json",
+      "sha256": "307707784547e0f6c8b7f77c6182e78eec6c3cf209685a36f867ec802cfd1115",
+      "size_bytes": 2105170
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/inventory.schema.json",
+      "sha256": "4418485d2a0dfe3a4e9f9a6a392a4309bae9774dc1c2a9c1ff8ed8479ec34f14",
+      "size_bytes": 9654
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/README.md",
+      "sha256": "c11e94a40d3720b2084415bfeba27d20478fd6d4f40332a9b3c48c4e384d3cfe",
+      "size_bytes": 10806
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/integration-2026-09-13/tests.log",
+      "sha256": "83fc450b4b3d0a3de3bb30febfd8b926f883bf949561e5464570f5989d6530dd",
+      "size_bytes": 851
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/integration-2026-09-13/coverage.json",
+      "sha256": "afb4d6334a39f7ef31c246c47efc56cac9e1bb591c6e761177ee8c0b325c4cbb",
+      "size_bytes": 24736
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/integration-2026-09-13/check.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/integration-2026-09-13/check.stderr.txt",
+      "sha256": "df4cf56c63bcc05745d8a498c6225edaa741d992cae7325ff6063775fbcd9c2d",
+      "size_bytes": 80
+    }
+  ],
+  "preimages": [
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/_SNAPSHOTS/BEFORE_GUNNISON_SPANISH_2026-09-13/implementation/geode/pipeline/manual_review_inventory.py",
+      "sha256": "47cf0fec86218b6909825196e055fbb8b8c5d4777df3e6f6f1b31b46f5a22c88",
+      "size_bytes": 21762
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/_SNAPSHOTS/BEFORE_GUNNISON_SPANISH_2026-09-13/implementation/tests/test_manual_review_inventory.py",
+      "sha256": "34c155815d36ddf0aa57b0bbbed2e398039aaa2e830139e38ed5146c2c4d4537",
+      "size_bytes": 46683
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/_SNAPSHOTS/BEFORE_GUNNISON_SPANISH_2026-09-13/join-plan.json",
+      "sha256": "38a414a2ed538349c07b22e2eada229babdaf1c33381c8676df4dcd5ca085704",
+      "size_bytes": 116445
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/_SNAPSHOTS/BEFORE_GUNNISON_SPANISH_2026-09-13/join-plan.schema.json",
+      "sha256": "be55b2c14ea3fa714ffdd4f2b7bf3e6db2374c0425a82c51725874f0a9d351b5",
+      "size_bytes": 6962
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/_SNAPSHOTS/BEFORE_GUNNISON_SPANISH_2026-09-13/inventory.json",
+      "sha256": "9bab20a523dccec8cf8438dfcef041045fb7e0c79f4edcf1ddd2bb4d8c8c7911",
+      "size_bytes": 1601695
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/_SNAPSHOTS/BEFORE_GUNNISON_SPANISH_2026-09-13/inventory.schema.json",
+      "sha256": "4418485d2a0dfe3a4e9f9a6a392a4309bae9774dc1c2a9c1ff8ed8479ec34f14",
+      "size_bytes": 9654
+    },
+    {
+      "path": "research/local_review/manual-source-review-inventory-2026-09-11/_SNAPSHOTS/BEFORE_GUNNISON_SPANISH_2026-09-13/README.md",
+      "sha256": "d42b7e7545971e9c7bf361908f82f3212bb8321143ec8e46e896d622bbe22f68",
+      "size_bytes": 9767
+    }
+  ],
+  "unchanged_inputs": [
+    {
+      "path": "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+      "sha256": "c0920acc249b795610132fa10df18bd912d9eb55e1e6d985ab8794feea4236f8",
+      "size_bytes": 150219
+    },
+    {
+      "path": "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl",
+      "sha256": "b83f729642af539eb2e66d2d3d4277cafa139bee1058607fa67dde482a93b204",
+      "size_bytes": 151455
+    },
+    {
+      "path": "_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+      "sha256": "ad27514fe91659c9914780c7d3e69e48ace742bc31ad67d9c3a3c99945aecde3",
+      "size_bytes": 2066981
+    }
+  ],
+  "accepted_qa_inputs": [
+    {
+      "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/ACCEPTANCE.json",
+      "sha256": "af6610851a22c3b922fd0400408825594c11038a3f645f6492d8e6df02dab6a8",
+      "size_bytes": 2576
+    },
+    {
+      "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/ACCEPTANCE.schema.json",
+      "sha256": "33e56ef6cd5b374cde3f9519d87f136fa980e2b3cbf9e2d4acc6cd120bd8b1ea",
+      "size_bytes": 2932
+    },
+    {
+      "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/source-review/received/SOURCE_QA.json",
+      "sha256": "2372e6bde1fa544c56dbaed1a808a7389bf943006f8d2d4c65dd5fa10a8ad46f",
+      "size_bytes": 154874
+    },
+    {
+      "path": "research/local_review/eb025-spanish-ehs-fees-source-qa-2026-09-13/source-review/received/SOURCE_QA.schema.json",
+      "sha256": "a72178f3e772c6c9e8ff99869c37af57491d334a71b1dd1b3d9908c32cb0b12f",
+      "size_bytes": 12295
+    },
+    {
+      "path": "research/local_review/eb026-spanish-bylaws-source-qa-2026-09-13/ACCEPTANCE.json",
+      "sha256": "00f1b9a610e3f65ca7a9e29662d1fb20738012110e439cb687463918fc072ba7",
+      "size_bytes": 2446
+    },
+    {
+      "path": "research/local_review/eb026-spanish-bylaws-source-qa-2026-09-13/ACCEPTANCE.schema.json",
+      "sha256": "33e56ef6cd5b374cde3f9519d87f136fa980e2b3cbf9e2d4acc6cd120bd8b1ea",
+      "size_bytes": 2932
+    },
+    {
+      "path": "research/local_review/eb026-spanish-bylaws-source-qa-2026-09-13/source-review/SOURCE_QA.json",
+      "sha256": "fff90226a2dd0c213b551f7f1345bfd87f1eabfd55107243a6c60c30e708a556",
+      "size_bytes": 191535
+    },
+    {
+      "path": "research/local_review/eb026-spanish-bylaws-source-qa-2026-09-13/source-review/SOURCE_QA.schema.json",
+      "sha256": "ac4dbc9e55528f36d9ec21ffc12e040a5b3e237e0afcbf4842ce074b26fc776c",
+      "size_bytes": 17513
+    },
+    {
+      "path": "research/local_review/gunnison-building-fees-source-qa-2026-09-13/ACCEPTANCE.json",
+      "sha256": "5623b12220710630f6197fe26f769fd0b27bca19dcaa1b1584606a3e92eb071d",
+      "size_bytes": 2623
+    },
+    {
+      "path": "research/local_review/gunnison-building-fees-source-qa-2026-09-13/ACCEPTANCE.schema.json",
+      "sha256": "33e56ef6cd5b374cde3f9519d87f136fa980e2b3cbf9e2d4acc6cd120bd8b1ea",
+      "size_bytes": 2932
+    },
+    {
+      "path": "research/local_review/gunnison-building-fees-source-qa-2026-09-13/source-review/SOURCE_QA.json",
+      "sha256": "ed1643f0c1cb4693d9275f92d54ac6fa6c86b47ef1ab96d3328a564b512f6ff2",
+      "size_bytes": 66062
+    },
+    {
+      "path": "research/local_review/gunnison-building-fees-source-qa-2026-09-13/source-review/SOURCE_QA.schema.json",
+      "sha256": "d18073c509964d2a78ce0fd226d61dadec8fe03f5dfa88c00a05ed158c4f0d19",
+      "size_bytes": 10254
+    }
+  ],
+  "scope_notes": [
+    "Counts are source custody rows and explicitly mapped review artifacts, not legal rule counts or complete local coverage.",
+    "Prior 64 authority and 27 review joins remain unchanged. Of the previous 64 source rows, only two existing Spanish-source review fields change; tests remove only those exact pinned reviews for historical equality comparisons.",
+    "All old checkpoint assertions retain their historical counts. Only expectations for the current operational inventory changed to 67/30/37.",
+    "Gunnison source custody is received_review_package; official_source_url and verified HTTP acquisition remain null. Actual repository receipt 2026-09-13T15:57:35.577123Z is distinct from supplied 02:18 HTTP times.",
+    "The three-page Gunnison fee QA is checked_passages: 34 blocks and 12 prose/bullet fee components. Native text is empty on all pages. OCR and reviewed-transcript offsets are distinct derived evidence.",
+    "EB025 has six unresolved footer-year certifications and no verified translation equivalence. EB026 date fields remain null and its initial review excludes external reports and English comparison.",
+    "All source QA bytes and root acceptances were only read and hash/schema checked. Review status and custody wording recorded before later acceptance/intake remain unchanged source history.",
+    "Automatic overwrite snapshots additionally exist under the repository and package _SNAPSHOTS. The seven preimages bound here are the complete explicit baseline for this integration.",
+    "No full suite, commit, push, raw-byte mutation, intake reconciliation, network or coverage-ledger update performed."
+  ],
+  "public_requests": 0,
+  "canonical_raw_changes": 0,
+  "coverage_ledger_changes": 0
+}

@@ -1,0 +1,686 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Cell": {
+      "additionalProperties": false,
+      "properties": {
+        "column_id": {
+          "title": "Column Id",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "native_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Native Text"
+        },
+        "glyph_bbox": {
+          "anyOf": [
+            {
+              "maxItems": 4,
+              "minItems": 4,
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Glyph Bbox"
+        },
+        "annotation": {
+          "title": "Annotation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "column_id",
+        "evidence",
+        "native_text",
+        "glyph_bbox",
+        "annotation"
+      ],
+      "title": "Cell",
+      "type": "object"
+    },
+    "Context": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "evidence": {
+          "$ref": "#/$defs/Span"
+        },
+        "applies_to": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Applies To",
+          "type": "array"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "page",
+        "evidence",
+        "applies_to",
+        "note"
+      ],
+      "title": "Context",
+      "type": "object"
+    },
+    "Crop": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "clip": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Clip",
+          "type": "array"
+        },
+        "scale": {
+          "title": "Scale",
+          "type": "number"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "directly_viewed": {
+          "const": true,
+          "default": true,
+          "title": "Directly Viewed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "page",
+        "clip",
+        "scale",
+        "image"
+      ],
+      "title": "Crop",
+      "type": "object"
+    },
+    "HTMLObservation": {
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/Asset"
+        },
+        "snapshot_text": {
+          "$ref": "#/$defs/Asset"
+        },
+        "source_url": {
+          "title": "Source Url",
+          "type": "string"
+        },
+        "retrieved_at": {
+          "format": "date-time",
+          "title": "Retrieved At",
+          "type": "string"
+        },
+        "exact_claim": {
+          "title": "Exact Claim",
+          "type": "string"
+        },
+        "start_byte": {
+          "title": "Start Byte",
+          "type": "integer"
+        },
+        "end_byte": {
+          "title": "End Byte",
+          "type": "integer"
+        },
+        "claim_sha256": {
+          "title": "Claim Sha256",
+          "type": "string"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "snapshot_text",
+        "source_url",
+        "retrieved_at",
+        "exact_claim",
+        "start_byte",
+        "end_byte",
+        "claim_sha256",
+        "note"
+      ],
+      "title": "HTMLObservation",
+      "type": "object"
+    },
+    "Line": {
+      "additionalProperties": false,
+      "properties": {
+        "number": {
+          "title": "Number",
+          "type": "integer"
+        },
+        "bbox": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Bbox",
+          "type": "array"
+        },
+        "evidence": {
+          "$ref": "#/$defs/Span"
+        }
+      },
+      "required": [
+        "number",
+        "bbox",
+        "evidence"
+      ],
+      "title": "Line",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "related_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Related Ids",
+          "type": "array"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "finding": {
+          "title": "Finding",
+          "type": "string"
+        },
+        "treatment": {
+          "title": "Treatment",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "related_ids",
+        "evidence",
+        "finding",
+        "treatment"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "properties": {
+        "number": {
+          "title": "Number",
+          "type": "integer"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "layout": {
+          "$ref": "#/$defs/Asset"
+        },
+        "lines": {
+          "items": {
+            "$ref": "#/$defs/Line"
+          },
+          "title": "Lines",
+          "type": "array"
+        },
+        "directly_viewed": {
+          "const": true,
+          "default": true,
+          "title": "Directly Viewed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "number",
+        "native",
+        "image",
+        "layout",
+        "lines"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Row": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "table_id": {
+          "title": "Table Id",
+          "type": "string"
+        },
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "order": {
+          "title": "Order",
+          "type": "integer"
+        },
+        "source_lines": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Source Lines",
+          "type": "array"
+        },
+        "evidence": {
+          "$ref": "#/$defs/Span"
+        },
+        "cells": {
+          "items": {
+            "$ref": "#/$defs/Cell"
+          },
+          "title": "Cells",
+          "type": "array"
+        },
+        "parent_context_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Parent Context Ids",
+          "type": "array"
+        },
+        "annotation": {
+          "title": "Annotation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "table_id",
+        "page",
+        "order",
+        "source_lines",
+        "evidence",
+        "cells",
+        "parent_context_ids",
+        "annotation"
+      ],
+      "title": "Row",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "properties": {
+        "page": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "page",
+        "start",
+        "end",
+        "text",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    },
+    "Table": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "columns": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Columns",
+          "type": "array"
+        },
+        "row_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Row Ids",
+          "type": "array"
+        },
+        "context_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Context Ids",
+          "type": "array"
+        },
+        "authority_note": {
+          "title": "Authority Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "page",
+        "title",
+        "columns",
+        "row_ids",
+        "context_ids",
+        "authority_note"
+      ],
+      "title": "Table",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "review_id": {
+      "const": "ATLAS-MESA-PLANNING-FEES-2026-09-11",
+      "title": "Review Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-MESA",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_url": {
+      "title": "Source Url",
+      "type": "string"
+    },
+    "acquired_at": {
+      "format": "date-time",
+      "title": "Acquired At",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "engine_version": {
+      "const": "1.28.2",
+      "title": "Engine Version",
+      "type": "string"
+    },
+    "native_flags": {
+      "const": 195,
+      "title": "Native Flags",
+      "type": "integer"
+    },
+    "native_sort": {
+      "const": false,
+      "title": "Native Sort",
+      "type": "boolean"
+    },
+    "native_bytes": {
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "native_byte_changes": {
+      "const": 0,
+      "title": "Native Byte Changes",
+      "type": "integer"
+    },
+    "review_mode": {
+      "const": "atlas_candidate_aware_not_blind",
+      "title": "Review Mode",
+      "type": "string"
+    },
+    "external_assignment": {
+      "title": "External Assignment",
+      "type": "null"
+    },
+    "status": {
+      "const": "all_three_pages_source_rows_and_associations_reviewed",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "adoption_effectiveness": {
+      "const": "not_verified",
+      "title": "Adoption Effectiveness",
+      "type": "string"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "tables": {
+      "items": {
+        "$ref": "#/$defs/Table"
+      },
+      "title": "Tables",
+      "type": "array"
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/Row"
+      },
+      "title": "Rows",
+      "type": "array"
+    },
+    "contexts": {
+      "items": {
+        "$ref": "#/$defs/Context"
+      },
+      "title": "Contexts",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "html_claims": {
+      "items": {
+        "$ref": "#/$defs/HTMLObservation"
+      },
+      "title": "Html Claims",
+      "type": "array"
+    },
+    "crops": {
+      "items": {
+        "$ref": "#/$defs/Crop"
+      },
+      "title": "Crops",
+      "type": "array"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "review_id",
+    "authority_id",
+    "source",
+    "candidate",
+    "source_url",
+    "acquired_at",
+    "completed_at",
+    "engine_version",
+    "native_flags",
+    "native_sort",
+    "native_bytes",
+    "native_byte_changes",
+    "review_mode",
+    "external_assignment",
+    "status",
+    "legal_currentness",
+    "adoption_effectiveness",
+    "pages",
+    "tables",
+    "rows",
+    "contexts",
+    "observations",
+    "html_claims",
+    "crops",
+    "limits"
+  ],
+  "title": "Review",
+  "type": "object"
+}

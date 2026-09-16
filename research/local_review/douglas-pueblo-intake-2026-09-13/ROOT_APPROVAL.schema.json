@@ -1,0 +1,83 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "approved_at": {
+      "format": "date-time",
+      "title": "Approved At",
+      "type": "string"
+    },
+    "status": {
+      "const": "approved_for_exact_two_source_apply",
+      "title": "Status",
+      "type": "string"
+    },
+    "reviewer": {
+      "const": "Atlas root",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "transaction_sha256": {
+      "title": "Transaction Sha256",
+      "type": "string"
+    },
+    "package_manifest_sha256": {
+      "title": "Package Manifest Sha256",
+      "type": "string"
+    },
+    "independent_review": {
+      "$ref": "#/$defs/Ref"
+    },
+    "scope": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Scope",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "approved_at",
+    "status",
+    "reviewer",
+    "transaction_sha256",
+    "package_manifest_sha256",
+    "independent_review",
+    "scope",
+    "legal_currentness"
+  ],
+  "title": "Approval",
+  "type": "object"
+}

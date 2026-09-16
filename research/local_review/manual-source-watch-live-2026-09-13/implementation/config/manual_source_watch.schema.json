@@ -1,0 +1,268 @@
+{
+  "$defs": {
+    "Limits": {
+      "additionalProperties": false,
+      "description": "Hard maximums; tests or a revised reviewed plan may only narrow them.",
+      "properties": {
+        "requests": {
+          "default": 4,
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Requests",
+          "type": "integer"
+        },
+        "distinct_urls": {
+          "default": 4,
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Distinct Urls",
+          "type": "integer"
+        },
+        "redirects_per_source": {
+          "default": 1,
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Redirects Per Source",
+          "type": "integer"
+        },
+        "bytes_per_source": {
+          "default": 2000000,
+          "maximum": 2000000,
+          "minimum": 1,
+          "title": "Bytes Per Source",
+          "type": "integer"
+        },
+        "total_bytes": {
+          "default": 4000000,
+          "maximum": 4000000,
+          "minimum": 1,
+          "title": "Total Bytes",
+          "type": "integer"
+        },
+        "request_seconds": {
+          "default": 30,
+          "maximum": 30,
+          "minimum": 1,
+          "title": "Request Seconds",
+          "type": "integer"
+        }
+      },
+      "title": "Limits",
+      "type": "object"
+    },
+    "PriorLive": {
+      "additionalProperties": false,
+      "description": "Data-only pointers to an accepted finite check, not recurring-operation evidence.",
+      "properties": {
+        "report": {
+          "$ref": "#/$defs/Ref"
+        },
+        "report_schema": {
+          "$ref": "#/$defs/Ref"
+        },
+        "run_manifest": {
+          "$ref": "#/$defs/Ref"
+        },
+        "authorization": {
+          "$ref": "#/$defs/Ref"
+        }
+      },
+      "required": [
+        "report",
+        "report_schema",
+        "run_manifest",
+        "authorization"
+      ],
+      "title": "PriorLive",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Immutable confined local evidence identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "Target": {
+      "additionalProperties": false,
+      "description": "One canonical original, its actual intake record, and earlier official HTTP custody.",
+      "properties": {
+        "source_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Source Id",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "canonical_source_id": {
+          "title": "Canonical Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-MUNICIPAL-COLORADO_SPRINGS",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "baseline": {
+          "$ref": "#/$defs/Ref"
+        },
+        "baseline_page_count": {
+          "const": 7,
+          "title": "Baseline Page Count",
+          "type": "integer"
+        },
+        "baseline_request_started_at": {
+          "format": "date-time",
+          "title": "Baseline Request Started At",
+          "type": "string"
+        },
+        "baseline_response_finished_at": {
+          "format": "date-time",
+          "title": "Baseline Response Finished At",
+          "type": "string"
+        },
+        "repository_received_at": {
+          "format": "date-time",
+          "title": "Repository Received At",
+          "type": "string"
+        },
+        "intake_id": {
+          "title": "Intake Id",
+          "type": "string"
+        },
+        "raw_manifest_line_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Raw Manifest Line Sha256",
+          "type": "string"
+        },
+        "source_context": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Context",
+          "type": "array"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "url",
+        "canonical_source_id",
+        "authority_id",
+        "baseline",
+        "baseline_page_count",
+        "baseline_request_started_at",
+        "baseline_response_finished_at",
+        "repository_received_at",
+        "intake_id",
+        "raw_manifest_line_sha256",
+        "source_context"
+      ],
+      "title": "Target",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Fixed two-source selection; invocation limits do not install or imply scheduling.",
+  "properties": {
+    "targets": {
+      "items": {
+        "$ref": "#/$defs/Target"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Targets",
+      "type": "array"
+    },
+    "limits": {
+      "$ref": "#/$defs/Limits"
+    },
+    "max_run_seconds": {
+      "default": 300,
+      "maximum": 300,
+      "minimum": 1,
+      "title": "Max Run Seconds",
+      "type": "integer"
+    },
+    "status": {
+      "const": "configured_not_scheduled",
+      "title": "Status",
+      "type": "string"
+    },
+    "custody_scope": {
+      "$ref": "#/$defs/Ref"
+    },
+    "custody_schema": {
+      "$ref": "#/$defs/Ref"
+    },
+    "intake_acceptance": {
+      "$ref": "#/$defs/Ref"
+    },
+    "intake_receipt": {
+      "$ref": "#/$defs/Ref"
+    },
+    "prior_live": {
+      "$ref": "#/$defs/PriorLive"
+    },
+    "automatic_baseline_updates": {
+      "const": false,
+      "default": false,
+      "title": "Automatic Baseline Updates",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Qualifications",
+      "type": "array"
+    }
+  },
+  "required": [
+    "targets",
+    "status",
+    "custody_scope",
+    "custody_schema",
+    "intake_acceptance",
+    "intake_receipt",
+    "prior_live",
+    "qualifications"
+  ],
+  "title": "Plan",
+  "type": "object"
+}

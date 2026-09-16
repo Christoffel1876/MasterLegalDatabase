@@ -1,0 +1,108 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "reviewer": {
+      "const": "Atlas",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "installed_metadata_integration_reviewed",
+      "title": "Status",
+      "type": "string"
+    },
+    "manifests": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Manifests",
+      "type": "array"
+    },
+    "sources": {
+      "const": 70,
+      "title": "Sources",
+      "type": "integer"
+    },
+    "reviewed": {
+      "const": 35,
+      "title": "Reviewed",
+      "type": "integer"
+    },
+    "unmapped": {
+      "const": 35,
+      "title": "Unmapped",
+      "type": "integer"
+    },
+    "checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "reviewer",
+    "recorded_at",
+    "status",
+    "manifests",
+    "sources",
+    "reviewed",
+    "unmapped",
+    "checks",
+    "limitations",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Decision",
+  "type": "object"
+}

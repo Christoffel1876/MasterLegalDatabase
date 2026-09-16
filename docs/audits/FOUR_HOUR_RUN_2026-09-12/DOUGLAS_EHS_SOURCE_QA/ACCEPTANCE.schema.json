@@ -1,0 +1,100 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "reviewer": {
+      "const": "Atlas",
+      "default": "Atlas",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "accepted_at": {
+      "title": "Accepted At",
+      "type": "string"
+    },
+    "status": {
+      "const": "accepted_source_qa_pending_intake",
+      "default": "accepted_source_qa_pending_intake",
+      "title": "Status",
+      "type": "string"
+    },
+    "package": {
+      "$ref": "#/$defs/Asset"
+    },
+    "root_validation": {
+      "$ref": "#/$defs/Asset"
+    },
+    "copied_files": {
+      "const": 65,
+      "default": 65,
+      "title": "Copied Files",
+      "type": "integer"
+    },
+    "checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "accepted_at",
+    "package",
+    "root_validation",
+    "checks",
+    "limitations"
+  ],
+  "title": "Acceptance",
+  "type": "object"
+}

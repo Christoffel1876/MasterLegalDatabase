@@ -1,0 +1,69 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "inventory_version": {
+      "const": 1,
+      "title": "Inventory Version",
+      "type": "integer"
+    },
+    "source_id": {
+      "const": "weld-building-fees-sd008-01",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "excluded_inventory_self": {
+      "const": "evidence-manifest.json",
+      "title": "Excluded Inventory Self",
+      "type": "string"
+    },
+    "limits": {
+      "const": "Hashes establish byte integrity, not legal currentness or independent human accuracy.",
+      "title": "Limits",
+      "type": "string"
+    }
+  },
+  "required": [
+    "inventory_version",
+    "source_id",
+    "files",
+    "excluded_inventory_self",
+    "limits"
+  ],
+  "title": "Inventory",
+  "type": "object"
+}

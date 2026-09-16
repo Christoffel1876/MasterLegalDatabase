@@ -1,0 +1,99 @@
+{
+  "$defs": {
+    "ExactTarget": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "expected_historical_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Expected Historical Sha256"
+        },
+        "historical_reference": {
+          "title": "Historical Reference",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "url",
+        "expected_historical_sha256",
+        "historical_reference"
+      ],
+      "title": "ExactTarget",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "targets": {
+      "items": {
+        "$ref": "#/$defs/ExactTarget"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "title": "Targets",
+      "type": "array"
+    },
+    "max_requests": {
+      "const": 4,
+      "default": 4,
+      "title": "Max Requests",
+      "type": "integer"
+    },
+    "max_redirects": {
+      "const": 0,
+      "default": 0,
+      "title": "Max Redirects",
+      "type": "integer"
+    },
+    "max_body_per_request": {
+      "const": 2097152,
+      "default": 2097152,
+      "title": "Max Body Per Request",
+      "type": "integer"
+    },
+    "per_request_seconds": {
+      "const": 25,
+      "default": 25,
+      "title": "Per Request Seconds",
+      "type": "integer"
+    },
+    "max_execution_seconds": {
+      "const": 180,
+      "default": 180,
+      "title": "Max Execution Seconds",
+      "type": "integer"
+    },
+    "historical_claims_unmodified": {
+      "const": true,
+      "default": true,
+      "title": "Historical Claims Unmodified",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "targets"
+  ],
+  "title": "Plan",
+  "type": "object"
+}

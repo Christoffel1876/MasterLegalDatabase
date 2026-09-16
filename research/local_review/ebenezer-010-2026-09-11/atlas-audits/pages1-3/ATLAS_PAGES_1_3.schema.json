@@ -1,0 +1,163 @@
+{
+  "$defs": {
+    "PageCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image_sha256": {
+          "title": "Image Sha256",
+          "type": "string"
+        },
+        "native_sha256": {
+          "title": "Native Sha256",
+          "type": "string"
+        },
+        "source_image_inspected": {
+          "const": true,
+          "default": true,
+          "title": "Source Image Inspected",
+          "type": "boolean"
+        },
+        "native_compared": {
+          "const": true,
+          "default": true,
+          "title": "Native Compared",
+          "type": "boolean"
+        },
+        "findings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Findings",
+          "type": "array"
+        },
+        "preserved_source_observations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Preserved Source Observations",
+          "type": "array"
+        },
+        "segments_in_source_order": {
+          "items": {
+            "$ref": "#/$defs/Segment"
+          },
+          "title": "Segments In Source Order",
+          "type": "array"
+        },
+        "corrected_ordered_native_text": {
+          "title": "Corrected Ordered Native Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image_sha256",
+        "native_sha256",
+        "findings",
+        "preserved_source_observations",
+        "segments_in_source_order",
+        "corrected_ordered_native_text"
+      ],
+      "title": "PageCheck",
+      "type": "object"
+    },
+    "Segment": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "original_start_byte": {
+          "minimum": 0,
+          "title": "Original Start Byte",
+          "type": "integer"
+        },
+        "original_end_byte_exclusive": {
+          "minimum": 0,
+          "title": "Original End Byte Exclusive",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "original_start_byte",
+        "original_end_byte_exclusive",
+        "text"
+      ],
+      "title": "Segment",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source_pdf_sha256": {
+      "title": "Source Pdf Sha256",
+      "type": "string"
+    },
+    "candidate_sha256": {
+      "title": "Candidate Sha256",
+      "type": "string"
+    },
+    "manifest_sha256": {
+      "title": "Manifest Sha256",
+      "type": "string"
+    },
+    "inspected_at": {
+      "title": "Inspected At",
+      "type": "string"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "external_report_consulted": {
+      "const": false,
+      "default": false,
+      "title": "External Report Consulted",
+      "type": "boolean"
+    },
+    "status": {
+      "const": "pages_1_3_source_checked_remaining_pages_separate",
+      "default": "pages_1_3_source_checked_remaining_pages_separate",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/PageCheck"
+      },
+      "title": "Pages",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_id",
+    "source_pdf_sha256",
+    "candidate_sha256",
+    "manifest_sha256",
+    "inspected_at",
+    "method",
+    "pages"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

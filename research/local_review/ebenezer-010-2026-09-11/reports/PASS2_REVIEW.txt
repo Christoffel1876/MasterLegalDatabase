@@ -1,0 +1,133 @@
+# PASS 2 — Candidate vs Image Comparison (EB-PDF-010)
+
+## 1. Metadata
+
+| Field | Value |
+| :--- | :--- |
+| assignment_id | EB-PDF-010 |
+| source_id | larimer-development-review-fees-sd004-07 |
+| expected_pages | 7 |
+| utc_pass2_start | 2026-09-11T18:35:20Z |
+| utc_pass2_end | 2026-09-11T18:39:20Z |
+| status | completed_pending_atlas_verification |
+| legal_currentness | not_verified |
+| candidate_status | machine_native_text_unreviewed |
+| candidate_engine | PyMuPDF native text (NOT OCR) |
+| reviewer | Ebenezer (Grok Bot) |
+| pass | PASS2 |
+| prior_materials_used | PASS1_frozen.md (read-only aid; not edited); PASS1_NOTES.md; candidate.txt; page-0001.png…page-0007.png + Pillow crops (Pass1 crops/ + crops_p2/) |
+| native_evidence_json | not_opened |
+
+## 2. Hash references
+
+| Asset | SHA-256 | Role / notes |
+| :--- | :--- | :--- |
+| packet manifest | 36dcce0e4b4712069e663a7950c1c21ebd2ef31dc6a53321b0a59ba72cc59db4 | cited |
+| original.pdf | 752dec4468ad92f5895a7af53ad0451b21517fb390212dc76b5f358f15fec64b | cited (file not required in workdir this pass) |
+| page-0001.png | 4b194f91bb827fbd1be2b6af014f12920378c63a553dd03e2593c7d570fce8de | verified match this pass |
+| page-0002.png | 3004b43481dc1d56351d7d27a4132b60e13fcdb7a5d6b68e5aa1134f94c6a298 | verified match this pass |
+| page-0003.png | c3c26a92d936b4ee4ae3d1a0bd68c70ec04aa0be2c5e664eba289e70fff51fd1 | verified match this pass |
+| page-0004.png | 6a79297beb7b86f5fd79edf488ed5c680d1061095323782d458ca7f7cf3661a0 | verified match this pass |
+| page-0005.png | 0e459d42dc39789671608cdcb65a76ea02ee5b5be3faa7c2f5f54df3bb928a09 | verified match this pass |
+| page-0006.png | 26c6c9d41fa9baa8e0b4a52fc2dedaaa5b6ff2a8db3607935d9b53d11e266509 | verified match this pass |
+| page-0007.png | 220cd68c8362590cc4a9ad3a488716e2eb691725077bd88db50e4444a34ff0d7 | verified match this pass |
+| candidate.txt | 10e1a99cc47fdf2bbd3e42b5a17577efc975b4c36c94dc3f8f7090a195c55f04 | **verified** this pass (sha256sum) |
+| PASS1_frozen.md | 4d09b7ad779833818e0d53ae09f0207b7ae951534ff63699bc07b17316679ff7 | **unchanged**; verified; **not edited** |
+
+## 3. Image-viewing method / limits
+
+- Compared `candidate.txt` (PyMuPDF native text, `machine_native_text_unreviewed`) to all **seven** page PNGs.
+- Page images inspected with the **Read** tool (returns **caption-mediated** vision descriptions — **not** source quotations and **not** OCR) plus **Pillow crops** of disputed/dense regions (intro `its'`, ALA dual `$550.36` rows, 1041/appeals/determination amounts, LAND DIVISION Final Plat `$7,881.22` vs `$7,881.21`, Special Review - Major uses list, ZCR `principle` + utility note, planning MISCELLANEOUS incl. Location and Extent note + `$726.47`, ENGINEERING FEES blocks, BFPD/LFRA/PFA/LCSO, CGS subdivisions + Special Review paragraph, special-event tier fees + Tier 3 transit bullet).
+- **Caption mediation disclosed:** captions can truncate, invent, or inject context. Known mediation noise this pass: one crop briefly read Location and Extent Administrative Amendment as `$728.47` (rejected; tight amount-column + `p4_b` confirm `$726.47`); one CGS paragraph crop said “referred to PSD” (rejected; `p6_b` / majority confirm “referred to CGS”); one Major-uses crop briefly invented “(Commercial)” on RV Park (rejected; uses-end crop shows `Park/Campground`). Captions are never treated as authoritative verbatim source text.
+- Page markers `===== PHYSICAL PDF PAGE … =====` in candidate are **packaging only**, not printed source text.
+- PASS1_frozen used only as a **finder aid**; neither PASS1 nor candidate was assumed correct when they agree or disagree — image pixels (via Read+crops) decide.
+- Source anomalies are **preserved**, not “fixed” (`its'`; `principle`; dual ALA `$550.36`; Final Plat `$7,881.22` vs `$7,881.21`; Tier 3 missing `)` after “transit”; two **MISCELLANEOUS** headers; PFA asymmetry vs LFRA).
+- `legal_currentness: not_verified`. Printed “EFFECTIVE JULY 1, 2026” reported as printed only.
+- Did **not** open native-evidence JSON. Did **not** modify PASS1_frozen.md, source images, or candidate.txt.
+
+## 4. Page coverage
+
+| Physical page | File | Candidate section present | Image+crops re-inspected | Compared | Notes |
+| :---: | :--- | :---: | :---: | :---: | :--- |
+| 1 | page-0001.png | YES | YES (full + intro/ALA/1041/appeals/determination crops) | YES | Fee **amounts** match; header+intro reading-order after tables |
+| 2 | page-0002.png | YES | YES (full + LAND DIVISION labels/amounts + Final Plat pair + rez/site) | YES | **Critical** subgroup-header displacement (see findings) |
+| 3 | page-0003.png | YES | YES (full + SR/Major uses + ZCR principle/util) | YES | **Critical** uses-list displacement; amounts match |
+| 4 | page-0004.png | YES | YES (full + planning MISC + Location note/`$726.47` + ENGINEERING) | YES | **Critical** exemption-note displacement; dual MISC headers preserved |
+| 5 | page-0005.png | YES | YES (full body BFPD/LFRA/PFA/LCSO) | YES | Referral fees match; Scope Fee labels reading-order drift |
+| 6 | page-0006.png | YES | YES (CGS top/subdivisions/paragraph/lower blank) | YES | **Critical** Special Review rate vs Initial note association |
+| 7 | page-0007.png | YES | YES (tier fees + footnote + Tier1–3 characteristics / transit) | YES | Tier↔fee label reading-order; missing `)` preserved |
+
+**Coverage statement:** All 7 physical pages compared in both Pass 1 (frozen) and Pass 2. Stop after 010.
+
+## 5. Findings
+
+| finding_id | physical_page | location | candidate_text | text_visibly_supported_by_image | proposed_correction_or_alternatives | error_type | severity | explanation |
+| :--- | :---: | :--- | :--- | :---: | :--- | :--- | :--- | :--- |
+| EB010-P2-001 | 2 | LAND DIVISION hierarchy | `Administrative Subdivision` then Sketch/Final, then second Sketch/Preliminary/Final/`Additional Processes`, with `Subdivision, Conservation Development, Planned Land Division, Rural Land Use` emitted **at page end** after SITE PLAN | no (order) | Place the Subdivision/CD/PLD/RLU header **immediately after** Administrative Subdivision’s Final Plat `$7,881.22` and **before** the second Sketch Plan `$2,262.92` block | reading_order | critical | Image shows two peer Level-1 groups under LAND DIVISION. Native stream orphans the second group header at EOF, so Preliminary Plat / `$7,881.21` Final Plat / Additional Processes falsely appear under Administrative Subdivision. |
+| EB010-P2-002 | 3 | Special Review - Major uses list | Uses paragraph (`For the following Uses: Airport… Seasonal Camp`) emitted **after** ZONING COMPLIANCE REVIEW block | no (order) | Keep uses list immediately under `Special Review - Major` / `$7,337.70` (before VARIANCE) | reading_order | critical | Image places the uses list under Special Review - Major. Candidate dumps it at page end after Utility permits, breaking Major↔uses binding. Word content itself matches (Park/Campground; lead-in “For the following Uses:”). |
+| EB010-P2-003 | 4 | Location and Extent Review exemption note | `(Projects funded by the Larimer County General Fund are exempt from this fee.)` appears after second **MISCELLANEOUS** / Temporary Permit for Public Construction Site, not under Location and Extent Review | no (order) | Bind note immediately under `Location and Extent Review` / `$1,971.23` (before Location and Extent Administrative Amendment `$726.47`) | reading_order / scope | critical | Image/`p4_b` show the General Fund exemption under Location and Extent Review. Candidate places it beside Engineering Temporary Permit, inviting wrong fee exemption scope. |
+| EB010-P2-004 | 6 | CGS Initial Submittal note vs Special Review rate | `Applies to all projects submitted to CGS…` appears after `Special Review` label; `Hourly Rate, TBD by CGS` appears near page end after CONTINUED header | no (order) | Keep “Applies to all…” under `Initial Submittal and Resubmittal` / `$125`; keep `Hourly Rate, TBD by CGS` on the Special Review fee line | reading_order | critical | Image/`p6_top`+`p6_b`: Initial note under `$125`; Special Review fee is Hourly Rate TBD. Native stream swaps associations (note under Special Review; rate orphaned). |
+| EB010-P2-005 | 7 | SPECIAL EVENT PERMITS Tier labels vs fee rows / characteristics | Fee triples emitted without adjacent `Tier 1`/`Tier 2`/`Tier 3` headers; tier headers + people counts appear later near characteristics / page end | no (order) | Prefix each Standard/Non-Profit/Natural Resources fee triple with its Tier N header; keep characteristics table Event Type column adjacent to its bullet block | reading_order | critical | Image shows Tier 1→2→3 fee groups then Full Road Closure. Candidate lists nine fee lines then later dumps Tier labels, degrading Tier↔amount and Tier↔characteristics recoverability. |
+| EB010-P2-006 | 1 | Header + intro paragraph placement | Title / EFFECTIVE JULY 1, 2026 / department / contact / intro (`its'`) appear **after** general fees + 1041 + Admin/ALA + Appeals + start of Determination | no (order) | Emit header+intro first, then general fees, then section tables | reading_order | minor | All header/intro strings are present and match image (including `its'`); order only is wrong. |
+| EB010-P2-007 | 1 | DETERMINATION OF STATUS / Property Status Information | `$137.61` appears before `Property Status Information` and before `Lot Determination, Expanded Zoning Determination…` | no (order) | Order: Property Status Information header → Lot Determination… line → `$137.61` | reading_order | minor | Amount and labels present; association recoverable but inverted vs image. |
+| EB010-P2-008 | 3 | Special Review - Major uses list line breaks | Native fragments (`Feed`/`Yard`, `Golf`/`Course`, `Heliport, Correctional`/`Facility`, etc.) | partial | Prefer visual wrap: `…Country Club, Feed Yard, Golf Course, Heliport, Correctional Facility, Landfill (Private), Manufactured Housing Park, Mining Operation, Recreational Vehicle Park/Campground, Retreat, and Seasonal Camp` | table_alignment | minor | Tokens match image; over-fragmentation is extractor linearization, not wording error. |
+| EB010-P2-009 | 5 | BFPD/PFA Scope Fee label vs TBD | `TBD by BFPD` / `TBD by PFA` appear near district rows; two copies of `New commercial and residential development may be subject to an additional Scope Fee` appear near page end; `REFERRAL AGENCY FEES` header also at end | no (order) | Keep each Scope Fee sentence on the same row as its TBD; put REFERRAL AGENCY FEES above FIRE DISTRICT FEES | reading_order | minor | TBD tokens and Scope Fee wording are present twice as printed; pairing is weakened by late label dump. PFA still correctly lacks LFRA’s “Any Other… $100” row. |
+| EB010-P2-010 | 4 | ENGINEERING FEES title placement | `ENGINEERING FEES` emitted near page end after Temporary Permit / exemption note | no (order) | Centered title between planning Sign Permit and DEVELOPMENT CONSTRUCTION PERMIT | reading_order | minor | Title present; engineering section body amounts match. |
+| EB010-P2-011 | 6 | Page header placement | `REFERRAL AGENCY FEES, CONTINUED` near end | no (order) | Header at top of page above CGS | reading_order | minor | String present; body fees match. |
+| EB010-P2-012 | 2–7 | Hierarchical label↔amount linearization (general) | Many rows: label line then amount line (or amount before late label) | partial | Document as native two-column dump; pair by visual hierarchy when reconstructing | table_alignment | minor | Typical PyMuPDF behavior. Unlike EB010-P2-001…005, most on-page pairs remain unambiguous once headers are restored. |
+
+### Finding counts
+
+| Severity | Count |
+| :--- | ---: |
+| critical | 5 |
+| minor | 7 |
+| unresolved | 0 |
+
+## 6. PASS1 errata (PASS1_frozen.md not edited)
+
+| PASS1 locus | PASS1 statement | Pass 2 disposition |
+| :--- | :--- | :--- |
+| Uncertainties §4 / ALA comma | Majority omit comma on “Administrative or Board Approved (BCC)”; residual uncertainty | **Resolve: no comma.** Candidate + ALA crops match PASS1 majority. |
+| Uncertainties §10 / Special Review - Major lead-in | “For the following Uses:” vs “Applies to…” | **Resolve: `For the following Uses:`.** Uses-end crop + candidate agree. |
+| Uncertainties §6 / Tier 3 `)` | Closing `)` after “transit” not observed | **Confirm printed anomaly (missing `)`).** Candidate + `p7_t3bullets` / Tier3 crop: opens `(e.g.,` and ends at `transit` with no `)`. |
+| Uncertainties §9 / CGS “referred to CGS” | One crop said “referred to us” | **Confirm `referred to CGS`.** `p6_b` + candidate; reject Pass2 “PSD” caption mediation. |
+| Uncertainties §2 / 1041 Permit | Prefer `$8,755.46` | **Reconfirmed** (full page + amount crops); candidate agrees. |
+| Uncertainties §3 / Commercial ZCR | Prefer `$176.11` | **Reconfirmed** (`p2_p3_zcr_full`); candidate agrees. |
+| Uncertainties §8 / PFA asymmetry | No PFA “Any Other… $100”; has Scope Fee TBD | **Reconfirmed** (page-5 full body); candidate has no PFA Any Other string. |
+| Location and Extent Administrative Amendment amount | PASS1 `$726.47` | **Reconfirmed** (`p4_b` + amount column `$726.47`); reject `$728.47` caption hallucination. Candidate agrees. |
+| Page 5 / 6 / 7 structure & anomalies | Dual ALA; Final Plat 1¢; `its'`; `principle`; two MISC headers | **Confirmed vs image and candidate.** No PASS1 content errata required. |
+
+## 7. Agreements worth recording (esp. preserved anomalies)
+
+| Topic | Candidate | Image / PASS1 | Notes |
+| :--- | :--- | :--- | :--- |
+| Intro typo `its'` | `interest of its' residents` | Crop-confirmed | **Preserve** |
+| ZCR typo `principle` | `without a principle structure` | ZCR crop-confirmed | **Preserve** |
+| Dual ALA `$550.36` | Two sub-rows: Administrative or Board Approved (BCC); Board Approved (BCC) | ALA crops | **Preserve**; no comma |
+| Final Plat 1¢ difference | Admin Subdiv `$7,881.22`; Subdiv… `$7,881.21` | Amount-column crops | **Preserve** |
+| Tier 3 missing `)` | ends `major impacts to transit` | Tier3 / t3bullets crops | **Preserve** |
+| Two MISCELLANEOUS headers (p4) | planning block + engineering block | Image | **Preserve** |
+| PFA vs LFRA | LFRA has Any Other `$100`; PFA has Scope Fee TBD only | Page-5 body | **Preserve** asymmetry |
+| LCSO parenthetical | `(Wildfire)` | LCSO crop | Agreement (not Wildlife) |
+| 1041 / Appeals / Determination fees | `$8,755.46` … `$137.61` etc. | Match | Agreement |
+| ZCR fees | `$165.11` / `$165.11` / `$176.11` / `$137.60` / `$137.60` | Match | Agreement |
+| Engineering block fees | DCP / Flood / Vacation / Temp Permit `$880.58` | Match | Agreement |
+| CGS fee ladder | `$125` / `$600` / `$950` / `$1,550` / `$2,500` / `$855` / Hourly TBD | Match | Agreement |
+| Special event tier fees | T1 `$200/$100/$25`; T2 `$600/$200/$100`; T3 `$1,100/$500/$250`; Full Road `$500` | Match | Agreement |
+| Printed effective line | EFFECTIVE JULY 1, 2026 | Present | Printed only; `legal_currentness: not_verified` |
+| Signatures | none in candidate | none on images | Agreement |
+| Packaging markers | `===== PHYSICAL PDF PAGE N OF 7 =====` | not printed | Packaging only |
+
+## 8. Completion statement
+
+- **All 7 physical pages** were inspected against images in **Pass 1** (frozen blind transcript) and again in **Pass 2** (candidate vs image).
+- Candidate SHA-256 **verified** as `10e1a99cc47fdf2bbd3e42b5a17577efc975b4c36c94dc3f8f7090a195c55f04`.
+- PASS1_frozen SHA-256 **unchanged** at `4d09b7ad779833818e0d53ae09f0207b7ae951534ff63699bc07b17316679ff7` (not edited).
+- Status: `completed_pending_atlas_verification`.
+- `legal_currentness: not_verified`.
+- Critical findings are primarily **native reading-order / association** failures; fee **literals** and source anomalies largely agree with the images.
+- **Stop after 010** — no further assignments in this packet.
+
+---
+END PASS2

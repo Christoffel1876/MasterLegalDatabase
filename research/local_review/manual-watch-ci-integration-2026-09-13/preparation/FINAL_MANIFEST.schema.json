@@ -1,0 +1,58 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "An exact retained file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Close only the actual public payload tree.",
+  "properties": {
+    "kind": {
+      "const": "manual_watch_ci_publishable_revision",
+      "title": "Kind",
+      "type": "string"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "kind",
+    "prepared_at",
+    "files"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

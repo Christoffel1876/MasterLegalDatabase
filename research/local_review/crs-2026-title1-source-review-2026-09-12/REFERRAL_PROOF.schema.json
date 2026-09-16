@@ -1,0 +1,57 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "copied_from": {
+      "title": "Copied From",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        },
+        "type": "object"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "observed_pdf_url": {
+      "title": "Observed Pdf Url",
+      "type": "string"
+    },
+    "referral_anchor": {
+      "title": "Referral Anchor",
+      "type": "string"
+    },
+    "inherited_manifest_sha256": {
+      "title": "Inherited Manifest Sha256",
+      "type": "string"
+    },
+    "original_gap_preserved": {
+      "default": true,
+      "title": "Original Gap Preserved",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "copied_from",
+    "files",
+    "observed_pdf_url",
+    "referral_anchor",
+    "inherited_manifest_sha256"
+  ],
+  "title": "Proof",
+  "type": "object"
+}

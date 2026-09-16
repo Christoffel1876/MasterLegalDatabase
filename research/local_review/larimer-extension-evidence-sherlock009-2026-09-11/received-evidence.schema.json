@@ -1,0 +1,592 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "A normalized confined relative path and exact byte identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "FileRef": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    },
+    "InputBinding": {
+      "additionalProperties": false,
+      "description": "Original audit identity, with explicit copy/redaction/exclusion disposition.",
+      "properties": {
+        "original": {
+          "$ref": "#/$defs/Asset"
+        },
+        "historical_absolute_path": {
+          "title": "Historical Absolute Path",
+          "type": "string"
+        },
+        "disposition": {
+          "enum": [
+            "unchanged_copy",
+            "redacted_header",
+            "hash_only_excluded"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "local": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Asset"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "removed_header_fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Removed Header Fields",
+          "type": "array"
+        },
+        "original_bytes_recomputed_offline": {
+          "title": "Original Bytes Recomputed Offline",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "original",
+        "historical_absolute_path",
+        "disposition",
+        "local",
+        "reason",
+        "removed_header_fields",
+        "original_bytes_recomputed_offline"
+      ],
+      "title": "InputBinding",
+      "type": "object"
+    },
+    "ReviewedImage": {
+      "additionalProperties": false,
+      "description": "A prior visually inspected page image, with reproducible source rendering.",
+      "properties": {
+        "source_priority_id": {
+          "enum": [
+            "SD009-01",
+            "SD009-02",
+            "SD009-03"
+          ],
+          "title": "Source Priority Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "evidence_origin": {
+          "enum": [
+            "final_atlas_audit",
+            "root_precheck"
+          ],
+          "title": "Evidence Origin",
+          "type": "string"
+        },
+        "rendering_dpi": {
+          "const": 144,
+          "default": 144,
+          "title": "Rendering Dpi",
+          "type": "integer"
+        },
+        "pixel_reproduction_only": {
+          "const": true,
+          "default": true,
+          "title": "Pixel Reproduction Only",
+          "type": "boolean"
+        },
+        "new_visual_review_performed": {
+          "const": false,
+          "default": false,
+          "title": "New Visual Review Performed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "source_priority_id",
+        "physical_page",
+        "image",
+        "evidence_origin"
+      ],
+      "title": "ReviewedImage",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "description": "An unchanged received PDF and the exact qualified Atlas assessment.",
+      "properties": {
+        "assessment": {
+          "$ref": "#/$defs/SourceAssessment"
+        },
+        "artifact": {
+          "$ref": "#/$defs/Asset"
+        },
+        "artifact_storage_role": {
+          "const": "received_research_evidence_only",
+          "title": "Artifact Storage Role",
+          "type": "string"
+        },
+        "authenticated_publisher_original": {
+          "const": false,
+          "default": false,
+          "title": "Authenticated Publisher Original",
+          "type": "boolean"
+        },
+        "actual_original_acquisition_at": {
+          "default": null,
+          "title": "Actual Original Acquisition At",
+          "type": "null"
+        },
+        "verified_exact_download_endpoint": {
+          "default": null,
+          "title": "Verified Exact Download Endpoint",
+          "type": "null"
+        },
+        "manual_intake_record_created": {
+          "const": false,
+          "default": false,
+          "title": "Manual Intake Record Created",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "assessment",
+        "artifact",
+        "artifact_storage_role"
+      ],
+      "title": "Source",
+      "type": "object"
+    },
+    "SourceAssessment": {
+      "additionalProperties": false,
+      "properties": {
+        "priority_id": {
+          "enum": [
+            "SD009-01",
+            "SD009-02",
+            "SD009-03"
+          ],
+          "title": "Priority Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-LARIMER",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "file": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "pages": {
+          "minimum": 1,
+          "title": "Pages",
+          "type": "integer"
+        },
+        "inspected_physical_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 1,
+          "title": "Inspected Physical Pages",
+          "type": "array"
+        },
+        "claimed_requested_url": {
+          "title": "Claimed Requested Url",
+          "type": "string"
+        },
+        "claimed_final_url": {
+          "title": "Claimed Final Url",
+          "type": "string"
+        },
+        "provenance_class": {
+          "enum": [
+            "received_pdf_download_claim_not_http_verified",
+            "browser_print_derivative"
+          ],
+          "title": "Provenance Class",
+          "type": "string"
+        },
+        "exact_delivered_bytes_verified": {
+          "const": true,
+          "title": "Exact Delivered Bytes Verified",
+          "type": "boolean"
+        },
+        "exact_publisher_original_verified": {
+          "const": false,
+          "title": "Exact Publisher Original Verified",
+          "type": "boolean"
+        },
+        "acquisition_time": {
+          "title": "Acquisition Time",
+          "type": "null"
+        },
+        "role": {
+          "enum": [
+            "staff_recommendation",
+            "unsigned_extension_draft",
+            "board_minutes"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "metadata_notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Metadata Notes",
+          "type": "array"
+        },
+        "visible_source_findings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Visible Source Findings",
+          "type": "array"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "priority_id",
+        "authority_id",
+        "file",
+        "pages",
+        "inspected_physical_pages",
+        "claimed_requested_url",
+        "claimed_final_url",
+        "provenance_class",
+        "exact_delivered_bytes_verified",
+        "exact_publisher_original_verified",
+        "acquisition_time",
+        "role",
+        "metadata_notes",
+        "visible_source_findings",
+        "legal_currentness"
+      ],
+      "title": "SourceAssessment",
+      "type": "object"
+    },
+    "URLConflict": {
+      "additionalProperties": false,
+      "description": "Retained conflicting acquisition claims, not evidence of source replacement.",
+      "properties": {
+        "claimed_url": {
+          "const": "https://larimercoco.portal.civicclerk.com/event/2812/files/agenda/3563",
+          "title": "Claimed Url",
+          "type": "string"
+        },
+        "prior_event_id": {
+          "const": "SD007-B012",
+          "title": "Prior Event Id",
+          "type": "string"
+        },
+        "prior_recorded_sha256": {
+          "const": "15933b2bbfc05894ab6f6cc49b8f8e1c4490815036f6afab9b22c7dc2cdbf10e",
+          "title": "Prior Recorded Sha256",
+          "type": "string"
+        },
+        "prior_recorded_pages": {
+          "const": 194,
+          "title": "Prior Recorded Pages",
+          "type": "integer"
+        },
+        "prior_pdf_included": {
+          "const": false,
+          "title": "Prior Pdf Included",
+          "type": "boolean"
+        },
+        "prior_pdf_reopened_for_packaging": {
+          "const": false,
+          "title": "Prior Pdf Reopened For Packaging",
+          "type": "boolean"
+        },
+        "current_event_id": {
+          "const": "SD009-B005",
+          "title": "Current Event Id",
+          "type": "string"
+        },
+        "current_received_sha256": {
+          "const": "88e4c7dcceb70d55e286b809471da7531dc1f5493f080d4487a8988706d9f0bc",
+          "title": "Current Received Sha256",
+          "type": "string"
+        },
+        "current_structural_pages": {
+          "const": 20,
+          "title": "Current Structural Pages",
+          "type": "integer"
+        },
+        "exact_endpoint_verified": {
+          "const": false,
+          "title": "Exact Endpoint Verified",
+          "type": "boolean"
+        },
+        "source_replacement_inferred": {
+          "const": false,
+          "title": "Source Replacement Inferred",
+          "type": "boolean"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claimed_url",
+        "prior_event_id",
+        "prior_recorded_sha256",
+        "prior_recorded_pages",
+        "prior_pdf_included",
+        "prior_pdf_reopened_for_packaging",
+        "current_event_id",
+        "current_received_sha256",
+        "current_structural_pages",
+        "exact_endpoint_verified",
+        "source_replacement_inferred",
+        "note"
+      ],
+      "title": "URLConflict",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Qualified portable research evidence with all operative conclusions withheld.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "package_status": {
+      "const": "portable_received_research_evidence_pending_pipeline",
+      "title": "Package Status",
+      "type": "string"
+    },
+    "source_audit": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_final_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Sources",
+      "type": "array"
+    },
+    "reviewed_images": {
+      "items": {
+        "$ref": "#/$defs/ReviewedImage"
+      },
+      "maxItems": 20,
+      "minItems": 20,
+      "title": "Reviewed Images",
+      "type": "array"
+    },
+    "input_bindings": {
+      "items": {
+        "$ref": "#/$defs/InputBinding"
+      },
+      "title": "Input Bindings",
+      "type": "array"
+    },
+    "url_conflict": {
+      "$ref": "#/$defs/URLConflict"
+    },
+    "structural_pages": {
+      "const": 27,
+      "default": 27,
+      "title": "Structural Pages",
+      "type": "integer"
+    },
+    "distinct_pages_visually_inspected_in_prior_reviews": {
+      "const": 10,
+      "default": 10,
+      "title": "Distinct Pages Visually Inspected In Prior Reviews",
+      "type": "integer"
+    },
+    "full_minutes_transcription_certified": {
+      "const": false,
+      "default": false,
+      "title": "Full Minutes Transcription Certified",
+      "type": "boolean"
+    },
+    "consolidated_public_rows": {
+      "const": 12,
+      "default": 12,
+      "title": "Consolidated Public Rows",
+      "type": "integer"
+    },
+    "public_attempt_lower_bound": {
+      "const": 13,
+      "default": 13,
+      "title": "Public Attempt Lower Bound",
+      "type": "integer"
+    },
+    "exact_public_attempt_count": {
+      "default": null,
+      "title": "Exact Public Attempt Count",
+      "type": "null"
+    },
+    "cap_compliance_certified": {
+      "const": false,
+      "default": false,
+      "title": "Cap Compliance Certified",
+      "type": "boolean"
+    },
+    "literal_draft_effective_wording": {
+      "const": "August 25, 2025",
+      "title": "Literal Draft Effective Wording",
+      "type": "string"
+    },
+    "literal_draft_first_recital_date": {
+      "const": "April 7, 2026",
+      "title": "Literal Draft First Recital Date",
+      "type": "string"
+    },
+    "literal_draft_first_recital_reception": {
+      "const": "20260016505",
+      "title": "Literal Draft First Recital Reception",
+      "type": "string"
+    },
+    "final_february_instrument_supplied": {
+      "const": false,
+      "default": false,
+      "title": "Final February Instrument Supplied",
+      "type": "boolean"
+    },
+    "final_july_instrument_supplied": {
+      "const": false,
+      "default": false,
+      "title": "Final July Instrument Supplied",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "operative_law_promoted": {
+      "const": false,
+      "default": false,
+      "title": "Operative Law Promoted",
+      "type": "boolean"
+    },
+    "coverage_promoted": {
+      "const": false,
+      "default": false,
+      "title": "Coverage Promoted",
+      "type": "boolean"
+    },
+    "raw_or_control_records_changed": {
+      "const": false,
+      "default": false,
+      "title": "Raw Or Control Records Changed",
+      "type": "boolean"
+    },
+    "public_source_opens": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Source Opens",
+      "type": "integer"
+    },
+    "report_custody": {
+      "const": "complete_frozen_report_and_metadata_with_explicit_input_dispositions",
+      "title": "Report Custody",
+      "type": "string"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "package_status",
+    "source_audit",
+    "original_final_manifest",
+    "sources",
+    "reviewed_images",
+    "input_bindings",
+    "url_conflict",
+    "literal_draft_effective_wording",
+    "literal_draft_first_recital_date",
+    "literal_draft_first_recital_reception",
+    "report_custody",
+    "limits"
+  ],
+  "title": "PackageReview",
+  "type": "object"
+}

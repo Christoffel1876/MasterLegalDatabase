@@ -1,0 +1,41 @@
+{
+  "additionalProperties": false,
+  "description": "One budget slot reserved before any public request.",
+  "properties": {
+    "event_id": {
+      "title": "Event Id",
+      "type": "string"
+    },
+    "url": {
+      "title": "Url",
+      "type": "string"
+    },
+    "basis": {
+      "title": "Basis",
+      "type": "string"
+    },
+    "reserved_at": {
+      "format": "date-time",
+      "title": "Reserved At",
+      "type": "string"
+    },
+    "maximum_seconds": {
+      "title": "Maximum Seconds",
+      "type": "integer"
+    },
+    "maximum_bytes": {
+      "title": "Maximum Bytes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "event_id",
+    "url",
+    "basis",
+    "reserved_at",
+    "maximum_seconds",
+    "maximum_bytes"
+  ],
+  "title": "Reservation",
+  "type": "object"
+}

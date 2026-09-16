@@ -1,0 +1,62 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "One closed ordinary-file payload.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        },
+        "visibility": {
+          "enum": [
+            "ordinary_evidence",
+            "local_only_raw_cookie_headers"
+          ],
+          "title": "Visibility",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes",
+        "visibility"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Complete fixed input/output inventory, excluding this manifest alone.",
+  "properties": {
+    "status": {
+      "const": "diagnosis_complete_source_status_unresolved",
+      "title": "Status",
+      "type": "string"
+    },
+    "assets": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Assets",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "assets"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

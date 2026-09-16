@@ -1,0 +1,134 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An ordinary closed handoff file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Measured tests and bounded behavioral preservation, not installation acceptance.",
+  "properties": {
+    "status": {
+      "const": "prepared_tested_not_installed",
+      "title": "Status",
+      "type": "string"
+    },
+    "frozen_at": {
+      "format": "date-time",
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "predecessor_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "predecessor_disposition": {
+      "const": "held_for_confirmed_late_read_integrity_defect",
+      "title": "Predecessor Disposition",
+      "type": "string"
+    },
+    "focused_cases_passed": {
+      "const": 82,
+      "title": "Focused Cases Passed",
+      "type": "integer"
+    },
+    "combined_cases_passed": {
+      "const": 393,
+      "title": "Combined Cases Passed",
+      "type": "integer"
+    },
+    "combined_duration_seconds": {
+      "exclusiveMinimum": 0,
+      "title": "Combined Duration Seconds",
+      "type": "number"
+    },
+    "branch_inclusive_coverage_percent": {
+      "maximum": 100,
+      "minimum": 90,
+      "title": "Branch Inclusive Coverage Percent",
+      "type": "number"
+    },
+    "added_late_read_and_capture_cases": {
+      "const": 13,
+      "title": "Added Late Read And Capture Cases",
+      "type": "integer"
+    },
+    "existing_source_outputs_preserved": {
+      "const": 7,
+      "title": "Existing Source Outputs Preserved",
+      "type": "integer"
+    },
+    "old_declarations_preserved": {
+      "const": 69,
+      "title": "Old Declarations Preserved",
+      "type": "integer"
+    },
+    "implementation": {
+      "$ref": "#/$defs/Asset"
+    },
+    "tests": {
+      "$ref": "#/$defs/Asset"
+    },
+    "documentation": {
+      "$ref": "#/$defs/Asset"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "production_writes": {
+      "const": 0,
+      "title": "Production Writes",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "frozen_at",
+    "predecessor_manifest",
+    "predecessor_disposition",
+    "focused_cases_passed",
+    "combined_cases_passed",
+    "combined_duration_seconds",
+    "branch_inclusive_coverage_percent",
+    "added_late_read_and_capture_cases",
+    "existing_source_outputs_preserved",
+    "old_declarations_preserved",
+    "implementation",
+    "tests",
+    "documentation",
+    "public_requests",
+    "production_writes",
+    "legal_currentness"
+  ],
+  "title": "Verification",
+  "type": "object"
+}

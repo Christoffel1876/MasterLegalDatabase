@@ -1,0 +1,59 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "physical_page": {
+      "const": 5,
+      "title": "Physical Page",
+      "type": "integer"
+    },
+    "source_path": {
+      "title": "Source Path",
+      "type": "string"
+    },
+    "source_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "pixel_box": {
+      "items": {
+        "type": "integer"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "title": "Pixel Box",
+      "type": "array"
+    },
+    "output_path": {
+      "title": "Output Path",
+      "type": "string"
+    },
+    "output_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Output Sha256",
+      "type": "string"
+    },
+    "method": {
+      "const": "PyMuPDF exact source-PNG sample slice, no scaling or enhancement",
+      "title": "Method",
+      "type": "string"
+    }
+  },
+  "required": [
+    "created_at",
+    "physical_page",
+    "source_path",
+    "source_sha256",
+    "pixel_box",
+    "output_path",
+    "output_sha256",
+    "method"
+  ],
+  "title": "Crop",
+  "type": "object"
+}

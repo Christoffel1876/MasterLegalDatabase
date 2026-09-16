@@ -1,0 +1,511 @@
+{
+  "$defs": {
+    "Custody": {
+      "additionalProperties": false,
+      "properties": {
+        "received_at": {
+          "format": "date-time",
+          "title": "Received At",
+          "type": "string"
+        },
+        "files": {
+          "items": {
+            "$ref": "#/$defs/Receipt"
+          },
+          "title": "Files",
+          "type": "array"
+        },
+        "originals_rechecked_unchanged": {
+          "const": true,
+          "default": true,
+          "title": "Originals Rechecked Unchanged",
+          "type": "boolean"
+        },
+        "copies_rehashed_and_write_protected": {
+          "const": true,
+          "default": true,
+          "title": "Copies Rehashed And Write Protected",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "received_at",
+        "files"
+      ],
+      "title": "Custody",
+      "type": "object"
+    },
+    "EventCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "method": {
+          "enum": [
+            "mac_curl",
+            "box_browser"
+          ],
+          "title": "Method",
+          "type": "string"
+        },
+        "reported_requested_url": {
+          "title": "Reported Requested Url",
+          "type": "string"
+        },
+        "requested_url_assurance": {
+          "enum": [
+            "recorded_curl",
+            "reconstructed",
+            "unconfirmed_version_path"
+          ],
+          "title": "Requested Url Assurance",
+          "type": "string"
+        },
+        "reported_final_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Reported Final Url"
+        },
+        "reported_http_status": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Reported Http Status"
+        },
+        "reported_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Reported At"
+        },
+        "original": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FileEvidence"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "header_evidence": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FileEvidence"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "limitation": {
+          "title": "Limitation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "method",
+        "reported_requested_url",
+        "requested_url_assurance",
+        "reported_final_url",
+        "reported_http_status",
+        "reported_at",
+        "original",
+        "header_evidence",
+        "limitation"
+      ],
+      "title": "EventCheck",
+      "type": "object"
+    },
+    "FileEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileEvidence",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "disposition": {
+          "enum": [
+            "correct",
+            "qualify",
+            "accepted_with_limits"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "source_locations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Locations",
+          "type": "array"
+        },
+        "evidence": {
+          "title": "Evidence",
+          "type": "string"
+        },
+        "overlay": {
+          "title": "Overlay",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "disposition",
+        "title",
+        "source_locations",
+        "evidence",
+        "overlay"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "LinkProof": {
+      "additionalProperties": false,
+      "properties": {
+        "source_path": {
+          "title": "Source Path",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "recorded_attempt",
+            "discovered_unopened"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_path",
+        "label",
+        "url",
+        "status"
+      ],
+      "title": "LinkProof",
+      "type": "object"
+    },
+    "Receipt": {
+      "additionalProperties": false,
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "received_path": {
+          "title": "Received Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "original_path",
+        "received_path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Receipt",
+      "type": "object"
+    },
+    "SourceCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "priority_id": {
+          "pattern": "^SD008-\\d{2}$",
+          "title": "Priority Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "enum": [
+            "CO-COUNTY-WELD",
+            "CO-MUNICIPAL-GREELEY"
+          ],
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "reported_url": {
+          "title": "Reported Url",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "evidence_status": {
+          "enum": [
+            "pdf_preserved",
+            "html_preserved",
+            "shell_only",
+            "error_only",
+            "unopened_historical_lead"
+          ],
+          "title": "Evidence Status",
+          "type": "string"
+        },
+        "primary": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/FileEvidence"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "related": {
+          "items": {
+            "$ref": "#/$defs/FileEvidence"
+          },
+          "title": "Related",
+          "type": "array"
+        },
+        "inspected_physical_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Inspected Physical Pages",
+          "type": "array"
+        },
+        "accepted_claims": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accepted Claims",
+          "type": "array"
+        },
+        "qualifications": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Qualifications",
+          "type": "array"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "review_status": {
+          "const": "pending_intake",
+          "default": "pending_intake",
+          "title": "Review Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "priority_id",
+        "authority_id",
+        "title",
+        "reported_url",
+        "role",
+        "evidence_status",
+        "primary",
+        "accepted_claims",
+        "qualifications"
+      ],
+      "title": "SourceCheck",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "assignment": {
+      "const": "geode-source-discovery-008",
+      "default": "geode-source-discovery-008",
+      "title": "Assignment",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "comparison_commit": {
+      "pattern": "^[a-f0-9]{40}$",
+      "title": "Comparison Commit",
+      "type": "string"
+    },
+    "disposition": {
+      "const": "retain_with_corrections_pending_intake",
+      "title": "Disposition",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "review_status": {
+      "const": "pending_intake",
+      "default": "pending_intake",
+      "title": "Review Status",
+      "type": "string"
+    },
+    "public_opens_by_reviewer": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Opens By Reviewer",
+      "type": "integer"
+    },
+    "repository_changed": {
+      "const": false,
+      "default": false,
+      "title": "Repository Changed",
+      "type": "boolean"
+    },
+    "custody": {
+      "$ref": "#/$defs/Custody"
+    },
+    "verified_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Verified Counts",
+      "type": "object"
+    },
+    "integrity_checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Integrity Checks",
+      "type": "array"
+    },
+    "event_checks": {
+      "items": {
+        "$ref": "#/$defs/EventCheck"
+      },
+      "title": "Event Checks",
+      "type": "array"
+    },
+    "source_checks": {
+      "items": {
+        "$ref": "#/$defs/SourceCheck"
+      },
+      "title": "Source Checks",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "official_html_links": {
+      "items": {
+        "$ref": "#/$defs/LinkProof"
+      },
+      "title": "Official Html Links",
+      "type": "array"
+    },
+    "supporting_facts": {
+      "items": {
+        "$ref": "#/$defs/FileEvidence"
+      },
+      "title": "Supporting Facts",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "comparison_commit",
+    "disposition",
+    "custody",
+    "verified_counts",
+    "integrity_checks",
+    "event_checks",
+    "source_checks",
+    "findings",
+    "official_html_links",
+    "supporting_facts",
+    "limitations"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

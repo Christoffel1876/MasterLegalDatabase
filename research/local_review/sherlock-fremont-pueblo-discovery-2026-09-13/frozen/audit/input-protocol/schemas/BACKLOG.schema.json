@@ -1,0 +1,66 @@
+{
+  "$defs": {
+    "BacklogEntry": {
+      "additionalProperties": false,
+      "description": "A discovered source that was not opened in this assignment.",
+      "properties": {
+        "authority_id": {
+          "enum": [
+            "CO-COUNTY-PUEBLO",
+            "CO-COUNTY-FREMONT"
+          ],
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "discovered_from": {
+          "title": "Discovered From",
+          "type": "string"
+        },
+        "reason_not_opened": {
+          "title": "Reason Not Opened",
+          "type": "string"
+        },
+        "status": {
+          "const": "discovered_not_opened",
+          "default": "discovered_not_opened",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "authority_id",
+        "url",
+        "discovered_from",
+        "reason_not_opened"
+      ],
+      "title": "BacklogEntry",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Preserve deferred leads separately from attempts and collected source claims.",
+  "properties": {
+    "assignment_id": {
+      "const": "SH-EXT-001",
+      "default": "SH-EXT-001",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "entries": {
+      "items": {
+        "$ref": "#/$defs/BacklogEntry"
+      },
+      "title": "Entries",
+      "type": "array"
+    }
+  },
+  "required": [
+    "entries"
+  ],
+  "title": "Backlog",
+  "type": "object"
+}

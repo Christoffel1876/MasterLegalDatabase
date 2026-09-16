@@ -1,0 +1,198 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact ordinary-file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Receipt": {
+      "additionalProperties": false,
+      "description": "Completion describes byte custody only.",
+      "properties": {
+        "status": {
+          "const": "completed_archived_pending_pipeline",
+          "title": "Status",
+          "type": "string"
+        },
+        "preparation_sha256": {
+          "title": "Preparation Sha256",
+          "type": "string"
+        },
+        "intent_sha256": {
+          "title": "Intent Sha256",
+          "type": "string"
+        },
+        "actual_repository_received_at": {
+          "format": "date-time",
+          "title": "Actual Repository Received At",
+          "type": "string"
+        },
+        "raw_sha256": {
+          "title": "Raw Sha256",
+          "type": "string"
+        },
+        "ledger_sha256": {
+          "title": "Ledger Sha256",
+          "type": "string"
+        },
+        "report_sha256": {
+          "title": "Report Sha256",
+          "type": "string"
+        },
+        "raw_records": {
+          "title": "Raw Records",
+          "type": "integer"
+        },
+        "ledger_records": {
+          "title": "Ledger Records",
+          "type": "integer"
+        },
+        "source_sha256": {
+          "const": "1c9fda2c8bacb414468947664d6edb6640845081fcb1a5366dccf0c58720a084",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "preparation_sha256",
+        "intent_sha256",
+        "actual_repository_received_at",
+        "raw_sha256",
+        "ledger_sha256",
+        "report_sha256",
+        "raw_records",
+        "ledger_records",
+        "source_sha256",
+        "legal_currentness"
+      ],
+      "title": "Receipt",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Root acceptance of one actual byte-custody intake, never legal currentness.",
+  "properties": {
+    "status": {
+      "const": "accepted_completed_byte_custody_intake",
+      "title": "Status",
+      "type": "string"
+    },
+    "verified_at": {
+      "format": "date-time",
+      "title": "Verified At",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "pueblo-county-planning-fees-sh-ext-002",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-PUEBLO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "preparation_manifest_sha256": {
+      "title": "Preparation Manifest Sha256",
+      "type": "string"
+    },
+    "reviewed_transaction_sha256": {
+      "title": "Reviewed Transaction Sha256",
+      "type": "string"
+    },
+    "actual_execution": {
+      "$ref": "#/$defs/Receipt"
+    },
+    "canonical_source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "snapshots": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Snapshots",
+      "type": "array"
+    },
+    "package_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Package Files",
+      "type": "array"
+    },
+    "repeat_application_byte_identical": {
+      "const": true,
+      "title": "Repeat Application Byte Identical",
+      "type": "boolean"
+    },
+    "original_prefixes_byte_identical": {
+      "const": true,
+      "title": "Original Prefixes Byte Identical",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "verified_at",
+    "source_id",
+    "authority_id",
+    "preparation_manifest_sha256",
+    "reviewed_transaction_sha256",
+    "actual_execution",
+    "canonical_source",
+    "snapshots",
+    "package_files",
+    "repeat_application_byte_identical",
+    "original_prefixes_byte_identical",
+    "legal_currentness",
+    "answer_safe",
+    "limitations"
+  ],
+  "title": "Acceptance",
+  "type": "object"
+}

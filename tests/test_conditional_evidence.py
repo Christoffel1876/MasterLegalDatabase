@@ -20,6 +20,7 @@ from geode.orchestration.services.retrieval import LocalKnowledgeRetrievalBacken
 from geode.orchestration.contracts import RetrievalStep, RetrievalStrategyType
 from geode.pipeline.retrieval_catalog import write_retrieval_catalog
 from geode.utils.file_io import atomic_write_json, atomic_write_jsonl
+from tests.ownership_support import ownership_policy
 
 
 HASH = "a" * 64

@@ -1,0 +1,407 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Identify exact local evidence bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Heading": {
+      "additionalProperties": false,
+      "description": "A literal native navigation candidate, not a complete legal-unit index.",
+      "properties": {
+        "span_id": {
+          "title": "Span Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "span_id",
+        "physical_page",
+        "text"
+      ],
+      "title": "Heading",
+      "type": "object"
+    },
+    "Note": {
+      "additionalProperties": false,
+      "description": "A source observation rather than an extracted enforceable rule.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "date_conflict",
+            "adoption_scope",
+            "source_anomaly",
+            "exceptions",
+            "fee_reference",
+            "section_map",
+            "graphic",
+            "signature",
+            "limitation"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "references": {
+          "items": {
+            "$ref": "#/$defs/Ref"
+          },
+          "minItems": 1,
+          "title": "References",
+          "type": "array"
+        },
+        "visual_reading": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Visual Reading"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "statement",
+        "references"
+      ],
+      "title": "Note",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "Bind an inspected full page to original embedded text and a render.",
+      "properties": {
+        "physical_page": {
+          "maximum": 29,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_spans": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "title": "Native Spans",
+          "type": "array"
+        },
+        "full_page_directly_viewed": {
+          "const": true,
+          "default": true,
+          "title": "Full Page Directly Viewed",
+          "type": "boolean"
+        },
+        "review_scope": {
+          "const": "structure_and_selected_language_not_character_certification",
+          "title": "Review Scope",
+          "type": "string"
+        },
+        "topic_map": {
+          "title": "Topic Map",
+          "type": "string"
+        }
+      },
+      "required": [
+        "physical_page",
+        "native",
+        "image",
+        "native_spans",
+        "review_scope",
+        "topic_map"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Bind an annotation to an exact page-byte range, including imperfect OCR.",
+      "properties": {
+        "physical_page": {
+          "maximum": 29,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "exclusiveMinimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "native_excerpt": {
+          "title": "Native Excerpt",
+          "type": "string"
+        },
+        "excerpt_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Excerpt Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "physical_page",
+        "start",
+        "end",
+        "native_excerpt",
+        "excerpt_sha256"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "description": "Preserve one exhaustive, unchanged native line and its byte offsets.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "exclusiveMinimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "start",
+        "end",
+        "text"
+      ],
+      "title": "Span",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Preserve all pages while explicitly withholding legal/currentness conclusions.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source_id": {
+      "const": "grand-junction-ordinance5269",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "reviewer": {
+      "const": "Atlas",
+      "default": "Atlas",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "mode": {
+      "const": "candidate_aware_direct_source_review",
+      "title": "Mode",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "access_receipt": {
+      "$ref": "#/$defs/Asset"
+    },
+    "official_url": {
+      "title": "Official Url",
+      "type": "string"
+    },
+    "native_extractor": {
+      "const": "PyMuPDF 1.28.2, text, flags=195, sort=False",
+      "title": "Native Extractor",
+      "type": "string"
+    },
+    "render_method": {
+      "const": "Poppler pdftoppm, full pages, 120 dpi PNG",
+      "title": "Render Method",
+      "type": "string"
+    },
+    "source_metadata": {
+      "additionalProperties": true,
+      "title": "Source Metadata",
+      "type": "object"
+    },
+    "native_bytes": {
+      "const": 68078,
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "source_pages": {
+      "const": 29,
+      "title": "Source Pages",
+      "type": "integer"
+    },
+    "visually_viewed_pages": {
+      "items": {
+        "type": "integer"
+      },
+      "maxItems": 29,
+      "minItems": 29,
+      "title": "Visually Viewed Pages",
+      "type": "array"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "maxItems": 29,
+      "minItems": 29,
+      "title": "Pages",
+      "type": "array"
+    },
+    "heading_candidates": {
+      "items": {
+        "$ref": "#/$defs/Heading"
+      },
+      "title": "Heading Candidates",
+      "type": "array"
+    },
+    "annotations": {
+      "items": {
+        "$ref": "#/$defs/Note"
+      },
+      "title": "Annotations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "effective_date": {
+      "default": null,
+      "title": "Effective Date",
+      "type": "null"
+    },
+    "effective_date_status": {
+      "const": "conflicting_source_statements_unresolved",
+      "title": "Effective Date Status",
+      "type": "string"
+    },
+    "semantic_rule_units_created": {
+      "const": false,
+      "default": false,
+      "title": "Semantic Rule Units Created",
+      "type": "boolean"
+    },
+    "native_text_edited": {
+      "const": false,
+      "default": false,
+      "title": "Native Text Edited",
+      "type": "boolean"
+    },
+    "word_level_transcription_certified": {
+      "const": false,
+      "default": false,
+      "title": "Word Level Transcription Certified",
+      "type": "boolean"
+    },
+    "all_graphic_dimensions_certified": {
+      "const": false,
+      "default": false,
+      "title": "All Graphic Dimensions Certified",
+      "type": "boolean"
+    },
+    "scope_limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Scope Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_id",
+    "reviewed_at",
+    "mode",
+    "source",
+    "access_receipt",
+    "official_url",
+    "native_extractor",
+    "render_method",
+    "source_metadata",
+    "native_bytes",
+    "source_pages",
+    "visually_viewed_pages",
+    "pages",
+    "heading_candidates",
+    "annotations",
+    "effective_date_status",
+    "scope_limits"
+  ],
+  "title": "Review",
+  "type": "object"
+}

@@ -1,0 +1,112 @@
+{
+  "$defs": {
+    "CandidatePage": {
+      "additionalProperties": false,
+      "description": "Unchanged machine native bytes with packaging-only candidate offsets.",
+      "properties": {
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "native": {
+          "$ref": "#/$defs/Ref"
+        },
+        "candidate_start": {
+          "minimum": 0,
+          "title": "Candidate Start",
+          "type": "integer"
+        },
+        "candidate_end": {
+          "minimum": 0,
+          "title": "Candidate End",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "physical_page",
+        "native",
+        "candidate_start",
+        "candidate_end"
+      ],
+      "title": "CandidatePage",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Exact packet-relative ordinary-file bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Machine candidate is not reviewed or corrected source text.",
+  "properties": {
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "candidate_status": {
+      "const": "machine_native_text_unreviewed",
+      "default": "machine_native_text_unreviewed",
+      "title": "Candidate Status",
+      "type": "string"
+    },
+    "method": {
+      "const": "PyMuPDF 1.28.2 Page.get_text(text, flags=195, sort=False)",
+      "default": "PyMuPDF 1.28.2 Page.get_text(text, flags=195, sort=False)",
+      "title": "Method",
+      "type": "string"
+    },
+    "normalization": {
+      "const": "none; physical-page markers are packaging",
+      "default": "none; physical-page markers are packaging",
+      "title": "Normalization",
+      "type": "string"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Ref"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/CandidatePage"
+      },
+      "maxItems": 6,
+      "minItems": 6,
+      "title": "Pages",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_id",
+    "source_sha256",
+    "candidate",
+    "pages"
+  ],
+  "title": "Extraction",
+  "type": "object"
+}

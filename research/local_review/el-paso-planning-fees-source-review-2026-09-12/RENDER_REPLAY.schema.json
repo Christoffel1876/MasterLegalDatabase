@@ -1,0 +1,115 @@
+{
+  "$defs": {
+    "ImageResult": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image_path": {
+          "title": "Image Path",
+          "type": "string"
+        },
+        "expected_sha256": {
+          "title": "Expected Sha256",
+          "type": "string"
+        },
+        "reproduced_sha256": {
+          "title": "Reproduced Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "exact_match": {
+          "const": true,
+          "default": true,
+          "title": "Exact Match",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image_path",
+        "expected_sha256",
+        "reproduced_sha256",
+        "size_bytes"
+      ],
+      "title": "ImageResult",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "input_source_path": {
+      "const": "source/original.pdf",
+      "default": "source/original.pdf",
+      "title": "Input Source Path",
+      "type": "string"
+    },
+    "input_source_sha256": {
+      "const": "c3bd819da169a58328e7bdfcd8ea65e4a751326a65dce325ad19e5bc868b3e12",
+      "title": "Input Source Sha256",
+      "type": "string"
+    },
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "title": "Completed At",
+      "type": "string"
+    },
+    "engine": {
+      "const": "Poppler pdftoppm",
+      "default": "Poppler pdftoppm",
+      "title": "Engine",
+      "type": "string"
+    },
+    "executable_sha256": {
+      "title": "Executable Sha256",
+      "type": "string"
+    },
+    "version_output": {
+      "title": "Version Output",
+      "type": "string"
+    },
+    "arguments": {
+      "const": "-r 200 -png source/original.pdf temporary/page",
+      "default": "-r 200 -png source/original.pdf temporary/page",
+      "title": "Arguments",
+      "type": "string"
+    },
+    "images": {
+      "items": {
+        "$ref": "#/$defs/ImageResult"
+      },
+      "title": "Images",
+      "type": "array"
+    },
+    "source_bytes_unchanged": {
+      "const": true,
+      "default": true,
+      "title": "Source Bytes Unchanged",
+      "type": "boolean"
+    },
+    "scope": {
+      "const": "full five displayed physical pages; exact output bytes compared",
+      "default": "full five displayed physical pages; exact output bytes compared",
+      "title": "Scope",
+      "type": "string"
+    }
+  },
+  "required": [
+    "input_source_sha256",
+    "started_at",
+    "completed_at",
+    "executable_sha256",
+    "version_output",
+    "images"
+  ],
+  "title": "RenderReplay",
+  "type": "object"
+}

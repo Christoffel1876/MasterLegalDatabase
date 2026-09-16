@@ -1,0 +1,81 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact ordinary package file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Crop": {
+      "additionalProperties": false,
+      "description": "Integer bounds in the retained full image, origin upper left.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "box": {
+          "items": {
+            "type": "integer"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Box",
+          "type": "array"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "id",
+        "page",
+        "box",
+        "image"
+      ],
+      "title": "Crop",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "All derived crop receipts.",
+  "properties": {
+    "crops": {
+      "items": {
+        "$ref": "#/$defs/Crop"
+      },
+      "title": "Crops",
+      "type": "array"
+    }
+  },
+  "required": [
+    "crops"
+  ],
+  "title": "Crops",
+  "type": "object"
+}

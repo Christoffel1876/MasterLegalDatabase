@@ -1,0 +1,712 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Crop": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "const": 2,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "x": {
+          "minimum": 0,
+          "title": "X",
+          "type": "integer"
+        },
+        "y": {
+          "minimum": 0,
+          "title": "Y",
+          "type": "integer"
+        },
+        "width": {
+          "exclusiveMinimum": 0,
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "title": "Height",
+          "type": "integer"
+        },
+        "dpi": {
+          "const": 300,
+          "title": "Dpi",
+          "type": "integer"
+        },
+        "directly_viewed": {
+          "const": true,
+          "title": "Directly Viewed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "image",
+        "x",
+        "y",
+        "width",
+        "height",
+        "dpi",
+        "directly_viewed"
+      ],
+      "title": "Crop",
+      "type": "object"
+    },
+    "Custody": {
+      "additionalProperties": false,
+      "properties": {
+        "manual_manifest": {
+          "$ref": "#/$defs/Asset"
+        },
+        "manual_line_number": {
+          "const": 33,
+          "title": "Manual Line Number",
+          "type": "integer"
+        },
+        "manual_line_sha256": {
+          "title": "Manual Line Sha256",
+          "type": "string"
+        },
+        "source_provenance": {
+          "$ref": "#/$defs/Asset"
+        },
+        "provenance_line_number": {
+          "const": 6,
+          "title": "Provenance Line Number",
+          "type": "integer"
+        },
+        "provenance_line_sha256": {
+          "title": "Provenance Line Sha256",
+          "type": "string"
+        },
+        "canonical_archive_path": {
+          "title": "Canonical Archive Path",
+          "type": "string"
+        },
+        "intake_id": {
+          "title": "Intake Id",
+          "type": "string"
+        },
+        "repository_received_at": {
+          "format": "date-time",
+          "title": "Repository Received At",
+          "type": "string"
+        },
+        "acquisition_method": {
+          "const": "received_review_package",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "original_acquisition_time": {
+          "default": null,
+          "title": "Original Acquisition Time",
+          "type": "null"
+        },
+        "supplied_requested_url": {
+          "title": "Supplied Requested Url",
+          "type": "string"
+        },
+        "supplied_final_url": {
+          "title": "Supplied Final Url",
+          "type": "string"
+        },
+        "supplied_time_claim": {
+          "title": "Supplied Time Claim",
+          "type": "string"
+        },
+        "supplied_method_claim": {
+          "title": "Supplied Method Claim",
+          "type": "string"
+        },
+        "supplied_http_status": {
+          "const": 200,
+          "title": "Supplied Http Status",
+          "type": "integer"
+        },
+        "source_http_acquisition_verified": {
+          "const": false,
+          "title": "Source Http Acquisition Verified",
+          "type": "boolean"
+        },
+        "intake_status": {
+          "const": "archived_pending_pipeline",
+          "title": "Intake Status",
+          "type": "string"
+        },
+        "copied_at": {
+          "format": "date-time",
+          "title": "Copied At",
+          "type": "string"
+        },
+        "limitation": {
+          "title": "Limitation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "manual_manifest",
+        "manual_line_number",
+        "manual_line_sha256",
+        "source_provenance",
+        "provenance_line_number",
+        "provenance_line_sha256",
+        "canonical_archive_path",
+        "intake_id",
+        "repository_received_at",
+        "acquisition_method",
+        "supplied_requested_url",
+        "supplied_final_url",
+        "supplied_time_claim",
+        "supplied_method_claim",
+        "supplied_http_status",
+        "source_http_acquisition_verified",
+        "intake_status",
+        "copied_at",
+        "limitation"
+      ],
+      "title": "Custody",
+      "type": "object"
+    },
+    "ExecutionRegion": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "const": 2,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "region_px": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Region Px",
+          "type": "array"
+        },
+        "printed_fragments": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Printed Fragments",
+          "type": "array"
+        },
+        "observation": {
+          "title": "Observation",
+          "type": "string"
+        },
+        "handwriting_reading": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Handwriting Reading"
+        },
+        "signature_identity": {
+          "default": null,
+          "title": "Signature Identity",
+          "type": "null"
+        },
+        "authenticity_verified": {
+          "const": false,
+          "default": false,
+          "title": "Authenticity Verified",
+          "type": "boolean"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        },
+        "crop_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Crop Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "region_px",
+        "printed_fragments",
+        "observation",
+        "handwriting_reading",
+        "qualification",
+        "crop_ids"
+      ],
+      "title": "ExecutionRegion",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "scope",
+            "condition",
+            "date",
+            "source_defect",
+            "dependency",
+            "execution"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "block_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Block Ids",
+          "type": "array"
+        },
+        "execution_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Execution Ids",
+          "type": "array"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "limitation": {
+          "title": "Limitation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "block_ids",
+        "execution_ids",
+        "statement",
+        "limitation"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "enum": [
+            1,
+            2
+          ],
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_text": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_bytes": {
+          "const": 0,
+          "title": "Native Bytes",
+          "type": "integer"
+        },
+        "printed_body": {
+          "$ref": "#/$defs/Asset"
+        },
+        "width_px": {
+          "const": 2550,
+          "title": "Width Px",
+          "type": "integer"
+        },
+        "height_px": {
+          "const": 3300,
+          "title": "Height Px",
+          "type": "integer"
+        },
+        "full_page_directly_viewed": {
+          "const": true,
+          "title": "Full Page Directly Viewed",
+          "type": "boolean"
+        },
+        "blocks": {
+          "items": {
+            "$ref": "#/$defs/TextBlock"
+          },
+          "title": "Blocks",
+          "type": "array"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "native_text",
+        "native_bytes",
+        "printed_body",
+        "width_px",
+        "height_px",
+        "full_page_directly_viewed",
+        "blocks"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "TextBlock": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "enum": [
+            1,
+            2
+          ],
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "role": {
+          "enum": [
+            "title",
+            "recital",
+            "resolution_lead",
+            "operative",
+            "eligibility"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "start_byte": {
+          "minimum": 0,
+          "title": "Start Byte",
+          "type": "integer"
+        },
+        "end_byte": {
+          "exclusiveMinimum": 0,
+          "title": "End Byte",
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "byte_basis": {
+          "const": "manual_page_transcription_utf8_not_native_source_text",
+          "title": "Byte Basis",
+          "type": "string"
+        },
+        "region_px": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Region Px",
+          "type": "array"
+        },
+        "region_precision": {
+          "const": "approximate_locator_in_full_300dpi_image",
+          "title": "Region Precision",
+          "type": "string"
+        },
+        "parent_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Parent Id"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "role",
+        "text",
+        "start_byte",
+        "end_byte",
+        "sha256",
+        "byte_basis",
+        "region_px",
+        "region_precision"
+      ],
+      "title": "TextBlock",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "review_id": {
+      "const": "ATLAS-LARIMER-EQUITY-RESOLUTION-2026-09-11-SESSION2",
+      "title": "Review Id",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "larimer-equity-fee-resolution-sd007-04",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-LARIMER",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "authority_basis": {
+      "title": "Authority Basis",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_unchanged": {
+      "const": true,
+      "title": "Source Unchanged",
+      "type": "boolean"
+    },
+    "expected_physical_pages": {
+      "const": 2,
+      "title": "Expected Physical Pages",
+      "type": "integer"
+    },
+    "review_mode": {
+      "const": "atlas_candidate_aware_source_qa_not_blind",
+      "title": "Review Mode",
+      "type": "string"
+    },
+    "prior_exposure": {
+      "title": "Prior Exposure",
+      "type": "string"
+    },
+    "external_assignment": {
+      "default": null,
+      "title": "External Assignment",
+      "type": "null"
+    },
+    "external_reports_consulted": {
+      "const": false,
+      "title": "External Reports Consulted",
+      "type": "boolean"
+    },
+    "status": {
+      "const": "printed_body_transcribed_execution_observations_qualified",
+      "title": "Status",
+      "type": "string"
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "transcription_convention": {
+      "title": "Transcription Convention",
+      "type": "string"
+    },
+    "native_extractor": {
+      "const": "PyMuPDF 1.28.2 text flags=195 sort=False",
+      "title": "Native Extractor",
+      "type": "string"
+    },
+    "rendering_engine": {
+      "const": "Poppler pdftoppm 26.05.0",
+      "title": "Rendering Engine",
+      "type": "string"
+    },
+    "rendering_dpi": {
+      "const": 300,
+      "title": "Rendering Dpi",
+      "type": "integer"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "crops": {
+      "items": {
+        "$ref": "#/$defs/Crop"
+      },
+      "title": "Crops",
+      "type": "array"
+    },
+    "execution": {
+      "items": {
+        "$ref": "#/$defs/ExecutionRegion"
+      },
+      "title": "Execution",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "custody": {
+      "$ref": "#/$defs/Custody"
+    },
+    "attachments_present": {
+      "const": false,
+      "title": "Attachments Present",
+      "type": "boolean"
+    },
+    "attachment_a_reference_observed": {
+      "const": false,
+      "title": "Attachment A Reference Observed",
+      "type": "boolean"
+    },
+    "signature_marks_observed": {
+      "const": 3,
+      "title": "Signature Marks Observed",
+      "type": "integer"
+    },
+    "execution_area_completed_as_visual_observation": {
+      "const": true,
+      "title": "Execution Area Completed As Visual Observation",
+      "type": "boolean"
+    },
+    "adopted_status_verified": {
+      "const": false,
+      "title": "Adopted Status Verified",
+      "type": "boolean"
+    },
+    "adoption_date_verified": {
+      "default": null,
+      "title": "Adoption Date Verified",
+      "type": "null"
+    },
+    "effective_date_verified": {
+      "default": null,
+      "title": "Effective Date Verified",
+      "type": "null"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "semantic_or_coverage_promotion": {
+      "const": false,
+      "title": "Semantic Or Coverage Promotion",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "review_id",
+    "source_id",
+    "authority_id",
+    "authority_basis",
+    "source",
+    "source_unchanged",
+    "expected_physical_pages",
+    "review_mode",
+    "prior_exposure",
+    "external_reports_consulted",
+    "status",
+    "reviewed_at",
+    "transcription_convention",
+    "native_extractor",
+    "rendering_engine",
+    "rendering_dpi",
+    "pages",
+    "crops",
+    "execution",
+    "observations",
+    "custody",
+    "attachments_present",
+    "attachment_a_reference_observed",
+    "signature_marks_observed",
+    "execution_area_completed_as_visual_observation",
+    "adopted_status_verified",
+    "legal_currentness",
+    "semantic_or_coverage_promotion",
+    "limitations"
+  ],
+  "title": "Review",
+  "type": "object"
+}

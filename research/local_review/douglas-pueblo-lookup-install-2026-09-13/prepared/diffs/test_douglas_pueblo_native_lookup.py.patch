@@ -1,0 +1,146 @@
+--- sealed-predecessor/test_douglas_pueblo_native_lookup.py
++++ revision-1/test_douglas_pueblo_native_lookup.py
+@@ -316,3 +316,143 @@
+     result = json.loads(process.stdout)
+     assert [r["row_id"] for r in result["rows"]] == ["P1-11"]
+     assert all(lookup._digest(Path(path)) == digest for path, digest in before.items())
++
++
++@pytest.mark.parametrize("source,relative", [
++    (lookup.DOUGLAS_SOURCE_ID, "SOURCE_QA.json"),
++    (lookup.DOUGLAS_SOURCE_ID, "candidate-native.txt"),
++    (lookup.DOUGLAS_SOURCE_ID, "page-0001.png"),
++    (lookup.PUEBLO_SOURCE_ID, "SOURCE_QA.json"),
++    (lookup.PUEBLO_SOURCE_ID, "native/page-0001.txt"),
++])
++def test_late_source_swaps_cannot_change_consumed_evidence(
++    copied: Path, complete: dict[str, Any], source: str, relative: str,
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    """A file swap after both checks cannot alter rows, contexts, spans or returned asset hashes."""
++    package = copied / "research/local_review" / lookup.DP_SOURCES[source]["folder"]
++    path = package / relative
++    original = path.read_bytes()
++    real = lookup._check_dp_package
++    calls = 0
++
++    def check(root: Path, identity: str) -> dict[str, bytes]:
++        """Mutate only temporary evidence after the final verifier identity check."""
++        nonlocal calls
++        result = real(root, identity)
++        calls += 1
++        if calls == 2:
++            if relative == "SOURCE_QA.json":
++                data = json.loads(original)
++                if identity == lookup.DOUGLAS_SOURCE_ID:
++                    data["rows"][0]["cells"][-1]["displayed_text"] = "INJECTED UNVERIFIED FEE"
++                    data["contexts"][0]["text"] = "INJECTED UNVERIFIED CONTEXT"
++                else:
++                    data["rows"][0]["fee"]["reviewed_display"] = "INJECTED UNVERIFIED FEE"
++                    data["annotations"][0]["statement"] = "INJECTED UNVERIFIED CONTEXT"
++                path.write_text(json.dumps(data))
++            else:
++                path.write_bytes(b"INJECTED UNVERIFIED CONTENT")
++        return result
++
++    monkeypatch.setattr(lookup, "_check_dp_package", check)
++    actual = lookup.lookup(copied, source, list_rows=True)
++    assert calls == 2 and path.read_bytes() != original
++    assert actual.model_dump_json().replace(str(copied), str(ROOT)) == (
++        complete[source].model_dump_json())
++    assert "INJECTED" not in actual.model_dump_json()
++
++
++@pytest.mark.parametrize("relative", [
++    "execution/RECEIPT.json", "execution/INTENT.json", "execution/records.jsonl",
++    "evidence/preparation/source-provenance.jsonl",
++    "evidence/preparation/custody/douglas-ehs-fees-atlas-directed/E017/event.json",
++])
++def test_late_custody_swaps_use_captured_pinned_buffers(
++    copied: Path, complete: dict[str, Any], relative: str, monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    """Receipt, canonical-line, provenance and HTTP parsing never reread changed disk bytes."""
++    target = copied / lookup.DP_INTAKE / relative
++    real = lookup._dp_capture
++    captures = 0
++
++    def capture(base: Path, name: str, expected: str, limit: int) -> tuple[str, bytes]:
++        """Swap the temporary artifact immediately after its exact checked buffer is captured."""
++        nonlocal captures
++        key, raw = real(base, name, expected, limit)
++        if Path(key) == target:
++            captures += 1
++            target.write_bytes(b"INJECTED UNVERIFIED CUSTODY")
++        return key, raw
++
++    monkeypatch.setattr(lookup, "_dp_capture", capture)
++    actual = lookup.lookup(copied, lookup.DOUGLAS_SOURCE_ID, list_rows=True)
++    assert captures == 1 and target.read_bytes() == b"INJECTED UNVERIFIED CUSTODY"
++    assert actual.model_dump_json().replace(str(copied), str(ROOT)) == (
++        complete[lookup.DOUGLAS_SOURCE_ID].model_dump_json())
++
++
++def test_late_acceptance_swap_and_aba_do_not_change_checked_output(
++    copied: Path, complete: dict[str, Any], monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    """Restoring a transient swapped QA does not certify its altered display or context."""
++    source = lookup.DOUGLAS_SOURCE_ID
++    config = lookup.DP_SOURCES[source]
++    package = copied / "research/local_review" / config["folder"]
++    qa = package / "SOURCE_QA.json"
++    acceptance = copied / "docs/audits/FOUR_HOUR_RUN_2026-09-12" / (
++        config["acceptance"] + "/ACCEPTANCE.json")
++    original = qa.read_bytes()
++    real_check, real_builder = lookup._check_dp_package, lookup._dp_douglas
++    calls = 0
++
++    def check(root: Path, identity: str) -> dict[str, bytes]:
++        """Place mutated QA and acceptance after the second source check."""
++        nonlocal calls
++        result = real_check(root, identity)
++        calls += 1
++        if calls == 2:
++            data = json.loads(original)
++            data["rows"][0]["cells"][-1]["displayed_text"] = "INJECTED UNVERIFIED FEE"
++            qa.write_text(json.dumps(data))
++            acceptance.write_bytes(b"INJECTED UNVERIFIED ACCEPTANCE")
++        return result
++
++    def build(base: Path, data: dict, captured: dict[str, bytes]) -> tuple:
++        """Restore the source after parsing would have consumed it in the former implementation."""
++        qa.write_bytes(original)
++        return real_builder(base, data, captured)
++
++    monkeypatch.setattr(lookup, "_check_dp_package", check)
++    monkeypatch.setattr(lookup, "_dp_douglas", build)
++    actual = lookup.lookup(copied, source, list_rows=True)
++    assert qa.read_bytes() == original and calls == 2
++    assert actual.model_dump_json().replace(str(copied), str(ROOT)) == (
++        complete[source].model_dump_json())
++
++
++def test_capture_checks_the_actual_buffer_not_an_earlier_path_digest(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    """A transient read substitution is rejected even when later disk bytes have the pinned hash."""
++    import io
++
++    path = tmp_path / "artifact.json"
++    path.write_bytes(b"checked")
++    real_open = Path.open
++
++    def opened(self: Path, *args: Any, **kwargs: Any) -> Any:
++        """Provide a hostile read stream while preserving the ordinary original on disk."""
++        return io.BytesIO(b"substituted") if self == path else real_open(self, *args, **kwargs)
++
++    monkeypatch.setattr(Path, "open", opened)
++    with pytest.raises(ValueError, match="captured evidence differs"):
++        lookup._dp_capture(tmp_path, "artifact.json", hashlib.sha256(b"checked").hexdigest(), 100)
++
++
++def test_capture_enforces_read_byte_limit(tmp_path: Path) -> None:
++    """An exact hash cannot waive the finite captured-buffer size limit."""
++    raw = b"12345"
++    (tmp_path / "artifact").write_bytes(raw)
++    with pytest.raises(ValueError, match="captured evidence differs"):
++        lookup._dp_capture(tmp_path, "artifact", hashlib.sha256(raw).hexdigest(), 4)

@@ -1,0 +1,68 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact retained body, derivative or report.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A delivery's exact retained files; independent closure verification remains Atlas work.",
+  "properties": {
+    "assignment_id": {
+      "const": "SH-EXT-003",
+      "default": "SH-EXT-003",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "status": {
+      "enum": [
+        "completed_pending_atlas_verification",
+        "partial_pending_atlas_verification"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "files",
+    "status"
+  ],
+  "title": "ArtifactInventory",
+  "type": "object"
+}

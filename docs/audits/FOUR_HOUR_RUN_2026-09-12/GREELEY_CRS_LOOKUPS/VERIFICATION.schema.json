@@ -1,0 +1,163 @@
+{
+  "$defs": {
+    "File": {
+      "additionalProperties": false,
+      "description": "Pin an ordinary file to its bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Separate observed test success from legal interpretation and coverage limits.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "passed_scoped_lookups",
+      "title": "Status",
+      "type": "string"
+    },
+    "parent_commit": {
+      "title": "Parent Commit",
+      "type": "string"
+    },
+    "changed_files": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Changed Files",
+      "type": "array"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "full_suite_command": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Full Suite Command",
+      "type": "array"
+    },
+    "full_suite_exit_code": {
+      "const": 0,
+      "title": "Full Suite Exit Code",
+      "type": "integer"
+    },
+    "full_suite_summary": {
+      "title": "Full Suite Summary",
+      "type": "string"
+    },
+    "full_suite_count": {
+      "title": "Full Suite Count",
+      "type": "integer"
+    },
+    "full_geode_combined_coverage_percent": {
+      "title": "Full Geode Combined Coverage Percent",
+      "type": "number"
+    },
+    "focused_greeley_tests": {
+      "const": 187,
+      "title": "Focused Greeley Tests",
+      "type": "integer"
+    },
+    "focused_greeley_combined_coverage_percent": {
+      "title": "Focused Greeley Combined Coverage Percent",
+      "type": "number"
+    },
+    "focused_crs_tests": {
+      "const": 81,
+      "title": "Focused Crs Tests",
+      "type": "integer"
+    },
+    "focused_crs_combined_coverage_percent": {
+      "title": "Focused Crs Combined Coverage Percent",
+      "type": "number"
+    },
+    "root_actual_cli_cases": {
+      "const": 2,
+      "title": "Root Actual Cli Cases",
+      "type": "integer"
+    },
+    "root_police_cells": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Root Police Cells",
+      "type": "array"
+    },
+    "root_pif_adoption_condition_retained": {
+      "const": true,
+      "title": "Root Pif Adoption Condition Retained",
+      "type": "boolean"
+    },
+    "source_bytes_unchanged": {
+      "const": true,
+      "title": "Source Bytes Unchanged",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "parent_commit",
+    "changed_files",
+    "evidence",
+    "full_suite_command",
+    "full_suite_exit_code",
+    "full_suite_summary",
+    "full_suite_count",
+    "full_geode_combined_coverage_percent",
+    "focused_greeley_tests",
+    "focused_greeley_combined_coverage_percent",
+    "focused_crs_tests",
+    "focused_crs_combined_coverage_percent",
+    "root_actual_cli_cases",
+    "root_police_cells",
+    "root_pif_adoption_condition_retained",
+    "source_bytes_unchanged",
+    "legal_currentness",
+    "limitations"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

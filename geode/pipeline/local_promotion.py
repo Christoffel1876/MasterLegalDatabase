@@ -10,6 +10,8 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field, ValidationError
 
+from geode.pipeline.local_release_ownership import ownership_reason_with_parents
+from geode.pipeline.local_source_ownership import OwnershipPolicy, load_ownership_policy
 from geode.pipeline.retrieval_catalog import write_retrieval_catalog
 from geode.schemas import RuleUnit
 from geode.utils.file_io import atomic_write_json, atomic_write_jsonl, iter_jsonl
@@ -51,12 +53,17 @@ def build_local_promotion_queue(root: Path) -> dict[str, int]:
     """Create reviewer packets for preserved local rule units."""
 
     resolved = root.resolve()
+    policy = load_ownership_policy(resolved)
     rows: list[dict[str, Any]] = []
     for layer in ("08_County_Authorities", "09_District_Authorities"):
         index_path = resolved / layer / "_index.jsonl"
         if not index_path.exists():
             continue
-        for row in iter_jsonl(index_path):
+        index_rows = list(iter_jsonl(index_path))
+        active = {str(row["id"]): row for row in index_rows if row.get("id")}
+        for row in index_rows:
+            if ownership_reason_with_parents(policy, row, active):
+                continue
             if row.get("entity_type") != "rule_unit":
                 continue
             if row.get("semantic_status") == "semantic_ready":
@@ -96,6 +103,7 @@ def apply_local_promotion_decisions(root: Path) -> dict[str, Any]:
     """Apply only validated reviewer decisions and rebuild derived retrieval data."""
 
     resolved = root.resolve()
+    policy = load_ownership_policy(resolved)
     decisions_path = resolved / DECISIONS_PATH
     decisions: list[PromotionDecision] = []
     errors: list[dict[str, str]] = []
@@ -111,7 +119,7 @@ def apply_local_promotion_decisions(root: Path) -> dict[str, Any]:
         index_path = resolved / layer / "_index.jsonl"
         if index_path.exists():
             for row in iter_jsonl(index_path):
-                if row.get("entity_type") == "rule_unit":
+                if row.get("id"):
                     indexes[str(row.get("id"))] = row
 
     decisions_by_id = {item.rule_unit_id: item for item in decisions}
@@ -135,7 +143,7 @@ def apply_local_promotion_decisions(root: Path) -> dict[str, Any]:
             if decision is None:
                 continue
             index_row = indexes.get(record_id)
-            reason = _promotion_blocker(record, index_row, decision)
+            reason = _promotion_blocker(record, index_row, decision, policy, indexes)
             if decision.decision == "reject":
                 rejected += 1
                 record["semantic_status"] = "needs_review"
@@ -196,9 +204,15 @@ def _promotion_blocker(
     record: dict[str, Any],
     index_row: dict[str, Any] | None,
     decision: PromotionDecision,
+    policy: OwnershipPolicy,
+    indexed_rows: dict[str, dict[str, Any]],
 ) -> str | None:
     """Return the first reason a decision cannot promote a rule unit."""
 
+    for row in (record, index_row or {}, decision.model_dump()):
+        reason = ownership_reason_with_parents(policy, row, indexed_rows)
+        if reason:
+            return reason
     if index_row is None:
         return "rule unit is not present in the active index"
     if str(index_row.get("sha256") or "") != decision.source_hash:

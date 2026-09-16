@@ -1,0 +1,60 @@
+name: Local source ownership checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: local-ownership-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  local-ownership:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GIT_LFS_SKIP_SMUDGE: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+      COVERAGE_FILE: .coverage-local-ownership
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          lfs: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+      - name: Install frozen offline test dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements-ownership-ci.txt
+      - name: Check ownership exclusions through ingestion and retrieval
+        run: |
+          python -m pytest tests/test_local_source_ownership.py tests/test_ownership_regeneration.py tests/test_local_pilot_index_preservation.py tests/test_ownership_release_gates.py tests/test_local_release_ownership.py tests/test_runtime_ownership_regressions.py tests/test_automated_county_review.py tests/test_local_link_retry.py tests/test_manual_source_reconciliation.py -q --cov=geode.pipeline.local_source_ownership --cov=geode.pipeline.local_release_ownership --cov=geode.pipeline.local_pilot --cov-branch --cov-report=term-missing --cov-report=xml:local-ownership.xml --junitxml=local-ownership-tests.xml
+          python -m coverage report --fail-under=90 --include=geode/pipeline/local_source_ownership.py
+          python -m coverage report --fail-under=90 --include=geode/pipeline/local_release_ownership.py
+          python -m coverage report --fail-under=90 --include=geode/pipeline/local_pilot.py
+      - name: Validate the committed exclusion policy without regenerating data
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from geode.pipeline.local_source_ownership import load_ownership_policy
+          policy = load_ownership_policy(Path.cwd())
+          assert policy.legal_currentness == "not_verified"
+          assert policy.retired_source_ids
+          print(f"Validated {len(policy.retired_source_ids)} retired source identities")
+          PY
+      - name: Retain test evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: local-ownership-tests-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            local-ownership-tests.xml
+            local-ownership.xml
+          retention-days: 30
+          if-no-files-found: warn

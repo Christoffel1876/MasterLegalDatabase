@@ -1,0 +1,91 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "copied_from": {
+          "title": "Copied From",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes",
+        "copied_from"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "preserved_at": {
+      "format": "date-time",
+      "title": "Preserved At",
+      "type": "string"
+    },
+    "checkpoint_commit": {
+      "title": "Checkpoint Commit",
+      "type": "string"
+    },
+    "index_files_verified": {
+      "title": "Index Files Verified",
+      "type": "integer"
+    },
+    "archive_files_verified": {
+      "title": "Archive Files Verified",
+      "type": "integer"
+    },
+    "smoke_checks_passed": {
+      "title": "Smoke Checks Passed",
+      "type": "integer"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "network_requested_during_preservation": {
+      "const": false,
+      "title": "Network Requested During Preservation",
+      "type": "boolean"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "preserved_at",
+    "checkpoint_commit",
+    "index_files_verified",
+    "archive_files_verified",
+    "smoke_checks_passed",
+    "files",
+    "network_requested_during_preservation",
+    "scope",
+    "legal_currentness"
+  ],
+  "title": "Preservation",
+  "type": "object"
+}

@@ -1,0 +1,617 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Cell": {
+      "additionalProperties": false,
+      "properties": {
+        "column_id": {
+          "title": "Column Id",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "display_text": {
+          "title": "Display Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "column_id",
+        "evidence",
+        "display_text"
+      ],
+      "title": "Cell",
+      "type": "object"
+    },
+    "Column": {
+      "additionalProperties": false,
+      "properties": {
+        "column_id": {
+          "title": "Column Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "label_origin": {
+          "enum": [
+            "exact_native",
+            "reviewer_structural_label"
+          ],
+          "title": "Label Origin",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "column_id",
+        "label",
+        "label_origin",
+        "evidence"
+      ],
+      "title": "Column",
+      "type": "object"
+    },
+    "Context": {
+      "additionalProperties": false,
+      "properties": {
+        "context_id": {
+          "title": "Context Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "title",
+            "condition",
+            "footnote",
+            "definition",
+            "date_label",
+            "column_group"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "association_note": {
+          "title": "Association Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "context_id",
+        "kind",
+        "evidence",
+        "association_note"
+      ],
+      "title": "Context",
+      "type": "object"
+    },
+    "FeeRow": {
+      "additionalProperties": false,
+      "properties": {
+        "row_id": {
+          "title": "Row Id",
+          "type": "string"
+        },
+        "table_id": {
+          "title": "Table Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "row_order": {
+          "exclusiveMinimum": 0,
+          "title": "Row Order",
+          "type": "integer"
+        },
+        "source_evidence": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "minItems": 1,
+          "title": "Source Evidence",
+          "type": "array"
+        },
+        "cells": {
+          "items": {
+            "$ref": "#/$defs/Cell"
+          },
+          "minItems": 2,
+          "title": "Cells",
+          "type": "array"
+        },
+        "context_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Context Ids",
+          "type": "array"
+        },
+        "crop_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Crop Ids",
+          "type": "array"
+        },
+        "status": {
+          "const": "source_text_and_association_reviewed",
+          "title": "Status",
+          "type": "string"
+        },
+        "annotation": {
+          "title": "Annotation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "row_id",
+        "table_id",
+        "physical_page",
+        "row_order",
+        "source_evidence",
+        "cells",
+        "context_ids",
+        "crop_ids",
+        "status",
+        "annotation"
+      ],
+      "title": "FeeRow",
+      "type": "object"
+    },
+    "Line": {
+      "additionalProperties": false,
+      "properties": {
+        "line_1based": {
+          "exclusiveMinimum": 0,
+          "title": "Line 1Based",
+          "type": "integer"
+        },
+        "span": {
+          "$ref": "#/$defs/Span"
+        },
+        "classification": {
+          "enum": [
+            "native_text",
+            "native_whitespace"
+          ],
+          "title": "Classification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "line_1based",
+        "span",
+        "classification"
+      ],
+      "title": "Line",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "properties": {
+        "observation_id": {
+          "title": "Observation Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "source_anomaly",
+            "reading_order",
+            "association",
+            "date_role",
+            "scope_limit"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "related_row_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Related Row Ids",
+          "type": "array"
+        },
+        "finding": {
+          "title": "Finding",
+          "type": "string"
+        },
+        "treatment": {
+          "title": "Treatment",
+          "type": "string"
+        }
+      },
+      "required": [
+        "observation_id",
+        "kind",
+        "evidence",
+        "related_row_ids",
+        "finding",
+        "treatment"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "source_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "layout": {
+          "$ref": "#/$defs/Asset"
+        },
+        "full_image_directly_viewed": {
+          "const": true,
+          "title": "Full Image Directly Viewed",
+          "type": "boolean"
+        },
+        "lines": {
+          "items": {
+            "$ref": "#/$defs/Line"
+          },
+          "minItems": 1,
+          "title": "Lines",
+          "type": "array"
+        },
+        "viewed_crop_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Viewed Crop Ids",
+          "type": "array"
+        },
+        "observation": {
+          "title": "Observation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "physical_page",
+        "source_sha256",
+        "native",
+        "image",
+        "layout",
+        "full_image_directly_viewed",
+        "lines",
+        "viewed_crop_ids",
+        "observation"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "start_byte": {
+          "minimum": 0,
+          "title": "Start Byte",
+          "type": "integer"
+        },
+        "end_byte_exclusive": {
+          "exclusiveMinimum": 0,
+          "title": "End Byte Exclusive",
+          "type": "integer"
+        },
+        "exact_text": {
+          "title": "Exact Text",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "physical_page",
+        "start_byte",
+        "end_byte_exclusive",
+        "exact_text",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    },
+    "Table": {
+      "additionalProperties": false,
+      "properties": {
+        "table_id": {
+          "title": "Table Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "title": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "minItems": 1,
+          "title": "Title",
+          "type": "array"
+        },
+        "columns": {
+          "items": {
+            "$ref": "#/$defs/Column"
+          },
+          "minItems": 2,
+          "title": "Columns",
+          "type": "array"
+        },
+        "context_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Context Ids",
+          "type": "array"
+        },
+        "expected_rows": {
+          "exclusiveMinimum": 0,
+          "title": "Expected Rows",
+          "type": "integer"
+        },
+        "structural_note": {
+          "title": "Structural Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "table_id",
+        "physical_page",
+        "title",
+        "columns",
+        "context_ids",
+        "expected_rows",
+        "structural_note"
+      ],
+      "title": "Table",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "review_id": {
+      "const": "ATLAS-WELD-BUILDING-FEES-2026-09-11",
+      "title": "Review Id",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "weld-building-fees-sd008-01",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Asset"
+    },
+    "preparation": {
+      "$ref": "#/$defs/Asset"
+    },
+    "crop_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "review_mode": {
+      "const": "atlas_candidate_aware_not_blind",
+      "title": "Review Mode",
+      "type": "string"
+    },
+    "external_assignment": {
+      "title": "External Assignment",
+      "type": "null"
+    },
+    "reviewer": {
+      "const": "Atlas (Codex)",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "scope": {
+      "const": "all_five_physical_pages_source_text_and_fee_associations",
+      "title": "Scope",
+      "type": "string"
+    },
+    "native_bytes": {
+      "const": 14311,
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "native_byte_changes": {
+      "const": 0,
+      "title": "Native Byte Changes",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "adopted_status": {
+      "const": "not_verified",
+      "title": "Adopted Status",
+      "type": "string"
+    },
+    "original_http_acquisition": {
+      "const": "unconfirmed_supplied_claims_only",
+      "title": "Original Http Acquisition",
+      "type": "string"
+    },
+    "official_source_url": {
+      "title": "Official Source Url",
+      "type": "null"
+    },
+    "received_at": {
+      "format": "date-time",
+      "title": "Received At",
+      "type": "string"
+    },
+    "supplied_url_claim": {
+      "title": "Supplied Url Claim",
+      "type": "string"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "title": "Pages",
+      "type": "array"
+    },
+    "tables": {
+      "items": {
+        "$ref": "#/$defs/Table"
+      },
+      "minItems": 1,
+      "title": "Tables",
+      "type": "array"
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/FeeRow"
+      },
+      "minItems": 1,
+      "title": "Rows",
+      "type": "array"
+    },
+    "contexts": {
+      "items": {
+        "$ref": "#/$defs/Context"
+      },
+      "minItems": 1,
+      "title": "Contexts",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "minItems": 1,
+      "title": "Observations",
+      "type": "array"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "review_id",
+    "source_id",
+    "source",
+    "candidate",
+    "preparation",
+    "crop_manifest",
+    "completed_at",
+    "review_mode",
+    "external_assignment",
+    "reviewer",
+    "scope",
+    "native_bytes",
+    "native_byte_changes",
+    "legal_currentness",
+    "adopted_status",
+    "original_http_acquisition",
+    "official_source_url",
+    "received_at",
+    "supplied_url_claim",
+    "pages",
+    "tables",
+    "rows",
+    "contexts",
+    "observations",
+    "limits"
+  ],
+  "title": "Review",
+  "type": "object"
+}

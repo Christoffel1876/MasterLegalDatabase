@@ -1,0 +1,610 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "CommandCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Command",
+          "type": "array"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "completed_at": {
+          "format": "date-time",
+          "title": "Completed At",
+          "type": "string"
+        },
+        "exit_code": {
+          "const": 0,
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "stdout": {
+          "title": "Stdout",
+          "type": "string"
+        },
+        "stderr": {
+          "title": "Stderr",
+          "type": "string"
+        },
+        "scope": {
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "command",
+        "started_at",
+        "completed_at",
+        "exit_code",
+        "stdout",
+        "stderr",
+        "scope"
+      ],
+      "title": "CommandCheck",
+      "type": "object"
+    },
+    "Input": {
+      "additionalProperties": false,
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "captured": {
+          "$ref": "#/$defs/Asset"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        }
+      },
+      "required": [
+        "original_path",
+        "captured",
+        "purpose"
+      ],
+      "title": "Input",
+      "type": "object"
+    },
+    "LegacyMatch": {
+      "additionalProperties": false,
+      "properties": {
+        "line": {
+          "minimum": 1,
+          "title": "Line",
+          "type": "integer"
+        },
+        "raw_line_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Raw Line Sha256",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "recorded_sha256": {
+          "title": "Recorded Sha256",
+          "type": "string"
+        },
+        "recorded_raw_path": {
+          "title": "Recorded Raw Path",
+          "type": "string"
+        },
+        "mapped_repository_path": {
+          "title": "Mapped Repository Path",
+          "type": "string"
+        },
+        "mapped_path_state": {
+          "enum": [
+            "missing",
+            "ordinary_present",
+            "nonordinary"
+          ],
+          "title": "Mapped Path State",
+          "type": "string"
+        },
+        "available_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Available Sha256"
+        }
+      },
+      "required": [
+        "line",
+        "raw_line_sha256",
+        "source_id",
+        "requested_url",
+        "recorded_sha256",
+        "recorded_raw_path",
+        "mapped_repository_path",
+        "mapped_path_state",
+        "available_sha256"
+      ],
+      "title": "LegacyMatch",
+      "type": "object"
+    },
+    "Snapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "repository_head": {
+          "pattern": "^[a-f0-9]{40}$",
+          "title": "Repository Head",
+          "type": "string"
+        },
+        "manual_records": {
+          "const": 64,
+          "title": "Manual Records",
+          "type": "integer"
+        },
+        "ledger_records": {
+          "const": 65,
+          "title": "Ledger Records",
+          "type": "integer"
+        },
+        "inventory_sources": {
+          "const": 64,
+          "title": "Inventory Sources",
+          "type": "integer"
+        },
+        "inventory_linked_reviews": {
+          "const": 27,
+          "title": "Inventory Linked Reviews",
+          "type": "integer"
+        },
+        "inventory_unmapped": {
+          "const": 37,
+          "title": "Inventory Unmapped",
+          "type": "integer"
+        },
+        "legacy_rows": {
+          "const": 48390,
+          "title": "Legacy Rows",
+          "type": "integer"
+        },
+        "legacy_current_equals_prior_full_stream": {
+          "const": true,
+          "title": "Legacy Current Equals Prior Full Stream",
+          "type": "boolean"
+        },
+        "legacy_current_equals_head_git_blob": {
+          "const": true,
+          "title": "Legacy Current Equals Head Git Blob",
+          "type": "boolean"
+        },
+        "raw_archive_regular_files_examined": {
+          "title": "Raw Archive Regular Files Examined",
+          "type": "integer"
+        },
+        "raw_archive_nonordinary_entries": {
+          "title": "Raw Archive Nonordinary Entries",
+          "type": "integer"
+        },
+        "raw_archive_same_size_files_hashed": {
+          "title": "Raw Archive Same Size Files Hashed",
+          "type": "integer"
+        },
+        "raw_archive_matching_paths": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 0,
+          "title": "Raw Archive Matching Paths",
+          "type": "array"
+        },
+        "raw_archive_scan_scope": {
+          "title": "Raw Archive Scan Scope",
+          "type": "string"
+        },
+        "ledger_only_missing_original_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ledger Only Missing Original Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "repository_head",
+        "manual_records",
+        "ledger_records",
+        "inventory_sources",
+        "inventory_linked_reviews",
+        "inventory_unmapped",
+        "legacy_rows",
+        "legacy_current_equals_prior_full_stream",
+        "legacy_current_equals_head_git_blob",
+        "raw_archive_regular_files_examined",
+        "raw_archive_nonordinary_entries",
+        "raw_archive_same_size_files_hashed",
+        "raw_archive_matching_paths",
+        "raw_archive_scan_scope",
+        "ledger_only_missing_original_ids"
+      ],
+      "title": "Snapshot",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "rank": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Rank",
+          "type": "integer"
+        },
+        "proposed_source_id": {
+          "title": "Proposed Source Id",
+          "type": "string"
+        },
+        "action_id": {
+          "title": "Action Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-GUNNISON",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "const": "08_County_Authorities",
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Asset"
+        },
+        "original_filename": {
+          "title": "Original Filename",
+          "type": "string"
+        },
+        "physical_pages": {
+          "minimum": 1,
+          "title": "Physical Pages",
+          "type": "integer"
+        },
+        "pdf_repaired": {
+          "const": false,
+          "title": "Pdf Repaired",
+          "type": "boolean"
+        },
+        "pdf_encrypted": {
+          "const": false,
+          "title": "Pdf Encrypted",
+          "type": "boolean"
+        },
+        "terminal_eof": {
+          "const": true,
+          "title": "Terminal Eof",
+          "type": "boolean"
+        },
+        "parent": {
+          "$ref": "#/$defs/Asset"
+        },
+        "parent_url": {
+          "title": "Parent Url",
+          "type": "string"
+        },
+        "original_href": {
+          "title": "Original Href",
+          "type": "string"
+        },
+        "visible_label": {
+          "title": "Visible Label",
+          "type": "string"
+        },
+        "resolved_url": {
+          "title": "Resolved Url",
+          "type": "string"
+        },
+        "reservation": {
+          "$ref": "#/$defs/Asset"
+        },
+        "result": {
+          "$ref": "#/$defs/Asset"
+        },
+        "public_headers": {
+          "$ref": "#/$defs/Asset"
+        },
+        "reported_requested_url": {
+          "title": "Reported Requested Url",
+          "type": "string"
+        },
+        "reported_final_url": {
+          "title": "Reported Final Url",
+          "type": "string"
+        },
+        "reported_status": {
+          "const": 200,
+          "title": "Reported Status",
+          "type": "integer"
+        },
+        "reported_start": {
+          "format": "date-time",
+          "title": "Reported Start",
+          "type": "string"
+        },
+        "reported_finish": {
+          "format": "date-time",
+          "title": "Reported Finish",
+          "type": "string"
+        },
+        "verified_original_acquired_at": {
+          "title": "Verified Original Acquired At",
+          "type": "null"
+        },
+        "proposed_intake_received_at": {
+          "title": "Proposed Intake Received At",
+          "type": "null"
+        },
+        "proposed_acquisition_method": {
+          "const": "received_review_package",
+          "title": "Proposed Acquisition Method",
+          "type": "string"
+        },
+        "proposed_official_source_url": {
+          "title": "Proposed Official Source Url",
+          "type": "null"
+        },
+        "proposed_status": {
+          "const": "archived_pending_pipeline",
+          "title": "Proposed Status",
+          "type": "string"
+        },
+        "prior_role_observations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Prior Role Observations",
+          "type": "array"
+        },
+        "prior_visually_reviewed_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Prior Visually Reviewed Pages",
+          "type": "array"
+        },
+        "prior_first_page_image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "new_visually_reviewed_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "maxItems": 0,
+          "title": "New Visually Reviewed Pages",
+          "type": "array"
+        },
+        "legacy_matches": {
+          "items": {
+            "$ref": "#/$defs/LegacyMatch"
+          },
+          "title": "Legacy Matches",
+          "type": "array"
+        },
+        "manual_matches": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 0,
+          "title": "Manual Matches",
+          "type": "array"
+        },
+        "ledger_matches": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 0,
+          "title": "Ledger Matches",
+          "type": "array"
+        },
+        "inventory_matches": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 0,
+          "title": "Inventory Matches",
+          "type": "array"
+        },
+        "registry_id_matches": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 0,
+          "title": "Registry Id Matches",
+          "type": "array"
+        },
+        "limitations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "rank",
+        "proposed_source_id",
+        "action_id",
+        "authority_id",
+        "layer_id",
+        "source",
+        "original_filename",
+        "physical_pages",
+        "pdf_repaired",
+        "pdf_encrypted",
+        "terminal_eof",
+        "parent",
+        "parent_url",
+        "original_href",
+        "visible_label",
+        "resolved_url",
+        "reservation",
+        "result",
+        "public_headers",
+        "reported_requested_url",
+        "reported_final_url",
+        "reported_status",
+        "reported_start",
+        "reported_finish",
+        "verified_original_acquired_at",
+        "proposed_intake_received_at",
+        "proposed_acquisition_method",
+        "proposed_official_source_url",
+        "proposed_status",
+        "prior_role_observations",
+        "prior_visually_reviewed_pages",
+        "prior_first_page_image",
+        "new_visually_reviewed_pages",
+        "legacy_matches",
+        "manual_matches",
+        "ledger_matches",
+        "inventory_matches",
+        "registry_id_matches",
+        "limitations"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "const": "PREPARED_RECOMMENDATION_NOT_APPLIED",
+      "title": "Status",
+      "type": "string"
+    },
+    "measured_at": {
+      "format": "date-time",
+      "title": "Measured At",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Sources",
+      "type": "array"
+    },
+    "inputs": {
+      "items": {
+        "$ref": "#/$defs/Input"
+      },
+      "title": "Inputs",
+      "type": "array"
+    },
+    "snapshot": {
+      "$ref": "#/$defs/Snapshot"
+    },
+    "prior_closed_audit_check": {
+      "$ref": "#/$defs/CommandCheck"
+    },
+    "prior_packet_preservation_scope": {
+      "title": "Prior Packet Preservation Scope",
+      "type": "string"
+    },
+    "required_before_apply": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Before Apply",
+      "type": "array"
+    },
+    "remaining_documentary_gaps": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Remaining Documentary Gaps",
+      "type": "array"
+    },
+    "no_new_source_review": {
+      "const": true,
+      "title": "No New Source Review",
+      "type": "boolean"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "canonical_mutations": {
+      "const": 0,
+      "title": "Canonical Mutations",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "status",
+    "measured_at",
+    "sources",
+    "inputs",
+    "snapshot",
+    "prior_closed_audit_check",
+    "prior_packet_preservation_scope",
+    "required_before_apply",
+    "remaining_documentary_gaps",
+    "no_new_source_review",
+    "public_requests",
+    "canonical_mutations",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Recommendation",
+  "type": "object"
+}

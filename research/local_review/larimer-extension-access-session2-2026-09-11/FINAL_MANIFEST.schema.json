@@ -1,0 +1,69 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "status": {
+      "const": "frozen_bounded_unresolved_evidence",
+      "default": "frozen_bounded_unresolved_evidence",
+      "title": "Status",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "excluded": {
+      "const": "FINAL_MANIFEST.json; FINAL_MANIFEST.schema.json",
+      "default": "FINAL_MANIFEST.json; FINAL_MANIFEST.schema.json",
+      "title": "Excluded",
+      "type": "string"
+    }
+  },
+  "required": [
+    "created_at",
+    "files"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

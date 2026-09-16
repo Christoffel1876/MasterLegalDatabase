@@ -1,0 +1,93 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "reviewer": {
+      "const": "Atlas",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "approved_netloc": {
+      "const": "cms2.revize.com",
+      "title": "Approved Netloc",
+      "type": "string"
+    },
+    "approved_path": {
+      "const": "/revize/chaffeecounty/",
+      "title": "Approved Path",
+      "type": "string"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "maintained_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Maintained Files",
+      "type": "array"
+    },
+    "validation": {
+      "title": "Validation",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "reviewer",
+    "approved_netloc",
+    "approved_path",
+    "scope",
+    "evidence",
+    "maintained_files",
+    "validation",
+    "limitations"
+  ],
+  "title": "Decision",
+  "type": "object"
+}

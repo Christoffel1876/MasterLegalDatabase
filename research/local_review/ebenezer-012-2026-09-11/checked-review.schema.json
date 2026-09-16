@@ -1,0 +1,293 @@
+{
+  "$defs": {
+    "Body": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "maximum": 2,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "candidate_start_byte": {
+          "title": "Candidate Start Byte",
+          "type": "integer"
+        },
+        "candidate_end_byte": {
+          "title": "Candidate End Byte",
+          "type": "integer"
+        },
+        "original_text": {
+          "title": "Original Text",
+          "type": "string"
+        },
+        "reviewed_text": {
+          "title": "Reviewed Text",
+          "type": "string"
+        },
+        "edits": {
+          "items": {
+            "$ref": "#/$defs/Edit"
+          },
+          "title": "Edits",
+          "type": "array"
+        },
+        "scope": {
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "physical_page",
+        "candidate_start_byte",
+        "candidate_end_byte",
+        "original_text",
+        "reviewed_text",
+        "edits",
+        "scope"
+      ],
+      "title": "Body",
+      "type": "object"
+    },
+    "Disposition": {
+      "additionalProperties": false,
+      "properties": {
+        "finding_id": {
+          "title": "Finding Id",
+          "type": "string"
+        },
+        "disposition": {
+          "enum": [
+            "accepted_text_correction",
+            "accepted_omission_note",
+            "qualified_nontext_observation",
+            "qualified_handwriting",
+            "expected_text_format_limit",
+            "packaging_not_source",
+            "agreement"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "atlas_note": {
+          "title": "Atlas Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "finding_id",
+        "disposition",
+        "atlas_note"
+      ],
+      "title": "Disposition",
+      "type": "object"
+    },
+    "Edit": {
+      "additionalProperties": false,
+      "properties": {
+        "start_byte": {
+          "title": "Start Byte",
+          "type": "integer"
+        },
+        "end_byte": {
+          "title": "End Byte",
+          "type": "integer"
+        },
+        "before": {
+          "title": "Before",
+          "type": "string"
+        },
+        "after": {
+          "title": "After",
+          "type": "string"
+        },
+        "source_basis": {
+          "title": "Source Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start_byte",
+        "end_byte",
+        "before",
+        "after",
+        "source_basis"
+      ],
+      "title": "Edit",
+      "type": "object"
+    },
+    "ExecutionNote": {
+      "additionalProperties": false,
+      "properties": {
+        "region": {
+          "title": "Region",
+          "type": "string"
+        },
+        "source_printed_text": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Printed Text",
+          "type": "array"
+        },
+        "observation": {
+          "title": "Observation",
+          "type": "string"
+        },
+        "uncertainty": {
+          "title": "Uncertainty",
+          "type": "string"
+        }
+      },
+      "required": [
+        "region",
+        "source_printed_text",
+        "observation",
+        "uncertainty"
+      ],
+      "title": "ExecutionNote",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "original_path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "assignment_id": {
+      "const": "EB-PDF-012",
+      "default": "EB-PDF-012",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "larimer-data-center-moratorium-sd004-04",
+      "default": "larimer-data-center-moratorium-sd004-04",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "status": {
+      "const": "body_text_checked_execution_block_qualified",
+      "default": "body_text_checked_execution_block_qualified",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "candidate_sha256": {
+      "title": "Candidate Sha256",
+      "type": "string"
+    },
+    "page_images_inspected": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Page Images Inspected",
+      "type": "array"
+    },
+    "bodies": {
+      "items": {
+        "$ref": "#/$defs/Body"
+      },
+      "title": "Bodies",
+      "type": "array"
+    },
+    "execution_notes": {
+      "items": {
+        "$ref": "#/$defs/ExecutionNote"
+      },
+      "title": "Execution Notes",
+      "type": "array"
+    },
+    "external_dispositions": {
+      "items": {
+        "$ref": "#/$defs/Disposition"
+      },
+      "title": "External Dispositions",
+      "type": "array"
+    },
+    "report_accounting_note": {
+      "title": "Report Accounting Note",
+      "type": "string"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "source_sha256",
+    "candidate_sha256",
+    "page_images_inspected",
+    "bodies",
+    "execution_notes",
+    "external_dispositions",
+    "report_accounting_note",
+    "method",
+    "limitations",
+    "files"
+  ],
+  "title": "Review",
+  "type": "object"
+}

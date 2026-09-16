@@ -1,0 +1,118 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact relative immutable file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Prepared data-map scope and bounded visual QA.",
+  "properties": {
+    "status": {
+      "const": "prepared_not_installed",
+      "title": "Status",
+      "type": "string"
+    },
+    "sealed_at": {
+      "title": "Sealed At",
+      "type": "string"
+    },
+    "source_inventory_sha256": {
+      "const": "e2531da64de89de3fff894283707e32833633898c1b4961ae535c262bb83c413",
+      "title": "Source Inventory Sha256",
+      "type": "string"
+    },
+    "fragment_sha256": {
+      "const": "b7ede04ac6de2bcc1f2affdfc45f0db9bf56e9084cc9a142358afb95552efbc0",
+      "title": "Fragment Sha256",
+      "type": "string"
+    },
+    "sources": {
+      "const": 64,
+      "title": "Sources",
+      "type": "integer"
+    },
+    "mapped": {
+      "const": 27,
+      "title": "Mapped",
+      "type": "integer"
+    },
+    "unmapped": {
+      "const": 37,
+      "title": "Unmapped",
+      "type": "integer"
+    },
+    "authorities": {
+      "const": 12,
+      "title": "Authorities",
+      "type": "integer"
+    },
+    "direct_screenshots_inspected": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Direct Screenshots Inspected",
+      "type": "array"
+    },
+    "tests": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Tests",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "sealed_at",
+    "source_inventory_sha256",
+    "fragment_sha256",
+    "sources",
+    "mapped",
+    "unmapped",
+    "authorities",
+    "direct_screenshots_inspected",
+    "tests",
+    "limitations",
+    "files"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

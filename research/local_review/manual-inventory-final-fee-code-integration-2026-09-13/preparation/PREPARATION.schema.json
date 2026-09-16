@@ -1,0 +1,273 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact local bytes with a declared relative path.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Review": {
+      "additionalProperties": false,
+      "description": "Bind one exact accepted source QA without changing historical fields.",
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "source_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "authority_id": {
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "acceptance": {
+          "$ref": "#/$defs/Asset"
+        },
+        "acceptance_schema": {
+          "$ref": "#/$defs/Asset"
+        },
+        "review": {
+          "$ref": "#/$defs/Asset"
+        },
+        "review_schema": {
+          "$ref": "#/$defs/Asset"
+        },
+        "review_kind": {
+          "enum": [
+            "checked_passages",
+            "checked_tables"
+          ],
+          "title": "Review Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "source_sha256",
+        "authority_id",
+        "acceptance",
+        "acceptance_schema",
+        "review",
+        "review_schema",
+        "review_kind"
+      ],
+      "title": "Review",
+      "type": "object"
+    },
+    "Target": {
+      "additionalProperties": false,
+      "description": "Exactly one authorized maintained target with immutable before and after copies.",
+      "properties": {
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "before": {
+          "$ref": "#/$defs/Asset"
+        },
+        "after": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "repository_path",
+        "before",
+        "after"
+      ],
+      "title": "Target",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Tested proposed files, not evidence that an installation already occurred.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "prepared_tested_not_installed",
+      "title": "Status",
+      "type": "string"
+    },
+    "reviewer": {
+      "const": "Plato",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "targets": {
+      "items": {
+        "$ref": "#/$defs/Target"
+      },
+      "title": "Targets",
+      "type": "array"
+    },
+    "reviews": {
+      "items": {
+        "$ref": "#/$defs/Review"
+      },
+      "title": "Reviews",
+      "type": "array"
+    },
+    "actual_intake_receipt": {
+      "$ref": "#/$defs/Asset"
+    },
+    "actual_intake_received_at": {
+      "format": "date-time",
+      "title": "Actual Intake Received At",
+      "type": "string"
+    },
+    "raw_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "prior_sources": {
+      "const": 69,
+      "title": "Prior Sources",
+      "type": "integer"
+    },
+    "prior_review_links": {
+      "const": 33,
+      "title": "Prior Review Links",
+      "type": "integer"
+    },
+    "proposed_sources": {
+      "const": 70,
+      "title": "Proposed Sources",
+      "type": "integer"
+    },
+    "proposed_review_links": {
+      "const": 35,
+      "title": "Proposed Review Links",
+      "type": "integer"
+    },
+    "proposed_unmapped": {
+      "const": 35,
+      "title": "Proposed Unmapped",
+      "type": "integer"
+    },
+    "old_authority_joins_preserved": {
+      "const": 69,
+      "title": "Old Authority Joins Preserved",
+      "type": "integer"
+    },
+    "old_review_joins_preserved": {
+      "const": 33,
+      "title": "Old Review Joins Preserved",
+      "type": "integer"
+    },
+    "only_old_row_with_new_review": {
+      "const": "gunnison-building-code-resolution-2023-22-sh-ext-003",
+      "title": "Only Old Row With New Review",
+      "type": "string"
+    },
+    "test_log": {
+      "$ref": "#/$defs/Asset"
+    },
+    "initial_failure_log": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Asset"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "coverage": {
+      "$ref": "#/$defs/Asset"
+    },
+    "passed_tests": {
+      "minimum": 129,
+      "title": "Passed Tests",
+      "type": "integer"
+    },
+    "branch_inclusive_coverage_percent": {
+      "maximum": 100,
+      "minimum": 90,
+      "title": "Branch Inclusive Coverage Percent",
+      "type": "number"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "canonical_source_writes": {
+      "const": 0,
+      "title": "Canonical Source Writes",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "reviewer",
+    "targets",
+    "reviews",
+    "actual_intake_receipt",
+    "actual_intake_received_at",
+    "raw_manifest",
+    "prior_sources",
+    "prior_review_links",
+    "proposed_sources",
+    "proposed_review_links",
+    "proposed_unmapped",
+    "old_authority_joins_preserved",
+    "old_review_joins_preserved",
+    "only_old_row_with_new_review",
+    "test_log",
+    "initial_failure_log",
+    "coverage",
+    "passed_tests",
+    "branch_inclusive_coverage_percent",
+    "limitations",
+    "public_requests",
+    "canonical_source_writes",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Preparation",
+  "type": "object"
+}

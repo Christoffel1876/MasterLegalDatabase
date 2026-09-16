@@ -1,0 +1,138 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "inputs": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Inputs",
+      "type": "array"
+    },
+    "exact_installed_targets": {
+      "title": "Exact Installed Targets",
+      "type": "integer"
+    },
+    "sources": {
+      "title": "Sources",
+      "type": "integer"
+    },
+    "mapped": {
+      "title": "Mapped",
+      "type": "integer"
+    },
+    "unmapped": {
+      "title": "Unmapped",
+      "type": "integer"
+    },
+    "new_schema_entries": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "New Schema Entries",
+      "type": "object"
+    },
+    "ast_otherwise_identical": {
+      "const": true,
+      "title": "Ast Otherwise Identical",
+      "type": "boolean"
+    },
+    "unchanged_authority_joins": {
+      "title": "Unchanged Authority Joins",
+      "type": "integer"
+    },
+    "unchanged_review_joins": {
+      "title": "Unchanged Review Joins",
+      "type": "integer"
+    },
+    "old_row_changes": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "title": "Old Row Changes",
+      "type": "object"
+    },
+    "new_review_proofs": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "New Review Proofs",
+      "type": "array"
+    },
+    "all_source_currentness_unverified": {
+      "const": true,
+      "title": "All Source Currentness Unverified",
+      "type": "boolean"
+    },
+    "all_source_answer_safe_false": {
+      "const": true,
+      "title": "All Source Answer Safe False",
+      "type": "boolean"
+    },
+    "unchanged_legacy_ledger": {
+      "$ref": "#/$defs/Ref"
+    },
+    "notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Notes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "inputs",
+    "exact_installed_targets",
+    "sources",
+    "mapped",
+    "unmapped",
+    "new_schema_entries",
+    "ast_otherwise_identical",
+    "unchanged_authority_joins",
+    "unchanged_review_joins",
+    "old_row_changes",
+    "new_review_proofs",
+    "all_source_currentness_unverified",
+    "all_source_answer_safe_false",
+    "unchanged_legacy_ledger",
+    "notes"
+  ],
+  "title": "InventoryReview",
+  "type": "object"
+}

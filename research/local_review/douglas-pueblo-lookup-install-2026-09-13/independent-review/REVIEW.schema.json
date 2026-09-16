@@ -1,0 +1,113 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "status": {
+      "const": "bounded_revision_recheck_passed",
+      "title": "Status",
+      "type": "string"
+    },
+    "proposal_manifest": {
+      "$ref": "#/$defs/Ref"
+    },
+    "proposed_code": {
+      "$ref": "#/$defs/Ref"
+    },
+    "checks": {
+      "additionalProperties": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Checks",
+      "type": "object"
+    },
+    "interpretation": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Interpretation",
+      "type": "object"
+    },
+    "inspected_logic": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Inspected Logic",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "production_writes": {
+      "const": 0,
+      "title": "Production Writes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schema_version",
+    "checked_at",
+    "status",
+    "proposal_manifest",
+    "proposed_code",
+    "checks",
+    "interpretation",
+    "inspected_logic",
+    "limitations",
+    "legal_currentness",
+    "public_requests",
+    "production_writes"
+  ],
+  "title": "Review",
+  "type": "object"
+}

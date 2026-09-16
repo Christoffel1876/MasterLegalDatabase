@@ -10,6 +10,8 @@ from typing import Any
 
 from pydantic import BaseModel, Field
 
+from geode.pipeline.local_release_ownership import ownership_reason_with_parents
+from geode.pipeline.local_source_ownership import load_ownership_policy
 from geode.utils.file_io import atomic_write_json, atomic_write_jsonl, iter_jsonl
 
 
@@ -41,6 +43,7 @@ def build_candidate_mappings(root: Path) -> dict[str, Any]:
     """
 
     resolved = root.resolve()
+    policy = load_ownership_policy(resolved)
     queue_path = resolved / QUEUE
     index_rows = _load_index_rows(resolved)
     units_by_parent: dict[str, list[dict[str, Any]]] = defaultdict(list)
@@ -74,6 +77,12 @@ def build_candidate_mappings(root: Path) -> dict[str, Any]:
             continue
         seen_candidates.add(candidate_id)
 
+        reason = ownership_reason_with_parents(policy, row, index_rows)
+        if reason:
+            mappings.append(_blocked_mapping(row, reason))
+            counts["blocked"] += 1
+            continue
+
         parent_rows = units_by_parent.get(parent, [])
         parent_hashes = {
             str(item.get("sha256") or "") for item in index_rows.values()
@@ -87,6 +96,10 @@ def build_candidate_mappings(root: Path) -> dict[str, Any]:
             continue
 
         matches = [item for item in parent_rows if item.get("source_section") == source_section]
+        if any(ownership_reason_with_parents(policy, item, index_rows) for item in matches):
+            mappings.append(_blocked_mapping(row, "ownership exclusion on matching active unit"))
+            counts["blocked"] += 1
+            continue
         if len(matches) == 1 and str(matches[0]["id"]) not in claimed_existing:
             permanent_id = str(matches[0]["id"])
             claimed_existing.add(permanent_id)

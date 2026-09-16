@@ -1,0 +1,123 @@
+{
+  "$defs": {
+    "FileRef": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "validated_at": {
+      "format": "date-time",
+      "title": "Validated At",
+      "type": "string"
+    },
+    "review": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "status": {
+      "const": "passed",
+      "title": "Status",
+      "type": "string"
+    },
+    "pages": {
+      "const": 2,
+      "title": "Pages",
+      "type": "integer"
+    },
+    "native_bytes": {
+      "const": 1316,
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "table_count": {
+      "const": 2,
+      "title": "Table Count",
+      "type": "integer"
+    },
+    "table_rows": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Table Rows",
+      "type": "array"
+    },
+    "table_data_cells": {
+      "const": 24,
+      "title": "Table Data Cells",
+      "type": "integer"
+    },
+    "fee_amount_cells": {
+      "const": 16,
+      "title": "Fee Amount Cells",
+      "type": "integer"
+    },
+    "printed_dollar_cells": {
+      "const": 4,
+      "title": "Printed Dollar Cells",
+      "type": "integer"
+    },
+    "image_only_regions": {
+      "const": 2,
+      "title": "Image Only Regions",
+      "type": "integer"
+    },
+    "originals_unchanged": {
+      "const": true,
+      "title": "Originals Unchanged",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "checks_passed": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks Passed",
+      "type": "array"
+    }
+  },
+  "required": [
+    "validated_at",
+    "review",
+    "status",
+    "pages",
+    "native_bytes",
+    "table_count",
+    "table_rows",
+    "table_data_cells",
+    "fee_amount_cells",
+    "printed_dollar_cells",
+    "image_only_regions",
+    "originals_unchanged",
+    "legal_currentness",
+    "checks_passed"
+  ],
+  "title": "ValidationResult",
+  "type": "object"
+}

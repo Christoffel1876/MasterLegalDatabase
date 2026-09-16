@@ -1,3 +1,8 @@
+---
+title: Project Geode control plane
+updated: 2026-09-10
+---
+
 # Project Geode Control Plane
 
 The control plane contains the small, AI-readable files that describe Geode's
@@ -17,3 +22,14 @@ Current operational handoff files:
 - `DOWNLOAD_SAFETY_CHECKPOINT.json` records the safety state before the next major source download.
 - `NEXT_DOWNLOAD_DASHBOARD.json` identifies the next recommended download area and current blockers.
 - `../docs/PUBLICATION_CHECKLIST.md` must be completed before public-facing GitHub publication.
+
+- `LOCAL_COVERAGE_LEDGER.json` separates preserved local source evidence from missing
+  collection, legal-currentness and review work. It includes dated directory reconciliation
+  and a full category checklist for each identified authority. See
+  `../docs/LOCAL_COVERAGE_LEDGER.md` for its validation and collection process.
+
+- `MUNICIPAL_EXPORTS_2026-09-10.json` binds two recovered municipal publications
+  to official referrals, publisher identities, source hashes and linked images.
+  Its explicitly derived endpoint/redaction summaries are distinct from exact
+  original source files. See `../docs/LOCAL_TEXT_RECOVERY.md` for saved native text,
+  OCR page receipts, checked excerpts and the fee reconciliation study.

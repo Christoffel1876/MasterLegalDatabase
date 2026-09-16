@@ -1,0 +1,87 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "chaffee-planning-application-fees-atlas-directed",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-CHAFFEE",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "original": {
+      "$ref": "#/$defs/Asset"
+    },
+    "observed_source_copy": {
+      "const": "exact_new_response_body",
+      "title": "Observed Source Copy",
+      "type": "string"
+    },
+    "expected_physical_pages": {
+      "const": 2,
+      "title": "Expected Physical Pages",
+      "type": "integer"
+    },
+    "plan": {
+      "title": "Plan",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "source_id",
+    "authority_id",
+    "original",
+    "observed_source_copy",
+    "expected_physical_pages",
+    "plan",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Prep",
+  "type": "object"
+}

@@ -1,0 +1,243 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Bind an exact prepared payload.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Input": {
+      "additionalProperties": false,
+      "properties": {
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "working": {
+          "$ref": "#/$defs/Asset"
+        },
+        "pinned": {
+          "$ref": "#/$defs/Asset"
+        },
+        "byte_equal": {
+          "title": "Byte Equal",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "repository_path",
+        "working",
+        "pinned",
+        "byte_equal"
+      ],
+      "title": "Input",
+      "type": "object"
+    },
+    "Legacy": {
+      "additionalProperties": false,
+      "properties": {
+        "edition": {
+          "title": "Edition",
+          "type": "string"
+        },
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "full_sha256": {
+          "title": "Full Sha256",
+          "type": "string"
+        },
+        "full_bytes": {
+          "title": "Full Bytes",
+          "type": "integer"
+        },
+        "full_rows": {
+          "title": "Full Rows",
+          "type": "integer"
+        },
+        "selected": {
+          "$ref": "#/$defs/Asset"
+        },
+        "selected_rows": {
+          "title": "Selected Rows",
+          "type": "integer"
+        },
+        "original_line_numbers": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Original Line Numbers",
+          "type": "array"
+        },
+        "by_authority": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "By Authority",
+          "type": "object"
+        },
+        "status_counts": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Status Counts",
+          "type": "object"
+        },
+        "url_attempts": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Url Attempts",
+          "type": "object"
+        },
+        "source_id_attempts": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Source Id Attempts",
+          "type": "object"
+        },
+        "recorded_sha256s": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Recorded Sha256S",
+          "type": "array"
+        },
+        "referenced_local_paths_present": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Referenced Local Paths Present",
+          "type": "array"
+        }
+      },
+      "required": [
+        "edition",
+        "repository_path",
+        "full_sha256",
+        "full_bytes",
+        "full_rows",
+        "selected",
+        "selected_rows",
+        "original_line_numbers",
+        "by_authority",
+        "status_counts",
+        "url_attempts",
+        "source_id_attempts",
+        "recorded_sha256s",
+        "referenced_local_paths_present"
+      ],
+      "title": "Legacy",
+      "type": "object"
+    },
+    "RegistryEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "json_pointer": {
+          "title": "Json Pointer",
+          "type": "string"
+        },
+        "record": {
+          "additionalProperties": true,
+          "title": "Record",
+          "type": "object"
+        }
+      },
+      "required": [
+        "json_pointer",
+        "record"
+      ],
+      "title": "RegistryEntry",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "assignment_id": {
+      "const": "SH-EXT-003",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_DISPATCHED",
+      "title": "Status",
+      "type": "string"
+    },
+    "captured_at": {
+      "title": "Captured At",
+      "type": "string"
+    },
+    "pinned_commit": {
+      "title": "Pinned Commit",
+      "type": "string"
+    },
+    "observed_head": {
+      "title": "Observed Head",
+      "type": "string"
+    },
+    "inputs": {
+      "items": {
+        "$ref": "#/$defs/Input"
+      },
+      "title": "Inputs",
+      "type": "array"
+    },
+    "legacy": {
+      "items": {
+        "$ref": "#/$defs/Legacy"
+      },
+      "title": "Legacy",
+      "type": "array"
+    },
+    "registry_entries": {
+      "items": {
+        "$ref": "#/$defs/RegistryEntry"
+      },
+      "title": "Registry Entries",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "assignment_id",
+    "status",
+    "captured_at",
+    "pinned_commit",
+    "observed_head",
+    "inputs",
+    "legacy",
+    "registry_entries",
+    "limitations"
+  ],
+  "title": "Comparison",
+  "type": "object"
+}

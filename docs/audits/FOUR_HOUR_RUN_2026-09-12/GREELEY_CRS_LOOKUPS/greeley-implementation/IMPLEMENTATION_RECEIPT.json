@@ -1,0 +1,109 @@
+{
+  "frozen_at": "2026-09-12T22:50:33.723110Z",
+  "status": "ready_for_independent_review",
+  "code_changes": [
+    {
+      "production_path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/scripts/research_source_lookup.py",
+      "frozen": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/greeley-lookup-extension/final-code/scripts/research_source_lookup.py",
+        "sha256": "2a1e2f3a82214dc1fc85511b4dda13b53ff171bb02aa530a5ed837005ec3a33e",
+        "size_bytes": 79190
+      },
+      "preimage": {
+        "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/_SNAPSHOTS/snapshot_2026-09-12T223833863553Z/scripts/research_source_lookup.py",
+        "sha256": "69f80d72320d54486c7c6f81a3d7ccb8ea46271c1b72f19d55514ab777920eee",
+        "size_bytes": 50569
+      },
+      "maximum_line_length": 100
+    },
+    {
+      "production_path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/tests/test_research_source_lookup.py",
+      "frozen": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/greeley-lookup-extension/final-code/tests/test_research_source_lookup.py",
+        "sha256": "479c678632457079d9698e225fe077bae08878fb7e58d7983e0887d8e666bef2",
+        "size_bytes": 71547
+      },
+      "preimage": {
+        "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/_SNAPSHOTS/snapshot_2026-09-12T223833863553Z/tests/test_research_source_lookup.py",
+        "sha256": "0d8c76450aaa6c42201740d5be285352dab16ef141099ced543fe9cf20190b9e",
+        "size_bytes": 54278
+      },
+      "maximum_line_length": 100
+    },
+    {
+      "production_path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/docs/RESEARCH_SOURCE_LOOKUP.md",
+      "frozen": {
+        "path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/greeley-lookup-extension/final-code/docs/RESEARCH_SOURCE_LOOKUP.md",
+        "sha256": "1dfa9ed4d72ca5b7c24cb661321ac0e9f3adbae1d34b06386ecba74c85e154c7",
+        "size_bytes": 15294
+      },
+      "preimage": {
+        "path": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase/_SNAPSHOTS/snapshot_2026-09-12T223833863553Z/docs/RESEARCH_SOURCE_LOOKUP.md",
+        "sha256": "4c1eda88090ec29e023bb3d515d3862b588cbf4a48ee95032da24493d0207f7d",
+        "size_bytes": 10356
+      },
+      "maximum_line_length": 158
+    }
+  ],
+  "sources_added": [
+    "greeley-development-impact-fee-memo-sd008-07",
+    "greeley-water-sewer-proposed-pif-notice-sd008-08"
+  ],
+  "verified_counts": {
+    "impact_rows": 30,
+    "impact_native_bytes": 7191,
+    "impact_context_rows": 15,
+    "pif_tap_rows": 7,
+    "pif_single_family_rows": 1,
+    "pif_native_bytes": 1316,
+    "pif_printed_dollar_cells": 4
+  },
+  "focused_tests_passed": 187,
+  "focused_command": "PYTHONDONTWRITEBYTECODE=1 COVERAGE_FILE=/private/tmp/geode-grid-final-lookup-coverage /private/tmp/geode-status-venv/bin/python -B -m pytest tests/test_research_source_lookup.py -q --tb=short --cov=scripts.research_source_lookup --cov-branch --cov-report=term-missing --cov-report=json:/private/tmp/geode-grid-final-lookup-coverage.json",
+  "post_format_test_passed": 1,
+  "coverage": {
+    "covered_lines": 870,
+    "num_statements": 890,
+    "percent_covered": 96.53379549393414,
+    "missing_lines": 20,
+    "excluded_lines": 0,
+    "percent_statements_covered": 97.75280898876404,
+    "num_branches": 264,
+    "num_partial_branches": 20,
+    "covered_branches": 244,
+    "missing_branches": 20,
+    "percent_branches_covered": 92.42424242424242
+  },
+  "changed_executable_lines": 284,
+  "changed_executable_lines_covered": 280,
+  "inherited_json_and_markdown_byte_equal": [
+    "grand-junction-fire-fees-atlas-directed",
+    "greeley-building-fees-sd008-06",
+    "weld-ehs-fees-2026-atlas-directed"
+  ],
+  "test_artifacts": [
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/greeley-lookup-extension/geode-grid-final-lookup-coverage.json",
+      "sha256": "b039b587fd23eeb007d1e5ec38a020b80823f57b237db63dcdc7bab9f2e67194",
+      "size_bytes": 60355
+    },
+    {
+      "path": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/greeley-lookup-extension/geode-grid-final-lookup.log",
+      "sha256": "0fd9676664f94f3b61c5b955a36acd97b3cc322f589d07e9695a99bd1730687d",
+      "size_bytes": 1005
+    }
+  ],
+  "limitations": [
+    "Only two exact additional source IDs are supported. No normal-backend integration or current-law output.",
+    "Native source cells, full source context, dates and known unknowns are preserved; source grid display strings remain separately bound to exact native text.",
+    "EB017 always carries the conditional adoption and issuer/addressee qualifications, including row-only and no-match results.",
+    "The withdrawn EB016 not-visible-title conclusion is not used. The original baseline and accepted superseding disposition govern visibility.",
+    "Canonical official source URLs and original acquisition times remain null; reported URLs/acquisition claims are separate from actual repository receipt timestamps.",
+    "The complete original Greeley custody package and accepted reconciliation package are required locally; missing or changed evidence fails closed.",
+    "The final 187-test module run passed before a two-line test formatting change; the affected test then passed again. Production module bytes were unchanged by that formatting step.",
+    "Root will perform independent review and the full suite; no commit or push performed."
+  ],
+  "full_suite_run": false,
+  "network_requests": 0,
+  "legal_currentness": "not_verified"
+}

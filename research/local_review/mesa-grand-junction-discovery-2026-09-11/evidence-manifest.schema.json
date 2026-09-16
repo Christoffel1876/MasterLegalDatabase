@@ -1,0 +1,71 @@
+{
+  "$defs": {
+    "FileRecord": {
+      "additionalProperties": false,
+      "description": "Identify exact distributed bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "FileRecord",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Bind all distributed files except the inventory itself.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "package_id": {
+      "const": "mesa-grand-junction-discovery-2026-09-11",
+      "title": "Package Id",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "excluded_self": {
+      "const": "evidence-manifest.json",
+      "default": "evidence-manifest.json",
+      "title": "Excluded Self",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/FileRecord"
+      },
+      "title": "Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "package_id",
+    "created_at",
+    "files"
+  ],
+  "title": "Inventory",
+  "type": "object"
+}

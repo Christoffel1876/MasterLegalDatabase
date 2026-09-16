@@ -1,0 +1,70 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "original_directory": {
+      "title": "Original Directory",
+      "type": "string"
+    },
+    "reason": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reason",
+      "type": "array"
+    },
+    "before": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Before",
+      "type": "array"
+    },
+    "after": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "After",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "original_directory",
+    "reason",
+    "before",
+    "after"
+  ],
+  "title": "Revision",
+  "type": "object"
+}

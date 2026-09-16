@@ -1,0 +1,141 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact ordinary package file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Check": {
+      "additionalProperties": false,
+      "description": "Actual local command outcome and exact retained output.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "started_at": {
+          "title": "Started At",
+          "type": "string"
+        },
+        "completed_at": {
+          "title": "Completed At",
+          "type": "string"
+        },
+        "command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Command",
+          "type": "array"
+        },
+        "cwd": {
+          "title": "Cwd",
+          "type": "string"
+        },
+        "returncode": {
+          "title": "Returncode",
+          "type": "integer"
+        },
+        "stdout": {
+          "$ref": "#/$defs/Asset"
+        },
+        "stderr": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "name",
+        "started_at",
+        "completed_at",
+        "command",
+        "cwd",
+        "returncode",
+        "stdout",
+        "stderr"
+      ],
+      "title": "Check",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A focused check receipt, distinct from visual source judgments.",
+  "properties": {
+    "status": {
+      "const": "pass",
+      "title": "Status",
+      "type": "string"
+    },
+    "source_qa": {
+      "$ref": "#/$defs/Asset"
+    },
+    "input_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/Check"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "coverage": {
+      "$ref": "#/$defs/Asset"
+    },
+    "branch_inclusive_percent": {
+      "title": "Branch Inclusive Percent",
+      "type": "number"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "canonical_mutations": {
+      "const": 0,
+      "title": "Canonical Mutations",
+      "type": "integer"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "source_qa",
+    "input_manifest",
+    "checks",
+    "coverage",
+    "branch_inclusive_percent",
+    "public_requests",
+    "canonical_mutations",
+    "limits"
+  ],
+  "title": "Validation",
+  "type": "object"
+}

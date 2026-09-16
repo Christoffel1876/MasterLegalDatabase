@@ -1,0 +1,89 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Identify an unchanged file using an exact relative path, size and SHA256.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Close the distributable file set and bind the preserved historical manifest.",
+  "properties": {
+    "status": {
+      "const": "frozen_public_preservation_source_only",
+      "title": "Status",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "original_manifest_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Original Manifest Sha256",
+      "type": "string"
+    },
+    "copied_original_files": {
+      "const": 686,
+      "default": 686,
+      "title": "Copied Original Files",
+      "type": "integer"
+    },
+    "omitted_original_files": {
+      "const": 31,
+      "default": 31,
+      "title": "Omitted Original Files",
+      "type": "integer"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "status",
+    "created_at",
+    "original_manifest_sha256",
+    "files"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

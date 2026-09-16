@@ -1,0 +1,283 @@
+{
+  "$defs": {
+    "Artifact": {
+      "additionalProperties": false,
+      "description": "Identify the exact bytes preserved or referenced.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Artifact",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Record final implementation tests without promoting legal evidence.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "session_start": {
+      "const": "2026-09-11T21:00:00Z",
+      "title": "Session Start",
+      "type": "string"
+    },
+    "authorized_end": {
+      "const": "2026-09-11T22:00:00Z",
+      "title": "Authorized End",
+      "type": "string"
+    },
+    "earlier_checkpoint_commit": {
+      "const": "968b167",
+      "title": "Earlier Checkpoint Commit",
+      "type": "string"
+    },
+    "command": {
+      "title": "Command",
+      "type": "string"
+    },
+    "full_suite_exit_code": {
+      "const": 0,
+      "title": "Full Suite Exit Code",
+      "type": "integer"
+    },
+    "passed": {
+      "exclusiveMinimum": 0,
+      "title": "Passed",
+      "type": "integer"
+    },
+    "warnings": {
+      "minimum": 0,
+      "title": "Warnings",
+      "type": "integer"
+    },
+    "duration_seconds": {
+      "exclusiveMinimum": 0,
+      "title": "Duration Seconds",
+      "type": "number"
+    },
+    "geode_coverage_percent": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Geode Coverage Percent",
+      "type": "integer"
+    },
+    "inventory_originals": {
+      "const": 46,
+      "title": "Inventory Originals",
+      "type": "integer"
+    },
+    "inventory_mapped": {
+      "const": 19,
+      "title": "Inventory Mapped",
+      "type": "integer"
+    },
+    "inventory_unmapped": {
+      "const": 27,
+      "title": "Inventory Unmapped",
+      "type": "integer"
+    },
+    "original_inventory_mapped": {
+      "const": 18,
+      "title": "Original Inventory Mapped",
+      "type": "integer"
+    },
+    "original_inventory_unmapped": {
+      "const": 28,
+      "title": "Original Inventory Unmapped",
+      "type": "integer"
+    },
+    "inventory_check_passed": {
+      "const": true,
+      "title": "Inventory Check Passed",
+      "type": "boolean"
+    },
+    "selected_crs_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Selected Crs Ids",
+      "type": "array"
+    },
+    "package_created_at": {
+      "format": "date-time",
+      "title": "Package Created At",
+      "type": "string"
+    },
+    "package_original_acquisition": {
+      "title": "Package Original Acquisition",
+      "type": "null"
+    },
+    "package_path": {
+      "title": "Package Path",
+      "type": "string"
+    },
+    "package_manifest_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Package Manifest Sha256",
+      "type": "string"
+    },
+    "copied_input_bytes": {
+      "const": 26925757,
+      "title": "Copied Input Bytes",
+      "type": "integer"
+    },
+    "copied_input_files_fully_admitted": {
+      "const": false,
+      "title": "Copied Input Files Fully Admitted",
+      "type": "boolean"
+    },
+    "package_validation_passed": {
+      "const": true,
+      "title": "Package Validation Passed",
+      "type": "boolean"
+    },
+    "current_law_query_status": {
+      "const": "refused_current_law",
+      "title": "Current Law Query Status",
+      "type": "string"
+    },
+    "current_law_query_exit_code": {
+      "const": 2,
+      "title": "Current Law Query Exit Code",
+      "type": "integer"
+    },
+    "actual_readiness_status": {
+      "const": "needs_review",
+      "title": "Actual Readiness Status",
+      "type": "string"
+    },
+    "actual_readiness_checks": {
+      "const": 16,
+      "title": "Actual Readiness Checks",
+      "type": "integer"
+    },
+    "actual_readiness_passed": {
+      "const": 13,
+      "title": "Actual Readiness Passed",
+      "type": "integer"
+    },
+    "independent_review": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Independent Review",
+      "type": "array"
+    },
+    "unchanged_inputs_since_0681fcc": {
+      "items": {
+        "$ref": "#/$defs/Artifact"
+      },
+      "title": "Unchanged Inputs Since 0681Fcc",
+      "type": "array"
+    },
+    "implementation": {
+      "items": {
+        "$ref": "#/$defs/Artifact"
+      },
+      "title": "Implementation",
+      "type": "array"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/Artifact"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "canonical_catalog_replaced": {
+      "const": false,
+      "default": false,
+      "title": "Canonical Catalog Replaced",
+      "type": "boolean"
+    },
+    "raw_originals_modified": {
+      "const": false,
+      "default": false,
+      "title": "Raw Originals Modified",
+      "type": "boolean"
+    },
+    "public_push_performed": {
+      "const": false,
+      "default": false,
+      "title": "Public Push Performed",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "session_start",
+    "authorized_end",
+    "earlier_checkpoint_commit",
+    "command",
+    "full_suite_exit_code",
+    "passed",
+    "warnings",
+    "duration_seconds",
+    "geode_coverage_percent",
+    "inventory_originals",
+    "inventory_mapped",
+    "inventory_unmapped",
+    "original_inventory_mapped",
+    "original_inventory_unmapped",
+    "inventory_check_passed",
+    "selected_crs_ids",
+    "package_created_at",
+    "package_original_acquisition",
+    "package_path",
+    "package_manifest_sha256",
+    "copied_input_bytes",
+    "copied_input_files_fully_admitted",
+    "package_validation_passed",
+    "current_law_query_status",
+    "current_law_query_exit_code",
+    "actual_readiness_status",
+    "actual_readiness_checks",
+    "actual_readiness_passed",
+    "independent_review",
+    "unchanged_inputs_since_0681fcc",
+    "implementation",
+    "evidence",
+    "limitations"
+  ],
+  "title": "Verification",
+  "type": "object"
+}

@@ -1,0 +1,603 @@
+{
+  "$defs": {
+    "CustodyCopy": {
+      "additionalProperties": false,
+      "description": "A frozen exact copy resolves a potentially mutable original path.",
+      "properties": {
+        "original": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "frozen": {
+          "$ref": "#/$defs/PacketFile"
+        },
+        "role": {
+          "minLength": 1,
+          "title": "Role",
+          "type": "string"
+        },
+        "captured_at": {
+          "format": "date-time",
+          "title": "Captured At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "original",
+        "frozen",
+        "role",
+        "captured_at"
+      ],
+      "title": "CustodyCopy",
+      "type": "object"
+    },
+    "Document": {
+      "additionalProperties": false,
+      "description": "One finite review assignment with a complete page set.",
+      "properties": {
+        "queue_order": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Queue Order",
+          "type": "integer"
+        },
+        "assignment_id": {
+          "enum": [
+            "EB-PDF-015",
+            "EB-PDF-016",
+            "EB-PDF-017"
+          ],
+          "title": "Assignment Id",
+          "type": "string"
+        },
+        "source_id": {
+          "enum": [
+            "greeley-building-fees-sd008-06",
+            "greeley-development-impact-fee-memo-sd008-07",
+            "greeley-water-sewer-proposed-pif-notice-sd008-08"
+          ],
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-MUNICIPAL-GREELEY",
+          "default": "CO-MUNICIPAL-GREELEY",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "authority_basis": {
+          "const": "collection context only; not a legal-authority finding",
+          "default": "collection context only; not a legal-authority finding",
+          "title": "Authority Basis",
+          "type": "string"
+        },
+        "expected_pages": {
+          "maximum": 8,
+          "minimum": 1,
+          "title": "Expected Pages",
+          "type": "integer"
+        },
+        "original": {
+          "$ref": "#/$defs/PacketFile"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "rendering_engine": {
+          "const": "Poppler pdftoppm",
+          "default": "Poppler pdftoppm",
+          "title": "Rendering Engine",
+          "type": "string"
+        },
+        "rendering_version": {
+          "const": "26.05.0",
+          "default": "26.05.0",
+          "title": "Rendering Version",
+          "type": "string"
+        },
+        "rendering_command": {
+          "const": "pdftoppm -r 300 -png original.pdf page",
+          "default": "pdftoppm -r 300 -png original.pdf page",
+          "title": "Rendering Command",
+          "type": "string"
+        },
+        "rendering_dpi": {
+          "const": 300,
+          "default": 300,
+          "title": "Rendering Dpi",
+          "type": "integer"
+        },
+        "rendering_scope": {
+          "const": "entire physical pages; no crop, annotation or rescaling",
+          "default": "entire physical pages; no crop, annotation or rescaling",
+          "title": "Rendering Scope",
+          "type": "string"
+        },
+        "candidate": {
+          "$ref": "#/$defs/PacketFile"
+        },
+        "candidate_status": {
+          "const": "machine_native_text_unreviewed",
+          "default": "machine_native_text_unreviewed",
+          "title": "Candidate Status",
+          "type": "string"
+        },
+        "candidate_changes": {
+          "const": "none",
+          "default": "none",
+          "title": "Candidate Changes",
+          "type": "string"
+        },
+        "candidate_packaging": {
+          "const": "UTF-8 page markers outside unchanged native byte slices",
+          "default": "UTF-8 page markers outside unchanged native byte slices",
+          "title": "Candidate Packaging",
+          "type": "string"
+        },
+        "page_evidence_schema": {
+          "$ref": "#/$defs/PacketFile"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/Page"
+          },
+          "title": "Pages",
+          "type": "array"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "legal_review": {
+          "const": "pending",
+          "default": "pending",
+          "title": "Legal Review",
+          "type": "string"
+        }
+      },
+      "required": [
+        "queue_order",
+        "assignment_id",
+        "source_id",
+        "expected_pages",
+        "original",
+        "provenance",
+        "candidate",
+        "page_evidence_schema",
+        "pages"
+      ],
+      "title": "Document",
+      "type": "object"
+    },
+    "FileRef": {
+      "additionalProperties": false,
+      "description": "Exact file reference; its scope is explicit in the containing field.",
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    },
+    "PacketFile": {
+      "additionalProperties": false,
+      "description": "Require a confined relative packet path.",
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "PacketFile",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "One complete physical page and exact candidate byte slice.",
+      "properties": {
+        "physical_page": {
+          "maximum": 8,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/PacketFile"
+        },
+        "image_width": {
+          "exclusiveMinimum": 0,
+          "title": "Image Width",
+          "type": "integer"
+        },
+        "image_height": {
+          "exclusiveMinimum": 0,
+          "title": "Image Height",
+          "type": "integer"
+        },
+        "evidence": {
+          "$ref": "#/$defs/PacketFile"
+        },
+        "text_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Text Sha256",
+          "type": "string"
+        },
+        "text_size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Text Size Bytes",
+          "type": "integer"
+        },
+        "candidate_text_offset_bytes": {
+          "minimum": 0,
+          "title": "Candidate Text Offset Bytes",
+          "type": "integer"
+        },
+        "candidate_text_end_byte_exclusive": {
+          "exclusiveMinimum": 0,
+          "title": "Candidate Text End Byte Exclusive",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "image_width",
+        "image_height",
+        "evidence",
+        "text_sha256",
+        "text_size_bytes",
+        "candidate_text_offset_bytes",
+        "candidate_text_end_byte_exclusive"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "description": "Frozen local custody and retained referral evidence; no new HTTP retrieval.",
+      "properties": {
+        "canonical_raw_pdf": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "received_original": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "original_acquisition_time": {
+          "default": null,
+          "title": "Original Acquisition Time",
+          "type": "null"
+        },
+        "upstream_http_acquisition_independently_verified_in_this_preparation": {
+          "const": false,
+          "default": false,
+          "title": "Upstream Http Acquisition Independently Verified In This Preparation",
+          "type": "boolean"
+        },
+        "actual_repository_received_at": {
+          "format": "date-time",
+          "title": "Actual Repository Received At",
+          "type": "string"
+        },
+        "intake_record_id": {
+          "title": "Intake Record Id",
+          "type": "string"
+        },
+        "intake_status": {
+          "const": "archived_pending_pipeline",
+          "default": "archived_pending_pipeline",
+          "title": "Intake Status",
+          "type": "string"
+        },
+        "acquisition_method": {
+          "const": "received_review_package",
+          "default": "received_review_package",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "frozen_raw_manifest": {
+          "$ref": "#/$defs/PacketFile"
+        },
+        "raw_manifest_line_number": {
+          "minimum": 1,
+          "title": "Raw Manifest Line Number",
+          "type": "integer"
+        },
+        "raw_manifest_line_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Raw Manifest Line Sha256",
+          "type": "string"
+        },
+        "raw_manifest_line_size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Raw Manifest Line Size Bytes",
+          "type": "integer"
+        },
+        "frozen_intake_receipt": {
+          "$ref": "#/$defs/PacketFile"
+        },
+        "frozen_source_provenance": {
+          "$ref": "#/$defs/PacketFile"
+        },
+        "provenance_line_number": {
+          "minimum": 1,
+          "title": "Provenance Line Number",
+          "type": "integer"
+        },
+        "provenance_line_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Provenance Line Sha256",
+          "type": "string"
+        },
+        "provenance_line_size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Provenance Line Size Bytes",
+          "type": "integer"
+        },
+        "reported_requested_url": {
+          "pattern": "^https://cogy-p-001\\.sitecorecontenthub\\.cloud/",
+          "title": "Reported Requested Url",
+          "type": "string"
+        },
+        "reported_final_url": {
+          "pattern": "^https://cogy-p-001\\.sitecorecontenthub\\.cloud/",
+          "title": "Reported Final Url",
+          "type": "string"
+        },
+        "reported_acquisition_at": {
+          "format": "date-time",
+          "title": "Reported Acquisition At",
+          "type": "string"
+        },
+        "reported_method": {
+          "const": "mac_curl",
+          "default": "mac_curl",
+          "title": "Reported Method",
+          "type": "string"
+        },
+        "acquisition_evidence_label": {
+          "const": "retained_curl_body_and_headers",
+          "default": "retained_curl_body_and_headers",
+          "title": "Acquisition Evidence Label",
+          "type": "string"
+        },
+        "canonical_official_source_url": {
+          "default": null,
+          "title": "Canonical Official Source Url",
+          "type": "null"
+        },
+        "null_official_source_url_reason": {
+          "const": "direct_host_not_in_existing_allowlist",
+          "default": "direct_host_not_in_existing_allowlist",
+          "title": "Null Official Source Url Reason",
+          "type": "string"
+        },
+        "official_referral_url": {
+          "pattern": "^https://greeleyco\\.gov/",
+          "title": "Official Referral Url",
+          "type": "string"
+        },
+        "reported_referral_label": {
+          "title": "Reported Referral Label",
+          "type": "string"
+        },
+        "frozen_referral_html": {
+          "$ref": "#/$defs/PacketFile"
+        },
+        "requested_url_found_in_saved_referral_anchor": {
+          "const": true,
+          "default": true,
+          "title": "Requested Url Found In Saved Referral Anchor",
+          "type": "boolean"
+        },
+        "frozen_derived_response_headers": {
+          "$ref": "#/$defs/PacketFile"
+        },
+        "original_response_header_identity": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "header_transformation": {
+          "const": "Only Set-Cookie header lines omitted; other bytes unchanged",
+          "default": "Only Set-Cookie header lines omitted; other bytes unchanged",
+          "title": "Header Transformation",
+          "type": "string"
+        },
+        "full_response_headers_in_packet": {
+          "const": false,
+          "default": false,
+          "title": "Full Response Headers In Packet",
+          "type": "boolean"
+        },
+        "source_role_claim": {
+          "enum": [
+            "municipal_building_fee_schedule",
+            "fee_adjustment_memorandum_with_schedules",
+            "proposed_utility_fee_notice_with_schedule"
+          ],
+          "title": "Source Role Claim",
+          "type": "string"
+        },
+        "role_basis": {
+          "const": "supplied intake label; no adopted/current legal effect established",
+          "default": "supplied intake label; no adopted/current legal effect established",
+          "title": "Role Basis",
+          "type": "string"
+        },
+        "caveats": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Caveats",
+          "type": "array"
+        }
+      },
+      "required": [
+        "canonical_raw_pdf",
+        "received_original",
+        "actual_repository_received_at",
+        "intake_record_id",
+        "frozen_raw_manifest",
+        "raw_manifest_line_number",
+        "raw_manifest_line_sha256",
+        "raw_manifest_line_size_bytes",
+        "frozen_intake_receipt",
+        "frozen_source_provenance",
+        "provenance_line_number",
+        "provenance_line_sha256",
+        "provenance_line_size_bytes",
+        "reported_requested_url",
+        "reported_final_url",
+        "reported_acquisition_at",
+        "official_referral_url",
+        "reported_referral_label",
+        "frozen_referral_html",
+        "frozen_derived_response_headers",
+        "original_response_header_identity",
+        "source_role_claim",
+        "caveats"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "An immutable, prepared but unsent three-document queue.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "packet_id": {
+      "const": "grok-pdf-review-2026-09-11-batch-5",
+      "default": "grok-pdf-review-2026-09-11-batch-5",
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_DISPATCHED",
+      "default": "PREPARED_NOT_DISPATCHED",
+      "title": "Status",
+      "type": "string"
+    },
+    "purpose": {
+      "const": "independent_pdf_transcription_review",
+      "default": "independent_pdf_transcription_review",
+      "title": "Purpose",
+      "type": "string"
+    },
+    "start_no_document_at_or_after": {
+      "const": "2026-09-11T20:50:00Z",
+      "default": "2026-09-11T20:50:00Z",
+      "title": "Start No Document At Or After",
+      "type": "string"
+    },
+    "finish_by": {
+      "const": "2026-09-11T21:20:00Z",
+      "default": "2026-09-11T21:20:00Z",
+      "title": "Finish By",
+      "type": "string"
+    },
+    "stop_after": {
+      "const": "EB-PDF-017",
+      "default": "EB-PDF-017",
+      "title": "Stop After",
+      "type": "string"
+    },
+    "independence": {
+      "const": "procedural source-first pass; per-document frozen receipt before candidate",
+      "default": "procedural source-first pass; per-document frozen receipt before candidate",
+      "title": "Independence",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "documents": {
+      "items": {
+        "$ref": "#/$defs/Document"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Documents",
+      "type": "array"
+    },
+    "custody_copies": {
+      "items": {
+        "$ref": "#/$defs/CustodyCopy"
+      },
+      "title": "Custody Copies",
+      "type": "array"
+    },
+    "supporting_payloads": {
+      "items": {
+        "$ref": "#/$defs/PacketFile"
+      },
+      "title": "Supporting Payloads",
+      "type": "array"
+    },
+    "assignment": {
+      "$ref": "#/$defs/CustodyCopy"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "documents",
+    "custody_copies",
+    "supporting_payloads",
+    "assignment",
+    "limitations"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

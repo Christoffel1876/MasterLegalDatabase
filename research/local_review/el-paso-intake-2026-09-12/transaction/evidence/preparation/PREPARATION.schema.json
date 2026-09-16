@@ -1,0 +1,974 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Bind one exact ordinary file relative to this package.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Baseline": {
+      "additionalProperties": false,
+      "description": "Bind a repository preimage without changing or reserializing it.",
+      "properties": {
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "preserved": {
+          "$ref": "#/$defs/Asset"
+        },
+        "records": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Records"
+        }
+      },
+      "required": [
+        "repository_path",
+        "preserved",
+        "records"
+      ],
+      "title": "Baseline",
+      "type": "object"
+    },
+    "Copy": {
+      "additionalProperties": false,
+      "description": "Record a copied input without certifying its upstream acquisition.",
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "original_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Original Sha256",
+          "type": "string"
+        },
+        "preserved": {
+          "$ref": "#/$defs/Asset"
+        },
+        "method": {
+          "enum": [
+            "exact_copy",
+            "audited_public_header_derivative"
+          ],
+          "title": "Method",
+          "type": "string"
+        },
+        "excluded_raw_header_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Excluded Raw Header Sha256"
+        }
+      },
+      "required": [
+        "original_path",
+        "original_sha256",
+        "preserved",
+        "method"
+      ],
+      "title": "Copy",
+      "type": "object"
+    },
+    "DateClaim": {
+      "additionalProperties": false,
+      "description": "Keep a source-stated date separate from legal effect or collection time.",
+      "properties": {
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "source_stated_effective",
+            "source_stated_approval",
+            "recording_stamp",
+            "unlabeled_cover_date",
+            "source_stated_execution",
+            "document_footer_date"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "observation_id": {
+          "title": "Observation Id",
+          "type": "string"
+        },
+        "independently_verified": {
+          "const": false,
+          "title": "Independently Verified",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "value",
+        "role",
+        "observation_id",
+        "independently_verified"
+      ],
+      "title": "DateClaim",
+      "type": "object"
+    },
+    "Dedupe": {
+      "additionalProperties": false,
+      "description": "Record exact existing manual rows and a bounded ordinary-raw-file screen.",
+      "properties": {
+        "checked_at": {
+          "format": "date-time",
+          "title": "Checked At",
+          "type": "string"
+        },
+        "raw_records": {
+          "minimum": 0,
+          "title": "Raw Records",
+          "type": "integer"
+        },
+        "ledger_records": {
+          "minimum": 0,
+          "title": "Ledger Records",
+          "type": "integer"
+        },
+        "ordinary_raw_files_screened": {
+          "minimum": 0,
+          "title": "Ordinary Raw Files Screened",
+          "type": "integer"
+        },
+        "symlinks_skipped": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Symlinks Skipped",
+          "type": "array"
+        },
+        "candidate_size_files_hashed": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "title": "Candidate Size Files Hashed",
+          "type": "array"
+        },
+        "source_id_matches": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Id Matches",
+          "type": "array"
+        },
+        "raw_manifest_digest_matches": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Raw Manifest Digest Matches",
+          "type": "array"
+        },
+        "ledger_digest_matches": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ledger Digest Matches",
+          "type": "array"
+        },
+        "ordinary_raw_digest_matches": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ordinary Raw Digest Matches",
+          "type": "array"
+        },
+        "boundary": {
+          "title": "Boundary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "checked_at",
+        "raw_records",
+        "ledger_records",
+        "ordinary_raw_files_screened",
+        "symlinks_skipped",
+        "candidate_size_files_hashed",
+        "source_id_matches",
+        "raw_manifest_digest_matches",
+        "ledger_digest_matches",
+        "ordinary_raw_digest_matches",
+        "boundary"
+      ],
+      "title": "Dedupe",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "description": "Record bounded image-supported wording and extraction limitations.",
+      "properties": {
+        "observation_id": {
+          "title": "Observation Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "region": {
+          "title": "Region",
+          "type": "string"
+        },
+        "visible_text": {
+          "title": "Visible Text",
+          "type": "string"
+        },
+        "native_anchor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Span"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "conclusion": {
+          "title": "Conclusion",
+          "type": "string"
+        },
+        "uncertainty": {
+          "title": "Uncertainty",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "observation_id",
+        "physical_page",
+        "region",
+        "visible_text",
+        "native_anchor",
+        "conclusion",
+        "uncertainty",
+        "legal_currentness"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "Bind a fully viewed page image and its uncorrected native extraction.",
+      "properties": {
+        "physical_page": {
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_nonwhitespace": {
+          "title": "Native Nonwhitespace",
+          "type": "boolean"
+        },
+        "view_scope": {
+          "const": "full_page_for_title_issuer_role_and_selected_date_context",
+          "title": "View Scope",
+          "type": "string"
+        },
+        "numeric_table_certification": {
+          "const": false,
+          "title": "Numeric Table Certification",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "native",
+        "native_nonwhitespace",
+        "view_scope",
+        "numeric_table_certification"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "RecordTemplate": {
+      "additionalProperties": false,
+      "description": "Hold only known final-record fields; execution fields must remain null.",
+      "properties": {
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "const": "08_County_Authorities",
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "official_source_name": {
+          "title": "Official Source Name",
+          "type": "string"
+        },
+        "official_source_url": {
+          "title": "Official Source Url",
+          "type": "string"
+        },
+        "acquisition_method": {
+          "const": "received_review_package",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "received_from": {
+          "title": "Received From",
+          "type": "string"
+        },
+        "reviewer_name": {
+          "title": "Reviewer Name",
+          "type": "string"
+        },
+        "reviewer_email": {
+          "title": "Reviewer Email",
+          "type": "null"
+        },
+        "custody_note": {
+          "title": "Custody Note",
+          "type": "string"
+        },
+        "source_file": {
+          "$ref": "#/$defs/Asset"
+        },
+        "expected_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Expected Sha256",
+          "type": "string"
+        },
+        "source_format": {
+          "const": "pdf",
+          "title": "Source Format",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 1,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "allow_duplicate": {
+          "const": false,
+          "title": "Allow Duplicate",
+          "type": "boolean"
+        },
+        "intake_id": {
+          "title": "Intake Id",
+          "type": "null"
+        },
+        "archive_path": {
+          "title": "Archive Path",
+          "type": "null"
+        },
+        "received_at": {
+          "title": "Received At",
+          "type": "null"
+        },
+        "status": {
+          "const": "proposed_not_applied",
+          "title": "Status",
+          "type": "string"
+        },
+        "intended_record_status": {
+          "const": "archived_pending_pipeline",
+          "title": "Intended Record Status",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "record_id",
+        "layer_id",
+        "official_source_name",
+        "official_source_url",
+        "acquisition_method",
+        "received_from",
+        "reviewer_name",
+        "reviewer_email",
+        "custody_note",
+        "source_file",
+        "expected_sha256",
+        "source_format",
+        "size_bytes",
+        "allow_duplicate",
+        "intake_id",
+        "archive_path",
+        "received_at",
+        "status",
+        "intended_record_status",
+        "legal_currentness"
+      ],
+      "title": "RecordTemplate",
+      "type": "object"
+    },
+    "Referral": {
+      "additionalProperties": false,
+      "description": "Keep the exact preserved public HTML anchor and audited response context.",
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "parent_url": {
+          "title": "Parent Url",
+          "type": "string"
+        },
+        "parent": {
+          "$ref": "#/$defs/Asset"
+        },
+        "href": {
+          "title": "Href",
+          "type": "string"
+        },
+        "resolved_url": {
+          "title": "Resolved Url",
+          "type": "string"
+        },
+        "anchor_text": {
+          "title": "Anchor Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "parent_url",
+        "parent",
+        "href",
+        "resolved_url",
+        "anchor_text"
+      ],
+      "title": "Referral",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "description": "Propose or defer ownership using direct document evidence.",
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "decision": {
+          "enum": [
+            "propose_county_intake",
+            "defer_issuer_layer_decision"
+          ],
+          "title": "Decision",
+          "type": "string"
+        },
+        "authority_id": {
+          "anyOf": [
+            {
+              "const": "CO-COUNTY-EL_PASO",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Authority Id"
+        },
+        "layer_id": {
+          "anyOf": [
+            {
+              "const": "08_County_Authorities",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Layer Id"
+        },
+        "issuer_as_shown": {
+          "title": "Issuer As Shown",
+          "type": "string"
+        },
+        "issuer_kind": {
+          "enum": [
+            "county_department",
+            "county_board_of_commissioners",
+            "county_board_of_health",
+            "unresolved_school_fee_issuer",
+            "colorado_geological_survey"
+          ],
+          "title": "Issuer Kind",
+          "type": "string"
+        },
+        "document_role": {
+          "title": "Document Role",
+          "type": "string"
+        },
+        "title_for_intake": {
+          "title": "Title For Intake",
+          "type": "string"
+        },
+        "language": {
+          "enum": [
+            "en",
+            "es"
+          ],
+          "title": "Language",
+          "type": "string"
+        },
+        "original": {
+          "$ref": "#/$defs/Asset"
+        },
+        "received_body_path": {
+          "title": "Received Body Path",
+          "type": "string"
+        },
+        "source_pages": {
+          "minimum": 1,
+          "title": "Source Pages",
+          "type": "integer"
+        },
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "requested_url_claim": {
+          "title": "Requested Url Claim",
+          "type": "string"
+        },
+        "final_url_claim": {
+          "title": "Final Url Claim",
+          "type": "string"
+        },
+        "acquisition_started_at_claim": {
+          "format": "date-time",
+          "title": "Acquisition Started At Claim",
+          "type": "string"
+        },
+        "acquisition_completed_at_claim": {
+          "format": "date-time",
+          "title": "Acquisition Completed At Claim",
+          "type": "string"
+        },
+        "upstream_acquisition_independently_verified": {
+          "const": false,
+          "title": "Upstream Acquisition Independently Verified",
+          "type": "boolean"
+        },
+        "verified_http_acquired_at": {
+          "title": "Verified Http Acquired At",
+          "type": "null"
+        },
+        "atlas_delivery_captured_at": {
+          "format": "date-time",
+          "title": "Atlas Delivery Captured At",
+          "type": "string"
+        },
+        "atlas_preparation_copied_at": {
+          "format": "date-time",
+          "title": "Atlas Preparation Copied At",
+          "type": "string"
+        },
+        "actual_repository_received_at": {
+          "title": "Actual Repository Received At",
+          "type": "null"
+        },
+        "public_headers": {
+          "$ref": "#/$defs/Asset"
+        },
+        "observed_http_statuses": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Observed Http Statuses",
+          "type": "array"
+        },
+        "observed_redirect_destinations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Observed Redirect Destinations",
+          "type": "array"
+        },
+        "source_referrals": {
+          "items": {
+            "$ref": "#/$defs/Referral"
+          },
+          "title": "Source Referrals",
+          "type": "array"
+        },
+        "referral_basis": {
+          "enum": [
+            "preserved_official_html_anchor",
+            "inherited_url_no_fresh_anchor"
+          ],
+          "title": "Referral Basis",
+          "type": "string"
+        },
+        "historical_matching_rows": {
+          "minimum": 0,
+          "title": "Historical Matching Rows",
+          "type": "integer"
+        },
+        "historical_source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Historical Source Ids",
+          "type": "array"
+        },
+        "directly_viewed_pages": {
+          "items": {
+            "$ref": "#/$defs/Page"
+          },
+          "minItems": 1,
+          "title": "Directly Viewed Pages",
+          "type": "array"
+        },
+        "observations": {
+          "items": {
+            "$ref": "#/$defs/Observation"
+          },
+          "minItems": 1,
+          "title": "Observations",
+          "type": "array"
+        },
+        "date_claims": {
+          "items": {
+            "$ref": "#/$defs/DateClaim"
+          },
+          "title": "Date Claims",
+          "type": "array"
+        },
+        "verified_adoption_date": {
+          "title": "Verified Adoption Date",
+          "type": "null"
+        },
+        "verified_effective_date": {
+          "title": "Verified Effective Date",
+          "type": "null"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "answer_safe": {
+          "const": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        },
+        "translation_equivalence_verified": {
+          "const": false,
+          "title": "Translation Equivalence Verified",
+          "type": "boolean"
+        },
+        "full_text_reviewed": {
+          "const": false,
+          "title": "Full Text Reviewed",
+          "type": "boolean"
+        },
+        "qualifications": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Qualifications",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source_id",
+        "decision",
+        "authority_id",
+        "layer_id",
+        "issuer_as_shown",
+        "issuer_kind",
+        "document_role",
+        "title_for_intake",
+        "language",
+        "original",
+        "received_body_path",
+        "source_pages",
+        "event_id",
+        "requested_url_claim",
+        "final_url_claim",
+        "acquisition_started_at_claim",
+        "acquisition_completed_at_claim",
+        "upstream_acquisition_independently_verified",
+        "verified_http_acquired_at",
+        "atlas_delivery_captured_at",
+        "atlas_preparation_copied_at",
+        "actual_repository_received_at",
+        "public_headers",
+        "observed_http_statuses",
+        "observed_redirect_destinations",
+        "source_referrals",
+        "referral_basis",
+        "historical_matching_rows",
+        "historical_source_ids",
+        "directly_viewed_pages",
+        "observations",
+        "date_claims",
+        "verified_adoption_date",
+        "verified_effective_date",
+        "legal_currentness",
+        "answer_safe",
+        "translation_equivalence_verified",
+        "full_text_reviewed",
+        "qualifications"
+      ],
+      "title": "Source",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "description": "Locate an exact UTF-8 substring; this is not corrected native text.",
+      "properties": {
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "text",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Fixed fifteen-source review and thirteen-source unexecuted proposal.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "prepared_not_applied",
+      "title": "Status",
+      "type": "string"
+    },
+    "apply_available": {
+      "const": false,
+      "title": "Apply Available",
+      "type": "boolean"
+    },
+    "audit": {
+      "$ref": "#/$defs/Asset"
+    },
+    "audit_sha256": {
+      "const": "a6e5befb2cd424a6a0c9f072075bab3abd1f78849495b91b4ca0194064d377f0",
+      "title": "Audit Sha256",
+      "type": "string"
+    },
+    "comparison_commit": {
+      "const": "0a3ba27aaf5358141efb5af2c33c3a6b9043d099",
+      "title": "Comparison Commit",
+      "type": "string"
+    },
+    "baseline": {
+      "items": {
+        "$ref": "#/$defs/Baseline"
+      },
+      "title": "Baseline",
+      "type": "array"
+    },
+    "dedupe": {
+      "$ref": "#/$defs/Dedupe"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "maxItems": 15,
+      "minItems": 15,
+      "title": "Sources",
+      "type": "array"
+    },
+    "proposed_records": {
+      "items": {
+        "$ref": "#/$defs/RecordTemplate"
+      },
+      "maxItems": 13,
+      "minItems": 13,
+      "title": "Proposed Records",
+      "type": "array"
+    },
+    "custody": {
+      "items": {
+        "$ref": "#/$defs/Copy"
+      },
+      "title": "Custody",
+      "type": "array"
+    },
+    "source_structural_pages": {
+      "const": 351,
+      "title": "Source Structural Pages",
+      "type": "integer"
+    },
+    "directly_viewed_pages": {
+      "const": 20,
+      "title": "Directly Viewed Pages",
+      "type": "integer"
+    },
+    "full_numeric_table_reviews": {
+      "const": 0,
+      "title": "Full Numeric Table Reviews",
+      "type": "integer"
+    },
+    "public_events_during_preparation": {
+      "const": 0,
+      "title": "Public Events During Preparation",
+      "type": "integer"
+    },
+    "upstream_public_events": {
+      "const": 66,
+      "title": "Upstream Public Events",
+      "type": "integer"
+    },
+    "upstream_distinct_targets": {
+      "const": 66,
+      "title": "Upstream Distinct Targets",
+      "type": "integer"
+    },
+    "upstream_distinct_target_cap": {
+      "const": 50,
+      "title": "Upstream Distinct Target Cap",
+      "type": "integer"
+    },
+    "upstream_cap_status": {
+      "const": "failed",
+      "title": "Upstream Cap Status",
+      "type": "string"
+    },
+    "upstream_missing_body_sha256": {
+      "items": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Upstream Missing Body Sha256",
+      "type": "array"
+    },
+    "original_acquisition_certified": {
+      "const": false,
+      "title": "Original Acquisition Certified",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "production_mutations": {
+      "const": 0,
+      "title": "Production Mutations",
+      "type": "integer"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "prepared_at",
+    "status",
+    "apply_available",
+    "audit",
+    "audit_sha256",
+    "comparison_commit",
+    "baseline",
+    "dedupe",
+    "sources",
+    "proposed_records",
+    "custody",
+    "source_structural_pages",
+    "directly_viewed_pages",
+    "full_numeric_table_reviews",
+    "public_events_during_preparation",
+    "upstream_public_events",
+    "upstream_distinct_targets",
+    "upstream_distinct_target_cap",
+    "upstream_cap_status",
+    "upstream_missing_body_sha256",
+    "original_acquisition_certified",
+    "legal_currentness",
+    "production_mutations",
+    "limitations"
+  ],
+  "title": "Preparation",
+  "type": "object"
+}

@@ -1,0 +1,102 @@
+name: Manual PDF daily source watch
+
+on:
+  schedule:
+    # UTC; source requests remain OFF unless the reviewed repository enable variable is true.
+    - cron: '17 13 * * *'
+  workflow_dispatch:
+    inputs:
+      execute:
+        description: 'Run the eight public GET checks after reviewed offline readiness'
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: manual-pdf-daily-source-watch
+  cancel-in-progress: false
+
+env:
+  PYTHONUNBUFFERED: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+  GIT_LFS_SKIP_SMUDGE: '1'
+
+jobs:
+  watch:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    # Four serial 5-minute source budgets; additional bounded setup/tests/replay/upload time.
+    timeout-minutes: 40
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout reviewed default branch without persistent credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: main
+          fetch-depth: 1
+          lfs: false
+          persist-credentials: false
+      - name: Initialize truthful setup-failure evidence
+        run: |
+          mkdir -p .geode_runtime/manual-watch-ci-setup
+          printf '%s\n' 'Source checks have not completed. Missing results are not unchanged sources.' > .geode_runtime/manual-watch-ci-setup/summary.md
+          git rev-parse HEAD > .geode_runtime/manual-watch-ci-setup/checkout-commit.txt
+      - name: Set up Python 3.11
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.11'
+      - name: Install frozen watch dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements-manual-watch-ci.txt
+      - name: Run offline guard and reporting tests
+        run: >-
+          python -B -m pytest tests/test_manual_watch*.py tests/test_manual_source_watch*.py
+          -q --cov=scripts.manual_source_watch_ci --cov-branch --cov-fail-under=90
+          --cov-report=term-missing --cov-report=xml:.geode_runtime/manual-watch-ci-setup/coverage.xml
+          --junitxml=.geode_runtime/manual-watch-ci-setup/tests.xml
+      - name: Check the eight fixed PDFs once and verify each result
+        env:
+          WATCH_RUN_ID: ${{ github.run_id }}
+          WATCH_RUN_ATTEMPT: ${{ github.run_attempt }}
+          WATCH_EVENT: ${{ github.event_name }}
+          WATCH_EXECUTE: ${{ (github.event_name == 'workflow_dispatch' && inputs.execute == true) || (github.event_name == 'schedule' && vars.MANUAL_WATCH_DAILY_ENABLED == 'true') }}
+        run: |
+          mode=()
+          if test "$WATCH_EXECUTE" = true; then
+            mode=(--execute)
+          fi
+          python -B scripts/manual_source_watch_ci.py --root "$GITHUB_WORKSPACE" \
+            --run-name "gha-${WATCH_RUN_ID}-${WATCH_RUN_ATTEMPT}" "${mode[@]}" \
+            --event "$WATCH_EVENT" --commit "$(git rev-parse HEAD)"
+      - name: Show every result or the setup failure
+        if: always()
+        env:
+          WATCH_RUN_ID: ${{ github.run_id }}
+          WATCH_RUN_ATTEMPT: ${{ github.run_attempt }}
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          printf '## Manual PDF source watch\n\nJob result: %s\n\n' "$JOB_STATUS" >> "$GITHUB_STEP_SUMMARY"
+          report=".geode_runtime/manual_source_watch_ci/gha-${WATCH_RUN_ID}-${WATCH_RUN_ATTEMPT}/summary.md"
+          if test -f "$report"; then
+            cat "$report" >> "$GITHUB_STEP_SUMMARY"
+          elif test -f .geode_runtime/manual-watch-ci-setup/summary.md; then
+            cat .geode_runtime/manual-watch-ci-setup/summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            printf 'Setup failed before a retained source report existed. No source outcome is established.\n' >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Retain actual evidence on success, change, refusal or failure
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: manual-watch-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .geode_runtime/manual-watch-ci-setup/
+            .geode_runtime/manual_source_watch_ci/
+            .geode_runtime/manual_source_watch/
+            .geode_runtime/manual_source_watch_batches/
+          retention-days: 90
+          if-no-files-found: warn
+          include-hidden-files: true

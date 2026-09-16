@@ -1,0 +1,98 @@
+{
+  "$defs": {
+    "ScopeItem": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "source_sha256": {
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "matching_canonical_layer": {
+          "title": "Matching Canonical Layer",
+          "type": "string"
+        },
+        "accepted_scope": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Accepted Scope",
+          "type": "object"
+        },
+        "measured_verifier_scope": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Measured Verifier Scope",
+          "type": "object"
+        },
+        "external_report_scope": {
+          "title": "External Report Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "authority_id",
+        "source_sha256",
+        "matching_canonical_layer",
+        "accepted_scope",
+        "measured_verifier_scope",
+        "external_report_scope"
+      ],
+      "title": "ScopeItem",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "observed_at": {
+      "title": "Observed At",
+      "type": "string"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/$defs/ScopeItem"
+      },
+      "title": "Items",
+      "type": "array"
+    },
+    "blocked_original_transaction_sha256": {
+      "title": "Blocked Original Transaction Sha256",
+      "type": "string"
+    },
+    "accepted_revision_transaction_sha256": {
+      "title": "Accepted Revision Transaction Sha256",
+      "type": "string"
+    },
+    "original_remains_blocked": {
+      "const": true,
+      "title": "Original Remains Blocked",
+      "type": "boolean"
+    },
+    "scope_issues": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Scope Issues",
+      "type": "array"
+    }
+  },
+  "required": [
+    "observed_at",
+    "items",
+    "blocked_original_transaction_sha256",
+    "accepted_revision_transaction_sha256",
+    "original_remains_blocked",
+    "scope_issues"
+  ],
+  "title": "Scope",
+  "type": "object"
+}

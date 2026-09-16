@@ -1,0 +1,82 @@
+{
+  "$defs": {
+    "Crop": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "image_path": {
+          "title": "Image Path",
+          "type": "string"
+        },
+        "image_sha256": {
+          "title": "Image Sha256",
+          "type": "string"
+        },
+        "rectangle": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Rectangle",
+          "type": "array"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "image_path",
+        "image_sha256",
+        "rectangle",
+        "sha256"
+      ],
+      "title": "Crop",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "crops": {
+      "items": {
+        "$ref": "#/$defs/Crop"
+      },
+      "title": "Crops",
+      "type": "array"
+    }
+  },
+  "required": [
+    "method",
+    "limitations",
+    "crops"
+  ],
+  "title": "Supplement",
+  "type": "object"
+}

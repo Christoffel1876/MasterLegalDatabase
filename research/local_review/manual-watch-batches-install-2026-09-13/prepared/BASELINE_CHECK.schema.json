@@ -1,0 +1,71 @@
+{
+  "$defs": {
+    "File": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "record_id": {
+      "title": "Record Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "baseline": {
+      "$ref": "#/$defs/File"
+    },
+    "actual_pdf_pages": {
+      "title": "Actual Pdf Pages",
+      "type": "integer"
+    },
+    "exact_raw_line_sha256": {
+      "title": "Exact Raw Line Sha256",
+      "type": "string"
+    },
+    "observed_raw_manifest": {
+      "$ref": "#/$defs/File"
+    },
+    "metadata_files_verified": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Metadata Files Verified",
+      "type": "array"
+    }
+  },
+  "required": [
+    "record_id",
+    "authority_id",
+    "baseline",
+    "actual_pdf_pages",
+    "exact_raw_line_sha256",
+    "observed_raw_manifest",
+    "metadata_files_verified"
+  ],
+  "title": "Check",
+  "type": "object"
+}

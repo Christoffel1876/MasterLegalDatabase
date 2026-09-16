@@ -1,0 +1,171 @@
+{
+  "$defs": {
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ids",
+          "type": "array"
+        },
+        "disposition": {
+          "title": "Disposition",
+          "type": "string"
+        },
+        "evidence_scope": {
+          "title": "Evidence Scope",
+          "type": "string"
+        },
+        "source_change": {
+          "const": false,
+          "default": false,
+          "title": "Source Change",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "ids",
+        "disposition",
+        "evidence_scope"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "PixelCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "source_page": {
+          "title": "Source Page",
+          "type": "integer"
+        },
+        "source_png_sha256": {
+          "title": "Source Png Sha256",
+          "type": "string"
+        },
+        "crop_sha256": {
+          "title": "Crop Sha256",
+          "type": "string"
+        },
+        "crop_name": {
+          "title": "Crop Name",
+          "type": "string"
+        },
+        "rectangle_xywh": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Rectangle Xywh",
+          "type": "array"
+        },
+        "exact_rgb_subrectangle": {
+          "const": true,
+          "default": true,
+          "title": "Exact Rgb Subrectangle",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "source_page",
+        "source_png_sha256",
+        "crop_sha256",
+        "crop_name",
+        "rectangle_xywh"
+      ],
+      "title": "PixelCheck",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "accepted_as_assisted_review_with_qualifications",
+      "title": "Status",
+      "type": "string"
+    },
+    "methods_audit_sha256": {
+      "title": "Methods Audit Sha256",
+      "type": "string"
+    },
+    "source_identity_verified_now": {
+      "const": true,
+      "default": true,
+      "title": "Source Identity Verified Now",
+      "type": "boolean"
+    },
+    "historical_protocol_certified": {
+      "const": false,
+      "default": false,
+      "title": "Historical Protocol Certified",
+      "type": "boolean"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "exact_crop_checks": {
+      "items": {
+        "$ref": "#/$defs/PixelCheck"
+      },
+      "title": "Exact Crop Checks",
+      "type": "array"
+    },
+    "header_band_sha256": {
+      "title": "Header Band Sha256",
+      "type": "string"
+    },
+    "root_errata": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Root Errata",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "canonical_source_edits": {
+      "const": 0,
+      "default": 0,
+      "title": "Canonical Source Edits",
+      "type": "integer"
+    },
+    "added_inventory_review_count": {
+      "const": 0,
+      "default": 0,
+      "title": "Added Inventory Review Count",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "methods_audit_sha256",
+    "findings",
+    "exact_crop_checks",
+    "header_band_sha256",
+    "root_errata",
+    "limitations"
+  ],
+  "title": "Decision",
+  "type": "object"
+}

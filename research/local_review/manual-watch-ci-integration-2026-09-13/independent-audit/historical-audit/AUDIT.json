@@ -1,0 +1,229 @@
+{
+  "schema_version": "1.0",
+  "stage": "frozen_independent_review",
+  "created_at": "2026-09-13T17:27:53.030415+00:00",
+  "inputs": [
+    {
+      "path": "received-preparation/FINAL_MANIFEST.json",
+      "sha256": "d4b387d43fcbd44e36b17f37dd0e643350b5efa6f42096dfce12eae0fbf6265d",
+      "size_bytes": 30331
+    },
+    {
+      "path": "received-preparation/PREPARATION.json",
+      "sha256": "13525e00022baa712751477f94535b09c6d9d2937706a906c60fed99f40d2821",
+      "size_bytes": 4386
+    },
+    {
+      "path": "received-final/scripts/manual_source_watch_ci.py",
+      "sha256": "76a80c7b832d82ef6f1990e4769f0f7d2aef2f01610bbfba7baae559ee6702b9",
+      "size_bytes": 20389
+    },
+    {
+      "path": "received-final/tests/test_manual_source_watch_ci.py",
+      "sha256": "9b2b0141b450c29c09887e3b0e0c2ee6717d96109714a191128f42e90204288a",
+      "size_bytes": 23509
+    },
+    {
+      "path": "received-final/.github/workflows/manual-source-watch-daily.yml",
+      "sha256": "b2a7eabf2dcb5e627ddf22033bbde74af75fe738581737cd38e6b28599bd4b0e",
+      "size_bytes": 4417
+    },
+    {
+      "path": "received-final/config/manual_source_watch_ci.json",
+      "sha256": "3e1b8900e56f5e708bbc145f176f849db1e3e02b2a18b92ec1e489f8ee17bfff",
+      "size_bytes": 21718
+    }
+  ],
+  "checks": [
+    {
+      "id": "C01",
+      "expected": "Exactly the existing four named pairs/eight PDFs are selected; no discovered URL is enrolled.",
+      "outcome": "pass",
+      "evidence": [
+        "received-final/scripts/manual_source_watch_ci.py",
+        "checks/author-tests.log",
+        "checks/independent-tests.log"
+      ]
+    },
+    {
+      "id": "C02",
+      "expected": "All four readiness/pin/selected-source preflights finish before any HTTP execution starts.",
+      "outcome": "pass",
+      "evidence": [
+        "received-final/scripts/manual_source_watch_ci.py",
+        "checks/author-tests.log",
+        "checks/independent-tests.log"
+      ]
+    },
+    {
+      "id": "C03",
+      "expected": "Four serial batches preserve individual 4-request/4-URL/2MB-source/4MB-batch caps and total maximum16 requests/16 MB response bytes; no retries.",
+      "outcome": "pass",
+      "evidence": [
+        "received-final/scripts/manual_source_watch_ci.py",
+        "checks/author-tests.log",
+        "checks/independent-tests.log"
+      ]
+    },
+    {
+      "id": "C04",
+      "expected": "Exit zero alone is not success: changed, partial, denied, not_checked and invalid reports remain distinguishable.",
+      "outcome": "pass",
+      "evidence": [
+        "received-final/scripts/manual_source_watch_ci.py",
+        "checks/author-tests.log",
+        "checks/independent-tests.log"
+      ]
+    },
+    {
+      "id": "C05",
+      "expected": "A changed valid PDF requires review and cannot update baselines, canonical files or legal status.",
+      "outcome": "pass",
+      "evidence": [
+        "received-final/scripts/manual_source_watch_ci.py",
+        "checks/author-tests.log",
+        "checks/independent-tests.log"
+      ]
+    },
+    {
+      "id": "C06",
+      "expected": "Immutable event/report artifacts survive failed jobs where execution reaches artifact handling; cancellation/platform upload failures remain explicit limits.",
+      "outcome": "pass",
+      "evidence": [
+        "received-final/.github/workflows/manual-source-watch-daily.yml",
+        "actual-readiness/process-receipt.schema.json",
+        "actual-readiness/summary.json"
+      ]
+    },
+    {
+      "id": "C07",
+      "expected": "Workflow uses read-only repository permissions and checkout without persisted credentials; no commit, publication or deployment.",
+      "outcome": "pass",
+      "evidence": [
+        "received-final/.github/workflows/manual-source-watch-daily.yml"
+      ]
+    },
+    {
+      "id": "C08",
+      "expected": "Finite wall timeout and per-batch/request deadlines remain effective; execution is serial and no hidden retry wrapper exists.",
+      "outcome": "pass",
+      "evidence": [
+        "received-final/scripts/manual_source_watch_ci.py",
+        "checks/author-tests.log",
+        "checks/independent-tests.log"
+      ]
+    },
+    {
+      "id": "C09",
+      "expected": "Only selected custody inputs are required, with no LFS fetch or whole-corpus completeness assumption.",
+      "outcome": "pass",
+      "evidence": [
+        "BASELINES.json",
+        "EXECUTION.json",
+        "checks/closed-preparation.log"
+      ]
+    },
+    {
+      "id": "C10",
+      "expected": "Offline fixtures exercise unchanged, changed, partial/failure, refusal, preflight failure and report/exit disagreement; no live HTTP.",
+      "outcome": "pass",
+      "evidence": [
+        "received-final/scripts/manual_source_watch_ci.py",
+        "checks/author-tests.log",
+        "checks/independent-tests.log"
+      ]
+    },
+    {
+      "id": "C11",
+      "expected": "All hashes and imported dependencies refer to reviewed artifacts; original workspace paths are not required by installed runner.",
+      "outcome": "pass",
+      "evidence": [
+        "received-final/config/manual_source_watch_ci.json",
+        "EXECUTION.json",
+        "dependencies/requirements-ci.txt",
+        "dependencies/requirements-register.txt"
+      ]
+    },
+    {
+      "id": "C12",
+      "expected": "Results assert transport/byte evidence only, not current law or source-wide extraction accuracy.",
+      "outcome": "pass",
+      "evidence": [
+        "received-final/scripts/manual_source_watch_ci.py",
+        "checks/author-tests.log",
+        "checks/independent-tests.log"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "severity": "no_issue",
+      "statement": "Final producer-status handling preserves valid stopped reports with otherwise complete observations as incomplete; denied/not-found/invalid/refused/partial source states remain explicit. Genuine report/exit disagreements and impossible completed-denial records are rejected.",
+      "evidence": [
+        "checks/independent-tests.log",
+        "test_independent.py",
+        "received-final/scripts/manual_source_watch_ci.py"
+      ]
+    },
+    {
+      "id": "F02",
+      "severity": "qualification",
+      "statement": "The reviewer initially omitted the compile_report/verify_run invariant and incorrectly claimed that current completed reports could contain access_denied. That premise was withdrawn before any counterexample execution. The preserved history separates the valid stopped-plus-complete case from the impossible completed-denial case.",
+      "evidence": [
+        "REVIEW_HISTORY.md",
+        "received-before-refinement/scripts/manual_source_watch_ci.py"
+      ]
+    },
+    {
+      "id": "F03",
+      "severity": "no_issue",
+      "statement": "44 frozen author tests and 20 independent cases pass. An actual four-process readiness invocation passed against only 88 pinned inputs, the 70-row raw manifest, and the new runner/config in a different temporary root. Unselected missing originals were informational; no execute/verify-run mode or source runtime was created.",
+      "evidence": [
+        "checks/author-tests.log",
+        "checks/independent-tests.log",
+        "EXECUTION.json",
+        "actual-readiness/summary.json"
+      ]
+    },
+    {
+      "id": "F04",
+      "severity": "qualification",
+      "statement": "The workflow defaults to readiness only. Installation, default-branch presence, a Linux offline run, a separately approved finite live pilot and enabling scheduled GETs remain distinct. No Linux/GitHub-hosted execution, schedule activation, public HTTP or delivered alert is established by this audit.",
+      "evidence": [
+        "received-final/docs/MANUAL_SOURCE_WATCH_CI.md",
+        "received-final/.github/workflows/manual-source-watch-daily.yml"
+      ]
+    },
+    {
+      "id": "F05",
+      "severity": "qualification",
+      "statement": "The always-conditioned summary/upload steps preserve evidence when those steps execute. Job cancellation, timeout, runner loss or artifact-service failure can prevent upload;40 minutes is the job limit,1200 seconds covers only source-run windows. Read-only contents permission restricts GitHub API access, not filesystem writes; reviewed code confines its own writes to runtime directories.",
+      "evidence": [
+        "received-final/.github/workflows/manual-source-watch-daily.yml",
+        "received-final/scripts/manual_source_watch_ci.py"
+      ]
+    },
+    {
+      "id": "F06",
+      "severity": "qualification",
+      "statement": "Root requested a separate two-file compliance revision for test annotations and Markdown frontmatter after the154-payload preparation was sealed. This base audit preserves that sealed preparation unchanged; any later delta needs its own hashes and review.",
+      "evidence": [
+        "received-preparation/FINAL_MANIFEST.json",
+        "received-final/tests/test_manual_source_watch_ci.py",
+        "received-final/docs/MANUAL_SOURCE_WATCH_CI.md"
+      ]
+    }
+  ],
+  "public_requests": 0,
+  "canonical_changes": false,
+  "scheduled_or_installed_by_audit": false,
+  "legal_currentness": "not_verified",
+  "limitations": [
+    "Candidate-aware independent code review, with root/author feedback consulted; no blind or external model-diversity claim.",
+    "Fixture process responses do not establish real publisher access; actual readiness only reads retained local evidence.",
+    "Third-party versions are pinned through the requirements chain; this audit did not install or byte-audit package wheels.",
+    "The full author preparation is retained byte-identically. Eight selected source PDFs were verified in the working tree and copied only into a temporary sparse test corpus; the audit does not duplicate all canonical source bodies.",
+    "All 64 focused cases were run locally on macOS/Python 3.14.3. The 44-author-case runner coverage was measured; no full repository suite was rerun here."
+  ]
+}

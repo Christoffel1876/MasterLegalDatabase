@@ -1,0 +1,265 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "RunResult": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "passed_structural_source_bindings_only",
+          "title": "Status",
+          "type": "string"
+        },
+        "source_sha256": {
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "source_pages": {
+          "const": 6,
+          "title": "Source Pages",
+          "type": "integer"
+        },
+        "native_bytes": {
+          "const": 10216,
+          "title": "Native Bytes",
+          "type": "integer"
+        },
+        "candidate_bytes": {
+          "const": 10894,
+          "title": "Candidate Bytes",
+          "type": "integer"
+        },
+        "physical_table_fragments": {
+          "const": 5,
+          "title": "Physical Table Fragments",
+          "type": "integer"
+        },
+        "physical_rows": {
+          "const": 75,
+          "title": "Physical Rows",
+          "type": "integer"
+        },
+        "fee_rows": {
+          "const": 65,
+          "title": "Fee Rows",
+          "type": "integer"
+        },
+        "native_spans_checked": {
+          "title": "Native Spans Checked",
+          "type": "integer"
+        },
+        "visibly_blank_cells_as_recorded": {
+          "const": 1,
+          "title": "Visibly Blank Cells As Recorded",
+          "type": "integer"
+        },
+        "merged_placeholder_cells": {
+          "title": "Merged Placeholder Cells",
+          "type": "integer"
+        },
+        "passage_bindings": {
+          "const": 27,
+          "title": "Passage Bindings",
+          "type": "integer"
+        },
+        "link_bindings": {
+          "const": 11,
+          "title": "Link Bindings",
+          "type": "integer"
+        },
+        "crop_pixel_replays": {
+          "const": 15,
+          "title": "Crop Pixel Replays",
+          "type": "integer"
+        },
+        "footer_limitations_preserved": {
+          "const": 6,
+          "title": "Footer Limitations Preserved",
+          "type": "integer"
+        },
+        "visually_certified_footer_year": {
+          "title": "Visually Certified Footer Year",
+          "type": "null"
+        },
+        "new_visual_review_pages": {
+          "const": 0,
+          "title": "New Visual Review Pages",
+          "type": "integer"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "answer_safe": {
+          "const": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        },
+        "translation_equivalence_verified": {
+          "const": false,
+          "title": "Translation Equivalence Verified",
+          "type": "boolean"
+        },
+        "external_reports_consulted": {
+          "const": false,
+          "title": "External Reports Consulted",
+          "type": "boolean"
+        },
+        "full_page_png_replays": {
+          "enum": [
+            0,
+            6
+          ],
+          "title": "Full Page Png Replays",
+          "type": "integer"
+        },
+        "public_requests": {
+          "const": 0,
+          "title": "Public Requests",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "status",
+        "source_sha256",
+        "source_pages",
+        "native_bytes",
+        "candidate_bytes",
+        "physical_table_fragments",
+        "physical_rows",
+        "fee_rows",
+        "native_spans_checked",
+        "visibly_blank_cells_as_recorded",
+        "merged_placeholder_cells",
+        "passage_bindings",
+        "link_bindings",
+        "crop_pixel_replays",
+        "footer_limitations_preserved",
+        "visually_certified_footer_year",
+        "new_visual_review_pages",
+        "legal_currentness",
+        "answer_safe",
+        "translation_equivalence_verified",
+        "external_reports_consulted",
+        "full_page_png_replays",
+        "public_requests"
+      ],
+      "title": "RunResult",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "status": {
+      "const": "structural_source_replay_passed_visual_judgments_not_repeated",
+      "title": "Status",
+      "type": "string"
+    },
+    "source_review_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Review Sha256",
+      "type": "string"
+    },
+    "result": {
+      "$ref": "#/$defs/RunResult"
+    },
+    "tests_passed": {
+      "const": 54,
+      "title": "Tests Passed",
+      "type": "integer"
+    },
+    "combined_branch_coverage_percent": {
+      "maximum": 100,
+      "minimum": 90,
+      "title": "Combined Branch Coverage Percent",
+      "type": "number"
+    },
+    "code_and_test_evidence": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Code And Test Evidence",
+      "type": "array"
+    },
+    "commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Commands",
+      "type": "array"
+    },
+    "discrepancy_and_resolution": {
+      "title": "Discrepancy And Resolution",
+      "type": "string"
+    },
+    "interpretation_limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Interpretation Limits",
+      "type": "array"
+    },
+    "canonical_changes": {
+      "const": 0,
+      "title": "Canonical Changes",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "started_at",
+    "completed_at",
+    "status",
+    "source_review_sha256",
+    "result",
+    "tests_passed",
+    "combined_branch_coverage_percent",
+    "code_and_test_evidence",
+    "commands",
+    "discrepancy_and_resolution",
+    "interpretation_limits",
+    "canonical_changes",
+    "public_requests"
+  ],
+  "title": "ValidationReceipt",
+  "type": "object"
+}

@@ -1,0 +1,277 @@
+# PASS 1 — Independent Visual Transcription (BLIND)
+
+## 1. Metadata
+
+| Field | Value |
+| :--- | :--- |
+| assignment_id | EB-PDF-009 |
+| source_id | larimer-building-fees-sd004-06 |
+| expected_pages | 5 |
+| utc_start | 2026-09-11T17:15:54Z |
+| utc_freeze | 2026-09-11T17:24:32Z |
+| packet manifest SHA-256 | ae7a6a63ece9b99ab039b87a1fe11a45ee04b6f57861c89d4ab54e3ab7391859 |
+| original.pdf SHA-256 | 1ac4dde1a7bbbd8ebf3b26bf8719c5c6854bbbd4844c221f54729d36bb193b2c |
+| page-0001 SHA-256 | a80d429c50139e0d7cf376b944ba231696d2828826f2d0e2f075eb8401debece |
+| page-0002 SHA-256 | e6068c7ab47633b1dfcb146fcee430377b2a7235f9a54700962a44155a419f91 |
+| page-0003 SHA-256 | 006b27833a6b6a0c7813a88e709d6f8d6a7c2220bdc6643a82fc5003a5117f11 |
+| page-0004 SHA-256 | ba6c6fb2aef8b2747b6f4320de9ba59bac0bf5423af8ebf5dd505bbfadd55a54 |
+| page-0005 SHA-256 | 3381afcddc5f8370c45f6c2cd9f6753cfd09b60727ecb9f3629ecf941827a7f3 |
+| reviewer | Ebenezer (Grok Bot) |
+| prior_candidate_exposure | none |
+| legal_currentness | not_verified |
+| pass | PASS1_frozen (blind visual transcription only) |
+
+## 2. Access / hash verification
+
+| Asset | Expected SHA-256 | Observed SHA-256 (this pass) | Match |
+| :--- | :--- | :--- | :--- |
+| page-0001.png | a80d429c50139e0d7cf376b944ba231696d2828826f2d0e2f075eb8401debece | a80d429c50139e0d7cf376b944ba231696d2828826f2d0e2f075eb8401debece | YES |
+| page-0002.png | e6068c7ab47633b1dfcb146fcee430377b2a7235f9a54700962a44155a419f91 | e6068c7ab47633b1dfcb146fcee430377b2a7235f9a54700962a44155a419f91 | YES |
+| page-0003.png | 006b27833a6b6a0c7813a88e709d6f8d6a7c2220bdc6643a82fc5003a5117f11 | 006b27833a6b6a0c7813a88e709d6f8d6a7c2220bdc6643a82fc5003a5117f11 | YES |
+| page-0004.png | ba6c6fb2aef8b2747b6f4320de9ba59bac0bf5423af8ebf5dd505bbfadd55a54 | ba6c6fb2aef8b2747b6f4320de9ba59bac0bf5423af8ebf5dd505bbfadd55a54 | YES |
+| page-0005.png | 3381afcddc5f8370c45f6c2cd9f6753cfd09b60727ecb9f3629ecf941827a7f3 | 3381afcddc5f8370c45f6c2cd9f6753cfd09b60727ecb9f3629ecf941827a7f3 | YES |
+
+**Access scope (this pass):** Inspected only `/workspace/geode-009/page-0001.png` … `page-0005.png` (and Pillow crops derived from those PNGs). Did **not** open, read, or hash any `candidate.txt`, native-evidence, OCR, Sherlock, Atlas, or other repository content. Did **not** browse the web for substitute sources. Directory listing at start showed only the five page PNGs (plus later-created `crops/` and this report).
+
+**Image geometry:** All five pages measured 2550×3300 px, RGB.
+
+## 3. Image-viewing method / caption-mediation disclosure
+
+- Page images were inspected with the **Read** tool, which returns **caption-mediated vision captions** (model-generated descriptions of the pixels), **not** source quotations and **not** OCR output.
+- Captions are **not** authoritative verbatim source text; they can truncate, invent, or inject prior-conversation / metadata context. Any caption text that injected other-document context or assignment metadata as if printed on the page was **ignored**.
+- Dense table regions were **cropped with Pillow** and re-read. When full-page and crop captions conflicted, preference was given to **complete-row / tight crops** that showed the disputed string fully; remaining conflicts are marked **[UNCERTAIN]** in §6.
+- A filename/URL/`source_id` year is **not** evidence of operative year. Printed date line on page 1 is reported as printed only; `legal_currentness: not_verified`.
+- No handwritten signatures observed. Printed personal names: none observed. Signature presence: **none**.
+
+## 4. Full page-by-page verbatim transcript
+
+### Page 1 (`page-0001.png`)
+
+**Printed title:** Building Permit Fee Schedule
+
+**Printed date/note line:** July 1, 2026 (CPI fee increase of 2.29% included)
+
+**Italic notice (printed):**
+New commercial and residential buildings may also be subject to impact fees for roads, parks, and schools, as well as county sales and use taxes. For information on the other fees, please contact the appropriate county department: Engineering (transportation fees) 498-5700; Parks and Open Lands (park fees) 679-4570; Planning (school fees) 498-7683; Finance (sales and use tax) 498-5930.
+
+*(Phone numbers appear as 7-digit local numbers without a printed area code in the captions.)*
+
+**Building Permit Fee** for a building permit shall be paid to the Building Official as required in Section R108.2 IRC/109.2 IBC and set forth in Table 1-A, except Group Utility Occupancies (private garages, carports, sheds, and agricultural buildings) shall use Table 1-B. Fees for electrical permits shall be paid as set forth in Table 1-E.
+
+**Plan Review Fee** shall be paid equal to 50% (on one- and two-family dwellings) and 65% (on commercial and multi-family units greater than a duplex) of the building permit fee as required in Section R108.2 IRC/109.2 IBC and set forth in Tables 1-A and 1-B. (Miscellaneous, electrical, and wildfire fee tables are exempt from plan review fee.) The plan review fee specified in this section is separate and in addition to the building permit fee. When submittal documents are incomplete or changed so as to require additional plan review or when the project involves deferred submittal items, an additional plan review fee shall be charged at the rate shown in Tables 1-A or 1-B as “Other Inspections and Fees.”
+
+**Plan Resubmittal, Reinspection, Investigation, and TCO Issuance Fees** as allowed in sections R108.4-R108.9 IRC/109.4-109.7 IBC and set forth in “Other Inspections and Fees” in Table 1-A/1-B. Reinspection and penalty fees are also included in Table 1-E.
+
+**Plumbing and Heating Permit Fees** for each permit as required in Sections R108.2 IRC, 106.5 IMC, & 106.6 IPC and set forth in fee Table 1-C.
+
+**Wildfire Site Assessment Fee** shall be charged as allowed in section R327.12 IRC/3606 IBC and set forth in Table 1-D to structures in the wildfire hazard area.
+
+**Short-Term Rental Conversion Permit Fee** (Outside Estes Valley) shall be $300-600 as required in Section R108.2 IRC and set forth in Table 1-A.
+
+**Document Imaging Fees** shall be charged as allowed in Table 1-F to comply with state archive laws.
+
+**Code Compliance (CC) Fee** of $100 shall be assessed on all permits associated with a CC case.
+
+*(Section lead-ins above appear bold + underlined in the image. No page footer / page number / signatures observed on this page.)*
+
+**Jurisdiction cues printed on this page:** “county department”; “Outside Estes Valley”; department phone list. The string **“Larimer”** was **not** observed as printed text on the inspected page images (metadata `source_id` is separate).
+
+---
+
+### Page 2 (`page-0002.png`) — Table 1-A
+
+**Table 1-A**
+
+**Spanning header:** Building Permit Fees except for Utility Occupancies
+
+| Total Valuation | Fee |
+| :--- | :--- |
+| $1.00 to $1,200.00 | $63.59 |
+| $1,200.01 to $2,000.00 | $63.59 for the first $1,200.00 plus $4.2396 for each additional $100.00 or fraction thereof, to and including $2,000.00. |
+| $2,000.01 to $25,000.00 | $97.50 for the first $2,000.00 plus $19.7847 for each additional $1,000.00 or fraction thereof, to and including $25,000.00. |
+| $25,000.01 to $50,000.00 | $552.56 for the first $25,000.00 plus $14.1320 for each additional $1,000.00 or fraction thereof, to and including $50,000.00. |
+| $50,000.01 to $100,000.00 | $919.73 for the first $50,000.00 plus $9.0727 for each additional $1,000.00 or fraction thereof, to and including $100,000.00. |
+| $100,000.01 to $500,000.00 | $1,428.35 for the first $100,000.00 plus $7.4616 for each additional $1,000.00 or fraction thereof, to and including $500,000.00. |
+| $500,000.01 to $1,000,000.00 | $4,489.25 for the first $500,000.00 plus $6.1120 for each additional $1,000.00 or fraction thereof, to and including $1,000,000.00. |
+| $1,000,000.01 and up | $7,545.75 for the first $1,000,000.00 plus $4.3668 for each additional $1,000.00 or fraction thereof. |
+
+**Other Inspections and Fees:**
+
+1. Inspections outside of normal business hours (2 Hour Minimum Charge) $54.00/ hour
+2. Re-inspection fees assessed under provisions of Sections 108.8 IRC & 109.7 IBC $54.00/hour
+3. Inspections when no fee is specifically indicated (minimum charge -one hour) $54.00/hour
+4. Additional plan review required by changes, additions or revisions to plans.... $54.00/ hour
+5. Issuance of each Temporary Certificate of Occupancy (TCO) and extensions...$600.00
+
+There will be a $600 fee for a temporary certificate of occupancy. A Temporary Certificate of Occupancy shall be valid for 180 days. If a full Certificate of Occupancy is issued within the first 30 days, all but $40 will be refunded. If a full Certificate of Occupancy is issued prior to the 180-day expiration, $100 shall be refunded for each 30-day period remaining out of the original 180-day validity period of the Temporary Certificate of Occupancy.
+
+6. A penalty fee will be assessed up to or equal to the building permit fee for work commenced without first obtaining a building permit per IRC Section R108.6/IBC Section 109.4
+7. A Code Compliance (CC) fee will be assessed on permits associated with a CC case...$100
+8. Use of outside consultants for plan checking, inspections, or both ............ Actual Cost
+9. Docket fee for Board of Appeals.................................................... $55.00
+10. Short-term Rental Conversion Permit ............................................ $300 - $600
+
+*(Entire table + “Other Inspections and Fees” appear enclosed in a rectangular border. Spacing after `$54.00/` varies across items as noted in §6.)*
+
+---
+
+### Page 3 (`page-0003.png`) — Table 1-B
+
+**Table 1-B**
+
+**Spanning header:** Building Permit Fees for Utility Occupancies
+
+| Total Valuation | Fee |
+| :--- | :--- |
+| $1.00 to $1,500.00 | $63.59 |
+| $1,500.01 to $2,000.00 | $63.59 for the first $1,500.00 plus $4.14 for each additional $100.00 or fraction thereof, to and including $2,000.00. |
+| $2,000.01 to $25,000.00 | $80.14 for the first $2,000.00 plus $16.07 for each additional $1,000.00 or fraction thereof, to and including $25,000.00. |
+| $25,000.01 to $50,000.00 | $459.29 for the first $25,000.00 plus $11.54 for each additional $1,000.00 or fraction thereof, to and including $50,000.00. |
+| $50,000.01 to $100,000.00 | $757.48 for the first $50,000.00 plus $7.92 for each additional $1,000.00 or fraction thereof, to and including $100,000.00. |
+| $100,000.01 to $500,000.00 | $1,167.30 for the first $100,000.00 plus $6.25 for each additional $1,000.00 or fraction thereof, to and including $500,000.00. |
+| $500,000.01 to $1,000,000.00 | $3,723.78 for the first $500,000.00 plus $5.32 for each additional $1,000.00 or fraction thereof, to and including $1,000,000.00. |
+| $1,000,000.01 and up | $6,137.40 for the first $1,000,000.00 plus $3.83 for each additional $1,000.00 or fraction thereof. |
+
+**Other Inspections and Fees:**
+
+1. Inspection outside of normal business hours (minimum charge-two hours) $54.00/hour
+2. Re-inspection fees assessed per provisions of Section R108.8 IRC & 109.7 IBC $54.00
+3. Inspections when no fee is specifically indicated (minimum charge-one hour) $54.00/hour
+4. Additional plan review required by changes, additions, or revisions to plan $54.00/hour
+5. A penalty fee will be assessed up to or equal to the building permit fee for work commenced without first obtaining a building permit per IRC Section R108.6/IBC Section 109.4
+6. A Code Compliance fee will be assessed on permits associated with a CC case...$100
+7. Use of outside consultants for plan checking, inspections, or both ............ Actual Cost
+8. Docket fee for Board of Appeals.................................................................... $55.00
+
+**Notable differences vs Table 1-A “Other” list (preserved):** Item 1 uses singular “Inspection”; item 2 fee is `$54.00` **without** `/hour` in consistent crop captions; no TCO item; no Short-term Rental item; list ends at 8.
+
+---
+
+### Page 4 (`page-0004.png`) — Tables 1-C and 1-D
+
+**Table 1-C**
+
+**Spanning header:** Plumbing and Mechanical Permit Fee  
+*(Page 1 narrative calls this category “Plumbing and Heating Permit Fees”; table header uses “Plumbing and Mechanical Permit Fee” [singular “Fee” in the strongest crop consensus].)*
+
+| Total Valuation | Fee |
+| :--- | :--- |
+| Up to $2000.00 | $66.42 |
+| $2000.01 to $50,000.00 | $66.42 for the first 2000.00 plus $25.5506 for each additional $1000.00 or fraction thereof, to and including $50,000.00 |
+| $50,000.01 to $500,000.00 | $1,277.95 for the first $50,000 plus $20.0816 for each additional $1000.00 or fraction thereof, to and including $500,000.00 |
+| $500,000.01 and up | $10,314.65 for the first $500,000 plus $14.14 for each additional $1000.00 or fraction thereof. |
+
+**Anomalies preserved:** Row 2 says “first 2000.00” **without** a `$` before 2000.00; incremental rates use four decimals on rows 2–3 (`$25.5506`, `$20.0816`) but two decimals on the top tier rate `$14.14`; comma usage on `$1000.00` / `$2000.00` is inconsistent with comma-bearing ranges like `$50,000.00`.
+
+**Table 1-D**
+
+**Spanning header:** Wildfire Site Assessment Fees
+
+| Type | Site Assessment Required |
+| :--- | :--- |
+| New Residence | $150.00 |
+| New Utility Bldg. | $150.00 |
+| New Commercial | $150.00 |
+| Residence Add. | $150.00 |
+| Utility Bldg. Add. | $150.00 |
+| Commercial Add. | $150.00 |
+
+Fees for other inspections or services not covered above............ $54.00/hour  
+(Minimum charge = one hour.)  
+Docket fee for Board of Appeals .............................................$55.00
+
+*(These trailing lines appear inside / immediately under the Table 1-D border region in crop consensus.)*
+
+---
+
+### Page 5 (`page-0005.png`) — Tables 1-E and 1-F
+
+**Table 1-E**
+
+**Electrical Permit Fees**  
+**Fees are based on A, B, C, or D below.**
+
+**A. Residential Electrical Installation:** (new, remodel, addition) (round sq. ft. up to next 100 for calculation)
+
+| Residential Installation – Based on enclosed living area only | FEE |
+| :--- | :--- |
+| Living Area: Less than or equal to 1000 square feet | $147 |
+| 1,001 square feet but not more than 1,500 square feet | $203 |
+| 1,501 square feet but not more than 2,000 square feet | $261 |
+| Greater than 2001 square feet | $261 + $12 per each additional 100 sq. ft. |
+
+EXAMPLE: (2235 sq. ft.) first 2000 sq. ft. = $261 + (2 (235 rounded down to next 100) x $12 = 24) = $285
+
+**B. Commercial and other fees:** Including some residential installations not based on square footage (non-habitable area, garage, shop, solar, etc.). These fees are calculated from the customer’s total cost (contract price), including materials, items and labor- whether provided by the contractor or the property owner.
+
+| Valuation of Installation – (Based on cost to customer of labor, material and items) | FEE |
+| :--- | :--- |
+| Less than or equal to $2000 = $147 (base fee) | $147 |
+| $2001 or more | $147 + $12 per thousand of job valuation |
+
+EXAMPLE: The installation cost is $5,150 (round down to $5,000) = $147 + (5 x $12 = $60) = $207
+
+| | |
+| :--- | :--- |
+| **C. Mobile/Modular/Manufactured Home Set** | **$133** |
+| **D. Temporary Construction Meter** | **$ 66** |
+
+*(Section D shows a visible space between `$` and `66` in crop captions: `$ 66`.)*
+
+**Other Inspections and Fees:**
+
+1. Inspections outside of normal business hours (minimum charge two hours) $54.00/hour
+2. Re-inspection fees assessed per IRC Section R108.8/IBC Section109.7 IBC/NEC $54.00  
+   *[UNCERTAIN: one crop set reads `Section109.7` with missing space; another reads `Section 109.7`. Transcript above preserves the missing-space form as the more specific anomaly observation; see §6.]*
+3. Inspections when no fee is specifically indicated (minimum charge one hour) $54.00/hour
+4. A penalty fee will be assessed up to or equal to the electrical permit fee for work commenced without first obtaining a building permit per IRC Section R108.6/IBC Section 109.4/NEC
+5. A Code Compliance (CC) fee will be assessed on permits associated with a CC case...$100
+6. Trim permit. If a permit expires after the rough-in inspection has been completed, inspected, and approved by the electrical inspector, but before the final inspection is approved, a TRIM permit must be obtained. The fee is based on the valuation of the remaining electrical work to be inspected. Minimum trim permit fee is $147.00
+7. Use of outside consultants for inspections....................................................... Actual Cost
+8. Docket fee for Board of Appeals.................................................................... $55.00
+9. Solar permit fees are capped by state law at $500 for residential installations and $1,000 for commercial installations.
+
+**Table 1-F**
+
+**Document Imaging Fees**
+
+| Document Imaging Fees | |
+| :--- | :--- |
+| Residential Plans | No Fees required |
+| Commercial plans submitted on digital disc. | No Fees required |
+| Commercial plans 10 pages and under | $18 |
+| Commercial plans 11 pages to 30 pages | $36 |
+| Commercial plans 30 to 50 pages | $100 |
+| Commercial plans greater than 50 pages | $100 plus $2 for each additional page |
+
+**Anomaly preserved:** Row “11 pages to 30 pages” and row “30 to 50 pages” both include page 30 (boundary overlap). Row 2 ends with a period after `disc.`
+
+## 5. Coverage table
+
+| Expected page | File | Inspected via Read (full) | Crops re-read | Content captured | Gaps / notes |
+| :---: | :--- | :---: | :---: | :--- | :--- |
+| 1 | page-0001.png | YES | YES (header, notice, body strips, STR/CC closeouts) | Title, date/CPI line, italic contacts, all fee narrative sections | No printed page number/footer; “Larimer” string not observed on-page |
+| 2 | page-0002.png | YES | YES (title, header cell, all valuation tiers, Other 1–10) | Full Table 1-A + Other Inspections and Fees 1–10 + TCO refund paragraph | Caption conflict on $1M+ base fee resolved to $7,545.75 via tight crop |
+| 3 | page-0003.png | YES | YES (title, all valuation tiers, Other 1–8) | Full Table 1-B + Other Inspections and Fees 1–8 | Item 2 lacks `/hour` vs Table 1-A; incremental rates appear 2-decimal |
+| 4 | page-0004.png | YES | YES (1-C full + rows; 1-D + notes) | Full Tables 1-C and 1-D + trailing hourly/docket lines | Singular vs plural “Fee(s)” in 1-C header: using singular |
+| 5 | page-0005.png | YES | YES (1-E A/B/C/D, Other 1–9, 1-F) | Full Tables 1-E and 1-F + Other list | Round-up vs round-down conflict in §A example; 1-F page-30 overlap |
+
+## 6. Uncertainties / notes
+
+1. **Caption mediation:** All text above is reconstructed from caption-mediated vision + crops, not native PDF text extraction. Decimal precision and minor punctuation (spaces around `/`, leader-dot counts, smart quotes) may still drift.
+2. **Table 1-A $1,000,000.01 base fee:** One truncated strip caption misread `$7,343.73`; multiple complete-row crops consistently show **`$7,545.75`** — used that value.
+3. **Table 1-A spanning header:** Early misaligned crops hallucinated “Utility Occupational / Utility Group…” wording; tight header crops consistently show **“Building Permit Fees except for Utility Occupancies”**.
+4. **Table 1-A item 2 code cite:** Printed form appears as **“Sections 108.8 IRC & 109.7 IBC”** (no `R` prefix on 108.8), contrasting with Table 1-B’s **“Section R108.8 IRC & 109.7 IBC”**.
+5. **Table 1-B incremental decimals:** Captions show two-place rates (`$4.14`, `$16.07`, `$11.54`, `$7.92`, `$6.25`, `$5.32`, `$3.83`) unlike Table 1-A’s four-place rates. Possible that finer decimals exist but were not resolved by captions — marked for later pass comparison.
+6. **Table 1-B item 2:** Fee consistently `$54.00` **without** `/hour`, while items 1/3/4 include `/hour`.
+7. **Table 1-C header:** Strongest consensus **“Plumbing and Mechanical Permit Fee”** (singular); one crop said plural “Fees”. Page 1 narrative says “Plumbing and Heating…”.
+8. **Table 1-D trailing text:** One incomplete crop hallucinated “mapping, master plan review”; fuller crops show **“Fees for other inspections or services not covered above............ $54.00/hour”** plus minimum-charge and docket lines — used fuller reading.
+9. **Table 1-E §A rounding contradiction (printed anomaly):** Instruction says round sq. ft. **up** to next 100; EXAMPLE says “235 rounded **down** to next 100” and arithmetic matches round-down.
+10. **Table 1-E item 2:** Possible missing space `Section109.7` vs `Section 109.7` — **[UNCERTAIN]**.
+11. **Table 1-F:** Boundary overlap at **30 pages** between adjacent commercial rows.
+12. **No signatures / handwritten marks** observed. No printed personal names observed.
+13. **legal_currentness: not_verified.** Printed “July 1, 2026” and CPI 2.29% are reported as printed; not assessed as current law. Filename/`source_id` year is not operative-year evidence.
+14. **Blindness:** `prior_candidate_exposure: none`. Candidate/OCR/native/Sherlock/Atlas/web substitutes were not used.
+
+---
+END PASS1_frozen

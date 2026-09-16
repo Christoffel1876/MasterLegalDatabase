@@ -1,0 +1,577 @@
+--- manual_source_watch.py
++++ manual_source_watch_batches.py
+@@ -1,4 +1,4 @@
+-"""Two-source manual PDF byte watch with canonical custody and read-only readiness."""
++"""Three fixed two-source watch batches with custody checks and no automatic enrollment."""
+ from __future__ import annotations
+ 
+ import argparse
+@@ -9,6 +9,8 @@
+ from datetime import datetime, timedelta
+ from pathlib import Path
+ from typing import Any, Callable, Literal
++
++from pydantic import JsonValue
+ from urllib.parse import unquote
+ 
+ import jsonschema
+@@ -16,93 +18,145 @@
+ from bs4 import BeautifulSoup
+ from pydantic import AwareDatetime, Field, model_validator
+ 
+-from geode.pipeline import manual_watch_http as g
++from geode.pipeline import manual_watch_http_v2 as g
+ from geode.pipeline.manual_source_intake import ManualSourceIntakeRecord
+ 
+-SELECTION = Path('config/manual_source_watch.json')
+ MANUAL_MANIFEST = Path('_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl')
+-RUNTIME = Path('.geode_runtime/manual_source_watch')
+-SCOPE_SHA = 'd5ad6056f8b7d820dfd01d09366744dc368fe6c604811eddfb0f225616f94ef5'
+-ACCEPTANCE_SHA = '503b98fb62561d3cee436f938c0555554a458547ef546f94576cf0abcafe5f12'
+-INTAKE_RECEIPT_SHA = '59efef8ab0b90059004f85054acca3b82bcf613c34eaaba20b37d5a521b8d5ff'
+-
+-IDENTITIES = {
+-    'SD014-01': (
+-        'colorado-springs-code-services-fees-2015-atlas-directed',
+-        'https://coloradosprings.gov/system/files/feeschedule_codeservices_final_2015.pdf',
+-        '555570a62a5a557a824d1bcf3ecd2e60d57e48d19ea401f06a2e5b7ccb177e56', 162682),
+-    'SD014-02': (
+-        'colorado-springs-construction-fees-atlas-directed',
+-        'https://coloradosprings.gov/system/files/2026-07/'
+-        '2026%20Fee%20Schedule%20Construction%20Services.pdf',
+-        'e35de501a011fe55f03140bf91aef54226997d896fec0b6308a2eac9bd40909a', 258393),
++RUNTIME = Path('.geode_runtime/manual_source_watch_batches')
++CATALOG = Path('config/manual_source_watch_sources_v1.json')
++CATALOG_SHA = 'd70ab79926513fa01d502ca03b824223fd47cb62f4d5d3a750d2c2633d6e564a'
++BATCHES = {
++    'county-fees-v1': ('arapahoe-planning-fees-sd002-14',
++                       'weld-ehs-fees-2026-atlas-directed'),
++    'western-fees-v1': ('grand-junction-fire-fees-atlas-directed',
++                        'mesa-building-fees-exhibit-a-atlas-directed'),
++    'greeley-fees-v1': ('greeley-building-fees-sd008-06',
++                       'greeley-development-impact-fee-memo-sd008-07'),
+ }
++SELECTIONS = {key: Path('config/manual_source_watch_' + key.replace('-', '_') + '.json')
++              for key in BATCHES}
++SELECTION = SELECTIONS['county-fees-v1']
++
++class Evidence(g.Strict):
++    """Identify an exact metadata document and, optionally, a zero-based JSONL row."""
++
++    artifact: g.Ref
++    jsonl_row: int | None = Field(default=None, ge=0)
++    pointers: list[str]
++    scope: str
++
++
++class SourceBinding(g.Strict):
++    """Preserve custody, review limits and the proposed exact watch target separately."""
++
++    rank: int = Field(ge=1, le=6)
++    record_id: str
++    intake_id: str
++    authority_id: str
++    layer_id: str
++    title: str
++    baseline: g.Ref
++    baseline_pages: int = Field(ge=1)
++    raw_manifest_zero_based_row: int = Field(ge=0)
++    raw_manifest_exact_line_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
++    historical_raw_url: str | None
++    historical_acquisition_method: str
++    historical_reported_acquisition: dict[str, JsonValue]
++    repository_received_at: AwareDatetime
++    proposed_url: str
++    retained_final_url: str
++    http_started_at: AwareDatetime | None
++    http_finished_at: AwareDatetime
++    http_time_role: str
++    recorded_http_status: Literal[200]
++    recorded_redirects: Literal[0]
++    official_link_basis: str
++    official_parent_url: str | None
++    official_parent_label: str | None
++    authority_evidence: Evidence
++    custody_evidence: Evidence
++    referral_evidence: list[Evidence]
++    review_evidence: Evidence
++    review_schema: g.Ref
++    mapped_review_kind: str
++    mapped_scope_fields: dict[str, JsonValue]
++    recorded_source_roles: dict[str, JsonValue]
++    review_limitations: list[str]
++    proposal_reason: str
++    enrollment_conditions: list[str]
++    legal_currentness: Literal["not_verified"] = "not_verified"
++    answer_safe: Literal[False] = False
++    status: Literal["PREPARED_NOT_ACTIVATED"] = "PREPARED_NOT_ACTIVATED"
++
++
++class Catalog(g.Strict):
++    """Immutable explicit six-source admission data, separate from installed/live status."""
++    schema_version: Literal[1]
++    catalog_version: Literal['2026-09-13-v1']
++    prepared_at: AwareDatetime
++    status: Literal['PREPARED_NOT_INSTALLED']
++    sources: list[SourceBinding] = Field(min_length=6, max_length=6)
++    public_requests: Literal[0]
++    legal_currentness: Literal['not_verified']
++
+ 
+ class Target(g.Target):
+-    """One canonical original, its actual intake record, and earlier official HTTP custody."""
++    """One exact source and complete custody/qualification fields for result consumers."""
+     canonical_source_id: str
+-    authority_id: Literal['CO-MUNICIPAL-COLORADO_SPRINGS']
++    authority_id: str
+     baseline: g.Ref
+-    baseline_page_count: Literal[7]
+-    baseline_request_started_at: AwareDatetime
+-    baseline_response_finished_at: AwareDatetime
++    baseline_page_count: int = Field(ge=1, le=100)
++    baseline_request_started_at: AwareDatetime | None
++    baseline_recorded_http_time: AwareDatetime
++    baseline_http_time_role: str
+     repository_received_at: AwareDatetime
+     intake_id: str
+     raw_manifest_line_sha256: str = Field(pattern=r'^[a-f0-9]{64}$')
+     source_context: list[str] = Field(min_length=1)
++    source: SourceBinding
+     legal_currentness: Literal['not_verified'] = 'not_verified'
+ 
+-
+-class PriorLive(g.Strict):
+-    """Data-only pointers to an accepted finite check, not recurring-operation evidence."""
+-    report: g.Ref
+-    report_schema: g.Ref
+-    run_manifest: g.Ref
+-    authorization: g.Ref
++    @model_validator(mode='after')
++    def consistent(self) -> Target:
++        """Refuse inconsistent convenience fields or loss of qualification context."""
++        expected = target_fields(self.source)
++        if self.model_dump(exclude={'source'}) != expected:
++            raise ValueError('Source/target custody or context differs')
++        return self
++
++
++def target_fields(source: SourceBinding) -> dict[str, Any]:
++    """Expose dates according to their recorded roles; never fill an unknown start time."""
++    return dict(source_id=source.record_id, canonical_source_id=source.record_id,
++        authority_id=source.authority_id, url=source.proposed_url,
++        baseline=source.baseline.model_dump(),
++        baseline_page_count=source.baseline_pages,
++        baseline_request_started_at=source.http_started_at,
++        baseline_recorded_http_time=source.http_finished_at,
++        baseline_http_time_role=source.http_time_role,
++        repository_received_at=source.repository_received_at, intake_id=source.intake_id,
++        raw_manifest_line_sha256=source.raw_manifest_exact_line_sha256,
++        source_context=[source.http_time_role, source.official_link_basis,
++                        *source.review_limitations, *source.enrollment_conditions],
++        legal_currentness='not_verified')
+ 
+ 
+ class Plan(g.Plan):
+-    """Fixed two-source selection; invocation limits do not install or imply scheduling."""
++    """One selected named pair. Limits may narrow, but source membership never expands."""
++    batch_id: Literal['county-fees-v1', 'western-fees-v1', 'greeley-fees-v1']
+     status: Literal['configured_not_scheduled']
+     targets: list[Target] = Field(min_length=2, max_length=2)
+-    custody_scope: g.Ref
+-    custody_schema: g.Ref
+-    intake_acceptance: g.Ref
+-    intake_receipt: g.Ref
+-    prior_live: PriorLive
++    source_catalog_sha256: Literal[
++        'd70ab79926513fa01d502ca03b824223fd47cb62f4d5d3a750d2c2633d6e564a']
+     automatic_baseline_updates: Literal[False] = False
+     legal_currentness: Literal['not_verified'] = 'not_verified'
+     qualifications: list[str]
+ 
+     @model_validator(mode='after')
+     def fixed_sources(self) -> Plan:
+-        """Refuse replacement identities, source bytes, jurisdiction or custody anchors."""
+-        if [t.source_id for t in self.targets] != ['SD014-01', 'SD014-02']:
+-            raise ValueError('Exactly the two ordered reviewed sources are required')
+-        for target in self.targets:
+-            if (target.canonical_source_id, target.url, target.baseline.sha256,
+-                    target.baseline.size_bytes) != IDENTITIES[target.source_id]:
+-                raise ValueError('Source URL/ID/baseline substitution refused')
+-            prefix = ('_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/'
+-                      + target.canonical_source_id + '/')
+-            if not target.baseline.path.startswith(prefix):
+-                raise ValueError('Unexpected canonical original path')
+-        if (self.custody_scope.sha256 != SCOPE_SHA or
+-                self.intake_acceptance.sha256 != ACCEPTANCE_SHA or
+-                self.intake_receipt.sha256 != INTAKE_RECEIPT_SHA):
+-            raise ValueError('Wrong accepted source custody')
+-        if self.custody_schema.sha256 != (
+-                '131d3c397e3a3f6e3c12c1559e2cdbe383a5a0a22519dd1021893368d49f19e2'):
+-            raise ValueError('Wrong original source schema')
+-        expected_prior = {
+-            'report': 'f2ede7e3b8f6673e0d6709e137444ffdb3220d9f23bebe81fb5caf91327e9e63',
+-            'report_schema': '7853239374b3655fe9f81b9970628015cc4ac961bcf727a15f7eccb4009a0a0e',
+-            'run_manifest': 'e96b713dcce69a9e0229141f6cd950d68268437b4619570e2342565839567bc3',
+-            'authorization': 'ab7db4324c60e9cad82300ed3ee47f24c4bee955cc2c711d060903b642ed4246',
+-        }
+-        if any(getattr(self.prior_live, key).sha256 != value
+-               for key, value in expected_prior.items()):
+-            raise ValueError('Wrong accepted prior live-check evidence')
++        """Refuse source/batch swaps before examining any transport destination."""
++        if tuple(t.source_id for t in self.targets) != BATCHES[self.batch_id]:
++            raise ValueError('Exactly the two ordered batch sources are required')
+         return self
+ 
+ 
+@@ -124,8 +178,9 @@
+     configured_sources: int
+     configured_source_ids: list[str]
+     unselected_manual_pdf_records: int
+-    accepted_prior_finite_live_source_checks: int
+-    prior_live_checked_at: AwareDatetime
++    batch_id: str
++    existing_other_batch_sources: Literal[4] = 4
++    prior_watch_execution: Literal['not_asserted'] = 'not_asserted'
+     recurring_deployment: Literal['not_deployed_by_this_feature']
+     existing_collectors: Literal['Register, CCR and county collectors unchanged by this feature']
+     fixed_urls_find_new_editions_elsewhere: Literal[False] = False
+@@ -136,14 +191,16 @@
+     """Transport/byte observations only; an absent response is never an unchanged source."""
+     source_id: str
+     canonical_source_id: str
+-    authority_id: Literal['CO-MUNICIPAL-COLORADO_SPRINGS']
++    authority_id: str
+     requested_url: str
+     baseline: g.Ref
+-    baseline_request_started_at: AwareDatetime
+-    baseline_response_finished_at: AwareDatetime
++    baseline_request_started_at: AwareDatetime | None
++    baseline_recorded_http_time: AwareDatetime
++    baseline_http_time_role: str
+     repository_received_at: AwareDatetime
+     intake_id: str
+     source_context: list[str]
++    source: SourceBinding
+     status: Literal['unchanged', 'changed', 'access_denied', 'not_found', 'transport_error',
+                     'invalid_response', 'refused', 'not_checked']
+     reason: str
+@@ -221,11 +278,12 @@
+ 
+ 
+ def repository_root(path: Path) -> Path:
+-    """Infer only the standard reviewed config location, rejecting symlinked inputs."""
++    """Infer only one of the three standard config paths; no arbitrary plan location."""
+     path = path.absolute()
+     g.ordinary(path)
+-    if path.name != SELECTION.name or path.parent.name != 'config' or '..' in path.parts:
+-        raise ValueError('Selection must be <repository>/config/manual_source_watch.json')
++    if (path.name not in {p.name for p in SELECTIONS.values()} or
++            path.parent.name != 'config' or '..' in path.parts):
++        raise ValueError('Selection must use a fixed <repository>/config batch filename')
+     return path.parent.parent
+ 
+ 
+@@ -278,107 +336,141 @@
+     return records, hashes, before
+ 
+ 
+-def prior_live_check(root: Path, plan: Plan) -> tuple[int, datetime]:
+-    """Verify the accepted historical run's data-only source/body/authorization bindings."""
+-    evidence = plan.prior_live
+-    report = schema_check(checked_bytes(root, evidence.report),
+-                          checked_bytes(root, evidence.report_schema))
+-    inventory = FileInventory.model_validate_json(checked_bytes(root, evidence.run_manifest))
+-    run_root = (root / evidence.report.path).parent
+-    expected = {p.relative_to(run_root).as_posix() for p in run_root.rglob('*')
+-                if p.is_file() and p.name != 'RUN_MANIFEST.json'}
+-    if inventory.kind != 'run' or expected != {f.path for f in inventory.files}:
+-        raise ValueError('Historical live run inventory mismatch')
+-    for ref in inventory.files:
+-        checked_bytes(run_root, ref)
+-    auth = json.loads(checked_bytes(root, evidence.authorization))
+-    if (report['status'] != 'completed' or report['mode'] != 'live_http'
+-            or report['clock_basis'] != 'actual_utc_clock'
+-            or report['legal_currentness'] != 'not_verified'
+-            or auth['dispatch_at'] != report['dispatch_at']
+-            or auth['pins']['WATCH_PLAN.json'] != report['plan_sha256']
+-            or auth['pins']['watch.py'] != report['implementation_sha256']
+-            or auth['pins']['sd014_guard.py'] != report['transport_sha256']
+-            or auth['run_name'] != run_root.name or len(report['observations']) != 2):
+-        raise ValueError('Historical live-check provenance differs')
+-    for target, observation in zip(plan.targets, report['observations']):
+-        if (observation['source_id'] != target.source_id or
+-                observation['canonical_source_id'] != target.canonical_source_id or
+-                observation['authority_id'] != target.authority_id or
+-                observation['status'] != 'unchanged' or observation['http_status'] != 200 or
+-                not observation['bytes_equal_to_baseline'] or
+-                observation['response_body']['sha256'] != target.baseline.sha256 or
+-                observation['requested_url'] != target.url):
+-            raise ValueError('Historical live source identity differs')
+-        checked_bytes(run_root, g.Ref.model_validate(observation['response_body']))
+-    return 2, datetime.fromisoformat(report['generated_at'].replace('Z', '+00:00'))
+-
+-
+-def load_plan(path: Path) -> Plan:
+-    """Bind selection to canonical originals, actual intake and immutable original HTTP evidence."""
+-    root = repository_root(path)
++def pointer(value: Any, path: str) -> Any:
++    """Resolve one local JSON pointer, with no external reference expansion."""
++    if not path.startswith('/'):
++        raise ValueError('Expected an absolute JSON pointer')
++    for part in path[1:].split('/'):
++        key = part.replace('~1', '/').replace('~0', '~')
++        value = value[int(key)] if isinstance(value, list) else value[key]
++    return value
++
++
++def evidence_value(root: Path, evidence: Evidence) -> Any:
++    """Validate a complete file while streaming JSONL, then select the declared row."""
++    if evidence.jsonl_row is None:
++        value = json.loads(checked_bytes(root, evidence.artifact))
++    else:
++        digest = hashlib.sha256()
++        length = 0
++        selected = None
++        path = g.ordinary(root / evidence.artifact.path)
++        with path.open('rb') as handle:
++            for index, raw in enumerate(handle):
++                digest.update(raw)
++                length += len(raw)
++                row = json.loads(raw)
++                if index == evidence.jsonl_row:
++                    selected = row
++        if (digest.hexdigest() != evidence.artifact.sha256 or
++                length != evidence.artifact.size_bytes or selected is None):
++            raise ValueError('JSONL custody file/selected row differs')
++        value = selected
++    for path in evidence.pointers:
++        pointer(value, path)
++    return value
++
++
++def greeley_anchor(root: Path, source: SourceBinding) -> None:
++    """Require the exact retained city anchor before admitting an external CDN URL."""
++    proof = next(e for e in source.referral_evidence
++                 if e.artifact.path.endswith('/PRESERVATION.json'))
++    data = evidence_value(root, proof)
++    index = 0 if source.record_id == 'greeley-building-fees-sd008-06' else 1
++    item = data['sources'][index]
++    anchor = item['anchor']
++    base = (root / proof.artifact.path).parent
++    parent = checked_bytes(base, g.Ref.model_validate(anchor['parent']))
++    start, end = anchor['exact_source_start_byte'], anchor['exact_source_end_byte']
++    exact = parent[start:end]
++    if (not 0 <= start < end <= len(parent) or
++            exact.decode('utf-8') != anchor['exact_anchor_html'] or
++            hashlib.sha256(exact).hexdigest() != anchor['anchor_html_sha256'] or
++            anchor['href'] != source.proposed_url or
++            anchor['parent_url'] != source.official_parent_url):
++        raise ValueError('Greeley city referral bytes/URL differ')
++    nodes = BeautifulSoup(exact, 'html.parser').find_all('a')
++    if (len(nodes) != 1 or nodes[0].get('href') != source.proposed_url or
++            ' '.join(nodes[0].get_text(' ', strip=True).split()) != anchor['normalized_dom_text']):
++        raise ValueError('Greeley exact anchor association differs')
++
++
++def validate_source(root: Path, source: SourceBinding,
++                    records: dict[str, ManualSourceIntakeRecord], hashes: dict[str, str]) -> None:
++    """Cross-check pinned bytes, ownership, receipt roles and bounded source-review metadata."""
++    row = records.get(source.record_id)
++    if (row is None or hashes[source.record_id] != source.raw_manifest_exact_line_sha256 or
++            row.intake_id != source.intake_id or row.archive_path != source.baseline.path or
++            row.sha256 != source.baseline.sha256 or row.size_bytes != source.baseline.size_bytes or
++            row.layer_id != source.layer_id or row.source_format != 'pdf' or
++            row.received_at != source.repository_received_at or
++            row.official_source_url != source.historical_raw_url or
++            row.acquisition_method != source.historical_acquisition_method):
++        raise ValueError('Canonical source/intake binding mismatch')
++    prefix = '_RAW_ARCHIVE/manual_intake/' + source.layer_id + '/' + source.record_id + '/'
++    if not source.baseline.path.startswith(prefix):
++        raise ValueError('Unexpected canonical original path')
++    if pdf_pages(checked_bytes(root, source.baseline)) != source.baseline_pages:
++        raise ValueError('Canonical PDF structure differs')
++    authority = evidence_value(root, source.authority_evidence)
++    if pointer(authority, '/authority_id') != source.authority_id:
++        raise ValueError('Source authority mismatch')
++    custody = evidence_value(root, source.custody_evidence)
++    digest, status, finished = (pointer(custody, p) for p in source.custody_evidence.pointers)
++    if (digest != source.baseline.sha256 or status != 200 or
++            datetime.fromisoformat(finished.replace('Z', '+00:00')) != source.http_finished_at):
++        raise ValueError('Original HTTP/source binding mismatch')
++    if source.record_id.startswith('greeley-'):
++        requested, final = custody['requested_url'], custody['effective_url']
++        started = custody['started_at']
++        if not custody['body_complete'] or custody['returncode'] != 0:
++            raise ValueError('Greeley later response was not complete')
++        greeley_anchor(root, source)
++    elif source.record_id == 'arapahoe-planning-fees-sd002-14':
++        requested, final = custody['requested_url'], custody['final_url']
++        started = None
++        if custody['error'] is not None or custody['redirects']:
++            raise ValueError('Arapahoe response failure or changed routing')
++    else:
++        requested, final = custody['exact_requested_url'], custody['exact_final_url']
++        started = custody['http_started_at']
++        if not custody['tls_verified']:
++            raise ValueError('Original transport trust differs')
++    actual_start = datetime.fromisoformat(started.replace('Z', '+00:00')) if started else None
++    if (requested != source.proposed_url or final != source.retained_final_url or
++            actual_start != source.http_started_at):
++        raise ValueError('Recorded request URL/timing mismatch')
++    review = schema_check(checked_bytes(root, source.review_evidence.artifact),
++                          checked_bytes(root, source.review_schema))
++    for path in source.review_evidence.pointers:
++        pointer(review, path)
++    for evidence in source.referral_evidence:
++        evidence_value(root, evidence)
++
++
++def load_plan(path: Path, *, root: Path | None = None,
++              catalog_path: Path | None = None) -> Plan:
++    """Validate a fixed selected pair; explicit paths support read-only staged preflight."""
++    inferred = repository_root(path)
++    root = inferred if root is None else root.absolute()
++    if not root.is_dir() or any(p.is_symlink() for p in (root, *root.parents)):
++        raise ValueError('Unsafe repository root')
+     plan = Plan.model_validate_json(g.ordinary(path).read_bytes())
++    if path.name != SELECTIONS[plan.batch_id].name:
++        raise ValueError('Batch filename/identity mismatch')
++    catalog_path = catalog_path or root / CATALOG
++    content = g.ordinary(catalog_path).read_bytes()
++    if hashlib.sha256(content).hexdigest() != CATALOG_SHA:
++        raise ValueError('Approved source catalog differs')
++    catalog = Catalog.model_validate_json(content)
++    sources = {s.record_id: s for s in catalog.sources}
++    if set(sources) != set(sum(BATCHES.values(), ())):
++        raise ValueError('Catalog source membership differs')
+     records, hashes, _ = manual_records(root)
+-    scope = schema_check(checked_bytes(root, plan.custody_scope),
+-                         checked_bytes(root, plan.custody_schema))
+-    acceptance = json.loads(checked_bytes(root, plan.intake_acceptance))
+-    receipt = json.loads(checked_bytes(root, plan.intake_receipt))
+-    acceptance_root = (root / plan.intake_acceptance.path).parent
+-    if (acceptance['status'] != 'accepted_custody_only' or acceptance['legal_currentness'] !=
+-            'not_verified' or acceptance['answer_safe'] is not False or
+-            acceptance['receipt']['sha256'] != plan.intake_receipt.sha256 or
+-            acceptance_root / acceptance['receipt']['path'] != root / plan.intake_receipt.path or
+-            receipt['status'] != 'completed_archived_pending_pipeline'):
+-        raise ValueError('Accepted intake receipt mismatch')
+-    receipt_records = {r['record_id']: ManualSourceIntakeRecord.model_validate(r)
+-                       for r in receipt['intent']['records']}
+-    scope_root = (root / plan.custody_scope.path).parent
+-    for target, source in zip(plan.targets, scope['sources']):
+-        row = records.get(target.canonical_source_id)
+-        if (row is None or hashes[target.canonical_source_id] != target.raw_manifest_line_sha256
+-                or row != receipt_records.get(target.canonical_source_id)
+-                or row.intake_id != target.intake_id or row.archive_path != target.baseline.path
+-                or row.sha256 != target.baseline.sha256
+-                or row.size_bytes != target.baseline.size_bytes
+-                or row.official_source_url != target.url
+-                or row.layer_id != '10_Municipal_Authorities'
+-                or row.source_format != 'pdf' or row.received_at != target.repository_received_at
+-                or datetime.fromisoformat(acceptance['actual_repository_received_at'].replace(
+-                    'Z', '+00:00')) != target.repository_received_at):
+-            raise ValueError('Canonical source/intake binding mismatch')
+-        if (source['source_id'] != target.source_id
+-                or source['authority_id'] != target.authority_id
+-                or source['requested_url'] != target.url
+-                or source['original']['sha256'] != row.sha256
+-                or source['original']['size_bytes'] != row.size_bytes or
+-                datetime.fromisoformat(source['request_started_at'].replace('Z', '+00:00')) !=
+-                target.baseline_request_started_at or
+-                datetime.fromisoformat(source['response_finished_at'].replace('Z', '+00:00')) !=
+-                target.baseline_response_finished_at):
+-            raise ValueError('Original HTTP/source binding mismatch')
+-        if pdf_pages(checked_bytes(root, target.baseline)) != target.baseline_page_count:
+-            raise ValueError('Canonical PDF structure differs')
+-        original_result = json.loads(checked_bytes(
+-            scope_root, g.Ref.model_validate(source['result'])))
+-        original_reservation = json.loads(checked_bytes(
+-            scope_root, g.Ref.model_validate(source['reservation'])))
+-        if (original_result['body']['sha256'] != row.sha256 or original_result['http_status'] != 200
+-                or original_result['partial_body'] or original_result['outcome'] != 'complete'
+-                or original_result['finished_at'] != source['response_finished_at']
+-                or original_reservation['reserved_at'] != source['request_started_at']
+-                or original_reservation['url'] != target.url or
+-                original_result['reservation_sha256'] != source['reservation']['sha256']):
+-            raise ValueError('Original HTTP receipt mismatch')
+-        html = checked_bytes(scope_root, g.Ref.model_validate(source['parent_html']))
+-        soup = BeautifulSoup(html, 'html.parser')
+-        frames = soup.select('div.field--name-field-media-document iframe.pdf')
+-        if len(frames) != 1 or frames[0].get('data-src') != target.url:
+-            raise ValueError('Official parent iframe differs')
+-        prefix = '/libraries/pdf.js/web/viewer.html?file='
+-        viewer = frames[0].get('src', '')
+-        if not viewer.startswith(prefix) or unquote(viewer[len(prefix):]) != target.url:
+-            raise ValueError('Official viewer reference differs')
+-    prior_live_check(root, plan)
++    for target in plan.targets:
++        if target.source != sources[target.source_id]:
++            raise ValueError('Source URL/ID/baseline or custody substitution refused')
++        validate_source(root, target.source, records, hashes)
+     return plan
+ 
+ 
+@@ -398,7 +490,6 @@
+         except (ValueError, OSError) as error:
+             unavailable.append(Availability(record_id=row.record_id,
+                 status='unavailable_or_mismatch', reason=type(error).__name__))
+-    count, checked_at = prior_live_check(root, plan)
+     if g.file_ref(root, root / MANUAL_MANIFEST) != manifest:
+         raise ValueError('Raw manifest changed during readiness scan')
+     return Readiness(generated_at=g.utcnow(), selection=g.file_ref(root, path),
+@@ -407,7 +498,7 @@
+         unavailable_or_mismatch=unavailable, configured_sources=len(plan.targets),
+         configured_source_ids=[t.canonical_source_id for t in plan.targets],
+         unselected_manual_pdf_records=len(pdfs) - len(plan.targets),
+-        accepted_prior_finite_live_source_checks=count, prior_live_checked_at=checked_at,
++        batch_id=plan.batch_id,
+         recurring_deployment='not_deployed_by_this_feature',
+         existing_collectors='Register, CCR and county collectors unchanged by this feature')
+ 
+@@ -435,9 +526,11 @@
+                   authority_id=target.authority_id, requested_url=target.url,
+                   baseline=target.baseline,
+                   baseline_request_started_at=target.baseline_request_started_at,
+-                  baseline_response_finished_at=target.baseline_response_finished_at,
++                  baseline_recorded_http_time=target.baseline_recorded_http_time,
++                  baseline_http_time_role=target.baseline_http_time_role,
+                   repository_received_at=target.repository_received_at,
+                   intake_id=target.intake_id, source_context=target.source_context,
++                  source=target.source,
+                   events=[r.event for r, _ in history])
+     if not history:
+         return Observation(**common, status='not_checked',
+@@ -509,7 +602,7 @@
+     if (output.parent != root / RUNTIME or not re.fullmatch(
+             r'[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}', output.name)):
+         raise ValueError(
+-            'Output must be <repository>/.geode_runtime/manual_source_watch/<run-name>')
++            'Output must be <repository>/.geode_runtime/manual_source_watch_batches/<run-name>')
+     if output.is_symlink() or any(p.is_symlink() for p in output.parents):
+         raise ValueError('Symlinked runtime ancestor')
+ 
+@@ -749,12 +842,13 @@
+     group = parser.add_mutually_exclusive_group()
+     group.add_argument('--execute', action='store_true')
+     group.add_argument('--verify-run')
++    parser.add_argument('--batch', choices=list(BATCHES), default='county-fees-v1')
+     parser.add_argument('--run-name')
+     parser.add_argument('--reviewed-selection-sha256')
+     args = parser.parse_args(argv)
+     try:
+         root = args.root.absolute()
+-        plan_path = root / SELECTION
++        plan_path = root / SELECTIONS[args.batch]
+         repository_root(plan_path)
+         if args.verify_run:
+             result = verify_run(plan_path, root / RUNTIME / args.verify_run)
+@@ -768,7 +862,7 @@
+                         .dispatch_at if invocation_path.exists() else g.utcnow())
+             result = run_watch(plan_path, output, dispatch, args.reviewed_selection_sha256)
+         else:
+-            result = readiness(root)
++            result = readiness(root, plan_path)
+             sys.stdout.write(result.model_dump_json(indent=2) + '\n')
+             return 0
+         sys.stdout.write(result.model_dump_json(indent=2) + '\n')

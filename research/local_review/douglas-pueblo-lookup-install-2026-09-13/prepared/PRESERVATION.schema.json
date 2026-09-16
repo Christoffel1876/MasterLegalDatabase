@@ -1,0 +1,35 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "compared_names": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Compared Names",
+      "type": "array"
+    },
+    "changed_dispatch_names": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Changed Dispatch Names",
+      "type": "array"
+    },
+    "production_preimages_unchanged": {
+      "title": "Production Preimages Unchanged",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "status",
+    "compared_names",
+    "changed_dispatch_names",
+    "production_preimages_unchanged"
+  ],
+  "title": "Preservation",
+  "type": "object"
+}

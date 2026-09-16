@@ -1,0 +1,457 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact local evidence identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Block": {
+      "additionalProperties": false,
+      "description": "Visible text or explicitly separated graphic annotation.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "page": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "printed_text",
+            "mixed_printed_and_handwritten",
+            "handwriting_annotation",
+            "graphic_annotation"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "region_xyxy": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Region Xyxy",
+          "type": "array"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "transcript": {
+          "$ref": "#/$defs/Asset"
+        },
+        "transcript_span": {
+          "$ref": "#/$defs/Span"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "page",
+        "kind",
+        "image",
+        "region_xyxy",
+        "text",
+        "transcript",
+        "transcript_span",
+        "notes"
+      ],
+      "title": "Block",
+      "type": "object"
+    },
+    "DateStatement": {
+      "additionalProperties": false,
+      "description": "A date's source role; no conversion into operative effect.",
+      "properties": {
+        "literal": {
+          "title": "Literal",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "block_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Block Ids",
+          "type": "array"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "literal",
+        "role",
+        "block_ids",
+        "qualification"
+      ],
+      "title": "DateStatement",
+      "type": "object"
+    },
+    "Fee": {
+      "additionalProperties": false,
+      "description": "Reviewer decomposition of a printed fee clause, not a RuleUnit.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "block_id": {
+          "title": "Block Id",
+          "type": "string"
+        },
+        "amount_literal": {
+          "title": "Amount Literal",
+          "type": "string"
+        },
+        "amount_in_block": {
+          "$ref": "#/$defs/Span"
+        },
+        "label_literal": {
+          "title": "Label Literal",
+          "type": "string"
+        },
+        "conditions_block_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Conditions Block Ids",
+          "type": "array"
+        },
+        "subsection": {
+          "title": "Subsection",
+          "type": "string"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "block_id",
+        "amount_literal",
+        "amount_in_block",
+        "label_literal",
+        "conditions_block_ids",
+        "subsection",
+        "notes"
+      ],
+      "title": "Fee",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "Complete physical page and unchanged extraction evidence.",
+      "properties": {
+        "number": {
+          "title": "Number",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_spans": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "title": "Native Spans",
+          "type": "array"
+        },
+        "native_status": {
+          "const": "empty_image_only",
+          "title": "Native Status",
+          "type": "string"
+        },
+        "ocr_json": {
+          "$ref": "#/$defs/Asset"
+        },
+        "ocr_text": {
+          "$ref": "#/$defs/Asset"
+        },
+        "ocr_observation_spans": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "title": "Ocr Observation Spans",
+          "type": "array"
+        },
+        "reviewed_transcript": {
+          "$ref": "#/$defs/Asset"
+        },
+        "width": {
+          "const": 2550,
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "const": 3300,
+          "title": "Height",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "number",
+        "image",
+        "native",
+        "native_spans",
+        "native_status",
+        "ocr_json",
+        "ocr_text",
+        "ocr_observation_spans",
+        "reviewed_transcript",
+        "width",
+        "height"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "description": "Half-open UTF-8 byte range.",
+      "properties": {
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Complete scoped image review with original provenance limits.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source_id": {
+      "const": "gunnison-building-fees-resolution-2025-24-sh-ext-003",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-GUNNISON",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "layer": {
+      "const": "08_County_Authorities",
+      "title": "Layer",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_role": {
+      "title": "Source Role",
+      "type": "string"
+    },
+    "status": {
+      "const": "complete_visible_source_fidelity_review_qualified_handwriting",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "reviewed_at": {
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "official_acquisition_at_verified": {
+      "title": "Official Acquisition At Verified",
+      "type": "null"
+    },
+    "supplied_requested_url": {
+      "title": "Supplied Requested Url",
+      "type": "string"
+    },
+    "supplied_acquisition_interval": {
+      "maxItems": 2,
+      "minItems": 2,
+      "prefixItems": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string"
+        }
+      ],
+      "title": "Supplied Acquisition Interval",
+      "type": "array"
+    },
+    "supplied_time_status": {
+      "const": "reported_not_independently_verified",
+      "title": "Supplied Time Status",
+      "type": "string"
+    },
+    "source_bytes_intake_status_at_review": {
+      "const": "received_package_canonical_intake_not_asserted",
+      "title": "Source Bytes Intake Status At Review",
+      "type": "string"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "blocks": {
+      "items": {
+        "$ref": "#/$defs/Block"
+      },
+      "title": "Blocks",
+      "type": "array"
+    },
+    "fees": {
+      "items": {
+        "$ref": "#/$defs/Fee"
+      },
+      "title": "Fees",
+      "type": "array"
+    },
+    "dates": {
+      "items": {
+        "$ref": "#/$defs/DateStatement"
+      },
+      "title": "Dates",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "custody": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Custody",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "source_id",
+    "authority_id",
+    "layer",
+    "source",
+    "source_role",
+    "status",
+    "legal_currentness",
+    "answer_safe",
+    "reviewed_at",
+    "method",
+    "official_acquisition_at_verified",
+    "supplied_requested_url",
+    "supplied_acquisition_interval",
+    "supplied_time_status",
+    "source_bytes_intake_status_at_review",
+    "pages",
+    "blocks",
+    "fees",
+    "dates",
+    "limitations",
+    "findings",
+    "custody"
+  ],
+  "title": "Review",
+  "type": "object"
+}

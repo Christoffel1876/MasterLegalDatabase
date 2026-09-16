@@ -1,0 +1,127 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "source_table_alteration_demonstrated_removal_not_authorized",
+      "title": "Status",
+      "type": "string"
+    },
+    "hosted_run_id": {
+      "title": "Hosted Run Id",
+      "type": "integer"
+    },
+    "source_url": {
+      "title": "Source Url",
+      "type": "string"
+    },
+    "transport_attempts": {
+      "title": "Transport Attempts",
+      "type": "integer"
+    },
+    "publisher_responses": {
+      "title": "Publisher Responses",
+      "type": "integer"
+    },
+    "redirects": {
+      "title": "Redirects",
+      "type": "integer"
+    },
+    "initial_failure": {
+      "const": "local_DNS_no_publisher_response",
+      "title": "Initial Failure",
+      "type": "string"
+    },
+    "route_retry": {
+      "const": "explicit_parent_authorization_verified_TLS_no_publisher_denial",
+      "title": "Route Retry",
+      "type": "string"
+    },
+    "source_difference": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Difference",
+      "type": "array"
+    },
+    "missing_notice_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Notice Ids",
+      "type": "array"
+    },
+    "source_alteration": {
+      "title": "Source Alteration",
+      "type": "boolean"
+    },
+    "parser_regression_supported": {
+      "title": "Parser Regression Supported",
+      "type": "boolean"
+    },
+    "pending_prepared_state_equality": {
+      "const": "unknown_not_in_received_artifacts",
+      "title": "Pending Prepared State Equality",
+      "type": "string"
+    },
+    "historical_notice_effect": {
+      "const": "unknown",
+      "title": "Historical Notice Effect",
+      "type": "string"
+    },
+    "canonical_changes": {
+      "const": false,
+      "title": "Canonical Changes",
+      "type": "boolean"
+    },
+    "collector_executed": {
+      "const": false,
+      "title": "Collector Executed",
+      "type": "boolean"
+    },
+    "public_activity_finished_at": {
+      "format": "date-time",
+      "title": "Public Activity Finished At",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "decision": {
+      "title": "Decision",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "hosted_run_id",
+    "source_url",
+    "transport_attempts",
+    "publisher_responses",
+    "redirects",
+    "initial_failure",
+    "route_retry",
+    "source_difference",
+    "missing_notice_ids",
+    "source_alteration",
+    "parser_regression_supported",
+    "pending_prepared_state_equality",
+    "historical_notice_effect",
+    "canonical_changes",
+    "collector_executed",
+    "public_activity_finished_at",
+    "limitations",
+    "decision"
+  ],
+  "title": "Decision",
+  "type": "object"
+}

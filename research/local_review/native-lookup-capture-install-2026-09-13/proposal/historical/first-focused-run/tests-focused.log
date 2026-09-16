@@ -1,0 +1,170 @@
+......................FF.............                                    [100%]
+=================================== FAILURES ===================================
+_ test_after_final_capture_swaps_cannot_change_output[weld-weld-ehs-fees-2026-atlas-directed-relative4] _
+
+copied = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-244/test_after_final_capture_swaps4')
+family = 'weld', source = 'weld-ehs-fees-2026-atlas-directed'
+relative = PosixPath('research/local_review/weld-directed-atlas-source-review-2026-09-11/frozen/ehs/SOURCE_QA.json')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10a1505a0>
+
+    @pytest.mark.parametrize("family,source,relative", [
+        ("gj", lookup.SOURCE_ID, lookup.PACKAGE / "access-event.json"),
+        ("gj", lookup.SOURCE_ID, lookup.PACKAGE / "SOURCE_QA.json"),
+        ("greeley", lookup.GREELEY_SOURCE_ID, lookup.GREELEY_PACKAGE / lookup.GREELEY_REVIEW),
+        ("greeley", lookup.GREELEY_SOURCE_ID, lookup.GREELEY_PACKAGE / "packet/manifest.json"),
+        ("weld", lookup.WELD_SOURCE_ID, lookup.WELD_PACKAGE / lookup.WELD_REVIEW),
+        ("weld", lookup.WELD_SOURCE_ID, lookup.WELD_INTAKE / "intake-receipt.json"),
+        ("grid", lookup.IMPACT_SOURCE_ID, lookup.GRID_PACKAGE /
+         "historical-packet/baseline/EB-PDF-016/SOURCE_QA.json"),
+        ("grid", lookup.PIF_SOURCE_ID, lookup.GRID_PACKAGE /
+         "historical-packet/baseline/EB-PDF-017/SOURCE_REVIEW.json"),
+        ("springs", lookup.SPRINGS_SOURCE_ID, lookup.SPRINGS_PACKAGE / "SOURCE_QA.json"),
+        ("springs", lookup.SPRINGS_SOURCE_ID, lookup.SPRINGS_PACKAGE / "native/page-0002.txt"),
+        ("springs_intake", lookup.SPRINGS_SOURCE_ID, lookup.SPRINGS_INTAKE /
+         "prepared-transaction/execution/RECEIPT.json"),
+        ("ehs", lookup.EHS_SOURCE_ID, lookup.EHS_PACKAGE / "SOURCE_QA.json"),
+        ("ehs", lookup.EHS_SOURCE_ID, lookup.EHS_ACCEPTANCE),
+    ])
+    def test_after_final_capture_swaps_cannot_change_output(
+        copied: Path, family: str, source: str, relative: Path, monkeypatch: pytest.MonkeyPatch,
+    ) -> None:
+        """A later disk replacement cannot substitute evidence after the exact verified capture."""
+        real = lookup._capture_existing
+        calls = 0
+        target = copied / relative
+        original = target.read_bytes()
+        target.chmod(target.stat().st_mode | 0o200)
+    
+        def capture(root: Path, name: str) -> dict[str, bytes]:
+            """Change only the temporary path after returning a genuine checked buffer."""
+            nonlocal calls
+            data = real(root, name)
+            if name == family:
+                calls += 1
+                if calls == 2:
+                    target.write_bytes(b"INJECTED UNVERIFIED EVIDENCE")
+            return data
+    
+        monkeypatch.setattr(lookup, "_capture_existing", capture)
+>       result = lookup.lookup(copied, source, list_rows=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/geode-dp-lookup-tests-hmnuaqto/test_native_lookup_capture.py:279: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-12/extended-run/native-lookup-captured-buffers/proposed/research_source_lookup.py:3024: in lookup
+    return _lookup_weld(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-12/extended-run/native-lookup-captured-buffers/proposed/research_source_lookup.py:2512: in _lookup_weld
+    data, provenance, captured = _load_weld_verified(root)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-12/extended-run/native-lookup-captured-buffers/proposed/research_source_lookup.py:2505: in _load_weld_verified
+    if _capture_existing(root, "weld") != before:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/geode-dp-lookup-tests-hmnuaqto/test_native_lookup_capture.py:271: in capture
+    data = real(root, name)
+           ^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-12/extended-run/native-lookup-captured-buffers/proposed/research_source_lookup.py:2209: in _capture_existing
+    checked = _check_weld_package(root)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-244/test_after_final_capture_swaps4')
+
+    def _check_weld_package(root: Path) -> dict[str, str]:
+        """Verify the closed review inventory and only the frozen intake dependencies used."""
+        package, intake = root / WELD_PACKAGE, root / WELD_INTAKE
+        hashes = {}
+        for base, pins in [(package, WELD_PINS), (intake, WELD_INTAKE_PINS)]:
+            for name, expected in pins.items():
+                path = _safe_file(base, name)
+                if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+>                   raise ValueError(f"Frozen Weld evidence hash/size mismatch: {name}")
+E                   ValueError: Frozen Weld evidence hash/size mismatch: frozen/ehs/SOURCE_QA.json
+
+handoffs/run-2026-09-12/extended-run/native-lookup-captured-buffers/proposed/research_source_lookup.py:2413: ValueError
+_ test_after_final_capture_swaps_cannot_change_output[weld-weld-ehs-fees-2026-atlas-directed-relative5] _
+
+copied = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-244/test_after_final_capture_swaps5')
+family = 'weld', source = 'weld-ehs-fees-2026-atlas-directed'
+relative = PosixPath('research/local_review/weld-directed-intake-2026-09-11/intake-receipt.json')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10a2a0150>
+
+    @pytest.mark.parametrize("family,source,relative", [
+        ("gj", lookup.SOURCE_ID, lookup.PACKAGE / "access-event.json"),
+        ("gj", lookup.SOURCE_ID, lookup.PACKAGE / "SOURCE_QA.json"),
+        ("greeley", lookup.GREELEY_SOURCE_ID, lookup.GREELEY_PACKAGE / lookup.GREELEY_REVIEW),
+        ("greeley", lookup.GREELEY_SOURCE_ID, lookup.GREELEY_PACKAGE / "packet/manifest.json"),
+        ("weld", lookup.WELD_SOURCE_ID, lookup.WELD_PACKAGE / lookup.WELD_REVIEW),
+        ("weld", lookup.WELD_SOURCE_ID, lookup.WELD_INTAKE / "intake-receipt.json"),
+        ("grid", lookup.IMPACT_SOURCE_ID, lookup.GRID_PACKAGE /
+         "historical-packet/baseline/EB-PDF-016/SOURCE_QA.json"),
+        ("grid", lookup.PIF_SOURCE_ID, lookup.GRID_PACKAGE /
+         "historical-packet/baseline/EB-PDF-017/SOURCE_REVIEW.json"),
+        ("springs", lookup.SPRINGS_SOURCE_ID, lookup.SPRINGS_PACKAGE / "SOURCE_QA.json"),
+        ("springs", lookup.SPRINGS_SOURCE_ID, lookup.SPRINGS_PACKAGE / "native/page-0002.txt"),
+        ("springs_intake", lookup.SPRINGS_SOURCE_ID, lookup.SPRINGS_INTAKE /
+         "prepared-transaction/execution/RECEIPT.json"),
+        ("ehs", lookup.EHS_SOURCE_ID, lookup.EHS_PACKAGE / "SOURCE_QA.json"),
+        ("ehs", lookup.EHS_SOURCE_ID, lookup.EHS_ACCEPTANCE),
+    ])
+    def test_after_final_capture_swaps_cannot_change_output(
+        copied: Path, family: str, source: str, relative: Path, monkeypatch: pytest.MonkeyPatch,
+    ) -> None:
+        """A later disk replacement cannot substitute evidence after the exact verified capture."""
+        real = lookup._capture_existing
+        calls = 0
+        target = copied / relative
+        original = target.read_bytes()
+        target.chmod(target.stat().st_mode | 0o200)
+    
+        def capture(root: Path, name: str) -> dict[str, bytes]:
+            """Change only the temporary path after returning a genuine checked buffer."""
+            nonlocal calls
+            data = real(root, name)
+            if name == family:
+                calls += 1
+                if calls == 2:
+                    target.write_bytes(b"INJECTED UNVERIFIED EVIDENCE")
+            return data
+    
+        monkeypatch.setattr(lookup, "_capture_existing", capture)
+>       result = lookup.lookup(copied, source, list_rows=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/geode-dp-lookup-tests-hmnuaqto/test_native_lookup_capture.py:279: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+handoffs/run-2026-09-12/extended-run/native-lookup-captured-buffers/proposed/research_source_lookup.py:3024: in lookup
+    return _lookup_weld(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-12/extended-run/native-lookup-captured-buffers/proposed/research_source_lookup.py:2512: in _lookup_weld
+    data, provenance, captured = _load_weld_verified(root)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-12/extended-run/native-lookup-captured-buffers/proposed/research_source_lookup.py:2505: in _load_weld_verified
+    if _capture_existing(root, "weld") != before:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/geode-dp-lookup-tests-hmnuaqto/test_native_lookup_capture.py:271: in capture
+    data = real(root, name)
+           ^^^^^^^^^^^^^^^^
+handoffs/run-2026-09-12/extended-run/native-lookup-captured-buffers/proposed/research_source_lookup.py:2209: in _capture_existing
+    checked = _check_weld_package(root)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-244/test_after_final_capture_swaps5')
+
+    def _check_weld_package(root: Path) -> dict[str, str]:
+        """Verify the closed review inventory and only the frozen intake dependencies used."""
+        package, intake = root / WELD_PACKAGE, root / WELD_INTAKE
+        hashes = {}
+        for base, pins in [(package, WELD_PINS), (intake, WELD_INTAKE_PINS)]:
+            for name, expected in pins.items():
+                path = _safe_file(base, name)
+                if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+>                   raise ValueError(f"Frozen Weld evidence hash/size mismatch: {name}")
+E                   ValueError: Frozen Weld evidence hash/size mismatch: intake-receipt.json
+
+handoffs/run-2026-09-12/extended-run/native-lookup-captured-buffers/proposed/research_source_lookup.py:2413: ValueError
+=========================== short test summary info ============================
+FAILED ../../../../var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/geode-dp-lookup-tests-hmnuaqto/test_native_lookup_capture.py::test_after_final_capture_swaps_cannot_change_output[weld-weld-ehs-fees-2026-atlas-directed-relative4]
+FAILED ../../../../var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/geode-dp-lookup-tests-hmnuaqto/test_native_lookup_capture.py::test_after_final_capture_swaps_cannot_change_output[weld-weld-ehs-fees-2026-atlas-directed-relative5]
+2 failed, 35 passed in 57.02s

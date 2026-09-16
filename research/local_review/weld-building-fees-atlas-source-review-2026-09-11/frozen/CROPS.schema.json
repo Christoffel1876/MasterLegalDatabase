@@ -1,0 +1,119 @@
+{
+  "$defs": {
+    "Crop": {
+      "additionalProperties": false,
+      "properties": {
+        "crop_id": {
+          "title": "Crop Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "source_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "pdf_clip_points": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Pdf Clip Points",
+          "type": "array"
+        },
+        "dpi": {
+          "const": 300,
+          "title": "Dpi",
+          "type": "integer"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "width": {
+          "exclusiveMinimum": 0,
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "title": "Height",
+          "type": "integer"
+        },
+        "engine": {
+          "const": "PyMuPDF 1.28.2",
+          "title": "Engine",
+          "type": "string"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        }
+      },
+      "required": [
+        "crop_id",
+        "physical_page",
+        "source_sha256",
+        "pdf_clip_points",
+        "dpi",
+        "path",
+        "sha256",
+        "size_bytes",
+        "width",
+        "height",
+        "engine",
+        "purpose"
+      ],
+      "title": "Crop",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "crops": {
+      "items": {
+        "$ref": "#/$defs/Crop"
+      },
+      "title": "Crops",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "crops"
+  ],
+  "title": "Crops",
+  "type": "object"
+}

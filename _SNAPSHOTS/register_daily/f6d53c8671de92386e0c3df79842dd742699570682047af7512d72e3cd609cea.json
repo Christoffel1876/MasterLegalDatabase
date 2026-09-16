@@ -1,0 +1,353 @@
+{
+  "project": {
+    "name": "Project Geode",
+    "description": "AI-first Colorado legal authority corpus for structured retrieval, compliance analysis, and legislative intelligence.",
+    "version": "0.1.0",
+    "created_date": "2026-06-15"
+  },
+  "data_layers": [
+    {
+      "id": "01_Statutes_CRS",
+      "path": "01_Statutes_CRS",
+      "record_count": 34717,
+      "known_gaps": [
+        "No versioned historical snapshots in machine-readable form."
+      ],
+      "entity_type": "statute_section",
+      "source": "crs",
+      "format": [
+        "markdown",
+        "jsonl"
+      ],
+      "last_ingested": "2026-07-02",
+      "currency": "2025",
+      "index_file": "01_Statutes_CRS/_index.jsonl",
+      "last_checked": "2026-07-02",
+      "staleness_days": 0,
+      "status": "ready"
+    },
+    {
+      "id": "02_Regulations_CCR",
+      "path": "02_Regulations_CCR",
+      "record_count": 1035,
+      "known_gaps": [
+        "Rule version history has been locally backfilled; live Rulemaking Search status flags remain pending.",
+        "Rulemaking Search comparison workflow is ready; official snapshot comparison must be refreshed during release testing."
+      ],
+      "derived_files": [
+        "02_Regulations_CCR/_history/ccr_rule_version_history.jsonl",
+        "02_Regulations_CCR/_history/ccr_rule_version_summary.json",
+        "_CONTROL_PLANE/CURRENT_RULE_VERIFICATION.jsonl",
+        "04_Rulemaking/_verification/rulemaking_search_comparison.jsonl",
+        "04_Rulemaking/_verification/rulemaking_search_verification_summary.json",
+        "_CONTROL_PLANE/COLORADO_RULEMAKING_SEARCH_VERIFICATION.json"
+      ],
+      "entity_type": "regulation_rule",
+      "source": "ccr",
+      "format": [
+        "markdown",
+        "jsonl"
+      ],
+      "last_ingested": "2026-07-02",
+      "currency": null,
+      "index_file": "02_Regulations_CCR/_index.jsonl",
+      "last_checked": "2026-07-08",
+      "staleness_days": 0,
+      "status": "ready"
+    },
+    {
+      "id": "03_Legislation",
+      "path": "03_Legislation",
+      "record_count": 12453,
+      "known_gaps": [
+        "Pre-2010 coverage requires historical session-law sources."
+      ],
+      "entity_type": "bill",
+      "source": "legiscan",
+      "format": [
+        "jsonl"
+      ],
+      "last_ingested": "2026-07-06",
+      "currency": null,
+      "index_file": "03_Legislation/_index.jsonl",
+      "last_checked": "2026-07-06",
+      "staleness_days": 0,
+      "status": "ready"
+    },
+    {
+      "id": "04_Rulemaking",
+      "path": "04_Rulemaking",
+      "record_count": 8079,
+      "known_gaps": [
+        "Rulemaking notices have local rule-version reconciliation; six notices still need stronger version-history source evidence.",
+        "Rulemaking Search comparison workflow is ready; official snapshot comparison must be refreshed during release testing.",
+        "Daily Register pilot covers issues from 2026-07-01; earlier records require separate verification."
+      ],
+      "derived_files": [
+        "04_Rulemaking/_dataset/rulemaking_rule_version_reconciliation.jsonl",
+        "04_Rulemaking/_dataset/rulemaking_rule_version_reconciliation_summary.json",
+        "04_Rulemaking/_verification/rulemaking_search_comparison.jsonl",
+        "04_Rulemaking/_verification/rulemaking_search_verification_summary.json",
+        "_CONTROL_PLANE/COLORADO_RULEMAKING_SEARCH_VERIFICATION.json",
+        "04_Rulemaking/_dataset/register_daily_sources.jsonl",
+        "_CONTROL_PLANE/REGISTER_REFRESH_STATE.json"
+      ],
+      "entity_type": "rulemaking_notice",
+      "source": "colorado_register",
+      "format": [
+        "jsonl"
+      ],
+      "last_ingested": "2026-07-02",
+      "currency": null,
+      "index_file": "04_Rulemaking/_index.jsonl",
+      "last_checked": "2026-07-08",
+      "staleness_days": 0,
+      "status": "ready"
+    },
+    {
+      "id": "05_Executive_Orders",
+      "path": "05_Executive_Orders",
+      "record_count": 535,
+      "known_gaps": [
+        "Historical executive orders may require archive discovery."
+      ],
+      "entity_type": "executive_order",
+      "source": "executive_orders",
+      "format": [
+        "jsonl"
+      ],
+      "last_ingested": "2026-07-07",
+      "currency": null,
+      "index_file": "05_Executive_Orders/_index.jsonl",
+      "last_checked": "2026-07-07",
+      "staleness_days": 0,
+      "status": "ready"
+    },
+    {
+      "id": "06_Session_Laws",
+      "path": "06_Session_Laws",
+      "record_count": 437,
+      "known_gaps": [
+        "Older session laws require separate historical collection."
+      ],
+      "entity_type": "session_law",
+      "source": "crs",
+      "format": [
+        "jsonl"
+      ],
+      "last_ingested": "2026-07-02",
+      "currency": null,
+      "index_file": "06_Session_Laws/_index.jsonl",
+      "last_checked": "2026-07-02",
+      "staleness_days": 0,
+      "status": "ready"
+    },
+    {
+      "id": "07_Supplementary",
+      "path": "07_Supplementary",
+      "record_count": 34,
+      "known_gaps": [
+        "Program-to-statute links require extraction from report text.",
+        "Federal OSHA coverage is limited to selected standards added for the 2026-07-08 search repair."
+      ],
+      "entity_type": "supplementary_document",
+      "source": "coprrr, ag_opinions, federal_osha",
+      "format": [
+        "jsonl"
+      ],
+      "last_ingested": "2026-07-08",
+      "currency": null,
+      "index_file": "07_Supplementary/_index.jsonl",
+      "last_checked": "2026-07-08",
+      "staleness_days": 0,
+      "status": "ready"
+    },
+    {
+      "id": "08_County_Authorities",
+      "path": "08_County_Authorities",
+      "record_count": 120341,
+      "known_gaps": [
+        "Official county source-category gap audit is clear; semantic normalization and review queues remain open."
+      ],
+      "derived_files": [
+        "_CONTROL_PLANE/COUNTY_SOURCE_COVERAGE.json",
+        "_CONTROL_PLANE/COUNTY_GAP_AUDIT.jsonl",
+        "_CONTROL_PLANE/LOCAL_SOURCE_REGISTRY.json",
+        "_CONTROL_PLANE/LOCAL_DOWNLOAD_MANIFEST.jsonl",
+        "_CONTROL_PLANE/LOCAL_REVIEW_QUEUE.jsonl",
+        "_CONTROL_PLANE/LOCAL_PROMOTION_QUEUE.jsonl",
+        "_CONTROL_PLANE/LOCAL_PROMOTION_DECISIONS.jsonl",
+        "_CONTROL_PLANE/LOCAL_PROMOTION_REPORT.json",
+        "_CONTROL_PLANE/LOCAL_OCR_QUEUE.jsonl",
+        "_CONTROL_PLANE/LOCAL_SOURCE_CLASSIFICATION_QUEUE.jsonl",
+        "_CONTROL_PLANE/LOCAL_SOURCE_FRESHNESS.json",
+        "_CONTROL_PLANE/LOCAL_METADATA_VERSION_AUDIT.json",
+        "_CONTROL_PLANE/LOCAL_METADATA_ARCHIVE_REPORT.json",
+        "_CONTROL_PLANE/LOCAL_REVIEW_SUMMARY.json",
+        "_CONTROL_PLANE/LOCAL_OCR_REPORT.json",
+        "_CONTROL_PLANE/LOCAL_STRESS_TEST_REPORT.json",
+        "_CONTROL_PLANE/LOCAL_GOLDEN_EVALUATION.json",
+        "_CONTROL_PLANE/AI_READ_ORDER.json",
+        "_CONTROL_PLANE/AI_QUERY_CONTRACT.json",
+        "_CONTROL_PLANE/AI_RETRIEVAL_CONTRACT.json",
+        "_CONTROL_PLANE/AI_ANSWER_CONTRACT.json",
+        "_CONTROL_PLANE/AI_READINESS_REPORT.json",
+        "_CONTROL_PLANE/RETRIEVAL_CATALOG.jsonl",
+        "_CROSSWALKS/local_rule_to_state_authority.jsonl",
+        "_CROSSWALKS/state_authority_to_local_rule.jsonl"
+      ],
+      "entity_type": "local_authority,local_rule",
+      "source": "local_county_registry",
+      "format": [
+        "markdown",
+        "jsonl"
+      ],
+      "last_ingested": "2026-07-20",
+      "currency": null,
+      "index_file": "08_County_Authorities/_index.jsonl",
+      "last_checked": "2026-07-20",
+      "staleness_days": 0,
+      "status": "ready"
+    },
+    {
+      "id": "09_District_Authorities",
+      "path": "09_District_Authorities",
+      "record_count": 712,
+      "known_gaps": [
+        "School-district policy documents still require individual discovery and download."
+      ],
+      "entity_type": "local_authority,local_rule",
+      "source": "local_district_registry",
+      "format": [
+        "markdown",
+        "jsonl"
+      ],
+      "last_ingested": "2026-07-16",
+      "currency": null,
+      "index_file": "09_District_Authorities/_index.jsonl",
+      "last_checked": "2026-07-16",
+      "staleness_days": 0,
+      "status": "ready"
+    },
+    {
+      "id": "10_Municipal_Authorities",
+      "path": "10_Municipal_Authorities",
+      "record_count": 85,
+      "known_gaps": [
+        "Eighty-five priority municipal identities are registered; category-specific downloading and source verification is in progress.",
+        "The registry does not claim that an unlisted category is absent."
+      ],
+      "derived_files": [
+        "_CONTROL_PLANE/MUNICIPAL_SOURCE_REGISTRY.json",
+        "_CONTROL_PLANE/LOCAL_DOWNLOAD_MANIFEST.jsonl"
+      ],
+      "entity_type": "local_authority,local_rule",
+      "source": "municipal_source_registry",
+      "format": [
+        "markdown",
+        "jsonl"
+      ],
+      "last_ingested": "2026-07-16",
+      "currency": null,
+      "index_file": "10_Municipal_Authorities/_index.jsonl",
+      "last_checked": "2026-07-16",
+      "staleness_days": 0,
+      "status": "in_progress"
+    }
+  ],
+  "crosswalks_available": [
+    "regulation_to_statute.jsonl",
+    "statute_to_regulation.jsonl",
+    "bill_to_statute.jsonl",
+    "rulemaking_to_regulation.jsonl",
+    "agency_to_statute.jsonl",
+    "amendment_history.jsonl",
+    "local_rule_to_state_authority.jsonl",
+    "state_authority_to_local_rule.jsonl"
+  ],
+  "freshness_policy": {
+    "statutes": {
+      "max_staleness_days": 365,
+      "alert_after_days": 330
+    },
+    "regulations": {
+      "max_staleness_days": 45,
+      "alert_after_days": 30
+    },
+    "legislation": {
+      "max_staleness_days": 14,
+      "alert_after_days": 10
+    },
+    "rulemaking": {
+      "max_staleness_days": 20,
+      "alert_after_days": 15
+    },
+    "exec_orders": {
+      "max_staleness_days": 60,
+      "alert_after_days": 45
+    },
+    "session_laws": {
+      "max_staleness_days": 365,
+      "alert_after_days": 330
+    },
+    "supplementary": {
+      "max_staleness_days": 120,
+      "alert_after_days": 90
+    },
+    "county_authorities": {
+      "max_staleness_days": 45,
+      "alert_after_days": 30
+    },
+    "district_authorities": {
+      "max_staleness_days": 45,
+      "alert_after_days": 30
+    }
+  },
+  "system_info": {
+    "pipeline_version": "0.1.0",
+    "schema_version": "1.0",
+    "ontology_version": "1.0"
+  },
+  "rule_history_backfill": {
+    "generated_at": "2026-07-08T17:00:33.599710+00:00",
+    "version_history_records_total": 7836,
+    "reconciled_notices_total": 7955,
+    "exact_effective_date_matches": 39,
+    "same_rule_matches": 7910,
+    "notices_without_rule_version_evidence": 6,
+    "current_rule_verification_records": 1035,
+    "live_search_pending_records": 1035,
+    "version_history_file": "02_Regulations_CCR/_history/ccr_rule_version_history.jsonl",
+    "reconciliation_file": "04_Rulemaking/_dataset/rulemaking_rule_version_reconciliation.jsonl",
+    "current_rule_verification_file": "_CONTROL_PLANE/CURRENT_RULE_VERIFICATION.jsonl",
+    "source_boundary": "Uses previously downloaded CCR and Register data. Live Rulemaking Search flags remain pending until a live source check is run."
+  },
+  "rulemaking_search_verification": {
+    "generated_at": "2026-07-08T23:36:51.075534Z",
+    "output_root": "C:/Users/jpfeifer/OneDrive - CoorsTek/Documents/Geode",
+    "official_snapshot_path": null,
+    "official_snapshot_loaded": false,
+    "geode_rules_total": 1035,
+    "geode_rulemaking_notices_total": 7955,
+    "official_records_total": 0,
+    "comparison_records_total": 1040,
+    "official_match_found": 0,
+    "possible_official_match": 0,
+    "no_official_match": 0,
+    "geode_only_history": 0,
+    "missing_geode_rule": 0,
+    "awaiting_official_snapshot": 1040,
+    "needs_review": 0,
+    "normalized_snapshot_path": "04_Rulemaking/_verification/colorado_rulemaking_search_snapshot_normalized.jsonl",
+    "comparison_path": "04_Rulemaking/_verification/rulemaking_search_comparison.jsonl",
+    "summary_path": "04_Rulemaking/_verification/rulemaking_search_verification_summary.json",
+    "control_summary_path": "_CONTROL_PLANE/COLORADO_RULEMAKING_SEARCH_VERIFICATION.json",
+    "template_path": "04_Rulemaking/_verification/rulemaking_search_snapshot_template.csv",
+    "boundary": "This workflow compares Geode CCR and rulemaking records against a saved Colorado Rulemaking Search snapshot. It does not call the live website during search and does not treat uncertain matches as confirmed.",
+    "next_steps": [
+      "Export or capture a Rulemaking Search snapshot using the template columns.",
+      "Run this command again with --official-snapshot pointing to the CSV, JSON, or JSONL file.",
+      "Review the comparison output before using the status labels in release testing."
+    ]
+  }
+}

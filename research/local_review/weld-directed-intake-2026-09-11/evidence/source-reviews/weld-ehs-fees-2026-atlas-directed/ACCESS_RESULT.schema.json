@@ -1,0 +1,361 @@
+{
+  "$defs": {
+    "Event": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "exact_target_url": {
+          "title": "Exact Target Url",
+          "type": "string"
+        },
+        "target_attempt_number": {
+          "enum": [
+            1,
+            2
+          ],
+          "title": "Target Attempt Number",
+          "type": "integer"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "finished_at": {
+          "format": "date-time",
+          "title": "Finished At",
+          "type": "string"
+        },
+        "outcome": {
+          "enum": [
+            "transport_failure_without_http_response",
+            "http_200_pdf_received"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        },
+        "curl_exit_code": {
+          "enum": [
+            0,
+            6
+          ],
+          "title": "Curl Exit Code",
+          "type": "integer"
+        },
+        "http_status": {
+          "anyOf": [
+            {
+              "const": 200,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Http Status"
+        },
+        "stderr_text": {
+          "title": "Stderr Text",
+          "type": "string"
+        },
+        "redirects_followed": {
+          "const": 0,
+          "title": "Redirects Followed",
+          "type": "integer"
+        },
+        "tls_certificate_verification": {
+          "enum": [
+            "verified_on_successful_https_connection",
+            "not_established_no_http_response"
+          ],
+          "title": "Tls Certificate Verification",
+          "type": "string"
+        },
+        "retained_body": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/File"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "retained_original": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/File"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "round_receipt": {
+          "$ref": "#/$defs/File"
+        }
+      },
+      "required": [
+        "event_id",
+        "exact_target_url",
+        "target_attempt_number",
+        "started_at",
+        "finished_at",
+        "outcome",
+        "curl_exit_code",
+        "http_status",
+        "stderr_text",
+        "redirects_followed",
+        "tls_certificate_verification",
+        "retained_body",
+        "retained_original",
+        "round_receipt"
+      ],
+      "title": "Event",
+      "type": "object"
+    },
+    "File": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "prepared_queue_reference": {
+          "enum": [
+            "SD010-01",
+            "SD010-02"
+          ],
+          "title": "Prepared Queue Reference",
+          "type": "string"
+        },
+        "exact_source_url": {
+          "title": "Exact Source Url",
+          "type": "string"
+        },
+        "captured_at": {
+          "format": "date-time",
+          "title": "Captured At",
+          "type": "string"
+        },
+        "original": {
+          "$ref": "#/$defs/File"
+        },
+        "physical_pages": {
+          "enum": [
+            3,
+            5
+          ],
+          "title": "Physical Pages",
+          "type": "integer"
+        },
+        "native_nonblank_pages": {
+          "enum": [
+            3,
+            5
+          ],
+          "title": "Native Nonblank Pages",
+          "type": "integer"
+        },
+        "native_utf8_bytes": {
+          "title": "Native Utf8 Bytes",
+          "type": "integer"
+        },
+        "source_parser": {
+          "const": "PyMuPDF 1.28.2; Page.get_text(text, sort=False, flags=195)",
+          "title": "Source Parser",
+          "type": "string"
+        },
+        "source_repaired": {
+          "const": false,
+          "title": "Source Repaired",
+          "type": "boolean"
+        },
+        "source_encrypted": {
+          "const": false,
+          "title": "Source Encrypted",
+          "type": "boolean"
+        },
+        "queue_recorded_historical_sha256": {
+          "title": "Queue Recorded Historical Sha256",
+          "type": "string"
+        },
+        "measured_digest_equals_queue_historical_digest": {
+          "const": true,
+          "title": "Measured Digest Equals Queue Historical Digest",
+          "type": "boolean"
+        },
+        "old_historical_bytes_reopened": {
+          "const": false,
+          "title": "Old Historical Bytes Reopened",
+          "type": "boolean"
+        },
+        "publication_or_adoption_verified": {
+          "const": false,
+          "title": "Publication Or Adoption Verified",
+          "type": "boolean"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "prepared_queue_reference",
+        "exact_source_url",
+        "captured_at",
+        "original",
+        "physical_pages",
+        "native_nonblank_pages",
+        "native_utf8_bytes",
+        "source_parser",
+        "source_repaired",
+        "source_encrypted",
+        "queue_recorded_historical_sha256",
+        "measured_digest_equals_queue_historical_digest",
+        "old_historical_bytes_reopened",
+        "publication_or_adoption_verified",
+        "legal_currentness"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "finalized_at": {
+      "format": "date-time",
+      "title": "Finalized At",
+      "type": "string"
+    },
+    "activity": {
+      "const": "independent_Atlas_directed_access_check",
+      "title": "Activity",
+      "type": "string"
+    },
+    "sherlock010_dispatched": {
+      "const": false,
+      "title": "Sherlock010 Dispatched",
+      "type": "boolean"
+    },
+    "sherlock010_completed": {
+      "const": false,
+      "title": "Sherlock010 Completed",
+      "type": "boolean"
+    },
+    "status": {
+      "const": "two_exact_pdf_sources_recovered_pending_intake",
+      "title": "Status",
+      "type": "string"
+    },
+    "network_event_count": {
+      "const": 4,
+      "title": "Network Event Count",
+      "type": "integer"
+    },
+    "distinct_exact_targets": {
+      "const": 2,
+      "title": "Distinct Exact Targets",
+      "type": "integer"
+    },
+    "tool_preflight_rejections": {
+      "const": 0,
+      "title": "Tool Preflight Rejections",
+      "type": "integer"
+    },
+    "publisher_http_responses": {
+      "const": 2,
+      "title": "Publisher Http Responses",
+      "type": "integer"
+    },
+    "transport_failures_without_http_response": {
+      "const": 2,
+      "title": "Transport Failures Without Http Response",
+      "type": "integer"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "inventory": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Inventory",
+      "type": "array"
+    },
+    "scope_limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Scope Limits",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "finalized_at",
+    "activity",
+    "sherlock010_dispatched",
+    "sherlock010_completed",
+    "status",
+    "network_event_count",
+    "distinct_exact_targets",
+    "tool_preflight_rejections",
+    "publisher_http_responses",
+    "transport_failures_without_http_response",
+    "events",
+    "sources",
+    "inventory",
+    "scope_limits",
+    "legal_currentness"
+  ],
+  "title": "Report",
+  "type": "object"
+}

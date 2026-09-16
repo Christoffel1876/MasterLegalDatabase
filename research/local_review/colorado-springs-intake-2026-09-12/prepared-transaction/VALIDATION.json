@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "status": "prepared_not_applied",
+  "frozen_at": "2026-09-12T23:51:37.240998Z",
+  "implementation": {
+    "path": "transaction.py",
+    "sha256": "e2fa69d68923b681796b952d0bb7a8f5d1b080925563369b8e5a353a5c53ec5c",
+    "size_bytes": 30818
+  },
+  "tests": {
+    "path": "test_transaction.py",
+    "sha256": "4baa0478022811b3fd500a4b0dfdcf57910994a946f7a7b077e1a5d7788238ae",
+    "size_bytes": 23831
+  },
+  "focused_tests": {
+    "argv": [
+      "/private/tmp/geode-status-venv/bin/python",
+      "-B",
+      "-m",
+      "pytest",
+      "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/colorado-springs-intake-transaction/test_transaction.py",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp=/private/tmp/csfd-tx-recorded-tests",
+      "--cov=transaction",
+      "--cov-branch",
+      "--cov-report=term-missing",
+      "--cov-report=json:/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/colorado-springs-intake-transaction/validation/coverage.json"
+    ],
+    "cwd": "/private/tmp",
+    "started_at": "2026-09-12T23:51:20.246842Z",
+    "completed_at": "2026-09-12T23:51:36.035142Z",
+    "exit_code": 0,
+    "stdout": {
+      "path": "validation/focused-tests.stdout.txt",
+      "sha256": "229ebeaa08d1a3f09e6d4455545e2b10f460faff00d8268aecfd1e475c92f7e7",
+      "size_bytes": 1991
+    },
+    "stderr": {
+      "path": "validation/focused-tests.stderr.txt",
+      "sha256": "ee649220d15160ba4535a7786250af6d7977bbefe63aade254a3850aee272f43",
+      "size_bytes": 82
+    }
+  },
+  "tests_passed": 56,
+  "test_warnings": 5,
+  "coverage": {
+    "path": "validation/coverage.json",
+    "sha256": "15f09a533f338b962fbd32d38a1c11a53f90154780aba1053cfbb5e59fe14889",
+    "size_bytes": 29089
+  },
+  "branch_inclusive_coverage_percent": 93.15286624203821,
+  "coverage_scope": "56 focused tests, including actual read-only two-record preflight",
+  "actual_dry_run": {
+    "argv": [
+      "/private/tmp/geode-status-venv/bin/python",
+      "-I",
+      "-B",
+      "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/colorado-springs-intake-transaction/transaction.py",
+      "--root",
+      "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+      "--dry-run"
+    ],
+    "cwd": "/private/tmp",
+    "started_at": "2026-09-12T23:51:36.039756Z",
+    "completed_at": "2026-09-12T23:51:37.235784Z",
+    "exit_code": 0,
+    "stdout": {
+      "path": "validation/actual-dry-run.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "stderr": {
+      "path": "validation/actual-dry-run.stderr.txt",
+      "sha256": "f959811109e64fee5ecb88e03c4e27f5068286d59544f628ead43e48e6258d0c",
+      "size_bytes": 154
+    }
+  },
+  "baselines": [
+    {
+      "before": {
+        "path": "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+        "sha256": "171f01a1246dad91971638f0cee30e948d59d43d4d333b40850fe9dd2c5aa155",
+        "size_bytes": 133691
+      },
+      "after": {
+        "path": "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+        "sha256": "171f01a1246dad91971638f0cee30e948d59d43d4d333b40850fe9dd2c5aa155",
+        "size_bytes": 133691
+      }
+    },
+    {
+      "before": {
+        "path": "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl",
+        "sha256": "85b751d2c98e92e423981a932fb976a72afab8a990ccecbebb18c218a89eb3b2",
+        "size_bytes": 134927
+      },
+      "after": {
+        "path": "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl",
+        "sha256": "85b751d2c98e92e423981a932fb976a72afab8a990ccecbebb18c218a89eb3b2",
+        "size_bytes": 134927
+      }
+    },
+    {
+      "before": {
+        "path": "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_REPORT.json",
+        "sha256": "789932f0123467224c09442838af35f57e11561646d47f86698d1585b4c0732b",
+        "size_bytes": 5716
+      },
+      "after": {
+        "path": "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_REPORT.json",
+        "sha256": "789932f0123467224c09442838af35f57e11561646d47f86698d1585b4c0732b",
+        "size_bytes": 5716
+      }
+    }
+  ],
+  "approved_preparation_manifest": {
+    "path": "evidence/preparation/FINAL_MANIFEST.json",
+    "sha256": "5b0e8cf0cd835d793c99ae1c32f50d287e9760ae854fa8fa69e911c1b6b21142",
+    "size_bytes": 11822
+  },
+  "expected_source_ids": [
+    "colorado-springs-code-services-fees-2015-atlas-directed",
+    "colorado-springs-construction-fees-atlas-directed"
+  ],
+  "baseline_raw_records": 59,
+  "baseline_ledger_records": 60,
+  "expected_raw_after": 61,
+  "expected_ledger_after": 62,
+  "missing_historical_original": "MSI-20260707T221329208329Z-EO-2019-007",
+  "real_repository_apply_performed": false,
+  "real_execution_directory_exists": false,
+  "legal_currentness": "not_verified",
+  "answer_safe": false,
+  "full_corpus_validation": "not_run_by_this_subtask",
+  "tested_recovery_scope": "process_interruption_and_deterministic_replay",
+  "power_loss_durability_verified": false
+}

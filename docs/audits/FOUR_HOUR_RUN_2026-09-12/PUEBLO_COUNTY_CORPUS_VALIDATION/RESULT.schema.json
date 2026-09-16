@@ -1,0 +1,41 @@
+{
+  "additionalProperties": false,
+  "description": "Recorded full-corpus command outcome after the one-source intake.",
+  "properties": {
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "finished_at": {
+      "format": "date-time",
+      "title": "Finished At",
+      "type": "string"
+    },
+    "command": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Command",
+      "type": "array"
+    },
+    "exit_code": {
+      "const": 1,
+      "title": "Exit Code",
+      "type": "integer"
+    },
+    "log_sha256": {
+      "title": "Log Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "started_at",
+    "finished_at",
+    "command",
+    "exit_code",
+    "log_sha256"
+  ],
+  "title": "CorpusResult",
+  "type": "object"
+}

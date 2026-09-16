@@ -1,0 +1,138 @@
+---
+title: Local source evidence and transcription reviews
+updated: 2026-09-11
+scope: navigation_for_this_research_folder
+legal_currentness: not_verified
+---
+
+# Local source evidence and transcription reviews
+
+Use this index to find the preserved source files, checked passages and review
+limits in this folder. A completed transcription check establishes what was
+read from a particular source. Adoption, later amendments, current applicability
+and complete jurisdiction coverage require separate evidence. Every package
+listed here retains `legal_currentness: not_verified`.
+
+The packages overlap: an intake package and a later review can concern the same
+PDF. Their source counts and page counts must not be added together to measure
+coverage. Read each package's scope before using its text. A bounded-excerpt
+review does not certify the whole document.
+
+## Preserved-source inventory
+
+The [manual-source review inventory](manual-source-review-inventory-2026-09-11/README.md)
+binds all 46 preserved PDFs to their recorded county or municipal authority and
+exact provenance. Nineteen have an explicit allowlisted review link; 27 have no
+mapped review link. A null review link does not establish that no earlier
+inspection exists. Each linked scope retains its original limitations, and the
+older coverage ledger remains unchanged.
+
+A [later Larimer equity-resolution review](../../docs/audits/LARIMER_EQUITY_RESOLUTION_2026-09-11/README.md)
+was accepted after the initial inventory snapshot and explicitly joined at
+21:33 UTC. The earlier 18/28 snapshot remains preserved in the continuation audit;
+the operational inventory now includes that qualified two-page review.
+
+## Checked text and source structure
+
+| Source | Entry point | What is checked | Remaining limit |
+|---|---|---|---|
+| Arapahoe planning fees, EB006 | [Fee-table review](ebenezer-006-2026-09-10/README.md) | Both pages, 36 fee rows and surrounding text; corrected label/amount associations | Adoption and applicability remain unverified |
+| Clear Creek Ordinance 6A, EB007 | [Checked passages](ebenezer-007-2026-09-10/README.md) | Twelve bounded passages, including recorder, publication and reading fields | Complete OCR and uncertain handwriting are not certified |
+| Clear Creek Ordinance 7-A, EB008 | [Checked passages](ebenezer-008-2026-09-11/README.md) | Seven bounded checks, including conflicting source years | The source's chronology conflict remains unresolved |
+| Larimer building fees, EB009 | [Native-text review](ebenezer-009-2026-09-11/README.md) | Complete page-five text order plus four page-one context passages | Full five-page table transcription is not certified by the reviewed text artifact |
+| Larimer development review fees, EB010 | [Seven-page review](ebenezer-010-2026-09-11/README.md) | All native bytes retained in reviewed source order, with section and fee associations | Source arithmetic and wording anomalies are preserved |
+| Larimer fee increase memo, EB011 | [One-page review](ebenezer-011-2026-09-11/ATLAS_REVIEW.md) | Complete native text; separate building and transportation assertions | The underlying adopting instruments remain separate gaps |
+| Larimer initial data-center moratorium, EB012 | [Body and execution review](ebenezer-012-2026-09-11/ATLAS_REVIEW.md) | Printed body corrections; separately qualified execution block | Handwritten identities and later extension effect are not certified |
+| Larimer equity fee-reduction resolution | [Two-page manual transcript](larimer-equity-fee-resolution-source-review-2026-09-11/SOURCE_QA.md) | Complete printed body, eight eligibility items and separately qualified execution observations | Printed `20243` anomaly retained; actual acquisition, authenticated adoption and current applicability remain unverified |
+| Fort Collins wildfire code, EB013 | [Eight-page draft review](ebenezer-013-2026-09-11/README.md) | Native text and separate strike, highlight, blank-field and display-order annotations | The source is visibly a discussion draft with placeholders and blank execution fields |
+| Fort Collins Land Use Code Article 1, EB014 | [Seven-page source review](ebenezer-014-2026-09-11/README.md) | Native text, visibility, paragraph associations and embedded links | Edition, adoption and effective dates are unverified |
+| Greeley building fees, EB015 | [One-page source review](greeley-fees-atlas-source-review-2026-09-11/README.md) | Eight valuation rows, nine other-fee items, footnotes and tax/electrical sections | External review pending; 2024 title and unlabeled 2026 footer remain distinct |
+| Greeley development impact fees, EB016 | [Three-page memo review](greeley-fees-atlas-source-review-2026-09-11/README.md) | Complete memo, EAF grid and thirty fee rows with their column associations | External review pending; future utility adoption is not treated as completed |
+| Greeley proposed water/sewer PIFs, EB017 | [Two-page source review](greeley-fees-atlas-source-review-2026-09-11/README.md) | Notice and separate seven-row/one-row tables with 24 data cells | External review pending; stated March 2021 date is expressly conditional on adoption |
+| Weld building fees | [Five-page source review](weld-building-fees-atlas-source-review-2026-09-11/README.md) | 107 fee/value/referral rows and 252 valuation-matrix cells with their conditions | Exact successful acquisition URL remains unconfirmed; source date and amount anomalies are preserved |
+| Weld Ordinance 2026-01 | [Five-page amendment review](weld-directed-atlas-source-review-2026-09-11/README.md) | Complete native text and selected zoning amendments; separately stated reading, adoption and effective dates | Full consolidated Chapter 23, execution and subsequent amendments remain unverified |
+| Weld environmental-health fees | [Three-page schedule review](weld-directed-atlas-source-review-2026-09-11/README.md) | 137 rows in eleven service groups, including one blank fee and the contract exception | Year 2026 is a source label; adoption and effective dates remain unverified |
+| Grand Junction IFC Ordinance 5269 | [Twenty-nine-page source review](grand-junction-ordinance5269-atlas-source-review-2026-09-11/SOURCE_REVIEW.md) | All pages visually inspected; 37 bounded annotations and unchanged native text | Effective dates conflict: September 1, 2025 in the body versus August 18, 2025 in certification; controlling date unresolved |
+| Grand Junction tree Ordinance 5340 | [Five-page passage review](grand-junction-ordinance5340-atlas-source-review-2026-09-11/README.md) | Recovered passages from missing/garbled text, with visible strikes and separate execution labels | Full transcription and obscured table ratios remain uncertified; stated October 5, 2026 effect was future at receipt |
+| Mesa building-fee Exhibit A | [Five-page table review](mesa-building-fees-atlas-source-review-2026-09-11/SOURCE_REVIEW.md) | 64 body rows, eight valuation tiers, 234 matrix entries and source notes | No legal dates; referenced Table 3B and exact equality cases remain unresolved |
+| Mesa planning fees, 2017–2018 | [Three-page table review](mesa-planning-fees-atlas-source-review-2026-09-11/SOURCE_REVIEW.md) | 77 rows, 17 groups and 231 cells, preserving conditions and payee distinctions | Historical columns, school-dedication expiration conflict and present applicability remain unresolved |
+| Grand Junction fire-prevention fees | [Two-page table review](grand-junction-fire-fees-atlas-source-review-2026-09-11/README.md) | All 57 fee rows, five heading associations and 23 qualified continuation rows; all native bytes retained | No visible edition or legal dates; alternate fee source and applicability remain unreconciled |
+| Fort Collins fee schedules HTML | [Structured source snapshot](fort-collins-fee-catalog-2026-09-11/README.md) | Preserved main-content structure, tables and links from the captured page | Snapshot structure is pending semantic and legal review |
+
+The EB013 and EB014 packages above preserve Atlas's source checks as they stood
+before reconciliation of the external reviews. Their historical pending-status
+fields are part of those frozen packages. Any later reconciliation belongs in a
+separate supplement, with its own source and report hashes.
+
+### External-review supplements
+
+- [EB013 wildfire draft reconciliation](ebenezer-013-reconciliation-2026-09-11/README.md):
+  all 23 external findings, four errata and three Atlas supplements are dispositioned.
+  Missing graphic marks are qualified as draft representation issues; green blanks
+  are not proven redactions. Two proposed italic corrections are rejected. Original
+  native text and reports remain unchanged.
+- [EB014 Article 1 reconciliation](ebenezer-014-reconciliation-2026-09-11/README.md):
+  all 21 findings, three errata and five unresolved themes are dispositioned.
+  Extracted headers and footers absent from rendered pages remain labeled with
+  that visibility limit; source punctuation and native bytes remain unchanged.
+
+## Received sources and documentary evidence
+
+| Package | Preserved material | Acquisition and review limit |
+|---|---|---|
+| [Larimer source intake](larimer-intake-2026-09-11/README.md) | Eleven received PDFs, including codes, fees, standards and planning documents | Structural preservation; original acquisition times remain unknown |
+| [Fort Collins source intake](fort-collins-intake-2026-09-11/README.md) | Nineteen PDFs: seventeen code/amendment candidates and two provisional meeting packets | Filenames and packet inclusion do not establish enacted law |
+| [Larimer adopting-instrument intake, Sherlock007](larimer-intake-sherlock007-2026-09-11/README.md) | Three additional originals; six other supplied PDFs match existing originals | Staff recommendations, unsigned draft content and source date anomalies remain qualified |
+| [Weld County and Greeley intake, Sherlock008](weld-greeley-intake-sherlock008-2026-09-11/README.md) | Four fee-related PDFs from two distinct authorities | Requested URL, received bytes, document date and effective-date assertion remain distinct |
+| [Recovered Weld ordinance and environmental-health schedule](weld-directed-intake-2026-09-11/INTAKE_COMPLETE.md) | Two official PDFs recovered by direct requests, with eight pages and complete source reviews | Both match older recorded hashes; this records reacquisition, with legal currentness unverified |
+| [Mesa and Grand Junction directed-gap intake](mesa-grand-junction-directed-intake-2026-09-11/README.md) | City Ordinance 5340 and two county fee exhibits, with seven official responses | Historical fee-date conflicts, unavailable county adopting ordinance and future stated city effectiveness remain explicit |
+| [Mesa County and Grand Junction archival intake](mesa-grand-junction-intake-2026-09-11/README.md) | Three originals: Mesa code edition, city IFC Ordinance 5269 and city fire-fee schedule | Existing Mesa bytes recovered; source dates, shared services and separate authorities retain their qualifications |
+| [Mesa County and Grand Junction discovery](mesa-grand-junction-discovery-2026-09-11/README.md) | Three official PDFs and bounded catalog evidence for two separate authorities | Eight of 250 structural pages visually checked; discovery leads, later amendments and full coverage remain unresolved |
+| [Arapahoe related resolution evidence](arapahoe-resolution26-224-evidence-2026-09-11/README.md) | Official item metadata and a two-page attachment with blank resolution and vote fields | Research evidence only; identity with Resolution 26-224, adoption and effect remain unverified |
+| [Larimer extension evidence, Sherlock009](larimer-extension-evidence-sherlock009-2026-09-11/README.md) | July staff memo, browser-printed unsigned addendum and received February minutes | Research evidence only; disputed download association, conflicting dates and missing executed instruments remain explicit |
+| [Later Larimer extension access check](larimer-extension-access-session2-2026-09-11/REPORT.md) | Eight requested actions and one reported redirect, with preserved response evidence | No executed extension or final July action obtained; access/search limits do not prove legal absence |
+
+For Sherlock009, only ten distinct pages of the 27 structural pages received a
+visual review. The two sets of reproduced page images are copies of that same
+scope. The minutes and the earlier meeting packet have different bytes despite
+the same claimed download URL; that conflict is not proof of a legal update.
+
+The later Ordinance 5269 review found two incompatible effective-date statements in the same PDF: September 1, 2025 in the body and August 18, 2025 in certification. Earlier intake records preserve their limited inspection scope; use the linked later source review with them. No controlling effective date has been selected.
+
+## Retrieval and collection readiness
+
+The [checked-source lookup](../../docs/RESEARCH_SOURCE_LOOKUP.md) now provides
+an offline, cited keyword search over 57 reviewed Grand Junction fire-fee rows
+and 19 Greeley building-fee entries. Greeley clauses retain their headings,
+footnotes and separate date statements. Both sources preserve review limitations
+and do not answer current-law questions. These scopes are not whole-city coverage.
+
+The [one-hour continuation audit](../../docs/audits/ONE_HOUR_CONTINUATION_2026-09-11/README.md)
+records the expanded lookup tests, inventory validation and corrected missing-input
+diagnostics. Three original LFS content objects remain unavailable; the valid
+local-review summary is preserved.
+
+The separate [three-section CRS catalog prototype](../../docs/RESEARCH_CATALOG.md)
+provides metadata discovery with exact derived-file bindings. Only three selected
+records are admitted; copied larger input files are not fully source-verified.
+This isolated package does not serve the normal backend or current-law answers.
+
+The [readiness and next-intake assessment](project-readiness-2026-09-11/README.md)
+records the distinction between preserved sources and integrated retrieval,
+targeted adoption-record gaps, and the unsuccessful exact catalog-object recovery.
+It is a timed operational assessment, not a legal coverage certification.
+
+## How to use a package
+
+1. Read its README or Atlas review for the actual inspection scope and limits.
+2. Use the reviewed JSON or checked passages together with the identified source
+   page. Keep draft marks, exceptions and uncertainty annotations attached.
+3. Follow the package's validation command to check the saved file identities and
+   structural bindings. A passing validator does not authenticate legal effect.
+4. Resolve the adopting instrument, effective-date chain and subsequent changes
+   before using an amount or requirement as current regulatory guidance.
+
+The raw intake manifest and the control-plane coverage records remain separate
+from this navigation index. Adding a package here does not promote a legal record
+or change statewide coverage. Earlier reviews outside this folder are not
+inventoried by this page.

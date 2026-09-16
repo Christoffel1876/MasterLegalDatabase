@@ -1,0 +1,38 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "requested_url": {
+      "title": "Requested Url",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "redirects_allowed": {
+      "const": 0,
+      "default": 0,
+      "title": "Redirects Allowed",
+      "type": "integer"
+    },
+    "byte_ceiling": {
+      "const": 2097152,
+      "default": 2097152,
+      "title": "Byte Ceiling",
+      "type": "integer"
+    },
+    "request_seconds": {
+      "const": 25,
+      "default": 25,
+      "title": "Request Seconds",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "requested_url",
+    "started_at"
+  ],
+  "title": "Reservation",
+  "type": "object"
+}

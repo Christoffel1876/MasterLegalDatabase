@@ -1,0 +1,66 @@
+{
+  "status": "BLOCKING_FINDING_HOLD_APPLY",
+  "reviewed_at": "2026-09-13T04:43:04.064580Z",
+  "proposal_manifest_sha256": "bd5fdf638f2fef30830fb2ed65b2cfe96466726a3903a98d2ad615b958eafd8c",
+  "checked_assets": [
+    {
+      "path": "transaction.py",
+      "sha256": "ba0a1083641f99f6d06fe739bffc4b53d9615aad0eef83b9035b61cd741f009d",
+      "size_bytes": 17074
+    },
+    {
+      "path": "models.py",
+      "sha256": "c68cbcfbeeede53c539707b08ae4c607e7b18d56056c09f18fa13c352ef22281",
+      "size_bytes": 2733
+    },
+    {
+      "path": "test_transaction.py",
+      "sha256": "704f8c1d9a8226c7bc30a80ba6f081fac65a7af262070efdd00dd462ae246180",
+      "size_bytes": 14171
+    },
+    {
+      "path": "PREPARATION.json",
+      "sha256": "175175020710c897000cbba4560dc4da45bbe1d0e146cb5058c9d98bd60d17c5",
+      "size_bytes": 7330
+    },
+    {
+      "path": "PROPOSED_RECORD.json",
+      "sha256": "2ed855c790abc4988fabc185f4de4f4ad3139b3b1f0c720c50052b3de1991d80",
+      "size_bytes": 1232
+    },
+    {
+      "path": "inputs/ROOT_ACCEPTANCE.json",
+      "sha256": "ec064067521ee2d4c350f049b4ce03bfa2acc31cb378a1008e2f53a6efe07289",
+      "size_bytes": 2777
+    },
+    {
+      "path": "FINAL_MANIFEST.json",
+      "sha256": "bd5fdf638f2fef30830fb2ed65b2cfe96466726a3903a98d2ad615b958eafd8c",
+      "size_bytes": 29833
+    },
+    {
+      "path": "verify_preparation.py",
+      "sha256": "15b51d15507701331d4efdf845741ab4e610f6127b64831811ba646a94b0619c",
+      "size_bytes": 7078
+    }
+  ],
+  "original_payloads_verified": 155,
+  "focused_tests_passed": 30,
+  "actual_readonly_preflight": "Passed: original63 raw/64 ledger, proposed64 raw/65 ledger; actual_repository_received_at null, canonical_mutations0. No execution directory or canonical apply by reviewer.",
+  "source_provenance_assessment": "One exact75,214-byte PDF, county Pueblo (not city), received_review_package, null official_source_url, actual incoming basename original.pdf. Reported HTTP200/times and parent browser-DOM remain qualified; root source-QA acceptance ec064067521ee2d4c350f049b4ce03bfa2acc31cb378a1008e2f53a6efe07289 is correctly bound. No source/adoption/currentness promotion.",
+  "finding": "transaction.py293-297 invokes broad reconciliation after raw append. A valid unrelated record arriving at the raw boundary is appended to ledger/report before final preflight rejects the now-unrecognized prefix. Temporary reproduction ends with ValueError but includes MSI-foreign in ledger and report.records3. A precheck alone leaves a gap before the generic API captures live rows.",
+  "required_repair": [
+    "Remove the write-capable generic reconciliation call from this fixed-source transaction.",
+    "Parse only captured reviewed baseline records; derive exact raw/ledger suffix and report from those records plus the single intent record.",
+    "Freeze deterministic expected report bytes/timestamp, preserve missing ledger-only EO evidence, and perform exact-before-byte atomic writes with recognized partial-state replay.",
+    "Recheck independent race at raw and ledger/report boundaries and run original recovery/idempotence/refusal tests before root applies."
+  ],
+  "canonical_mutations": 0,
+  "public_requests": 0,
+  "limitations": [
+    "The fixture intentionally simulates another writer; no production records were inserted.",
+    "First probe attempt failed before fixture setup because macOS /var is a symlink; resolved temporary root used for successful reproduction, original probe retained.",
+    "Selected reviewed inputs are copied; the full155-file proposal was hash-verified but is not duplicated.",
+    "This is a pre-repair finding record. Any later repair needs a separate additive review; do not relabel this frozen failure as passed."
+  ]
+}

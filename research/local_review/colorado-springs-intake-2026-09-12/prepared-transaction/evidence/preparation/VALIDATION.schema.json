@@ -1,0 +1,46 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "input_manifest_sha256": {
+      "title": "Input Manifest Sha256",
+      "type": "string"
+    },
+    "actual_api_preflight": {
+      "additionalProperties": true,
+      "title": "Actual Api Preflight",
+      "type": "object"
+    },
+    "portable_validation": {
+      "additionalProperties": true,
+      "title": "Portable Validation",
+      "type": "object"
+    },
+    "canonical_baseline_unchanged": {
+      "title": "Canonical Baseline Unchanged",
+      "type": "boolean"
+    },
+    "copied_files_byte_identical": {
+      "title": "Copied Files Byte Identical",
+      "type": "boolean"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "input_manifest_sha256",
+    "actual_api_preflight",
+    "portable_validation",
+    "canonical_baseline_unchanged",
+    "copied_files_byte_identical",
+    "scope"
+  ],
+  "title": "Check",
+  "type": "object"
+}

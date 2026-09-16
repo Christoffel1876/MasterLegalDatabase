@@ -1,0 +1,107 @@
+{
+  "$defs": {
+    "DiscoveredLink": {
+      "additionalProperties": false,
+      "description": "Distinct discovered URL and actual opened/unopened disposition.",
+      "properties": {
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "observations": {
+          "items": {
+            "$ref": "#/$defs/LinkObservation"
+          },
+          "title": "Observations",
+          "type": "array"
+        },
+        "event_ids_opened": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Event Ids Opened",
+          "type": "array"
+        },
+        "disposition": {
+          "enum": [
+            "opened",
+            "unopened",
+            "not_public_https_source_target"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "url",
+        "observations",
+        "event_ids_opened",
+        "disposition",
+        "reason"
+      ],
+      "title": "DiscoveredLink",
+      "type": "object"
+    },
+    "LinkObservation": {
+      "additionalProperties": false,
+      "description": "A discovered source anchor's exact retained position.",
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "anchor_index_zero_based": {
+          "title": "Anchor Index Zero Based",
+          "type": "integer"
+        },
+        "href": {
+          "title": "Href",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "anchor_index_zero_based",
+        "href",
+        "label"
+      ],
+      "title": "LinkObservation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Observed links only; no implied official ownership or opened content.",
+  "properties": {
+    "status": {
+      "const": "discovered_but_unopened_not_acquired",
+      "title": "Status",
+      "type": "string"
+    },
+    "links": {
+      "items": {
+        "$ref": "#/$defs/DiscoveredLink"
+      },
+      "title": "Links",
+      "type": "array"
+    },
+    "qualification": {
+      "title": "Qualification",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "links",
+    "qualification"
+  ],
+  "title": "Backlog",
+  "type": "object"
+}

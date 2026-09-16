@@ -1,0 +1,30 @@
+{
+  "additionalProperties": false,
+  "description": "Preserve inherited parsed records without asserting their correctness.",
+  "properties": {
+    "input_path": {
+      "title": "Input Path",
+      "type": "string"
+    },
+    "sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Sha256",
+      "type": "string"
+    },
+    "rows": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Rows",
+      "type": "array"
+    }
+  },
+  "required": [
+    "input_path",
+    "sha256",
+    "rows"
+  ],
+  "title": "Extract",
+  "type": "object"
+}

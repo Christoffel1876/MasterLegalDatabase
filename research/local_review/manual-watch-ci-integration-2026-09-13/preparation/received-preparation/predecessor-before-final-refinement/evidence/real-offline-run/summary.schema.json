@@ -1,0 +1,335 @@
+{
+  "$defs": {
+    "PairResult": {
+      "additionalProperties": false,
+      "properties": {
+        "batch_id": {
+          "title": "Batch Id",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "verified",
+            "incomplete",
+            "setup_failed",
+            "execution_failed",
+            "verification_failed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "execute_exit": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Execute Exit"
+        },
+        "verify_exit": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Verify Exit"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reason"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/$defs/SourceResult"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "report": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Ref"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "batch_id",
+        "status"
+      ],
+      "title": "PairResult",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "SourceResult": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "response_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Response Url"
+        },
+        "http_status": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Http Status"
+        },
+        "baseline_sha256": {
+          "title": "Baseline Sha256",
+          "type": "string"
+        },
+        "response_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Response Sha256"
+        },
+        "request_started_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Request Started At"
+        },
+        "response_finished_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Response Finished At"
+        }
+      },
+      "required": [
+        "source_id",
+        "status",
+        "reason",
+        "requested_url",
+        "response_url",
+        "http_status",
+        "baseline_sha256",
+        "response_sha256",
+        "request_started_at",
+        "response_finished_at"
+      ],
+      "title": "SourceResult",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "manual-watch-ci-summary-v1",
+      "default": "manual-watch-ci-summary-v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "created_at": {
+      "title": "Created At",
+      "type": "string"
+    },
+    "finished_at": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Finished At"
+    },
+    "failure_reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Failure Reason"
+    },
+    "event_context": {
+      "enum": [
+        "schedule",
+        "workflow_dispatch",
+        "local_readiness"
+      ],
+      "title": "Event Context",
+      "type": "string"
+    },
+    "run_name": {
+      "title": "Run Name",
+      "type": "string"
+    },
+    "commit_claim": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Commit Claim"
+    },
+    "execution_requested": {
+      "title": "Execution Requested",
+      "type": "boolean"
+    },
+    "status": {
+      "enum": [
+        "pending",
+        "ready",
+        "unchanged",
+        "changed",
+        "incomplete",
+        "setup_failed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "pairs": {
+      "items": {
+        "$ref": "#/$defs/PairResult"
+      },
+      "title": "Pairs",
+      "type": "array"
+    },
+    "plan_sha256": {
+      "title": "Plan Sha256",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "baseline_updated": {
+      "const": false,
+      "default": false,
+      "title": "Baseline Updated",
+      "type": "boolean"
+    },
+    "publication_attempted": {
+      "const": false,
+      "default": false,
+      "title": "Publication Attempted",
+      "type": "boolean"
+    },
+    "schedule_activation_verified": {
+      "const": false,
+      "default": false,
+      "title": "Schedule Activation Verified",
+      "type": "boolean"
+    },
+    "producer_scheduler_flag_is_historical": {
+      "const": true,
+      "default": true,
+      "title": "Producer Scheduler Flag Is Historical",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "created_at",
+    "event_context",
+    "run_name",
+    "commit_claim",
+    "execution_requested",
+    "status",
+    "pairs",
+    "plan_sha256"
+  ],
+  "title": "Summary",
+  "type": "object"
+}

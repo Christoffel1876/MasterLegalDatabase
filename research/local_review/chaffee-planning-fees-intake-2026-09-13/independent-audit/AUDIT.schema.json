@@ -1,0 +1,228 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact retained file relative to this audit.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "description": "Exact selected source and observed acquisition, before repository intake.",
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-CHAFFEE",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "const": "08_County_Authorities",
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "original": {
+          "$ref": "#/$defs/Asset"
+        },
+        "physical_pages": {
+          "minimum": 1,
+          "title": "Physical Pages",
+          "type": "integer"
+        },
+        "official_source_url": {
+          "title": "Official Source Url",
+          "type": "string"
+        },
+        "acquisition_method": {
+          "const": "manual_official_download",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "observed_get_started_at": {
+          "format": "date-time",
+          "title": "Observed Get Started At",
+          "type": "string"
+        },
+        "observed_get_completed_at": {
+          "format": "date-time",
+          "title": "Observed Get Completed At",
+          "type": "string"
+        },
+        "future_repository_received_at": {
+          "title": "Future Repository Received At",
+          "type": "null"
+        },
+        "status": {
+          "const": "archived_pending_pipeline",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "authority_id",
+        "layer_id",
+        "original",
+        "physical_pages",
+        "official_source_url",
+        "acquisition_method",
+        "observed_get_started_at",
+        "observed_get_completed_at",
+        "future_repository_received_at",
+        "status"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Independent inspected scope and actual verification, with no canonical apply.",
+  "properties": {
+    "reviewer": {
+      "const": "Plato",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "disposition": {
+      "const": "no_blocker_found_in_fixed_one_source_preapply_scope",
+      "title": "Disposition",
+      "type": "string"
+    },
+    "reviewed_preparation": {
+      "$ref": "#/$defs/Asset"
+    },
+    "reviewed_transaction": {
+      "$ref": "#/$defs/Asset"
+    },
+    "reviewed_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "copy_receipt": {
+      "$ref": "#/$defs/Asset"
+    },
+    "checks": {
+      "$ref": "#/$defs/Asset"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "maxItems": 1,
+      "minItems": 1,
+      "title": "Sources",
+      "type": "array"
+    },
+    "baseline_raw_records": {
+      "const": 69,
+      "title": "Baseline Raw Records",
+      "type": "integer"
+    },
+    "baseline_ledger_records": {
+      "const": 70,
+      "title": "Baseline Ledger Records",
+      "type": "integer"
+    },
+    "proposed_raw_records": {
+      "const": 70,
+      "title": "Proposed Raw Records",
+      "type": "integer"
+    },
+    "proposed_ledger_records": {
+      "const": 71,
+      "title": "Proposed Ledger Records",
+      "type": "integer"
+    },
+    "actual_intake_occurred_in_this_audit": {
+      "const": false,
+      "title": "Actual Intake Occurred In This Audit",
+      "type": "boolean"
+    },
+    "independent_probe_cases": {
+      "const": 8,
+      "title": "Independent Probe Cases",
+      "type": "integer"
+    },
+    "observations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "reviewer",
+    "recorded_at",
+    "disposition",
+    "reviewed_preparation",
+    "reviewed_transaction",
+    "reviewed_manifest",
+    "copy_receipt",
+    "checks",
+    "sources",
+    "baseline_raw_records",
+    "baseline_ledger_records",
+    "proposed_raw_records",
+    "proposed_ledger_records",
+    "actual_intake_occurred_in_this_audit",
+    "independent_probe_cases",
+    "observations",
+    "limitations",
+    "legal_currentness",
+    "answer_safe",
+    "public_requests"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

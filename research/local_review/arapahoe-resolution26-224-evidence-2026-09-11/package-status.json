@@ -1,0 +1,69 @@
+{
+  "package_id": "arapahoe-resolution26-224-evidence-2026-09-11",
+  "packaged_at": "2026-09-11T20:11:19.620439Z",
+  "historical_handoff": "/Users/mcoors/Documents/Project Geode/handoffs/atlas-reviews/arapahoe-resolution26-224-access-2026-09-11",
+  "frozen_handoff_inventory": {
+    "path": "frozen/evidence-manifest.json",
+    "sha256": "b267d0f32ddd1c3098faac002be05856a7a4f74292cea6ef67f03a28f6a0e414",
+    "size_bytes": 5752
+  },
+  "frozen_audit": {
+    "path": "frozen/ACCESS_AUDIT.json",
+    "sha256": "702fc62471c77e9beec955a965d899d9a6ea9e1afc5020f5d87c52f0fac565cb",
+    "size_bytes": 30936
+  },
+  "handoff_files_total": 36,
+  "exact_handoff_files_included": 35,
+  "exact_handoff_bytes_included": 1513543,
+  "redactions": [
+    {
+      "excluded_original": {
+        "path": "frozen/http/E008.headers",
+        "sha256": "78257b8f02bc6dee6582c744cebf7698b4b402d7bae242ba78c86d5cb2569b71",
+        "size_bytes": 367
+      },
+      "derivative": {
+        "path": "derived/http/E008.headers.redacted.txt",
+        "sha256": "3d511e14897aa6f875d0373e7840b587c6db31ef4d6eb53213ad9394e10d059f",
+        "size_bytes": 311
+      },
+      "reason": "Set-Cookie session value excluded from distribution",
+      "transformation": "Replace the single case-insensitive Set-Cookie header line with Set-Cookie: [REDACTED SESSION COOKIE], retaining its CRLF ending and all other original header bytes unchanged.",
+      "original_checked_against_handoff_before_packaging": true,
+      "original_digest_recomputed_by_portable_validator": false,
+      "sensitive_lines_replaced": 1,
+      "original_retained_in_handoff": true
+    }
+  ],
+  "source_attachment_sha256": "8f1e94f6332fc9c36ee479f4673e2f85a533b2b777f29cbfc9757c2adcd41e6c",
+  "source_attachment_pages": 2,
+  "original_access_events_counted": 8,
+  "original_distinct_targets": 6,
+  "new_public_access_events": 0,
+  "scope": "preserve_completed_bounded_source_review_only",
+  "item_metadata": "26-403: Passed; final action 9/8/2026",
+  "item_metadata_qualification": "Official item metadata was returned through a cached/derived web-tool representation. It is distinct from the unfilled attachment, the fee-sheet reference to Res 26-224, and a finalized official vote/minute record.",
+  "attachment_status": "unnumbered_unfilled_resolution_attachment",
+  "numbered_executed_resolution_26_224_confirmed": false,
+  "adoption_date": null,
+  "effective_date": null,
+  "legal_currentness": "not_verified",
+  "raw_manifest_or_ledger_intake": false,
+  "semantic_or_coverage_promotion": false,
+  "external_assignment": null,
+  "privacy_check": [
+    "Both retained response-header files inspected. E002 headers are empty; E008 contains one Set-Cookie header line. No Authorization, Proxy-Authorization, Cookie request, X-API-Key or X-Auth-Token header was found.",
+    "The one response-session-cookie value is excluded from this package. All other header bytes were kept; the redacted derivative is independently hashed and explicitly labelled.",
+    "Retained curl metrics have empty URL user/password/options fields and no cookie/auth header text. The session-cookie token was checked absent from every included file before final packaging metadata was written.",
+    "The original 367-byte header remains unchanged only in the original handoff; its digest is recorded as a custody reference. The portable verifier cannot recompute its omitted bytes and explicitly reports that limitation."
+  ],
+  "limits": [
+    "This copies the completed bounded access/source review; no new public source open or expansion of visual review occurred.",
+    "All 35 distributed handoff files remain exact, including the original PDF/response body, page images, nine excerpt bindings, reports, prior fee-source custody and observed-link tool evidence. One original response header is omitted, with an explicit derivative and exclusion record.",
+    "The old handoff inventory and report remain exact historical evidence. Their original header reference is intentionally unavailable in this distribution; use the top-level portable verifier, not the unmodified historical validator directly.",
+    "File 26-403 Passed metadata does not identify the blank numbered-resolution field as 26-224 or supply the blank mover, seconder and votes.",
+    "Effective immediately is relative wording within the unnumbered/unfilled attachment. Adoption, activation and actual effective date remain unverified; no present legal-effect inference is supplied.",
+    "The fee sheet is unchanged. No canonical raw-manifest/ledger intake, packet modification, registry/coverage promotion, Git or external-bot action was performed.",
+    "Public event counting retains eight visible events and six targets; hidden web-provider internals remain unobservable. E002 DNS/receipt-metadata limitations are preserved honestly."
+  ]
+}

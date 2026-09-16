@@ -1,0 +1,578 @@
+{
+  "schema_version": 1,
+  "prepared_at": "2026-09-12T22:09:39.430817+00:00",
+  "status": "original_not_recovered",
+  "selected_ids": [
+    "CRS-1-1-101",
+    "CRS-1-1-102",
+    "CRS-1-1-103"
+  ],
+  "original_zip_sha256": null,
+  "original_title01_sgml_sha256": null,
+  "original_2025_pdf_recovered": false,
+  "prototype_manifest": {
+    "path": "inherited/prototype/manifest.json",
+    "sha256": "230077e63761ab368367c6e7e834d9b298a1bfab65d7a07b32aa189488520acb",
+    "size_bytes": 1548
+  },
+  "prototype_validation": "passed_before_investigation",
+  "actions": [
+    {
+      "event_id": "E001",
+      "kind": "web_open",
+      "target": "https://leg.colorado.gov/colorado-revised-statutes",
+      "started_at": "2026-09-12T22:02:27+00:00",
+      "completed_at": "2026-09-12T22:02:28+00:00",
+      "timing_scope": "Tool-call bracket, not publisher clock",
+      "http_status": null,
+      "final_url": "https://leg.colorado.gov/laws/colorado-revised-statutes",
+      "redirect_location": null,
+      "retained_evidence": {
+        "path": "events/E001.web-tool.json",
+        "sha256": "540b280a849a4fcce5fbc79784a5f8139cba283e6f56f117a4d63d8cac264349",
+        "size_bytes": 5773
+      },
+      "original_body": null,
+      "qualification": "Web-tool result, not original response bytes or HTTP metadata."
+    },
+    {
+      "event_id": "E002",
+      "kind": "ordinary_https_get",
+      "target": "https://leg.colorado.gov/colorado-revised-statutes",
+      "started_at": "2026-09-12T22:03:07.140155+00:00",
+      "completed_at": "2026-09-12T22:03:07.154036+00:00",
+      "timing_scope": "Actual local UTC request bracket",
+      "http_status": null,
+      "final_url": null,
+      "redirect_location": null,
+      "retained_evidence": {
+        "path": "events/E002.json",
+        "sha256": "934fb706f833dc1be346665e92e88bac8a40fc7c7afa866975a804f7129246b3",
+        "size_bytes": 1202
+      },
+      "original_body": {
+        "path": "events/E002/body.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_bytes": 0
+      },
+      "qualification": "Local DNS failure; no HTTP response; zero-byte placeholders are not sources."
+    },
+    {
+      "event_id": "E003",
+      "kind": "ordinary_https_get",
+      "target": "https://content.leg.colorado.gov/agencies/office-legislative-legal-services/colorado-revised-statutes-data",
+      "started_at": "2026-09-12T22:03:07.129814+00:00",
+      "completed_at": "2026-09-12T22:03:07.147805+00:00",
+      "timing_scope": "Actual local UTC request bracket",
+      "http_status": null,
+      "final_url": null,
+      "redirect_location": null,
+      "retained_evidence": {
+        "path": "events/E003.json",
+        "sha256": "e650ba9b601264117d1e526aaa7132cde1be535ee3abff566c8d6cc3f6894826",
+        "size_bytes": 1258
+      },
+      "original_body": {
+        "path": "events/E003/body.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_bytes": 0
+      },
+      "qualification": "Local DNS failure; no HTTP response; zero-byte placeholders are not sources."
+    },
+    {
+      "event_id": "E004",
+      "kind": "ordinary_https_get",
+      "target": "https://leg.colorado.gov/colorado-revised-statutes",
+      "started_at": "2026-09-12T22:03:22.354775+00:00",
+      "completed_at": "2026-09-12T22:03:22.719836+00:00",
+      "timing_scope": "Actual local UTC request bracket",
+      "http_status": 301,
+      "final_url": "https://leg.colorado.gov/colorado-revised-statutes",
+      "redirect_location": "https://leg.colorado.gov/laws/colorado-revised-statutes",
+      "retained_evidence": {
+        "path": "events/E004.json",
+        "sha256": "7545e6005eb6bcceb4d7b2d6293749e8eb748341c400e9c0d4c53f4fa1c05264",
+        "size_bytes": 1323
+      },
+      "original_body": {
+        "path": "events/E004/body.bin",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_bytes": 0
+      },
+      "qualification": "Observed direct HTTP response; automatic redirect following disabled. One separately logged retry after local DNS failure; no publisher denial."
+    },
+    {
+      "event_id": "E005",
+      "kind": "ordinary_https_get",
+      "target": "https://content.leg.colorado.gov/agencies/office-legislative-legal-services/colorado-revised-statutes-data",
+      "started_at": "2026-09-12T22:03:25.604852+00:00",
+      "completed_at": "2026-09-12T22:03:25.994916+00:00",
+      "timing_scope": "Actual local UTC request bracket",
+      "http_status": 200,
+      "final_url": "https://content.leg.colorado.gov/agencies/office-legislative-legal-services/colorado-revised-statutes-data",
+      "redirect_location": null,
+      "retained_evidence": {
+        "path": "events/E005.json",
+        "sha256": "3aa144968b71a7289a94f3b7d4d4e71cab747b6c03e00f5f83574aa4b8792d75",
+        "size_bytes": 1385
+      },
+      "original_body": {
+        "path": "events/E005/body.bin",
+        "sha256": "7e2880690d8b6565bdbe2590c46685550c8a5c598a7a2f05772c67386a74f868",
+        "size_bytes": 50757
+      },
+      "qualification": "Observed direct HTTP response; automatic redirect following disabled. One separately logged retry after local DNS failure; no publisher denial."
+    },
+    {
+      "event_id": "E006",
+      "kind": "ordinary_https_get",
+      "target": "https://leg.colorado.gov/laws/colorado-revised-statutes",
+      "started_at": "2026-09-12T22:03:38.368108+00:00",
+      "completed_at": "2026-09-12T22:03:38.989661+00:00",
+      "timing_scope": "Actual local UTC request bracket",
+      "http_status": 200,
+      "final_url": "https://leg.colorado.gov/laws/colorado-revised-statutes",
+      "redirect_location": null,
+      "retained_evidence": {
+        "path": "events/E006.json",
+        "sha256": "41a639c601e739e10fc25bcf6a56f803bc00a40bcc6c806fab3006584dfefde8",
+        "size_bytes": 1284
+      },
+      "original_body": {
+        "path": "events/E006/body.bin",
+        "sha256": "42f4faf44ec215ba86f46eb9cd3b25ae83453485707bae76f5f092133814d766",
+        "size_bytes": 40080
+      },
+      "qualification": "Observed direct HTTP response; automatic redirect following disabled. Follows the observed Location in E004."
+    },
+    {
+      "event_id": "E007",
+      "kind": "ordinary_https_get",
+      "target": "https://content.leg.colorado.gov/agencies/office-legislative-legal-services/2025-crs-titles-download",
+      "started_at": "2026-09-12T22:04:06.338415+00:00",
+      "completed_at": "2026-09-12T22:04:06.910161+00:00",
+      "timing_scope": "Actual local UTC request bracket",
+      "http_status": 404,
+      "final_url": "https://content.leg.colorado.gov/agencies/office-legislative-legal-services/2025-crs-titles-download",
+      "redirect_location": null,
+      "retained_evidence": {
+        "path": "events/E007.json",
+        "sha256": "6e3fef01c0dbe38364b587a879cbe142bc55de641a4b88cf5f1d4eb3164ca1c0",
+        "size_bytes": 1373
+      },
+      "original_body": {
+        "path": "events/E007/body.bin",
+        "sha256": "35330334221d5f562073bf7602a9ac4f5bf24dde7d7b6763db208d0e33e6990b",
+        "size_bytes": 42654
+      },
+      "qualification": "Observed direct HTTP response; automatic redirect following disabled."
+    },
+    {
+      "event_id": "E008",
+      "kind": "ordinary_https_get",
+      "target": "https://content.leg.colorado.gov/agencies/office-legislative-legal-services/colorado-revised-statutes",
+      "started_at": "2026-09-12T22:04:08.892285+00:00",
+      "completed_at": "2026-09-12T22:04:09.239087+00:00",
+      "timing_scope": "Actual local UTC request bracket",
+      "http_status": 200,
+      "final_url": "https://content.leg.colorado.gov/agencies/office-legislative-legal-services/colorado-revised-statutes",
+      "redirect_location": null,
+      "retained_evidence": {
+        "path": "events/E008.json",
+        "sha256": "c57686ab6cf42864ea6f4197de76e3ea2bbd8d3a6da97135b9f390417a0d0523",
+        "size_bytes": 1375
+      },
+      "original_body": {
+        "path": "events/E008/body.bin",
+        "sha256": "264e4e0570e280b19b98632176f3b5eb99fb383a3f4a789dbcbb83686268f918",
+        "size_bytes": 59321
+      },
+      "qualification": "Observed direct HTTP response; automatic redirect following disabled."
+    },
+    {
+      "event_id": "E009",
+      "kind": "ordinary_https_get",
+      "target": "https://content.leg.colorado.gov/agencies/office-legislative-legal-services/2026-crs-titles-download",
+      "started_at": "2026-09-12T22:04:48.718202+00:00",
+      "completed_at": "2026-09-12T22:04:49.176281+00:00",
+      "timing_scope": "Actual local UTC request bracket",
+      "http_status": 200,
+      "final_url": "https://content.leg.colorado.gov/agencies/office-legislative-legal-services/2026-crs-titles-download",
+      "redirect_location": null,
+      "retained_evidence": {
+        "path": "events/E009.json",
+        "sha256": "3d5f6fc8b9b4b920a71c0320a4808ab9fe871d220416654c3937e1e698ee23fe",
+        "size_bytes": 1373
+      },
+      "original_body": {
+        "path": "events/E009/body.bin",
+        "sha256": "95f7acf502bd6ec9386f47e4ecf0f3c2bc27741736cde3943dda7aa60bf34735",
+        "size_bytes": 57790
+      },
+      "qualification": "Observed direct HTTP response; automatic redirect following disabled."
+    },
+    {
+      "event_id": "E010",
+      "kind": "web_search",
+      "target": "site:leg.colorado.gov \"2025\" \"crs2025-title-01\"",
+      "started_at": "2026-09-12T22:04:49+00:00",
+      "completed_at": "2026-09-12T22:04:50+00:00",
+      "timing_scope": "Tool-call bracket, not publisher clock",
+      "http_status": null,
+      "final_url": null,
+      "redirect_location": null,
+      "retained_evidence": {
+        "path": "events/E010.web-tool.json",
+        "sha256": "5b5783b2a76af8f891f51be1908a8d3ece0262ca893ce3dd9716c7ba1542fea6",
+        "size_bytes": 338
+      },
+      "original_body": null,
+      "qualification": "Web-tool result, not original response bytes or HTTP metadata."
+    },
+    {
+      "event_id": "E011",
+      "kind": "web_search",
+      "target": "\"2025\" \"Title 1\" \"Elections\" \"olls.info\"",
+      "started_at": "2026-09-12T22:05:14+00:00",
+      "completed_at": "2026-09-12T22:05:17+00:00",
+      "timing_scope": "Combined tool call; per-query start/end unavailable",
+      "http_status": null,
+      "final_url": null,
+      "redirect_location": null,
+      "retained_evidence": {
+        "path": "events/E011-E012.web-tool.json",
+        "sha256": "6420401475e6aa695f9b9eb8651f474c3e69cb613137d1b73a28911da053d2fe",
+        "size_bytes": 3907
+      },
+      "original_body": null,
+      "qualification": "Web-tool result, not original response bytes or HTTP metadata."
+    },
+    {
+      "event_id": "E012",
+      "kind": "web_search",
+      "target": "\"2025 CRS Titles\" download",
+      "started_at": "2026-09-12T22:05:14+00:00",
+      "completed_at": "2026-09-12T22:05:17+00:00",
+      "timing_scope": "Combined tool call; per-query start/end unavailable",
+      "http_status": null,
+      "final_url": null,
+      "redirect_location": null,
+      "retained_evidence": {
+        "path": "events/E011-E012.web-tool.json",
+        "sha256": "6420401475e6aa695f9b9eb8651f474c3e69cb613137d1b73a28911da053d2fe",
+        "size_bytes": 3907
+      },
+      "original_body": null,
+      "qualification": "Web-tool result, not original response bytes or HTTP metadata."
+    },
+    {
+      "event_id": "E013",
+      "kind": "ordinary_https_get",
+      "target": "https://content.leg.colorado.gov/sites/default/files/2025-12/COLS%20-%20XDOME%20memo.pdf",
+      "started_at": "2026-09-12T22:05:33.674208+00:00",
+      "completed_at": "2026-09-12T22:05:34.001467+00:00",
+      "timing_scope": "Actual local UTC request bracket",
+      "http_status": 200,
+      "final_url": "https://content.leg.colorado.gov/sites/default/files/2025-12/COLS%20-%20XDOME%20memo.pdf",
+      "redirect_location": null,
+      "retained_evidence": {
+        "path": "events/E013.json",
+        "sha256": "6ea1097668c246b4999d61abbfdb7e4060fdef41f3aca40d80e83c5349ab2df9",
+        "size_bytes": 1340
+      },
+      "original_body": {
+        "path": "events/E013/body.bin",
+        "sha256": "e376eca290561967111e58aa2b442105c5f0ae282d99751961ce625c0a967bd9",
+        "size_bytes": 40376
+      },
+      "qualification": "Observed direct HTTP response; automatic redirect following disabled."
+    },
+    {
+      "event_id": "E014",
+      "kind": "web_search",
+      "target": "\"CRSDATA20251001\" OR \"crs2025-title-01.pdf\"",
+      "started_at": "2026-09-12T22:06:05+00:00",
+      "completed_at": "2026-09-12T22:06:07+00:00",
+      "timing_scope": "Tool-call bracket, not publisher clock",
+      "http_status": null,
+      "final_url": null,
+      "redirect_location": null,
+      "retained_evidence": {
+        "path": "events/E014.web-tool.json",
+        "sha256": "590bb9f64056bbd781ea648611f66ea0ee3500788c9832ce9dc19ecc3bd629bb",
+        "size_bytes": 351
+      },
+      "original_body": null,
+      "qualification": "Web-tool result, not original response bytes or HTTP metadata."
+    }
+  ],
+  "deliberate_action_count": 14,
+  "distinct_target_count": 11,
+  "accepted_response_body_bytes": 248324,
+  "error_response_body_bytes": 42654,
+  "total_response_body_bytes": 290978,
+  "findings": [
+    {
+      "id": "CRS-CUSTODY-01",
+      "disposition": "supported",
+      "observation": "Prototype binds only three derived records across its frozen inputs; its inherited SGML path, 2025 version and dates are not acquisition proof.",
+      "evidence": [
+        {
+          "artifact": {
+            "path": "inherited/prototype/manifest.json",
+            "sha256": "230077e63761ab368367c6e7e834d9b298a1bfab65d7a07b32aa189488520acb",
+            "size_bytes": 1548
+          },
+          "location": "selected_ids and boundary"
+        },
+        {
+          "artifact": {
+            "path": "inherited/prototype/RESEARCH_CATALOG.local-subset.v1.jsonl",
+            "sha256": "a6dc4f9188359a061f2156cd9e93c87c429bccb8b1a5e46f3b134676eaed742a",
+            "size_bytes": 4219
+          },
+          "location": "all three claims and original_custody fields"
+        }
+      ],
+      "limitation": "Copied complete index and Title1 files are custody, not whole-file review."
+    },
+    {
+      "id": "CRS-CUSTODY-02",
+      "disposition": "gap",
+      "observation": "Exact SGML title and zip bytes were not recovered. Expected repository _RAW_ARCHIVE/crs path is absent; bounded workspace filename search found no CRSDATA20251001.zip or title01.txt. No known original digest exists in inspected records.",
+      "evidence": [
+        {
+          "artifact": {
+            "path": "inherited/repository/_CONTROL_PLANE/CRS_OFFICIAL_REFRESH_CONFIRMATION.json",
+            "sha256": "116adb1696e767b075de254fa8e88d625df6419035bd919af1803f79c3d8551d",
+            "size_bytes": 1296
+          },
+          "location": "archived_source_package and archived_titles_dir"
+        },
+        {
+          "artifact": {
+            "path": "inherited/local-presence-check.json",
+            "sha256": "53445e072089e4739c44574e0635548b31b8db4ed24118bf24a847a17b3b138d",
+            "size_bytes": 344
+          },
+          "location": "exact expected path checks"
+        },
+        {
+          "artifact": {
+            "path": "inherited/repository/01_Statutes_CRS/_meta/crs_bulk_summary.json",
+            "sha256": "92f8c700df1e6778208f8b8500f529b39d42b7ce67420de29b0a8139147d1a8d",
+            "size_bytes": 11490
+          },
+          "location": "items[0], source_path; no original digest"
+        }
+      ],
+      "limitation": "No former Windows machine, cloud backup, email or entire-disk search."
+    },
+    {
+      "id": "CRS-CUSTODY-03",
+      "disposition": "qualification",
+      "observation": "The four Title1 update SHA values identify rendered Markdown. The latest equals frozen body.md SHA6acc70...; none is an SGML/zip digest.",
+      "evidence": [
+        {
+          "artifact": {
+            "path": "inherited/title1-update-log-selection.json",
+            "sha256": "9c5234db0e31c659ad8d3b91a44fc6dc05f08c103809d21fcd4a0e8a11267853",
+            "size_bytes": 3531
+          },
+          "location": "four selected rows"
+        },
+        {
+          "artifact": {
+            "path": "inherited/repository/geode/pipeline/writer.py",
+            "sha256": "40c4d055949d2119ad882995074a7b874f23c716320a40c2e3f97d52fa6df847",
+            "size_bytes": 19349
+          },
+          "location": "write_crs_title: UpdateLogRecord sha256=sha256_text(markdown)"
+        }
+      ],
+      "limitation": "Historical counts877 then876 are output/parser history, not proven legal change."
+    },
+    {
+      "id": "CRS-CUSTODY-04",
+      "disposition": "qualification",
+      "observation": "Stager fixes destination CRSDATA20251001.zip and defaults date2025-10-01; the resulting path does not establish original publisher filename or acquisition date.",
+      "evidence": [
+        {
+          "artifact": {
+            "path": "inherited/repository/geode/connectors/crs_bulk.py",
+            "sha256": "1bd1f0e5d7c26223ce76f4cea66c799b3b4561c3b8e82cb0ee40953a536f9d09",
+            "size_bytes": 12865
+          },
+          "location": "stage_crs_archive"
+        }
+      ],
+      "limitation": "The exact initial external filename, acquisition receipt and generation date remain unknown."
+    },
+    {
+      "id": "CRS-CUSTODY-05",
+      "disposition": "supported",
+      "observation": "Live official data page says the statutory SGML text database is supplied as an unmodified zip on request and links a request form; no public zip anchor appears in its retained content region. It publishes Yelana Love/yelana.love@coleg.gov.",
+      "evidence": [
+        {
+          "artifact": {
+            "path": "events/E005/body.bin",
+            "sha256": "7e2880690d8b6565bdbe2590c46685550c8a5c598a7a2f05772c67386a74f868",
+            "size_bytes": 50757
+          },
+          "location": "region-content data description and request anchor"
+        }
+      ],
+      "limitation": "Published route, not an exhaustive claim about all public archives; no form opened/submitted. Registry instead spells the address yelena, so do not silently reuse it."
+    },
+    {
+      "id": "CRS-CUSTODY-06",
+      "disposition": "supported",
+      "observation": "Inherited2025 title-download URL returned404 once. Current official landing links the2026 title page, whose statement covers the2026 Second Regular Session.",
+      "evidence": [
+        {
+          "artifact": {
+            "path": "events/E007.json",
+            "sha256": "6e3fef01c0dbe38364b587a879cbe142bc55de641a4b88cf5f1d4eb3164ca1c0",
+            "size_bytes": 1373
+          },
+          "location": "http_status404"
+        },
+        {
+          "artifact": {
+            "path": "events/E008/body.bin",
+            "sha256": "264e4e0570e280b19b98632176f3b5eb99fb383a3f4a789dbcbb83686268f918",
+            "size_bytes": 59321
+          },
+          "location": "Download C.R.S Titles href"
+        },
+        {
+          "artifact": {
+            "path": "events/E009/body.bin",
+            "sha256": "95f7acf502bd6ec9386f47e4ecf0f3c2bc27741736cde3943dda7aa60bf34735",
+            "size_bytes": 57790
+          },
+          "location": "edition statement and Title1 row"
+        }
+      ],
+      "limitation": "2026 is a distinct edition; no 2025 PDF or section equivalence established. Bounded official searches did not locate exact2025 title/zip; not an absence proof."
+    },
+    {
+      "id": "CRS-CUSTODY-07",
+      "disposition": "supported",
+      "observation": "Official Dec4,2025 memo describes moving publications from WordPerfect/SGML to XDOME/XML for2026 and reports two unnamed titles plus Constitution piloted in2025.",
+      "evidence": [
+        {
+          "artifact": {
+            "path": "events/E013/body.bin",
+            "sha256": "e376eca290561967111e58aa2b442105c5f0ae282d99751961ce625c0a967bd9",
+            "size_bytes": 40376
+          },
+          "location": "physical pages1–2; both directly inspected"
+        },
+        {
+          "artifact": {
+            "path": "memo-review/page-1.txt",
+            "sha256": "6105b432fc82d6a2dbec6f26b2184b656e1fe56fab9502479b4d9e57bc59008e",
+            "size_bytes": 2496
+          },
+          "location": "complete native page1"
+        },
+        {
+          "artifact": {
+            "path": "memo-review/page-2.txt",
+            "sha256": "a591bb935a0fc10a9476a7622d164c0cf0131132c3e1927d2a645c89a32ec307",
+            "size_bytes": 963
+          },
+          "location": "complete native page2"
+        }
+      ],
+      "limitation": "This qualifies reliance on the live SGML-only route for future editions; it does not itself prove a public XML API, released dataset, or Title1 pilot format."
+    }
+  ],
+  "memo": {
+    "source": {
+      "path": "events/E013/body.bin",
+      "sha256": "e376eca290561967111e58aa2b442105c5f0ae282d99751961ce625c0a967bd9",
+      "size_bytes": 40376
+    },
+    "title": "XDOME update",
+    "role": "official_publications_process_memorandum",
+    "printed_date": "2025-12-04",
+    "pages": 2,
+    "visually_reviewed_pages": [
+      1,
+      2
+    ],
+    "native_text": [
+      {
+        "path": "memo-review/page-1.txt",
+        "sha256": "6105b432fc82d6a2dbec6f26b2184b656e1fe56fab9502479b4d9e57bc59008e",
+        "size_bytes": 2496
+      },
+      {
+        "path": "memo-review/page-2.txt",
+        "sha256": "a591bb935a0fc10a9476a7622d164c0cf0131132c3e1927d2a645c89a32ec307",
+        "size_bytes": 963
+      }
+    ],
+    "page_images": [
+      {
+        "path": "memo-review/page-1.png",
+        "sha256": "03e267951d84e39bf603d30d96cf7aa0d6a84eb7db3127b6706a22b79b5bea00",
+        "size_bytes": 313407
+      },
+      {
+        "path": "memo-review/page-2.png",
+        "sha256": "63334b77c73f4cc59d2b223dfdd370fb28ab5dae8dafde0ce1824424b81f9626",
+        "size_bytes": 125787
+      }
+    ],
+    "metadata_claims": {
+      "format": "PDF 1.5",
+      "title": "COLS - XDOME",
+      "author": "Yelana Love",
+      "subject": "",
+      "keywords": "",
+      "creator": "Power PDF Create",
+      "producer": "Power PDF Create",
+      "creationDate": "D:20251204155045-07'00'",
+      "modDate": "D:20251204155046-07'00'",
+      "trapped": "",
+      "encryption": null
+    },
+    "qualification": "Both full Poppler130dpi pages inspected after native/tool-aware reading. Memo describes publication workflow, not release bytes or statutory legal effect. It does not identify the two 2025 pilot titles. Native order omits logo semantics. First Poppler attempt failed fontconfig and was interrupted without outputs; final render used the preserved local font configuration. No original PDF was altered."
+  },
+  "unopened_leads": [
+    {
+      "url": "https://olls.info/crs/crs2026-title-01.pdf",
+      "basis": "E009 Title1 PDF anchor",
+      "reason": "Distinct2026 edition, not the missing2025 source; not downloaded."
+    },
+    {
+      "url": "https://olls.info/crs/crs2026-title-01.htm",
+      "basis": "E009 Title1 HTM anchor",
+      "reason": "Distinct2026 edition; not downloaded or promoted."
+    },
+    {
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSevPXxtJfl25qFlC_xNeCXYRPR1oq0J7hmEaaMWgsEb6Gj5uA/viewform?c=0&w=1",
+      "basis": "E005 Request the Statutory Data Set anchor",
+      "reason": "No form/contact authorization."
+    }
+  ],
+  "recommended_next_steps": [
+    "Recover exact original zip/title01 bytes and acquisition receipt from the former source checkout or backup. Hash bytes independently; do not rename a different file as proof of identity.",
+    "If recovery fails, Michael can authorize a narrowly specified request for the2025 Title1 SGML package/version including source notes, naming the historical staging path as an internal clue rather than publisher identity. Ask the publisher to identify original generation/version/cutoff and available archive checksum.",
+    "Keep2026 XML/HTML/PDF acquisition separate. For any later source received, verify provenance and exact bytes, then compare only the three section bodies/headings/source notes with explicit byte/page or node bindings. Do not infer original byte equality from normalized matching or promote currentness."
+  ],
+  "legal_currentness": "not_verified",
+  "answer_safe": false,
+  "catalog_changed": false,
+  "contacts_or_form_submissions": 0,
+  "limitations": [
+    "14 deliberate public actions:9 direct curl requests,1 web open,4 search queries. The web service's internal requests and wire bytes are not observable or claimed counted.",
+    "Direct outcomes:5 HTTP200,1 HTTP301,1 HTTP404,2 local DNS failures with no HTTP response. The301 was followed once as a separately logged request; no automatic redirects.",
+    "Tool search results are derived exports; HTTP body hashes apply only to retained direct responses.",
+    "No exact2025 SGML/zip or2025 PDF recovered; no source-equivalence test was possible. No new sections, normal backend, canonical raw/control/index files or catalog were changed.",
+    "Memo is process context only. Both pages visually inspected; no statutory page visual review occurred."
+  ]
+}

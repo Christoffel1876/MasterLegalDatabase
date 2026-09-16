@@ -1,0 +1,137 @@
+name: County source recovery pilot
+
+on:
+  schedule:
+    # 13:17 UTC = 07:17 MDT / 06:17 MST; away from the busy top of the hour.
+    - cron: '17 13 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: county-reacquisition-pilot
+  cancel-in-progress: false
+
+env:
+  PYTHONUNBUFFERED: '1'
+  GIT_LFS_SKIP_SMUDGE: '1'
+
+jobs:
+  collect:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    permissions:
+      contents: read
+    outputs:
+      has_changes: ${{ steps.candidate.outputs.has_changes }}
+    steps:
+      - name: Checkout default branch with read-only credentials
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+          lfs: false
+      - name: Initialize run evidence
+        run: |
+          mkdir -p .geode_runtime/county-reacquisition .geode_runtime/county-reacquisition-candidate
+          printf '%s\n' "Source check has not completed. Inspect the job log for setup failures." > .geode_runtime/county-reacquisition/summary.md
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+      - name: Install frozen pilot dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements-county.txt
+      - name: Resume pending data and merge current main
+        run: python scripts/publish_county_update.py prepare --root . --output .geode_runtime/county-reacquisition-candidate
+      - name: Run offline pilot regression checks
+        run: |
+          python -m pytest tests/test_county_reacquisition.py tests/test_publish_county_update.py tests/test_coverage_dashboard.py -q --cov=geode.pipeline.county_reacquisition --cov=geode.pipeline.coverage_dashboard --cov=scripts.publish_county_update --cov-branch --cov-report=term-missing --cov-report=xml:.geode_runtime/county-reacquisition/coverage.xml --junitxml=.geode_runtime/county-reacquisition/tests.xml
+          python -m coverage report --fail-under=90 --include=geode/pipeline/county_reacquisition.py
+          python -m coverage report --fail-under=90 --include=geode/pipeline/coverage_dashboard.py
+          python -m coverage report --fail-under=90 --include=scripts/publish_county_update.py
+      - name: Check official sources and validate the transaction
+        run: python -m geode.pipeline.county_reacquisition --root . --manifest _CONTROL_PLANE/COUNTY_REACQUISITION_PILOT.json --report-dir .geode_runtime/county-reacquisition
+      - name: Inventory current checkout coverage
+        run: python -m geode.pipeline.coverage_dashboard --root . --output-dir .geode_runtime/county-reacquisition/coverage
+      - name: Package validated candidate
+        id: candidate
+        run: python scripts/publish_county_update.py build --root . --output .geode_runtime/county-reacquisition-candidate --report-dir .geode_runtime/county-reacquisition
+      - name: Show source-check result
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          printf '## County source preservation check\n\nJob result: %s\n\n' "$JOB_STATUS" >> "$GITHUB_STEP_SUMMARY"
+          if test -f .geode_runtime/county-reacquisition/summary.md; then
+            cat .geode_runtime/county-reacquisition/summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            printf 'The run failed before creating a source report. Inspect the job log.\n' >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Retain run report including failure or no-change results
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: county-reacquisition-report-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .geode_runtime/county-reacquisition/
+          retention-days: 90
+          if-no-files-found: warn
+          include-hidden-files: true
+      - name: Retain validated candidate for isolated publisher
+        if: success() && steps.candidate.outputs.has_changes == 'true'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: county-reacquisition-candidate-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .geode_runtime/county-reacquisition-candidate/
+          retention-days: 14
+          if-no-files-found: error
+          include-hidden-files: true
+
+  publish:
+    needs: collect
+    if: needs.collect.outputs.has_changes == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout trusted publisher from main
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          fetch-depth: 0
+          lfs: false
+      - name: Download candidate from this successful collection job
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+        with:
+          name: county-reacquisition-candidate-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .geode_runtime/county-reacquisition-candidate/
+      - name: Download validation report from the same collection job
+        uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+        with:
+          name: county-reacquisition-report-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .geode_runtime/county-reacquisition/
+      - name: Recheck candidate, push bot branch and open review PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/publish_county_update.py publish --root . --output .geode_runtime/county-reacquisition-candidate
+      - name: Show publication result
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          printf '\nPublication job result: %s. The data update requires human review before merge.\n' "$JOB_STATUS" >> "$GITHUB_STEP_SUMMARY"
+      - name: Retain publication evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: county-reacquisition-publication-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .geode_runtime/county-reacquisition-candidate/candidate.json
+            .geode_runtime/county-reacquisition-candidate/published.json
+            .geode_runtime/county-reacquisition-candidate/pull-request-body.md
+          retention-days: 90
+          if-no-files-found: warn
+          include-hidden-files: true

@@ -1,0 +1,55 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "const": "dry_run",
+      "title": "Status",
+      "type": "string"
+    },
+    "raw_before": {
+      "const": 63,
+      "title": "Raw Before",
+      "type": "integer"
+    },
+    "raw_after": {
+      "const": 64,
+      "title": "Raw After",
+      "type": "integer"
+    },
+    "ledger_before": {
+      "const": 64,
+      "title": "Ledger Before",
+      "type": "integer"
+    },
+    "ledger_after": {
+      "const": 65,
+      "title": "Ledger After",
+      "type": "integer"
+    },
+    "actual_repository_received_at": {
+      "title": "Actual Repository Received At",
+      "type": "null"
+    },
+    "source_qa_approval_sha256": {
+      "title": "Source Qa Approval Sha256",
+      "type": "string"
+    },
+    "canonical_mutations": {
+      "const": 0,
+      "title": "Canonical Mutations",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "status",
+    "raw_before",
+    "raw_after",
+    "ledger_before",
+    "ledger_after",
+    "actual_repository_received_at",
+    "source_qa_approval_sha256",
+    "canonical_mutations"
+  ],
+  "title": "DryRun",
+  "type": "object"
+}

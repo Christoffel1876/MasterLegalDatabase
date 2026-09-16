@@ -1,0 +1,61 @@
+{
+  "$defs": {
+    "F": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "F",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/F"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "excluded_sibling_paths": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Excluded Sibling Paths",
+      "type": "array"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "files",
+    "excluded_sibling_paths",
+    "scope"
+  ],
+  "title": "M",
+  "type": "object"
+}

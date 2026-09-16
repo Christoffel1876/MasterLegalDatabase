@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-09-13T02:20:33.649622Z",
+  "status": "bounded_source_qa_accepted_with_custody_limits",
+  "source": {
+    "path": "received/original.pdf",
+    "sha256": "1c9fda2c8bacb414468947664d6edb6640845081fcb1a5366dccf0c58720a084",
+    "size_bytes": 75214
+  },
+  "source_qa": {
+    "path": "received/SOURCE_QA.json",
+    "sha256": "e1af59772ed9d1ee9d2bcb2ee20f8514efdbaa8fe5743dd0a029c5f5d4399536",
+    "size_bytes": 179888
+  },
+  "source_schema": {
+    "path": "received/SOURCE_QA.schema.json",
+    "sha256": "d55009c3f3bd8ef2930186854c343fa33ff6589ad21eb97cc9f12d6dc5754c03",
+    "size_bytes": 7293
+  },
+  "structural_verifier": {
+    "path": "support/verify_source_review.py",
+    "sha256": "fdedfe25e7d246c84528d9f533827a4690586f31afe90ee22b2a218f41b0f865",
+    "size_bytes": 9069
+  },
+  "checks": {
+    "path": "CHECKS.json",
+    "sha256": "2f632841c4a4d61565369b04c62de1b631d6317b18dc78c8adfe912b59106d47",
+    "size_bytes": 2880
+  },
+  "direct_visual_pages": [
+    1,
+    2
+  ],
+  "direct_physical_rows": 88,
+  "labeled_fee_rows": 69,
+  "source_native_bytes": 3187,
+  "source_native_lines": 145,
+  "review_method": "Candidate-aware direct viewing of both complete 1224x1584 original-resolution PNGs, compared row by row to SOURCE_QA and Markdown; original PDF bytes read and both full-page pixel buffers replayed; root structural verifier invoked once. No new crops were required.",
+  "findings": [
+    {
+      "id": "F01",
+      "disposition": "accepted_source_association",
+      "row_ids": [
+        "P1-01",
+        "P1-45",
+        "P2-01",
+        "P2-43"
+      ],
+      "statement": "All physical rows are preserved: page 1 has 45 and page 2 has 43; 69 fee rows, 4 continuations, 7 section headings, 4 subheadings, 3 notes and 1 column header.",
+      "limitation": "These are document-table counts, not legal-requirement counts or geographic completeness."
+    },
+    {
+      "id": "F02",
+      "disposition": "accepted_source_association",
+      "row_ids": [
+        "P1-03",
+        "P1-04",
+        "P1-05",
+        "P1-06",
+        "P1-07",
+        "P1-08"
+      ],
+      "statement": "Three $5,000 Deposit; Refund/Charge will apply rows remain continuations of Activity Permit*, Area Permit and Munic. and Indust. Water Project*. Actual Cost is separately retained.",
+      "limitation": "Blank application cells are not missing service labels; no total or final fee calculation."
+    },
+    {
+      "id": "F03",
+      "disposition": "accepted_source_association",
+      "row_ids": [
+        "P1-18",
+        "P1-19"
+      ],
+      "statement": "The $210 ea. for Lighting, Parking & Buffering Plans continuation belongs to Site Development Plan - Nonresidential, whose preceding fee is $630.",
+      "limitation": "No alternative or cumulative fee interpretation added."
+    },
+    {
+      "id": "F04",
+      "disposition": "accepted_source_association",
+      "row_ids": [
+        "P1-39",
+        "P2-01",
+        "P2-02",
+        "P2-03",
+        "P2-04",
+        "P2-05"
+      ],
+      "statement": "The first five page-2 rows visibly continue Land Division Applications from page 1. Their star/caret marks and fee amounts remain distinct.",
+      "limitation": "Reading-order context is preserved without claiming legal applicability."
+    },
+    {
+      "id": "F05",
+      "disposition": "accepted_source_association",
+      "row_ids": [
+        "P2-07",
+        "P2-08",
+        "P2-09",
+        "P2-10",
+        "P2-11"
+      ],
+      "statement": "All three Fire Fees rows carry $1,200 per Undeveloped Lot and the dagger note: $600 due prior to plat recordation, $600 due at time of building permit. Park and School sections remain separate.",
+      "limitation": "Timing terms are source text, not independently verified current charges or a jurisdictional assignment to a particular district."
+    },
+    {
+      "id": "F06",
+      "disposition": "accepted_source_association",
+      "row_ids": [
+        "P2-23",
+        "P2-24",
+        "P2-25",
+        "P2-26",
+        "P2-27",
+        "P2-43"
+      ],
+      "statement": "Certificates^ is a marked group heading above Conforming Use, Merger by Contiguity, Parcel of Record and Certificate of Nonconformance; each shows $55. The caret context points to the recording-fee note.",
+      "limitation": "The four child labels do not acquire invented literal caret characters or a calculated recording charge."
+    },
+    {
+      "id": "F07",
+      "disposition": "accepted_source_association",
+      "row_ids": [
+        "P2-42",
+        "P2-43"
+      ],
+      "statement": "The exact bottom notes are *application will also require Advertising Fee. and ^application will also require Recording Fee(s). They are global marker notes, detached from Appeals.",
+      "limitation": "No advertised fee is silently added to an unmarked row."
+    },
+    {
+      "id": "F08",
+      "disposition": "source_owned_anomaly",
+      "row_ids": [
+        "P2-31"
+      ],
+      "statement": "The source says documents reviewing incomplete applications within the Resubmittal Review Fee label; $75/hr. is aligned with the full two-line label. Both trailing source-line spaces remain in native evidence.",
+      "limitation": "Do not repair the awkward wording or infer a different trigger."
+    },
+    {
+      "id": "F09",
+      "disposition": "source_owned_anomaly",
+      "row_ids": [
+        "P1-29",
+        "P1-30",
+        "P1-41",
+        "P1-42",
+        "P1-43",
+        "P1-44",
+        "P1-45",
+        "P2-36"
+      ],
+      "statement": "No Charge, Actual Cost, $90 + $300/lot, $90 + $300/developable lot and Similar Use Determination*/Director's Interpretation remain exact distinct strings.",
+      "limitation": "No currency/unit normalization, arithmetic, or punctuation-codepoint certification beyond retained native bytes."
+    },
+    {
+      "id": "F10",
+      "disposition": "qualified_custody",
+      "row_ids": [],
+      "statement": "Both supplied PNGs equal an independent 144dpi PyMuPDF replay of the retained two-page original at the pixel level; native re-extraction and all structural bindings pass.",
+      "limitation": "Pixel equality verifies representation linkage, not legal effect. Review is Atlas candidate-aware, after root annotations, not a blind pass."
+    },
+    {
+      "id": "F11",
+      "disposition": "qualified_custody",
+      "row_ids": [],
+      "statement": "The exact A031 browser DOM anchor links the county planning page to the retained PDF URL. Recorded SH-EXT-002 custody has one 200 PDF and one 403 commissioner catalog, two URLs and 81,082 bytes.",
+      "limitation": "A031 is a browser DOM derivative; HTTP/time evidence is received Sherlock evidence, not an independent Atlas acquisition. The 403 body is not a successful catalog or adopting instrument."
+    },
+    {
+      "id": "F12",
+      "disposition": "qualified_custody",
+      "row_ids": [],
+      "statement": "The filename/anchor advertises Adopted 5.8.25. HTTP Last-Modified says 14 May 2025; PDF metadata carries a 14 May 2025 creation/modification time and title Suggested Fee Schedule FINAL.xlsx.",
+      "limitation": "None is an independently established adoption/effective date; neither Suggested nor FINAL alone determines legal status. No issuer/date/execution heading appears on the two page faces."
+    },
+    {
+      "id": "F13",
+      "disposition": "qualified_custody",
+      "row_ids": [],
+      "statement": "No exact fee URL or PDF digest match was found in the hash-verified 1,415-row pinned selected legacy stream.",
+      "limitation": "This does not establish absence in current global manifests, renamed URLs, other representations, or the source corpus."
+    }
+  ],
+  "acquisition_limit": "Preserved report/HTTP metadata and browser-derived referral evidence, not a new independent public acquisition. No adoption document obtained; denied catalog remains unresolved.",
+  "legacy_limit": "Only exact requested/source URL and PDF digest in the pinned selected 1,415-row legacy file; no global absence or current dedupe conclusion.",
+  "adoption_date": null,
+  "effective_date": null,
+  "legal_currentness": "not_verified",
+  "answer_safe": false,
+  "public_requests": 0,
+  "production_writes": 0
+}

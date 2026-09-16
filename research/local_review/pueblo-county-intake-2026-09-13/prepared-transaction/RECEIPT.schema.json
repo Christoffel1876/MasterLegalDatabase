@@ -1,0 +1,69 @@
+{
+  "additionalProperties": false,
+  "description": "Completion describes byte custody only.",
+  "properties": {
+    "status": {
+      "const": "completed_archived_pending_pipeline",
+      "title": "Status",
+      "type": "string"
+    },
+    "preparation_sha256": {
+      "title": "Preparation Sha256",
+      "type": "string"
+    },
+    "intent_sha256": {
+      "title": "Intent Sha256",
+      "type": "string"
+    },
+    "actual_repository_received_at": {
+      "format": "date-time",
+      "title": "Actual Repository Received At",
+      "type": "string"
+    },
+    "raw_sha256": {
+      "title": "Raw Sha256",
+      "type": "string"
+    },
+    "ledger_sha256": {
+      "title": "Ledger Sha256",
+      "type": "string"
+    },
+    "report_sha256": {
+      "title": "Report Sha256",
+      "type": "string"
+    },
+    "raw_records": {
+      "title": "Raw Records",
+      "type": "integer"
+    },
+    "ledger_records": {
+      "title": "Ledger Records",
+      "type": "integer"
+    },
+    "source_sha256": {
+      "const": "1c9fda2c8bacb414468947664d6edb6640845081fcb1a5366dccf0c58720a084",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "preparation_sha256",
+    "intent_sha256",
+    "actual_repository_received_at",
+    "raw_sha256",
+    "ledger_sha256",
+    "report_sha256",
+    "raw_records",
+    "ledger_records",
+    "source_sha256",
+    "legal_currentness"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

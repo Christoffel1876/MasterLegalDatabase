@@ -1,0 +1,265 @@
+{
+  "$defs": {
+    "Detail": {
+      "additionalProperties": false,
+      "description": "Source presence and field comparison; no legal status conclusion.",
+      "properties": {
+        "docket": {
+          "title": "Docket",
+          "type": "string"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "acquired_start": {
+          "format": "date-time",
+          "title": "Acquired Start",
+          "type": "string"
+        },
+        "acquired_end": {
+          "format": "date-time",
+          "title": "Acquired End",
+          "type": "string"
+        },
+        "http_status": {
+          "const": 200,
+          "title": "Http Status",
+          "type": "integer"
+        },
+        "old_body": {
+          "$ref": "#/$defs/Ref"
+        },
+        "fresh_body": {
+          "$ref": "#/$defs/Ref"
+        },
+        "original_bytes_equal": {
+          "title": "Original Bytes Equal",
+          "type": "boolean"
+        },
+        "old_fields": {
+          "items": {
+            "$ref": "#/$defs/TableField"
+          },
+          "title": "Old Fields",
+          "type": "array"
+        },
+        "fresh_fields": {
+          "items": {
+            "$ref": "#/$defs/TableField"
+          },
+          "title": "Fresh Fields",
+          "type": "array"
+        },
+        "complete_table_field_values_equal": {
+          "const": true,
+          "title": "Complete Table Field Values Equal",
+          "type": "boolean"
+        },
+        "visible_hearing_date": {
+          "title": "Visible Hearing Date",
+          "type": "string"
+        },
+        "explicit_explanation_observed": {
+          "const": false,
+          "title": "Explicit Explanation Observed",
+          "type": "boolean"
+        },
+        "verified_legal_status": {
+          "default": null,
+          "title": "Verified Legal Status",
+          "type": "null"
+        }
+      },
+      "required": [
+        "docket",
+        "requested_url",
+        "acquired_start",
+        "acquired_end",
+        "http_status",
+        "old_body",
+        "fresh_body",
+        "original_bytes_equal",
+        "old_fields",
+        "fresh_fields",
+        "complete_table_field_values_equal",
+        "visible_hearing_date",
+        "explicit_explanation_observed"
+      ],
+      "title": "Detail",
+      "type": "object"
+    },
+    "HeaderDerivative": {
+      "additionalProperties": false,
+      "description": "Hash-bound removal of cookie header fields for distributable custody.",
+      "properties": {
+        "original_private": {
+          "$ref": "#/$defs/Ref"
+        },
+        "public": {
+          "$ref": "#/$defs/Ref"
+        },
+        "omitted_field_names": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Omitted Field Names",
+          "type": "array"
+        },
+        "method": {
+          "const": "remove sensitive header lines and their folded continuations",
+          "title": "Method",
+          "type": "string"
+        }
+      },
+      "required": [
+        "original_private",
+        "public",
+        "omitted_field_names",
+        "method"
+      ],
+      "title": "HeaderDerivative",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Exact local bytes, independent of their interpreted meaning.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "TableField": {
+      "additionalProperties": false,
+      "description": "A decoded visible table field with its original HTML byte range.",
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "start_byte": {
+          "minimum": 0,
+          "title": "Start Byte",
+          "type": "integer"
+        },
+        "end_byte": {
+          "exclusiveMinimum": 0,
+          "title": "End Byte",
+          "type": "integer"
+        },
+        "fragment_sha256": {
+          "title": "Fragment Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "value",
+        "start_byte",
+        "end_byte",
+        "fragment_sha256"
+      ],
+      "title": "TableField",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Two accessible details do not establish why issue rows disappeared.",
+  "properties": {
+    "reviewed_at": {
+      "format": "date-time",
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "status": {
+      "const": "detail_pages_accessible_fields_unchanged_explanation_unresolved",
+      "title": "Status",
+      "type": "string"
+    },
+    "details": {
+      "items": {
+        "$ref": "#/$defs/Detail"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Details",
+      "type": "array"
+    },
+    "header_derivatives": {
+      "items": {
+        "$ref": "#/$defs/HeaderDerivative"
+      },
+      "title": "Header Derivatives",
+      "type": "array"
+    },
+    "attempts": {
+      "const": 2,
+      "title": "Attempts",
+      "type": "integer"
+    },
+    "http_responses": {
+      "const": 2,
+      "title": "Http Responses",
+      "type": "integer"
+    },
+    "redirects": {
+      "const": 0,
+      "title": "Redirects",
+      "type": "integer"
+    },
+    "corpus_changed": {
+      "const": false,
+      "title": "Corpus Changed",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "reviewed_at",
+    "status",
+    "details",
+    "header_derivatives",
+    "attempts",
+    "http_responses",
+    "redirects",
+    "corpus_changed",
+    "legal_currentness",
+    "limits"
+  ],
+  "title": "Review",
+  "type": "object"
+}

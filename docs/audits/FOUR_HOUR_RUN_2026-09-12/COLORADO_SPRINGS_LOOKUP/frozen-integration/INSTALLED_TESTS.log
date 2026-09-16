@@ -1,0 +1,1690 @@
+........................................................................ [ 21%]
+........................................................................ [ 43%]
+...........................................EEEFFFFFFF................... [ 65%]
+..EEEEEEEEEEEEEEEEEEE......FF.........FEE............................... [ 87%]
+........................................                                 [100%]
+==================================== ERRORS ====================================
+_ ERROR at setup of test_all_128_rows_preserve_source_cells_tables_and_410_lines _
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+__ ERROR at setup of test_required_global_conditions_and_complete_definitions __
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+________ ERROR at setup of test_printed_rate_anomalies_are_not_repaired ________
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+_______ ERROR at setup of test_native_part_rejects_false_bindings[hash] ________
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+_______ ERROR at setup of test_native_part_rejects_false_bindings[range] _______
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+_____ ERROR at setup of test_native_part_rejects_false_bindings[line_page] _____
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+_______ ERROR at setup of test_native_part_rejects_false_bindings[bbox] ________
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+______ ERROR at setup of test_native_part_rejects_false_bindings[pixels] _______
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+_______ ERROR at setup of test_native_part_rejects_false_bindings[count] _______
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+______ ERROR at setup of test_complete_output_context_is_required[global] ______
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+____ ERROR at setup of test_complete_output_context_is_required[technology] ____
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+____ ERROR at setup of test_complete_output_context_is_required[definition] ____
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+____ ERROR at setup of test_complete_output_context_is_required[table_note] ____
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+______ ERROR at setup of test_complete_output_context_is_required[page7] _______
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+______ ERROR at setup of test_complete_output_context_is_required[table] _______
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+____ ERROR at setup of test_complete_output_context_is_required[duplicate] _____
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+______ ERROR at setup of test_complete_output_context_is_required[source] ______
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+___ ERROR at setup of test_complete_output_context_is_required[row_context] ____
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+______ ERROR at setup of test_complete_output_context_is_required[status] ______
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+______________ ERROR at setup of test_row_associations[cell_role] ______________
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+______________ ERROR at setup of test_row_associations[row_page] _______________
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+_______________ ERROR at setup of test_row_associations[global] ________________
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+_ ERROR at setup of test_source_result_cannot_falsify_intake_chronology[intake_received_at-2026-09-12T20:00:00Z] _
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+_ ERROR at setup of test_source_result_cannot_falsify_intake_chronology[canonical_intake_verified-False] _
+
+    @pytest.fixture(scope="module")
+    def all_rows() -> lookup.SpringsLookupResult:
+        """Verify the real package and retain all 128 exact rows for read-only output checks."""
+>       return lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, list_rows=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:45: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+=================================== FAILURES ===================================
+_______________ test_targeted_exact_source_query[0.04-expected0] _______________
+
+query = '0.04', expected = ['P3-CONSTRUCTION-35', 'P4-CONSTRUCTION-01']
+
+    @pytest.mark.parametrize("query,expected", [
+        ("0.04", ["P3-CONSTRUCTION-35", "P4-CONSTRUCTION-01"]),
+        ("$336.00", ["P4-SPRINKLER-05"]),
+        ("Technology Fee", ["P4-MISC-01"]),
+    ])
+    def test_targeted_exact_source_query(query: str, expected: list[str]) -> None:
+        """Rates and source labels retrieve exactly their recorded rows and mandatory context."""
+>       result = lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, query)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:143: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+_____________ test_targeted_exact_source_query[$336.00-expected1] ______________
+
+query = '$336.00', expected = ['P4-SPRINKLER-05']
+
+    @pytest.mark.parametrize("query,expected", [
+        ("0.04", ["P3-CONSTRUCTION-35", "P4-CONSTRUCTION-01"]),
+        ("$336.00", ["P4-SPRINKLER-05"]),
+        ("Technology Fee", ["P4-MISC-01"]),
+    ])
+    def test_targeted_exact_source_query(query: str, expected: list[str]) -> None:
+        """Rates and source labels retrieve exactly their recorded rows and mandatory context."""
+>       result = lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, query)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:143: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+__________ test_targeted_exact_source_query[Technology Fee-expected2] __________
+
+query = 'Technology Fee', expected = ['P4-MISC-01']
+
+    @pytest.mark.parametrize("query,expected", [
+        ("0.04", ["P3-CONSTRUCTION-35", "P4-CONSTRUCTION-01"]),
+        ("$336.00", ["P4-SPRINKLER-05"]),
+        ("Technology Fee", ["P4-MISC-01"]),
+    ])
+    def test_targeted_exact_source_query(query: str, expected: list[str]) -> None:
+        """Rates and source labels retrieve exactly their recorded rows and mandatory context."""
+>       result = lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, query)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:143: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+_____ test_no_match_cannot_establish_absence[fictional teleporter permit] ______
+
+query = 'fictional teleporter permit'
+
+    @pytest.mark.parametrize("query", [
+        "fictional teleporter permit", "0 square feet", "000 square feet",
+    ])
+    def test_no_match_cannot_establish_absence(query: str) -> None:
+        """Missing services remain no-match in this one snapshot with all scope qualifications."""
+>       result = lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, query)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:153: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+____________ test_no_match_cannot_establish_absence[0 square feet] _____________
+
+query = '0 square feet'
+
+    @pytest.mark.parametrize("query", [
+        "fictional teleporter permit", "0 square feet", "000 square feet",
+    ])
+    def test_no_match_cannot_establish_absence(query: str) -> None:
+        """Missing services remain no-match in this one snapshot with all scope qualifications."""
+>       result = lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, query)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:153: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+___________ test_no_match_cannot_establish_absence[000 square feet] ____________
+
+query = '000 square feet'
+
+    @pytest.mark.parametrize("query", [
+        "fictional teleporter permit", "0 square feet", "000 square feet",
+    ])
+    def test_no_match_cannot_establish_absence(query: str) -> None:
+        """Missing services remain no-match in this one snapshot with all scope qualifications."""
+>       result = lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, query)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:153: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+____________________ test_context_only_does_not_assign_fee _____________________
+
+    def test_context_only_does_not_assign_fee() -> None:
+        """The implementation statement is retrievable without assigning it a computed fee."""
+>       result = lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, "Fees shall be assessed")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:161: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+_____________ test_native_lookup_cli_and_markdown_preserve_context _____________
+
+capsys = <_pytest.capture.CaptureFixture object at 0x108bed480>
+tmp_path = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-191/test_native_lookup_cli_and_mar0')
+
+    def test_native_lookup_cli_and_markdown_preserve_context(
+        capsys: pytest.CaptureFixture[str], tmp_path: Path,
+    ) -> None:
+        """The installed-style interface keeps mandatory context readable and refuses current law."""
+        base = ["--root", str(ROOT), "--source-id", lookup.SPRINGS_SOURCE_ID]
+>       assert lookup.main(base + ["--query", "0.04", "--format", "json"]) == 0
+E       AssertionError: assert 1 == 0
+E        +  where 1 = <function main at 0x1096531c0>((['--root', '/Users/mcoors/Documents/Project Geode/MasterLegalDatabase', '--source-id', 'colorado-springs-construction-fees-atlas-directed'] + ['--query', '0.04', '--format', 'json']))
+E        +    where <function main at 0x1096531c0> = lookup.main
+
+tests/test_colorado_springs_native_lookup.py:345: AssertionError
+------------------------------ Captured log call -------------------------------
+ERROR    root:research_source_lookup.py:2141 Research source lookup failed: Colorado Springs closed intake inventory differs
+_________________ test_untrusted_query_not_rendered_as_markup __________________
+
+    def test_untrusted_query_not_rendered_as_markup() -> None:
+        """An unmatched hostile query does not become active Markdown or an invented source row."""
+>       result = lookup.lookup(ROOT, lookup.SPRINGS_SOURCE_ID, '<img src=x onerror=alert(1)>')
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_colorado_springs_native_lookup.py:363: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/research_source_lookup.py:1848: in lookup
+    return _lookup_springs(root, query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:997: in _lookup_springs
+    intake = _load_springs_intake(root, data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts/research_source_lookup.py:949: in _load_springs_intake
+    before = _check_springs_intake(root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/Users/mcoors/Documents/Project Geode/MasterLegalDatabase')
+
+    def _check_springs_intake(root: Path) -> dict[str, str]:
+        """Pin the closed completed-intake package before its read-only verifier executes."""
+        package = root / SPRINGS_INTAKE
+        hashes = {}
+        for name, expected in SPRINGS_INTAKE_PINS.items():
+            path = _safe_file(package, name)
+            if path.stat().st_size > 2_000_000 or _digest(path) != expected:
+                raise ValueError("Colorado Springs intake pin differs: " + name)
+            hashes[str(path)] = expected
+        refs = json.loads((package / "INVENTORY.json").read_bytes())["files"]
+        names = {r["path"] for r in refs}
+        if len(names) != len(refs):
+            raise ValueError("Colorado Springs duplicate intake inventory path")
+        expected_files = names | {"INVENTORY.json", "INVENTORY.schema.json"}
+        expected_dirs = {str(p) for name in expected_files for p in Path(name).parents
+                         if str(p) != "."}
+        files, directories = set(), set()
+        for path in package.rglob("*"):
+            if path.is_symlink() or not (path.is_dir() or path.is_file()):
+                raise ValueError("Colorado Springs nonordinary intake member")
+            (directories if path.is_dir() else files).add(path.relative_to(package).as_posix())
+        if files != expected_files or directories != expected_dirs:
+>           raise ValueError("Colorado Springs closed intake inventory differs")
+E           ValueError: Colorado Springs closed intake inventory differs
+
+scripts/research_source_lookup.py:938: ValueError
+________ test_intake_verifier_uses_isolation_and_rejects_false_success _________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10897def0>
+
+    def test_intake_verifier_uses_isolation_and_rejects_false_success(
+        monkeypatch: pytest.MonkeyPatch,
+    ) -> None:
+        """The assert-based portable intake verifier runs without optimization or credentials."""
+        calls = []
+    
+        def run(command: list[str], **kwargs: object) -> SimpleNamespace:
+            """Return a false success marker from an otherwise recorded invocation."""
+            calls.append((command, kwargs))
+            return SimpleNamespace(stdout='{"status":"passed"}')
+    
+        monkeypatch.setattr(lookup.subprocess, "run", run)
+>       with pytest.raises(ValueError, match="completed-intake verification failed"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'completed-intake verification failed'
+E         Actual message: 'Colorado Springs closed intake inventory differs'
+
+tests/test_colorado_springs_native_lookup.py:421: AssertionError
+================================ tests coverage ================================
+_______________ coverage: platform darwin, python 3.14.3-final-0 _______________
+
+Name                                        Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------------------------
+geode/pipeline/manual_review_inventory.py     302      2    100      1    99%   461-462
+scripts/research_source_lookup.py            1228    170    402     29    82%   654-677, 729-735, 782-787, 816, 818-848, 867, 880, 912, 928, 935, 939-944, 950-982, 998-1057, 1076-1127, 1170, 1184, 1240, 1267, 1290, 1315, 1354, 1371, 1492, 1504, 1530, 1624, 1701, 1705, 1719, 1858, 1920, 1972, 2100, 2148
+---------------------------------------------------------------------------------------
+TOTAL                                        1530    172    502     30    86%
+Coverage JSON written to file /private/tmp/cs-installed-coverage.json
+=========================== short test summary info ============================
+ERROR tests/test_colorado_springs_native_lookup.py::test_all_128_rows_preserve_source_cells_tables_and_410_lines
+ERROR tests/test_colorado_springs_native_lookup.py::test_required_global_conditions_and_complete_definitions
+ERROR tests/test_colorado_springs_native_lookup.py::test_printed_rate_anomalies_are_not_repaired
+ERROR tests/test_colorado_springs_native_lookup.py::test_native_part_rejects_false_bindings[hash]
+ERROR tests/test_colorado_springs_native_lookup.py::test_native_part_rejects_false_bindings[range]
+ERROR tests/test_colorado_springs_native_lookup.py::test_native_part_rejects_false_bindings[line_page]
+ERROR tests/test_colorado_springs_native_lookup.py::test_native_part_rejects_false_bindings[bbox]
+ERROR tests/test_colorado_springs_native_lookup.py::test_native_part_rejects_false_bindings[pixels]
+ERROR tests/test_colorado_springs_native_lookup.py::test_native_part_rejects_false_bindings[count]
+ERROR tests/test_colorado_springs_native_lookup.py::test_complete_output_context_is_required[global]
+ERROR tests/test_colorado_springs_native_lookup.py::test_complete_output_context_is_required[technology]
+ERROR tests/test_colorado_springs_native_lookup.py::test_complete_output_context_is_required[definition]
+ERROR tests/test_colorado_springs_native_lookup.py::test_complete_output_context_is_required[table_note]
+ERROR tests/test_colorado_springs_native_lookup.py::test_complete_output_context_is_required[page7]
+ERROR tests/test_colorado_springs_native_lookup.py::test_complete_output_context_is_required[table]
+ERROR tests/test_colorado_springs_native_lookup.py::test_complete_output_context_is_required[duplicate]
+ERROR tests/test_colorado_springs_native_lookup.py::test_complete_output_context_is_required[source]
+ERROR tests/test_colorado_springs_native_lookup.py::test_complete_output_context_is_required[row_context]
+ERROR tests/test_colorado_springs_native_lookup.py::test_complete_output_context_is_required[status]
+ERROR tests/test_colorado_springs_native_lookup.py::test_row_associations[cell_role]
+ERROR tests/test_colorado_springs_native_lookup.py::test_row_associations[row_page]
+ERROR tests/test_colorado_springs_native_lookup.py::test_row_associations[global]
+ERROR tests/test_colorado_springs_native_lookup.py::test_source_result_cannot_falsify_intake_chronology[intake_received_at-2026-09-12T20:00:00Z]
+ERROR tests/test_colorado_springs_native_lookup.py::test_source_result_cannot_falsify_intake_chronology[canonical_intake_verified-False]
+FAILED tests/test_colorado_springs_native_lookup.py::test_targeted_exact_source_query[0.04-expected0]
+FAILED tests/test_colorado_springs_native_lookup.py::test_targeted_exact_source_query[$336.00-expected1]
+FAILED tests/test_colorado_springs_native_lookup.py::test_targeted_exact_source_query[Technology Fee-expected2]
+FAILED tests/test_colorado_springs_native_lookup.py::test_no_match_cannot_establish_absence[fictional teleporter permit]
+FAILED tests/test_colorado_springs_native_lookup.py::test_no_match_cannot_establish_absence[0 square feet]
+FAILED tests/test_colorado_springs_native_lookup.py::test_no_match_cannot_establish_absence[000 square feet]
+FAILED tests/test_colorado_springs_native_lookup.py::test_context_only_does_not_assign_fee
+FAILED tests/test_colorado_springs_native_lookup.py::test_native_lookup_cli_and_markdown_preserve_context
+FAILED tests/test_colorado_springs_native_lookup.py::test_untrusted_query_not_rendered_as_markup
+FAILED tests/test_colorado_springs_native_lookup.py::test_intake_verifier_uses_isolation_and_rejects_false_success
+10 failed, 294 passed, 24 errors in 141.46s (0:02:21)

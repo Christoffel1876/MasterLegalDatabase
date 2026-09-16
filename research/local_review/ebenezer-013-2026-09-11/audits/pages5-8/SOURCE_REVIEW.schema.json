@@ -1,0 +1,486 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Crop": {
+      "additionalProperties": false,
+      "properties": {
+        "asset": {
+          "$ref": "#/$defs/Asset"
+        },
+        "source_image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "physical_page": {
+          "maximum": 8,
+          "minimum": 5,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "pixel_box": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "integer"
+            }
+          ],
+          "title": "Pixel Box",
+          "type": "array"
+        },
+        "method": {
+          "const": "Pillow crop of original PNG; no rescaling or annotation",
+          "title": "Method",
+          "type": "string"
+        },
+        "inspected": {
+          "const": true,
+          "default": true,
+          "title": "Inspected",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "asset",
+        "source_image",
+        "physical_page",
+        "pixel_box",
+        "method"
+      ],
+      "title": "Crop",
+      "type": "object"
+    },
+    "Mark": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "strikethrough",
+            "yellow_highlight",
+            "blank_field",
+            "draft_label",
+            "source_anomaly",
+            "page_continuation",
+            "typography"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "native_text": {
+          "title": "Native Text",
+          "type": "string"
+        },
+        "original_start_byte": {
+          "minimum": 0,
+          "title": "Original Start Byte",
+          "type": "integer"
+        },
+        "original_end_byte_exclusive": {
+          "exclusiveMinimum": 0,
+          "title": "Original End Byte Exclusive",
+          "type": "integer"
+        },
+        "observation": {
+          "title": "Observation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "native_text",
+        "original_start_byte",
+        "original_end_byte_exclusive",
+        "observation"
+      ],
+      "title": "Mark",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 8,
+          "minimum": 5,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "section": {
+          "title": "Section",
+          "type": "string"
+        },
+        "region_description": {
+          "title": "Region Description",
+          "type": "string"
+        },
+        "original_start_byte": {
+          "minimum": 0,
+          "title": "Original Start Byte",
+          "type": "integer"
+        },
+        "original_end_byte_exclusive": {
+          "exclusiveMinimum": 0,
+          "title": "Original End Byte Exclusive",
+          "type": "integer"
+        },
+        "native_text": {
+          "title": "Native Text",
+          "type": "string"
+        },
+        "native_text_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Native Text Sha256",
+          "type": "string"
+        },
+        "wording_comparison": {
+          "const": "no_word_or_numeric_discrepancy_identified",
+          "title": "Wording Comparison",
+          "type": "string"
+        },
+        "graphical_annotations": {
+          "items": {
+            "$ref": "#/$defs/Mark"
+          },
+          "title": "Graphical Annotations",
+          "type": "array"
+        },
+        "association_risks": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Association Risks",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "section",
+        "region_description",
+        "original_start_byte",
+        "original_end_byte_exclusive",
+        "native_text",
+        "native_text_sha256",
+        "wording_comparison",
+        "graphical_annotations",
+        "association_risks"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "PageReview": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "maximum": 8,
+          "minimum": 5,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "printed_page_label": {
+          "title": "Printed Page Label",
+          "type": "string"
+        },
+        "source_image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "image_width": {
+          "const": 2550,
+          "default": 2550,
+          "title": "Image Width",
+          "type": "integer"
+        },
+        "image_height": {
+          "const": 3300,
+          "default": 3300,
+          "title": "Image Height",
+          "type": "integer"
+        },
+        "native_evidence": {
+          "$ref": "#/$defs/Asset"
+        },
+        "candidate_start_byte": {
+          "minimum": 0,
+          "title": "Candidate Start Byte",
+          "type": "integer"
+        },
+        "candidate_end_byte_exclusive": {
+          "exclusiveMinimum": 0,
+          "title": "Candidate End Byte Exclusive",
+          "type": "integer"
+        },
+        "native_text": {
+          "title": "Native Text",
+          "type": "string"
+        },
+        "native_text_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Native Text Sha256",
+          "type": "string"
+        },
+        "native_text_size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Native Text Size Bytes",
+          "type": "integer"
+        },
+        "full_image_inspected": {
+          "const": true,
+          "default": true,
+          "title": "Full Image Inspected",
+          "type": "boolean"
+        },
+        "diagnostic_crops": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Diagnostic Crops",
+          "type": "array"
+        },
+        "observations_in_native_order": {
+          "items": {
+            "$ref": "#/$defs/Observation"
+          },
+          "title": "Observations In Native Order",
+          "type": "array"
+        },
+        "visual_reading_order_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Visual Reading Order Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "physical_page",
+        "printed_page_label",
+        "source_image",
+        "native_evidence",
+        "candidate_start_byte",
+        "candidate_end_byte_exclusive",
+        "native_text",
+        "native_text_sha256",
+        "native_text_size_bytes",
+        "diagnostic_crops",
+        "observations_in_native_order",
+        "visual_reading_order_ids"
+      ],
+      "title": "PageReview",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "assignment_id": {
+      "const": "EB-PDF-013",
+      "default": "EB-PDF-013",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "fort-collins-wildfire-code-sd005-05",
+      "default": "fort-collins-wildfire-code-sd005-05",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "reviewer": {
+      "const": "Atlas / Codex independent source QA (recover_county)",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "review_mode": {
+      "const": "candidate_aware_visual_QA",
+      "default": "candidate_aware_visual_QA",
+      "title": "Review Mode",
+      "type": "string"
+    },
+    "external_ebenezer_reports_consulted": {
+      "const": false,
+      "default": false,
+      "title": "External Ebenezer Reports Consulted",
+      "type": "boolean"
+    },
+    "blind_review_claim": {
+      "const": false,
+      "default": false,
+      "title": "Blind Review Claim",
+      "type": "boolean"
+    },
+    "reviewed_physical_pages": {
+      "maxItems": 4,
+      "minItems": 4,
+      "prefixItems": [
+        {
+          "const": 5,
+          "type": "integer"
+        },
+        {
+          "const": 6,
+          "type": "integer"
+        },
+        {
+          "const": 7,
+          "type": "integer"
+        },
+        {
+          "const": 8,
+          "type": "integer"
+        }
+      ],
+      "title": "Reviewed Physical Pages",
+      "type": "array"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "canonical_source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "packet_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Asset"
+    },
+    "native_method": {
+      "const": "PyMuPDF 1.28.2 Page.get_text(\"text\", sort=False, flags=195)",
+      "title": "Native Method",
+      "type": "string"
+    },
+    "original_status": {
+      "const": "archived_pending_pipeline",
+      "default": "archived_pending_pipeline",
+      "title": "Original Status",
+      "type": "string"
+    },
+    "candidate_status_unchanged": {
+      "const": "machine_native_text_unreviewed",
+      "default": "machine_native_text_unreviewed",
+      "title": "Candidate Status Unchanged",
+      "type": "string"
+    },
+    "source_visibly_draft": {
+      "const": true,
+      "default": true,
+      "title": "Source Visibly Draft",
+      "type": "boolean"
+    },
+    "source_or_candidate_modified": {
+      "const": false,
+      "default": false,
+      "title": "Source Or Candidate Modified",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "adoption_or_effectiveness_certified": {
+      "const": false,
+      "default": false,
+      "title": "Adoption Or Effectiveness Certified",
+      "type": "boolean"
+    },
+    "semantic_or_coverage_promotion": {
+      "const": false,
+      "default": false,
+      "title": "Semantic Or Coverage Promotion",
+      "type": "boolean"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/PageReview"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "title": "Pages",
+      "type": "array"
+    },
+    "crops": {
+      "items": {
+        "$ref": "#/$defs/Crop"
+      },
+      "title": "Crops",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "reviewer",
+    "prepared_at",
+    "reviewed_physical_pages",
+    "source",
+    "canonical_source",
+    "packet_manifest",
+    "candidate",
+    "native_method",
+    "pages",
+    "crops",
+    "findings",
+    "limits"
+  ],
+  "title": "Review",
+  "type": "object"
+}

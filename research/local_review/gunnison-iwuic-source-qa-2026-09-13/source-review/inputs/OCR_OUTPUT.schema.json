@@ -1,0 +1,74 @@
+{
+  "$defs": {
+    "OCRLine": {
+      "additionalProperties": false,
+      "description": "Unchanged raw Apple Vision observation.",
+      "properties": {
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "bbox": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Bbox",
+          "type": "array"
+        }
+      },
+      "required": [
+        "text",
+        "confidence",
+        "bbox"
+      ],
+      "title": "OCRLine",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Raw engine output, never a corrected transcription.",
+  "properties": {
+    "revision": {
+      "const": 3,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "os_version": {
+      "title": "Os Version",
+      "type": "string"
+    },
+    "lines": {
+      "items": {
+        "$ref": "#/$defs/OCRLine"
+      },
+      "title": "Lines",
+      "type": "array"
+    }
+  },
+  "required": [
+    "revision",
+    "os_version",
+    "lines"
+  ],
+  "title": "OCROutput",
+  "type": "object"
+}

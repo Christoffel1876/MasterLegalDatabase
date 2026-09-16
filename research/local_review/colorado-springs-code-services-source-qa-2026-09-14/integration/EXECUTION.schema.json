@@ -1,0 +1,200 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact file identity relative to its stated package root.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Command": {
+      "additionalProperties": false,
+      "description": "An actual command, interval, status and retained ordinary output.",
+      "properties": {
+        "argv": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Argv",
+          "type": "array"
+        },
+        "started_at": {
+          "title": "Started At",
+          "type": "string"
+        },
+        "finished_at": {
+          "title": "Finished At",
+          "type": "string"
+        },
+        "exit_code": {
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "log": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "argv",
+        "started_at",
+        "finished_at",
+        "exit_code",
+        "log"
+      ],
+      "title": "Command",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Actual installation/check results; no implied publication.",
+  "properties": {
+    "status": {
+      "const": "installed_and_focused_verified",
+      "title": "Status",
+      "type": "string"
+    },
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "finished_at": {
+      "title": "Finished At",
+      "type": "string"
+    },
+    "preparation": {
+      "$ref": "#/$defs/Asset"
+    },
+    "acceptance": {
+      "$ref": "#/$defs/Asset"
+    },
+    "before": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Before",
+      "type": "array"
+    },
+    "after": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "After",
+      "type": "array"
+    },
+    "unchanged_schemas": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Unchanged Schemas",
+      "type": "array"
+    },
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "counts": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Counts",
+      "type": "array"
+    },
+    "preserved_other_source_rows": {
+      "title": "Preserved Other Source Rows",
+      "type": "integer"
+    },
+    "preserved_prior_review_joins": {
+      "title": "Preserved Prior Review Joins",
+      "type": "integer"
+    },
+    "preserved_authority_joins": {
+      "title": "Preserved Authority Joins",
+      "type": "integer"
+    },
+    "source_row_comparison": {
+      "title": "Source Row Comparison",
+      "type": "string"
+    },
+    "prior_review_comparison": {
+      "title": "Prior Review Comparison",
+      "type": "string"
+    },
+    "raw_manifest_unchanged": {
+      "title": "Raw Manifest Unchanged",
+      "type": "boolean"
+    },
+    "legacy_ledger_unchanged": {
+      "title": "Legacy Ledger Unchanged",
+      "type": "boolean"
+    },
+    "tests": {
+      "items": {
+        "$ref": "#/$defs/Command"
+      },
+      "title": "Tests",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "started_at",
+    "finished_at",
+    "preparation",
+    "acceptance",
+    "before",
+    "after",
+    "unchanged_schemas",
+    "source_id",
+    "counts",
+    "preserved_other_source_rows",
+    "preserved_prior_review_joins",
+    "preserved_authority_joins",
+    "source_row_comparison",
+    "prior_review_comparison",
+    "raw_manifest_unchanged",
+    "legacy_ledger_unchanged",
+    "tests",
+    "legal_currentness",
+    "answer_safe",
+    "limitations"
+  ],
+  "title": "Execution",
+  "type": "object"
+}

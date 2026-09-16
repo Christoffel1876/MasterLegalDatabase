@@ -1,0 +1,75 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "A confined file and exact byte identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "The complete combined package inventory, excluding its own JSON and schema.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "file_count": {
+      "title": "File Count",
+      "type": "integer"
+    },
+    "listed_bytes": {
+      "title": "Listed Bytes",
+      "type": "integer"
+    },
+    "excludes": {
+      "const": "evidence-manifest.json,evidence-manifest.schema.json",
+      "title": "Excludes",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "prepared_at",
+    "files",
+    "file_count",
+    "listed_bytes",
+    "excludes"
+  ],
+  "title": "Inventory",
+  "type": "object"
+}

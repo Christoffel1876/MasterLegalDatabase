@@ -1,0 +1,331 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact ordinary-file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Baseline": {
+      "additionalProperties": false,
+      "description": "Frozen existing bytes, never a reconstructed prefix.",
+      "properties": {
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "preserved": {
+          "$ref": "#/$defs/Asset"
+        },
+        "records": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Records"
+        }
+      },
+      "required": [
+        "repository_path",
+        "preserved",
+        "records"
+      ],
+      "title": "Baseline",
+      "type": "object"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "description": "Reported transport and adoption claims remain separate from local custody.",
+      "properties": {
+        "requested_url_reported": {
+          "title": "Requested Url Reported",
+          "type": "string"
+        },
+        "final_url_reported": {
+          "title": "Final Url Reported",
+          "type": "string"
+        },
+        "http_status_reported": {
+          "const": 200,
+          "title": "Http Status Reported",
+          "type": "integer"
+        },
+        "reported_reserved_at": {
+          "format": "date-time",
+          "title": "Reported Reserved At",
+          "type": "string"
+        },
+        "reported_finished_at": {
+          "format": "date-time",
+          "title": "Reported Finished At",
+          "type": "string"
+        },
+        "independently_verified_http_time": {
+          "title": "Independently Verified Http Time",
+          "type": "null"
+        },
+        "original_tool_command_retained": {
+          "const": false,
+          "title": "Original Tool Command Retained",
+          "type": "boolean"
+        },
+        "parent_representation": {
+          "const": "received_browser_DOM_derivative",
+          "title": "Parent Representation",
+          "type": "string"
+        },
+        "catalog_status_reported": {
+          "const": 403,
+          "title": "Catalog Status Reported",
+          "type": "integer"
+        },
+        "adoption_date": {
+          "title": "Adoption Date",
+          "type": "null"
+        },
+        "effective_date": {
+          "title": "Effective Date",
+          "type": "null"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "limitations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "requested_url_reported",
+        "final_url_reported",
+        "http_status_reported",
+        "reported_reserved_at",
+        "reported_finished_at",
+        "independently_verified_http_time",
+        "original_tool_command_retained",
+        "parent_representation",
+        "catalog_status_reported",
+        "adoption_date",
+        "effective_date",
+        "legal_currentness",
+        "limitations"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "Template": {
+      "additionalProperties": false,
+      "description": "Only future repository receipt fields are unresolved.",
+      "properties": {
+        "record_id": {
+          "const": "pueblo-county-planning-fees-sh-ext-002",
+          "title": "Record Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-PUEBLO",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "const": "08_County_Authorities",
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "official_source_name": {
+          "title": "Official Source Name",
+          "type": "string"
+        },
+        "official_source_url": {
+          "title": "Official Source Url",
+          "type": "null"
+        },
+        "acquisition_method": {
+          "const": "received_review_package",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Asset"
+        },
+        "original_filename": {
+          "const": "original.pdf",
+          "title": "Original Filename",
+          "type": "string"
+        },
+        "custody_note": {
+          "title": "Custody Note",
+          "type": "string"
+        },
+        "actual_repository_received_at": {
+          "title": "Actual Repository Received At",
+          "type": "null"
+        },
+        "intake_id": {
+          "title": "Intake Id",
+          "type": "null"
+        },
+        "archive_path": {
+          "title": "Archive Path",
+          "type": "null"
+        }
+      },
+      "required": [
+        "record_id",
+        "authority_id",
+        "layer_id",
+        "official_source_name",
+        "official_source_url",
+        "acquisition_method",
+        "source",
+        "original_filename",
+        "custody_note",
+        "actual_repository_received_at",
+        "intake_id",
+        "archive_path"
+      ],
+      "title": "Template",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Fixed inputs for a separately authorized append; preparation is not execution.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_APPLIED",
+      "title": "Status",
+      "type": "string"
+    },
+    "comparison_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "title": "Comparison Commit",
+      "type": "string"
+    },
+    "template": {
+      "$ref": "#/$defs/Template"
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    },
+    "baseline": {
+      "items": {
+        "$ref": "#/$defs/Baseline"
+      },
+      "title": "Baseline",
+      "type": "array"
+    },
+    "runtime_pins": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Runtime Pins",
+      "type": "object"
+    },
+    "source_review": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_review_schema": {
+      "$ref": "#/$defs/Asset"
+    },
+    "independent_review": {
+      "$ref": "#/$defs/Asset"
+    },
+    "root_source_qa_approval": {
+      "const": "pending",
+      "title": "Root Source Qa Approval",
+      "type": "string"
+    },
+    "raw_before": {
+      "minimum": 0,
+      "title": "Raw Before",
+      "type": "integer"
+    },
+    "ledger_before": {
+      "minimum": 0,
+      "title": "Ledger Before",
+      "type": "integer"
+    },
+    "raw_after": {
+      "minimum": 1,
+      "title": "Raw After",
+      "type": "integer"
+    },
+    "ledger_after": {
+      "minimum": 1,
+      "title": "Ledger After",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "canonical_mutations": {
+      "const": 0,
+      "title": "Canonical Mutations",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schema_version",
+    "prepared_at",
+    "status",
+    "comparison_commit",
+    "template",
+    "provenance",
+    "baseline",
+    "runtime_pins",
+    "source_review",
+    "source_review_schema",
+    "independent_review",
+    "root_source_qa_approval",
+    "raw_before",
+    "ledger_before",
+    "raw_after",
+    "ledger_after",
+    "public_requests",
+    "canonical_mutations"
+  ],
+  "title": "Preparation",
+  "type": "object"
+}

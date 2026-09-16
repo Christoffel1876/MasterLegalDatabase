@@ -1,0 +1,84 @@
+{
+  "$defs": {
+    "Change": {
+      "additionalProperties": false,
+      "properties": {
+        "field": {
+          "title": "Field",
+          "type": "string"
+        },
+        "before": {
+          "title": "Before",
+          "type": "string"
+        },
+        "after": {
+          "title": "After",
+          "type": "string"
+        }
+      },
+      "required": [
+        "field",
+        "before",
+        "after"
+      ],
+      "title": "Change",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "reason": {
+      "title": "Reason",
+      "type": "string"
+    },
+    "previous_review_sha256": {
+      "title": "Previous Review Sha256",
+      "type": "string"
+    },
+    "final_review_sha256": {
+      "title": "Final Review Sha256",
+      "type": "string"
+    },
+    "changes": {
+      "items": {
+        "$ref": "#/$defs/Change"
+      },
+      "title": "Changes",
+      "type": "array"
+    },
+    "unchanged_body_sha256": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Unchanged Body Sha256",
+      "type": "object"
+    },
+    "independent_audit_files": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Independent Audit Files",
+      "type": "object"
+    },
+    "legal_currentness": {
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "reason",
+    "previous_review_sha256",
+    "final_review_sha256",
+    "changes",
+    "unchanged_body_sha256",
+    "independent_audit_files",
+    "legal_currentness"
+  ],
+  "title": "Finalization",
+  "type": "object"
+}

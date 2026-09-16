@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "reviewer": "Plato",
+  "agent_path": "/root/state_refresh_plan",
+  "recorded_at": "2026-09-13T15:55:44.634209+00:00",
+  "disposition": "no_blocking_issue_found_fixed_three_source_preparation",
+  "preparation_directory_claim": "/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-13/popper-gunnison-intake-preparation",
+  "reviewed_package": [
+    {
+      "path": "reviewed-inputs/FINAL_MANIFEST.json",
+      "sha256": "1866196230889278815ae368d8e6ca48d1c8a3aae6684fddc196bf13d4e5ad4b",
+      "size_bytes": 11424
+    },
+    {
+      "path": "reviewed-inputs/FINAL_MANIFEST.schema.json",
+      "sha256": "feef96a8485c2d6ab8a14f9ddd302033b24c4eca204d0be1d424eac1f2bc9c27",
+      "size_bytes": 1100
+    },
+    {
+      "path": "reviewed-inputs/PREPARATION.json",
+      "sha256": "d4c756566d32edcc55fc46137753a515d3663c476a0485a682ddd126b19cf932",
+      "size_bytes": 24211
+    },
+    {
+      "path": "reviewed-inputs/PREPARATION.schema.json",
+      "sha256": "6d0cb722ba38b6d90dd5c908b06ae60ec70ff09403f315e07b228c6460d660d7",
+      "size_bytes": 10324
+    },
+    {
+      "path": "reviewed-inputs/README.md",
+      "sha256": "4d3f2b1ebedc0fb98b5378a60d92e5caf0cf4d780cf519789fcda13901a1af91",
+      "size_bytes": 6573
+    },
+    {
+      "path": "reviewed-inputs/VALIDATION.json",
+      "sha256": "ec38993944a49ce3af9759fad2facc1d4bfc325f33bcdfa5914f95027c665a34",
+      "size_bytes": 5064
+    },
+    {
+      "path": "reviewed-inputs/VALIDATION.schema.json",
+      "sha256": "a1342df8649fa46857bec908c62b54bc57b79444b4d7e2ee1b80bb2220224d65",
+      "size_bytes": 4046
+    },
+    {
+      "path": "reviewed-inputs/models.py",
+      "sha256": "0021c4c067dd847f6675e64e19d6f6ac8a6fd383f6b71738ab78b73e982f798c",
+      "size_bytes": 5127
+    },
+    {
+      "path": "reviewed-inputs/transaction.py",
+      "sha256": "14574074e519d5606c411c6eb2a02492ae2111d3d097c45635bb748ad724263d",
+      "size_bytes": 25081
+    },
+    {
+      "path": "reviewed-inputs/validate_preparation.py",
+      "sha256": "189bd932dce38342f3da42650386791818ce821f2a57f2042c7d385043ee051e",
+      "size_bytes": 6908
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "gunnison-building-fees-resolution-2025-24-sh-ext-003",
+      "authority_id": "CO-COUNTY-GUNNISON",
+      "layer_id": "08_County_Authorities",
+      "sha256": "53bd127e25d331ab0086fb09c5e1485d52dc46a96235d84476ef17a989022bab",
+      "size_bytes": 126763,
+      "pages": 3,
+      "original_filename": "SHEXT003-A026.pdf",
+      "original_acquisition_at_verified": null
+    },
+    {
+      "source_id": "gunnison-building-code-resolution-2023-22-sh-ext-003",
+      "authority_id": "CO-COUNTY-GUNNISON",
+      "layer_id": "08_County_Authorities",
+      "sha256": "41dc3a6c962039878f4b49212c07e289a8658903dd63a9980e68ecdee9cc9b7b",
+      "size_bytes": 682037,
+      "pages": 16,
+      "original_filename": "SHEXT003-A027.pdf",
+      "original_acquisition_at_verified": null
+    },
+    {
+      "source_id": "gunnison-iwuic-resolution-2022-33-sh-ext-003",
+      "authority_id": "CO-COUNTY-GUNNISON",
+      "layer_id": "08_County_Authorities",
+      "sha256": "0b2dc2e2bdff25b849b29de9285e993d7a353a9209cffbccad2ebc79c7f7b99d",
+      "size_bytes": 114843,
+      "pages": 4,
+      "original_filename": "SHEXT003-A028.pdf",
+      "original_acquisition_at_verified": null
+    }
+  ],
+  "code_reviewed": [
+    "transaction.py complete 508 lines",
+    "models.py complete",
+    "validate_preparation.py complete",
+    "test_transaction.py fixture and focused scenario/assertion structure"
+  ],
+  "independent_cases_passed": [
+    "dry_run_no_writes_and_exact_prefix_idempotence_passed",
+    "terminal_receipt_recovery_without_canonical_rewrite_passed",
+    "foreign_suffix_retained_and_not_promoted_passed",
+    "late_source_ABA_does_not_change_consumed_canonical_bytes_passed"
+  ],
+  "findings": [
+    "Exact selected source, parent referral, original basename and county authority bindings agree.",
+    "Records retain received_review_package and null independently verified acquisition time; reported URLs and action times are not promoted.",
+    "Immutable originals and exact historical JSONL prefixes are preserved; new suffix consists of exactly three typed records.",
+    "Monotone recognized recovery states and captured report projection reject unrelated arrivals.",
+    "Late source ABA at write boundary cannot replace captured verified bytes.",
+    "Actual read-only checks passed and seven canonical file hashes were unchanged; original execution directory absent."
+  ],
+  "failed_attempts": [
+    "Initial independent temporary fixture used /var/folders; maintained symlink guard refused before transaction apply. Original script/logs retained. Additive v2 uses /private/tmp and all four probes pass."
+  ],
+  "limitations": [
+    "Bounded source/custody/code review, not an exhaustive proof or full-suite run.",
+    "Only cooperating invocations of this transaction share its advisory lock. Root must pause unrelated canonical writers; final compare/rename race remains documented.",
+    "No new review of A027/A028 substantive text, no acquisition authentication and no legal effect/currentness claim.",
+    "A026 separate later complete visual QA does not retroactively alter frozen earlier first-page-only preparation assertions.",
+    "Agent attribution is not a human or cryptographically authenticated signature.",
+    "Independent probes reuse the supplied synthetic historical fixture constructor; their four fault scenarios/assertions are newly authored."
+  ],
+  "actual_repository_apply_performed": false,
+  "public_requests": 0,
+  "legal_currentness": "not_verified",
+  "answer_safe": false
+}

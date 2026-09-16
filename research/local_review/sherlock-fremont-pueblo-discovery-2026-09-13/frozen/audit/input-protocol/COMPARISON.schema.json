@@ -1,0 +1,268 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Pin": {
+      "additionalProperties": false,
+      "properties": {
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "working_sha256": {
+          "title": "Working Sha256",
+          "type": "string"
+        },
+        "working_bytes": {
+          "title": "Working Bytes",
+          "type": "integer"
+        },
+        "pinned_sha256": {
+          "title": "Pinned Sha256",
+          "type": "string"
+        },
+        "pinned_bytes": {
+          "title": "Pinned Bytes",
+          "type": "integer"
+        },
+        "byte_equal": {
+          "title": "Byte Equal",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "repository_path",
+        "working_sha256",
+        "working_bytes",
+        "pinned_sha256",
+        "pinned_bytes",
+        "byte_equal"
+      ],
+      "title": "Pin",
+      "type": "object"
+    },
+    "Seed": {
+      "additionalProperties": false,
+      "properties": {
+        "authority_id": {
+          "enum": [
+            "CO-COUNTY-PUEBLO",
+            "CO-COUNTY-FREMONT"
+          ],
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        },
+        "related_source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Related Source Ids",
+          "type": "array"
+        },
+        "special_limit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Special Limit"
+        }
+      },
+      "required": [
+        "authority_id",
+        "url",
+        "role",
+        "basis",
+        "related_source_ids"
+      ],
+      "title": "Seed",
+      "type": "object"
+    },
+    "Selection": {
+      "additionalProperties": false,
+      "properties": {
+        "edition": {
+          "enum": [
+            "pinned_commit",
+            "working_tree"
+          ],
+          "title": "Edition",
+          "type": "string"
+        },
+        "full_row_count": {
+          "title": "Full Row Count",
+          "type": "integer"
+        },
+        "selected_row_count": {
+          "title": "Selected Row Count",
+          "type": "integer"
+        },
+        "full_sha256": {
+          "title": "Full Sha256",
+          "type": "string"
+        },
+        "full_bytes": {
+          "title": "Full Bytes",
+          "type": "integer"
+        },
+        "selected": {
+          "$ref": "#/$defs/Asset"
+        },
+        "original_line_numbers": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Original Line Numbers",
+          "type": "array"
+        }
+      },
+      "required": [
+        "edition",
+        "full_row_count",
+        "selected_row_count",
+        "full_sha256",
+        "full_bytes",
+        "selected",
+        "original_line_numbers"
+      ],
+      "title": "Selection",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "assignment_id": {
+      "const": "SH-EXT-001",
+      "default": "SH-EXT-001",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "comparison_commit": {
+      "title": "Comparison Commit",
+      "type": "string"
+    },
+    "captured_at": {
+      "format": "date-time",
+      "title": "Captured At",
+      "type": "string"
+    },
+    "observed_head": {
+      "title": "Observed Head",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Pin"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "legacy": {
+      "items": {
+        "$ref": "#/$defs/Selection"
+      },
+      "title": "Legacy",
+      "type": "array"
+    },
+    "registry_export": {
+      "$ref": "#/$defs/Asset"
+    },
+    "seeds": {
+      "items": {
+        "$ref": "#/$defs/Seed"
+      },
+      "title": "Seeds",
+      "type": "array"
+    },
+    "working_raw_count": {
+      "title": "Working Raw Count",
+      "type": "integer"
+    },
+    "working_ledger_count": {
+      "title": "Working Ledger Count",
+      "type": "integer"
+    },
+    "working_inventory_count": {
+      "title": "Working Inventory Count",
+      "type": "integer"
+    },
+    "working_inventory_reviewed": {
+      "title": "Working Inventory Reviewed",
+      "type": "integer"
+    },
+    "intake_state": {
+      "title": "Intake State",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "comparison_commit",
+    "captured_at",
+    "observed_head",
+    "files",
+    "legacy",
+    "registry_export",
+    "seeds",
+    "working_raw_count",
+    "working_ledger_count",
+    "working_inventory_count",
+    "working_inventory_reviewed",
+    "intake_state",
+    "limitations"
+  ],
+  "title": "Comparison",
+  "type": "object"
+}

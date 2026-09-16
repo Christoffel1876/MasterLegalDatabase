@@ -1,0 +1,303 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "One retained file relative to the receipt directory.",
+      "properties": {
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sha256",
+        "size_bytes",
+        "path"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Command": {
+      "additionalProperties": false,
+      "description": "Actual process invocation and byte-stream outcomes.",
+      "properties": {
+        "argv": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Argv",
+          "type": "array"
+        },
+        "cwd": {
+          "title": "Cwd",
+          "type": "string"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "finished_at": {
+          "format": "date-time",
+          "title": "Finished At",
+          "type": "string"
+        },
+        "exit_code": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Exit Code"
+        },
+        "stdout": {
+          "$ref": "#/$defs/Digest"
+        },
+        "stderr": {
+          "$ref": "#/$defs/Asset"
+        },
+        "stdout_file": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Asset"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "timed_out": {
+          "title": "Timed Out",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "argv",
+        "cwd",
+        "started_at",
+        "finished_at",
+        "exit_code",
+        "stdout",
+        "stderr",
+        "stdout_file",
+        "timed_out"
+      ],
+      "title": "Command",
+      "type": "object"
+    },
+    "Digest": {
+      "additionalProperties": false,
+      "description": "An exact byte identity, without claiming a file was retained.",
+      "properties": {
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Digest",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Actual execution only, including failed checks without inferred success.",
+  "properties": {
+    "schema_version": {
+      "const": "staged-export-verification-v1",
+      "default": "staged-export-verification-v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "passed",
+        "failed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "finished_at": {
+      "format": "date-time",
+      "title": "Finished At",
+      "type": "string"
+    },
+    "repository": {
+      "title": "Repository",
+      "type": "string"
+    },
+    "export_directory": {
+      "title": "Export Directory",
+      "type": "string"
+    },
+    "expected_scan_sha256": {
+      "title": "Expected Scan Sha256",
+      "type": "string"
+    },
+    "expected_schema_sha256": {
+      "title": "Expected Schema Sha256",
+      "type": "string"
+    },
+    "index_before": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Digest"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "index_after": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Digest"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "head": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Head"
+    },
+    "scan_members_checked": {
+      "title": "Scan Members Checked",
+      "type": "integer"
+    },
+    "exported_files": {
+      "title": "Exported Files",
+      "type": "integer"
+    },
+    "exported_bytes": {
+      "title": "Exported Bytes",
+      "type": "integer"
+    },
+    "wrappers_checked": {
+      "title": "Wrappers Checked",
+      "type": "integer"
+    },
+    "inventory_check_passed": {
+      "title": "Inventory Check Passed",
+      "type": "boolean"
+    },
+    "ci_default_readiness_passed": {
+      "title": "Ci Default Readiness Passed",
+      "type": "boolean"
+    },
+    "ci_execution_requested": {
+      "const": false,
+      "default": false,
+      "title": "Ci Execution Requested",
+      "type": "boolean"
+    },
+    "public_source_requests_requested": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Source Requests Requested",
+      "type": "integer"
+    },
+    "git_mutations_requested": {
+      "const": 0,
+      "default": 0,
+      "title": "Git Mutations Requested",
+      "type": "integer"
+    },
+    "lfs_smudge": {
+      "const": "disabled_and_never_invoked",
+      "default": "disabled_and_never_invoked",
+      "title": "Lfs Smudge",
+      "type": "string"
+    },
+    "commands": {
+      "items": {
+        "$ref": "#/$defs/Command"
+      },
+      "title": "Commands",
+      "type": "array"
+    },
+    "procedure_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Procedure Files",
+      "type": "array"
+    },
+    "failure": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Failure"
+    },
+    "qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Qualifications",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "started_at",
+    "finished_at",
+    "repository",
+    "export_directory",
+    "expected_scan_sha256",
+    "expected_schema_sha256",
+    "index_before",
+    "index_after",
+    "head",
+    "scan_members_checked",
+    "exported_files",
+    "exported_bytes",
+    "wrappers_checked",
+    "inventory_check_passed",
+    "ci_default_readiness_passed",
+    "commands",
+    "procedure_files",
+    "failure",
+    "qualifications"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

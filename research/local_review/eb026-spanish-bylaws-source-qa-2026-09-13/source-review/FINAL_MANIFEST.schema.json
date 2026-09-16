@@ -1,0 +1,83 @@
+{
+  "$defs": {
+    "FileRef": {
+      "additionalProperties": false,
+      "description": "A package-relative immutable byte identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Closed portable package identity, excluding only its own manifest file.",
+  "properties": {
+    "schema_version": {
+      "const": "geode.eb026.source-qa.inventory.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "status": {
+      "const": "frozen_initial_source_qa",
+      "title": "Status",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/FileRef"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "canonical_writes": {
+      "const": 0,
+      "title": "Canonical Writes",
+      "type": "integer"
+    },
+    "source_changes": {
+      "const": 0,
+      "title": "Source Changes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schema_version",
+    "created_at",
+    "status",
+    "files",
+    "public_requests",
+    "canonical_writes",
+    "source_changes"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

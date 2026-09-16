@@ -1,0 +1,13 @@
+{
+  "source": "agent_transcript_jsonl_tool_use_input",
+  "transcript_line": 1670,
+  "description": "EB-PDF-019 caption-mediated Pass1",
+  "attachments": [
+    "/workspace/geode-019/page-0001.png",
+    "/workspace/geode-019/page-0002.png",
+    "/workspace/geode-019/page-0003.png",
+    "/workspace/geode-019/page-0004.png",
+    "/workspace/geode-019/page-0005.png"
+  ],
+  "prompt": "You are executing EB-PDF-019 Pass 1 for Project Geode (Ebenezer / Grok Bot) under the 2026-09-12 Weld next-packet activation.\n\n## CRITICAL METHOD RULES\n- Read tool = CAPTION-MEDIATED, not raw pixels.\n- review_method = caption_mediated_source_first; visual_verification = pending_atlas_direct_image_review.\n- NEVER call this direct pixel inspection or blind visual transcription.\n- Disclose assistance; mark unchecked regions; preserve anomalies; legal_currentness: not_verified.\n- Separate handwriting/signatures from printed names; do not infer signer from title.\n\n## Assignment\n- EB-PDF-019 / weld-ordinance-26-01-atlas-directed / expected_pages: 5\n- Workdir: /workspace/geode-019/\n- page SHAs:\n  page-0001 04de77358b0830d989a14995a09d0fee7fcab3a0adf4286d5f95fc8aa53cb4b6\n  page-0002 09f6709e45bbba5e2a34515de406679ab4d6bdacf18e1e66e20dde111520bdc7\n  page-0003 f025c5a7ebd938459ffa7e4840f4d0f9f9cde092d6964da64f1913ffcad94846\n  page-0004 68fab481ae6e9d7cd758bdc1912befa322505a8575f38eb3dea84ce5131021c3\n  page-0005 468e7ed723a4a2609eda3b30db46daf7696637a9e8e11c1c6635560800cee5ef\n- original.pdf SHA: 2ba9073aa06420e41a5dce98fade56278df96729630f5d61d3ab1c910e839eb0\n- opaque manifest digest (do NOT open manifest.json): b9e843e783a65a238d1a7e1106a5d0a49ea08f7ffbb59b9ca02d841e7639a112\n- START_HERE SHA: 142ca7e336f197d3636f362f3044e5a6f716c11950817e38daeefc996b5b948a\n- SOURCE_ONLY_IDENTITIES SHA: 1c07c1b39db7798b0fea34c224fe7d06beecb6bac5ab77fbf549ce25674b5564\n- Reviewer: Ebenezer (Grok Bot)\n\n## Hard gates BEFORE freeze\n- Do NOT open candidate, 02-candidate-text, 03-custody, 04-verification, full manifest, INVENTORY, prior reviews, 018/020 materials.\n- No native PDF extraction/OCR as Pass1 substitute.\n\n## Deliverables under /workspace/geode-019/\n1. PASS1_frozen.md\n2. PASS1_FREEZE_RECEIPT.json\n3. Optional PASS1_NOTES.md (include if written — deliver with attempt)\n\n## Procedure\n1. Verify all 5 page SHAs.\n2. utc_start; Read each page (+ crops as needed).\n3. Write PASS1_frozen.md; hash; write receipt with utc_freeze.\n4. Do NOT open candidate.\n\n## Report back\n- Full PASS1_frozen.md SHA-256\n- Full PASS1_FREEZE_RECEIPT.json SHA-256\n- utc_start / utc_freeze\n- Brief printed identity\n- review_method + visual_verification\n- Unchecked/unresolved\n- Confirm sealed materials not opened\n"
+}

@@ -1,0 +1,463 @@
+{
+  "$defs": {
+    "Action": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "tool": {
+          "enum": [
+            "curl_direct_https",
+            "web_open",
+            "web_search",
+            "web_click"
+          ],
+          "title": "Tool",
+          "type": "string"
+        },
+        "requested_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Requested Url"
+        },
+        "query": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Query"
+        },
+        "search_domains": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Search Domains",
+          "type": "array"
+        },
+        "request_window_start": {
+          "format": "date-time",
+          "title": "Request Window Start",
+          "type": "string"
+        },
+        "request_window_end": {
+          "format": "date-time",
+          "title": "Request Window End",
+          "type": "string"
+        },
+        "time_precision": {
+          "enum": [
+            "direct_microsecond_receipt",
+            "tool_call_whole_second_window"
+          ],
+          "title": "Time Precision",
+          "type": "string"
+        },
+        "result_asset": {
+          "$ref": "#/$defs/Asset"
+        },
+        "outcome": {
+          "enum": [
+            "dns_failure_no_http",
+            "tool_text_derivative",
+            "empty_search_result",
+            "tool_preflight_nonretryable_error"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        },
+        "observed_final_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Observed Final Url"
+        },
+        "redirect_target_reported": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Redirect Target Reported"
+        },
+        "publisher_http_status": {
+          "default": null,
+          "title": "Publisher Http Status",
+          "type": "null"
+        },
+        "original_publisher_body_received": {
+          "const": false,
+          "default": false,
+          "title": "Original Publisher Body Received",
+          "type": "boolean"
+        },
+        "cached_crawl_label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cached Crawl Label"
+        },
+        "limitation": {
+          "title": "Limitation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "tool",
+        "requested_url",
+        "request_window_start",
+        "request_window_end",
+        "time_precision",
+        "result_asset",
+        "outcome",
+        "limitation"
+      ],
+      "title": "Action",
+      "type": "object"
+    },
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "properties": {
+        "finding_id": {
+          "title": "Finding Id",
+          "type": "string"
+        },
+        "classification": {
+          "enum": [
+            "fresh_tool_observation",
+            "prior_audit_fact",
+            "unresolved"
+          ],
+          "title": "Classification",
+          "type": "string"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/Support"
+          },
+          "minItems": 1,
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "finding_id",
+        "classification",
+        "statement",
+        "evidence"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "Input": {
+      "additionalProperties": false,
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "captured_at": {
+          "format": "date-time",
+          "title": "Captured At",
+          "type": "string"
+        },
+        "evidence_role": {
+          "enum": [
+            "prior_atlas_audit",
+            "prior_external_claims",
+            "prior_page_snapshot",
+            "prior_access_audit"
+          ],
+          "title": "Evidence Role",
+          "type": "string"
+        },
+        "copy": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "original_path",
+        "captured_at",
+        "evidence_role",
+        "copy"
+      ],
+      "title": "Input",
+      "type": "object"
+    },
+    "Support": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_path": {
+          "title": "Asset Path",
+          "type": "string"
+        },
+        "locator": {
+          "title": "Locator",
+          "type": "string"
+        },
+        "excerpt": {
+          "minLength": 1,
+          "title": "Excerpt",
+          "type": "string"
+        }
+      },
+      "required": [
+        "asset_path",
+        "locator",
+        "excerpt"
+      ],
+      "title": "Support",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-LARIMER",
+      "default": "CO-COUNTY-LARIMER",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "status": {
+      "const": "bounded_attempt_complete_unresolved",
+      "default": "bounded_attempt_complete_unresolved",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    },
+    "actions": {
+      "items": {
+        "$ref": "#/$defs/Action"
+      },
+      "maxItems": 8,
+      "minItems": 8,
+      "title": "Actions",
+      "type": "array"
+    },
+    "requested_action_count": {
+      "const": 8,
+      "default": 8,
+      "title": "Requested Action Count",
+      "type": "integer"
+    },
+    "reported_redirect_count": {
+      "const": 1,
+      "default": 1,
+      "title": "Reported Redirect Count",
+      "type": "integer"
+    },
+    "conservative_observed_action_plus_redirect_count": {
+      "const": 9,
+      "default": 9,
+      "title": "Conservative Observed Action Plus Redirect Count",
+      "type": "integer"
+    },
+    "distinct_requested_urls": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "title": "Distinct Requested Urls",
+      "type": "array"
+    },
+    "distinct_requested_and_reported_final_urls": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "title": "Distinct Requested And Reported Final Urls",
+      "type": "array"
+    },
+    "distinct_search_queries": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Distinct Search Queries",
+      "type": "array"
+    },
+    "conservative_url_and_query_target_count": {
+      "const": 7,
+      "default": 7,
+      "title": "Conservative Url And Query Target Count",
+      "type": "integer"
+    },
+    "exact_underlying_http_request_count": {
+      "default": null,
+      "title": "Exact Underlying Http Request Count",
+      "type": "null"
+    },
+    "publisher_originals_acquired": {
+      "const": 0,
+      "default": 0,
+      "title": "Publisher Originals Acquired",
+      "type": "integer"
+    },
+    "pdfs_acquired": {
+      "const": 0,
+      "default": 0,
+      "title": "Pdfs Acquired",
+      "type": "integer"
+    },
+    "new_pdf_pages_visually_reviewed": {
+      "const": 0,
+      "default": 0,
+      "title": "New Pdf Pages Visually Reviewed",
+      "type": "integer"
+    },
+    "public_access_stopped_at": {
+      "format": "date-time",
+      "title": "Public Access Stopped At",
+      "type": "string"
+    },
+    "public_cutoff": {
+      "format": "date-time",
+      "title": "Public Cutoff",
+      "type": "string"
+    },
+    "inputs": {
+      "items": {
+        "$ref": "#/$defs/Input"
+      },
+      "title": "Inputs",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "unresolved": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unresolved",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "acceptance_or_registration_performed": {
+      "const": false,
+      "default": false,
+      "title": "Acceptance Or Registration Performed",
+      "type": "boolean"
+    },
+    "external_messages_sent": {
+      "const": false,
+      "default": false,
+      "title": "External Messages Sent",
+      "type": "boolean"
+    },
+    "canonical_files_changed": {
+      "const": false,
+      "default": false,
+      "title": "Canonical Files Changed",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "scope",
+    "actions",
+    "distinct_requested_urls",
+    "distinct_requested_and_reported_final_urls",
+    "distinct_search_queries",
+    "public_access_stopped_at",
+    "public_cutoff",
+    "inputs",
+    "findings",
+    "unresolved",
+    "limitations"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

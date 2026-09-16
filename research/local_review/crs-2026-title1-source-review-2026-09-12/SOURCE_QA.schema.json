@@ -1,0 +1,561 @@
+{
+  "$defs": {
+    "Comparison": {
+      "additionalProperties": false,
+      "description": "Cross-edition derived-record comparison with exact raw strings retained.",
+      "properties": {
+        "section_id": {
+          "title": "Section Id",
+          "type": "string"
+        },
+        "inherited_meta_line": {
+          "title": "Inherited Meta Line",
+          "type": "integer"
+        },
+        "inherited_meta_line_sha256": {
+          "title": "Inherited Meta Line Sha256",
+          "type": "string"
+        },
+        "inherited_data_version": {
+          "const": "2025_official_sgml",
+          "title": "Inherited Data Version",
+          "type": "string"
+        },
+        "inherited_body": {
+          "title": "Inherited Body",
+          "type": "string"
+        },
+        "inherited_history": {
+          "title": "Inherited History",
+          "type": "string"
+        },
+        "new_body_regions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "New Body Regions",
+          "type": "array"
+        },
+        "new_history_regions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "New History Regions",
+          "type": "array"
+        },
+        "literal_body_diff": {
+          "title": "Literal Body Diff",
+          "type": "string"
+        },
+        "literal_history_diff": {
+          "title": "Literal History Diff",
+          "type": "string"
+        },
+        "body_token_deltas": {
+          "items": {
+            "$ref": "#/$defs/TokenDelta"
+          },
+          "title": "Body Token Deltas",
+          "type": "array"
+        },
+        "history_token_deltas": {
+          "items": {
+            "$ref": "#/$defs/TokenDelta"
+          },
+          "title": "History Token Deltas",
+          "type": "array"
+        },
+        "method": {
+          "title": "Method",
+          "type": "string"
+        },
+        "ancillary_qualification": {
+          "title": "Ancillary Qualification",
+          "type": "string"
+        },
+        "legal_change_determination": {
+          "const": "not_assessed",
+          "default": "not_assessed",
+          "title": "Legal Change Determination",
+          "type": "string"
+        },
+        "original_source_identity_claim": {
+          "const": false,
+          "default": false,
+          "title": "Original Source Identity Claim",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "section_id",
+        "inherited_meta_line",
+        "inherited_meta_line_sha256",
+        "inherited_data_version",
+        "inherited_body",
+        "inherited_history",
+        "new_body_regions",
+        "new_history_regions",
+        "literal_body_diff",
+        "literal_history_diff",
+        "body_token_deltas",
+        "history_token_deltas",
+        "method",
+        "ancillary_qualification"
+      ],
+      "title": "Comparison",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "An exact uncorrected native page and complete visual rendering.",
+      "properties": {
+        "physical_page": {
+          "maximum": 6,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "printed_page": {
+          "title": "Printed Page",
+          "type": "string"
+        },
+        "native": {
+          "$ref": "#/$defs/Ref"
+        },
+        "image": {
+          "$ref": "#/$defs/Ref"
+        },
+        "visual_review": {
+          "const": "full_page_candidate_aware",
+          "default": "full_page_candidate_aware",
+          "title": "Visual Review",
+          "type": "string"
+        },
+        "native_order_note": {
+          "title": "Native Order Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "physical_page",
+        "printed_page",
+        "native",
+        "image",
+        "native_order_note"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Paragraph": {
+      "additionalProperties": false,
+      "description": "Source paragraph label and ordered fragments, without semantic interpretation.",
+      "properties": {
+        "label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Label"
+        },
+        "fragments": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Fragments",
+          "type": "array"
+        },
+        "continuation_note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Continuation Note"
+        }
+      },
+      "required": [
+        "label",
+        "fragments",
+        "continuation_note"
+      ],
+      "title": "Paragraph",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "An exact retained byte identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "Region": {
+      "additionalProperties": false,
+      "description": "A byte-exact native region, classified by visible source role.",
+      "properties": {
+        "region_id": {
+          "title": "Region Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 6,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "role": {
+          "enum": [
+            "footer",
+            "title_editorial_context",
+            "table_of_contents",
+            "part_heading",
+            "section_heading",
+            "statutory_paragraph",
+            "source_history_note",
+            "editors_note",
+            "cross_references",
+            "annotation_heading",
+            "case_annotation",
+            "outside_selected_sections"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "section_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Section Id"
+        },
+        "native_start": {
+          "minimum": 0,
+          "title": "Native Start",
+          "type": "integer"
+        },
+        "native_end": {
+          "exclusiveMinimum": 0,
+          "title": "Native End",
+          "type": "integer"
+        },
+        "native_sha256": {
+          "title": "Native Sha256",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "text_sha256": {
+          "title": "Text Sha256",
+          "type": "string"
+        },
+        "visible_location": {
+          "title": "Visible Location",
+          "type": "string"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "region_id",
+        "physical_page",
+        "role",
+        "section_id",
+        "native_start",
+        "native_end",
+        "native_sha256",
+        "text",
+        "text_sha256",
+        "visible_location",
+        "qualification"
+      ],
+      "title": "Region",
+      "type": "object"
+    },
+    "Section": {
+      "additionalProperties": false,
+      "description": "Only one of the three authorized section selections.",
+      "properties": {
+        "section_id": {
+          "enum": [
+            "CRS-1-1-101",
+            "CRS-1-1-102",
+            "CRS-1-1-103"
+          ],
+          "title": "Section Id",
+          "type": "string"
+        },
+        "heading_region": {
+          "title": "Heading Region",
+          "type": "string"
+        },
+        "paragraphs": {
+          "items": {
+            "$ref": "#/$defs/Paragraph"
+          },
+          "title": "Paragraphs",
+          "type": "array"
+        },
+        "source_note_regions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Note Regions",
+          "type": "array"
+        },
+        "ancillary_regions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ancillary Regions",
+          "type": "array"
+        },
+        "scope_note": {
+          "title": "Scope Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "section_id",
+        "heading_region",
+        "paragraphs",
+        "source_note_regions",
+        "ancillary_regions",
+        "scope_note"
+      ],
+      "title": "Section",
+      "type": "object"
+    },
+    "TokenDelta": {
+      "additionalProperties": false,
+      "description": "A mechanical token difference, not a legal amendment determination.",
+      "properties": {
+        "operation": {
+          "title": "Operation",
+          "type": "string"
+        },
+        "inherited_tokens": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Inherited Tokens",
+          "type": "array"
+        },
+        "new_pdf_tokens": {
+          "items": {
+            "type": "string"
+          },
+          "title": "New Pdf Tokens",
+          "type": "array"
+        }
+      },
+      "required": [
+        "operation",
+        "inherited_tokens",
+        "new_pdf_tokens"
+      ],
+      "title": "TokenDelta",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Limited source-review result; it cannot authorize legal answers.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source_id": {
+      "const": "crs-2026-title1-official-pdf",
+      "default": "crs-2026-title1-official-pdf",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Ref"
+    },
+    "source_url": {
+      "const": "https://olls.info/crs/crs2026-title-01.pdf",
+      "default": "https://olls.info/crs/crs2026-title-01.pdf",
+      "title": "Source Url",
+      "type": "string"
+    },
+    "acquisition_receipt": {
+      "$ref": "#/$defs/Ref"
+    },
+    "official_referral": {
+      "$ref": "#/$defs/Ref"
+    },
+    "publisher_role": {
+      "const": "Office of Legislative Legal Services, Colorado General Assembly",
+      "title": "Publisher Role",
+      "type": "string"
+    },
+    "representation": {
+      "const": "distinct_new_officially_linked_2026_pdf",
+      "title": "Representation",
+      "type": "string"
+    },
+    "pdf_page_count": {
+      "const": 1008,
+      "title": "Pdf Page Count",
+      "type": "integer"
+    },
+    "pdf_metadata_claims": {
+      "additionalProperties": true,
+      "title": "Pdf Metadata Claims",
+      "type": "object"
+    },
+    "printed_edition": {
+      "const": "Colorado Revised Statutes 2026",
+      "title": "Printed Edition",
+      "type": "string"
+    },
+    "catalog_session_statement": {
+      "title": "Catalog Session Statement",
+      "type": "string"
+    },
+    "legal_effective_date": {
+      "default": null,
+      "title": "Legal Effective Date",
+      "type": "null"
+    },
+    "date_qualification": {
+      "title": "Date Qualification",
+      "type": "string"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "regions": {
+      "items": {
+        "$ref": "#/$defs/Region"
+      },
+      "title": "Regions",
+      "type": "array"
+    },
+    "selected_sections": {
+      "items": {
+        "$ref": "#/$defs/Section"
+      },
+      "title": "Selected Sections",
+      "type": "array"
+    },
+    "comparisons": {
+      "items": {
+        "$ref": "#/$defs/Comparison"
+      },
+      "title": "Comparisons",
+      "type": "array"
+    },
+    "tables_and_footnotes": {
+      "title": "Tables And Footnotes",
+      "type": "string"
+    },
+    "typography_qualification": {
+      "title": "Typography Qualification",
+      "type": "string"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    },
+    "prior_2025_original_custody": {
+      "const": "unresolved",
+      "default": "unresolved",
+      "title": "Prior 2025 Original Custody",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "research_only": {
+      "const": true,
+      "default": true,
+      "title": "Research Only",
+      "type": "boolean"
+    },
+    "canonical_or_catalog_changes": {
+      "const": false,
+      "default": false,
+      "title": "Canonical Or Catalog Changes",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "source",
+    "acquisition_receipt",
+    "official_referral",
+    "publisher_role",
+    "representation",
+    "pdf_page_count",
+    "pdf_metadata_claims",
+    "printed_edition",
+    "catalog_session_statement",
+    "date_qualification",
+    "pages",
+    "regions",
+    "selected_sections",
+    "comparisons",
+    "tables_and_footnotes",
+    "typography_qualification",
+    "limits"
+  ],
+  "title": "QA",
+  "type": "object"
+}

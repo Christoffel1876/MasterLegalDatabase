@@ -1,0 +1,469 @@
+{
+  "$defs": {
+    "BlindDocument": {
+      "additionalProperties": false,
+      "description": "Neutral source identities available before candidate release.",
+      "properties": {
+        "assignment_id": {
+          "title": "Assignment Id",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-WELD",
+          "default": "CO-COUNTY-WELD",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "expected_pages": {
+          "exclusiveMinimum": 0,
+          "title": "Expected Pages",
+          "type": "integer"
+        },
+        "original": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/ImageIdentity"
+          },
+          "title": "Pages",
+          "type": "array"
+        }
+      },
+      "required": [
+        "assignment_id",
+        "source_id",
+        "expected_pages",
+        "original",
+        "pages"
+      ],
+      "title": "BlindDocument",
+      "type": "object"
+    },
+    "CandidatePage": {
+      "additionalProperties": false,
+      "description": "Exact page evidence and complete candidate byte slice.",
+      "properties": {
+        "physical_page": {
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "evidence": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "text_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Text Sha256",
+          "type": "string"
+        },
+        "text_size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Text Size Bytes",
+          "type": "integer"
+        },
+        "start_byte": {
+          "minimum": 0,
+          "title": "Start Byte",
+          "type": "integer"
+        },
+        "end_byte_exclusive": {
+          "exclusiveMinimum": 0,
+          "title": "End Byte Exclusive",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "physical_page",
+        "evidence",
+        "text_sha256",
+        "text_size_bytes",
+        "start_byte",
+        "end_byte_exclusive"
+      ],
+      "title": "CandidatePage",
+      "type": "object"
+    },
+    "Copy": {
+      "additionalProperties": false,
+      "description": "A byte-exact frozen copy of an explicit historical input.",
+      "properties": {
+        "original": {
+          "$ref": "#/$defs/HistoricalRef"
+        },
+        "frozen": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "original",
+        "frozen",
+        "role"
+      ],
+      "title": "Copy",
+      "type": "object"
+    },
+    "Custody": {
+      "additionalProperties": false,
+      "description": "Retained intake history, withheld from the source-first reviewer.",
+      "properties": {
+        "raw_copy": {
+          "$ref": "#/$defs/Copy"
+        },
+        "manual_record": {
+          "$ref": "#/$defs/JSONLRow"
+        },
+        "provenance_record": {
+          "$ref": "#/$defs/JSONLRow"
+        },
+        "preserved_acquisition_method": {
+          "enum": [
+            "received_review_package",
+            "manual_official_download"
+          ],
+          "title": "Preserved Acquisition Method",
+          "type": "string"
+        },
+        "preserved_repository_received_at": {
+          "format": "date-time",
+          "title": "Preserved Repository Received At",
+          "type": "string"
+        },
+        "original_acquisition_replayed_by_packet": {
+          "const": false,
+          "default": false,
+          "title": "Original Acquisition Replayed By Packet",
+          "type": "boolean"
+        },
+        "interpretation": {
+          "const": "Frozen intake/provenance claims retain their original qualifications.",
+          "default": "Frozen intake/provenance claims retain their original qualifications.",
+          "title": "Interpretation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "raw_copy",
+        "manual_record",
+        "provenance_record",
+        "preserved_acquisition_method",
+        "preserved_repository_received_at"
+      ],
+      "title": "Custody",
+      "type": "object"
+    },
+    "Document": {
+      "additionalProperties": false,
+      "description": "Sealed complete candidate/custody binding for one neutral source identity.",
+      "properties": {
+        "identity": {
+          "$ref": "#/$defs/BlindDocument"
+        },
+        "custody": {
+          "$ref": "#/$defs/Custody"
+        },
+        "candidate": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "candidate_pages": {
+          "items": {
+            "$ref": "#/$defs/CandidatePage"
+          },
+          "title": "Candidate Pages",
+          "type": "array"
+        },
+        "native_evidence_schema": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "candidate_status": {
+          "const": "machine_native_text_unreviewed",
+          "default": "machine_native_text_unreviewed",
+          "title": "Candidate Status",
+          "type": "string"
+        },
+        "candidate_changes": {
+          "const": "none",
+          "default": "none",
+          "title": "Candidate Changes",
+          "type": "string"
+        },
+        "candidate_packaging": {
+          "const": "UTF-8 page markers outside unchanged native bytes",
+          "default": "UTF-8 page markers outside unchanged native bytes",
+          "title": "Candidate Packaging",
+          "type": "string"
+        },
+        "render_method": {
+          "const": "pdftoppm -r 300 -png original.pdf page",
+          "default": "pdftoppm -r 300 -png original.pdf page",
+          "title": "Render Method",
+          "type": "string"
+        },
+        "render_version": {
+          "const": "26.05.0",
+          "default": "26.05.0",
+          "title": "Render Version",
+          "type": "string"
+        },
+        "render_scope": {
+          "const": "Entire physical page; no crop, annotation, or rescaling",
+          "default": "Entire physical page; no crop, annotation, or rescaling",
+          "title": "Render Scope",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "identity",
+        "custody",
+        "candidate",
+        "candidate_pages",
+        "native_evidence_schema"
+      ],
+      "title": "Document",
+      "type": "object"
+    },
+    "FileRef": {
+      "additionalProperties": false,
+      "description": "A confined immutable packet file.",
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    },
+    "HistoricalRef": {
+      "additionalProperties": false,
+      "description": "Exact original location, retained as history and never opened by this verifier.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "HistoricalRef",
+      "type": "object"
+    },
+    "ImageIdentity": {
+      "additionalProperties": false,
+      "description": "One complete source-page image; no interpretations.",
+      "properties": {
+        "physical_page": {
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "width": {
+          "exclusiveMinimum": 0,
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "title": "Height",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "width",
+        "height"
+      ],
+      "title": "ImageIdentity",
+      "type": "object"
+    },
+    "JSONLRow": {
+      "additionalProperties": false,
+      "description": "One exact streamed line in a frozen, schema-validated JSONL file.",
+      "properties": {
+        "file": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "schema_file": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "physical_line": {
+          "minimum": 1,
+          "title": "Physical Line",
+          "type": "integer"
+        },
+        "line_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Line Sha256",
+          "type": "string"
+        },
+        "line_size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Line Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "file",
+        "schema_file",
+        "physical_line",
+        "line_sha256",
+        "line_size_bytes"
+      ],
+      "title": "JSONLRow",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Immutable prepared packet, never a dispatch receipt or legal certification.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "packet_id": {
+      "const": "ebenezer-next-weld-2026-09-12",
+      "default": "ebenezer-next-weld-2026-09-12",
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_DISPATCHED",
+      "default": "PREPARED_NOT_DISPATCHED",
+      "title": "Status",
+      "type": "string"
+    },
+    "start_no_document_at_or_after": {
+      "const": "2026-09-13T01:25:00Z",
+      "title": "Start No Document At Or After",
+      "type": "string"
+    },
+    "hard_stop": {
+      "const": "2026-09-13T01:55:00Z",
+      "title": "Hard Stop",
+      "type": "string"
+    },
+    "stop_after": {
+      "const": "EB-PDF-020",
+      "default": "EB-PDF-020",
+      "title": "Stop After",
+      "type": "string"
+    },
+    "dispatch_at": {
+      "default": null,
+      "title": "Dispatch At",
+      "type": "null"
+    },
+    "task_id": {
+      "const": "01a08848-5f8e-7c51-9b66-fd82eff860fe",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "source_only_identities": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "source_only_schema": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "instructions": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "documents": {
+      "items": {
+        "$ref": "#/$defs/Document"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Documents",
+      "type": "array"
+    },
+    "custody_copies": {
+      "items": {
+        "$ref": "#/$defs/Copy"
+      },
+      "title": "Custody Copies",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 4,
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "start_no_document_at_or_after",
+    "hard_stop",
+    "task_id",
+    "source_only_identities",
+    "source_only_schema",
+    "instructions",
+    "documents",
+    "custody_copies",
+    "limitations"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

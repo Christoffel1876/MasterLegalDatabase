@@ -1,0 +1,162 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Recorded input bytes of this checkpoint.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Measured results, source limitations and the exact tree awaiting local commit.",
+  "properties": {
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "verified_ready_for_local_commit",
+      "title": "Status",
+      "type": "string"
+    },
+    "parent_commit": {
+      "title": "Parent Commit",
+      "type": "string"
+    },
+    "branch": {
+      "title": "Branch",
+      "type": "string"
+    },
+    "tests_passed": {
+      "title": "Tests Passed",
+      "type": "integer"
+    },
+    "warnings": {
+      "title": "Warnings",
+      "type": "integer"
+    },
+    "test_seconds": {
+      "title": "Test Seconds",
+      "type": "number"
+    },
+    "changed_module_coverage": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Changed Module Coverage",
+      "type": "object"
+    },
+    "manual_originals": {
+      "const": 64,
+      "title": "Manual Originals",
+      "type": "integer"
+    },
+    "manual_ledger_records": {
+      "const": 65,
+      "title": "Manual Ledger Records",
+      "type": "integer"
+    },
+    "linked_reviews": {
+      "const": 27,
+      "title": "Linked Reviews",
+      "type": "integer"
+    },
+    "unmapped_reviews": {
+      "const": 37,
+      "title": "Unmapped Reviews",
+      "type": "integer"
+    },
+    "authorities": {
+      "const": 12,
+      "title": "Authorities",
+      "type": "integer"
+    },
+    "code_stable_during_suite": {
+      "const": true,
+      "title": "Code Stable During Suite",
+      "type": "boolean"
+    },
+    "corpus_errors": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Corpus Errors",
+      "type": "array"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "conclusions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Conclusions",
+      "type": "array"
+    },
+    "pending": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Pending",
+      "type": "array"
+    },
+    "public_push": {
+      "const": false,
+      "title": "Public Push",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "status",
+    "parent_commit",
+    "branch",
+    "tests_passed",
+    "warnings",
+    "test_seconds",
+    "changed_module_coverage",
+    "manual_originals",
+    "manual_ledger_records",
+    "linked_reviews",
+    "unmapped_reviews",
+    "authorities",
+    "code_stable_during_suite",
+    "corpus_errors",
+    "evidence",
+    "conclusions",
+    "pending",
+    "public_push",
+    "legal_currentness"
+  ],
+  "title": "Checkpoint",
+  "type": "object"
+}

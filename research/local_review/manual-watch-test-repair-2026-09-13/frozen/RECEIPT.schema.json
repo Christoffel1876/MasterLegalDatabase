@@ -1,0 +1,223 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Bind an exact ordinary local payload.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Change": {
+      "additionalProperties": false,
+      "description": "A repository test adaptation and its unchanged exact preimage.",
+      "properties": {
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "before": {
+          "$ref": "#/$defs/Asset"
+        },
+        "after": {
+          "$ref": "#/$defs/Asset"
+        },
+        "repository_snapshot": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "repository_path",
+        "before",
+        "after",
+        "repository_snapshot"
+      ],
+      "title": "Change",
+      "type": "object"
+    },
+    "Command": {
+      "additionalProperties": false,
+      "description": "An actual executed command, preserving unsuccessful collection separately.",
+      "properties": {
+        "argv": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Argv",
+          "type": "array"
+        },
+        "cwd": {
+          "title": "Cwd",
+          "type": "string"
+        },
+        "exit_code": {
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "log": {
+          "$ref": "#/$defs/Asset"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "argv",
+        "cwd",
+        "exit_code",
+        "log",
+        "description"
+      ],
+      "title": "Command",
+      "type": "object"
+    },
+    "Predecessor": {
+      "additionalProperties": false,
+      "description": "The earlier frozen package was checked in place but not duplicated in this repair.",
+      "properties": {
+        "path_at_verification": {
+          "title": "Path At Verification",
+          "type": "string"
+        },
+        "manifest": {
+          "$ref": "#/$defs/Asset"
+        },
+        "verified_payload_count": {
+          "title": "Verified Payload Count",
+          "type": "integer"
+        },
+        "all_payload_hashes_verified": {
+          "const": true,
+          "title": "All Payload Hashes Verified",
+          "type": "boolean"
+        },
+        "payloads_excluded_from_this_receipt_package": {
+          "const": true,
+          "title": "Payloads Excluded From This Receipt Package",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "path_at_verification",
+        "manifest",
+        "verified_payload_count",
+        "all_payload_hashes_verified",
+        "payloads_excluded_from_this_receipt_package"
+      ],
+      "title": "Predecessor",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "An additive compatibility correction; no runtime policy or source bytes changed.",
+  "properties": {
+    "status": {
+      "const": "installed_focused_tests_passed",
+      "title": "Status",
+      "type": "string"
+    },
+    "verified_at": {
+      "title": "Verified At",
+      "type": "string"
+    },
+    "changes": {
+      "items": {
+        "$ref": "#/$defs/Change"
+      },
+      "title": "Changes",
+      "type": "array"
+    },
+    "unchanged_repository_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Unchanged Repository Files",
+      "type": "array"
+    },
+    "commands": {
+      "items": {
+        "$ref": "#/$defs/Command"
+      },
+      "title": "Commands",
+      "type": "array"
+    },
+    "tests_passed": {
+      "const": 205,
+      "title": "Tests Passed",
+      "type": "integer"
+    },
+    "combined_branch_coverage_percent": {
+      "title": "Combined Branch Coverage Percent",
+      "type": "number"
+    },
+    "coverage": {
+      "$ref": "#/$defs/Asset"
+    },
+    "predecessors": {
+      "items": {
+        "$ref": "#/$defs/Predecessor"
+      },
+      "title": "Predecessors",
+      "type": "array"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "runtime_config_changes": {
+      "const": 0,
+      "title": "Runtime Config Changes",
+      "type": "integer"
+    },
+    "repository_full_suite_run": {
+      "const": false,
+      "title": "Repository Full Suite Run",
+      "type": "boolean"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "verified_at",
+    "changes",
+    "unchanged_repository_files",
+    "commands",
+    "tests_passed",
+    "combined_branch_coverage_percent",
+    "coverage",
+    "predecessors",
+    "public_requests",
+    "runtime_config_changes",
+    "repository_full_suite_run",
+    "limits"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

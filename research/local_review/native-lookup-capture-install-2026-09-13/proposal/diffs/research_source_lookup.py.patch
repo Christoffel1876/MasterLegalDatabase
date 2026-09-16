@@ -1,0 +1,564 @@
+--- scripts/research_source_lookup.py (preimage)
++++ scripts/research_source_lookup.py (proposed)
+@@ -887,9 +887,9 @@
+     return hashes
+ 
+ 
+-def _load_springs_verified(root: Path) -> dict:
++def _load_springs_verified(root: Path) -> tuple[dict, dict[str, bytes]]:
+     """Replay the unchanged offline source QA verifier with isolation and bounded time."""
+-    before = _check_springs_package(root)
++    before = _capture_existing(root, "springs")
+     package = root / SPRINGS_PACKAGE
+     try:
+         result = subprocess.run(
+@@ -909,9 +909,9 @@
+             raise ValueError("Colorado Springs source verifier receipt differs")
+     except (subprocess.SubprocessError, OSError, ValueError) as exc:
+         raise ValueError("Colorado Springs source-package verification failed") from exc
+-    if _check_springs_package(root) != before:
++    if _capture_existing(root, "springs") != before:
+         raise ValueError("Colorado Springs package changed during verification")
+-    return json.loads((package / "SOURCE_QA.json").read_bytes())
++    return json.loads(before[str(package / "SOURCE_QA.json")]), before
+ 
+ 
+ def _check_springs_intake(root: Path) -> dict[str, str]:
+@@ -950,7 +950,7 @@
+ 
+ def _load_springs_intake(root: Path, source: dict) -> dict:
+     """Bind actual intake time to the accepted receipt and present canonical source bytes."""
+-    before = _check_springs_intake(root)
++    before = _capture_existing(root, "springs_intake")
+     package = root / SPRINGS_INTAKE
+     try:
+         result = subprocess.run(
+@@ -965,9 +965,9 @@
+             raise ValueError("Colorado Springs intake verifier receipt differs")
+     except (subprocess.SubprocessError, OSError, ValueError) as exc:
+         raise ValueError("Colorado Springs completed-intake verification failed") from exc
+-    if _check_springs_intake(root) != before:
++    if _capture_existing(root, "springs_intake") != before:
+         raise ValueError("Colorado Springs intake changed during verification")
+-    receipt = json.loads((package / "prepared-transaction/execution/RECEIPT.json").read_bytes())
++    receipt = json.loads(before[str(package / "prepared-transaction/execution/RECEIPT.json")])
+     selected = [r for r in receipt["intent"]["records"] if r["record_id"] == SPRINGS_SOURCE_ID]
+     if len(selected) != 1:
+         raise ValueError("Colorado Springs intake source identity differs")
+@@ -981,7 +981,8 @@
+                 f"_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/{SPRINGS_SOURCE_ID}/")):
+         raise ValueError("Colorado Springs completed source/intake binding differs")
+     path = _safe_file(root, record["archive_path"])
+-    if path.stat().st_size != record["size_bytes"] or _digest(path) != record["sha256"]:
++    original = _capture_source_file(root, path, record["sha256"], 20_000_000)
++    if len(original) != record["size_bytes"]:
+         raise ValueError("Colorado Springs present canonical original differs")
+     return {
+         "intake_received_at": record["received_at"], "intake_id": record["intake_id"],
+@@ -989,7 +990,7 @@
+                                "size_bytes": record["size_bytes"]},
+         "intake_evidence": [
+             {"path": str(package / name), "sha256": digest,
+-             "size_bytes": (package / name).stat().st_size}
++             "size_bytes": len(before[str(package / name)])}
+             for name, digest in SPRINGS_INTAKE_PINS.items()
+         ],
+     }
+@@ -997,16 +998,16 @@
+ 
+ def _lookup_springs(root: Path, query: str | None) -> SpringsLookupResult:
+     """Map verified native cells and complete source context without deriving a charge."""
+-    data = _load_springs_verified(root)
++    data, captured = _load_springs_verified(root)
+     intake = _load_springs_intake(root, data)
+     package = root / SPRINGS_PACKAGE
+ 
+     def asset(ref: dict) -> dict:
+         """Resolve a preverified asset without replacing its source digest."""
+-        return {**ref, "path": str(package / ref["path"])}
++        return _captured_reference(captured, package, ref)
+ 
+     pages = {p["physical_page"]: p for p in data["pages"]}
+-    native = {n: (package / p["native"]["path"]).read_bytes() for n, p in pages.items()}
++    native = {n: captured[str(package / p["native"]["path"])] for n, p in pages.items()}
+ 
+     def part(raw: dict, page: int | None = None) -> dict:
+         """Recheck exact native ranges and bind the full cell or context part."""
+@@ -1044,12 +1045,12 @@
+         "issuer": data["issuer"], "collector_qualification": data["collector_qualification"],
+         "pdf": asset(data["source"]),
+         "review": asset({"path": "SOURCE_QA.json", "sha256": SPRINGS_PINS["SOURCE_QA.json"],
+-                         "size_bytes": (package / "SOURCE_QA.json").stat().st_size}),
++                         "size_bytes": len(captured[str(package / "SOURCE_QA.json")])}),
+         "manifest": asset({"path": "FINAL_MANIFEST.json",
+                            "sha256": SPRINGS_PINS["FINAL_MANIFEST.json"],
+-                           "size_bytes": (package / "FINAL_MANIFEST.json").stat().st_size}),
++                           "size_bytes": len(captured[str(package / "FINAL_MANIFEST.json")])}),
+         "acceptance": {"path": str(root / SPRINGS_ACCEPTANCE), "sha256": SPRINGS_ACCEPTANCE_SHA,
+-                       "size_bytes": (root / SPRINGS_ACCEPTANCE).stat().st_size},
++                       "size_bytes": len(captured[str(root / SPRINGS_ACCEPTANCE)])},
+         "official_url": provenance["official_url"],
+         "request_started_at": provenance["request_started_at"],
+         "response_finished_at": provenance["response_finished_at"],
+@@ -1342,9 +1343,9 @@
+     return hashes
+ 
+ 
+-def _load_ehs_verified(root: Path) -> tuple[dict, dict, dict]:
++def _load_ehs_verified(root: Path) -> tuple[dict, dict, dict, dict[str, bytes]]:
+     """Replay pinned source/grid verification and bind the current canonical row and original."""
+-    before = _check_ehs_package(root)
++    before = _capture_existing(root, "ehs")
+     package = root / EHS_PACKAGE
+     try:
+         process = subprocess.run([sys.executable, "-I", "-B", str(package / "validate_review.py")],
+@@ -1371,11 +1372,15 @@
+             raise ValueError("El Paso EHS verifier receipt differs")
+     except (subprocess.SubprocessError, OSError, ValueError) as error:
+         raise ValueError("El Paso EHS source verification failed") from error
+-    if _check_ehs_package(root) != before:
++    try:
++        after = _capture_existing(root, "ehs")
++    except (OSError, ValueError) as error:
++        raise ValueError("El Paso EHS package changed during verification") from error
++    if after != before:
+         raise ValueError("El Paso EHS package changed during verification")
+-    copied = _safe_file(package, "source/canonical-record.jsonl").read_bytes()
++    copied = before[str(package / "source/canonical-record.jsonl")]
+     record = json.loads(copied)
+-    schema = json.loads(_safe_file(package, "source/canonical-record.schema.json").read_bytes())
++    schema = json.loads(before[str(package / "source/canonical-record.schema.json")])
+     jsonschema.Draft202012Validator(schema).validate(record)
+     manifest = _safe_file(root, "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl")
+     if manifest.stat().st_size > 8_000_000:
+@@ -1395,10 +1400,14 @@
+                 f"_RAW_ARCHIVE/manual_intake/08_County_Authorities/{EHS_SOURCE_ID}/")):
+         raise ValueError("El Paso EHS canonical ownership differs")
+     original = _safe_file(root, record["archive_path"])
+-    if original.stat().st_size != record["size_bytes"] or _digest(original) != record["sha256"]:
++    try:
++        before[str(original)] = _capture_source_file(root, original, record["sha256"], 20_000_000)
++    except (OSError, ValueError) as error:
++        raise ValueError("El Paso EHS canonical original differs") from error
++    if len(before[str(original)]) != record["size_bytes"]:
+         raise ValueError("El Paso EHS canonical original differs")
+-    return (json.loads((package / "SOURCE_QA.json").read_bytes()), record,
+-            json.loads((root / EHS_ACCEPTANCE).read_bytes()))
++    return (json.loads(before[str(package / "SOURCE_QA.json")]), record,
++            json.loads(before[str(root / EHS_ACCEPTANCE)]), before)
+ 
+ 
+ def _ehs_matches(query: str, text: str) -> bool:
+@@ -1412,15 +1421,15 @@
+ 
+ def _lookup_ehs(root: Path, query: str | None) -> EhsLookupResult:
+     """Return full native cells, source headings and every checked contextual qualification."""
+-    data, record, acceptance = _load_ehs_verified(root)
++    data, record, acceptance, captured = _load_ehs_verified(root)
+     package = root / EHS_PACKAGE
+     pages = {p["physical_page"]: p for p in data["pages"]}
+-    native = {i: _safe_file(package, p["native"]["path"]).read_bytes() for i, p in pages.items()}
++    native = {i: captured[str(package / p["native"]["path"])] for i, p in pages.items()}
+     bindings = {b["identity"]: b for b in data["bindings"]}
+ 
+     def asset(ref: dict) -> dict:
+         """Resolve an already pinned local evidence reference."""
+-        return {**ref, "path": str(package / ref["path"])}
++        return _captured_reference(captured, package, ref)
+ 
+     def span(raw: dict, page: int) -> EhsSpan:
+         """Bind exact native bytes used in the output, not just display normalization."""
+@@ -1454,15 +1463,15 @@
+             "size_bytes": record["size_bytes"]},
+         "review": {"path": str(package / "SOURCE_QA.json"),
+                    "sha256": EHS_PINS["SOURCE_QA.json"],
+-                   "size_bytes": (package / "SOURCE_QA.json").stat().st_size},
++                   "size_bytes": len(captured[str(package / "SOURCE_QA.json")])},
+         "manifest": {"path": str(package / "FINAL_MANIFEST.json"),
+                      "sha256": EHS_PINS["FINAL_MANIFEST.json"],
+-                     "size_bytes": (package / "FINAL_MANIFEST.json").stat().st_size},
++                     "size_bytes": len(captured[str(package / "FINAL_MANIFEST.json")])},
+         "acceptance": {"path": str(root / EHS_ACCEPTANCE), "sha256": EHS_ACCEPTANCE_SHA,
+-                       "size_bytes": (root / EHS_ACCEPTANCE).stat().st_size},
++                       "size_bytes": len(captured[str(root / EHS_ACCEPTANCE)])},
+         "copied_canonical_record": {"path": str(package / "source/canonical-record.jsonl"),
+             "sha256": EHS_PINS["source/canonical-record.jsonl"],
+-            "size_bytes": (package / "source/canonical-record.jsonl").stat().st_size},
++            "size_bytes": len(captured[str(package / "source/canonical-record.jsonl")])},
+         "official_url": record["official_source_url"], "intake_id": record["intake_id"],
+         "intake_received_at": record["received_at"],
+         "acquisition_method": record["acquisition_method"],
+@@ -2170,6 +2179,113 @@
+     return "\n".join(lines) + "\n"
+ 
+ 
++def _captured_reference(
++    captured: dict[str, bytes], base: Path, ref: dict,
++) -> dict:
++    """Resolve and validate an authoritative reference against consumed captured bytes."""
++    path = _safe_file(base, ref["path"])
++    raw = captured[str(path)]
++    if (hashlib.sha256(raw).hexdigest() != ref["sha256"] or
++            len(raw) != ref["size_bytes"]):
++        raise ValueError("Captured source reference differs: " + ref["path"])
++    return {**ref, "path": str(path)}
++
++
++def _capture_source_file(root: Path, path: Path, expected: str, limit: int) -> bytes:
++    """Read a bounded ordinary file once and hash the exact buffer that will be consumed."""
++    name = path.relative_to(root).as_posix()
++    checked = _safe_file(root, name)
++    with checked.open("rb") as handle:
++        raw = handle.read(limit + 1)
++    if len(raw) > limit or hashlib.sha256(raw).hexdigest() != expected:
++        raise ValueError("Captured source bytes differ: " + name)
++    return raw
++
++
++def _capture_existing(root: Path, family: str) -> dict[str, bytes]:
++    """Capture accepted family inputs and rebind manifest references to pinned buffers."""
++    if family == "gj":
++        base = root / PACKAGE
++        _check_package(base)
++        checked, anchors = {}, [(base, PINS)]
++    elif family == "greeley":
++        base = root / GREELEY_PACKAGE
++        checked = {str(base / k): v for k, v in _check_greeley_package(base).items()}
++        anchors = [(base, GREELEY_PINS)]
++    elif family == "weld":
++        checked = _check_weld_package(root)
++        anchors = [(root / WELD_PACKAGE, WELD_PINS), (root / WELD_INTAKE, WELD_INTAKE_PINS)]
++    elif family == "grid":
++        checked = _check_grid_package(root)
++        anchors = [(root / GRID_PACKAGE, GRID_PINS), (root / GREELEY_PACKAGE, GREELEY_PINS)]
++    elif family == "springs":
++        checked = _check_springs_package(root)
++        anchors = [(root / SPRINGS_PACKAGE, SPRINGS_PINS),
++                   (root, {SPRINGS_ACCEPTANCE.as_posix(): SPRINGS_ACCEPTANCE_SHA})]
++    elif family == "springs_intake":
++        checked = _check_springs_intake(root)
++        anchors = [(root / SPRINGS_INTAKE, SPRINGS_INTAKE_PINS)]
++    elif family == "ehs":
++        checked = _check_ehs_package(root)
++        anchors = [(root / EHS_PACKAGE, EHS_PINS),
++                   (root, {EHS_ACCEPTANCE.as_posix(): EHS_ACCEPTANCE_SHA})]
++    else:
++        raise ValueError("Unsupported captured source family")
++    captured = {}
++    for base, pins in anchors:
++        for name, expected in pins.items():
++            key = str(base / name)
++            if key in checked and checked[key] != expected:
++                raise ValueError("Source anchor identity differs")
++            captured[key] = _capture_source_file(root, Path(key), expected, 20_000_000)
++    manifests = []
++    if family == "gj":
++        manifests.append((root / PACKAGE, "MANIFEST.json", "files"))
++    if family in {"greeley", "grid"}:
++        manifests.append((root / GREELEY_PACKAGE, "PACKAGE.json", "payloads"))
++    if family == "grid":
++        manifests.append((root / GRID_PACKAGE, "FINAL_MANIFEST.json", "files"))
++    if family == "weld":
++        manifests.append((root / WELD_PACKAGE, "evidence-manifest.json", "files"))
++    if family == "springs":
++        manifests.append((root / SPRINGS_PACKAGE, "FINAL_MANIFEST.json", "files"))
++    if family == "springs_intake":
++        manifests.append((root / SPRINGS_INTAKE, "INVENTORY.json", "files"))
++    if family == "ehs":
++        manifests.append((root / EHS_PACKAGE, "FINAL_MANIFEST.json", "files"))
++    references = []
++    for base, name, field in manifests:
++        values = json.loads(captured[str(base / name)])[field]
++        refs = [v["file"] for v in values] if field == "payloads" else values
++        references.extend((base, ref) for ref in refs)
++    if family == "weld":
++        base = root / WELD_INTAKE
++        receipt = json.loads(captured[str(base / "intake-receipt.json")])
++        references.extend((base, receipt[k]) for k in
++                          ["record_stream", "provenance_stream", "record_schema", "source_schema"])
++        sources = [s for s in receipt["sources"] if s["source_id"] == WELD_SOURCE_ID]
++        if len(sources) != 1:
++            raise ValueError("Captured Weld custody source is not unique")
++        references.extend((base, sources[0][k]) for k in ["access_receipt", "public_headers"])
++    if family == "ehs":
++        references.extend((root / EHS_PACKAGE, ref) for ref in json.loads(
++            captured[str(root / EHS_ACCEPTANCE)])["copied_originals"])
++    for base, ref in references:
++        key = str(_safe_file(base, ref["path"]))
++        if key in checked and checked[key] != ref["sha256"]:
++            raise ValueError("Captured manifest and checked file identities differ")
++        if key not in captured:
++            captured[key] = _capture_source_file(root, Path(key), ref["sha256"], 20_000_000)
++        _captured_reference(captured, base, ref)
++    # Include fixed auxiliary files that existing verifiers require; no dynamic code imports.
++    for key, expected in checked.items():
++        if key not in captured:
++            captured[key] = _capture_source_file(root, Path(key), expected, 20_000_000)
++    if sum(map(len, captured.values())) > 40_000_000:
++        raise ValueError("Captured source family byte bound exceeded")
++    return captured
++
++
+ def _digest(path: Path) -> str:
+     digest = hashlib.sha256()
+     with path.open("rb") as handle:
+@@ -2200,8 +2316,8 @@
+     return (package / "SOURCE_QA.json").read_bytes()
+ 
+ 
+-def _load_verified(package: Path) -> dict:
+-    before = _check_package(package)
++def _load_verified(package: Path) -> tuple[dict, dict[str, bytes]]:
++    before = _capture_existing(package.parents[2], "gj")
+     try:
+         subprocess.run(
+             [sys.executable, "-I", "-B", str(package / "build_review.py"), "--verify"],
+@@ -2209,9 +2325,9 @@
+         )
+     except (subprocess.SubprocessError, OSError) as exc:
+         raise ValueError("Existing source-package verification failed") from exc
+-    if _check_package(package) != before:
++    if _capture_existing(package.parents[2], "gj") != before:
+         raise ValueError("Evidence changed during verification")
+-    return json.loads(before)
++    return json.loads(before[str(package / "SOURCE_QA.json")]), before
+ 
+ 
+ def _check_greeley_package(package: Path) -> dict[str, str]:
+@@ -2250,15 +2366,15 @@
+     return hashes
+ 
+ 
+-def _load_greeley_verified(package: Path) -> tuple[dict, dict, bytes]:
++def _load_greeley_verified(package: Path) -> tuple[dict, dict, bytes, dict[str, bytes]]:
+     """Run only the pinned offline wrapper, with its verified local imports available."""
+-    before = _check_greeley_package(package)
+-    review = (package / GREELEY_REVIEW).read_bytes()
+-    packet = (package / "packet/manifest.json").read_bytes()
++    before = _capture_existing(package.parents[2], "greeley")
++    review = before[str(package / GREELEY_REVIEW)]
++    packet = before[str(package / "packet/manifest.json")]
+     candidate_path = (
+         package / "packet/02-candidate-text" / GREELEY_SOURCE_ID / "candidate.txt"
+     )
+-    candidate = candidate_path.read_bytes()
++    candidate = before[str(candidate_path)]
+     launcher = (
+         "import runpy,sys; from pathlib import Path; "
+         "p=Path(sys.argv[1]); sys.path.insert(0,str(p)); "
+@@ -2279,9 +2395,9 @@
+             raise ValueError("Greeley verification receipt mismatch")
+     except (subprocess.SubprocessError, OSError, ValueError, KeyError) as exc:
+         raise ValueError("Existing Greeley source-package verification failed") from exc
+-    if _check_greeley_package(package) != before:
++    if _capture_existing(package.parents[2], "greeley") != before:
+         raise ValueError("Greeley evidence changed during verification")
+-    return json.loads(review), json.loads(packet), candidate
++    return json.loads(review), json.loads(packet), candidate, before
+ 
+ 
+ def _weld_ref(package: Path, ref: dict[str, Any]) -> Path:
+@@ -2337,12 +2453,12 @@
+     return hashes
+ 
+ 
+-def _load_weld_verified(root: Path) -> tuple[dict, dict]:
++def _load_weld_verified(root: Path) -> tuple[dict, dict, dict[str, bytes]]:
+     """Run only the pinned EHS verifier; historical absolute paths are never opened."""
+-    before = _check_weld_package(root)
++    before = _capture_existing(root, "weld")
+     package, intake = root / WELD_PACKAGE, root / WELD_INTAKE
+-    review = (package / WELD_REVIEW).read_bytes()
+-    receipt = json.loads((intake / "intake-receipt.json").read_bytes())
++    review = before[str(package / WELD_REVIEW)]
++    receipt = json.loads(before[str(intake / "intake-receipt.json")])
+     try:
+         result = subprocess.run(
+             [sys.executable, "-I", "-B", str(package / "frozen/ehs/build_review.py"), "--verify"],
+@@ -2354,15 +2470,15 @@
+             raise ValueError("Weld verification receipt mismatch")
+     except (subprocess.SubprocessError, OSError, ValueError) as exc:
+         raise ValueError("Existing Weld source-package verification failed") from exc
+-    if _check_weld_package(root) != before:
++    if _capture_existing(root, "weld") != before:
+         raise ValueError("Weld evidence changed during verification")
+     rows = {}
+     for stream, schema, field in [("record_stream", "record_schema", "record_id"),
+                                    ("provenance_stream", "source_schema", "source_id")]:
+         validator = jsonschema.Draft202012Validator(json.loads(
+-            (intake / receipt[schema]["path"]).read_bytes()))
++            before[str(intake / receipt[schema]["path"])]))
+         selected = []
+-        with (intake / receipt[stream]["path"]).open("rb") as handle:
++        with io.BytesIO(before[str(intake / receipt[stream]["path"])]) as handle:
+             for line in handle:
+                 row = json.loads(line)
+                 try:
+@@ -2377,7 +2493,7 @@
+     data = json.loads(review)
+     source = rows["provenance_stream"]
+     record = rows["record_stream"]
+-    event = [e for e in json.loads((package / "frozen/ehs/ACCESS_RESULT.json").read_bytes())[
++    event = [e for e in json.loads(before[str(package / "frozen/ehs/ACCESS_RESULT.json")])[
+         "events"] if e["event_id"] == "ATLAS-WELD-04"][0]
+     if (source not in receipt["sources"] or data["source_id"] != WELD_SOURCE_ID
+             or source["authority_id"] != "CO-COUNTY-WELD"
+@@ -2393,14 +2509,14 @@
+             or event["exact_target_url"] != source["exact_requested_url"]
+             or event["finished_at"] != source["http_completed_at"]):
+         raise ValueError("Weld source/custody relationship mismatch")
+-    if _check_weld_package(root) != before:
++    if _capture_existing(root, "weld") != before:
+         raise ValueError("Weld evidence changed while reading custody records")
+-    return data, source
++    return data, source, before
+ 
+ 
+ def _lookup_weld(root: Path, query: str | None) -> WeldLookupResult:
+     """Preserve complete row associations and separately searchable page context."""
+-    data, provenance = _load_weld_verified(root)
++    data, provenance, captured = _load_weld_verified(root)
+     package = root / WELD_PACKAGE
+     base = package / "frozen/ehs"
+     spans = {s["id"]: (p, s) for p in data["pages"] for s in p["spans"]}
+@@ -2408,9 +2524,10 @@
+     def bind(identity: str) -> WeldBlock:
+         """Bind one unchanged reviewed line to its physical native page."""
+         page, span = spans[identity]
+-        native = _safe_file(base, page["native"]["path"])
++        native = Path(_captured_reference(captured, base, page["native"])["path"])
++        _captured_reference(captured, base, page["image"])
+         raw = span["text"].encode("utf-8")
+-        if native.read_bytes()[span["start"]:span["end"]] != raw:
++        if captured[str(native)][span["start"]:span["end"]] != raw:
+             raise ValueError("Weld native slice mismatch")
+         return WeldBlock(
+             **span, physical_page=page["physical_page"], native_path=str(native),
+@@ -2501,9 +2618,11 @@
+     return hashes
+ 
+ 
+-def _load_grid_verified(root: Path, source_id: str) -> tuple[dict, dict, bytes, dict, dict]:
++def _load_grid_verified(
++    root: Path, source_id: str,
++) -> tuple[dict, dict, bytes, dict, dict, dict[str, bytes]]:
+     """Replay the accepted superseding review and bind the selected immutable source."""
+-    before = _check_grid_package(root)
++    before = _capture_existing(root, "grid")
+     package = root / GRID_PACKAGE
+     try:
+         result = subprocess.run(
+@@ -2525,32 +2644,33 @@
+         raise ValueError("Existing grid source-package verification failed") from exc
+     number, review_file, pages, _ = GRID_SOURCES[source_id]
+     base = package / "historical-packet/baseline" / f"EB-PDF-{number}"
+-    data = json.loads((base / review_file).read_bytes())
+-    candidate = (base / "inputs/candidate.txt").read_bytes()
+-    record = json.loads((package / "historical-packet/RECONCILIATION.json").read_bytes())
+-    correction = json.loads((package / "SUPERSEDING_DISPOSITION.json").read_bytes())
+-    packet = json.loads((root / GREELEY_PACKAGE / "packet/manifest.json").read_bytes())
++    data = json.loads(before[str(base / review_file)])
++    candidate = before[str(base / "inputs/candidate.txt")]
++    record = json.loads(before[str(package / "historical-packet/RECONCILIATION.json")])
++    correction = json.loads(before[str(package / "SUPERSEDING_DISPOSITION.json")])
++    packet = json.loads(before[str(root / GREELEY_PACKAGE / "packet/manifest.json")])
+     selected = [d for d in packet["documents"] if d["source_id"] == source_id]
+     if len(selected) != 1 or data["source_id"] != source_id:
+         raise ValueError("Grid source identity mismatch")
+     doc = selected[0]
+     if (doc["assignment_id"] != f"EB-PDF-{number}" or doc["expected_pages"] != pages
+             or doc["authority_id"] != "CO-MUNICIPAL-GREELEY"
+-            or doc["original"]["sha256"] != _digest(base / "inputs/original.pdf")
++            or doc["original"]["sha256"] != hashlib.sha256(
++                before[str(base / "inputs/original.pdf")]).hexdigest()
+             or doc["candidate"]["sha256"] != hashlib.sha256(candidate).hexdigest()
+             or correction["corrected_observation"] != "running_title_visible_on_pages_1_2_3"
+             or correction["affected_pages"] != [2, 3]
+             or "ATLAS-EB016-014" not in correction["withdrawn_claim_ids"]
+             or correction["source_and_candidate_changed"] is not False):
+         raise ValueError("Grid source/correction relationship mismatch")
+-    if _check_grid_package(root) != before:
++    if _capture_existing(root, "grid") != before:
+         raise ValueError("Grid evidence changed during verification")
+-    return data, doc, candidate, record, correction
++    return data, doc, candidate, record, correction, before
+ 
+ 
+ def _lookup_grid(root: Path, source_id: str, query: str | None) -> GridLookupResult:
+     """Map only the reviewed grids, retaining complete source context on every result."""
+-    data, doc, candidate, record, correction = _load_grid_verified(root, source_id)
++    data, doc, candidate, record, correction, captured = _load_grid_verified(root, source_id)
+     number, review_file, _, expected_rows = GRID_SOURCES[source_id]
+     package = root / GRID_PACKAGE
+     base = package / "historical-packet/baseline" / f"EB-PDF-{number}"
+@@ -2575,7 +2695,7 @@
+ 
+     def image_path(page: int) -> str:
+         """Resolve the reviewed physical page without substituting a crop."""
+-        return str(base / pages[page]["image"]["path"])
++        return _captured_reference(captured, base, pages[page]["image"])["path"]
+ 
+     def cell(raw: dict) -> GridCell:
+         """Preserve merged cells, explicit blanks and contributing source strings."""
+@@ -2698,11 +2818,13 @@
+         ),
+         "pdf_path": str(base / "inputs/original.pdf"), "pdf_sha256": doc["original"]["sha256"],
+         "candidate_path": candidate_path, "candidate_sha256": doc["candidate"]["sha256"],
+-        "review_path": str(base / review_file), "review_sha256": _digest(base / review_file),
++        "review_path": str(base / review_file),
++        "review_sha256": hashlib.sha256(captured[str(base / review_file)]).hexdigest(),
+         "provenance_path": str(root / GREELEY_PACKAGE / "packet/manifest.json"),
+         "packet_manifest_sha256": GREELEY_PINS["packet/manifest.json"],
+         "reconciliation_path": str(package / "historical-packet/RECONCILIATION.json"),
+-        "reconciliation_sha256": _digest(package / "historical-packet/RECONCILIATION.json"),
++        "reconciliation_sha256": hashlib.sha256(
++            captured[str(package / "historical-packet/RECONCILIATION.json")]).hexdigest(),
+         "superseding_disposition_path": str(package / "SUPERSEDING_DISPOSITION.json"),
+         "superseding_disposition_sha256": GRID_PINS["SUPERSEDING_DISPOSITION.json"],
+         "package_manifest_sha256": GRID_PINS["FINAL_MANIFEST.json"],
+@@ -2738,7 +2860,7 @@
+ 
+ 
+ def _lookup_greeley(package: Path, query: str | None) -> GreeleyLookupResult:
+-    data, packet, candidate = _load_greeley_verified(package)
++    data, packet, candidate, captured = _load_greeley_verified(package)
+     documents = [d for d in packet["documents"] if d["source_id"] == GREELEY_SOURCE_ID]
+     if len(documents) != 1 or data["source_id"] != GREELEY_SOURCE_ID:
+         raise ValueError("Greeley source identity mismatch")
+@@ -2786,6 +2908,9 @@
+                 footnotes=footnotes,
+                 page_image_path=str(package / "packet" / doc["pages"][0]["image"]["path"]),
+             ))
++    _captured_reference(captured, package / "packet", doc["original"])
++    _captured_reference(captured, package / "packet", doc["candidate"])
++    _captured_reference(captured, package / "packet", doc["pages"][0]["image"])
+     p = doc["provenance"]
+     source = GreeleySourceBinding.model_validate_json(json.dumps({
+         "authority_id": doc["authority_id"], "authority_basis": doc["authority_basis"],
+@@ -2912,13 +3037,16 @@
+     if source_id == GREELEY_SOURCE_ID:
+         return _lookup_greeley(root / GREELEY_PACKAGE, query)
+     package = root / PACKAGE
+-    data = _load_verified(package)
++    data, captured = _load_verified(package)
+     if data["source_id"] != REVIEW_SOURCE_ID:
+         raise ValueError("The review's historical source alias does not match")
+     spans = {s["id"]: (p, s) for p in data["pages"] for s in p["spans"]}
+ 
+     def bind(span_id: str) -> SpanBinding:
+         page, span = spans[span_id]
++        native = Path(_captured_reference(captured, package, page["native"])["path"])
++        if captured[str(native)][span["start"]:span["end"]] != span["text"].encode():
++            raise ValueError("Grand Junction captured native span differs")
+         return SpanBinding(
+             id=span_id, physical_page=page["physical_page"],
+             native_path=str(package / page["native"]["path"]), start=span["start"],
+@@ -2939,7 +3067,7 @@
+             fee_binding=bind(row["fee_span"]),
+             page_image_path=str(package / f"page-{row['physical_page']}.png"),
+         ))
+-    event = json.loads((package / "access-event.json").read_bytes())
++    event = json.loads(captured[str(package / "access-event.json")])
+     source = SourceBinding.model_validate_json(json.dumps({
+         "source_url": data["official_url"], "pdf_sha256": PINS["original.pdf"],
+         "review_sha256": PINS["SOURCE_QA.json"], "manifest_sha256": PINS["MANIFEST.json"],

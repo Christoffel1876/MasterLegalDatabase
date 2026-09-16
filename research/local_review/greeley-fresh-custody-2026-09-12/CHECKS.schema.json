@@ -1,0 +1,96 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "One package-relative ordinary file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Bind the exact bounded local verification invocation and results.",
+  "properties": {
+    "status": {
+      "const": "passed",
+      "title": "Status",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "command": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Command",
+      "type": "array"
+    },
+    "cwd": {
+      "title": "Cwd",
+      "type": "string"
+    },
+    "returncode": {
+      "const": 0,
+      "title": "Returncode",
+      "type": "integer"
+    },
+    "tests_passed": {
+      "const": 10,
+      "title": "Tests Passed",
+      "type": "integer"
+    },
+    "stdout": {
+      "$ref": "#/$defs/Asset"
+    },
+    "stderr": {
+      "$ref": "#/$defs/Asset"
+    },
+    "scope": {
+      "const": "offline custody/tamper checks; no new visual review or HTTP request",
+      "title": "Scope",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "started_at",
+    "completed_at",
+    "command",
+    "cwd",
+    "returncode",
+    "tests_passed",
+    "stdout",
+    "stderr",
+    "scope"
+  ],
+  "title": "Check",
+  "type": "object"
+}

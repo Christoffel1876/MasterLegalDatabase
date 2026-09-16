@@ -1,0 +1,225 @@
+{
+  "$defs": {
+    "Artifact": {
+      "additionalProperties": false,
+      "description": "Identify immutable local bytes within the selected repository.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Artifact",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "status": {
+      "const": "inventory_supplement_validated_no_legal_promotion",
+      "title": "Status",
+      "type": "string"
+    },
+    "previous_counts": {
+      "maxItems": 3,
+      "minItems": 3,
+      "prefixItems": [
+        {
+          "const": 64,
+          "type": "integer"
+        },
+        {
+          "const": 27,
+          "type": "integer"
+        },
+        {
+          "const": 37,
+          "type": "integer"
+        }
+      ],
+      "title": "Previous Counts",
+      "type": "array"
+    },
+    "current_counts": {
+      "maxItems": 3,
+      "minItems": 3,
+      "prefixItems": [
+        {
+          "const": 67,
+          "type": "integer"
+        },
+        {
+          "const": 30,
+          "type": "integer"
+        },
+        {
+          "const": 37,
+          "type": "integer"
+        }
+      ],
+      "title": "Current Counts",
+      "type": "array"
+    },
+    "raw_manifest_records": {
+      "const": 67,
+      "title": "Raw Manifest Records",
+      "type": "integer"
+    },
+    "intake_ledger_records": {
+      "const": 68,
+      "title": "Intake Ledger Records",
+      "type": "integer"
+    },
+    "unchanged_authority_joins": {
+      "const": 64,
+      "title": "Unchanged Authority Joins",
+      "type": "integer"
+    },
+    "unchanged_review_joins": {
+      "const": 27,
+      "title": "Unchanged Review Joins",
+      "type": "integer"
+    },
+    "new_authorities": {
+      "items": {
+        "type": "string"
+      },
+      "title": "New Authorities",
+      "type": "array"
+    },
+    "new_reviews": {
+      "items": {
+        "type": "string"
+      },
+      "title": "New Reviews",
+      "type": "array"
+    },
+    "new_allowlist_entries": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "New Allowlist Entries",
+      "type": "object"
+    },
+    "focused_tests_passed": {
+      "const": 112,
+      "title": "Focused Tests Passed",
+      "type": "integer"
+    },
+    "branch_inclusive_module_coverage": {
+      "maximum": 100,
+      "minimum": 90,
+      "title": "Branch Inclusive Module Coverage",
+      "type": "number"
+    },
+    "actual_check_passed": {
+      "const": true,
+      "title": "Actual Check Passed",
+      "type": "boolean"
+    },
+    "commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Commands",
+      "type": "array"
+    },
+    "final_artifacts": {
+      "items": {
+        "$ref": "#/$defs/Artifact"
+      },
+      "title": "Final Artifacts",
+      "type": "array"
+    },
+    "preimages": {
+      "items": {
+        "$ref": "#/$defs/Artifact"
+      },
+      "title": "Preimages",
+      "type": "array"
+    },
+    "unchanged_inputs": {
+      "items": {
+        "$ref": "#/$defs/Artifact"
+      },
+      "title": "Unchanged Inputs",
+      "type": "array"
+    },
+    "accepted_qa_inputs": {
+      "items": {
+        "$ref": "#/$defs/Artifact"
+      },
+      "title": "Accepted Qa Inputs",
+      "type": "array"
+    },
+    "scope_notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Scope Notes",
+      "type": "array"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "canonical_raw_changes": {
+      "const": 0,
+      "title": "Canonical Raw Changes",
+      "type": "integer"
+    },
+    "coverage_ledger_changes": {
+      "const": 0,
+      "title": "Coverage Ledger Changes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "completed_at",
+    "status",
+    "previous_counts",
+    "current_counts",
+    "raw_manifest_records",
+    "intake_ledger_records",
+    "unchanged_authority_joins",
+    "unchanged_review_joins",
+    "new_authorities",
+    "new_reviews",
+    "new_allowlist_entries",
+    "focused_tests_passed",
+    "branch_inclusive_module_coverage",
+    "actual_check_passed",
+    "commands",
+    "final_artifacts",
+    "preimages",
+    "unchanged_inputs",
+    "accepted_qa_inputs",
+    "scope_notes",
+    "public_requests",
+    "canonical_raw_changes",
+    "coverage_ledger_changes"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

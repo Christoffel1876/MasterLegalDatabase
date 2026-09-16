@@ -1,0 +1,328 @@
+{
+  "$defs": {
+    "CandidatePage": {
+      "additionalProperties": false,
+      "description": "An exact unchanged machine-page buffer within packaging-only markers.",
+      "properties": {
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "body": {
+          "$ref": "#/$defs/Ref"
+        },
+        "candidate_start": {
+          "minimum": 0,
+          "title": "Candidate Start",
+          "type": "integer"
+        },
+        "candidate_end": {
+          "minimum": 0,
+          "title": "Candidate End",
+          "type": "integer"
+        },
+        "raw_engine_output": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "physical_page",
+        "body",
+        "candidate_start",
+        "candidate_end",
+        "raw_engine_output"
+      ],
+      "title": "CandidatePage",
+      "type": "object"
+    },
+    "Custody": {
+      "additionalProperties": false,
+      "description": "Copied canonical record and exact immutable manifest slice, not fresh HTTP acquisition.",
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "canonical_record": {
+          "$ref": "#/$defs/Ref"
+        },
+        "original_archive_path_claim": {
+          "title": "Original Archive Path Claim",
+          "type": "string"
+        },
+        "official_url_claim": {
+          "title": "Official Url Claim",
+          "type": "string"
+        },
+        "acquisition_method": {
+          "const": "received_review_package",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "repository_received_at": {
+          "format": "date-time",
+          "title": "Repository Received At",
+          "type": "string"
+        },
+        "original_acquisition_at": {
+          "default": null,
+          "title": "Original Acquisition At",
+          "type": "null"
+        },
+        "custody_note": {
+          "title": "Custody Note",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Ref"
+        },
+        "currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "authority_id",
+        "canonical_record",
+        "original_archive_path_claim",
+        "official_url_claim",
+        "acquisition_method",
+        "repository_received_at",
+        "custody_note",
+        "source"
+      ],
+      "title": "Custody",
+      "type": "object"
+    },
+    "Extraction": {
+      "additionalProperties": false,
+      "description": "Distinguish native extraction from OCR without claims of source fidelity.",
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "source_sha256": {
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "method": {
+          "enum": [
+            "pymupdf_native",
+            "apple_vision_ocr"
+          ],
+          "title": "Method",
+          "type": "string"
+        },
+        "candidate_status": {
+          "enum": [
+            "machine_native_text_unreviewed",
+            "machine_ocr_unreviewed"
+          ],
+          "title": "Candidate Status",
+          "type": "string"
+        },
+        "candidate": {
+          "$ref": "#/$defs/Ref"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/CandidatePage"
+          },
+          "title": "Pages",
+          "type": "array"
+        },
+        "native_attempts": {
+          "items": {
+            "$ref": "#/$defs/Ref"
+          },
+          "title": "Native Attempts",
+          "type": "array"
+        },
+        "engine_receipt": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "method_settings": {
+          "title": "Method Settings",
+          "type": "string"
+        },
+        "normalization": {
+          "const": "none; page markers are packaging",
+          "default": "none; page markers are packaging",
+          "title": "Normalization",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "source_sha256",
+        "method",
+        "candidate_status",
+        "candidate",
+        "pages",
+        "native_attempts",
+        "engine_receipt",
+        "method_settings"
+      ],
+      "title": "Extraction",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "An exact packet-relative artifact.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Actual source preservation and candidate construction, without prior QA conclusions.",
+  "properties": {
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_DISPATCHED",
+      "default": "PREPARED_NOT_DISPATCHED",
+      "title": "Status",
+      "type": "string"
+    },
+    "initial_capture": {
+      "$ref": "#/$defs/Ref"
+    },
+    "original_frozen_manual_manifest": {
+      "$ref": "#/$defs/Ref"
+    },
+    "original_frozen_inventory": {
+      "$ref": "#/$defs/Ref"
+    },
+    "inputs": {
+      "items": {
+        "$ref": "#/$defs/Custody"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Inputs",
+      "type": "array"
+    },
+    "extraction": {
+      "items": {
+        "$ref": "#/$defs/Extraction"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Extraction",
+      "type": "array"
+    },
+    "inspected_complete_images": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "maxItems": 9,
+      "minItems": 9,
+      "title": "Inspected Complete Images",
+      "type": "array"
+    },
+    "visual_check_completed_at": {
+      "format": "date-time",
+      "title": "Visual Check Completed At",
+      "type": "string"
+    },
+    "visual_check_scope": {
+      "title": "Visual Check Scope",
+      "type": "string"
+    },
+    "no_new_document_at_or_after": {
+      "format": "date-time",
+      "title": "No New Document At Or After",
+      "type": "string"
+    },
+    "stop_at": {
+      "format": "date-time",
+      "title": "Stop At",
+      "type": "string"
+    },
+    "stop_after": {
+      "const": "EB-PDF-024",
+      "default": "EB-PDF-024",
+      "title": "Stop After",
+      "type": "string"
+    },
+    "public_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "source_bytes_changed": {
+      "const": false,
+      "default": false,
+      "title": "Source Bytes Changed",
+      "type": "boolean"
+    },
+    "prior_findings_in_blind_materials": {
+      "const": false,
+      "default": false,
+      "title": "Prior Findings In Blind Materials",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "initial_capture",
+    "original_frozen_manual_manifest",
+    "original_frozen_inventory",
+    "inputs",
+    "extraction",
+    "inspected_complete_images",
+    "visual_check_completed_at",
+    "visual_check_scope",
+    "no_new_document_at_or_after",
+    "stop_at"
+  ],
+  "title": "Preparation",
+  "type": "object"
+}

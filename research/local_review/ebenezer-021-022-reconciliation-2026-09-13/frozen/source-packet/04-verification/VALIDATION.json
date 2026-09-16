@@ -1,0 +1,67 @@
+{
+  "started_at": "2026-09-13T01:39:58.753140Z",
+  "completed_at": "2026-09-13T01:39:59.301725Z",
+  "initial_manifest_sha256": "1e583cc32008a6200701ebee46a086f51cb81adf797fb66adde4f186dacd77f4",
+  "status": "passed",
+  "portable_cli_exit": 0,
+  "portable_stdout": "",
+  "portable_stderr": "{\n  \"status\": \"verified_prepared_not_dispatched\",\n  \"documents\": 2,\n  \"physical_pages\": 5,\n  \"native_bytes\": 9846,\n  \"images_dpi\": 300,\n  \"payloads\": 27,\n  \"manifest_sha256\": \"1e583cc32008a6200701ebee46a086f51cb81adf797fb66adde4f186dacd77f4\",\n  \"public_requests\": 0,\n  \"source_fidelity_review_performed_by_validator\": false,\n  \"legal_currentness\": \"not_verified\"\n}\n",
+  "tamper_checks": [
+    {
+      "case": "pdf_tamper",
+      "result": "rejected",
+      "reason": "Hash or size differs: 01-source-only/douglas-ehs-fees-atlas-directed/original.pdf"
+    },
+    {
+      "case": "candidate_tamper",
+      "result": "rejected",
+      "reason": "Hash or size differs: 02-candidate-text/pueblo-planning-fees-atlas-directed/candidate.txt"
+    },
+    {
+      "case": "missing_page",
+      "result": "rejected",
+      "reason": "Closed membership differs"
+    },
+    {
+      "case": "extra_member",
+      "result": "rejected",
+      "reason": "Closed membership differs"
+    },
+    {
+      "case": "symlink",
+      "result": "rejected",
+      "reason": "Nonordinary member"
+    },
+    {
+      "case": "wrong_authority",
+      "result": "rejected",
+      "reason": "typed identity invariant"
+    },
+    {
+      "case": "duplicate_page",
+      "result": "rejected",
+      "reason": "typed identity invariant"
+    }
+  ],
+  "packet_check": {
+    "status": "verified_prepared_not_dispatched",
+    "documents": 2,
+    "physical_pages": 5,
+    "native_bytes": 9846,
+    "images_dpi": 300,
+    "payloads": 27,
+    "manifest_sha256": "1e583cc32008a6200701ebee46a086f51cb81adf797fb66adde4f186dacd77f4",
+    "public_requests": 0,
+    "source_fidelity_review_performed_by_validator": false,
+    "legal_currentness": "not_verified"
+  },
+  "all_five_full_images_directly_viewed_for_render_completeness": true,
+  "review_scope": "Technical rendering and packaging only; no new full numerical source QA claimed.",
+  "initial_local_setup_failures": [
+    "PIL unavailable; PNG dimensions read directly from IHDR instead.",
+    "First builder redirection used wrong working directory and wrote no builder; corrected before successful build.",
+    "Initial temporary tamper fixtures used a symlinked default temp root and therefore did not reach intended tamper checks; rerun with explicit /private/tmp."
+  ],
+  "source_or_repository_writes": 0,
+  "public_requests": 0
+}

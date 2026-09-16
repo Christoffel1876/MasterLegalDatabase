@@ -1,0 +1,122 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "One package-relative ordinary file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Document": {
+      "additionalProperties": false,
+      "description": "HttpBinding-compatible package-relative document location.",
+      "properties": {
+        "artifact": {
+          "$ref": "#/$defs/Asset"
+        },
+        "jsonl_row": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Jsonl Row"
+        }
+      },
+      "required": [
+        "artifact"
+      ],
+      "title": "Document",
+      "type": "object"
+    },
+    "HttpBinding": {
+      "additionalProperties": false,
+      "description": "Exact existing inventory contract, with package-relative paths awaiting integration.",
+      "properties": {
+        "document": {
+          "$ref": "#/$defs/Document"
+        },
+        "sha_pointer": {
+          "title": "Sha Pointer",
+          "type": "string"
+        },
+        "status_pointer": {
+          "title": "Status Pointer",
+          "type": "string"
+        },
+        "time_pointer": {
+          "title": "Time Pointer",
+          "type": "string"
+        }
+      },
+      "required": [
+        "document",
+        "sha_pointer",
+        "status_pointer",
+        "time_pointer"
+      ],
+      "title": "HttpBinding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Propose an additive fresh-event reference; not an inventory mutation.",
+  "properties": {
+    "record_id": {
+      "title": "Record Id",
+      "type": "string"
+    },
+    "verified_http": {
+      "$ref": "#/$defs/HttpBinding"
+    },
+    "path_basis": {
+      "const": "package-relative; prefix with actual destination if later integrated",
+      "title": "Path Basis",
+      "type": "string"
+    },
+    "time_role": {
+      "const": "recorded response completion, not original acquisition or repository intake",
+      "title": "Time Role",
+      "type": "string"
+    },
+    "integration_status": {
+      "const": "not_applied",
+      "title": "Integration Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "record_id",
+    "verified_http",
+    "path_basis",
+    "time_role",
+    "integration_status"
+  ],
+  "title": "HttpCandidate",
+  "type": "object"
+}

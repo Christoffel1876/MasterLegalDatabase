@@ -1,0 +1,173 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact retained file relative to this audit.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Scan": {
+      "additionalProperties": false,
+      "description": "Exact observed metadata bytes and exact-value matches only.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "rows": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rows"
+        },
+        "exact_value_matches": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Exact Value Matches",
+          "type": "array"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes",
+        "rows",
+        "exact_value_matches"
+      ],
+      "title": "Scan",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Bounded duplicate comparison, not coverage or source-currentness certification.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "passed_no_exact_local_match",
+      "title": "Status",
+      "type": "string"
+    },
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "source_size_bytes": {
+      "title": "Source Size Bytes",
+      "type": "integer"
+    },
+    "metadata": {
+      "items": {
+        "$ref": "#/$defs/Scan"
+      },
+      "title": "Metadata",
+      "type": "array"
+    },
+    "ordinary_raw_files": {
+      "title": "Ordinary Raw Files",
+      "type": "integer"
+    },
+    "matching_size_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Matching Size Files",
+      "type": "array"
+    },
+    "equal_digest_paths": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Equal Digest Paths",
+      "type": "array"
+    },
+    "public_header_files": {
+      "title": "Public Header Files",
+      "type": "integer"
+    },
+    "sensitive_header_names_present": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Sensitive Header Names Present",
+      "type": "array"
+    },
+    "canonical_apply": {
+      "const": false,
+      "title": "Canonical Apply",
+      "type": "boolean"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "source_id",
+    "source_sha256",
+    "source_size_bytes",
+    "metadata",
+    "ordinary_raw_files",
+    "matching_size_files",
+    "equal_digest_paths",
+    "public_header_files",
+    "sensitive_header_names_present",
+    "canonical_apply",
+    "public_requests",
+    "limitations"
+  ],
+  "title": "DataCheck",
+  "type": "object"
+}

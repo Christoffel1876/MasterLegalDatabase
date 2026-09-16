@@ -1,0 +1,33 @@
+# Executed in an inline Python process from /private/tmp before the checked-buffer revision.
+# The original transaction path below has since been revised; this text is historical, not a runner.
+from pathlib import Path
+import sys,json
+from unittest.mock import patch
+base=Path('/Users/mcoors/Documents/Project Geode/handoffs/run-2026-09-12/final-two-source-intake')
+sys.path.insert(0,str(base))
+import transaction as tx
+manifest=json.loads((tx.PREP/'FINAL_MANIFEST.json').read_bytes())
+print('PREPARATION_is_manifest_member',any(r['path']=='PREPARATION.json' for r in manifest['files']))
+original=Path.read_bytes
+calls=[]
+def tracking(self):
+ data=original(self)
+ if self==tx.PREP/'PREPARATION.json':calls.append('read')
+ return data
+with patch.object(Path,'read_bytes',tracking):
+ plan=tx.load_plan(tx.DEFAULT_ROOT)
+print('PREPARATION_read_count',len(calls))
+seen=0
+def late_read(self):
+ global seen
+ data=original(self)
+ if self==tx.PREP/'PREPARATION.json':
+  seen+=1
+  if seen==len(calls):
+   obj=json.loads(data);obj['proposed_records'][0]['official_source_name']='MUTATED UNPINNED DISPLAY NAME'
+   return json.dumps(obj).encode()
+ return data
+with patch.object(Path,'read_bytes',late_read):
+ changed=tx.load_plan(tx.DEFAULT_ROOT)
+print('late_unpinned_name_accepted_into_plan',changed.templates[0]['official_source_name']=='MUTATED UNPINNED DISPLAY NAME')
+print('filesystem_writes',0)

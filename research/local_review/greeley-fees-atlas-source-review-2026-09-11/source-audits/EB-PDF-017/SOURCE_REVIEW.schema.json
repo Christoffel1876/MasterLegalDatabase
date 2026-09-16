@@ -1,0 +1,585 @@
+{
+  "$defs": {
+    "Cell": {
+      "additionalProperties": false,
+      "properties": {
+        "column": {
+          "enum": [
+            1,
+            2,
+            3
+          ],
+          "title": "Column",
+          "type": "integer"
+        },
+        "display_text": {
+          "title": "Display Text",
+          "type": "string"
+        },
+        "native_span": {
+          "$ref": "#/$defs/Span"
+        },
+        "native_occurrence": {
+          "minimum": 0,
+          "title": "Native Occurrence",
+          "type": "integer"
+        },
+        "pdf_bbox": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Pdf Bbox",
+          "type": "array"
+        },
+        "source_dollar_sign": {
+          "anyOf": [
+            {
+              "const": "$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Dollar Sign"
+        }
+      },
+      "required": [
+        "column",
+        "display_text",
+        "native_span",
+        "native_occurrence",
+        "pdf_bbox",
+        "source_dollar_sign"
+      ],
+      "title": "Cell",
+      "type": "object"
+    },
+    "FileRef": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    },
+    "Header": {
+      "additionalProperties": false,
+      "properties": {
+        "column": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Column",
+          "type": "integer"
+        },
+        "display_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Display Text"
+        },
+        "native_span": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Span"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "visibly_blank": {
+          "title": "Visibly Blank",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "column",
+        "display_text",
+        "native_span",
+        "visibly_blank"
+      ],
+      "title": "Header",
+      "type": "object"
+    },
+    "ImageOnly": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "const": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "source_region": {
+          "title": "Source Region",
+          "type": "string"
+        },
+        "text_lines": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Text Lines",
+          "type": "array"
+        },
+        "native_text_present": {
+          "const": false,
+          "title": "Native Text Present",
+          "type": "boolean"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "image",
+        "source_region",
+        "text_lines",
+        "native_text_present",
+        "qualification"
+      ],
+      "title": "ImageOnly",
+      "type": "object"
+    },
+    "NativePage": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "enum": [
+            1,
+            2
+          ],
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "native_receipt": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "native_text": {
+          "title": "Native Text",
+          "type": "string"
+        },
+        "native_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Native Sha256",
+          "type": "string"
+        },
+        "native_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Native Bytes",
+          "type": "integer"
+        },
+        "candidate_start_byte": {
+          "minimum": 0,
+          "title": "Candidate Start Byte",
+          "type": "integer"
+        },
+        "candidate_end_byte_exclusive": {
+          "exclusiveMinimum": 0,
+          "title": "Candidate End Byte Exclusive",
+          "type": "integer"
+        },
+        "partition": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "title": "Partition",
+          "type": "array"
+        },
+        "full_image_directly_reviewed": {
+          "const": true,
+          "title": "Full Image Directly Reviewed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "native_receipt",
+        "native_text",
+        "native_sha256",
+        "native_bytes",
+        "candidate_start_byte",
+        "candidate_end_byte_exclusive",
+        "partition",
+        "full_image_directly_reviewed"
+      ],
+      "title": "NativePage",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Physical Pages",
+          "type": "array"
+        },
+        "native_spans": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "title": "Native Spans",
+          "type": "array"
+        },
+        "finding": {
+          "title": "Finding",
+          "type": "string"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "physical_pages",
+        "native_spans",
+        "finding",
+        "qualification"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "Row": {
+      "additionalProperties": false,
+      "properties": {
+        "row_id": {
+          "title": "Row Id",
+          "type": "string"
+        },
+        "source_row": {
+          "minimum": 1,
+          "title": "Source Row",
+          "type": "integer"
+        },
+        "cells": {
+          "items": {
+            "$ref": "#/$defs/Cell"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Cells",
+          "type": "array"
+        }
+      },
+      "required": [
+        "row_id",
+        "source_row",
+        "cells"
+      ],
+      "title": "Row",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "enum": [
+            1,
+            2
+          ],
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "start_byte": {
+          "minimum": 0,
+          "title": "Start Byte",
+          "type": "integer"
+        },
+        "end_byte_exclusive": {
+          "exclusiveMinimum": 0,
+          "title": "End Byte Exclusive",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "physical_page",
+        "start_byte",
+        "end_byte_exclusive",
+        "text",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    },
+    "Table": {
+      "additionalProperties": false,
+      "properties": {
+        "table_id": {
+          "enum": [
+            "tap_size",
+            "single_family"
+          ],
+          "title": "Table Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "const": 2,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "source_position": {
+          "enum": [
+            "left",
+            "right"
+          ],
+          "title": "Source Position",
+          "type": "string"
+        },
+        "heading_text": {
+          "title": "Heading Text",
+          "type": "string"
+        },
+        "heading_span": {
+          "$ref": "#/$defs/Span"
+        },
+        "headers": {
+          "items": {
+            "$ref": "#/$defs/Header"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Headers",
+          "type": "array"
+        },
+        "rows": {
+          "items": {
+            "$ref": "#/$defs/Row"
+          },
+          "title": "Rows",
+          "type": "array"
+        },
+        "interpretation_boundary": {
+          "title": "Interpretation Boundary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "table_id",
+        "physical_page",
+        "source_position",
+        "heading_text",
+        "heading_span",
+        "headers",
+        "rows",
+        "interpretation_boundary"
+      ],
+      "title": "Table",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "assignment_id": {
+      "const": "EB-PDF-017",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "greeley-water-sewer-proposed-pif-notice-sd008-08",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-MUNICIPAL-GREELEY",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "review_mode": {
+      "const": "candidate_aware_source_review_before_external_report",
+      "title": "Review Mode",
+      "type": "string"
+    },
+    "external_reports_consulted": {
+      "const": false,
+      "title": "External Reports Consulted",
+      "type": "boolean"
+    },
+    "source_status": {
+      "const": "proposed_fee_notice_with_conditional_schedule",
+      "title": "Source Status",
+      "type": "string"
+    },
+    "source_pdf": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "candidate": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "input_custody": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/NativePage"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Pages",
+      "type": "array"
+    },
+    "tables": {
+      "items": {
+        "$ref": "#/$defs/Table"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Tables",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "image_only": {
+      "items": {
+        "$ref": "#/$defs/ImageOnly"
+      },
+      "title": "Image Only",
+      "type": "array"
+    },
+    "inspected_crops": {
+      "items": {
+        "$ref": "#/$defs/FileRef"
+      },
+      "title": "Inspected Crops",
+      "type": "array"
+    },
+    "all_native_bytes": {
+      "const": 1316,
+      "title": "All Native Bytes",
+      "type": "integer"
+    },
+    "table_data_cells": {
+      "const": 24,
+      "title": "Table Data Cells",
+      "type": "integer"
+    },
+    "native_changes": {
+      "const": "none",
+      "title": "Native Changes",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "legal_effect_verified": {
+      "const": false,
+      "title": "Legal Effect Verified",
+      "type": "boolean"
+    },
+    "source_and_packet_changed": {
+      "const": false,
+      "title": "Source And Packet Changed",
+      "type": "boolean"
+    },
+    "network_requests": {
+      "const": 0,
+      "title": "Network Requests",
+      "type": "integer"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "assignment_id",
+    "source_id",
+    "authority_id",
+    "prepared_at",
+    "review_mode",
+    "external_reports_consulted",
+    "source_status",
+    "source_pdf",
+    "candidate",
+    "input_custody",
+    "pages",
+    "tables",
+    "observations",
+    "image_only",
+    "inspected_crops",
+    "all_native_bytes",
+    "table_data_cells",
+    "native_changes",
+    "legal_currentness",
+    "legal_effect_verified",
+    "source_and_packet_changed",
+    "network_requests",
+    "limits"
+  ],
+  "title": "Review",
+  "type": "object"
+}

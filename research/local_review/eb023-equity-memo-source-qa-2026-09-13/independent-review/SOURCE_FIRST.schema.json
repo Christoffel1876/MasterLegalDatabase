@@ -1,0 +1,142 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Block": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "masthead",
+            "metadata",
+            "heading",
+            "paragraph",
+            "bullet",
+            "table_header",
+            "table_fragment",
+            "footnote",
+            "attachment",
+            "page_number",
+            "graphic_note"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "association": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Association"
+        }
+      },
+      "required": [
+        "id",
+        "page",
+        "kind",
+        "text"
+      ],
+      "title": "Block",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "review_phase": {
+      "const": "source_images_before_current_phase_ocr_comparison",
+      "title": "Review Phase",
+      "type": "string"
+    },
+    "frozen_at": {
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "assets": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Assets",
+      "type": "array"
+    },
+    "blocks": {
+      "items": {
+        "$ref": "#/$defs/Block"
+      },
+      "title": "Blocks",
+      "type": "array"
+    },
+    "scope_notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Scope Notes",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "complete_four_pages": {
+      "const": true,
+      "title": "Complete Four Pages",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "source_id",
+    "review_phase",
+    "frozen_at",
+    "assets",
+    "blocks",
+    "scope_notes",
+    "legal_currentness",
+    "complete_four_pages"
+  ],
+  "title": "FirstReview",
+  "type": "object"
+}

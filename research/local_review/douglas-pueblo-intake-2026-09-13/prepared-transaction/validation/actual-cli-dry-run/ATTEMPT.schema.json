@@ -1,0 +1,59 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "command": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Command",
+      "type": "array"
+    },
+    "cwd": {
+      "title": "Cwd",
+      "type": "string"
+    },
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "title": "Completed At",
+      "type": "string"
+    },
+    "returncode": {
+      "title": "Returncode",
+      "type": "integer"
+    },
+    "stdout_sha256": {
+      "title": "Stdout Sha256",
+      "type": "string"
+    },
+    "stderr_sha256": {
+      "title": "Stderr Sha256",
+      "type": "string"
+    },
+    "production_writes": {
+      "const": 0,
+      "title": "Production Writes",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "command",
+    "cwd",
+    "started_at",
+    "completed_at",
+    "returncode",
+    "stdout_sha256",
+    "stderr_sha256",
+    "production_writes",
+    "public_requests"
+  ],
+  "title": "Attempt",
+  "type": "object"
+}

@@ -1,0 +1,129 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "scoped_acceptance_for_parent_integration_review",
+      "title": "Status",
+      "type": "string"
+    },
+    "final_script_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Final Script Sha256",
+      "type": "string"
+    },
+    "proposal_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "historical_injections_replayed": {
+      "const": 9,
+      "title": "Historical Injections Replayed",
+      "type": "integer"
+    },
+    "rejected": {
+      "const": 6,
+      "title": "Rejected",
+      "type": "integer"
+    },
+    "returned_without_injection": {
+      "const": 3,
+      "title": "Returned Without Injection",
+      "type": "integer"
+    },
+    "exact_normal_outputs": {
+      "const": 18,
+      "title": "Exact Normal Outputs",
+      "type": "integer"
+    },
+    "sources": {
+      "const": 9,
+      "title": "Sources",
+      "type": "integer"
+    },
+    "unchanged_model_asts": {
+      "const": 44,
+      "title": "Unchanged Model Asts",
+      "type": "integer"
+    },
+    "unchanged_douglas_pueblo_helpers": {
+      "const": 9,
+      "title": "Unchanged Douglas Pueblo Helpers",
+      "type": "integer"
+    },
+    "independent_findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Independent Findings",
+      "type": "array"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "production_writes": {
+      "const": 0,
+      "title": "Production Writes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "status",
+    "final_script_sha256",
+    "proposal_manifest",
+    "historical_injections_replayed",
+    "rejected",
+    "returned_without_injection",
+    "exact_normal_outputs",
+    "sources",
+    "unchanged_model_asts",
+    "unchanged_douglas_pueblo_helpers",
+    "independent_findings",
+    "limits",
+    "public_requests",
+    "production_writes"
+  ],
+  "title": "Review",
+  "type": "object"
+}

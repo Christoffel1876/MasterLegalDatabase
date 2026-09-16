@@ -1,0 +1,574 @@
+{
+  "$defs": {
+    "File": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    },
+    "HistoricalRow": {
+      "additionalProperties": false,
+      "properties": {
+        "line": {
+          "title": "Line",
+          "type": "integer"
+        },
+        "line_sha256": {
+          "title": "Line Sha256",
+          "type": "string"
+        },
+        "line_utf8": {
+          "title": "Line Utf8",
+          "type": "string"
+        },
+        "row": {
+          "additionalProperties": true,
+          "title": "Row",
+          "type": "object"
+        },
+        "matches": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Matches",
+          "type": "array"
+        },
+        "archive_reference": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Archive Reference"
+        },
+        "local_availability": {
+          "title": "Local Availability",
+          "type": "string"
+        },
+        "local_recomputed_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Local Recomputed Sha256"
+        }
+      },
+      "required": [
+        "line",
+        "line_sha256",
+        "line_utf8",
+        "row",
+        "matches",
+        "archive_reference",
+        "local_availability",
+        "local_recomputed_sha256"
+      ],
+      "title": "HistoricalRow",
+      "type": "object"
+    },
+    "Legacy": {
+      "additionalProperties": false,
+      "properties": {
+        "input_file": {
+          "$ref": "#/$defs/File"
+        },
+        "compared_commit": {
+          "title": "Compared Commit",
+          "type": "string"
+        },
+        "commit_hash_matched": {
+          "title": "Commit Hash Matched",
+          "type": "boolean"
+        },
+        "total_lines": {
+          "title": "Total Lines",
+          "type": "integer"
+        },
+        "matched_rows": {
+          "items": {
+            "$ref": "#/$defs/HistoricalRow"
+          },
+          "title": "Matched Rows",
+          "type": "array"
+        },
+        "counts_by_event": {
+          "additionalProperties": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object"
+          },
+          "title": "Counts By Event",
+          "type": "object"
+        },
+        "manual_snapshot": {
+          "$ref": "#/$defs/File"
+        },
+        "manual_rows": {
+          "title": "Manual Rows",
+          "type": "integer"
+        },
+        "manual_digest_matches": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Manual Digest Matches",
+          "type": "object"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "input_file",
+        "compared_commit",
+        "commit_hash_matched",
+        "total_lines",
+        "matched_rows",
+        "counts_by_event",
+        "manual_snapshot",
+        "manual_rows",
+        "manual_digest_matches",
+        "note"
+      ],
+      "title": "Legacy",
+      "type": "object"
+    },
+    "LinkBasis": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "source_file": {
+          "title": "Source File",
+          "type": "string"
+        },
+        "source_kind": {
+          "enum": [
+            "parsed_anchor",
+            "curl_redirect"
+          ],
+          "title": "Source Kind",
+          "type": "string"
+        },
+        "exact_url": {
+          "title": "Exact Url",
+          "type": "string"
+        },
+        "exact_label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Exact Label"
+        }
+      },
+      "required": [
+        "event_id",
+        "source_file",
+        "source_kind",
+        "exact_url",
+        "exact_label"
+      ],
+      "title": "LinkBasis",
+      "type": "object"
+    },
+    "NativePage": {
+      "additionalProperties": false,
+      "properties": {
+        "page": {
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "native": {
+          "$ref": "#/$defs/File"
+        },
+        "image": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/File"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "visually_viewed": {
+          "title": "Visually Viewed",
+          "type": "boolean"
+        },
+        "limitation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Limitation"
+        }
+      },
+      "required": [
+        "page",
+        "native",
+        "image",
+        "visually_viewed"
+      ],
+      "title": "NativePage",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Physical Page"
+        },
+        "topic": {
+          "title": "Topic",
+          "type": "string"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/Slice"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "scope": {
+          "enum": [
+            "selected_source_region",
+            "official_html_statement"
+          ],
+          "title": "Scope",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "event_id",
+        "physical_page",
+        "topic",
+        "statement",
+        "evidence",
+        "scope"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "PDF": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/File"
+        },
+        "pages": {
+          "minimum": 1,
+          "title": "Pages",
+          "type": "integer"
+        },
+        "repaired": {
+          "title": "Repaired",
+          "type": "boolean"
+        },
+        "encrypted": {
+          "title": "Encrypted",
+          "type": "boolean"
+        },
+        "engine": {
+          "title": "Engine",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        },
+        "flags": {
+          "title": "Flags",
+          "type": "integer"
+        },
+        "sort": {
+          "const": false,
+          "default": false,
+          "title": "Sort",
+          "type": "boolean"
+        },
+        "metadata": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": "Metadata",
+          "type": "object"
+        },
+        "native_pages": {
+          "items": {
+            "$ref": "#/$defs/NativePage"
+          },
+          "title": "Native Pages",
+          "type": "array"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "date_limits": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Date Limits",
+          "type": "array"
+        }
+      },
+      "required": [
+        "event_id",
+        "source",
+        "pages",
+        "repaired",
+        "encrypted",
+        "engine",
+        "version",
+        "flags",
+        "metadata",
+        "native_pages",
+        "role",
+        "date_limits"
+      ],
+      "title": "PDF",
+      "type": "object"
+    },
+    "Slice": {
+      "additionalProperties": false,
+      "properties": {
+        "file": {
+          "$ref": "#/$defs/File"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "excerpt": {
+          "title": "Excerpt",
+          "type": "string"
+        },
+        "excerpt_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Excerpt Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "file",
+        "start",
+        "end",
+        "excerpt",
+        "excerpt_sha256"
+      ],
+      "title": "Slice",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "task_id": {
+      "const": "atlas-mesa-grand-junction-directed-gaps-2026-09-11",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "public_stop_at": {
+      "format": "date-time",
+      "title": "Public Stop At",
+      "type": "string"
+    },
+    "public_event_count": {
+      "maximum": 14,
+      "title": "Public Event Count",
+      "type": "integer"
+    },
+    "distinct_requested_urls": {
+      "maximum": 10,
+      "title": "Distinct Requested Urls",
+      "type": "integer"
+    },
+    "response_bytes": {
+      "title": "Response Bytes",
+      "type": "integer"
+    },
+    "acquired_pdf_bytes": {
+      "title": "Acquired Pdf Bytes",
+      "type": "integer"
+    },
+    "source_ownership": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Source Ownership",
+      "type": "object"
+    },
+    "basis": {
+      "items": {
+        "$ref": "#/$defs/LinkBasis"
+      },
+      "title": "Basis",
+      "type": "array"
+    },
+    "pdfs": {
+      "items": {
+        "$ref": "#/$defs/PDF"
+      },
+      "title": "Pdfs",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "legacy": {
+      "$ref": "#/$defs/Legacy"
+    },
+    "unopened": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unopened",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "distribution_header_sensitive_paths": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Distribution Header Sensitive Paths",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "completeness": {
+      "const": "not_assessed",
+      "default": "not_assessed",
+      "title": "Completeness",
+      "type": "string"
+    },
+    "scope": {
+      "const": "research_evidence_only",
+      "default": "research_evidence_only",
+      "title": "Scope",
+      "type": "string"
+    }
+  },
+  "required": [
+    "task_id",
+    "prepared_at",
+    "public_stop_at",
+    "public_event_count",
+    "distinct_requested_urls",
+    "response_bytes",
+    "acquired_pdf_bytes",
+    "source_ownership",
+    "basis",
+    "pdfs",
+    "observations",
+    "legacy",
+    "unopened",
+    "limitations",
+    "distribution_header_sensitive_paths"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

@@ -1,0 +1,111 @@
+{
+  "$defs": {
+    "File": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "status": {
+      "const": "PREPARED_NOT_APPLIED",
+      "title": "Status",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "mutable_execution_directory": {
+      "const": "execution",
+      "title": "Mutable Execution Directory",
+      "type": "string"
+    },
+    "execution_directory_present_at_freeze": {
+      "const": false,
+      "title": "Execution Directory Present At Freeze",
+      "type": "boolean"
+    },
+    "sources": {
+      "const": 2,
+      "title": "Sources",
+      "type": "integer"
+    },
+    "physical_pages": {
+      "const": 5,
+      "title": "Physical Pages",
+      "type": "integer"
+    },
+    "original_bytes": {
+      "const": 377549,
+      "title": "Original Bytes",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "preparation_canonical_writes": {
+      "const": 0,
+      "title": "Preparation Canonical Writes",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "prepared_at",
+    "files",
+    "mutable_execution_directory",
+    "execution_directory_present_at_freeze",
+    "sources",
+    "physical_pages",
+    "original_bytes",
+    "legal_currentness",
+    "preparation_canonical_writes",
+    "public_requests"
+  ],
+  "title": "Inventory",
+  "type": "object"
+}

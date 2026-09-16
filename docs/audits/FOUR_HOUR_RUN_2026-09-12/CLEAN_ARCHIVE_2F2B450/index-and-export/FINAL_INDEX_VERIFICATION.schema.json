@@ -1,0 +1,59 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "checked_at": {
+      "title": "Checked At",
+      "type": "string"
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "prepared_record_sha256": {
+      "title": "Prepared Record Sha256",
+      "type": "string"
+    },
+    "selected_files": {
+      "title": "Selected Files",
+      "type": "integer"
+    },
+    "staged_changed_files": {
+      "title": "Staged Changed Files",
+      "type": "integer"
+    },
+    "selected_stored_bytes": {
+      "title": "Selected Stored Bytes",
+      "type": "integer"
+    },
+    "all_index_blobs_match": {
+      "title": "All Index Blobs Match",
+      "type": "boolean"
+    },
+    "index_changed_paths_within_selection": {
+      "title": "Index Changed Paths Within Selection",
+      "type": "boolean"
+    },
+    "untracked_user_files_excluded": {
+      "title": "Untracked User Files Excluded",
+      "type": "boolean"
+    },
+    "head_before_commit": {
+      "title": "Head Before Commit",
+      "type": "string"
+    }
+  },
+  "required": [
+    "checked_at",
+    "status",
+    "prepared_record_sha256",
+    "selected_files",
+    "staged_changed_files",
+    "selected_stored_bytes",
+    "all_index_blobs_match",
+    "index_changed_paths_within_selection",
+    "untracked_user_files_excluded",
+    "head_before_commit"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

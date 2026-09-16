@@ -1,0 +1,128 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "finished_at": {
+      "format": "date-time",
+      "title": "Finished At",
+      "type": "string"
+    },
+    "status": {
+      "const": "source_rendered_before_native_text_access",
+      "title": "Status",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "el-paso-boh-ehs-fees-sd011",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "canonical_original_path": {
+      "title": "Canonical Original Path",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Ref"
+    },
+    "original_record_line": {
+      "$ref": "#/$defs/Ref"
+    },
+    "renderer": {
+      "title": "Renderer",
+      "type": "string"
+    },
+    "renderer_version": {
+      "title": "Renderer Version",
+      "type": "string"
+    },
+    "settings": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "type": "boolean"
+          }
+        ]
+      },
+      "title": "Settings",
+      "type": "object"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "physical_pages": {
+      "const": 5,
+      "title": "Physical Pages",
+      "type": "integer"
+    },
+    "native_text_opened": {
+      "const": false,
+      "title": "Native Text Opened",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "started_at",
+    "finished_at",
+    "status",
+    "source_id",
+    "canonical_original_path",
+    "source",
+    "original_record_line",
+    "renderer",
+    "renderer_version",
+    "settings",
+    "pages",
+    "physical_pages",
+    "native_text_opened",
+    "legal_currentness"
+  ],
+  "title": "Capture",
+  "type": "object"
+}

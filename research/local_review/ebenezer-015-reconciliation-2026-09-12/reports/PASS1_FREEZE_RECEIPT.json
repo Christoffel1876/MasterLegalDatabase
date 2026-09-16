@@ -1,0 +1,76 @@
+{
+  "assignment_id": "EB-PDF-015",
+  "source_id": "greeley-building-fees-sd008-06",
+  "authority_id": "CO-MUNICIPAL-GREELEY",
+  "reviewer": "Ebenezer (Grok Bot)",
+  "review_method": "caption_mediated_source_first",
+  "visual_verification": "pending_atlas_direct_image_review",
+  "prior_candidate_exposure": "none",
+  "legal_currentness": "not_verified",
+  "activation_sha256": "fc9f78bbdc4a9d416ab946bb435de96957cc3d5a748d2063e912eea1d350e3de",
+  "packet_manifest_sha256": "dcb4565ae9a3ce007f7a96e0fcc74cd6ebe8664b435cb1a278d8a75a2f152397",
+  "source_only_identities_sha256": "29ea8ec18e6343e66bff79e6786eba26eb37dbdd09e7bed61fc4a5f26ea9afd5",
+  "original_pdf_sha256": "fa8a90dae00525c2dcb62ef4d69aeb84b7032a0fd2dc64f45c1685981e9becd4",
+  "original_pdf_present_in_workdir": false,
+  "pages_only_ok": true,
+  "expected_pages": 1,
+  "inspected_pages": 1,
+  "page_images": [
+    {
+      "physical_page": 1,
+      "path": "/workspace/geode-015/page-0001.png",
+      "sha256": "051102365c1fc699736227afacc4065c157e32ac6d7d8dd77b4becb9698d8210",
+      "size_bytes": 535417,
+      "representation": "full_page_png_plus_pillow_crops",
+      "tool": "Read (caption-mediated)"
+    }
+  ],
+  "crops_re_read": [
+    "crops/header.png",
+    "crops/table.png",
+    "crops/other_fees.png",
+    "crops/sales_tax_electrical.png",
+    "crops/footer.png",
+    "crops/sales_tax_body.png",
+    "crops/electrical_and_date.png",
+    "crops/table_bottom_rows.png",
+    "crops/footnotes_zone.png"
+  ],
+  "pass1_frozen_md": {
+    "path": "/workspace/geode-015/PASS1_frozen.md",
+    "sha256": "7700629a1a32c57da2b620bf6d9ed388a219cdf79f22a1742b62c2e666870e7f",
+    "size_bytes": 9987
+  },
+  "utc_start": "2026-09-12T22:00:31Z",
+  "utc_freeze": "2026-09-12T22:02:26Z",
+  "hard_gates_observed": {
+    "candidate_txt_opened": false,
+    "02_candidate_text_opened": false,
+    "03_custody_opened": false,
+    "04_verification_opened": false,
+    "full_manifest_json_opened": false,
+    "preparation_receipt_opened": false,
+    "validate_activation_opened": false,
+    "prior_atlas_sherlock_ebenezer_reviews_opened": false,
+    "016_017_materials_opened": false,
+    "native_pdf_extraction_or_ocr_substitute": false
+  },
+  "unchecked_unresolved_regions": [
+    "exact glyphs/Unicode/kerning/spacing (caption-mediated only)",
+    "logo graphic fine detail (caption variants)",
+    "any uncaptioned seals/stamps/watermarks/margin text",
+    "sales-tax percent caption conflict: 4.11% (majority crops) vs 1.11% (footer crop once)",
+    "item 6 terminal punctuation reported as '.-'",
+    "item 9 heading/bold styling vs items 6-8",
+    "original.pdf bytes not present in workdir (identity only)"
+  ],
+  "limitations": [
+    "Captions are not source quotations; may omit/invent/misread",
+    "Not direct pixel inspection; not blind visual transcription",
+    "Assisted and pending Atlas actual image verification",
+    "Caption availability does not authenticate complete transcription",
+    "legal_currentness not_verified; title year 2024 vs footer date 8/18/2026 preserved without effectiveness inference",
+    "No fee arithmetic verification performed"
+  ],
+  "status": "completed_pending_atlas_verification"
+}

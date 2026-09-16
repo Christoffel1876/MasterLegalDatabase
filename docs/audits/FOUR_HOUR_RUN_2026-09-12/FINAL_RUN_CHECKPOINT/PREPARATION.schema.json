@@ -1,0 +1,109 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "checked_at": {
+      "title": "Checked At",
+      "type": "string"
+    },
+    "status": {
+      "const": "tested_local_checkpoint_prepared_shutdown_pending",
+      "title": "Status",
+      "type": "string"
+    },
+    "authorized_start_utc": {
+      "title": "Authorized Start Utc",
+      "type": "string"
+    },
+    "authorized_end_utc": {
+      "title": "Authorized End Utc",
+      "type": "string"
+    },
+    "parent_commit": {
+      "title": "Parent Commit",
+      "type": "string"
+    },
+    "starting_commit": {
+      "title": "Starting Commit",
+      "type": "string"
+    },
+    "full_suite_result": {
+      "title": "Full Suite Result",
+      "type": "string"
+    },
+    "changed_module_coverage": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Changed Module Coverage",
+      "type": "object"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "conclusions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Conclusions",
+      "type": "array"
+    },
+    "public_push": {
+      "const": false,
+      "default": false,
+      "title": "Public Push",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "checked_at",
+    "status",
+    "authorized_start_utc",
+    "authorized_end_utc",
+    "parent_commit",
+    "starting_commit",
+    "full_suite_result",
+    "changed_module_coverage",
+    "files",
+    "conclusions"
+  ],
+  "title": "Preparation",
+  "type": "object"
+}

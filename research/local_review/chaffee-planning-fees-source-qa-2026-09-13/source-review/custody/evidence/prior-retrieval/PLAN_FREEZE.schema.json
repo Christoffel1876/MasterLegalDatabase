@@ -1,0 +1,66 @@
+{
+  "$defs": {
+    "FileRef": {
+      "additionalProperties": false,
+      "description": "Exact package-relative byte identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Byte identities frozen before the first network request.",
+  "properties": {
+    "frozen_at": {
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "plan": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "schema_file": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/FileRef"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "public_actions_before_freeze": {
+      "const": 0,
+      "title": "Public Actions Before Freeze",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "frozen_at",
+    "plan",
+    "schema_file",
+    "evidence",
+    "public_actions_before_freeze"
+  ],
+  "title": "PlanFreeze",
+  "type": "object"
+}

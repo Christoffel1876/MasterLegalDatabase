@@ -1,0 +1,145 @@
+{
+  "$defs": {
+    "Disposition": {
+      "additionalProperties": false,
+      "description": "Root response to one report item; findings are not assumed to be errors.",
+      "properties": {
+        "finding_id": {
+          "pattern": "^EB018-P2-\\d{3}$",
+          "title": "Finding Id",
+          "type": "string"
+        },
+        "decision": {
+          "enum": [
+            "confirmed_observation",
+            "qualified",
+            "uncertainty_retained"
+          ],
+          "title": "Decision",
+          "type": "string"
+        },
+        "pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Pages",
+          "type": "array"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        },
+        "canonical_text_change": {
+          "const": false,
+          "default": false,
+          "title": "Canonical Text Change",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "finding_id",
+        "decision",
+        "pages",
+        "note"
+      ],
+      "title": "Disposition",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A scoped direct check, separate from the assisted report and legal currentness.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source_id": {
+      "const": "weld-building-fees-sd008-01",
+      "default": "weld-building-fees-sd008-01",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source_pdf_sha256": {
+      "const": "8fb5dc78f67407a22857160f107a0253da42320e9e502387be573ef53cab9f27",
+      "default": "8fb5dc78f67407a22857160f107a0253da42320e9e502387be573ef53cab9f27",
+      "title": "Source Pdf Sha256",
+      "type": "string"
+    },
+    "received_and_recorded_at": {
+      "title": "Received And Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "assisted_review_preserved_with_atlas_scoped_dispositions",
+      "title": "Status",
+      "type": "string"
+    },
+    "review_mode": {
+      "const": "candidate_and_prior_review_aware_direct_page_check",
+      "title": "Review Mode",
+      "type": "string"
+    },
+    "root_full_pages_inspected": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Root Full Pages Inspected",
+      "type": "array"
+    },
+    "root_scope": {
+      "title": "Root Scope",
+      "type": "string"
+    },
+    "dispositions": {
+      "items": {
+        "$ref": "#/$defs/Disposition"
+      },
+      "title": "Dispositions",
+      "type": "array"
+    },
+    "qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Qualifications",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "original_reports_modified": {
+      "const": false,
+      "default": false,
+      "title": "Original Reports Modified",
+      "type": "boolean"
+    },
+    "candidate_modified": {
+      "const": false,
+      "default": false,
+      "title": "Candidate Modified",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "received_and_recorded_at",
+    "status",
+    "review_mode",
+    "root_full_pages_inspected",
+    "root_scope",
+    "dispositions",
+    "qualifications"
+  ],
+  "title": "Reconciliation",
+  "type": "object"
+}

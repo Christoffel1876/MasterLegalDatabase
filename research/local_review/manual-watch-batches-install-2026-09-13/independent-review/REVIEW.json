@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-09-13T02:08:14.204239Z",
+  "status": "replay_findings_resolved_scoped_review_passed",
+  "input_manifest": {
+    "path": "received/FINAL_MANIFEST.json",
+    "sha256": "ef2d664301fa00935100307628ec5ac0317bfd622480dc79c0d92ce44b8b159f",
+    "size_bytes": 19436
+  },
+  "evidence": [
+    {
+      "path": "received/proposed/geode/pipeline/manual_source_watch_batches.py",
+      "sha256": "4d291eb8e14237ae98f059dd38e937cad099ee0964e391b5d6ce1e3acbbb6197",
+      "size_bytes": 43958
+    },
+    {
+      "path": "received/proposed/geode/pipeline/manual_watch_http_v2.py",
+      "sha256": "2211827c47cba3503b2ed96e898b6427c1471d71f84c7eb53e8bd42efe439ee1",
+      "size_bytes": 32280
+    },
+    {
+      "path": "probe_replay_revision.py",
+      "sha256": "514526eea6031d1ce56d9d87f06fb5b0936cb5f706451a93eb856cc14e1a79a9",
+      "size_bytes": 5287
+    },
+    {
+      "path": "REPLAY_RESULTS.json",
+      "sha256": "0e55b558fc9ec17a1dc4575c2af856ca5459df19918d192de21220acbb06effa",
+      "size_bytes": 366
+    },
+    {
+      "path": "probe_positive_revision.py",
+      "sha256": "dd0721e7736ba16a03215b2f92a69f8707d7b80fc3534661257d476bdadefb0b",
+      "size_bytes": 2320
+    },
+    {
+      "path": "POSITIVE_RESULTS.json",
+      "sha256": "07cec767a1736261ad5b167ea346b8cc2396566e1c2238484e385a15bb125cee",
+      "size_bytes": 526
+    }
+  ],
+  "resolved_findings": [
+    "The exact earlier cross-host follow-up counterexample now fails verify_run with Reservation changed the original source hostname. Receipt hashes and report were coherently resealed in the temporary fixture.",
+    "The exact earlier 200-second reservation/+70-second complete-response counterexample now fails verify_run with Reservation deadline differs from the selected request limit.",
+    "New helper also enforces the selected per-source redirect-hop limit during ledger replay; reviewed source diff is limited to these routing checks and the exact deadline check."
+  ],
+  "positive_controls": [
+    "Normal and narrowed (3-second request/20-second run) same-host redirects produce completed reports with the two exact unchanged baseline PDFs. All transport was injected.",
+    "Deleting only the temporary final run seal and resuming reconstructs the byte-identical history with no fetch.",
+    "Reusing the completed run name for another configured batch rejects without changing files.",
+    "Revised 94-payload closure and actual six-source/three-batch canonical preflight pass. The preflight also checks original Springs code/config pins."
+  ],
+  "results": {
+    "replay": [
+      {
+        "case": "cross_host_redirect",
+        "result": "REJECTED",
+        "error": "ValueError: Reservation changed the original source hostname",
+        "public_requests": 0
+      },
+      {
+        "case": "request_deadline_extension",
+        "result": "REJECTED",
+        "error": "ValueError: Reservation deadline differs from the selected request limit",
+        "public_requests": 0
+      }
+    ],
+    "positive": [
+      {
+        "narrower_limits": false,
+        "same_host_redirect": "completed_three_fixture_calls",
+        "two_sources": "unchanged_exact_bytes",
+        "final_seal_recovery": "byte_identical_no_fetch",
+        "cross_batch": "rejected_no_change",
+        "public_requests": 0
+      },
+      {
+        "narrower_limits": true,
+        "same_host_redirect": "completed_three_fixture_calls",
+        "two_sources": "unchanged_exact_bytes",
+        "final_seal_recovery": "byte_identical_no_fetch",
+        "cross_batch": "rejected_no_change",
+        "public_requests": 0
+      }
+    ]
+  },
+  "limits": [
+    "This closes the two concrete historical findings for the exact pinned revised proposal. It is not a general security proof, public transport test, source-currentness determination or automatic deployment approval.",
+    "All fixture clocks are injected and artificial; no claim of elapsed real HTTP behavior follows from them. No production file or historical audit was changed.",
+    "No rerun of the author205-case suite or old saved live report; those remain author-reported checks. Root chooses installation and any separately authorized live check."
+  ],
+  "legal_currentness": "not_verified",
+  "production_writes": 0,
+  "public_requests": 0
+}

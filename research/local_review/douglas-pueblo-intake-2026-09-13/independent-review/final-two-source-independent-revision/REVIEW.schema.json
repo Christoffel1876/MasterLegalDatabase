@@ -1,0 +1,133 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "reviewer": {
+      "const": "Atlas independent review worker",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "historical_transaction": {
+      "$ref": "#/$defs/Ref"
+    },
+    "original_independent_manifest": {
+      "$ref": "#/$defs/Ref"
+    },
+    "final_transaction": {
+      "$ref": "#/$defs/Ref"
+    },
+    "final_preparation_manifest": {
+      "$ref": "#/$defs/Ref"
+    },
+    "final_verifier": {
+      "$ref": "#/$defs/Ref"
+    },
+    "final_tests": {
+      "$ref": "#/$defs/Ref"
+    },
+    "historical_repro": {
+      "title": "Historical Repro",
+      "type": "string"
+    },
+    "reproduction_scope": {
+      "title": "Reproduction Scope",
+      "type": "string"
+    },
+    "checked_buffer_confirmation": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checked Buffer Confirmation",
+      "type": "array"
+    },
+    "read_only_check": {
+      "$ref": "#/$defs/Ref"
+    },
+    "status": {
+      "const": "accepted_in_reviewed_scope",
+      "title": "Status",
+      "type": "string"
+    },
+    "qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Qualifications",
+      "type": "array"
+    },
+    "public_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "production_writes": {
+      "const": 0,
+      "default": 0,
+      "title": "Production Writes",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "reviewed_at",
+    "reviewer",
+    "historical_transaction",
+    "original_independent_manifest",
+    "final_transaction",
+    "final_preparation_manifest",
+    "final_verifier",
+    "final_tests",
+    "historical_repro",
+    "reproduction_scope",
+    "checked_buffer_confirmation",
+    "read_only_check",
+    "status",
+    "qualifications"
+  ],
+  "title": "Review",
+  "type": "object"
+}

@@ -1,0 +1,81 @@
+{
+  "$defs": {
+    "Image": {
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "physical_page"
+      ],
+      "title": "Image",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    },
+    "original_sha256": {
+      "title": "Original Sha256",
+      "type": "string"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Image"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "complete_verbatim_transcript": {
+      "default": false,
+      "title": "Complete Verbatim Transcript",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "method",
+    "scope",
+    "original_sha256",
+    "pages",
+    "observations"
+  ],
+  "title": "Review",
+  "type": "object"
+}

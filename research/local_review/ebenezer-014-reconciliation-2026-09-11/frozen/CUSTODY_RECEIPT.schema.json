@@ -1,0 +1,63 @@
+{
+  "$defs": {
+    "File": {
+      "additionalProperties": false,
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "received_path": {
+          "title": "Received Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "original_path",
+        "received_path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "frozen_at": {
+      "format": "date-time",
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "title": "Files",
+      "type": "array"
+    },
+    "original_files_unchanged": {
+      "title": "Original Files Unchanged",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "frozen_at",
+    "files",
+    "original_files_unchanged"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

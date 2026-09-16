@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0",
+  "stage": "expectations_before_draft",
+  "created_at": "2026-09-13T17:11:47.424461+00:00",
+  "inputs": [],
+  "checks": [
+    {
+      "id": "C01",
+      "expected": "Exactly the existing four named pairs/eight PDFs are selected; no discovered URL is enrolled.",
+      "outcome": "pending",
+      "evidence": []
+    },
+    {
+      "id": "C02",
+      "expected": "All four readiness/pin/selected-source preflights finish before any HTTP execution starts.",
+      "outcome": "pending",
+      "evidence": []
+    },
+    {
+      "id": "C03",
+      "expected": "Four serial batches preserve individual 4-request/4-URL/2MB-source/4MB-batch caps and total maximum16 requests/16MB response bytes; no retries.",
+      "outcome": "pending",
+      "evidence": []
+    },
+    {
+      "id": "C04",
+      "expected": "Exit zero alone is not success: changed, partial, denied, not_checked and invalid reports remain distinguishable.",
+      "outcome": "pending",
+      "evidence": []
+    },
+    {
+      "id": "C05",
+      "expected": "A changed valid PDF requires review and cannot update baselines, canonical files or legal status.",
+      "outcome": "pending",
+      "evidence": []
+    },
+    {
+      "id": "C06",
+      "expected": "Immutable event/report artifacts survive failed jobs where execution reaches artifact handling; cancellation/platform upload failures remain explicit limits.",
+      "outcome": "pending",
+      "evidence": []
+    },
+    {
+      "id": "C07",
+      "expected": "Workflow uses read-only repository permissions and checkout without persisted credentials; no commit, publication or deployment.",
+      "outcome": "pending",
+      "evidence": []
+    },
+    {
+      "id": "C08",
+      "expected": "Finite wall timeout and per-batch/request deadlines remain effective; execution is serial and no hidden retry wrapper exists.",
+      "outcome": "pending",
+      "evidence": []
+    },
+    {
+      "id": "C09",
+      "expected": "Only selected custody inputs are required, with no LFS fetch or whole-corpus completeness assumption.",
+      "outcome": "pending",
+      "evidence": []
+    },
+    {
+      "id": "C10",
+      "expected": "Offline fixtures exercise unchanged, changed, partial/failure, refusal, preflight failure and report/exit disagreement; no live HTTP.",
+      "outcome": "pending",
+      "evidence": []
+    },
+    {
+      "id": "C11",
+      "expected": "All hashes and imported dependencies refer to reviewed artifacts; original workspace paths are not required by installed runner.",
+      "outcome": "pending",
+      "evidence": []
+    },
+    {
+      "id": "C12",
+      "expected": "Results assert transport/byte evidence only, not current law or source-wide extraction accuracy.",
+      "outcome": "pending",
+      "evidence": []
+    }
+  ],
+  "findings": [],
+  "public_requests": 0,
+  "canonical_changes": false,
+  "scheduled_or_installed_by_audit": false,
+  "legal_currentness": "not_verified",
+  "limitations": [
+    "Expectations recorded before the frozen proposed runner/workflow was inspected.",
+    "Local macOS fixtures cannot certify actual GitHub-hosted Linux scheduling, network access or artifact service operation."
+  ]
+}

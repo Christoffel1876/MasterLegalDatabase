@@ -1,0 +1,81 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "package_path": {
+          "title": "Package Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "original_path",
+        "package_path",
+        "sha256",
+        "size_bytes",
+        "role"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "exact_custody_copies_verified",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "context_only_manifest": {
+      "title": "Context Only Manifest",
+      "type": "string"
+    },
+    "references": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "References",
+      "type": "array"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "status",
+    "legal_currentness",
+    "context_only_manifest",
+    "references",
+    "scope"
+  ],
+  "title": "Supplement",
+  "type": "object"
+}

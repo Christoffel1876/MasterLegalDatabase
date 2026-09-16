@@ -1,0 +1,121 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact package-relative retained file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Local code review/probe receipt; prior suite counts remain root-attributed.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "reviewer": {
+      "const": "Popper",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "status": {
+      "const": "no_blocker_in_new_path_scoped_branch",
+      "title": "Status",
+      "type": "string"
+    },
+    "copied_root_decision": {
+      "$ref": "#/$defs/Asset"
+    },
+    "copied_root_inventory": {
+      "$ref": "#/$defs/Asset"
+    },
+    "copied_policy_subset": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Copied Policy Subset",
+      "type": "array"
+    },
+    "accepted_exact_urls": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Accepted Exact Urls",
+      "type": "array"
+    },
+    "rejected_probe_urls": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rejected Probe Urls",
+      "type": "array"
+    },
+    "root_reported_focused_tests": {
+      "const": 126,
+      "title": "Root Reported Focused Tests",
+      "type": "integer"
+    },
+    "root_tests_independently_rerun": {
+      "const": false,
+      "title": "Root Tests Independently Rerun",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "canonical_changes": {
+      "const": 0,
+      "title": "Canonical Changes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "reviewer",
+    "status",
+    "copied_root_decision",
+    "copied_root_inventory",
+    "copied_policy_subset",
+    "accepted_exact_urls",
+    "rejected_probe_urls",
+    "root_reported_focused_tests",
+    "root_tests_independently_rerun",
+    "limitations",
+    "public_requests",
+    "canonical_changes"
+  ],
+  "title": "PolicyReview",
+  "type": "object"
+}

@@ -1,0 +1,515 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Bind one exact ordinary file relative to this package.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "DateClaim": {
+      "additionalProperties": false,
+      "description": "Keep a source-stated date separate from legal effect or collection time.",
+      "properties": {
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "source_stated_effective",
+            "source_stated_approval",
+            "recording_stamp",
+            "unlabeled_cover_date",
+            "source_stated_execution",
+            "document_footer_date"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "observation_id": {
+          "title": "Observation Id",
+          "type": "string"
+        },
+        "independently_verified": {
+          "const": false,
+          "title": "Independently Verified",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "value",
+        "role",
+        "observation_id",
+        "independently_verified"
+      ],
+      "title": "DateClaim",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "description": "Record bounded image-supported wording and extraction limitations.",
+      "properties": {
+        "observation_id": {
+          "title": "Observation Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "region": {
+          "title": "Region",
+          "type": "string"
+        },
+        "visible_text": {
+          "title": "Visible Text",
+          "type": "string"
+        },
+        "native_anchor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Span"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "conclusion": {
+          "title": "Conclusion",
+          "type": "string"
+        },
+        "uncertainty": {
+          "title": "Uncertainty",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "observation_id",
+        "physical_page",
+        "region",
+        "visible_text",
+        "native_anchor",
+        "conclusion",
+        "uncertainty",
+        "legal_currentness"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "Bind a fully viewed page image and its uncorrected native extraction.",
+      "properties": {
+        "physical_page": {
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_nonwhitespace": {
+          "title": "Native Nonwhitespace",
+          "type": "boolean"
+        },
+        "view_scope": {
+          "const": "full_page_for_title_issuer_role_and_selected_date_context",
+          "title": "View Scope",
+          "type": "string"
+        },
+        "numeric_table_certification": {
+          "const": false,
+          "title": "Numeric Table Certification",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "native",
+        "native_nonwhitespace",
+        "view_scope",
+        "numeric_table_certification"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Referral": {
+      "additionalProperties": false,
+      "description": "Keep the exact preserved public HTML anchor and audited response context.",
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "parent_url": {
+          "title": "Parent Url",
+          "type": "string"
+        },
+        "parent": {
+          "$ref": "#/$defs/Asset"
+        },
+        "href": {
+          "title": "Href",
+          "type": "string"
+        },
+        "resolved_url": {
+          "title": "Resolved Url",
+          "type": "string"
+        },
+        "anchor_text": {
+          "title": "Anchor Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "parent_url",
+        "parent",
+        "href",
+        "resolved_url",
+        "anchor_text"
+      ],
+      "title": "Referral",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "description": "Locate an exact UTF-8 substring; this is not corrected native text.",
+      "properties": {
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "text",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Propose or defer ownership using direct document evidence.",
+  "properties": {
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "decision": {
+      "enum": [
+        "propose_county_intake",
+        "defer_issuer_layer_decision"
+      ],
+      "title": "Decision",
+      "type": "string"
+    },
+    "authority_id": {
+      "anyOf": [
+        {
+          "const": "CO-COUNTY-EL_PASO",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Authority Id"
+    },
+    "layer_id": {
+      "anyOf": [
+        {
+          "const": "08_County_Authorities",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Layer Id"
+    },
+    "issuer_as_shown": {
+      "title": "Issuer As Shown",
+      "type": "string"
+    },
+    "issuer_kind": {
+      "enum": [
+        "county_department",
+        "county_board_of_commissioners",
+        "county_board_of_health",
+        "unresolved_school_fee_issuer",
+        "colorado_geological_survey"
+      ],
+      "title": "Issuer Kind",
+      "type": "string"
+    },
+    "document_role": {
+      "title": "Document Role",
+      "type": "string"
+    },
+    "title_for_intake": {
+      "title": "Title For Intake",
+      "type": "string"
+    },
+    "language": {
+      "enum": [
+        "en",
+        "es"
+      ],
+      "title": "Language",
+      "type": "string"
+    },
+    "original": {
+      "$ref": "#/$defs/Asset"
+    },
+    "received_body_path": {
+      "title": "Received Body Path",
+      "type": "string"
+    },
+    "source_pages": {
+      "minimum": 1,
+      "title": "Source Pages",
+      "type": "integer"
+    },
+    "event_id": {
+      "title": "Event Id",
+      "type": "string"
+    },
+    "requested_url_claim": {
+      "title": "Requested Url Claim",
+      "type": "string"
+    },
+    "final_url_claim": {
+      "title": "Final Url Claim",
+      "type": "string"
+    },
+    "acquisition_started_at_claim": {
+      "format": "date-time",
+      "title": "Acquisition Started At Claim",
+      "type": "string"
+    },
+    "acquisition_completed_at_claim": {
+      "format": "date-time",
+      "title": "Acquisition Completed At Claim",
+      "type": "string"
+    },
+    "upstream_acquisition_independently_verified": {
+      "const": false,
+      "title": "Upstream Acquisition Independently Verified",
+      "type": "boolean"
+    },
+    "verified_http_acquired_at": {
+      "title": "Verified Http Acquired At",
+      "type": "null"
+    },
+    "atlas_delivery_captured_at": {
+      "format": "date-time",
+      "title": "Atlas Delivery Captured At",
+      "type": "string"
+    },
+    "atlas_preparation_copied_at": {
+      "format": "date-time",
+      "title": "Atlas Preparation Copied At",
+      "type": "string"
+    },
+    "actual_repository_received_at": {
+      "title": "Actual Repository Received At",
+      "type": "null"
+    },
+    "public_headers": {
+      "$ref": "#/$defs/Asset"
+    },
+    "observed_http_statuses": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Observed Http Statuses",
+      "type": "array"
+    },
+    "observed_redirect_destinations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Observed Redirect Destinations",
+      "type": "array"
+    },
+    "source_referrals": {
+      "items": {
+        "$ref": "#/$defs/Referral"
+      },
+      "title": "Source Referrals",
+      "type": "array"
+    },
+    "referral_basis": {
+      "enum": [
+        "preserved_official_html_anchor",
+        "inherited_url_no_fresh_anchor"
+      ],
+      "title": "Referral Basis",
+      "type": "string"
+    },
+    "historical_matching_rows": {
+      "minimum": 0,
+      "title": "Historical Matching Rows",
+      "type": "integer"
+    },
+    "historical_source_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Historical Source Ids",
+      "type": "array"
+    },
+    "directly_viewed_pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "minItems": 1,
+      "title": "Directly Viewed Pages",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "minItems": 1,
+      "title": "Observations",
+      "type": "array"
+    },
+    "date_claims": {
+      "items": {
+        "$ref": "#/$defs/DateClaim"
+      },
+      "title": "Date Claims",
+      "type": "array"
+    },
+    "verified_adoption_date": {
+      "title": "Verified Adoption Date",
+      "type": "null"
+    },
+    "verified_effective_date": {
+      "title": "Verified Effective Date",
+      "type": "null"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "translation_equivalence_verified": {
+      "const": false,
+      "title": "Translation Equivalence Verified",
+      "type": "boolean"
+    },
+    "full_text_reviewed": {
+      "const": false,
+      "title": "Full Text Reviewed",
+      "type": "boolean"
+    },
+    "qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Qualifications",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_id",
+    "decision",
+    "authority_id",
+    "layer_id",
+    "issuer_as_shown",
+    "issuer_kind",
+    "document_role",
+    "title_for_intake",
+    "language",
+    "original",
+    "received_body_path",
+    "source_pages",
+    "event_id",
+    "requested_url_claim",
+    "final_url_claim",
+    "acquisition_started_at_claim",
+    "acquisition_completed_at_claim",
+    "upstream_acquisition_independently_verified",
+    "verified_http_acquired_at",
+    "atlas_delivery_captured_at",
+    "atlas_preparation_copied_at",
+    "actual_repository_received_at",
+    "public_headers",
+    "observed_http_statuses",
+    "observed_redirect_destinations",
+    "source_referrals",
+    "referral_basis",
+    "historical_matching_rows",
+    "historical_source_ids",
+    "directly_viewed_pages",
+    "observations",
+    "date_claims",
+    "verified_adoption_date",
+    "verified_effective_date",
+    "legal_currentness",
+    "answer_safe",
+    "translation_equivalence_verified",
+    "full_text_reviewed",
+    "qualifications"
+  ],
+  "title": "Source",
+  "type": "object"
+}

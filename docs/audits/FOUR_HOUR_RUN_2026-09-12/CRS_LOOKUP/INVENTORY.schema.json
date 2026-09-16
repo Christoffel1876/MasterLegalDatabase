@@ -1,0 +1,54 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "One exact file with a declared local path base.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "maximum": 10000000,
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Closed audit subset, distinct from the full historical prototype inventory.",
+  "properties": {
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "excluded_files": {
+      "const": "INVENTORY.json only",
+      "title": "Excluded Files",
+      "type": "string"
+    }
+  },
+  "required": [
+    "files",
+    "excluded_files"
+  ],
+  "title": "Inventory",
+  "type": "object"
+}

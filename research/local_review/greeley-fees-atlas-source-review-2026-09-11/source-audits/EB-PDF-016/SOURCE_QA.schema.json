@@ -1,0 +1,731 @@
+{
+  "$defs": {
+    "Cell": {
+      "additionalProperties": false,
+      "properties": {
+        "column_start": {
+          "maximum": 8,
+          "minimum": 1,
+          "title": "Column Start",
+          "type": "integer"
+        },
+        "column_span": {
+          "maximum": 8,
+          "minimum": 1,
+          "title": "Column Span",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "native_bound_visible_text",
+            "visually_blank"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "native_spans": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "title": "Native Spans",
+          "type": "array"
+        }
+      },
+      "required": [
+        "column_start",
+        "column_span",
+        "text",
+        "status",
+        "native_spans"
+      ],
+      "title": "Cell",
+      "type": "object"
+    },
+    "Chunk": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "layout_whitespace",
+            "native_artifact",
+            "header",
+            "body",
+            "table"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "visibility": {
+          "enum": [
+            "visible",
+            "not_visible_in_checked_render",
+            "layout_whitespace"
+          ],
+          "title": "Visibility",
+          "type": "string"
+        },
+        "span": {
+          "$ref": "#/$defs/Span"
+        }
+      },
+      "required": [
+        "id",
+        "role",
+        "visibility",
+        "span"
+      ],
+      "title": "Chunk",
+      "type": "object"
+    },
+    "Crop": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "pdf_rect_points": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Pdf Rect Points",
+          "type": "array"
+        },
+        "file": {
+          "$ref": "#/$defs/Ref"
+        },
+        "method": {
+          "const": "PyMuPDF 1.28.2; Matrix(300/72,300/72); clip; alpha=False",
+          "title": "Method",
+          "type": "string"
+        },
+        "visually_checked": {
+          "const": true,
+          "title": "Visually Checked",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "pdf_rect_points",
+        "file",
+        "method",
+        "visually_checked"
+      ],
+      "title": "Crop",
+      "type": "object"
+    },
+    "InputCopy": {
+      "additionalProperties": false,
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "frozen": {
+          "$ref": "#/$defs/Ref"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "original_path",
+        "frozen",
+        "role"
+      ],
+      "title": "InputCopy",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "source_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "source_image_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Source Image Sha256",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "source_wording",
+            "date_role",
+            "reading_order",
+            "native_not_visible",
+            "image_only",
+            "scope_boundary",
+            "source_arithmetic",
+            "source_layout"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "pdf_rect_points": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Pdf Rect Points",
+          "type": "array"
+        },
+        "native_spans": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "title": "Native Spans",
+          "type": "array"
+        },
+        "image_only_words": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Image Only Words"
+        },
+        "finding": {
+          "title": "Finding",
+          "type": "string"
+        },
+        "limitation": {
+          "title": "Limitation",
+          "type": "string"
+        },
+        "crop_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Crop Ids",
+          "type": "array"
+        },
+        "legal_effect": {
+          "const": "not_determined",
+          "title": "Legal Effect",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "source_sha256",
+        "source_image_sha256",
+        "kind",
+        "pdf_rect_points",
+        "native_spans",
+        "image_only_words",
+        "finding",
+        "limitation",
+        "crop_ids",
+        "legal_effect"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "source_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "image": {
+          "$ref": "#/$defs/Ref"
+        },
+        "evidence": {
+          "$ref": "#/$defs/Ref"
+        },
+        "native_file": {
+          "$ref": "#/$defs/Ref"
+        },
+        "native_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Native Sha256",
+          "type": "string"
+        },
+        "native_text": {
+          "title": "Native Text",
+          "type": "string"
+        },
+        "candidate_start_byte": {
+          "title": "Candidate Start Byte",
+          "type": "integer"
+        },
+        "candidate_end_byte_exclusive": {
+          "title": "Candidate End Byte Exclusive",
+          "type": "integer"
+        },
+        "chunks": {
+          "items": {
+            "$ref": "#/$defs/Chunk"
+          },
+          "title": "Chunks",
+          "type": "array"
+        },
+        "printed_page_label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Printed Page Label"
+        },
+        "full_page_visually_checked": {
+          "const": true,
+          "title": "Full Page Visually Checked",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "physical_page",
+        "source_sha256",
+        "image",
+        "evidence",
+        "native_file",
+        "native_sha256",
+        "native_text",
+        "candidate_start_byte",
+        "candidate_end_byte_exclusive",
+        "chunks",
+        "printed_page_label",
+        "full_page_visually_checked"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "Row": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "caption",
+            "column_header",
+            "group_header",
+            "fee",
+            "weight",
+            "percent_change",
+            "spacer"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "fee_group_header_row_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Fee Group Header Row Id"
+        },
+        "pdf_rect_points": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Pdf Rect Points",
+          "type": "array"
+        },
+        "cells": {
+          "items": {
+            "$ref": "#/$defs/Cell"
+          },
+          "title": "Cells",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "role",
+        "fee_group_header_row_id",
+        "pdf_rect_points",
+        "cells"
+      ],
+      "title": "Row",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "start_byte": {
+          "minimum": 0,
+          "title": "Start Byte",
+          "type": "integer"
+        },
+        "end_byte_exclusive": {
+          "exclusiveMinimum": 0,
+          "title": "End Byte Exclusive",
+          "type": "integer"
+        },
+        "candidate_start_byte": {
+          "minimum": 0,
+          "title": "Candidate Start Byte",
+          "type": "integer"
+        },
+        "candidate_end_byte_exclusive": {
+          "exclusiveMinimum": 0,
+          "title": "Candidate End Byte Exclusive",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "physical_page",
+        "start_byte",
+        "end_byte_exclusive",
+        "candidate_start_byte",
+        "candidate_end_byte_exclusive",
+        "text",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    },
+    "Table": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "source_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "source_image_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Source Image Sha256",
+          "type": "string"
+        },
+        "column_count": {
+          "maximum": 8,
+          "minimum": 1,
+          "title": "Column Count",
+          "type": "integer"
+        },
+        "pdf_rect_points": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Pdf Rect Points",
+          "type": "array"
+        },
+        "column_role_notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Column Role Notes",
+          "type": "array"
+        },
+        "header_reference_row_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Header Reference Row Ids",
+          "type": "array"
+        },
+        "native_span": {
+          "$ref": "#/$defs/Span"
+        },
+        "rows": {
+          "items": {
+            "$ref": "#/$defs/Row"
+          },
+          "title": "Rows",
+          "type": "array"
+        },
+        "visual_association_notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Visual Association Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "source_sha256",
+        "source_image_sha256",
+        "column_count",
+        "pdf_rect_points",
+        "column_role_notes",
+        "header_reference_row_ids",
+        "native_span",
+        "rows",
+        "visual_association_notes"
+      ],
+      "title": "Table",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "greeley-development-impact-fee-memo-sd008-07",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "assignment_id": {
+      "const": "EB-PDF-016",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "status": {
+      "const": "three_page_candidate_aware_source_qa_complete_pending_parent_integration",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "review_mode": {
+      "const": "candidate_aware_not_blind",
+      "title": "Review Mode",
+      "type": "string"
+    },
+    "external_review_consulted": {
+      "const": false,
+      "title": "External Review Consulted",
+      "type": "boolean"
+    },
+    "prior_exposure": {
+      "title": "Prior Exposure",
+      "type": "string"
+    },
+    "input_copies": {
+      "items": {
+        "$ref": "#/$defs/InputCopy"
+      },
+      "title": "Input Copies",
+      "type": "array"
+    },
+    "source": {
+      "$ref": "#/$defs/Ref"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Ref"
+    },
+    "packet_manifest": {
+      "$ref": "#/$defs/Ref"
+    },
+    "expected_pages": {
+      "const": 3,
+      "title": "Expected Pages",
+      "type": "integer"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "crops": {
+      "items": {
+        "$ref": "#/$defs/Crop"
+      },
+      "title": "Crops",
+      "type": "array"
+    },
+    "tables": {
+      "items": {
+        "$ref": "#/$defs/Table"
+      },
+      "title": "Tables",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "text_edits_applied": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 0,
+      "title": "Text Edits Applied",
+      "type": "array"
+    },
+    "normalization_policy": {
+      "title": "Normalization Policy",
+      "type": "string"
+    },
+    "no_arithmetic_recomputation": {
+      "const": true,
+      "title": "No Arithmetic Recomputation",
+      "type": "boolean"
+    },
+    "fee_row_count": {
+      "const": 30,
+      "title": "Fee Row Count",
+      "type": "integer"
+    },
+    "footnotes_observed": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Footnotes Observed",
+      "type": "array"
+    },
+    "provenance_limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Provenance Limits",
+      "type": "array"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "reviewed_at",
+    "source_id",
+    "assignment_id",
+    "status",
+    "legal_currentness",
+    "review_mode",
+    "external_review_consulted",
+    "prior_exposure",
+    "input_copies",
+    "source",
+    "candidate",
+    "packet_manifest",
+    "expected_pages",
+    "pages",
+    "crops",
+    "tables",
+    "observations",
+    "text_edits_applied",
+    "normalization_policy",
+    "no_arithmetic_recomputation",
+    "fee_row_count",
+    "footnotes_observed",
+    "provenance_limits",
+    "limits"
+  ],
+  "title": "Review",
+  "type": "object"
+}

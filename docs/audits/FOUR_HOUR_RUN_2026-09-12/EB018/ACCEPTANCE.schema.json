@@ -1,0 +1,118 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "preserved_scoped_reconciliation",
+      "title": "Status",
+      "type": "string"
+    },
+    "package_inventory": {
+      "$ref": "#/$defs/Ref"
+    },
+    "source_package_files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Source Package Files",
+      "type": "array"
+    },
+    "verification_returncode": {
+      "const": 0,
+      "title": "Verification Returncode",
+      "type": "integer"
+    },
+    "verification_stdout": {
+      "title": "Verification Stdout",
+      "type": "string"
+    },
+    "root_full_pages_previously_viewed": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Root Full Pages Previously Viewed",
+      "type": "array"
+    },
+    "independent_full_pages_reported": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Independent Full Pages Reported",
+      "type": "array"
+    },
+    "independent_native_bytes": {
+      "title": "Independent Native Bytes",
+      "type": "integer"
+    },
+    "findings_dispositioned": {
+      "title": "Findings Dispositioned",
+      "type": "integer"
+    },
+    "native_corrections_accepted": {
+      "const": 0,
+      "title": "Native Corrections Accepted",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "package_inventory",
+    "source_package_files",
+    "verification_returncode",
+    "verification_stdout",
+    "root_full_pages_previously_viewed",
+    "independent_full_pages_reported",
+    "independent_native_bytes",
+    "findings_dispositioned",
+    "native_corrections_accepted",
+    "legal_currentness",
+    "limitations"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

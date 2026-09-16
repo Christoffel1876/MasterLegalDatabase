@@ -1,0 +1,205 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Hash-bound copied evidence member.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "description": "Exact proposed source and authority, not an intake receipt.",
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-GUNNISON",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "const": "08_County_Authorities",
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "pages": {
+          "title": "Pages",
+          "type": "integer"
+        },
+        "original_filename": {
+          "title": "Original Filename",
+          "type": "string"
+        },
+        "original_acquisition_at_verified": {
+          "title": "Original Acquisition At Verified",
+          "type": "null"
+        }
+      },
+      "required": [
+        "source_id",
+        "authority_id",
+        "layer_id",
+        "sha256",
+        "size_bytes",
+        "pages",
+        "original_filename",
+        "original_acquisition_at_verified"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Agent-attributed review conclusion with explicit execution limits.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "reviewer": {
+      "const": "Plato",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "agent_path": {
+      "const": "/root/state_refresh_plan",
+      "title": "Agent Path",
+      "type": "string"
+    },
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "disposition": {
+      "const": "no_blocking_issue_found_fixed_three_source_preparation",
+      "title": "Disposition",
+      "type": "string"
+    },
+    "preparation_directory_claim": {
+      "title": "Preparation Directory Claim",
+      "type": "string"
+    },
+    "reviewed_package": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Reviewed Package",
+      "type": "array"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "code_reviewed": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Code Reviewed",
+      "type": "array"
+    },
+    "independent_cases_passed": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Independent Cases Passed",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "failed_attempts": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Failed Attempts",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "actual_repository_apply_performed": {
+      "const": false,
+      "title": "Actual Repository Apply Performed",
+      "type": "boolean"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "reviewer",
+    "agent_path",
+    "recorded_at",
+    "disposition",
+    "preparation_directory_claim",
+    "reviewed_package",
+    "sources",
+    "code_reviewed",
+    "independent_cases_passed",
+    "findings",
+    "failed_attempts",
+    "limitations",
+    "actual_repository_apply_performed",
+    "public_requests",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

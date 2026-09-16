@@ -1,0 +1,38 @@
+........................................................................ [ 36%]
+................................F....................................... [ 72%]
+.......................................................                  [100%]
+=================================== FAILURES ===================================
+__________ test_v2_does_not_admit_other_urls_or_cross_host_redirects ___________
+
+packet = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-225/test_v2_does_not_admit_other_u0/packet')
+
+    def test_v2_does_not_admit_other_urls_or_cross_host_redirects(packet: Path) -> None:
+        """The five-host policy does not expand a pair or permit an otherwise approved new owner."""
+        path, plan = selected(packet, 'county-fees-v1')
+        calls = []
+        def fetch(url: str, *args: Any) -> Response:
+            calls.append(url)
+            return Response(b'', 302, {'location': plan.targets[1].url})
+        report = w.run_watch(path, packet / w.RUNTIME / 'cross-owner', NOW, w.g.sha(path),
+                             clock=lambda: NOW, fetch=fetch)
+        assert calls[0] == plan.targets[0].url
+>       assert len(calls) == 2  # Second target's own initial request, not a followed redirect.
+        ^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 1 == 2
+E        +  where 1 = len(['https://files.arapahoeco.gov/Public%20Works_Development/planning_land%20development/Planning%20Fees.pdf'])
+
+handoffs/run-2026-09-12/extended-run/manual-watch-expansion/proposed/tests/test_manual_watch_batches_admission.py:244: AssertionError
+================================ tests coverage ================================
+_______________ coverage: platform darwin, python 3.14.3-final-0 _______________
+
+Name                                                                                                                 Stmts   Miss Branch BrPart  Cover   Missing
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+handoffs/run-2026-09-12/extended-run/manual-watch-expansion/proposed/geode/pipeline/manual_source_watch_batches.py     628     30    234     32    93%   291, 406, 409, 411, 424, 435, 465, 485, 491, 513, 539, 571->573, 591, 612, 626, 630, 673, 696, 701, 704, 719, 735->734, 760, 768, 775, 779, 802, 806, 814, 818, 830, 872
+handoffs/run-2026-09-12/extended-run/manual-watch-expansion/proposed/geode/pipeline/manual_watch_http_v2.py            496     18    180     16    95%   138, 175, 260, 309, 384-385, 394, 401, 409, 458, 467, 478, 494, 534, 536, 560, 579, 608
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                                                                 1124     48    414     48    94%
+Coverage JSON written to file /private/tmp/geode-watch-batches-coverage-final.json
+=========================== short test summary info ============================
+FAILED handoffs/run-2026-09-12/extended-run/manual-watch-expansion/proposed/tests/test_manual_watch_batches_admission.py::test_v2_does_not_admit_other_urls_or_cross_host_redirects
+1 failed, 198 passed, 5 warnings in 34.05s
+<sys>:0: DeprecationWarning: builtin type swigvarlink has no __module__ attribute

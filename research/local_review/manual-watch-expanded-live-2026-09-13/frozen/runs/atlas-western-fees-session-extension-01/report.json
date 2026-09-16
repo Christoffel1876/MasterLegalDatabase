@@ -1,0 +1,382 @@
+{
+  "status": "completed",
+  "mode": "live_http",
+  "clock_basis": "actual_utc_clock",
+  "generated_at": "2026-09-13T02:22:34.949999Z",
+  "plan_sha256": "163f9ac6099a1e2e764bba5daa5bc2825bf3ae93108a6905312a67c0a0ace113",
+  "implementation_sha256": "4d291eb8e14237ae98f059dd38e937cad099ee0964e391b5d6ce1e3acbbb6197",
+  "invocation": {
+    "path": "INVOCATION.json",
+    "sha256": "1179a55752649c1c5637b2f4ebc32a11b6878673c5b27a053c3f711e1fc3444d",
+    "size_bytes": 880
+  },
+  "transport_sha256": "2211827c47cba3503b2ed96e898b6427c1471d71f84c7eb53e8bd42efe439ee1",
+  "authorization_basis": "operator_supplied_time_and_plan_digest_not_independent_proof",
+  "dispatch_at": "2026-09-13T02:22:33.585354Z",
+  "stop_reason": null,
+  "state": {
+    "request_count": 2,
+    "distinct_urls": [
+      "https://www.gjcity.org/DocumentCenter/View/15794/Fire-Prevention-Fee-Schedule",
+      "https://www.mesacounty.us/sites/default/files/2026-04/Exhibit%20A%20Mesa%20County%20Building%20Department%20Fee%20Schedule%202024%20ADA.pdf"
+    ],
+    "charged_bytes": 993264,
+    "source_charged_bytes": {
+      "grand-junction-fire-fees-atlas-directed": 802051,
+      "mesa-building-fees-exhibit-a-atlas-directed": 191213
+    }
+  },
+  "observations": [
+    {
+      "source_id": "grand-junction-fire-fees-atlas-directed",
+      "canonical_source_id": "grand-junction-fire-fees-atlas-directed",
+      "authority_id": "CO-MUNICIPAL-GRAND_JUNCTION",
+      "requested_url": "https://www.gjcity.org/DocumentCenter/View/15794/Fire-Prevention-Fee-Schedule",
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/grand-junction-fire-fees-atlas-directed/20260911T201938Z_grand_junction_fire_prevention_service_fees.pdf",
+        "sha256": "1f7faf078188c26fa803e4ec6225d20caad2fcce48f69d2d2ae9563c96732884",
+        "size_bytes": 802051
+      },
+      "baseline_request_started_at": "2026-09-11T20:06:16.887129Z",
+      "baseline_recorded_http_time": "2026-09-11T20:06:17.536965Z",
+      "baseline_http_time_role": "Recorded original response completion, separate from later repository intake.",
+      "repository_received_at": "2026-09-11T20:19:38.791057Z",
+      "intake_id": "MSI-20260911T201938791057Z-grand-junction-fire-fees-atlas-directed",
+      "source_context": [
+        "Recorded original response completion, separate from later repository intake.",
+        "Exact official government direct URL and retained ordinary TLS HTTP 200 custody.",
+        "/observations: [{\"id\": \"GJF-O01\", \"pages\": [1, 2], \"statement\": \"All 57 visible fee rows were directly checked against full 144-dpi Poppler renders. Native text has 3,673 bytes and 127 lines; words, amounts, whitespace and ligatures remain unchanged.\"}, {\"id\": \"GJF-O02\", \"pages\": [1], \"statement\": \"The five native group headings occur after all fee rows and in reverse visual order. The reviewed map attaches 2 new-building, 4 tenant-finish, 2 fire-alarm, 2 sprinkler and 24 miscellaneous rows to their visible headings.\"}, {\"id\": \"GJF-O03\", \"pages\": [2], \"statement\": \"The 23 page-two rows visibly continue the table under the page title Fire Prevention Service Fees Continued. Miscellaneous Permits is not reprinted; the cross-page group association is an explicit layout annotation, not inserted source text.\"}, {\"id\": \"GJF-O04\", \"pages\": [1, 2], \"statement\": \"Both page titles and contact lines occur after fee rows in native extraction but are visible at the top. Printed footer text remains separate. Each page has a fire-department emblem; native text does not transcribe its raster lettering. Exact emblem microlettering and font glyph code points are not certified.\"}, {\"id\": \"GJF-O05\", \"pages\": [1], \"statement\": \"New-building tiers begin at 1-5,000 square feet; tenant-finish tiers begin at 1-200 and continue 201-500, 501-5,000 and >5,000. No unstated zero-area tier or calculation rule is added.\"}, {\"id\": \"GJF-O06\", \"pages\": [1], \"statement\": \"The fire-alarm modification row visibly says flate fee= < 5 devices, while sprinkler modification says (=< 20 heads). Preserve these source spellings/operators without replacing them with a normalized inequality or merging their scopes.\"}, {\"id\": \"GJF-O07\", \"pages\": [1], \"statement\": \"Includes inspections applies to the 1-200 tenant-finish row. Other listed per-inspection charges, the per-trip/paid-prior condition, per-tank versus flat charges and per-device wording remain inside their respective fee cells.\"}, {\"id\": \"GJF-O08\", \"pages\": [1], \"statement\": \"Double regular fee belongs to work performed without obtaining a permit. The 1.5 X original plan review fee belongs to plans requiring more than two (2) reviews. Neither multiplier is applied to other rows.\"}, {\"id\": \"GJF-O09\", \"pages\": [1, 2], \"statement\": \"Annual Mobile Food Preparation Vehicles, hourly Alternative Materials/Designs/Methods Review, and Burn Permit per-year labels remain distinct. Repeated storage and spray labels on the source are not deduplicated.\"}, {\"id\": \"GJF-O10\", \"pages\": [1, 2], \"statement\": \"Explosives of blasting agents, PVP Systems and flate are preserved as printed/native source wording. Mixed native ligatures and plain letter sequences are not rewritten as corrections.\"}, {\"id\": \"GJF-O11\", \"pages\": [1, 2], \"statement\": \"No visible edition, adoption or effective date was observed. September 2025 PDF creation/modification metadata do not establish legal dates. The alternate linked fee endpoint and adopting instruments have not been reconciled.\"}, {\"id\": \"GJF-O12\", \"pages\": [1, 2], \"statement\": \"The city referral and printed Grand Junction contact details identify this source; its applicability to a separately named rural fire district or other authority is not established by this document review.\"}]",
+        "/adoption_date: null",
+        "/effective_date: null",
+        "/source_edition_date: null",
+        "Add an exact source/authority/URL/baseline identity to a separately reviewed watch contract.",
+        "Allow only the exact retained hostname and specific source URLs; reject new cross-host redirects.",
+        "Verify ordinary archived bytes and all custody/review metadata before any future request.",
+        "A changed or unavailable URL needs review; never overwrite this accepted baseline automatically."
+      ],
+      "source": {
+        "rank": 2,
+        "record_id": "grand-junction-fire-fees-atlas-directed",
+        "intake_id": "MSI-20260911T201938791057Z-grand-junction-fire-fees-atlas-directed",
+        "authority_id": "CO-MUNICIPAL-GRAND_JUNCTION",
+        "layer_id": "10_Municipal_Authorities",
+        "title": "Grand Junction fire-prevention service fees",
+        "baseline": {
+          "path": "_RAW_ARCHIVE/manual_intake/10_Municipal_Authorities/grand-junction-fire-fees-atlas-directed/20260911T201938Z_grand_junction_fire_prevention_service_fees.pdf",
+          "sha256": "1f7faf078188c26fa803e4ec6225d20caad2fcce48f69d2d2ae9563c96732884",
+          "size_bytes": 802051
+        },
+        "baseline_pages": 2,
+        "raw_manifest_zero_based_row": 42,
+        "raw_manifest_exact_line_sha256": "996ff632264d98ce9d2fab8f22d0e4653ec39ca898d80e3652d92ff01e77a8a4",
+        "historical_raw_url": "https://www.gjcity.org/DocumentCenter/View/15794/Fire-Prevention-Fee-Schedule",
+        "historical_acquisition_method": "manual_official_download",
+        "historical_reported_acquisition": {
+          "/http_started_at": "2026-09-11T20:06:16.887129Z",
+          "/http_completed_at": "2026-09-11T20:06:17.536965Z"
+        },
+        "repository_received_at": "2026-09-11T20:19:38.791057Z",
+        "proposed_url": "https://www.gjcity.org/DocumentCenter/View/15794/Fire-Prevention-Fee-Schedule",
+        "retained_final_url": "https://www.gjcity.org/DocumentCenter/View/15794/Fire-Prevention-Fee-Schedule",
+        "http_started_at": "2026-09-11T20:06:16.887129Z",
+        "http_finished_at": "2026-09-11T20:06:17.536965Z",
+        "http_time_role": "Recorded original response completion, separate from later repository intake.",
+        "recorded_http_status": 200,
+        "recorded_redirects": 0,
+        "official_link_basis": "Exact official government direct URL and retained ordinary TLS HTTP 200 custody.",
+        "official_parent_url": "https://www.gjcity.org/201/Codes-Permits",
+        "official_parent_label": "Fire Prevention Bureau Fees (PDF)",
+        "authority_evidence": {
+          "artifact": {
+            "path": "research/local_review/mesa-grand-junction-intake-2026-09-11/sources.final.jsonl",
+            "sha256": "8c78cc4da476f11ec5179ac208b3b81bdb36eb195edcda5854057f41712130dc",
+            "size_bytes": 7856
+          },
+          "jsonl_row": 2,
+          "pointers": [
+            "/authority_id"
+          ],
+          "scope": "Explicit pinned authority identity; never inferred from URL or path alone."
+        },
+        "custody_evidence": {
+          "artifact": {
+            "path": "research/local_review/mesa-grand-junction-intake-2026-09-11/sources.final.jsonl",
+            "sha256": "8c78cc4da476f11ec5179ac208b3b81bdb36eb195edcda5854057f41712130dc",
+            "size_bytes": 7856
+          },
+          "jsonl_row": 2,
+          "pointers": [
+            "/staged_original/sha256",
+            "/http_status",
+            "/http_completed_at"
+          ],
+          "scope": "Recorded original response completion, separate from later repository intake."
+        },
+        "referral_evidence": [
+          {
+            "artifact": {
+              "path": "research/local_review/mesa-grand-junction-intake-2026-09-11/evidence/discovery/REPORT.json",
+              "sha256": "475eba114fcc97eb9e4239b9a9f644efcfb1f4023bb14826b0870e3815d31497",
+              "size_bytes": 29898
+            },
+            "jsonl_row": null,
+            "pointers": [
+              "/priorities/6/basis"
+            ],
+            "scope": "Earlier discovery identifies exact official parent anchor; later table QA supersedes only its transcription gap."
+          },
+          {
+            "artifact": {
+              "path": "research/local_review/mesa-grand-junction-intake-2026-09-11/evidence/discovery/events/E004/event.json",
+              "sha256": "ebf5d25393d73882e9eea9234896740232eefca9269d2cb098c1514a5a16e273",
+              "size_bytes": 710
+            },
+            "jsonl_row": null,
+            "pointers": [
+              "/requested_url",
+              "/body_sha256"
+            ],
+            "scope": "Recorded official parent HTTP identity; body not reopened in this planning task."
+          }
+        ],
+        "review_evidence": {
+          "artifact": {
+            "path": "research/local_review/grand-junction-fire-fees-atlas-source-review-2026-09-11/SOURCE_QA.json",
+            "sha256": "8069accad238166936f6ee519eb8cc35dc9a62ceb252597ea21a4ebc5efc520a",
+            "size_bytes": 39466
+          },
+          "jsonl_row": null,
+          "pointers": [
+            "/status",
+            "/native_bytes"
+          ],
+          "scope": "Previously accepted bounded review, not re-performed here; overlaps are not additive coverage."
+        },
+        "review_schema": {
+          "path": "research/local_review/grand-junction-fire-fees-atlas-source-review-2026-09-11/SOURCE_QA.schema.json",
+          "sha256": "13e23d55f3dbccef04bd6fbd113e7ca20ccb91bd8dd5dfa07c0454b68f0b6aeb",
+          "size_bytes": 7176
+        },
+        "mapped_review_kind": "checked_tables",
+        "mapped_scope_fields": {
+          "/status": "source_checked_pending_legal_review",
+          "/native_bytes": 3673
+        },
+        "recorded_source_roles": {
+          "/role": "municipal_fire_prevention_service_fee_schedule",
+          "/dates": []
+        },
+        "review_limitations": [
+          "/observations: [{\"id\": \"GJF-O01\", \"pages\": [1, 2], \"statement\": \"All 57 visible fee rows were directly checked against full 144-dpi Poppler renders. Native text has 3,673 bytes and 127 lines; words, amounts, whitespace and ligatures remain unchanged.\"}, {\"id\": \"GJF-O02\", \"pages\": [1], \"statement\": \"The five native group headings occur after all fee rows and in reverse visual order. The reviewed map attaches 2 new-building, 4 tenant-finish, 2 fire-alarm, 2 sprinkler and 24 miscellaneous rows to their visible headings.\"}, {\"id\": \"GJF-O03\", \"pages\": [2], \"statement\": \"The 23 page-two rows visibly continue the table under the page title Fire Prevention Service Fees Continued. Miscellaneous Permits is not reprinted; the cross-page group association is an explicit layout annotation, not inserted source text.\"}, {\"id\": \"GJF-O04\", \"pages\": [1, 2], \"statement\": \"Both page titles and contact lines occur after fee rows in native extraction but are visible at the top. Printed footer text remains separate. Each page has a fire-department emblem; native text does not transcribe its raster lettering. Exact emblem microlettering and font glyph code points are not certified.\"}, {\"id\": \"GJF-O05\", \"pages\": [1], \"statement\": \"New-building tiers begin at 1-5,000 square feet; tenant-finish tiers begin at 1-200 and continue 201-500, 501-5,000 and >5,000. No unstated zero-area tier or calculation rule is added.\"}, {\"id\": \"GJF-O06\", \"pages\": [1], \"statement\": \"The fire-alarm modification row visibly says flate fee= < 5 devices, while sprinkler modification says (=< 20 heads). Preserve these source spellings/operators without replacing them with a normalized inequality or merging their scopes.\"}, {\"id\": \"GJF-O07\", \"pages\": [1], \"statement\": \"Includes inspections applies to the 1-200 tenant-finish row. Other listed per-inspection charges, the per-trip/paid-prior condition, per-tank versus flat charges and per-device wording remain inside their respective fee cells.\"}, {\"id\": \"GJF-O08\", \"pages\": [1], \"statement\": \"Double regular fee belongs to work performed without obtaining a permit. The 1.5 X original plan review fee belongs to plans requiring more than two (2) reviews. Neither multiplier is applied to other rows.\"}, {\"id\": \"GJF-O09\", \"pages\": [1, 2], \"statement\": \"Annual Mobile Food Preparation Vehicles, hourly Alternative Materials/Designs/Methods Review, and Burn Permit per-year labels remain distinct. Repeated storage and spray labels on the source are not deduplicated.\"}, {\"id\": \"GJF-O10\", \"pages\": [1, 2], \"statement\": \"Explosives of blasting agents, PVP Systems and flate are preserved as printed/native source wording. Mixed native ligatures and plain letter sequences are not rewritten as corrections.\"}, {\"id\": \"GJF-O11\", \"pages\": [1, 2], \"statement\": \"No visible edition, adoption or effective date was observed. September 2025 PDF creation/modification metadata do not establish legal dates. The alternate linked fee endpoint and adopting instruments have not been reconciled.\"}, {\"id\": \"GJF-O12\", \"pages\": [1, 2], \"statement\": \"The city referral and printed Grand Junction contact details identify this source; its applicability to a separately named rural fire district or other authority is not established by this document review.\"}]",
+          "/adoption_date: null",
+          "/effective_date: null",
+          "/source_edition_date: null"
+        ],
+        "proposal_reason": "Reviewed fee rows already support source-only lookup; byte changes would identify a review need.",
+        "enrollment_conditions": [
+          "Add an exact source/authority/URL/baseline identity to a separately reviewed watch contract.",
+          "Allow only the exact retained hostname and specific source URLs; reject new cross-host redirects.",
+          "Verify ordinary archived bytes and all custody/review metadata before any future request.",
+          "A changed or unavailable URL needs review; never overwrite this accepted baseline automatically."
+        ],
+        "legal_currentness": "not_verified",
+        "answer_safe": false,
+        "status": "PREPARED_NOT_ACTIVATED"
+      },
+      "status": "unchanged",
+      "reason": "Exact bytes equal the pinned prior original",
+      "events": [
+        1
+      ],
+      "request_started_at": "2026-09-13T02:22:33.686445Z",
+      "response_finished_at": "2026-09-13T02:22:34.476218Z",
+      "response_url": "https://www.gjcity.org/DocumentCenter/View/15794/Fire-Prevention-Fee-Schedule",
+      "http_status": 200,
+      "response_body": {
+        "path": "events/0001/body.bin",
+        "sha256": "1f7faf078188c26fa803e4ec6225d20caad2fcce48f69d2d2ae9563c96732884",
+        "size_bytes": 802051
+      },
+      "response_public_headers": {
+        "path": "events/0001/public-headers.json",
+        "sha256": "b5ffdb51f56e339b629a9aac1a4fe8dc50c2ba2813e2a39a6149441bdd068c2e",
+        "size_bytes": 320
+      },
+      "valid_pdf_pages": 2,
+      "bytes_equal_to_baseline": true,
+      "review_needed": false,
+      "legal_currentness": "not_verified",
+      "inferred_legal_change": null,
+      "canonical_update": "not_attempted"
+    },
+    {
+      "source_id": "mesa-building-fees-exhibit-a-atlas-directed",
+      "canonical_source_id": "mesa-building-fees-exhibit-a-atlas-directed",
+      "authority_id": "CO-COUNTY-MESA",
+      "requested_url": "https://www.mesacounty.us/sites/default/files/2026-04/Exhibit%20A%20Mesa%20County%20Building%20Department%20Fee%20Schedule%202024%20ADA.pdf",
+      "baseline": {
+        "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/mesa-building-fees-exhibit-a-atlas-directed/20260911T202724Z_mesa_building_department_exhibit_a_fee_schedule.pdf",
+        "sha256": "421aa92efa159b484a091f1ade3589f6abb8a060bb880ec0c0a09e0472e4b9e7",
+        "size_bytes": 191213
+      },
+      "baseline_request_started_at": "2026-09-11T20:17:42.887486Z",
+      "baseline_recorded_http_time": "2026-09-11T20:17:43.011756Z",
+      "baseline_http_time_role": "Recorded original response completion, separate from later repository intake.",
+      "repository_received_at": "2026-09-11T20:27:24.633106Z",
+      "intake_id": "MSI-20260911T202724633106Z-mesa-building-fees-exhibit-a-atlas-directed",
+      "source_context": [
+        "Recorded original response completion, separate from later repository intake.",
+        "Exact official government direct URL and retained ordinary TLS HTTP 200 custody.",
+        "/limits: [\"All five full pages and three focused crops directly viewed; candidate-aware Atlas source QA, not independent external blind review.\", \"No new source request, legal interpretation, fee computation, numeric correction, rule-unit/coverage/currentness promotion or canonical intake.\", \"Geometric cell strings are separate derived extraction, while original native UTF8 bytes and all source glyph positions are retained unchanged. Superscripts/spacing are not a native-text correction.\", \"All physical tables retained, including eight valuation tiers and26valuation rows; absent referenced Table3B is unresolved.\", \"Raw PDF and prior custody files are unchanged. Fresh typed records are research evidence only; no assertion of authenticity of enactment.\"]",
+        "/adoption_effectiveness: not_verified",
+        "Add an exact source/authority/URL/baseline identity to a separately reviewed watch contract.",
+        "Allow only the exact retained hostname and specific source URLs; reject new cross-host redirects.",
+        "Verify ordinary archived bytes and all custody/review metadata before any future request.",
+        "A changed or unavailable URL needs review; never overwrite this accepted baseline automatically."
+      ],
+      "source": {
+        "rank": 6,
+        "record_id": "mesa-building-fees-exhibit-a-atlas-directed",
+        "intake_id": "MSI-20260911T202724633106Z-mesa-building-fees-exhibit-a-atlas-directed",
+        "authority_id": "CO-COUNTY-MESA",
+        "layer_id": "08_County_Authorities",
+        "title": "Mesa Building Department fee Exhibit A",
+        "baseline": {
+          "path": "_RAW_ARCHIVE/manual_intake/08_County_Authorities/mesa-building-fees-exhibit-a-atlas-directed/20260911T202724Z_mesa_building_department_exhibit_a_fee_schedule.pdf",
+          "sha256": "421aa92efa159b484a091f1ade3589f6abb8a060bb880ec0c0a09e0472e4b9e7",
+          "size_bytes": 191213
+        },
+        "baseline_pages": 5,
+        "raw_manifest_zero_based_row": 45,
+        "raw_manifest_exact_line_sha256": "d7e80457fc6dc2607f9d7d576959911553e63bae3de8b323ceba9356d84640ee",
+        "historical_raw_url": "https://www.mesacounty.us/sites/default/files/2026-04/Exhibit%20A%20Mesa%20County%20Building%20Department%20Fee%20Schedule%202024%20ADA.pdf",
+        "historical_acquisition_method": "manual_official_download",
+        "historical_reported_acquisition": {
+          "/http_started_at": "2026-09-11T20:17:42.887486Z",
+          "/http_completed_at": "2026-09-11T20:17:43.011756Z"
+        },
+        "repository_received_at": "2026-09-11T20:27:24.633106Z",
+        "proposed_url": "https://www.mesacounty.us/sites/default/files/2026-04/Exhibit%20A%20Mesa%20County%20Building%20Department%20Fee%20Schedule%202024%20ADA.pdf",
+        "retained_final_url": "https://www.mesacounty.us/sites/default/files/2026-04/Exhibit%20A%20Mesa%20County%20Building%20Department%20Fee%20Schedule%202024%20ADA.pdf",
+        "http_started_at": "2026-09-11T20:17:42.887486Z",
+        "http_finished_at": "2026-09-11T20:17:43.011756Z",
+        "http_time_role": "Recorded original response completion, separate from later repository intake.",
+        "recorded_http_status": 200,
+        "recorded_redirects": 0,
+        "official_link_basis": "Exact official government direct URL and retained ordinary TLS HTTP 200 custody.",
+        "official_parent_url": "https://www.mesacounty.us/departments-and-services/community-development/building/permit-and-plan-review-fees-building",
+        "official_parent_label": "Adopted Fee Schedule (PDF)",
+        "authority_evidence": {
+          "artifact": {
+            "path": "research/local_review/mesa-grand-junction-directed-intake-2026-09-11/sources.final.jsonl",
+            "sha256": "c63584f4ac73a1c4f9fe3a721a67c96bde80112699812754e51badbd9a832008",
+            "size_bytes": 7761
+          },
+          "jsonl_row": 2,
+          "pointers": [
+            "/authority_id"
+          ],
+          "scope": "Explicit pinned authority identity; never inferred from URL or path alone."
+        },
+        "custody_evidence": {
+          "artifact": {
+            "path": "research/local_review/mesa-grand-junction-directed-intake-2026-09-11/sources.final.jsonl",
+            "sha256": "c63584f4ac73a1c4f9fe3a721a67c96bde80112699812754e51badbd9a832008",
+            "size_bytes": 7761
+          },
+          "jsonl_row": 2,
+          "pointers": [
+            "/staged_original/sha256",
+            "/http_status",
+            "/http_completed_at"
+          ],
+          "scope": "Recorded original response completion, separate from later repository intake."
+        },
+        "referral_evidence": [
+          {
+            "artifact": {
+              "path": "research/local_review/mesa-grand-junction-directed-intake-2026-09-11/evidence/discovery/ACCESS_AUDIT.json",
+              "sha256": "66314f02a6806b3d93c4c342cefa341affe8a738704e8ad910eacffba63eb480",
+              "size_bytes": 35950
+            },
+            "jsonl_row": null,
+            "pointers": [
+              "/basis/5"
+            ],
+            "scope": "Recorded exact parsed anchor from E006; catalog label adopted is not independent adoption proof."
+          }
+        ],
+        "review_evidence": {
+          "artifact": {
+            "path": "research/local_review/mesa-building-fees-atlas-source-review-2026-09-11/SOURCE_REVIEW.json",
+            "sha256": "5aeb9abfe5efe1575c9e11b93d812b491f44a3d9b6575b737e91d510b573f275",
+            "size_bytes": 639389
+          },
+          "jsonl_row": null,
+          "pointers": [
+            "/status",
+            "/native_byte_changes"
+          ],
+          "scope": "Previously accepted bounded review, not re-performed here; overlaps are not additive coverage."
+        },
+        "review_schema": {
+          "path": "research/local_review/mesa-building-fees-atlas-source-review-2026-09-11/SOURCE_REVIEW.schema.json",
+          "sha256": "82e201c93da9a1bcbff5d6486a5fb97e7d4ac22ce7acb4dff20594d61c281bc8",
+          "size_bytes": 15574
+        },
+        "mapped_review_kind": "checked_tables",
+        "mapped_scope_fields": {
+          "/status": "source_text_and_table_associations_reviewed",
+          "/native_byte_changes": 0
+        },
+        "recorded_source_roles": {
+          "/role": "county_building_department_fee_exhibit",
+          "/dates": []
+        },
+        "review_limitations": [
+          "/limits: [\"All five full pages and three focused crops directly viewed; candidate-aware Atlas source QA, not independent external blind review.\", \"No new source request, legal interpretation, fee computation, numeric correction, rule-unit/coverage/currentness promotion or canonical intake.\", \"Geometric cell strings are separate derived extraction, while original native UTF8 bytes and all source glyph positions are retained unchanged. Superscripts/spacing are not a native-text correction.\", \"All physical tables retained, including eight valuation tiers and26valuation rows; absent referenced Table3B is unresolved.\", \"Raw PDF and prior custody files are unchanged. Fresh typed records are research evidence only; no assertion of authenticity of enactment.\"]",
+          "/adoption_effectiveness: not_verified"
+        ],
+        "proposal_reason": "Reviewed county fee exhibit, retaining missing Table 3B and shared-service authority limitations.",
+        "enrollment_conditions": [
+          "Add an exact source/authority/URL/baseline identity to a separately reviewed watch contract.",
+          "Allow only the exact retained hostname and specific source URLs; reject new cross-host redirects.",
+          "Verify ordinary archived bytes and all custody/review metadata before any future request.",
+          "A changed or unavailable URL needs review; never overwrite this accepted baseline automatically."
+        ],
+        "legal_currentness": "not_verified",
+        "answer_safe": false,
+        "status": "PREPARED_NOT_ACTIVATED"
+      },
+      "status": "unchanged",
+      "reason": "Exact bytes equal the pinned prior original",
+      "events": [
+        2
+      ],
+      "request_started_at": "2026-09-13T02:22:34.485894Z",
+      "response_finished_at": "2026-09-13T02:22:34.935063Z",
+      "response_url": "https://www.mesacounty.us/sites/default/files/2026-04/Exhibit%20A%20Mesa%20County%20Building%20Department%20Fee%20Schedule%202024%20ADA.pdf",
+      "http_status": 200,
+      "response_body": {
+        "path": "events/0002/body.bin",
+        "sha256": "421aa92efa159b484a091f1ade3589f6abb8a060bb880ec0c0a09e0472e4b9e7",
+        "size_bytes": 191213
+      },
+      "response_public_headers": {
+        "path": "events/0002/public-headers.json",
+        "sha256": "d2f84f0b1a2cab0339128dd6709160d68bf129a97ac503fe0fb2e9aa6a22714e",
+        "size_bytes": 451
+      },
+      "valid_pdf_pages": 5,
+      "bytes_equal_to_baseline": true,
+      "review_needed": false,
+      "legal_currentness": "not_verified",
+      "inferred_legal_change": null,
+      "canonical_update": "not_attempted"
+    }
+  ],
+  "legal_currentness": "not_verified",
+  "publication_status": "not_attempted",
+  "scheduler_installed": false,
+  "baseline_updated": false
+}

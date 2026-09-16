@@ -1,0 +1,872 @@
+{
+  "$defs": {
+    "Anchor": {
+      "additionalProperties": false,
+      "description": "Observed href and label; resolving a URL never opens it.",
+      "properties": {
+        "element_locator": {
+          "title": "Element Locator",
+          "type": "string"
+        },
+        "raw_href_decoded": {
+          "title": "Raw Href Decoded",
+          "type": "string"
+        },
+        "resolved_url": {
+          "title": "Resolved Url",
+          "type": "string"
+        },
+        "normalized_label": {
+          "title": "Normalized Label",
+          "type": "string"
+        },
+        "title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Title"
+        },
+        "fragment_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Fragment Ids",
+          "type": "array"
+        },
+        "containing_content_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Containing Content Ids",
+          "type": "array"
+        },
+        "component_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Component Id"
+        },
+        "source": {
+          "$ref": "#/$defs/ByteRange"
+        },
+        "resource_opened_by_this_extraction": {
+          "const": false,
+          "default": false,
+          "title": "Resource Opened By This Extraction",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "element_locator",
+        "raw_href_decoded",
+        "resolved_url",
+        "normalized_label",
+        "title",
+        "fragment_ids",
+        "containing_content_ids",
+        "component_id",
+        "source"
+      ],
+      "title": "Anchor",
+      "type": "object"
+    },
+    "Attribute": {
+      "additionalProperties": false,
+      "description": "Decoded HTML attribute, preserving original order and duplicate entries.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "title": "Attribute",
+      "type": "object"
+    },
+    "Block": {
+      "additionalProperties": false,
+      "description": "DOM-ordered content; table text is stored only in its cells.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "heading",
+            "paragraph",
+            "list_item_fragment",
+            "text_run",
+            "table",
+            "image"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "element_locator": {
+          "title": "Element Locator",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/ByteRange"
+        },
+        "component_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Component Id"
+        },
+        "heading_context_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Heading Context Ids",
+          "type": "array"
+        },
+        "parent_list_item_locator": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Parent List Item Locator"
+        },
+        "list_container_locator": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "List Container Locator"
+        },
+        "list_type": {
+          "anyOf": [
+            {
+              "enum": [
+                "ul",
+                "ol"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "List Type"
+        },
+        "heading_level": {
+          "anyOf": [
+            {
+              "maximum": 6,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Heading Level"
+        },
+        "fragment_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Fragment Ids",
+          "type": "array"
+        },
+        "dom_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Dom Text"
+        },
+        "normalized_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Normalized Text"
+        },
+        "table_rows": {
+          "items": {
+            "$ref": "#/$defs/Row"
+          },
+          "title": "Table Rows",
+          "type": "array"
+        },
+        "image_alt": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Image Alt"
+        },
+        "image_src": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Image Src"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "element_locator",
+        "source",
+        "component_id",
+        "heading_context_ids",
+        "parent_list_item_locator",
+        "list_container_locator",
+        "list_type",
+        "fragment_ids",
+        "dom_text",
+        "normalized_text",
+        "table_rows",
+        "image_alt",
+        "image_src"
+      ],
+      "title": "Block",
+      "type": "object"
+    },
+    "ByteRange": {
+      "additionalProperties": false,
+      "description": "Half-open byte range in the original UTF-8 HTML.",
+      "properties": {
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "sha256"
+      ],
+      "title": "ByteRange",
+      "type": "object"
+    },
+    "Cell": {
+      "additionalProperties": false,
+      "description": "One table cell in original row order; no spanning-cell expansion.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "element_locator": {
+          "title": "Element Locator",
+          "type": "string"
+        },
+        "tag": {
+          "enum": [
+            "td",
+            "th"
+          ],
+          "title": "Tag",
+          "type": "string"
+        },
+        "rowspan": {
+          "minimum": 1,
+          "title": "Rowspan",
+          "type": "integer"
+        },
+        "colspan": {
+          "minimum": 1,
+          "title": "Colspan",
+          "type": "integer"
+        },
+        "fragment_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Fragment Ids",
+          "type": "array"
+        },
+        "dom_text": {
+          "title": "Dom Text",
+          "type": "string"
+        },
+        "normalized_text": {
+          "title": "Normalized Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "element_locator",
+        "tag",
+        "rowspan",
+        "colspan",
+        "fragment_ids",
+        "dom_text",
+        "normalized_text"
+      ],
+      "title": "Cell",
+      "type": "object"
+    },
+    "Component": {
+      "additionalProperties": false,
+      "description": "Source-defined accordion/side panel, without inferred fee ownership.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "element_locator": {
+          "title": "Element Locator",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "block_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Block Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "element_locator",
+        "label",
+        "block_ids"
+      ],
+      "title": "Component",
+      "type": "object"
+    },
+    "Coverage": {
+      "additionalProperties": false,
+      "description": "Source-token accounting, not legal or fee coverage.",
+      "properties": {
+        "selected_element_count": {
+          "title": "Selected Element Count",
+          "type": "integer"
+        },
+        "text_fragment_count": {
+          "title": "Text Fragment Count",
+          "type": "integer"
+        },
+        "nonblank_text_fragment_count": {
+          "title": "Nonblank Text Fragment Count",
+          "type": "integer"
+        },
+        "assigned_nonblank_text_fragment_count": {
+          "title": "Assigned Nonblank Text Fragment Count",
+          "type": "integer"
+        },
+        "unassigned_whitespace_fragment_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Unassigned Whitespace Fragment Ids",
+          "type": "array"
+        },
+        "duplicated_fragment_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Duplicated Fragment Ids",
+          "type": "array"
+        },
+        "unassigned_nonblank_fragment_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Unassigned Nonblank Fragment Ids",
+          "type": "array"
+        },
+        "block_count": {
+          "title": "Block Count",
+          "type": "integer"
+        },
+        "table_count": {
+          "const": 9,
+          "title": "Table Count",
+          "type": "integer"
+        },
+        "table_row_count_including_headers": {
+          "const": 76,
+          "title": "Table Row Count Including Headers",
+          "type": "integer"
+        },
+        "table_cell_count": {
+          "title": "Table Cell Count",
+          "type": "integer"
+        },
+        "list_item_fragment_count": {
+          "title": "List Item Fragment Count",
+          "type": "integer"
+        },
+        "anchor_count": {
+          "title": "Anchor Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "selected_element_count",
+        "text_fragment_count",
+        "nonblank_text_fragment_count",
+        "assigned_nonblank_text_fragment_count",
+        "unassigned_whitespace_fragment_ids",
+        "duplicated_fragment_ids",
+        "unassigned_nonblank_fragment_ids",
+        "block_count",
+        "table_count",
+        "table_row_count_including_headers",
+        "table_cell_count",
+        "list_item_fragment_count",
+        "anchor_count"
+      ],
+      "title": "Coverage",
+      "type": "object"
+    },
+    "DateMention": {
+      "additionalProperties": false,
+      "description": "Printed date phrase only; event type and applicability stay unclassified.",
+      "properties": {
+        "content_id": {
+          "title": "Content Id",
+          "type": "string"
+        },
+        "component_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Component Id"
+        },
+        "literal": {
+          "title": "Literal",
+          "type": "string"
+        },
+        "normalized_start": {
+          "minimum": 0,
+          "title": "Normalized Start",
+          "type": "integer"
+        },
+        "normalized_end": {
+          "exclusiveMinimum": 0,
+          "title": "Normalized End",
+          "type": "integer"
+        },
+        "interpretation": {
+          "const": "printed_phrase_unclassified",
+          "default": "printed_phrase_unclassified",
+          "title": "Interpretation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "content_id",
+        "component_id",
+        "literal",
+        "normalized_start",
+        "normalized_end"
+      ],
+      "title": "DateMention",
+      "type": "object"
+    },
+    "ElementRecord": {
+      "additionalProperties": false,
+      "description": "DOM element locator and exact source envelope; text lives in fragments.",
+      "properties": {
+        "locator": {
+          "title": "Locator",
+          "type": "string"
+        },
+        "parent_locator": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Parent Locator"
+        },
+        "tag": {
+          "title": "Tag",
+          "type": "string"
+        },
+        "attributes": {
+          "items": {
+            "$ref": "#/$defs/Attribute"
+          },
+          "title": "Attributes",
+          "type": "array"
+        },
+        "source": {
+          "$ref": "#/$defs/ByteRange"
+        },
+        "start_tag": {
+          "$ref": "#/$defs/ByteRange"
+        },
+        "end_tag": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ByteRange"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "locator",
+        "parent_locator",
+        "tag",
+        "attributes",
+        "source",
+        "start_tag",
+        "end_tag"
+      ],
+      "title": "ElementRecord",
+      "type": "object"
+    },
+    "ExcludedRange": {
+      "additionalProperties": false,
+      "description": "Explicitly excluded source region; original bytes remain preserved.",
+      "properties": {
+        "locator": {
+          "title": "Locator",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/ByteRange"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "locator",
+        "source",
+        "reason"
+      ],
+      "title": "ExcludedRange",
+      "type": "object"
+    },
+    "FileIdentity": {
+      "additionalProperties": false,
+      "description": "Exact file bytes, with a package-relative path.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileIdentity",
+      "type": "object"
+    },
+    "Fragment": {
+      "additionalProperties": false,
+      "description": "One source text/entity token or explicitly projected br line break.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "element_locator": {
+          "title": "Element Locator",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "text",
+            "entity",
+            "character_reference",
+            "br_break"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/ByteRange"
+        },
+        "dom_text": {
+          "title": "Dom Text",
+          "type": "string"
+        },
+        "dom_text_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Dom Text Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "element_locator",
+        "kind",
+        "source",
+        "dom_text",
+        "dom_text_sha256"
+      ],
+      "title": "Fragment",
+      "type": "object"
+    },
+    "Row": {
+      "additionalProperties": false,
+      "description": "One source row, retaining whether cells use th or td.",
+      "properties": {
+        "element_locator": {
+          "title": "Element Locator",
+          "type": "string"
+        },
+        "cells": {
+          "items": {
+            "$ref": "#/$defs/Cell"
+          },
+          "title": "Cells",
+          "type": "array"
+        }
+      },
+      "required": [
+        "element_locator",
+        "cells"
+      ],
+      "title": "Row",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Deterministic source snapshot; no operative fees or rules are created.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source_id": {
+      "const": "fort-collins-fee-catalog-atlas-sd004-14",
+      "default": "fort-collins-fee-catalog-atlas-sd004-14",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "status": {
+      "const": "source_snapshot_structured_pending_semantic_review",
+      "default": "source_snapshot_structured_pending_semantic_review",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "source_url": {
+      "const": "https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules",
+      "default": "https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules",
+      "title": "Source Url",
+      "type": "string"
+    },
+    "source_html": {
+      "$ref": "#/$defs/FileIdentity"
+    },
+    "source_http_receipt": {
+      "$ref": "#/$defs/FileIdentity"
+    },
+    "source_capture_completed_at": {
+      "format": "date-time",
+      "title": "Source Capture Completed At",
+      "type": "string"
+    },
+    "source_capture_time_role": {
+      "const": "actual prior Atlas HTTP receipt, not extraction time",
+      "default": "actual prior Atlas HTTP receipt, not extraction time",
+      "title": "Source Capture Time Role",
+      "type": "string"
+    },
+    "extraction_program": {
+      "$ref": "#/$defs/FileIdentity"
+    },
+    "selected_root_locator": {
+      "title": "Selected Root Locator",
+      "type": "string"
+    },
+    "selector": {
+      "const": "unique element with id=main-content",
+      "default": "unique element with id=main-content",
+      "title": "Selector",
+      "type": "string"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "normalization": {
+      "title": "Normalization",
+      "type": "string"
+    },
+    "elements": {
+      "items": {
+        "$ref": "#/$defs/ElementRecord"
+      },
+      "title": "Elements",
+      "type": "array"
+    },
+    "text_fragments": {
+      "items": {
+        "$ref": "#/$defs/Fragment"
+      },
+      "title": "Text Fragments",
+      "type": "array"
+    },
+    "components": {
+      "items": {
+        "$ref": "#/$defs/Component"
+      },
+      "title": "Components",
+      "type": "array"
+    },
+    "blocks": {
+      "items": {
+        "$ref": "#/$defs/Block"
+      },
+      "title": "Blocks",
+      "type": "array"
+    },
+    "anchors": {
+      "items": {
+        "$ref": "#/$defs/Anchor"
+      },
+      "title": "Anchors",
+      "type": "array"
+    },
+    "printed_date_mentions": {
+      "items": {
+        "$ref": "#/$defs/DateMention"
+      },
+      "title": "Printed Date Mentions",
+      "type": "array"
+    },
+    "excluded_ranges": {
+      "items": {
+        "$ref": "#/$defs/ExcludedRange"
+      },
+      "title": "Excluded Ranges",
+      "type": "array"
+    },
+    "coverage": {
+      "$ref": "#/$defs/Coverage"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_html",
+    "source_http_receipt",
+    "source_capture_completed_at",
+    "extraction_program",
+    "selected_root_locator",
+    "method",
+    "normalization",
+    "elements",
+    "text_fragments",
+    "components",
+    "blocks",
+    "anchors",
+    "printed_date_mentions",
+    "excluded_ranges",
+    "coverage",
+    "limitations"
+  ],
+  "title": "Extraction",
+  "type": "object"
+}

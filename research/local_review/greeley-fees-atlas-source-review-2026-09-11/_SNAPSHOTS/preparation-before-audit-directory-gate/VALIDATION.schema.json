@@ -1,0 +1,124 @@
+{
+  "$defs": {
+    "FileRef": {
+      "additionalProperties": false,
+      "description": "An immutable package-local regular file.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Measured offline verification result for one package manifest.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "verified_at": {
+      "format": "date-time",
+      "title": "Verified At",
+      "type": "string"
+    },
+    "package": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "status": {
+      "const": "passed",
+      "title": "Status",
+      "type": "string"
+    },
+    "payload_files": {
+      "exclusiveMinimum": 0,
+      "title": "Payload Files",
+      "type": "integer"
+    },
+    "physical_pages": {
+      "const": 6,
+      "title": "Physical Pages",
+      "type": "integer"
+    },
+    "native_bytes": {
+      "const": 11743,
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "audit_scope_checks": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Audit Scope Checks",
+      "type": "object"
+    },
+    "schema_pairs_checked": {
+      "exclusiveMinimum": 0,
+      "title": "Schema Pairs Checked",
+      "type": "integer"
+    },
+    "historical_paths_resolved": {
+      "exclusiveMinimum": 0,
+      "title": "Historical Paths Resolved",
+      "type": "integer"
+    },
+    "full_page_rerender_performed": {
+      "title": "Full Page Rerender Performed",
+      "type": "boolean"
+    },
+    "external_report_intake": {
+      "const": false,
+      "title": "External Report Intake",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "verified_at",
+    "package",
+    "status",
+    "payload_files",
+    "physical_pages",
+    "native_bytes",
+    "audit_scope_checks",
+    "schema_pairs_checked",
+    "historical_paths_resolved",
+    "full_page_rerender_performed",
+    "external_report_intake",
+    "legal_currentness",
+    "checks"
+  ],
+  "title": "ValidationReceipt",
+  "type": "object"
+}

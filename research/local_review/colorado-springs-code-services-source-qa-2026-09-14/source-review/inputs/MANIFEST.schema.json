@@ -1,0 +1,159 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact packet-relative payload.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Identity": {
+      "additionalProperties": false,
+      "description": "Only allowed source-only document and pixel identities.",
+      "properties": {
+        "packet_id": {
+          "const": "ebenezer-fresh-2026-09-14-001",
+          "title": "Packet Id",
+          "type": "string"
+        },
+        "assignment_id": {
+          "const": "EB-REVIEW-2026-09-14-01",
+          "title": "Assignment Id",
+          "type": "string"
+        },
+        "source_id": {
+          "const": "colorado-springs-code-services-fees-2015-atlas-directed",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "original": {
+          "$ref": "#/$defs/Asset"
+        },
+        "expected_physical_pages": {
+          "const": 7,
+          "title": "Expected Physical Pages",
+          "type": "integer"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/SourcePage"
+          },
+          "title": "Pages",
+          "type": "array"
+        }
+      },
+      "required": [
+        "packet_id",
+        "assignment_id",
+        "source_id",
+        "original",
+        "expected_physical_pages",
+        "pages"
+      ],
+      "title": "Identity",
+      "type": "object"
+    },
+    "SourcePage": {
+      "additionalProperties": false,
+      "description": "A complete physical-page image without transcribed content.",
+      "properties": {
+        "physical_page": {
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "width_px": {
+          "title": "Width Px",
+          "type": "integer"
+        },
+        "height_px": {
+          "title": "Height Px",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "width_px",
+        "height_px"
+      ],
+      "title": "SourcePage",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Complete payload inventory excluding manifest and its opaque digest only.",
+  "properties": {
+    "packet_id": {
+      "const": "ebenezer-fresh-2026-09-14-001",
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "frozen_at": {
+      "format": "date-time",
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_DISPATCHED",
+      "title": "Status",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "identities": {
+      "$ref": "#/$defs/Identity"
+    },
+    "preparation": {
+      "$ref": "#/$defs/Asset"
+    },
+    "instructions": {
+      "$ref": "#/$defs/Asset"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "packet_id",
+    "frozen_at",
+    "status",
+    "files",
+    "identities",
+    "preparation",
+    "instructions",
+    "legal_currentness"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

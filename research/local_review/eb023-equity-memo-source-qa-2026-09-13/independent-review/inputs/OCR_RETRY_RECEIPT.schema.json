@@ -1,0 +1,195 @@
+{
+  "$defs": {
+    "Event": {
+      "additionalProperties": false,
+      "description": "One actual local OCR invocation with complete outputs.",
+      "properties": {
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Ref"
+        },
+        "command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Command",
+          "type": "array"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "completed_at": {
+          "format": "date-time",
+          "title": "Completed At",
+          "type": "string"
+        },
+        "returncode": {
+          "title": "Returncode",
+          "type": "integer"
+        },
+        "stdout": {
+          "$ref": "#/$defs/Ref"
+        },
+        "stderr": {
+          "$ref": "#/$defs/Ref"
+        },
+        "parsed_nonempty_lines": {
+          "title": "Parsed Nonempty Lines",
+          "type": "integer"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Ref"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "command",
+        "started_at",
+        "completed_at",
+        "returncode",
+        "stdout",
+        "stderr",
+        "parsed_nonempty_lines",
+        "text"
+      ],
+      "title": "Event",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Exact packet-relative artifact identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Machine evidence only; no visual or semantic correctness claim.",
+  "properties": {
+    "status": {
+      "enum": [
+        "machine_ocr_unreviewed",
+        "ocr_failed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "engine": {
+      "const": "Apple Vision",
+      "default": "Apple Vision",
+      "title": "Engine",
+      "type": "string"
+    },
+    "adapter": {
+      "$ref": "#/$defs/Ref"
+    },
+    "adapter_source": {
+      "$ref": "#/$defs/Ref"
+    },
+    "settings": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "integer"
+          },
+          {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        ]
+      },
+      "title": "Settings",
+      "type": "object"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "source_changed": {
+      "const": false,
+      "default": false,
+      "title": "Source Changed",
+      "type": "boolean"
+    },
+    "network_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "Network Requests",
+      "type": "integer"
+    },
+    "reviewed": {
+      "const": false,
+      "default": false,
+      "title": "Reviewed",
+      "type": "boolean"
+    },
+    "serialization": {
+      "title": "Serialization",
+      "type": "string"
+    },
+    "psm": {
+      "default": null,
+      "title": "Psm",
+      "type": "null"
+    },
+    "tsv": {
+      "default": null,
+      "title": "Tsv",
+      "type": "null"
+    }
+  },
+  "required": [
+    "status",
+    "adapter",
+    "adapter_source",
+    "settings",
+    "events",
+    "serialization"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

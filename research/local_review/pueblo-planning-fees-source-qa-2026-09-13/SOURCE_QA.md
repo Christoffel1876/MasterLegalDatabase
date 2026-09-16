@@ -1,0 +1,87 @@
+---
+title: Pueblo City planning fee schedule source QA
+status: candidate_aware_source_review
+authority_id: CO-MUNICIPAL-PUEBLO
+legal_currentness: not_verified
+---
+
+All four source pages were directly reviewed. The 44 physical application rows and 43 nested associations are tied to unchanged native text and source geometry. No fee calculation, adopting-instrument determination, current-law certification, or monitoring enrollment is made.
+
+The original frozen review is retained unchanged. Additive errata correct both remodel clauses from “or” to “nor” and withdraw the initial header/date omissions: the letterhead, Applications/Fees columns and printed 2-13-26 occur on all four pages. The CCN/RCN low horizontal mark is preserved as a separate graphical annotation; its native text contains no underscore.
+
+The display below joins soft wraps and normalizes bullets/superscripts as declared in SOURCE_QA.json. It does not replace the original native bytes.
+
+Physical page 1
+
+| Row | Application | Fees |
+|---|---|---|
+| P1-01 | Accessory Dwelling Unit | $50 |
+| P1-02 | Accessory Structure (one, two, or three-family residence) | $50 |
+| P1-03 | Administrative Determination | $150 |
+| P1-04 | Annexation | $500 + $5 for each acre over 10 acres |
+| P1-05 | Annexation Agreement Amendment | $500 |
+| P1-06 | Appeal of Administrative Determination | $600 |
+| P1-07 | Awning Over Right of Way | $25 |
+| P1-08 | Certificate of Appropriateness:<br>- Residential (historic landmark)<br>- Non-residential (historic landmark) | $75<br>$150 |
+| P1-09 | Certificate of Economic Hardship (related to Certificate of Appropriateness) | $75 |
+| P1-10 | Certificate of Zoning, or Legal Nonconforming Lot, Structure, or Use | $50 |
+| P1-11 | Commercial Site Plan | - Landscape Verification: $0 1st Visit, $150 2nd Visit, $300 3rd Visit or More<br>- Large-Scale Development: $1,000 ≤ 100,000 sf, $1,500 >100,000 sf<br>- Lighting Plan Review: $50<br>- Site Plan Review: $300<br>- Tenant Finish or Exterior Remodel (without addition that increases building footprint nor site improvements): $50<br>- Interior Only Remodel (without addition that increases building footprint nor site improvements): $50 |
+| P1-12 | Continuation of Public Hearing | $50 |
+| P1-13 | Demolition (structures not designated as a historic landmark)<br>- Non-residential structure<br>- Residential Structure | - $150<br>- $25 |
+
+Physical page 2
+
+| Row | Application | Fees |
+|---|---|---|
+| P2-01 | Demolition Permit Review (designated as a historic landmark) | $150 |
+| P2-02 | Extension of Recordation Deadline | $40 |
+| P2-03 | HARP Development Plan Review | $150 |
+| P2-04 | Limited Use Permit | $500 |
+| P2-05 | Marijuana Certificate of Location (cannabis) | $500 |
+| P2-06 | Marijuana (Retail or Medical) Conditional Use Permit or Renewal (cannabis) | - New Permit: $5,000 (medical center, retail store, retail or medical cultivation facility, retail or medical infused product manufacturing, and retail or medical testing facility)<br>- Renewal: $2,500 |
+| P2-07 | Master Sign Plan | $150 |
+| P2-08 | Metropolitan District Service Plan Review | - $500, plus hourly rate for legal review of the service plan |
+| P2-09 | Nomination of Historic District | $200 |
+| P2-10 | Nomination of Historic Landmark | $150 |
+| P2-11 | Overall Development Plan | $500 + $5 For each acre over 10 acres<br>(Note: waived if required as part of an annexation) |
+| P2-12 | Planned Unit Development, Development Guide/Plan Amendment | $500 |
+| P2-13 | Planned Unit Development, Site Plan Review or Major Revision | - $500 1st 50,000 sf<br>- $500 Each additional 50,000 sf |
+| P2-14 | Planned Unit Development, Site Plan Review, Minor Revision | - $250 Dimensional<br>- $100 Landscape<br>- $150 Location<br>- $200 Parking |
+
+Physical page 3
+
+| Row | Application | Fees |
+|---|---|---|
+| P3-01 | Public Notice Fees | - $2 Postcard for each address<br>- $5 HPC Poster<br>- $5 PZ poster<br>- $3 ZBA poster<br>- Legal advertisement calculation based on number of cases per meeting.<br>- $25 per public notice required for annexation |
+| P3-02 | Rearrangement of Property Boundaries | $200 |
+| P3-03 | Residential, New Construction or Addition (one- or two-family residence) | $50 |
+| P3-04 | Rezoning<br>- A-1<br>- A-2<br>- A-3<br>- A-4<br>- R-1, R-2, R-2U, R-3, R-4, R-5, R-6 & R-8<br>- R-7<br>- O-1, B-1, B-2, B-3, B-4, BP, I-1, I-2, I-3<br>- H-B, HARP1, HARP2, HARP3<br>- CCN, RCN<br>- S-1, S-2, S-3, S-4, S-5<br>- MPCD, PUD | - $100 + $1.00 per acre<br>- $100 + $4 per acre<br>- $100 + $18 per acre<br>- $100 + $35 per acre<br>- $150 + $75 1st acre + $20 each additional acre<br>- $150 + $150 1st acre + $40 each additional acre<br>- $150 + $125 1st acre + $30 each additional acre<br>- $90 + $125 1st acre + $30 each additional acre<br>- $150_+ $125 1st acre + $30 each additional acre<br>- $90 + $25 1st acre + $10 each additional acre<br>- $500 base fee + $50 per acre |
+| P3-05 | Sign Plan Review | $95 |
+| P3-06 | Special Area Plan | $100 + $25 per Lot |
+| P3-07 | Special Exception | $500 |
+| P3-08 | Special Use Permit (Use by Review) | $500 |
+| P3-09 | Specially Requested Hearing (ZBA) | $1,000 |
+| P3-10 | Specially Requested Hearing (HPC) | $150 |
+| P3-11 | Student Housing, Site Plan or Major Revision | $500 (1st 50,000 sf) + $500 (each additional 50,000 sf) |
+| P3-12 | Student Housing, Minor Revision | $100 |
+| P3-13 | Subdivision | - $100 + $160 per Lot (≤10), $105 Plus per Lot (≥11)<br>- $100 Deferred Filing+ $50 per lot |
+| P3-14 | Swimming Pool | $50 |
+
+Physical page 4
+
+| Row | Application | Fees |
+|---|---|---|
+| P4-01 | Vacation (of street, alley, or other public way) | - $250 Alley (if not included with Road Vacation)<br>- $175 Easement<br>- $325 Road<br>(Note: fees per plat) |
+| P4-02 | Variance | - $750 Non-Residential<br>- $250 Residential |
+| P4-03 | Wireless Communication Facilities, (Tower or Antenna,) New or Modification | $500 |
+
+Qualifications:
+
+- 44 physical application rows contain 43 explicitly bound nested entries: 15 paired subcategories and 28 fee bullets. These are table-structure counts, not counts of legal requirements.
+- All 4923 native UTF-8 bytes across 243 lines are retained, including whitespace; no native byte or source PDF was cleaned or overwritten.
+- The eleven Rezoning category/fee pairs and six Commercial Site Plan bullets are preserved separately under their parent physical rows; identical fee wording on distinct Rezoning categories has distinct ordered source-line bindings.
+- Both $50 remodel clauses retain “nor site improvements”. The Subdivision text retains “$105 Plus per Lot (≥11)” and “Deferred Filing+” as printed; no formula or arithmetic interpretation is supplied.
+- The printed 2-13-26 date, HTTP receipt times and Content-Disposition filename are different evidence roles. No adopting instrument or independently verified legal-effective date was established.
+- Original HTTP receipts are copied from the separate frozen discovery package. This QA made no public request; no canonical intake, lookup release, monitoring enrollment or legal-currentness promotion is included.
+- The original Poppler attempt lacked usable fontconfig/cache and was interrupted after repeated errors; a second local render with explicit system-font configuration completed. Only the successful full-page renders are source-review evidence; the failed attempt is noted rather than treated as a rendering success.
+- The original two root crops are preserved byte-for-byte; their original crop-creation settings/times are not inferred. New independent crops have exact replayable settings.

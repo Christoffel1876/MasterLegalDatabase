@@ -1,0 +1,246 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "A byte-bound repository file or historical delivery location.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 1,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Measured bytes and qualified supplied source claims for one delivered PDF.",
+  "properties": {
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-LARIMER",
+      "default": "CO-COUNTY-LARIMER",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "priority_id": {
+      "title": "Priority Id",
+      "type": "string"
+    },
+    "event_id": {
+      "title": "Event Id",
+      "type": "string"
+    },
+    "source_role": {
+      "enum": [
+        "fee_schedule",
+        "fee_increase_memo",
+        "recorded_initial_moratorium_resolution",
+        "signed_equity_reduction_instrument",
+        "staff_recommendation_memo",
+        "meeting_packet_with_unsigned_extension_draft",
+        "incidental_building_amendments",
+        "incidental_wildfire_code"
+      ],
+      "title": "Source Role",
+      "type": "string"
+    },
+    "received_original": {
+      "$ref": "#/$defs/Asset"
+    },
+    "canonical_original": {
+      "$ref": "#/$defs/Asset"
+    },
+    "intake_id": {
+      "title": "Intake Id",
+      "type": "string"
+    },
+    "disposition": {
+      "enum": [
+        "new_original_archived",
+        "existing_original_reused"
+      ],
+      "title": "Disposition",
+      "type": "string"
+    },
+    "repository_received_at": {
+      "format": "date-time",
+      "title": "Repository Received At",
+      "type": "string"
+    },
+    "delivery_rechecked_at": {
+      "format": "date-time",
+      "title": "Delivery Rechecked At",
+      "type": "string"
+    },
+    "original_acquisition_at": {
+      "default": null,
+      "title": "Original Acquisition At",
+      "type": "null"
+    },
+    "acquisition_method": {
+      "const": "received_review_package",
+      "default": "received_review_package",
+      "title": "Acquisition Method",
+      "type": "string"
+    },
+    "supplied_requested_url": {
+      "title": "Supplied Requested Url",
+      "type": "string"
+    },
+    "supplied_final_url": {
+      "title": "Supplied Final Url",
+      "type": "string"
+    },
+    "supplied_http_status": {
+      "const": 200,
+      "default": 200,
+      "title": "Supplied Http Status",
+      "type": "integer"
+    },
+    "supplied_time_claim": {
+      "title": "Supplied Time Claim",
+      "type": "string"
+    },
+    "supplied_method_claim": {
+      "const": "browser_GET",
+      "default": "browser_GET",
+      "title": "Supplied Method Claim",
+      "type": "string"
+    },
+    "source_http_acquisition_verified": {
+      "const": false,
+      "default": false,
+      "title": "Source Http Acquisition Verified",
+      "type": "boolean"
+    },
+    "official_source_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Official Source Url"
+    },
+    "official_url_allowlist_accepted": {
+      "title": "Official Url Allowlist Accepted",
+      "type": "boolean"
+    },
+    "referral_context": {
+      "title": "Referral Context",
+      "type": "string"
+    },
+    "referral_evidence": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Referral Evidence",
+      "type": "array"
+    },
+    "source_audit_pointer": {
+      "title": "Source Audit Pointer",
+      "type": "string"
+    },
+    "source_audit_inspected_physical_pages": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Source Audit Inspected Physical Pages",
+      "type": "array"
+    },
+    "inspected_by_this_intake": {
+      "const": "PDF_structure_only",
+      "default": "PDF_structure_only",
+      "title": "Inspected By This Intake",
+      "type": "string"
+    },
+    "page_count": {
+      "minimum": 1,
+      "title": "Page Count",
+      "type": "integer"
+    },
+    "pdf_is_repaired": {
+      "const": false,
+      "default": false,
+      "title": "Pdf Is Repaired",
+      "type": "boolean"
+    },
+    "pdf_is_encrypted": {
+      "const": false,
+      "default": false,
+      "title": "Pdf Is Encrypted",
+      "type": "boolean"
+    },
+    "source_qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Qualifications",
+      "type": "array"
+    },
+    "status": {
+      "const": "archived_pending_pipeline",
+      "default": "archived_pending_pipeline",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "semantic_or_coverage_promotion": {
+      "const": false,
+      "default": false,
+      "title": "Semantic Or Coverage Promotion",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "source_id",
+    "priority_id",
+    "event_id",
+    "source_role",
+    "received_original",
+    "canonical_original",
+    "intake_id",
+    "disposition",
+    "repository_received_at",
+    "delivery_rechecked_at",
+    "supplied_requested_url",
+    "supplied_final_url",
+    "supplied_time_claim",
+    "official_source_url",
+    "official_url_allowlist_accepted",
+    "referral_context",
+    "referral_evidence",
+    "source_audit_pointer",
+    "source_audit_inspected_physical_pages",
+    "page_count",
+    "source_qualifications"
+  ],
+  "title": "SourceProvenance",
+  "type": "object"
+}

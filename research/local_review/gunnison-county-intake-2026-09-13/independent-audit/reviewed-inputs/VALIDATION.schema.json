@@ -1,0 +1,177 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "CommandResult": {
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "enum": [
+            "focused_tests",
+            "live_read_only_preflight"
+          ],
+          "title": "Label",
+          "type": "string"
+        },
+        "command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Command",
+          "type": "array"
+        },
+        "working_directory": {
+          "title": "Working Directory",
+          "type": "string"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "completed_at": {
+          "format": "date-time",
+          "title": "Completed At",
+          "type": "string"
+        },
+        "exit_code": {
+          "const": 0,
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "stdout": {
+          "$ref": "#/$defs/Asset"
+        },
+        "stderr": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "label",
+        "command",
+        "working_directory",
+        "started_at",
+        "completed_at",
+        "exit_code",
+        "stdout",
+        "stderr"
+      ],
+      "title": "CommandResult",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "const": "passed_preparation_only",
+      "title": "Status",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "preparation_sha256": {
+      "title": "Preparation Sha256",
+      "type": "string"
+    },
+    "transaction_sha256": {
+      "title": "Transaction Sha256",
+      "type": "string"
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/CommandResult"
+      },
+      "title": "Results",
+      "type": "array"
+    },
+    "test_count": {
+      "const": 64,
+      "title": "Test Count",
+      "type": "integer"
+    },
+    "combined_branch_inclusive_coverage_percent": {
+      "maximum": 100,
+      "minimum": 90,
+      "title": "Combined Branch Inclusive Coverage Percent",
+      "type": "number"
+    },
+    "coverage": {
+      "$ref": "#/$defs/Asset"
+    },
+    "canonical_managed_sha256_before": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Canonical Managed Sha256 Before",
+      "type": "object"
+    },
+    "canonical_managed_sha256_after": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Canonical Managed Sha256 After",
+      "type": "object"
+    },
+    "canonical_managed_bytes_unchanged": {
+      "const": true,
+      "title": "Canonical Managed Bytes Unchanged",
+      "type": "boolean"
+    },
+    "actual_execution_directory_created": {
+      "const": false,
+      "title": "Actual Execution Directory Created",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "completed_at",
+    "preparation_sha256",
+    "transaction_sha256",
+    "results",
+    "test_count",
+    "combined_branch_inclusive_coverage_percent",
+    "coverage",
+    "canonical_managed_sha256_before",
+    "canonical_managed_sha256_after",
+    "canonical_managed_bytes_unchanged",
+    "actual_execution_directory_created",
+    "limitations"
+  ],
+  "title": "Validation",
+  "type": "object"
+}

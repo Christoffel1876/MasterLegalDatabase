@@ -1,0 +1,315 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Bind one local file by its exact bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "description": "Separate a qualified visual observation from source text.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Pages",
+          "type": "array"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "pages",
+        "statement"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "Bind a directly viewed Poppler page and all native text.",
+      "properties": {
+        "physical_page": {
+          "maximum": 2,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "full_page_directly_viewed": {
+          "const": true,
+          "default": true,
+          "title": "Full Page Directly Viewed",
+          "type": "boolean"
+        },
+        "spans": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "title": "Spans",
+          "type": "array"
+        }
+      },
+      "required": [
+        "physical_page",
+        "native",
+        "image",
+        "spans"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Row": {
+      "additionalProperties": false,
+      "description": "Keep the complete source fee text attached to its visible label.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "label_span": {
+          "title": "Label Span",
+          "type": "string"
+        },
+        "fee_span": {
+          "title": "Fee Span",
+          "type": "string"
+        },
+        "group_span": {
+          "title": "Group Span",
+          "type": "string"
+        },
+        "group_basis": {
+          "enum": [
+            "visible_preceding_heading",
+            "continued_table_no_repeated_heading"
+          ],
+          "title": "Group Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "physical_page",
+        "label_span",
+        "fee_span",
+        "group_span",
+        "group_basis"
+      ],
+      "title": "Row",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "description": "Preserve one exhaustive native line with byte offsets.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "exclusiveMinimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "label",
+            "fee",
+            "group",
+            "header",
+            "footer"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "start",
+        "end",
+        "text",
+        "role"
+      ],
+      "title": "Span",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Source-only review, with no present-law or adoption certification.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "reviewer": {
+      "const": "Atlas",
+      "default": "Atlas",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "mode": {
+      "const": "candidate_aware_direct_source_review",
+      "default": "candidate_aware_direct_source_review",
+      "title": "Mode",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_id": {
+      "const": "grand-junction-fire-fees-mg-07",
+      "default": "grand-junction-fire-fees-mg-07",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "official_url": {
+      "const": "https://www.gjcity.org/DocumentCenter/View/15794/Fire-Prevention-Fee-Schedule",
+      "title": "Official Url",
+      "type": "string"
+    },
+    "access_receipt": {
+      "$ref": "#/$defs/Asset"
+    },
+    "structure_receipt": {
+      "$ref": "#/$defs/Asset"
+    },
+    "status": {
+      "const": "source_checked_pending_legal_review",
+      "default": "source_checked_pending_legal_review",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "adoption_date": {
+      "default": null,
+      "title": "Adoption Date",
+      "type": "null"
+    },
+    "effective_date": {
+      "default": null,
+      "title": "Effective Date",
+      "type": "null"
+    },
+    "source_edition_date": {
+      "default": null,
+      "title": "Source Edition Date",
+      "type": "null"
+    },
+    "native_bytes": {
+      "const": 3673,
+      "default": 3673,
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Pages",
+      "type": "array"
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/Row"
+      },
+      "maxItems": 57,
+      "minItems": 57,
+      "title": "Rows",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "external_review_consulted": {
+      "const": false,
+      "default": false,
+      "title": "External Review Consulted",
+      "type": "boolean"
+    },
+    "edited_source_bytes": {
+      "const": false,
+      "default": false,
+      "title": "Edited Source Bytes",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "reviewed_at",
+    "source",
+    "official_url",
+    "access_receipt",
+    "structure_receipt",
+    "pages",
+    "rows",
+    "observations"
+  ],
+  "title": "Review",
+  "type": "object"
+}

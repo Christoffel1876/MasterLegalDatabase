@@ -1,0 +1,92 @@
+{
+  "assignment_id": "EB-PDF-010",
+  "source_id": "larimer-development-review-fees-sd004-07",
+  "reviewer": "Ebenezer (Grok Bot)",
+  "pass": "PASS2",
+  "status": "completed_pending_atlas_verification",
+  "legal_currentness": "not_verified",
+  "candidate_status": "machine_native_text_unreviewed",
+  "candidate_engine": "PyMuPDF native text (NOT OCR)",
+  "utc_pass2_start": "2026-09-11T18:35:20Z",
+  "utc_pass2_end": "2026-09-11T18:39:20Z",
+  "expected_pages": 7,
+  "pages_compared": 7,
+  "pages_compared_list": [
+    "page-0001.png",
+    "page-0002.png",
+    "page-0003.png",
+    "page-0004.png",
+    "page-0005.png",
+    "page-0006.png",
+    "page-0007.png"
+  ],
+  "coverage": {
+    "pass1_pages": 7,
+    "pass2_pages": 7,
+    "all_pages_compared": true,
+    "stop_after": "010"
+  },
+  "finding_counts": {
+    "critical": 5,
+    "minor": 7,
+    "unresolved": 0
+  },
+  "top_critical_issues": [
+    {
+      "id": "EB010-P2-001",
+      "page": 2,
+      "error_type": "reading_order",
+      "summary": "LAND DIVISION subgroup header 'Subdivision, Conservation Development, Planned Land Division, Rural Land Use' displaced to page end; Preliminary/Final Plat ,881.21/Additional Processes falsely under Administrative Subdivision"
+    },
+    {
+      "id": "EB010-P2-002",
+      "page": 3,
+      "error_type": "reading_order",
+      "summary": "Special Review - Major uses list dumped after ZCR instead of under ,337.70"
+    },
+    {
+      "id": "EB010-P2-003",
+      "page": 4,
+      "error_type": "reading_order/scope",
+      "summary": "Location and Extent General Fund exemption note displaced next to Engineering Temporary Permit"
+    },
+    {
+      "id": "EB010-P2-004",
+      "page": 6,
+      "error_type": "reading_order",
+      "summary": "CGS Initial Submittal note vs Special Review Hourly Rate associations swapped/orphaned"
+    },
+    {
+      "id": "EB010-P2-005",
+      "page": 7,
+      "error_type": "reading_order",
+      "summary": "Special event Tier 1/2/3 labels detached from fee triples and characteristics table"
+    }
+  ],
+  "hashes": {
+    "packet_manifest_sha256": "36dcce0e4b4712069e663a7950c1c21ebd2ef31dc6a53321b0a59ba72cc59db4",
+    "original_pdf_sha256": "752dec4468ad92f5895a7af53ad0451b21517fb390212dc76b5f358f15fec64b",
+    "page-0001.png": "4b194f91bb827fbd1be2b6af014f12920378c63a553dd03e2593c7d570fce8de",
+    "page-0002.png": "3004b43481dc1d56351d7d27a4132b60e13fcdb7a5d6b68e5aa1134f94c6a298",
+    "page-0003.png": "c3c26a92d936b4ee4ae3d1a0bd68c70ec04aa0be2c5e664eba289e70fff51fd1",
+    "page-0004.png": "6a79297beb7b86f5fd79edf488ed5c680d1061095323782d458ca7f7cf3661a0",
+    "page-0005.png": "0e459d42dc39789671608cdcb65a76ea02ee5b5be3faa7c2f5f54df3bb928a09",
+    "page-0006.png": "26c6c9d41fa9baa8e0b4a52fc2dedaaa5b6ff2a8db3607935d9b53d11e266509",
+    "page-0007.png": "220cd68c8362590cc4a9ad3a488716e2eb691725077bd88db50e4444a34ff0d7",
+    "candidate.txt": "10e1a99cc47fdf2bbd3e42b5a17577efc975b4c36c94dc3f8f7090a195c55f04",
+    "PASS1_frozen.md": "4d09b7ad779833818e0d53ae09f0207b7ae951534ff63699bc07b17316679ff7",
+    "PASS2_REVIEW.md": "4d01f4ac367ebf690f4caf18ae25f2cb2e82c28d64f39aec12e72d5167aa2cad"
+  },
+  "integrity_checks": {
+    "candidate_sha256_verified": true,
+    "PASS1_frozen_sha256_verified": true,
+    "PASS1_frozen_edited": false,
+    "all_seven_page_png_sha256_verified": true,
+    "native_evidence_json_opened": false,
+    "caption_mediation_disclosed": true
+  },
+  "deliverables": [
+    "/workspace/geode-010/PASS2_REVIEW.md",
+    "/workspace/geode-010/COMPLETION_RECEIPT.json"
+  ]
+}

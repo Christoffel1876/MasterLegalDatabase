@@ -1,0 +1,335 @@
+{
+  "schema_version": "staged-export-verification-v1",
+  "status": "passed",
+  "started_at": "2026-09-13T17:42:51.117018Z",
+  "finished_at": "2026-09-13T17:45:15.479305Z",
+  "repository": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+  "export_directory": "/private/tmp/geode-staged-final-20260913T1743/exported-index",
+  "expected_scan_sha256": "3ba29be62065db3af9d13e3786a56720ab54fcc3bb4fc9ba07d02443052526b7",
+  "expected_schema_sha256": "ad1b8d46440d5166dfa0d07a92ab0cc38c649b115debf9b44d3ab975765f61e5",
+  "index_before": {
+    "sha256": "245b5c6c14a66ddf3ad626744716a738ead42f7cacf9a9ffb27d97ff3be267b3",
+    "size_bytes": 2398558
+  },
+  "index_after": {
+    "sha256": "245b5c6c14a66ddf3ad626744716a738ead42f7cacf9a9ffb27d97ff3be267b3",
+    "size_bytes": 2398558
+  },
+  "head": "512684a65ae3c4eb51509b23520cfe41823ca0b9",
+  "scan_members_checked": 3052,
+  "exported_files": 15591,
+  "exported_bytes": 2486413507,
+  "wrappers_checked": 21,
+  "inventory_check_passed": true,
+  "ci_default_readiness_passed": true,
+  "ci_execution_requested": false,
+  "public_source_requests_requested": 0,
+  "git_mutations_requested": 0,
+  "lfs_smudge": "disabled_and_never_invoked",
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "-c",
+        "filter.lfs.process=",
+        "-c",
+        "filter.lfs.smudge=cat",
+        "-c",
+        "filter.lfs.required=false",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+      "started_at": "2026-09-13T17:42:51.200954Z",
+      "finished_at": "2026-09-13T17:42:51.246922Z",
+      "exit_code": 0,
+      "stdout": {
+        "sha256": "59fe6dcfb8cd01d30d284ef571d13a14e098ddb86be6b5c4735f272bde5b62f8",
+        "size_bytes": 41
+      },
+      "stderr": {
+        "sha256": "247717a28272f910a74b0f1f7cc1bfb6495da4ff7f14dece8f45b12eb79cdce6",
+        "size_bytes": 212,
+        "path": "command-001.stderr"
+      },
+      "stdout_file": {
+        "sha256": "59fe6dcfb8cd01d30d284ef571d13a14e098ddb86be6b5c4735f272bde5b62f8",
+        "size_bytes": 41,
+        "path": "command-001.stdout"
+      },
+      "timed_out": false
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "-c",
+        "filter.lfs.process=",
+        "-c",
+        "filter.lfs.smudge=cat",
+        "-c",
+        "filter.lfs.required=false",
+        "ls-files",
+        "--stage",
+        "-z"
+      ],
+      "cwd": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+      "started_at": "2026-09-13T17:42:51.246972Z",
+      "finished_at": "2026-09-13T17:42:51.276889Z",
+      "exit_code": 0,
+      "stdout": {
+        "sha256": "245b5c6c14a66ddf3ad626744716a738ead42f7cacf9a9ffb27d97ff3be267b3",
+        "size_bytes": 2398558
+      },
+      "stderr": {
+        "sha256": "54dc9366cf6d804bdf5ae1ffa172dab10fc68a63170232134cbe6981ee4634fb",
+        "size_bytes": 106,
+        "path": "command-002.stderr"
+      },
+      "stdout_file": {
+        "sha256": "245b5c6c14a66ddf3ad626744716a738ead42f7cacf9a9ffb27d97ff3be267b3",
+        "size_bytes": 2398558,
+        "path": "command-002.stdout"
+      },
+      "timed_out": false
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "-c",
+        "filter.lfs.process=",
+        "-c",
+        "filter.lfs.smudge=cat",
+        "-c",
+        "filter.lfs.required=false",
+        "diff",
+        "--cached",
+        "--no-renames",
+        "--name-only",
+        "-z",
+        "HEAD",
+        "--"
+      ],
+      "cwd": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+      "started_at": "2026-09-13T17:42:51.343312Z",
+      "finished_at": "2026-09-13T17:42:51.375243Z",
+      "exit_code": 0,
+      "stdout": {
+        "sha256": "8c1d768be3bcd99668e632b3c707b6b207ea3f5c6328025c4f4d46e0f51192da",
+        "size_bytes": 398189
+      },
+      "stderr": {
+        "sha256": "54dc9366cf6d804bdf5ae1ffa172dab10fc68a63170232134cbe6981ee4634fb",
+        "size_bytes": 106,
+        "path": "command-003.stderr"
+      },
+      "stdout_file": {
+        "sha256": "8c1d768be3bcd99668e632b3c707b6b207ea3f5c6328025c4f4d46e0f51192da",
+        "size_bytes": 398189,
+        "path": "command-003.stdout"
+      },
+      "timed_out": false
+    },
+    {
+      "argv": [
+        "git",
+        "cat-file",
+        "--batch"
+      ],
+      "cwd": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+      "started_at": "2026-09-13T17:42:51.390582Z",
+      "finished_at": "2026-09-13T17:42:53.049592Z",
+      "exit_code": 0,
+      "stdout": {
+        "sha256": "a7f430b59df87dccf6107f28738710ee00664754e2d7ddf4f6f9004ad5188cd0",
+        "size_bytes": 199948146
+      },
+      "stderr": {
+        "sha256": "54dc9366cf6d804bdf5ae1ffa172dab10fc68a63170232134cbe6981ee4634fb",
+        "size_bytes": 106,
+        "path": "command-004.stderr"
+      },
+      "stdout_file": null,
+      "timed_out": false
+    },
+    {
+      "argv": [
+        "git",
+        "cat-file",
+        "--batch"
+      ],
+      "cwd": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+      "started_at": "2026-09-13T17:42:53.051683Z",
+      "finished_at": "2026-09-13T17:43:04.961220Z",
+      "exit_code": 0,
+      "stdout": {
+        "sha256": "4f0fdcd13d2ae33966b7d8baa3e2f9075c615c116c38617fce5a405da4440531",
+        "size_bytes": 2487228218
+      },
+      "stderr": {
+        "sha256": "54dc9366cf6d804bdf5ae1ffa172dab10fc68a63170232134cbe6981ee4634fb",
+        "size_bytes": 106,
+        "path": "command-005.stderr"
+      },
+      "stdout_file": null,
+      "timed_out": false
+    },
+    {
+      "argv": [
+        "/private/tmp/geode-status-venv/bin/python",
+        "-B",
+        "-m",
+        "geode.pipeline.manual_review_inventory",
+        "--root",
+        "/private/tmp/geode-staged-final-20260913T1743/exported-index",
+        "--check"
+      ],
+      "cwd": "/private/tmp/geode-staged-final-20260913T1743/exported-index",
+      "started_at": "2026-09-13T17:45:03.411556Z",
+      "finished_at": "2026-09-13T17:45:04.847632Z",
+      "exit_code": 0,
+      "stdout": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_bytes": 0
+      },
+      "stderr": {
+        "sha256": "44871d918d3905eb4aa3096340f5e26f647bf0f99272a9a75e99517840acfe30",
+        "size_bytes": 80,
+        "path": "command-006.stderr"
+      },
+      "stdout_file": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_bytes": 0,
+        "path": "command-006.stdout"
+      },
+      "timed_out": false
+    },
+    {
+      "argv": [
+        "/private/tmp/geode-status-venv/bin/python",
+        "-B",
+        "scripts/manual_source_watch_ci.py",
+        "--root",
+        "/private/tmp/geode-staged-final-20260913T1743/exported-index",
+        "--run-name",
+        "staged-offline",
+        "--event",
+        "local_readiness"
+      ],
+      "cwd": "/private/tmp/geode-staged-final-20260913T1743/exported-index",
+      "started_at": "2026-09-13T17:45:04.847672Z",
+      "finished_at": "2026-09-13T17:45:07.695677Z",
+      "exit_code": 0,
+      "stdout": {
+        "sha256": "6c4c479632dc24da9231523e725f2fcee23049d7f5ca7879a0410ce33204a953",
+        "size_bytes": 1404
+      },
+      "stderr": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size_bytes": 0,
+        "path": "command-007.stderr"
+      },
+      "stdout_file": {
+        "sha256": "6c4c479632dc24da9231523e725f2fcee23049d7f5ca7879a0410ce33204a953",
+        "size_bytes": 1404,
+        "path": "command-007.stdout"
+      },
+      "timed_out": false
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "-c",
+        "filter.lfs.process=",
+        "-c",
+        "filter.lfs.smudge=cat",
+        "-c",
+        "filter.lfs.required=false",
+        "ls-files",
+        "--stage",
+        "-z"
+      ],
+      "cwd": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+      "started_at": "2026-09-13T17:45:15.414659Z",
+      "finished_at": "2026-09-13T17:45:15.449357Z",
+      "exit_code": 0,
+      "stdout": {
+        "sha256": "245b5c6c14a66ddf3ad626744716a738ead42f7cacf9a9ffb27d97ff3be267b3",
+        "size_bytes": 2398558
+      },
+      "stderr": {
+        "sha256": "54dc9366cf6d804bdf5ae1ffa172dab10fc68a63170232134cbe6981ee4634fb",
+        "size_bytes": 106,
+        "path": "command-008.stderr"
+      },
+      "stdout_file": {
+        "sha256": "245b5c6c14a66ddf3ad626744716a738ead42f7cacf9a9ffb27d97ff3be267b3",
+        "size_bytes": 2398558,
+        "path": "command-008.stdout"
+      },
+      "timed_out": false
+    },
+    {
+      "argv": [
+        "git",
+        "-c",
+        "core.fsmonitor=false",
+        "-c",
+        "filter.lfs.process=",
+        "-c",
+        "filter.lfs.smudge=cat",
+        "-c",
+        "filter.lfs.required=false",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/Users/mcoors/Documents/Project Geode/MasterLegalDatabase",
+      "started_at": "2026-09-13T17:45:15.450244Z",
+      "finished_at": "2026-09-13T17:45:15.479262Z",
+      "exit_code": 0,
+      "stdout": {
+        "sha256": "59fe6dcfb8cd01d30d284ef571d13a14e098ddb86be6b5c4735f272bde5b62f8",
+        "size_bytes": 41
+      },
+      "stderr": {
+        "sha256": "54dc9366cf6d804bdf5ae1ffa172dab10fc68a63170232134cbe6981ee4634fb",
+        "size_bytes": 106,
+        "path": "command-009.stderr"
+      },
+      "stdout_file": {
+        "sha256": "59fe6dcfb8cd01d30d284ef571d13a14e098ddb86be6b5c4735f272bde5b62f8",
+        "size_bytes": 41,
+        "path": "command-009.stdout"
+      },
+      "timed_out": false
+    }
+  ],
+  "procedure_files": [
+    {
+      "sha256": "8d6397489996d8b2451cf9111d50f95902821ec3a0cbe26ba6212a23b5125dfc",
+      "size_bytes": 22044,
+      "path": "procedure/verify_staged_export.py"
+    },
+    {
+      "sha256": "d82d5c62157c033fafd7efadb6b7bec2471f4c1be4e265ff3b362d97f2048971",
+      "size_bytes": 2857,
+      "path": "procedure/models.py"
+    }
+  ],
+  "failure": null,
+  "qualifications": [
+    "This checks staged bytes, not working files or remote publication.",
+    "LFS pointers remain pointer bytes; no object hydration was attempted.",
+    "Only default local readiness was requested; no live source mode ran.",
+    "No full suite, scheduler activation or legal-currentness review ran.",
+    "The export is local; Linux/GitHub Actions behavior remains unverified.",
+    "Command logs and partial export are preserved on any failure."
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "$defs": {
+    "FileRef": {
+      "additionalProperties": false,
+      "description": "A confined immutable packet file.",
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Closed immutable file set; self and schema are explicit exclusions.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/FileRef"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "exclusions": {
+      "const": "INVENTORY.json and INVENTORY.schema.json only",
+      "default": "INVENTORY.json and INVENTORY.schema.json only",
+      "title": "Exclusions",
+      "type": "string"
+    }
+  },
+  "required": [
+    "files"
+  ],
+  "title": "Inventory",
+  "type": "object"
+}

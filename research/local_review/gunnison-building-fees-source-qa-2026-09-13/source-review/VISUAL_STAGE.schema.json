@@ -1,0 +1,40 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "directly_viewed_complete_pages": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Directly Viewed Complete Pages",
+      "type": "array"
+    },
+    "prior_exposure": {
+      "title": "Prior Exposure",
+      "type": "string"
+    },
+    "display": {
+      "title": "Display",
+      "type": "string"
+    },
+    "notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Notes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "directly_viewed_complete_pages",
+    "prior_exposure",
+    "display",
+    "notes"
+  ],
+  "title": "Visual",
+  "type": "object"
+}

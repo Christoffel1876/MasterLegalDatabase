@@ -1,0 +1,471 @@
+{
+  "$defs": {
+    "Custody": {
+      "additionalProperties": false,
+      "description": "Measured source receipt facts, kept separate from publication and legal dates.",
+      "properties": {
+        "source_id": {
+          "const": "crs-2026-title1-official-pdf",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_level": {
+          "const": "state",
+          "default": "state",
+          "title": "Authority Level",
+          "type": "string"
+        },
+        "jurisdiction": {
+          "const": "Colorado",
+          "default": "Colorado",
+          "title": "Jurisdiction",
+          "type": "string"
+        },
+        "publisher_role": {
+          "const": "Office of Legislative Legal Services, Colorado General Assembly",
+          "title": "Publisher Role",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "official_url": {
+          "const": "https://olls.info/crs/crs2026-title-01.pdf",
+          "title": "Official Url",
+          "type": "string"
+        },
+        "acquisition_receipt": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "acquisition_started_at": {
+          "format": "date-time",
+          "title": "Acquisition Started At",
+          "type": "string"
+        },
+        "acquisition_completed_at": {
+          "format": "date-time",
+          "title": "Acquisition Completed At",
+          "type": "string"
+        },
+        "acquisition_basis": {
+          "const": "retained_direct_http_receipt_verified_tls_200",
+          "default": "retained_direct_http_receipt_verified_tls_200",
+          "title": "Acquisition Basis",
+          "type": "string"
+        },
+        "source_review_prepared_at": {
+          "format": "date-time",
+          "title": "Source Review Prepared At",
+          "type": "string"
+        },
+        "printed_edition_claim": {
+          "const": "Colorado Revised Statutes 2026",
+          "title": "Printed Edition Claim",
+          "type": "string"
+        },
+        "catalog_session_claim": {
+          "title": "Catalog Session Claim",
+          "type": "string"
+        },
+        "pdf_metadata_claims": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": "Pdf Metadata Claims",
+          "type": "object"
+        },
+        "date_qualification": {
+          "title": "Date Qualification",
+          "type": "string"
+        },
+        "legal_effective_date": {
+          "default": null,
+          "title": "Legal Effective Date",
+          "type": "null"
+        },
+        "source_manifest_sha256": {
+          "const": "ea43aa1d1d2ae4d28a8833642230d22babb18c615a1604b913b52459d181175d",
+          "default": "ea43aa1d1d2ae4d28a8833642230d22babb18c615a1604b913b52459d181175d",
+          "title": "Source Manifest Sha256",
+          "type": "string"
+        },
+        "source_review_sha256": {
+          "const": "555aefd0cac5b99e74d3bb37937d0f36b1943979202aa3f7d96a4cc55f1109e0",
+          "default": "555aefd0cac5b99e74d3bb37937d0f36b1943979202aa3f7d96a4cc55f1109e0",
+          "title": "Source Review Sha256",
+          "type": "string"
+        },
+        "reviewed_physical_pages": {
+          "items": {
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "type": "integer"
+          },
+          "title": "Reviewed Physical Pages",
+          "type": "array"
+        },
+        "total_pdf_pages": {
+          "const": 1008,
+          "default": 1008,
+          "title": "Total Pdf Pages",
+          "type": "integer"
+        },
+        "review_method": {
+          "const": "candidate_aware_source_review_not_blind",
+          "default": "candidate_aware_source_review_not_blind",
+          "title": "Review Method",
+          "type": "string"
+        },
+        "source_review_limits": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Review Limits",
+          "type": "array"
+        },
+        "typography_qualification": {
+          "title": "Typography Qualification",
+          "type": "string"
+        },
+        "prior_2025_original_custody": {
+          "const": "unresolved",
+          "default": "unresolved",
+          "title": "Prior 2025 Original Custody",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "publisher_role",
+        "source",
+        "official_url",
+        "acquisition_receipt",
+        "acquisition_started_at",
+        "acquisition_completed_at",
+        "source_review_prepared_at",
+        "printed_edition_claim",
+        "catalog_session_claim",
+        "pdf_metadata_claims",
+        "date_qualification",
+        "reviewed_physical_pages",
+        "source_review_limits",
+        "typography_qualification"
+      ],
+      "title": "Custody",
+      "type": "object"
+    },
+    "FileRef": {
+      "additionalProperties": false,
+      "description": "One byte-bound, confined file relative to the source packet.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "maximum": 8000000,
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    },
+    "Fragment": {
+      "additionalProperties": false,
+      "description": "A complete reviewed native region, not normalized or silently corrected.",
+      "properties": {
+        "region_id": {
+          "title": "Region Id",
+          "type": "string"
+        },
+        "section_id": {
+          "enum": [
+            "CRS-1-1-101",
+            "CRS-1-1-102",
+            "CRS-1-1-103"
+          ],
+          "title": "Section Id",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "section_heading",
+            "statutory_paragraph",
+            "source_history_note",
+            "editors_note",
+            "cross_references",
+            "annotation_heading",
+            "case_annotation"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 6,
+          "minimum": 4,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "printed_page": {
+          "title": "Printed Page",
+          "type": "string"
+        },
+        "native": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "image": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "native_start": {
+          "minimum": 0,
+          "title": "Native Start",
+          "type": "integer"
+        },
+        "native_end": {
+          "exclusiveMinimum": 0,
+          "title": "Native End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "text_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Text Sha256",
+          "type": "string"
+        },
+        "visible_location": {
+          "title": "Visible Location",
+          "type": "string"
+        },
+        "source_review_qualification": {
+          "title": "Source Review Qualification",
+          "type": "string"
+        },
+        "byte_basis": {
+          "const": "half_open_utf8_offsets_in_unchanged_native_page",
+          "default": "half_open_utf8_offsets_in_unchanged_native_page",
+          "title": "Byte Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "region_id",
+        "section_id",
+        "role",
+        "physical_page",
+        "printed_page",
+        "native",
+        "image",
+        "native_start",
+        "native_end",
+        "text",
+        "text_sha256",
+        "visible_location",
+        "source_review_qualification"
+      ],
+      "title": "Fragment",
+      "type": "object"
+    },
+    "Paragraph": {
+      "additionalProperties": false,
+      "description": "One complete source paragraph, including every declared continuation fragment.",
+      "properties": {
+        "label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Label"
+        },
+        "fragments": {
+          "items": {
+            "$ref": "#/$defs/Fragment"
+          },
+          "minItems": 1,
+          "title": "Fragments",
+          "type": "array"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "text_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Text Sha256",
+          "type": "string"
+        },
+        "continuation_note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Continuation Note"
+        },
+        "byte_basis": {
+          "const": "ordered_native_fragments_concatenated_without_insertions",
+          "default": "ordered_native_fragments_concatenated_without_insertions",
+          "title": "Byte Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "fragments",
+        "text",
+        "text_sha256",
+        "continuation_note"
+      ],
+      "title": "Paragraph",
+      "type": "object"
+    },
+    "Section": {
+      "additionalProperties": false,
+      "description": "The whole admitted section selection with distinct ancillary source material.",
+      "properties": {
+        "section_id": {
+          "enum": [
+            "CRS-1-1-101",
+            "CRS-1-1-102",
+            "CRS-1-1-103"
+          ],
+          "title": "Section Id",
+          "type": "string"
+        },
+        "heading": {
+          "$ref": "#/$defs/Fragment"
+        },
+        "paragraphs": {
+          "items": {
+            "$ref": "#/$defs/Paragraph"
+          },
+          "title": "Paragraphs",
+          "type": "array"
+        },
+        "ancillary": {
+          "items": {
+            "$ref": "#/$defs/Fragment"
+          },
+          "title": "Ancillary",
+          "type": "array"
+        },
+        "scope_note": {
+          "title": "Scope Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "section_id",
+        "heading",
+        "paragraphs",
+        "ancillary",
+        "scope_note"
+      ],
+      "title": "Section",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A source-only response; it never answers a current-law or calculation question.",
+  "properties": {
+    "status": {
+      "enum": [
+        "matched",
+        "outside_scope",
+        "refused_mode"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "requested_section_id": {
+      "title": "Requested Section Id",
+      "type": "string"
+    },
+    "section": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Section"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "custody": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Custody"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "boundary": {
+      "const": "Research-only passages from the preserved 2026 PDF, limited to CRS-1-1-101/102/103. Six pages were reviewed with native-text context; the whole 1008-page title was not reviewed. Contents listings and the section 104 tail are excluded. Historical/editorial notes and case commentary remain distinct from statutory paragraphs. No current-law, effective-date, applicability, interpretation or completeness conclusion. The older 2025 derived catalog and its unresolved original custody remain unchanged.",
+      "default": "Research-only passages from the preserved 2026 PDF, limited to CRS-1-1-101/102/103. Six pages were reviewed with native-text context; the whole 1008-page title was not reviewed. Contents listings and the section 104 tail are excluded. Historical/editorial notes and case commentary remain distinct from statutory paragraphs. No current-law, effective-date, applicability, interpretation or completeness conclusion. The older 2025 derived catalog and its unresolved original custody remain unchanged.",
+      "title": "Boundary",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "research_only": {
+      "const": true,
+      "default": true,
+      "title": "Research Only",
+      "type": "boolean"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "status",
+    "requested_section_id"
+  ],
+  "title": "Result",
+  "type": "object"
+}

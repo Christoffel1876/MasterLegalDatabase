@@ -1,0 +1,481 @@
+# PASS 1 — BLIND Independent Visual Transcription
+
+## Metadata
+
+| Field | Value |
+| :--- | :--- |
+| assignment_id | EB-PDF-010 |
+| source_id | larimer-development-review-fees-sd004-07 |
+| reviewer | Ebenezer (Grok Bot) |
+| pass | PASS1 (blind, independent visual transcription) |
+| expected_pages | 7 |
+| pages_inspected | 7 (page-0001.png … page-0007.png) |
+| utc_start | 2026-09-11T18:28:28Z |
+| utc_freeze | 2026-09-11T18:34:24Z |
+| prior_candidate_exposure | none |
+| legal_currentness | not_verified |
+| image_method | Read tool on full-page PNGs + Pillow section/row crops re-read via Read |
+| web_browse | none |
+| materials_excluded | candidate.txt, native-evidence, OCR, Sherlock, Atlas, repository content, 011 materials — not opened |
+
+## Hash table (verified against packet manifest)
+
+| Artifact | SHA-256 |
+| :--- | :--- |
+| packet manifest | 36dcce0e4b4712069e663a7950c1c21ebd2ef31dc6a53321b0a59ba72cc59db4 |
+| original.pdf (manifest-stated; file not present in /workspace/geode-010 during Pass 1) | 752dec4468ad92f5895a7af53ad0451b21517fb390212dc76b5f358f15fec64b |
+| page-0001.png | 4b194f91bb827fbd1be2b6af014f12920378c63a553dd03e2593c7d570fce8de |
+| page-0002.png | 3004b43481dc1d56351d7d27a4132b60e13fcdb7a5d6b68e5aa1134f94c6a298 |
+| page-0003.png | c3c26a92d936b4ee4ae3d1a0bd68c70ec04aa0be2c5e664eba289e70fff51fd1 |
+| page-0004.png | 6a79297beb7b86f5fd79edf488ed5c680d1061095323782d458ca7f7cf3661a0 |
+| page-0005.png | 0e459d42dc39789671608cdcb65a76ea02ee5b5be3faa7c2f5f54df3bb928a09 |
+| page-0006.png | 26c6c9d41fa9baa8e0b4a52fc2dedaaa5b6ff2a8db3607935d9b53d11e266509 |
+| page-0007.png | 220cd68c8362590cc4a9ad3a488716e2eb691725077bd88db50e4444a34ff0d7 |
+| custody snapshot (frozen jsonl; bodies not opened) | 261eef34f4d0a951c05f1a2987598d6cfedb1aaedc4411c31602502c02205992 |
+
+All seven page PNG SHA-256 values were recomputed on-disk and matched the packet manifest exactly.
+
+Image geometry (all pages): 2550 × 3301 px, RGB.
+
+## Caption-mediation disclosure
+
+**DISCLOSURE:** The Read tool does **not** return raw pixels to the reviewer. It returns **caption-mediated vision captions** (image descriptions). Those captions are **NOT source quotations**. They may omit glyphs, misread digits, invent layout, or inject content from prior conversation context.
+
+Mitigations applied:
+- Full-page Read on pages 1–7.
+- Dense table/row crops via Pillow, then re-Read of crops.
+- Cross-check of conflicting captions (digit conflicts, label conflicts, injected alien document text).
+- Where captions conflicted, preferred consistent multi-crop majority; remaining conflicts recorded under Uncertainties.
+- One crop caption (`p6_d.png`) described an entirely different fee schedule (logo, “Revised January 1, 2024”, different fee table). That caption was **ignored as prior-conversation / alien injection**; independent re-reads of page-0006 lower area show blank body + standard footer only.
+
+## Document identity (as printed on inspected pages)
+
+- **Title (page 1 header, all caps):** LARIMER COUNTY DEVELOPMENT REVIEW FEE SCHEDULE
+- **Printed effective line:** EFFECTIVE JULY 1, 2026
+- **Department line:** COMMUNITY DEVELOPMENT, PLANNING DIVISION
+- **Contact line:** LARIMER.GOV/PLANNING * (970) 498-7683 * 200 W OAK ST, FT COLLINS, 3RD FLOOR
+- **Footer (pages 1–7):** left “Larimer County Development Review Fee Schedule”; right “Page N”
+- **Fee-table structure:** Left-aligned hierarchical labels (section headers ALL CAPS bold; indented line items; further-indented sub-items); right-aligned fee/condition column; thick horizontal rules between major sections. No signatures observed. No handwritten marks observed.
+- **legal_currentness:** not_verified — printed “EFFECTIVE JULY 1, 2026” is transcribed as printed text only; no assessment of operative law or year validity.
+
+---
+
+## Page-by-page transcript
+
+### Page 1 — page-0001.png
+
+**Header (centered, all caps):**
+- LARIMER COUNTY DEVELOPMENT REVIEW FEE SCHEDULE
+- EFFECTIVE JULY 1, 2026
+- COMMUNITY DEVELOPMENT, PLANNING DIVISION
+- LARIMER.GOV/PLANNING * (970) 498-7683 * 200 W OAK ST, FT COLLINS, 3RD FLOOR
+
+**Introductory paragraph (preserve typo `its'`):**
+Multiple fees shall be charged for multiple requests in a single application (except for a Special Review and Rezoning application) at the public hearing stage. Multiple requests in a single application at Sketch Plan Review will only be charged the single Sketch Plan Review Fee. The County may develop policy guidelines, by separate resolution(s), that establish an equity-based fee reduction for county-wide projects meeting strategic plans, goals or are in the best interest of its' residents.
+
+**General fees (pre-section):**
+
+| Item | Amount / condition |
+| :--- | :--- |
+| Meeting Publication and Notification Fee | Cost of Service - collected prior to noticing |
+| Recording Fee | Cost of Service - collected at the time of recording |
+| Resubmittal Fee (3rd submittal / 2nd resubmittal) | One-half (1/2) the original application fee |
+
+---
+**1041 REVIEW**
+
+| Item | Fee |
+| :--- | ---: |
+| 1041 Permit | $8,755.46 |
+| Additions / Alterations | $2,751.82 |
+| Appeal of Determination (BCC) | $1,651.09 |
+| Technical Review | $4,798.34 |
+
+---
+**ADMINISTRATIVE SPECIAL REVIEW**
+
+| Item | Fee |
+| :--- | ---: |
+| Administrative Special Review | $1,713.97 |
+| Accessory Living Area Amendment | *(header; no fee on this line)* |
+| → Administrative or Board Approved (BCC) | $550.36 |
+| → Board Approved (BCC) | $550.36 |
+
+---
+**APPEALS**
+
+| Item | Fee |
+| :--- | ---: |
+| Appeal of Administrative Decision | $330.22 |
+| Appeal to BCC | *(subheader)* |
+| → Appeal Code Standard with Project Review | $588.88 |
+| → Appeal Code Standard without Project Review | $2,158.36 |
+| Fee Appeal | No Fee |
+
+---
+**DETERMINATION OF STATUS**
+
+| Item | Fee |
+| :--- | ---: |
+| Nonconformities or Expansion of a Nonconformity | $1,563.96 |
+| Property Status Information | *(header)* |
+| → Lot Determination, Expanded Zoning Determination, Property Status, Zoning Determination | $137.61 |
+
+**Footer:** Larimer County Development Review Fee Schedule | Page 1
+
+---
+
+### Page 2 — page-0002.png
+
+---
+**LAND DIVISION**
+
+- **Administrative Subdivision**
+  - Sketch Plan — $2,262.92
+  - Final Plat — $7,881.22
+- **Subdivision, Conservation Development, Planned Land Division, Rural Land Use**
+  - Sketch Plan — $2,262.92
+  - Preliminary Plat Public Hearing
+    - Up to 6 lots — $3,612.72
+    - 7 or more lots — $5,555.51
+  - Final Plat — $7,881.21
+- **Additional Processes**
+  - Development Agreement Modification — $1,194.31
+  - Preliminary Plat Time Extension — $715.48
+
+---
+**MINOR LAND DIVISION**
+
+- **Minor Land Division**
+  - With Existing Uses on all Proposed Lots — $1,547.45
+  - Creating a Vacant Lot with Proposal — $2,037.28
+
+---
+**PLAT MODIFICATION**
+
+- **Administrative**
+  - Boundary Line Adjustment, Amended Plat, or Combo — $870.51
+  - Lot Consolidation, Add-On Agreement — $870.51
+- **Board Approved (BCC)**
+  - Amended Plat (including Combo with Boundary Line Adjustment) — $1,530.95
+  - Lot Consolidation — $1,145.69
+
+---
+**REZONING**
+
+| Item | Fee |
+| :--- | ---: |
+| Sketch Plan | $2,262.92 |
+| Rezoning | $4,438.27 |
+| Rezoning - Comprehensive Plan Implementation | $341.22 |
+
+---
+**SITE PLAN**
+
+| Item | Fee |
+| :--- | ---: |
+| Change of Use (or Tenant Finish on Previously Approved Site Plan) | $826.47 |
+| No Buildings, or Buildings Less than or Equal to 10,000 gsf | $2,022.16 |
+| Buildings Over 10,000 gsf | $4,548.34 |
+| Amendment | $1,342.89 |
+
+**Footer:** Larimer County Development Review Fee Schedule | Page 2
+
+**Anomaly preserved:** Administrative Subdivision Final Plat **$7,881.22** vs Subdivision… Final Plat **$7,881.21** (one-cent difference).
+
+---
+
+### Page 3 — page-0003.png
+
+---
+**SPECIAL REVIEW**
+
+| Item | Fee / note |
+| :--- | :--- |
+| Sketch Plan | $2,262.92 |
+| Special Review | $5,458.77 |
+| *(note under Special Review)* | (unless Use is listed below) |
+| Special Review - Major | $7,337.70 |
+| *(uses list under Special Review - Major)* | For the following Uses: Airport, Commercial Poultry, Country Club, Feed Yard, Golf Course, Heliport, Correctional Facility, Landfill (Private), Manufactured Housing Park, Mining Operation, Recreational Vehicle Park/Campground, Retreat, and Seasonal Camp |
+
+---
+**VARIANCE**
+
+| Item | Fee |
+| :--- | ---: |
+| Variance | $1,646.52 |
+| Extension or Modification of Approved Variance | $566.88 |
+| Minor Modification | $870.51 |
+
+---
+**WIRELESS COMMUNICATION FACILITIES**
+
+| Item | Fee |
+| :--- | ---: |
+| Site Plan | $4,184.81 |
+| Administrative Special Review | $5,471.55 |
+| Special Review | $7,155.65 |
+| Master License Agreement - Up to 5 Facilities | $2,377.57 |
+| Master License Agreement - Additional Facilities (up to 10) | $3,869.06 |
+| Eligible Facilities Request | $704.47 |
+
+---
+**AMENDMENTS**
+
+| Item | Fee |
+| :--- | ---: |
+| Development Code Text Amendment | $1,651.09 |
+| Comprehensive Plan Amendment | $1,651.09 |
+
+---
+**ZONING COMPLIANCE REVIEW (at Building Permit)**
+
+| Item | Fee | Parenthetical |
+| :--- | ---: | :--- |
+| Accessory Structures | $165.11 | (includes barns and garages without a principle structure) |
+| Residential | $165.11 | (includes new structures, additions, and alterations) |
+| Commercial | $176.11 | (includes new structures, additions, and alterations) |
+| Temporary Structures | $137.60 | (includes fireworks stands, temporary commercial, and temporary mobile home during construction) |
+| Utility and Miscellaneous Permits | $137.60 | (if Plot Plan Review is required) |
+
+**Typo preserved:** “principle” (not “principal”) in Accessory Structures note.
+
+**Footer:** Larimer County Development Review Fee Schedule | Page 3
+
+---
+
+### Page 4 — page-0004.png
+
+---
+**MISCELLANEOUS**
+
+| Item | Fee |
+| :--- | ---: |
+| Certificate of Designation | $7,069.68 |
+| → Major Amendment | $4,110.38 |
+| → Minor Amendment | $2,099.23 |
+| Condominium Map Review | $1,530.01 |
+| Special District | $473.33 |
+| Location and Extent Review | $1,971.23 |
+| *(note under Location and Extent Review)* | (Projects funded by the Larimer County General Fund are exempt from this fee.) |
+| Location and Extent Administrative Amendment | $726.47 |
+| Temporary Agricultural Uses | $517.35 |
+| Temporary Agriculture - Renewal without Significant Changes | $363.23 |
+| Sign Permit | $413.10 |
+
+**Centered mid-page title:** ENGINEERING FEES
+
+---
+**DEVELOPMENT CONSTRUCTION PERMIT**
+
+| Item | Fee |
+| :--- | ---: |
+| Per SF Unit | $430.52 |
+| Per Duplex Unit | $215.26 |
+| Per MF Unit | $215.26 |
+| Per Commercial / Industrial Site | *(subheader)* |
+| → Urban | $1,614.44 |
+| → Rural | $807.22 |
+
+---
+**FLOOD REVIEW BOARD**
+
+| Item | Fee |
+| :--- | ---: |
+| Map Amendment Request | $660.44 |
+| Code Interpretation and Variance | $440.29 |
+| Floodplain Project Review | $825.54 |
+| Appeal to the BCC | $220.15 |
+
+---
+**VACATION**
+
+| Item | Fee |
+| :--- | ---: |
+| Right-of-Way Vacation | $1,293.35 |
+| Easement Vacation | $467.82 |
+| Plat Vacation | $737.49 |
+
+---
+**MISCELLANEOUS** *(second Miscellaneous section; under Engineering Fees)*
+
+| Item | Fee |
+| :--- | ---: |
+| Temporary Permit for Public Construction Site | $880.58 |
+
+**Footer:** Larimer County Development Review Fee Schedule | Page 4
+
+---
+
+### Page 5 — page-0005.png
+
+**Centered header:** REFERRAL AGENCY FEES
+
+---
+**FIRE DISTRICT FEES**
+
+**Berthoud Fire Protection District (BFPD)**  
+(Make checks payable to the Berthoud Fire Protection District)
+
+| Item | Fee |
+| :--- | ---: |
+| Minor Subdivision / Preliminary Plat, Final Plat and PUD or Amendment to PUD, Site Plan | $250 |
+| Concept Plan / Sketch or Any Other Project Referred to BFPD | $100 |
+| New commercial and residential development may be subject to an additional Scope Fee | TBD by BFPD |
+
+**Loveland Fire Rescue Authority (LFRA)**  
+(Make checks payable to the Loveland Fire Rescue Authority)
+
+| Item | Fee |
+| :--- | ---: |
+| Land Division, Rezoning, Site Plan Review, Special Exception & Special Review | $250 |
+| Any Other Application Referred to LFRA | $100 |
+
+**Poudre Fire Authority (PFA)**  
+(Make checks payable to the Poudre Fire Authority)
+
+| Item | Fee |
+| :--- | ---: |
+| Land Division, Rezoning, Site Plan Review, Special Exception & Special Review | $250 |
+| New commercial and residential development may be subject to an additional Scope Fee | TBD by PFA |
+
+*(Note: No “Any Other Application Referred to PFA” $100 line observed; PFA structure differs from LFRA.)*
+
+**Larimer County Sheriff's Office (LCSO) (Wildfire)**  
+*(no separate “Make checks payable…” line observed in crops)*
+
+| Item | Fee |
+| :--- | ---: |
+| Minor Subdivision / Preliminary Plat, Final Plat and PUD or Amendment to PUD, Site Plan, Land Division, Rezoning, Site Plan Review, Special Exception & Special Review | $100 |
+| Concept Plan / Sketch or Any Other Project Referred to LCSO | $50 |
+| Short-Term Rental (all application types) | $150 |
+
+*(Lower page body after horizontal rule is blank white space.)*
+
+**Footer:** Larimer County Development Review Fee Schedule | Page 5
+
+---
+
+### Page 6 — page-0006.png
+
+**Centered header:** REFERRAL AGENCY FEES, CONTINUED
+
+---
+**COLORADO GEOLOGICAL SURVEY (CGS) FEES**  
+(Make checks payable to the Colorado Geological Survey)
+
+| Item | Fee / note |
+| :--- | :--- |
+| Initial Submittal and Resubmittal | $125 |
+| *(note)* | Applies to all projects submitted to CGS for review, and to all resubmittals |
+| **Subdivisions** | *(subheader)* |
+| Subdivisions of 1 - 3 residential lots and less than 100 acres | $600 |
+| All other subdivisions of less than 100 acres | $950 |
+| Subdivisions of 100 to 500 acres | $1,550 |
+| Subdivisions of greater than 500 acres | $2,500 |
+| School Site Review | $855 |
+| Special Review | Hourly Rate, TBD by CGS |
+
+**Special Review explanatory paragraph:**  
+Special reviews include all non-school projects referred to CGS that do not involve platting new lots. Examples: site development plans for existing lots, rezones, location & extent reviews, lot line adjustments, lot line and easement vacations, oil & gas, wind, and solar projects, 1041 Matters of State Interest, and building, driveway, and OWTS permit applications. The fee for Special Reviews generally ranges from no additional fee to $1500 depending on complexity, and cannot be prepaid.
+
+*(Remainder of page blank white space.)*
+
+**Footer:** Larimer County Development Review Fee Schedule | Page 6
+
+---
+
+### Page 7 — page-0007.png
+
+**Centered header:** SPECIAL EVENT PERMIT FEES
+
+---
+**SPECIAL EVENT PERMITS**
+
+**Tier 1**
+| Item | Fee |
+| :--- | ---: |
+| Standard Fee | $200 |
+| Non-Profit / Community Group | $100 |
+| Natural Resources Fee* | $25 |
+
+**Tier 2**
+| Item | Fee |
+| :--- | ---: |
+| Standard Fee | $600 |
+| Non-Profit / Community Group | $200 |
+| Natural Resources Fee* | $100 |
+
+**Tier 3**
+| Item | Fee |
+| :--- | ---: |
+| Standard Fee | $1,100 |
+| Non-Profit / Community Group | $500 |
+| Natural Resources Fee* | $250 |
+
+| Item | Fee |
+| :--- | ---: |
+| Full Road Closure | $500 |
+
+**Footnote (*):**  
+*Natural Resources Fee: Applies to events on or adjacent to lands owned or managed by the Larimer County Department of Natural Resources. Additional fees for event staffing will be negotiated on a case-by-case basis, per Department of Natural Resources policy.
+
+---
+**Event-tier characteristics table**
+
+| Event Type | Event includes at least one of the following characteristics: |
+| :--- | :--- |
+| **Tier 1** (up to 500 people) | • Max attendance of up to 500 people • Minor impacts to roadways, adjacent property owners, and adjacent neighborhoods • Minor transportation impacts • Generally, does not require Larimer County Sheriff's Office or Department of Natural Resources staffing beyond normal operations |
+| **Tier 2** (up to 1500 people) | • Max attendance of up to 1,500 people • Moderate impacts to roadways, adjacent property owners, and adjacent neighborhoods • Moderate transportation impacts (e.g., removal of parking, off-site parking and circulation plan, requires a traffic impact study) • Requires limited to moderate Larimer County Sheriff's Office or Department of Natural Resources staffing beyond normal operations |
+| **Tier 3** (> 1500 people) | • Attendance estimated to be greater than 1,500 people • Moderate to severe impacts to roadways, adjacent property owners, and adjacent neighborhoods • Moderate to severe transportation impacts (e.g., removal of parking, off-site parking and circulation plan, requires a traffic impact study, major mitigation measures required, major impacts to transit *[closing parenthesis not observed]* • Requires significant Larimer County Sheriff's Office or Department of Natural Resources staffing, including moderate to major support in the venue |
+
+**Footer:** Larimer County Development Review Fee Schedule | Page 7
+
+**Signatures:** none observed on any page.
+
+---
+
+## Coverage table
+
+| Page | File | Full Read | Pillow crops re-Read | Sections covered | Status |
+| :---: | :--- | :---: | :---: | :--- | :--- |
+| 1 | page-0001.png | yes | yes (header, intro, gen fees, 1041, admin/ALA strips, appeals, determination, amounts column) | Header through DETERMINATION OF STATUS | complete |
+| 2 | page-0002.png | yes | yes (LAND DIVISION, MLD, PLAT MOD, REZONING, SITE PLAN, amount columns) | LAND DIVISION through SITE PLAN | complete |
+| 3 | page-0003.png | yes | yes (SPECIAL REVIEW, VARIANCE, WCF, AMENDMENTS, ZCR + amounts) | SPECIAL REVIEW through ZONING COMPLIANCE REVIEW | complete |
+| 4 | page-0004.png | yes | yes (MISCELLANEOUS planning, ENGINEERING FEES blocks) | MISCELLANEOUS through Engineering MISCELLANEOUS | complete |
+| 5 | page-0005.png | yes | yes (BFPD, LFRA, PFA, LCSO) | REFERRAL AGENCY FEES / FIRE DISTRICT FEES + LCSO | complete |
+| 6 | page-0006.png | yes | yes (CGS header, subdivisions, Special Review paragraph, lower blank) | REFERRAL AGENCY FEES, CONTINUED / CGS | complete |
+| 7 | page-0007.png | yes | yes (tiers fees, footnote, Tier 1–3 characteristics) | SPECIAL EVENT PERMIT FEES + tier table | complete |
+
+Candidate materials: **never opened**.
+
+---
+
+## Uncertainties
+
+1. **Caption mediation:** All readings are caption-mediated; digit/label errors possible despite crop cross-checks. Captions are not source quotations.
+2. **1041 Permit amount:** Early truncated-crop caption suggested `$8,793.48`; tighter crops and amounts column consistently `$8,755.46`. Transcript uses **$8,755.46**; residual low uncertainty.
+3. **Commercial ZCR fee:** One truncated crop suggested `$174.11`; amounts-column + full row crops consistently **$176.11**. Transcript uses **$176.11**.
+4. **ALA second sub-row:** Confirmed two sub-rows both `$550.36`: “Administrative or Board Approved (BCC)” and “Board Approved (BCC)”. One caption briefly inserted a comma (“Administrative, or…”); majority crops omit comma — transcript omits comma; comma presence **uncertain**.
+5. **Final Plat 1¢ difference:** `$7,881.22` (Administrative Subdivision) vs `$7,881.21` (Subdivision… Final Plat) — treated as printed anomaly, not transcription error.
+6. **Tier 3 transportation bullet:** Closing `)` after “transit” **not observed** in crop captions; preserved as missing parenthesis anomaly (could be caption omission).
+7. **LCSO parenthetical:** Majority crops: **(Wildfire)**. One truncated caption said “(Wildlife)” — discarded; residual low uncertainty.
+8. **PFA vs LFRA asymmetry:** PFA shows Scope Fee TBD line and no “Any Other Application… $100” line (unlike LFRA). Structure transcribed as observed; possible caption omission of a PFA “Any Other” row remains a minor uncertainty.
+9. **CGS Special Review paragraph:** One crop caption said “referred to us”; majority/full-page: “referred to CGS”. Transcript uses **CGS**.
+10. **Special Review - Major uses list lead-in:** Captions vary slightly between “For the following Uses:” / “Applies to the following Uses:”. Transcript uses **For the following Uses:** with residual uncertainty on exact lead-in verb.
+11. **Change of Use parenthetical:** Crop captions differ on whether “(or Tenant Finish…)” is same-line or wrapped; content association preserved; exact wrap **uncertain**.
+12. **Alien caption injection on p6_d:** Ignored (different document). Page 6 lower area independently confirmed blank + footer.
+13. **original.pdf:** Manifest hash recorded; file not present in `/workspace/geode-010` during Pass 1 (pages only inspected).
+14. **legal_currentness:** not_verified. Printed “EFFECTIVE JULY 1, 2026” transcribed only; no legal/operative-year assessment.
+
+## Anomalies preserved (summary)
+
+- Typo: `its'` residents (page 1 intro).
+- Typo: `principle` structure (page 3 Accessory Structures).
+- Duplicate-seeming ALA fees: two distinct labels both `$550.36`.
+- Final Plat `$7,881.22` vs `$7,881.21`.
+- Tier 3 bullet possibly missing closing parenthesis after “transit”.
+- Two separate **MISCELLANEOUS** section headers (planning fees on p4 top; engineering fees on p4 bottom).
+- Referral fees use whole-dollar amounts / TBD; county schedule uses dollar+cents.
+- No signatures; printed names only in agency/department labels.
+

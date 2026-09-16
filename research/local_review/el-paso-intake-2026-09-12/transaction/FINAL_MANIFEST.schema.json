@@ -1,0 +1,94 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Bind one ordinary file to exact bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Freeze distributable assets while declaring excluded local test/runtime paths.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "status": {
+      "const": "prepared_not_applied",
+      "title": "Status",
+      "type": "string"
+    },
+    "frozen_at": {
+      "format": "date-time",
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "minItems": 150,
+      "title": "Files",
+      "type": "array"
+    },
+    "excluded_prefixes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Excluded Prefixes",
+      "type": "array"
+    },
+    "excluded_files": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Excluded Files",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "frozen_at",
+    "files",
+    "excluded_prefixes",
+    "excluded_files",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Package",
+  "type": "object"
+}

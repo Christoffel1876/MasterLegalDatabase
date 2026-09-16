@@ -1,0 +1,87 @@
+from pathlib import Path
+from datetime import datetime,timezone
+from typing import Literal
+import ast,hashlib,importlib.util,json,re,shutil,sys
+from pydantic import BaseModel,ConfigDict,Field
+B=Path('/Users/mcoors/Documents/Project Geode');R=B/'MasterLegalDatabase';A=B/'handoffs/run-2026-09-13/ptolemy-manual-watch-ci-preparation';P=A/'proposed'
+spec=importlib.util.spec_from_file_location('ci_frozen_models',P/'scripts/manual_source_watch_ci.py');m=importlib.util.module_from_spec(spec);sys.modules[spec.name]=m;spec.loader.exec_module(m)
+for name,model in [('manual_source_watch_ci.schema.json',m.Plan),('manual_source_watch_ci-summary.schema.json',m.Summary),('manual_source_watch_ci-process.schema.json',m.ProcessReceipt),('manual_source_watch_ci-progress.schema.json',m.ProgressSnapshot)]:
+ (P/'config'/name).write_text(json.dumps(model.model_json_schema(),indent=2)+'\n')
+# Validate readable style and Python 3.11 parsing without implying Linux execution.
+for f in [P/'scripts/manual_source_watch_ci.py',P/'tests/test_manual_source_watch_ci.py']:
+ text=f.read_text();tree=ast.parse(text,feature_version=(3,11));assert all(len(line)<=100 for line in text.splitlines())
+ assert all(ast.get_docstring(node) for node in ast.walk(tree) if isinstance(node,(ast.FunctionDef,ast.ClassDef,ast.AsyncFunctionDef)))
+plan=m.Plan.model_validate_json((P/'config/manual_source_watch_ci.json').read_bytes())
+for ref in plan.immutable_inputs:m.check_ref(R,ref)
+# Update documentation only with the accepted narrow preimage preservation mechanism.
+f=P/'docs/MANUAL_SOURCE_WATCH_CI.md';s=f.read_text();s=s.replace('Every selected raw record and original remains checked', 'The 88 explicit pins include package startup/schema imports; third-party distribution identities remain the frozen requirements, not hashes of every installed library file. Every selected raw record and original remains checked')
+s=s.replace('Output lives only under', 'Schemas for summaries, process receipts and progress preimages are emitted before records. Before replacing a CI summary, both old JSON and Markdown are preserved with typed hash identities in bounded progress history (at most five prior versions). Source evidence and process logs remain write-once. This is process-interruption evidence, not a proven power-loss durability guarantee.\n\nOutput lives only under');f.write_text(s)
+class Ref(BaseModel):
+ model_config=ConfigDict(extra='forbid',strict=True)
+ path:str;sha256:str=Field(pattern='^[0-9a-f]{64}$');size_bytes:int=Field(ge=0)
+class Preparation(BaseModel):
+ model_config=ConfigDict(extra='forbid',strict=True)
+ status:Literal['PREPARED_ONLY_NOT_INSTALLED_NOT_DEPLOYED'];prepared_at:str
+ install_files:list[Ref];immutable_input_count:Literal[88];source_pairs:Literal[4];selected_sources:Literal[8]
+ max_source_events:Literal[16];max_source_response_bytes:Literal[16000000];max_source_run_seconds:Literal[1200]
+ scheduled_http_enabled_by_default:Literal[False];manual_http_enabled_by_default:Literal[False]
+ source_http_requests:Literal[0];primary_document_urls_observed:Literal[6]
+ final_focused_tests:int;final_combined_tests:int;branch_inclusive_coverage_percent:float
+ local_python:str;python311_syntax_checked:Literal[True];linux_execution_tested:Literal[False]
+ unchanged_maintained_input_pins:Literal[True];legal_currentness:Literal['not_verified'];limitations:list[str]
+class Manifest(BaseModel):
+ model_config=ConfigDict(extra='forbid',strict=True)
+ kind:Literal['manual_watch_ci_preparation'];prepared_at:str;files:list[Ref]
+# Ordinary strict models are retained independently of the proposed runner.
+model_text='''"""Strict preparation custody records; importing performs no work."""\nfrom typing import Literal\nfrom pydantic import BaseModel, ConfigDict, Field\n'''
+source=Path(__file__).read_text();start=source.index('class Ref(BaseModel):');end=source.index('# Ordinary strict models')
+(A/'models.py').write_text(model_text+source[start:end])
+for name,model in [('PREPARATION.schema.json',Preparation),('FINAL_MANIFEST.schema.json',Manifest)]:
+ (A/name).write_text(json.dumps(model.model_json_schema(),indent=2)+'\n')
+def ref(path,root=A):
+ data=path.read_bytes();return Ref(path=path.relative_to(root).as_posix(),sha256=hashlib.sha256(data).hexdigest(),size_bytes=len(data))
+log=(A/'evidence/combined-final.log').read_text();match=re.search(r'(\d+) passed',log);assert match and int(match.group(1))==422,log[-500:]
+focused=(A/'evidence/focused-final.log').read_text();assert '44 passed' in focused
+coverage=json.loads((A/'evidence/combined-final-coverage.json').read_bytes())['totals']['percent_covered'];assert coverage>=90
+receipt=Preparation(status='PREPARED_ONLY_NOT_INSTALLED_NOT_DEPLOYED',prepared_at=datetime.now(timezone.utc).isoformat(),install_files=[ref(f) for f in sorted(P.rglob('*')) if f.is_file() and '__pycache__' not in f.parts],immutable_input_count=88,source_pairs=4,selected_sources=8,max_source_events=16,max_source_response_bytes=16000000,max_source_run_seconds=1200,scheduled_http_enabled_by_default=False,manual_http_enabled_by_default=False,source_http_requests=0,primary_document_urls_observed=6,final_focused_tests=44,final_combined_tests=422,branch_inclusive_coverage_percent=coverage,local_python=sys.version.split()[0],python311_syntax_checked=True,linux_execution_tested=False,unchanged_maintained_input_pins=True,legal_currentness='not_verified',limitations=[
+ 'Prepared files only. Root review, installation, default-branch deployment, Linux validation, manual live pilot and scheduled-HTTP activation are separate actions.',
+ 'All tests used offline fixtures or readiness-only subprocesses; no watched publisher was requested.',
+ 'Primary-document observations are web-tool-derived metadata, not raw HTTP custody. No package wheel was downloaded or installed here.',
+ 'Source outputs remain fixed-baseline comparisons; no source enrollment, baseline promotion, new-edition discovery, notification route or legal-currentness claim.',
+ 'The first combined test command used repository-default ignored coverage/pytest caches. Final cache/coverage destinations are inside this handoff; no maintained source/config/raw input was edited.',
+ 'Historical predecessor files/logs are preserved as evidence, never execution entrypoints. Earlier exit-semantics concern was narrowed: current producers classify denial as stopped/2; final wrapper also supports stopped reports with complete observations.',
+ 'Local dependencies and code were checked against 88 explicit pins. The current full manifest remains dynamic across invocations and is guarded against change within a run.',
+ 'The real temporary readiness copy contains the eight selected originals and the full manifest; missing unselected originals are informational. It creates no source-runtime directory.',
+ 'Only source-run budgets aggregate to 20 minutes. Setup, dependency installation, tests and replay have separate bounded job overhead.',
+ 'No guarantee of exact daily scheduling, artifact retention beyond configured limits, or delivered change notifications is made.'])
+(A/'PREPARATION.json').write_text(receipt.model_dump_json(indent=2)+'\n')
+(A/'README.md').write_text('''# Prepared manual-watch CI integration
+
+Status: **prepared only, not installed or deployed**. Eight existing sources, four serial pairs. Source HTTP defaults off both for schedule events and manual dispatch. Root must independently accept the exact proposal and later approve any activation.
+
+`PREPARATION.json` binds every proposed install file. `proposed/` contains only new runner/test/config/schema/workflow/requirements/documentation files; existing source selections and baselines are unchanged. Preimages are preserved under `preimages/`. No installer is supplied, and no write script should be invoked on the production repository from this packet.
+
+Final validation: 44 runner-specific tests and 422 combined maintained-watch/runner tests pass; the exact branch-inclusive coverage is in the typed receipt. Actual subprocess readiness from a temporary copy passes with all eight selected originals, the complete raw manifest, and no copied unselected originals. No public source GET was made. Python 3.11 syntax parses; the test runtime is macOS/Python 3.14.3. Linux execution is a future activation gate. YAML syntax parsed using the local Ruby parser; GitHub service execution is not certified.
+
+The packet preserves two predecessor proposals/logs before root-requested typed process receipts, bounded summary history, style cleanup, and producer-status refinement. Only `proposed/` is current. The exact report semantics are checked from maintained code: complete requires changed/unchanged observations and no stop reason; denied responses are stopped. Final runner status handling respects both source and producer states.
+
+Run the portable read-only custody check:
+
+```sh
+python -B verify_preparation.py
+```
+
+Optionally add `--repository-root /absolute/path/to/MasterLegalDatabase` to recheck the 88 existing immutable input references. That reads files only and does not install the new config or execute HTTP. The complete current raw manifest is deliberately not pinned to this historical preparation as a global future baseline; the maintained watcher checks the exact selected record lines, and each invocation retains its own complete manifest snapshot.
+
+All six primary references are linked in `evidence/PRIMARY_METADATA.json`: official actions/checkout, actions/setup-python and actions/upload-artifact commit pages, plus PyPI versions for PyMuPDF/BeautifulSoup/SoupSieve. Only the existing repository action SHAs are reused. Original raw document response bodies from the web tool are not represented as retained HTTP bytes.
+
+Source sites, source discovery, canonical intake, coverage/indexes, publication, Git staging/push, cloud settings and notification services are outside this preparation. No deployment or activation occurred.
+''')
+# Remove only newly generated local caches, never historical input evidence.
+for path in [A/'.pytest_cache',A/'evidence/_pytest_cache',A/'.coverage',A/'evidence/final.coverage',A/'evidence/combined-final.coverage']:
+ if path.is_dir():shutil.rmtree(path)
+ elif path.exists():path.unlink()
+for path in sorted(A.rglob('__pycache__'),reverse=True):shutil.rmtree(path)
+manifest=Manifest(kind='manual_watch_ci_preparation',prepared_at=datetime.now(timezone.utc).isoformat(),files=[ref(f) for f in sorted(A.rglob('*')) if f.is_file() and f!=A/'FINAL_MANIFEST.json'])
+(A/'FINAL_MANIFEST.json').write_text(manifest.model_dump_json(indent=2)+'\n')
+print(json.dumps({'manifest':ref(A/'FINAL_MANIFEST.json').model_dump(),'preparation':ref(A/'PREPARATION.json').model_dump(),'payloads':len(manifest.files),'coverage':coverage},indent=2))

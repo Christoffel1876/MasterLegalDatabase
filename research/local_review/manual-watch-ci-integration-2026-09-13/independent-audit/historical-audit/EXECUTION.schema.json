@@ -1,0 +1,107 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact ordinary-file identity in this closed packet.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Actual local sparse-corpus readiness; no watched publisher invocation.",
+  "properties": {
+    "checked_at": {
+      "title": "Checked At",
+      "type": "string"
+    },
+    "temporary_root": {
+      "title": "Temporary Root",
+      "type": "string"
+    },
+    "immutable_inputs_checked": {
+      "const": 88,
+      "title": "Immutable Inputs Checked",
+      "type": "integer"
+    },
+    "manual_record_count": {
+      "title": "Manual Record Count",
+      "type": "integer"
+    },
+    "manual_manifest_sha256": {
+      "title": "Manual Manifest Sha256",
+      "type": "string"
+    },
+    "actual_processes": {
+      "const": 4,
+      "title": "Actual Processes",
+      "type": "integer"
+    },
+    "execution_switch_present": {
+      "const": false,
+      "title": "Execution Switch Present",
+      "type": "boolean"
+    },
+    "source_runtime_created": {
+      "const": false,
+      "title": "Source Runtime Created",
+      "type": "boolean"
+    },
+    "summary": {
+      "$ref": "#/$defs/Asset"
+    },
+    "status": {
+      "const": "ready",
+      "title": "Status",
+      "type": "string"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "checked_at",
+    "temporary_root",
+    "immutable_inputs_checked",
+    "manual_record_count",
+    "manual_manifest_sha256",
+    "actual_processes",
+    "execution_switch_present",
+    "source_runtime_created",
+    "summary",
+    "status",
+    "public_requests",
+    "limitations"
+  ],
+  "title": "ExecutionCheck",
+  "type": "object"
+}

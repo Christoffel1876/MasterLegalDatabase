@@ -1,0 +1,22 @@
+--- manual_watch_http.py
++++ manual_watch_http_v2.py
+@@ -1,4 +1,4 @@
+-"""Maintained bounded HTTP custody for explicit manual-source watch selections."""
++"""Version 2 bounded HTTP custody for six explicitly approved additional sources."""
+ from __future__ import annotations
+ 
+ import contextlib
+@@ -22,7 +22,12 @@
+ 
+ from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, model_validator
+ 
+-HOSTS = {'coloradosprings.gov', 'www.coloradosprings.gov'}
++# Version 1 remains unchanged for existing Springs saved-run replay.
++# This transport policy is necessary, not sufficient: the adapter pins each exact URL.
++HOSTS = {
++    'files.arapahoeco.gov', 'www.weld.gov', 'www.gjcity.org', 'www.mesacounty.us',
++    'cogy-p-001.sitecorecontenthub.cloud',
++}
+ PUBLIC_HEADERS = {
+     'content-type', 'content-length', 'date', 'last-modified', 'etag', 'cache-control'}
+ REDIRECTS = {301, 302, 303, 307, 308}

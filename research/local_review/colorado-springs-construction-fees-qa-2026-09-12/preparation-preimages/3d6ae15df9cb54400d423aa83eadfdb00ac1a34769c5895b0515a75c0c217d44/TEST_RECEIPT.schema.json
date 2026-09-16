@@ -1,0 +1,65 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "run_at": {
+      "title": "Run At",
+      "type": "string"
+    },
+    "command": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Command",
+      "type": "array"
+    },
+    "exit_code": {
+      "const": 0,
+      "title": "Exit Code",
+      "type": "integer"
+    },
+    "log": {
+      "$ref": "#/$defs/Asset"
+    },
+    "coverage_note": {
+      "title": "Coverage Note",
+      "type": "string"
+    }
+  },
+  "required": [
+    "run_at",
+    "command",
+    "exit_code",
+    "log",
+    "coverage_note"
+  ],
+  "title": "TestReceipt",
+  "type": "object"
+}

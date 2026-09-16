@@ -1,0 +1,291 @@
+{
+  "$defs": {
+    "Artifact": {
+      "additionalProperties": false,
+      "description": "Exact repository evidence bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 1,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Artifact",
+      "type": "object"
+    },
+    "Block": {
+      "additionalProperties": false,
+      "description": "One bounded source-image transcription and its native-text anchor.",
+      "properties": {
+        "block_id": {
+          "title": "Block Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "enum": [
+            1,
+            5
+          ],
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "scope": {
+          "title": "Scope",
+          "type": "string"
+        },
+        "raw_native_excerpt": {
+          "minLength": 1,
+          "title": "Raw Native Excerpt",
+          "type": "string"
+        },
+        "checked_text": {
+          "minLength": 1,
+          "title": "Checked Text",
+          "type": "string"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "block_id",
+        "physical_page",
+        "scope",
+        "raw_native_excerpt",
+        "checked_text",
+        "notes"
+      ],
+      "title": "Block",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "Bind a physical page to its unchanged image and native stream.",
+      "properties": {
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Artifact"
+        },
+        "native_evidence": {
+          "$ref": "#/$defs/Artifact"
+        },
+        "native_text_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Native Text Sha256",
+          "type": "string"
+        },
+        "width_pixels": {
+          "const": 2550,
+          "default": 2550,
+          "title": "Width Pixels",
+          "type": "integer"
+        },
+        "height_pixels": {
+          "const": 3300,
+          "default": 3300,
+          "title": "Height Pixels",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "native_evidence",
+        "native_text_sha256"
+      ],
+      "title": "Page",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Checked layout/text evidence, with no claim of current legal applicability.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "review_id": {
+      "const": "EB-PDF-009-ATLAS-NATIVE",
+      "default": "EB-PDF-009-ATLAS-NATIVE",
+      "title": "Review Id",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "larimer-building-fees-sd004-06",
+      "default": "larimer-building-fees-sd004-06",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-LARIMER",
+      "default": "CO-COUNTY-LARIMER",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Artifact"
+    },
+    "manual_intake": {
+      "$ref": "#/$defs/Artifact"
+    },
+    "source_intake_status": {
+      "const": "archived_pending_pipeline",
+      "default": "archived_pending_pipeline",
+      "title": "Source Intake Status",
+      "type": "string"
+    },
+    "reported_official_url": {
+      "title": "Reported Official Url",
+      "type": "string"
+    },
+    "original_source_acquired_at": {
+      "default": null,
+      "title": "Original Source Acquired At",
+      "type": "null"
+    },
+    "source_http_acquisition_verified": {
+      "const": false,
+      "default": false,
+      "title": "Source Http Acquisition Verified",
+      "type": "boolean"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Artifact"
+    },
+    "packet_manifest": {
+      "$ref": "#/$defs/Artifact"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/Artifact"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "title": "Pages",
+      "type": "array"
+    },
+    "blocks": {
+      "items": {
+        "$ref": "#/$defs/Block"
+      },
+      "maxItems": 7,
+      "minItems": 7,
+      "title": "Blocks",
+      "type": "array"
+    },
+    "reviewed_scope": {
+      "const": "complete_page_5_and_four_page_1_context_blocks",
+      "title": "Reviewed Scope",
+      "type": "string"
+    },
+    "remaining_candidate_status": {
+      "const": "machine_native_text_unreviewed",
+      "default": "machine_native_text_unreviewed",
+      "title": "Remaining Candidate Status",
+      "type": "string"
+    },
+    "extraction_method": {
+      "const": "PyMuPDF Page.get_text(\"text\", sort=False, flags=195)",
+      "title": "Extraction Method",
+      "type": "string"
+    },
+    "visual_review_method": {
+      "title": "Visual Review Method",
+      "type": "string"
+    },
+    "transcription_convention": {
+      "title": "Transcription Convention",
+      "type": "string"
+    },
+    "printed_date_text": {
+      "const": "July 1, 2026 (CPI fee increase of 2.29% included)",
+      "title": "Printed Date Text",
+      "type": "string"
+    },
+    "adoption_date": {
+      "default": null,
+      "title": "Adoption Date",
+      "type": "null"
+    },
+    "verified_effective_date": {
+      "default": null,
+      "title": "Verified Effective Date",
+      "type": "null"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "legal_review": {
+      "const": "pending",
+      "default": "pending",
+      "title": "Legal Review",
+      "type": "string"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "source",
+    "manual_intake",
+    "reported_official_url",
+    "candidate",
+    "packet_manifest",
+    "evidence",
+    "pages",
+    "blocks",
+    "reviewed_scope",
+    "extraction_method",
+    "visual_review_method",
+    "transcription_convention",
+    "printed_date_text",
+    "limits"
+  ],
+  "title": "NativeReview",
+  "type": "object"
+}

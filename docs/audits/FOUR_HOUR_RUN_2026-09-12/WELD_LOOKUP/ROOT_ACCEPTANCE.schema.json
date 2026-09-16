@@ -1,0 +1,123 @@
+{
+  "$defs": {
+    "Run": {
+      "additionalProperties": false,
+      "description": "Record an actual CLI result and its assertions separately from source claims.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Command",
+          "type": "array"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "finished_at": {
+          "format": "date-time",
+          "title": "Finished At",
+          "type": "string"
+        },
+        "exit_code": {
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "result_count": {
+          "title": "Result Count",
+          "type": "integer"
+        },
+        "assertions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Assertions",
+          "type": "array"
+        },
+        "stdout_sha256": {
+          "title": "Stdout Sha256",
+          "type": "string"
+        },
+        "stderr_sha256": {
+          "title": "Stderr Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "command",
+        "started_at",
+        "finished_at",
+        "exit_code",
+        "status",
+        "result_count",
+        "assertions",
+        "stdout_sha256",
+        "stderr_sha256"
+      ],
+      "title": "Run",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Root acceptance examples do not promote the sources to current law.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "passed",
+      "title": "Status",
+      "type": "string"
+    },
+    "implementation_sha256": {
+      "title": "Implementation Sha256",
+      "type": "string"
+    },
+    "evidence_unchanged": {
+      "const": true,
+      "title": "Evidence Unchanged",
+      "type": "boolean"
+    },
+    "runs": {
+      "items": {
+        "$ref": "#/$defs/Run"
+      },
+      "title": "Runs",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "implementation_sha256",
+    "evidence_unchanged",
+    "runs",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

@@ -1,0 +1,20 @@
+# Read caption page 2
+mediation: image_description
+
+Header same Pueblo logo + Planning & Community Development + contact
+Columns Applications | Fees
+Demolition Permit Review (designated as a historic landmark) | $150
+Extension of Recordation Deadline | $40
+HARP Development Plan Review | $150
+Limited Use Permit | $500
+Marijuana Certificate of Location (cannabis) | $500
+Marijuana (Retail or Medical) Conditional Use Permit or Renewal (cannabis): New Permit $5,000 (medical center, retail store, retail or medical cultivation facility, retail or medical infused product manufacturing, and retail or medical testing facility); Renewal $2,500
+Master Sign Plan | $150
+Metropolitan District Service Plan Review | $500, plus hourly rate for legal review of the service plan
+Nomination of Historic District | $200
+Nomination of Historic Landmark | $150
+Overall Development Plan | $500 + $5 For each acre over 10 acres (waived if required as part of an annexation)
+Planned Unit Development, Development Guide/Plan Amendment | $500
+Planned Unit Development, Site Plan Review or Major Revision | $500 1st 50,000 sf; $500 Each additional 50,000 sf
+Planned Unit Development, Site Plan Review, Minor Revision | $250 Dimensional; $100 Landscape; $150 Location; $200 Parking
+Footer: 2-13-26

@@ -1,0 +1,576 @@
+{
+  "$defs": {
+    "Amendment": {
+      "additionalProperties": false,
+      "description": "Exact document amendment instruction, not an enacted RuleUnit.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "target_literal": {
+          "title": "Target Literal",
+          "type": "string"
+        },
+        "instruction_literal": {
+          "title": "Instruction Literal",
+          "type": "string"
+        },
+        "passage_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Passage Ids",
+          "type": "array"
+        },
+        "targets_within_literal": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Targets Within Literal",
+          "type": "array"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "target_literal",
+        "instruction_literal",
+        "passage_ids",
+        "targets_within_literal",
+        "qualification"
+      ],
+      "title": "Amendment",
+      "type": "object"
+    },
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact relative file identity; historical paths are never opened.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "DateStatement": {
+      "additionalProperties": false,
+      "description": "Source date or edition role, never a verified operative date.",
+      "properties": {
+        "literal": {
+          "title": "Literal",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "passage_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Passage Ids",
+          "type": "array"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "literal",
+        "role",
+        "passage_ids",
+        "qualification"
+      ],
+      "title": "DateStatement",
+      "type": "object"
+    },
+    "Discrepancy": {
+      "additionalProperties": false,
+      "description": "Checked OCR discrepancy; original OCR remains untouched.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "page": {
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "ocr_span": {
+          "$ref": "#/$defs/Span"
+        },
+        "ocr_text_literal": {
+          "title": "Ocr Text Literal",
+          "type": "string"
+        },
+        "reviewed_passage_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reviewed Passage Ids",
+          "type": "array"
+        },
+        "finding": {
+          "title": "Finding",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "page",
+        "ocr_span",
+        "ocr_text_literal",
+        "reviewed_passage_ids",
+        "finding"
+      ],
+      "title": "Discrepancy",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "Full physical page and unchanged machine evidence.",
+      "properties": {
+        "number": {
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Number",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "width": {
+          "exclusiveMinimum": 0,
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "title": "Height",
+          "type": "integer"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_spans": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "title": "Native Spans",
+          "type": "array"
+        },
+        "native_status": {
+          "const": "empty_image_only",
+          "title": "Native Status",
+          "type": "string"
+        },
+        "ocr_json": {
+          "$ref": "#/$defs/Asset"
+        },
+        "ocr_text": {
+          "$ref": "#/$defs/Asset"
+        },
+        "ocr_observation_spans": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "title": "Ocr Observation Spans",
+          "type": "array"
+        },
+        "candidate_span": {
+          "$ref": "#/$defs/Span"
+        },
+        "reviewed_transcript": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "number",
+        "image",
+        "width",
+        "height",
+        "native",
+        "native_spans",
+        "native_status",
+        "ocr_json",
+        "ocr_text",
+        "ocr_observation_spans",
+        "candidate_span",
+        "reviewed_transcript"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Passage": {
+      "additionalProperties": false,
+      "description": "A checked image passage or explicitly separate reviewer annotation.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "page": {
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "printed_text",
+            "mixed_printed_and_handwritten",
+            "handwriting_annotation",
+            "graphic_annotation"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "locator": {
+          "title": "Locator",
+          "type": "string"
+        },
+        "crop_paths": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Crop Paths",
+          "type": "array"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "reviewed_transcript": {
+          "$ref": "#/$defs/Asset"
+        },
+        "reviewed_span": {
+          "$ref": "#/$defs/Span"
+        },
+        "continuation_of": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Continuation Of"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "page",
+        "kind",
+        "image",
+        "locator",
+        "crop_paths",
+        "text",
+        "reviewed_transcript",
+        "reviewed_span",
+        "continuation_of",
+        "notes"
+      ],
+      "title": "Passage",
+      "type": "object"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "description": "Canonical receipt custody separate from supplier's acquisition claims.",
+      "properties": {
+        "acquisition_method": {
+          "const": "received_review_package",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "official_source_url_verified": {
+          "title": "Official Source Url Verified",
+          "type": "null"
+        },
+        "official_acquisition_at_verified": {
+          "title": "Official Acquisition At Verified",
+          "type": "null"
+        },
+        "supplied_requested_url": {
+          "title": "Supplied Requested Url",
+          "type": "string"
+        },
+        "supplied_started_at": {
+          "title": "Supplied Started At",
+          "type": "string"
+        },
+        "supplied_finished_at": {
+          "title": "Supplied Finished At",
+          "type": "string"
+        },
+        "supplied_times_status": {
+          "const": "reported_not_independently_verified",
+          "title": "Supplied Times Status",
+          "type": "string"
+        },
+        "repository_received_at": {
+          "title": "Repository Received At",
+          "type": "string"
+        },
+        "canonical_archive_path_claim": {
+          "title": "Canonical Archive Path Claim",
+          "type": "string"
+        },
+        "canonical_record": {
+          "$ref": "#/$defs/Asset"
+        },
+        "intake_receipt": {
+          "$ref": "#/$defs/Asset"
+        },
+        "receipt_status": {
+          "const": "canonical_intake_record_bound_not_fresh_http_verification",
+          "title": "Receipt Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "acquisition_method",
+        "official_source_url_verified",
+        "official_acquisition_at_verified",
+        "supplied_requested_url",
+        "supplied_started_at",
+        "supplied_finished_at",
+        "supplied_times_status",
+        "repository_received_at",
+        "canonical_archive_path_claim",
+        "canonical_record",
+        "intake_receipt",
+        "receipt_status"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "description": "A half-open UTF-8 byte range, including a declared separator if any.",
+      "properties": {
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Complete scoped source transcription with explicit legal limits.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source_id": {
+      "const": "gunnison-iwuic-resolution-2022-33-sh-ext-003",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-GUNNISON",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "layer": {
+      "const": "08_County_Authorities",
+      "title": "Layer",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_role": {
+      "title": "Source Role",
+      "type": "string"
+    },
+    "status": {
+      "const": "complete_visible_source_fidelity_review_qualified_handwriting",
+      "title": "Status",
+      "type": "string"
+    },
+    "review_kind": {
+      "const": "checked_passages",
+      "title": "Review Kind",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "reviewed_at": {
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    },
+    "normalization": {
+      "title": "Normalization",
+      "type": "string"
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Asset"
+    },
+    "packet_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "inspection": {
+      "$ref": "#/$defs/Asset"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "checked_passages": {
+      "items": {
+        "$ref": "#/$defs/Passage"
+      },
+      "title": "Checked Passages",
+      "type": "array"
+    },
+    "amendment_instructions": {
+      "items": {
+        "$ref": "#/$defs/Amendment"
+      },
+      "title": "Amendment Instructions",
+      "type": "array"
+    },
+    "dates": {
+      "items": {
+        "$ref": "#/$defs/DateStatement"
+      },
+      "title": "Dates",
+      "type": "array"
+    },
+    "ocr_discrepancies": {
+      "items": {
+        "$ref": "#/$defs/Discrepancy"
+      },
+      "title": "Ocr Discrepancies",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "custody": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Custody",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "source_id",
+    "authority_id",
+    "layer",
+    "source",
+    "source_role",
+    "status",
+    "review_kind",
+    "legal_currentness",
+    "answer_safe",
+    "reviewed_at",
+    "method",
+    "scope",
+    "normalization",
+    "provenance",
+    "candidate",
+    "packet_manifest",
+    "inspection",
+    "pages",
+    "checked_passages",
+    "amendment_instructions",
+    "dates",
+    "ocr_discrepancies",
+    "limitations",
+    "findings",
+    "custody"
+  ],
+  "title": "Review",
+  "type": "object"
+}

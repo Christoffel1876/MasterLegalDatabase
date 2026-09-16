@@ -1,0 +1,114 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "const": "BLOCKING_FINDING_HOLD_APPLY",
+      "title": "Status",
+      "type": "string"
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "proposal_manifest_sha256": {
+      "title": "Proposal Manifest Sha256",
+      "type": "string"
+    },
+    "checked_assets": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Checked Assets",
+      "type": "array"
+    },
+    "original_payloads_verified": {
+      "title": "Original Payloads Verified",
+      "type": "integer"
+    },
+    "focused_tests_passed": {
+      "title": "Focused Tests Passed",
+      "type": "integer"
+    },
+    "actual_readonly_preflight": {
+      "title": "Actual Readonly Preflight",
+      "type": "string"
+    },
+    "source_provenance_assessment": {
+      "title": "Source Provenance Assessment",
+      "type": "string"
+    },
+    "finding": {
+      "title": "Finding",
+      "type": "string"
+    },
+    "required_repair": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Repair",
+      "type": "array"
+    },
+    "canonical_mutations": {
+      "const": 0,
+      "title": "Canonical Mutations",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "reviewed_at",
+    "proposal_manifest_sha256",
+    "checked_assets",
+    "original_payloads_verified",
+    "focused_tests_passed",
+    "actual_readonly_preflight",
+    "source_provenance_assessment",
+    "finding",
+    "required_repair",
+    "canonical_mutations",
+    "public_requests",
+    "limitations"
+  ],
+  "title": "Review",
+  "type": "object"
+}

@@ -1,0 +1,50 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "query": {
+      "title": "Query",
+      "type": "string"
+    },
+    "exit_code": {
+      "title": "Exit Code",
+      "type": "integer"
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "row_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Row Ids",
+      "type": "array"
+    },
+    "context_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Context Ids",
+      "type": "array"
+    },
+    "output_file": {
+      "title": "Output File",
+      "type": "string"
+    },
+    "sha256": {
+      "title": "Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "query",
+    "exit_code",
+    "status",
+    "row_ids",
+    "context_ids",
+    "output_file",
+    "sha256"
+  ],
+  "title": "Event",
+  "type": "object"
+}

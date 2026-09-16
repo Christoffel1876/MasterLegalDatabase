@@ -1,0 +1,263 @@
+{
+  "$defs": {
+    "Change": {
+      "additionalProperties": false,
+      "description": "Allow only exact before/after bytes and a write-once preimage.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "before": {
+          "$ref": "#/$defs/File"
+        },
+        "after": {
+          "$ref": "#/$defs/File"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/File"
+        }
+      },
+      "required": [
+        "path",
+        "before",
+        "after",
+        "snapshot"
+      ],
+      "title": "Change",
+      "type": "object"
+    },
+    "File": {
+      "additionalProperties": false,
+      "description": "One source or transaction file bound to its exact bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    },
+    "NewRecord": {
+      "additionalProperties": false,
+      "description": "Constrain final records to the approved source-only custody method.",
+      "properties": {
+        "intake_id": {
+          "title": "Intake Id",
+          "type": "string"
+        },
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "enum": [
+            "08_County_Authorities",
+            "10_Municipal_Authorities"
+          ],
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "official_source_name": {
+          "title": "Official Source Name",
+          "type": "string"
+        },
+        "official_source_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Official Source Url"
+        },
+        "acquisition_method": {
+          "const": "manual_official_download",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "received_from": {
+          "title": "Received From",
+          "type": "string"
+        },
+        "reviewer_name": {
+          "title": "Reviewer Name",
+          "type": "string"
+        },
+        "reviewer_email": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewer Email"
+        },
+        "custody_note": {
+          "title": "Custody Note",
+          "type": "string"
+        },
+        "original_filename": {
+          "title": "Original Filename",
+          "type": "string"
+        },
+        "archive_path": {
+          "title": "Archive Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 1,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "source_format": {
+          "const": "pdf",
+          "title": "Source Format",
+          "type": "string"
+        },
+        "received_at": {
+          "format": "date-time",
+          "title": "Received At",
+          "type": "string"
+        },
+        "status": {
+          "const": "archived_pending_pipeline",
+          "title": "Status",
+          "type": "string"
+        },
+        "blocked_queue_match": {
+          "const": false,
+          "title": "Blocked Queue Match",
+          "type": "boolean"
+        },
+        "boundary": {
+          "title": "Boundary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "intake_id",
+        "record_id",
+        "layer_id",
+        "official_source_name",
+        "acquisition_method",
+        "received_from",
+        "reviewer_name",
+        "custody_note",
+        "original_filename",
+        "archive_path",
+        "sha256",
+        "size_bytes",
+        "source_format",
+        "received_at",
+        "status",
+        "blocked_queue_match",
+        "boundary"
+      ],
+      "title": "NewRecord",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Persist actual application time before any repository writes.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "transaction_id": {
+      "title": "Transaction Id",
+      "type": "string"
+    },
+    "root": {
+      "title": "Root",
+      "type": "string"
+    },
+    "preparation_sha256": {
+      "title": "Preparation Sha256",
+      "type": "string"
+    },
+    "actual_repository_received_at": {
+      "format": "date-time",
+      "title": "Actual Repository Received At",
+      "type": "string"
+    },
+    "records": {
+      "items": {
+        "$ref": "#/$defs/NewRecord"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Records",
+      "type": "array"
+    },
+    "suffix": {
+      "$ref": "#/$defs/File"
+    },
+    "changes": {
+      "items": {
+        "$ref": "#/$defs/Change"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Changes",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "source_provenance_sha256": {
+      "title": "Source Provenance Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "transaction_id",
+    "root",
+    "preparation_sha256",
+    "actual_repository_received_at",
+    "records",
+    "suffix",
+    "changes",
+    "legal_currentness",
+    "answer_safe",
+    "source_provenance_sha256"
+  ],
+  "title": "Intent",
+  "type": "object"
+}

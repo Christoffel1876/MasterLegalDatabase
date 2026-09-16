@@ -1,0 +1,62 @@
+{
+  "$defs": {
+    "InventoryItem": {
+      "additionalProperties": false,
+      "description": "Closed custody with raw response headers explicitly local only.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        },
+        "visibility": {
+          "enum": [
+            "ordinary_evidence",
+            "local_only_private_headers"
+          ],
+          "title": "Visibility",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes",
+        "visibility"
+      ],
+      "title": "InventoryItem",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "All files except the manifest itself, with exact private-header labeling.",
+  "properties": {
+    "status": {
+      "const": "closed_local_discovery_pending_root_verification",
+      "title": "Status",
+      "type": "string"
+    },
+    "assets": {
+      "items": {
+        "$ref": "#/$defs/InventoryItem"
+      },
+      "title": "Assets",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "assets"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

@@ -1,0 +1,308 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact file identity within this new package.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Copy": {
+      "additionalProperties": false,
+      "description": "Historical source location is context, not a live validation dependency.",
+      "properties": {
+        "historical_path": {
+          "title": "Historical Path",
+          "type": "string"
+        },
+        "frozen": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "historical_path",
+        "frozen"
+      ],
+      "title": "Copy",
+      "type": "object"
+    },
+    "Decision": {
+      "additionalProperties": false,
+      "description": "A specific report claim and direct source-page disposition.",
+      "properties": {
+        "claim_id": {
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "report": {
+          "title": "Report",
+          "type": "string"
+        },
+        "report_line": {
+          "minimum": 1,
+          "title": "Report Line",
+          "type": "integer"
+        },
+        "report_line_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Report Line Sha256",
+          "type": "string"
+        },
+        "disposition": {
+          "enum": [
+            "candidate_supported",
+            "confirmed_difference",
+            "qualified",
+            "source_feature",
+            "packaging_observation",
+            "unresolved",
+            "rejected_external_claim"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "source_physical_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Source Physical Pages",
+          "type": "array"
+        },
+        "source_basis": {
+          "title": "Source Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim_id",
+        "report",
+        "report_line",
+        "report_line_sha256",
+        "disposition",
+        "source_physical_pages",
+        "source_basis"
+      ],
+      "title": "Decision",
+      "type": "object"
+    },
+    "Document": {
+      "additionalProperties": false,
+      "description": "Separate actual local custody, assisted chronology and direct Atlas review.",
+      "properties": {
+        "assignment_id": {
+          "enum": [
+            "EB-PDF-016",
+            "EB-PDF-017"
+          ],
+          "title": "Assignment Id",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-MUNICIPAL-GREELEY",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "report": {
+          "$ref": "#/$defs/Asset"
+        },
+        "completion_receipt": {
+          "$ref": "#/$defs/Asset"
+        },
+        "source_pdf": {
+          "$ref": "#/$defs/Asset"
+        },
+        "candidate": {
+          "$ref": "#/$defs/Asset"
+        },
+        "source_images": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "title": "Source Images",
+          "type": "array"
+        },
+        "baseline_review": {
+          "$ref": "#/$defs/Asset"
+        },
+        "page_count": {
+          "title": "Page Count",
+          "type": "integer"
+        },
+        "direct_review_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Direct Review Pages",
+          "type": "array"
+        },
+        "review_method": {
+          "title": "Review Method",
+          "type": "string"
+        },
+        "external_method": {
+          "const": "caption_mediated_source_first",
+          "title": "External Method",
+          "type": "string"
+        },
+        "external_chronology_verified": {
+          "const": false,
+          "title": "External Chronology Verified",
+          "type": "boolean"
+        },
+        "original_pdf_rehashed_by_atlas": {
+          "const": true,
+          "title": "Original Pdf Rehashed By Atlas",
+          "type": "boolean"
+        },
+        "external_pdf_presence_claim": {
+          "title": "External Pdf Presence Claim",
+          "type": "string"
+        },
+        "source_and_candidate_changed": {
+          "const": false,
+          "title": "Source And Candidate Changed",
+          "type": "boolean"
+        },
+        "decisions": {
+          "items": {
+            "$ref": "#/$defs/Decision"
+          },
+          "title": "Decisions",
+          "type": "array"
+        },
+        "source_role": {
+          "title": "Source Role",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "answer_safe": {
+          "const": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "assignment_id",
+        "source_id",
+        "authority_id",
+        "report",
+        "completion_receipt",
+        "source_pdf",
+        "candidate",
+        "source_images",
+        "baseline_review",
+        "page_count",
+        "direct_review_pages",
+        "review_method",
+        "external_method",
+        "external_chronology_verified",
+        "original_pdf_rehashed_by_atlas",
+        "external_pdf_presence_claim",
+        "source_and_candidate_changed",
+        "decisions",
+        "source_role",
+        "legal_currentness",
+        "answer_safe"
+      ],
+      "title": "Document",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Additive review only; does not alter prior frozen QA or canonical records.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "received_at": {
+      "format": "date-time",
+      "title": "Received At",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "external_reviews_reconciled_with_qualifications",
+      "title": "Status",
+      "type": "string"
+    },
+    "copies": {
+      "items": {
+        "$ref": "#/$defs/Copy"
+      },
+      "title": "Copies",
+      "type": "array"
+    },
+    "documents": {
+      "items": {
+        "$ref": "#/$defs/Document"
+      },
+      "title": "Documents",
+      "type": "array"
+    },
+    "supplementary_custody": {
+      "title": "Supplementary Custody",
+      "type": "string"
+    },
+    "missing_claimed_artifacts": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Claimed Artifacts",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "received_at",
+    "prepared_at",
+    "status",
+    "copies",
+    "documents",
+    "supplementary_custody",
+    "missing_claimed_artifacts",
+    "limitations"
+  ],
+  "title": "Reconciliation",
+  "type": "object"
+}

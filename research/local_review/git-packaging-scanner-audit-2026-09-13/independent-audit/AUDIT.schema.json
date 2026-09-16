@@ -1,0 +1,160 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "One unchanged local payload relative to this audit.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "description": "A scoped finding and its observed or proposed disposition.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "reproduced",
+            "verified",
+            "qualified",
+            "proposed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "status",
+        "statement",
+        "evidence"
+      ],
+      "title": "Finding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Agent-authored review, distinct from publication authorization.",
+  "properties": {
+    "reviewer": {
+      "const": "Plato",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "proposed_revision_validated_not_installed",
+      "title": "Status",
+      "type": "string"
+    },
+    "original_scanner": {
+      "$ref": "#/$defs/Asset"
+    },
+    "proposed_scanner": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_scan": {
+      "$ref": "#/$defs/Asset"
+    },
+    "proposed_scan": {
+      "$ref": "#/$defs/Asset"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "commands": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Commands",
+      "type": "array"
+    },
+    "focused_tests_passed": {
+      "minimum": 0,
+      "title": "Focused Tests Passed",
+      "type": "integer"
+    },
+    "production_mutations": {
+      "const": 0,
+      "title": "Production Mutations",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "git_mutations": {
+      "const": 0,
+      "title": "Git Mutations",
+      "type": "integer"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "reviewer",
+    "recorded_at",
+    "status",
+    "original_scanner",
+    "proposed_scanner",
+    "original_scan",
+    "proposed_scan",
+    "findings",
+    "commands",
+    "focused_tests_passed",
+    "production_mutations",
+    "public_requests",
+    "git_mutations",
+    "limitations"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

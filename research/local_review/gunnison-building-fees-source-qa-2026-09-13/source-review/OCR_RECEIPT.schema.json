@@ -1,0 +1,42 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "enum": [
+        "machine_ocr_unreviewed",
+        "local_ocr_failed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "engine": {
+      "title": "Engine",
+      "type": "string"
+    },
+    "binary_sha256": {
+      "title": "Binary Sha256",
+      "type": "string"
+    },
+    "swift_sha256": {
+      "title": "Swift Sha256",
+      "type": "string"
+    },
+    "events": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Events",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "engine",
+    "binary_sha256",
+    "swift_sha256",
+    "events"
+  ],
+  "title": "Record",
+  "type": "object"
+}

@@ -1,0 +1,116 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Package-relative exact file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Typed receipt of actual local structural replay and measured focused tests.",
+  "properties": {
+    "schema_version": {
+      "const": "cwrc-validation-1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "source_qa": {
+      "$ref": "#/$defs/Ref"
+    },
+    "verifier": {
+      "$ref": "#/$defs/Ref"
+    },
+    "models": {
+      "$ref": "#/$defs/Ref"
+    },
+    "tests": {
+      "$ref": "#/$defs/Ref"
+    },
+    "test_log": {
+      "$ref": "#/$defs/Ref"
+    },
+    "coverage": {
+      "$ref": "#/$defs/Ref"
+    },
+    "passed_tests": {
+      "const": 63,
+      "title": "Passed Tests",
+      "type": "integer"
+    },
+    "measured_line_and_branch_coverage": {
+      "title": "Measured Line And Branch Coverage",
+      "type": "number"
+    },
+    "coverage_subjects": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Coverage Subjects",
+      "type": "array"
+    },
+    "structural_result": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "boolean"
+          }
+        ]
+      },
+      "title": "Structural Result",
+      "type": "object"
+    },
+    "limitation": {
+      "title": "Limitation",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "recorded_at",
+    "source_qa",
+    "verifier",
+    "models",
+    "tests",
+    "test_log",
+    "coverage",
+    "passed_tests",
+    "measured_line_and_branch_coverage",
+    "coverage_subjects",
+    "structural_result",
+    "limitation"
+  ],
+  "title": "Validation",
+  "type": "object"
+}

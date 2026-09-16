@@ -1,0 +1,248 @@
+{
+  "$defs": {
+    "FileRef": {
+      "additionalProperties": false,
+      "description": "Bind exact ordinary bytes in the handoff or repository.",
+      "properties": {
+        "domain": {
+          "enum": [
+            "handoff",
+            "repository"
+          ],
+          "title": "Domain",
+          "type": "string"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "domain",
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    },
+    "Tests": {
+      "additionalProperties": false,
+      "description": "Retain the actual focused check counts and coverage measures.",
+      "properties": {
+        "passed": {
+          "exclusiveMinimum": 0,
+          "title": "Passed",
+          "type": "integer"
+        },
+        "failed": {
+          "const": 0,
+          "title": "Failed",
+          "type": "integer"
+        },
+        "elapsed_seconds": {
+          "exclusiveMinimum": 0,
+          "title": "Elapsed Seconds",
+          "type": "number"
+        },
+        "combined_coverage_percent": {
+          "maximum": 100,
+          "minimum": 90,
+          "title": "Combined Coverage Percent",
+          "type": "number"
+        },
+        "lookup_coverage_percent": {
+          "maximum": 100,
+          "minimum": 90,
+          "title": "Lookup Coverage Percent",
+          "type": "number"
+        },
+        "lookup_branch_percent": {
+          "maximum": 100,
+          "minimum": 90,
+          "title": "Lookup Branch Percent",
+          "type": "number"
+        },
+        "inventory_coverage_percent": {
+          "maximum": 100,
+          "minimum": 90,
+          "title": "Inventory Coverage Percent",
+          "type": "number"
+        }
+      },
+      "required": [
+        "passed",
+        "failed",
+        "elapsed_seconds",
+        "combined_coverage_percent",
+        "lookup_coverage_percent",
+        "lookup_branch_percent",
+        "inventory_coverage_percent"
+      ],
+      "title": "Tests",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Describe this additive integration without legal-readiness promotion.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "scope": {
+      "const": "six_source_lookup_and_61_source_review_inventory",
+      "title": "Scope",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "colorado-springs-construction-fees-atlas-directed",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "historical_review_alias": {
+      "const": "SD014-02",
+      "title": "Historical Review Alias",
+      "type": "string"
+    },
+    "source_rows": {
+      "const": 128,
+      "title": "Source Rows",
+      "type": "integer"
+    },
+    "source_tables": {
+      "const": 9,
+      "title": "Source Tables",
+      "type": "integer"
+    },
+    "native_lines": {
+      "const": 410,
+      "title": "Native Lines",
+      "type": "integer"
+    },
+    "mandatory_context_blocks": {
+      "const": 80,
+      "title": "Mandatory Context Blocks",
+      "type": "integer"
+    },
+    "inventory_sources": {
+      "const": 61,
+      "title": "Inventory Sources",
+      "type": "integer"
+    },
+    "inventory_mapped": {
+      "const": 21,
+      "title": "Inventory Mapped",
+      "type": "integer"
+    },
+    "inventory_unmapped": {
+      "const": 40,
+      "title": "Inventory Unmapped",
+      "type": "integer"
+    },
+    "unchanged_old_review_joins": {
+      "const": 20,
+      "title": "Unchanged Old Review Joins",
+      "type": "integer"
+    },
+    "unchanged_old_lookup_outputs": {
+      "const": 5,
+      "title": "Unchanged Old Lookup Outputs",
+      "type": "integer"
+    },
+    "new_authority_joins": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "New Authority Joins",
+      "type": "array"
+    },
+    "later_http_binding_sources": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Later Http Binding Sources",
+      "type": "array"
+    },
+    "tests": {
+      "$ref": "#/$defs/Tests"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 5,
+      "title": "Limitations",
+      "type": "array"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/FileRef"
+      },
+      "minItems": 15,
+      "title": "Files",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "canonical_writes_by_integration": {
+      "const": false,
+      "title": "Canonical Writes By Integration",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "prepared_at",
+    "scope",
+    "source_id",
+    "historical_review_alias",
+    "source_rows",
+    "source_tables",
+    "native_lines",
+    "mandatory_context_blocks",
+    "inventory_sources",
+    "inventory_mapped",
+    "inventory_unmapped",
+    "unchanged_old_review_joins",
+    "unchanged_old_lookup_outputs",
+    "new_authority_joins",
+    "later_http_binding_sources",
+    "tests",
+    "limitations",
+    "files",
+    "legal_currentness",
+    "answer_safe",
+    "canonical_writes_by_integration"
+  ],
+  "title": "Integration",
+  "type": "object"
+}

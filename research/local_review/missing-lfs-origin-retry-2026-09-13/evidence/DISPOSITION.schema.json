@@ -1,0 +1,195 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Identify exact local bytes without exposing private content.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Result": {
+      "additionalProperties": false,
+      "description": "Keep a reported object error distinct from raw HTTP evidence.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "oid": {
+          "title": "Oid",
+          "type": "string"
+        },
+        "expected_size_bytes": {
+          "title": "Expected Size Bytes",
+          "type": "integer"
+        },
+        "cli_reported_object_error_code": {
+          "const": 404,
+          "title": "Cli Reported Object Error Code",
+          "type": "integer"
+        },
+        "cli_reported_message": {
+          "const": "Object does not exist on the server",
+          "title": "Cli Reported Message",
+          "type": "string"
+        },
+        "source_output_line": {
+          "title": "Source Output Line",
+          "type": "integer"
+        },
+        "original_recovered": {
+          "const": false,
+          "title": "Original Recovered",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "path",
+        "oid",
+        "expected_size_bytes",
+        "cli_reported_object_error_code",
+        "cli_reported_message",
+        "source_output_line",
+        "original_recovered"
+      ],
+      "title": "Result",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Describe the observed failed availability check and recovery consequence.",
+  "properties": {
+    "schema_version": {
+      "const": "lfs-origin-disposition-1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "exact_objects_reported_missing_at_origin_no_recovery",
+      "title": "Status",
+      "type": "string"
+    },
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "finished_at": {
+      "title": "Finished At",
+      "type": "string"
+    },
+    "attempt": {
+      "$ref": "#/$defs/Asset"
+    },
+    "objects": {
+      "items": {
+        "$ref": "#/$defs/Result"
+      },
+      "title": "Objects",
+      "type": "array"
+    },
+    "public_error_output": {
+      "$ref": "#/$defs/Asset"
+    },
+    "private_error_output_sha256": {
+      "title": "Private Error Output Sha256",
+      "type": "string"
+    },
+    "public_output_derivation": {
+      "title": "Public Output Derivation",
+      "type": "string"
+    },
+    "private_raw_outputs_excluded": {
+      "const": true,
+      "title": "Private Raw Outputs Excluded",
+      "type": "boolean"
+    },
+    "http_batch_status": {
+      "title": "Http Batch Status",
+      "type": "null"
+    },
+    "raw_http_response_preserved": {
+      "const": false,
+      "title": "Raw Http Response Preserved",
+      "type": "boolean"
+    },
+    "low_level_request_count": {
+      "title": "Low Level Request Count",
+      "type": "null"
+    },
+    "object_bytes_recovered": {
+      "const": 0,
+      "title": "Object Bytes Recovered",
+      "type": "integer"
+    },
+    "canonical_restoration_proposed": {
+      "const": false,
+      "title": "Canonical Restoration Proposed",
+      "type": "boolean"
+    },
+    "observations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "next_step": {
+      "title": "Next Step",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "recorded_at",
+    "status",
+    "started_at",
+    "finished_at",
+    "attempt",
+    "objects",
+    "public_error_output",
+    "private_error_output_sha256",
+    "public_output_derivation",
+    "private_raw_outputs_excluded",
+    "http_batch_status",
+    "raw_http_response_preserved",
+    "low_level_request_count",
+    "object_bytes_recovered",
+    "canonical_restoration_proposed",
+    "observations",
+    "limitations",
+    "next_step"
+  ],
+  "title": "Disposition",
+  "type": "object"
+}

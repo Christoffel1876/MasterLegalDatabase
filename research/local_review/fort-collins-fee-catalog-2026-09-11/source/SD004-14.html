@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en-US">
+<!--<![endif]-->
+<head>
+	<!-- Published by OpenCities, 1.37.6.1 -->
+
+    
+        
+    
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="theme-color" content="#FFFFFF"/>
+    <title>Fee Schedules City of Fort Collins</title>
+	<meta name="generator" content="OpenCities - https://granicus.com/product/opencities" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Using mobile-web-app-capable for now to enable full-screen experience on supported platforms -->
+    <!-- Note: This tag works mainly on Android Chrome. It does NOT enable full-screen mode on iOS Safari. -->
+    <!-- For iOS, the correct tag is: <meta name="apple-mobile-web-app-capable" content="yes"> -->
+    <!-- TODO: Monitor for updated meta tag standards from Apple or other browser vendors -->
+    <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="description" content="View Fee Schedules for building and development work." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules" />
+    <meta property="og:title" content="Fee Schedules" />
+    <meta property="og:description" content="View Fee Schedules for building and development work." />
+    <meta property="og:image" content="https://www.fortcollins.gov/files/sharedassets/city/v/1/planning-development-amp-transportation/community-development/building-services/construction-in-fort-collins.jpg?w=1200" />
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:title" content="Fee Schedules" />
+    <meta property="twitter:description" content="View Fee Schedules for building and development work." />
+    <meta property="twitter:image" content="https://www.fortcollins.gov/files/sharedassets/city/v/1/planning-development-amp-transportation/community-development/building-services/construction-in-fort-collins.jpg?w=1080" />
+    <link rel="canonical" href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules" />
+
+    
+    <link rel="icon" type="image/png" href="/files/ocfavicon/City/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/files/ocfavicon/City/favicon.svg" />
+<link rel="shortcut icon" href="/files/ocfavicon/City/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/files/ocfavicon/City/apple-touch-icon.png" />
+<link rel="manifest" href="/files/ocfavicon/City/site.webmanifest" />
+    <script>
+        (function () {
+            if (window.__UNLOAD_LAZY_PATCH__) return;
+            window.__UNLOAD_LAZY_PATCH__ = true;
+
+            var supportsPageHide = ("onpagehide" in window);
+            var mappedType = supportsPageHide ? "pagehide" : "beforeunload";
+            var nativeAdd = window.addEventListener;
+            var nativeRemove = window.removeEventListener;
+            var unloadMap = null;
+            var patched = false;
+
+            function ensurePatched() {
+                if (patched) return;
+                unloadMap = new WeakMap();
+
+                window.addEventListener = function (type, listener, options) {
+                    if (type === "unload") {
+                        var wrapped = function (evt) {
+                            if (supportsPageHide && evt.persisted) return;
+                            listener.call(this, evt);
+                        };
+                        unloadMap.set(listener, wrapped);
+                        return nativeAdd.call(this, mappedType, wrapped, options);
+                    }
+                    return nativeAdd.call(this, type, listener, options);
+                };
+
+                window.removeEventListener = function (type, listener, options) {
+                    if (type === "unload") {
+                        var wrapped = unloadMap.get(listener);
+                        if (wrapped) {
+                            nativeRemove.call(this, mappedType, wrapped, options);
+                            unloadMap.delete(listener);
+                        }
+                        return;
+                    }
+                    return nativeRemove.call(this, type, listener, options);
+                };
+
+                var orig = null;
+                Object.defineProperty(window, "onunload", {
+                    configurable: true, enumerable: true,
+                    get: function () { return orig; },
+                    set: function (h) {
+                        orig = h;
+                        if (typeof h === "function") window.addEventListener("unload", h);
+                    }
+                });
+                patched = true;
+            }
+
+            window.addEventListener = function (type, listener, options) {
+                if (type === "unload") {
+                    ensurePatched();
+                    return window.addEventListener(type, listener, options);
+                }
+                return nativeAdd.call(this, type, listener, options);
+            };
+
+            window.removeEventListener = function (type, listener, options) {
+                if (type === "unload" && !patched) {
+                    return;
+                }
+                return nativeRemove.call(this, type, listener, options);
+            };
+
+            function patchTelerik() {
+                ensurePatched();
+                var ns = window.RadAjaxNamespace;
+                if (!ns || !ns.EventManager || !ns.EventManager.Add || ns.EventManager.__UnloadPatched) return;
+                var origAdd = ns.EventManager.Add;
+                ns.EventManager.Add = function (el, evtName, handler, clientId) {
+                    if (el === window && evtName === "unload") {
+                        return window.addEventListener("unload", handler);
+                    }
+                    return origAdd.call(this, el, evtName, handler, clientId);
+                };
+                ns.EventManager.__UnloadPatched = true;
+            }
+
+            if (window.RadAjaxNamespace)
+                patchTelerik();
+            else (window.requestIdleCallback || function (cb)
+            {
+                setTimeout(cb, 120);
+            })(patchTelerik);
+        })();
+    </script>
+    <!-- Preconnecting to Google Fonts servers -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Defer Roboto font loading to avoid render-blocking -->
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const robotoLink = document.createElement('link');
+            robotoLink.rel = 'stylesheet';
+            robotoLink.href = 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap';
+            document.head.appendChild(robotoLink);
+        });
+    </script>
+
+    <style>
+        .gm-style, .gm-style * {
+            font-family: 'Roboto', system-ui, -apple-system, "Segoe UI", Arial, sans-serif !important;
+        }
+    </style>
+
+    <script>
+        document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, "js");
+    </script>
+    <!-- this is custom font -->
+    
+        
+            <script type="text/javascript">
+                window.__oc_flags_ImprovedBreakpointEventHandling = true;
+            </script>
+            
+        
+    
+    
+    
+        <script type="text/javascript">
+            var __metaQueryBreakpoints = {
+                'sc-size-4': '(max-width: 480px)',
+                'sc-size-3': '(min-width: 480px) and (max-width: 768px)',
+                'sc-size-2': '(min-width: 768px) and (max-width: 992px)',
+                'sc-size-1': '(min-width: 992px)'
+            }
+
+            var __ocSizePoints = [
+                { min: 0, name: 'sc-size-4' },
+                { min: 480, name: 'sc-size-3' },
+                { min: 768, name: 'sc-size-2' },
+                { min: 992, name: 'sc-size-1' }
+            ];
+
+        </script>
+    
+
+    <!-- Framework Section -->
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/files/templates/00000000-0000-0000-0000-000000000000/403381f7-b48f-4571-be47-bfe5e32dd4e7/v/173/jquery-3.7.1.min.js?seamlessts=639233003875251082" ><\/script>')</script>
+
+    <!--Google Maps API Loader – Improved Version to avoid Warning
+    This script loads the Google Maps JavaScript API using a dynamic and async method.
+    It replaces the old static <script> tag to avoid performance warnings from Google.
+
+    Dynamically creates the <script> tag with loading = async for better performance
+    Builds the API URL with required libraries(places, geometry, marker, geocoding)
+    Uses a Promise and callback(google.maps.__ib__) to confirm when the script is ready
+
+    It Avoids Google’s warning about direct script loading
+    Improves page load speed by loading the API asynchronously-->
+
+    
+        <script>
+            (function (root) {
+                root.OpenCities = root.OpenCities || {};
+                if (!root.OpenCities.GoogleMapsLoader) {
+                    root.OpenCities.GoogleMapsLoader = {
+                        _cbs: [],
+                        _ready: false,
+                        onReady: function (cb) {
+                            if (this._ready) { try { cb(); } catch (e) { console.error(e); } }
+                            else if (typeof cb === 'function') this._cbs.push(cb);
+                        },
+                        _fire: function () {
+                            if (this._ready) return;
+                            this._ready = true;
+                            var q = this._cbs.splice(0);
+                            for (var i = 0; i < q.length; i++) {
+                                try { q[i](); } catch (e) { console.error(e); }
+                            }
+                        }
+                    };
+                }
+            })(window);
+
+            (g => {
+                var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__",
+                    m = document, b = window;
+                b = b[c] || (b[c] = {});
+                var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams,
+                    u = () => h || (h = new Promise(async (resolve, reject) => {
+                        a = m.createElement("script");
+                        e.set("libraries", [...r] + "");
+                        for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]);
+                        e.set("callback", c + ".maps." + q);
+                        a.src = "https://maps." + c + "apis.com/maps/api/js?" + e.toString();
+                        a.loading = "async";
+                        a.async = true;
+                        a.defer = true;
+                        d[q] = resolve;
+                        a.onerror = () => reject(Error(p + " could not load."));
+                        a.nonce = m.querySelector("script[nonce]")?.nonce || "";
+                        m.head.append(a);
+                    }));
+                if (d[l]) {
+                    console.warn(p + " only loads once. Ignoring duplicate load.");
+                } else {
+                    d[l] = (f, ...n) => (r.add(f), u().then(() => d[l](f, ...n)));
+                }
+            })({
+                key: "AIzaSyCYd0bOjA13a9CO-Hr1H3kewFDfblhR02U",
+                v: "3.65"
+            });
+
+            (async () => {
+                try {
+                    if (!google?.maps?.importLibrary) return;
+
+                    if (!window.OpenCities.__mapsLibsPromise) {
+                        window.OpenCities.__mapsLibsPromise = Promise.all([
+                            google.maps.importLibrary('maps'),
+                            google.maps.importLibrary('places'),
+                            google.maps.importLibrary('geocoding'),
+                            google.maps.importLibrary('marker'),
+                            google.maps.importLibrary('geometry')
+                        ]);
+                    }
+                    await window.OpenCities.__mapsLibsPromise;
+
+                    if (window.OpenCities?.GoogleMapsLoader) {
+                        window.OpenCities.GoogleMapsLoader._fire();
+                    }
+                } catch (err) {
+                    console.error('Google Maps failed to initialise', err);
+                }
+            })();
+        </script>
+    
+    <script src="/files/templates/00000000-0000-0000-0000-000000000000/403381f7-b48f-4571-be47-bfe5e32dd4e7/v/173/modernizr.custom.710f3bf.js?seamlessts=639233003875251082" defer></script>
+    
+    <!--// End Framework Section -->
+    <!-- OpenCities Section -->
+    <script>
+        var OpenCities = OpenCities || {};
+        OpenCities.Paths = {
+            SiteTemplate: '/files/templates/00000000-0000-0000-0000-000000000000/403381f7-b48f-4571-be47-bfe5e32dd4e7/v/173/',
+            ThemePath: '/files/templates/00000000-0000-0000-0000-000000000000/403381f7-b48f-4571-be47-bfe5e32dd4e7/v/173/'
+        };
+    </script>
+    <script src='/ocapi/ec2c3178-7c83-4446-a67c-c1487cf1af69/en-US/websitesettings.js'></script>
+    <script src="/files/templates/00000000-0000-0000-0000-000000000000/403381f7-b48f-4571-be47-bfe5e32dd4e7/v/173/oc_head.js?applied=20251211073855"></script>
+    <!-- Script Combine. To enter debug mode for this browser session, enter OcScriptCombineDebug=true as a querystring -->
+<link href="/files/oc-templates/00000000-0000-0000-0000-000000000000/403381f7-b48f-4571-be47-bfe5e32dd4e7/v/173/oc_grid.css~oc_style.css~oc_wizard_style.css~oc_main.css~oc_forms.css~oc_wizard.css~oc_wizard_menu.css~oc_main_s1.css~oc_wizard_s1.css~oc_wizard_menu_s1.css~oc_grid_s1.css~OcScriptCombine_Minify0?uniqueid=20251211073855" rel="stylesheet" type="text/css">
+    <!-- Script Combine. To enter debug mode for this browser session, enter OcScriptCombineDebug=true as a querystring -->
+<link href="/files/oc-templates/00000000-0000-0000-0000-000000000000/403381f7-b48f-4571-be47-bfe5e32dd4e7/v/173/client_style.css~client.css~client_menu.css~client_s1.css~client_menu_s1.css~client_forms.css~OcScriptCombine_Minify0?uniqueid=20251211073855" rel="stylesheet" type="text/css">
+    <style type="text/css">.content-outer-container
+{
+    background-image:url('/files/sharedassets/city/v/1/04-images-amp-icons/background-images-1920x450/business03_1920x450.png?w=480');
+    
+}
+
+@media (min-width: 480px)
+{
+    .content-outer-container
+    {
+      background-image:url('/files/sharedassets/city/v/1/04-images-amp-icons/background-images-1920x450/business03_1920x450.png?w=768');
+    }
+}
+@media (min-width: 768px)
+{
+    .content-outer-container
+    {
+      background-image:url('/files/sharedassets/city/v/1/04-images-amp-icons/background-images-1920x450/business03_1920x450.png?w=992');
+    }
+}
+@media (min-width: 992px)
+{
+    .content-outer-container
+    {
+      background-image:url('/files/sharedassets/city/v/1/04-images-amp-icons/background-images-1920x450/business03_1920x450.png');
+    }
+}
+@media (min-width: 1280px)
+{
+    .content-outer-container
+    {
+      background-image:url('/files/sharedassets/city/v/1/04-images-amp-icons/background-images-1920x450/business03_1920x450.png');
+    }
+}
+@media (min-width: 1920px)
+{
+    .content-outer-container
+    {
+      background-image:url('/files/sharedassets/city/v/1/04-images-amp-icons/background-images-1920x450/business03_1920x450.png');
+    }
+}
+        </style><script>
+(function (BackgroundSettings, $, undefined) {
+    BackgroundSettings.initialise = function () {
+        this.Application = {"CSSSelector":".content-outer-container","EnableFade":false};
+    };
+} (OpenCities.BackgroundSettings = OpenCities.BackgroundSettings || {}, jQuery));
+OpenCities.BackgroundSettings.initialise();
+</script>
+    
+    <!-- Script Combine. To enter debug mode for this browser session, enter OcScriptCombineDebug=true as a querystring -->
+<link href="/files/oc-templates/00000000-0000-0000-0000-000000000000/403381f7-b48f-4571-be47-bfe5e32dd4e7/v/173/oc_print.css~client_print.css~OcScriptCombine_Minify0?uniqueid=20251211073855" rel="stylesheet" type="text/css" media="print">
+    <!-- Script Combine. To enter debug mode for this browser session, enter OcScriptCombineDebug=true as a querystring -->
+<script src="/files/oc-templates/00000000-0000-0000-0000-000000000000/403381f7-b48f-4571-be47-bfe5e32dd4e7/v/173/external_plugins.js~oc_form_helper.js~oc_main.js~plugins.js~oc_main_init.js~OcScriptCombine_Minify0?uniqueid=20251211073855" defer="true"></script>
+    <script async defer src="https://tools.luckyorange.com/core/lo.js?site-id=9dc45aca"></script>
+    
+
+                                <script>!function(e){var n="https://s.go-mpulse.net/boomerang/";if("False"=="True")e.BOOMR_config=e.BOOMR_config||{},e.BOOMR_config.PageParams=e.BOOMR_config.PageParams||{},e.BOOMR_config.PageParams.pci=!0,n="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="DYTCK-JM9C8-ED4EP-C3GGK-Z575H",function(){function e(){if(!r){var e=document.createElement("script");e.id="boomr-scr-as",e.src=window.BOOMR.url,e.async=!0,o.appendChild(e),r=!0}}function t(e){r=!0;var n,t,a,i,d=document,O=window;if(window.BOOMR.snippetMethod=e?"if":"i",t=function(e,n){var t=d.createElement("script");t.id=n||"boomr-if-as",t.src=window.BOOMR.url,BOOMR_lstart=(new Date).getTime(),e=e||d.body,e.appendChild(t)},!window.addEventListener&&window.attachEvent&&navigator.userAgent.match(/MSIE [67]\./))return window.BOOMR.snippetMethod="s",void t(o,"boomr-async");a=document.createElement("IFRAME"),a.src="about:blank",a.title="",a.role="presentation",a.loading="eager",i=(a.frameElement||a).style,i.width=0,i.height=0,i.border=0,i.display="none",o.appendChild(a);try{O=a.contentWindow,d=O.document.open()}catch(_){n=document.domain,a.src="javascript:var d=document.open();d.domain='"+n+"';void 0;",O=a.contentWindow,d=O.document.open()}if(n)d._boomrl=function(){this.domain=n,t()},d.write("<bo"+"dy onload='document._boomrl();'>");else if(O._boomrl=function(){t()},O.addEventListener)O.addEventListener("load",O._boomrl,!1);else if(O.attachEvent)O.attachEvent("onload",O._boomrl);d.close()}function a(e){window.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!window.BOOMR||!window.BOOMR.version&&!window.BOOMR.snippetExecuted){window.BOOMR=window.BOOMR||{},window.BOOMR.snippetStart=(new Date).getTime(),window.BOOMR.snippetExecuted=!0,window.BOOMR.snippetVersion=14,window.BOOMR.url=n+"DYTCK-JM9C8-ED4EP-C3GGK-Z575H";var i=document.currentScript||document.getElementsByTagName("script")[0],o=i.parentNode,r=!1,d=document.createElement("link");if(d.relList&&"function"==typeof d.relList.supports&&d.relList.supports("preload")&&"as"in d)window.BOOMR.snippetMethod="p",d.href=window.BOOMR.url,d.rel="preload",d.as="script",d.addEventListener("load",e),d.addEventListener("error",function(){t(!0)}),setTimeout(function(){if(!r)t(!0)},3e3),BOOMR_lstart=(new Date).getTime(),o.appendChild(d);else t(!1);if(window.addEventListener)window.addEventListener("load",a,!1);else if(window.attachEvent)window.attachEvent("onload",a)}}(),"".length>0)if(e&&"performance"in e&&e.performance&&"function"==typeof e.performance.setResourceTimingBufferSize)e.performance.setResourceTimingBufferSize();!function(){if(BOOMR=e.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var n=""=="true"?1:0,t="",a="zwubmdyxyj7262vdfhwq-f-3ddd4edea-clientnsv4-s.akamaihd.net",i="false"=="true"?2:1,o={"ak.v":"41","ak.cp":"1929113","ak.ai":parseInt("1075935",10),"ak.ol":"0","ak.cr":6,"ak.ipv":4,"ak.proto":"http/1.1","ak.rid":"27534b13","ak.r":47319,"ak.a2":n,"ak.m":"","ak.n":"essl","ak.cport":5918,"ak.gh":"23.202.99.207","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.0rtt.ed":"","ak.csrc":"-","ak.acc":"bbr","ak.t":"1789077997","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==La83oJwh5xKTN/Djh358eJBj1zNH6Qke+x9uqTMHaLGQteYiAgcVB6JzWu0790KNqbZCnp0wfTu4uzH8cTl6ELQDXXLhthTvA9dDgM2OuDvvVq5pXG7jFVN6OXEdpbreYJDgxgOoTvdmLJeJx+QlIc/pBiwVxBDqGSRh1XBcRhxKTwLLo1ZU0qfpO5XzGakIQAsgYUP0DObwelJ+EUIDRYAhuDEo3J/nSrYPGJ1ZkTtQDSZFIZl/wKxADTNsX1UTd8tZwsKzNOCrWzTwtoJ1o5fvfIj+9++/N3wvQz6ONKIiCjMeW+DHwvTd4fKQwly7LYF507aK9yQzOA+xKXyzJ/OT297U69yCsMSdul9nVaoJHmkS10wDS6DuCm+plmnjdpAV6UYpWWDB/6mRMatxgIZ2Jk41pXqs8dZTdoofbCA=","ak.pv":"336","ak.dpoabenc":"","ak.tf":i};if(""!==t)o["ak.ruds"]=t;var r={i:!1,av:function(n){var t="http.initiator";if(n&&(!n[t]||"spa_hard"===n[t]))o["ak.feo"]=void 0!==e.aFeoApplied?1:0,BOOMR.addVar(o)},rv:function(){var e=["ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.0rtt.ed","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(e)}};BOOMR.plugins.AK={akVars:o,akDNSPreFetchDomain:a,init:function(){if(!r.i){var e=BOOMR.subscribe;e("before_beacon",r.av,null,null),e("onbeacon",r.rv,null,null),r.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head>
+<body class="body layout-modern  site-search-always-visble  content-type-oc-general content-template-oc-full-width group-template-oc-full-width-with-default-header page-name-fee-schedules page-sequence-10 page-depth-3 page-section-5 website-type-primary device-desktop " id="body-top">
+    <div id="skip-to-content-container">
+        <a href="#main-content" class="visuallyhidden focusable" id="skip-to-content-link">Skip to main content</a>
+    </div>
+    <script>
+        // OCNOW-11988 (Cursor): Proactively focus skip link when returning from browser chrome.
+        // Must run inline (not deferred oc_main.js) so focus is intercepted before NVDA speaks footer.
+        (function () {
+            var awaitingReentry = false;
+            var inertSupported = 'inert' in HTMLElement.prototype;
+
+            function isExplicitlyOutsideDocument(node) {
+                return node != null && !document.documentElement.contains(node);
+            }
+
+            function getSkipContainer() {
+                return document.getElementById('skip-to-content-container');
+            }
+
+            function getSkipLink() {
+                return document.getElementById('skip-to-content-link');
+            }
+
+            function applyGuard() {
+                awaitingReentry = true;
+                if (!inertSupported) {
+                    return;
+                }
+                var skipContainer = getSkipContainer();
+                var children = document.body.children;
+                for (var i = 0; i < children.length; i++) {
+                    if (children[i] !== skipContainer) {
+                        children[i].setAttribute('inert', '');
+                    }
+                }
+            }
+
+            function clearGuard() {
+                awaitingReentry = false;
+                if (!inertSupported) {
+                    return;
+                }
+                var children = document.body.children;
+                for (var i = 0; i < children.length; i++) {
+                    children[i].removeAttribute('inert');
+                }
+            }
+
+            function isSkipLinkElement(target) {
+                if (!target) {
+                    return false;
+                }
+                var skipContainer = getSkipContainer();
+                return target.id === 'skip-to-content-link' ||
+                    (skipContainer && skipContainer.contains(target));
+            }
+
+            function focusSkipLink() {
+                var skipLink = getSkipLink();
+                if (!skipLink) {
+                    return;
+                }
+                if (window.scrollY > 0) {
+                    window.scrollTo(0, 0);
+                }
+                skipLink.focus({ preventScroll: true });
+            }
+
+            function scheduleGuardIfDocumentLostFocus() {
+                window.setTimeout(function () {
+                    if (!document.hasFocus()) {
+                        applyGuard();
+                    }
+                }, 0);
+            }
+
+            document.addEventListener('focusout', function (e) {
+                if (isExplicitlyOutsideDocument(e.relatedTarget)) {
+                    applyGuard();
+                }
+            }, true);
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Tab') {
+                    scheduleGuardIfDocumentLostFocus();
+                } else if (e.key === 'F6' || (e.key === 'l' && e.ctrlKey)) {
+                    scheduleGuardIfDocumentLostFocus();
+                }
+            }, true);
+
+            window.addEventListener('focus', function () {
+                if (!awaitingReentry) {
+                    return;
+                }
+                applyGuard();
+                focusSkipLink();
+            }, true);
+
+            document.addEventListener('focusin', function (e) {
+                var reentryFromChrome = awaitingReentry || isExplicitlyOutsideDocument(e.relatedTarget);
+                if (!reentryFromChrome) {
+                    return;
+                }
+                if (isSkipLinkElement(e.target)) {
+                    clearGuard();
+                    return;
+                }
+                applyGuard();
+                focusSkipLink();
+                clearGuard();
+            }, true);
+        })();
+    </script>
+    <form name="mainForm" method="post" action="/Business/Building-and-Development/Fee-Schedules" id="mainForm">
+<input type="hidden" name="ctl04_seamless_script_manager_TSM" id="ctl04_seamless_script_manager_TSM" value="" />
+<input type="hidden" name="__SEAMLESSVIEWSTATE" id="__SEAMLESSVIEWSTATE" value="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" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="" />
+
+
+<script src="/Telerik.Web.UI.WebResource.axd?_TSM_HiddenField_=ctl04_seamless_script_manager_TSM&amp;compress=1&amp;_TSM_CombinedScripts_=%3b%3bSystem.Web.Extensions%2c+Version%3d4.0.0.0%2c+Culture%3dneutral%2c+PublicKeyToken%3d31bf3856ad364e35%3aen-GB%3add3ac3d5-1e29-4112-8fed-529caffa8f24%3aea597d4b%3bOpenCities.CustomControls%3aen-GB%3a8875e443-f2ef-457b-94fb-857d92f72782%3a8e1d32bf" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=Dgt4HF_ft_aJ1oNhpkWrMiNDmBLKt_DsvWnSAz2w6tEELqoI6U0la4w2SXOqY6aKSQopJdYQ7QqurDo6luOWtmOtc0ilepv84Pn5KcIhMMrgeTsEf5EuV8_Sa3cCDWfG--Hnf94oO4VdVbckSgJaVhayxbZ7XIfk_l5vwX8rf1j3PHHLVdsirYnSQi7H-FBaAoI8vrsBRaLWZaSMhQbjtYYKqDWglhIGGk6W571YqSk-uulGq2FPvDWIH4jcRJViiV9xArPU8giGtZPgZuzgazGDA9l8J7QQlNhfdKhxD-RT-xq7lTMNzZtN4P2818X2kcTOPsVXuC5sJXLwZ_95djU3-fBGudmoTPxL2612tOyiZZah_zDS4uE2zWSOvuEiX7jWqffsB-AvNOYbMeUCVMkDWwxm4SnM9P_FzJ7I9RNhaF2SxAANL2e2AV_KOoQt0" type="text/javascript"></script>
+    
+<script type="text/javascript">
+    try{
+        function SeamlessEndRequestHandler(sender, args) {
+            try {
+                var dataItems = args.get_dataItems();
+                if(dataItems.ctl04_seamless_script_manager)
+                    document.getElementById('__SEAMLESSVIEWSTATE').value = dataItems.ctl04_seamless_script_manager;
+            }
+            catch (e) { }
+        }
+
+        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(SeamlessEndRequestHandler);
+    }
+    catch (e) { }
+</script>
+
+    <div class="unsupported-browser-warning js-element"></div>
+    
+    <div hidden>
+        <span id="new-window-0">opens in new tab or window </span>
+    </div>
+    <div class="overlay-container"></div>
+    
+    <div class="background-container">
+        <div class="page-container">
+            <!-- OC Layout Element GROUP TEMPLATE -->
+            <!--groupTemplateStart--><header>
+            <div class="toolbar-outer-container">
+  <div class="toolbar-inner-container clearfix">
+    <div class="toolbar-item toolbar-quicklinks toolbar-display-dropdown">
+	<button type="button" aria-controls="toolbar-quicklinks-drop-down" aria-expanded="false" class="toolbar-button toolbar-button-quicklinks js-element"><span>Quick Links</span><i aria-hidden="true"></i></button>	
+	<div id="toolbar-quicklinks-drop-down" class="toolbar-drop-down toolbar-quicklinks-drop-down clearfix">
+		<ul>
+		  <li><a href="https://www.fortcollins.gov/Government/Contact-Us" class="oc-icon-b oc-i--none link-type-internal"><span>Contact Us</span></a></li><li><a href="https://www.facebook.com/fortcollinsgov" class="oc-icon-b oc-i-facebook link-type-external link-hide-text" target="_blank"><span>Facebook</span></a></li><li><a href="https://www.instagram.com/fortcollinsgov/" class="oc-icon-b oc-i-instagram link-type-external link-hide-text" target="_blank"><span>Instagram</span></a></li><li><a href="https://x.com/fortcollinsgov" class="oc-icon-b oc-i-x link-type-external link-hide-text" target="_blank"><span>X</span></a></li>
+		</ul>
+	</div>
+</div><div class="toolbar-item toolbar-language notranslate toolbar-display-dropdown"><div class="no-js-element">
+		  <ul>
+		    <li id="toolbar-language-option-en-us-noscript"><a href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=en-US" class="lang-item lang-en-us" data-translate-to="en-us" lang="en-US">English (United States)<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li id="toolbar-language-option-es-noscript"><a href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=es" class="lang-item lang-es" data-translate-to="es" lang="en">Spanish<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li id="toolbar-language-option-ar-noscript"><a href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=ar" class="lang-item lang-ar" data-translate-to="ar" lang="en">Arabic<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li id="toolbar-language-option-zh-cn-noscript"><a href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=zh-CN" class="lang-item lang-zh-cn" data-translate-to="zh-cn" lang="en">Chinese (Simplified)<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li id="toolbar-language-option-zh-tw-noscript"><a href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=zh-TW" class="lang-item lang-zh-tw" data-translate-to="zh-tw" lang="en">Chinese (Traditional)<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li id="toolbar-language-option-fr-noscript"><a href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=fr" class="lang-item lang-fr" data-translate-to="fr" lang="en">French<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li id="toolbar-language-option-de-noscript"><a href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=de" class="lang-item lang-de" data-translate-to="de" lang="en">German<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li id="toolbar-language-option-it-noscript"><a href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=it" class="lang-item lang-it" data-translate-to="it" lang="en">Italian<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li id="toolbar-language-option-ko-noscript"><a href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=ko" class="lang-item lang-ko" data-translate-to="ko" lang="en">Korean<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li id="toolbar-language-option-pl-noscript"><a href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=pl" class="lang-item lang-pl" data-translate-to="pl" lang="en">Polish<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li id="toolbar-language-option-pt-noscript"><a href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=pt" class="lang-item lang-pt" data-translate-to="pt" lang="en">Portuguese<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li id="toolbar-language-option-pa-noscript"><a href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=pa" class="lang-item lang-pa" data-translate-to="pa" lang="en">Punjabi<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li id="toolbar-language-option-ru-noscript"><a href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=ru" class="lang-item lang-ru" data-translate-to="ru" lang="en">Russian<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li id="toolbar-language-option-tl-noscript"><a href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=tl" class="lang-item lang-tl" data-translate-to="tl" lang="en">Tagalog (Filipino)<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li id="toolbar-language-option-vi-noscript"><a href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=vi" class="lang-item lang-vi" data-translate-to="vi" lang="en">Vietnamese<span class="visuallyhidden"> Select this as your preferred language</span></a></li>
+          </ul>
+		</div>
+	<button type="button" role="combobox" aria-controls="toolbar-language-drop-down" aria-expanded="false" aria-haspopup="listbox" aria-autocomplete="none" aria-labelledby="toolbar-language-label" class="toolbar-button toolbar-button-language js-element">  
+        <span class="toolbar-language-globe-icon" aria-hidden="true"></span>
+        <span id="toolbar-language-label" class="current-language">
+            Select a language to translate to
+		</span>
+		<i aria-hidden="true"></i>
+	</button>
+	<div id="toolbar-language-drop-down" role="listbox" aria-label="Available languages" class="toolbar-drop-down toolbar-language-drop-down js-element clearfix">
+		<ul role="group">
+		    <li role="presentation"><a id="toolbar-language-option-en-us" role="option" aria-selected="true" href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=en-US" class="lang-item lang-en-us" data-translate-to="en-us" lang="en-US">English (United States)<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li role="presentation"><a id="toolbar-language-option-es" role="option" aria-selected="false" href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=es" class="lang-item lang-es" data-translate-to="es" lang="en">Spanish<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li role="presentation"><a id="toolbar-language-option-ar" role="option" aria-selected="false" href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=ar" class="lang-item lang-ar" data-translate-to="ar" lang="en">Arabic<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li role="presentation"><a id="toolbar-language-option-zh-cn" role="option" aria-selected="false" href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=zh-CN" class="lang-item lang-zh-cn" data-translate-to="zh-cn" lang="en">Chinese (Simplified)<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li role="presentation"><a id="toolbar-language-option-zh-tw" role="option" aria-selected="false" href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=zh-TW" class="lang-item lang-zh-tw" data-translate-to="zh-tw" lang="en">Chinese (Traditional)<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li role="presentation"><a id="toolbar-language-option-fr" role="option" aria-selected="false" href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=fr" class="lang-item lang-fr" data-translate-to="fr" lang="en">French<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li role="presentation"><a id="toolbar-language-option-de" role="option" aria-selected="false" href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=de" class="lang-item lang-de" data-translate-to="de" lang="en">German<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li role="presentation"><a id="toolbar-language-option-it" role="option" aria-selected="false" href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=it" class="lang-item lang-it" data-translate-to="it" lang="en">Italian<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li role="presentation"><a id="toolbar-language-option-ko" role="option" aria-selected="false" href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=ko" class="lang-item lang-ko" data-translate-to="ko" lang="en">Korean<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li role="presentation"><a id="toolbar-language-option-pl" role="option" aria-selected="false" href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=pl" class="lang-item lang-pl" data-translate-to="pl" lang="en">Polish<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li role="presentation"><a id="toolbar-language-option-pt" role="option" aria-selected="false" href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=pt" class="lang-item lang-pt" data-translate-to="pt" lang="en">Portuguese<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li role="presentation"><a id="toolbar-language-option-pa" role="option" aria-selected="false" href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=pa" class="lang-item lang-pa" data-translate-to="pa" lang="en">Punjabi<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li role="presentation"><a id="toolbar-language-option-ru" role="option" aria-selected="false" href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=ru" class="lang-item lang-ru" data-translate-to="ru" lang="en">Russian<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li role="presentation"><a id="toolbar-language-option-tl" role="option" aria-selected="false" href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=tl" class="lang-item lang-tl" data-translate-to="tl" lang="en">Tagalog (Filipino)<span class="visuallyhidden"> Select this as your preferred language</span></a></li><li role="presentation"><a id="toolbar-language-option-vi" role="option" aria-selected="false" href="https://www.fortcollins.gov/Business/Building-and-Development/Fee-Schedules?oc_lang=vi" class="lang-item lang-vi" data-translate-to="vi" lang="en">Vietnamese<span class="visuallyhidden"> Select this as your preferred language</span></a></li>
+        </ul>
+	</div></div>
+  </div>
+</div>
+            <div class="header-outer-container">
+    <div class="header-container header-layout-4  clearfix">
+			<div class="header-site-logo">
+				<a href="https://www.fortcollins.gov/Home" lang="en-US" aria-label="City of Fort Collins - Home - Logo">
+				</a>
+			</div>
+      
+		    <div class="mobile-search-btn js-element">
+		        <button><i aria-hidden="true"></i><span class="mobile-search-btn-text"><span class="visuallyhidden">Open </span>Search</span></button>
+		    </div>
+		    <div class="header-website-settings">
+                <button id="btn-mob-nav" type="button" aria-expanded="false" aria-controls="nav">
+                    <i aria-hidden="true"></i><span class="side-menu-btn-text">Menu</span>
+                </button>
+        	</div>
+          <div class="navigation-outer-container">
+	<div id="nav" role="navigation" class="navigation-container  navigation-container-option-8" data-menu-type="horizontal" aria-label="primary">
+        <div class="grid">
+            <div class="col-xs-12">              
+                <ul class="sf-menu mega-menu" id="sc-main-menu"><li class="nav-section-quarters-1   first-item nav-item-seq-1">
+<a href="https://www.fortcollins.gov/Activities" class="nav-level-1 nav-has-children"  target="">
+	<i class="item-icon" aria-hidden="true"></i><span class="item-text">Activities</span>
+</a>
+<button aria-label="Expand" aria-controls="sc-menu-second-level-nav-item-seq-1" aria-haspopup="true" class="mobnav-subarrow" ><i aria-hidden="true"></i></button>
+<ul id="sc-menu-second-level-nav-item-seq-1" class="second-level-container ch-9">
+
+          
+            <li class="second-level-item  "><a href="https://www.fortcollins.gov/Activities/Sign-Up-for-Classes-and-Events" class=""  target="">Sign Up for Classes and Events</a></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Activities/Rent-Our-Spaces" class=""  target="_self">Rent Our Spaces</a></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Activities/Recreation" class="nav-has-children"  target="">Recreation</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-1-nav-item-seq-3" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-1-nav-item-seq-3" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Activities/Recreation/Recreator"  target="">Recreator</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Activities/Recreation/Passes-and-Fees"  target="">Passes and Fees</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Activities/Recreation/Programs"  target="">Programs</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Activities/Recreation/Bicycling"  target="_self">Bicycling</a></li></ul></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Activities/Recreation-Facilities-and-Pools" class=""  target="">Recreation Facilities and Pools</a></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Activities/Golf" class="nav-has-children"  target="">Golf</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-1-nav-item-seq-5" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-1-nav-item-seq-5" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Activities/Golf/Courses"  target="_self">Courses</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Activities/Golf/Rates-and-Passes"  target="">Rates and Passes</a></li></ul></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Activities/Parks-Natural-Areas-and-Trails" class="nav-has-children"  target="">Parks, Natural Areas and Trails</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-1-nav-item-seq-6" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-1-nav-item-seq-6" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Activities/Parks-Natural-Areas-and-Trails/Parks"  target="">Parks</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Activities/Parks-Natural-Areas-and-Trails/Natural-Areas"  target="">Natural Areas</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Activities/Parks-Natural-Areas-and-Trails/Trails"  target="">Trails</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Activities/Parks-Natural-Areas-and-Trails/Field-Reservations-and-Shelter-Rentals"  target="">Field Reservations and Shelter Rentals</a></li></ul></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Activities/Arts-and-Culture" class="nav-has-children"  target="">Arts and Culture</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-1-nav-item-seq-7" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-1-nav-item-seq-7" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Activities/Arts-and-Culture/Center-for-Creativity"  target="_self">Center for Creativity</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Activities/Arts-and-Culture/Gardens-on-Spring-Creek"  target="_blank">Gardens on Spring Creek</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Activities/Arts-and-Culture/The-Lincoln-Center"  target="_blank">The Lincoln Center</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Activities/Arts-and-Culture/Fort-Collins-Museum-of-Discovery"  target="_blank">Fort Collins Museum of Discovery</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Activities/Arts-and-Culture/Art-in-Public-Places"  target="">Art in Public Places</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Activities/Arts-and-Culture/FoCo-Creates-Fort-Fund"  target="">FoCo Creates (Fort Fund)</a></li></ul></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Activities/Event-Calendar" class=""  target="_blank">Event Calendar</a></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Activities/Visitor-Info" class=""  target="_blank">Visitor Info</a></li></ul></li>
+          
+            <li class="nav-section-quarters-2   nav-item-seq-2">
+<a href="https://www.fortcollins.gov/Services" class="nav-level-1 nav-has-children"  target="">Services</a>
+<button aria-label="Expand" aria-controls="sc-menu-second-level-nav-item-seq-2" aria-haspopup="true" class="mobnav-subarrow" ><i aria-hidden="true"></i></button>
+<ul id="sc-menu-second-level-nav-item-seq-2" class="second-level-container ch-16">
+
+          
+            <li class="second-level-item  "><a href="https://www.fortcollins.gov/Services/Utilities" class="nav-has-children"  target="">Utilities</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-2-nav-item-seq-1" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-2-nav-item-seq-1" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Utilities/Pay-My-Bill"  target="">Pay My Bill</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Utilities/Customer-Support"  target="">Customer Support</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Utilities/StartStop-Service"  target="_blank">Start or Stop Service</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Utilities/Outages"  target="">Outages</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Utilities/Programs-and-Rebates"  target="">Programs and Rebates</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Utilities/Commercial-Utilities"  target="">Commercial Utilities</a></li></ul></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Services/Connexion-Broadband" class=""  target="_blank">Connexion (Broadband)</a></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Services/Trash-and-Recycling" class="nav-has-children"  target="">Trash and Recycling</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-2-nav-item-seq-3" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-2-nav-item-seq-3" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Trash-and-Recycling/Recycling-A-to-Z-List"  target="_blank">Recycling A to Z List</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Trash-and-Recycling/Timberline-Recycling-Center"  target="">Timberline Recycling Center</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Trash-and-Recycling/Curbside-Trash-and-Recycling"  target="">Curbside Trash and Recycling</a></li></ul></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Services/Transportation-and-Roads" class="nav-has-children"  target="">Transportation and Roads</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-2-nav-item-seq-4" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-2-nav-item-seq-4" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Transportation-and-Roads/Transfort"  target="_blank">Transfort</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Transportation-and-Roads/Construction-and-Traffic-Impacts"  target="">Construction and Traffic Impacts</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Transportation-and-Roads/Street-Maintenance"  target="">Street Maintenance</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Transportation-and-Roads/Getting-Around-Town"  target="">Getting Around Town</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Transportation-and-Roads/Transportation-Programs"  target="">Transportation Programs</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Transportation-and-Roads/Transportation-Planning"  target="">Transportation Planning</a></li></ul></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Services/Police-and-Public-Safety" class="nav-has-children"  target="">Police and Public Safety</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-2-nav-item-seq-5" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-2-nav-item-seq-5" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Police-and-Public-Safety/Contact-Police"  target="">Contact Police</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Police-and-Public-Safety/Online-Crime-Reporting"  target="">Online Crime Reporting</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Police-and-Public-Safety/Police-Services"  target="">Police Services</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Police-and-Public-Safety/Police-Recruiting"  target="">Police Recruiting</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Police-and-Public-Safety/Emergency-Preparedness"  target="">Emergency Preparedness</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Police-and-Public-Safety/Poudre-Fire-Authority"  target="_blank">Poudre Fire Authority</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Police-and-Public-Safety/Drones-as-a-City-Resource-DCR"  target="_self">Drones as a City Resource (DCR)</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Police-and-Public-Safety/Mosquito-Spraying"  target="">Mosquito Spraying</a></li></ul></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Services/Parking" class="nav-has-children"  target="">Parking</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-2-nav-item-seq-6" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-2-nav-item-seq-6" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Parking/Pay-Your-Parking-Ticket"  target="">Pay Your Parking Ticket</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Parking/Where-to-Park"  target="">Where to Park</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Parking/Parking-Permits"  target="">Parking Permits</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Parking/Parking-Rules"  target="">Parking Rules</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Parking/Residential-Parking-Permit-Program-RP3"  target="">Residential Parking Permit Program (RP3)</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Parking/Downtown-Parking-Management-Updates"  target="_blank">Downtown Parking Management Updates</a></li></ul></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Services/Home-Improvements" class=""  target="">Home Improvements</a></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Services/Development-Review" class=""  target="_self">Development Review</a></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Services/Housing" class="nav-has-children"  target="">Housing</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-2-nav-item-seq-9" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-2-nav-item-seq-9" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Housing/Rental-Housing"  target="">Rental Housing</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Housing/In-Your-Neighborhood"  target="">In Your Neighborhood</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Housing/Mobile-Homes"  target="">Mobile Homes</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Housing/Affordable-Housing"  target="">Affordable Housing</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Housing/Short-Term-Rentals"  target="">Short-Term Rentals</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Housing/Homelessness"  target="">Homelessness</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Housing/Historic-Preservation"  target="_self">Historic Preservation</a></li></ul></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Services/Historic-Preservation" class=""  target="">Historic Preservation</a></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Services/Code-Compliance" class=""  target="_self">Code Compliance</a></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Services/Forestry" class=""  target="">Forestry</a></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Services/Cemeteries" class=""  target="">Cemeteries</a></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Services/Permits-and-Licensing" class=""  target="_self">Permits and Licensing</a></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Services/Assistance-Programs-and-Grants" class="nav-has-children"  target="">Assistance Programs and Grants</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-2-nav-item-seq-15" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-2-nav-item-seq-15" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Assistance-Programs-and-Grants/Residential-Assistance-Programs"  target="">Residential Assistance Programs</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Services/Assistance-Programs-and-Grants/BusinessNonprofit-Assistance-Programs"  target="">Business/Nonprofit Assistance Programs</a></li></ul></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Services/Other-Services" class=""  target="_self">Other Services</a></li></ul></li>
+          
+            <li class="nav-section-quarters-3   nav-item-seq-3">
+<a href="https://www.fortcollins.gov/Government" class="nav-level-1 nav-has-children"  target="">Government</a>
+<button aria-label="Expand" aria-controls="sc-menu-second-level-nav-item-seq-3" aria-haspopup="true" class="mobnav-subarrow" ><i aria-hidden="true"></i></button>
+<ul id="sc-menu-second-level-nav-item-seq-3" class="second-level-container ch-13">
+
+          
+            <li class="second-level-item  "><a href="https://www.fortcollins.gov/Government/City-Council" class="nav-has-children"  target="">City Council</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-3-nav-item-seq-1" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-3-nav-item-seq-1" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Government/City-Council/Council-Meetings"  target="">Council Meetings</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Government/City-Council/Council-Subcommittees"  target="">Council Subcommittees</a></li></ul></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Government/City-Manager" class="nav-has-children"  target="">City Manager</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-3-nav-item-seq-2" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-3-nav-item-seq-2" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Government/City-Manager/City-Managers-Quarterly-Report"  target="">City Manager's Quarterly Report</a></li></ul></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Government/Records-and-Documents" class="nav-has-children"  target="">Records and Documents</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-3-nav-item-seq-3" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-3-nav-item-seq-3" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Government/Records-and-Documents/Public-Records"  target="">Public Records</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Government/Records-and-Documents/Public-Notices"  target="">Public Notices</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Government/Records-and-Documents/Agendas"  target="_blank">Agendas</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Government/Records-and-Documents/Maps-and-GIS"  target="_blank">Maps and GIS</a></li></ul></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Government/Elections" class=""  target="">Elections</a></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Government/Municipal-Court" class="nav-has-children"  target="">Municipal Court</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-3-nav-item-seq-5" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-3-nav-item-seq-5" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Government/Municipal-Court/Pay-Your-Ticket"  target="">Pay Your Ticket</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Government/Municipal-Court/Jury-Duty"  target="">Jury Duty</a></li></ul></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Government/Boards-and-Commissions" class=""  target="">Boards and Commissions</a></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Government/City-Code-and-Charter" class=""  target="">City Code and Charter</a></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Government/City-Attorney" class=""  target="">City Attorney</a></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Government/City-Careers" class=""  target="">City Careers</a></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Government/Get-Involved" class="nav-has-children"  target="">Get Involved</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-3-nav-item-seq-10" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-3-nav-item-seq-10" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Government/Get-Involved/Volunteer"  target="">Volunteer</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Government/Get-Involved/OurCity-Online-Engagement"  target="_blank">OurCity Online Engagement</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Government/Get-Involved/Community-Survey"  target="">Community Survey</a></li></ul></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Government/City-Plans-and-Projects" class="nav-has-children"  target="">City Plans and Projects</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-3-nav-item-seq-11" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-3-nav-item-seq-11" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Government/City-Plans-and-Projects/City-Plans"  target="">City Plans</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Government/City-Plans-and-Projects/Public-Improvement-Projects"  target="">Public Improvement Projects</a></li></ul></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Government/Budget-and-Finance" class="nav-has-children"  target="">Budget and Finance</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-3-nav-item-seq-12" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-3-nav-item-seq-12" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Government/Budget-and-Finance/Budget"  target="">Budget</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Government/Budget-and-Finance/Financial-Reports"  target="_self">Financial Reports</a></li></ul></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Government/Contact-Us" class="nav-has-children"  target="">Contact Us</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-3-nav-item-seq-13" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-3-nav-item-seq-13" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Government/Contact-Us/Access-Fort-Collins"  target="_blank">Access Fort Collins</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Government/Contact-Us/Department-Directory"  target="_self">Department Directory</a></li></ul></li></ul></li>
+          
+            <li class="nav-section-quarters-4 nav-active-path  nav-item-seq-4">
+<a href="https://www.fortcollins.gov/Business" class="nav-level-1 nav-has-children"  target="">Business</a>
+<button aria-label="Expand" aria-controls="sc-menu-second-level-nav-item-seq-4" aria-haspopup="true" class="mobnav-subarrow" ><i aria-hidden="true"></i></button>
+<ul id="sc-menu-second-level-nav-item-seq-4" class="second-level-container ch-6">
+
+          
+            <li class="second-level-item  "><a href="https://www.fortcollins.gov/Business/Business-Resources-and-Support" class="nav-has-children"  target="">Business Resources and Support</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-4-nav-item-seq-1" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-4-nav-item-seq-1" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Business/Business-Resources-and-Support/Starting-Your-Business"  target="">Starting Your Business</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Business/Business-Resources-and-Support/Growing-Your-Business"  target="">Growing Your Business</a></li></ul></li><li class="second-level-item nav-active-path "><a href="https://www.fortcollins.gov/Business/Building-and-Development" class="nav-has-children"  target="">Building and Development</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-4-nav-item-seq-2" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-4-nav-item-seq-2" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Business/Building-and-Development/Building-Services"  target="">Building Services</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Business/Building-and-Development/Development-Review"  target="">Development Review</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Business/Building-and-Development/Accela"  target="_blank">Accela</a></li></ul></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Business/Commercial-Utilities" class=""  target="_self">Commercial Utilities</a></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Business/Permits-and-Licensing" class="nav-has-children"  target="">Permits and Licensing</a><button aria-label="Expand" aria-controls="sc-menu-third-level-nav-item-seq-4-nav-item-seq-4" class="mobnav-subarrow-child"><i aria-hidden="true"></i>
+              </button>
+<ul  id="sc-menu-third-level-nav-item-seq-4-nav-item-seq-4" class="third-level-container">
+          
+            <li  class="third-level-item  "><a href="https://www.fortcollins.gov/Business/Permits-and-Licensing/Building-Permits"  target="">Building Permits</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Business/Permits-and-Licensing/BusinessSales-Tax-License"  target="_self">Business/Sales Tax License</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Business/Permits-and-Licensing/Liquor-License"  target="">Liquor License</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Business/Permits-and-Licensing/Marijuana-License"  target="">Marijuana License</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Business/Permits-and-Licensing/Special-Event-Permits"  target="">Special Event Permits</a></li><li  class="third-level-item  "><a href="https://www.fortcollins.gov/Business/Permits-and-Licensing/Other-Licenses-and-Permits"  target="">Other Licenses and Permits</a></li></ul></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Business/Pay-Sales-Tax" class=""  target="_self">Pay Sales Tax</a></li><li class="second-level-item  "><a href="https://www.fortcollins.gov/Business/Bids-and-Contracts" class=""  target="">Bids and Contracts</a></li></ul></li>
+          
+            </ul>
+            </div>
+        </div>
+    </div>
+</div>
+			
+			<div class="header-search-control-container" id="header-search">
+				<div class="search-inner-container">
+					<div class="sc-search-panel">
+	<label for="ctl08_txtSearch" id="ctl08_lblSearch" class="sc-search-label">Search</label><input name="ctl08$txtSearch" type="text" id="ctl08_txtSearch" class="sc-search-text" placeholder="What are you looking for?" /><input type="submit" name="ctl08$btnSearch" value="Search" id="ctl08_btnSearch" class="sc-search-button" />
+</div>
+					<div role="status" id="predictiveResults"></div>
+				</div>
+			</div>
+    </div>
+</div>
+
+            
+            </header>
+            <div class="content-outer-container">
+                <div id="main" role="main" class="main-outer-container clearfix">
+                        
+                        <div class="content-main-container">
+                            <div class="grid">
+					            <div class="col-xs-12">
+						            <nav id="breadcrumbs-container" aria-label="You Are Here :">
+							            <span role="list">
+<span role="listitem">
+	<a href="https://www.fortcollins.gov/Home"  lang="en-US">Home</a>
+	<span class="nav-separator" aria-hidden="true" role="presentation">/</span>
+</span>
+          <span role="listitem"><a href="https://www.fortcollins.gov/Business" >Business</a><span class='nav-separator' aria-hidden="true" role="presentation">/</span></span><span role="listitem">
+	<a href="https://www.fortcollins.gov/Business/Building-and-Development" >
+		Building and Development
+	</a>
+	<span class='nav-separator' aria-hidden="true" role="presentation">/</span>
+</span>
+<span class="current-page" role="listitem" aria-current="page" >Fee Schedules</span>
+          </span>
+						            </nav>
+					            </div>
+                      
+					            <div class="col-xs-12">
+						            <div class="main-inner-container">
+							            <div id="main-content" class="main-container clearfix">
+							              
+                            <!-- OC Layout Element Conent Template -->
+							              <!--normalTemplateStart--><div class="grid">
+    <div class="col-xs-12 col-m-8">
+        <h1 class='oc-page-title '>Fee Schedules</h1>
+        
+        
+       <picture>
+  <source media="(min-width: 992px)" srcset="/files/sharedassets/city/v/1/planning-development-amp-transportation/community-development/building-services/construction-in-fort-collins.jpg?dimension=pageimage&w=480">
+  <source media="(min-width: 768px)" srcset="/files/sharedassets/city/v/1/planning-development-amp-transportation/community-development/building-services/construction-in-fort-collins.jpg?dimension=pageimage&w=480">
+  <source srcset="/files/sharedassets/city/v/1/planning-development-amp-transportation/community-development/building-services/construction-in-fort-collins.jpg?dimension=pageimage&w=480">
+  <img class="main-page-image" src="/files/sharedassets/city/v/1/planning-development-amp-transportation/community-development/building-services/construction-in-fort-collins.jpg?dimension=pageimage&w=480" alt="an excavator digging in a road construction zone" />
+</picture> 
+      
+        <p>You can use this page to view and calculate fees that may apply to your project.</p>
+<h2>How to Pay Fees</h2>
+<div data-type="0" data-title-level="3" class="oc-wysiwyg-container">
+<div class="oc-wysiwyg-container-panel">
+<h3>Payment Methods</h3>
+<div class="oc-wysiwyg-container-panel-content">
+<p><strong>Debit/Credit Card (no amount limit):</strong></p>
+<ul>
+<li><strong>Fees:</strong>
+<ul>
+<li><em>For transactions up to $2,500:</em> $0.25 flat fee + 2% of total transaction amount</li>
+<li><em>For transactions more than $2,500:</em> 2.75% of total transaction amount</li>
+</ul>
+</li>
+</ul>
+<p><strong>ACH Payment (eCheck) ($150,000 limit):</strong></p>
+<ul>
+<li><strong>Fees:</strong>
+<ul>
+<li>$0.50 flat fee</li>
+</ul>
+</li>
+</ul>
+<p><strong>Check (any amount):</strong></p>
+<ul>
+<li><strong>Fees:</strong></li>
+<li style="list-style: none; display: inline">
+<ul>
+<li>None</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="oc-wysiwyg-container-panel">
+<h3>Where to Pay</h3>
+<div class="oc-wysiwyg-container-panel-content">
+<p><strong>For card or ACH payments:</strong></p>
+<ul>
+<li><strong>Online:</strong> Pay online in the <a href="https://accela-aca.fcgov.com/CitizenAccess/Welcome.aspx" target="_blank">Citizen Access Portal</a></li>
+</ul>
+<p><strong>For checks:</strong></p>
+<ul>
+<li>Drop checks in the blue drop box on the northwest side of our building at 281 N. College Ave. (accessible from Maple Street, just west of College).</li>
+</ul>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+<h2>Fees</h2>
+<p>Use the expandable windows below to view Fee Schedules by type:</p>
+<div data-type="0" data-title-level="3" class="oc-wysiwyg-container">
+<div class="oc-wysiwyg-container-panel">
+<h3>Building Permit Fees</h3>
+<div class="oc-wysiwyg-container-panel-content">
+<p>Building Permit fees are detailed on the&nbsp;<a href="https://www.fortcollins.gov/Business/Building-and-Development/Building-Services/Building-Permits" target="_blank" style="transition-behavior: normal, normal; transition-duration: 0.3s, 0s; transition-timing-function: ease-in-out, ease; transition-delay: 0s, 0s; font-size: 18px;">Building Permits</a>&nbsp;webpage. Find the permit you're applying for to view its fees.</p>
+<p>&nbsp;</p>
+<p><strong>Fees for New Construction Projects</strong></p>
+<p>Fees for new construction projects&nbsp;are calculated based on the occupancy type and square footage of your project. To calculate those fees you'll use this equation:</p>
+<ul>
+<li><em>Total square footage of your project multiplied by the applicable fee rate per square foot for each occupancy type</em></li>
+</ul>
+<p>Use the information below to complete that equation for your project.</p>
+<p>Your fees will be paid in two parts:</p>
+<ol>
+<li><strong>Plan Check Fee:</strong> 35% of your total will need to be paid when you apply for your permit.</li>
+<li><strong>Building Permit Fee:</strong> 65% of your total will need to be paid when your permit is issued/approved.</li>
+</ol>
+<p><em>Note: In addition to your Plan Check Fee and Building Permit Fee, Transportation Capital Expansion Fees are applied to permit applications for new buildings or major changes to existing buildings that create more traffic. If this applies to your project, see the Transportation Capital Expansion Fees (TCEF) section of this webpage.</em></p>
+<p><em>&nbsp;</em></p>
+<p><strong>Applicable Fee Rates Per Square Foot</strong></p>
+<p><em>Note: Occupancy categories are typically indicated on the architectural plans submitted for your project.</em></p>
+<table class="sc-responsive-table">
+<thead>
+<tr>
+<th style=""><strong>Occupancy Category</strong></th>
+<th style=""><strong>Fee Rate per Square Foot</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A (Assembly)</strong></td>
+<td>$0.40</td>
+</tr>
+<tr>
+<td><strong>B (Business)</strong></td>
+<td>$0.50</td>
+</tr>
+<tr>
+<td><strong>E (Education/Schools)</strong></td>
+<td>$0.50</td>
+</tr>
+<tr>
+<td><strong>F (Factory)</strong></td>
+<td>$0.35</td>
+</tr>
+<tr>
+<td><strong>I (Institutional)</strong></td>
+<td>$0.50</td>
+</tr>
+<tr>
+<td><strong>M (Mercantile)</strong></td>
+<td>$0.40</td>
+</tr>
+<tr>
+<td><strong>R-1 (Hotel)</strong></td>
+<td>$0.35</td>
+</tr>
+<tr>
+<td><strong>R-2 (Apartment)</strong></td>
+<td>$0.35</td>
+</tr>
+<tr>
+<td><strong>R-3 (Single Family Detached/Duplex)</strong></td>
+<td>$0.65</td>
+</tr>
+<tr>
+<td><strong>R-4 (Assisted Living)</strong></td>
+<td>$0.55</td>
+</tr>
+<tr>
+<td><strong>S (Storage)</strong></td>
+<td>$0.40</td>
+</tr>
+<tr>
+<td><strong>U (Utility)</strong></td>
+<td>$0.40</td>
+</tr>
+<tr>
+<td><strong>H (High Hazard)</strong></td>
+<td>$0.60</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Fee Calculation Examples</strong></p>
+<p>Example 1: Single-Family Detached Home (R-3)</p>
+<ul>
+<li><strong>Single-family residential square&nbsp;footage (R-3):</strong> 3,500 square feet</li>
+<li><strong>Total cost:</strong> 3,500 square feet &times; $0.65 (Fee Rate for R-3) = $2,275</li>
+<li><strong>Plan Check Fee (35%):</strong> $2,275 &times; 0.35 = $796.25</li>
+<li><strong>Building Permit Fee (65%):</strong> $2,275 &times; 0.65 = $1,478.75</li>
+</ul>
+<p>Example 2: Mixed-Use Building (M + R-2)</p>
+<ul>
+<li><strong>Mercantile square footage (M):</strong> 2,000 square feet &times; $0.40 (Fee Rate for M) = $800</li>
+<li><strong>Apartment square footage (R-2):</strong> 2,000 square feet &times; $0.35 (Fee Rate for R-2) = $700</li>
+<li><strong>Total cost:</strong> $800 + $700 = $1,500</li>
+<li><strong>Plan Check Fee (35%):</strong> $1,500 &times; 0.35 = $525</li>
+<li><strong>Building Permit Fee (65%):</strong> $1,500 &times; 0.65 = $975</li>
+</ul>
+</div>
+</div>
+<div class="oc-wysiwyg-container-panel">
+<h3>Development Review Fees</h3>
+<div class="oc-wysiwyg-container-panel-content">
+<p>The fees below are effective as of Jan. 1, 2024.</p>
+<p>For questions about these fees, contact us at <a href="tel:9702216689">970-221-6689</a> between 8 a.m.-5 p.m., Monday-Friday.</p>
+<p>&nbsp;</p>
+<p><strong>Planning Services</strong></p>
+<table class="sc-responsive-table">
+<thead>
+<tr>
+<th style=""><strong>Service Name</strong></th>
+<th style=""><strong>Fee</strong></th>
+<th style=""><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Annexation (ANX)</strong></td>
+<td>$5,825</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Rezoning (REZ)</strong></td>
+<td>$4,800</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Plan Amendment</strong></td>
+<td>$11,150</td>
+<td>Applies to requested amendments to <a href="https://www.fortcollins.gov/Government/City-Plans-and-Projects/City-Plans" target="_blank">City Plan, Structure Plan or adopted Subarea Plans</a>.</td>
+</tr>
+<tr>
+<td><strong>Text Amendments</strong></td>
+<td>$3,200</td>
+<td>Applies to requested amendments to <a href="https://www.fortcollins.gov/Government/City-Code-and-Charter/Land-Use-Code" target="_blank">Land Use Code</a>.</td>
+</tr>
+<tr>
+<td><strong>Planned Unit Development (PUD)</strong></td>
+<td>$54,475</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Overall Development Plan (ODP)</strong></td>
+<td>$11,775</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Project Development Plan (PDP)</strong></td>
+<td>$27,675</td>
+<td>For Combo PDP/FDP projects only the PDP fee is assessed (not the FDP fee).</td>
+</tr>
+<tr>
+<td><strong>Final Development Plan (FDP)</strong></td>
+<td>$21,575</td>
+<td>For Combo PDP/FDP projects only the PDP fee is assessed (not the FDP fee).</td>
+</tr>
+<tr>
+<td><strong>Basic Development Review (BDR)</strong></td>
+<td>$16,900</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Site Plan Advisory Review (SPAR)</strong></td>
+<td>No fee</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Major Amendment (MJA)</strong></td>
+<td>$18,975</td>
+<td>Final Plan process also required for Major Amendments.</td>
+</tr>
+<tr>
+<td><strong>Minor Amendment (MA)</strong></td>
+<td>$1,500</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Parkway Landscape Minor Amendment</strong></td>
+<td>No fee</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Minor Subdivision</strong></td>
+<td>$2,300</td>
+<td>For projects that include subdivision only, no land use approval.</td>
+</tr>
+<tr>
+<td><strong>Infrastructure Project</strong></td>
+<td>$13,625</td>
+<td>For projects that include grading or infrastructure only, no land use approval.</td>
+</tr>
+<tr>
+<td><strong>Modification of Standards</strong></td>
+<td>$1,675</td>
+<td>Applies to stand-alone modification requests (not in conjunction with a development plan). Fee assessed for each modification requested.</td>
+</tr>
+<tr>
+<td><strong>Additional Rounds of Review</strong></td>
+<td>$3,000</td>
+<td>Charged once for projects that require 4 or more rounds of review.</td>
+</tr>
+<tr>
+<td><strong>Preliminary Design Review (PDR)</strong></td>
+<td>$1,000</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Conceptual Design Review (CDR)</strong></td>
+<td>No fee</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Appeal of Administrative Decision</strong></td>
+<td>$100</td>
+<td>For appeals of Basic Development Review, Minor Amendment, Administrative Interpretation, or other decisions by the Director.</td>
+</tr>
+<tr>
+<td><strong>Limited-Scope Development Project</strong></td>
+<td>$6,925</td>
+<td>Director approval required based on project-specific criteria. For Combo PDP/FDP, fee is only assessed once. Still subject to fees for additional rounds of review.</td>
+</tr>
+<tr>
+<td><strong>Limited Scope Minor Amendment</strong></td>
+<td>$500</td>
+<td>Director approval required based on project-specific criteria.</td>
+</tr>
+<tr>
+<td><strong>1041 Pre-Application for FONSI Determination</strong></td>
+<td>$25,000</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>1041 Full Permit</strong></td>
+<td>$55,000</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>&nbsp;</strong></p>
+<p><strong>Engineering Services</strong></p>
+<table class="sc-responsive-table">
+<thead>
+<tr>
+<th style=""><strong>Service Name</strong></th>
+<th style=""><strong>Fee</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Development Construction Permit (DCP)</strong></td>
+<td>$2,425</td>
+</tr>
+<tr>
+<td><strong>Easement / Right-of-Way Dedication</strong></td>
+<td>$725</td>
+</tr>
+<tr>
+<td><strong>Easement Vacation</strong></td>
+<td>$1,300</td>
+</tr>
+<tr>
+<td><strong>Right-of-Way Vacation</strong></td>
+<td>$2,050</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p><strong>Zoning Services</strong></p>
+<table class="sc-responsive-table">
+<thead>
+<tr>
+<th style=""><strong>Service Name</strong></th>
+<th style=""><strong>Fee</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Off-Site Construction Staging</strong></td>
+<td>$475</td>
+</tr>
+<tr>
+<td><strong>Variance</strong></td>
+<td>$300</td>
+</tr>
+<tr>
+<td><strong>Short Term Rental Denial Appeal</strong></td>
+<td>$100</td>
+</tr>
+<tr>
+<td><strong>Zoning Verification Letter</strong></td>
+<td>$100</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> Fees cover costs of all departments involved in reviewing or processing the project (including Planning, Engineering, Utilities, Forestry/Parks, administrative support, mailings, sign postings and other functions). Does not include Poudre Fire Authority (PFA) fees, which are additional and calculated at the time of submittal. PFA permit requirements and fee info available <a href="https://www.poudre-fire.org/online-services/apply-for-permits" target="_blank">here</a>.</p>
+<p>&nbsp;</p>
+<p><strong>Limited-Scope Project Fee Criteria</strong></p>
+<p>Reach out to <a href="mailto:drcoord@fortcollins.gov">drcoord@fortcollins.gov</a> for details.</p>
+<p>&nbsp;</p>
+<p><strong>Fee Categories</strong></p>
+<table class="sc-responsive-table">
+<thead>
+<tr>
+<th style=""><strong>Fee Category</strong></th>
+<th style=""><strong>Fee</strong></th>
+<th style=""><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Development Plan (Limited Scope)</strong></td>
+<td>$6,925</td>
+<td>Includes PDP, FDP, BDR and MJA project types.</td>
+</tr>
+<tr>
+<td><strong>Minor Amendment (Limited Scope)</strong></td>
+<td>$500</td>
+<td><br /></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="oc-wysiwyg-container-panel">
+<h3>Utilities Fees</h3>
+<div class="oc-wysiwyg-container-panel-content">
+<p>Plant Investment Fees (PIF) and Water Supply Requirement (WSR) fees support supply and infrastructure associated with new development, as well as improvements to current infrastructure. There are five main components to Fort Collins Utilities&rsquo; water system development fees:</p>
+<ol>
+<li>Water Meter Fee</li>
+<li>Water Supply Requirement (WSR)</li>
+<li>Water Plant Investment Fee (PIF)</li>
+<li>Stormwater PIF</li>
+<li>Wastewater PIF</li>
+</ol>
+<p>Not all customers within Fort Collins receive water and wastewater services from Utilities. Depending on what <a href="https://gisweb.fcgov.com/HTML5Viewer/Index.html?Viewer=utility%20districts" target="_blank">water service area</a> the property is in, you may or may not pay all of these fees to Utilities.</p>
+<p>Separate irrigation taps are required for multi-family and commercial properties using 30,000 gallons or more per year. Mixed-use buildings require separate irrigation taps for residential and non-residential components.</p>
+<p><strong>Water Meter Fees&nbsp;</strong></p>
+<p>The water meter fee is a one-time fee based on the size of the water meter. If more than one trip is needed for meter installation, an additional charge will be billed.</p>
+<table class="sc-responsive-table">
+<thead>
+<tr>
+<th style=""><strong>Meter Size</strong></th>
+<th style=""><strong>Domestic and Irrigation Meter Cost</strong></th>
+<th style=""><strong>Meter Credits (When Changing Size)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>3/4-inch</strong></td>
+<td>$428.84</td>
+<td>$308.75</td>
+</tr>
+<tr>
+<td><strong>1-inch</strong></td>
+<td>$539.79</td>
+<td>$419.70</td>
+</tr>
+<tr>
+<td><strong>1.5-inch</strong></td>
+<td>$1,928.46</td>
+<td>$1,688.28</td>
+</tr>
+<tr>
+<td><strong>2-inch</strong></td>
+<td>$2,166.51</td>
+<td>$1,926.33</td>
+</tr>
+<tr>
+<td><strong>3-inch</strong></td>
+<td>$2,465.39</td>
+<td>$2,213.83</td>
+</tr>
+<tr>
+<td><strong>4-inch</strong></td>
+<td>$3,989.26</td>
+<td>$3,749.08</td>
+</tr>
+</tbody>
+</table>
+<p>Meters larger than 4 inches must be purchased from the current meter vendor; installation is $214.04. Single-family homes typically use 3/4-inch meters unless a fire suppression system is required.</p>
+<p>&nbsp;</p>
+<p><strong>Water Supply Requirement (WSR)<br /></strong><br />
+The Water Supply Requirement (WSR) fee pays for the water supply needed to serve new development and some non-residential redevelopment projects. Developers must pay the WSR fee to receive a water service permit. This usually occurs at the same time the City issues a building permit.&nbsp;</p>
+<p><em>The current WSR fee is $63,800 per acre-foot or $0.196 per gallon.</em></p>
+<p>The amount of the fee depends on the development&rsquo;s water needs, including factors such as:</p>
+<ul type="disc">
+<li>Business type</li>
+<li>Building size</li>
+<li>Number of bedrooms (for residential development)</li>
+</ul>
+<p>Redevelopment projects aren&rsquo;t required to pay a WSR fee unless there is an increase in water service.</p>
+<p>Paying the WSR fee gives a property owner access to a reliable water supply. It does not give ownership to any of the City&rsquo;s water supply. WSR credits stay with the property they were purchased for and can&rsquo;t be transferred or sold.</p>
+<p>Developers can also use City Certificates or Josh Ames Certificates to meet all or a portion of the WSR. Due to fee changes made in 2022, the WSR met with these certificates will be increased by a water supply factor of 1.92.</p>
+<p><span style="text-decoration: underline;">Water Allotments</span></p>
+<p>A water allotment is the amount of water a <em>non-residential</em> or <em>irrigation</em> account can use each year. The City assigns annual water allotments during development or redevelopment based on the WSR fee paid for the property.</p>
+<p>If an account uses more than its annual allotment, the customer pays an excess water use surcharge.</p>
+<p>Water allotments stay with the account they were assigned to and can't be transferred or sold.</p>
+<p>&nbsp;</p>
+<p><strong>Water Plant Investment Fee (PIF)</strong></p>
+<p>The Water PIF pays for infrastructure used to treat and deliver water to developments. Fees vary by number of dwelling units, lot size for residential users, and water meter size for non-residential users. Payment is due at building permit issuance.</p>
+<p>&nbsp;</p>
+<p><strong>Stormwater PIF</strong></p>
+<p>The Stormwater PIF covers both existing and new storm drainage infrastructure for the development. Fees apply when development creates more than 350 square feet of impervious surface.</p>
+<p>&nbsp;</p>
+<p><strong>Wastewater PIF</strong></p>
+<p>The Wastewater PIF pays for growth-related expansion costs of wastewater systems. Fees vary by dwelling units for residential users, meter size, and strength of discharge for non-residential users. Payment is due at building permit issuance.</p>
+<p>High-strength discharges may incur surcharges. To receive a list of those fees, please email&nbsp;<a href="/utilityfees@fortcollins.gov">utilityfees@fortcollins.gov</a>.</p>
+<p>&nbsp;</p>
+<p><strong>Residential Fee Summary&nbsp;</strong></p>
+<p>Please use the arrows on the top right to scroll through the entire fee summary.</p>
+<table class="sc-responsive-table">
+<thead>
+<tr>
+<th style=""><strong>Type</strong></th>
+<th style=""><strong>WSR</strong></th>
+<th style=""><strong>Water PIF</strong></th>
+<th><strong>Wastewater PIF</strong>&nbsp;</th>
+<th style=""><strong>Stormwater PIF</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Single-family 3/4-inch</strong></td>
+<td>10 gallons * outdoor area + 12,200 gallons * number of bedrooms</td>
+<td>$914 + $0.494 per sq ft of lot area</td>
+<td>$4,476 per dwelling unit</td>
+<td>Varies per lot size but basic calculation includes (gross sq ft) * ($0.276 per sq ft) * (runoff coefficient)</td>
+</tr>
+<tr>
+<td><strong>Single-family 1-inch</strong></td>
+<td>10 gallons * outdoor area + 12,200 gallons * number of bedrooms</td>
+<td>$1,548 + $0.494 per sq ft of lot area</td>
+<td>$4,476 per dwelling unit
+<p>&nbsp;</p>
+</td>
+<td>Varies per lot size but basic calculation includes (gross sq ft) * ($0.276 per sq ft) * (runoff coefficient)</td>
+</tr>
+<tr>
+<td><strong>Duplex</strong></td>
+<td>10 gallons * outdoor area + 12,200 gallons * number of bedrooms</td>
+<td>$690 per dwelling unit + $0.365/sq ft of lot</td>
+<td>$3,230 per unit or $6,460 per duplex</td>
+<td>Varies per lot size but basic calculation includes (gross sq ft) * ($0.276 per sq ft) * (runoff coefficient)</td>
+</tr>
+<tr>
+<td><strong>Multi-family (3+ units)</strong></td>
+<td>13,100 gallons * number of bedrooms</td>
+<td>$690 per dwelling unit; outdoor area requires a separate tap unless under 30,000 gallons, in which case will include $0.365 per sq ft of lot</td>
+<td>$3,230/dwelling unit</td>
+<td>Varies per lot size but basic calculation includes (gross sq ft) * ($0.276 per sq ft) * (runoff coefficient)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Irrigation Fee Summary</strong></p>
+<p>&nbsp;</p>
+<table class="sc-responsive-table">
+<thead>
+<tr>
+<th id="table_heading_0" style="">Meter Size&nbsp;</th>
+<th>Water PIF&nbsp;</th>
+<th>Stormwater PIF&nbsp;</th>
+<th>Wastewater PIF</th>
+<th>WSR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>3/4-inch</strong>
+<p>&nbsp;</p>
+</td>
+<td>$17,397
+<p>&nbsp;</p>
+</td>
+<td>Not applicable &ndash; Irrigation taps are not subject to stormwater fees</td>
+<td>Not applicable &ndash; Irrigation taps are not subject to wastewater fees</td>
+<td>See <a href="https://library.municode.com/co/fort_collins/codes/municipal_code?nodeId=CH26UT_ARTIIIWA_DIV5WARI_S26-149WASUREWSNOSE">City Code Section 26-149</a> for landscape types and water requirements</td>
+</tr>
+<tr>
+<td><strong>1-inch</strong></td>
+<td>$39,754</td>
+<td>Not applicable &ndash; Irrigation taps are not subject to stormwater fees</td>
+<td>Not applicable &ndash; Irrigation taps are not subject to wastewater fees</td>
+<td>See&nbsp;<a href="https://library.municode.com/co/fort_collins/codes/municipal_code?nodeId=CH26UT_ARTIIIWA_DIV5WARI_S26-149WASUREWSNOSE">City Code Section 26-149</a>&nbsp;for landscape types and water requirements</td>
+</tr>
+<tr>
+<td headers="table_heading_0"><strong>1.5-inch</strong></td>
+<td headers="table_heading_1">$98,872<br />
+&nbsp;</td>
+<td headers="table_heading_1">Not applicable &ndash; Irrigation taps are not subject to stormwater fees</td>
+<td headers="table_heading_1">Not applicable &ndash; Irrigation taps are not subject to wastewater fees</td>
+<td headers="table_heading_1">See&nbsp;<a href="https://library.municode.com/co/fort_collins/codes/municipal_code?nodeId=CH26UT_ARTIIIWA_DIV5WARI_S26-149WASUREWSNOSE">City Code Section 26-149</a>&nbsp;for landscape types and water requirements</td>
+</tr>
+<tr>
+<td headers="table_heading_0"><strong>2-inch</strong></td>
+<td headers="table_heading_1">$151,109</td>
+<td headers="table_heading_1">Not applicable &ndash; Irrigation taps are not subject to stormwater fees<br /></td>
+<td headers="table_heading_1">Not applicable &ndash; Irrigation taps are not subject to wastewater fees</td>
+<td headers="table_heading_1">See&nbsp;<a href="https://library.municode.com/co/fort_collins/codes/municipal_code?nodeId=CH26UT_ARTIIIWA_DIV5WARI_S26-149WASUREWSNOSE">City Code Section 26-149</a>&nbsp;for landscape types and water requirements</td>
+</tr>
+<tr>
+<td headers="table_heading_0"><strong>3- and 4-inch</strong></td>
+<td headers="table_heading_1">Based/dependent on peak day demand multiplied by $6.54 per gallon</td>
+<td headers="table_heading_1">Not applicable &ndash; Irrigation taps are not subject to stormwater fees</td>
+<td headers="table_heading_1">Not applicable &ndash; Irrigation taps are not subject to wastewater fees</td>
+<td headers="table_heading_1">See&nbsp;<a href="https://library.municode.com/co/fort_collins/codes/municipal_code?nodeId=CH26UT_ARTIIIWA_DIV5WARI_S26-149WASUREWSNOSE">City Code Section 26-149</a>&nbsp;for landscape types and water requirements</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p><strong>Notes</strong></p>
+<ul>
+<li>Separate irrigation meters are required for multi-family and non-residential properties using 30,000+ gallons per year.</li>
+<li>Under <a href="https://library.municode.com/co/fort_collins/codes/municipal_code?nodeId=CH26UT_ARTIIIWA_DIV4FECH_S26-120WAPLINFE">City Code Section 26-120</a> temporary irrigation taps are sometimes permissible as a source of irrigation water for establishment of new vegetation. For more information contact Utilities Rates and Fees at&nbsp;<a href="mailto:UtilityFees@fortcollins.gov">utilityfees@fortcollins.gov</a>&nbsp;or call 970-416-4252.</li>
+</ul>
+<p><strong>Non-Residential Fee Summary</strong></p>
+<table class="sc-responsive-table">
+<thead>
+<tr>
+<th class="sc-responsive-table" id="table_heading_0">Meter Size</th>
+<th id="table_heading_1">Water PIF</th>
+<th id="table_heading_2">Stormwater PIF</th>
+<th id="table_heading_3">Wastewater PIF</th>
+<th id="table_heading_4">WSR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td headers="table_heading_0"><strong>3/4-inch</strong>
+<p>&nbsp;</p>
+</td>
+<td headers="table_heading_1">$5,367</td>
+<td>$12,012 per gross acre</td>
+<td headers="table_heading_3">$9,612</td>
+<td headers="table_heading_4">See&nbsp;<a href="https://library.municode.com/co/fort_collins/codes/municipal_code?nodeId=CH26UT_ARTIIIWA_DIV5WARI_S26-149WASUREWSNOSE">City Code Section 26-149</a>&nbsp;for landscape types and water requirements</td>
+</tr>
+<tr>
+<td headers="table_heading_0"><strong>1-inch</strong></td>
+<td headers="table_heading_1">$13,454</td>
+<td>$12,012 per gross acre</td>
+<td headers="table_heading_3">$21,433</td>
+<td headers="table_heading_4">See&nbsp;<a href="https://library.municode.com/co/fort_collins/codes/municipal_code?nodeId=CH26UT_ARTIIIWA_DIV5WARI_S26-149WASUREWSNOSE">City Code Section 26-149</a>&nbsp;for landscape types and water requirements</td>
+</tr>
+<tr>
+<td headers="table_heading_0"><strong>1.5-inch</strong></td>
+<td headers="table_heading_1">$24,794<br /></td>
+<td headers="table_heading_2">$12,012 per gross acre</td>
+<td headers="table_heading_3">$40,334</td>
+<td headers="table_heading_4">See&nbsp;<a href="https://library.municode.com/co/fort_collins/codes/municipal_code?nodeId=CH26UT_ARTIIIWA_DIV5WARI_S26-149WASUREWSNOSE">City Code Section 26-149</a>&nbsp;for landscape types and water requirements</td>
+</tr>
+<tr>
+<td headers="table_heading_0"><strong>2-inch</strong></td>
+<td headers="table_heading_1">$48,727</td>
+<td headers="table_heading_2">$12,012 per gross acre<br /></td>
+<td headers="table_heading_3">$83,685</td>
+<td headers="table_heading_4">See&nbsp;<a href="https://library.municode.com/co/fort_collins/codes/municipal_code?nodeId=CH26UT_ARTIIIWA_DIV5WARI_S26-149WASUREWSNOSE">City Code Section 26-149</a>&nbsp;for landscape types and water requirements</td>
+</tr>
+<tr>
+<td headers="table_heading_0"><strong>3- and 4-inch</strong></td>
+<td headers="table_heading_1">Based/dependent on peak day demand multiplied by $6.54 per gallon</td>
+<td headers="table_heading_2">$12,012 per gross acre</td>
+<td headers="table_heading_3">Contact Utilities Rates and Fees. Based/Dependent on Peak day demand an effluent quality</td>
+<td headers="table_heading_4">See&nbsp;<a href="https://library.municode.com/co/fort_collins/codes/municipal_code?nodeId=CH26UT_ARTIIIWA_DIV5WARI_S26-149WASUREWSNOSE">City Code Section 26-149</a>&nbsp;for landscape types and water requirements</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Notes</strong></p>
+<ul style="margin-left: 40px;">
+<li>Non-residential developments must satisfy their WSR based on their development type (e.g., office, hotel, restaurant) and the square footage or parcel area of the development. For some development types with high water usage and/or variable use an engineered estimate may be required to calculate the WSR instead. For the full list of development types and water values see <a href="https://library.municode.com/co/fort_collins/codes/municipal_code?nodeId=CH26UT_ARTIIIWA_DIV5WARI_S26-149WASUREWSNOSE" target="_blank">City Code Section 26-149</a>.</li>
+<li>Non-residential developments must satisfy their WSR based on their development type (e.g., office, hotel, restaurant) and the square footage or parcel area of the development. For some development types with high water usage and/or variable use an engineered estimate may be required to calculate the WSR instead. For the full list of development types and water values see <a href="https://library.municode.com/co/fort_collins/codes/municipal_code?nodeId=CH26UT_ARTIIIWA_DIV5WARI_S26-149WASUREWSNOSE" target="_blank" style="font-size: 1em; font-family: inherit;">City Code Section 26-149</a>.&nbsp;</li>
+<li>PIF will vary depending on lot size and allocated common area/right-of-way. Larger size or more intense imperviousness will result in higher fees. See <a href="https://library.municode.com/co/fort_collins/codes/municipal_code?nodeId=CH26UT_ARTVIISTUT_DIV2STFE_S26-512STPLINFEES" target="_blank" style="font-family: inherit; font-size: 1.125em;">City Code Section 26-512</a> for details.&nbsp;</li>
+</ul>
+<p>&nbsp;</p>
+<p>For questions about these fees contact <a href="mailto:UtilityFees@fortcollins.gov">utilityfees@fortcollins.gov</a>&nbsp;or call 970-416-4252.</p>
+</div>
+</div>
+<div class="oc-wysiwyg-container-panel">
+<h3>Poudre Fire Authority Fees</h3>
+<div class="oc-wysiwyg-container-panel-content">
+<p>See: <a href="https://www.poudre-fire.org/programs-services/community-safety-services-fire-prevention/fee-schedule" target="_blank">Poudre Fire Authority Fee Schedule</a>.</p>
+</div>
+</div>
+<div class="oc-wysiwyg-container-panel">
+<h3>Capital Expansion Fees (including Transportation Capital Expansion Fees)</h3>
+<div class="oc-wysiwyg-container-panel-content">
+<p>New developments must pay Capital Expansion Fees (CEFs) to help cover the cost of city services and facilities. This includes Fire, Police, General Government services and parks.</p>
+<p><em>Note: City of Fort Collins Transportation Capital Expansion Fees (TCEF) are included in these fees, to help cover the cost of roads and transportation improvements. The City also collects regional road fees on behalf of Larimer County. These fees are collected at the time of issuance of the building permit.</em></p>
+<p>Key points:</p>
+<ul>
+<li>Fees are based on the type of development (residential, commercial, office, industrial).</li>
+<li>Fees are due before or when the building permit is issued.</li>
+<li>The goal is to make sure new development pays its share of the costs it creates.</li>
+<li>Fees are updated to match the cost of building new facilities and providing services.</li>
+<li>They are not used to fix existing problems&mdash;only to pay for new growth.</li>
+<li>Fees are reviewed regularly and adjusted for inflation and changes in construction costs.</li>
+<li>The City periodically hires outside experts to make sure the fees reflect actual infrastructure costs.</li>
+</ul>
+<p>For questions about Capital Expansion Fees, email <a href="mailto:drcoord@fortcollins.gov">drcoord@fortcollins.gov</a> or call <a href="tel:9702216689">970-221-6689</a>.</p>
+<h3><strong>Fees</strong></h3>
+<p>Fees Effective January 1, 2026<span style="font-size: 1em;">&nbsp;</span></p>
+<h4><a href="https://library.municode.com/co/fort_collins/codes/municipal_code?nodeId=CH7.5FE_ARTIICAEXFE_DIV2PAPUFA_S7.5-28COPACAEXFE" target="_blank">Community Parkland Capital Expansion Fee</a></h4>
+<ul>
+<li><strong>Single Family Detached</strong><br />
+<ul>
+<li>Up to 900 square feet: $2,525</li>
+<li>901-1,300 square feet: $2,744</li>
+<li>1,301-1,800 square feet: $3,061</li>
+<li>1,801-2,400 square feet: $3,342</li>
+<li>2,401-3,000 square feet: $3,590</li>
+<li>3,001-3,600 square feet: $3,782</li>
+<li>Over 3,601 square feet: $3,940</li>
+</ul>
+</li>
+<li><strong>Single Family Attached</strong><br />
+<ul>
+<li>Up to 900 square feet: $2,001</li>
+<li>901-1,300 square feet: $2,308</li>
+<li>1,301-1,800 square feet: $2,754</li>
+<li>1,801-2,400 square feet: $3,150</li>
+<li>2,401-3,000 square feet: $3,499</li>
+<li>3,001-3,600 square feet: $3,770</li>
+<li>Over 3,601 square feet: $3,992</li>
+</ul>
+</li>
+<li><strong>Multifamily or Accessory Dwelling Unit (ADU)</strong><br />
+<ul>
+<li>Up to 750 square feet: $1,611</li>
+<li>751-1,300 square feet: $2,249</li>
+<li>Over 1,301 square feet: $2,494</li>
+</ul>
+</li>
+</ul>
+<h4 style="margin-top: 40px; font-family: Arial, Helvetica, sans-serif;"><a href="https://library.municode.com/co/fort_collins/codes/municipal_code?nodeId=CH7.5FE_ARTIICAEXFE_DIV2PAPUFA_S7.5-29POCAEXFE" target="_blank">Police Capital Expansion Fee</a></h4>
+<ul>
+<li><strong>Single Family Detached</strong><br />
+<ul>
+<li>Up to 900 square feet: $496</li>
+<li>901-1,300 square feet: $581</li>
+<li>1,301-1,800 square feet: $642</li>
+<li>1,801-2,400 square feet: $683</li>
+<li>2,401-3,000 square feet: $743</li>
+<li>3,001-3,600 square feet: $769</li>
+<li>Over 3,601 square feet: $790</li>
+</ul>
+</li>
+<li><strong>Single Family Attached</strong><br />
+<ul>
+<li>Up to 900 square feet: $426</li>
+<li>901-1,300 square feet: $524</li>
+<li>1,301-1,800 square feet: $602</li>
+<li>1,801-2,400 square feet: $658</li>
+<li>2,401-3,000 square feet: $731</li>
+<li>3,001-3,600 square feet: $768</li>
+<li>Over 3,601 square feet: $797</li>
+</ul>
+</li>
+<li><strong>Multifamily or Accessory Dwelling Unit (ADU)</strong><br />
+<ul>
+<li>Up to 750 square feet: $375</li>
+<li>751-1,300 square feet: $516</li>
+<li>Over 1,301 square feet: $567</li>
+</ul>
+</li>
+<li><strong>Nonresidential (per 1,000 square feet)</strong><br />
+<ul>
+<li>Retail/Commercial: $628</li>
+<li>Office and Other Services: $435</li>
+<li>Industrial: $158</li>
+</ul>
+</li>
+</ul>
+<h4 style="margin-top: 40px; font-family: Arial, Helvetica, sans-serif;"><a href="https://library.municode.com/co/fort_collins/codes/municipal_code?nodeId=CH7.5FE_ARTIICAEXFE_DIV2PAPUFA_S7.5-30FIPRCAEXFE" target="_blank">Fire Protection&nbsp;Capital Expansion Fee</a></h4>
+<ul>
+<li><strong>Single Family Detached</strong><br />
+<ul>
+<li>Up to 900 square feet: $817</li>
+<li>901-1,300 square feet: $964</li>
+<li>1,301-1,800 square feet: $1,064</li>
+<li>1,801-2,400 square feet: $1,130</li>
+<li>2,401-3,000 square feet: $1,230</li>
+<li>3,001-3,600 square feet: $1,271</li>
+<li>Over 3,601 square feet: $1,304</li>
+</ul>
+</li>
+<li><strong>Single Family Attached</strong><br />
+<ul>
+<li>Up to 900 square feet: $707</li>
+<li>901-1,300 square feet: $872</li>
+<li>1,301-1,800 square feet: $1,000</li>
+<li>1,801-2,400 square feet: $1,090</li>
+<li>2,401-3,000 square feet: $1,211</li>
+<li>3,001-3,600 square feet: $1,268</li>
+<li>Over 3,601 square feet: $1,315</li>
+</ul>
+</li>
+<li><strong>Multifamily or Accessory Dwelling Unit (ADU)</strong><br />
+<ul>
+<li>Up to 750 square feet: $625</li>
+<li>751-1,300 square feet: $860</li>
+<li>Over 1,301 square feet: $945</li>
+</ul>
+</li>
+<li><strong>Nonresidential (per 1,000 square feet)</strong><br />
+<ul>
+<li>Retail/Commercial: $1,034</li>
+<li>Office and Other Services: $729</li>
+<li>Industrial: $259</li>
+</ul>
+</li>
+</ul>
+<h4 style="margin-top: 40px; font-family: Arial, Helvetica, sans-serif;"><a href="https://library.municode.com/co/fort_collins/codes/municipal_code?nodeId=CH7.5FE_ARTIICAEXFE_DIV2PAPUFA_S7.5-31GOFACAEXFE" target="_blank">Government Facilities&nbsp;Capital Expansion Fee</a></h4>
+<ul>
+<li><strong>Single Family Detached</strong><br />
+<ul>
+<li>Up to 900 square feet: $868</li>
+<li>901-1,300 square feet: $1,028</li>
+<li>1,301-1,800 square feet: $1,137</li>
+<li>1,801-2,400 square feet: $1,204</li>
+<li>2,401-3,000 square feet: $1,313</li>
+<li>3,001-3,600 square feet: $1,354</li>
+<li>Over 3,601 square feet: $1,388</li>
+</ul>
+</li>
+<li><strong>Single Family Attached</strong><br />
+<ul>
+<li>Up to 900 square feet: $755</li>
+<li>901-1,300 square feet: $934</li>
+<li>1,301-1,800 square feet: $1,070</li>
+<li>1,801-2,400 square feet: $1,163</li>
+<li>2,401-3,000 square feet: $1,293</li>
+<li>3,001-3,600 square feet: $1,352</li>
+<li>Over 3,601 square feet: $1,399</li>
+</ul>
+</li>
+<li><strong>Multifamily or Accessory Dwelling Unit (ADU)</strong><br />
+<ul>
+<li>Up to 750 square feet: $671</li>
+<li>751-1,300 square feet: $921</li>
+<li>Over 1,301 square feet: $1,014</li>
+</ul>
+</li>
+<li><strong>Nonresidential (per 1,000 square feet)</strong><br />
+<ul>
+<li>Retail/Commercial: $1,382</li>
+<li>Office and Other Services: $756</li>
+<li>Industrial: $358</li>
+</ul>
+</li>
+</ul>
+<h4 style="margin-top: 40px; font-family: Arial, Helvetica, sans-serif;"><a href="https://library.municode.com/co/fort_collins/codes/municipal_code?nodeId=CH7.5FE_ARTIICAEXFE_DIV2PAPUFA_S7.5-31.5CAEQEXFE" target="_blank">Capital Equipment Expansion Fee</a></h4>
+<ul>
+<li><strong>Single Family Detached</strong><br />
+<ul>
+<li>Up to 900 square feet: $177</li>
+<li>901-1,300 square feet: $210</li>
+<li>1,301-1,800 square feet: $232</li>
+<li>1,801-2,400 square feet: $246</li>
+<li>2,401-3,000 square feet: $267</li>
+<li>3,001-3,600 square feet: $276</li>
+<li>Over 3,601 square feet: $283</li>
+</ul>
+</li>
+<li><strong>Single Family Attached</strong><br />
+<ul>
+<li>Up to 900 square feet: $154</li>
+<li>901-1,300 square feet: $190</li>
+<li>1,301-1,800 square feet: $219</li>
+<li>1,801-2,400 square feet: $237</li>
+<li>2,401-3,000 square feet: $264</li>
+<li>3,001-3,600 square feet: $275</li>
+<li>Over 3,601 square feet: $285</li>
+</ul>
+</li>
+<li><strong>Multifamily or Accessory Dwelling Unit (ADU)</strong><br />
+<ul>
+<li>Up to 750 square feet: $137</li>
+<li>751-1,300 square feet: $188</li>
+<li>Over 1,301 square feet: $207</li>
+</ul>
+</li>
+<li><strong>Nonresidential (per 1,000 square feet)</strong><br />
+<ul>
+<li>Retail/Commercial: $281</li>
+<li>Office and Other Services: $154</li>
+<li>Industrial: $73</li>
+</ul>
+</li>
+</ul>
+<h4 style="margin-top: 40px; font-family: Arial, Helvetica, sans-serif;"><a href="https://library.municode.com/co/fort_collins/codes/municipal_code?nodeId=CH7.5FE_ARTIICAEXFE_DIV2PAPUFA_S7.5-32TREXFE" target="_blank">Transportation Capital Expansion Fees (TCEFs)</a></h4>
+<ul>
+<li><strong>Single Family Detached</strong><br />
+<ul>
+<li>Up to 900 square feet: $3,442</li>
+<li>901-1,300 square feet: $5,727</li>
+<li>1,301-1,800 square feet: $7,344</li>
+<li>1,801-2,400 square feet: $8,660</li>
+<li>2,401-3,000 square feet: $9,560</li>
+<li>3,001-3,600 square feet: $10,044</li>
+<li>Over 3,601 square feet: $10,445</li>
+</ul>
+</li>
+<li><strong>Single Family Attached</strong><br />
+<ul>
+<li>Up to 900 square feet: $2,976</li>
+<li>901-1,300 square feet: $4,771</li>
+<li>1,301-1,800 square feet: $6,086</li>
+<li>1,801-2,400 square feet: $7,260</li>
+<li>2,401-3,000 square feet: $8,244</li>
+<li>3,001-3,600 square feet: $8,813</li>
+<li>Over 3,601 square feet: $9,136</li>
+</ul>
+</li>
+<li><strong>Multifamily or Accessory Dwelling Unit (ADU)</strong><br />
+<ul>
+<li>Up to 750 square feet: $2,023</li>
+<li>751-1,300 square feet: $3,188</li>
+<li>Over 1,301 square feet: $3,995</li>
+</ul>
+</li>
+<li><strong>Nonresidential (per 1,000 square feet)</strong><br />
+<ul>
+<li>Retail/Commercial: $11,068</li>
+<li>Office and Other Services: $7,558</li>
+<li>Industrial: $3,205</li>
+</ul>
+</li>
+</ul>
+<h4 style="margin-top: 40px; font-family: Arial, Helvetica, sans-serif;">Neighborhood Parkland Capital&nbsp;Expansion Fee</h4>
+<ul>
+<li><strong>Single Family Detached</strong><br />
+<ul>
+<li>Up to 900 square feet: $3,699</li>
+<li>901-1,300 square feet: $4,314</li>
+<li>1,301-1,800 square feet: $4,776</li>
+<li>1,801-2,400 square feet: $5,075</li>
+<li>2,401-3,000 square feet: $5,521</li>
+<li>3,001-3,600 square feet: $5,714</li>
+<li>Over 3,601 square feet: $5,872</li>
+</ul>
+</li>
+<li><strong>Single Family Attached</strong><br />
+<ul>
+<li>Up to 900 square feet: $3,174</li>
+<li>901-1,300 square feet: $3,878</li>
+<li>1,301-1,800 square feet: $4,469</li>
+<li>1,801-2,400 square feet: $4,883</li>
+<li>2,401-3,000 square feet: $5,431</li>
+<li>3,001-3,600 square feet: $5,703</li>
+<li>Over 3,601 square feet: $5,924</li>
+</ul>
+</li>
+<li><strong>Multifamily or Accessory Dwelling Unit (ADU)</strong><br />
+<ul>
+<li>Up to 750 square feet: $2,783</li>
+<li>751-1,300 square feet: $3,819</li>
+<li>Over 1,301 square feet: $4,208</li>
+</ul>
+</li>
+</ul>
+<h4 style="margin-top: 40px; font-family: Arial, Helvetica, sans-serif;">Larimer County Regional Transportation Capital&nbsp;Expansion Fees (TCEFs)</h4>
+<p style="margin-top: 40px; font-family: Arial, Helvetica, sans-serif;"><a title="2026-Larimer-County-Transportation-Capital-Expansion-Fees.pdf" href="/files/sharedassets/city/v/1/planning-development-amp-transportation/community-development/building-services/2026-larimer-county-transportation-capital-expansion-fees.pdf" target="_blank" class="styled-button-calltoaction document ext-pdf"><i aria-hidden="true"></i>View detailed fee information about Larimer County TCEFs<span class="file-info">(PDF,&nbsp;4MB)</span></a></p>
+<ul>
+<li><strong>Residential (per dwelling)</strong><br />
+<ul>
+<li>Up to 900 square feet: $268</li>
+<li>901-1,300 square feet: $376</li>
+<li>1,301-1,800 square feet: $457</li>
+<li>1,801-2,400 square feet: $535</li>
+<li>2,401-3,000 square feet: $600</li>
+<li>3,001-3,600 square feet: $653</li>
+<li>Over 3,601 square feet: $698</li>
+</ul>
+</li>
+<li><strong>Nonresidential (per 1,000 square feet of floor area)</strong><br />
+<ul>
+<li>Commercial: $702</li>
+<li>Office and Other Services: $414</li>
+<li>Industrial: $165</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+      
+        
+    </div>
+    
+        <div class="col-xs-12 col-m-4">
+            <div class="side-box consultation-snapshot">
+		
+			<h2 class="side-box-title">
+				Contact Us
+			</h2>
+		
+		
+		<div class="side-box-content">
+			<div class="side-box-section body-content">
+				<h6><strong>Building Services</strong></h6>
+<p><a href="tel:9704162740">970-416-2740</a>&nbsp;|&nbsp;<a href="https://www.fortcollins.gov/Department-Directory/Building-Services" target="_blank">Website</a></p>
+<p><a href="mailto:buildingservices@fortcollins.gov">buildingservices@fortcollins.gov</a></p>
+<h6><strong>Development Review</strong></h6>
+<p><a href="tel:9704162740">970-416-2740</a>&nbsp;|&nbsp;<a href="https://www.fortcollins.gov/Business/Building-and-Development/Development-Review" target="_blank">Website</a></p>
+<p><a href="mailto:drcoord@fortcollins.gov">drcoord@fortcollins.gov</a></p>
+<p><br /></p>
+<h6><strong>Engineering</strong></h6>
+<p><a href="tel:9702216605">970-221-6605</a>&nbsp;|&nbsp;<a href="https://www.fortcollins.gov/Department-Directory/Transportation-Planning-and-Engineering" target="_blank">Website</a></p>
+<p><a href="mailto:engineering@fortcollins.gov">engineering@fortcollins.gov</a><span style="font-size: 1em;">&nbsp;</span></p>
+<h6><strong>Utilities</strong></h6>
+<p><a href="tel:9702122900">970-212-2900</a>&nbsp;|&nbsp;<a href="https://www.fortcollins.gov/Services/Utilities" target="_blank">Website</a></p>
+<h6><strong>Poudre Fire Authority</strong></h6>
+<p><a href="tel:9704162891">970-416-2891</a>&nbsp;|&nbsp;<a href="https://www.poudre-fire.org/about-us/contact-us" target="_blank">Website</a><span style="font-size: 1em;">&nbsp;</span></p>
+
+
+			</div>
+		</div>
+		
+	</div>
+            
+        </div>
+    
+    
+</div><!--normalTemplateEnd-->
+                            
+                            
+                            
+							            </div>
+						            </div>
+					            </div>
+                        
+                            </div>
+                        </div>
+                        <div class="back-to-top-container text-center">
+                            <a href="#body-top" id="back-to-top"><i aria-hidden="true"></i><span class="js-visuallyhidden">Back to top</span></a>
+                        </div>
+                </div>
+            </div><!--groupTemplateEnd-->
+            <footer>
+                
+                    <div class="footer-outer-container footer-first-row">
+                        <div class="footer-container clearfix">
+                            <div class="grid grid-pad">
+                                <div class="col-xs-12 col-s-6 col-m-3 col-lg-3 contact-us" >
+	
+			<h2 class="visuallyhidden">Site Footer</h2>
+			<h3 class="footer-title">Contact Us</h3>
+			
+	<p><a href="https://www.fortcollins.gov/Department-Directory" target="_blank">Department Directory</a></p>
+<p><a href="https://fortcollinsco.citysourced.com/" target="_blank">Access Fort Collins</a></p>
+<p><strong>City Hall:</strong></p>
+<p>300 Laporte Ave.</p>
+<p>Fort Collins, CO 80521</p>
+<p><a href="https://maps.app.goo.gl/vnHeThmoTgEn1CT59" target="_blank">View on Map</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+	<ul class="footer-links with-icons ">   </ul>
+	<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+</div><div class="col-xs-12 col-s-6 col-m-3 col-lg-3 share-connect" >
+	
+			<h2 class="visuallyhidden">Site Footer</h2>
+			<h3 class="footer-title">Social Media</h3>
+			
+	
+	<ul class="footer-links with-icons social-media-links">  <li class="footer-link-facebook">
+	<a href="https://www.facebook.com/fortcollinsgov" target="_blank"  >
+<i aria-hidden="true"></i>Facebook
+</a>
+</li>
+          <li class="footer-link-instagram">
+	<a href="http://instagram.com/fortcollinsgov" target="_blank"  >
+<i aria-hidden="true"></i>Instagram
+</a>
+</li>
+          <li class="footer-link-twitter">
+	<a href="http://www.x.com/fortcollinsgov" target="_blank"  >
+<i aria-hidden="true"></i>X
+</a>
+</li>
+          <li class="footer-link-youtube">
+	<a href="http://www.youtube.com/user/cityoffortcollins" target="_blank"  >
+<i aria-hidden="true"></i>YouTube
+</a>
+</li>
+          <li class="footer-link-linkedin">
+	<a href="https://www.linkedin.com/company/city-of-fort-collins" target="_blank"  >
+<i aria-hidden="true"></i>LinkedIn
+</a>
+</li>
+           </ul>
+	
+</div><div class="col-xs-12 col-s-6 col-m-3 col-lg-3 link-section" >
+	
+			<h2 class="visuallyhidden">Site Footer</h2>
+			<h3 class="footer-title">Stay Informed</h3>
+			
+	
+	<ul class="footer-links with-icons ">  <li class="footer-link-">
+	<a href="https://apps.fcgov.com/subscriptions/" target="_blank"  >
+<i aria-hidden="true"></i>Subscribe to a Newsletter
+</a>
+</li>
+          <li class="footer-link-">
+	<a href="https://ourcity.fcgov.com/" target="_blank"  >
+<i aria-hidden="true"></i>Share Feedback on City Projects
+</a>
+</li>
+          <li class="footer-link-">
+	<a href="https://fortcollinsco.prelive.opencities.com/News-Articles" target="_blank"  >
+<i aria-hidden="true"></i>Check Out the Latest News
+</a>
+</li>
+          <li class="footer-link-">
+	<a href="https://fortcollinsco.prelive.opencities.com/Events-Directory" target="_blank"  >
+<i aria-hidden="true"></i>Browse Upcoming City Events
+</a>
+</li>
+          <li class="footer-link-">
+	
+</li>
+          <li class="footer-link-">
+	<a href="https://www.fortcollins.gov/Uncategorized-Content/Fort-Collins-Overview" target="_blank"  >
+<i aria-hidden="true"></i>Learn More About Fort Collins
+</a>
+</li>
+          <li class="footer-link-">
+	<a href="https://www.fortcollins.gov/Uncategorized-Content/Mission-Vision-Values" target="_self"  >
+<i aria-hidden="true"></i>Our Mission, Vision, Values
+</a>
+</li>
+           </ul>
+	
+</div><div class="col-xs-12 col-s-6 col-m-3 col-lg-3 link-section" >
+	
+			<h2 class="visuallyhidden">Site Footer</h2>
+			<h3 class="footer-title">Community Partners</h3>
+			
+	
+	<ul class="footer-links with-icons ">  <li class="footer-link-">
+	<a href="https://www.larimer.gov/" target="_blank"  >
+<i aria-hidden="true"></i>Larimer County
+</a>
+</li>
+          <li class="footer-link-">
+	<a href="https://www.poudre-fire.org/" target="_blank"  >
+<i aria-hidden="true"></i>Poudre Fire Authority
+</a>
+</li>
+          <li class="footer-link-">
+	<a href="https://poudrelibraries.org/" target="_blank"  >
+<i aria-hidden="true"></i>Poudre Libraries
+</a>
+</li>
+          <li class="footer-link-">
+	<a href="https://www.colostate.edu/" target="_blank"  >
+<i aria-hidden="true"></i>Colorado State University
+</a>
+</li>
+          <li class="footer-link-">
+	<a href="https://www.frontrange.edu/" target="_blank"  >
+<i aria-hidden="true"></i>Front Range Community College
+</a>
+</li>
+          <li class="footer-link-">
+	<a href="https://www.psdschools.org/" target="_blank"  >
+<i aria-hidden="true"></i>Poudre School District
+</a>
+</li>
+           </ul>
+	
+</div>
+                            </div>
+                        </div>
+                    </div>
+                
+                <div class="footer-outer-container footer-second-row">
+                    <div class="footer-container clearfix">
+                        <div class="grid grid-pad footer-secondary-links">
+                            <div class="col-xs-12 col-m-7">
+                                
+                                    <div><a href="https://www.fortcollins.gov/Government/City-Attorney/Disclaimer-and-Copyright" target="_self"  >Disclaimer and Copyright</a>&nbsp;| <a href="https://www.fortcollins.gov/Government/City-Attorney/Privacy" target="_self"  >Privacy</a>&nbsp;| <a href="https://www.fortcollins.gov/Government/City-Attorney/Non-Discrimination-Policies" target="_self"  >Non-Discrimination</a>&nbsp;| <a href="https://www.fortcollins.gov/Government/City-Attorney/Digital-Accessibility" target="_self"  >Accessibility</a>&nbsp;| <a href="https://www.fortcollins.gov/Government/City-Attorney/Social-Media-Disclaimer" target="_blank"  >Social Media</a>&nbsp;| <a href="https://www.fortcollins.gov/Site-Footer/Sitemap" target="_self"  >Sitemap</a></div>
+                                
+                            </div>
+                            <div class="col-xs-12 col-m-5 powered-by">
+                                <div class="right">
+                                    &copy; 2026 City of Fort Collins&nbsp;|&nbsp;<span class="powered-by">Powered by <a href="https://granicus.com/solution/govaccess/opencities/" target="_blank">Granicus</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="/files/oc-resources/3e5cc29d-9607-4410-92de-1fffffd2ed21/JsTextSnippets.js?ocsvclang=en-US" type="text/javascript"></script><script></script>
+    
+    <!--BEGIN QUALTRICS WEBSITE FEEDBACK SNIPPET-->
+<script type='text/javascript'>
+
+(function(){var g=function(g){
+
+this.go=function(){var a=document.createElement("script");a.type="text/javascript";a.src=g;document.body&&document.body.appendChild(a)};
+
+this.start=function(){var t=this;"complete"!==document.readyState?window.addEventListener?window.addEventListener("load",function(){t.go()},!1):window.attachEvent&&window.attachEvent("onload",function(){t.go()}):t.go()};};
+
+try{(new g("https://zn3mm1puta2vhz71f-fortcollinsstrategic.siteintercept.qualtrics.com/SIE/?Q_ZID=ZN_3Mm1putA2VHZ71F")).start()}catch(i){}})();
+
+</script><div id='ZN_3Mm1putA2VHZ71F'><!--DO NOT REMOVE-CONTENTS PLACED HERE--></div>
+<!--END WEBSITE FEEDBACK SNIPPET-->
+
+<!--BEGIN TYLER FOUNDRY CHAT BOT-->
+<script type="module">
+  import { initChatbot } from 'https://cityoffortcollinsco.foundry.tylertechai.com/api/embed/bootstrap.js';
+
+  const chatbot = await initChatbot({
+    baseUrl: "https://cityoffortcollinsco.foundry.tylertechai.com",
+    agentId: "44f614d4-5265-4dd4-a12d-d6d80af91bc1",
+    chatViewType: "floating",
+    chatTitle: "Ask Gander",
+    initialOpen: false
+  });
+
+  window.TylerAI = chatbot;
+</script>
+<!--END TYLER FOUNDRY CHAT BOT-->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EQTZ723D8W"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EQTZ723D8W');
+</script>
+    
+    
+
+<script type="text/javascript">
+//<![CDATA[
+window.__TsmHiddenField = $get('ctl04_seamless_script_manager_TSM');//]]>
+</script>
+</form>
+</body>
+</html>

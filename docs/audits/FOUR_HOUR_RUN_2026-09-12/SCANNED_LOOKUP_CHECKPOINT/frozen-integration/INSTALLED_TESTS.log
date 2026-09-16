@@ -1,0 +1,201 @@
+........................................................................ [ 54%]
+.......................................................FFFFF             [100%]
+=================================== FAILURES ===================================
+_ test_actual_planning_review_identity_scope_and_currency_tamper[authority_id-CO-MUNICIPAL-COLORADO_SPRINGS] _
+
+tmp_path = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-179/test_actual_planning_review_id0')
+field = 'authority_id', value = 'CO-MUNICIPAL-COLORADO_SPRINGS'
+
+    @pytest.mark.parametrize("field,value", [
+        ("authority_id", "CO-MUNICIPAL-COLORADO_SPRINGS"),
+        ("source_id", "el-paso-boh-ehs-fees-sd011"),
+        ("source_pdf", {"path": "source/original.pdf", "sha256": "0" * 64, "size_bytes": 1198750}),
+        ("source_fee_rows", 105),
+        ("currentness", "verified"),
+    ])
+    def test_actual_planning_review_identity_scope_and_currency_tamper(
+        tmp_path: Path, field: str, value: object,
+    ) -> None:
+        """Rehashed mutant review bytes cannot substitute ownership, source, scope or currency."""
+        root = Path(__file__).resolve().parents[1]
+        plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
+        join = next(r for r in plan.reviews if r.record_id == "el-paso-planning-fees-sd011")
+        saved = inventory.Inventory.model_validate_json(
+            (root / inventory.PACKAGE / "inventory.json").read_bytes()
+        )
+        row = next(r for r in saved.sources if r.record_id == join.record_id)
+        data = json.loads((root / join.review.path).read_bytes())
+        data[field] = value
+        for asset in [join.review, join.review_schema]:
+            path = tmp_path / asset.path
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes((root / asset.path).read_bytes())
+        (tmp_path / join.review.path).write_text(json.dumps(data), encoding="utf-8")
+        mutant = join.model_copy(update={"review": inventory.identity(tmp_path, join.review.path)})
+>       with pytest.raises((ValueError, jsonschema.ValidationError)):
+                                        ^^^^^^^^^^
+E       NameError: name 'jsonschema' is not defined
+
+tests/test_manual_review_inventory.py:556: NameError
+_ test_actual_planning_review_identity_scope_and_currency_tamper[source_id-el-paso-boh-ehs-fees-sd011] _
+
+tmp_path = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-179/test_actual_planning_review_id1')
+field = 'source_id', value = 'el-paso-boh-ehs-fees-sd011'
+
+    @pytest.mark.parametrize("field,value", [
+        ("authority_id", "CO-MUNICIPAL-COLORADO_SPRINGS"),
+        ("source_id", "el-paso-boh-ehs-fees-sd011"),
+        ("source_pdf", {"path": "source/original.pdf", "sha256": "0" * 64, "size_bytes": 1198750}),
+        ("source_fee_rows", 105),
+        ("currentness", "verified"),
+    ])
+    def test_actual_planning_review_identity_scope_and_currency_tamper(
+        tmp_path: Path, field: str, value: object,
+    ) -> None:
+        """Rehashed mutant review bytes cannot substitute ownership, source, scope or currency."""
+        root = Path(__file__).resolve().parents[1]
+        plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
+        join = next(r for r in plan.reviews if r.record_id == "el-paso-planning-fees-sd011")
+        saved = inventory.Inventory.model_validate_json(
+            (root / inventory.PACKAGE / "inventory.json").read_bytes()
+        )
+        row = next(r for r in saved.sources if r.record_id == join.record_id)
+        data = json.loads((root / join.review.path).read_bytes())
+        data[field] = value
+        for asset in [join.review, join.review_schema]:
+            path = tmp_path / asset.path
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes((root / asset.path).read_bytes())
+        (tmp_path / join.review.path).write_text(json.dumps(data), encoding="utf-8")
+        mutant = join.model_copy(update={"review": inventory.identity(tmp_path, join.review.path)})
+>       with pytest.raises((ValueError, jsonschema.ValidationError)):
+                                        ^^^^^^^^^^
+E       NameError: name 'jsonschema' is not defined
+
+tests/test_manual_review_inventory.py:556: NameError
+_ test_actual_planning_review_identity_scope_and_currency_tamper[source_pdf-value2] _
+
+tmp_path = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-179/test_actual_planning_review_id2')
+field = 'source_pdf'
+value = {'path': 'source/original.pdf', 'sha256': '0000000000000000000000000000000000000000000000000000000000000000', 'size_bytes': 1198750}
+
+    @pytest.mark.parametrize("field,value", [
+        ("authority_id", "CO-MUNICIPAL-COLORADO_SPRINGS"),
+        ("source_id", "el-paso-boh-ehs-fees-sd011"),
+        ("source_pdf", {"path": "source/original.pdf", "sha256": "0" * 64, "size_bytes": 1198750}),
+        ("source_fee_rows", 105),
+        ("currentness", "verified"),
+    ])
+    def test_actual_planning_review_identity_scope_and_currency_tamper(
+        tmp_path: Path, field: str, value: object,
+    ) -> None:
+        """Rehashed mutant review bytes cannot substitute ownership, source, scope or currency."""
+        root = Path(__file__).resolve().parents[1]
+        plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
+        join = next(r for r in plan.reviews if r.record_id == "el-paso-planning-fees-sd011")
+        saved = inventory.Inventory.model_validate_json(
+            (root / inventory.PACKAGE / "inventory.json").read_bytes()
+        )
+        row = next(r for r in saved.sources if r.record_id == join.record_id)
+        data = json.loads((root / join.review.path).read_bytes())
+        data[field] = value
+        for asset in [join.review, join.review_schema]:
+            path = tmp_path / asset.path
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes((root / asset.path).read_bytes())
+        (tmp_path / join.review.path).write_text(json.dumps(data), encoding="utf-8")
+        mutant = join.model_copy(update={"review": inventory.identity(tmp_path, join.review.path)})
+>       with pytest.raises((ValueError, jsonschema.ValidationError)):
+                                        ^^^^^^^^^^
+E       NameError: name 'jsonschema' is not defined
+
+tests/test_manual_review_inventory.py:556: NameError
+_ test_actual_planning_review_identity_scope_and_currency_tamper[source_fee_rows-105] _
+
+tmp_path = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-179/test_actual_planning_review_id3')
+field = 'source_fee_rows', value = 105
+
+    @pytest.mark.parametrize("field,value", [
+        ("authority_id", "CO-MUNICIPAL-COLORADO_SPRINGS"),
+        ("source_id", "el-paso-boh-ehs-fees-sd011"),
+        ("source_pdf", {"path": "source/original.pdf", "sha256": "0" * 64, "size_bytes": 1198750}),
+        ("source_fee_rows", 105),
+        ("currentness", "verified"),
+    ])
+    def test_actual_planning_review_identity_scope_and_currency_tamper(
+        tmp_path: Path, field: str, value: object,
+    ) -> None:
+        """Rehashed mutant review bytes cannot substitute ownership, source, scope or currency."""
+        root = Path(__file__).resolve().parents[1]
+        plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
+        join = next(r for r in plan.reviews if r.record_id == "el-paso-planning-fees-sd011")
+        saved = inventory.Inventory.model_validate_json(
+            (root / inventory.PACKAGE / "inventory.json").read_bytes()
+        )
+        row = next(r for r in saved.sources if r.record_id == join.record_id)
+        data = json.loads((root / join.review.path).read_bytes())
+        data[field] = value
+        for asset in [join.review, join.review_schema]:
+            path = tmp_path / asset.path
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes((root / asset.path).read_bytes())
+        (tmp_path / join.review.path).write_text(json.dumps(data), encoding="utf-8")
+        mutant = join.model_copy(update={"review": inventory.identity(tmp_path, join.review.path)})
+>       with pytest.raises((ValueError, jsonschema.ValidationError)):
+                                        ^^^^^^^^^^
+E       NameError: name 'jsonschema' is not defined
+
+tests/test_manual_review_inventory.py:556: NameError
+_ test_actual_planning_review_identity_scope_and_currency_tamper[currentness-verified] _
+
+tmp_path = PosixPath('/private/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/pytest-of-mcoors/pytest-179/test_actual_planning_review_id4')
+field = 'currentness', value = 'verified'
+
+    @pytest.mark.parametrize("field,value", [
+        ("authority_id", "CO-MUNICIPAL-COLORADO_SPRINGS"),
+        ("source_id", "el-paso-boh-ehs-fees-sd011"),
+        ("source_pdf", {"path": "source/original.pdf", "sha256": "0" * 64, "size_bytes": 1198750}),
+        ("source_fee_rows", 105),
+        ("currentness", "verified"),
+    ])
+    def test_actual_planning_review_identity_scope_and_currency_tamper(
+        tmp_path: Path, field: str, value: object,
+    ) -> None:
+        """Rehashed mutant review bytes cannot substitute ownership, source, scope or currency."""
+        root = Path(__file__).resolve().parents[1]
+        plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
+        join = next(r for r in plan.reviews if r.record_id == "el-paso-planning-fees-sd011")
+        saved = inventory.Inventory.model_validate_json(
+            (root / inventory.PACKAGE / "inventory.json").read_bytes()
+        )
+        row = next(r for r in saved.sources if r.record_id == join.record_id)
+        data = json.loads((root / join.review.path).read_bytes())
+        data[field] = value
+        for asset in [join.review, join.review_schema]:
+            path = tmp_path / asset.path
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes((root / asset.path).read_bytes())
+        (tmp_path / join.review.path).write_text(json.dumps(data), encoding="utf-8")
+        mutant = join.model_copy(update={"review": inventory.identity(tmp_path, join.review.path)})
+>       with pytest.raises((ValueError, jsonschema.ValidationError)):
+                                        ^^^^^^^^^^
+E       NameError: name 'jsonschema' is not defined
+
+tests/test_manual_review_inventory.py:556: NameError
+================================ tests coverage ================================
+_______________ coverage: platform darwin, python 3.14.3-final-0 _______________
+
+Name                                        Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------------------------
+geode/pipeline/manual_review_inventory.py     302      2    100      1    99%   460-461
+scripts/research_scanned_fee_lookup.py        312      3     94      3    99%   263, 293, 494
+---------------------------------------------------------------------------------------
+TOTAL                                         614      5    194      4    99%
+Coverage JSON written to file /private/tmp/el-paso-installed-and-inventory-coverage.json
+=========================== short test summary info ============================
+FAILED tests/test_manual_review_inventory.py::test_actual_planning_review_identity_scope_and_currency_tamper[authority_id-CO-MUNICIPAL-COLORADO_SPRINGS]
+FAILED tests/test_manual_review_inventory.py::test_actual_planning_review_identity_scope_and_currency_tamper[source_id-el-paso-boh-ehs-fees-sd011]
+FAILED tests/test_manual_review_inventory.py::test_actual_planning_review_identity_scope_and_currency_tamper[source_pdf-value2]
+FAILED tests/test_manual_review_inventory.py::test_actual_planning_review_identity_scope_and_currency_tamper[source_fee_rows-105]
+FAILED tests/test_manual_review_inventory.py::test_actual_planning_review_identity_scope_and_currency_tamper[currentness-verified]
+5 failed, 127 passed in 28.58s

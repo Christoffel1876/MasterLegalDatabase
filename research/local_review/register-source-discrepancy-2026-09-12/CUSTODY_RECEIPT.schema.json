@@ -1,0 +1,325 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An ordinary file inside this closed package.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "maximum": 50000000,
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Copy": {
+      "additionalProperties": false,
+      "description": "An exact copy with an original path retained only as a custody claim.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "maximum": 50000000,
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        },
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes",
+        "original_path"
+      ],
+      "title": "Copy",
+      "type": "object"
+    },
+    "Exclusion": {
+      "additionalProperties": false,
+      "description": "A private file omitted from this explicitly incomplete export.",
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "original_relative_path": {
+          "title": "Original Relative Path",
+          "type": "string"
+        },
+        "original_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Original Sha256",
+          "type": "string"
+        },
+        "original_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Original Bytes",
+          "type": "integer"
+        },
+        "would_be_package_path": {
+          "title": "Would Be Package Path",
+          "type": "string"
+        },
+        "public_derivative": {
+          "$ref": "#/$defs/Asset"
+        },
+        "removed_field_names": {
+          "items": {
+            "const": "set-cookie",
+            "type": "string"
+          },
+          "maxItems": 1,
+          "minItems": 1,
+          "title": "Removed Field Names",
+          "type": "array"
+        },
+        "checked_at": {
+          "format": "date-time",
+          "title": "Checked At",
+          "type": "string"
+        },
+        "local_exact_derivative_replay": {
+          "const": true,
+          "title": "Local Exact Derivative Replay",
+          "type": "boolean"
+        },
+        "procedure": {
+          "const": "remove named sensitive fields and folded continuations; keep other bytes",
+          "title": "Procedure",
+          "type": "string"
+        },
+        "portable_raw_replay": {
+          "const": false,
+          "title": "Portable Raw Replay",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "original_path",
+        "original_relative_path",
+        "original_sha256",
+        "original_bytes",
+        "would_be_package_path",
+        "public_derivative",
+        "removed_field_names",
+        "checked_at",
+        "local_exact_derivative_replay",
+        "procedure",
+        "portable_raw_replay"
+      ],
+      "title": "Exclusion",
+      "type": "object"
+    },
+    "PassiveView": {
+      "additionalProperties": false,
+      "description": "An escaped byte-faithful text display with active source markup disabled.",
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/Asset"
+        },
+        "view": {
+          "$ref": "#/$defs/Asset"
+        },
+        "encoding": {
+          "const": "iso-8859-1",
+          "title": "Encoding",
+          "type": "string"
+        },
+        "method": {
+          "const": "HTML-escape entire decoded original inside pre; restrictive CSP",
+          "title": "Method",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source",
+        "view",
+        "encoding",
+        "method"
+      ],
+      "title": "PassiveView",
+      "type": "object"
+    },
+    "Subset": {
+      "additionalProperties": false,
+      "description": "A frozen selection, not a replacement for the complete original packet.",
+      "properties": {
+        "original_root": {
+          "title": "Original Root",
+          "type": "string"
+        },
+        "package_prefix": {
+          "title": "Package Prefix",
+          "type": "string"
+        },
+        "original_file_count": {
+          "exclusiveMinimum": 0,
+          "title": "Original File Count",
+          "type": "integer"
+        },
+        "copied_file_count": {
+          "exclusiveMinimum": 0,
+          "title": "Copied File Count",
+          "type": "integer"
+        },
+        "excluded_file_count": {
+          "exclusiveMinimum": 0,
+          "title": "Excluded File Count",
+          "type": "integer"
+        },
+        "original_complete_manifest_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Original Complete Manifest Sha256"
+        },
+        "complete_original_packet_exported": {
+          "const": false,
+          "title": "Complete Original Packet Exported",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "original_root",
+        "package_prefix",
+        "original_file_count",
+        "copied_file_count",
+        "excluded_file_count",
+        "original_complete_manifest_sha256",
+        "complete_original_packet_exported"
+      ],
+      "title": "Subset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Qualified preservation of source evidence, without a notice status decision.",
+  "properties": {
+    "packaged_at": {
+      "format": "date-time",
+      "title": "Packaged At",
+      "type": "string"
+    },
+    "status": {
+      "const": "public_subset_source_discrepancy_preserved_legal_status_unresolved",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "new_network_requests": {
+      "const": 0,
+      "title": "New Network Requests",
+      "type": "integer"
+    },
+    "canonical_notice_mutations": {
+      "const": false,
+      "title": "Canonical Notice Mutations",
+      "type": "boolean"
+    },
+    "source_subsets": {
+      "items": {
+        "$ref": "#/$defs/Subset"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Source Subsets",
+      "type": "array"
+    },
+    "copies": {
+      "items": {
+        "$ref": "#/$defs/Copy"
+      },
+      "maxItems": 115,
+      "minItems": 115,
+      "title": "Copies",
+      "type": "array"
+    },
+    "exclusions": {
+      "items": {
+        "$ref": "#/$defs/Exclusion"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Exclusions",
+      "type": "array"
+    },
+    "passive_views": {
+      "items": {
+        "$ref": "#/$defs/PassiveView"
+      },
+      "maxItems": 6,
+      "minItems": 6,
+      "title": "Passive Views",
+      "type": "array"
+    },
+    "local_selected_payload_scan": {
+      "const": "no omitted header value found in selected payloads",
+      "title": "Local Selected Payload Scan",
+      "type": "string"
+    },
+    "scan_scope": {
+      "title": "Scan Scope",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 5,
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "packaged_at",
+    "status",
+    "legal_currentness",
+    "new_network_requests",
+    "canonical_notice_mutations",
+    "source_subsets",
+    "copies",
+    "exclusions",
+    "passive_views",
+    "local_selected_payload_scan",
+    "scan_scope",
+    "limitations"
+  ],
+  "title": "Custody",
+  "type": "object"
+}

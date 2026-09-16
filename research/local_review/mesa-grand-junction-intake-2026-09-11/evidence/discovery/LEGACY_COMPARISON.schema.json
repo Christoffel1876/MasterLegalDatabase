@@ -1,0 +1,295 @@
+{
+  "$defs": {
+    "Basis": {
+      "additionalProperties": false,
+      "description": "Identify a retained catalog anchor or pinned registry row.",
+      "properties": {
+        "event_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Event Id"
+        },
+        "input_source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Source Ids",
+          "type": "array"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "input_source_ids",
+        "label",
+        "note"
+      ],
+      "title": "Basis",
+      "type": "object"
+    },
+    "Legacy": {
+      "additionalProperties": false,
+      "description": "Separate exact attempted URLs from parent-catalog association.",
+      "properties": {
+        "requested_url_matches": {
+          "minimum": 0,
+          "title": "Requested Url Matches",
+          "type": "integer"
+        },
+        "parent_source_url_matches": {
+          "minimum": 0,
+          "title": "Parent Source Url Matches",
+          "type": "integer"
+        },
+        "requested_match_source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Requested Match Source Ids",
+          "type": "array"
+        },
+        "parent_match_source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Parent Match Source Ids",
+          "type": "array"
+        },
+        "known_digests_at_requested_url": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Known Digests At Requested Url",
+          "type": "array"
+        },
+        "preserved_digest_equal_records": {
+          "minimum": 0,
+          "title": "Preserved Digest Equal Records",
+          "type": "integer"
+        },
+        "preserved_digest_equal_source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Preserved Digest Equal Source Ids",
+          "type": "array"
+        },
+        "interpretation": {
+          "title": "Interpretation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "requested_url_matches",
+        "parent_source_url_matches",
+        "requested_match_source_ids",
+        "parent_match_source_ids",
+        "known_digests_at_requested_url",
+        "preserved_digest_equal_records",
+        "preserved_digest_equal_source_ids",
+        "interpretation"
+      ],
+      "title": "Legacy",
+      "type": "object"
+    },
+    "Priority": {
+      "additionalProperties": false,
+      "description": "One source resource, never an assertion of a complete authority corpus.",
+      "properties": {
+        "priority_id": {
+          "title": "Priority Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "enum": [
+            "CO-COUNTY-MESA",
+            "CO-MUNICIPAL-GRAND_JUNCTION"
+          ],
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "categories": {
+          "items": {
+            "enum": [
+              "land_use_zoning",
+              "building_fire",
+              "fees",
+              "adopted_changes"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Categories",
+          "type": "array"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "acquisition_status": {
+          "enum": [
+            "source_preserved",
+            "linked_unopened",
+            "redirect_only"
+          ],
+          "title": "Acquisition Status",
+          "type": "string"
+        },
+        "source_event_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Event Id"
+        },
+        "unfollowed_redirect_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unfollowed Redirect Url"
+        },
+        "basis": {
+          "items": {
+            "$ref": "#/$defs/Basis"
+          },
+          "minItems": 1,
+          "title": "Basis",
+          "type": "array"
+        },
+        "existing_registry_source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Existing Registry Source Ids",
+          "type": "array"
+        },
+        "legacy": {
+          "$ref": "#/$defs/Legacy"
+        },
+        "date_and_scope_notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Date And Scope Notes",
+          "type": "array"
+        },
+        "gaps": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Gaps",
+          "type": "array"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "priority_id",
+        "authority_id",
+        "categories",
+        "title",
+        "url",
+        "role",
+        "acquisition_status",
+        "source_event_id",
+        "basis",
+        "existing_registry_source_ids",
+        "legacy",
+        "date_and_scope_notes",
+        "gaps"
+      ],
+      "title": "Priority",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "input_sha256": {
+      "title": "Input Sha256",
+      "type": "string"
+    },
+    "input_lines": {
+      "title": "Input Lines",
+      "type": "integer"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "priorities": {
+      "items": {
+        "$ref": "#/$defs/Priority"
+      },
+      "title": "Priorities",
+      "type": "array"
+    },
+    "manual_manifest_path": {
+      "title": "Manual Manifest Path",
+      "type": "string"
+    },
+    "manual_manifest_sha256": {
+      "title": "Manual Manifest Sha256",
+      "type": "string"
+    },
+    "manual_manifest_rows": {
+      "title": "Manual Manifest Rows",
+      "type": "integer"
+    },
+    "manual_pdf_digest_matches": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Manual Pdf Digest Matches",
+      "type": "object"
+    }
+  },
+  "required": [
+    "input_sha256",
+    "input_lines",
+    "generated_at",
+    "priorities",
+    "manual_manifest_path",
+    "manual_manifest_sha256",
+    "manual_manifest_rows",
+    "manual_pdf_digest_matches"
+  ],
+  "title": "Compare",
+  "type": "object"
+}

@@ -1,0 +1,59 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "One local immutable byte identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Closed audit package, including the untouched delivery and assignment snapshots.",
+  "properties": {
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "status": {
+      "const": "frozen_offline_audit",
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "created_at",
+    "files",
+    "status"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

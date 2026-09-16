@@ -1,0 +1,116 @@
+{
+  "$defs": {
+    "Artifact": {
+      "additionalProperties": false,
+      "description": "Identify immutable local bytes within the selected repository.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Artifact",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Allow one exact schema-backed review and its recorded, bounded scope.",
+  "properties": {
+    "record_id": {
+      "title": "Record Id",
+      "type": "string"
+    },
+    "review": {
+      "$ref": "#/$defs/Artifact"
+    },
+    "review_schema": {
+      "$ref": "#/$defs/Artifact"
+    },
+    "source_sha_pointer": {
+      "title": "Source Sha Pointer",
+      "type": "string"
+    },
+    "source_id_pointer": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Source Id Pointer"
+    },
+    "expected_review_source_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expected Review Source Id"
+    },
+    "authority_pointer": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Authority Pointer"
+    },
+    "scope_pointers": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Scope Pointers",
+      "type": "array"
+    },
+    "limitation_pointers": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Limitation Pointers",
+      "type": "array"
+    },
+    "note": {
+      "title": "Note",
+      "type": "string"
+    }
+  },
+  "required": [
+    "record_id",
+    "review",
+    "review_schema",
+    "source_sha_pointer",
+    "scope_pointers",
+    "limitation_pointers",
+    "note"
+  ],
+  "title": "ReviewJoin",
+  "type": "object"
+}

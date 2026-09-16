@@ -1,0 +1,2 @@
+Initial post-install CLI --verify was rejected by argparse; files had already been installed. No install was repeated. Corrected command: ['/private/tmp/geode-status-venv/bin/python', '-B', '-m', 'geode.pipeline.manual_review_inventory', '--root', '/Users/mcoors/Documents/Project Geode/MasterLegalDatabase', '--check']
+Started 2026-09-13T01:44:03.020413+00:00; completed 2026-09-13T01:44:04.140451+00:00; exit0. Original verify.stdout.txt and verify.stderr.txt are preserved.

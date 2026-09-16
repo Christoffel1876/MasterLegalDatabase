@@ -4,14 +4,20 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from geode.pipeline.automated_county_review import review_county_candidates
 from geode.utils.file_io import atomic_write_jsonl, iter_jsonl
+from tests.ownership_support import ownership_policy
 
 
 HASH = "a" * 64
 
 
-def test_automated_review_promotes_only_source_grounded_actor(tmp_path: Path) -> None:
+@pytest.mark.parametrize("retired_source", [False, True])
+def test_automated_review_promotes_only_source_grounded_actor(
+    tmp_path: Path, retired_source: bool
+) -> None:
     """A clear, source-grounded obligation is promoted automatically."""
 
     source = tmp_path / "source.txt"
@@ -26,6 +32,8 @@ def test_automated_review_promotes_only_source_grounded_actor(tmp_path: Path) ->
         "tags": ["county_codes"],
         "last_updated": "2026-07-15T00:00:00Z",
     }
+    if retired_source:
+        parent_row["source_id"] = "county_boulder_code"
     candidate = {
         "entity_type": "rule_unit",
         "id": f"{parent}_RU_0001",
@@ -69,6 +77,17 @@ def test_automated_review_promotes_only_source_grounded_actor(tmp_path: Path) ->
     atomic_write_jsonl(tmp_path / "08_County_Authorities" / "_meta" / "local_rule_units.jsonl", [], tmp_path)
 
     summary = review_county_candidates(tmp_path, apply=True)
+    if retired_source:
+        assert summary["auto_approved"] == 0
+        assert summary["applied"] == 0
+        result = next(iter_jsonl(
+            tmp_path / "_CONTROL_PLANE" / "COUNTY_SEMANTIC_AUTOMATED_REVIEW.jsonl"
+        ))
+        assert any("retired source ownership" in reason for reason in result["hard_failures"])
+        assert not list(iter_jsonl(
+            tmp_path / "08_County_Authorities" / "_meta" / "local_rule_units.jsonl"
+        ))
+        return
     assert summary["auto_approved"] == 1
     promoted = next(iter_jsonl(tmp_path / "08_County_Authorities" / "_meta" / "local_rule_units.jsonl"))
 

@@ -1,0 +1,46 @@
+{
+  "prepared_at": "2026-09-13T01:35:53.296343Z",
+  "status": "DESIGN_PREPARATION_NOT_INSTALLED_OR_EXECUTED",
+  "existing_code": [
+    {
+      "path": "geode/pipeline/manual_source_watch.py",
+      "sha256": "e1958b886a8b164b0cc4e7a890fa70c47679fdb5318c33423ac45254f60f06ea",
+      "size_bytes": 41311
+    },
+    {
+      "path": "geode/pipeline/manual_watch_http.py",
+      "sha256": "c935ee6d74843e9214f27c5fef82d4470ec3c2b55ea5001eade594cc6a8de2ae",
+      "size_bytes": 31734
+    },
+    {
+      "path": "config/manual_source_watch.json",
+      "sha256": "91b4c46f7121de66d70b353405900f9d1ed3a3247718a9471ad2f1a9afa6dabb",
+      "size_bytes": 6483
+    }
+  ],
+  "pairs": {
+    "county-fees-v1": [
+      "arapahoe-planning-fees-sd002-14",
+      "weld-ehs-fees-2026-atlas-directed"
+    ],
+    "western-fees-v1": [
+      "grand-junction-fire-fees-atlas-directed",
+      "mesa-building-fees-exhibit-a-atlas-directed"
+    ],
+    "greeley-fees-v1": [
+      "greeley-building-fees-sd008-06",
+      "greeley-development-impact-fee-memo-sd008-07"
+    ]
+  },
+  "source_baseline_bytes": 2191486,
+  "source_pages": 16,
+  "public_requests": 0,
+  "production_writes": 0,
+  "notes": [
+    "Arapahoe prior HTTP request start is null; receipt observation time is not invented as start.",
+    "Greeley later reacquisition does not rewrite earlier received_review_package/null raw URLs or acquisition claims.",
+    "Exact parent-link authority differs by source; no new edition discovery or current-law conclusion.",
+    "Original Springs code/config/helper and saved-run bytes remain unchanged. The approved successor is an ordinary separately versioned module with explicit policy; the earlier private-helper option is superseded and retained only in the design preimage."
+  ],
+  "implementation_decision": "Ordinary separately versioned manual_watch_http_v2.py with explicit five-host transport policy; exact six-source catalog and three fixed pair selections remain additional admission gates. Original Springs helper/adapter/config retained byte-identically for saved-run replay."
+}

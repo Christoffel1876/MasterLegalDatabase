@@ -1,0 +1,88 @@
+{
+  "assignment_id": "EB-PDF-011",
+  "source_id": "larimer-fee-increase-memo-sd004-lc-09",
+  "reviewer": "Ebenezer (Grok Bot)",
+  "pass": "PASS2",
+  "status": "completed_pending_atlas_verification",
+  "legal_currentness": "not_verified",
+  "candidate_status": "machine_native_text_unreviewed",
+  "candidate_engine": "PyMuPDF native text (NOT OCR)",
+  "utc_pass2_start": "2026-09-11T18:43:43Z",
+  "utc_pass2_end": "2026-09-11T18:46:50Z",
+  "expected_pages": 1,
+  "pages_compared": 1,
+  "pages_compared_list": [
+    "page-0001.png"
+  ],
+  "coverage": {
+    "pass1_pages": 1,
+    "pass2_pages": 1,
+    "all_pages_compared": true,
+    "stop_after": "011"
+  },
+  "finding_counts": {
+    "critical": 0,
+    "minor": 3,
+    "unresolved": 1
+  },
+  "top_findings_summary": [
+    {
+      "id": "EB011-P2-001",
+      "severity": "minor",
+      "error_type": "whitespace/spacing",
+      "summary": "Wordmark has double ASCII spaces around '|' vs visual single space each side (native tracking artifact); tokens otherwise match"
+    },
+    {
+      "id": "EB011-P2-002",
+      "severity": "minor",
+      "error_type": "whitespace",
+      "summary": "Trailing spaces on most candidate lines including October date line"
+    },
+    {
+      "id": "EB011-P2-003",
+      "severity": "minor",
+      "error_type": "layout_not_in_text",
+      "summary": "Teal bar/rule/letterhead color and heading underlines absent from plain-text candidate (expected)"
+    },
+    {
+      "id": "EB011-P2-U001",
+      "severity": "unresolved",
+      "error_type": "unicode_uncertainty",
+      "summary": "Director's/year's apostrophe code point not certifiable from raster; candidate U+2019 retained"
+    }
+  ],
+  "unresolved_regions": [
+    "Apostrophe exact code points in Director's and year's (EB011-P2-U001); residual only \u2014 wording otherwise resolved"
+  ],
+  "hashes": {
+    "packet_manifest_sha256": "36dcce0e4b4712069e663a7950c1c21ebd2ef31dc6a53321b0a59ba72cc59db4",
+    "original_pdf_sha256": "17a50621a9669c37876bef67cbeeba930d95b0520abc6a210a23bfd7f40b1d19",
+    "page-0001.png": "39b8e679e3709ec002883799412a21bc9bc6b60c6f0998fa44e81704fd8b853f",
+    "candidate.txt": "5d8cbcad2b5c8dd72c8ba4092358607c78041a80457a56e7adac82e52bc1a768",
+    "PASS1_frozen.md": "a4c4a3102cdd29e01402e80df4a35dac13cafcaf2809a26720bf45866cabd09a",
+    "PASS1_FREEZE_RECEIPT.json": "5ce23f28d5f51770f34f50514c200803d67093c946dbd0bed5054032794897f8",
+    "PASS2_REVIEW.md": "e11954f76e8bdb04ba907e117f221881ad14f991e933bd345b96a12e5b351d11"
+  },
+  "integrity_checks": {
+    "candidate_sha256_verified": true,
+    "page_0001_png_sha256_verified": true,
+    "original_pdf_sha256_verified": true,
+    "PASS1_frozen_sha256_verified": true,
+    "PASS1_frozen_edited": false,
+    "PASS1_FREEZE_RECEIPT_sha256_verified": true,
+    "PASS1_FREEZE_RECEIPT_edited": false,
+    "native_evidence_json_opened": false,
+    "caption_mediation_disclosed": true,
+    "prior_candidate_exposure_at_pass1_freeze": "none"
+  },
+  "pass1_freeze": {
+    "utc_start": "2026-09-11T18:41:14Z",
+    "utc_freeze": "2026-09-11T18:42:43Z"
+  },
+  "time_cost": "unknown",
+  "model": "unknown",
+  "deliverables": [
+    "/workspace/geode-011/PASS2_REVIEW.md",
+    "/workspace/geode-011/COMPLETION_RECEIPT.json"
+  ]
+}

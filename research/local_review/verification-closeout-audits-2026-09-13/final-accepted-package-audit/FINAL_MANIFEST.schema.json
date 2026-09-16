@@ -1,0 +1,69 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "const": "FROZEN_READ_ONLY_AUDIT",
+      "title": "Status",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "canonical_mutations": {
+      "const": 0,
+      "default": 0,
+      "title": "Canonical Mutations",
+      "type": "integer"
+    },
+    "source_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "Source Requests",
+      "type": "integer"
+    },
+    "repeated_visual_review": {
+      "const": false,
+      "default": false,
+      "title": "Repeated Visual Review",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "status",
+    "files"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

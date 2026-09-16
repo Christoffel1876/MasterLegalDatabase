@@ -1,0 +1,115 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Pin an evidence file's exact bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Record the later preparation comparison without rewriting the frozen expectations.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "expectations": {
+      "$ref": "#/$defs/Ref"
+    },
+    "preparation_files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Preparation Files",
+      "type": "array"
+    },
+    "status": {
+      "enum": [
+        "no_blocker_in_reviewed_scope",
+        "changes_required",
+        "preparation_not_ready"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "actionable_findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Actionable Findings",
+      "type": "array"
+    },
+    "required_qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Qualifications",
+      "type": "array"
+    },
+    "no_production_write": {
+      "const": true,
+      "default": true,
+      "title": "No Production Write",
+      "type": "boolean"
+    },
+    "no_public_request": {
+      "const": true,
+      "default": true,
+      "title": "No Public Request",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "completed_at",
+    "expectations",
+    "preparation_files",
+    "status",
+    "checks",
+    "actionable_findings",
+    "required_qualifications"
+  ],
+  "title": "FinalReview",
+  "type": "object"
+}

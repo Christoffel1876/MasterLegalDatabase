@@ -1,0 +1,127 @@
+{
+  "$defs": {
+    "Accepted": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "source_directory": {
+          "title": "Source Directory",
+          "type": "string"
+        },
+        "repository_directory": {
+          "title": "Repository Directory",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "files": {
+          "items": {
+            "$ref": "#/$defs/Item"
+          },
+          "title": "Files",
+          "type": "array"
+        },
+        "direct_atlas_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Direct Atlas Pages",
+          "type": "array"
+        },
+        "qualifications": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Qualifications",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "source_directory",
+        "repository_directory",
+        "status",
+        "files",
+        "direct_atlas_pages",
+        "qualifications"
+      ],
+      "title": "Accepted",
+      "type": "object"
+    },
+    "Item": {
+      "additionalProperties": false,
+      "properties": {
+        "source_path": {
+          "title": "Source Path",
+          "type": "string"
+        },
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "source_path",
+        "repository_path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Item",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "copied_at": {
+      "format": "date-time",
+      "title": "Copied At",
+      "type": "string"
+    },
+    "packages": {
+      "items": {
+        "$ref": "#/$defs/Accepted"
+      },
+      "title": "Packages",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "source_candidates_or_old_reviews_modified": {
+      "const": false,
+      "title": "Source Candidates Or Old Reviews Modified",
+      "type": "boolean"
+    },
+    "public_activity": {
+      "const": "none",
+      "title": "Public Activity",
+      "type": "string"
+    }
+  },
+  "required": [
+    "copied_at",
+    "packages",
+    "legal_currentness",
+    "source_candidates_or_old_reviews_modified",
+    "public_activity"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

@@ -1,0 +1,255 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact retained body, derivative or report.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "DateClaim": {
+      "additionalProperties": false,
+      "description": "Keep source wording and date role separate from acquisition or legal effect.",
+      "properties": {
+        "role": {
+          "enum": [
+            "adoption",
+            "effective",
+            "revision",
+            "publication",
+            "posting",
+            "recording",
+            "filename",
+            "unknown"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "printed_text": {
+          "title": "Printed Text",
+          "type": "string"
+        },
+        "evidence_location": {
+          "title": "Evidence Location",
+          "type": "string"
+        },
+        "independently_verified_legal_effect": {
+          "const": false,
+          "default": false,
+          "title": "Independently Verified Legal Effect",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "role",
+        "printed_text",
+        "evidence_location"
+      ],
+      "title": "DateClaim",
+      "type": "object"
+    },
+    "Priority": {
+      "additionalProperties": false,
+      "description": "One exact document or explicitly labeled catalog; do not bundle multiple instruments.",
+      "properties": {
+        "candidate_id": {
+          "pattern": "^SHEXT001-(0[1-9]|1[0-6])$",
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "enum": [
+            "CO-COUNTY-PUEBLO",
+            "CO-COUNTY-FREMONT"
+          ],
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "title_as_observed": {
+          "title": "Title As Observed",
+          "type": "string"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "observed_final_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Observed Final Url"
+        },
+        "role": {
+          "enum": [
+            "adopted_instrument_as_stated",
+            "proposed_instrument",
+            "agenda_attachment",
+            "codified_text",
+            "fee_schedule",
+            "guidance",
+            "form",
+            "catalog",
+            "unknown"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "ownership_evidence": {
+          "title": "Ownership Evidence",
+          "type": "string"
+        },
+        "official_referral_evidence": {
+          "title": "Official Referral Evidence",
+          "type": "string"
+        },
+        "action_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Action Ids",
+          "type": "array"
+        },
+        "categories": {
+          "items": {
+            "enum": [
+              "identity_service_area",
+              "codified_rules",
+              "adopted_changes",
+              "land_use_zoning",
+              "building_fire",
+              "permits_licenses",
+              "fees",
+              "taxes",
+              "health_environment",
+              "roads_utilities",
+              "enforcement_appeals",
+              "policies_guidance"
+            ],
+            "type": "string"
+          },
+          "title": "Categories",
+          "type": "array"
+        },
+        "original_body": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Asset"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "physical_pages": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Physical Pages"
+        },
+        "date_claims": {
+          "items": {
+            "$ref": "#/$defs/DateClaim"
+          },
+          "title": "Date Claims",
+          "type": "array"
+        },
+        "legacy_comparison": {
+          "title": "Legacy Comparison",
+          "type": "string"
+        },
+        "remaining_gaps": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Remaining Gaps",
+          "type": "array"
+        },
+        "review_status": {
+          "const": "pending_intake",
+          "default": "pending_intake",
+          "title": "Review Status",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "authority_id",
+        "title_as_observed",
+        "requested_url",
+        "observed_final_url",
+        "role",
+        "ownership_evidence",
+        "official_referral_evidence",
+        "action_ids",
+        "categories",
+        "original_body",
+        "date_claims",
+        "legacy_comparison",
+        "remaining_gaps"
+      ],
+      "title": "Priority",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Limit the source priority queue independently of the24-category checklist.",
+  "properties": {
+    "assignment_id": {
+      "const": "SH-EXT-001",
+      "default": "SH-EXT-001",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "priorities": {
+      "items": {
+        "$ref": "#/$defs/Priority"
+      },
+      "maxItems": 16,
+      "title": "Priorities",
+      "type": "array"
+    }
+  },
+  "required": [
+    "priorities"
+  ],
+  "title": "Priorities",
+  "type": "object"
+}

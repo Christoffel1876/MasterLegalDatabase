@@ -1,0 +1,77 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "captured_at": {
+      "format": "date-time",
+      "title": "Captured At",
+      "type": "string"
+    },
+    "source_root": {
+      "title": "Source Root",
+      "type": "string"
+    },
+    "frozen_root": {
+      "title": "Frozen Root",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "source_membership_unchanged": {
+      "const": true,
+      "title": "Source Membership Unchanged",
+      "type": "boolean"
+    },
+    "scope_note": {
+      "title": "Scope Note",
+      "type": "string"
+    }
+  },
+  "required": [
+    "captured_at",
+    "source_root",
+    "frozen_root",
+    "files",
+    "public_requests",
+    "source_membership_unchanged",
+    "scope_note"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

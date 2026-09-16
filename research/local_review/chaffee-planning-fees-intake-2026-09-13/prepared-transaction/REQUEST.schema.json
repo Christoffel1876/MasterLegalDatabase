@@ -1,0 +1,103 @@
+{
+  "additionalProperties": false,
+  "description": "Request to preserve one official source artifact received outside automation.",
+  "properties": {
+    "record_id": {
+      "minLength": 1,
+      "title": "Record Id",
+      "type": "string"
+    },
+    "layer_id": {
+      "title": "Layer Id",
+      "type": "string"
+    },
+    "source_file": {
+      "title": "Source File",
+      "type": "string"
+    },
+    "official_source_name": {
+      "minLength": 1,
+      "title": "Official Source Name",
+      "type": "string"
+    },
+    "official_source_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Official Source Url"
+    },
+    "acquisition_method": {
+      "enum": [
+        "official_email",
+        "state_archives_request",
+        "manual_official_download",
+        "public_records_request",
+        "other_official_transfer"
+      ],
+      "title": "Acquisition Method",
+      "type": "string"
+    },
+    "received_from": {
+      "minLength": 1,
+      "title": "Received From",
+      "type": "string"
+    },
+    "reviewer_name": {
+      "minLength": 1,
+      "title": "Reviewer Name",
+      "type": "string"
+    },
+    "reviewer_email": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reviewer Email"
+    },
+    "custody_note": {
+      "minLength": 10,
+      "title": "Custody Note",
+      "type": "string"
+    },
+    "expected_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Expected Sha256"
+    },
+    "allow_duplicate": {
+      "default": false,
+      "title": "Allow Duplicate",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "record_id",
+    "layer_id",
+    "source_file",
+    "official_source_name",
+    "acquisition_method",
+    "received_from",
+    "reviewer_name",
+    "custody_note"
+  ],
+  "title": "ManualSourceIntakeRequest",
+  "type": "object"
+}

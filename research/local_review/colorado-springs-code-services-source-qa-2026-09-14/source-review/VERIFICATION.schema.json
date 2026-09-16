@@ -1,0 +1,111 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "A byte-bound external packet asset or local audit payload.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Run": {
+      "additionalProperties": false,
+      "description": "Actual local validation command and retained result.",
+      "properties": {
+        "argv": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Argv",
+          "type": "array"
+        },
+        "started_at": {
+          "title": "Started At",
+          "type": "string"
+        },
+        "finished_at": {
+          "title": "Finished At",
+          "type": "string"
+        },
+        "exit_code": {
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "output": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "argv",
+        "started_at",
+        "finished_at",
+        "exit_code",
+        "output"
+      ],
+      "title": "Run",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Bounded validation receipt, distinct from source/currentness claims.",
+  "properties": {
+    "status": {
+      "const": "focused_checks_passed_before_seal",
+      "title": "Status",
+      "type": "string"
+    },
+    "qa": {
+      "$ref": "#/$defs/Asset"
+    },
+    "schema_asset": {
+      "$ref": "#/$defs/Asset"
+    },
+    "tests": {
+      "$ref": "#/$defs/Run"
+    },
+    "structural_verification": {
+      "$ref": "#/$defs/Run"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "qa",
+    "schema_asset",
+    "tests",
+    "structural_verification",
+    "scope",
+    "limitations"
+  ],
+  "title": "Validation",
+  "type": "object"
+}

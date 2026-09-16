@@ -1,0 +1,265 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "One ordinary file bound to its exact bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Baseline": {
+      "additionalProperties": false,
+      "description": "Record the unchanged actual repository inputs across read-only validation.",
+      "properties": {
+        "before": {
+          "$ref": "#/$defs/Asset"
+        },
+        "after": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "before",
+        "after"
+      ],
+      "title": "Baseline",
+      "type": "object"
+    },
+    "Invocation": {
+      "additionalProperties": false,
+      "description": "Bind a locally observed command and its exact output streams.",
+      "properties": {
+        "argv": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Argv",
+          "type": "array"
+        },
+        "cwd": {
+          "title": "Cwd",
+          "type": "string"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "completed_at": {
+          "format": "date-time",
+          "title": "Completed At",
+          "type": "string"
+        },
+        "exit_code": {
+          "const": 0,
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "stdout": {
+          "$ref": "#/$defs/Asset"
+        },
+        "stderr": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "argv",
+        "cwd",
+        "started_at",
+        "completed_at",
+        "exit_code",
+        "stdout",
+        "stderr"
+      ],
+      "title": "Invocation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Distinguish synthetic apply tests from actual read-only repository checks.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "status": {
+      "const": "prepared_not_applied",
+      "title": "Status",
+      "type": "string"
+    },
+    "frozen_at": {
+      "format": "date-time",
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "implementation": {
+      "$ref": "#/$defs/Asset"
+    },
+    "tests": {
+      "$ref": "#/$defs/Asset"
+    },
+    "focused_tests": {
+      "$ref": "#/$defs/Invocation"
+    },
+    "tests_passed": {
+      "const": 56,
+      "title": "Tests Passed",
+      "type": "integer"
+    },
+    "test_warnings": {
+      "const": 5,
+      "title": "Test Warnings",
+      "type": "integer"
+    },
+    "coverage": {
+      "$ref": "#/$defs/Asset"
+    },
+    "branch_inclusive_coverage_percent": {
+      "maximum": 100,
+      "minimum": 90,
+      "title": "Branch Inclusive Coverage Percent",
+      "type": "number"
+    },
+    "coverage_scope": {
+      "const": "56 focused tests, including actual read-only two-record preflight",
+      "title": "Coverage Scope",
+      "type": "string"
+    },
+    "actual_dry_run": {
+      "$ref": "#/$defs/Invocation"
+    },
+    "baselines": {
+      "items": {
+        "$ref": "#/$defs/Baseline"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Baselines",
+      "type": "array"
+    },
+    "approved_preparation_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "expected_source_ids": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Expected Source Ids",
+      "type": "array"
+    },
+    "baseline_raw_records": {
+      "const": 59,
+      "title": "Baseline Raw Records",
+      "type": "integer"
+    },
+    "baseline_ledger_records": {
+      "const": 60,
+      "title": "Baseline Ledger Records",
+      "type": "integer"
+    },
+    "expected_raw_after": {
+      "const": 61,
+      "title": "Expected Raw After",
+      "type": "integer"
+    },
+    "expected_ledger_after": {
+      "const": 62,
+      "title": "Expected Ledger After",
+      "type": "integer"
+    },
+    "missing_historical_original": {
+      "const": "MSI-20260707T221329208329Z-EO-2019-007",
+      "title": "Missing Historical Original",
+      "type": "string"
+    },
+    "real_repository_apply_performed": {
+      "const": false,
+      "title": "Real Repository Apply Performed",
+      "type": "boolean"
+    },
+    "real_execution_directory_exists": {
+      "const": false,
+      "title": "Real Execution Directory Exists",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "full_corpus_validation": {
+      "const": "not_run_by_this_subtask",
+      "title": "Full Corpus Validation",
+      "type": "string"
+    },
+    "tested_recovery_scope": {
+      "const": "process_interruption_and_deterministic_replay",
+      "title": "Tested Recovery Scope",
+      "type": "string"
+    },
+    "power_loss_durability_verified": {
+      "const": false,
+      "title": "Power Loss Durability Verified",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "frozen_at",
+    "implementation",
+    "tests",
+    "focused_tests",
+    "tests_passed",
+    "test_warnings",
+    "coverage",
+    "branch_inclusive_coverage_percent",
+    "coverage_scope",
+    "actual_dry_run",
+    "baselines",
+    "approved_preparation_manifest",
+    "expected_source_ids",
+    "baseline_raw_records",
+    "baseline_ledger_records",
+    "expected_raw_after",
+    "expected_ledger_after",
+    "missing_historical_original",
+    "real_repository_apply_performed",
+    "real_execution_directory_exists",
+    "legal_currentness",
+    "answer_safe",
+    "full_corpus_validation",
+    "tested_recovery_scope",
+    "power_loss_durability_verified"
+  ],
+  "title": "Validation",
+  "type": "object"
+}

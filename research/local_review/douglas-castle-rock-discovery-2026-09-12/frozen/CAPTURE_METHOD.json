@@ -1,0 +1,43 @@
+{
+  "recorded_at": "2026-09-12T23:48:20.602319Z",
+  "capture_versions": [
+    {
+      "first_event": "E001",
+      "last_event": "E002",
+      "script": {
+        "path": "preimages/capture.events-001-002.py",
+        "sha256": "1e6aea27f735aa0f08e012585be0a00dc87d3a179b7cf9d1096a031e2a6b1c40",
+        "bytes": 8370
+      },
+      "qualification": "Initial registry hosts; E001 transport DNS failure and E002 authorized route retry of the same exact URL."
+    },
+    {
+      "first_event": "E003",
+      "last_event": "E022",
+      "script": {
+        "path": "preimages/capture.events-003-022.py",
+        "sha256": "15de7936bb8c9ca9af8f941a8d8441f9d8bab44be9262f9876fefa87b0e5e4f2",
+        "bytes": 8391
+      },
+      "qualification": "County government destination added after official Location referral."
+    },
+    {
+      "first_event": "E023",
+      "last_event": "E031",
+      "script": {
+        "path": "capture.py",
+        "sha256": "c6ffc5200657ef757d6a4055a22f8d09d7107358c6f063ff2665a6b0c265e555",
+        "bytes": 8431
+      },
+      "qualification": "Code-provider hosts added only after their exact official referrals. No automatic redirects or subsequent requests."
+    }
+  ],
+  "latest_parent_reported_head": "2ff11035cbf356be341dc72a024017e1f91f5b86",
+  "parent_reported_raw_rows": 59,
+  "parent_reported_ledger_rows": 60,
+  "limits": [
+    "Parent-provided later checkpoint only; no Git commands or committed-blob comparisons performed by this audit.",
+    "Historical BASELINE_RECEIPT remains unchanged. Raw/ledger working files were not claimed as committed under the earlier 6d2d12f observation.",
+    "Helper allowlist edits add observed referral hosts; all events remain separately counted."
+  ]
+}

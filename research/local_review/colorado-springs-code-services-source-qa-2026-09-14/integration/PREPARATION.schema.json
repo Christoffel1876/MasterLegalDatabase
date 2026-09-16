@@ -1,0 +1,111 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact file identity relative to its stated package root.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Preimage receipt captured before any authorized maintained change.",
+  "properties": {
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "repository_claim": {
+      "title": "Repository Claim",
+      "type": "string"
+    },
+    "qa_package_claim": {
+      "title": "Qa Package Claim",
+      "type": "string"
+    },
+    "accepted_qa_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "snapshot_path": {
+      "title": "Snapshot Path",
+      "type": "string"
+    },
+    "before": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Before",
+      "type": "array"
+    },
+    "planned_maintained_targets": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Planned Maintained Targets",
+      "type": "array"
+    },
+    "expected_before": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Expected Before",
+      "type": "array"
+    },
+    "expected_after": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Expected After",
+      "type": "array"
+    },
+    "authorization": {
+      "title": "Authorization",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "source_id",
+    "repository_claim",
+    "qa_package_claim",
+    "accepted_qa_manifest",
+    "snapshot_path",
+    "before",
+    "planned_maintained_targets",
+    "expected_before",
+    "expected_after",
+    "authorization",
+    "legal_currentness"
+  ],
+  "title": "Preparation",
+  "type": "object"
+}

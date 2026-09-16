@@ -1,0 +1,251 @@
+{
+  "$defs": {
+    "Binding": {
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "claimed": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Claimed"
+        },
+        "observed": {
+          "title": "Observed",
+          "type": "string"
+        },
+        "matches": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Matches"
+        },
+        "evidence_paths": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Paths",
+          "type": "array"
+        }
+      },
+      "required": [
+        "label",
+        "claimed",
+        "observed",
+        "matches",
+        "evidence_paths"
+      ],
+      "title": "Binding",
+      "type": "object"
+    },
+    "DocumentAudit": {
+      "additionalProperties": false,
+      "properties": {
+        "assignment": {
+          "enum": [
+            "EB-PDF-025",
+            "EB-PDF-026"
+          ],
+          "title": "Assignment",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "report_directory": {
+          "title": "Report Directory",
+          "type": "string"
+        },
+        "expected_pages": {
+          "const": 6,
+          "title": "Expected Pages",
+          "type": "integer"
+        },
+        "pdf_pages_observed": {
+          "const": 6,
+          "title": "Pdf Pages Observed",
+          "type": "integer"
+        },
+        "bindings": {
+          "items": {
+            "$ref": "#/$defs/Binding"
+          },
+          "title": "Bindings",
+          "type": "array"
+        },
+        "claimed_status": {
+          "title": "Claimed Status",
+          "type": "string"
+        },
+        "declared_method": {
+          "title": "Declared Method",
+          "type": "string"
+        },
+        "declared_critical_count": {
+          "title": "Declared Critical Count",
+          "type": "integer"
+        },
+        "claimed_findings": {
+          "items": {
+            "$ref": "#/$defs/FindingClaim"
+          },
+          "title": "Claimed Findings",
+          "type": "array"
+        },
+        "chronology_claims": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Chronology Claims",
+          "type": "object"
+        },
+        "method_evidence": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Method Evidence",
+          "type": "array"
+        },
+        "unresolved_or_missing_evidence": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Unresolved Or Missing Evidence",
+          "type": "array"
+        },
+        "source_meaning_assessed": {
+          "const": false,
+          "title": "Source Meaning Assessed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "assignment",
+        "source_id",
+        "report_directory",
+        "expected_pages",
+        "pdf_pages_observed",
+        "bindings",
+        "claimed_status",
+        "declared_method",
+        "declared_critical_count",
+        "claimed_findings",
+        "chronology_claims",
+        "method_evidence",
+        "unresolved_or_missing_evidence",
+        "source_meaning_assessed"
+      ],
+      "title": "DocumentAudit",
+      "type": "object"
+    },
+    "FindingClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "finding_id": {
+          "title": "Finding Id",
+          "type": "string"
+        },
+        "claimed_classification": {
+          "title": "Claimed Classification",
+          "type": "string"
+        },
+        "claimed_summary": {
+          "title": "Claimed Summary",
+          "type": "string"
+        },
+        "source_meaning_assessed": {
+          "const": false,
+          "title": "Source Meaning Assessed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "finding_id",
+        "claimed_classification",
+        "claimed_summary",
+        "source_meaning_assessed"
+      ],
+      "title": "FindingClaim",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "audited_at": {
+      "format": "date-time",
+      "title": "Audited At",
+      "type": "string"
+    },
+    "status": {
+      "const": "post_report_custody_checked_substantive_reconciliation_pending",
+      "title": "Status",
+      "type": "string"
+    },
+    "custody_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Custody Sha256",
+      "type": "string"
+    },
+    "documents": {
+      "items": {
+        "$ref": "#/$defs/DocumentAudit"
+      },
+      "title": "Documents",
+      "type": "array"
+    },
+    "shared_limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Shared Limits",
+      "type": "array"
+    },
+    "original_source_qa_changed": {
+      "const": false,
+      "title": "Original Source Qa Changed",
+      "type": "boolean"
+    },
+    "new_visual_review_pages": {
+      "const": 0,
+      "title": "New Visual Review Pages",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "canonical_changes": {
+      "const": 0,
+      "title": "Canonical Changes",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "audited_at",
+    "status",
+    "custody_sha256",
+    "documents",
+    "shared_limits",
+    "original_source_qa_changed",
+    "new_visual_review_pages",
+    "public_requests",
+    "canonical_changes"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

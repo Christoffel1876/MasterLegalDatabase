@@ -1,0 +1,524 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "A byte-bound repository file or historical delivery location.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 1,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "DedupeCheck": {
+      "additionalProperties": false,
+      "description": "Exact size-screened SHA comparison across the complete local raw archive.",
+      "properties": {
+        "scope": {
+          "const": "all ordinary files under repository _RAW_ARCHIVE",
+          "title": "Scope",
+          "type": "string"
+        },
+        "checked_at": {
+          "format": "date-time",
+          "title": "Checked At",
+          "type": "string"
+        },
+        "ordinary_files_size_screened": {
+          "minimum": 1,
+          "title": "Ordinary Files Size Screened",
+          "type": "integer"
+        },
+        "matching_size_files_hashed": {
+          "minimum": 0,
+          "title": "Matching Size Files Hashed",
+          "type": "integer"
+        },
+        "matching_size_bytes_hashed": {
+          "minimum": 0,
+          "title": "Matching Size Bytes Hashed",
+          "type": "integer"
+        },
+        "symlinks_encountered": {
+          "const": 0,
+          "default": 0,
+          "title": "Symlinks Encountered",
+          "type": "integer"
+        },
+        "method": {
+          "const": "size excludes byte equality; every matching-size file SHA256 verified",
+          "title": "Method",
+          "type": "string"
+        },
+        "new_pdf_digests": {
+          "items": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "New Pdf Digests",
+          "type": "array"
+        },
+        "reused_pdf_digests": {
+          "items": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "maxItems": 6,
+          "minItems": 6,
+          "title": "Reused Pdf Digests",
+          "type": "array"
+        },
+        "limit": {
+          "title": "Limit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "scope",
+        "checked_at",
+        "ordinary_files_size_screened",
+        "matching_size_files_hashed",
+        "matching_size_bytes_hashed",
+        "method",
+        "new_pdf_digests",
+        "reused_pdf_digests",
+        "limit"
+      ],
+      "title": "DedupeCheck",
+      "type": "object"
+    },
+    "ManualIntakeArchiveVerification": {
+      "additionalProperties": false,
+      "description": "Distinguish verified archive bytes from retained ledger-only history.",
+      "properties": {
+        "manifest_records": {
+          "minimum": 0,
+          "title": "Manifest Records",
+          "type": "integer"
+        },
+        "verified_intake_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Verified Intake Ids",
+          "type": "array"
+        },
+        "ledger_only_intake_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ledger Only Intake Ids",
+          "type": "array"
+        },
+        "missing_ledger_only_intake_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Ledger Only Intake Ids",
+          "type": "array"
+        },
+        "boundary": {
+          "default": "Hash and size verification establishes local byte identity only. Ledger-only history may lack a local original; custody, acquisition claims, pipeline status, and legal currentness are not promoted.",
+          "title": "Boundary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "manifest_records",
+        "verified_intake_ids",
+        "ledger_only_intake_ids",
+        "missing_ledger_only_intake_ids"
+      ],
+      "title": "ManualIntakeArchiveVerification",
+      "type": "object"
+    },
+    "ManualIntakeReconciliation": {
+      "additionalProperties": false,
+      "description": "Validated preview or result of reconciling the archive into the ledger.",
+      "properties": {
+        "status": {
+          "enum": [
+            "dry_run",
+            "updated",
+            "no_change"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "added_intake_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Added Intake Ids",
+          "type": "array"
+        },
+        "ledger_records_before": {
+          "minimum": 0,
+          "title": "Ledger Records Before",
+          "type": "integer"
+        },
+        "ledger_records_after": {
+          "minimum": 0,
+          "title": "Ledger Records After",
+          "type": "integer"
+        },
+        "report_needs_update": {
+          "title": "Report Needs Update",
+          "type": "boolean"
+        },
+        "report": {
+          "$ref": "#/$defs/ManualSourceIntakeReport"
+        }
+      },
+      "required": [
+        "status",
+        "added_intake_ids",
+        "ledger_records_before",
+        "ledger_records_after",
+        "report_needs_update",
+        "report"
+      ],
+      "title": "ManualIntakeReconciliation",
+      "type": "object"
+    },
+    "ManualSourceIntakeReport": {
+      "additionalProperties": false,
+      "description": "Summary of manual source intake state.",
+      "properties": {
+        "generated_at": {
+          "format": "date-time",
+          "title": "Generated At",
+          "type": "string"
+        },
+        "ledger_path": {
+          "title": "Ledger Path",
+          "type": "string"
+        },
+        "archive_manifest_path": {
+          "title": "Archive Manifest Path",
+          "type": "string"
+        },
+        "records": {
+          "minimum": 0,
+          "title": "Records",
+          "type": "integer"
+        },
+        "pending_pipeline_use": {
+          "minimum": 0,
+          "title": "Pending Pipeline Use",
+          "type": "integer"
+        },
+        "layers": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Layers",
+          "type": "object"
+        },
+        "latest_record_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Latest Record Id"
+        },
+        "acquisition_methods": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Acquisition Methods",
+          "type": "object"
+        },
+        "archive_verification": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ManualIntakeArchiveVerification"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "boundary": {
+          "title": "Boundary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "generated_at",
+        "ledger_path",
+        "archive_manifest_path",
+        "records",
+        "pending_pipeline_use",
+        "boundary"
+      ],
+      "title": "ManualSourceIntakeReport",
+      "type": "object"
+    },
+    "PreservedEvidence": {
+      "additionalProperties": false,
+      "description": "An immutable copy of an earlier audit or supplied provenance artifact.",
+      "properties": {
+        "original": {
+          "$ref": "#/$defs/Asset"
+        },
+        "preserved": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "original",
+        "preserved"
+      ],
+      "title": "PreservedEvidence",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A three-original intake with six exact-byte reuses and unchanged prior custody.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "assignment": {
+      "const": "sherlock007-received-pdf-intake",
+      "title": "Assignment",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "source_authority_id": {
+      "const": "CO-COUNTY-LARIMER",
+      "title": "Source Authority Id",
+      "type": "string"
+    },
+    "layer_id": {
+      "const": "08_County_Authorities",
+      "title": "Layer Id",
+      "type": "string"
+    },
+    "pdfs_checked": {
+      "const": 9,
+      "default": 9,
+      "title": "Pdfs Checked",
+      "type": "integer"
+    },
+    "pages_checked_structurally": {
+      "const": 345,
+      "default": 345,
+      "title": "Pages Checked Structurally",
+      "type": "integer"
+    },
+    "new_originals": {
+      "const": 3,
+      "default": 3,
+      "title": "New Originals",
+      "type": "integer"
+    },
+    "new_original_pages": {
+      "const": 200,
+      "default": 200,
+      "title": "New Original Pages",
+      "type": "integer"
+    },
+    "new_original_bytes": {
+      "const": 31000893,
+      "default": 31000893,
+      "title": "New Original Bytes",
+      "type": "integer"
+    },
+    "reused_originals": {
+      "const": 6,
+      "default": 6,
+      "title": "Reused Originals",
+      "type": "integer"
+    },
+    "custody_pairs_rechecked": {
+      "const": 87,
+      "default": 87,
+      "title": "Custody Pairs Rechecked",
+      "type": "integer"
+    },
+    "deduplication": {
+      "$ref": "#/$defs/DedupeCheck"
+    },
+    "evidence_copies": {
+      "items": {
+        "$ref": "#/$defs/PreservedEvidence"
+      },
+      "title": "Evidence Copies",
+      "type": "array"
+    },
+    "source_provenance": {
+      "$ref": "#/$defs/Asset"
+    },
+    "intake_records": {
+      "$ref": "#/$defs/Asset"
+    },
+    "raw_manifest_before": {
+      "$ref": "#/$defs/Asset"
+    },
+    "raw_manifest_after": {
+      "$ref": "#/$defs/Asset"
+    },
+    "ledger_before": {
+      "$ref": "#/$defs/Asset"
+    },
+    "ledger_after": {
+      "$ref": "#/$defs/Asset"
+    },
+    "report_before": {
+      "$ref": "#/$defs/Asset"
+    },
+    "report_after": {
+      "$ref": "#/$defs/Asset"
+    },
+    "preimage_snapshots": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Preimage Snapshots",
+      "type": "array"
+    },
+    "batch4_frozen_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "batch4_preimage_rechecked": {
+      "const": true,
+      "default": true,
+      "title": "Batch4 Preimage Rechecked",
+      "type": "boolean"
+    },
+    "new_raw_paths": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "New Raw Paths",
+      "type": "array"
+    },
+    "baseline": {
+      "$ref": "#/$defs/ManualIntakeReconciliation"
+    },
+    "pre_apply_dry_run": {
+      "$ref": "#/$defs/ManualIntakeReconciliation"
+    },
+    "applied": {
+      "$ref": "#/$defs/ManualIntakeReconciliation"
+    },
+    "idempotency_dry_run": {
+      "$ref": "#/$defs/ManualIntakeReconciliation"
+    },
+    "no_existing_raw_bytes_changed": {
+      "const": true,
+      "default": true,
+      "title": "No Existing Raw Bytes Changed",
+      "type": "boolean"
+    },
+    "old_manifest_prefix_preserved": {
+      "const": true,
+      "default": true,
+      "title": "Old Manifest Prefix Preserved",
+      "type": "boolean"
+    },
+    "old_ledger_prefix_preserved": {
+      "const": true,
+      "default": true,
+      "title": "Old Ledger Prefix Preserved",
+      "type": "boolean"
+    },
+    "original_acquisition_at": {
+      "default": null,
+      "title": "Original Acquisition At",
+      "type": "null"
+    },
+    "acquisition_method": {
+      "const": "received_review_package",
+      "title": "Acquisition Method",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "semantic_or_coverage_promotion": {
+      "const": false,
+      "default": false,
+      "title": "Semantic Or Coverage Promotion",
+      "type": "boolean"
+    },
+    "api_usage": {
+      "title": "Api Usage",
+      "type": "string"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "assignment",
+    "prepared_at",
+    "source_authority_id",
+    "layer_id",
+    "deduplication",
+    "evidence_copies",
+    "source_provenance",
+    "intake_records",
+    "raw_manifest_before",
+    "raw_manifest_after",
+    "ledger_before",
+    "ledger_after",
+    "report_before",
+    "report_after",
+    "preimage_snapshots",
+    "batch4_frozen_manifest",
+    "new_raw_paths",
+    "baseline",
+    "pre_apply_dry_run",
+    "applied",
+    "idempotency_dry_run",
+    "acquisition_method",
+    "api_usage",
+    "limits"
+  ],
+  "title": "IntakeReceipt",
+  "type": "object"
+}

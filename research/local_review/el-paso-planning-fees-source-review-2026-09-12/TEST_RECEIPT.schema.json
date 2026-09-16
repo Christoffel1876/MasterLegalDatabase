@@ -1,0 +1,44 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "command": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Command",
+      "type": "array"
+    },
+    "tests_passed": {
+      "title": "Tests Passed",
+      "type": "integer"
+    },
+    "tests_failed": {
+      "const": 0,
+      "default": 0,
+      "title": "Tests Failed",
+      "type": "integer"
+    },
+    "receipt_scope": {
+      "const": "Offline integrity/refusal tests, not independent visual correctness.",
+      "title": "Receipt Scope",
+      "type": "string"
+    },
+    "stdout_sha256": {
+      "title": "Stdout Sha256",
+      "type": "string"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "command",
+    "tests_passed",
+    "receipt_scope",
+    "stdout_sha256"
+  ],
+  "title": "TamperResults",
+  "type": "object"
+}

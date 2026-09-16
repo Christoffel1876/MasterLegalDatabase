@@ -4,14 +4,17 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import logging
 import re
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
 from geode.constants import AUTHORIZED_SOURCE_HOSTS
+from geode.pipeline.local_source_ownership import load_ownership_policy
 from geode.utils.file_io import atomic_write_json, iter_jsonl, load_json
 
 CONTROL = Path("_CONTROL_PLANE")
+LOGGER = logging.getLogger(__name__)
 CATEGORY_TERMS: dict[str, tuple[str, ...]] = {
     "county_ordinances": ("ordinance", "ordinances", "county-code", "county_code"),
     "county_codes": ("county-code", "county_code", "code", "codes"),
@@ -38,9 +41,20 @@ def discover_county_sources(root: Path, *, write: bool = False) -> dict[str, obj
     """
 
     resolved = root.resolve()
+    ownership = load_ownership_policy(resolved)
     registry = load_json(resolved / CONTROL / "LOCAL_SOURCE_REGISTRY.json")
     pilot = registry.setdefault("pilot", {})
     sources = list(pilot.get("county_sources", []))
+    exclusions: list[str] = []
+    active_sources = []
+    for source in sources:
+        reason = ownership.source_exclusion_reason(source)
+        if reason:
+            exclusions.append(reason)
+        else:
+            active_sources.append(source)
+    registry_changed = len(active_sources) != len(sources)
+    sources = active_sources
     existing_pairs = {
         (str(row.get("authority_id")), str(row.get("category")), str(row.get("url")))
         for row in sources
@@ -55,6 +69,10 @@ def discover_county_sources(root: Path, *, write: bool = False) -> dict[str, obj
     candidates: list[dict[str, str]] = []
     for row in iter_jsonl(manifest_path):
         if row.get("status") != "downloaded" or row.get("authority_level") != "county":
+            continue
+        reason = ownership.source_exclusion_reason(row)
+        if reason:
+            exclusions.append(reason)
             continue
         authority_id = str(row.get("authority_id"))
         if authority_id not in county_ids:
@@ -87,16 +105,25 @@ def discover_county_sources(root: Path, *, write: bool = False) -> dict[str, obj
                     "discovery_parent_url": str(row.get("requested_url")),
                     "known_gaps": ["Candidate source requires download and Geode review."],
                 }
+                reason = ownership.source_exclusion_reason(candidate)
+                if reason:
+                    exclusions.append(reason)
+                    continue
                 candidates.append(candidate)
                 existing_pairs.add((authority_id, category, url))
                 existing_cells.add(cell)
-    if write and candidates:
+    changed = bool(candidates or registry_changed)
+    if write and changed:
         pilot["county_sources"] = [*sources, *candidates]
         atomic_write_json(resolved / CONTROL / "LOCAL_SOURCE_REGISTRY.json", registry, resolved)
+    for reason in sorted(set(exclusions)):
+        LOGGER.warning("Ownership exclusion during county discovery: %s", reason)
     return {
         "candidates": len(candidates),
-        "written": bool(write and candidates),
+        "written": bool(write and changed),
         "source_ids": [row["source_id"] for row in candidates],
+        "ownership_excluded": len(exclusions),
+        "ownership_exclusion_reasons": sorted(set(exclusions)),
     }
 
 

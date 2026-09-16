@@ -1,0 +1,163 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Event": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "assignment_id": {
+          "title": "Assignment Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "expected_pages": {
+          "title": "Expected Pages",
+          "type": "integer"
+        },
+        "source": {
+          "$ref": "#/$defs/Asset"
+        },
+        "canonical_record": {
+          "$ref": "#/$defs/Asset"
+        },
+        "render_started_at": {
+          "format": "date-time",
+          "title": "Render Started At",
+          "type": "string"
+        },
+        "render_completed_at": {
+          "format": "date-time",
+          "title": "Render Completed At",
+          "type": "string"
+        },
+        "render_command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Render Command",
+          "type": "array"
+        },
+        "renderer_version": {
+          "title": "Renderer Version",
+          "type": "string"
+        },
+        "returncode": {
+          "title": "Returncode",
+          "type": "integer"
+        },
+        "stderr": {
+          "$ref": "#/$defs/Asset"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "title": "Pages",
+          "type": "array"
+        },
+        "page_dimensions": {
+          "items": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "title": "Page Dimensions",
+          "type": "array"
+        },
+        "native_pages": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "title": "Native Pages",
+          "type": "array"
+        },
+        "native_nonwhitespace_bytes": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Native Nonwhitespace Bytes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source_id",
+        "assignment_id",
+        "authority_id",
+        "expected_pages",
+        "source",
+        "canonical_record",
+        "render_started_at",
+        "render_completed_at",
+        "render_command",
+        "renderer_version",
+        "returncode",
+        "stderr",
+        "pages",
+        "page_dimensions",
+        "native_pages",
+        "native_nonwhitespace_bytes"
+      ],
+      "title": "Event",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "captured_at": {
+      "format": "date-time",
+      "title": "Captured At",
+      "type": "string"
+    },
+    "frozen_manual_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "frozen_inventory": {
+      "$ref": "#/$defs/Asset"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
+      "title": "Events",
+      "type": "array"
+    }
+  },
+  "required": [
+    "captured_at",
+    "frozen_manual_manifest",
+    "frozen_inventory",
+    "events"
+  ],
+  "title": "Capture",
+  "type": "object"
+}

@@ -1,0 +1,374 @@
+{
+  "$defs": {
+    "Start": {
+      "additionalProperties": false,
+      "properties": {
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "repository": {
+          "title": "Repository",
+          "type": "string"
+        },
+        "operation": {
+          "const": "download",
+          "default": "download",
+          "title": "Operation",
+          "type": "string"
+        },
+        "oid": {
+          "title": "Oid",
+          "type": "string"
+        },
+        "expected_bytes": {
+          "title": "Expected Bytes",
+          "type": "integer"
+        },
+        "pointer_sha256": {
+          "title": "Pointer Sha256",
+          "type": "string"
+        },
+        "pointer_bytes": {
+          "title": "Pointer Bytes",
+          "type": "integer"
+        },
+        "local_lfs_object_present": {
+          "title": "Local Lfs Object Present",
+          "type": "boolean"
+        },
+        "check_deadline": {
+          "format": "date-time",
+          "title": "Check Deadline",
+          "type": "string"
+        },
+        "download_deadline": {
+          "format": "date-time",
+          "title": "Download Deadline",
+          "type": "string"
+        },
+        "credentials": {
+          "default": "Existing gh authentication read in memory only; not retained or printed.",
+          "title": "Credentials",
+          "type": "string"
+        }
+      },
+      "required": [
+        "started_at",
+        "repository",
+        "oid",
+        "expected_bytes",
+        "pointer_sha256",
+        "pointer_bytes",
+        "local_lfs_object_present",
+        "check_deadline",
+        "download_deadline"
+      ],
+      "title": "Start",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "started": {
+      "$ref": "#/$defs/Start"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "outcome": {
+      "title": "Outcome",
+      "type": "string"
+    },
+    "batch_http_status": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Batch Http Status"
+    },
+    "batch_response_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Batch Response Sha256"
+    },
+    "batch_response_bytes": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Batch Response Bytes"
+    },
+    "batch_response_original_retained": {
+      "const": false,
+      "default": false,
+      "title": "Batch Response Original Retained",
+      "type": "boolean"
+    },
+    "batch_headers": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {},
+      "title": "Batch Headers",
+      "type": "object"
+    },
+    "object_oid": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Object Oid"
+    },
+    "object_size": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Object Size"
+    },
+    "object_error_code": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Object Error Code"
+    },
+    "object_error_message": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Object Error Message"
+    },
+    "download_action_present": {
+      "default": false,
+      "title": "Download Action Present",
+      "type": "boolean"
+    },
+    "action_url_retained": {
+      "const": false,
+      "default": false,
+      "title": "Action Url Retained",
+      "type": "boolean"
+    },
+    "download_http_status": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Download Http Status"
+    },
+    "download_bytes": {
+      "default": 0,
+      "title": "Download Bytes",
+      "type": "integer"
+    },
+    "download_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Download Sha256"
+    },
+    "download_path": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Download Path"
+    },
+    "exact_oid_and_size_verified": {
+      "default": false,
+      "title": "Exact Oid And Size Verified",
+      "type": "boolean"
+    },
+    "jsonl_lines": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Jsonl Lines"
+    },
+    "jsonl_object_rows": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Jsonl Object Rows"
+    },
+    "jsonl_syntax_errors": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Jsonl Syntax Errors"
+    },
+    "schema_valid_rows": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Schema Valid Rows"
+    },
+    "schema_invalid_rows": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Schema Invalid Rows"
+    },
+    "schema_error_locations": {
+      "default": [],
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Schema Error Locations",
+      "type": "array"
+    },
+    "schema_name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Schema Name"
+    },
+    "schema_module_sha256": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Schema Module Sha256"
+    },
+    "failure_class": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Failure Class"
+    },
+    "sanitized_error": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Sanitized Error"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "started",
+    "completed_at",
+    "outcome",
+    "limitations"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

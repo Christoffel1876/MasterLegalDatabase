@@ -1,0 +1,15 @@
+Command '['/private/tmp/geode-status-venv/bin/python', '-B', '/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/chaffee-fee-custody-verify-qf310j80/verify_packet.py']' returned non-zero exit status 1.
+STDOUT
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+
+STDERR
+Traceback (most recent call last):
+  File "/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/chaffee-fee-custody-verify-qf310j80/verify_packet.py", line 205, in <module>
+    sys.stdout.write(json.dumps(verify(Path(__file__).absolute().parent)) + "\n")
+                                ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/chaffee-fee-custody-verify-qf310j80/verify_packet.py", line 34, in verify
+    require(not any(p.is_symlink() for p in [root, *root.parents]), "symlink root")
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/var/folders/bl/sd33_qs11_vcwzdn2tl6gks80000gr/T/chaffee-fee-custody-verify-qf310j80/verify_packet.py", line 28, in require
+    raise ValueError(message)
+ValueError: symlink root

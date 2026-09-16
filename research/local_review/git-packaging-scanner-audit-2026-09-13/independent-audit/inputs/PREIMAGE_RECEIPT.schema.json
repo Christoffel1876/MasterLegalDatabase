@@ -1,0 +1,100 @@
+{
+  "$defs": {
+    "Item": {
+      "additionalProperties": false,
+      "description": "Exact before-copy identity tied to the maintained predecessor path.",
+      "properties": {
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "preserved_path": {
+          "title": "Preserved Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "repository_path",
+        "preserved_path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Item",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Preimage capture only; the new fee source review remains pending.",
+  "properties": {
+    "captured_at": {
+      "format": "date-time",
+      "title": "Captured At",
+      "type": "string"
+    },
+    "status": {
+      "const": "preimages_preserved_final_fee_review_pending",
+      "title": "Status",
+      "type": "string"
+    },
+    "inventory_sources": {
+      "const": 69,
+      "title": "Inventory Sources",
+      "type": "integer"
+    },
+    "inventory_reviewed": {
+      "const": 33,
+      "title": "Inventory Reviewed",
+      "type": "integer"
+    },
+    "inventory_unmapped": {
+      "const": 36,
+      "title": "Inventory Unmapped",
+      "type": "integer"
+    },
+    "current_raw_manifest_records": {
+      "const": 70,
+      "title": "Current Raw Manifest Records",
+      "type": "integer"
+    },
+    "inventory_expected_transient_staleness": {
+      "const": true,
+      "title": "Inventory Expected Transient Staleness",
+      "type": "boolean"
+    },
+    "production_writes": {
+      "const": 0,
+      "title": "Production Writes",
+      "type": "integer"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Item"
+      },
+      "title": "Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "captured_at",
+    "status",
+    "inventory_sources",
+    "inventory_reviewed",
+    "inventory_unmapped",
+    "current_raw_manifest_records",
+    "inventory_expected_transient_staleness",
+    "production_writes",
+    "files"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

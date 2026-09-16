@@ -1,0 +1,286 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Bind exact ordinary bytes under an explicitly supplied package/repository root.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "SourceCheck": {
+      "additionalProperties": false,
+      "description": "A local identity/custody preflight, not a new HTTP request or legal-source review.",
+      "properties": {
+        "batch_id": {
+          "title": "Batch Id",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "baseline": {
+          "$ref": "#/$defs/Ref"
+        },
+        "pages": {
+          "minimum": 1,
+          "title": "Pages",
+          "type": "integer"
+        },
+        "exact_requested_url": {
+          "title": "Exact Requested Url",
+          "type": "string"
+        },
+        "baseline_request_started_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Baseline Request Started At"
+        },
+        "baseline_recorded_http_time": {
+          "format": "date-time",
+          "title": "Baseline Recorded Http Time",
+          "type": "string"
+        },
+        "baseline_http_time_role": {
+          "title": "Baseline Http Time Role",
+          "type": "string"
+        },
+        "repository_received_at": {
+          "format": "date-time",
+          "title": "Repository Received At",
+          "type": "string"
+        },
+        "raw_manifest_line_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Raw Manifest Line Sha256",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "batch_id",
+        "source_id",
+        "authority_id",
+        "baseline",
+        "pages",
+        "exact_requested_url",
+        "baseline_request_started_at",
+        "baseline_recorded_http_time",
+        "baseline_http_time_role",
+        "repository_received_at",
+        "raw_manifest_line_sha256"
+      ],
+      "title": "SourceCheck",
+      "type": "object"
+    },
+    "TestCheck": {
+      "additionalProperties": false,
+      "description": "One complete offline focused-test result with exact machine coverage evidence.",
+      "properties": {
+        "command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Command",
+          "type": "array"
+        },
+        "return_code": {
+          "const": 0,
+          "title": "Return Code",
+          "type": "integer"
+        },
+        "passed": {
+          "const": 205,
+          "title": "Passed",
+          "type": "integer"
+        },
+        "branch_inclusive_coverage_percent": {
+          "maximum": 100,
+          "minimum": 90,
+          "title": "Branch Inclusive Coverage Percent",
+          "type": "number"
+        },
+        "log": {
+          "$ref": "#/$defs/Ref"
+        },
+        "coverage": {
+          "$ref": "#/$defs/Ref"
+        },
+        "scope": {
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "command",
+        "return_code",
+        "passed",
+        "branch_inclusive_coverage_percent",
+        "log",
+        "coverage",
+        "scope"
+      ],
+      "title": "TestCheck",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Bind prepared implementation to actual local checks and unchanged existing replay.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_INSTALLED_OR_EXECUTED",
+      "title": "Status",
+      "type": "string"
+    },
+    "proposed_implementation": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Proposed Implementation",
+      "type": "array"
+    },
+    "current_manual_manifest": {
+      "$ref": "#/$defs/Ref"
+    },
+    "current_manual_records": {
+      "title": "Current Manual Records",
+      "type": "integer"
+    },
+    "source_checks": {
+      "items": {
+        "$ref": "#/$defs/SourceCheck"
+      },
+      "maxItems": 6,
+      "minItems": 6,
+      "title": "Source Checks",
+      "type": "array"
+    },
+    "tests": {
+      "$ref": "#/$defs/TestCheck"
+    },
+    "old_springs_inputs": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Old Springs Inputs",
+      "type": "array"
+    },
+    "old_springs_run_files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Old Springs Run Files",
+      "type": "array"
+    },
+    "old_springs_report_status": {
+      "const": "completed",
+      "title": "Old Springs Report Status",
+      "type": "string"
+    },
+    "old_springs_readonly_replay": {
+      "const": "passed_with_transport_disabled",
+      "title": "Old Springs Readonly Replay",
+      "type": "string"
+    },
+    "old_springs_bytes_unchanged": {
+      "const": true,
+      "title": "Old Springs Bytes Unchanged",
+      "type": "boolean"
+    },
+    "public_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "production_writes": {
+      "const": 0,
+      "default": 0,
+      "title": "Production Writes",
+      "type": "integer"
+    },
+    "schedule_installed": {
+      "const": false,
+      "default": false,
+      "title": "Schedule Installed",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "checked_at",
+    "status",
+    "proposed_implementation",
+    "current_manual_manifest",
+    "current_manual_records",
+    "source_checks",
+    "tests",
+    "old_springs_inputs",
+    "old_springs_run_files",
+    "old_springs_report_status",
+    "old_springs_readonly_replay",
+    "old_springs_bytes_unchanged",
+    "limits"
+  ],
+  "title": "Validation",
+  "type": "object"
+}

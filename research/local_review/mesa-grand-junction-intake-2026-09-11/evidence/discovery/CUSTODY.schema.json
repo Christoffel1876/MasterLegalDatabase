@@ -1,0 +1,79 @@
+{
+  "$defs": {
+    "FileRecord": {
+      "additionalProperties": false,
+      "description": "Bind one immutable file to its exact bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "FileRecord",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Inventory this local package without claiming legal completeness.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "task_id": {
+      "const": "atlas-mesa-grand-junction-discovery-2026-09-11",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "excludes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Excludes",
+      "type": "array"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/FileRecord"
+      },
+      "title": "Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "task_id",
+    "created_at",
+    "excludes",
+    "files"
+  ],
+  "title": "Custody",
+  "type": "object"
+}

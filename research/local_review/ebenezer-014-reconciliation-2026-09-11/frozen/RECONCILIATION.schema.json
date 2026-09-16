@@ -1,0 +1,348 @@
+{
+  "$defs": {
+    "Counts": {
+      "additionalProperties": false,
+      "properties": {
+        "finding_rows": {
+          "const": 21,
+          "title": "Finding Rows",
+          "type": "integer"
+        },
+        "critical": {
+          "const": 2,
+          "title": "Critical",
+          "type": "integer"
+        },
+        "minor": {
+          "const": 12,
+          "title": "Minor",
+          "type": "integer"
+        },
+        "info": {
+          "const": 7,
+          "title": "Info",
+          "type": "integer"
+        },
+        "errata_rows": {
+          "const": 3,
+          "title": "Errata Rows",
+          "type": "integer"
+        },
+        "unresolved_themes": {
+          "const": 5,
+          "title": "Unresolved Themes",
+          "type": "integer"
+        },
+        "arithmetic_matches": {
+          "const": true,
+          "title": "Arithmetic Matches",
+          "type": "boolean"
+        },
+        "unique_error_count_certified": {
+          "const": false,
+          "title": "Unique Error Count Certified",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "finding_rows",
+        "critical",
+        "minor",
+        "info",
+        "errata_rows",
+        "unresolved_themes",
+        "arithmetic_matches",
+        "unique_error_count_certified"
+      ],
+      "title": "Counts",
+      "type": "object"
+    },
+    "Decision": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "external_finding",
+            "external_erratum",
+            "unresolved_theme"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "disposition": {
+          "enum": [
+            "accepted",
+            "qualified",
+            "rejected",
+            "source_observation"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "external_report": {
+          "const": "PASS2_REVIEW.md",
+          "title": "External Report",
+          "type": "string"
+        },
+        "external_line": {
+          "minimum": 1,
+          "title": "External Line",
+          "type": "integer"
+        },
+        "external_claim": {
+          "title": "External Claim",
+          "type": "string"
+        },
+        "physical_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 1,
+          "title": "Physical Pages",
+          "type": "array"
+        },
+        "page_images": {
+          "items": {
+            "$ref": "#/$defs/FileRef"
+          },
+          "minItems": 1,
+          "title": "Page Images",
+          "type": "array"
+        },
+        "atlas_observation_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Atlas Observation Ids",
+          "type": "array"
+        },
+        "source_observation": {
+          "title": "Source Observation",
+          "type": "string"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        },
+        "native_text_change_required": {
+          "const": false,
+          "title": "Native Text Change Required",
+          "type": "boolean"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "disposition",
+        "external_report",
+        "external_line",
+        "external_claim",
+        "physical_pages",
+        "page_images",
+        "atlas_observation_ids",
+        "source_observation",
+        "qualification",
+        "native_text_change_required",
+        "legal_currentness"
+      ],
+      "title": "Decision",
+      "type": "object"
+    },
+    "FileRef": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "assignment": {
+      "const": "EB-PDF-014",
+      "title": "Assignment",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "fort-collins-land-use-article-1-sd005-07",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-MUNICIPAL-FORT_COLLINS",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "comparison_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "title": "Comparison Commit",
+      "type": "string"
+    },
+    "status": {
+      "const": "reconciled_with_qualifications_no_source_changes",
+      "title": "Status",
+      "type": "string"
+    },
+    "review_mode": {
+      "const": "candidate_aware_direct_image_review_with_native_support",
+      "title": "Review Mode",
+      "type": "string"
+    },
+    "physical_pages_directly_inspected": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Physical Pages Directly Inspected",
+      "type": "array"
+    },
+    "directly_inspected_crops": {
+      "items": {
+        "$ref": "#/$defs/FileRef"
+      },
+      "maxItems": 11,
+      "minItems": 11,
+      "title": "Directly Inspected Crops",
+      "type": "array"
+    },
+    "source_pdf": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "native_candidate": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "committed_review": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "receipts": {
+      "items": {
+        "$ref": "#/$defs/FileRef"
+      },
+      "title": "Receipts",
+      "type": "array"
+    },
+    "supplemental_evidence": {
+      "items": {
+        "$ref": "#/$defs/FileRef"
+      },
+      "title": "Supplemental Evidence",
+      "type": "array"
+    },
+    "external_counts": {
+      "$ref": "#/$defs/Counts"
+    },
+    "decisions": {
+      "items": {
+        "$ref": "#/$defs/Decision"
+      },
+      "maxItems": 29,
+      "minItems": 29,
+      "title": "Decisions",
+      "type": "array"
+    },
+    "disposition_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Disposition Counts",
+      "type": "object"
+    },
+    "method_and_limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Method And Limits",
+      "type": "array"
+    },
+    "original_source_and_candidate_changed": {
+      "const": false,
+      "title": "Original Source And Candidate Changed",
+      "type": "boolean"
+    },
+    "external_reports_changed": {
+      "const": false,
+      "title": "External Reports Changed",
+      "type": "boolean"
+    },
+    "production_changes": {
+      "const": false,
+      "title": "Production Changes",
+      "type": "boolean"
+    },
+    "network_requests": {
+      "const": 0,
+      "title": "Network Requests",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "assignment",
+    "source_id",
+    "authority_id",
+    "reviewed_at",
+    "comparison_commit",
+    "status",
+    "review_mode",
+    "physical_pages_directly_inspected",
+    "directly_inspected_crops",
+    "source_pdf",
+    "native_candidate",
+    "committed_review",
+    "receipts",
+    "supplemental_evidence",
+    "external_counts",
+    "decisions",
+    "disposition_counts",
+    "method_and_limits",
+    "original_source_and_candidate_changed",
+    "external_reports_changed",
+    "production_changes",
+    "network_requests",
+    "legal_currentness"
+  ],
+  "title": "Reconciliation",
+  "type": "object"
+}

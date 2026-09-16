@@ -1,0 +1,69 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "const": "frozen_source_qa_pending_root_independent_acceptance",
+      "title": "Status",
+      "type": "string"
+    },
+    "source_sha256": {
+      "const": "e35de501a011fe55f03140bf91aef54226997d896fec0b6308a2eac9bd40909a",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "excluded_paths": {
+      "const": "FINAL_MANIFEST.json and FINAL_MANIFEST.schema.json only; all other ordinary package files are included.",
+      "title": "Excluded Paths",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "source_sha256",
+    "files",
+    "excluded_paths"
+  ],
+  "title": "Inventory",
+  "type": "object"
+}

@@ -1,0 +1,98 @@
+{
+  "additionalProperties": false,
+  "description": "Full unchanged native page bytes, not an accuracy certification.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "physical_page": {
+      "minimum": 1,
+      "title": "Physical Page",
+      "type": "integer"
+    },
+    "expected_pages": {
+      "minimum": 1,
+      "title": "Expected Pages",
+      "type": "integer"
+    },
+    "source_image_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Image Sha256",
+      "type": "string"
+    },
+    "extracted_at": {
+      "format": "date-time",
+      "title": "Extracted At",
+      "type": "string"
+    },
+    "engine": {
+      "const": "PyMuPDF",
+      "default": "PyMuPDF",
+      "title": "Engine",
+      "type": "string"
+    },
+    "engine_version": {
+      "const": "1.28.2",
+      "default": "1.28.2",
+      "title": "Engine Version",
+      "type": "string"
+    },
+    "method": {
+      "const": "Page.get_text(\"text\", sort=False, flags=195)",
+      "default": "Page.get_text(\"text\", sort=False, flags=195)",
+      "title": "Method",
+      "type": "string"
+    },
+    "text": {
+      "title": "Text",
+      "type": "string"
+    },
+    "text_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Text Sha256",
+      "type": "string"
+    },
+    "text_size_bytes": {
+      "exclusiveMinimum": 0,
+      "title": "Text Size Bytes",
+      "type": "integer"
+    },
+    "status": {
+      "const": "machine_native_text_unreviewed",
+      "default": "machine_native_text_unreviewed",
+      "title": "Status",
+      "type": "string"
+    },
+    "changes": {
+      "const": "none",
+      "default": "none",
+      "title": "Changes",
+      "type": "string"
+    }
+  },
+  "required": [
+    "source_id",
+    "source_sha256",
+    "physical_page",
+    "expected_pages",
+    "source_image_sha256",
+    "extracted_at",
+    "text",
+    "text_sha256",
+    "text_size_bytes"
+  ],
+  "title": "NativePage",
+  "type": "object"
+}

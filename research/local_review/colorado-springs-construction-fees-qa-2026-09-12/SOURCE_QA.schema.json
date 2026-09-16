@@ -1,0 +1,629 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Block": {
+      "additionalProperties": false,
+      "properties": {
+        "block_id": {
+          "title": "Block Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "heading",
+            "definition",
+            "table_note",
+            "general_note",
+            "implementation",
+            "other_schedule_reference",
+            "printed_date",
+            "cover",
+            "contents",
+            "footer",
+            "native_whitespace"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "parts": {
+          "items": {
+            "$ref": "#/$defs/BlockPart"
+          },
+          "minItems": 1,
+          "title": "Parts",
+          "type": "array"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "block_id",
+        "kind",
+        "parts",
+        "notes"
+      ],
+      "title": "Block",
+      "type": "object"
+    },
+    "BlockPart": {
+      "additionalProperties": false,
+      "properties": {
+        "page": {
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "line_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Line Ids",
+          "type": "array"
+        },
+        "exact_native_text": {
+          "title": "Exact Native Text",
+          "type": "string"
+        },
+        "native_ranges": {
+          "items": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "title": "Native Ranges",
+          "type": "array"
+        },
+        "pdf_bboxes": {
+          "items": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "title": "Pdf Bboxes",
+          "type": "array"
+        },
+        "pixel_bboxes": {
+          "items": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "title": "Pixel Bboxes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "page",
+        "line_ids",
+        "exact_native_text",
+        "native_ranges",
+        "pdf_bboxes",
+        "pixel_bboxes"
+      ],
+      "title": "BlockPart",
+      "type": "object"
+    },
+    "Cell": {
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "enum": [
+            "label",
+            "fee_as_printed"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "line_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Line Ids",
+          "type": "array"
+        },
+        "exact_native_text": {
+          "title": "Exact Native Text",
+          "type": "string"
+        },
+        "native_ranges": {
+          "items": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "title": "Native Ranges",
+          "type": "array"
+        },
+        "pdf_bboxes": {
+          "items": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "title": "Pdf Bboxes",
+          "type": "array"
+        },
+        "pixel_bboxes": {
+          "items": {
+            "items": {
+              "type": "integer"
+            },
+            "type": "array"
+          },
+          "title": "Pixel Bboxes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "role",
+        "line_ids",
+        "exact_native_text",
+        "native_ranges",
+        "pdf_bboxes",
+        "pixel_bboxes"
+      ],
+      "title": "Cell",
+      "type": "object"
+    },
+    "FeeRow": {
+      "additionalProperties": false,
+      "properties": {
+        "row_id": {
+          "title": "Row Id",
+          "type": "string"
+        },
+        "table_id": {
+          "title": "Table Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 2,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "label": {
+          "$ref": "#/$defs/Cell"
+        },
+        "fee_as_printed": {
+          "$ref": "#/$defs/Cell"
+        },
+        "global_context_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Global Context Ids",
+          "type": "array"
+        },
+        "table_context_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Table Context Ids",
+          "type": "array"
+        },
+        "definition_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Definition Ids",
+          "type": "array"
+        },
+        "context_rule": {
+          "const": "Return the complete global context, linked table notes and definitions with this source row; conditions remain source wording, not an applicability decision.",
+          "title": "Context Rule",
+          "type": "string"
+        }
+      },
+      "required": [
+        "row_id",
+        "table_id",
+        "physical_page",
+        "label",
+        "fee_as_printed",
+        "global_context_ids",
+        "table_context_ids",
+        "definition_ids",
+        "context_rule"
+      ],
+      "title": "FeeRow",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "source_rect_points": {
+          "items": {
+            "type": "number"
+          },
+          "title": "Source Rect Points",
+          "type": "array"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "image_dimensions": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Image Dimensions",
+          "type": "array"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "geometry": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_line_count": {
+          "title": "Native Line Count",
+          "type": "integer"
+        },
+        "direct_full_image_viewed": {
+          "const": true,
+          "title": "Direct Full Image Viewed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "physical_page",
+        "source_rect_points",
+        "image",
+        "image_dimensions",
+        "native",
+        "geometry",
+        "native_line_count",
+        "direct_full_image_viewed"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "const": "Atlas direct ordinary HTTPS GET retained complete response",
+          "title": "Method",
+          "type": "string"
+        },
+        "request_started_at": {
+          "const": "2026-09-12T23:10:46.676197Z",
+          "title": "Request Started At",
+          "type": "string"
+        },
+        "response_finished_at": {
+          "const": "2026-09-12T23:10:47.380038Z",
+          "title": "Response Finished At",
+          "type": "string"
+        },
+        "official_url": {
+          "const": "https://coloradosprings.gov/system/files/2026-07/2026%20Fee%20Schedule%20Construction%20Services.pdf",
+          "title": "Official Url",
+          "type": "string"
+        },
+        "http_status": {
+          "const": 200,
+          "title": "Http Status",
+          "type": "integer"
+        },
+        "redirect_count": {
+          "const": 0,
+          "title": "Redirect Count",
+          "type": "integer"
+        },
+        "event": {
+          "minimum": 1,
+          "title": "Event",
+          "type": "integer"
+        },
+        "receipts": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "title": "Receipts",
+          "type": "array"
+        },
+        "header_dates_are_legal_dates": {
+          "const": false,
+          "title": "Header Dates Are Legal Dates",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "method",
+        "request_started_at",
+        "response_finished_at",
+        "official_url",
+        "http_status",
+        "redirect_count",
+        "event",
+        "receipts",
+        "header_dates_are_legal_dates"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "Table": {
+      "additionalProperties": false,
+      "properties": {
+        "table_id": {
+          "title": "Table Id",
+          "type": "string"
+        },
+        "heading_block_id": {
+          "title": "Heading Block Id",
+          "type": "string"
+        },
+        "page_order": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Page Order",
+          "type": "array"
+        },
+        "row_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Row Ids",
+          "type": "array"
+        },
+        "column_roles": {
+          "const": "Unlabeled left description and right fee columns; roles are visual associations, not invented printed column headings.",
+          "title": "Column Roles",
+          "type": "string"
+        }
+      },
+      "required": [
+        "table_id",
+        "heading_block_id",
+        "page_order",
+        "row_ids",
+        "column_roles"
+      ],
+      "title": "Table",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "SD014-02",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-MUNICIPAL-COLORADO_SPRINGS",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "issuer": {
+      "const": "Colorado Springs Fire Department, Division of the Fire Marshal",
+      "title": "Issuer",
+      "type": "string"
+    },
+    "collector_qualification": {
+      "title": "Collector Qualification",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_sha256": {
+      "const": "e35de501a011fe55f03140bf91aef54226997d896fec0b6308a2eac9bd40909a",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "page_count": {
+      "const": 7,
+      "title": "Page Count",
+      "type": "integer"
+    },
+    "source_status": {
+      "const": "fee_schedule_as_received",
+      "title": "Source Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "adoption_verification": {
+      "const": "not_verified",
+      "title": "Adoption Verification",
+      "type": "string"
+    },
+    "effective_date_verification": {
+      "const": "printed_claim_only",
+      "title": "Effective Date Verification",
+      "type": "string"
+    },
+    "printed_effective_date": {
+      "const": "07/01/2026",
+      "title": "Printed Effective Date",
+      "type": "string"
+    },
+    "review_method": {
+      "const": "Atlas source-first direct image QA followed by native comparison; title and role known, not blind",
+      "title": "Review Method",
+      "type": "string"
+    },
+    "reviewed_at": {
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "source_first_observations": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_first_observations_sha256": {
+      "const": "e382da7c1be63d5b7b26be5f0d43d35b1fe55a4486346377fe8895cfbfdbbc97",
+      "title": "Source First Observations Sha256",
+      "type": "string"
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    },
+    "native_engine": {
+      "const": "PyMuPDF 1.28.2 get_text(text, sort=False); UTF-8 unchanged per physical page",
+      "title": "Native Engine",
+      "type": "string"
+    },
+    "native_byte_basis": {
+      "const": "Zero-based half-open UTF-8 offsets in the named unchanged physical-page native file; PDF bboxes in points, crop bboxes in 200 dpi original-image pixels.",
+      "title": "Native Byte Basis",
+      "type": "string"
+    },
+    "native_byte_count": {
+      "title": "Native Byte Count",
+      "type": "integer"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "maxItems": 7,
+      "minItems": 7,
+      "title": "Pages",
+      "type": "array"
+    },
+    "tables": {
+      "items": {
+        "$ref": "#/$defs/Table"
+      },
+      "maxItems": 9,
+      "minItems": 9,
+      "title": "Tables",
+      "type": "array"
+    },
+    "fee_rows": {
+      "items": {
+        "$ref": "#/$defs/FeeRow"
+      },
+      "maxItems": 128,
+      "minItems": 128,
+      "title": "Fee Rows",
+      "type": "array"
+    },
+    "blocks": {
+      "items": {
+        "$ref": "#/$defs/Block"
+      },
+      "title": "Blocks",
+      "type": "array"
+    },
+    "all_native_lines_assigned_once": {
+      "const": true,
+      "title": "All Native Lines Assigned Once",
+      "type": "boolean"
+    },
+    "all_context_must_accompany_fee_rows": {
+      "const": true,
+      "title": "All Context Must Accompany Fee Rows",
+      "type": "boolean"
+    },
+    "comparison_findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Comparison Findings",
+      "type": "array"
+    },
+    "source_anomalies": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Anomalies",
+      "type": "array"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "source_id",
+    "authority_id",
+    "issuer",
+    "collector_qualification",
+    "source",
+    "source_sha256",
+    "page_count",
+    "source_status",
+    "legal_currentness",
+    "adoption_verification",
+    "effective_date_verification",
+    "printed_effective_date",
+    "review_method",
+    "reviewed_at",
+    "source_first_observations",
+    "source_first_observations_sha256",
+    "provenance",
+    "native_engine",
+    "native_byte_basis",
+    "native_byte_count",
+    "pages",
+    "tables",
+    "fee_rows",
+    "blocks",
+    "all_native_lines_assigned_once",
+    "all_context_must_accompany_fee_rows",
+    "comparison_findings",
+    "source_anomalies",
+    "limits"
+  ],
+  "title": "QA",
+  "type": "object"
+}

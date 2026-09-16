@@ -1,0 +1,533 @@
+{
+  "$defs": {
+    "Binding": {
+      "additionalProperties": false,
+      "description": "Source row or context associated with its exact native page span.",
+      "properties": {
+        "identity": {
+          "title": "Identity",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "spans": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "minItems": 1,
+          "title": "Spans",
+          "type": "array"
+        },
+        "normalized_equal": {
+          "title": "Normalized Equal",
+          "type": "boolean"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "identity",
+        "physical_page",
+        "spans",
+        "normalized_equal",
+        "note"
+      ],
+      "title": "Binding",
+      "type": "object"
+    },
+    "Context": {
+      "additionalProperties": false,
+      "description": "Source wording outside the service/fee cells, with explicit applicability links.",
+      "properties": {
+        "context_id": {
+          "title": "Context Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "cover",
+            "heading",
+            "authority",
+            "approval_claim",
+            "note",
+            "definition",
+            "civil_penalty",
+            "group_heading",
+            "column_heading"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "applies_to": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Applies To",
+          "type": "array"
+        }
+      },
+      "required": [
+        "context_id",
+        "physical_page",
+        "kind",
+        "text",
+        "applies_to"
+      ],
+      "title": "Context",
+      "type": "object"
+    },
+    "GridRow": {
+      "additionalProperties": false,
+      "description": "Two exact table cells, including merged-cell nulls and source geometry.",
+      "properties": {
+        "cells": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "title": "Cells",
+          "type": "array"
+        },
+        "cell_rectangles": {
+          "items": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "title": "Cell Rectangles",
+          "type": "array"
+        },
+        "fee_row_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Fee Row Id"
+        }
+      },
+      "required": [
+        "cells",
+        "cell_rectangles",
+        "fee_row_id"
+      ],
+      "title": "GridRow",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "Complete original native bytes with reproducible extraction settings.",
+      "properties": {
+        "physical_page": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "native": {
+          "$ref": "#/$defs/Ref"
+        },
+        "image": {
+          "$ref": "#/$defs/Ref"
+        },
+        "candidate_start": {
+          "minimum": 0,
+          "title": "Candidate Start",
+          "type": "integer"
+        },
+        "candidate_end": {
+          "minimum": 0,
+          "title": "Candidate End",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "physical_page",
+        "native",
+        "image",
+        "candidate_start",
+        "candidate_end"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "An exact relative payload identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "Row": {
+      "additionalProperties": false,
+      "description": "A whole visual service/fee row, preserving uncomputed values and conditions.",
+      "properties": {
+        "row_id": {
+          "title": "Row Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 4,
+          "minimum": 2,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "group": {
+          "title": "Group",
+          "type": "string"
+        },
+        "group_physical_page": {
+          "maximum": 4,
+          "minimum": 2,
+          "title": "Group Physical Page",
+          "type": "integer"
+        },
+        "service": {
+          "title": "Service",
+          "type": "string"
+        },
+        "fee": {
+          "title": "Fee",
+          "type": "string"
+        },
+        "linked_context": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Linked Context",
+          "type": "array"
+        }
+      },
+      "required": [
+        "row_id",
+        "physical_page",
+        "group",
+        "group_physical_page",
+        "service",
+        "fee",
+        "linked_context"
+      ],
+      "title": "Row",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "description": "Exact UTF-8 bytes from one unaltered physical native page.",
+      "properties": {
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "sha256",
+        "text"
+      ],
+      "title": "Span",
+      "type": "object"
+    },
+    "Table": {
+      "additionalProperties": false,
+      "description": "Complete physical table segment with unchanged extraction and explicit continuation.",
+      "properties": {
+        "physical_page": {
+          "maximum": 4,
+          "minimum": 2,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "rectangle": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Rectangle",
+          "type": "array"
+        },
+        "rows": {
+          "items": {
+            "$ref": "#/$defs/GridRow"
+          },
+          "title": "Rows",
+          "type": "array"
+        },
+        "carried_group_from_prior_page": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Carried Group From Prior Page"
+        }
+      },
+      "required": [
+        "physical_page",
+        "rectangle",
+        "rows",
+        "carried_group_from_prior_page"
+      ],
+      "title": "Table",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Complete grid and contextual bindings supplement the untouched native pages.",
+  "properties": {
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "status": {
+      "const": "source_visual_and_native_compared_pending_root_review",
+      "title": "Status",
+      "type": "string"
+    },
+    "first_pass": {
+      "$ref": "#/$defs/Ref"
+    },
+    "source": {
+      "$ref": "#/$defs/Ref"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Ref"
+    },
+    "extraction_method": {
+      "title": "Extraction Method",
+      "type": "string"
+    },
+    "extraction_version": {
+      "title": "Extraction Version",
+      "type": "string"
+    },
+    "extraction_flags": {
+      "const": 195,
+      "title": "Extraction Flags",
+      "type": "integer"
+    },
+    "extraction_sort": {
+      "const": false,
+      "title": "Extraction Sort",
+      "type": "boolean"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "maxItems": 5,
+      "minItems": 5,
+      "title": "Pages",
+      "type": "array"
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/Row"
+      },
+      "maxItems": 65,
+      "minItems": 65,
+      "title": "Rows",
+      "type": "array"
+    },
+    "contexts": {
+      "items": {
+        "$ref": "#/$defs/Context"
+      },
+      "title": "Contexts",
+      "type": "array"
+    },
+    "bindings": {
+      "items": {
+        "$ref": "#/$defs/Binding"
+      },
+      "title": "Bindings",
+      "type": "array"
+    },
+    "errata": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Errata",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "issuer": {
+      "const": "El Paso County Board of Health",
+      "title": "Issuer",
+      "type": "string"
+    },
+    "administering_agency": {
+      "const": "El Paso County Public Health",
+      "title": "Administering Agency",
+      "type": "string"
+    },
+    "source_approval_claim": {
+      "const": "October 25, 2023",
+      "title": "Source Approval Claim",
+      "type": "string"
+    },
+    "source_effective_claim": {
+      "const": "January 1, 2024",
+      "title": "Source Effective Claim",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "translation_equivalence": {
+      "const": "not_reviewed",
+      "title": "Translation Equivalence",
+      "type": "string"
+    },
+    "tables": {
+      "items": {
+        "$ref": "#/$defs/Table"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Tables",
+      "type": "array"
+    },
+    "native_bytes_preserved": {
+      "const": 8060,
+      "title": "Native Bytes Preserved",
+      "type": "integer"
+    },
+    "source_fee_rows": {
+      "const": 65,
+      "title": "Source Fee Rows",
+      "type": "integer"
+    },
+    "source_groups": {
+      "const": 7,
+      "title": "Source Groups",
+      "type": "integer"
+    },
+    "source_table_grid_rows": {
+      "const": 74,
+      "title": "Source Table Grid Rows",
+      "type": "integer"
+    },
+    "geometry_method": {
+      "const": "PyMuPDF Page.find_tables default line strategy; 1 table on pages 2\u20134",
+      "title": "Geometry Method",
+      "type": "string"
+    }
+  },
+  "required": [
+    "completed_at",
+    "status",
+    "first_pass",
+    "source",
+    "candidate",
+    "extraction_method",
+    "extraction_version",
+    "extraction_flags",
+    "extraction_sort",
+    "pages",
+    "rows",
+    "contexts",
+    "bindings",
+    "errata",
+    "limitations",
+    "issuer",
+    "administering_agency",
+    "source_approval_claim",
+    "source_effective_claim",
+    "legal_currentness",
+    "translation_equivalence",
+    "tables",
+    "native_bytes_preserved",
+    "source_fee_rows",
+    "source_groups",
+    "source_table_grid_rows",
+    "geometry_method"
+  ],
+  "title": "CompleteReview",
+  "type": "object"
+}

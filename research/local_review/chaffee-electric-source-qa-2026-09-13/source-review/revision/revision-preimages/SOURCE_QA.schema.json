@@ -1,0 +1,513 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Block": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "page": {
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "printed_context",
+            "table_fragment",
+            "editorial_graphic_note"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "transcript_span": {
+          "$ref": "#/$defs/Span"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "id",
+        "page",
+        "kind",
+        "transcript_span",
+        "image"
+      ],
+      "title": "Block",
+      "type": "object"
+    },
+    "DateClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "literal": {
+          "title": "Literal",
+          "type": "string"
+        },
+        "role": {
+          "title": "Role",
+          "type": "string"
+        },
+        "block_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Block Ids",
+          "type": "array"
+        },
+        "external_verification": {
+          "const": false,
+          "default": false,
+          "title": "External Verification",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "literal",
+        "role",
+        "block_ids"
+      ],
+      "title": "DateClaim",
+      "type": "object"
+    },
+    "Link": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "cross_page_continuation",
+            "local_note"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "from_block_id": {
+          "title": "From Block Id",
+          "type": "string"
+        },
+        "to_block_id": {
+          "title": "To Block Id",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "from_block_id",
+        "to_block_id",
+        "reason"
+      ],
+      "title": "Link",
+      "type": "object"
+    },
+    "Mark": {
+      "additionalProperties": false,
+      "properties": {
+        "page": {
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "underline",
+            "strikethrough",
+            "superscript"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "transcript_span": {
+          "$ref": "#/$defs/Span"
+        },
+        "meaning": {
+          "const": "visible_typography_only_not_operative_status",
+          "default": "visible_typography_only_not_operative_status",
+          "title": "Meaning",
+          "type": "string"
+        }
+      },
+      "required": [
+        "page",
+        "kind",
+        "transcript_span"
+      ],
+      "title": "Mark",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "properties": {
+        "number": {
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Number",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_status": {
+          "const": "empty_image_only",
+          "default": "empty_image_only",
+          "title": "Native Status",
+          "type": "string"
+        },
+        "native_spans": {
+          "items": {
+            "$ref": "#/$defs/Span"
+          },
+          "maxItems": 0,
+          "title": "Native Spans",
+          "type": "array"
+        },
+        "ocr_json": {
+          "$ref": "#/$defs/Asset"
+        },
+        "ocr_text": {
+          "$ref": "#/$defs/Asset"
+        },
+        "transcript_span": {
+          "$ref": "#/$defs/Span"
+        },
+        "full_image_directly_viewed": {
+          "const": true,
+          "default": true,
+          "title": "Full Image Directly Viewed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "number",
+        "image",
+        "native",
+        "native_spans",
+        "ocr_json",
+        "ocr_text",
+        "transcript_span"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "properties": {
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 1,
+          "title": "End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "text",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    },
+    "Table": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Pages",
+          "type": "array"
+        },
+        "fragment_block_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Fragment Block Ids",
+          "type": "array"
+        },
+        "context_block_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Context Block Ids",
+          "type": "array"
+        },
+        "physical_data_rows": {
+          "minimum": 1,
+          "title": "Physical Data Rows",
+          "type": "integer"
+        },
+        "qualifiers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Qualifiers",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "pages",
+        "fragment_block_ids",
+        "context_block_ids",
+        "physical_data_rows",
+        "qualifiers"
+      ],
+      "title": "Table",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source_id": {
+      "const": "chaffee-electric-ordinance-2026-01-atlas-directed",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-CHAFFEE",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "reviewer": {
+      "const": "Atlas",
+      "default": "Atlas",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "reviewed_at": {
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "status": {
+      "const": "complete_scoped_source_review_pending_independent_audit",
+      "default": "complete_scoped_source_review_pending_independent_audit",
+      "title": "Status",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "transcript": {
+      "$ref": "#/$defs/Asset"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "full_pages": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Full Pages",
+      "type": "array"
+    },
+    "focused_crops": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Focused Crops",
+      "type": "array"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "maxItems": 7,
+      "minItems": 7,
+      "title": "Pages",
+      "type": "array"
+    },
+    "blocks": {
+      "items": {
+        "$ref": "#/$defs/Block"
+      },
+      "title": "Blocks",
+      "type": "array"
+    },
+    "marks": {
+      "items": {
+        "$ref": "#/$defs/Mark"
+      },
+      "title": "Marks",
+      "type": "array"
+    },
+    "tables": {
+      "items": {
+        "$ref": "#/$defs/Table"
+      },
+      "maxItems": 7,
+      "minItems": 7,
+      "title": "Tables",
+      "type": "array"
+    },
+    "links": {
+      "items": {
+        "$ref": "#/$defs/Link"
+      },
+      "title": "Links",
+      "type": "array"
+    },
+    "dates": {
+      "items": {
+        "$ref": "#/$defs/DateClaim"
+      },
+      "title": "Dates",
+      "type": "array"
+    },
+    "observed_get_completed_at": {
+      "title": "Observed Get Completed At",
+      "type": "string"
+    },
+    "acquisition_evidence": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Acquisition Evidence",
+      "type": "array"
+    },
+    "repository_intake_at_review": {
+      "default": null,
+      "title": "Repository Intake At Review",
+      "type": "null"
+    },
+    "effective_date": {
+      "default": null,
+      "title": "Effective Date",
+      "type": "null"
+    },
+    "native_bytes": {
+      "const": 0,
+      "default": 0,
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "ocr_bytes": {
+      "title": "Ocr Bytes",
+      "type": "integer"
+    },
+    "observations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "external_reviews_consulted": {
+      "const": false,
+      "default": false,
+      "title": "External Reviews Consulted",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "source_id",
+    "authority_id",
+    "reviewed_at",
+    "source",
+    "transcript",
+    "method",
+    "full_pages",
+    "focused_crops",
+    "pages",
+    "blocks",
+    "marks",
+    "tables",
+    "links",
+    "dates",
+    "observed_get_completed_at",
+    "acquisition_evidence",
+    "ocr_bytes",
+    "observations",
+    "limitations"
+  ],
+  "title": "Review",
+  "type": "object"
+}

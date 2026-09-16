@@ -1,0 +1,80 @@
+{
+  "assignment_id": "SH-EXT-002",
+  "reservations": [
+    {
+      "action_id": "SHEXT002-A001",
+      "authority_id": "CO-COUNTY-PUEBLO",
+      "reserved_at": "2026-09-13T01:57:19.462+00:00",
+      "tool_name": "mac_curl",
+      "action_kind": "download",
+      "requested_url": "https://www.pueblocounty.gov/sites/default/files/2025-05/Fee%20Schedule%20Adopted%205.8.25%20-%20Revised%20%282%29.pdf",
+      "basis": "DIRECTED_PROPOSAL target1 exact observed fee PDF href from A031 parent",
+      "budget_checked": true
+    },
+    {
+      "action_id": "SHEXT002-A002",
+      "authority_id": "CO-COUNTY-PUEBLO",
+      "reserved_at": "2026-09-13T01:57:20.394+00:00",
+      "tool_name": "mac_curl",
+      "action_kind": "open",
+      "requested_url": "https://www.pueblocounty.gov/board-county-commissioners/board-county-commissioners",
+      "basis": "DIRECTED_PROPOSAL target2 commissioner catalog lead",
+      "budget_checked": true
+    }
+  ],
+  "results": [
+    {
+      "action_id": "SHEXT002-A001",
+      "finished_at": "2026-09-13T01:57:20.393+00:00",
+      "observed_final_url": "https://www.pueblocounty.gov/sites/default/files/2025-05/Fee%20Schedule%20Adopted%205.8.25%20-%20Revised%20%282%29.pdf",
+      "visible_redirect_urls": [],
+      "observed_http_status": 200,
+      "outcome": "response",
+      "body_role": "original_pdf",
+      "body_sha256": "1c9fda2c8bacb414468947664d6edb6640845081fcb1a5366dccf0c58720a084",
+      "size_bytes": 75214,
+      "pdf_magic": true,
+      "pdf_pages": 2,
+      "retained_assets": [
+        {
+          "path": "raw/SHEXT002-A001.pdf",
+          "sha256": "1c9fda2c8bacb414468947664d6edb6640845081fcb1a5366dccf0c58720a084",
+          "size_bytes": 75214
+        },
+        {
+          "path": "headers/SHEXT002-A001.json",
+          "sha256": "00fd7749f8513fd424833d67a518f4b4861ecb1dfe83153630c494e8c0ca757a",
+          "size_bytes": 665
+        }
+      ],
+      "notes": "curl_rc=0; cum=75214; stop_on_403_policy=n/a"
+    },
+    {
+      "action_id": "SHEXT002-A002",
+      "finished_at": "2026-09-13T01:57:20.652+00:00",
+      "observed_final_url": "https://www.pueblocounty.gov/board-county-commissioners/board-county-commissioners",
+      "visible_redirect_urls": [],
+      "observed_http_status": 403,
+      "outcome": "access_denied",
+      "body_role": "error_body",
+      "body_sha256": "d4074fa6d9f4ac22d763ea65b9419241dac025322e2f57b9393dfd2bf5b43854",
+      "size_bytes": 5868,
+      "pdf_magic": false,
+      "pdf_pages": null,
+      "retained_assets": [
+        {
+          "path": "raw/SHEXT002-A002.html",
+          "sha256": "d4074fa6d9f4ac22d763ea65b9419241dac025322e2f57b9393dfd2bf5b43854",
+          "size_bytes": 5868
+        },
+        {
+          "path": "headers/SHEXT002-A002.json",
+          "sha256": "92a8f595d646e3f4a4da91286de31f0605b179bd9003a6b7160f91d7441810bc",
+          "size_bytes": 466
+        }
+      ],
+      "notes": "curl_rc=0; cum=81082; stop_on_403_policy=triggered"
+    }
+  ],
+  "hidden_network_requests_measured": false
+}

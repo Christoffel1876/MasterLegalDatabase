@@ -1,0 +1,63 @@
+{
+  "additionalProperties": false,
+  "description": "Portable closure checks, explicitly excluding source access.",
+  "properties": {
+    "status": {
+      "const": "passed",
+      "title": "Status",
+      "type": "string"
+    },
+    "prototype_files": {
+      "title": "Prototype Files",
+      "type": "integer"
+    },
+    "copied_custody_files": {
+      "const": 21,
+      "title": "Copied Custody Files",
+      "type": "integer"
+    },
+    "sources": {
+      "const": 2,
+      "title": "Sources",
+      "type": "integer"
+    },
+    "pdf_baseline_pages": {
+      "const": 14,
+      "title": "Pdf Baseline Pages",
+      "type": "integer"
+    },
+    "offline_examples": {
+      "const": 3,
+      "title": "Offline Examples",
+      "type": "integer"
+    },
+    "offline_example_request_events": {
+      "const": 5,
+      "title": "Offline Example Request Events",
+      "type": "integer"
+    },
+    "public_requests_made_by_verifier": {
+      "const": 0,
+      "title": "Public Requests Made By Verifier",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "status",
+    "prototype_files",
+    "copied_custody_files",
+    "sources",
+    "pdf_baseline_pages",
+    "offline_examples",
+    "offline_example_request_events",
+    "public_requests_made_by_verifier",
+    "legal_currentness"
+  ],
+  "title": "Check",
+  "type": "object"
+}

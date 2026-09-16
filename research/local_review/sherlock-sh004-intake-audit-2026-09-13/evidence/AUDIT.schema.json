@@ -1,0 +1,445 @@
+{
+  "$defs": {
+    "Action": {
+      "additionalProperties": false,
+      "description": "Reported public action versus actually retained bytes.",
+      "properties": {
+        "action_id": {
+          "title": "Action Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-CHAFFEE",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "reported_final_url": {
+          "title": "Reported Final Url",
+          "type": "string"
+        },
+        "reported_status": {
+          "title": "Reported Status",
+          "type": "integer"
+        },
+        "reservation_time_claim": {
+          "format": "date-time",
+          "title": "Reservation Time Claim",
+          "type": "string"
+        },
+        "finished_time_claim": {
+          "format": "date-time",
+          "title": "Finished Time Claim",
+          "type": "string"
+        },
+        "reported_header_date": {
+          "title": "Reported Header Date",
+          "type": "string"
+        },
+        "body": {
+          "$ref": "#/$defs/Ref"
+        },
+        "observed_body_kind": {
+          "enum": [
+            "fee_catalog_html",
+            "redirect_notice_html"
+          ],
+          "title": "Observed Body Kind",
+          "type": "string"
+        },
+        "pdf_magic_present": {
+          "const": false,
+          "title": "Pdf Magic Present",
+          "type": "boolean"
+        },
+        "received_header_metadata": {
+          "$ref": "#/$defs/Ref"
+        },
+        "recorded_command": {
+          "$ref": "#/$defs/Ref"
+        },
+        "unopened_location": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Unopened Location"
+        },
+        "original_http_witnessed": {
+          "const": false,
+          "title": "Original Http Witnessed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "action_id",
+        "authority_id",
+        "requested_url",
+        "reported_final_url",
+        "reported_status",
+        "reservation_time_claim",
+        "finished_time_claim",
+        "reported_header_date",
+        "body",
+        "observed_body_kind",
+        "pdf_magic_present",
+        "received_header_metadata",
+        "recorded_command",
+        "unopened_location",
+        "original_http_witnessed"
+      ],
+      "title": "Action",
+      "type": "object"
+    },
+    "Facts": {
+      "additionalProperties": false,
+      "description": "Measured finite evidence counts; unrelated retained duplicates are not actions.",
+      "properties": {
+        "received_files": {
+          "title": "Received Files",
+          "type": "integer"
+        },
+        "inventory_rows": {
+          "title": "Inventory Rows",
+          "type": "integer"
+        },
+        "inventory_hash_failures": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Inventory Hash Failures",
+          "type": "array"
+        },
+        "inventory_unlisted": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Inventory Unlisted",
+          "type": "array"
+        },
+        "hash_summary_rows": {
+          "title": "Hash Summary Rows",
+          "type": "integer"
+        },
+        "hash_summary_failures": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Hash Summary Failures",
+          "type": "array"
+        },
+        "reported_actions": {
+          "const": 4,
+          "title": "Reported Actions",
+          "type": "integer"
+        },
+        "distinct_requested_urls": {
+          "const": 4,
+          "title": "Distinct Requested Urls",
+          "type": "integer"
+        },
+        "reported_redirect_hops": {
+          "const": 0,
+          "title": "Reported Redirect Hops",
+          "type": "integer"
+        },
+        "actual_unique_body_bytes": {
+          "const": 166875,
+          "title": "Actual Unique Body Bytes",
+          "type": "integer"
+        },
+        "retained_raw_files": {
+          "const": 6,
+          "title": "Retained Raw Files",
+          "type": "integer"
+        },
+        "retained_raw_file_bytes_including_aliases": {
+          "const": 333155,
+          "title": "Retained Raw File Bytes Including Aliases",
+          "type": "integer"
+        },
+        "retained_pdf_bodies": {
+          "const": 0,
+          "title": "Retained Pdf Bodies",
+          "type": "integer"
+        },
+        "manual_comparison_rows": {
+          "const": 64,
+          "title": "Manual Comparison Rows",
+          "type": "integer"
+        },
+        "manual_exact_digest_matches": {
+          "const": 0,
+          "title": "Manual Exact Digest Matches",
+          "type": "integer"
+        },
+        "manual_exact_url_matches": {
+          "const": 0,
+          "title": "Manual Exact Url Matches",
+          "type": "integer"
+        },
+        "parent_anchor_matches_by_rank": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Parent Anchor Matches By Rank",
+          "type": "array"
+        },
+        "catalog_link_occurrences": {
+          "const": 431,
+          "title": "Catalog Link Occurrences",
+          "type": "integer"
+        },
+        "location_leads": {
+          "const": 2,
+          "title": "Location Leads",
+          "type": "integer"
+        },
+        "unique_derived_urls": {
+          "const": 165,
+          "title": "Unique Derived Urls",
+          "type": "integer"
+        },
+        "backlog_rows": {
+          "const": 163,
+          "title": "Backlog Rows",
+          "type": "integer"
+        },
+        "unique_backlog_urls": {
+          "const": 163,
+          "title": "Unique Backlog Urls",
+          "type": "integer"
+        },
+        "omitted_derived_urls": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Omitted Derived Urls",
+          "type": "array"
+        },
+        "backlog_outside_county_host": {
+          "const": 43,
+          "title": "Backlog Outside County Host",
+          "type": "integer"
+        },
+        "serialized_label_qualifications": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Serialized Label Qualifications",
+          "type": "array"
+        },
+        "url_serialization_qualifications": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Url Serialization Qualifications",
+          "type": "array"
+        },
+        "useful_unopened_fee_lead": {
+          "title": "Useful Unopened Fee Lead",
+          "type": "string"
+        },
+        "actions": {
+          "items": {
+            "$ref": "#/$defs/Action"
+          },
+          "title": "Actions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "received_files",
+        "inventory_rows",
+        "inventory_hash_failures",
+        "inventory_unlisted",
+        "hash_summary_rows",
+        "hash_summary_failures",
+        "reported_actions",
+        "distinct_requested_urls",
+        "reported_redirect_hops",
+        "actual_unique_body_bytes",
+        "retained_raw_files",
+        "retained_raw_file_bytes_including_aliases",
+        "retained_pdf_bodies",
+        "manual_comparison_rows",
+        "manual_exact_digest_matches",
+        "manual_exact_url_matches",
+        "parent_anchor_matches_by_rank",
+        "catalog_link_occurrences",
+        "location_leads",
+        "unique_derived_urls",
+        "backlog_rows",
+        "unique_backlog_urls",
+        "omitted_derived_urls",
+        "backlog_outside_county_host",
+        "serialized_label_qualifications",
+        "url_serialization_qualifications",
+        "useful_unopened_fee_lead",
+        "actions"
+      ],
+      "title": "Facts",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "description": "An accepted observation or explicit qualification, never legal promotion.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "disposition": {
+          "enum": [
+            "accepted_local_evidence",
+            "qualified",
+            "unverified_claim"
+          ],
+          "title": "Disposition",
+          "type": "string"
+        },
+        "finding": {
+          "title": "Finding",
+          "type": "string"
+        },
+        "evidence_paths": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Paths",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "disposition",
+        "finding",
+        "evidence_paths"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "One local immutable byte identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Initial offline intake disposition with original acquisition explicitly unverified.",
+  "properties": {
+    "schema_version": {
+      "const": "geode.sh004.offline-audit.v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "offline_audit_complete_with_qualifications",
+      "title": "Status",
+      "type": "string"
+    },
+    "assignment_manifest_sha256": {
+      "const": "4485cb16ddbf4dbd0e1b7b7b505961d3d7e67d6fb59bae4194763e4117536c04",
+      "title": "Assignment Manifest Sha256",
+      "type": "string"
+    },
+    "custody": {
+      "$ref": "#/$defs/Ref"
+    },
+    "report": {
+      "$ref": "#/$defs/Ref"
+    },
+    "facts": {
+      "$ref": "#/$defs/Facts"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "source_qa_performed": {
+      "const": false,
+      "title": "Source Qa Performed",
+      "type": "boolean"
+    },
+    "public_requests_by_auditor": {
+      "const": 0,
+      "title": "Public Requests By Auditor",
+      "type": "integer"
+    },
+    "canonical_writes": {
+      "const": 0,
+      "title": "Canonical Writes",
+      "type": "integer"
+    },
+    "agent_current_state_verified": {
+      "const": false,
+      "title": "Agent Current State Verified",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "prepared_at",
+    "status",
+    "assignment_manifest_sha256",
+    "custody",
+    "report",
+    "facts",
+    "findings",
+    "source_qa_performed",
+    "public_requests_by_auditor",
+    "canonical_writes",
+    "agent_current_state_verified",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

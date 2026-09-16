@@ -361,9 +361,12 @@ def build_coverage_dashboard(root: Path, *, generated_at: datetime | None = None
     for row in entries:
         if not isinstance(row, dict) or not row.get("name"):
             continue
-        name = str(row["name"])
-        if name.casefold() in {"sheriden lake", "sheridan lake"}:
-            continue
+        name = str(row["name"]).strip()
+        # The archived CML directory misspells the incorporated town Sheridan Lake.
+        # Census ACS25 identifies Sheridan Lake town (GEOID 0869700); it is not
+        # a synthetic statewide discovery entry and must remain in this inventory.
+        if name.casefold() == "sheriden lake":
+            name = "Sheridan Lake"
         directory_names.add(name.casefold())
         key = str(row.get("authority_id") or "DIRECTORY-MUNICIPAL-" + name.upper())
         authority(key, "municipal", name, "MUNICIPAL_EXPANSION_QUEUE.json")
@@ -511,15 +514,24 @@ def build_coverage_dashboard(root: Path, *, generated_at: datetime | None = None
         if isinstance(queue, dict) else None,
         "inherited_directory_entries": queue.get("directory_entries")
         if isinstance(queue, dict) else None,
+        "inherited_directory_source_retrieved_at": queue.get("source_retrieved_at")
+        if isinstance(queue, dict) else None,
+        "directory_source_retrieval_status": queue.get(
+            "source_retrieval_status", "inherited_unverified"
+        ) if isinstance(queue, dict) else "unknown",
+        "directory_generated_at": queue.get("generated_at") if isinstance(queue, dict) else None,
         "recounted_directory_names": len(directory_names),
         "authority_identities_in_inventory": len(municipal_rows),
         "registered_authority_ids": sum("MUNICIPAL_SOURCE_REGISTRY.json" in r.identity_sources
                                         for r in municipal_rows),
         "inherited_statewide_target": municipal.get("statewide_target"),
         "excluded_synthetic_authority_ids": sorted(synthetic_ids),
-        "explanation": "Inherited 273 target and directory/source counts require reconciliation. "
-                       "Statewide discovery entries and Sheriden Lake are not municipalities. "
-                       "These are repository claims and recounts, not a verified current total.",
+        "explanation": "Inherited target and directory/source counts are distinct from legal "
+                       "coverage. Statewide discovery entries are not municipalities. The CML "
+                       "spelling Sheriden Lake is normalized to Sheridan Lake, identified by "
+                       "Census ACS25 as an incorporated town (GEOID 0869700, as of 2025-01-01). "
+                       "These repository recounts do not verify today's active-government total "
+                       "or turn directory generation time into source retrieval time.",
     }
     for file in inputs:
         if file.invalid_records:

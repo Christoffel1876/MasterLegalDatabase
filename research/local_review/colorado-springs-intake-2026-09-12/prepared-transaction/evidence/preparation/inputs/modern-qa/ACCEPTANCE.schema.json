@@ -1,0 +1,66 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "accepted_scoped_source_review",
+        "accepted_bounded_source_discrepancy"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "package_path": {
+      "title": "Package Path",
+      "type": "string"
+    },
+    "manifest_sha256": {
+      "title": "Manifest Sha256",
+      "type": "string"
+    },
+    "package_files": {
+      "title": "Package Files",
+      "type": "integer"
+    },
+    "verifier_stdout_sha256": {
+      "title": "Verifier Stdout Sha256",
+      "type": "string"
+    },
+    "directly_inspected_pages": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Directly Inspected Pages",
+      "type": "array"
+    },
+    "scope": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Scope",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "package_path",
+    "manifest_sha256",
+    "package_files",
+    "verifier_stdout_sha256",
+    "directly_inspected_pages",
+    "scope",
+    "legal_currentness"
+  ],
+  "title": "Acceptance",
+  "type": "object"
+}

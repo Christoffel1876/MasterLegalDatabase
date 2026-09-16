@@ -1,0 +1,133 @@
+{
+  "$defs": {
+    "Claim": {
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "expected_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Expected Sha256",
+          "type": "string"
+        },
+        "actual_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Actual Sha256",
+          "type": "string"
+        },
+        "matches": {
+          "title": "Matches",
+          "type": "boolean"
+        },
+        "actual_path": {
+          "title": "Actual Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "expected_sha256",
+        "actual_sha256",
+        "matches",
+        "actual_path"
+      ],
+      "title": "Claim",
+      "type": "object"
+    },
+    "File": {
+      "additionalProperties": false,
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "copy_path": {
+          "title": "Copy Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "git_blob_match": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Git Blob Match"
+        }
+      },
+      "required": [
+        "original_path",
+        "copy_path",
+        "sha256",
+        "size_bytes",
+        "git_blob_match"
+      ],
+      "title": "File",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "frozen_at": {
+      "format": "date-time",
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "comparison_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "title": "Comparison Commit",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "hash_claims": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "title": "Hash Claims",
+      "type": "array"
+    },
+    "duplicate_packet_and_committed_bytes_match": {
+      "title": "Duplicate Packet And Committed Bytes Match",
+      "type": "boolean"
+    },
+    "original_files_unchanged": {
+      "title": "Original Files Unchanged",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "frozen_at",
+    "comparison_commit",
+    "files",
+    "hash_claims",
+    "duplicate_packet_and_committed_bytes_match",
+    "original_files_unchanged",
+    "legal_currentness"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

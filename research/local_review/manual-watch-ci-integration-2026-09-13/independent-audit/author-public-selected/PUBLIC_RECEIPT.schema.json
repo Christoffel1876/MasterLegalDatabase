@@ -1,0 +1,173 @@
+{
+  "$defs": {
+    "Omission": {
+      "additionalProperties": false,
+      "description": "Record an excluded historical member without carrying its contents.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "reason": {
+          "const": "unrelated_untracked_user_owned_file",
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes",
+        "reason"
+      ],
+      "title": "Omission",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "An exact retained file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Bind the current operational proposal and limited historical preservation.",
+  "properties": {
+    "status": {
+      "const": "PREPARED_ONLY_PUBLIC_SUBSET_AND_87_PIN_REVISION",
+      "title": "Status",
+      "type": "string"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "predecessor_manifest": {
+      "$ref": "#/$defs/Ref"
+    },
+    "original_payload_count": {
+      "const": 154,
+      "title": "Original Payload Count",
+      "type": "integer"
+    },
+    "retained_original_payload_count": {
+      "const": 153,
+      "title": "Retained Original Payload Count",
+      "type": "integer"
+    },
+    "omitted": {
+      "items": {
+        "$ref": "#/$defs/Omission"
+      },
+      "maxItems": 1,
+      "minItems": 1,
+      "title": "Omitted",
+      "type": "array"
+    },
+    "install_files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Install Files",
+      "type": "array"
+    },
+    "final_immutable_pin_count": {
+      "const": 87,
+      "title": "Final Immutable Pin Count",
+      "type": "integer"
+    },
+    "all_final_pins_git_tracked": {
+      "const": true,
+      "title": "All Final Pins Git Tracked",
+      "type": "boolean"
+    },
+    "focused_tests_passed": {
+      "const": 44,
+      "title": "Focused Tests Passed",
+      "type": "integer"
+    },
+    "sparse_readiness_passed": {
+      "const": true,
+      "title": "Sparse Readiness Passed",
+      "type": "boolean"
+    },
+    "unrelated_user_file_original_unchanged": {
+      "const": true,
+      "title": "Unrelated User File Original Unchanged",
+      "type": "boolean"
+    },
+    "unrelated_user_file_contents_present": {
+      "const": false,
+      "title": "Unrelated User File Contents Present",
+      "type": "boolean"
+    },
+    "source_requests": {
+      "const": 0,
+      "title": "Source Requests",
+      "type": "integer"
+    },
+    "installed_or_deployed": {
+      "const": false,
+      "title": "Installed Or Deployed",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "prepared_at",
+    "predecessor_manifest",
+    "original_payload_count",
+    "retained_original_payload_count",
+    "omitted",
+    "install_files",
+    "final_immutable_pin_count",
+    "all_final_pins_git_tracked",
+    "focused_tests_passed",
+    "sparse_readiness_passed",
+    "unrelated_user_file_original_unchanged",
+    "unrelated_user_file_contents_present",
+    "source_requests",
+    "installed_or_deployed",
+    "limitations"
+  ],
+  "title": "PublicReceipt",
+  "type": "object"
+}

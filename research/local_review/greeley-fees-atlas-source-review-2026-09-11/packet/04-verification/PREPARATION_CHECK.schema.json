@@ -1,0 +1,290 @@
+{
+  "$defs": {
+    "CheckResult": {
+      "additionalProperties": false,
+      "properties": {
+        "documents": {
+          "const": 3,
+          "title": "Documents",
+          "type": "integer"
+        },
+        "physical_pages": {
+          "const": 6,
+          "title": "Physical Pages",
+          "type": "integer"
+        },
+        "payload_reference_checks": {
+          "minimum": 1,
+          "title": "Payload Reference Checks",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "documents",
+        "physical_pages",
+        "payload_reference_checks"
+      ],
+      "title": "CheckResult",
+      "type": "object"
+    },
+    "FileRef": {
+      "additionalProperties": false,
+      "description": "Exact file reference; its scope is explicit in the containing field.",
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    },
+    "PacketFile": {
+      "additionalProperties": false,
+      "description": "Require a confined relative packet path.",
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "PacketFile",
+      "type": "object"
+    },
+    "PageCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "assignment_id": {
+          "enum": [
+            "EB-PDF-015",
+            "EB-PDF-016",
+            "EB-PDF-017"
+          ],
+          "title": "Assignment Id",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "source_sha256": {
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "physical_page": {
+          "maximum": 3,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/PacketFile"
+        },
+        "dimensions": {
+          "items": {
+            "type": "integer"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "title": "Dimensions",
+          "type": "array"
+        },
+        "png_chunk_crcs_verified": {
+          "const": true,
+          "default": true,
+          "title": "Png Chunk Crcs Verified",
+          "type": "boolean"
+        },
+        "pixels_per_metre": {
+          "const": 11811,
+          "default": 11811,
+          "title": "Pixels Per Metre",
+          "type": "integer"
+        },
+        "rendering_dpi": {
+          "const": 300,
+          "default": 300,
+          "title": "Rendering Dpi",
+          "type": "integer"
+        },
+        "full_image_visually_inspected": {
+          "const": true,
+          "default": true,
+          "title": "Full Image Visually Inspected",
+          "type": "boolean"
+        },
+        "printed_page_label_observed": {
+          "default": null,
+          "title": "Printed Page Label Observed",
+          "type": "null"
+        },
+        "image_observation": {
+          "title": "Image Observation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "assignment_id",
+        "source_id",
+        "source_sha256",
+        "physical_page",
+        "image",
+        "dimensions",
+        "image_observation"
+      ],
+      "title": "PageCheck",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_DISPATCHED",
+      "default": "PREPARED_NOT_DISPATCHED",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "packet_manifest": {
+      "$ref": "#/$defs/PacketFile"
+    },
+    "assignment": {
+      "$ref": "#/$defs/PacketFile"
+    },
+    "external_assignment": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "inventory_before_this_receipt": {
+      "items": {
+        "$ref": "#/$defs/PacketFile"
+      },
+      "title": "Inventory Before This Receipt",
+      "type": "array"
+    },
+    "page_checks": {
+      "items": {
+        "$ref": "#/$defs/PageCheck"
+      },
+      "maxItems": 6,
+      "minItems": 6,
+      "title": "Page Checks",
+      "type": "array"
+    },
+    "portable_check": {
+      "$ref": "#/$defs/CheckResult"
+    },
+    "rerender_check": {
+      "$ref": "#/$defs/CheckResult"
+    },
+    "frozen_raw_manifest_records": {
+      "const": 38,
+      "default": 38,
+      "title": "Frozen Raw Manifest Records",
+      "type": "integer"
+    },
+    "source_candidate_files_unchanged_after_generation": {
+      "const": true,
+      "default": true,
+      "title": "Source Candidate Files Unchanged After Generation",
+      "type": "boolean"
+    },
+    "source_only_folders_contain_exact_pdf_and_expected_full_pngs_only": {
+      "const": true,
+      "default": true,
+      "title": "Source Only Folders Contain Exact Pdf And Expected Full Pngs Only",
+      "type": "boolean"
+    },
+    "source_roles_qualified": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Roles Qualified",
+      "type": "array"
+    },
+    "constraints": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Constraints",
+      "type": "array"
+    },
+    "checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "packet_manifest",
+    "assignment",
+    "external_assignment",
+    "inventory_before_this_receipt",
+    "page_checks",
+    "portable_check",
+    "rerender_check",
+    "source_roles_qualified",
+    "constraints",
+    "checks",
+    "limitations"
+  ],
+  "title": "Final",
+  "type": "object"
+}

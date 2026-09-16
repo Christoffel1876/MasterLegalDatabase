@@ -1,0 +1,145 @@
+{
+  "$defs": {
+    "File": {
+      "additionalProperties": false,
+      "description": "Bind one reviewed payload to exact bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "File",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Record bounded source-fidelity and custody acceptance qualifications.",
+  "properties": {
+    "source_id": {
+      "const": "larimer-fee-increase-memo-sd004-lc-09",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "assignment_id": {
+      "const": "EB-PDF-011",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "source_fidelity_verified_with_portability_qualification",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "inspected_files": {
+      "items": {
+        "$ref": "#/$defs/File"
+      },
+      "title": "Inspected Files",
+      "type": "array"
+    },
+    "verified_copy_receipts": {
+      "const": 12,
+      "title": "Verified Copy Receipts",
+      "type": "integer"
+    },
+    "verified_reviewer_hash_references": {
+      "const": 11,
+      "title": "Verified Reviewer Hash References",
+      "type": "integer"
+    },
+    "native_text_bytes": {
+      "const": 1256,
+      "title": "Native Text Bytes",
+      "type": "integer"
+    },
+    "candidate_slice": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Candidate Slice",
+      "type": "array"
+    },
+    "topic_count": {
+      "const": 2,
+      "title": "Topic Count",
+      "type": "integer"
+    },
+    "source_pages": {
+      "const": 1,
+      "title": "Source Pages",
+      "type": "integer"
+    },
+    "image_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Image Sha256",
+      "type": "string"
+    },
+    "checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_id",
+    "assignment_id",
+    "recorded_at",
+    "status",
+    "legal_currentness",
+    "inspected_files",
+    "verified_copy_receipts",
+    "verified_reviewer_hash_references",
+    "native_text_bytes",
+    "candidate_slice",
+    "topic_count",
+    "source_pages",
+    "image_sha256",
+    "checks",
+    "findings",
+    "limitations"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

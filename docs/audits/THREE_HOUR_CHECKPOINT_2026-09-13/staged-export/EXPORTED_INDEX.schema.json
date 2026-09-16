@@ -1,0 +1,68 @@
+{
+  "$defs": {
+    "ExportAsset": {
+      "additionalProperties": false,
+      "description": "Exact index blob identity checked after export.",
+      "properties": {
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "mode": {
+          "enum": [
+            "100644",
+            "100755"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "oid": {
+          "pattern": "^[a-f0-9]{40,64}$",
+          "title": "Oid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sha256",
+        "size_bytes",
+        "path",
+        "mode",
+        "oid"
+      ],
+      "title": "ExportAsset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Complete index-derived exported tree inventory.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/ExportAsset"
+      },
+      "title": "Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "files"
+  ],
+  "title": "ExportInventory",
+  "type": "object"
+}

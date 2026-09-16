@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-09-13T01:58:10.751562Z",
+  "status": "revision_required_before_installation_or_live_execution",
+  "received_package": {
+    "path": "received/FINAL_MANIFEST.json",
+    "sha256": "7b2f64e85f74cc2c3a122417f7a727afe6535ffa4dd22bf713fe4dac402c9a71",
+    "size_bytes": 14410
+  },
+  "adapter": {
+    "path": "received/proposed/geode/pipeline/manual_source_watch_batches.py",
+    "sha256": "4bed93109ae0fcd979722421017cb268f6ca7dd973b2f13850b9c22662b9cb4f",
+    "size_bytes": 43672
+  },
+  "helper": {
+    "path": "received/proposed/geode/pipeline/manual_watch_http_v2.py",
+    "sha256": "acb62a492dd9da289b549826381f62164603ca4dae25801ba5a9b396eee12950",
+    "size_bytes": 31971
+  },
+  "counterexamples": {
+    "path": "COUNTEREXAMPLES_TYPED.json",
+    "sha256": "14ba61dd5eb4bdff8d534dc56f5a498064610ca66edee283995bdce685c5cdc1",
+    "size_bytes": 1410
+  },
+  "findings": [
+    {
+      "id": "WATCH-R1",
+      "severity": "blocks_installation",
+      "title": "Resealed cross-host redirect history passes replay",
+      "location": "manual_watch_http_v2.py:459-467; manual_source_watch_batches.py:796",
+      "observation": "A valid offline county batch was changed only in temporary event/header/reservation/report hashes. Arapahoe redirect response and its next reservation were replaced by a URL on the separately allowed Weld hostname. verify_run returned completed with Arapahoe observation.response_url on www.weld.gov. No public request occurred; original fixture transport used only injected bytes. Runtime reserve() correctly rejects this change, but ledger() replay checks only general HOSTS and follow-up equality.",
+      "remedy": "During replay, require every reservation hostname to equal the source target hostname, in addition to the exact first URL and chained redirect checks. Keep terminal refused external redirects as recorded failure evidence; never accept a followed cross-host reservation. Test resealed coherent fixture and a valid same-host positive control."
+    },
+    {
+      "id": "WATCH-R2",
+      "severity": "blocks_installation",
+      "title": "Resealed overlong per-request deadline passes replay",
+      "location": "manual_source_watch_batches.py:801-812",
+      "observation": "The second reservation deadline was changed from +30 to +200 seconds; its complete PDF result and later event/report timestamps were changed consistently to +70 seconds. All remain inside the +300 run deadline. verify_run returned completed even though request_seconds is 30. Checking result.finished_at only against the altered reservation deadline does not enforce the pinned per-request maximum.",
+      "remedy": "Require reservation.deadline == min(run.deadline, reservation.reserved_at + timedelta(seconds=plan.limits.request_seconds)) during replay, then retain strict complete-before-deadline validation. Test overlong, equality and narrower-limit runs without weakening timeout/partial evidence."
+    }
+  ],
+  "positive_checks": [
+    "Exact 70-payload package closure and six-source/three-batch real canonical preflight passed with network disabled.",
+    "All 15 INSTALL.patch additions reconstruct proposed bytes exactly and all 15 production destinations were absent at review; no install performed.",
+    "The original Springs adapter, helper and config match the three retained exact hashes. This review did not rerun the old saved live report or the 199-test author suite.",
+    "Six-source catalog is code-pinned; selected canonical source/authority/raw-row SHA/path and date fields are explicit. Arapahoe HTTP start stays null. Greeley September12 reacquisition remains separate from older received_review_package/null raw URL.",
+    "Runtime code retains source-origin redirect restriction, four-request/four-URL, one-hop, 2MB/source,4MB/run,30-second request and300-second run limits; both reported failures concern offline semantic replay, not demonstrated live limit bypass.",
+    "Per-source context preserves document roles, gaps and unknown currentness. Catalog references are immutable; watching unchanged bytes does not expand prior QA."
+  ],
+  "limits": [
+    "Candidate-aware implementation review; source-review scopes were read from accepted pinned metadata, not newly re-reviewed from PDF images.",
+    "No network, deployment, production edits, full-suite run or broad assurance. Two local tamper reproductions intentionally reseal their temporary histories to exercise semantic replay beyond hashes.",
+    "This packet preserves the original proposed package exactly. Future revisions need a new package pin and independent recheck; these findings must remain historical rather than overwritten."
+  ],
+  "legal_currentness": "not_verified",
+  "production_writes": 0,
+  "public_requests": 0
+}

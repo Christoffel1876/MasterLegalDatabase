@@ -1,0 +1,314 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "proposed_record_id": {
+          "title": "Proposed Record Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-WELD",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "source_original": {
+          "$ref": "#/$defs/Asset"
+        },
+        "preserved_from": {
+          "title": "Preserved From",
+          "type": "string"
+        },
+        "successful_event_id": {
+          "title": "Successful Event Id",
+          "type": "string"
+        },
+        "exact_requested_url": {
+          "title": "Exact Requested Url",
+          "type": "string"
+        },
+        "exact_final_url": {
+          "title": "Exact Final Url",
+          "type": "string"
+        },
+        "http_started_at": {
+          "format": "date-time",
+          "title": "Http Started At",
+          "type": "string"
+        },
+        "http_completed_at": {
+          "format": "date-time",
+          "title": "Http Completed At",
+          "type": "string"
+        },
+        "http_status": {
+          "const": 200,
+          "title": "Http Status",
+          "type": "integer"
+        },
+        "content_type": {
+          "const": "application/pdf",
+          "title": "Content Type",
+          "type": "string"
+        },
+        "verified_tls": {
+          "const": true,
+          "title": "Verified Tls",
+          "type": "boolean"
+        },
+        "source_page_count": {
+          "enum": [
+            3,
+            5
+          ],
+          "title": "Source Page Count",
+          "type": "integer"
+        },
+        "native_nonblank_pages": {
+          "enum": [
+            3,
+            5
+          ],
+          "title": "Native Nonblank Pages",
+          "type": "integer"
+        },
+        "native_utf8_bytes": {
+          "title": "Native Utf8 Bytes",
+          "type": "integer"
+        },
+        "source_role_review_status": {
+          "const": "pending_root_reconciliation",
+          "title": "Source Role Review Status",
+          "type": "string"
+        },
+        "source_role_provisional": {
+          "title": "Source Role Provisional",
+          "type": "string"
+        },
+        "source_scope_provisional": {
+          "title": "Source Scope Provisional",
+          "type": "string"
+        },
+        "source_publication_date": {
+          "title": "Source Publication Date",
+          "type": "null"
+        },
+        "adoption_date": {
+          "title": "Adoption Date",
+          "type": "null"
+        },
+        "effective_date": {
+          "title": "Effective Date",
+          "type": "null"
+        },
+        "original_http_headers": {
+          "$ref": "#/$defs/Asset"
+        },
+        "public_derived_headers": {
+          "$ref": "#/$defs/Asset"
+        },
+        "header_transformation": {
+          "const": "Only Set-Cookie header lines omitted; all other bytes retained unchanged",
+          "title": "Header Transformation",
+          "type": "string"
+        },
+        "access_receipt": {
+          "$ref": "#/$defs/Asset"
+        },
+        "historical_recorded_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Historical Recorded Sha256",
+          "type": "string"
+        },
+        "newly_measured_digest_equals_recorded_digest": {
+          "const": true,
+          "title": "Newly Measured Digest Equals Recorded Digest",
+          "type": "boolean"
+        },
+        "historical_original_bytes_reopened": {
+          "const": false,
+          "title": "Historical Original Bytes Reopened",
+          "type": "boolean"
+        },
+        "request": {
+          "$ref": "#/$defs/Asset"
+        },
+        "dry_run_preview": {
+          "$ref": "#/$defs/Asset"
+        },
+        "dry_run_preview_is_actual_intake": {
+          "const": false,
+          "title": "Dry Run Preview Is Actual Intake",
+          "type": "boolean"
+        },
+        "actual_repository_received_at": {
+          "title": "Actual Repository Received At",
+          "type": "null"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "proposed_record_id",
+        "authority_id",
+        "source_original",
+        "preserved_from",
+        "successful_event_id",
+        "exact_requested_url",
+        "exact_final_url",
+        "http_started_at",
+        "http_completed_at",
+        "http_status",
+        "content_type",
+        "verified_tls",
+        "source_page_count",
+        "native_nonblank_pages",
+        "native_utf8_bytes",
+        "source_role_review_status",
+        "source_role_provisional",
+        "source_scope_provisional",
+        "source_publication_date",
+        "adoption_date",
+        "effective_date",
+        "original_http_headers",
+        "public_derived_headers",
+        "header_transformation",
+        "access_receipt",
+        "historical_recorded_sha256",
+        "newly_measured_digest_equals_recorded_digest",
+        "historical_original_bytes_reopened",
+        "request",
+        "dry_run_preview",
+        "dry_run_preview_is_actual_intake",
+        "actual_repository_received_at",
+        "legal_currentness"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "pending_source_role_reconciliation_and_explicit_internal_go_ahead",
+      "title": "Status",
+      "type": "string"
+    },
+    "apply_available": {
+      "const": false,
+      "title": "Apply Available",
+      "type": "boolean"
+    },
+    "raw_archive_or_control_changes": {
+      "const": "none",
+      "title": "Raw Archive Or Control Changes",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "dedupe": {
+      "$ref": "#/$defs/Asset"
+    },
+    "request_schema": {
+      "$ref": "#/$defs/Asset"
+    },
+    "preview_schema": {
+      "$ref": "#/$defs/Asset"
+    },
+    "payloads": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Payloads",
+      "type": "array"
+    },
+    "proposed_after_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Proposed After Counts",
+      "type": "object"
+    },
+    "application_constraints": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Application Constraints",
+      "type": "array"
+    },
+    "scope_limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Scope Limits",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "prepared_at",
+    "status",
+    "apply_available",
+    "raw_archive_or_control_changes",
+    "sources",
+    "dedupe",
+    "request_schema",
+    "preview_schema",
+    "payloads",
+    "proposed_after_counts",
+    "application_constraints",
+    "scope_limits",
+    "legal_currentness"
+  ],
+  "title": "Preparation",
+  "type": "object"
+}

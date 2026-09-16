@@ -1,0 +1,224 @@
+{
+  "$defs": {
+    "FileRef": {
+      "additionalProperties": false,
+      "description": "Exact package-relative byte identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    },
+    "Target": {
+      "additionalProperties": false,
+      "description": "An exact Location from an actually retained prior county response.",
+      "properties": {
+        "target_id": {
+          "title": "Target Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-CHAFFEE",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "const": "08",
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "prior_request_url": {
+          "title": "Prior Request Url",
+          "type": "string"
+        },
+        "prior_response_body": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "prior_public_headers": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "prior_actual_result": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "prior_frozen_manifest": {
+          "$ref": "#/$defs/FileRef"
+        },
+        "raw_location": {
+          "title": "Raw Location",
+          "type": "string"
+        },
+        "request_url": {
+          "title": "Request Url",
+          "type": "string"
+        },
+        "encoding_rule": {
+          "const": "Preserve raw Location; replace literal spaces with %20 exactly once",
+          "title": "Encoding Rule",
+          "type": "string"
+        },
+        "evidence_limit": {
+          "title": "Evidence Limit",
+          "type": "string"
+        },
+        "anticipated_role": {
+          "title": "Anticipated Role",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "target_id",
+        "authority_id",
+        "layer_id",
+        "prior_request_url",
+        "prior_response_body",
+        "prior_public_headers",
+        "prior_actual_result",
+        "prior_frozen_manifest",
+        "raw_location",
+        "request_url",
+        "encoding_rule",
+        "evidence_limit",
+        "anticipated_role",
+        "legal_currentness"
+      ],
+      "title": "Target",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Fixed targets and nonrenewable serial request limits.",
+  "properties": {
+    "schema_version": {
+      "const": "chaffee-fee-directed-plan-v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_EXECUTED",
+      "title": "Status",
+      "type": "string"
+    },
+    "targets": {
+      "items": {
+        "$ref": "#/$defs/Target"
+      },
+      "maxItems": 3,
+      "minItems": 1,
+      "title": "Targets",
+      "type": "array"
+    },
+    "maximum_actions": {
+      "const": 3,
+      "title": "Maximum Actions",
+      "type": "integer"
+    },
+    "maximum_distinct_urls": {
+      "const": 3,
+      "title": "Maximum Distinct Urls",
+      "type": "integer"
+    },
+    "maximum_body_bytes": {
+      "const": 20000000,
+      "title": "Maximum Body Bytes",
+      "type": "integer"
+    },
+    "maximum_total_body_bytes": {
+      "const": 30000000,
+      "title": "Maximum Total Body Bytes",
+      "type": "integer"
+    },
+    "request_seconds": {
+      "const": 60,
+      "title": "Request Seconds",
+      "type": "integer"
+    },
+    "connect_seconds": {
+      "const": 15,
+      "title": "Connect Seconds",
+      "type": "integer"
+    },
+    "no_start_after": {
+      "const": "2026-09-13T17:45:00Z",
+      "title": "No Start After",
+      "type": "string"
+    },
+    "finish_by": {
+      "const": "2026-09-13T18:00:00Z",
+      "title": "Finish By",
+      "type": "string"
+    },
+    "redirects": {
+      "const": false,
+      "title": "Redirects",
+      "type": "boolean"
+    },
+    "retries": {
+      "const": 0,
+      "title": "Retries",
+      "type": "integer"
+    },
+    "request_user_agent": {
+      "title": "Request User Agent",
+      "type": "string"
+    },
+    "authorization": {
+      "title": "Authorization",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "prepared_at",
+    "status",
+    "targets",
+    "maximum_actions",
+    "maximum_distinct_urls",
+    "maximum_body_bytes",
+    "maximum_total_body_bytes",
+    "request_seconds",
+    "connect_seconds",
+    "no_start_after",
+    "finish_by",
+    "redirects",
+    "retries",
+    "request_user_agent",
+    "authorization",
+    "limitations"
+  ],
+  "title": "Plan",
+  "type": "object"
+}

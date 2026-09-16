@@ -1,0 +1,229 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact byte identity relative to the declared evidence root.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Record only the tested additive change and unchanged legal-reliance boundary.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "old_sources": {
+      "const": 46,
+      "title": "Old Sources",
+      "type": "integer"
+    },
+    "new_sources": {
+      "const": 59,
+      "title": "New Sources",
+      "type": "integer"
+    },
+    "old_review_linked": {
+      "const": 19,
+      "title": "Old Review Linked",
+      "type": "integer"
+    },
+    "new_review_linked": {
+      "const": 19,
+      "title": "New Review Linked",
+      "type": "integer"
+    },
+    "old_metadata_only": {
+      "const": 27,
+      "title": "Old Metadata Only",
+      "type": "integer"
+    },
+    "new_metadata_only": {
+      "const": 40,
+      "title": "New Metadata Only",
+      "type": "integer"
+    },
+    "old_source_rows_identical": {
+      "const": true,
+      "title": "Old Source Rows Identical",
+      "type": "boolean"
+    },
+    "old_authority_joins_identical": {
+      "const": true,
+      "title": "Old Authority Joins Identical",
+      "type": "boolean"
+    },
+    "old_review_joins_identical": {
+      "const": true,
+      "title": "Old Review Joins Identical",
+      "type": "boolean"
+    },
+    "added_ids": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 13,
+      "minItems": 13,
+      "title": "Added Ids",
+      "type": "array"
+    },
+    "added_authority": {
+      "const": "CO-COUNTY-EL_PASO",
+      "title": "Added Authority",
+      "type": "string"
+    },
+    "added_review_links": {
+      "const": 0,
+      "title": "Added Review Links",
+      "type": "integer"
+    },
+    "added_verified_http_bindings": {
+      "const": 0,
+      "title": "Added Verified Http Bindings",
+      "type": "integer"
+    },
+    "portable_package_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "portable_receipt": {
+      "$ref": "#/$defs/Asset"
+    },
+    "old_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Old Files",
+      "type": "array"
+    },
+    "new_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "New Files",
+      "type": "array"
+    },
+    "live_legacy_coverage_ledger": {
+      "$ref": "#/$defs/Asset"
+    },
+    "package_local_snapshot_paths": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Package Local Snapshot Paths",
+      "type": "array"
+    },
+    "existing_inventory_tests_passed": {
+      "const": 60,
+      "title": "Existing Inventory Tests Passed",
+      "type": "integer"
+    },
+    "actual_join_fixture_tests_passed": {
+      "const": 5,
+      "title": "Actual Join Fixture Tests Passed",
+      "type": "integer"
+    },
+    "deterministic_check_passed": {
+      "const": true,
+      "title": "Deterministic Check Passed",
+      "type": "boolean"
+    },
+    "portable_check_passed": {
+      "const": true,
+      "title": "Portable Check Passed",
+      "type": "boolean"
+    },
+    "actual_archive_check_passed": {
+      "const": true,
+      "title": "Actual Archive Check Passed",
+      "type": "boolean"
+    },
+    "inherited_full_corpus_errors": {
+      "const": 2,
+      "title": "Inherited Full Corpus Errors",
+      "type": "integer"
+    },
+    "full_corpus_valid": {
+      "const": false,
+      "title": "Full Corpus Valid",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "coverage_promotion": {
+      "const": false,
+      "title": "Coverage Promotion",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "checked_at",
+    "old_sources",
+    "new_sources",
+    "old_review_linked",
+    "new_review_linked",
+    "old_metadata_only",
+    "new_metadata_only",
+    "old_source_rows_identical",
+    "old_authority_joins_identical",
+    "old_review_joins_identical",
+    "added_ids",
+    "added_authority",
+    "added_review_links",
+    "added_verified_http_bindings",
+    "portable_package_manifest",
+    "portable_receipt",
+    "old_files",
+    "new_files",
+    "live_legacy_coverage_ledger",
+    "package_local_snapshot_paths",
+    "existing_inventory_tests_passed",
+    "actual_join_fixture_tests_passed",
+    "deterministic_check_passed",
+    "portable_check_passed",
+    "actual_archive_check_passed",
+    "inherited_full_corpus_errors",
+    "full_corpus_valid",
+    "legal_currentness",
+    "answer_safe",
+    "coverage_promotion"
+  ],
+  "title": "InventoryUpdate",
+  "type": "object"
+}

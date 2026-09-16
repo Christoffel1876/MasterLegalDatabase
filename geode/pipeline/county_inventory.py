@@ -3,13 +3,16 @@
 from __future__ import annotations
 
 import argparse
+import logging
 import re
 from datetime import date
 from pathlib import Path
 from typing import Any
 
-from geode.utils.file_io import atomic_write_json, iter_jsonl
-from geode.utils.file_io import load_json
+from geode.pipeline.local_source_ownership import OwnershipPolicy, load_ownership_policy
+from geode.utils.file_io import atomic_write_json, iter_jsonl, load_json
+
+LOGGER = logging.getLogger(__name__)
 
 COUNTY_NAMES = (
     "Adams", "Alamosa", "Arapahoe", "Archuleta", "Baca", "Bent", "Boulder",
@@ -2332,6 +2335,7 @@ def write_county_matrix(root: Path) -> Path:
 def register_county_homepages(root: Path) -> Path:
     """Add verified county homepages to the local source registry."""
 
+    ownership = load_ownership_policy(root)
     registry_path = root / "_CONTROL_PLANE" / "LOCAL_SOURCE_REGISTRY.json"
     registry = load_json(registry_path)
     existing = {entry["authority_id"]: entry for entry in registry.get("pilot", {}).get("counties", [])}
@@ -2339,6 +2343,8 @@ def register_county_homepages(root: Path) -> Path:
     for name in COUNTY_NAMES:
         authority_id = "CO-COUNTY-" + name.upper().replace(" ", "_")
         current = dict(existing.get(authority_id, {}))
+        if _ownership_excluded(ownership, current):
+            current = {}
         current.setdefault("source_id", f"county_{name.lower().replace(' ', '_')}_homepage")
         current["authority_id"] = authority_id
         current["authority_level"] = "county"
@@ -2361,13 +2367,21 @@ def register_county_homepages(root: Path) -> Path:
 def update_homepage_coverage(root: Path) -> Path:
     """Record homepage download results in the county coverage matrix."""
 
+    ownership = load_ownership_policy(root)
     matrix_path = root / "_CONTROL_PLANE" / "COUNTY_SOURCE_COVERAGE.json"
     manifest_path = root / "_CONTROL_PLANE" / "LOCAL_DOWNLOAD_MANIFEST.jsonl"
     matrix = load_json(matrix_path)
+    registry_path = root / "_CONTROL_PLANE" / "LOCAL_SOURCE_REGISTRY.json"
+    registry = load_json(registry_path) if registry_path.exists() else {}
+    excluded = _excluded_registry_aliases(registry, ownership)
     latest: dict[str, dict[str, Any]] = {}
     for row in iter_jsonl(manifest_path):
+        if _ownership_excluded(ownership, row):
+            excluded.add((str(row.get("authority_id")), str(row.get("source_id"))))
+            continue
         if row.get("authority_level") == "county" and row.get("requested_url") == row.get("source_url"):
             latest[str(row["authority_id"])] = row
+    _remove_retired_coverage(matrix, ownership, excluded)
     for county in matrix.get("counties", []):
         row = latest.get(str(county["county_id"]))
         if not row:
@@ -2379,7 +2393,7 @@ def update_homepage_coverage(root: Path) -> Path:
             "raw_path": row.get("raw_path"),
             "message": row.get("message", ""),
         }
-        county["overall_status"] = "source_identified" if row.get("status") == "downloaded" else "blocked"
+        county["overall_status"] = _remaining_coverage_status(county)
     atomic_write_json(matrix_path, matrix, root)
     return matrix_path
 
@@ -2387,16 +2401,24 @@ def update_homepage_coverage(root: Path) -> Path:
 def register_seed_sources(root: Path) -> Path:
     """Add verified category-specific sources discovered in the first wave."""
 
+    ownership = load_ownership_policy(root)
     registry_path = root / "_CONTROL_PLANE" / "LOCAL_SOURCE_REGISTRY.json"
     registry = load_json(registry_path)
     pilot = registry.setdefault("pilot", {})
-    existing = {row["source_id"]: row for row in pilot.get("county_sources", [])}
+    existing = {
+        row["source_id"]: row for row in pilot.get("county_sources", [])
+        if not _ownership_excluded(ownership, row)
+    }
     for row in SEED_SOURCE_RECORDS:
+        if _ownership_excluded(ownership, row):
+            continue
         existing[row["source_id"]] = dict(row)
         for category in SEED_CATEGORY_ALIASES.get(row["source_id"], ()):
             alias = dict(row)
             alias["source_id"] = f"{row['source_id']}_{category}"
             alias["category"] = category
+            if _ownership_excluded(ownership, alias):
+                continue
             existing[alias["source_id"]] = alias
     pilot["county_sources"] = list(existing.values())
     atomic_write_json(registry_path, registry, root)
@@ -2406,14 +2428,22 @@ def register_seed_sources(root: Path) -> Path:
 def update_category_coverage(root: Path) -> Path:
     """Apply registered category-source download results to the coverage matrix."""
 
+    ownership = load_ownership_policy(root)
     matrix_path = root / "_CONTROL_PLANE" / "COUNTY_SOURCE_COVERAGE.json"
     registry = load_json(root / "_CONTROL_PLANE" / "LOCAL_SOURCE_REGISTRY.json")
+    excluded = _excluded_registry_aliases(registry, ownership)
     rows_by_source: dict[str, list[dict[str, Any]]] = {}
     for row in iter_jsonl(root / "_CONTROL_PLANE" / "LOCAL_DOWNLOAD_MANIFEST.jsonl"):
+        if _ownership_excluded(ownership, row):
+            excluded.add((str(row.get("authority_id")), str(row.get("source_id"))))
+            continue
         rows_by_source.setdefault(str(row.get("source_id")), []).append(row)
     matrix = load_json(matrix_path)
+    corrected_counties = _remove_retired_coverage(matrix, ownership, excluded)
     counties = {str(row["county_id"]): row for row in matrix.get("counties", [])}
     for source in registry.get("pilot", {}).get("county_sources", []):
+        if _ownership_excluded(ownership, source):
+            continue
         county = counties.get(str(source.get("authority_id")))
         if not county:
             continue
@@ -2435,6 +2465,8 @@ def update_category_coverage(root: Path) -> Path:
             target["status"] = "blocked"
             target["notes"] = "Official source attempt failed; see download manifest for details."
     for row in iter_jsonl(root / "_CONTROL_PLANE" / "LOCAL_DOWNLOAD_MANIFEST.jsonl"):
+        if _ownership_excluded(ownership, row):
+            continue
         if row.get("status") != "downloaded" or row.get("authority_level") != "county":
             continue
         requested_url = str(row.get("requested_url") or "")
@@ -2455,8 +2487,74 @@ def update_category_coverage(root: Path) -> Path:
             target["notes"] = "Raw source downloaded; category assignment is heuristic and needs review."
         if county.get("overall_status") == "source_identified":
             county["overall_status"] = "partial"
+    for county_id in corrected_counties:
+        counties[county_id]["overall_status"] = _remaining_coverage_status(counties[county_id])
     atomic_write_json(matrix_path, matrix, root)
     return matrix_path
+
+
+def _ownership_excluded(ownership: OwnershipPolicy, row: dict[str, Any]) -> bool:
+    """Log the explicit reason a source is unavailable to active regeneration."""
+    reason = ownership.source_exclusion_reason(row)
+    if reason:
+        LOGGER.warning("Ownership exclusion during county inventory: %s", reason)
+    return reason is not None
+
+
+def _excluded_registry_aliases(
+    registry: dict[str, Any], ownership: OwnershipPolicy,
+) -> set[tuple[str, str]]:
+    """Identify aliases only from registry rows matching an explicit ownership correction."""
+    pilot = registry.get("pilot", {})
+    return {
+        (str(row.get("authority_id")), str(row.get("source_id")))
+        for row in [*pilot.get("counties", []), *pilot.get("county_sources", [])]
+        if _ownership_excluded(ownership, row)
+    }
+
+
+def _remaining_coverage_status(county: dict[str, Any]) -> str:
+    """Retain unaffected category support while refusing completeness after exclusions."""
+    statuses = {cell.get("status") for cell in county.get("source_categories", {}).values()}
+    if statuses & {"downloaded", "downloaded_unreviewed", "partial", "complete"}:
+        return "partial"
+    homepage_status = county.get("homepage", {}).get("status")
+    if "source_identified" in statuses or homepage_status == "downloaded":
+        return "source_identified"
+    if "blocked" in statuses or homepage_status == "blocked":
+        return "blocked"
+    return "not_started"
+
+
+def _remove_retired_coverage(
+    matrix: dict[str, Any], ownership: OwnershipPolicy, excluded: set[tuple[str, str]],
+) -> set[str]:
+    """Remove explicitly retired support without carrying its prior coverage status."""
+    changed: set[str] = set()
+    for county in matrix.get("counties", []):
+        county_id = str(county.get("county_id"))
+        blocked_ids = ownership.retired_source_ids | {
+            source_id for authority_id, source_id in excluded if authority_id == county_id
+        }
+        homepage = county.get("homepage")
+        if isinstance(homepage, dict) and (
+            homepage.get("source_id") in blocked_ids
+            or _ownership_excluded(ownership, {**homepage, "authority_id": county_id})
+        ):
+            county.pop("homepage")
+            changed.add(county_id)
+        for cell in county.get("source_categories", {}).values():
+            source_ids = cell.get("source_ids", [])
+            retained = [value for value in source_ids if value not in blocked_ids]
+            if len(retained) != len(source_ids):
+                cell["source_ids"] = retained
+                cell["status"] = "source_identified" if retained else "not_started"
+                cell["notes"] = "Retired ownership support excluded; remaining sources need review."
+                changed.add(county_id)
+        if county_id in changed:
+            county["overall_status"] = _remaining_coverage_status(county)
+    matrix["ownership_policy_sha256"] = ownership.policy_sha256
+    return changed
 
 
 def main() -> int:
@@ -2470,6 +2568,7 @@ def main() -> int:
     parser.add_argument("--update-category-coverage", action="store_true")
     args = parser.parse_args()
     root = args.root.resolve()
+    load_ownership_policy(root)
     matrix_path = root / "_CONTROL_PLANE" / "COUNTY_SOURCE_COVERAGE.json"
     print(matrix_path if matrix_path.exists() else write_county_matrix(root))
     if args.register_homepages:

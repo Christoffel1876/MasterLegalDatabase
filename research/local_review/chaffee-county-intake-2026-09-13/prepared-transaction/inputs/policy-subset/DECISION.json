@@ -1,0 +1,57 @@
+{
+  "recorded_at": "2026-09-13T16:25:51.567886+00:00",
+  "reviewer": "Atlas",
+  "approved_netloc": "cms2.revize.com",
+  "approved_path": "/revize/chaffeecounty/",
+  "scope": "Accept exact HTTPS source URLs within the county publisher tenant; not a shared-host approval or crawler authorization. Preserve supplied URLs unchanged.",
+  "evidence": [
+    {
+      "path": "retrieval/FINAL_MANIFEST.json",
+      "sha256": "0ad7b970736921a175de778e05629db8b9191ba2394a692d3715c0a51421c95f",
+      "size_bytes": 7555
+    },
+    {
+      "path": "retrieval/PLAN.json",
+      "sha256": "4b9168c1b391fd9d4e39fedaa8c68de0e86609329e057e349fc268acf5015256",
+      "size_bytes": 7790
+    },
+    {
+      "path": "retrieval/REPORT.md",
+      "sha256": "7acad18c6978037f9fe37c311de7a45d53a8b82de4abbf8f7f086f7f83c52aeb",
+      "size_bytes": 4776
+    },
+    {
+      "path": "retrieval/events/A001/RESULT.json",
+      "sha256": "9011dd8c7e8663f9fca3c01996de3b01a864022cec3306794748d4628978bb76",
+      "size_bytes": 2840
+    },
+    {
+      "path": "retrieval/events/A002/RESULT.json",
+      "sha256": "e8b10292eaf1708297459795d2442de69a594332f9e884da49701e3ee46c73cb",
+      "size_bytes": 2676
+    }
+  ],
+  "maintained_files": [
+    {
+      "path": "maintained-code-at-decision/constants.py",
+      "sha256": "e8045e0cc4d69045f4296ac464a518c43773bc762e747f672a9b5b40a6c56f95",
+      "size_bytes": 22102
+    },
+    {
+      "path": "maintained-code-at-decision/test_chaffee_source_path.py",
+      "sha256": "858d4452a0eb72bcb98eb449778a3e652fa5acf0092ad23bbb7ec4c8627f7c98",
+      "size_bytes": 3540
+    },
+    {
+      "path": "maintained-code-at-decision/validators.py",
+      "sha256": "26708c26fa757a0981fed78c473bcaf84c0498c8c414c0a7003764f639a8c45b",
+      "size_bytes": 6448
+    }
+  ],
+  "validation": "Root ran tests/test_chaffee_source_path.py, test_el_paso_source_host.py, test_douglas_source_host.py, test_schemas.py, test_manual_source_intake.py and test_manual_source_reconciliation.py:126 passed in20.30s, terminal38131 exit0. git diff --check passed. The earlier2978-test full run preceded this policy change.",
+  "limitations": [
+    "Earlier county catalog and302 referral bytes/headers are retained evidence, not retrospectively authenticated HTTP events. Later A001/A002 directGET intervals/body bytes are separately recorded.",
+    "No source text, legal adoption, currentness, tenant-wide document validity or completeness is certified by URL acceptance. Individual sources still require byte custody and review.",
+    "New shared-host rule refuses other tenants, dot-segment traversal, encoded slash/backslash or percent nesting, path controls and ambiguous percent escapes. Existing approved hosts and Colorado-government behavior remain unchanged."
+  ]
+}

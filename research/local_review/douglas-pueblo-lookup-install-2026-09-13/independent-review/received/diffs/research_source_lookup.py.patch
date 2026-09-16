@@ -1,0 +1,274 @@
+--- sealed-predecessor/research_source_lookup.py
++++ revision-1/research_source_lookup.py
+@@ -5,6 +5,7 @@
+ import argparse
+ import hashlib
+ import html
++import io
+ import json
+ import logging
+ import os
+@@ -1805,31 +1806,39 @@
+         return self
+ 
+ 
+-def _dp_asset(base: Path, relative: str) -> EhsAsset:
+-    """Resolve an ordinary already checked file, preserving its exact identity."""
++def _dp_capture(base: Path, relative: str, expected: str, limit: int) -> tuple[str, bytes]:
++    """Read once within a byte bound and verify the exact buffer that will be consumed."""
+     path = _safe_file(base, relative)
+-    return EhsAsset(path=str(path), sha256=_digest(path), size_bytes=path.stat().st_size)
+-
+-
+-def _check_dp_package(root: Path, source_id: str) -> dict[str, str]:
+-    """Pin every accepted payload before an isolated retained verifier can execute."""
++    with path.open("rb") as handle:
++        raw = handle.read(limit + 1)
++    if len(raw) > limit or hashlib.sha256(raw).hexdigest() != expected:
++        raise ValueError("Douglas/Pueblo captured evidence differs: " + relative)
++    return str(path), raw
++
++
++def _dp_asset(base: Path, relative: str, captured: dict[str, bytes]) -> EhsAsset:
++    """Construct an asset identity from checked captured bytes, never a later disk read."""
++    path = _safe_file(base, relative)
++    raw = captured[str(path)]
++    return EhsAsset(path=str(path), sha256=hashlib.sha256(raw).hexdigest(), size_bytes=len(raw))
++
++
++def _check_dp_package(root: Path, source_id: str) -> dict[str, bytes]:
++    """Capture the closed accepted package; parse only the exact bytes pinned at capture."""
+     config = DP_SOURCES[source_id]
+     package = root / "research/local_review" / config["folder"]
+-    acceptance = _safe_file(root, "docs/audits/FOUR_HOUR_RUN_2026-09-12/" +
+-                            config["acceptance"] + "/ACCEPTANCE.json")
+-    if _digest(acceptance) != config["acceptance_sha"]:
+-        raise ValueError("Douglas/Pueblo acceptance differs")
+-    hashes = {str(acceptance): config["acceptance_sha"]}
+-    for name, digest in config["pins"].items():
+-        path = _safe_file(package, name)
+-        if path.stat().st_size > 2_000_000 or _digest(path) != digest:
+-            raise ValueError("Douglas/Pueblo pinned evidence differs: " + name)
+-        hashes[str(path)] = digest
+-    accepted = json.loads(acceptance.read_bytes())
++    acceptance_relative = ("docs/audits/FOUR_HOUR_RUN_2026-09-12/" +
++                           config["acceptance"] + "/ACCEPTANCE.json")
++    key, raw = _dp_capture(root, acceptance_relative, config["acceptance_sha"], 2_000_000)
++    captured = {key: raw}
++    accepted = json.loads(raw)
+     if (accepted["status"] != config["accepted_status"] or
+             accepted["legal_currentness"] != "not_verified"):
+         raise ValueError("Douglas/Pueblo acceptance scope differs")
+-    refs = json.loads((package / config["manifest"]).read_bytes())["files"]
++    for name, digest in config["pins"].items():
++        key, raw = _dp_capture(package, name, digest, 2_000_000)
++        captured[key] = raw
++    refs = json.loads(captured[str(package / config["manifest"])])["files"]
+     names = {r["path"] for r in refs}
+     expected = names | {config["manifest"]}
+     dirs = {p.as_posix() for name in expected for p in Path(name).parents if p.as_posix() != "."}
+@@ -1843,21 +1852,26 @@
+         raise ValueError("Douglas/Pueblo closed membership differs")
+     total = 0
+     for ref in refs:
+-        path = _safe_file(package, ref["path"])
+-        size = path.stat().st_size
+-        if size != ref["size_bytes"] or size > 8_000_000 or _digest(path) != ref["sha256"]:
++        key = str(_safe_file(package, ref["path"]))
++        if key in captured:
++            raw = captured[key]
++        else:
++            key, raw = _dp_capture(package, ref["path"], ref["sha256"], 8_000_000)
++        if len(raw) != ref["size_bytes"] or hashlib.sha256(raw).hexdigest() != ref["sha256"]:
+             raise ValueError("Douglas/Pueblo package member differs: " + ref["path"])
+-        total += size
+-        hashes[str(path)] = ref["sha256"]
+-    if total > 32_000_000:
+-        raise ValueError("Douglas/Pueblo package byte bound exceeded")
+-    schema = json.loads((package / "SOURCE_QA.schema.json").read_bytes())
++        total += len(raw)
++        if total > 32_000_000:
++            raise ValueError("Douglas/Pueblo package byte bound exceeded")
++        captured[key] = raw
++    schema = json.loads(captured[str(package / "SOURCE_QA.schema.json")])
+     jsonschema.Draft202012Validator(schema).validate(
+-        json.loads((package / "SOURCE_QA.json").read_bytes()))
+-    return hashes
+-
+-
+-def _load_dp_verified(root: Path, source_id: str) -> tuple[dict, dict, dict, dict, dict]:
++        json.loads(captured[str(package / "SOURCE_QA.json")]))
++    return captured
++
++
++def _load_dp_verified(
++    root: Path, source_id: str,
++) -> tuple[dict, dict, dict, dict, dict, dict[str, bytes]]:
+     """Replay fixed source QA and bind exact immutable transaction and current source row."""
+     config = DP_SOURCES[source_id]
+     package = root / "research/local_review" / config["folder"]
+@@ -1899,11 +1913,10 @@
+             "evidence/preparation/source-provenance.jsonl": DP_PROVENANCE_SHA,
+             "execution/records.jsonl": DP_RECORDS_SHA}
+     for relative, digest in pins.items():
+-        path = _safe_file(intake, relative)
+-        if path.stat().st_size > 1_000_000 or _digest(path) != digest:
+-            raise ValueError("Douglas/Pueblo intake evidence differs")
+-    receipt = json.loads((intake / "execution/RECEIPT.json").read_bytes())
+-    intent = json.loads((intake / "execution/INTENT.json").read_bytes())
++        key, raw = _dp_capture(intake, relative, digest, 1_000_000)
++        before[key] = raw
++    receipt = json.loads(before[str(intake / "execution/RECEIPT.json")])
++    intent = json.loads(before[str(intake / "execution/INTENT.json")])
+     if (receipt["intent"] != intent or receipt["intent_sha256"] != DP_INTENT_SHA or
+             receipt["status"] != "completed_archived_pending_pipeline"):
+         raise ValueError("Douglas/Pueblo actual receipt differs")
+@@ -1919,7 +1932,7 @@
+             not record["archive_path"].startswith(
+                 f"_RAW_ARCHIVE/manual_intake/{config['layer']}/{source_id}/")):
+         raise ValueError("Douglas/Pueblo canonical identity differs")
+-    with (intake / "execution/records.jsonl").open("rb") as handle:
++    with io.BytesIO(before[str(intake / "execution/records.jsonl")]) as handle:
+         frozen_lines = [line for line in handle if json.loads(line).get("record_id") == source_id]
+     if len(frozen_lines) != 1 or json.loads(frozen_lines[0]) != record:
+         raise ValueError("Douglas/Pueblo frozen canonical line differs")
+@@ -1935,10 +1948,12 @@
+                 matches.append(line)
+     if matches != frozen_lines or _digest(manifest) != digest:
+         raise ValueError("Douglas/Pueblo current canonical row differs")
+-    original = _dp_asset(root, record["archive_path"])
++    key, raw = _dp_capture(root, record["archive_path"], record["sha256"], 8_000_000)
++    before[key] = raw
++    original = _dp_asset(root, record["archive_path"], before)
+     if original.sha256 != record["sha256"] or original.size_bytes != record["size_bytes"]:
+         raise ValueError("Douglas/Pueblo canonical original differs")
+-    with (intake / "evidence/preparation/source-provenance.jsonl").open("rb") as handle:
++    with io.BytesIO(before[str(intake / "evidence/preparation/source-provenance.jsonl")]) as handle:
+         sources = [json.loads(line) for line in handle]
+     provenance = [s for s in sources if s["proposed_record_id"] == source_id]
+     if (len(provenance) != 1 or provenance[0]["original"]["sha256"] != original.sha256 or
+@@ -1946,18 +1961,17 @@
+         raise ValueError("Douglas/Pueblo provenance ownership differs")
+     event_relative = ("evidence/preparation/custody/" + source_id + "/" +
+                       config["event"] + "/event.json")
+-    event_path = _safe_file(intake, event_relative)
+-    if _digest(event_path) != config["event_sha"]:
+-        raise ValueError("Douglas/Pueblo acquisition event differs")
+-    event = json.loads(event_path.read_bytes())
++    key, raw = _dp_capture(intake, event_relative, config["event_sha"], 1_000_000)
++    before[key] = raw
++    event = json.loads(raw)
+     if (event["body"]["sha256"] != original.sha256 or event["http_status"] != 200 or
+             event["requested_url"] != record["official_source_url"] or
+             event["completed_at"] != provenance[0]["response_completed_at"]):
+         raise ValueError("Douglas/Pueblo acquisition source association differs")
+-    data = json.loads((package / "SOURCE_QA.json").read_bytes())
++    data = json.loads(before[str(package / "SOURCE_QA.json")])
+     if data["source_id"] != config["alias"] or data["source"]["sha256"] != original.sha256:
+         raise ValueError("Douglas/Pueblo source-review alias differs")
+-    return data, record, provenance[0], event, receipt
++    return data, record, provenance[0], event, receipt, before
+ 
+ 
+ def _dp_span(raw: bytes, start: int, end: int, line_id: str, page: int,
+@@ -1970,12 +1984,12 @@
+ 
+ 
+ def _dp_douglas(
+-    package: Path, data: dict,
++    package: Path, data: dict, captured: dict[str, bytes],
+ ) -> tuple[list[DpRow], list[DpContext], list[DpAnnotation]]:
+     """Preserve all five Douglas columns, explicit blanks and distinct caption/footnote links."""
+-    native = _dp_asset(package, data["native"]["path"])
+-    image = _dp_asset(package, data["full_image"]["path"])
+-    raw = Path(native.path).read_bytes()
++    native = _dp_asset(package, data["native"]["path"], captured)
++    image = _dp_asset(package, data["full_image"]["path"], captured)
++    raw = captured[native.path]
+     spans = {}
+     offset = 0
+     for number, line in enumerate(raw.splitlines(keepends=True), 1):
+@@ -2009,21 +2023,21 @@
+         affected_rows=[e["row_id"]], pages=[1],
+         statement=("Frozen " + e["field"] + ": " + e["frozen_text"] +
+                    "; image-supported source: " + e["image_supported_text"]),
+-        limitation=e["explanation"], proofs=[_dp_asset(package, e["evidence"]["path"])])
++        limitation=e["explanation"], proofs=[_dp_asset(package, e["evidence"]["path"], captured)])
+         for i, e in enumerate(data["errata"])]
+     return rows, contexts, annotations
+ 
+ 
+ def _dp_pueblo(
+-    package: Path, data: dict,
++    package: Path, data: dict, captured: dict[str, bytes],
+ ) -> tuple[list[DpRow], list[DpContext], list[DpAnnotation]]:
+     """Return all physical cells and their exact nested pair/bullet and inherited-note links."""
+     spans = {}
+     contexts = []
+     for page in data["pages"]:
+-        native = _dp_asset(package, page["native"]["path"])
+-        image = _dp_asset(package, page["image"]["path"])
+-        raw = Path(native.path).read_bytes()
++        native = _dp_asset(package, page["native"]["path"], captured)
++        image = _dp_asset(package, page["image"]["path"], captured)
++        raw = captured[native.path]
+         for line in page["lines"]:
+             bound = _dp_span(raw, line["start_byte"], line["end_byte"], line["id"],
+                              page["physical_page"], native, image, line["bbox"])
+@@ -2049,17 +2063,18 @@
+             linked_context_ids=["PAGE-" + str(row["physical_page"])], cells=cells,
+             nested=[DpNested(**item) for item in row["nested"]]))
+     annotations = [DpAnnotation(**{k: v for k, v in a.items() if k != "proof_paths"},
+-        proofs=[_dp_asset(package, p) for p in a["proof_paths"]]) for a in data["annotations"]]
++        proofs=[_dp_asset(package, p, captured) for p in a["proof_paths"]])
++        for a in data["annotations"]]
+     return rows, contexts, annotations
+ 
+ 
+ def _lookup_dp(root: Path, source_id: str, query: str | None) -> DpLookupResult:
+     """Verify all evidence before filtering; return complete rows and full source context."""
+     config = DP_SOURCES[source_id]
+-    data, record, provenance, event, receipt = _load_dp_verified(root, source_id)
++    data, record, provenance, event, receipt, captured = _load_dp_verified(root, source_id)
+     package = root / "research/local_review" / config["folder"]
+-    rows, contexts, annotations = (_dp_douglas(package, data) if source_id == DOUGLAS_SOURCE_ID
+-                                   else _dp_pueblo(package, data))
++    builder = _dp_douglas if source_id == DOUGLAS_SOURCE_ID else _dp_pueblo
++    rows, contexts, annotations = builder(package, data, captured)
+     if len(rows) != 44:
+         raise ValueError("Douglas/Pueblo source row count differs")
+     selected = [r for r in rows if query is None or any(_matches(query, text)
+@@ -2069,23 +2084,23 @@
+                    [c.context_id for c in contexts if _matches(query, c.text)])
+     acceptance_relative = ("docs/audits/FOUR_HOUR_RUN_2026-09-12/" +
+                            config["acceptance"] + "/ACCEPTANCE.json")
+-    acceptance = json.loads(_safe_file(root, acceptance_relative).read_bytes())
++    acceptance = json.loads(captured[str(root / acceptance_relative)])
+     intake = root / DP_INTAKE
+     source = DpSource.model_validate_json(json.dumps({
+         "source_id": source_id, "review_alias": config["alias"],
+         "authority_id": config["authority"], "issuer": config["issuer"],
+         "official_url": record["official_source_url"], "physical_pages": config["pages"],
+-        "source": _dp_asset(package, "original.pdf").model_dump(),
+-        "review": _dp_asset(package, "SOURCE_QA.json").model_dump(),
+-        "review_schema": _dp_asset(package, "SOURCE_QA.schema.json").model_dump(),
+-        "manifest": _dp_asset(package, config["manifest"]).model_dump(),
+-        "acceptance": _dp_asset(root, acceptance_relative).model_dump(),
+-        "intake_receipt": _dp_asset(intake, "execution/RECEIPT.json").model_dump(),
+-        "canonical_original": _dp_asset(root, record["archive_path"]).model_dump(),
++        "source": _dp_asset(package, "original.pdf", captured).model_dump(),
++        "review": _dp_asset(package, "SOURCE_QA.json", captured).model_dump(),
++        "review_schema": _dp_asset(package, "SOURCE_QA.schema.json", captured).model_dump(),
++        "manifest": _dp_asset(package, config["manifest"], captured).model_dump(),
++        "acceptance": _dp_asset(root, acceptance_relative, captured).model_dump(),
++        "intake_receipt": _dp_asset(intake, "execution/RECEIPT.json", captured).model_dump(),
++        "canonical_original": _dp_asset(root, record["archive_path"], captured).model_dump(),
+         "provenance": _dp_asset(
+-            intake, "evidence/preparation/source-provenance.jsonl").model_dump(),
++            intake, "evidence/preparation/source-provenance.jsonl", captured).model_dump(),
+         "http_event": _dp_asset(intake, "evidence/preparation/custody/" + source_id + "/" +
+-                                config["event"] + "/event.json").model_dump(),
++                                config["event"] + "/event.json", captured).model_dump(),
+         "intake_id": record["intake_id"], "intake_received_at": record["received_at"],
+         "acquisition_method": record["acquisition_method"],
+         "http_request_started_at": event["started_at"],

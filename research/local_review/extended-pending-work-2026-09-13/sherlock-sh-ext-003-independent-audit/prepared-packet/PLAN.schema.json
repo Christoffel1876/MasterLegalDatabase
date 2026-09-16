@@ -1,0 +1,119 @@
+{
+  "$defs": {
+    "Seed": {
+      "additionalProperties": false,
+      "description": "An exact recorded initial URL; category/title are unverified discovery context.",
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "registry_json_pointer": {
+          "title": "Registry Json Pointer",
+          "type": "string"
+        },
+        "priority_purpose": {
+          "title": "Priority Purpose",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "authority_id",
+        "url",
+        "registry_json_pointer",
+        "priority_purpose"
+      ],
+      "title": "Seed",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A finite proposal that only a separate root dispatch can activate.",
+  "properties": {
+    "assignment_id": {
+      "const": "SH-EXT-003",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_DISPATCHED",
+      "title": "Status",
+      "type": "string"
+    },
+    "research_cutoff": {
+      "title": "Research Cutoff",
+      "type": "string"
+    },
+    "report_cutoff": {
+      "title": "Report Cutoff",
+      "type": "string"
+    },
+    "seeds": {
+      "items": {
+        "$ref": "#/$defs/Seed"
+      },
+      "title": "Seeds",
+      "type": "array"
+    },
+    "max_actions": {
+      "title": "Max Actions",
+      "type": "integer"
+    },
+    "max_actions_per_county": {
+      "title": "Max Actions Per County",
+      "type": "integer"
+    },
+    "max_distinct_urls": {
+      "title": "Max Distinct Urls",
+      "type": "integer"
+    },
+    "max_body_bytes": {
+      "title": "Max Body Bytes",
+      "type": "integer"
+    },
+    "max_total_body_bytes": {
+      "title": "Max Total Body Bytes",
+      "type": "integer"
+    },
+    "max_pending_actions": {
+      "title": "Max Pending Actions",
+      "type": "integer"
+    },
+    "public_actions_by_preparation": {
+      "const": 0,
+      "title": "Public Actions By Preparation",
+      "type": "integer"
+    },
+    "next_assignment_authorized": {
+      "const": false,
+      "title": "Next Assignment Authorized",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "assignment_id",
+    "status",
+    "research_cutoff",
+    "report_cutoff",
+    "seeds",
+    "max_actions",
+    "max_actions_per_county",
+    "max_distinct_urls",
+    "max_body_bytes",
+    "max_total_body_bytes",
+    "max_pending_actions",
+    "public_actions_by_preparation",
+    "next_assignment_authorized"
+  ],
+  "title": "Plan",
+  "type": "object"
+}

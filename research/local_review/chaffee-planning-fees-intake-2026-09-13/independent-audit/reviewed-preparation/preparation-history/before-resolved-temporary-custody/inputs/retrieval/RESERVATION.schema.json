@@ -1,0 +1,126 @@
+{
+  "$defs": {
+    "FileRef": {
+      "additionalProperties": false,
+      "description": "Exact package-relative byte identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "FileRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Write-once reservation counting a deliberate invocation.",
+  "properties": {
+    "action_id": {
+      "title": "Action Id",
+      "type": "string"
+    },
+    "target_id": {
+      "title": "Target Id",
+      "type": "string"
+    },
+    "reserved_at": {
+      "title": "Reserved At",
+      "type": "string"
+    },
+    "plan_sha256": {
+      "title": "Plan Sha256",
+      "type": "string"
+    },
+    "request_url": {
+      "title": "Request Url",
+      "type": "string"
+    },
+    "maximum_body_bytes": {
+      "exclusiveMinimum": 0,
+      "maximum": 20000000,
+      "title": "Maximum Body Bytes",
+      "type": "integer"
+    },
+    "maximum_seconds": {
+      "exclusiveMinimum": 0,
+      "maximum": 60,
+      "title": "Maximum Seconds",
+      "type": "integer"
+    },
+    "connect_seconds": {
+      "const": 15,
+      "title": "Connect Seconds",
+      "type": "integer"
+    },
+    "prior_actions": {
+      "maximum": 2,
+      "minimum": 0,
+      "title": "Prior Actions",
+      "type": "integer"
+    },
+    "prior_body_bytes": {
+      "maximum": 30000000,
+      "minimum": 0,
+      "title": "Prior Body Bytes",
+      "type": "integer"
+    },
+    "argv": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Argv",
+      "type": "array"
+    },
+    "shell_display": {
+      "title": "Shell Display",
+      "type": "string"
+    },
+    "runner": {
+      "$ref": "#/$defs/FileRef"
+    },
+    "cwd": {
+      "title": "Cwd",
+      "type": "string"
+    },
+    "network_permission": {
+      "const": "explicitly_authorized_narrow_escalation",
+      "title": "Network Permission",
+      "type": "string"
+    }
+  },
+  "required": [
+    "action_id",
+    "target_id",
+    "reserved_at",
+    "plan_sha256",
+    "request_url",
+    "maximum_body_bytes",
+    "maximum_seconds",
+    "connect_seconds",
+    "prior_actions",
+    "prior_body_bytes",
+    "argv",
+    "shell_display",
+    "runner",
+    "cwd",
+    "network_permission"
+  ],
+  "title": "Reservation",
+  "type": "object"
+}

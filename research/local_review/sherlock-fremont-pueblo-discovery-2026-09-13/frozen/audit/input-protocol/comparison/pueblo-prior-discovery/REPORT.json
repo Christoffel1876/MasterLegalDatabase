@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "prepared_at": "2026-09-13T00:29:07.387939Z",
+  "status": "complete_bounded_discovery_with_county_gap",
+  "limits": {
+    "maximum_events": 12,
+    "maximum_distinct_urls": 10,
+    "maximum_source_bytes": 5000000,
+    "maximum_total_body_bytes": 12000000,
+    "maximum_request_seconds": 30,
+    "hard_stop": "2026-09-13T01:05:00Z"
+  },
+  "events": 5,
+  "distinct_urls": 4,
+  "retained_body_bytes": 358366,
+  "http_responses": 4,
+  "local_transport_failures": 1,
+  "pdfs_preserved": 1,
+  "sources": [
+    {
+      "source_id": "PUEBLO-FEE-01",
+      "authority_id": "CO-MUNICIPAL-PUEBLO",
+      "authority_name": "City of Pueblo",
+      "source_role": "official_city_planning_fee_schedule",
+      "title": "FEE SCHEDULE — Planning & Community Development",
+      "official_parent": {
+        "path": "events/E002/body.bin",
+        "sha256": "1fb6ff01526de287f4cb1abb93d794ca70b2f69d52ddfd9554a3e28ced37ae07",
+        "size_bytes": 124009
+      },
+      "parent_url": "https://www.pueblo.us/393/Fee-Schedule",
+      "anchor_label": "planning and zoning department fee schedule",
+      "anchor_href": "/DocumentCenter/View/21956/Fee-Schedule-110218-COR-LUP-FEE",
+      "requested_url": "https://www.pueblo.us/DocumentCenter/View/21956/Fee-Schedule-110218-COR-LUP-FEE",
+      "final_url": "https://www.pueblo.us/DocumentCenter/View/21956/Fee-Schedule?bidId=",
+      "event_ids": [
+        "E002",
+        "E004",
+        "E005"
+      ],
+      "original": {
+        "path": "sources/city-pueblo-planning-fees/original.pdf",
+        "sha256": "0ba13c07bede5bf07c24dd8bbbe604c61745e8a73be773a7987e26dfa601414b",
+        "size_bytes": 228376
+      },
+      "physical_pages": 4,
+      "native_bytes": 4923,
+      "native_extraction_scope": "all_four_pages_uncorrected",
+      "directly_viewed_pages": [
+        1,
+        4
+      ],
+      "rendered_pages": [
+        1,
+        4
+      ],
+      "date_claims": [
+        {
+          "text": "2-13-26",
+          "basis": "printed_footer",
+          "physical_pages": [
+            1,
+            4
+          ],
+          "qualification": "Directly visible but unlabeled as adoption/effectiveness. Native text also contains it on pages2–3, which were not visually reviewed by this task."
+        },
+        {
+          "text": "FEE%20SCHEDULE%202-13-26_202602181221267689.pdf",
+          "basis": "content_disposition",
+          "physical_pages": [],
+          "qualification": "Response filename only; not adoption/effective date."
+        },
+        {
+          "text": "creationDate=D:20260213130020-07'00'; modDate=D:20260218112112-07'00'",
+          "basis": "pdf_metadata",
+          "physical_pages": [],
+          "qualification": "Recorded PDF metadata; not verified publication, adoption or legal effect."
+        },
+        {
+          "text": "110218",
+          "basis": "old_url_slug",
+          "physical_pages": [],
+          "qualification": "Old official link slug only; it redirected to the final fee PDF. Not a verified edition date."
+        }
+      ],
+      "review_notes": [
+        "Candidate-aware Atlas discovery inspection of complete physical pages1 and4 only; no external-review claim.",
+        "All4923 native UTF-8 bytes retained without correcting order, text, punctuation or numbers.",
+        "The extraction moves footer text ahead of table body and omits the full graphic logo; it is not a reviewed table or reliable visual reading order.",
+        "Nested first/last-page fee conditions were observed structurally. No full fee-row certification, fee calculation or applicability conclusion.",
+        "City planning source is not a county, district or complete-jurisdiction fee collection.",
+        "Any root full-page QA is a separate later artifact and is not included in this frozen discovery."
+      ],
+      "adoption_date": null,
+      "effective_date": null,
+      "legal_currentness": "not_verified",
+      "full_table_qa": false,
+      "answer_safe": false
+    }
+  ],
+  "gaps": [
+    {
+      "authority_id": "CO-COUNTY-PUEBLO",
+      "status": "blocked_http_403",
+      "url": "https://www.pueblocounty.gov/planning-and-development-department/application-information-page-and-checklists",
+      "detail": "Publisher403 after the one explicitly authorized correction of the local sandbox/DNS failure. County source stopped; no bypass or further retry."
+    },
+    {
+      "authority_id": "CO-COUNTY-PUEBLO",
+      "status": "unverified_reported_lead",
+      "url": null,
+      "detail": "Task-reported Fee Schedule Adopted5.8.25-Revised(2).pdf label could not be verified from a successful official response. No county PDF URL or bytes acquired."
+    },
+    {
+      "authority_id": "CO-MUNICIPAL-PUEBLO",
+      "status": "not_assessed",
+      "url": "https://www.pueblo.us/DocumentCenter/View/21956/Fee-Schedule?bidId=",
+      "detail": "No adopting-instrument/current-law reconciliation and no complete numeric-table QA in this discovery. Pages2–3 native text retained but not visually checked by this task."
+    },
+    {
+      "authority_id": "CO-MUNICIPAL-PUEBLO",
+      "status": "unopened",
+      "url": "https://www.pueblo.us/DocumentCenter/View/24677/PUD",
+      "detail": "Official page link retained but outside this one-PDF-per-authority task: PUD (Planned Unit Development)"
+    },
+    {
+      "authority_id": "CO-MUNICIPAL-PUEBLO",
+      "status": "unopened",
+      "url": "https://www.pueblo.us/DocumentCenter/View/33031/Building-Permit-Process-Flowchart-Commercial-10-days",
+      "detail": "Official page link retained but outside this one-PDF-per-authority task: Building Permit Flow Chart Commercial"
+    },
+    {
+      "authority_id": "CO-MUNICIPAL-PUEBLO",
+      "status": "unopened",
+      "url": "https://www.pueblo.us/DocumentCenter/View/39422/Building-Permit-Flow-chart-Residential-3-Days-12-24-25-SOCOBD",
+      "detail": "Official page link retained but outside this one-PDF-per-authority task: Residential Development Flow Chart"
+    },
+    {
+      "authority_id": "CO-MUNICIPAL-PUEBLO",
+      "status": "unopened",
+      "url": "https://www.pueblo.us/DocumentCenter/View/39425/City-of-Pueblo-Expedited-Review-Process-for-Affordable-Housing-Resolution-16202-for-website-003",
+      "detail": "Official page link retained but outside this one-PDF-per-authority task: Expedited Review Process for Affordable Housing Projects Resolution"
+    }
+  ],
+  "acquisition_notes": [
+    "Ordinary verified-TLS GET with fixed descriptive ProjectGeode user agent, identity encoding, no credentials/cookies, no guessed endpoints.",
+    "Every attempt and redirect is separately preserved. Initial zero-byte sandbox failure was not a publisher response; the parent authorized one same-URL ordinary-network correction. Actual county403 stopped further county requests.",
+    "Official city HTML single anchor -> initialPDF URL -> observed same-host301 -> exact finalPDF. No viewer/API inference or recursive collection.",
+    "No additional public requests after E005, no contacts, no repository intake, no registry/coverage/index/lookup changes."
+  ],
+  "comparison": {
+    "path": "COMPARISON.json",
+    "sha256": "749782af2033e02608d936171bc26d3cb001196fb7505ceadd411fac498fe7e0",
+    "size_bytes": 1923
+  },
+  "comparison_limits": [
+    "Exact case-sensitive URL/PDF-SHA comparisons against complete named files only; no text-similarity or normalized URL comparison.",
+    "Manual61-row manifest copied; full48390-row legacy manifest streamed. Legacy and registry full-file hashes retained with selected Pueblo rows, not whole files. Offline negative-set scan is a recorded Atlas observation, not independently reproducible from omitted full files.",
+    "Zero exact matches does not prove raw absence, novelty, completeness, currentness or lack of a related source elsewhere. Inherited rows can be repeated collection attempts."
+  ],
+  "privacy": [
+    "Only selected public response headers were retained. No raw header sidecars, Set-Cookie values or Authorization fields are present.",
+    "Exact public HTML/PDF response bodies are retained, including the county denial. This is a scoped header-privacy statement, not a universal forensic privacy certification."
+  ],
+  "legal_currentness": "not_verified",
+  "answer_safe": false,
+  "canonical_changes": false
+}
