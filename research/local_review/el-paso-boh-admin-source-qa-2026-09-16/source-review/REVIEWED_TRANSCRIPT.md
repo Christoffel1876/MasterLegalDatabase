@@ -1,0 +1,328 @@
+# Reviewed source transcript
+Candidate-aware direct image review by Plato. Whitespace normalized; original native bytes unchanged. No legal currentness certification.
+
+## Physical page 1
+
+### P1-TITLE
+
+REGULATIONS OF THE EL PASO COUNTY BOARD OF HEALTH
+
+### P1-LOCATION
+
+EL PASO COUNTY, COLORADO
+
+### P1-CHAPTER
+
+Chapter 2
+
+### P1-SUBTITLE
+
+Administrative Regulations
+
+### P1-AGENCY
+
+El Paso County Public Health
+
+### P1-DATE
+
+5/23/2012
+
+## Physical page 2
+
+### 2.1
+
+SECTION 2.1: TITLE
+
+### 2.1A
+
+A. The regulations contained in these chapters shall constitute and shall be designated in their entirety as “The Regulations of the El Paso County Board of Health”, and may be cited as the “Public Health Regulations”.
+
+### 2.1B
+
+B. Reference herein to the “El Paso County Board of Health”, also referred to herein as the “Board of Health” or “Board”, shall mean the El Paso County Board of Health as established by the El Paso County Board of County Commissioners for the County of El Paso, State of Colorado.
+
+### 2.1C
+
+C. References herein to “El Paso County Public Health”, also referred to herein as the “Public Health”, shall mean El Paso County Public Health as established by the El Paso County Board of County Commissioners for the County of El Paso, State of Colorado.
+
+### 2.2
+
+SECTION 2.2: AUTHORITY
+
+### 2.2A
+
+A. These regulations are promulgated by the El Paso County Board of Health pursuant to its authority granted in Section 25-1-508, C.R.S.; and, all other grants of legal authority by the Colorado State Legislature and any other governmental bodies authorized to grant powers and duties to the Board of Health.
+
+### 2.2B
+
+B. The El Paso County Board of Health hereby determines that these regulations are necessary, and in the best interests of the public health, safety and welfare.
+
+### 2.3
+
+SECTION 2.3: NUMBERING SYSTEM
+
+### 2.3-TEXT
+
+The regulations of the El Paso County Board of Health shall be organized into chapters consisting of major subject areas of regulation. Each chapter shall be divided into sections and subsections, as appropriate. The Secretary of the Board, or her designee, is authorized to renumber chapters, sections and subsections of these regulations as she deems appropriate.
+
+### 2.4
+
+SECTION 2.4: ACCEPTANCE OF THE REGULATIONS
+
+### 2.4A
+
+A. These regulations, as presented in printed form, shall be received without further proof in all courts and in all administrative tribunals of the State of Colorado as the regulations of general and permanent affect of the El Paso County Board of Health.
+
+### 2.4B
+
+B. The Secretary of the Board, or her designee, is authorized to certify a true copy of the Regulations of the Board of Health or any part thereof, to any court or administrative tribunal.
+
+### P2-DATE
+
+5/23/2012
+
+## Physical page 3
+
+### 2.5
+
+SECTION 2.5: RULES OF CONSTRUCTION
+
+### 2.5A
+
+A. In the construction of phrases and terms used in these regulations, normally recognized rules of construction shall be observed unless excluded by expressed provision, or inconsistent with the intent of the Board of Health.
+
+### 2.5B
+
+B. All general terms, phrases and expressions shall be liberally construed in order that the true meaning and intent of the Board of Health may be implemented.
+
+### 2.5C
+
+C. Words in the present tense include the future tense. Words in the singular include the plural, and words in the plural include the singular.
+
+### 2.5D
+
+D. Words importing the masculine or feminine gender shall be applied to the opposite gender, as appropriate, and to individuals, associations, corporations, partnerships, and to all other types of legal entities.
+
+### 2.5E
+
+E. Titles, captions, historical notes, source notes, and all other explanatory notes are intended as aids in reference and shall not be deemed to be part of these regulations.
+
+### 2.5F
+
+F. References to authority granted to a specific position, appointee, manager, officer, agent, or similar person shall be deemed to include that person’s authorized designee.
+
+### 2.5G
+
+G. Public Health has authority to administratively adopt written and unwritten interpretations of words and phrases contained in these regulations, except as such words and phrases have otherwise been defined by the regulations or otherwise by law. In adopting such administrative interpretations, Public Health shall apply reasonable meanings and understandings; and shall, to the extent possible, affect the intent of the Board of Health in promulgating such regulations.
+
+### 2.5H
+
+H. The Secretary of the Board of Health has authority to correct typographical errors and grammatical errors within any of the regulations herein without further action of the Board. Any such corrections shall be accompanied by an historical note, source note, or other appropriate note explaining the correction.
+
+### 2.6
+
+SECTION 2.6: COMPUTATION OF TIME
+
+### 2.6A
+
+A. In the computation of any period of time prescribed or allowed for the transaction of business, filing papers, applying for licenses or permits, and all other similar transactions involving official business before the Board of Health or Public Health, the time shall be computed by excluding the first day and including the last day. If, however, the last day is a Saturday, Sunday, or legal holiday, it shall be excluded, and therefore, the last day of any such prescribed period of time shall be on the following regular business day of Public Health.
+
+### 2.6B
+
+B. A legal holiday includes all holidays declared by the Board of Health.
+
+### 2.7
+
+SECTION 2.7: DEFINITIONS
+
+### 2.7A
+
+A. BOARD or BOARD OF HEALTH: The El Paso County Board of Health, unless the context requires otherwise.
+
+### 2.7B
+
+B. COUNTY: El Paso County, unless the context requires otherwise.
+
+### 2.7C
+
+C. C.R.S.: Colorado Revised Statutes.
+
+### 2.7D
+
+D. PUBLIC HEALTH: El Paso County Public Health, unless the context requires otherwise.
+
+### 2.7E
+
+E. PERSON: Any individual, firm, company, partnership, sole proprietorship, association, governmental agency, or similar legal entity.
+
+### P3-DATE
+
+5/23/2012
+
+## Physical page 4
+
+### 2.7F
+
+F. EXECITOVE DIRECTOR: The administrative and executive head of the Public Health designated by the Board of Health pursuant to its authority contained in Section 25-1-508, C.R.S.
+
+### 2.8
+
+SECTION 2.8: SEVERABILITY
+
+### 2.8-TEXT
+
+It is the intention of the Board of Health that each and every part of these regulations is severable. If any term, phrase, clause, sentence, paragraph, or section of these regulations is declared to be unconstitutional or invalid by any court, the unconstitutionality or invalidity shall not affect any remaining provisions, as the remaining provisions would have been promulgated in these regulations in any event.
+
+### 2.9
+
+SECTION 2.9: REPEAL OF PRIOR REGULATIONS
+
+### 2.9A
+
+A. All rules and regulations promulgated by the Board of Health prior to January 21, 2009, are hereby repealed, except as provided below.
+
+### 2.9B
+
+B. All permits, licenses, orders, and other administrative and quasi-judicial actions issued, authorized, or otherwise taken by the Board of Health or Public Health pursuant to rules and regulations promulgated prior to this date shall remain in full force and effect. The rules and regulations upon which such administrative or quasi-judicial action is, or was, taken, shall remain effective for the purposes of such action.
+
+### 2.10
+
+SECTION 2.10: COMPLIANCE WITH REGULATIONS
+
+### 2.10A
+
+A. No person shall be granted, or have renewed, any permit, license, or certificate pursuant to the Regulations of the El Paso County Board of Health if said person is in noncompliance with any of such regulations, or has failed to pay any applicable fees, or penalties, or represents another person in obtaining or renewing any permit, license, or certificate who is in noncompliance or has failed to pay applicable fees, or penalties at any location within El Paso County.
+
+### 2.10B
+
+B. Public Health shall use reasonable means to notify the property owner prior to entry upon any property of its intent to enter and purpose for entering. Notice shall normally be given in person immediately prior to the time of entry by contacting the property owner in person at the location of the property. If notice cannot reasonably be given in person, notice may be given by telephone, fax, electronic mail, United States mail, or any other reasonable means, if feasible.
+
+### 2.10C
+
+C. If Public Health has a lawful right to enter a property for the purposes of making an inspection, and the property owner refuses to grant entry, or withdraws permission to enter or remain on the property, Public Health shall not enter the property, or immediately leave the property, and seek an administrative inspection warrant or other lawful means to obtain access.
+
+### 2.10D
+
+D. The property owner, or his representative, shall have the right to accompany Public Health during any inspection of a property.
+
+### 2.10E
+
+E. If Public Health obtains any samples from a property, the owner shall be provided a split sample, upon request. If a split sample is not practicable, a duplicate sample shall be provided, upon request.
+
+### P4-DATE
+
+5/23/2012
+
+## Physical page 5
+
+### 2.10F
+
+F. Public Health is authorized to record a Certificate of Noncompliance in the Office of the El Paso County Clerk and Recorder relating to any real property located in El Paso County, Colorado, that has conditions, structures, improvements, facilities, or any operation thereon, or for which the owner, tenant, or operator has not paid a fee or civil penalty associated with said real property in compliance with any public health law of the State of Colorado, or Regulation of the El Paso County Board of Health.
+
+### 2.10F.1
+
+1. At least thirty (30) calendar days prior to recording a Certificate of Noncompliance, Public Health shall first notify the owner, tenant or operator of said real property of the alleged non-compliant condition, structure, improvement, facility, or operation, or the failure to pay a fee or civil penalty associated with the use of such real property, and its intent to record a Certificate of Noncompliance, by personal service to the owner, tenant or operator; or, by certified mail, return receipt requested, to the last known address of any such person; or, by posting a notice on a building, structure, or other prominent place on said property, or by personal service of the notice to the property owner.
+
+### 2.10F.2
+
+2. Following at least thirty (30) days after mailing or posting such notice, and without further investigation or evidence required, Public Health may, but is not required, to record a Certificate of Noncompliance with regard to such real property as provided herein so long as the property owner, tenant or occupant has not provided competent evidence that the non-compliant conditions have been corrected, and all fees, civil penalties and costs paid.
+
+### 2.10F.3
+
+3. The form for the Certificate of Noncompliance shall be developed by Public Health to include the following information, as is known or readily available: Name of the property owner, tenant, or operator; common address; legal description; date the notice of noncompliance was mailed or posted; date of recording the Certificate of Noncompliance; citation of the legal authority relating to the noncompliance; general nature of the non-compliant condition, structure, improvement, facility, or operation, or failure to pay a fee or civil penalty; name, title, address and telephone number of Public Health official filing the Certificate of Noncompliance; general statement of the corrective action that is necessary to obtain a release of the Certificate of Noncompliance; and, general statement of the process to obtain a release of the Certificate of Noncompliance.
+
+### 2.10F.4
+
+4. Public Health shall issue a release of the Certificate of Noncompliance to the property owner, tenant, or operator upon request as soon as practicable following receipt of competent evidence that the non-compliant conditions have been corrected, and following payment of all fees and costs, including applicable permit fees, inspection fees, penalties, and release processing fees.
+
+### 2.10F.5
+
+5. The property owner shall be responsible to file the release with the Office of the El Paso County Clerk and Recorder at his expense.
+
+### 2.11
+
+SECTION 2.11: ADMINISTRATIVE PROCEDURES
+
+### 2.11A
+
+A. The following procedures shall be followed by the Board of Health for adoption or revision of regulations pursuant to its authority contained in Section 25-1-508, C.R.S. These procedures shall not apply to general statements of policy, adoption or revision to the annual budget of Public Health, ceremonial actions, administrative procedures or policies of Public Health, contracts, advisory directions, or any similar actions of the Board of Health or Public Health.
+
+### P5-DATE
+
+5/23/2012
+
+## Physical page 6
+
+### 2.11B
+
+B. Any member of the Board of Health, Public Health, or any other person may propose regulations for adoption by the Board of Health.
+
+### 2.11C
+
+C. A person proposing a regulation shall submit a draft of such regulation to the legal advisor of the Board of Health who shall determine whether the proposed regulation is within the authority of the Board of Health to adopt.
+
+### 2.11D
+
+D. If the legal advisor determines that the proposed regulation is not within the authority of the Board of Health to adopt, he shall so notify the person proposing the regulation.
+
+### 2.11E
+
+E. If the legal advisor determines that the proposed regulation is within the authority of the Board of Health to adopt, he shall draft an appropriate resolution setting forth the draft regulation, along with a proposed public hearing date, time and place, and ordering the Secretary of the Board of Health to advertise the public hearing at least once in a newspaper of general circulation in El Paso County, Colorado, not less than twenty (20) days prior to said public hearing.
+
+### 2.11F
+
+F. The Board of Health shall consider said resolution for a public hearing on the proposed regulation at its first appropriate regular or special meeting. The Board of Health may adopt, modify, or reject said resolution for a public hearing on the proposed regulation at its sole discretion.
+
+### 2.11G
+
+G. If ordered by the Board of Health by resolution, the Secretary of the Board of Health shall thereafter advertise the date, time, place, and general nature of the proposed regulation at least once in a newspaper of general circulation in El Paso County, Colorado, not less than twenty (20) days prior to said public hearing. Said notice shall include a statement that a complete copy of the proposed regulation shall be available for public inspection and copying at Public Health offices located at 1675 W. Garden of the Gods Road, Suite 2044, Colorado Springs, Colorado. The Secretary of the Board of Health may also make the proposed regulation available for public inspection on the Internet.
+
+### 2.11H
+
+H. Any person may submit written comments on the proposed regulation to the Board of Health at any time prior to or during said public hearing. All written comments shall be made available for public inspection and copying as a part of the hearing record, and shall be considered by the Board of Health in making its final determination regarding the proposed regulation.
+
+### 2.11I
+
+I. On the date, and at the time and place stated in the notice, the Board of Health shall hold a public hearing on the proposed regulation; except, that the Board of Health may cancel the public hearing, postpone it indefinitely, continue it to another date, time or place which shall be announced, or take other action as it deems appropriate.
+
+### 2.11J
+
+J. At the public hearing, the Board of Health shall first receive written and/or oral statements from the person proposing the regulation. The person proposing the regulation may recommend adoption of it as proposed, or may recommend modification, rejection, or any other appropriate consideration by the Board of Health.
+
+### 2.11K
+
+K. Thereafter, the Board of Health shall afford interested persons an opportunity to present written and/or oral data, views, and arguments concerning the proposed regulation.
+
+### 2.11L
+
+L. The Board of Health may impose reasonable rules for the conduct of public hearings such as time restrictions, restrictions on duplicitous presentations, and other such rules as it deems necessary to provide a full, fair and expeditious hearing.
+
+### P6-DATE
+
+5/23/2012
+
+## Physical page 7
+
+### 2.11M
+
+M. Following conclusion of all presentations, the Board of Health shall close the public hearing and deliberate on its final determination. During its deliberation, the Board of Health may request clarification or follow-up material from Public Health, or others relating to matters raised during the hearing. The Board of Health may also reopen the public hearing, or allow submittal of supplemental material for a set period of time following the public hearing, followed by deliberation at a later date to be announced.
+
+### 2.11N
+
+N. The Board of Health shall base its final determination regarding the proposed regulation on the administrative record that shall consist of all written and oral statements presented. The Board of Health may adopt the regulation as proposed, modify the proposal, reject the proposal, postpone action to a later date, or take such other action as it deems appropriate.
+
+### 2.11O
+
+O. Regulations adopted by the Board of Health shall become effective immediately upon adoption, unless otherwise provided by the Board of Health.
+
+### 2.11P
+
+P. The Secretary of the Board of Health shall maintain, and make available for public inspection and copying all regulations adopted by the Board of Health in paper copy, and on the Internet, if feasible.
+
+### 2.11-UNLETTERED
+
+The Board of Health may adopt a temporary or emergency regulation without compliance with these procedures if the Board of Health determines that immediate adoption of a regulation is imperative to comply with a federal or State law, or for the immediate preservation of public health, safety or welfare, and compliance with these procedures would be contrary to the public interest. In such case, the Board of Health will make a finding as to the basis of its determination that a temporary or emergency regulation is imperative. A temporary or emergency regulation shall become effective immediately, or as otherwise ordered by the Board of Health. A temporary or emergency regulation shall be effective for a period not to exceed three (3) months, or for such shorter period of time as ordered by the Board of Health.
+
+### P7-DATE
+
+5/23/2012

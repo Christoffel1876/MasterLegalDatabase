@@ -1,0 +1,268 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Repository-relative exact file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Check": {
+      "additionalProperties": false,
+      "description": "Actual command result; absent exact start/end timestamps remain null.",
+      "properties": {
+        "command": {
+          "title": "Command",
+          "type": "string"
+        },
+        "exit_code": {
+          "const": 0,
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "evidence": {
+          "$ref": "#/$defs/Asset"
+        },
+        "started_at": {
+          "title": "Started At",
+          "type": "null"
+        },
+        "finished_at": {
+          "title": "Finished At",
+          "type": "null"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "command",
+        "exit_code",
+        "evidence",
+        "started_at",
+        "finished_at",
+        "qualification"
+      ],
+      "title": "Check",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One installed review link with exact unchanged baseline checks.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "installed_and_focused_checks_passed_metadata_only",
+      "title": "Status",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "el-paso-boh-admin-regulations-sd011",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-EL_PASO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "const": "64d72ce1f7783dcf7fb5a3f6956e8ba4845c4839318613a1dee09d99716625d7",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "accepted_source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "accepted_wrapper_inventory": {
+      "$ref": "#/$defs/Asset"
+    },
+    "prepared_plan": {
+      "$ref": "#/$defs/Asset"
+    },
+    "application_checkpoint": {
+      "$ref": "#/$defs/Asset"
+    },
+    "snapshot_directory": {
+      "title": "Snapshot Directory",
+      "type": "string"
+    },
+    "snapshot_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Snapshot Files",
+      "type": "array"
+    },
+    "installed_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Installed Files",
+      "type": "array"
+    },
+    "unchanged_required_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Unchanged Required Files",
+      "type": "array"
+    },
+    "before_originals": {
+      "const": 70,
+      "title": "Before Originals",
+      "type": "integer"
+    },
+    "before_reviewed": {
+      "const": 36,
+      "title": "Before Reviewed",
+      "type": "integer"
+    },
+    "before_unmapped": {
+      "const": 34,
+      "title": "Before Unmapped",
+      "type": "integer"
+    },
+    "after_originals": {
+      "const": 70,
+      "title": "After Originals",
+      "type": "integer"
+    },
+    "after_reviewed": {
+      "const": 37,
+      "title": "After Reviewed",
+      "type": "integer"
+    },
+    "after_unmapped": {
+      "const": 33,
+      "title": "After Unmapped",
+      "type": "integer"
+    },
+    "preserved_authority_joins": {
+      "const": 70,
+      "title": "Preserved Authority Joins",
+      "type": "integer"
+    },
+    "preserved_review_joins": {
+      "const": 36,
+      "title": "Preserved Review Joins",
+      "type": "integer"
+    },
+    "unchanged_other_rows": {
+      "const": 69,
+      "title": "Unchanged Other Rows",
+      "type": "integer"
+    },
+    "target_only_changed_fields": {
+      "items": {
+        "enum": [
+          "reviews",
+          "review_status"
+        ],
+        "type": "string"
+      },
+      "title": "Target Only Changed Fields",
+      "type": "array"
+    },
+    "source_review_artifact": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_review_schema": {
+      "$ref": "#/$defs/Asset"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/Check"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "coverage_promotion": {
+      "const": false,
+      "title": "Coverage Promotion",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "recorded_at",
+    "status",
+    "source_id",
+    "authority_id",
+    "source_sha256",
+    "accepted_source",
+    "accepted_wrapper_inventory",
+    "prepared_plan",
+    "application_checkpoint",
+    "snapshot_directory",
+    "snapshot_files",
+    "installed_files",
+    "unchanged_required_files",
+    "before_originals",
+    "before_reviewed",
+    "before_unmapped",
+    "after_originals",
+    "after_reviewed",
+    "after_unmapped",
+    "preserved_authority_joins",
+    "preserved_review_joins",
+    "unchanged_other_rows",
+    "target_only_changed_fields",
+    "source_review_artifact",
+    "source_review_schema",
+    "checks",
+    "legal_currentness",
+    "answer_safe",
+    "coverage_promotion",
+    "limitations"
+  ],
+  "title": "Execution",
+  "type": "object"
+}
