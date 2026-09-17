@@ -1,0 +1,170 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact retained local bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Crop": {
+      "additionalProperties": false,
+      "description": "Unaltered rectangular pixel subset of a bound full-page render.",
+      "properties": {
+        "crop_id": {
+          "title": "Crop Id",
+          "type": "string"
+        },
+        "priority": {
+          "title": "Priority",
+          "type": "string"
+        },
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "full_image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "rectangle_xyxy": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Rectangle Xyxy",
+          "type": "array"
+        },
+        "crop": {
+          "$ref": "#/$defs/Asset"
+        },
+        "pixel_sha256": {
+          "title": "Pixel Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "crop_id",
+        "priority",
+        "page",
+        "full_image",
+        "rectangle_xyxy",
+        "crop",
+        "pixel_sha256"
+      ],
+      "title": "Crop",
+      "type": "object"
+    },
+    "NativePage": {
+      "additionalProperties": false,
+      "description": "Untouched extraction for context; not a complete checked transcription.",
+      "properties": {
+        "priority": {
+          "title": "Priority",
+          "type": "string"
+        },
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "priority",
+        "page",
+        "native"
+      ],
+      "title": "NativePage",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Actual locally generated evidence and known rendering implementation.",
+  "properties": {
+    "generated_at": {
+      "title": "Generated At",
+      "type": "string"
+    },
+    "native_method": {
+      "const": "PyMuPDF get_text(text), flags=195, sort=False; UTF-8 unchanged",
+      "title": "Native Method",
+      "type": "string"
+    },
+    "native_version": {
+      "title": "Native Version",
+      "type": "string"
+    },
+    "all_full_page_images_directly_viewed_before_native_read": {
+      "const": true,
+      "title": "All Full Page Images Directly Viewed Before Native Read",
+      "type": "boolean"
+    },
+    "native_length_only_preflight_before_visuals": {
+      "const": true,
+      "title": "Native Length Only Preflight Before Visuals",
+      "type": "boolean"
+    },
+    "full_image_display": {
+      "const": "view_image; 1700x2200 originals displayed at 1376x1780; crops separate",
+      "title": "Full Image Display",
+      "type": "string"
+    },
+    "renderer_wrapper": {
+      "$ref": "#/$defs/Asset"
+    },
+    "renderer_binary": {
+      "$ref": "#/$defs/Asset"
+    },
+    "renderer_version": {
+      "title": "Renderer Version",
+      "type": "string"
+    },
+    "crops": {
+      "items": {
+        "$ref": "#/$defs/Crop"
+      },
+      "title": "Crops",
+      "type": "array"
+    },
+    "native_pages": {
+      "items": {
+        "$ref": "#/$defs/NativePage"
+      },
+      "title": "Native Pages",
+      "type": "array"
+    }
+  },
+  "required": [
+    "generated_at",
+    "native_method",
+    "native_version",
+    "all_full_page_images_directly_viewed_before_native_read",
+    "native_length_only_preflight_before_visuals",
+    "full_image_display",
+    "renderer_wrapper",
+    "renderer_binary",
+    "renderer_version",
+    "crops",
+    "native_pages"
+  ],
+  "title": "Evidence",
+  "type": "object"
+}

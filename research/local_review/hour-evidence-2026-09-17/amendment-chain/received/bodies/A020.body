@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no">
+    <title>Document search</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/iip/favicon.ico">
+    <link rel="stylesheet" href="/iip/lib/font-awesome/css/all.min.css" />
+    <link href="/iip/css/customers/elpaso.css" rel="stylesheet" type="text/css" />
+    
+    
+        <link rel="stylesheet" href="/iip/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/iip/css/site.min.css" />
+        <link rel="stylesheet" href="/iip/lib/bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.min.css" />
+    
+</head>
+<body class="background">
+    <div id="skip"><a href="#content">Skip to main content</a></div>
+<nav class="navbar navbar-expand-xl fixed-top py-1" role="navigation">
+    <button class="navbar-toggler border-0 py-0" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="fas fa-bars"></span> Menu 
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav justify-content-center mr-auto">
+            <li class="nav-item"><a class="nav-link" href="/iip/elpaso">Welcome</a></li>
+                <li class="nav-item"><a class="nav-link" href="/iip/elpaso/organization/list">Organizations</a></li>
+                <li class="nav-item"><a class="nav-link" href="/iip/elpaso/person/list">Commissioners</a></li>
+                <li class="nav-item"><a class="nav-link" href="/iip/elpaso/meeting/list">Meetings</a></li>
+                <li class="nav-item"><a class="nav-link" href="/iip/elpaso/meetingsearch">Meeting search</a></li>
+                <li class="nav-item"><a class="nav-link" href="/iip/elpaso/agendaitem/list">Agenda items</a></li>
+                <li class="nav-item"><a class="nav-link" href="/iip/elpaso/search">Search</a></li>
+                <li class="nav-item"><a class="nav-link" href="/iip/elpaso/ordinance/list">Resolutions</a></li>
+                    <li class="nav-item">
+        <div class="dropdown">
+            <a href="#" data-toggle="dropdown" class="nav-link" id="dropdownMenuButton">
+                <em class="fas fa-caret-square-down"></em>&nbsp;Login
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="min-width:250px;">
+                <form method="post" class="px-2 py-1" action="/iip/elpaso/login/login">
+                    <div class="form-group">
+                        <label for="loginusername">Username:</label>
+                        <input name="Username" type="text" class="form-control" id="loginusername" required>
+                        <label for="loginpassword">Password:</label>
+                        <input name="Password" type="password" class="form-control" id="loginpassword" autocomplete="off" required>
+                        <br />
+                        <button id="loginbutton" type="submit" class="btn loginbuttons btn-block">Log in</button>
+                    </div>
+                <input name="__RequestVerificationToken" type="hidden" value="CfDJ8KCvlOdv38NLmvtea-Besla0b7gIbHfAaJti5geZweKHozCA3vMEt4XQ1xcY0A1eLUK66b_urHX6650Lb4gSZZiGZwuSx7ak1sv81iU9fIxKcizQKQaduud5oI8UGM46hnjhpBrZ4mVHBo2s2jZJHvg" /></form>
+            </div>
+        </div>
+    </li>
+
+        </ul>
+    </div>
+</nav>
+    <div class="container body-content" id="content"> 
+        <div role="main">
+            
+<div class="container" role="search">
+    <div class="heading" role="heading" aria-level="1">FreeText Document Search</div>
+    <div>
+        <p>Here you have the option to do a full-text search in all documents (agenda, minutes, agenda items, attachments, etc...)</p>
+        <p><strong>Search instructions:</strong><br />To get results, you need to check at least one checkbox and enter a search term.<br />The search term will be matched anywhere in a word.<br />To find words starting with your term please add a space before it. Equally adding a space after the term finds anything ending with it.<br />To get better results, try to be specific about the term and dates.<br /> You are able to combine two words, by using AND or OR. Example: <em>forest OR mountain</em></p>
+        <p>Note: Non public documents will only show up, if you have the rights to see those.</p>
+    </div>
+
+    <div class="filter">
+        <form method="post" action="/iip/elpaso/search">
+            <div class="row">
+                <div class="col-lg-2">
+                    <label for="SearchFilters_SearchString">Enter a search term</label>
+                </div>
+                <div class="col-lg-2">
+                    <input value="" type="text" id="SearchFilters_SearchString" name="SearchFilters.SearchString" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2">
+                    <label for="SearchFilters_Limit">How many results?</label>
+                </div>
+                <div class="col-lg-2">
+                    <input value="50" type="number" data-val="true" data-val-required="The Limit field is required." id="SearchFilters_Limit" name="SearchFilters.Limit" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 col-md-12 col-sm-12">
+                    <label for="SearchFilters_SelectedOrganizationFilterId">Organization</label>
+                </div>
+                <div class="col-lg-10 col-md-12 col-sm-12">
+                    <select style="max-width:300px;" data-val="true" data-val-required="The SelectedOrganizationFilterId field is required." id="SearchFilters_SelectedOrganizationFilterId" name="SearchFilters.SelectedOrganizationFilterId">
+                        <option>Please select</option>
+                    <option value="3">Board of Adjustment</option>
+<option value="1">Board of County Commissioners</option>
+<option value="82">Board of County Commissioners (Informal)</option>
+<option value="81">Board of County Commissioners (Land Use)</option>
+<option value="54">Board of County Commissioners Work Session</option>
+<option value="5">Board of Retirement</option>
+<option value="78">Child Fatality Review Team</option>
+<option value="6">Citizen Outreach Group</option>
+<option value="7">Citizen Review Panel</option>
+<option value="9">Community Corrections Board</option>
+<option value="10">Community Development Advisory Board</option>
+<option value="20">Community Services Block Grant Advisory Board&#xD;&#xA;</option>
+<option value="11">Cooperative Extension Advisory Committee</option>
+<option value="76">County Event</option>
+<option value="90">Criminal Justice Assistance Board</option>
+<option value="21">Criminal Justice Coordinating Council</option>
+<option value="70">Economic Development Department</option>
+<option value="2">El Paso - Teller County 9-1-1</option>
+<option value="84">El Paso County Facilities Corporation</option>
+<option value="73">El Paso County Health Plan Trust Board</option>
+<option value="72">El Paso County Master Plan Advisory Committee</option>
+<option value="15">Emergency Services Authority</option>
+<option value="22">Facilities Corporation</option>
+<option value="13">Fair Advisory Board</option>
+<option value="14">Fairgrounds Corporation</option>
+<option value="45">Fountain Creek Watershed</option>
+<option value="27">Highway Advisory Commission</option>
+<option value="28">Housing Authority</option>
+<option value="41">Innovation and Technology Committee</option>
+<option value="29">Juvenile Community Review Board</option>
+<option value="71">Juvenile Community Review Board</option>
+<option value="30">Local Emergency Planning Committee</option>
+<option value="63">Metro Multi Agency Units (MAU) Executive Board</option>
+<option value="32">Noxious Weed Advisory Committee</option>
+<option value="16">Park Advisory Board</option>
+<option value="33">Park Fee Advisory Committee</option>
+<option value="47">Pikes Peak Library District Board</option>
+<option value="97">Pikes Peak Library District Joint Appointment Committee</option>
+<option value="69">Pikes Peak Regional Office of Emergency Management Advisory Board</option>
+<option value="68">Pikes Peak Regional Water Authority</option>
+<option value="36">Pikes Peak Rural Transportation Authority </option>
+<option value="62">Pikes Peak Workforce</option>
+<option value="37">Pioneer Village Roads Advisory Committee</option>
+<option value="56">Pioneer Village Roads PID</option>
+<option value="17">Planning Commission</option>
+<option value="4">Public Health</option>
+<option value="48">Public Improvement District 1</option>
+<option value="49">Public Improvement District 2</option>
+<option value="50">Public Improvement District 3</option>
+<option value="95">Public Improvement District 4</option>
+<option value="93">Public Improvement District 5</option>
+<option value="60">Public Meeting Notice</option>
+<option value="85">Region 16 Opioid Policy Council</option>
+<option value="39">Road Impact Advisory Committee</option>
+<option value="57">Stratmoor Valley Streetlights PID</option>
+<option value="86">TEFRA Hearing</option>
+<option value="67">The Resource Exchange Annual Legislative Town Hall</option>
+<option value="61">Victim Assistance and Law Enforcement Board </option>
+<option value="64">Victim Compensation</option>
+</select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-3 col-md-3 col-sm-12">
+                        <p>
+                            <input type="checkbox" data-val="true" data-val-required="The InNotification field is required." id="SearchFilters_InNotification" name="SearchFilters.InNotification" value="true" />
+                            <label for="SearchFilters_InNotification">Agenda</label>
+                        </p>
+                        <p id="searchai">
+                            <input type="checkbox" data-val="true" data-val-required="The InProposal field is required." id="SearchFilters_InProposal" name="SearchFilters.InProposal" value="true" />
+                            <label for="SearchFilters_InProposal">Agenda items</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" data-val="true" data-val-required="The InAgenda field is required." id="SearchFilters_InAgenda" name="SearchFilters.InAgenda" value="true" />
+                            <label for="SearchFilters_InAgenda">Agenda (Committee)</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" data-val="true" data-val-required="The InMinutes field is required." id="SearchFilters_InMinutes" name="SearchFilters.InMinutes" value="true" />
+                            <label for="SearchFilters_InMinutes">Minutes</label>
+                        </p>
+                </div>
+                <div class="col-xl-3 col-md-5 col-sm-12">
+                        <p>
+                            <input type="checkbox" data-val="true" data-val-required="The InAttachmentMeeting field is required." id="SearchFilters_InAttachmentMeeting" name="SearchFilters.InAttachmentMeeting" value="true" />
+                            <label for="SearchFilters_InAttachmentMeeting">Attachments (Meeting)</label>
+                        </p>
+                        <p id="searchai">
+                            <input type="checkbox" data-val="true" data-val-required="The InAttachmentProposal field is required." id="SearchFilters_InAttachmentProposal" name="SearchFilters.InAttachmentProposal" value="true" />
+                            <label for="SearchFilters_InAttachmentProposal">Attachments (Agenda Items)</label>
+                        </p>
+                        <p>
+                            <input type="checkbox" data-val="true" data-val-required="The InOrdinances field is required." id="SearchFilters_InOrdinances" name="SearchFilters.InOrdinances" value="true" />
+                            <label for="SearchFilters_InOrdinances">Resolutions</label>
+                        </p>
+                </div>
+            </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <input type="checkbox" data-val="true" data-val-required="The InArchive field is required." id="SearchFilters_InArchive" name="SearchFilters.InArchive" value="true" />
+                        <label for="SearchFilters_InArchive">Archive</label>
+                    </div>
+                </div>
+            <p style="margin-top:5px;">
+                <label for="SearchFilters_FromDateStr">Search from</label>
+                <input type="text" class="datepicker" autocomplete="off" value="09/17/2025" id="SearchFilters_FromDateStr" name="SearchFilters.FromDateStr">
+                <label for="SearchFilters_ToDateStr">up to</label>
+                <input type="text" class="datepicker" autocomplete="off" value="09/17/2026" id="SearchFilters_ToDateStr" name="SearchFilters.ToDateStr">
+            </p>
+            <label for="searchbutton">Apply filters</label>
+            <input id="searchbutton" name="searchbutton" type="submit" class="btn loginbuttons" value="Start search" />
+        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8KCvlOdv38NLmvtea-Besla0b7gIbHfAaJti5geZweKHozCA3vMEt4XQ1xcY0A1eLUK66b_urHX6650Lb4gSZZiGZwuSx7ak1sv81iU9fIxKcizQKQaduud5oI8UGM46hnjhpBrZ4mVHBo2s2jZJHvg" /><input name="SearchFilters.InNotification" type="hidden" value="false" /><input name="SearchFilters.InProposal" type="hidden" value="false" /><input name="SearchFilters.InAgenda" type="hidden" value="false" /><input name="SearchFilters.InMinutes" type="hidden" value="false" /><input name="SearchFilters.InAttachmentMeeting" type="hidden" value="false" /><input name="SearchFilters.InAttachmentProposal" type="hidden" value="false" /><input name="SearchFilters.InOrdinances" type="hidden" value="false" /><input name="SearchFilters.InArchive" type="hidden" value="false" /></form>
+    </div>
+</div>
+        </div>
+        <hr />
+            <footer role="contentinfo">
+                <div class="row">
+                    <div id="copyright" class="col-12">
+                        &copy; 2026 - <a href="https://www.provox-systems.com">Provox Systems, Inc.</a>
+                    </div>
+                </div>
+            </footer>
+    </div>
+    
+    
+        <script src="/iip/lib/jquery/dist/jquery.min.js"></script>
+        <script src="/iip/js/jquery.tablesorter.min.js"></script>
+        <script src="/iip/lib/popper.min.js"></script>
+        <script src="/iip/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    
+    <script>
+        $('table').tablesorter({
+            dateFormat : "mmddyyyy",
+            sortLocaleCompare : true,
+        });
+    </script>
+    
+    <script src="/iip/lib/bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js"></script>
+    <script>
+    $('.datepicker').datepicker({
+        maxViewMode: 2,
+        todayBtn: "linked",
+        language: 'en',
+        format: 'mm/dd/yyyy',
+        weekStart: 0,
+        orientation: "bottom auto"
+    });
+    </script>
+
+    <style>
+    .gtranslate_wrapper img {
+        display: none !important;
+    }
+</style>
+<div class="gtranslate_wrapper"></div>
+<script>
+    window.gtranslateSettings = {
+        "default_language": "en",
+        "wrapper_selector": ".gtranslate_wrapper",
+        "switcher_horizontal_position": "right",
+        "switcher_vertical_position": "top"
+    };
+</script>
+<script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
+</body>
+</html>

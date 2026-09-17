@@ -6,7 +6,7 @@ answer_safe: false
 
 # Manual source/review inventory
 
-70 custody rows; 38 have an explicit review link and 32 have no allowlisted review link.
+71 custody rows; 38 have an explicit review link and 33 have no allowlisted review link.
 These are source-custody counts, not statewide coverage or current-law readiness.
 
 From the repository root:
@@ -87,6 +87,7 @@ python -m geode.pipeline.manual_review_inventory --root . --check
 | chaffee-cwrc-ordinance-2026-02-atlas-directed | CO-COUNTY-CHAFFEE | checked_passages |
 | chaffee-electric-ordinance-2026-01-atlas-directed | CO-COUNTY-CHAFFEE | checked_passages |
 | chaffee-planning-application-fees-atlas-directed | CO-COUNTY-CHAFFEE | checked_tables |
+| el-paso-boa-resolution-25-290-directed-lead | CO-COUNTY-EL_PASO | metadata only |
 
 ## Limits
 

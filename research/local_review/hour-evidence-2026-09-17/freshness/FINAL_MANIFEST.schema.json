@@ -1,0 +1,61 @@
+{
+  "$defs": {
+    "Pin": {
+      "additionalProperties": false,
+      "description": "Exact artifact identity; a web derivative is not a source original.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Pin",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Closed inventory excluding only this self-referential manifest.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "excluded": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Excluded",
+      "type": "array"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Pin"
+      },
+      "title": "Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "excluded",
+    "files"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

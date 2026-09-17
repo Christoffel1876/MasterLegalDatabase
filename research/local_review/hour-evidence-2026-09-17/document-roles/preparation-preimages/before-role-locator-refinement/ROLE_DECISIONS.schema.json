@@ -1,0 +1,461 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact retained local bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "DateClaim": {
+      "additionalProperties": false,
+      "description": "Source's words and role, with no operative date inference.",
+      "properties": {
+        "literal": {
+          "title": "Literal",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "source_stated_effective_date_unverified",
+            "source_stated_introduction_date_unverified",
+            "source_stated_adoption_date_unverified",
+            "source_stated_publication_date_unverified",
+            "source_stated_hearing_date_unverified",
+            "source_stated_conditional_effect_unverified"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "observation_id": {
+          "title": "Observation Id",
+          "type": "string"
+        },
+        "scope": {
+          "title": "Scope",
+          "type": "string"
+        },
+        "independently_verified": {
+          "const": false,
+          "title": "Independently Verified",
+          "type": "boolean"
+        },
+        "operative_date_certified": {
+          "const": false,
+          "title": "Operative Date Certified",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "literal",
+        "role",
+        "observation_id",
+        "scope",
+        "independently_verified",
+        "operative_date_certified"
+      ],
+      "title": "DateClaim",
+      "type": "object"
+    },
+    "NativeAnchor": {
+      "additionalProperties": false,
+      "description": "Exact unchanged native byte span supporting a selected visual observation.",
+      "properties": {
+        "asset": {
+          "$ref": "#/$defs/Asset"
+        },
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "asset",
+        "start",
+        "end",
+        "text"
+      ],
+      "title": "NativeAnchor",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "description": "Limited direct-image observation, not a complete paragraph transcription.",
+      "properties": {
+        "observation_id": {
+          "title": "Observation Id",
+          "type": "string"
+        },
+        "physical_page": {
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "locator": {
+          "title": "Locator",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "printed_claim",
+            "blank_field",
+            "scope",
+            "document_identity",
+            "execution",
+            "anomaly"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "visual_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Visual Text"
+        },
+        "finding": {
+          "title": "Finding",
+          "type": "string"
+        },
+        "crop_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Crop Ids",
+          "type": "array"
+        },
+        "native_anchor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/NativeAnchor"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "observation_id",
+        "physical_page",
+        "locator",
+        "kind",
+        "visual_text",
+        "finding",
+        "crop_ids",
+        "native_anchor"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "PageReview": {
+      "additionalProperties": false,
+      "description": "Coverage of every physical page for role evidence only.",
+      "properties": {
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "printed_page": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Printed Page"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "directly_viewed": {
+          "const": true,
+          "title": "Directly Viewed",
+          "type": "boolean"
+        },
+        "role_scan_note": {
+          "title": "Role Scan Note",
+          "type": "string"
+        },
+        "complete_text_fidelity_checked": {
+          "const": false,
+          "title": "Complete Text Fidelity Checked",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "physical_page",
+        "printed_page",
+        "image",
+        "directly_viewed",
+        "role_scan_note",
+        "complete_text_fidelity_checked"
+      ],
+      "title": "PageReview",
+      "type": "object"
+    },
+    "RoleDecision": {
+      "additionalProperties": false,
+      "description": "One exact source and its bounded visual document-role assessment.",
+      "properties": {
+        "priority": {
+          "enum": [
+            "P04",
+            "P07",
+            "P08"
+          ],
+          "title": "Priority",
+          "type": "string"
+        },
+        "action_id": {
+          "title": "Action Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "enum": [
+            "CO-COUNTY-JEFFERSON",
+            "CO-MUNICIPAL-ARVADA"
+          ],
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Asset"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/PageReview"
+          },
+          "title": "Pages",
+          "type": "array"
+        },
+        "title_as_printed": {
+          "title": "Title As Printed",
+          "type": "string"
+        },
+        "assessed_role": {
+          "enum": [
+            "policy_with_uncompleted_adoption_metadata",
+            "introduced_bill_with_uncompleted_execution_fields",
+            "ordinance_form_code_with_printed_adoption_claim"
+          ],
+          "title": "Assessed Role",
+          "type": "string"
+        },
+        "role_reason": {
+          "title": "Role Reason",
+          "type": "string"
+        },
+        "observations": {
+          "items": {
+            "$ref": "#/$defs/Observation"
+          },
+          "title": "Observations",
+          "type": "array"
+        },
+        "dates": {
+          "items": {
+            "$ref": "#/$defs/DateClaim"
+          },
+          "title": "Dates",
+          "type": "array"
+        },
+        "blank_or_incomplete_fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Blank Or Incomplete Fields",
+          "type": "array"
+        },
+        "execution_evidence_in_copy": {
+          "title": "Execution Evidence In Copy",
+          "type": "string"
+        },
+        "unverified_external_dependencies": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Unverified External Dependencies",
+          "type": "array"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "legal_effect_certified": {
+          "const": false,
+          "title": "Legal Effect Certified",
+          "type": "boolean"
+        },
+        "complete_text_fidelity_checked": {
+          "const": false,
+          "title": "Complete Text Fidelity Checked",
+          "type": "boolean"
+        },
+        "intake_or_rule_promotion_authorized": {
+          "const": false,
+          "title": "Intake Or Rule Promotion Authorized",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "priority",
+        "action_id",
+        "authority_id",
+        "source",
+        "pages",
+        "title_as_printed",
+        "assessed_role",
+        "role_reason",
+        "observations",
+        "dates",
+        "blank_or_incomplete_fields",
+        "execution_evidence_in_copy",
+        "unverified_external_dependencies",
+        "legal_currentness",
+        "legal_effect_certified",
+        "complete_text_fidelity_checked",
+        "intake_or_rule_promotion_authorized"
+      ],
+      "title": "RoleDecision",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Exact package inputs, actual observation scope and immutable qualifications.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "reviewer": {
+      "const": "Plato",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "complete_bounded_document_role_review",
+      "title": "Status",
+      "type": "string"
+    },
+    "inputs": {
+      "$ref": "#/$defs/Asset"
+    },
+    "evidence": {
+      "$ref": "#/$defs/Asset"
+    },
+    "custody": {
+      "const": "received_review_package",
+      "title": "Custody",
+      "type": "string"
+    },
+    "original_http_and_timing_verified": {
+      "const": false,
+      "title": "Original Http And Timing Verified",
+      "type": "boolean"
+    },
+    "source_exposure": {
+      "title": "Source Exposure",
+      "type": "string"
+    },
+    "visual_method": {
+      "title": "Visual Method",
+      "type": "string"
+    },
+    "directly_viewed_full_pages": {
+      "const": 28,
+      "title": "Directly Viewed Full Pages",
+      "type": "integer"
+    },
+    "directly_viewed_crops": {
+      "const": 10,
+      "title": "Directly Viewed Crops",
+      "type": "integer"
+    },
+    "candidate_corrections_performed": {
+      "const": false,
+      "title": "Candidate Corrections Performed",
+      "type": "boolean"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "documents": {
+      "items": {
+        "$ref": "#/$defs/RoleDecision"
+      },
+      "title": "Documents",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "reviewer",
+    "recorded_at",
+    "status",
+    "inputs",
+    "evidence",
+    "custody",
+    "original_http_and_timing_verified",
+    "source_exposure",
+    "visual_method",
+    "directly_viewed_full_pages",
+    "directly_viewed_crops",
+    "candidate_corrections_performed",
+    "public_requests",
+    "documents",
+    "limitations"
+  ],
+  "title": "Review",
+  "type": "object"
+}

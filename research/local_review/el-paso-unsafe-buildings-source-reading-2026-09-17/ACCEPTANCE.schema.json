@@ -1,0 +1,97 @@
+{
+  "$defs": {
+    "Binding": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Binding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "authority_id": {
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "root_review": {
+      "$ref": "#/$defs/Binding"
+    },
+    "peer_audit": {
+      "$ref": "#/$defs/Binding"
+    },
+    "reading": {
+      "$ref": "#/$defs/Binding"
+    },
+    "review_scope": {
+      "title": "Review Scope",
+      "type": "string"
+    },
+    "unresolved": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unresolved",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "inventory_join_added": {
+      "title": "Inventory Join Added",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "source_id",
+    "source_sha256",
+    "authority_id",
+    "status",
+    "root_review",
+    "peer_audit",
+    "reading",
+    "review_scope",
+    "unresolved",
+    "legal_currentness",
+    "answer_safe",
+    "inventory_join_added"
+  ],
+  "title": "Acceptance",
+  "type": "object"
+}
