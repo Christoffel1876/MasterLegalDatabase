@@ -1,0 +1,139 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "source_id": {
+      "const": "el-paso-boh-admin-regulations-sd011",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "const": "64d72ce1f7783dcf7fb5a3f6956e8ba4845c4839318613a1dee09d99716625d7",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-EL_PASO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "accepted_at": {
+      "format": "date-time",
+      "title": "Accepted At",
+      "type": "string"
+    },
+    "reviewer": {
+      "const": "Atlas",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "status": {
+      "const": "accepted_source_fidelity_for_metadata_only_review_join",
+      "title": "Status",
+      "type": "string"
+    },
+    "source_review": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_review_schema": {
+      "$ref": "#/$defs/Asset"
+    },
+    "frozen_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "root_reading": {
+      "$ref": "#/$defs/Asset"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    },
+    "pages_directly_inspected": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Pages Directly Inspected",
+      "type": "array"
+    },
+    "native_candidate_changed": {
+      "const": false,
+      "title": "Native Candidate Changed",
+      "type": "boolean"
+    },
+    "external_review_consulted": {
+      "const": false,
+      "title": "External Review Consulted",
+      "type": "boolean"
+    },
+    "external_review_status": {
+      "title": "External Review Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_id",
+    "source_sha256",
+    "authority_id",
+    "accepted_at",
+    "reviewer",
+    "status",
+    "source_review",
+    "source_review_schema",
+    "frozen_manifest",
+    "root_reading",
+    "scope",
+    "pages_directly_inspected",
+    "native_candidate_changed",
+    "external_review_consulted",
+    "external_review_status",
+    "legal_currentness",
+    "answer_safe",
+    "limitations"
+  ],
+  "title": "Acceptance",
+  "type": "object"
+}

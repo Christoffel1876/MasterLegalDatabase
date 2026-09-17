@@ -1,0 +1,68 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Repository-relative exact file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Recorded application checkpoint after preimage capture and initial file writes.",
+  "properties": {
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "scope": {
+      "const": "one metadata review join only",
+      "title": "Scope",
+      "type": "string"
+    },
+    "preimage_directory": {
+      "title": "Preimage Directory",
+      "type": "string"
+    },
+    "before": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Before",
+      "type": "array"
+    },
+    "accepted_source": {
+      "$ref": "#/$defs/Asset"
+    }
+  },
+  "required": [
+    "started_at",
+    "scope",
+    "preimage_directory",
+    "before",
+    "accepted_source"
+  ],
+  "title": "Start",
+  "type": "object"
+}
