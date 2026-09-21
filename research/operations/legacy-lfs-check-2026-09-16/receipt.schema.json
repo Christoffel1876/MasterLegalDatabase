@@ -1,0 +1,134 @@
+{
+  "$defs": {
+    "ObjectResult": {
+      "additionalProperties": false,
+      "properties": {
+        "oid": {
+          "title": "Oid",
+          "type": "string"
+        },
+        "returned_size": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Returned Size"
+        },
+        "download_action_offered": {
+          "title": "Download Action Offered",
+          "type": "boolean"
+        },
+        "error_code": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Error Code"
+        }
+      },
+      "required": [
+        "oid",
+        "returned_size",
+        "download_action_offered",
+        "error_code"
+      ],
+      "title": "ObjectResult",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "repository": {
+      "title": "Repository",
+      "type": "string"
+    },
+    "endpoint": {
+      "title": "Endpoint",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "status": {
+      "title": "Status",
+      "type": "integer"
+    },
+    "request_sha256": {
+      "title": "Request Sha256",
+      "type": "string"
+    },
+    "response_sha256": {
+      "title": "Response Sha256",
+      "type": "string"
+    },
+    "response_bytes": {
+      "title": "Response Bytes",
+      "type": "integer"
+    },
+    "response_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Response Type"
+    },
+    "objects": {
+      "items": {
+        "$ref": "#/$defs/ObjectResult"
+      },
+      "title": "Objects",
+      "type": "array"
+    },
+    "authenticated_request": {
+      "const": false,
+      "default": false,
+      "title": "Authenticated Request",
+      "type": "boolean"
+    },
+    "payload_downloaded": {
+      "const": false,
+      "default": false,
+      "title": "Payload Downloaded",
+      "type": "boolean"
+    },
+    "canonical_changes": {
+      "const": false,
+      "default": false,
+      "title": "Canonical Changes",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "repository",
+    "endpoint",
+    "started_at",
+    "completed_at",
+    "status",
+    "request_sha256",
+    "response_sha256",
+    "response_bytes",
+    "response_type",
+    "objects"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}
