@@ -1,0 +1,259 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact repository-relative immutable identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Check": {
+      "additionalProperties": false,
+      "description": "Actual local verification outcome and retained output.",
+      "properties": {
+        "command": {
+          "title": "Command",
+          "type": "string"
+        },
+        "exit_code": {
+          "const": 0,
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "evidence": {
+          "$ref": "#/$defs/Asset"
+        },
+        "timing": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Asset"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "scope": {
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "command",
+        "exit_code",
+        "evidence",
+        "timing",
+        "scope"
+      ],
+      "title": "Check",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One accepted review join; original sources and historical scope remain fixed.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "base_commit": {
+      "const": "06504e53ca64734b05eb2362bd48d04b1f223078",
+      "title": "Base Commit",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "el-paso-ldc-chapter-2-sd011",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-EL_PASO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "const": "f3d527fd6a9da5b0043672582dda812dc9c3dfe9958d8b53eec876957ed10953",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "status": {
+      "const": "metadata_only_integration_verified",
+      "title": "Status",
+      "type": "string"
+    },
+    "before_counts": {
+      "maxItems": 3,
+      "minItems": 3,
+      "prefixItems": [
+        {
+          "const": 70,
+          "type": "integer"
+        },
+        {
+          "const": 37,
+          "type": "integer"
+        },
+        {
+          "const": 33,
+          "type": "integer"
+        }
+      ],
+      "title": "Before Counts",
+      "type": "array"
+    },
+    "after_counts": {
+      "maxItems": 3,
+      "minItems": 3,
+      "prefixItems": [
+        {
+          "const": 70,
+          "type": "integer"
+        },
+        {
+          "const": 38,
+          "type": "integer"
+        },
+        {
+          "const": 32,
+          "type": "integer"
+        }
+      ],
+      "title": "After Counts",
+      "type": "array"
+    },
+    "preserved_authority_joins": {
+      "const": 70,
+      "title": "Preserved Authority Joins",
+      "type": "integer"
+    },
+    "preserved_review_joins": {
+      "const": 37,
+      "title": "Preserved Review Joins",
+      "type": "integer"
+    },
+    "unchanged_other_rows": {
+      "const": 69,
+      "title": "Unchanged Other Rows",
+      "type": "integer"
+    },
+    "source_passages": {
+      "const": 119,
+      "title": "Source Passages",
+      "type": "integer"
+    },
+    "structural_links": {
+      "const": 5,
+      "title": "Structural Links",
+      "type": "integer"
+    },
+    "snapshot_directory": {
+      "title": "Snapshot Directory",
+      "type": "string"
+    },
+    "preimages": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Preimages",
+      "type": "array"
+    },
+    "installed_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Installed Files",
+      "type": "array"
+    },
+    "unchanged_inputs": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Unchanged Inputs",
+      "type": "array"
+    },
+    "accepted_review_inputs": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Accepted Review Inputs",
+      "type": "array"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/Check"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "coverage_promotion": {
+      "const": false,
+      "title": "Coverage Promotion",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "base_commit",
+    "source_id",
+    "authority_id",
+    "source_sha256",
+    "status",
+    "before_counts",
+    "after_counts",
+    "preserved_authority_joins",
+    "preserved_review_joins",
+    "unchanged_other_rows",
+    "source_passages",
+    "structural_links",
+    "snapshot_directory",
+    "preimages",
+    "installed_files",
+    "unchanged_inputs",
+    "accepted_review_inputs",
+    "checks",
+    "legal_currentness",
+    "answer_safe",
+    "coverage_promotion",
+    "limitations"
+  ],
+  "title": "Execution",
+  "type": "object"
+}

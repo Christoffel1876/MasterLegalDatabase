@@ -1,0 +1,174 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact retained local bytes.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "description": "Supplied identity and actual local preparation.",
+      "properties": {
+        "priority": {
+          "title": "Priority",
+          "type": "string"
+        },
+        "action_id": {
+          "title": "Action Id",
+          "type": "string"
+        },
+        "authority": {
+          "title": "Authority",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Asset"
+        },
+        "supplied_attempt": {
+          "$ref": "#/$defs/Asset"
+        },
+        "page_count": {
+          "title": "Page Count",
+          "type": "integer"
+        },
+        "native_page_bytes": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Native Page Bytes",
+          "type": "array"
+        },
+        "render_started_at": {
+          "title": "Render Started At",
+          "type": "string"
+        },
+        "render_finished_at": {
+          "title": "Render Finished At",
+          "type": "string"
+        },
+        "render_command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Render Command",
+          "type": "array"
+        },
+        "render_exit_code": {
+          "title": "Render Exit Code",
+          "type": "integer"
+        },
+        "images": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "title": "Images",
+          "type": "array"
+        }
+      },
+      "required": [
+        "priority",
+        "action_id",
+        "authority",
+        "source",
+        "supplied_attempt",
+        "page_count",
+        "native_page_bytes",
+        "render_started_at",
+        "render_finished_at",
+        "render_command",
+        "render_exit_code",
+        "images"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Frozen originals, preparation and honest receipt-only provenance.",
+  "properties": {
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "finished_at": {
+      "title": "Finished At",
+      "type": "string"
+    },
+    "custody": {
+      "const": "received_review_package",
+      "title": "Custody",
+      "type": "string"
+    },
+    "official_http_independently_verified": {
+      "const": false,
+      "title": "Official Http Independently Verified",
+      "type": "boolean"
+    },
+    "supplied_times_independently_verified": {
+      "const": false,
+      "title": "Supplied Times Independently Verified",
+      "type": "boolean"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "renderer": {
+      "$ref": "#/$defs/Asset"
+    },
+    "render_dpi": {
+      "const": 200,
+      "title": "Render Dpi",
+      "type": "integer"
+    },
+    "supporting_inputs": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Supporting Inputs",
+      "type": "array"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "title": "Sources",
+      "type": "array"
+    }
+  },
+  "required": [
+    "started_at",
+    "finished_at",
+    "custody",
+    "official_http_independently_verified",
+    "supplied_times_independently_verified",
+    "public_requests",
+    "renderer",
+    "render_dpi",
+    "supporting_inputs",
+    "sources"
+  ],
+  "title": "Inputs",
+  "type": "object"
+}

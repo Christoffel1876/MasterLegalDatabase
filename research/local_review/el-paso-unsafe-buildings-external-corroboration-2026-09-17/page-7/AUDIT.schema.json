@@ -1,0 +1,138 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact retained file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Bounded replay results, distinct from reported methods and timestamps.",
+  "properties": {
+    "schema_version": {
+      "const": "page7-external-audit-1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "audited_at": {
+      "title": "Audited At",
+      "type": "string"
+    },
+    "scope": {
+      "const": "physical_page_7_only",
+      "title": "Scope",
+      "type": "string"
+    },
+    "source_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "received_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Received Files",
+      "type": "array"
+    },
+    "listed_hashes": {
+      "title": "Listed Hashes",
+      "type": "integer"
+    },
+    "listed_checksums": {
+      "title": "Listed Checksums",
+      "type": "integer"
+    },
+    "freeze_leaf_bindings": {
+      "title": "Freeze Leaf Bindings",
+      "type": "integer"
+    },
+    "completion_hash_bindings": {
+      "title": "Completion Hash Bindings",
+      "type": "integer"
+    },
+    "unlisted_payloads": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unlisted Payloads",
+      "type": "array"
+    },
+    "normalized_body_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Normalized Body Sha256",
+      "type": "string"
+    },
+    "normalized_bodies_equal": {
+      "const": true,
+      "title": "Normalized Bodies Equal",
+      "type": "boolean"
+    },
+    "findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "limits": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limits",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "audited_at",
+    "scope",
+    "source_sha256",
+    "legal_currentness",
+    "answer_safe",
+    "received_files",
+    "listed_hashes",
+    "listed_checksums",
+    "freeze_leaf_bindings",
+    "completion_hash_bindings",
+    "unlisted_payloads",
+    "normalized_body_sha256",
+    "normalized_bodies_equal",
+    "findings",
+    "limits"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

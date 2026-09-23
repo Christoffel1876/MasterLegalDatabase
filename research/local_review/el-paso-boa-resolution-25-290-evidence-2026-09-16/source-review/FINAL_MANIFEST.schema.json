@@ -1,0 +1,59 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact relative payload identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Closed inventory excluding the manifest itself.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "frozen_literal_source_review_not_current_law",
+      "title": "Status",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "files"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

@@ -1,0 +1,115 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact relative payload identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "CheckRun": {
+      "additionalProperties": false,
+      "description": "Actual local command timing and captured output, with no public requests.",
+      "properties": {
+        "argv": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Argv",
+          "type": "array"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "finished_at": {
+          "format": "date-time",
+          "title": "Finished At",
+          "type": "string"
+        },
+        "exit_code": {
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "stdout": {
+          "$ref": "#/$defs/Asset"
+        },
+        "stderr": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "argv",
+        "started_at",
+        "finished_at",
+        "exit_code",
+        "stdout",
+        "stderr"
+      ],
+      "title": "CheckRun",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Finite mechanical checks for this source-review package only.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "python_version": {
+      "title": "Python Version",
+      "type": "string"
+    },
+    "network_requests": {
+      "const": 0,
+      "title": "Network Requests",
+      "type": "integer"
+    },
+    "runs": {
+      "items": {
+        "$ref": "#/$defs/CheckRun"
+      },
+      "title": "Runs",
+      "type": "array"
+    },
+    "prior_checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Prior Checks",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "python_version",
+    "network_requests",
+    "runs",
+    "prior_checks"
+  ],
+  "title": "RunReceipt",
+  "type": "object"
+}

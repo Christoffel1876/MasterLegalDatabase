@@ -1,0 +1,85 @@
+{
+  "$defs": {
+    "Case": {
+      "additionalProperties": false,
+      "description": "One actually attempted corruption and rejection.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "rejected": {
+          "const": true,
+          "title": "Rejected",
+          "type": "boolean"
+        },
+        "error_type": {
+          "title": "Error Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "rejected",
+        "error_type"
+      ],
+      "title": "Case",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Recorded actual bounded validation result, not a full software test suite.",
+  "properties": {
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "review_sha256": {
+      "title": "Review Sha256",
+      "type": "string"
+    },
+    "verifier_sha256": {
+      "title": "Verifier Sha256",
+      "type": "string"
+    },
+    "baseline_passed": {
+      "const": true,
+      "title": "Baseline Passed",
+      "type": "boolean"
+    },
+    "exact_rerender_28_pages_previously_passed": {
+      "const": true,
+      "title": "Exact Rerender 28 Pages Previously Passed",
+      "type": "boolean"
+    },
+    "rerender_tool_exit_code": {
+      "const": 0,
+      "title": "Rerender Tool Exit Code",
+      "type": "integer"
+    },
+    "cases": {
+      "items": {
+        "$ref": "#/$defs/Case"
+      },
+      "title": "Cases",
+      "type": "array"
+    },
+    "original_review_unchanged": {
+      "const": true,
+      "title": "Original Review Unchanged",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "review_sha256",
+    "verifier_sha256",
+    "baseline_passed",
+    "exact_rerender_28_pages_previously_passed",
+    "rerender_tool_exit_code",
+    "cases",
+    "original_review_unchanged"
+  ],
+  "title": "Checks",
+  "type": "object"
+}

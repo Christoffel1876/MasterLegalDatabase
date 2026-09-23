@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "prepared_at": "2026-09-16T18:31:20.976307Z",
+  "prepared_at": "2026-09-17T20:56:20.635685Z",
   "manual_manifest": {
     "path": "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
-    "sha256": "d32afb35ca30d113e786ba98768dace04c8e4d433322355a14ab35d7a3810537",
-    "size_bytes": 155913
+    "sha256": "d52a282f0eda368fcb0874f1398afd43b268e5ce5af03ab7eca6d529f6ca14f7",
+    "size_bytes": 157401
   },
   "legacy_ledger": {
     "path": "_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
@@ -2456,6 +2456,49 @@
         "status_pointer": "/http_status",
         "time_pointer": "/completed_at"
       }
+    },
+    {
+      "record_id": "el-paso-boa-resolution-25-290-directed-lead",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "provenance": {
+        "artifact": {
+          "path": "research/local_review/el-paso-resolution-25-290-intake-2026-09-17/PROVENANCE.json",
+          "sha256": "4df383427136616dec88594726bffd573eab08d0148788a5ff75321cb60a1863",
+          "size_bytes": 2350
+        },
+        "jsonl_row": null
+      },
+      "sha_pointer": "/source/sha256",
+      "source_id_pointer": "/source_id",
+      "authority_pointer": "/authority_id",
+      "reported_acquisition_pointers": [
+        "/recorded_http_started_at",
+        "/recorded_http_completed_at"
+      ],
+      "role_pointers": [
+        "/document_role",
+        "/source_dates",
+        "/physical_pages"
+      ],
+      "qualification_pointers": [
+        "/limitations",
+        "/legal_currentness",
+        "/answer_safe",
+        "/actual_repository_received_at"
+      ],
+      "verified_http": {
+        "document": {
+          "artifact": {
+            "path": "research/local_review/el-paso-resolution-25-290-intake-2026-09-17/inputs/curl-event-04.json",
+            "sha256": "d87d0d2b1a4397605d07b855a1a36a4f91a01d018e1f30c2c3d582dab06b42b2",
+            "size_bytes": 1045
+          },
+          "jsonl_row": null
+        },
+        "sha_pointer": "/body/sha256",
+        "status_pointer": "/status",
+        "time_pointer": "/finished_at"
+      }
     }
   ],
   "reviews": [
@@ -3650,6 +3693,52 @@
         "/provenance"
       ],
       "note": "Atlas accepted the exact seven-page, 78-passage source-fidelity review for a metadata-only review link. The original QA status pending Atlas acceptance remains historical. Separate acceptance: research/local_review/el-paso-boh-admin-source-qa-2026-09-16/ACCEPTANCE.json, SHA256 9aa3719fb14057a17dc5c981671570274667c2fc2bbc3ef3ffabadc2ce854b9c. All 19,118 native bytes and seven source pages are bound by the frozen QA; no external review credited. This inventory records the reviewed scope and does not rerun visual/native verification or certify current law."
+    },
+    {
+      "record_id": "el-paso-ldc-chapter-2-sd011",
+      "review": {
+        "path": "research/local_review/el-paso-ldc-chapter-2-source-qa-2026-09-16/source-review/SOURCE_QA.json",
+        "sha256": "b550d50b5feae1e5e3b4e1f3afb1789ac808affa2b7cacc273b08c6db8d3f40a",
+        "size_bytes": 336971
+      },
+      "review_schema": {
+        "path": "research/local_review/el-paso-ldc-chapter-2-source-qa-2026-09-16/source-review/SOURCE_QA.schema.json",
+        "sha256": "efa342b2cbe01d5c6a3f8e2f897b94da782ebbeac0dd4dea4b0328225938e93f",
+        "size_bytes": 16945
+      },
+      "source_sha_pointer": "/source/sha256",
+      "source_id_pointer": "/source_id",
+      "expected_review_source_id": "el-paso-ldc-chapter-2-sd011",
+      "authority_pointer": "/authority_id",
+      "scope_pointers": [
+        "/scope",
+        "/status",
+        "/review_kind",
+        "/method",
+        "/normalization",
+        "/checked_passages",
+        "/structural_links",
+        "/table_count",
+        "/substantive_candidate_corrections",
+        "/findings",
+        "/pages/0/coverage",
+        "/pages/1/coverage",
+        "/pages/2/coverage",
+        "/pages/3/coverage",
+        "/pages/4/coverage",
+        "/pages/5/coverage",
+        "/pages/6/coverage"
+      ],
+      "limitation_pointers": [
+        "/limitations",
+        "/legal_currentness",
+        "/answer_safe",
+        "/prior_exposure",
+        "/external_reports_consulted",
+        "/dates",
+        "/provenance"
+      ],
+      "note": "Atlas accepted the exact seven-page, 119-passage source-fidelity review and five structural links for a metadata-only review join. The original QA status pending Atlas acceptance remains historical. Separate acceptance: research/local_review/el-paso-ldc-chapter-2-source-qa-2026-09-16/ACCEPTANCE.json, SHA256 86dfb20c2e0522100b6ee96794e9a53a782413d55181735bce1daa0b8a5c556b. All 16,366 native bytes and seven source pages are bound by the frozen QA; no external review credited. Effective 12/12/2017 is source-printed wording, not a certified operative date. Supplied HTTP claims, referral gap and actual repository receipt remain separate. This inventory records scope and does not rerun visual/native verification or certify current law."
     }
   ],
   "limitations": [

@@ -139,7 +139,7 @@ def test_relative_and_tilde_root_normalization(
 ) -> None:
     """Relative roots and tilde resolve to the same ordinary checked tree."""
     monkeypatch.chdir(REPO.parent)
-    relative = lookup.lookup(Path("MasterLegalDatabase"), lookup.SOURCE_ID, "nothing unmatched")
+    relative = lookup.lookup(Path(REPO.name), lookup.SOURCE_ID, "nothing unmatched")
     assert relative.status == "no_matching_row"
     tilde_root = Path("~") / REPO.relative_to(Path.home())
     tilde = lookup.lookup(tilde_root, lookup.SOURCE_ID, "nothing unmatched")
