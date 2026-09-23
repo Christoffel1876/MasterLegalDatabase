@@ -453,3 +453,215 @@ def test_extended_source_citation_is_exact_and_separate(packet: tuple, tmp_path:
     flattened = record.model_copy(update={"id": "1_CCR_100-1"})
     with pytest.raises(ValueError, match="identity"):
         text.build(repin(root, state, [flattened]), tmp_path / "bad-package")
+
+
+@pytest.fixture
+def selected_packet(packet: tuple) -> tuple:
+    """Two different PDF originals retain complete current/future and Word associations."""
+    root, plan, state, record = packet
+    with fitz.open() as pdf:
+        for _ in range(3):
+            pdf.new_page().insert_text((72, 72), "Unselected future fee $900.")
+        body = pdf.tobytes()
+    prior = record.sources[2]
+    other = source(root, "pdf", body, prior.url.removeprefix(BASE))
+    sources = [record.sources[0], record.sources[1], other, record.sources[3]]
+    state = state.model_copy(update={"sources": {item.url: item for item in sources}})
+    record = record.model_copy(update={"sources": sources})
+    plan = repin(root, state, [record])
+    selection = text.SelectedInputPlan(
+        departments=plan.departments, selected_pdf_sha256=[record.sources[1].sha256],
+    )
+    return root, selection, state, record
+
+
+def test_v1_schema_bytes_remain_exact() -> None:
+    """Preexisting package schema bytes stay compatible, including nested source models."""
+    expected = {
+        "InputPlan": "67ec07c132afe892f71a8f8d05786941732f965b7686f5816146446d016861ff",
+        "Document": "ebca662625d06e5a1b0f24453340b51ef8f09a2dea5dd5010bbd94269b546907",
+        "Page": "034dd483ee83982931cb899fd58c5e6f4d8dc914349d1e26e9bc2d3d21a693aa",
+        "Manifest": "52679b78ce8883d311f2133d22d4c5685f1204f187bd7fbdc89aad2d19d75258",
+        "QueryResult": "9e163cac80bdf8d2bc57c75b111475bc9d9934f2e8459e79fb1f416380e17a5a",
+    }
+    assert {name: text._sha(body) for name, body in text._schemas().items()} == {
+        f"schemas/{name}.json": digest for name, digest in expected.items()
+    }
+
+
+def test_selected_preserves_all_sources_and_explicit_omissions(
+    selected_packet: tuple, tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Only selected PDF buffers reach extraction; all source/association custody survives."""
+    root, plan, _, record = selected_packet
+    original = text.extract_pdf_pages
+    extracted = []
+
+    def selected_only(body: bytes) -> list[bytes]:
+        """Fail if native extraction touches the intentionally unselected PDF."""
+        digest = text._sha(body)
+        assert digest in plan.selected_pdf_sha256
+        extracted.append(digest)
+        return original(body)
+
+    monkeypatch.setattr(text, "extract_pdf_pages", selected_only)
+    output = tmp_path / "selected"
+    manifest = text.build(plan, output)
+    assert isinstance(manifest, text.SelectedManifest) and manifest.version == 2
+    assert (manifest.documents, manifest.page_associations,
+            manifest.unique_pdf_originals) == (3, 2, 1)
+    assert manifest.selection.unselected_pdf_originals == 1
+    assert manifest.selection.selected_document_associations == 1
+    assert manifest.selection.unselected_document_associations == 1
+    assert set(extracted) == set(plan.selected_pdf_sha256)
+    for source_record in record.sources:
+        assert (output / text._original(source_record)).read_bytes() == (
+            root / source_record.path
+        ).read_bytes()
+    for suffix, name in (("-state.json", "state.json"), (".jsonl", "inventory.jsonl")):
+        assert (output / "inputs/15" / name).read_bytes() == (
+            root / (text.PREFIX + "department-15" + suffix)
+        ).read_bytes()
+    documents = text._rows((output / "documents.jsonl").read_bytes(), text.SelectedDocument)
+    omitted = next(doc for doc in documents if doc.selection_status == "unselected_pdf")
+    assert omitted.extraction_status == "intentionally_unselected"
+    assert omitted.physical_pages is None and omitted.empty_native_pages == []
+    assert omitted.extraction_method == "not_extracted"
+    assert manifest.unsupported_documents == 1
+    pin = text._sha((output / "MANIFEST.json").read_bytes())
+    shutil.rmtree(root)
+    assert text.verify(output, pin) == manifest
+    found = text.query(output, "except", expected_sha256=pin)
+    assert isinstance(found, text.SelectedQueryResult) and found.total_matching_pages == 1
+    missing = text.query(output, "$900", expected_sha256=pin)
+    assert missing.total_matching_pages == 0 and missing.selection == manifest.selection
+    assert "department-wide absence" in missing.selection_warning
+    assert not missing.selection.complete_department_native_text
+    assert missing.unsupported_documents == 1 and missing.currentness == "not_verified"
+
+
+def test_selector_keeps_every_shared_pdf_alias(packet: tuple, tmp_path: Path) -> None:
+    """A whole original is indivisible across current/future and URL associations."""
+    _, plan, _, record = packet
+    plan = text.SelectedInputPlan(
+        departments=plan.departments, selected_pdf_sha256=[record.sources[1].sha256],
+    )
+    output = tmp_path / "aliases"
+    manifest = text.build(plan, output)
+    assert manifest.selection.selected_document_associations == 2
+    assert manifest.selection.unselected_document_associations == 0
+    assert manifest.selection.unselected_pdf_originals == 0
+    assert not manifest.selection.complete_department_native_text
+    result = text.query(output, "1 CCR 100-1", mode="citation")
+    assert result.total_matching_pages == 4
+    assert {hit.document.version.designation for hit in result.hits} == {"current", "future"}
+
+
+@pytest.mark.parametrize("case", ["empty", "duplicate", "unsorted", "bad_hash", "pages"])
+def test_invalid_selection_structure_refused(packet: tuple, case: str) -> None:
+    """No blank, duplicate, noncanonical or page-range selector can split original custody."""
+    _, plan, _, record = packet
+    digest = record.sources[1].sha256
+    data = {"version": 2, "departments": plan.model_dump()["departments"],
+            "selected_pdf_sha256": [digest]}
+    if case == "empty":
+        data["selected_pdf_sha256"] = []
+    elif case == "duplicate":
+        data["selected_pdf_sha256"] = [digest, digest]
+    elif case == "unsorted":
+        data["selected_pdf_sha256"] = ["f" * 64, "0" * 64]
+    elif case == "bad_hash":
+        data["selected_pdf_sha256"] = ["../unknown"]
+    else:
+        data["selected_pages"] = [1]
+    with pytest.raises(ValueError):
+        text.PLAN_ADAPTER.validate_python(data)
+
+
+@pytest.mark.parametrize("case", ["unknown", "word", "catalog_pdf"])
+def test_noneligible_hash_selection_fails_before_publication(
+    selected_packet: tuple, tmp_path: Path, case: str,
+) -> None:
+    """Only PDFs associated with admitted versions can be selected, not arbitrary inputs."""
+    root, plan, state, record = selected_packet
+    if case == "catalog_pdf":
+        extra = source(root, "pdf", pdf_bytes(), "unused-catalog.pdf")
+        state = state.model_copy(update={"sources": {**state.sources, extra.url: extra}})
+        pinned = repin(root, state, [record])
+        plan = text.SelectedInputPlan(departments=pinned.departments,
+                                      selected_pdf_sha256=[extra.sha256])
+    else:
+        digest = "0" * 64 if case == "unknown" else record.sources[3].sha256
+        plan = text.SelectedInputPlan(departments=plan.departments, selected_pdf_sha256=[digest])
+    with pytest.raises(ValueError, match="unknown or noneligible"):
+        text.build(plan, tmp_path / "bad")
+    assert not (tmp_path / "bad").exists()
+
+
+@pytest.mark.parametrize("case", ["changed", "missing", "bad_magic", "corrupt", "encrypted"])
+def test_unselected_source_still_fails_closed(
+    selected_packet: tuple, tmp_path: Path, case: str,
+) -> None:
+    """Selection cannot hide missing/hash-changed or structurally invalid original PDFs."""
+    root, plan, state, record = selected_packet
+    prior = record.sources[2]
+    if case in {"changed", "missing"}:
+        path = root / prior.path
+        if case == "changed":
+            path.write_bytes(b"changed original")
+        else:
+            path.unlink()
+    else:
+        body = b"not PDF" if case == "bad_magic" else b"%PDF-1.7\nbroken"
+        if case == "encrypted":
+            with fitz.open(stream=pdf_bytes(), filetype="pdf") as pdf:
+                body = pdf.tobytes(encryption=fitz.PDF_ENCRYPT_AES_256,
+                                   owner_pw="owner", user_pw="reader")
+        bad = source(root, "pdf", body, prior.url.removeprefix(BASE))
+        sources = [record.sources[0], record.sources[1], bad, record.sources[3]]
+        state = state.model_copy(update={"sources": {item.url: item for item in sources}})
+        record = record.model_copy(update={"sources": sources})
+        pinned = repin(root, state, [record])
+        plan = text.SelectedInputPlan(departments=pinned.departments,
+                                      selected_pdf_sha256=plan.selected_pdf_sha256)
+    with pytest.raises(ValueError):
+        text.build(plan, tmp_path / "bad")
+    assert not (tmp_path / "bad").exists()
+
+
+@pytest.mark.parametrize("case", ["omission_count", "complete_claim", "selected_hash"])
+def test_resealed_selection_claims_refused(
+    selected_packet: tuple, tmp_path: Path, case: str,
+) -> None:
+    """Re-sealing cannot erase omitted scope, claim completeness or substitute a selector."""
+    output = tmp_path / "package"
+    text.build(selected_packet[1], output)
+    path = output / "MANIFEST.json"
+    manifest = json.loads(path.read_bytes())
+    if case == "omission_count":
+        manifest["selection"]["unselected_document_associations"] = 0
+    elif case == "complete_claim":
+        manifest["selection"]["complete_department_native_text"] = True
+    else:
+        manifest["selection"]["selected_pdf_sha256"] = ["0" * 64]
+    path.write_bytes(text._json(manifest))
+    with pytest.raises(ValueError):
+        text.verify(output)
+
+
+def test_selected_cli_and_scope_schema(
+    selected_packet: tuple, tmp_path: Path, capsys: pytest.CaptureFixture[str],
+) -> None:
+    """V2 CLI results parse under their explicit schema and preserve omissions on no match."""
+    plan_path = tmp_path / "plan.json"
+    plan_path.write_bytes(text._json(selected_packet[1]))
+    output = tmp_path / "package"
+    assert text.main(["build", "--plan", str(plan_path), "--output", str(output)]) == 0
+    manifest = text.SelectedManifest.model_validate_json(capsys.readouterr().out)
+    assert manifest.version == 2
+    assert text.main(["query", "--package", str(output), "--text", "absent"]) == 0
+    result = text.SelectedQueryResult.model_validate_json(capsys.readouterr().out)
+    assert result.selection.unselected_pdf_originals == 1
+    assert result.hits == [] and not result.answer_safe
+    with pytest.raises(ValueError):
+        text.QueryResult.model_validate_json(result.model_dump_json())

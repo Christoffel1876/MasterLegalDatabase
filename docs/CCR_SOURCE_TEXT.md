@@ -65,6 +65,54 @@ remain explicit; no claim is made that they are blank visually. DOC, DOCX and RT
 originals receive `unsupported_format` and zero extracted pages, not invented text
 or a successful document-content validation.
 
+## Bounded PDF selection
+
+Version 1 plans and packages retain their original schemas and verification behavior.
+For a large department, a version 2 `SelectedInputPlan` can select a nonempty, sorted,
+unique list of complete PDF SHA-256 identities:
+
+```json
+{
+  "version": 2,
+  "departments": [
+    {
+      "root": "/absolute/path/to/collector/evidence",
+      "department_id": "18",
+      "state_sha256": "<exact state SHA256>",
+      "inventory_sha256": "<exact inventory SHA256>"
+    }
+  ],
+  "selected_pdf_sha256": ["<exact eligible PDF SHA256>"]
+}
+```
+
+Validate it with `SelectedInputPlan.model_validate_json()` or `PLAN_ADAPTER.validate_json()`;
+publish `SelectedInputPlan.model_json_schema()` before recording a new plan. The same
+build/verify/query commands accept either version. Unknown hashes, unsupported-format
+hashes, duplicate hashes and page-range selectors are refused. The selector applies to
+every admitted association of each original across aliases and versions; it cannot split
+a PDF or select only one association of shared bytes. Sorting is required, not inferred.
+
+Every shard still captures the full pinned state/inventory and **all original source
+files**. All admitted document associations remain in `documents.jsonl`. Unselected PDF
+rows have `selection_status: unselected_pdf`, `extraction_status: intentionally_unselected`,
+`extraction_method: not_extracted`, `physical_pages: null`, and no native-page records.
+Their empty-page list is unassessed, not a claim that they contain no blank pages. Their
+bytes, magic, parseability, encryption and repair status still pass the source checks.
+Unsupported Word/RTF associations remain explicit independently of PDF selection.
+
+Version 2 manifests and query results include the selected hashes and selected/unselected
+original and association counts. Even a no-match result exposes this scope and warns
+that it is not department-wide absence. `complete_department_native_text` stays false,
+including when every eligible PDF was selected: unsupported formats and unacquired
+history remain outside native search. Every match remains unreviewed and not answer-safe.
+
+Sharding does not raise any limit. A minimum file-count estimate is necessary but not
+sufficient: exact final schemas, output bytes, text bytes and association counts must
+pass all existing caps before any package is created. A proposed pair of selectors is
+not a successful build; separately verify the disjoint hash union against the pinned
+inventory and verify each completed package under its own exact manifest hash.
+
 ## Source-only search
 
 ```bash
@@ -90,8 +138,10 @@ searching the unsuffixed citation does not silently include a suffixed series.
 ## Portable verification and limits
 
 Verification captures all package members once, checks the closed inventory and
-schemas, revalidates all input joins, and re-extracts every PDF page from captured
-original bytes. Queries perform this verification too; input provenance paths are
+schemas, revalidates all input joins, and re-extracts every selected PDF page from captured
+original bytes (every eligible PDF in version 1). Queries perform this verification too;
+version 2 also rechecks unselected original PDF structure without extracting its text.
+Input provenance paths are
 never reopened. Matching the supplied manifest hash binds an independently saved
 package identity. Without that external pin, verification establishes only internal
 consistency of the supplied package. The recorded PyMuPDF version must match the

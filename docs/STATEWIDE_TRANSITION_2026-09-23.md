@@ -7,6 +7,12 @@ legal_currentness: not_verified
 
 # Statewide source collection and pilot closeout
 
+This document preserves the initial collection checkpoint. A subsequent verified
+build at 20:14 UTC completed DORA native extraction, raising the local searchable
+CCR total to 850 PDFs / 24,933 pages. See the [DORA build and search guide](CCR_DORA_NATIVE_SEARCH_2026-09-23.md)
+for the later result, exact plans and unchanged limitations. The earlier figures
+below describe the initial checkpoint, not the later search coverage.
+
 Project Geode is moving from individual pilot documents to complete source-family
 batches. Source acquisition can expand while legal-text review and currentness
 reconciliation remain separate, visible work. None of the figures below is a

@@ -10,11 +10,11 @@ import os
 import shutil
 import sys
 from pathlib import Path
-from typing import Literal
+from typing import Annotated, Literal
 from urllib.parse import parse_qs, urlparse
 
 import pymupdf as fitz
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, TypeAdapter, model_validator
 
 from geode.pipeline.ccr_current import (
     MAX_SOURCES,
@@ -156,6 +156,77 @@ class QueryResult(StrictModel):
     currentness: Literal["not_verified"] = "not_verified"
 
 
+class SelectedInputPlan(InputPlan):
+    """Version two selects whole PDF hashes while retaining every pinned source input."""
+
+    version: Literal[2] = 2
+    selected_pdf_sha256: list[Annotated[str, Field(pattern=r"^[a-f0-9]{64}$")]] = Field(
+        min_length=1, max_length=MAX_DOCUMENTS,
+    )
+
+    @model_validator(mode="after")
+    def unique_selection(self) -> SelectedInputPlan:
+        """Require an explicit canonical set; no duplicate, range or page selectors."""
+        if self.selected_pdf_sha256 != sorted(set(self.selected_pdf_sha256)):
+            raise ValueError("PDF selection must be sorted and unique")
+        return self
+
+
+class SelectedDocument(Document):
+    """Every association remains visible, including intentionally unextracted PDFs."""
+
+    selection_status: Literal["selected_pdf", "unselected_pdf", "unsupported_format"]
+    extraction_status: Literal[
+        "native_text", "empty_native", "unsupported_format", "intentionally_unselected",
+    ]
+    physical_pages: int | None = Field(ge=0, le=MAX_PAGES)
+
+
+class SelectionScope(StrictModel):
+    """Explicit extraction scope; retained originals do not imply searchable native text."""
+
+    scope: Literal["selected_pdf_originals_only"] = "selected_pdf_originals_only"
+    selected_pdf_sha256: list[Annotated[str, Field(pattern=r"^[a-f0-9]{64}$")]] = Field(
+        min_length=1, max_length=MAX_DOCUMENTS,
+    )
+    selected_pdf_originals: int = Field(ge=1, le=MAX_DOCUMENTS)
+    unselected_pdf_originals: int = Field(ge=0, le=MAX_DOCUMENTS)
+    selected_document_associations: int = Field(ge=1, le=MAX_DOCUMENTS)
+    unselected_document_associations: int = Field(ge=0, le=MAX_DOCUMENTS)
+    complete_department_native_text: Literal[False] = False
+
+
+class SelectedManifest(Manifest):
+    """Version two preserves full source custody and declares bounded native selection."""
+
+    version: Literal[2] = 2
+    selection: SelectionScope
+
+
+class SelectedHit(Hit):
+    """A selected-source page with its explicit association selection status."""
+
+    document: SelectedDocument
+
+
+class SelectedQueryResult(QueryResult):
+    """Even a no-match result exposes the intentionally unsearched document scope."""
+
+    hits: list[SelectedHit] = Field(max_length=50)
+    selection: SelectionScope
+    selection_warning: Literal[
+        "Only selected PDF originals were searched. Unselected PDF associations and unsupported "
+        "formats remain unsearched; no match is not department-wide absence."
+    ] = (
+        "Only selected PDF originals were searched. Unselected PDF associations and unsupported "
+        "formats remain unsearched; no match is not department-wide absence."
+    )
+
+
+PLAN_ADAPTER = TypeAdapter(InputPlan | SelectedInputPlan)
+MANIFEST_ADAPTER = TypeAdapter(Manifest | SelectedManifest)
+
+
 def _sha(body: bytes) -> str:
     return hashlib.sha256(body).hexdigest()
 
@@ -204,10 +275,14 @@ def _jsonl(rows: list[BaseModel]) -> bytes:
     return b"".join((row.model_dump_json() + "\n").encode() for row in rows)
 
 
-def _schemas() -> dict[str, bytes]:
+def _schemas(version: int = 1) -> dict[str, bytes]:
+    models = (InputPlan, Document, Page, Manifest, QueryResult) if version == 1 else (
+        SelectedInputPlan, SelectedDocument, Page, SelectedManifest, SelectedQueryResult,
+        SelectionScope,
+    )
     return {
         f"schemas/{model.__name__}.json": _json(model.model_json_schema())
-        for model in (InputPlan, Document, Page, Manifest, QueryResult)
+        for model in models
     }
 
 
@@ -227,7 +302,7 @@ def _url_identity(url: str, identities: dict[str, str], required: set[str]) -> N
             raise ValueError(f"Source URL {key} identity mismatch")
 
 
-def _capture(plan: InputPlan) -> dict[str, bytes]:
+def _capture(plan: InputPlan | SelectedInputPlan) -> dict[str, bytes]:
     files = {"input-plan.json": _json(plan)}
     total = len(files["input-plan.json"])
     for item in plan.departments:
@@ -276,13 +351,29 @@ def extract_pdf_pages(body: bytes) -> list[bytes]:
         raise ValueError("PDF extraction failed") from exc
 
 
-def _derive(files: dict[str, bytes]) -> tuple[list[Document], list[Page], dict[str, bytes]]:
-    plan = InputPlan.model_validate_json(files["input-plan.json"])
+def _check_unselected_pdf(body: bytes) -> None:
+    if not body.startswith(b"%PDF-"):
+        raise ValueError("PDF magic missing")
+    try:
+        with fitz.open(stream=body, filetype="pdf") as pdf:
+            if pdf.needs_pass or pdf.is_repaired or not 1 <= len(pdf) <= MAX_PAGES:
+                raise ValueError("Encrypted, repaired, empty or oversized PDF")
+    except (RuntimeError, fitz.FileDataError) as exc:
+        raise ValueError("PDF validation failed") from exc
+
+
+def _derive(
+    files: dict[str, bytes],
+) -> tuple[list[Document | SelectedDocument], list[Page], dict[str, bytes]]:
+    plan = PLAN_ADAPTER.validate_json(files["input-plan.json"])
+    selected = set(plan.selected_pdf_sha256) if isinstance(plan, SelectedInputPlan) else None
     documents, pages = [], []
     texts: dict[str, bytes] = {}
     cache: dict[str, list[bytes]] = {}
     expected = {"input-plan.json"}
     identities: set[str] = set()
+    eligible_pdfs: set[str] = set()
+    checked_unselected: set[str] = set()
     for item in plan.departments:
         state_name = f"inputs/{item.department_id}/state.json"
         inventory_name = f"inputs/{item.department_id}/inventory.jsonl"
@@ -363,20 +454,34 @@ def _derive(files: dict[str, bytes]) -> tuple[list[Document], list[Page], dict[s
                     name = _original(source)
                     body = files[name]
                     pdf = source.path.endswith(".pdf")
-                    if pdf and source.sha256 not in cache:
+                    admitted = pdf and (selected is None or source.sha256 in selected)
+                    if pdf:
+                        eligible_pdfs.add(source.sha256)
+                    if pdf and not admitted and source.sha256 not in checked_unselected:
+                        _check_unselected_pdf(body)
+                        checked_unselected.add(source.sha256)
+                    if admitted and source.sha256 not in cache:
                         cache[source.sha256] = extract_pdf_pages(body)
-                    native = cache[source.sha256] if pdf else []
+                    native = cache[source.sha256] if admitted else []
                     identity = _sha(_json({"rule": record.id, "version": version.version_id,
                                           "url": url}))
                     empty = [index for index, text in enumerate(native, 1) if not text.strip()]
-                    documents.append(Document(
+                    model = Document if selected is None else SelectedDocument
+                    scope = {} if selected is None else {"selection_status": (
+                        "selected_pdf" if admitted else "unselected_pdf" if pdf
+                        else "unsupported_format"
+                    )}
+                    status = (("native_text" if len(empty) < len(native) else "empty_native")
+                              if admitted else "intentionally_unselected" if pdf
+                              else "unsupported_format")
+                    documents.append(model(
                         document_id=identity, record=record, version=version, source=source,
-                        original=_asset(name, body), physical_pages=len(native),
+                        original=_asset(name, body),
+                        physical_pages=None if pdf and not admitted else len(native),
                         empty_native_pages=empty,
-                        extraction_status=("native_text" if len(empty) < len(native)
-                                           else "empty_native") if pdf else "unsupported_format",
+                        extraction_status=status,
                         extraction_method=("PyMuPDF get_text(text), sort=False"
-                                           if pdf else "not_extracted"),
+                                           if admitted else "not_extracted"), **scope,
                     ))
                     for index, text in enumerate(native, 1):
                         text_name = f"native/{source.sha256}/{index:05d}.txt"
@@ -393,17 +498,33 @@ def _derive(files: dict[str, bytes]) -> tuple[list[Document], list[Page], dict[s
         raise ValueError("Unexpected captured input member")
     if sum(map(len, texts.values())) > MAX_TEXT_BYTES:
         raise ValueError("Total native text budget exceeded")
+    if selected is not None and not selected <= eligible_pdfs:
+        raise ValueError("Selection contains unknown or noneligible PDF hashes")
     return documents, pages, texts
 
 
-def _outputs(files: dict[str, bytes]) -> tuple[dict[str, bytes], Manifest]:
+def _outputs(files: dict[str, bytes]) -> tuple[dict[str, bytes], Manifest | SelectedManifest]:
+    plan = PLAN_ADAPTER.validate_json(files["input-plan.json"])
     documents, pages, texts = _derive(files)
-    outputs = {**_schemas(), **files, **texts, "documents.jsonl": _jsonl(documents),
+    outputs = {**_schemas(plan.version), **files, **texts, "documents.jsonl": _jsonl(documents),
                "pages.jsonl": _jsonl(pages)}
     if len(outputs) > MAX_FILES or sum(map(len, outputs.values())) > MAX_TOTAL_BYTES:
         raise ValueError("Package file/byte budget exceeded")
-    plan = InputPlan.model_validate_json(files["input-plan.json"])
-    manifest = Manifest(
+    model, extra = Manifest, {}
+    if isinstance(plan, SelectedInputPlan):
+        unselected = [
+            doc for doc in documents if doc.extraction_status == "intentionally_unselected"
+        ]
+        extra = {"selection": SelectionScope(
+            selected_pdf_sha256=plan.selected_pdf_sha256,
+            selected_pdf_originals=len(plan.selected_pdf_sha256),
+            unselected_pdf_originals=len({doc.source.sha256 for doc in unselected}),
+            selected_document_associations=sum(
+                doc.selection_status == "selected_pdf" for doc in documents
+            ), unselected_document_associations=len(unselected),
+        )}
+        model = SelectedManifest
+    manifest = model(
         extractor=f"PyMuPDF {fitz.VersionBind}", departments=len(plan.departments),
         documents=len(documents), page_associations=len(pages),
         unique_pdf_originals=len({page.original_sha256 for page in pages}),
@@ -412,13 +533,14 @@ def _outputs(files: dict[str, bytes]) -> tuple[dict[str, bytes], Manifest]:
         unsupported_documents=sum(doc.extraction_status == "unsupported_format"
                                   for doc in documents),
         files=[_asset(name, outputs[name]) for name in sorted(outputs)],
+        **extra,
     )
     if sum(map(len, outputs.values())) + len(_json(manifest)) > MAX_TOTAL_BYTES:
         raise ValueError("Manifest-inclusive package byte budget exceeded")
     return outputs, manifest
 
 
-def build(plan: InputPlan, output: Path) -> Manifest:
+def build(plan: InputPlan | SelectedInputPlan, output: Path) -> Manifest | SelectedManifest:
     """Publish a fresh isolated package, with its final manifest as the completion marker."""
     output = _absolute(output)
     if any(part.startswith(("_RAW_ARCHIVE", "_CONTROL_PLANE", "_SNAPSHOTS"))
@@ -449,7 +571,7 @@ def _verified(package: Path, expected_sha256: str | None) -> tuple[dict[str, byt
     raw_manifest = _read(package / "MANIFEST.json")
     if expected_sha256 is not None:
         _bound(raw_manifest, expected_sha256)
-    manifest = Manifest.model_validate_json(raw_manifest)
+    manifest = MANIFEST_ADAPTER.validate_json(raw_manifest)
     names = [asset.path for asset in manifest.files]
     if len(names) != len(set(names)) or "MANIFEST.json" in names:
         raise ValueError("Duplicate or self-referencing manifest member")
@@ -483,26 +605,30 @@ def _verified(package: Path, expected_sha256: str | None) -> tuple[dict[str, byt
     return files, raw_manifest
 
 
-def verify(package: Path, expected_sha256: str | None = None) -> Manifest:
+def verify(package: Path, expected_sha256: str | None = None) -> Manifest | SelectedManifest:
     """Replay captured joins and native extraction without reopening original input paths."""
     _, raw = _verified(package, expected_sha256)
-    return Manifest.model_validate_json(raw)
+    return MANIFEST_ADAPTER.validate_json(raw)
 
 
 def query(
     package: Path, text: str, *, mode: Literal["phrase", "citation"] = "phrase",
     limit: int = 10, expected_sha256: str | None = None,
-) -> QueryResult:
+) -> QueryResult | SelectedQueryResult:
     """Return literal case-insensitive source matches, preserving each entire physical page."""
     if not text.strip() or len(text) > 500 or not 1 <= limit <= 50:
         raise ValueError("Nonempty query up to 500 characters and limit 1..50 required")
     if mode not in {"phrase", "citation"}:
         raise ValueError("Only source phrase/citation search is supported")
     files, raw = _verified(package, expected_sha256)
+    manifest = MANIFEST_ADAPTER.validate_json(raw)
+    selected = isinstance(manifest, SelectedManifest)
+    document_model = SelectedDocument if selected else Document
+    hit_model = SelectedHit if selected else Hit
+    result_model = SelectedQueryResult if selected else QueryResult
     documents = {
-        doc.document_id: doc for doc in _rows(files["documents.jsonl"], Document)
+        doc.document_id: doc for doc in _rows(files["documents.jsonl"], document_model)
     }
-    manifest = Manifest.model_validate_json(raw)
     hits, count, returned_bytes = [], 0, 0
     for page in _rows(files["pages.jsonl"], Page):
         doc = documents[page.document_id]
@@ -513,14 +639,16 @@ def query(
         if matched:
             count += 1
             if len(hits) < limit and returned_bytes + page.text.size_bytes <= 2_000_000:
-                hits.append(Hit(document=doc, page=page, native_text=native))
+                hits.append(hit_model(document=doc, page=page, native_text=native))
                 returned_bytes += page.text.size_bytes
-    return QueryResult(
+    extra = {"selection": manifest.selection} if selected else {}
+    return result_model(
         package_manifest_sha256=_sha(raw), query=text, mode=mode,
         total_matching_pages=count, returned_pages=len(hits),
         truncated=count > len(hits), hits=hits,
         empty_native_documents=manifest.empty_native_documents,
         unsupported_documents=manifest.unsupported_documents,
+        **extra,
     )
 
 
@@ -542,7 +670,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         if args.command == "build":
-            result = build(InputPlan.model_validate_json(_read(args.plan)), args.output)
+            result = build(PLAN_ADAPTER.validate_json(_read(args.plan)), args.output)
         elif args.command == "verify":
             result = verify(args.package, args.manifest_sha256)
         else:
