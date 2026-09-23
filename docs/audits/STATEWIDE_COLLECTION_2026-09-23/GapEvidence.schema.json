@@ -1,0 +1,53 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "record_id": {
+      "title": "Record Id",
+      "type": "string"
+    },
+    "source_packet_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Source Packet Sha256",
+      "type": "string"
+    },
+    "source_report_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Source Report Sha256",
+      "type": "string"
+    },
+    "source_url": {
+      "title": "Source Url",
+      "type": "string"
+    },
+    "observed_at": {
+      "title": "Observed At",
+      "type": "string"
+    },
+    "outcome": {
+      "title": "Outcome",
+      "type": "string"
+    },
+    "details": {
+      "additionalProperties": true,
+      "title": "Details",
+      "type": "object"
+    },
+    "boundary": {
+      "const": "Observed collection failure only; no legal absence or currentness determination.",
+      "default": "Observed collection failure only; no legal absence or currentness determination.",
+      "title": "Boundary",
+      "type": "string"
+    }
+  },
+  "required": [
+    "record_id",
+    "source_packet_sha256",
+    "source_report_sha256",
+    "source_url",
+    "observed_at",
+    "outcome",
+    "details"
+  ],
+  "title": "Evidence",
+  "type": "object"
+}

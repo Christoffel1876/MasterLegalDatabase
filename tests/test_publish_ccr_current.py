@@ -6,11 +6,18 @@ import hashlib
 import json
 import subprocess
 import sys
+from collections import Counter
+from datetime import timedelta
 from pathlib import Path
 
 import pytest
 
+from geode.pipeline import ccr_current as ccr
+from geode.pipeline.register_daily import FetchResult
 from scripts import publish_ccr_current as publisher
+from tests import test_ccr_current as collection
+
+FIXED_WORD_BYTES = collection.word_bytes()
 
 
 @pytest.fixture
@@ -24,7 +31,8 @@ def checkout(tmp_path: Path) -> Path:
     publisher.git(root, "config", "user.email", "test@example.invalid")
     (root / "README.md").write_text("baseline\n", encoding="utf-8")
     (root / ".gitignore").write_text(".geode_runtime/\n_RAW_ARCHIVE/\n", encoding="utf-8")
-    publisher.git(root, "add", "README.md", ".gitignore")
+    paths = update_evidence(root, "baseline")
+    publisher.git(root, "add", "-f", "README.md", ".gitignore", *paths)
     publisher.git(root, "commit", "-m", "baseline")
     publisher.git(root, "push", "origin", "main")
     return root
@@ -42,16 +50,59 @@ def write(root: Path, path: str, content: bytes) -> None:
     target.write_bytes(content)
 
 
-def candidate(root: Path, paths: list[str]) -> Path:
-    """Write a successful report and build the exact transaction."""
+def update_evidence(root: Path, label: str, department_id: str = "12") -> list[str]:
+    """Collect typed fixtures through the real source collector without public requests."""
+    world = collection.world.__wrapped__()
+    word = world[collection.WORD_URL]
+    world[collection.WORD_URL] = FetchResult(word.url, FIXED_WORD_BYTES, word.content_type)
+    if department_id != "12":
+        world = {
+            url.replace("deptID=12", f"deptID={department_id}"): FetchResult(
+                result.url.replace("deptID=12", f"deptID={department_id}"),
+                result.content.replace(b"deptID=12", f"deptID={department_id}".encode()),
+                result.content_type,
+            ) for url, result in world.items()
+        }
+    rule_url = collection.RULE_URL.replace("deptID=12", f"deptID={department_id}")
+    source = world[rule_url]
+    world[rule_url] = FetchResult(
+        rule_url, source.content.replace(b"PROCEDURES OF REVIEW", label.encode()),
+        source.content_type,
+    )
+    report = ccr.collect_ccr_current(
+        root, department_id, fetch=world.__getitem__, now=collection.NOW + timedelta(days=1),
+    )
+    assert report.status in {"updated", "no_change"}, report.errors
+    return report.changed_paths
+
+
+def write_report(root: Path, paths: list[str], department_id: str = "12") -> Path:
+    """Write a complete typed report for an existing fixture transaction."""
+    prefix = f"{ccr.VERIFICATION_PREFIX}department-{department_id}"
+    state = ccr.CCRState.model_validate_json((root / f"{prefix}-state.json").read_bytes())
+    with (root / f"{prefix}.jsonl").open("rb") as handle:
+        records = [ccr.CCRCurrentRecord.model_validate_json(line) for line in handle]
+    report = ccr.CCRCurrentReport(
+        department_id=department_id, checked_at=collection.NOW + timedelta(days=1),
+        status="updated" if paths else "no_change", validation_passed=True,
+        full_department_discovery=True, department_name=state.department_name,
+        source_publication_cutoff=state.source_publication_cutoff,
+        agencies_checked=len(state.agency_ids), rules_checked=len(records),
+        sources_checked=len(state.sources),
+        downloaded_bytes=sum(source.bytes for source in state.sources.values()),
+        classification_counts=dict(Counter(record.classification for record in records)),
+        changed_paths=paths,
+    )
+    directory = root / ".geode_runtime/report"
+    ccr.write_run_report(report, directory)
+    return directory
+
+
+def candidate(root: Path, paths: list[str], department_id: str = "12") -> Path:
+    """Build exactly the real typed fixture transaction, without repairing bad payloads."""
     output = root / ".geode_runtime/candidate"
-    report = root / ".geode_runtime/report"
-    publisher.save_json(report / "report.json", {
-        "status": "updated" if paths else "no_change", "validation_passed": True,
-        "full_department_discovery": True, "department_id": "12", "changed_paths": paths,
-    })
-    publisher.save_json(report / "changes.json", paths)
-    publisher.build(root, output, report)
+    report = write_report(root, paths, department_id)
+    publisher.build(root, output, report, department_id)
     return output
 
 
@@ -73,14 +124,12 @@ def test_build_stages_only_manifest_and_includes_ignored_original(
     publisher.prepare(checkout, output)
     workflow_output = output / "github-output.txt"
     monkeypatch.setenv("GITHUB_OUTPUT", str(workflow_output))
-    raw = source_path(b"official original")
-    write(checkout, raw, b"official original")
-    write(checkout, "02_Regulations_CCR/_verification/current/department-12.jsonl", b'{}\n')
+    paths = update_evidence(checkout, "official update")
     write(checkout, "unrelated-untracked.txt", b"keep out of commit")
-    candidate(checkout, [raw, "02_Regulations_CCR/_verification/current/department-12.jsonl"])
+    candidate(checkout, paths)
     changed = publisher.validate_tree(checkout, "origin/main", "HEAD")
-    expected = [raw, "02_Regulations_CCR/_verification/current/department-12.jsonl"]
-    assert sorted(changed) == sorted(expected)
+    assert sorted(changed) == sorted(paths)
+    assert any(path.startswith(ccr.RAW_PREFIX) for path in paths)
     assert (output / "candidate.bundle").is_file()
     assert workflow_output.read_text() == "has_changes=true\n"
 
@@ -98,18 +147,19 @@ def test_no_change_creates_no_commit_or_candidate_bundle(checkout: Path) -> None
 def test_pending_branch_keeps_unmerged_originals_and_state(checkout: Path) -> None:
     output = checkout / ".geode_runtime/candidate"
     publisher.prepare(checkout, output)
-    raw = source_path(b"unmerged original")
+    paths = update_evidence(checkout, "unmerged original")
+    raw = next(path for path in paths if path.startswith(ccr.RAW_PREFIX))
+    original = (checkout / raw).read_bytes()
     state = "02_Regulations_CCR/_verification/current/department-12-state.json"
-    write(checkout, raw, b"unmerged original")
-    write(checkout, state, b'{"source_hash": "retained"}\n')
-    candidate(checkout, [raw, state])
+    state_bytes = (checkout / state).read_bytes()
+    candidate(checkout, paths)
     previous = publisher.git(checkout, "rev-parse", "HEAD")
     publisher.git(checkout, "push", "origin", f"HEAD:refs/heads/{publisher.BRANCH}")
     publisher.git(checkout, "switch", "main")
     publisher.prepare(checkout, output)
     assert publisher.git(checkout, "rev-parse", "HEAD") == previous
-    assert (checkout / raw).read_bytes() == b"unmerged original"
-    assert json.loads((checkout / state).read_text())["source_hash"] == "retained"
+    assert (checkout / raw).read_bytes() == original
+    assert (checkout / state).read_bytes() == state_bytes
     candidate(checkout, [])
     assert json.loads((output / "candidate.json").read_text())["pending"] == previous
 
@@ -117,8 +167,8 @@ def test_pending_branch_keeps_unmerged_originals_and_state(checkout: Path) -> No
 def test_pending_branch_resumes_after_squash_merge_without_losing_history(checkout: Path) -> None:
     output = checkout / ".geode_runtime/candidate"
     publisher.prepare(checkout, output)
-    write(checkout, "02_Regulations_CCR/_verification/current/department-12.jsonl", b'{}\n')
-    candidate(checkout, ["02_Regulations_CCR/_verification/current/department-12.jsonl"])
+    paths = update_evidence(checkout, "updated")
+    candidate(checkout, paths)
     publisher.git(checkout, "push", "origin", f"HEAD:refs/heads/{publisher.BRANCH}")
     prior = publisher.git(checkout, "rev-parse", "HEAD")
     publisher.git(checkout, "switch", "main")
@@ -145,7 +195,8 @@ def test_build_rejects_failed_report(checkout: Path) -> None:
     output = checkout / ".geode_runtime/candidate"
     publisher.prepare(checkout, output)
     report = checkout / ".geode_runtime/report"
-    publisher.save_json(report / "report.json", {"status": "failed", "validation_passed": False})
+    failed = ccr.CCRCurrentReport(department_id="12", checked_at=collection.NOW)
+    publisher.save_json(report / "report.json", failed.model_dump(mode="json"))
     publisher.save_json(report / "changes.json", [])
     with pytest.raises(ValueError, match="successful"):
         publisher.build(checkout, output, report)
@@ -155,29 +206,35 @@ def test_build_rejects_failed_report(checkout: Path) -> None:
 def test_build_rejects_unsafe_transaction(checkout: Path, kind: str) -> None:
     output = checkout / ".geode_runtime/candidate"
     publisher.prepare(checkout, output)
+    report_dir = write_report(checkout, [])
     path = "02_Regulations_CCR/_verification/current/department-12.jsonl"
     if kind == "wrong_hash":
         path = source_path(b"expected")
         write(checkout, path, b"different")
     elif kind == "symlink":
-        (checkout / path).parent.mkdir(parents=True)
+        (checkout / path).unlink()
         (checkout / path).symlink_to(checkout / "README.md")
     elif kind == "delete":
         (checkout / "README.md").unlink()
     else:
         (checkout / "README.md").write_text("unlisted tracked mutation", encoding="utf-8")
+    paths = [] if kind in {"delete", "unlisted"} else [path]
+    report = ccr.CCRCurrentReport.model_validate_json((report_dir / "report.json").read_bytes())
+    report.status = "updated" if paths else "no_change"
+    report.changed_paths = paths
+    ccr.write_run_report(report, report_dir)
     with pytest.raises(ValueError):
-        candidate(checkout, [] if kind in {"delete", "unlisted"} else [path])
+        publisher.build(checkout, output, report_dir)
 
 
 def test_immutable_original_cannot_be_overwritten(checkout: Path) -> None:
     output = checkout / ".geode_runtime/candidate"
     publisher.prepare(checkout, output)
-    path = source_path(b"original")
-    write(checkout, path, b"original")
-    candidate(checkout, [path])
+    paths = update_evidence(checkout, "original")
+    path = next(path for path in paths if path.startswith(ccr.RAW_PREFIX))
+    candidate(checkout, paths)
     write(checkout, path, b"overwrite")
-    with pytest.raises(ValueError, match="overwritten"):
+    with pytest.raises(ValueError, match="overwritten|corrupt"):
         candidate(checkout, [path])
 
 
@@ -188,8 +245,8 @@ def test_publish_validates_bundle_and_rejects_branch_race(
     monkeypatch.setenv("GITHUB_RUN_ID", "1234")
     monkeypatch.setenv("GITHUB_STEP_SUMMARY", str(checkout / ".geode_runtime/summary.md"))
     publisher.prepare(checkout, output)
-    write(checkout, "02_Regulations_CCR/_verification/current/department-12.jsonl", b'{}\n')
-    candidate(checkout, ["02_Regulations_CCR/_verification/current/department-12.jsonl"])
+    paths = update_evidence(checkout, "updated")
+    candidate(checkout, paths)
     actual_run = publisher.run
     calls = []
 
@@ -235,8 +292,8 @@ def test_publish_validates_bundle_and_rejects_branch_race(
 def test_publish_rejects_tampered_artifact_metadata(checkout: Path, corruption: str) -> None:
     output = checkout / ".geode_runtime/candidate"
     publisher.prepare(checkout, output)
-    write(checkout, "02_Regulations_CCR/_verification/current/department-12.jsonl", b'{}\n')
-    candidate(checkout, ["02_Regulations_CCR/_verification/current/department-12.jsonl"])
+    paths = update_evidence(checkout, "updated")
+    candidate(checkout, paths)
     metadata = json.loads((output / "candidate.json").read_text())
     if corruption == "bundle":
         metadata["candidate"] = metadata["main"]
@@ -251,8 +308,8 @@ def test_publish_rejects_tampered_artifact_metadata(checkout: Path, corruption: 
 def test_publish_rejects_new_main_after_validation(checkout: Path) -> None:
     output = checkout / ".geode_runtime/candidate"
     publisher.prepare(checkout, output)
-    write(checkout, "02_Regulations_CCR/_verification/current/department-12.jsonl", b'{}\n')
-    candidate(checkout, ["02_Regulations_CCR/_verification/current/department-12.jsonl"])
+    paths = update_evidence(checkout, "updated")
+    candidate(checkout, paths)
     publisher.git(checkout, "switch", "main")
     write(checkout, "README.md", b"updated main\n")
     publisher.git(checkout, "commit", "-am", "other reviewed work")
@@ -278,19 +335,16 @@ def test_build_rejects_malformed_change_manifests(checkout: Path, bad_paths: obj
 
 def test_prepare_stops_on_conflicting_reviewed_data(checkout: Path) -> None:
     path = "02_Regulations_CCR/_verification/current/department-12.jsonl"
-    write(checkout, path, b'{"baseline":1}\n')
-    publisher.git(checkout, "add", path)
-    publisher.git(checkout, "commit", "-m", "initial data")
-    publisher.git(checkout, "push", "origin", "main")
     output = checkout / ".geode_runtime/candidate"
     publisher.prepare(checkout, output)
-    write(checkout, path, b'{"pending":2}\n')
-    candidate(checkout, [path])
+    paths = update_evidence(checkout, "pending")
+    candidate(checkout, paths)
     publisher.git(checkout, "push", "origin", f"HEAD:refs/heads/{publisher.BRANCH}")
     pending = publisher.remote_head(checkout)
     publisher.git(checkout, "switch", "main")
-    write(checkout, path, b'{"reviewed":3}\n')
-    publisher.git(checkout, "commit", "-am", "other reviewed data")
+    reviewed = update_evidence(checkout, "reviewed")
+    publisher.git(checkout, "add", "-f", *reviewed)
+    publisher.git(checkout, "commit", "-m", "other reviewed data")
     publisher.git(checkout, "push", "origin", "main")
     with pytest.raises(RuntimeError, match="git failed"):
         publisher.prepare(checkout, output)
@@ -304,9 +358,7 @@ def test_cli_phases_and_failure_exit(checkout: Path, monkeypatch: pytest.MonkeyP
                  "--report-dir", str(report)]
     monkeypatch.setattr(sys, "argv", arguments)
     assert publisher.main() == 0
-    publisher.save_json(report / "report.json", {"status": "no_change", "validation_passed": True,
-        "full_department_discovery": True, "department_id": "12", "changed_paths": []})
-    publisher.save_json(report / "changes.json", [])
+    write_report(checkout, [])
     arguments[1] = "build"
     assert publisher.main() == 0
     arguments[1] = "publish"
@@ -324,8 +376,10 @@ def test_cli_phases_and_failure_exit(checkout: Path, monkeypatch: pytest.MonkeyP
 def test_requires_complete_department12_report(
     tmp_path: Path, field: str, value: object,
 ) -> None:
-    report = {"status": "no_change", "validation_passed": True,
-              "full_department_discovery": True, "department_id": "12", "changed_paths": []}
+    report = ccr.CCRCurrentReport(
+        department_id="12", checked_at=collection.NOW, status="no_change",
+        validation_passed=True, full_department_discovery=True,
+    ).model_dump(mode="json")
     report[field] = value
     publisher.save_json(tmp_path / "report.json", report)
     publisher.save_json(tmp_path / "changes.json", [])
@@ -380,8 +434,8 @@ def test_prepare_rejects_pending_branch_moving_during_fetch(
     output = checkout / ".geode_runtime/candidate"
     publisher.prepare(checkout, output)
     path = "02_Regulations_CCR/_verification/current/department-12.jsonl"
-    write(checkout, path, b"{}\n")
-    candidate(checkout, [path])
+    paths = update_evidence(checkout, "updated")
+    candidate(checkout, paths)
     publisher.git(checkout, "push", "origin", f"HEAD:refs/heads/{publisher.BRANCH}")
     actual_git = publisher.git
 
@@ -400,8 +454,8 @@ def test_failed_pr_creation_preserves_branch_and_retries_without_new_commit(
     output, report = checkout / ".geode_runtime/candidate", checkout / ".geode_runtime/report"
     publisher.prepare(checkout, output)
     path = "02_Regulations_CCR/_verification/current/department-12.jsonl"
-    write(checkout, path, b"{}\n")
-    candidate(checkout, [path])
+    paths = update_evidence(checkout, "updated")
+    candidate(checkout, paths)
     expected = publisher.git(checkout, "rev-parse", "HEAD")
     actual_run, calls = publisher.run, []
     failing = True
@@ -434,15 +488,15 @@ def test_nonforce_push_rejects_concurrent_pending_commit(
     output, report = checkout / ".geode_runtime/candidate", checkout / ".geode_runtime/report"
     publisher.prepare(checkout, output)
     path = "02_Regulations_CCR/_verification/current/department-12.jsonl"
-    write(checkout, path, b'{"first":true}\n')
-    candidate(checkout, [path])
+    paths = update_evidence(checkout, "first")
+    candidate(checkout, paths)
     actual_git, actual_run = publisher.git, publisher.run
     rival = checkout.parent / "rival"
     actual_run(checkout.parent, "git", "clone", str(checkout.parent / "origin.git"), str(rival))
     actual_git(rival, "config", "user.name", "Concurrent run")
     actual_git(rival, "config", "user.email", "test@example.invalid")
-    write(rival, path, b'{"concurrent":true}\n')
-    actual_git(rival, "add", path)
+    rival_paths = update_evidence(rival, "concurrent")
+    actual_git(rival, "add", "-f", *rival_paths)
     actual_git(rival, "commit", "-m", "concurrent pending data")
     rival_head = actual_git(rival, "rev-parse", "HEAD")
 
@@ -470,8 +524,8 @@ def test_multiple_open_prs_stops_before_push(
     output, report = checkout / ".geode_runtime/candidate", checkout / ".geode_runtime/report"
     publisher.prepare(checkout, output)
     path = "02_Regulations_CCR/_verification/current/department-12.jsonl"
-    write(checkout, path, b"{}\n")
-    candidate(checkout, [path])
+    paths = update_evidence(checkout, "updated")
+    candidate(checkout, paths)
     actual_run = publisher.run
 
     def gh(root: Path, *args: str, check: bool = True) -> subprocess.CompletedProcess[bytes]:
