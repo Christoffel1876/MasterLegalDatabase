@@ -93,6 +93,71 @@ jobs:
           assert result.scope.department_complete is False
           print('Real-source native rebuild, verification and citation query passed')
           PY
+      - name: Replay the retained PH141 addendum and exact page union
+        run: |
+          python -B - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          import jsonschema
+          from geode.pipeline import ccr_agency_capture_v2 as capture
+          from geode.pipeline import ccr_agency_text as native
+
+          folder = Path('docs/audits/CCR_PH141_RESEARCH_2026-09-24')
+          raw = (folder / 'INDEX.json').read_bytes()
+          assert hashlib.sha256(raw).hexdigest() == 'f56e9437ff3e3851c0772bf0c0b0d32567de8dd3ff27380e4f0fc319227e74ab'
+          index = json.loads(raw)
+          jsonschema.validate(index, json.loads((folder / 'INDEX.schema.json').read_bytes()))
+          row = index['package']
+          references = [index[k] for k in ('previous_11_package_index', 'previous_page_set', 'new_page_set', 'original_schema')]
+          references += index['implementation']
+          references += [row[k] for k in ('capture_manifest', 'native_output_manifest', 'native_input_plan')]
+          for ref in references:
+              body = Path(ref['path']).read_bytes()
+              assert len(body) == ref['bytes']
+              assert hashlib.sha256(body).hexdigest() == ref['sha256']
+          source = capture.verify(Path(row['capture_root']), row['capture_manifest']['sha256'])
+          assert source.selected_rule_count == 17 and source.catalog_agency_count == 18
+          output = Path('.geode_runtime/ci-native-ph141')
+          plan = native.InputPlan.model_validate_json(Path(row['native_input_plan']['path']).read_bytes())
+          native.build(Path(row['capture_root']), output, plan)
+          manifest = native.verify(output, row['native_output_manifest']['sha256'])
+          assert manifest.unique_physical_pages == 883 and len(manifest.scope.selected_pdf_sha256) == 17
+          result = native.query(output, row['native_output_manifest']['sha256'], '6 CCR 1007-1', mode='citation', limit=1)
+          assert result.returned_page_associations == 1 and result.answer_safe is False
+          assert result.scope.department_complete is False
+          schema = json.loads(Path(index['original_schema']['path']).read_bytes())
+          validator = jsonschema.Draft202012Validator(schema)
+          def page_set(path):
+              pages = {}
+              hashes = set()
+              with Path(path).open(encoding='utf-8') as handle:
+                  for line in handle:
+                      original = json.loads(line)
+                      validator.validate(original)
+                      assert original['sha256'] not in hashes
+                      hashes.add(original['sha256'])
+                      assert [p['physical_page'] for p in original['pages']] == list(range(1, len(original['pages']) + 1))
+                      for p in original['pages']:
+                          pages[(original['sha256'], p['physical_page'])] = (p['text_sha256'], p['text_bytes'])
+              return hashes, pages
+          old_hashes, old_pages = page_set(index['previous_page_set']['path'])
+          new_hashes, new_pages = page_set(index['new_page_set']['path'])
+          actual_pages = {}
+          with (output / 'pages.jsonl').open(encoding='utf-8') as handle:
+              for line in handle:
+                  p = native.Page.model_validate_json(line)
+                  key = (p.original_sha256, p.physical_page)
+                  value = (p.text.sha256, p.text.size_bytes)
+                  assert key not in actual_pages or actual_pages[key] == value
+                  actual_pages[key] = value
+          assert actual_pages == new_pages
+          assert (len(old_hashes), len(old_pages), len(new_hashes), len(new_pages)) == (992, 31167, 17, 883)
+          assert not old_hashes & new_hashes and not old_pages.keys() & new_pages.keys()
+          assert len(old_hashes | new_hashes) == index['union_unique_pdfs'] == 1009
+          assert len(old_pages.keys() | new_pages.keys()) == index['union_unique_physical_pages'] == 32050
+          print('PH141 source/native replay, citation query and exact hash/page union passed')
+          PY
       - name: Retain test report
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1

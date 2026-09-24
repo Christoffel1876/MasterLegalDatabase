@@ -117,6 +117,11 @@ preserves 142 Public Health/Transportation PDF and Word pairs and supports offli
 rebuilding and source-linked searching of 6,234 PDF pages. These native pages are
 machine extractions awaiting review; the guide states the remaining source gaps.
 
+The separate [Hazardous Materials and Waste Management addendum](docs/CCR_PH141_RESEARCH_2026-09-24.md)
+adds 17 retained rule pairs and 883 pages. Together, these September 24 additions
+contain 159 pairs / 7,117 pages. The broader research index now covers 1,009 distinct
+PDFs / 32,050 pages; these counts do not establish statewide legal completeness.
+
 Three research commands expose the reviewed source material with its page references,
 original wording and qualifications:
 
