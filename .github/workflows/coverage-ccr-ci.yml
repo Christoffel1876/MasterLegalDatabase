@@ -37,15 +37,19 @@ jobs:
             tests/test_ccr_current_source_series.py tests/test_ccr_current_empty_agency.py \
             tests/test_publish_ccr_current.py tests/test_publish_ccr_departments.py \
             tests/test_ccr_source_text.py tests/test_ccr_agency_capture.py \
+            tests/test_ccr_agency_capture_v2.py tests/test_ccr_agency_text.py \
             tests/test_coverage_dashboard.py -q \
             --cov=geode.pipeline.ccr_current --cov=geode.pipeline.ccr_source_text \
             --cov=geode.pipeline.ccr_agency_capture \
+            --cov=geode.pipeline.ccr_agency_capture_v2 --cov=geode.pipeline.ccr_agency_text \
             --cov=geode.pipeline.coverage_dashboard --cov=scripts.publish_ccr_current \
             --cov-branch --cov-report=term-missing --cov-report=xml:coverage-ccr.xml \
             --junitxml=coverage-ccr-tests.xml
           python -m coverage report --fail-under=90 --include=geode/pipeline/ccr_current.py
           python -m coverage report --fail-under=90 --include=geode/pipeline/ccr_source_text.py
           python -m coverage report --fail-under=90 --include=geode/pipeline/ccr_agency_capture.py
+          python -m coverage report --fail-under=90 --include=geode/pipeline/ccr_agency_capture_v2.py
+          python -m coverage report --fail-under=90 --include=geode/pipeline/ccr_agency_text.py
           python -m coverage report --fail-under=90 --include=geode/pipeline/coverage_dashboard.py
           python -m coverage report --fail-under=90 --include=scripts/publish_ccr_current.py
       - name: Replay the committed historical agency research snapshot
@@ -53,6 +57,42 @@ jobs:
           python -B -m geode.pipeline.ccr_agency_capture verify
           --root 02_Regulations_CCR/_verification/agency_scopes/2026-09-23/public-health-137-138-140
           --manifest-sha256 1d8807b9aff8f42f923dbe1e147fce0821c4580cde967808271c02b660816219
+      - name: Replay all eleven partial agency source captures
+        run: |
+          python -B - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          import jsonschema
+          from geode.pipeline import ccr_agency_capture_v2 as capture
+          from geode.pipeline import ccr_agency_text as native
+
+          folder = Path('docs/audits/CCR_AGENCY_RESEARCH_2026-09-24')
+          raw = (folder / 'INDEX.json').read_bytes()
+          assert hashlib.sha256(raw).hexdigest() == '7680496f30c81eac4bca6d0dbd3f27627e3f105053c4fac5fe8fa00468fe024b'
+          index = json.loads(raw)
+          jsonschema.validate(index, json.loads((folder / 'INDEX.schema.json').read_bytes()))
+          assert len(index['packages']) == 11
+          for row in index['packages']:
+              for key in ('capture_manifest', 'native_output_manifest', 'native_input_plan'):
+                  ref = row[key]
+                  body = Path(ref['path']).read_bytes()
+                  assert len(body) == ref['bytes']
+                  assert hashlib.sha256(body).hexdigest() == ref['sha256']
+              actual = capture.verify(Path(row['capture_root']), row['capture_manifest']['sha256'])
+              assert actual.selected_rule_count == row['selected_rules']
+              print(row['group'], 'source replay passed')
+          sample = next(row for row in index['packages'] if row['group'] == 'PH-A145-01')
+          output = Path('.geode_runtime/ci-native-ph145')
+          plan = native.InputPlan.model_validate_json(Path(sample['native_input_plan']['path']).read_bytes())
+          native.build(Path(sample['capture_root']), output, plan)
+          manifest = native.verify(output, sample['native_output_manifest']['sha256'])
+          assert manifest.unique_physical_pages == sample['native_unique_physical_pages']
+          result = native.query(output, sample['native_output_manifest']['sha256'], '6 CCR 1012-1', mode='citation', limit=1)
+          assert result.returned_page_associations == 1 and result.answer_safe is False
+          assert result.scope.department_complete is False
+          print('Real-source native rebuild, verification and citation query passed')
+          PY
       - name: Retain test report
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1

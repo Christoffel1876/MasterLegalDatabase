@@ -1,0 +1,330 @@
+{
+  "schema_version": "ccr-agency-selection-plan-2",
+  "department_id": "16",
+  "provenance_sha256": [
+    "568f7e2ae5fb0200f8752ef6904e695895349f38c53c279ed773a2549946ea30"
+  ],
+  "selections": [
+    {
+      "agency_id": "132",
+      "rule_id": "2376"
+    },
+    {
+      "agency_id": "132",
+      "rule_id": "2901"
+    },
+    {
+      "agency_id": "132",
+      "rule_id": "2386"
+    },
+    {
+      "agency_id": "132",
+      "rule_id": "3362"
+    }
+  ],
+  "responses": [
+    {
+      "association_id": "E0001",
+      "role": "welcome",
+      "parent_id": null,
+      "body": {
+        "path": "bodies/ada752cff759490f2ed16c3cf24c08d5e6c7692d275ecefad604e323c854fc32.bin",
+        "sha256": "ada752cff759490f2ed16c3cf24c08d5e6c7692d275ecefad604e323c854fc32",
+        "bytes": 9724
+      },
+      "claim": {
+        "receipt_sha256": "db56061ab7f65ab1e9fe3435a48a8bd68868e050621662a0081e5e474ff6c5bc",
+        "requested_url": "https://www.sos.state.co.us/CCR/Welcome.do",
+        "observed_final_url": null,
+        "started_at": "2026-09-23T18:42:28.429444Z",
+        "finished_at": "2026-09-23T18:42:28.605057Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 9724
+      }
+    },
+    {
+      "association_id": "E0002",
+      "role": "catalog",
+      "parent_id": "E0001",
+      "body": {
+        "path": "bodies/cf9abccf2117abbef58612a99849ae6dea89c096f511956bf5a1aff34e9f830b.bin",
+        "sha256": "cf9abccf2117abbef58612a99849ae6dea89c096f511956bf5a1aff34e9f830b",
+        "bytes": 132585
+      },
+      "claim": {
+        "receipt_sha256": "d26819b3980e2bfb8f11bf921576c2a8434c0151202f61c7906dd5e60d8c4813",
+        "requested_url": "https://www.sos.state.co.us/CCR/NumericalDeptList.do",
+        "observed_final_url": null,
+        "started_at": "2026-09-23T18:42:29.612910Z",
+        "finished_at": "2026-09-23T18:42:29.892301Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 132585
+      }
+    },
+    {
+      "association_id": "E0003",
+      "role": "listing",
+      "parent_id": "E0002",
+      "body": {
+        "path": "bodies/702c823db62ab21d37af9a782a899430260aa4fe421ad00ec7734869d07fb470.bin",
+        "sha256": "702c823db62ab21d37af9a782a899430260aa4fe421ad00ec7734869d07fb470",
+        "bytes": 25232
+      },
+      "claim": {
+        "receipt_sha256": "ca47f35c163ad912d3e03667e5381bce7ea08a934e9f37f9fa122ad04c1fc35a",
+        "requested_url": "https://www.sos.state.co.us/CCR/NumericalCCRDocList.do?deptID=16&deptName=1000%20Department%20of%20Public%20Health%20and%20Environment&agencyID=132&agencyName=1002%20Water%20Quality%20Control%20Commission",
+        "observed_final_url": null,
+        "started_at": "2026-09-23T18:42:30.911970Z",
+        "finished_at": "2026-09-23T18:42:31.290920Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 25232
+      }
+    },
+    {
+      "association_id": "E0055",
+      "role": "history",
+      "parent_id": "E0003",
+      "body": {
+        "path": "bodies/6b8be64d57aa5c05d330ce5458c9ccc21b428e35dd299538e0ddde726db20a61.bin",
+        "sha256": "6b8be64d57aa5c05d330ce5458c9ccc21b428e35dd299538e0ddde726db20a61",
+        "bytes": 17208
+      },
+      "claim": {
+        "receipt_sha256": "aad82981010aa1877fcc013d9c96bc98f42c196b5b4f24bef593e036077a26d4",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2376&deptID=16&agencyID=132&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Water%20Quality%20Control%20Commission&seriesNum=5%20CCR%201002-54",
+        "observed_final_url": null,
+        "started_at": "2026-09-23T18:43:41.155050Z",
+        "finished_at": "2026-09-23T18:43:41.740890Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 17208
+      }
+    },
+    {
+      "association_id": "E0056",
+      "role": "pdf",
+      "parent_id": "E0055",
+      "body": {
+        "path": "bodies/3e879c0f5def3e35ffac8468ff54874434d9d9a9e02d70da2b788be2bb99deeb.bin",
+        "sha256": "3e879c0f5def3e35ffac8468ff54874434d9d9a9e02d70da2b788be2bb99deeb",
+        "bytes": 317303
+      },
+      "claim": {
+        "receipt_sha256": "018d9e3344edd5f6c3006f97ea6a48ec6dfd071a2994f833832181cc9c5fd81f",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=5914&fileName=5%20CCR%201002-54",
+        "observed_final_url": null,
+        "started_at": "2026-09-23T18:43:42.755805Z",
+        "finished_at": "2026-09-23T18:43:42.990422Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 317303
+      }
+    },
+    {
+      "association_id": "E0057",
+      "role": "word",
+      "parent_id": "E0055",
+      "body": {
+        "path": "bodies/6f3c095cc5fc78d88655b95f351f87828c4bea96d09b1ed624fbd3e18d23370e.bin",
+        "sha256": "6f3c095cc5fc78d88655b95f351f87828c4bea96d09b1ed624fbd3e18d23370e",
+        "bytes": 30208
+      },
+      "claim": {
+        "receipt_sha256": "ed0a8fc31399050798ecdfacb313ad2b60d457d36cdf8b15edab7281406e8c56",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=5914&fileName=5%20CCR%201002-54",
+        "observed_final_url": null,
+        "started_at": "2026-09-23T18:43:44.002363Z",
+        "finished_at": "2026-09-23T18:43:44.110274Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 30208
+      }
+    },
+    {
+      "association_id": "E0103",
+      "role": "history",
+      "parent_id": "E0003",
+      "body": {
+        "path": "bodies/838b6bd557cec22f71127c5f9ef1709539e6ae651c97ee6edc91ef80c8c6ef1d.bin",
+        "sha256": "838b6bd557cec22f71127c5f9ef1709539e6ae651c97ee6edc91ef80c8c6ef1d",
+        "bytes": 15298
+      },
+      "claim": {
+        "receipt_sha256": "c760ddb988d95f44adb71fe182a7a53a7df009090cd40721c7374f527a323636",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2901&deptID=16&agencyID=132&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Water%20Quality%20Control%20Commission&seriesNum=5%20CCR%201002-94",
+        "observed_final_url": null,
+        "started_at": "2026-09-23T18:44:40.727079Z",
+        "finished_at": "2026-09-23T18:44:40.989654Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 15298
+      }
+    },
+    {
+      "association_id": "E0104",
+      "role": "pdf",
+      "parent_id": "E0103",
+      "body": {
+        "path": "bodies/ceb2e96c240ddf767549c5171d147d5bc15fc098d767ae431c520af16745cc9a.bin",
+        "sha256": "ceb2e96c240ddf767549c5171d147d5bc15fc098d767ae431c520af16745cc9a",
+        "bytes": 319673
+      },
+      "claim": {
+        "receipt_sha256": "bd8fa46118ea424589f2f439c14dc4c57bd404f1d24197e855350ed95c8a8606",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=3478&fileName=5%20CCR%201002-94",
+        "observed_final_url": null,
+        "started_at": "2026-09-23T18:44:42.003398Z",
+        "finished_at": "2026-09-23T18:44:42.155952Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 319673
+      }
+    },
+    {
+      "association_id": "E0105",
+      "role": "word",
+      "parent_id": "E0103",
+      "body": {
+        "path": "bodies/459b34aa5c8a69f36298848af3c7487febee4b9abbb5b0b0cca273ee99cc895e.bin",
+        "sha256": "459b34aa5c8a69f36298848af3c7487febee4b9abbb5b0b0cca273ee99cc895e",
+        "bytes": 29184
+      },
+      "claim": {
+        "receipt_sha256": "ab52036cda3e146f5ccefd45f3097a175a354ba4b23d6bbad72c4c715f412d23",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=3478&fileName=5%20CCR%201002-94",
+        "observed_final_url": null,
+        "started_at": "2026-09-23T18:44:43.166047Z",
+        "finished_at": "2026-09-23T18:44:43.270012Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 29184
+      }
+    },
+    {
+      "association_id": "E0085",
+      "role": "history",
+      "parent_id": "E0003",
+      "body": {
+        "path": "bodies/f5d01e32cf4516f67ae52cc05e04b36fa9044d6a4c0b51b2f52086a3eaab3cb2.bin",
+        "sha256": "f5d01e32cf4516f67ae52cc05e04b36fa9044d6a4c0b51b2f52086a3eaab3cb2",
+        "bytes": 15149
+      },
+      "claim": {
+        "receipt_sha256": "40edac61b78a80ade14421838bc9302fd977d70eb69b0e196a4e8032c7bde68f",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2386&deptID=16&agencyID=132&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Water%20Quality%20Control%20Commission&seriesNum=5%20CCR%201002-75",
+        "observed_final_url": null,
+        "started_at": "2026-09-23T18:44:18.329420Z",
+        "finished_at": "2026-09-23T18:44:18.581355Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 15149
+      }
+    },
+    {
+      "association_id": "E0086",
+      "role": "pdf",
+      "parent_id": "E0085",
+      "body": {
+        "path": "bodies/118870b9c542245da06ab579cde3771924ca7731177df9de0701b434a1a025b1.bin",
+        "sha256": "118870b9c542245da06ab579cde3771924ca7731177df9de0701b434a1a025b1",
+        "bytes": 306165
+      },
+      "claim": {
+        "receipt_sha256": "227a7d682a663636de71e215327584299f81a65c56e977a5704fc489525588f1",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=5687&fileName=5%20CCR%201002-75",
+        "observed_final_url": null,
+        "started_at": "2026-09-23T18:44:19.594229Z",
+        "finished_at": "2026-09-23T18:44:19.818151Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 306165
+      }
+    },
+    {
+      "association_id": "E0087",
+      "role": "word",
+      "parent_id": "E0085",
+      "body": {
+        "path": "bodies/24f71c483c012959cb72487691478e59903e23f5cc1dc21906d10f6f45ec9f9c.bin",
+        "sha256": "24f71c483c012959cb72487691478e59903e23f5cc1dc21906d10f6f45ec9f9c",
+        "bytes": 30720
+      },
+      "claim": {
+        "receipt_sha256": "81ced252b35151eb6104670f45e340a7be66ece1fa2575b14d3cce3ad4484c71",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=5687&fileName=5%20CCR%201002-75",
+        "observed_final_url": null,
+        "started_at": "2026-09-23T18:44:20.832064Z",
+        "finished_at": "2026-09-23T18:44:20.935250Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 30720
+      }
+    },
+    {
+      "association_id": "E0124",
+      "role": "history",
+      "parent_id": "E0003",
+      "body": {
+        "path": "bodies/094978f14deeb3b55c7cf0b8c9836c63987731e2a3232d28e7fe172783b0e4bf.bin",
+        "sha256": "094978f14deeb3b55c7cf0b8c9836c63987731e2a3232d28e7fe172783b0e4bf",
+        "bytes": 17131
+      },
+      "claim": {
+        "receipt_sha256": "dedd31f1de8a96952c6fb185ec729eccf7eb9802c54e45c1efd3d98ee25c51d5",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3362&deptID=16&agencyID=132&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Water%20Quality%20Control%20Commission&seriesNum=5%20CCR%201002-101",
+        "observed_final_url": null,
+        "started_at": "2026-09-23T18:45:07.525451Z",
+        "finished_at": "2026-09-23T18:45:07.809495Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 17131
+      }
+    },
+    {
+      "association_id": "E0125",
+      "role": "pdf",
+      "parent_id": "E0124",
+      "body": {
+        "path": "bodies/939e5385414ace78e846968eb73e58ea81b216ae28d822617464b4928b7e6725.bin",
+        "sha256": "939e5385414ace78e846968eb73e58ea81b216ae28d822617464b4928b7e6725",
+        "bytes": 302748
+      },
+      "claim": {
+        "receipt_sha256": "8cb7ba2d77570bac80a025879843567ad86702783378991e6a2e59e159735c91",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=12538&fileName=5%20CCR%201002-101",
+        "observed_final_url": null,
+        "started_at": "2026-09-23T18:45:08.820331Z",
+        "finished_at": "2026-09-23T18:45:09.020266Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 302748
+      }
+    },
+    {
+      "association_id": "E0126",
+      "role": "word",
+      "parent_id": "E0124",
+      "body": {
+        "path": "bodies/9eb49543f3bc2523b8d742e61478acb9d9a389fcca0b52c051209c4b2c662fb0.bin",
+        "sha256": "9eb49543f3bc2523b8d742e61478acb9d9a389fcca0b52c051209c4b2c662fb0",
+        "bytes": 27934
+      },
+      "claim": {
+        "receipt_sha256": "579b2f4e72d891a4f80db0a41003b6c878f66742146f9a95ef84a0e4afdd0f0c",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=12538&fileName=5%20CCR%201002-101",
+        "observed_final_url": null,
+        "started_at": "2026-09-23T18:45:10.022958Z",
+        "finished_at": "2026-09-23T18:45:10.186318Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 27934
+      }
+    }
+  ],
+  "document_policy": "all_source_nonarchived_pdf_word_pairs",
+  "legal_currentness": "not_verified",
+  "answer_safe": false
+}

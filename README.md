@@ -112,6 +112,11 @@ the manifest and has passed validation.
 
 ## Explore Reviewed Sources
 
+The [September 24 CCR agency research addition](docs/CCR_AGENCY_RESEARCH_2026-09-24.md)
+preserves 142 Public Health/Transportation PDF and Word pairs and supports offline
+rebuilding and source-linked searching of 6,234 PDF pages. These native pages are
+machine extractions awaiting review; the guide states the remaining source gaps.
+
 Three research commands expose the reviewed source material with its page references,
 original wording and qualifications:
 
