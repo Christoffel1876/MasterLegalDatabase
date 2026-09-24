@@ -122,6 +122,10 @@ adds 17 retained rule pairs and 883 pages. Together, these September 24 addition
 contain 159 pairs / 7,117 pages. The broader research index now covers 1,009 distinct
 PDFs / 32,050 pages; these counts do not establish statewide legal completeness.
 
+The [PH141 document-role review](docs/CCR_PH141_DOCUMENT_ROLES_2026-09-24.md)
+distinguishes seven notice/history PDFs from one substantive regulation PDF.
+Nine other PDFs remain unreviewed for role; collection does not imply complete rule text.
+
 Three research commands expose the reviewed source material with its page references,
 original wording and qualifications:
 

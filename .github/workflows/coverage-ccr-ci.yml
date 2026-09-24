@@ -158,6 +158,154 @@ jobs:
           assert len(old_pages.keys() | new_pages.keys()) == index['union_unique_physical_pages'] == 32050
           print('PH141 source/native replay, citation query and exact hash/page union passed')
           PY
+      - name: Validate PH141 documentary roles
+        run: |
+          python -B - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          import jsonschema
+          import pymupdf
+          from geode.pipeline import ccr_agency_capture_v2 as capture
+
+          folder = Path('docs/audits/CCR_PH141_DOCUMENT_ROLES_2026-09-24')
+
+          def sha(raw):
+              return hashlib.sha256(raw).hexdigest()
+
+          def read(root, path, maximum=15_000_000):
+              rel = Path(path)
+              assert not rel.is_absolute() and '..' not in rel.parts
+              current = root
+              for part in rel.parts:
+                  current = current / part
+                  assert not current.is_symlink()
+              assert current.is_file() and current.stat().st_size <= maximum
+              with current.open('rb') as handle:
+                  raw = handle.read(maximum + 1)
+              assert len(raw) <= maximum
+              return raw
+
+          def bound(root, ref):
+              raw = read(root, ref['path'])
+              assert len(raw) == ref['bytes'] and sha(raw) == ref['sha256']
+              return raw
+
+          raw = read(folder, 'ROLES.json')
+          schema_raw = read(folder, 'ROLES.schema.json')
+          assert sha(raw) == '01803cee71f8eba8c31476d8569535c3351414c35594fbc7306cdc6cb55ab213'
+          assert sha(schema_raw) == 'fbaf0b6260e65183db1443efdf2fc16860c433dbcbb02e459e8e86baae494ba4'
+          roles = json.loads(raw)
+          jsonschema.Draft202012Validator(json.loads(schema_raw)).validate(roles)
+          assert roles['legal_currentness'] == 'not_verified' and roles['answer_safe'] is False
+          assert roles['department_complete'] is False and roles['native_package_status_changed'] is False
+          public_index = json.loads(bound(Path('.'), roles['public_index']))
+          root_rel = Path(roles['capture_root'])
+          assert not root_rel.is_absolute() and '..' not in root_rel.parts
+          root = Path('.') / root_rel
+          assert public_index['package']['capture_root'] == roles['capture_root']
+          manifest_raw = bound(Path('.'), roles['capture_manifest'])
+          manifest_pin = sha(manifest_raw)
+          assert manifest_pin == '51657265d4199ab7d034fe64920eeaa44aee73709be0b0f4de95ab47d4aa349d'
+          assert public_index['package']['capture_manifest']['sha256'] == manifest_pin
+          source = capture.verify(root, manifest_pin).model_dump(mode='json')
+          members = {r['path']: r for r in json.loads(manifest_raw)['files']}
+          plan_raw = bound(root, members['PLAN.json'])
+          record_raw = bound(root, members['CAPTURE.json'])
+          assert plan_raw == bound(Path('.'), roles['capture_plan'])
+          assert record_raw == bound(Path('.'), roles['capture_record'])
+          assert json.loads(record_raw) == source
+          plan = capture.Plan.model_validate_json(plan_raw).model_dump(mode='json')
+          responses = {r['association_id']: r for r in plan['responses']}
+          rules = {r['rule_id']: r for r in source['selected_rules']}
+          pdfs = {d['association_id']: d for d in source['documents'] if d['role'] == 'pdf'}
+          agency = next(a for a in source['agencies'] if a['agency_id'] == '141')
+          assert (source['catalog_agency_count'], agency['listed_rule_count'], source['selected_rule_count']) == (18, 53, 17)
+          rows = roles['documents']
+          assert len(rows) == len({r['association_id'] for r in rows}) == 17
+          assert len({r['capture_relative_original']['sha256'] for r in rows}) == 17
+          assert set(pdfs) == {r['association_id'] for r in rows}
+          expected_roles = {
+              '2404': 'editorial_navigation_notice',
+              '2405': 'editorial_navigation_and_history',
+              '2406': 'editorial_navigation_and_history',
+              '2407': 'substantive_body_present',
+              '2408': 'editorial_repeal_notice',
+              '2937': 'editorial_recodification_notice',
+              '2938': 'editorial_recodification_notice',
+              '2939': 'editorial_recodification_notice',
+          }
+          evidence = {e['review_id']: e for e in roles['evidence']}
+          assert len(roles['evidence']) == len(evidence) == 3
+          assert {e['manifest']['path'] for e in evidence.values()} == {
+              'review-manifests/ptolemy-six-short.json',
+              'review-manifests/plato-2406.json',
+              'review-manifests/atlas-2407.json',
+          }
+          review_members = {}
+          for key, e in evidence.items():
+              m = json.loads(bound(folder, e['manifest']))
+              items = m.get('files', m.get('assets'))
+              reports = [r for r in items if r['path'] == 'REVIEW.json']
+              assert len(reports) == 1
+              assert reports[0]['sha256'] == e['report_sha256']
+              assert reports[0].get('bytes', reports[0].get('size')) == e['report_bytes']
+              review_members[key] = items
+          for row in rows:
+              association = row['association_id']
+              response, document = responses[association], pdfs[association]
+              rule = rules[row['rule_id']]
+              assert row['department_id'] == source['department_id'] == '16'
+              assert row['agency_id'] == rule['agency_id'] == '141'
+              assert response['parent_id'] == 'rule-' + row['rule_id']
+              assert row['source_citation'] == rule['source_citation']
+              assert row['source_listing_title'] == rule['listing_title']
+              assert row['source_history_title'] == rule['history_title']
+              assert row['source_url'] == response['claim']['requested_url']
+              versions = [v for v in rule['versions'] if v['selected'] and row['source_url'] in v['document_urls']]
+              assert len(versions) == 1
+              assert row['source_version_id'] == versions[0]['version_id']
+              assert row['source_designation_claim'] == versions[0]['designation']
+              original = row['capture_relative_original']
+              assert original == response['body']
+              assert original['sha256'] == document['sha256']
+              body = bound(root, original)
+              with pymupdf.open(stream=body, filetype='pdf') as pdf:
+                  assert len(pdf) == row['physical_pages'] == document['pages']
+              assert row['legal_currentness'] == 'not_verified' and row['answer_safe'] is False
+              if row['rule_id'] in expected_roles:
+                  assert row['role_review_status'] == 'scoped_document_role_observed'
+                  assert row['observed_role'] == expected_roles[row['rule_id']]
+                  assert row['substantive_body_in_this_pdf'] is (row['observed_role'] == 'substantive_body_present')
+                  assert row['review_id'] in review_members
+                  originals = [r for r in review_members[row['review_id']]
+                               if r['path'].endswith('.pdf') and r['sha256'] == original['sha256']]
+                  assert len(originals) == 1
+                  assert originals[0].get('bytes', originals[0].get('size')) == original['bytes']
+              else:
+                  assert row['role_review_status'] == 'not_reviewed_for_document_role'
+                  assert row['observed_role'] is None
+                  assert row['substantive_body_in_this_pdf'] is None and row['review_id'] is None
+          reviewed = [r for r in rows if r['review_id'] is not None]
+          notices = [r for r in reviewed if r['observed_role'] != 'substantive_body_present']
+          substantive = [r for r in reviewed if r['observed_role'] == 'substantive_body_present']
+          unreviewed = [r for r in rows if r['review_id'] is None]
+          counts = tuple((len(xs), sum(r['physical_pages'] for r in xs))
+                         for xs in (rows, reviewed, notices, substantive, unreviewed))
+          assert counts == ((17, 883), (8, 24), (7, 14), (1, 10), (9, 859))
+          for keys, pair in [(('selected_capture_pdfs', 'selected_capture_pages'), counts[0]),
+                             (('reviewed_pdfs', 'reviewed_pages'), counts[1]),
+                             (('notice_or_history_pdfs', 'notice_or_history_pages'), counts[2]),
+                             (('substantive_body_pdfs', 'substantive_body_pages'), counts[3]),
+                             (('role_unreviewed_pdfs', 'role_unreviewed_pages'), counts[4])]:
+              assert tuple(roles[k] for k in keys) == pair
+          print(json.dumps({'status': 'PH141 role schema/source/identity checks passed',
+                            'reviewed_pdfs': 8, 'reviewed_pages': 24, 'notice_pdfs': 7,
+                            'notice_pages': 14, 'substantive_pdfs': 1, 'substantive_pages': 10,
+                            'role_unreviewed_pdfs': 9, 'role_unreviewed_pages': 859,
+                            'visual_judgment_reproduced': False}, sort_keys=True))
+          PY
+
       - name: Retain test report
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
