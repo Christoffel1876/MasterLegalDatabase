@@ -158,6 +158,94 @@ jobs:
           assert len(old_pages.keys() | new_pages.keys()) == index['union_unique_physical_pages'] == 32050
           print('PH141 source/native replay, citation query and exact hash/page union passed')
           PY
+      - name: Replay twelve additional PH141 pairs and their exact page union
+        run: |
+          python -B - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          import jsonschema
+          from geode.pipeline import ccr_agency_capture_v2 as capture
+          from geode.pipeline import ccr_agency_text as native
+
+          folder = Path('docs/audits/CCR_PH141_ADDITIONAL_RESEARCH_2026-09-24')
+          raw = (folder / 'INDEX.json').read_bytes()
+          assert hashlib.sha256(raw).hexdigest() == (
+              'e9d530e89cb3281f7de7840f9928d0dc291c2f0031e9b8c616b1ad5691fdb38c'
+          )
+          index = json.loads(raw)
+          jsonschema.validate(index, json.loads((folder / 'INDEX.schema.json').read_bytes()))
+          def bound(ref):
+              path = Path(ref['path'])
+              assert not path.is_absolute() and '..' not in path.parts
+              assert not any(p.is_symlink() for p in [path, *path.parents])
+              body = path.read_bytes()
+              assert len(body) == ref['bytes']
+              assert hashlib.sha256(body).hexdigest() == ref['sha256']
+              return body
+          refs = [index['baseline_index'], index['new_page_set'], index['original_schema']]
+          refs += index['baseline_page_sets'] + index['implementation']
+          for ref in refs:
+              bound(ref)
+          schema = json.loads(bound(index['original_schema']))
+          def pages(raw):
+              result, hashes = {}, set()
+              for line in raw.splitlines():
+                  row = json.loads(line)
+                  jsonschema.validate(row, schema)
+                  assert row['sha256'] not in hashes
+                  hashes.add(row['sha256'])
+                  assert [p['physical_page'] for p in row['pages']] == list(
+                      range(1, len(row['pages']) + 1)
+                  )
+                  for p in row['pages']:
+                      result[(row['sha256'], p['physical_page'])] = (
+                          p['text_sha256'], p['text_bytes']
+                      )
+              return result
+          old = {}
+          for ref in index['baseline_page_sets']:
+              previous = pages(bound(ref))
+              assert not old.keys() & previous.keys()
+              old.update(previous)
+          new = pages(bound(index['new_page_set']))
+          actual, rules = {}, set()
+          assert len(index['packages']) == 2
+          for row in index['packages']:
+              for key in ('capture_manifest', 'native_manifest', 'native_input_plan'):
+                  bound(row[key])
+              root = Path(row['capture_root'])
+              cap = capture.verify(root, row['capture_manifest']['sha256'])
+              assert cap.selected_rule_count == 6 and cap.catalog_agency_count == 18
+              selected = {r.rule_id for r in cap.selected_rules}
+              assert selected == set(row['selected_rule_ids']) and not rules & selected
+              rules.update(selected)
+              output = Path('.geode_runtime/ci-additional-ph141') / row['group']
+              plan = native.InputPlan.model_validate_json(bound(row['native_input_plan']))
+              native.build(root, output, plan)
+              manifest = native.verify(output, row['native_manifest']['sha256'])
+              assert manifest.unique_physical_pages == row['native_unique_pages']
+              result = native.query(output, row['native_manifest']['sha256'],
+                  row['source_citation_query'], mode='citation', limit=1)
+              assert result.returned_page_associations == 1 and result.answer_safe is False
+              assert result.scope.department_complete is False
+              with (output / 'pages.jsonl').open(encoding='utf-8') as handle:
+                  for line in handle:
+                      p = native.Page.model_validate_json(line)
+                      key = (p.original_sha256, p.physical_page)
+                      value = (p.text.sha256, p.text.size_bytes)
+                      assert key not in actual or actual[key] == value
+                      actual[key] = value
+          assert actual == new and len(new) == 984
+          assert not old.keys() & new.keys()
+          assert len({p[0] for p in old}) == 1009 and len(old) == 32050
+          assert len({p[0] for p in new}) == 12
+          assert len({p[0] for p in old | new}) == index['union_unique_pdfs'] == 1021
+          assert len(old | new) == index['union_unique_pages'] == 33034
+          assert rules == set(index['selected_new_rule_ids'])
+          assert index['answer_safe'] is False and index['statewide_complete'] is False
+          print('Twelve added PH141 pairs, native rebuilds, citation queries and page union passed')
+          PY
       - name: Validate PH141 documentary roles
         run: |
           python -B - <<'PY'

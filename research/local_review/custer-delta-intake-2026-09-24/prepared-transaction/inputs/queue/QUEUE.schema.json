@@ -1,0 +1,385 @@
+{
+  "$defs": {
+    "Binding": {
+      "additionalProperties": false,
+      "description": "Literal JSON value or JSONL row field retained as evidence.",
+      "properties": {
+        "jsonl_line": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Jsonl Line"
+        },
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "pointer": {
+          "title": "Pointer",
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/$defs/JsonValue"
+        }
+      },
+      "required": [
+        "path",
+        "pointer",
+        "value"
+      ],
+      "title": "Binding",
+      "type": "object"
+    },
+    "Item": {
+      "additionalProperties": false,
+      "description": "A bounded task selected from actual recorded gaps.",
+      "properties": {
+        "acceptance_requirements": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Acceptance Requirements",
+          "type": "array"
+        },
+        "authority_id": {
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "authority_name": {
+          "title": "Authority Name",
+          "type": "string"
+        },
+        "bounded_next_step": {
+          "title": "Bounded Next Step",
+          "type": "string"
+        },
+        "limitations": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Limitations",
+          "type": "array"
+        },
+        "ownership_qualification": {
+          "title": "Ownership Qualification",
+          "type": "string"
+        },
+        "phase": {
+          "enum": [
+            "pending_intake",
+            "extraction_review",
+            "source_discovery"
+          ],
+          "title": "Phase",
+          "type": "string"
+        },
+        "queue_id": {
+          "title": "Queue Id",
+          "type": "string"
+        },
+        "rank": {
+          "maximum": 10,
+          "minimum": 1,
+          "title": "Rank",
+          "type": "integer"
+        },
+        "recorded_gaps": {
+          "items": {
+            "$ref": "#/$defs/Binding"
+          },
+          "minItems": 1,
+          "title": "Recorded Gaps",
+          "type": "array"
+        },
+        "scope": {
+          "enum": [
+            "county",
+            "municipal",
+            "district",
+            "public_provider"
+          ],
+          "title": "Scope",
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/$defs/Source"
+          },
+          "minItems": 1,
+          "title": "Sources",
+          "type": "array"
+        },
+        "why_prioritized": {
+          "title": "Why Prioritized",
+          "type": "string"
+        }
+      },
+      "required": [
+        "rank",
+        "queue_id",
+        "authority_id",
+        "authority_name",
+        "scope",
+        "ownership_qualification",
+        "phase",
+        "sources",
+        "recorded_gaps",
+        "why_prioritized",
+        "bounded_next_step",
+        "acceptance_requirements",
+        "limitations"
+      ],
+      "title": "Item",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "Pin": {
+      "additionalProperties": false,
+      "description": "Workspace-relative immutable file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Pin",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "description": "Exact recorded URL and the separately verified availability of its bytes.",
+      "properties": {
+        "authority_binding": {
+          "$ref": "#/$defs/Binding"
+        },
+        "availability": {
+          "enum": [
+            "retained_hash_verified",
+            "historical_claim_exact_path_missing"
+          ],
+          "title": "Availability",
+          "type": "string"
+        },
+        "body": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Pin"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "checked_missing_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Checked Missing Path"
+        },
+        "declared_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Declared Sha256",
+          "type": "string"
+        },
+        "legacy_hash_matches": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Legacy Hash Matches",
+          "type": "array"
+        },
+        "manual_hash_matches": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Manual Hash Matches",
+          "type": "array"
+        },
+        "qualifications": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Qualifications",
+          "type": "array"
+        },
+        "recorded_pages": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Recorded Pages"
+        },
+        "sha256_binding": {
+          "$ref": "#/$defs/Binding"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "url_binding": {
+          "$ref": "#/$defs/Binding"
+        }
+      },
+      "required": [
+        "source_id",
+        "url",
+        "url_binding",
+        "authority_binding",
+        "sha256_binding",
+        "availability",
+        "body",
+        "declared_sha256",
+        "checked_missing_path",
+        "recorded_pages",
+        "manual_hash_matches",
+        "legacy_hash_matches",
+        "qualifications"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Planning only; no public activity or legal-completeness promotion.",
+  "properties": {
+    "activation_authorized": {
+      "const": false,
+      "default": false,
+      "title": "Activation Authorized",
+      "type": "boolean"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "baseline_legacy_rows_compared": {
+      "const": 48390,
+      "default": 48390,
+      "title": "Baseline Legacy Rows Compared",
+      "type": "integer"
+    },
+    "baseline_manual_originals": {
+      "const": 71,
+      "default": 71,
+      "title": "Baseline Manual Originals",
+      "type": "integer"
+    },
+    "baseline_manual_review_joins": {
+      "const": 38,
+      "default": 38,
+      "title": "Baseline Manual Review Joins",
+      "type": "integer"
+    },
+    "canonical_mutations": {
+      "const": false,
+      "default": false,
+      "title": "Canonical Mutations",
+      "type": "boolean"
+    },
+    "input_pins": {
+      "items": {
+        "$ref": "#/$defs/Pin"
+      },
+      "title": "Input Pins",
+      "type": "array"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/$defs/Item"
+      },
+      "maxItems": 10,
+      "minItems": 1,
+      "title": "Items",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "observed_at": {
+      "title": "Observed At",
+      "type": "string"
+    },
+    "public_requests_performed": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Requests Performed",
+      "type": "integer"
+    },
+    "qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Qualifications",
+      "type": "array"
+    },
+    "repository_head_observed": {
+      "pattern": "^[0-9a-f]{40}$",
+      "title": "Repository Head Observed",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "status": {
+      "const": "inactive_next_session_proposal",
+      "default": "inactive_next_session_proposal",
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "observed_at",
+    "repository_head_observed",
+    "input_pins",
+    "items",
+    "qualifications"
+  ],
+  "title": "Queue",
+  "type": "object"
+}

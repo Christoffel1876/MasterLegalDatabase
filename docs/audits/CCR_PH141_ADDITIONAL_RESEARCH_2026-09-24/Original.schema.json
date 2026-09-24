@@ -1,0 +1,54 @@
+{
+  "$defs": {
+    "Page": {
+      "additionalProperties": false,
+      "description": "One exact native physical-page identity.",
+      "properties": {
+        "physical_page": {
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "text_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Text Sha256",
+          "type": "string"
+        },
+        "text_bytes": {
+          "minimum": 0,
+          "title": "Text Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "physical_page",
+        "text_sha256",
+        "text_bytes"
+      ],
+      "title": "Page",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One original PDF and complete physical-page identity sequence.",
+  "properties": {
+    "sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Sha256",
+      "type": "string"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Pages",
+      "type": "array"
+    }
+  },
+  "required": [
+    "sha256",
+    "pages"
+  ],
+  "title": "Original",
+  "type": "object"
+}

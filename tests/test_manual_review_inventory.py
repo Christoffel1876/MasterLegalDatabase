@@ -442,9 +442,9 @@ def test_accepted_equity_review_is_one_bounded_additive_join() -> None:
     new_plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
     new = inventory.build_inventory(root)
     assert len(old.sources) == 46
-    assert len(new.sources) == 71
+    assert len(new.sources) == 74
     assert (old.rows_with_review, old.rows_without_review) == (18, 28)
-    assert (new.rows_with_review, new.rows_without_review) == (38, 33)
+    assert (new.rows_with_review, new.rows_without_review) == (38, 36)
     assert [r.model_dump(mode="json") for r in new_plan.reviews[:18]] == old_plan["reviews"]
     assert len(new_plan.reviews) == 38
     previous = {s.record_id: s for s in old.sources}
@@ -511,9 +511,9 @@ def test_planning_scan_join_preserves_prior_59_sources_and_19_reviews() -> None:
     old = inventory.Inventory.model_validate_json((checkpoint / "inventory.json").read_bytes())
     new_plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
     new = inventory.build_inventory(root)
-    assert len(old.sources) == 59 and len(new.sources) == 71
+    assert len(old.sources) == 59 and len(new.sources) == 74
     assert (old.rows_with_review, old.rows_without_review) == (19, 40)
-    assert (new.rows_with_review, new.rows_without_review) == (38, 33)
+    assert (new.rows_with_review, new.rows_without_review) == (38, 36)
     assert len(new_plan.reviews) == 38 and new_plan.reviews[:19] == old_plan.reviews
     for current, previous in zip(new_plan.authorities[:59], old_plan.authorities, strict=True):
         a, b = current.model_dump(), previous.model_dump()
@@ -601,9 +601,9 @@ def test_springs_and_later_greeley_preserve_all_prior_review_and_custody_fields(
     old_plan = inventory.JoinPlan.model_validate_json((before / "join-plan.json").read_bytes())
     new = inventory.build_inventory(root)
     plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
-    assert len(old.sources) == 59 and len(new.sources) == 71
+    assert len(old.sources) == 59 and len(new.sources) == 74
     assert (old.rows_with_review, old.rows_without_review) == (20, 39)
-    assert (new.rows_with_review, new.rows_without_review) == (38, 33)
+    assert (new.rows_with_review, new.rows_without_review) == (38, 36)
     assert plan.reviews[:20] == old_plan.reviews and len(plan.reviews) == 38
     assert new.unchanged_legacy_ledger == old.unchanged_legacy_ledger
     changed = set()
@@ -699,9 +699,9 @@ def test_english_ehs_join_preserves_all_61_sources_and_21_prior_reviews() -> Non
     old_plan = inventory.JoinPlan.model_validate_json((before / "join-plan.json").read_bytes())
     new = inventory.build_inventory(root)
     plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
-    assert len(old.sources) == 61 and len(new.sources) == 71
+    assert len(old.sources) == 61 and len(new.sources) == 74
     assert (old.rows_with_review, old.rows_without_review) == (21, 40)
-    assert (new.rows_with_review, new.rows_without_review) == (38, 33)
+    assert (new.rows_with_review, new.rows_without_review) == (38, 36)
     assert plan.reviews[:21] == old_plan.reviews and len(plan.reviews) == 38
     assert plan.authorities[:61] == old_plan.authorities
     assert new.manual_manifest.path == old.manual_manifest.path
@@ -729,11 +729,11 @@ def test_final_two_sources_preserve_prior_61_sources_and_22_reviews() -> None:
     old_plan = inventory.JoinPlan.model_validate_json((before / "join-plan.json").read_bytes())
     new = inventory.build_inventory(root)
     plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
-    assert len(old.sources) == 61 and len(new.sources) == 71
+    assert len(old.sources) == 61 and len(new.sources) == 74
     assert (old.rows_with_review, old.rows_without_review) == (22, 39)
-    assert (new.rows_with_review, new.rows_without_review) == (38, 33)
+    assert (new.rows_with_review, new.rows_without_review) == (38, 36)
     assert plan.reviews[:22] == old_plan.reviews and len(plan.reviews) == 38
-    assert plan.authorities[:61] == old_plan.authorities and len(plan.authorities) == 71
+    assert plan.authorities[:61] == old_plan.authorities and len(plan.authorities) == 74
     assert [_before_final_reviews(r) for r in new.sources[:61]] == old.sources
     assert new.unchanged_legacy_ledger == old.unchanged_legacy_ledger
     expected = {
@@ -833,8 +833,8 @@ def test_final_three_preserve_63_custody_rows_and_24_old_review_joins() -> None:
     new = inventory.build_inventory(root)
     plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
     assert (len(old.sources), old.rows_with_review, old.rows_without_review) == (63, 24, 39)
-    assert (len(new.sources), new.rows_with_review, new.rows_without_review) == (71, 38, 33)
-    assert plan.authorities[:63] == old_plan.authorities and len(plan.authorities) == 71
+    assert (len(new.sources), new.rows_with_review, new.rows_without_review) == (74, 38, 36)
+    assert plan.authorities[:63] == old_plan.authorities and len(plan.authorities) == 74
     assert plan.reviews[:24] == old_plan.reviews and len(plan.reviews) == 38
     assert [_before_final_reviews(r) for r in new.sources[:63]] == old.sources
     assert new.unchanged_legacy_ledger == old.unchanged_legacy_ledger
@@ -936,9 +936,9 @@ def test_gunnison_and_spanish_joins_preserve_exact_64_source_baseline() -> None:
     plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
     assert (len(old.sources), old.rows_with_review, old.rows_without_review) == (64, 27, 37)
     assert (len(current.sources), current.rows_with_review, current.rows_without_review) == (
-        71, 38, 33,
+        74, 38, 36,
     )
-    assert plan.authorities[:64] == old_plan.authorities and len(plan.authorities) == 71
+    assert plan.authorities[:64] == old_plan.authorities and len(plan.authorities) == 74
     assert plan.reviews[:27] == old_plan.reviews and len(plan.reviews) == 38
     assert [_before_september13_reviews(r) for r in current.sources[:64]] == old.sources
     assert current.unchanged_legacy_ledger == old.unchanged_legacy_ledger
@@ -1099,9 +1099,9 @@ def test_chaffee_iwuic_preserves_all_67_prior_sources_and_30_review_joins() -> N
     plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
     assert (len(old.sources), old.rows_with_review, old.rows_without_review) == (67, 30, 37)
     assert (len(current.sources), current.rows_with_review, current.rows_without_review) == (
-        71, 38, 33,
+        74, 38, 36,
     )
-    assert plan.authorities[:67] == old_plan.authorities and len(plan.authorities) == 71
+    assert plan.authorities[:67] == old_plan.authorities and len(plan.authorities) == 74
     assert plan.reviews[:30] == old_plan.reviews and len(plan.reviews) == 38
     assert {r.record_id for r in plan.reviews[30:33]} == set(CHAFFEE_IWUIC_REVIEWS)
     for previous, row in zip(old.sources, current.sources[:67], strict=True):
@@ -1261,9 +1261,9 @@ def test_final_fee_code_preserves_69_authorities_and_33_review_joins() -> None:
     plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
     assert (len(old.sources), old.rows_with_review, old.rows_without_review) == (69, 33, 36)
     assert (len(current.sources), current.rows_with_review, current.rows_without_review) == (
-        71, 38, 33,
+        74, 38, 36,
     )
-    assert plan.authorities[:69] == old_plan.authorities and len(plan.authorities) == 71
+    assert plan.authorities[:69] == old_plan.authorities and len(plan.authorities) == 74
     assert plan.reviews[:33] == old_plan.reviews and len(plan.reviews) == 38
     assert {r.record_id for r in plan.reviews[33:35]} == set(FINAL_FEE_CODE_REVIEWS)
     assert [_before_final_fee_code_reviews(r) for r in current.sources[:69]] == old.sources
@@ -1422,9 +1422,9 @@ def test_code_services_preserves_other_69_rows_and_all_35_prior_joins() -> None:
     plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
     assert (len(old.sources), old.rows_with_review, old.rows_without_review) == (70, 35, 35)
     assert (len(current.sources), current.rows_with_review, current.rows_without_review) == (
-        71, 38, 33,
+        74, 38, 36,
     )
-    assert plan.authorities[:70] == old_plan.authorities and len(plan.authorities) == 71
+    assert plan.authorities[:70] == old_plan.authorities and len(plan.authorities) == 74
     assert plan.reviews[:35] == old_plan.reviews and len(plan.reviews) == 38
     assert plan.reviews[35].record_id == CODE_SERVICES_ID
     assert [r.model_dump_json() for r in plan.reviews[:35]] == [
@@ -1550,9 +1550,9 @@ def test_boh_admin_preserves_69_rows_70_authorities_and_36_prior_reviews() -> No
     plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
     assert (len(old.sources), old.rows_with_review, old.rows_without_review) == (70, 36, 34)
     assert (len(current.sources), current.rows_with_review, current.rows_without_review) == (
-        71, 38, 33,
+        74, 38, 36,
     )
-    assert len(plan.authorities) == 71 and len(plan.reviews) == 38
+    assert len(plan.authorities) == 74 and len(plan.reviews) == 38
     assert [a.model_dump_json() for a in plan.authorities[:70]] == [
         a.model_dump_json() for a in old_plan.authorities
     ]
@@ -1682,9 +1682,9 @@ def test_ldc_preserves_69_rows_70_authorities_and_37_prior_reviews() -> None:
     plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
     assert (len(old.sources), old.rows_with_review, old.rows_without_review) == (70, 37, 33)
     assert (len(current.sources), current.rows_with_review, current.rows_without_review) == (
-        71, 38, 33,
+        74, 38, 36,
     )
-    assert plan.authorities[:70] == old_plan.authorities and len(plan.authorities) == 71
+    assert plan.authorities[:70] == old_plan.authorities and len(plan.authorities) == 74
     assert plan.reviews[:37] == old_plan.reviews and len(plan.reviews) == 38
     assert plan.reviews[37].record_id == LDC_CHAPTER_ID
     for prior, row in zip(old.sources, current.sources[:70], strict=True):
@@ -1886,7 +1886,7 @@ def _before_resolution_manifest(root: Path, current: inventory.Artifact) -> inve
     saved = RESOLUTION_INTAKE / "preimages/manual_source_intake_manifest.jsonl"
     old = inventory.identity(root, saved.as_posix())
     prior = (root / saved).read_bytes()
-    actual = inventory._verified_bytes(root, current)
+    actual = _before_custer_delta_manifest(root, current)
     assert actual.startswith(prior)
     rows = list(inventory._jsonl_bytes(actual[len(prior):], current.path))
     assert len(rows) == 1 and rows[0]["record_id"] == RESOLUTION_ID
@@ -1905,10 +1905,10 @@ def test_resolution_intake_preserves_70_sources_and_all_38_reviews() -> None:
     plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
     assert (len(old.sources), old.rows_with_review, old.rows_without_review) == (70, 38, 32)
     assert (len(current.sources), current.rows_with_review, current.rows_without_review) == (
-        71, 38, 33,
+        74, 38, 36,
     )
     assert current.sources[:70] == old.sources
-    assert plan.authorities[:70] == old_plan.authorities and len(plan.authorities) == 71
+    assert plan.authorities[:70] == old_plan.authorities and len(plan.authorities) == 74
     assert plan.reviews == old_plan.reviews and len(plan.reviews) == 38
     assert _before_resolution_manifest(root, current.manual_manifest) == old.manual_manifest
     assert current.unchanged_legacy_ledger == old.unchanged_legacy_ledger
@@ -1925,4 +1925,78 @@ def test_resolution_intake_preserves_70_sources_and_all_38_reviews() -> None:
     assert row.provenance_qualifications["/actual_repository_received_at"] is None
     assert row.recorded_intake_status == "archived_pending_pipeline"
     assert row.legal_currentness == "not_verified" and not row.answer_safe
+    assert not current.coverage_promotion and not current.answer_safe
+
+
+COUNTY_INTAKE = Path("research/local_review/custer-delta-intake-2026-09-24/prepared-transaction")
+COUNTY_PREPARATION_SHA = "16be7d7fd5c3dd9585c3d8c55b7101b1e4d3d9e5b51cf600f816a97f93f13dc4"
+COUNTY_EXPECTED = [
+    ("custer-right-to-ranch-farm-resolution-98-14-shstate03", "CO-COUNTY-CUSTER",
+     "5afc51d162a5472b999ce5bf308ff9a93810015bcbea7c7e710cec864932605a", "SHSTATE03-A024.bin"),
+    ("delta-land-use-adoption-resolution-2021-r-001-shstate03", "CO-COUNTY-DELTA",
+     "43aa136adb355681cd8dc4ac2c5437ab74ee7cc5c52050dcfc29f6d6d90dd0ba", "SHSTATE03-A014.bin"),
+    ("delta-land-use-code-2024-label-shstate03", "CO-COUNTY-DELTA",
+     "d5a6e7a8f8c3e6ba6e29ce97ede237e591e963a33eb2bbaee03b5b5c9d8c429b", "SHSTATE03-A007.bin"),
+]
+
+
+def _before_custer_delta_manifest(root: Path, current: inventory.Artifact) -> bytes:
+    """Normalize only the exact71-row prefix plus these three fixed received originals."""
+    prep_path = (COUNTY_INTAKE / "PREPARATION.json").as_posix()
+    prep_asset = inventory.identity(root, prep_path)
+    assert prep_asset.sha256 == COUNTY_PREPARATION_SHA
+    prep = json.loads(inventory._verified_bytes(root, prep_asset))
+    raw_pin = prep["baseline"][0]["preserved"]
+    prior_asset = inventory.Artifact(
+        path=(COUNTY_INTAKE / raw_pin["path"]).as_posix(),
+        sha256=raw_pin["sha256"], size_bytes=raw_pin["size_bytes"],
+    )
+    prior = inventory._verified_bytes(root, prior_asset)
+    actual = inventory._verified_bytes(root, current)
+    assert actual.startswith(prior)
+    rows = list(inventory._jsonl_bytes(actual[len(prior):], current.path))
+    assert len(rows) == 3
+    for row, (identity, _, digest, filename) in zip(rows, COUNTY_EXPECTED, strict=True):
+        record = inventory.ManualSourceIntakeRecord.model_validate_json(json.dumps(row))
+        assert record.record_id == identity and record.sha256 == digest
+        assert record.original_filename == filename and record.source_format == "pdf"
+        assert record.acquisition_method == "received_review_package"
+        assert record.official_source_url is None
+        assert record.status == "archived_pending_pipeline" and not record.blocked_queue_match
+    return prior
+
+
+def test_custer_delta_preserves_71_sources_and_38_reviews() -> None:
+    """Three custody originals stay unreviewed with separate reported acquisition clocks."""
+    root = Path(__file__).resolve().parents[1]
+    saved = inventory.PACKAGE / "_SNAPSHOTS/BEFORE_CUSTER_DELTA_2026-09-24"
+    old = inventory.Inventory.model_validate_json((root / saved / "inventory.json").read_bytes())
+    old_plan = inventory.JoinPlan.model_validate_json(
+        (root / saved / "join-plan.json").read_bytes())
+    current = inventory.build_inventory(root)
+    plan = inventory.JoinPlan.model_validate_json((root / inventory.PLAN).read_bytes())
+    assert (len(old.sources), old.rows_with_review, old.rows_without_review) == (71, 38, 33)
+    assert (len(current.sources), current.rows_with_review, current.rows_without_review) == (
+        74, 38, 36,
+    )
+    assert current.sources[:71] == old.sources
+    assert plan.authorities[:71] == old_plan.authorities and len(plan.authorities) == 74
+    assert plan.reviews == old_plan.reviews and len(plan.reviews) == 38
+    assert current.unchanged_legacy_ledger == old.unchanged_legacy_ledger
+    assert _before_custer_delta_manifest(root, current.manual_manifest) == (
+        root / COUNTY_INTAKE / "preimages/manual_source_intake_manifest.jsonl").read_bytes()
+    for offset, (row, expected) in enumerate(
+            zip(current.sources[71:], COUNTY_EXPECTED, strict=True)):
+        identity, authority, digest, _ = expected
+        assert (row.record_id, row.authority_id, row.source.sha256) == (identity, authority, digest)
+        assert row.verified_http_acquired_at is None and row.verified_http_evidence is None
+        assert row.official_source_url is None
+        assert row.acquisition_method == "received_review_package"
+        assert row.reviews is None and row.review_status == "metadata_only_review_unknown"
+        assert row.source_roles[f"/provenance/{offset}/physical_pages"] == [4, 3, 234][offset]
+        assert row.source_roles[f"/provenance/{offset}/originally_reported_pages"] == (
+            [4, 3, 236][offset])
+        reported = row.reported_acquisition[f"/provenance/{offset}/reported_finished_at"]
+        assert row.intake_received_at.isoformat() != reported
+        assert row.legal_currentness == "not_verified" and not row.answer_safe
     assert not current.coverage_promotion and not current.answer_safe

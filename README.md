@@ -119,8 +119,9 @@ machine extractions awaiting review; the guide states the remaining source gaps.
 
 The separate [Hazardous Materials and Waste Management addendum](docs/CCR_PH141_RESEARCH_2026-09-24.md)
 adds 17 retained rule pairs and 883 pages. Together, these September 24 additions
-contain 159 pairs / 7,117 pages. The broader research index now covers 1,009 distinct
-PDFs / 32,050 pages; these counts do not establish statewide legal completeness.
+contain 159 pairs / 7,117 pages. A [further twelve-pair addition](docs/audits/CCR_PH141_ADDITIONAL_RESEARCH_2026-09-24/README.md)
+adds 984 pages, bringing the broader research index to 1,021 distinct PDFs / 33,034
+physical pages. These counts do not establish statewide legal completeness.
 
 The [PH141 document-role review](docs/CCR_PH141_DOCUMENT_ROLES_2026-09-24.md)
 distinguishes seven notice/history PDFs from one substantive regulation PDF.

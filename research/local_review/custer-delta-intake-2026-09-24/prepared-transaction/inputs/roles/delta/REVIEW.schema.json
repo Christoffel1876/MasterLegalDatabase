@@ -1,0 +1,188 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Repository-relative exact file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "DateClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "iso_date": {
+          "title": "Iso Date",
+          "type": "string"
+        },
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "support": {
+          "title": "Support",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "iso_date",
+        "physical_page",
+        "support"
+      ],
+      "title": "DateClaim",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "reviewed_at": {
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_first_notes": {
+      "$ref": "#/$defs/Asset"
+    },
+    "observed_authority": {
+      "const": "Board of County Commissioners of Delta County, Colorado",
+      "title": "Observed Authority",
+      "type": "string"
+    },
+    "resolution_number_reading": {
+      "const": "2021-R-001",
+      "title": "Resolution Number Reading",
+      "type": "string"
+    },
+    "role": {
+      "const": "three_page_adopting_and_repealing_resolution_with_execution_marks",
+      "title": "Role",
+      "type": "string"
+    },
+    "full_pages_directly_inspected": {
+      "const": 3,
+      "default": 3,
+      "title": "Full Pages Directly Inspected",
+      "type": "integer"
+    },
+    "observed_dates": {
+      "items": {
+        "$ref": "#/$defs/DateClaim"
+      },
+      "title": "Observed Dates",
+      "type": "array"
+    },
+    "execution_observation": {
+      "title": "Execution Observation",
+      "type": "string"
+    },
+    "native_pages": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Native Pages",
+      "type": "array"
+    },
+    "native_text_bytes": {
+      "const": 0,
+      "default": 0,
+      "title": "Native Text Bytes",
+      "type": "integer"
+    },
+    "extraction_disposition": {
+      "const": "native_empty_OCR_and_review_required",
+      "default": "native_empty_OCR_and_review_required",
+      "title": "Extraction Disposition",
+      "type": "string"
+    },
+    "referenced_attachments_in_this_pdf": {
+      "const": false,
+      "default": false,
+      "title": "Referenced Attachments In This Pdf",
+      "type": "boolean"
+    },
+    "next_step": {
+      "title": "Next Step",
+      "type": "string"
+    },
+    "source_first_errata": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source First Errata",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "canonical_intake_performed": {
+      "const": false,
+      "default": false,
+      "title": "Canonical Intake Performed",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "reviewed_at",
+    "source",
+    "source_first_notes",
+    "observed_authority",
+    "resolution_number_reading",
+    "role",
+    "observed_dates",
+    "execution_observation",
+    "native_pages",
+    "next_step",
+    "source_first_errata",
+    "limitations"
+  ],
+  "title": "Review",
+  "type": "object"
+}
