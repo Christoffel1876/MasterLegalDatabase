@@ -1,0 +1,283 @@
+{
+  "$defs": {
+    "ManualIntakeArchiveVerification": {
+      "additionalProperties": false,
+      "description": "Distinguish verified archive bytes from retained ledger-only history.",
+      "properties": {
+        "manifest_records": {
+          "minimum": 0,
+          "title": "Manifest Records",
+          "type": "integer"
+        },
+        "verified_intake_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Verified Intake Ids",
+          "type": "array"
+        },
+        "ledger_only_intake_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ledger Only Intake Ids",
+          "type": "array"
+        },
+        "missing_ledger_only_intake_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Ledger Only Intake Ids",
+          "type": "array"
+        },
+        "boundary": {
+          "default": "Hash and size verification establishes local byte identity only. Ledger-only history may lack a local original; custody, acquisition claims, pipeline status, and legal currentness are not promoted.",
+          "title": "Boundary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "manifest_records",
+        "verified_intake_ids",
+        "ledger_only_intake_ids",
+        "missing_ledger_only_intake_ids"
+      ],
+      "title": "ManualIntakeArchiveVerification",
+      "type": "object"
+    },
+    "ManualSourceIntakeReport": {
+      "additionalProperties": false,
+      "description": "Summary of manual source intake state.",
+      "properties": {
+        "generated_at": {
+          "format": "date-time",
+          "title": "Generated At",
+          "type": "string"
+        },
+        "ledger_path": {
+          "title": "Ledger Path",
+          "type": "string"
+        },
+        "archive_manifest_path": {
+          "title": "Archive Manifest Path",
+          "type": "string"
+        },
+        "records": {
+          "minimum": 0,
+          "title": "Records",
+          "type": "integer"
+        },
+        "pending_pipeline_use": {
+          "minimum": 0,
+          "title": "Pending Pipeline Use",
+          "type": "integer"
+        },
+        "layers": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Layers",
+          "type": "object"
+        },
+        "latest_record_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Latest Record Id"
+        },
+        "acquisition_methods": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Acquisition Methods",
+          "type": "object"
+        },
+        "archive_verification": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ManualIntakeArchiveVerification"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "boundary": {
+          "title": "Boundary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "generated_at",
+        "ledger_path",
+        "archive_manifest_path",
+        "records",
+        "pending_pipeline_use",
+        "boundary"
+      ],
+      "title": "ManualSourceIntakeReport",
+      "type": "object"
+    },
+    "NewRecord": {
+      "additionalProperties": false,
+      "description": "Validated final custody only; timestamp is created during eventual apply.",
+      "properties": {
+        "intake_id": {
+          "title": "Intake Id",
+          "type": "string"
+        },
+        "record_id": {
+          "const": "el-paso-boa-resolution-25-290-directed-lead",
+          "title": "Record Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "const": "08_County_Authorities",
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "official_source_name": {
+          "title": "Official Source Name",
+          "type": "string"
+        },
+        "official_source_url": {
+          "const": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/Misc/25-290.pdf",
+          "title": "Official Source Url",
+          "type": "string"
+        },
+        "acquisition_method": {
+          "const": "manual_official_download",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "received_from": {
+          "title": "Received From",
+          "type": "string"
+        },
+        "reviewer_name": {
+          "title": "Reviewer Name",
+          "type": "string"
+        },
+        "reviewer_email": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewer Email"
+        },
+        "custody_note": {
+          "title": "Custody Note",
+          "type": "string"
+        },
+        "original_filename": {
+          "title": "Original Filename",
+          "type": "string"
+        },
+        "archive_path": {
+          "title": "Archive Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 1,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "source_format": {
+          "const": "pdf",
+          "title": "Source Format",
+          "type": "string"
+        },
+        "received_at": {
+          "format": "date-time",
+          "title": "Received At",
+          "type": "string"
+        },
+        "status": {
+          "const": "archived_pending_pipeline",
+          "title": "Status",
+          "type": "string"
+        },
+        "blocked_queue_match": {
+          "const": false,
+          "title": "Blocked Queue Match",
+          "type": "boolean"
+        },
+        "boundary": {
+          "title": "Boundary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "intake_id",
+        "record_id",
+        "layer_id",
+        "official_source_name",
+        "official_source_url",
+        "acquisition_method",
+        "received_from",
+        "reviewer_name",
+        "custody_note",
+        "original_filename",
+        "archive_path",
+        "sha256",
+        "size_bytes",
+        "source_format",
+        "received_at",
+        "status",
+        "blocked_queue_match",
+        "boundary"
+      ],
+      "title": "NewRecord",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Actual apply clock, exact record and captured report projection.",
+  "properties": {
+    "preparation_sha256": {
+      "title": "Preparation Sha256",
+      "type": "string"
+    },
+    "actual_repository_received_at": {
+      "format": "date-time",
+      "title": "Actual Repository Received At",
+      "type": "string"
+    },
+    "records": {
+      "items": {
+        "$ref": "#/$defs/NewRecord"
+      },
+      "maxItems": 1,
+      "minItems": 1,
+      "title": "Records",
+      "type": "array"
+    },
+    "expected_report": {
+      "$ref": "#/$defs/ManualSourceIntakeReport"
+    }
+  },
+  "required": [
+    "preparation_sha256",
+    "actual_repository_received_at",
+    "records",
+    "expected_report"
+  ],
+  "title": "Intent",
+  "type": "object"
+}

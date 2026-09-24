@@ -105,7 +105,11 @@ def test_actual_department_catalog_preserves_all_agencies() -> None:
 ])
 def test_real_source_status_overrides_current_table_label(name, status, effective, repeal) -> None:
     doc = document(name)
-    versions = ccr._versions(doc, RULE_URL)
+    # Each retained fixture represents a different source series. The parser
+    # now binds the exact requested series instead of ignoring a wrong URL.
+    citation = {'rule-repealed.html': '1302-4', 'rule-undated.html': '1306-1'}.get(
+        name, '1301-1')
+    versions = ccr._versions(doc, RULE_URL.replace('1301-1', citation))
     classification, evidence, selected = ccr._classify(doc, versions, NOW.date())
     assert classification == status
     assert selected.effective_date == effective
@@ -278,13 +282,15 @@ def test_multiple_current_or_undated_repeal_remain_ambiguous() -> None:
     assert ccr._classify(doc, versions, NOW.date())[0] == "ambiguous"
     body = fixture("rule-repealed.html").replace(b"eff. 07/01/2018]", b"eff. unknown]")
     doc = ccr._parse_html(body, CONTENT_TYPE)
-    assert ccr._classify(doc, ccr._versions(doc, RULE_URL), NOW.date())[0] == "ambiguous"
+    assert ccr._classify(doc, ccr._versions(
+        doc, RULE_URL.replace('1301-1', '1302-4')), NOW.date())[0] == "ambiguous"
 
 
 def test_future_repeal_is_not_already_repealed() -> None:
     body = fixture("rule-repealed.html").replace(b"eff. 07/01/2018]", b"eff. 09/10/2026]")
     doc = ccr._parse_html(body, CONTENT_TYPE)
-    result = ccr._classify(doc, ccr._versions(doc, RULE_URL), NOW.date())
+    result = ccr._classify(doc, ccr._versions(
+        doc, RULE_URL.replace('1301-1', '1302-4')), NOW.date())
     assert result[0] == "future_effective"
     assert "09/10/2026" in result[1]
 
@@ -356,7 +362,7 @@ def test_foreign_scope_rule_link_is_not_attributed_to_this_department(
     (ccr.CATALOG_URL, "deptID=12", "deptID=99", "no agencies"),
     (AGENCY_URL, "DisplayRule.do", "MissingRule.do", "no verifiable"),
     (AGENCY_URL, "ruleId=2567", "ruleId=invalid", "numeric"),
-    (AGENCY_URL, "8 CCR 1301-1 </a>", "unknown </a>", "no CCR citation"),
+    (AGENCY_URL, "8 CCR 1301-1 </a>", "unknown </a>", "Unexpected CCR source citation"),
     (AGENCY_URL, "PROCEDURES OF PRACTICE AND PROCEDURES OF REVIEW</TD>", "</TD>", "Incomplete"),
     (RULE_URL, "Current version</b>", "New version</b>", "Current version"),
     (RULE_URL, "Archived versions</b>", "Old versions</b>", "Archived versions"),
@@ -407,7 +413,7 @@ def test_redirected_wrong_version_and_external_url_are_rejected(tmp_path, world)
 
 @pytest.mark.parametrize("limits", [
     {"max_sources": 3}, {"max_total_bytes": 20}, {"max_sources": 0},
-    {"max_sources": 301}, {"max_total_bytes": 150_000_001},
+    {"max_sources": 1001}, {"max_total_bytes": 150_000_001},
 ])
 def test_resource_limits_are_failures_not_partial_success(tmp_path, world, limits) -> None:
     assert run(tmp_path, world, **limits).status == "failed"

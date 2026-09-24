@@ -1,0 +1,124 @@
+{
+  "additionalProperties": false,
+  "description": "Validated final custody only; timestamp is created during eventual apply.",
+  "properties": {
+    "intake_id": {
+      "title": "Intake Id",
+      "type": "string"
+    },
+    "record_id": {
+      "enum": [
+        "custer-right-to-ranch-farm-resolution-98-14-shstate03",
+        "delta-land-use-adoption-resolution-2021-r-001-shstate03",
+        "delta-land-use-code-2024-label-shstate03"
+      ],
+      "title": "Record Id",
+      "type": "string"
+    },
+    "layer_id": {
+      "const": "08_County_Authorities",
+      "title": "Layer Id",
+      "type": "string"
+    },
+    "official_source_name": {
+      "title": "Official Source Name",
+      "type": "string"
+    },
+    "official_source_url": {
+      "title": "Official Source Url",
+      "type": "null"
+    },
+    "acquisition_method": {
+      "const": "received_review_package",
+      "title": "Acquisition Method",
+      "type": "string"
+    },
+    "received_from": {
+      "title": "Received From",
+      "type": "string"
+    },
+    "reviewer_name": {
+      "title": "Reviewer Name",
+      "type": "string"
+    },
+    "reviewer_email": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reviewer Email"
+    },
+    "custody_note": {
+      "title": "Custody Note",
+      "type": "string"
+    },
+    "original_filename": {
+      "title": "Original Filename",
+      "type": "string"
+    },
+    "archive_path": {
+      "title": "Archive Path",
+      "type": "string"
+    },
+    "sha256": {
+      "title": "Sha256",
+      "type": "string"
+    },
+    "size_bytes": {
+      "minimum": 1,
+      "title": "Size Bytes",
+      "type": "integer"
+    },
+    "source_format": {
+      "const": "pdf",
+      "title": "Source Format",
+      "type": "string"
+    },
+    "received_at": {
+      "format": "date-time",
+      "title": "Received At",
+      "type": "string"
+    },
+    "status": {
+      "const": "archived_pending_pipeline",
+      "title": "Status",
+      "type": "string"
+    },
+    "blocked_queue_match": {
+      "const": false,
+      "title": "Blocked Queue Match",
+      "type": "boolean"
+    },
+    "boundary": {
+      "title": "Boundary",
+      "type": "string"
+    }
+  },
+  "required": [
+    "intake_id",
+    "record_id",
+    "layer_id",
+    "official_source_name",
+    "official_source_url",
+    "acquisition_method",
+    "received_from",
+    "reviewer_name",
+    "custody_note",
+    "original_filename",
+    "archive_path",
+    "sha256",
+    "size_bytes",
+    "source_format",
+    "received_at",
+    "status",
+    "blocked_queue_match",
+    "boundary"
+  ],
+  "title": "NewRecord",
+  "type": "object"
+}

@@ -43,9 +43,14 @@ WELCOME_URL = "https://www.sos.state.co.us/CCR/Welcome.do"
 RAW_PREFIX = "_RAW_ARCHIVE/ccr/current/"
 SNAPSHOT_PREFIX = "_SNAPSHOTS/ccr_current/"
 VERIFICATION_PREFIX = "02_Regulations_CCR/_verification/current/"
-MAX_SOURCES = 300
+DEFAULT_MAX_SOURCES = 300
+MAX_SOURCES = 1000
 MAX_TOTAL_BYTES = 150_000_000
 CCR_RE = re.compile(r"\b(\d{1,2})\s+CCR\s+(\d+-\d+(?:-\d+)?)\b", re.I)
+SOURCE_CITATION_RE = re.compile(
+    r"([0-9]{1,2}) CCR ([0-9]+-[0-9]+(?:-[0-9]+)?)"
+    r"(?: ([A-Za-z0-9]+(?:[ .-][A-Za-z0-9]+)*))?"
+)
 DATE_RE = re.compile(r"\b(\d{1,2}/\d{1,2}/\d{4})\b")
 
 
@@ -107,7 +112,7 @@ class CCRCurrentRecord(StrictModel):
     """Evidence of source designation, distinct from a legal status determination."""
 
     entity_type: Literal["ccr_current_verification"] = "ccr_current_verification"
-    id: str = Field(pattern=r"^\d{1,2}_CCR_\d+-\d+(?:-\d+)?$")
+    id: str = Field(pattern=r"^\d{1,2}_CCR_\d+-\d+(?:-\d+)?(?:__rule_\d+)?$")
     ccr_citation: str
     rule_id: str = Field(pattern=r"^\d+$")
     department_id: str = Field(pattern=r"^\d+$")
@@ -288,33 +293,111 @@ def _agencies(document: _Document, url: str, department_id: str) -> dict[str, tu
         if anchor.attrs.get("name") in match[1].split(",")
         and _cells(_ancestor(anchor, "tr"))[-1].text() == match[2]
     ]
-    if len(starts) != 1:
+    group_numbers = match[1].split(",")
+    # SOS repeats a combined department under each numerical grouping. For
+    # example, HCPF (1305/2505) has two complete, identical agency sections.
+    # Require one heading per declared grouping, then verify every copy rather
+    # than treating the second legitimate grouping as ambiguous or omitting it.
+    if (
+        len(group_numbers) != len(set(group_numbers))
+        or sorted(anchor.attrs["name"] for anchor in starts) != sorted(group_numbers)
+    ):
         raise ValueError("Missing or ambiguous department section in source catalog")
-    first_row = _ancestor(starts[0], "tr")
-    table = _ancestor(first_row, "table")
-    expected_ids = []
-    for row in table.nodes("tr"):
-        if row.order <= first_row.order or _ancestor(row, "table") is not table:
-            continue
-        if any(anchor.attrs.get("name") for anchor in row.nodes("a")):
-            break
-        cells = _cells(row)
-        anchors = [anchor for anchor in row.nodes("a") if anchor.attrs.get("href")]
-        if len(cells) != 2 or len(anchors) != 1:
-            raise ValueError("Incomplete agency row in department source section")
-        target = _url(urljoin(url, anchors[0].attrs["href"]))
-        if (
-            urlparse(target).path != "/CCR/NumericalCCRDocList.do"
-            or _query(target, "deptID") != department_id
-        ):
-            raise ValueError("Agency row has an unexpected endpoint or department")
-        expected_ids.append(_numeric(_query(target, "agencyID")))
-    if sorted(expected_ids) != sorted(agencies):
-        raise ValueError("Department source rows and parsed agency identities disagree")
+    for start in starts:
+        first_row = _ancestor(start, "tr")
+        table = _ancestor(first_row, "table")
+        expected_ids = []
+        for row in table.nodes("tr"):
+            if row.order <= first_row.order or _ancestor(row, "table") is not table:
+                continue
+            if any(anchor.attrs.get("name") for anchor in row.nodes("a")):
+                break
+            cells = _cells(row)
+            anchors = [anchor for anchor in row.nodes("a") if anchor.attrs.get("href")]
+            if len(cells) != 2 or len(anchors) != 1:
+                raise ValueError("Incomplete agency row in department source section")
+            target = _url(urljoin(url, anchors[0].attrs["href"]))
+            if (
+                urlparse(target).path != "/CCR/NumericalCCRDocList.do"
+                or _query(target, "deptID") != department_id
+            ):
+                raise ValueError("Agency row has an unexpected endpoint or department")
+            expected_ids.append(_numeric(_query(target, "agencyID")))
+        if sorted(expected_ids) != sorted(agencies):
+            raise ValueError("Department source rows and parsed agency identities disagree")
     return agencies
 
 
+def _explicit_empty_agency(document: _Document, url: str) -> bool:
+    """Recognize the retained SOS empty-result structure and matching breadcrumb.
+
+    This describes the returned catalog, never legal absence. The caller must
+    retain the response and preserve the final previously indexed rule-ID gate.
+    """
+    markers = [node for node in document.root.nodes('td')
+               if any(isinstance(child, str) and child.strip() == 'No results found'
+                      for child in node.children)]
+    if not markers:
+        return False
+    if len(markers) != 1:
+        raise ValueError('Ambiguous explicit empty agency marker')
+    require_sos_url(url)
+    if urlparse(url).path != '/CCR/NumericalCCRDocList.do':
+        raise ValueError('Unexpected empty agency endpoint')
+    department_id = _numeric(_query(url, 'deptID'))
+    _numeric(_query(url, 'agencyID'))
+    labels = []
+    for key in ('deptName', 'agencyName'):
+        match = re.fullmatch(r'\d+(?:[,-]\d+)*\s+(.+)', _query(url, key))
+        if match is None:
+            raise ValueError('Missing numbered empty agency label')
+        labels.append(match[1])
+    department, agency = labels
+    if _links(document, url, 'DisplayRule.do'):
+        raise ValueError('Empty marker contradicts rule links')
+    if any(_headers(table) for table in document.root.nodes('table')):
+        raise ValueError('Empty marker contradicts tabular headings')
+    container = markers[0]
+    direct = ' '.join(child.strip() for child in container.children if isinstance(child, str))
+    if direct.strip() != 'No results found':
+        raise ValueError('Unexpected direct content beside empty marker')
+    children = [node for node in container.children if isinstance(node, _Node)]
+    if [node.tag for node in children] != ['table', 'br', 'br', 'br', 'p']:
+        raise ValueError('Unexpected empty result structure')
+    table = children[0]
+    if table.attrs.get('class') != 'fullNoPadding' or len(container.nodes('table')) != 1:
+        raise ValueError('Missing or contradictory empty agency breadcrumb table')
+    if container.text() != f'Home > Browse rules > {department} > {agency} No results found':
+        raise ValueError('Empty agency breadcrumb text differs')
+    rows = [row for row in table.nodes('tr') if _ancestor(row, 'table') is table]
+    if len(rows) != 2 or any(len(_cells(row)) != 1 for row in rows):
+        raise ValueError('Malformed empty agency breadcrumb rows')
+    anchors = table.nodes('a')
+    if len(anchors) != 3 or [node.text() for node in anchors] != [
+        'Home', 'Browse rules', department
+    ]:
+        raise ValueError('Ambiguous empty agency breadcrumb links')
+    expected_paths = ['/CCR/Welcome.do', '/CCR/NumericalDeptList.do',
+                      '/CCR/NumericalAgencyList.do']
+    targets = [_url(urljoin(url, anchor.attrs.get('href', ''))) for anchor in anchors]
+    if [urlparse(target).path for target in targets] != expected_paths:
+        raise ValueError('Wrong empty agency breadcrumb endpoints')
+    if (_query(targets[2], 'deptID') != department_id
+            or _query(targets[2], 'deptName') != department):
+        raise ValueError('Wrong empty agency breadcrumb department')
+    all_dept_links = _links(document, url, 'NumericalAgencyList.do')
+    if len(all_dept_links) != 1 or all_dept_links[0][1] is not anchors[2]:
+        raise ValueError('Ambiguous empty agency department identity')
+    inputs = children[-1].nodes('input')
+    if (len(inputs) != 1 or inputs[0].attrs.get('type') != 'button'
+            or inputs[0].attrs.get('value') != 'Back' or children[-1].text()):
+        raise ValueError('Unexpected empty agency trailing content')
+    return True
+
+
 def _rules(document: _Document, url: str) -> dict[str, tuple[str, str, str]]:
+    if _explicit_empty_agency(document, url):
+        return {}
     rules = {}
     tables = [
         table for table in document.root.nodes("table")
@@ -333,10 +416,9 @@ def _rules(document: _Document, url: str) -> dict[str, tuple[str, str, str]]:
         if _query(link, "action").casefold() != "ruleinfo":
             raise ValueError("Unexpected rule listing action")
         rule_id = _numeric(_query(link, "ruleId"))
-        citation = CCR_RE.search(anchor.text())
-        if citation is None:
-            raise ValueError(f"Rule listing has no CCR citation: {rule_id}")
-        ccr = f"{citation[1]} CCR {citation[2]}"
+        ccr = _source_citation(anchor.text())
+        if _query(link, "seriesNum") != ccr:
+            raise ValueError("Rule listing citation differs from its exact seriesNum")
         row = _ancestor(anchor, "tr")
         cells = _cells(row)
         if len(cells) != 2 or not cells[1].text():
@@ -393,6 +475,35 @@ def _title(document: _Document) -> str:
     return titles[0]
 
 
+def _source_citation(value: str) -> str:
+    """Preserve one bounded literal SOS series label, including source subdivisions."""
+    if len(value) > 200 or SOURCE_CITATION_RE.fullmatch(value) is None:
+        raise ValueError("Unexpected CCR source citation")
+    return value
+
+
+def record_identity(citation: str, rule_id: str) -> str:
+    """Keep ordinary IDs stable and distinguish separately cataloged subdivisions.
+
+    A suffixed label is an SOS source-series identity, not an inferred legal section
+    number. Its explicit rule ID prevents flattening separate source documents into
+    the same base CCR record. The full original citation is retained separately.
+    """
+    _source_citation(citation)
+    match = SOURCE_CITATION_RE.fullmatch(citation)
+    base = f"{match[1]}_CCR_{match[2]}"
+    return f"{base}__rule_{_numeric(rule_id)}" if match[3] else base
+
+
+def _listed_citation(document: _Document, url: str) -> str:
+    """Bind the exact requested series to its displayed title without truncation."""
+    citation = _source_citation(_query(url, "seriesNum"))
+    title = _title(document)
+    if title != citation and not title.startswith(citation + " "):
+        raise ValueError("Rule-page citation differs from the exact requested seriesNum")
+    return citation
+
+
 def _document_link(anchor: _Node, url: str) -> tuple[str, str]:
     """Resolve the exact two observed SOS handlers without executing JavaScript."""
 
@@ -404,8 +515,7 @@ def _document_link(anchor: _Node, url: str) -> tuple[str, str]:
     if match is None:
         raise ValueError("Unrecognized rule download handler")
     version, filename = match[2], match[3]
-    if not CCR_RE.fullmatch(filename):
-        raise ValueError("Unexpected rule filename in source handler")
+    _source_citation(filename)
     kind = "type=word&" if match[1] == "WordVersion" else ""
     target = (
         f"/CCR/GenerateRulePdf.do?{kind}ruleVersionId={version}&fileName={quote(filename)}"
@@ -446,7 +556,7 @@ def _versions(document: _Document, url: str) -> list[CCRVersion]:
         raise ValueError("Rule page contains no downloadable version rows")
     versions = []
     seen = set()
-    expected_filename = CCR_RE.match(_title(document))[0]
+    expected_filename = _listed_citation(document, url)
     for order, row in sorted(rows.items()):
         preceding = [label for position, label in sections if position < order]
         if not preceding:
@@ -616,7 +726,7 @@ def collect_ccr_current(
     now: datetime | None = None,
     catalog_url: str = CATALOG_URL,
     welcome_url: str = WELCOME_URL,
-    max_sources: int = MAX_SOURCES,
+    max_sources: int = DEFAULT_MAX_SOURCES,
     max_total_bytes: int = MAX_TOTAL_BYTES,
 ) -> CCRCurrentReport:
     """Collect a complete department into a separately reviewable evidence package.
@@ -648,7 +758,7 @@ def _collect(
     max_sources: int, max_total_bytes: int,
 ) -> None:
     if not 1 <= max_sources <= MAX_SOURCES or not 1 <= max_total_bytes <= MAX_TOTAL_BYTES:
-        raise ValueError("Source limits must be positive and within the pilot hard limits")
+        raise ValueError("Source limits must be positive and within the collection hard limits")
     if report.checked_at.tzinfo is None:
         raise ValueError("Check timestamp must include timezone")
     inventory_path = f"{VERIFICATION_PREFIX}department-{department_id}.jsonl"
@@ -727,7 +837,7 @@ def _collect(
                 raise ValueError("Rule appears in multiple agencies")
             primary, document = collect(rule_url, True)
             source_title = _title(document)
-            if CCR_RE.match(source_title)[0] != ccr:
+            if _listed_citation(document, rule_url) != ccr:
                 raise ValueError("Rule-page citation differs from the agency listing")
             versions = _versions(document, rule_url)
             status, evidence, selected = _classify(document, versions, as_of)
@@ -737,7 +847,7 @@ def _collect(
                     for document_url in version.document_urls:
                         artifact, _doc = collect(document_url, False)
                         source_evidence.append(artifact)
-            canonical = ccr.replace(" CCR ", "_CCR_")
+            canonical = record_identity(ccr, rule_id)
             if canonical in canonical_ids:
                 raise ValueError("Duplicate CCR citation across rule identities")
             canonical_ids.add(canonical)
@@ -829,12 +939,15 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--department-id", required=True)
     parser.add_argument("--report-dir", type=Path, default=Path(".geode_runtime/ccr-current"))
     parser.add_argument("--delay", type=float, default=1.0)
+    parser.add_argument("--max-sources", type=int, default=DEFAULT_MAX_SOURCES,
+                        help="Explicit source-count budget; default300, hard ceiling1000")
     args = parser.parse_args(argv)
     if args.delay < 0:
         parser.error("--delay cannot be negative")
     client = OfficialSourceClient(delay=args.delay)
     try:
-        report = collect_ccr_current(args.root, args.department_id, fetch=client)
+        report = collect_ccr_current(args.root, args.department_id, fetch=client,
+                                     max_sources=args.max_sources)
     finally:
         client.close()
     write_run_report(report, args.report_dir)

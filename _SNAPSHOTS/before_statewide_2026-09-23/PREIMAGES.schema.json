@@ -1,0 +1,58 @@
+{
+  "$defs": {
+    "Preimage": {
+      "additionalProperties": false,
+      "properties": {
+        "original_path": {
+          "title": "Original Path",
+          "type": "string"
+        },
+        "preserved_path": {
+          "title": "Preserved Path",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "original_path",
+        "preserved_path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Preimage",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "baseline_commit": {
+      "title": "Baseline Commit",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Preimage"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "note": {
+      "title": "Note",
+      "type": "string"
+    }
+  },
+  "required": [
+    "baseline_commit",
+    "files",
+    "note"
+  ],
+  "title": "Preimages",
+  "type": "object"
+}

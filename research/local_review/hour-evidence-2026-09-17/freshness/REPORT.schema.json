@@ -1,0 +1,417 @@
+{
+  "$defs": {
+    "Candidate": {
+      "additionalProperties": false,
+      "description": "A bounded research lead, distinct from an admitted legal record.",
+      "properties": {
+        "candidate_id": {
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "source_owner": {
+          "title": "Source Owner",
+          "type": "string"
+        },
+        "source_url": {
+          "title": "Source Url",
+          "type": "string"
+        },
+        "possible_layer": {
+          "title": "Possible Layer",
+          "type": "string"
+        },
+        "discovered_date": {
+          "title": "Discovered Date",
+          "type": "string"
+        },
+        "change_type": {
+          "enum": [
+            "new",
+            "amended",
+            "repealed",
+            "corrected",
+            "unknown"
+          ],
+          "title": "Change Type",
+          "type": "string"
+        },
+        "reason_for_review": {
+          "title": "Reason For Review",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "needs_validation",
+            "queued",
+            "processed",
+            "rejected",
+            "duplicate"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "confidence_scope": {
+          "const": "catalog_identity_only_not_legal_effect",
+          "title": "Confidence Scope",
+          "type": "string"
+        },
+        "authority_id": {
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "observed_label": {
+          "title": "Observed Label",
+          "type": "string"
+        },
+        "event_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Event Ids",
+          "type": "array"
+        },
+        "adoption_date": {
+          "default": null,
+          "title": "Adoption Date",
+          "type": "null"
+        },
+        "effective_date": {
+          "default": null,
+          "title": "Effective Date",
+          "type": "null"
+        },
+        "original_sha256": {
+          "default": null,
+          "title": "Original Sha256",
+          "type": "null"
+        },
+        "document_url": {
+          "default": null,
+          "title": "Document Url",
+          "type": "null"
+        },
+        "local_comparison": {
+          "title": "Local Comparison",
+          "type": "string"
+        },
+        "next_step": {
+          "title": "Next Step",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "answer_safe": {
+          "const": false,
+          "default": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "source_owner",
+        "source_url",
+        "possible_layer",
+        "discovered_date",
+        "change_type",
+        "reason_for_review",
+        "status",
+        "confidence",
+        "confidence_scope",
+        "authority_id",
+        "observed_label",
+        "event_ids",
+        "local_comparison",
+        "next_step"
+      ],
+      "title": "Candidate",
+      "type": "object"
+    },
+    "Comparison": {
+      "additionalProperties": false,
+      "description": "Recount over explicitly pinned tracked metadata, not raw bodies.",
+      "properties": {
+        "input": {
+          "$ref": "#/$defs/Pin"
+        },
+        "row_count": {
+          "minimum": 0,
+          "title": "Row Count",
+          "type": "integer"
+        },
+        "representation": {
+          "enum": [
+            "jsonl_records",
+            "json_document",
+            "lfs_pointer"
+          ],
+          "title": "Representation",
+          "type": "string"
+        },
+        "matches": {
+          "additionalProperties": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "title": "Matches",
+          "type": "object"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "input",
+        "row_count",
+        "representation",
+        "matches",
+        "qualification"
+      ],
+      "title": "Comparison",
+      "type": "object"
+    },
+    "Event": {
+      "additionalProperties": false,
+      "description": "Deliberate web-tool action and observed representation limits.",
+      "properties": {
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "operation": {
+          "enum": [
+            "open",
+            "click"
+          ],
+          "title": "Operation",
+          "type": "string"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "reported_final_url": {
+          "title": "Reported Final Url",
+          "type": "string"
+        },
+        "interval_start": {
+          "title": "Interval Start",
+          "type": "string"
+        },
+        "interval_end": {
+          "title": "Interval End",
+          "type": "string"
+        },
+        "interval_role": {
+          "const": "tool_batch_wall_clock_not_http_timing",
+          "title": "Interval Role",
+          "type": "string"
+        },
+        "representation": {
+          "const": "web_tool_parsed_page",
+          "title": "Representation",
+          "type": "string"
+        },
+        "evidence": {
+          "$ref": "#/$defs/Pin"
+        },
+        "original_http_status": {
+          "default": null,
+          "title": "Original Http Status",
+          "type": "null"
+        },
+        "original_source_sha256": {
+          "default": null,
+          "title": "Original Source Sha256",
+          "type": "null"
+        },
+        "source_original_retained": {
+          "const": false,
+          "default": false,
+          "title": "Source Original Retained",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "event_id",
+        "operation",
+        "requested_url",
+        "reported_final_url",
+        "interval_start",
+        "interval_end",
+        "interval_role",
+        "representation",
+        "evidence"
+      ],
+      "title": "Event",
+      "type": "object"
+    },
+    "Pin": {
+      "additionalProperties": false,
+      "description": "Exact artifact identity; a web derivative is not a source original.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Pin",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Session freshness report implementing the repository policy contract.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "report_id": {
+      "title": "Report Id",
+      "type": "string"
+    },
+    "session_date": {
+      "title": "Session Date",
+      "type": "string"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "baseline_commit": {
+      "title": "Baseline Commit",
+      "type": "string"
+    },
+    "search_completed": {
+      "const": true,
+      "default": true,
+      "title": "Search Completed",
+      "type": "boolean"
+    },
+    "sources_checked": {
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
+      "title": "Sources Checked",
+      "type": "array"
+    },
+    "candidates": {
+      "items": {
+        "$ref": "#/$defs/Candidate"
+      },
+      "title": "Candidates",
+      "type": "array"
+    },
+    "controls": {
+      "items": {
+        "$ref": "#/$defs/Pin"
+      },
+      "title": "Controls",
+      "type": "array"
+    },
+    "comparisons": {
+      "items": {
+        "$ref": "#/$defs/Comparison"
+      },
+      "title": "Comparisons",
+      "type": "array"
+    },
+    "public_action_count": {
+      "maximum": 10,
+      "minimum": 0,
+      "title": "Public Action Count",
+      "type": "integer"
+    },
+    "public_action_limit": {
+      "const": 10,
+      "default": 10,
+      "title": "Public Action Limit",
+      "type": "integer"
+    },
+    "findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "unchecked_scope": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unchecked Scope",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "canonical_changed": {
+      "const": false,
+      "default": false,
+      "title": "Canonical Changed",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "report_id",
+    "session_date",
+    "prepared_at",
+    "baseline_commit",
+    "sources_checked",
+    "candidates",
+    "controls",
+    "comparisons",
+    "public_action_count",
+    "findings",
+    "unchecked_scope",
+    "limitations"
+  ],
+  "title": "Report",
+  "type": "object"
+}

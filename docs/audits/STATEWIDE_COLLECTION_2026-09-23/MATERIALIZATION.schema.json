@@ -1,0 +1,177 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Batch": {
+      "additionalProperties": false,
+      "properties": {
+        "plan_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Plan Sha256",
+          "type": "string"
+        },
+        "completed_at": {
+          "title": "Completed At",
+          "type": "string"
+        },
+        "department_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Department Ids",
+          "type": "array"
+        },
+        "rule_records": {
+          "title": "Rule Records",
+          "type": "integer"
+        },
+        "file_count": {
+          "title": "File Count",
+          "type": "integer"
+        },
+        "total_bytes": {
+          "title": "Total Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "plan_sha256",
+        "completed_at",
+        "department_ids",
+        "rule_records",
+        "file_count",
+        "total_bytes"
+      ],
+      "title": "Batch",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "created_at": {
+      "title": "Created At",
+      "type": "string"
+    },
+    "baseline_commit": {
+      "title": "Baseline Commit",
+      "type": "string"
+    },
+    "batches": {
+      "items": {
+        "$ref": "#/$defs/Batch"
+      },
+      "title": "Batches",
+      "type": "array"
+    },
+    "department_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Department Ids",
+      "type": "array"
+    },
+    "new_rule_records": {
+      "title": "New Rule Records",
+      "type": "integer"
+    },
+    "file_count": {
+      "title": "File Count",
+      "type": "integer"
+    },
+    "total_bytes": {
+      "title": "Total Bytes",
+      "type": "integer"
+    },
+    "largest_file_bytes": {
+      "title": "Largest File Bytes",
+      "type": "integer"
+    },
+    "files": {
+      "$ref": "#/$defs/Asset"
+    },
+    "final_implementation": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Final Implementation",
+      "type": "array"
+    },
+    "test_suite": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Test Suite",
+      "type": "object"
+    },
+    "test_report_sha256": {
+      "title": "Test Report Sha256",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "review_status": {
+      "const": "source_inventory_verified_extraction_review_separate",
+      "default": "source_inventory_verified_extraction_review_separate",
+      "title": "Review Status",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "created_at",
+    "baseline_commit",
+    "batches",
+    "department_ids",
+    "new_rule_records",
+    "file_count",
+    "total_bytes",
+    "largest_file_bytes",
+    "files",
+    "final_implementation",
+    "test_suite",
+    "test_report_sha256",
+    "limitations"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

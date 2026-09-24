@@ -1,0 +1,217 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Shard": {
+      "additionalProperties": false,
+      "properties": {
+        "shard": {
+          "title": "Shard",
+          "type": "integer"
+        },
+        "plan": {
+          "$ref": "#/$defs/Asset"
+        },
+        "reproduced_manifest": {
+          "$ref": "#/$defs/Asset"
+        },
+        "selected_pdfs": {
+          "title": "Selected Pdfs",
+          "type": "integer"
+        },
+        "physical_pages": {
+          "title": "Physical Pages",
+          "type": "integer"
+        },
+        "preserved_originals": {
+          "title": "Preserved Originals",
+          "type": "integer"
+        },
+        "preserved_document_associations": {
+          "title": "Preserved Document Associations",
+          "type": "integer"
+        },
+        "payload_files": {
+          "title": "Payload Files",
+          "type": "integer"
+        },
+        "manifest_inclusive_bytes": {
+          "title": "Manifest Inclusive Bytes",
+          "type": "integer"
+        },
+        "positive_citation": {
+          "title": "Positive Citation",
+          "type": "string"
+        },
+        "matching_pages": {
+          "title": "Matching Pages",
+          "type": "integer"
+        },
+        "no_match_preserves_selection_scope": {
+          "const": true,
+          "default": true,
+          "title": "No Match Preserves Selection Scope",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "shard",
+        "plan",
+        "reproduced_manifest",
+        "selected_pdfs",
+        "physical_pages",
+        "preserved_originals",
+        "preserved_document_associations",
+        "payload_files",
+        "manifest_inclusive_bytes",
+        "positive_citation",
+        "matching_pages"
+      ],
+      "title": "Shard",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "const": 1,
+      "default": 1,
+      "title": "Version",
+      "type": "integer"
+    },
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "base_commit": {
+      "title": "Base Commit",
+      "type": "string"
+    },
+    "bridge": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_state": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source_inventory": {
+      "$ref": "#/$defs/Asset"
+    },
+    "shards": {
+      "items": {
+        "$ref": "#/$defs/Shard"
+      },
+      "title": "Shards",
+      "type": "array"
+    },
+    "prior_package_manifests": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Prior Package Manifests",
+      "type": "array"
+    },
+    "new_unique_pdfs": {
+      "title": "New Unique Pdfs",
+      "type": "integer"
+    },
+    "new_unique_pages": {
+      "title": "New Unique Pages",
+      "type": "integer"
+    },
+    "cumulative_unique_pdfs": {
+      "title": "Cumulative Unique Pdfs",
+      "type": "integer"
+    },
+    "cumulative_unique_pages": {
+      "title": "Cumulative Unique Pages",
+      "type": "integer"
+    },
+    "cumulative_departments": {
+      "title": "Cumulative Departments",
+      "type": "integer"
+    },
+    "package_count": {
+      "title": "Package Count",
+      "type": "integer"
+    },
+    "no_source_fetches": {
+      "const": true,
+      "default": true,
+      "title": "No Source Fetches",
+      "type": "boolean"
+    },
+    "no_limits_raised": {
+      "const": true,
+      "default": true,
+      "title": "No Limits Raised",
+      "type": "boolean"
+    },
+    "review_status": {
+      "const": "machine_extraction_unreviewed",
+      "default": "machine_extraction_unreviewed",
+      "title": "Review Status",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Qualifications",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "base_commit",
+    "bridge",
+    "source_state",
+    "source_inventory",
+    "shards",
+    "prior_package_manifests",
+    "new_unique_pdfs",
+    "new_unique_pages",
+    "cumulative_unique_pdfs",
+    "cumulative_unique_pages",
+    "cumulative_departments",
+    "package_count",
+    "qualifications"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

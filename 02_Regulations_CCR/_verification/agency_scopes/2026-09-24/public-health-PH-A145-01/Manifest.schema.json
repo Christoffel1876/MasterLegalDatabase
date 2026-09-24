@@ -1,0 +1,61 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact contained file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "maximum": 15000000,
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Closed v2 file identities; manifest bytes also count toward the physical cap.",
+  "properties": {
+    "schema_version": {
+      "const": "ccr-agency-capture-manifest-2",
+      "default": "ccr-agency-capture-manifest-2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "maxItems": 99,
+      "title": "Files",
+      "type": "array"
+    },
+    "excluded": {
+      "const": "MANIFEST.json",
+      "default": "MANIFEST.json",
+      "title": "Excluded",
+      "type": "string"
+    }
+  },
+  "required": [
+    "files"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

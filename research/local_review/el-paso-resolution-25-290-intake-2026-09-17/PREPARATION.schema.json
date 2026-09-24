@@ -1,0 +1,370 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact ordinary relative file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Baseline": {
+      "additionalProperties": false,
+      "description": "Exact prior managed file.",
+      "properties": {
+        "repository_path": {
+          "title": "Repository Path",
+          "type": "string"
+        },
+        "preserved": {
+          "$ref": "#/$defs/Asset"
+        },
+        "records": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Records"
+        }
+      },
+      "required": [
+        "repository_path",
+        "preserved",
+        "records"
+      ],
+      "title": "Baseline",
+      "type": "object"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "description": "Recorded successful official HTTP acquisition and separate source claims.",
+      "properties": {
+        "source_id": {
+          "const": "el-paso-boa-resolution-25-290-directed-lead",
+          "title": "Source Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-EL_PASO",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Asset"
+        },
+        "parent": {
+          "$ref": "#/$defs/Asset"
+        },
+        "parent_event": {
+          "$ref": "#/$defs/Asset"
+        },
+        "source_event": {
+          "$ref": "#/$defs/Asset"
+        },
+        "parent_url": {
+          "const": "https://planningdevelopment.elpasoco.com/",
+          "title": "Parent Url",
+          "type": "string"
+        },
+        "official_source_url": {
+          "const": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/Misc/25-290.pdf",
+          "title": "Official Source Url",
+          "type": "string"
+        },
+        "anchor_text": {
+          "const": "Resolution to Dissolve",
+          "title": "Anchor Text",
+          "type": "string"
+        },
+        "physical_pages": {
+          "const": 2,
+          "title": "Physical Pages",
+          "type": "integer"
+        },
+        "recorded_http_started_at": {
+          "format": "date-time",
+          "title": "Recorded Http Started At",
+          "type": "string"
+        },
+        "recorded_http_completed_at": {
+          "format": "date-time",
+          "title": "Recorded Http Completed At",
+          "type": "string"
+        },
+        "original_http_status": {
+          "const": 200,
+          "title": "Original Http Status",
+          "type": "integer"
+        },
+        "actual_repository_received_at": {
+          "title": "Actual Repository Received At",
+          "type": "null"
+        },
+        "source_dates": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Dates",
+          "type": "array"
+        },
+        "document_role": {
+          "title": "Document Role",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "answer_safe": {
+          "const": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        },
+        "limitations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source_id",
+        "authority_id",
+        "source",
+        "parent",
+        "parent_event",
+        "source_event",
+        "parent_url",
+        "official_source_url",
+        "anchor_text",
+        "physical_pages",
+        "recorded_http_started_at",
+        "recorded_http_completed_at",
+        "original_http_status",
+        "actual_repository_received_at",
+        "source_dates",
+        "document_role",
+        "legal_currentness",
+        "answer_safe",
+        "limitations"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "Template": {
+      "additionalProperties": false,
+      "description": "Validated future record with unknown intake timestamp until actual application.",
+      "properties": {
+        "record_id": {
+          "const": "el-paso-boa-resolution-25-290-directed-lead",
+          "title": "Record Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "const": "CO-COUNTY-EL_PASO",
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "layer_id": {
+          "const": "08_County_Authorities",
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "official_source_name": {
+          "title": "Official Source Name",
+          "type": "string"
+        },
+        "official_source_url": {
+          "const": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/Misc/25-290.pdf",
+          "title": "Official Source Url",
+          "type": "string"
+        },
+        "acquisition_method": {
+          "const": "manual_official_download",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Asset"
+        },
+        "original_filename": {
+          "const": "original.pdf",
+          "title": "Original Filename",
+          "type": "string"
+        },
+        "custody_note": {
+          "title": "Custody Note",
+          "type": "string"
+        },
+        "actual_repository_received_at": {
+          "title": "Actual Repository Received At",
+          "type": "null"
+        },
+        "intake_id": {
+          "title": "Intake Id",
+          "type": "null"
+        },
+        "archive_path": {
+          "title": "Archive Path",
+          "type": "null"
+        }
+      },
+      "required": [
+        "record_id",
+        "authority_id",
+        "layer_id",
+        "official_source_name",
+        "official_source_url",
+        "acquisition_method",
+        "source",
+        "original_filename",
+        "custody_note",
+        "actual_repository_received_at",
+        "intake_id",
+        "archive_path"
+      ],
+      "title": "Template",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Fixed one-source transaction limits; variable baseline sizes support offline fixtures.",
+  "properties": {
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "status": {
+      "const": "PREPARED_NOT_APPLIED",
+      "title": "Status",
+      "type": "string"
+    },
+    "comparison_commit": {
+      "title": "Comparison Commit",
+      "type": "string"
+    },
+    "templates": {
+      "items": {
+        "$ref": "#/$defs/Template"
+      },
+      "maxItems": 1,
+      "minItems": 1,
+      "title": "Templates",
+      "type": "array"
+    },
+    "provenance": {
+      "items": {
+        "$ref": "#/$defs/Provenance"
+      },
+      "maxItems": 1,
+      "minItems": 1,
+      "title": "Provenance",
+      "type": "array"
+    },
+    "baseline": {
+      "items": {
+        "$ref": "#/$defs/Baseline"
+      },
+      "title": "Baseline",
+      "type": "array"
+    },
+    "runtime_pins": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Runtime Pins",
+      "type": "object"
+    },
+    "custody_subset": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Custody Subset",
+      "type": "array"
+    },
+    "parent_packet_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "legacy_guard": {
+      "$ref": "#/$defs/Asset"
+    },
+    "raw_before": {
+      "title": "Raw Before",
+      "type": "integer"
+    },
+    "ledger_before": {
+      "title": "Ledger Before",
+      "type": "integer"
+    },
+    "raw_after": {
+      "title": "Raw After",
+      "type": "integer"
+    },
+    "ledger_after": {
+      "title": "Ledger After",
+      "type": "integer"
+    },
+    "public_requests": {
+      "const": 0,
+      "title": "Public Requests",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "status",
+    "comparison_commit",
+    "templates",
+    "provenance",
+    "baseline",
+    "runtime_pins",
+    "custody_subset",
+    "parent_packet_manifest",
+    "legacy_guard",
+    "raw_before",
+    "ledger_before",
+    "raw_after",
+    "ledger_after",
+    "public_requests",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Preparation",
+  "type": "object"
+}

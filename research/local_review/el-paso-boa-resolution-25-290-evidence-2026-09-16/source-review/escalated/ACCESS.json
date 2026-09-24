@@ -1,0 +1,35 @@
+{
+  "recorded_at": "2026-09-16T21:51:19.049502Z",
+  "request_cap": 8,
+  "distinct_target_cap": 6,
+  "per_response_byte_cap": 10485760,
+  "aggregate_byte_cap": 20971520,
+  "deliberate_attempts": 1,
+  "distinct_targets": 1,
+  "retained_body_bytes": 0,
+  "tls_verification": true,
+  "cookies_or_authentication_used": false,
+  "events": [
+    {
+      "sequence": 1,
+      "requested_url": "https://planningdevelopment.elpasoco.com/",
+      "returned_url": null,
+      "reserved_at": "2026-09-16T21:51:18.852985Z",
+      "started_at": "2026-09-16T21:51:18.855188Z",
+      "finished_at": "2026-09-16T21:51:19.044367Z",
+      "status": null,
+      "outcome": "failed",
+      "body": null,
+      "headers": {},
+      "omitted_header_names": [],
+      "redirect_location": null,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)>",
+      "complete": false
+    }
+  ],
+  "limitations": [
+    "Counts deliberate urllib requests including explicit redirects, not hidden DNS/TLS/wire packets.",
+    "Only a selected public response-header derivative is retained; omitted header names are recorded, values are not saved.",
+    "Normal verified TLS; no authentication, cookie jar, denial bypass or retries. No legal-currentness certification."
+  ]
+}

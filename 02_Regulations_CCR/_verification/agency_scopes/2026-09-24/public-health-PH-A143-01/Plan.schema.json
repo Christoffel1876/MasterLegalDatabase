@@ -1,0 +1,242 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact contained file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "maximum": 15000000,
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "ReceiptClaim": {
+      "additionalProperties": false,
+      "description": "Nonsecret historical claims; opaque receipt pins are not transport attestations.",
+      "properties": {
+        "receipt_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Receipt Sha256",
+          "type": "string"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "observed_final_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Observed Final Url"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "finished_at": {
+          "format": "date-time",
+          "title": "Finished At",
+          "type": "string"
+        },
+        "http_status": {
+          "const": 200,
+          "title": "Http Status",
+          "type": "integer"
+        },
+        "content_type": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[\\x20-\\x7e]+$",
+          "title": "Content Type",
+          "type": "string"
+        },
+        "charged_bytes": {
+          "maximum": 15000000,
+          "minimum": 1,
+          "title": "Charged Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "receipt_sha256",
+        "requested_url",
+        "started_at",
+        "finished_at",
+        "http_status",
+        "content_type",
+        "charged_bytes"
+      ],
+      "title": "ReceiptClaim",
+      "type": "object"
+    },
+    "Response": {
+      "additionalProperties": false,
+      "description": "One retained response association, with no asserted rule identity or free label.",
+      "properties": {
+        "association_id": {
+          "pattern": "^[A-Za-z0-9_-]{1,80}$",
+          "title": "Association Id",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "welcome",
+            "catalog",
+            "listing",
+            "history",
+            "pdf",
+            "word"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "parent_id": {
+          "anyOf": [
+            {
+              "pattern": "^[A-Za-z0-9_-]{1,80}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Parent Id"
+        },
+        "body": {
+          "$ref": "#/$defs/Asset"
+        },
+        "claim": {
+          "$ref": "#/$defs/ReceiptClaim"
+        }
+      },
+      "required": [
+        "association_id",
+        "role",
+        "body",
+        "claim"
+      ],
+      "title": "Response",
+      "type": "object"
+    },
+    "Selection": {
+      "additionalProperties": false,
+      "description": "A whole rule selected by the two observed numeric source identities.",
+      "properties": {
+        "agency_id": {
+          "maxLength": 20,
+          "pattern": "^[0-9]+$",
+          "title": "Agency Id",
+          "type": "string"
+        },
+        "rule_id": {
+          "maxLength": 20,
+          "pattern": "^[0-9]+$",
+          "title": "Rule Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "agency_id",
+        "rule_id"
+      ],
+      "title": "Selection",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Pinned bounded offline inputs; source labels and denominators are derived.",
+  "properties": {
+    "schema_version": {
+      "const": "ccr-agency-selection-plan-2",
+      "default": "ccr-agency-selection-plan-2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "department_id": {
+      "maxLength": 20,
+      "pattern": "^[0-9]+$",
+      "title": "Department Id",
+      "type": "string"
+    },
+    "provenance_sha256": {
+      "items": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "maxItems": 20,
+      "minItems": 1,
+      "title": "Provenance Sha256",
+      "type": "array"
+    },
+    "selections": {
+      "items": {
+        "$ref": "#/$defs/Selection"
+      },
+      "maxItems": 25,
+      "minItems": 1,
+      "title": "Selections",
+      "type": "array"
+    },
+    "responses": {
+      "items": {
+        "$ref": "#/$defs/Response"
+      },
+      "maxItems": 80,
+      "minItems": 5,
+      "title": "Responses",
+      "type": "array"
+    },
+    "document_policy": {
+      "const": "all_source_nonarchived_pdf_word_pairs",
+      "default": "all_source_nonarchived_pdf_word_pairs",
+      "title": "Document Policy",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "department_id",
+    "provenance_sha256",
+    "selections",
+    "responses"
+  ],
+  "title": "Plan",
+  "type": "object"
+}

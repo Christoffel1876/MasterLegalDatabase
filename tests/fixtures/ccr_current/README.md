@@ -18,3 +18,14 @@ Rule pages use the official `/CCR/DisplayRule.do?action=ruleinfo&ruleId=...`
 endpoint. Test-only mutations simulate future dates, missing rows, corrupt
 responses, and other failures; they are not represented as official evidence.
 The tiny PDF and DOCX bodies in tests are synthetic format fixtures.
+
+The additional `agency-empty-228.html` is the exact September 23, 2026 response for
+Agriculture / Pesticide Disposal Enterprise Board (agency 228). Its public receipt
+records the URL, timestamp and SHA-256. The source explicitly displays “No results
+found.” Tests accept only its bound empty-result structure; that observation is
+not a determination that the agency has no legally applicable rules.
+
+Agency 229 is an exact September 23 SOS empty-result response for the 702-11
+Strengthen Colorado Homes Enterprise. Its separate public receipt omits sensitive
+transport headers. It tests numbered prefixes containing hyphens while preserving
+all empty-source identity and contradiction checks.

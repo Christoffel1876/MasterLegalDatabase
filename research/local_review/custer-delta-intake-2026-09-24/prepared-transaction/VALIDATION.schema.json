@@ -1,0 +1,99 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Strict Asset custody contract.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Observed tests and read-only live preflight; no apply receipt.",
+  "properties": {
+    "status": {
+      "const": "passed_preparation_only",
+      "title": "Status",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "preparation_sha256": {
+      "title": "Preparation Sha256",
+      "type": "string"
+    },
+    "transaction_sha256": {
+      "title": "Transaction Sha256",
+      "type": "string"
+    },
+    "test_count": {
+      "title": "Test Count",
+      "type": "integer"
+    },
+    "test_log": {
+      "$ref": "#/$defs/Asset"
+    },
+    "preflight_log": {
+      "$ref": "#/$defs/Asset"
+    },
+    "combined_branch_inclusive_coverage_percent": {
+      "title": "Combined Branch Inclusive Coverage Percent",
+      "type": "number"
+    },
+    "canonical_managed_bytes_unchanged": {
+      "const": true,
+      "title": "Canonical Managed Bytes Unchanged",
+      "type": "boolean"
+    },
+    "actual_execution_directory_created": {
+      "const": false,
+      "title": "Actual Execution Directory Created",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "completed_at",
+    "preparation_sha256",
+    "transaction_sha256",
+    "test_count",
+    "test_log",
+    "preflight_log",
+    "combined_branch_inclusive_coverage_percent",
+    "canonical_managed_bytes_unchanged",
+    "actual_execution_directory_created",
+    "limitations"
+  ],
+  "title": "Validation",
+  "type": "object"
+}

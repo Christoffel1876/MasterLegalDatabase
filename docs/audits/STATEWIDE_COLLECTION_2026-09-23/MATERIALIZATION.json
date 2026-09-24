@@ -1,0 +1,130 @@
+{
+  "created_at": "2026-09-23T19:31:13.369754+00:00",
+  "baseline_commit": "effbbcd64055b145e893d81e952c3f67df89913a",
+  "batches": [
+    {
+      "plan_sha256": "b595fbed5597e6fc9630f2248f23ee4a4226d3337ad0a889bd5c5024e30023a9",
+      "completed_at": "2026-09-23T18:58:41.617549+00:00",
+      "department_ids": [
+        "3",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "14",
+        "15",
+        "17",
+        "19",
+        "20",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26"
+      ],
+      "rule_records": 387,
+      "file_count": 1332,
+      "total_bytes": 245367128
+    },
+    {
+      "plan_sha256": "aabbdab6dad1ad4b7694d784d69739df7b62c29bcd0315b0df116cad75c690bb",
+      "completed_at": "2026-09-23T19:01:06.587024+00:00",
+      "department_ids": [
+        "1",
+        "4",
+        "13"
+      ],
+      "rule_records": 250,
+      "file_count": 786,
+      "total_bytes": 189004511
+    },
+    {
+      "plan_sha256": "9becd724a09383faa243e849d4f519eda545bde776302b1fef700403d31287d4",
+      "completed_at": "2026-09-23T19:20:38.605894+00:00",
+      "department_ids": [
+        "18"
+      ],
+      "rule_records": 213,
+      "file_count": 699,
+      "total_bytes": 127692391
+    }
+  ],
+  "department_ids": [
+    "1",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "13",
+    "14",
+    "15",
+    "17",
+    "18",
+    "19",
+    "20",
+    "22",
+    "23",
+    "24",
+    "25",
+    "26"
+  ],
+  "new_rule_records": 850,
+  "file_count": 2817,
+  "total_bytes": 562064030,
+  "largest_file_bytes": 13538304,
+  "files": {
+    "path": "docs/audits/STATEWIDE_COLLECTION_2026-09-23/SOURCE_FILES.json",
+    "sha256": "2c0369089fbfcbebd3343672af04cafb7bdbc172a42a8849f1ffd587c1f3aea6",
+    "bytes": 645899
+  },
+  "final_implementation": [
+    {
+      "path": "geode/pipeline/ccr_current.py",
+      "sha256": "b98b2d24bb9354f4ed9e239c746fde4b1c91db5fbb30a6d141408469afc33936",
+      "bytes": 42358
+    },
+    {
+      "path": "scripts/publish_ccr_current.py",
+      "sha256": "c89876dc1e62ab71a684f518ec7ea5f7b621231f4de7dc6a21687a197490f9e3",
+      "bytes": 27549
+    },
+    {
+      "path": "geode/pipeline/ccr_source_text.py",
+      "sha256": "5ac87c1d884562472feb05c93f54ca24a9fc50281820a8ae31f15b062b356dd4",
+      "bytes": 24952
+    },
+    {
+      "path": "scripts/verify_ccr_source_coverage.py",
+      "sha256": "89c7b6b3b0cf41c782346196090e6fa8f74d71fe3770cff1aa9bf3bca92c7715",
+      "bytes": 11878
+    }
+  ],
+  "test_suite": {
+    "tests": "3354",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "961.045",
+    "timestamp": "2026-09-23T13:12:24.241756-06:00"
+  },
+  "test_report_sha256": "58d74f52025f8728458743f4f12658d7094e9390c01be1c553db04769d1094cf",
+  "legal_currentness": "not_verified",
+  "answer_safe": false,
+  "review_status": "source_inventory_verified_extraction_review_separate",
+  "limitations": [
+    "Source-series counts are not counts of individual obligations or certified current regulations.",
+    "Existing department12 metadata and its separate daily update proposal are excluded from new totals.",
+    "Historical links do not establish collection of every historical document.",
+    "Native extraction and page-image review remain separately qualified; DORA extraction is pending bounded sharding.",
+    "CRS compilations, private transport headers, local paths and Grok working directories are excluded from this receipt and publication payload.",
+    "Complete source-family and local jurisdiction coverage, legal applicability and statewide daily monitoring remain unfinished."
+  ]
+}

@@ -1,0 +1,816 @@
+{
+  "$defs": {
+    "Agency": {
+      "additionalProperties": false,
+      "description": "One identity from the complete retained department catalog.",
+      "properties": {
+        "agency_id": {
+          "title": "Agency Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "original_href": {
+          "title": "Original Href",
+          "type": "string"
+        },
+        "observed_url": {
+          "title": "Observed Url",
+          "type": "string"
+        },
+        "selected": {
+          "title": "Selected",
+          "type": "boolean"
+        },
+        "expected_rule_count": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Expected Rule Count"
+        },
+        "catalog": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "agency_id",
+        "name",
+        "original_href",
+        "observed_url",
+        "selected",
+        "expected_rule_count",
+        "catalog"
+      ],
+      "title": "Agency",
+      "type": "object"
+    },
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact contained file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "maximum": 15000000,
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Caps": {
+      "additionalProperties": false,
+      "description": "Proposed ceilings only; fresh activation is mandatory.",
+      "properties": {
+        "status": {
+          "const": "proposed_not_active",
+          "title": "Status",
+          "type": "string"
+        },
+        "actual_http_events": {
+          "const": 80,
+          "title": "Actual Http Events",
+          "type": "integer"
+        },
+        "distinct_requested_urls": {
+          "const": 80,
+          "title": "Distinct Requested Urls",
+          "type": "integer"
+        },
+        "response_bytes": {
+          "const": 15000000,
+          "title": "Response Bytes",
+          "type": "integer"
+        },
+        "aggregate_received_body_bytes": {
+          "const": 50000000,
+          "title": "Aggregate Received Body Bytes",
+          "type": "integer"
+        },
+        "automatic_retries": {
+          "const": 0,
+          "title": "Automatic Retries",
+          "type": "integer"
+        },
+        "automatic_redirects": {
+          "const": 0,
+          "title": "Automatic Redirects",
+          "type": "integer"
+        },
+        "timeout_seconds_per_event": {
+          "const": 30,
+          "title": "Timeout Seconds Per Event",
+          "type": "integer"
+        },
+        "overall_elapsed_seconds": {
+          "const": 900,
+          "title": "Overall Elapsed Seconds",
+          "type": "integer"
+        },
+        "activation_at": {
+          "title": "Activation At",
+          "type": "null"
+        },
+        "public_stop_at": {
+          "title": "Public Stop At",
+          "type": "null"
+        },
+        "reservation_before_request": {
+          "const": true,
+          "title": "Reservation Before Request",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "status",
+        "actual_http_events",
+        "distinct_requested_urls",
+        "response_bytes",
+        "aggregate_received_body_bytes",
+        "automatic_retries",
+        "automatic_redirects",
+        "timeout_seconds_per_event",
+        "overall_elapsed_seconds",
+        "activation_at",
+        "public_stop_at",
+        "reservation_before_request"
+      ],
+      "title": "Caps",
+      "type": "object"
+    },
+    "DocumentCheck": {
+      "additionalProperties": false,
+      "description": "Structural disposition only, never visible accuracy or Word/PDF equivalence.",
+      "properties": {
+        "target_id": {
+          "title": "Target Id",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "pdf",
+            "word"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "pdf_parsed_unreviewed",
+            "word_signature_only_unparsed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "pages": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pages"
+        }
+      },
+      "required": [
+        "target_id",
+        "role",
+        "sha256",
+        "status",
+        "pages"
+      ],
+      "title": "DocumentCheck",
+      "type": "object"
+    },
+    "HistoricalReceipt": {
+      "additionalProperties": false,
+      "description": "Public field projection of a private-header-bearing historical receipt.",
+      "properties": {
+        "original_receipt_path_claim": {
+          "title": "Original Receipt Path Claim",
+          "type": "string"
+        },
+        "original_receipt_sha256": {
+          "title": "Original Receipt Sha256",
+          "type": "string"
+        },
+        "original_receipt_bytes": {
+          "title": "Original Receipt Bytes",
+          "type": "integer"
+        },
+        "historical_sequence": {
+          "title": "Historical Sequence",
+          "type": "integer"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "recorded_started_at": {
+          "format": "date-time",
+          "title": "Recorded Started At",
+          "type": "string"
+        },
+        "recorded_finished_at": {
+          "format": "date-time",
+          "title": "Recorded Finished At",
+          "type": "string"
+        },
+        "recorded_http_status": {
+          "const": 200,
+          "title": "Recorded Http Status",
+          "type": "integer"
+        },
+        "recorded_result": {
+          "const": "returned",
+          "title": "Recorded Result",
+          "type": "string"
+        },
+        "content_type": {
+          "title": "Content Type",
+          "type": "string"
+        },
+        "body": {
+          "$ref": "#/$defs/Asset"
+        },
+        "recorded_charged_bytes": {
+          "title": "Recorded Charged Bytes",
+          "type": "integer"
+        },
+        "private_headers_copied": {
+          "const": false,
+          "title": "Private Headers Copied",
+          "type": "boolean"
+        },
+        "projection": {
+          "const": "only explicit nonsecret URL/time/status/body/content-type fields retained",
+          "title": "Projection",
+          "type": "string"
+        }
+      },
+      "required": [
+        "original_receipt_path_claim",
+        "original_receipt_sha256",
+        "original_receipt_bytes",
+        "historical_sequence",
+        "requested_url",
+        "recorded_started_at",
+        "recorded_finished_at",
+        "recorded_http_status",
+        "recorded_result",
+        "content_type",
+        "body",
+        "recorded_charged_bytes",
+        "private_headers_copied",
+        "projection"
+      ],
+      "title": "HistoricalReceipt",
+      "type": "object"
+    },
+    "Plan": {
+      "additionalProperties": false,
+      "description": "Fixed three-agency proposal, explicitly outside the departmental publisher.",
+      "properties": {
+        "schema_version": {
+          "const": "ccr16-agency-capture-plan-1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "status": {
+          "const": "prepared_not_activated_not_acquired",
+          "title": "Status",
+          "type": "string"
+        },
+        "prepared_at": {
+          "format": "date-time",
+          "title": "Prepared At",
+          "type": "string"
+        },
+        "checkpoint_commit_claim": {
+          "const": "da3ba811be1599c77ad25fc1c135f3bd6108294d",
+          "title": "Checkpoint Commit Claim",
+          "type": "string"
+        },
+        "checkpoint_basis": {
+          "const": "root-provided commit; actual working input hashes independently pinned",
+          "title": "Checkpoint Basis",
+          "type": "string"
+        },
+        "department_id": {
+          "const": "16",
+          "title": "Department Id",
+          "type": "string"
+        },
+        "department_name": {
+          "const": "1000 Department of Public Health and Environment",
+          "title": "Department Name",
+          "type": "string"
+        },
+        "selected_agency_ids": {
+          "items": {
+            "enum": [
+              "137",
+              "138",
+              "140"
+            ],
+            "type": "string"
+          },
+          "title": "Selected Agency Ids",
+          "type": "array"
+        },
+        "department_catalog_agencies": {
+          "items": {
+            "$ref": "#/$defs/Agency"
+          },
+          "maxItems": 18,
+          "minItems": 18,
+          "title": "Department Catalog Agencies",
+          "type": "array"
+        },
+        "targets": {
+          "items": {
+            "$ref": "#/$defs/Target"
+          },
+          "maxItems": 65,
+          "minItems": 65,
+          "title": "Targets",
+          "type": "array"
+        },
+        "frozen_inputs": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "title": "Frozen Inputs",
+          "type": "array"
+        },
+        "historical_rule_count": {
+          "const": 20,
+          "title": "Historical Rule Count",
+          "type": "integer"
+        },
+        "historical_url_associations": {
+          "const": 65,
+          "title": "Historical Url Associations",
+          "type": "integer"
+        },
+        "historical_distinct_urls": {
+          "const": 65,
+          "title": "Historical Distinct Urls",
+          "type": "integer"
+        },
+        "historical_received_body_bytes": {
+          "maximum": 50000000,
+          "minimum": 1,
+          "title": "Historical Received Body Bytes",
+          "type": "integer"
+        },
+        "historical_bytes_are_future_guarantee": {
+          "const": false,
+          "title": "Historical Bytes Are Future Guarantee",
+          "type": "boolean"
+        },
+        "shared_discovery_associations": {
+          "const": 2,
+          "title": "Shared Discovery Associations",
+          "type": "integer"
+        },
+        "shared_discovery_bytes": {
+          "maximum": 50000000,
+          "minimum": 1,
+          "title": "Shared Discovery Bytes",
+          "type": "integer"
+        },
+        "caps": {
+          "$ref": "#/$defs/Caps"
+        },
+        "accounting_policy": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accounting Policy",
+          "type": "array"
+        },
+        "success_criteria": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Success Criteria",
+          "type": "array"
+        },
+        "failure_criteria": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Failure Criteria",
+          "type": "array"
+        },
+        "limitations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        },
+        "full_department_discovery": {
+          "const": false,
+          "title": "Full Department Discovery",
+          "type": "boolean"
+        },
+        "existing_department_publisher_admissible": {
+          "const": false,
+          "title": "Existing Department Publisher Admissible",
+          "type": "boolean"
+        },
+        "department16_complete": {
+          "const": false,
+          "title": "Department16 Complete",
+          "type": "boolean"
+        },
+        "review_required": {
+          "const": true,
+          "title": "Review Required",
+          "type": "boolean"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "answer_safe": {
+          "const": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        },
+        "new_public_requests": {
+          "const": 0,
+          "title": "New Public Requests",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "schema_version",
+        "status",
+        "prepared_at",
+        "checkpoint_commit_claim",
+        "checkpoint_basis",
+        "department_id",
+        "department_name",
+        "selected_agency_ids",
+        "department_catalog_agencies",
+        "targets",
+        "frozen_inputs",
+        "historical_rule_count",
+        "historical_url_associations",
+        "historical_distinct_urls",
+        "historical_received_body_bytes",
+        "historical_bytes_are_future_guarantee",
+        "shared_discovery_associations",
+        "shared_discovery_bytes",
+        "caps",
+        "accounting_policy",
+        "success_criteria",
+        "failure_criteria",
+        "limitations",
+        "full_department_discovery",
+        "existing_department_publisher_admissible",
+        "department16_complete",
+        "review_required",
+        "legal_currentness",
+        "answer_safe",
+        "new_public_requests"
+      ],
+      "title": "Plan",
+      "type": "object"
+    },
+    "Target": {
+      "additionalProperties": false,
+      "description": "One ordered exact historical request, not a newly activated request.",
+      "properties": {
+        "sequence": {
+          "maximum": 65,
+          "minimum": 1,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "target_id": {
+          "title": "Target Id",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "welcome",
+            "catalog",
+            "agency_listing",
+            "rule_history",
+            "pdf",
+            "word"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "department_id": {
+          "const": "16",
+          "title": "Department Id",
+          "type": "string"
+        },
+        "agency_id": {
+          "anyOf": [
+            {
+              "enum": [
+                "137",
+                "138",
+                "140"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Agency Id"
+        },
+        "rule_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rule Id"
+        },
+        "source_citation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Citation"
+        },
+        "version_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Version Id"
+        },
+        "source_designation": {
+          "anyOf": [
+            {
+              "enum": [
+                "current",
+                "future",
+                "unknown"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Designation"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "parent_target_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Parent Target Id"
+        },
+        "observed_attribute": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Observed Attribute"
+        },
+        "attribute_kind": {
+          "enum": [
+            "href",
+            "onclick",
+            "historically_requested_seed"
+          ],
+          "title": "Attribute Kind",
+          "type": "string"
+        },
+        "resolution_method": {
+          "title": "Resolution Method",
+          "type": "string"
+        },
+        "source_label_claim": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Label Claim"
+        },
+        "historical": {
+          "$ref": "#/$defs/HistoricalReceipt"
+        }
+      },
+      "required": [
+        "sequence",
+        "target_id",
+        "role",
+        "department_id",
+        "agency_id",
+        "rule_id",
+        "source_citation",
+        "version_id",
+        "source_designation",
+        "requested_url",
+        "parent_target_id",
+        "observed_attribute",
+        "attribute_kind",
+        "resolution_method",
+        "source_label_claim",
+        "historical"
+      ],
+      "title": "Target",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Portable offline scope, with the entire source catalog and explicit unknowns.",
+  "properties": {
+    "schema_version": {
+      "const": "ccr-agency-offline-capture-1",
+      "default": "ccr-agency-offline-capture-1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "const": "historical_agency_scope_replayed",
+      "default": "historical_agency_scope_replayed",
+      "title": "Status",
+      "type": "string"
+    },
+    "input_plan_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Input Plan Sha256",
+      "type": "string"
+    },
+    "plan_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Plan Sha256",
+      "type": "string"
+    },
+    "projection": {
+      "const": "receipt_paths_and_nonbody_inputs_omitted",
+      "default": "receipt_paths_and_nonbody_inputs_omitted",
+      "title": "Projection",
+      "type": "string"
+    },
+    "plan": {
+      "$ref": "#/$defs/Plan"
+    },
+    "unselected_agency_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unselected Agency Ids",
+      "type": "array"
+    },
+    "unselected_status": {
+      "const": "unknown_not_evaluated",
+      "default": "unknown_not_evaluated",
+      "title": "Unselected Status",
+      "type": "string"
+    },
+    "observed_start_claim": {
+      "format": "date-time",
+      "title": "Observed Start Claim",
+      "type": "string"
+    },
+    "observed_finish_claim": {
+      "format": "date-time",
+      "title": "Observed Finish Claim",
+      "type": "string"
+    },
+    "classification_cutoff": {
+      "default": null,
+      "title": "Classification Cutoff",
+      "type": "null"
+    },
+    "cutoff_policy": {
+      "const": "historical_source_labels_not_reclassified",
+      "default": "historical_source_labels_not_reclassified",
+      "title": "Cutoff Policy",
+      "type": "string"
+    },
+    "document_checks": {
+      "items": {
+        "$ref": "#/$defs/DocumentCheck"
+      },
+      "title": "Document Checks",
+      "type": "array"
+    },
+    "department_complete": {
+      "const": false,
+      "default": false,
+      "title": "Department Complete",
+      "type": "boolean"
+    },
+    "existing_department_publisher_admissible": {
+      "const": false,
+      "default": false,
+      "title": "Existing Department Publisher Admissible",
+      "type": "boolean"
+    },
+    "canonical_installation": {
+      "const": false,
+      "default": false,
+      "title": "Canonical Installation",
+      "type": "boolean"
+    },
+    "fresh_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "Fresh Requests",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "input_plan_sha256",
+    "plan_sha256",
+    "plan",
+    "unselected_agency_ids",
+    "observed_start_claim",
+    "observed_finish_claim",
+    "document_checks",
+    "limitations"
+  ],
+  "title": "Capture",
+  "type": "object"
+}
