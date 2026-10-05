@@ -1,0 +1,168 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "maximum": 25000000,
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Binding": {
+      "additionalProperties": false,
+      "description": "An actual selected source version, never an inferred operative version.",
+      "properties": {
+        "version_id": {
+          "title": "Version Id",
+          "type": "string"
+        },
+        "designation": {
+          "title": "Designation",
+          "type": "string"
+        },
+        "pdf_url": {
+          "title": "Pdf Url",
+          "type": "string"
+        },
+        "pdf": {
+          "$ref": "#/$defs/Asset"
+        },
+        "word_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Word Url"
+        },
+        "word": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Asset"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "physical_pages": {
+          "minimum": 1,
+          "title": "Physical Pages",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "version_id",
+        "designation",
+        "pdf_url",
+        "pdf",
+        "word_url",
+        "word",
+        "physical_pages"
+      ],
+      "title": "Binding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One retained agency/rule identity and its source-bound PDF selection.",
+  "properties": {
+    "department_id": {
+      "title": "Department Id",
+      "type": "string"
+    },
+    "agency_id": {
+      "title": "Agency Id",
+      "type": "string"
+    },
+    "rule_id": {
+      "title": "Rule Id",
+      "type": "string"
+    },
+    "source_citation": {
+      "title": "Source Citation",
+      "type": "string"
+    },
+    "source_kind": {
+      "enum": [
+        "department_inventory",
+        "agency_capture_v2",
+        "partial_pdf"
+      ],
+      "title": "Source Kind",
+      "type": "string"
+    },
+    "source_metadata": {
+      "$ref": "#/$defs/Asset"
+    },
+    "history_url": {
+      "title": "History Url",
+      "type": "string"
+    },
+    "source_cutoff_claim": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Source Cutoff Claim"
+    },
+    "observed_at_claim": {
+      "title": "Observed At Claim",
+      "type": "string"
+    },
+    "bindings": {
+      "items": {
+        "$ref": "#/$defs/Binding"
+      },
+      "minItems": 1,
+      "title": "Bindings",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "department_id",
+    "agency_id",
+    "rule_id",
+    "source_citation",
+    "source_kind",
+    "source_metadata",
+    "history_url",
+    "source_cutoff_claim",
+    "observed_at_claim",
+    "bindings"
+  ],
+  "title": "Identity",
+  "type": "object"
+}

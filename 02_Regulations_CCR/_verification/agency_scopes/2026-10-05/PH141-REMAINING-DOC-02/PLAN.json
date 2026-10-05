@@ -1,0 +1,463 @@
+{
+  "schema_version": "ccr-agency-selection-plan-2",
+  "department_id": "16",
+  "provenance_sha256": [
+    "97315e848750360e173e143071f3b22ba0285a57dfe18ecaa1ee6927e5fe6422",
+    "4d0f4827a718548136f84ef12b3fdfd2594f9b9c026eb144c217b2c7e849ab32",
+    "1db84198f0fc8f03fafdeedd17f61245222a39158d2928a0d3c50e3a7e16fa0d",
+    "51657265d4199ab7d034fe64920eeaa44aee73709be0b0f4de95ab47d4aa349d",
+    "b0f11bfc38201237d686e77e219f0df91fc53b81a30c217ef95b7586525f3079",
+    "6600b6a784affee0ef4201804d4946a2a488b5aca4e0671982bafc80be1536d4"
+  ],
+  "selections": [
+    {
+      "agency_id": "141",
+      "rule_id": "3083"
+    },
+    {
+      "agency_id": "141",
+      "rule_id": "3099"
+    },
+    {
+      "agency_id": "141",
+      "rule_id": "3221"
+    },
+    {
+      "agency_id": "141",
+      "rule_id": "3222"
+    },
+    {
+      "agency_id": "141",
+      "rule_id": "3223"
+    },
+    {
+      "agency_id": "141",
+      "rule_id": "3224"
+    }
+  ],
+  "responses": [
+    {
+      "association_id": "welcome",
+      "role": "welcome",
+      "parent_id": null,
+      "body": {
+        "path": "bodies/ada752cff759490f2ed16c3cf24c08d5e6c7692d275ecefad604e323c854fc32.bin",
+        "sha256": "ada752cff759490f2ed16c3cf24c08d5e6c7692d275ecefad604e323c854fc32",
+        "bytes": 9724
+      },
+      "claim": {
+        "receipt_sha256": "db56061ab7f65ab1e9fe3435a48a8bd68868e050621662a0081e5e474ff6c5bc",
+        "requested_url": "https://www.sos.state.co.us/CCR/Welcome.do",
+        "observed_final_url": null,
+        "started_at": "2026-09-23T18:42:28.429444Z",
+        "finished_at": "2026-09-23T18:42:28.605057Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 9724
+      }
+    },
+    {
+      "association_id": "catalog",
+      "role": "catalog",
+      "parent_id": "welcome",
+      "body": {
+        "path": "bodies/cf9abccf2117abbef58612a99849ae6dea89c096f511956bf5a1aff34e9f830b.bin",
+        "sha256": "cf9abccf2117abbef58612a99849ae6dea89c096f511956bf5a1aff34e9f830b",
+        "bytes": 132585
+      },
+      "claim": {
+        "receipt_sha256": "d26819b3980e2bfb8f11bf921576c2a8434c0151202f61c7906dd5e60d8c4813",
+        "requested_url": "https://www.sos.state.co.us/CCR/NumericalDeptList.do",
+        "observed_final_url": null,
+        "started_at": "2026-09-23T18:42:29.612910Z",
+        "finished_at": "2026-09-23T18:42:29.892301Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 132585
+      }
+    },
+    {
+      "association_id": "listing",
+      "role": "listing",
+      "parent_id": "catalog",
+      "body": {
+        "path": "bodies/30fd73eb0065c665058a24d827764f08942cdeefa0b6f3890b0dcada6a247d92.bin",
+        "sha256": "30fd73eb0065c665058a24d827764f08942cdeefa0b6f3890b0dcada6a247d92",
+        "bytes": 30451
+      },
+      "claim": {
+        "receipt_sha256": "95bba3b19357579e5140d434598cacabe1b1d8eabc3b188b61928cd04adb6224",
+        "requested_url": "https://www.sos.state.co.us/CCR/NumericalCCRDocList.do?deptID=16&deptName=1000%20Department%20of%20Public%20Health%20and%20Environment&agencyID=141&agencyName=1007%20Hazardous%20Materials%20and%20Waste%20Management%20Division",
+        "observed_final_url": null,
+        "started_at": "2026-09-23T18:46:34.639599Z",
+        "finished_at": "2026-09-23T18:46:34.944580Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 30451
+      }
+    },
+    {
+      "association_id": "history-3083",
+      "role": "history",
+      "parent_id": "listing",
+      "body": {
+        "path": "bodies/87e9dabde5bfe373b34dd04988b42062912d10d6f9cc50d1e8e28ba54430053b.bin",
+        "sha256": "87e9dabde5bfe373b34dd04988b42062912d10d6f9cc50d1e8e28ba54430053b",
+        "bytes": 14431
+      },
+      "claim": {
+        "receipt_sha256": "a42d0f1221e0d7396ec6c5320d266e692f54ac68ef95e1ff7a67f96e9df403a4",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3083&deptID=16&agencyID=141&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Hazardous%20Materials%20and%20Waste%20Management%20Division&seriesNum=6%20CCR%201007-1%20Part%2024",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3083&deptID=16&agencyID=141&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Hazardous%20Materials%20and%20Waste%20Management%20Division&seriesNum=6%20CCR%201007-1%20Part%2024",
+        "started_at": "2026-09-24T19:52:47.719477Z",
+        "finished_at": "2026-09-24T19:52:47.946506Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 14431
+      }
+    },
+    {
+      "association_id": "document-1",
+      "role": "pdf",
+      "parent_id": "history-3083",
+      "body": {
+        "path": "bodies/193304260421c42d24771b510f45dac0af02753de84036c762f2a51e1fff0d0f.bin",
+        "sha256": "193304260421c42d24771b510f45dac0af02753de84036c762f2a51e1fff0d0f",
+        "bytes": 673400
+      },
+      "claim": {
+        "receipt_sha256": "e6856b0d735d448c644aaac0704faa9db0425b55599b4e85b2e1e8ec6705c57f",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=5563&fileName=6%20CCR%201007-1%20Part%2024",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=5563&fileName=6%20CCR%201007-1%20Part%2024",
+        "started_at": "2026-10-05T20:45:20.897457Z",
+        "finished_at": "2026-10-05T20:45:21.033419Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 673400
+      }
+    },
+    {
+      "association_id": "document-2",
+      "role": "word",
+      "parent_id": "history-3083",
+      "body": {
+        "path": "bodies/620561edd923f8365f0599387080d6e9a2fe3d26b153be9c422f04ef8411735f.bin",
+        "sha256": "620561edd923f8365f0599387080d6e9a2fe3d26b153be9c422f04ef8411735f",
+        "bytes": 166400
+      },
+      "claim": {
+        "receipt_sha256": "e175b35160cdca0947e67f7911d9df9ea43c97fbf50609935f1354a2679deb91",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=5563&fileName=6%20CCR%201007-1%20Part%2024",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=5563&fileName=6%20CCR%201007-1%20Part%2024",
+        "started_at": "2026-10-05T20:45:21.044113Z",
+        "finished_at": "2026-10-05T20:45:21.147231Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 166400
+      }
+    },
+    {
+      "association_id": "history-3099",
+      "role": "history",
+      "parent_id": "listing",
+      "body": {
+        "path": "bodies/03e163f5a8aba3acb8b43c347b5606c56216092cfc52bc485a11bb05ffa04d76.bin",
+        "sha256": "03e163f5a8aba3acb8b43c347b5606c56216092cfc52bc485a11bb05ffa04d76",
+        "bytes": 15606
+      },
+      "claim": {
+        "receipt_sha256": "61cca65486ab66fdcd0f7d27330375e7f6d5918dcf9da13a3d8d1c5ab96ff5c5",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3099&deptID=16&agencyID=141&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Hazardous%20Materials%20and%20Waste%20Management%20Division&seriesNum=6%20CCR%201007-2%20Part%204",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3099&deptID=16&agencyID=141&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Hazardous%20Materials%20and%20Waste%20Management%20Division&seriesNum=6%20CCR%201007-2%20Part%204",
+        "started_at": "2026-09-24T19:52:48.044384Z",
+        "finished_at": "2026-09-24T19:52:48.357507Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 15606
+      }
+    },
+    {
+      "association_id": "document-3",
+      "role": "pdf",
+      "parent_id": "history-3099",
+      "body": {
+        "path": "bodies/fc8da7084da0cd2bcd1aa1692365dcfb03203cdb3893ac691178454574daf7e7.bin",
+        "sha256": "fc8da7084da0cd2bcd1aa1692365dcfb03203cdb3893ac691178454574daf7e7",
+        "bytes": 317665
+      },
+      "claim": {
+        "receipt_sha256": "9808d04c02b1e6fb6de4a3c8208cddaac2509657ed2cee5c08facaa29245afc3",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=6080&fileName=6%20CCR%201007-2%20Part%204",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=6080&fileName=6%20CCR%201007-2%20Part%204",
+        "started_at": "2026-10-05T20:45:21.154317Z",
+        "finished_at": "2026-10-05T20:45:21.278663Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 317665
+      }
+    },
+    {
+      "association_id": "document-4",
+      "role": "word",
+      "parent_id": "history-3099",
+      "body": {
+        "path": "bodies/7f078a2a54d5e89f6223763279fa8d31a2987e65b7415e4e4eca5556c1b5a92e.bin",
+        "sha256": "7f078a2a54d5e89f6223763279fa8d31a2987e65b7415e4e4eca5556c1b5a92e",
+        "bytes": 29696
+      },
+      "claim": {
+        "receipt_sha256": "2bde96544bc3b3f4e73c9afc40180c48996e6d417d6b63aa6d4655e71d82979c",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=6080&fileName=6%20CCR%201007-2%20Part%204",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=6080&fileName=6%20CCR%201007-2%20Part%204",
+        "started_at": "2026-10-05T20:45:21.282947Z",
+        "finished_at": "2026-10-05T20:45:21.409033Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 29696
+      }
+    },
+    {
+      "association_id": "history-3221",
+      "role": "history",
+      "parent_id": "listing",
+      "body": {
+        "path": "bodies/a3e61ea059e2c1d3fa56217e7642abd6ff334325e7dd243817e5146f2edaf120.bin",
+        "sha256": "a3e61ea059e2c1d3fa56217e7642abd6ff334325e7dd243817e5146f2edaf120",
+        "bytes": 13627
+      },
+      "claim": {
+        "receipt_sha256": "1780fb7a6a73ca2302f99f9cdf9ed93d66e5af3dcffb87260996ffd1519b999a",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3221&deptID=16&agencyID=141&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Hazardous%20Materials%20and%20Waste%20Management%20Division&seriesNum=6%20CCR%201007-1%20Part%2008",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3221&deptID=16&agencyID=141&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Hazardous%20Materials%20and%20Waste%20Management%20Division&seriesNum=6%20CCR%201007-1%20Part%2008",
+        "started_at": "2026-09-24T19:52:48.467735Z",
+        "finished_at": "2026-09-24T19:52:48.755345Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 13627
+      }
+    },
+    {
+      "association_id": "document-5",
+      "role": "pdf",
+      "parent_id": "history-3221",
+      "body": {
+        "path": "bodies/e74cd72fd1f6e562e8c4ae97593377df5ce016799f6c7a3af9b6c8e2952a84b2.bin",
+        "sha256": "e74cd72fd1f6e562e8c4ae97593377df5ce016799f6c7a3af9b6c8e2952a84b2",
+        "bytes": 393630
+      },
+      "claim": {
+        "receipt_sha256": "cf252a9cc9ae398a076aa71c65b2f53e3564c53c4a24755a271ae11ae46c8e5c",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=9671&fileName=6%20CCR%201007-1%20Part%2008",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=9671&fileName=6%20CCR%201007-1%20Part%2008",
+        "started_at": "2026-10-05T20:45:21.416739Z",
+        "finished_at": "2026-10-05T20:45:21.544715Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 393630
+      }
+    },
+    {
+      "association_id": "document-6",
+      "role": "word",
+      "parent_id": "history-3221",
+      "body": {
+        "path": "bodies/6bcc551a54035b66095dfcdeb31779931161fb4549567e9492df6bc266c3339c.bin",
+        "sha256": "6bcc551a54035b66095dfcdeb31779931161fb4549567e9492df6bc266c3339c",
+        "bytes": 99328
+      },
+      "claim": {
+        "receipt_sha256": "366df78f108fca9963bc94aac3f6c266b88e9d75f10cf51e223bb3a2d9c3b1f2",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=9671&fileName=6%20CCR%201007-1%20Part%2008",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=9671&fileName=6%20CCR%201007-1%20Part%2008",
+        "started_at": "2026-10-05T20:45:21.554214Z",
+        "finished_at": "2026-10-05T20:45:21.651714Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 99328
+      }
+    },
+    {
+      "association_id": "history-3222",
+      "role": "history",
+      "parent_id": "listing",
+      "body": {
+        "path": "bodies/e445a04388ed865abed57d20c57eb390a330c02d2334cac3bce87f39d3a166be.bin",
+        "sha256": "e445a04388ed865abed57d20c57eb390a330c02d2334cac3bce87f39d3a166be",
+        "bytes": 13623
+      },
+      "claim": {
+        "receipt_sha256": "5e9ee80c6a5ce9e6a22d038ea8454a8ce3d711d67190f62b9c30111280b9d856",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3222&deptID=16&agencyID=141&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Hazardous%20Materials%20and%20Waste%20Management%20Division&seriesNum=6%20CCR%201007-1%20Part%2009",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3222&deptID=16&agencyID=141&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Hazardous%20Materials%20and%20Waste%20Management%20Division&seriesNum=6%20CCR%201007-1%20Part%2009",
+        "started_at": "2026-09-24T19:52:48.869358Z",
+        "finished_at": "2026-09-24T19:52:49.219577Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 13623
+      }
+    },
+    {
+      "association_id": "document-7",
+      "role": "pdf",
+      "parent_id": "history-3222",
+      "body": {
+        "path": "bodies/6522f9369e3c6a7828f8f383c836f8bc2a4abba8c0c81f64a5f3100f2b7981f1.bin",
+        "sha256": "6522f9369e3c6a7828f8f383c836f8bc2a4abba8c0c81f64a5f3100f2b7981f1",
+        "bytes": 328370
+      },
+      "claim": {
+        "receipt_sha256": "09838c4f38989f07a48e5cf29a46c36e1673ef58022f72ca96081afda31e901c",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=11725&fileName=6%20CCR%201007-1%20Part%2009",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=11725&fileName=6%20CCR%201007-1%20Part%2009",
+        "started_at": "2026-10-05T20:45:21.658951Z",
+        "finished_at": "2026-10-05T20:45:21.789242Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 328370
+      }
+    },
+    {
+      "association_id": "document-8",
+      "role": "word",
+      "parent_id": "history-3222",
+      "body": {
+        "path": "bodies/56da6bda5db02f3aa2373ab43539b4e58ca9ebb7bbf0a7a60766b24ad88c7295.bin",
+        "sha256": "56da6bda5db02f3aa2373ab43539b4e58ca9ebb7bbf0a7a60766b24ad88c7295",
+        "bytes": 49152
+      },
+      "claim": {
+        "receipt_sha256": "03b1bea1f56fff7a9a7ba9c607af940228f9b2742172c2633185f0ae5cdb4065",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=11725&fileName=6%20CCR%201007-1%20Part%2009",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=11725&fileName=6%20CCR%201007-1%20Part%2009",
+        "started_at": "2026-10-05T20:45:21.801110Z",
+        "finished_at": "2026-10-05T20:45:21.883345Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 49152
+      }
+    },
+    {
+      "association_id": "history-3223",
+      "role": "history",
+      "parent_id": "listing",
+      "body": {
+        "path": "bodies/84fb97dc3dd217e592c206640582fa1d1dd6f07d332f0b977aa9a902d452a578.bin",
+        "sha256": "84fb97dc3dd217e592c206640582fa1d1dd6f07d332f0b977aa9a902d452a578",
+        "bytes": 13596
+      },
+      "claim": {
+        "receipt_sha256": "a603bb5692c51713b531418659003e041994b08e238ce10a13c4e71989995350",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3223&deptID=16&agencyID=141&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Hazardous%20Materials%20and%20Waste%20Management%20Division&seriesNum=6%20CCR%201007-1%20Part%2010",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3223&deptID=16&agencyID=141&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Hazardous%20Materials%20and%20Waste%20Management%20Division&seriesNum=6%20CCR%201007-1%20Part%2010",
+        "started_at": "2026-09-24T19:52:49.333939Z",
+        "finished_at": "2026-09-24T19:52:49.716244Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 13596
+      }
+    },
+    {
+      "association_id": "document-9",
+      "role": "pdf",
+      "parent_id": "history-3223",
+      "body": {
+        "path": "bodies/89d47b9825ddeb1fa9342815b578c2ace1d742ccd3716b4e2a342724bd3bdf7f.bin",
+        "sha256": "89d47b9825ddeb1fa9342815b578c2ace1d742ccd3716b4e2a342724bd3bdf7f",
+        "bytes": 337869
+      },
+      "claim": {
+        "receipt_sha256": "1f303c2e9dcd8efcb64723a3ef981957d87c6b329bc5ceda62a8f4210c89f24c",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=11584&fileName=6%20CCR%201007-1%20Part%2010",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=11584&fileName=6%20CCR%201007-1%20Part%2010",
+        "started_at": "2026-10-05T20:45:21.889709Z",
+        "finished_at": "2026-10-05T20:45:22.007357Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 337869
+      }
+    },
+    {
+      "association_id": "document-10",
+      "role": "word",
+      "parent_id": "history-3223",
+      "body": {
+        "path": "bodies/33ea5fd8ea43fffd669980c6e556ce21097733983bb72f33dbced40283b724c7.bin",
+        "sha256": "33ea5fd8ea43fffd669980c6e556ce21097733983bb72f33dbced40283b724c7",
+        "bytes": 50176
+      },
+      "claim": {
+        "receipt_sha256": "eccba8a647e586a1b3af58b641ece3a33f2f3646bc87b931e7637856d373d349",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=11584&fileName=6%20CCR%201007-1%20Part%2010",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=11584&fileName=6%20CCR%201007-1%20Part%2010",
+        "started_at": "2026-10-05T20:45:22.012554Z",
+        "finished_at": "2026-10-05T20:45:22.092489Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 50176
+      }
+    },
+    {
+      "association_id": "history-3224",
+      "role": "history",
+      "parent_id": "listing",
+      "body": {
+        "path": "bodies/c81164c2d30a0fe88d6d53e6439bf9045c14af5d1119fd582574b2b68b246eeb.bin",
+        "sha256": "c81164c2d30a0fe88d6d53e6439bf9045c14af5d1119fd582574b2b68b246eeb",
+        "bytes": 17005
+      },
+      "claim": {
+        "receipt_sha256": "68b16ceb3179fa237b57a2e7469d70d9b8622275dcd96038208835d39ae259d3",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3224&deptID=16&agencyID=141&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Hazardous%20Materials%20and%20Waste%20Management%20Division&seriesNum=6%20CCR%201007-1%20Part%2012",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3224&deptID=16&agencyID=141&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Hazardous%20Materials%20and%20Waste%20Management%20Division&seriesNum=6%20CCR%201007-1%20Part%2012",
+        "started_at": "2026-09-24T19:52:49.863639Z",
+        "finished_at": "2026-09-24T19:52:50.175482Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 17005
+      }
+    },
+    {
+      "association_id": "document-11",
+      "role": "pdf",
+      "parent_id": "history-3224",
+      "body": {
+        "path": "bodies/208484d1c34717ede2a4f7b8a69b170e0fdab1a2640550034716be1aaa0958b4.bin",
+        "sha256": "208484d1c34717ede2a4f7b8a69b170e0fdab1a2640550034716be1aaa0958b4",
+        "bytes": 475236
+      },
+      "claim": {
+        "receipt_sha256": "0cb7f1a2e78ee92d9083f3747f94b7120e789ee677e87e7c041ffa72fb6049bc",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=12451&fileName=6%20CCR%201007-1%20Part%2012",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=12451&fileName=6%20CCR%201007-1%20Part%2012",
+        "started_at": "2026-10-05T20:45:22.097820Z",
+        "finished_at": "2026-10-05T20:45:22.226377Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 475236
+      }
+    },
+    {
+      "association_id": "document-12",
+      "role": "word",
+      "parent_id": "history-3224",
+      "body": {
+        "path": "bodies/1be8b00512028ad64bdc4b51ba5077b7a59c0fea232c8fb8cad194a4dfce0399.bin",
+        "sha256": "1be8b00512028ad64bdc4b51ba5077b7a59c0fea232c8fb8cad194a4dfce0399",
+        "bytes": 228864
+      },
+      "claim": {
+        "receipt_sha256": "afcb4f8d54d48d522619d171759e51f7cedf7e31fe950749d949d0e5ef7663e6",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=12451&fileName=6%20CCR%201007-1%20Part%2012",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=12451&fileName=6%20CCR%201007-1%20Part%2012",
+        "started_at": "2026-10-05T20:45:22.242107Z",
+        "finished_at": "2026-10-05T20:45:22.341684Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 228864
+      }
+    }
+  ],
+  "document_policy": "all_source_nonarchived_pdf_word_pairs",
+  "legal_currentness": "not_verified",
+  "answer_safe": false
+}

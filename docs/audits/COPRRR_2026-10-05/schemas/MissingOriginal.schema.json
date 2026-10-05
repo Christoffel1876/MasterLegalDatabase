@@ -1,0 +1,51 @@
+{
+  "additionalProperties": false,
+  "description": "Existing baseline identity and its observed local source-path availability.",
+  "properties": {
+    "record_id": {
+      "title": "Record Id",
+      "type": "string"
+    },
+    "source_path": {
+      "title": "Source Path",
+      "type": "string"
+    },
+    "expected_sha256": {
+      "title": "Expected Sha256",
+      "type": "string"
+    },
+    "expected_sha256_basis": {
+      "enum": [
+        "summary_utf8",
+        "original_pdf_bytes"
+      ],
+      "title": "Expected Sha256 Basis",
+      "type": "string"
+    },
+    "materialized_at_existing_path": {
+      "title": "Materialized At Existing Path",
+      "type": "boolean"
+    },
+    "matches_expected_sha256": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Matches Expected Sha256"
+    }
+  },
+  "required": [
+    "record_id",
+    "source_path",
+    "expected_sha256",
+    "expected_sha256_basis",
+    "materialized_at_existing_path",
+    "matches_expected_sha256"
+  ],
+  "title": "MissingOriginal",
+  "type": "object"
+}

@@ -1,0 +1,90 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "layer": {
+      "title": "Layer",
+      "type": "string"
+    },
+    "entity_type": {
+      "title": "Entity Type",
+      "type": "string"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "citation": {
+      "title": "Citation",
+      "type": "string"
+    },
+    "path": {
+      "title": "Path",
+      "type": "string"
+    },
+    "meta_path": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Meta Path"
+    },
+    "source_url": {
+      "title": "Source Url",
+      "type": "string"
+    },
+    "source_path": {
+      "title": "Source Path",
+      "type": "string"
+    },
+    "publication_year": {
+      "title": "Publication Year",
+      "type": "integer"
+    },
+    "last_updated": {
+      "title": "Last Updated",
+      "type": "string"
+    },
+    "sha256": {
+      "description": "SHA-256 of UTF-8 stored full_text, not original PDF bytes.",
+      "title": "Sha256",
+      "type": "string"
+    },
+    "tags": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Tags",
+      "type": "array"
+    },
+    "confidence": {
+      "title": "Confidence",
+      "type": "number"
+    }
+  },
+  "required": [
+    "id",
+    "layer",
+    "entity_type",
+    "title",
+    "citation",
+    "path",
+    "meta_path",
+    "source_url",
+    "source_path",
+    "publication_year",
+    "last_updated",
+    "sha256",
+    "tags",
+    "confidence"
+  ],
+  "title": "PriorIndexRecord",
+  "type": "object"
+}

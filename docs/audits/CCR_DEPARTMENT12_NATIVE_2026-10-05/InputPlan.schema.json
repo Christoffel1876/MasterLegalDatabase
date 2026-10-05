@@ -1,0 +1,62 @@
+{
+  "$defs": {
+    "DepartmentInput": {
+      "additionalProperties": false,
+      "description": "Pinned collector outputs; root is local provenance, not a portable dependency.",
+      "properties": {
+        "root": {
+          "minLength": 1,
+          "title": "Root",
+          "type": "string"
+        },
+        "department_id": {
+          "pattern": "^\\d+$",
+          "title": "Department Id",
+          "type": "string"
+        },
+        "state_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "State Sha256",
+          "type": "string"
+        },
+        "inventory_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Inventory Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "root",
+        "department_id",
+        "state_sha256",
+        "inventory_sha256"
+      ],
+      "title": "DepartmentInput",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Finite, explicitly selected department snapshots.",
+  "properties": {
+    "version": {
+      "const": 1,
+      "default": 1,
+      "title": "Version",
+      "type": "integer"
+    },
+    "departments": {
+      "items": {
+        "$ref": "#/$defs/DepartmentInput"
+      },
+      "maxItems": 30,
+      "minItems": 1,
+      "title": "Departments",
+      "type": "array"
+    }
+  },
+  "required": [
+    "departments"
+  ],
+  "title": "InputPlan",
+  "type": "object"
+}

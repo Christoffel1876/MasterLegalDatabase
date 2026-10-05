@@ -1,0 +1,111 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Hash-bound relative package member.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One physical source page; native extraction has not been legally reviewed.",
+  "properties": {
+    "citation": {
+      "title": "Citation",
+      "type": "string"
+    },
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "original_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Original Sha256",
+      "type": "string"
+    },
+    "physical_page": {
+      "minimum": 1,
+      "title": "Physical Page",
+      "type": "integer"
+    },
+    "pdf_page_label": {
+      "title": "Pdf Page Label",
+      "type": "string"
+    },
+    "native_text": {
+      "$ref": "#/$defs/Asset"
+    },
+    "native_text_empty_after_strip": {
+      "title": "Native Text Empty After Strip",
+      "type": "boolean"
+    },
+    "original_page_width_points": {
+      "exclusiveMinimum": 0,
+      "title": "Original Page Width Points",
+      "type": "number"
+    },
+    "original_page_height_points": {
+      "exclusiveMinimum": 0,
+      "title": "Original Page Height Points",
+      "type": "number"
+    },
+    "extraction_status": {
+      "const": "native_text_unreviewed",
+      "default": "native_text_unreviewed",
+      "title": "Extraction Status",
+      "type": "string"
+    },
+    "ocr_used": {
+      "const": false,
+      "default": false,
+      "title": "Ocr Used",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "citation",
+    "source_id",
+    "original_sha256",
+    "physical_page",
+    "pdf_page_label",
+    "native_text",
+    "native_text_empty_after_strip",
+    "original_page_width_points",
+    "original_page_height_points"
+  ],
+  "title": "Page",
+  "type": "object"
+}

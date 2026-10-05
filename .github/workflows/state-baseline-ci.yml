@@ -1,0 +1,77 @@
+name: State source baseline checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: state-baseline-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  retained-source-replay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GIT_LFS_SKIP_SMUDGE: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+      PYTHONPATH: .
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          lfs: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        with:
+          python-version: '3.11'
+      - name: Install pinned verification dependencies
+        run: >-
+          python -m pip install --disable-pip-version-check -r requirements-ci.txt
+          PyMuPDF==1.28.2 beautifulsoup4==4.15.0 soupsieve==2.9.2
+      - name: Test source identity and native-page boundaries
+        run: >-
+          python -B -m pytest tests/test_ccr_baseline_coverage.py
+          tests/test_ccr_baseline_additions.py tests/test_ccr_identity_pdf_baseline.py
+          tests/test_ccr_native_completion.py -q --junitxml=state-baseline-tests.xml
+      - name: Bind all retained CCR identities to original PDFs
+        run: >-
+          python -B -m scripts.verify_ccr_identity_pdf_baseline --root .
+          --index docs/audits/CCR_IDENTITY_PDF_BASELINE_2026-10-05/INDEX.json
+          --index-sha256 27f7856e772dd9cbd1c54c95a5092efd9b6d73570011d2363f2395d29ad8c19c
+      - name: Rebuild the 88 newly acquired Public Health PDFs
+        run: >-
+          python -B -m scripts.verify_ccr_baseline_additions --root .
+          --index-sha256 1fffb74c742cb16013a51596e8080dbddec7e4a9bdf75296aba35585c4a0d6b6
+          --rebuild-native
+      - name: Rebuild the final 47 PDFs and verify the complete page union
+        run: >-
+          python -B -m scripts.verify_ccr_native_completion --root .
+          --index-sha256 b7b5b5020bb0f8b855653e79fb1139f5bc8fb935d6d229baf533d57e7dbd2580
+      - name: Replay all 21 observed 2026 B/D executive orders
+        run: >-
+          python -B docs/audits/EXECUTIVE_ORDERS_2026-10-05/verify.py verify
+          --root docs/audits/EXECUTIVE_ORDERS_2026-10-05
+          --manifest-sha256 5f996f170f2b44fad59b12a73d03c9acc8f3bc2d009041143ff73c3156292ef2
+      - name: Replay 17 COPRRR originals, receipts, and native pages
+        run: |
+          python -B - <<'PY'
+          from pathlib import Path
+          import hashlib
+          path = Path('docs/audits/COPRRR_2026-10-05/MANIFEST.json')
+          assert hashlib.sha256(path.read_bytes()).hexdigest() == '0b9843c31a4bc781c7fbb5872f15fd98e3f433d63aa023acc968b24095290883'
+          PY
+          python -B docs/audits/COPRRR_2026-10-05/verify_package.py docs/audits/COPRRR_2026-10-05
+      - name: Retain test results
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: state-baseline-tests-${{ github.run_id }}-${{ github.run_attempt }}
+          path: state-baseline-tests.xml
+          retention-days: 30
+          if-no-files-found: warn

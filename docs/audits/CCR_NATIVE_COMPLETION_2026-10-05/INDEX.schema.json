@@ -1,0 +1,180 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "One repository-relative immutable artifact.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "NativePackage": {
+      "additionalProperties": false,
+      "description": "Exact reproducible native addendum.",
+      "properties": {
+        "package_id": {
+          "title": "Package Id",
+          "type": "string"
+        },
+        "source_manifest": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Asset"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "input_plan": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Asset"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "native_manifest": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Asset"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "ledger": {
+          "$ref": "#/$defs/Asset"
+        },
+        "build_command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Build Command",
+          "type": "array"
+        },
+        "verify_command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Verify Command",
+          "type": "array"
+        }
+      },
+      "required": [
+        "package_id",
+        "source_manifest",
+        "input_plan",
+        "native_manifest",
+        "ledger",
+        "build_command",
+        "verify_command"
+      ],
+      "title": "NativePackage",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Source/native custody counts with explicitly limited legal meaning.",
+  "properties": {
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "previous_index": {
+      "$ref": "#/$defs/Asset"
+    },
+    "ledgers": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Ledgers",
+      "type": "array"
+    },
+    "packages": {
+      "items": {
+        "$ref": "#/$defs/NativePackage"
+      },
+      "title": "Packages",
+      "type": "array"
+    },
+    "unique_pdf_originals": {
+      "title": "Unique Pdf Originals",
+      "type": "integer"
+    },
+    "unique_physical_pages": {
+      "title": "Unique Physical Pages",
+      "type": "integer"
+    },
+    "added_native_pdfs": {
+      "title": "Added Native Pdfs",
+      "type": "integer"
+    },
+    "added_native_pages": {
+      "title": "Added Native Pages",
+      "type": "integer"
+    },
+    "transportation_pdf": {
+      "$ref": "#/$defs/Asset"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "whole_state_complete": {
+      "const": false,
+      "default": false,
+      "title": "Whole State Complete",
+      "type": "boolean"
+    },
+    "native_status": {
+      "const": "machine_extraction_unreviewed",
+      "default": "machine_extraction_unreviewed",
+      "title": "Native Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "previous_index",
+    "ledgers",
+    "packages",
+    "unique_pdf_originals",
+    "unique_physical_pages",
+    "added_native_pdfs",
+    "added_native_pages",
+    "transportation_pdf"
+  ],
+  "title": "Index",
+  "type": "object"
+}

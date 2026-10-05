@@ -1,0 +1,95 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "sequence": {
+      "maximum": 40,
+      "minimum": 1,
+      "title": "Sequence",
+      "type": "integer"
+    },
+    "target_id": {
+      "title": "Target Id",
+      "type": "string"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    },
+    "exception_type": {
+      "title": "Exception Type",
+      "type": "string"
+    },
+    "reserved_bytes": {
+      "exclusiveMinimum": 0,
+      "maximum": 15000000,
+      "title": "Reserved Bytes",
+      "type": "integer"
+    },
+    "measured_transfer_bytes": {
+      "default": null,
+      "title": "Measured Transfer Bytes",
+      "type": "null"
+    },
+    "body": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Asset"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "retry_authorized": {
+      "const": false,
+      "default": false,
+      "title": "Retry Authorized",
+      "type": "boolean"
+    },
+    "limitation": {
+      "const": "No raw exception stdout/stderr retained; they may contain private headers",
+      "default": "No raw exception stdout/stderr retained; they may contain private headers",
+      "title": "Limitation",
+      "type": "string"
+    }
+  },
+  "required": [
+    "sequence",
+    "target_id",
+    "observed_at",
+    "exception_type",
+    "reserved_bytes",
+    "body"
+  ],
+  "title": "TerminalError",
+  "type": "object"
+}

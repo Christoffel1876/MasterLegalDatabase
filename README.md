@@ -1,5 +1,11 @@
 # Project Geode
 
+## October 5 state source checkpoint
+
+The retained CCR catalogs now have PDFs for **all 1,156 listed rule identities across 25 departments**, with **39,460 physical native-text pages**. Public Health has all 238 source pairs; one Transportation Word export remains unavailable. The wider state collection still has source-custody, coverage and currentness work.
+
+Start with the [dated state-baseline report](docs/STATE_BASELINE_2026-10-05.md) for exact scope, reproducible evidence, new executive-order and COPRRR sources, and remaining work. The existing 23-of-25 whole-department publisher flag is unchanged.
+
 Project Geode is a backend-first regulatory intelligence database for Colorado
 law and regulation. It is built for AI retrieval, agentic workflows, search,
 ingestion, legal data analysis, and source-backed answer generation.

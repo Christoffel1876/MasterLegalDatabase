@@ -1,0 +1,291 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Hash-bound relative package member.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Gap": {
+      "additionalProperties": false,
+      "description": "Machine-readable unresolved source or coverage finding.",
+      "properties": {
+        "gap_id": {
+          "title": "Gap Id",
+          "type": "string"
+        },
+        "source_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Url"
+        },
+        "existing_record_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Existing Record Id"
+        },
+        "state": {
+          "title": "State",
+          "type": "string"
+        },
+        "evidence_paths": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Paths",
+          "type": "array"
+        },
+        "explanation": {
+          "title": "Explanation",
+          "type": "string"
+        },
+        "original_acquired": {
+          "const": false,
+          "default": false,
+          "title": "Original Acquired",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "gap_id",
+        "source_url",
+        "existing_record_id",
+        "state",
+        "evidence_paths",
+        "explanation"
+      ],
+      "title": "Gap",
+      "type": "object"
+    },
+    "MissingOriginal": {
+      "additionalProperties": false,
+      "description": "Existing baseline identity and its observed local source-path availability.",
+      "properties": {
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "source_path": {
+          "title": "Source Path",
+          "type": "string"
+        },
+        "expected_sha256": {
+          "title": "Expected Sha256",
+          "type": "string"
+        },
+        "expected_sha256_basis": {
+          "enum": [
+            "summary_utf8",
+            "original_pdf_bytes"
+          ],
+          "title": "Expected Sha256 Basis",
+          "type": "string"
+        },
+        "materialized_at_existing_path": {
+          "title": "Materialized At Existing Path",
+          "type": "boolean"
+        },
+        "matches_expected_sha256": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Matches Expected Sha256"
+        }
+      },
+      "required": [
+        "record_id",
+        "source_path",
+        "expected_sha256",
+        "expected_sha256_basis",
+        "materialized_at_existing_path",
+        "matches_expected_sha256"
+      ],
+      "title": "MissingOriginal",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "description": "Explicitly transcribed browser evidence, never represented as raw HTTP.",
+      "properties": {
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "observation": {
+          "title": "Observation",
+          "type": "string"
+        },
+        "observed_links": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Observed Links",
+          "type": "array"
+        },
+        "evidence_kind": {
+          "const": "browser_visible_dom_transcription",
+          "default": "browser_visible_dom_transcription",
+          "title": "Evidence Kind",
+          "type": "string"
+        },
+        "raw_wire_capture_available": {
+          "const": false,
+          "default": false,
+          "title": "Raw Wire Capture Available",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "url",
+        "observation",
+        "observed_links"
+      ],
+      "title": "Observation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Package-level scope, browser findings, and retained gaps.",
+  "properties": {
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "root_run_sha256": {
+      "title": "Root Run Sha256",
+      "type": "string"
+    },
+    "root_supplement_sha256": {
+      "title": "Root Supplement Sha256",
+      "type": "string"
+    },
+    "collection_request_count": {
+      "maximum": 45,
+      "title": "Collection Request Count",
+      "type": "integer"
+    },
+    "collection_charged_bytes": {
+      "maximum": 100000000,
+      "title": "Collection Charged Bytes",
+      "type": "integer"
+    },
+    "collection_body_cap_bytes": {
+      "const": 15000000,
+      "default": 15000000,
+      "title": "Collection Body Cap Bytes",
+      "type": "integer"
+    },
+    "browser_successful_navigation_count": {
+      "maximum": 10,
+      "title": "Browser Successful Navigation Count",
+      "type": "integer"
+    },
+    "browser_policy_refused_navigation_count": {
+      "title": "Browser Policy Refused Navigation Count",
+      "type": "integer"
+    },
+    "browser_resource_bytes": {
+      "const": "unmetered_separate",
+      "default": "unmetered_separate",
+      "title": "Browser Resource Bytes",
+      "type": "string"
+    },
+    "baseline_index": {
+      "$ref": "#/$defs/Asset"
+    },
+    "baseline_original_availability": {
+      "items": {
+        "$ref": "#/$defs/MissingOriginal"
+      },
+      "title": "Baseline Original Availability",
+      "type": "array"
+    },
+    "browser_observations": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "title": "Browser Observations",
+      "type": "array"
+    },
+    "gaps": {
+      "items": {
+        "$ref": "#/$defs/Gap"
+      },
+      "title": "Gaps",
+      "type": "array"
+    },
+    "native_extraction_limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Native Extraction Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "root_run_sha256",
+    "root_supplement_sha256",
+    "collection_request_count",
+    "collection_charged_bytes",
+    "browser_successful_navigation_count",
+    "browser_policy_refused_navigation_count",
+    "baseline_index",
+    "baseline_original_availability",
+    "browser_observations",
+    "gaps",
+    "native_extraction_limitations"
+  ],
+  "title": "Provenance",
+  "type": "object"
+}

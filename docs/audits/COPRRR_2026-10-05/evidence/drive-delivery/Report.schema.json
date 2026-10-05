@@ -1,0 +1,179 @@
+{
+  "$defs": {
+    "FileResult": {
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "$ref": "#/$defs/Source"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "pdf_body_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pdf Body Path"
+        },
+        "pdf_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pdf Sha256"
+        },
+        "bytes": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bytes"
+        },
+        "matches_inherited_hash": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Matches Inherited Hash"
+        },
+        "event_paths": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Event Paths",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source",
+        "status",
+        "event_paths"
+      ],
+      "title": "FileResult",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "parent_url": {
+          "const": "https://coprrr.colorado.gov/archive-of-reviews",
+          "default": "https://coprrr.colorado.gov/archive-of-reviews",
+          "title": "Parent Url",
+          "type": "string"
+        },
+        "observed_view_url": {
+          "title": "Observed View Url",
+          "type": "string"
+        },
+        "download_url": {
+          "title": "Download Url",
+          "type": "string"
+        },
+        "inherited_id": {
+          "title": "Inherited Id",
+          "type": "string"
+        },
+        "inherited_sha256": {
+          "title": "Inherited Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "title",
+        "observed_view_url",
+        "download_url",
+        "inherited_id",
+        "inherited_sha256"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "plan_sha256": {
+      "title": "Plan Sha256",
+      "type": "string"
+    },
+    "initial_direct_requests": {
+      "const": 2,
+      "default": 2,
+      "title": "Initial Direct Requests",
+      "type": "integer"
+    },
+    "initial_direct_charged_bytes": {
+      "const": 919,
+      "default": 919,
+      "title": "Initial Direct Charged Bytes",
+      "type": "integer"
+    },
+    "total_lane_requests": {
+      "maximum": 45,
+      "title": "Total Lane Requests",
+      "type": "integer"
+    },
+    "total_lane_charged_bytes": {
+      "maximum": 100000000,
+      "title": "Total Lane Charged Bytes",
+      "type": "integer"
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/FileResult"
+      },
+      "title": "Results",
+      "type": "array"
+    },
+    "currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "plan_sha256",
+    "total_lane_requests",
+    "total_lane_charged_bytes",
+    "results"
+  ],
+  "title": "Report",
+  "type": "object"
+}

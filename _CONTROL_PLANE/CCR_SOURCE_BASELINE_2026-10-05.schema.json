@@ -1,0 +1,416 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "maximum": 25000000,
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Capsule": {
+      "additionalProperties": false,
+      "properties": {
+        "manifest": {
+          "$ref": "#/$defs/Asset"
+        },
+        "format": {
+          "enum": [
+            "v1",
+            "v2"
+          ],
+          "title": "Format",
+          "type": "string"
+        },
+        "department_id": {
+          "enum": [
+            "16",
+            "21"
+          ],
+          "title": "Department Id",
+          "type": "string"
+        },
+        "selectors": {
+          "items": {
+            "$ref": "#/$defs/Selector"
+          },
+          "title": "Selectors",
+          "type": "array"
+        }
+      },
+      "required": [
+        "manifest",
+        "format",
+        "department_id",
+        "selectors"
+      ],
+      "title": "Capsule",
+      "type": "object"
+    },
+    "EmptyListing": {
+      "additionalProperties": false,
+      "properties": {
+        "department_id": {
+          "const": "16",
+          "default": "16",
+          "title": "Department Id",
+          "type": "string"
+        },
+        "agency_id": {
+          "const": "170",
+          "default": "170",
+          "title": "Agency Id",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "content_type": {
+          "title": "Content Type",
+          "type": "string"
+        },
+        "body": {
+          "$ref": "#/$defs/Asset"
+        },
+        "receipt": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "url",
+        "content_type",
+        "body",
+        "receipt"
+      ],
+      "title": "EmptyListing",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "properties": {
+        "body": {
+          "$ref": "#/$defs/Asset"
+        },
+        "receipt": {
+          "$ref": "#/$defs/Asset"
+        },
+        "receipt_schema": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "body",
+        "receipt",
+        "receipt_schema"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "PartialPair": {
+      "additionalProperties": false,
+      "properties": {
+        "department_id": {
+          "const": "21",
+          "default": "21",
+          "title": "Department Id",
+          "type": "string"
+        },
+        "agency_id": {
+          "const": "124",
+          "default": "124",
+          "title": "Agency Id",
+          "type": "string"
+        },
+        "rule_id": {
+          "const": "3475",
+          "default": "3475",
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "version_id": {
+          "const": "12137",
+          "default": "12137",
+          "title": "Version Id",
+          "type": "string"
+        },
+        "pdf": {
+          "$ref": "#/$defs/Asset"
+        },
+        "returned_word_body": {
+          "$ref": "#/$defs/Asset"
+        },
+        "observations": {
+          "items": {
+            "$ref": "#/$defs/Observation"
+          },
+          "maxItems": 5,
+          "minItems": 5,
+          "title": "Observations",
+          "type": "array"
+        },
+        "pdf_pages": {
+          "const": 10,
+          "default": 10,
+          "title": "Pdf Pages",
+          "type": "integer"
+        },
+        "status": {
+          "const": "valid_pdf_exact_word_handler_returned_html",
+          "default": "valid_pdf_exact_word_handler_returned_html",
+          "title": "Status",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "pdf",
+        "returned_word_body",
+        "observations"
+      ],
+      "title": "PartialPair",
+      "type": "object"
+    },
+    "Scope": {
+      "additionalProperties": false,
+      "properties": {
+        "department_id": {
+          "title": "Department Id",
+          "type": "string"
+        },
+        "catalog_agency_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Catalog Agency Ids",
+          "type": "array"
+        },
+        "observed_listing_agency_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Observed Listing Agency Ids",
+          "type": "array"
+        },
+        "listed": {
+          "items": {
+            "$ref": "#/$defs/Selector"
+          },
+          "title": "Listed",
+          "type": "array"
+        },
+        "paired": {
+          "items": {
+            "$ref": "#/$defs/Selector"
+          },
+          "title": "Paired",
+          "type": "array"
+        },
+        "missing_pairs": {
+          "items": {
+            "$ref": "#/$defs/Selector"
+          },
+          "title": "Missing Pairs",
+          "type": "array"
+        },
+        "source_cutoff_claims": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Cutoff Claims",
+          "type": "array"
+        },
+        "earliest_observed": {
+          "title": "Earliest Observed",
+          "type": "string"
+        },
+        "latest_observed": {
+          "title": "Latest Observed",
+          "type": "string"
+        },
+        "publisher_department_complete": {
+          "const": false,
+          "default": false,
+          "title": "Publisher Department Complete",
+          "type": "boolean"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "department_id",
+        "catalog_agency_ids",
+        "observed_listing_agency_ids",
+        "listed",
+        "paired",
+        "missing_pairs",
+        "source_cutoff_claims",
+        "earliest_observed",
+        "latest_observed"
+      ],
+      "title": "Scope",
+      "type": "object"
+    },
+    "Selector": {
+      "additionalProperties": false,
+      "properties": {
+        "agency_id": {
+          "pattern": "^[0-9]+$",
+          "title": "Agency Id",
+          "type": "string"
+        },
+        "rule_id": {
+          "pattern": "^[0-9]+$",
+          "title": "Rule Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "agency_id",
+        "rule_id"
+      ],
+      "title": "Selector",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "ccr-source-baseline-1",
+      "default": "ccr-source-baseline-1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "prior_department_index": {
+      "$ref": "#/$defs/Asset"
+    },
+    "capsules": {
+      "items": {
+        "$ref": "#/$defs/Capsule"
+      },
+      "title": "Capsules",
+      "type": "array"
+    },
+    "explicit_empty_listing": {
+      "$ref": "#/$defs/EmptyListing"
+    },
+    "partial_pairs": {
+      "items": {
+        "$ref": "#/$defs/PartialPair"
+      },
+      "title": "Partial Pairs",
+      "type": "array"
+    },
+    "department_catalog_count": {
+      "const": 25,
+      "default": 25,
+      "title": "Department Catalog Count",
+      "type": "integer"
+    },
+    "unchanged_department_collection_count": {
+      "const": 23,
+      "default": 23,
+      "title": "Unchanged Department Collection Count",
+      "type": "integer"
+    },
+    "full_prior_source_replayed_departments": {
+      "const": 22,
+      "default": 22,
+      "title": "Full Prior Source Replayed Departments",
+      "type": "integer"
+    },
+    "prior_metadata_only_department_ids": {
+      "default": [
+        "12"
+      ],
+      "items": {
+        "const": "12",
+        "type": "string"
+      },
+      "title": "Prior Metadata Only Department Ids",
+      "type": "array"
+    },
+    "scopes": {
+      "items": {
+        "$ref": "#/$defs/Scope"
+      },
+      "title": "Scopes",
+      "type": "array"
+    },
+    "exact_remaining_gap": {
+      "title": "Exact Remaining Gap",
+      "type": "string"
+    },
+    "source_cutoff_claims": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Cutoff Claims",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "prior_department_index",
+    "capsules",
+    "explicit_empty_listing",
+    "partial_pairs",
+    "scopes",
+    "exact_remaining_gap",
+    "source_cutoff_claims",
+    "limitations"
+  ],
+  "title": "Index",
+  "type": "object"
+}

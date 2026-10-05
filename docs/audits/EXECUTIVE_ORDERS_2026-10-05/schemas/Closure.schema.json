@@ -1,0 +1,58 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "geode-eo-native-manifest-1",
+      "default": "geode-eo-native-manifest-1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "excluded": {
+      "const": "MANIFEST.json",
+      "default": "MANIFEST.json",
+      "title": "Excluded",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "maxItems": 999,
+      "title": "Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "files"
+  ],
+  "title": "Closure",
+  "type": "object"
+}

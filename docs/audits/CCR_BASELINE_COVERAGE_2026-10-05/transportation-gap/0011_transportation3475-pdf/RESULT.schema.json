@@ -1,0 +1,158 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "maximum": 15000000,
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "reservation_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Reservation Sha256",
+      "type": "string"
+    },
+    "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+    },
+    "target_id": {
+      "title": "Target Id",
+      "type": "string"
+    },
+    "role": {
+      "title": "Role",
+      "type": "string"
+    },
+    "requested_url": {
+      "title": "Requested Url",
+      "type": "string"
+    },
+    "observed_final_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Observed Final Url"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "finished_at": {
+      "format": "date-time",
+      "title": "Finished At",
+      "type": "string"
+    },
+    "http_status": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Http Status"
+    },
+    "curl_exit": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Curl Exit"
+    },
+    "safe_headers": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Safe Headers",
+      "type": "object"
+    },
+    "body": {
+      "$ref": "#/$defs/Asset"
+    },
+    "stderr": {
+      "title": "Stderr",
+      "type": "string"
+    },
+    "complete_transfer": {
+      "title": "Complete Transfer",
+      "type": "boolean"
+    },
+    "charged_bytes": {
+      "maximum": 15000000,
+      "minimum": 0,
+      "title": "Charged Bytes",
+      "type": "integer"
+    },
+    "detected_format": {
+      "title": "Detected Format",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "reservation_sha256",
+    "sequence",
+    "target_id",
+    "role",
+    "requested_url",
+    "observed_final_url",
+    "started_at",
+    "finished_at",
+    "http_status",
+    "curl_exit",
+    "safe_headers",
+    "body",
+    "stderr",
+    "complete_transfer",
+    "charged_bytes",
+    "detected_format"
+  ],
+  "title": "Result",
+  "type": "object"
+}

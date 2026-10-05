@@ -1,0 +1,105 @@
+{
+  "additionalProperties": false,
+  "description": "Offline package verification and negative citation checks.",
+  "properties": {
+    "verified_at": {
+      "title": "Verified At",
+      "type": "string"
+    },
+    "manifest_sha256": {
+      "title": "Manifest Sha256",
+      "type": "string"
+    },
+    "manifest_member_count": {
+      "title": "Manifest Member Count",
+      "type": "integer"
+    },
+    "original_count": {
+      "title": "Original Count",
+      "type": "integer"
+    },
+    "native_page_count": {
+      "title": "Native Page Count",
+      "type": "integer"
+    },
+    "original_bytes": {
+      "title": "Original Bytes",
+      "type": "integer"
+    },
+    "native_text_bytes": {
+      "title": "Native Text Bytes",
+      "type": "integer"
+    },
+    "verified_request_count": {
+      "title": "Verified Request Count",
+      "type": "integer"
+    },
+    "verified_charged_bytes": {
+      "title": "Verified Charged Bytes",
+      "type": "integer"
+    },
+    "exact_citation_cases": {
+      "title": "Exact Citation Cases",
+      "type": "integer"
+    },
+    "negative_citation_cases": {
+      "title": "Negative Citation Cases",
+      "type": "integer"
+    },
+    "hash_mismatch_cases": {
+      "title": "Hash Mismatch Cases",
+      "type": "integer"
+    },
+    "unsafe_path_cases": {
+      "title": "Unsafe Path Cases",
+      "type": "integer"
+    },
+    "all_page_text_reextractions_identical": {
+      "const": true,
+      "default": true,
+      "title": "All Page Text Reextractions Identical",
+      "type": "boolean"
+    },
+    "all_pdf_structures_verified": {
+      "const": true,
+      "default": true,
+      "title": "All Pdf Structures Verified",
+      "type": "boolean"
+    },
+    "all_manifest_members_verified": {
+      "const": true,
+      "default": true,
+      "title": "All Manifest Members Verified",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "verified_at",
+    "manifest_sha256",
+    "manifest_member_count",
+    "original_count",
+    "native_page_count",
+    "original_bytes",
+    "native_text_bytes",
+    "verified_request_count",
+    "verified_charged_bytes",
+    "exact_citation_cases",
+    "negative_citation_cases",
+    "hash_mismatch_cases",
+    "unsafe_path_cases"
+  ],
+  "title": "Verification",
+  "type": "object"
+}
