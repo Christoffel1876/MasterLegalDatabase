@@ -1,0 +1,399 @@
+{
+  "$defs": {
+    "DocumentRole": {
+      "additionalProperties": false,
+      "description": "One exact retained PDF association; role remains null without a review.",
+      "properties": {
+        "association_id": {
+          "title": "Association Id",
+          "type": "string"
+        },
+        "department_id": {
+          "const": "16",
+          "title": "Department Id",
+          "type": "string"
+        },
+        "agency_id": {
+          "const": "141",
+          "title": "Agency Id",
+          "type": "string"
+        },
+        "rule_id": {
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "source_citation": {
+          "title": "Source Citation",
+          "type": "string"
+        },
+        "source_listing_title": {
+          "title": "Source Listing Title",
+          "type": "string"
+        },
+        "source_history_title": {
+          "title": "Source History Title",
+          "type": "string"
+        },
+        "source_version_id": {
+          "title": "Source Version Id",
+          "type": "string"
+        },
+        "source_designation_claim": {
+          "title": "Source Designation Claim",
+          "type": "string"
+        },
+        "source_url": {
+          "title": "Source Url",
+          "type": "string"
+        },
+        "capture_relative_original": {
+          "$ref": "#/$defs/Ref"
+        },
+        "physical_pages": {
+          "exclusiveMinimum": 0,
+          "title": "Physical Pages",
+          "type": "integer"
+        },
+        "role_review_status": {
+          "enum": [
+            "scoped_document_role_observed",
+            "not_reviewed_for_document_role"
+          ],
+          "title": "Role Review Status",
+          "type": "string"
+        },
+        "observed_role": {
+          "anyOf": [
+            {
+              "enum": [
+                "editorial_navigation_notice",
+                "editorial_navigation_and_history",
+                "editorial_repeal_notice",
+                "editorial_recodification_notice",
+                "substantive_body_present"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Observed Role"
+        },
+        "substantive_body_in_this_pdf": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Substantive Body In This Pdf"
+        },
+        "review_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Review Id"
+        },
+        "observation": {
+          "title": "Observation",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "answer_safe": {
+          "const": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "association_id",
+        "department_id",
+        "agency_id",
+        "rule_id",
+        "source_citation",
+        "source_listing_title",
+        "source_history_title",
+        "source_version_id",
+        "source_designation_claim",
+        "source_url",
+        "capture_relative_original",
+        "physical_pages",
+        "role_review_status",
+        "observed_role",
+        "substantive_body_in_this_pdf",
+        "review_id",
+        "observation",
+        "legal_currentness",
+        "answer_safe"
+      ],
+      "title": "DocumentRole",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Exact portable file reference.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "ReviewEvidence": {
+      "additionalProperties": false,
+      "description": "Retained manifest identity for a separately held scoped source review.",
+      "properties": {
+        "review_id": {
+          "title": "Review Id",
+          "type": "string"
+        },
+        "reviewer": {
+          "enum": [
+            "Ptolemy",
+            "Plato",
+            "Atlas"
+          ],
+          "title": "Reviewer",
+          "type": "string"
+        },
+        "manifest": {
+          "$ref": "#/$defs/Ref"
+        },
+        "report_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Report Sha256",
+          "type": "string"
+        },
+        "report_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Report Bytes",
+          "type": "integer"
+        },
+        "method": {
+          "title": "Method",
+          "type": "string"
+        },
+        "scope": {
+          "title": "Scope",
+          "type": "string"
+        },
+        "limitation": {
+          "title": "Limitation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "review_id",
+        "reviewer",
+        "manifest",
+        "report_sha256",
+        "report_bytes",
+        "method",
+        "scope",
+        "limitation"
+      ],
+      "title": "ReviewEvidence",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Fixed 17-PDF scope with eight reviewed and nine unknown document roles.",
+  "properties": {
+    "schema_version": {
+      "const": "ph141-document-roles-2026-09-24-1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "public_index": {
+      "$ref": "#/$defs/Ref"
+    },
+    "capture_root": {
+      "title": "Capture Root",
+      "type": "string"
+    },
+    "capture_manifest": {
+      "$ref": "#/$defs/Ref"
+    },
+    "capture_record": {
+      "$ref": "#/$defs/Ref"
+    },
+    "capture_plan": {
+      "$ref": "#/$defs/Ref"
+    },
+    "full_catalog_agencies": {
+      "const": 18,
+      "title": "Full Catalog Agencies",
+      "type": "integer"
+    },
+    "full_agency_listing_rules": {
+      "const": 53,
+      "title": "Full Agency Listing Rules",
+      "type": "integer"
+    },
+    "selected_capture_rules": {
+      "const": 17,
+      "title": "Selected Capture Rules",
+      "type": "integer"
+    },
+    "selected_capture_pdfs": {
+      "const": 17,
+      "title": "Selected Capture Pdfs",
+      "type": "integer"
+    },
+    "selected_capture_pages": {
+      "const": 883,
+      "title": "Selected Capture Pages",
+      "type": "integer"
+    },
+    "reviewed_pdfs": {
+      "const": 8,
+      "title": "Reviewed Pdfs",
+      "type": "integer"
+    },
+    "reviewed_pages": {
+      "const": 24,
+      "title": "Reviewed Pages",
+      "type": "integer"
+    },
+    "notice_or_history_pdfs": {
+      "const": 7,
+      "title": "Notice Or History Pdfs",
+      "type": "integer"
+    },
+    "notice_or_history_pages": {
+      "const": 14,
+      "title": "Notice Or History Pages",
+      "type": "integer"
+    },
+    "substantive_body_pdfs": {
+      "const": 1,
+      "title": "Substantive Body Pdfs",
+      "type": "integer"
+    },
+    "substantive_body_pages": {
+      "const": 10,
+      "title": "Substantive Body Pages",
+      "type": "integer"
+    },
+    "role_unreviewed_pdfs": {
+      "const": 9,
+      "title": "Role Unreviewed Pdfs",
+      "type": "integer"
+    },
+    "role_unreviewed_pages": {
+      "const": 859,
+      "title": "Role Unreviewed Pages",
+      "type": "integer"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/ReviewEvidence"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "documents": {
+      "items": {
+        "$ref": "#/$defs/DocumentRole"
+      },
+      "title": "Documents",
+      "type": "array"
+    },
+    "qualification": {
+      "title": "Qualification",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "native_package_status_changed": {
+      "const": false,
+      "title": "Native Package Status Changed",
+      "type": "boolean"
+    },
+    "department_complete": {
+      "const": false,
+      "title": "Department Complete",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "prepared_at",
+    "public_index",
+    "capture_root",
+    "capture_manifest",
+    "capture_record",
+    "capture_plan",
+    "full_catalog_agencies",
+    "full_agency_listing_rules",
+    "selected_capture_rules",
+    "selected_capture_pdfs",
+    "selected_capture_pages",
+    "reviewed_pdfs",
+    "reviewed_pages",
+    "notice_or_history_pdfs",
+    "notice_or_history_pages",
+    "substantive_body_pdfs",
+    "substantive_body_pages",
+    "role_unreviewed_pdfs",
+    "role_unreviewed_pages",
+    "evidence",
+    "documents",
+    "qualification",
+    "limitations",
+    "native_package_status_changed",
+    "department_complete",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Inventory",
+  "type": "object"
+}

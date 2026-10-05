@@ -1,0 +1,325 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "An exact ordinary file relative to the repository root.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "maximum": 25000000,
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Department": {
+      "additionalProperties": false,
+      "description": "Catalog identity and separately qualified retained metadata/source phase.",
+      "properties": {
+        "department_id": {
+          "pattern": "^[1-9][0-9]*$",
+          "title": "Department Id",
+          "type": "string"
+        },
+        "catalog_names": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Catalog Names",
+          "type": "array"
+        },
+        "catalog_url": {
+          "title": "Catalog Url",
+          "type": "string"
+        },
+        "phase": {
+          "enum": [
+            "new_source_snapshot",
+            "existing_metadata_only",
+            "catalog_only"
+          ],
+          "title": "Phase",
+          "type": "string"
+        },
+        "state": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Asset"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "inventory": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Asset"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "publication_cutoff_claim": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Publication Cutoff Claim"
+        },
+        "rule_count": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rule Count"
+        },
+        "source_classification_counts": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "integer"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Classification Counts"
+        },
+        "source_url_associations": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Url Associations"
+        },
+        "declared_unique_original_counts": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "integer"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Declared Unique Original Counts"
+        },
+        "record_observed_range": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Range"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source_retrieval_range": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Range"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        },
+        "review_status": {
+          "const": "source_fidelity_not_established_by_this_index",
+          "title": "Review Status",
+          "type": "string"
+        },
+        "answer_safe": {
+          "const": false,
+          "default": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        },
+        "currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "department_id",
+        "catalog_names",
+        "catalog_url",
+        "phase",
+        "state",
+        "inventory",
+        "publication_cutoff_claim",
+        "rule_count",
+        "source_classification_counts",
+        "source_url_associations",
+        "declared_unique_original_counts",
+        "record_observed_range",
+        "source_retrieval_range",
+        "qualification",
+        "review_status"
+      ],
+      "title": "Department",
+      "type": "object"
+    },
+    "Range": {
+      "additionalProperties": false,
+      "description": "Recorded timestamp bounds, not independently inferred legal dates.",
+      "properties": {
+        "minimum": {
+          "title": "Minimum",
+          "type": "string"
+        },
+        "maximum": {
+          "title": "Maximum",
+          "type": "string"
+        }
+      },
+      "required": [
+        "minimum",
+        "maximum"
+      ],
+      "title": "Range",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Portable source coverage; acquisition, extraction, review and currentness stay separate.",
+  "properties": {
+    "version": {
+      "const": 1,
+      "default": 1,
+      "title": "Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "catalog": {
+      "$ref": "#/$defs/Asset"
+    },
+    "catalog_url": {
+      "title": "Catalog Url",
+      "type": "string"
+    },
+    "catalog_department_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Catalog Department Ids",
+      "type": "array"
+    },
+    "departments": {
+      "items": {
+        "$ref": "#/$defs/Department"
+      },
+      "maxItems": 30,
+      "minItems": 1,
+      "title": "Departments",
+      "type": "array"
+    },
+    "new_department_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "New Department Ids",
+      "type": "array"
+    },
+    "new_rule_record_count": {
+      "title": "New Rule Record Count",
+      "type": "integer"
+    },
+    "new_unique_original_counts": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "New Unique Original Counts",
+      "type": "object"
+    },
+    "existing_department_ids_excluded_from_new_totals": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Existing Department Ids Excluded From New Totals",
+      "type": "array"
+    },
+    "materialization_status": {
+      "const": "verified_local_materialization",
+      "title": "Materialization Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "catalog",
+    "catalog_url",
+    "catalog_department_ids",
+    "departments",
+    "new_department_ids",
+    "new_rule_record_count",
+    "new_unique_original_counts",
+    "existing_department_ids_excluded_from_new_totals",
+    "materialization_status",
+    "limitations"
+  ],
+  "title": "Index",
+  "type": "object"
+}

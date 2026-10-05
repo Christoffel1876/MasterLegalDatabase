@@ -1,0 +1,244 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact relative payload identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Event": {
+      "additionalProperties": false,
+      "description": "One deliberate attempted public request; hidden transport events unmeasured.",
+      "properties": {
+        "sequence": {
+          "maximum": 8,
+          "minimum": 1,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "returned_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Returned Url"
+        },
+        "reserved_at": {
+          "format": "date-time",
+          "title": "Reserved At",
+          "type": "string"
+        },
+        "started_at": {
+          "format": "date-time",
+          "title": "Started At",
+          "type": "string"
+        },
+        "finished_at": {
+          "format": "date-time",
+          "title": "Finished At",
+          "type": "string"
+        },
+        "status": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Status"
+        },
+        "outcome": {
+          "enum": [
+            "received",
+            "redirect",
+            "denied",
+            "failed",
+            "limit_refusal"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        },
+        "body": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Asset"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "headers": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Headers",
+          "type": "object"
+        },
+        "omitted_header_names": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Omitted Header Names",
+          "type": "array"
+        },
+        "redirect_location": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Redirect Location"
+        },
+        "error": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Error"
+        },
+        "complete": {
+          "title": "Complete",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "sequence",
+        "requested_url",
+        "returned_url",
+        "reserved_at",
+        "started_at",
+        "finished_at",
+        "status",
+        "outcome",
+        "body",
+        "headers",
+        "omitted_header_names",
+        "redirect_location",
+        "error",
+        "complete"
+      ],
+      "title": "Event",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Bounded finite request receipt, not a currentness determination.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "request_cap": {
+      "const": 8,
+      "title": "Request Cap",
+      "type": "integer"
+    },
+    "distinct_target_cap": {
+      "const": 6,
+      "title": "Distinct Target Cap",
+      "type": "integer"
+    },
+    "per_response_byte_cap": {
+      "const": 10485760,
+      "title": "Per Response Byte Cap",
+      "type": "integer"
+    },
+    "aggregate_byte_cap": {
+      "const": 20971520,
+      "title": "Aggregate Byte Cap",
+      "type": "integer"
+    },
+    "deliberate_attempts": {
+      "title": "Deliberate Attempts",
+      "type": "integer"
+    },
+    "distinct_targets": {
+      "title": "Distinct Targets",
+      "type": "integer"
+    },
+    "retained_body_bytes": {
+      "title": "Retained Body Bytes",
+      "type": "integer"
+    },
+    "tls_verification": {
+      "const": true,
+      "title": "Tls Verification",
+      "type": "boolean"
+    },
+    "cookies_or_authentication_used": {
+      "const": false,
+      "title": "Cookies Or Authentication Used",
+      "type": "boolean"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
+      "title": "Events",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "request_cap",
+    "distinct_target_cap",
+    "per_response_byte_cap",
+    "aggregate_byte_cap",
+    "deliberate_attempts",
+    "distinct_targets",
+    "retained_body_bytes",
+    "tls_verification",
+    "cookies_or_authentication_used",
+    "events",
+    "limitations"
+  ],
+  "title": "Access",
+  "type": "object"
+}

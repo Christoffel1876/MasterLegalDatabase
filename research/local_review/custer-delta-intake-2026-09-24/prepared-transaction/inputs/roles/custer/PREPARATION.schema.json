@@ -1,0 +1,100 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "source_workspace_path": {
+      "title": "Source Workspace Path",
+      "type": "string"
+    },
+    "original": {
+      "$ref": "#/$defs/Asset"
+    },
+    "physical_pages": {
+      "const": 4,
+      "title": "Physical Pages",
+      "type": "integer"
+    },
+    "queue": {
+      "$ref": "#/$defs/Asset"
+    },
+    "queue_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "render_command": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Render Command",
+      "type": "array"
+    },
+    "renderer_version": {
+      "title": "Renderer Version",
+      "type": "string"
+    },
+    "images": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "title": "Images",
+      "type": "array"
+    },
+    "native_opened": {
+      "const": false,
+      "title": "Native Opened",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "source_workspace_path",
+    "original",
+    "physical_pages",
+    "queue",
+    "queue_manifest",
+    "render_command",
+    "renderer_version",
+    "images",
+    "native_opened",
+    "legal_currentness"
+  ],
+  "title": "Preparation",
+  "type": "object"
+}

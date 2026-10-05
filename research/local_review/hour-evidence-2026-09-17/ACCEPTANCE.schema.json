@@ -1,0 +1,88 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "status": {
+      "const": "accepted_bounded_research_evidence",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "canonical_additions": {
+      "const": 0,
+      "title": "Canonical Additions",
+      "type": "integer"
+    },
+    "source_packages": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Source Packages",
+      "type": "array"
+    },
+    "atlas_direct_pages": {
+      "additionalProperties": {
+        "items": {
+          "type": "integer"
+        },
+        "type": "array"
+      },
+      "title": "Atlas Direct Pages",
+      "type": "object"
+    },
+    "qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Qualifications",
+      "type": "array"
+    }
+  },
+  "required": [
+    "status",
+    "legal_currentness",
+    "answer_safe",
+    "canonical_additions",
+    "source_packages",
+    "atlas_direct_pages",
+    "qualifications"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

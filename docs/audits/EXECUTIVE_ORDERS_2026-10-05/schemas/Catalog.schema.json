@@ -1,0 +1,134 @@
+{
+  "$defs": {
+    "Row": {
+      "additionalProperties": false,
+      "properties": {
+        "citation": {
+          "pattern": "^[BD] 2026 [0-9]{3}$",
+          "title": "Citation",
+          "type": "string"
+        },
+        "displayed_date": {
+          "title": "Displayed Date",
+          "type": "string"
+        },
+        "displayed_title": {
+          "title": "Displayed Title",
+          "type": "string"
+        },
+        "observed_href": {
+          "title": "Observed Href",
+          "type": "string"
+        },
+        "direct_download_url": {
+          "title": "Direct Download Url",
+          "type": "string"
+        },
+        "direct_url_basis": {
+          "const": "maintained_exec_orders_scraper._download_url_from_exact_observed_href",
+          "default": "maintained_exec_orders_scraper._download_url_from_exact_observed_href",
+          "title": "Direct Url Basis",
+          "type": "string"
+        },
+        "inherited_index_match": {
+          "title": "Inherited Index Match",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "citation",
+        "displayed_date",
+        "displayed_title",
+        "observed_href",
+        "direct_download_url",
+        "inherited_index_match"
+      ],
+      "title": "Row",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "observation_method": {
+      "const": "Chrome read-only DOM table extraction",
+      "default": "Chrome read-only DOM table extraction",
+      "title": "Observation Method",
+      "type": "string"
+    },
+    "source_page": {
+      "const": "https://www.colorado.gov/governor/2026-executive-orders",
+      "default": "https://www.colorado.gov/governor/2026-executive-orders",
+      "title": "Source Page",
+      "type": "string"
+    },
+    "browser_tab_id": {
+      "const": "903489740",
+      "default": "903489740",
+      "title": "Browser Tab Id",
+      "type": "string"
+    },
+    "browser_navigation_count": {
+      "title": "Browser Navigation Count",
+      "type": "integer"
+    },
+    "browser_resource_bytes": {
+      "default": null,
+      "title": "Browser Resource Bytes",
+      "type": "null"
+    },
+    "raw_http_html_retained": {
+      "const": false,
+      "default": false,
+      "title": "Raw Http Html Retained",
+      "type": "boolean"
+    },
+    "inherited_index_path": {
+      "title": "Inherited Index Path",
+      "type": "string"
+    },
+    "inherited_index_sha256": {
+      "title": "Inherited Index Sha256",
+      "type": "string"
+    },
+    "inherited_index_records": {
+      "title": "Inherited Index Records",
+      "type": "integer"
+    },
+    "selector_scope": {
+      "const": "2026 B and D order rows only",
+      "default": "2026 B and D order rows only",
+      "title": "Selector Scope",
+      "type": "string"
+    },
+    "rows": {
+      "items": {
+        "$ref": "#/$defs/Row"
+      },
+      "title": "Rows",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "browser_navigation_count",
+    "inherited_index_path",
+    "inherited_index_sha256",
+    "inherited_index_records",
+    "rows",
+    "limitations"
+  ],
+  "title": "Catalog",
+  "type": "object"
+}

@@ -1,0 +1,157 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Hash-bound relative package member.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Fresh original acquired from an official archive's delegated public link.",
+  "properties": {
+    "source_id": {
+      "title": "Source Id",
+      "type": "string"
+    },
+    "title_observed_on_official_archive": {
+      "title": "Title Observed On Official Archive",
+      "type": "string"
+    },
+    "official_parent_url": {
+      "title": "Official Parent Url",
+      "type": "string"
+    },
+    "observed_public_view_url": {
+      "title": "Observed Public View Url",
+      "type": "string"
+    },
+    "requested_public_download_url": {
+      "title": "Requested Public Download Url",
+      "type": "string"
+    },
+    "final_response_url": {
+      "title": "Final Response Url",
+      "type": "string"
+    },
+    "acquired_at": {
+      "title": "Acquired At",
+      "type": "string"
+    },
+    "original": {
+      "$ref": "#/$defs/Asset"
+    },
+    "page_count": {
+      "exclusiveMinimum": 0,
+      "title": "Page Count",
+      "type": "integer"
+    },
+    "empty_native_pages": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Empty Native Pages",
+      "type": "array"
+    },
+    "native_text_bytes": {
+      "minimum": 0,
+      "title": "Native Text Bytes",
+      "type": "integer"
+    },
+    "acquisition_receipts": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Acquisition Receipts",
+      "type": "array"
+    },
+    "historical_record_id": {
+      "title": "Historical Record Id",
+      "type": "string"
+    },
+    "historical_index_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Historical Index Sha256",
+      "type": "string"
+    },
+    "historical_index_sha256_basis": {
+      "const": "summary_utf8",
+      "default": "summary_utf8",
+      "title": "Historical Index Sha256 Basis",
+      "type": "string"
+    },
+    "historical_original_sha256": {
+      "default": null,
+      "title": "Historical Original Sha256",
+      "type": "null"
+    },
+    "historical_original_comparison": {
+      "const": "not_possible_no_historical_original_hash_or_body",
+      "default": "not_possible_no_historical_original_hash_or_body",
+      "title": "Historical Original Comparison",
+      "type": "string"
+    },
+    "format_verified": {
+      "const": "pdf_opened_without_repair_or_encryption",
+      "title": "Format Verified",
+      "type": "string"
+    },
+    "extraction_method": {
+      "title": "Extraction Method",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "source_id",
+    "title_observed_on_official_archive",
+    "official_parent_url",
+    "observed_public_view_url",
+    "requested_public_download_url",
+    "final_response_url",
+    "acquired_at",
+    "original",
+    "page_count",
+    "empty_native_pages",
+    "native_text_bytes",
+    "acquisition_receipts",
+    "historical_record_id",
+    "historical_index_sha256",
+    "format_verified",
+    "extraction_method"
+  ],
+  "title": "Source",
+  "type": "object"
+}

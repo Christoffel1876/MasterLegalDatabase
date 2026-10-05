@@ -1,0 +1,71 @@
+{
+  "$defs": {
+    "Page": {
+      "additionalProperties": false,
+      "properties": {
+        "physical_page": {
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "observation": {
+          "title": "Observation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "physical_page",
+        "observation"
+      ],
+      "title": "Page",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "frozen_at": {
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "method": {
+      "const": "direct_image_source_first_informed_queue_context",
+      "title": "Method",
+      "type": "string"
+    },
+    "source_sha256": {
+      "const": "5afc51d162a5472b999ce5bf308ff9a93810015bcbea7c7e710cec864932605a",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "page_observations": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "title": "Page Observations",
+      "type": "array"
+    },
+    "candidate_text_opened": {
+      "const": false,
+      "title": "Candidate Text Opened",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    }
+  },
+  "required": [
+    "frozen_at",
+    "method",
+    "source_sha256",
+    "page_observations",
+    "candidate_text_opened",
+    "legal_currentness"
+  ],
+  "title": "Initial",
+  "type": "object"
+}

@@ -1,0 +1,71 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "sequence": {
+      "maximum": 35,
+      "minimum": 1,
+      "title": "Sequence",
+      "type": "integer"
+    },
+    "target_id": {
+      "pattern": "^[a-zA-Z0-9_-]+$",
+      "title": "Target Id",
+      "type": "string"
+    },
+    "role": {
+      "enum": [
+        "welcome",
+        "catalog",
+        "listing",
+        "history",
+        "pdf",
+        "word",
+        "diagnostic"
+      ],
+      "title": "Role",
+      "type": "string"
+    },
+    "parent_evidence": {
+      "title": "Parent Evidence",
+      "type": "string"
+    },
+    "requested_url": {
+      "title": "Requested Url",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "granted_bytes": {
+      "maximum": 15000000,
+      "minimum": 1,
+      "title": "Granted Bytes",
+      "type": "integer"
+    },
+    "timeout_seconds": {
+      "exclusiveMinimum": 0,
+      "maximum": 30,
+      "title": "Timeout Seconds",
+      "type": "number"
+    },
+    "purpose": {
+      "title": "Purpose",
+      "type": "string"
+    }
+  },
+  "required": [
+    "sequence",
+    "target_id",
+    "role",
+    "parent_evidence",
+    "requested_url",
+    "started_at",
+    "granted_bytes",
+    "timeout_seconds",
+    "purpose"
+  ],
+  "title": "Reservation",
+  "type": "object"
+}

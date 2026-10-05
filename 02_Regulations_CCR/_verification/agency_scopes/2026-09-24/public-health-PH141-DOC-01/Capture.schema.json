@@ -1,0 +1,564 @@
+{
+  "$defs": {
+    "AgencyRow": {
+      "additionalProperties": false,
+      "description": "A complete catalog row; only selected agencies have a retained listing scope.",
+      "properties": {
+        "agency_id": {
+          "maxLength": 20,
+          "pattern": "^[0-9]+$",
+          "title": "Agency Id",
+          "type": "string"
+        },
+        "source_label": {
+          "title": "Source Label",
+          "type": "string"
+        },
+        "listing_url": {
+          "title": "Listing Url",
+          "type": "string"
+        },
+        "selected": {
+          "title": "Selected",
+          "type": "boolean"
+        },
+        "listing_association_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Listing Association Id"
+        },
+        "listed_rule_count": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Listed Rule Count"
+        },
+        "rules": {
+          "items": {
+            "$ref": "#/$defs/RuleRow"
+          },
+          "title": "Rules",
+          "type": "array"
+        },
+        "unselected_status": {
+          "const": "unknown_not_evaluated",
+          "default": "unknown_not_evaluated",
+          "title": "Unselected Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "agency_id",
+        "source_label",
+        "listing_url",
+        "selected",
+        "listing_association_id",
+        "listed_rule_count",
+        "rules"
+      ],
+      "title": "AgencyRow",
+      "type": "object"
+    },
+    "DocumentCheck": {
+      "additionalProperties": false,
+      "description": "Structural PDF parsing or Word signature observation; no content verification.",
+      "properties": {
+        "association_id": {
+          "title": "Association Id",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "pdf",
+            "word"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "pages": {
+          "anyOf": [
+            {
+              "maximum": 20000,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pages"
+        },
+        "status": {
+          "enum": [
+            "pdf_parsed_unreviewed",
+            "word_signature_only_unparsed"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "association_id",
+        "role",
+        "sha256",
+        "pages",
+        "status"
+      ],
+      "title": "DocumentCheck",
+      "type": "object"
+    },
+    "Link": {
+      "additionalProperties": false,
+      "description": "Exact parsed parent attribute and label, without executing source JavaScript.",
+      "properties": {
+        "parent_id": {
+          "title": "Parent Id",
+          "type": "string"
+        },
+        "child_id": {
+          "title": "Child Id",
+          "type": "string"
+        },
+        "attribute_name": {
+          "enum": [
+            "href",
+            "onclick"
+          ],
+          "title": "Attribute Name",
+          "type": "string"
+        },
+        "attribute": {
+          "title": "Attribute",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "parent_id",
+        "child_id",
+        "attribute_name",
+        "attribute",
+        "label"
+      ],
+      "title": "Link",
+      "type": "object"
+    },
+    "RuleCapture": {
+      "additionalProperties": false,
+      "description": "Complete parsed history, with archived rows explicitly excluded from acquisition.",
+      "properties": {
+        "agency_id": {
+          "maxLength": 20,
+          "pattern": "^[0-9]+$",
+          "title": "Agency Id",
+          "type": "string"
+        },
+        "rule_id": {
+          "maxLength": 20,
+          "pattern": "^[0-9]+$",
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "source_citation": {
+          "title": "Source Citation",
+          "type": "string"
+        },
+        "listing_title": {
+          "title": "Listing Title",
+          "type": "string"
+        },
+        "history_title": {
+          "title": "History Title",
+          "type": "string"
+        },
+        "history_association_id": {
+          "title": "History Association Id",
+          "type": "string"
+        },
+        "versions": {
+          "items": {
+            "$ref": "#/$defs/VersionRow"
+          },
+          "title": "Versions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "agency_id",
+        "rule_id",
+        "source_citation",
+        "listing_title",
+        "history_title",
+        "history_association_id",
+        "versions"
+      ],
+      "title": "RuleCapture",
+      "type": "object"
+    },
+    "RuleRow": {
+      "additionalProperties": false,
+      "description": "Every source listing row, including unselected rules with unknown documents.",
+      "properties": {
+        "rule_id": {
+          "maxLength": 20,
+          "pattern": "^[0-9]+$",
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "source_citation": {
+          "title": "Source Citation",
+          "type": "string"
+        },
+        "source_title": {
+          "title": "Source Title",
+          "type": "string"
+        },
+        "history_url": {
+          "title": "History Url",
+          "type": "string"
+        },
+        "selected": {
+          "title": "Selected",
+          "type": "boolean"
+        },
+        "document_status": {
+          "enum": [
+            "selected_pairs_retained_unreviewed",
+            "unknown_not_selected"
+          ],
+          "title": "Document Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "rule_id",
+        "source_citation",
+        "source_title",
+        "history_url",
+        "selected",
+        "document_status"
+      ],
+      "title": "RuleRow",
+      "type": "object"
+    },
+    "VersionRow": {
+      "additionalProperties": false,
+      "description": "Source-owned version labels and dates, never a legal-currentness decision.",
+      "properties": {
+        "version_id": {
+          "maxLength": 20,
+          "pattern": "^[0-9]+$",
+          "title": "Version Id",
+          "type": "string"
+        },
+        "designation": {
+          "enum": [
+            "current",
+            "future",
+            "history",
+            "unknown"
+          ],
+          "title": "Designation",
+          "type": "string"
+        },
+        "source_label": {
+          "title": "Source Label",
+          "type": "string"
+        },
+        "effective_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Effective Date"
+        },
+        "adopted_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Adopted Date"
+        },
+        "publication_date": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Publication Date"
+        },
+        "filing_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Filing Type"
+        },
+        "document_urls": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Document Urls",
+          "type": "array"
+        },
+        "edocket_urls": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Edocket Urls",
+          "type": "array"
+        },
+        "selected": {
+          "title": "Selected",
+          "type": "boolean"
+        },
+        "omission": {
+          "anyOf": [
+            {
+              "const": "archived_not_selected",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Omission"
+        }
+      },
+      "required": [
+        "version_id",
+        "designation",
+        "source_label",
+        "effective_date",
+        "adopted_date",
+        "publication_date",
+        "filing_type",
+        "document_urls",
+        "edocket_urls",
+        "selected",
+        "omission"
+      ],
+      "title": "VersionRow",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Portable replay derived solely from verified captured source buffers.",
+  "properties": {
+    "schema_version": {
+      "const": "ccr-agency-offline-capture-2",
+      "default": "ccr-agency-offline-capture-2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "const": "offline_selected_whole_rules_replayed",
+      "default": "offline_selected_whole_rules_replayed",
+      "title": "Status",
+      "type": "string"
+    },
+    "input_plan_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Input Plan Sha256",
+      "type": "string"
+    },
+    "public_plan_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Public Plan Sha256",
+      "type": "string"
+    },
+    "department_id": {
+      "maxLength": 20,
+      "pattern": "^[0-9]+$",
+      "title": "Department Id",
+      "type": "string"
+    },
+    "source_department_label": {
+      "title": "Source Department Label",
+      "type": "string"
+    },
+    "source_cutoff_claim": {
+      "format": "date",
+      "title": "Source Cutoff Claim",
+      "type": "string"
+    },
+    "catalog_agency_count": {
+      "minimum": 1,
+      "title": "Catalog Agency Count",
+      "type": "integer"
+    },
+    "selected_agency_count": {
+      "minimum": 1,
+      "title": "Selected Agency Count",
+      "type": "integer"
+    },
+    "selected_rule_count": {
+      "maximum": 25,
+      "minimum": 1,
+      "title": "Selected Rule Count",
+      "type": "integer"
+    },
+    "response_associations": {
+      "maximum": 80,
+      "title": "Response Associations",
+      "type": "integer"
+    },
+    "distinct_body_count": {
+      "minimum": 1,
+      "title": "Distinct Body Count",
+      "type": "integer"
+    },
+    "retained_unique_body_bytes": {
+      "maximum": 48000000,
+      "title": "Retained Unique Body Bytes",
+      "type": "integer"
+    },
+    "charged_response_bytes_claim": {
+      "maximum": 50000000,
+      "title": "Charged Response Bytes Claim",
+      "type": "integer"
+    },
+    "observed_start_claim": {
+      "format": "date-time",
+      "title": "Observed Start Claim",
+      "type": "string"
+    },
+    "observed_finish_claim": {
+      "format": "date-time",
+      "title": "Observed Finish Claim",
+      "type": "string"
+    },
+    "agencies": {
+      "items": {
+        "$ref": "#/$defs/AgencyRow"
+      },
+      "title": "Agencies",
+      "type": "array"
+    },
+    "selected_rules": {
+      "items": {
+        "$ref": "#/$defs/RuleCapture"
+      },
+      "title": "Selected Rules",
+      "type": "array"
+    },
+    "links": {
+      "items": {
+        "$ref": "#/$defs/Link"
+      },
+      "title": "Links",
+      "type": "array"
+    },
+    "documents": {
+      "items": {
+        "$ref": "#/$defs/DocumentCheck"
+      },
+      "title": "Documents",
+      "type": "array"
+    },
+    "department_complete": {
+      "const": false,
+      "default": false,
+      "title": "Department Complete",
+      "type": "boolean"
+    },
+    "existing_department_publisher_admissible": {
+      "const": false,
+      "default": false,
+      "title": "Existing Department Publisher Admissible",
+      "type": "boolean"
+    },
+    "canonical_installation": {
+      "const": false,
+      "default": false,
+      "title": "Canonical Installation",
+      "type": "boolean"
+    },
+    "fresh_requests": {
+      "const": 0,
+      "default": 0,
+      "title": "Fresh Requests",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "input_plan_sha256",
+    "public_plan_sha256",
+    "department_id",
+    "source_department_label",
+    "source_cutoff_claim",
+    "catalog_agency_count",
+    "selected_agency_count",
+    "selected_rule_count",
+    "response_associations",
+    "distinct_body_count",
+    "retained_unique_body_bytes",
+    "charged_response_bytes_claim",
+    "observed_start_claim",
+    "observed_finish_claim",
+    "agencies",
+    "selected_rules",
+    "links",
+    "documents",
+    "limitations"
+  ],
+  "title": "Capture",
+  "type": "object"
+}

@@ -1,0 +1,202 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Pointer": {
+      "additionalProperties": false,
+      "properties": {
+        "workspace_path": {
+          "title": "Workspace Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        },
+        "json_pointer": {
+          "title": "Json Pointer",
+          "type": "string"
+        },
+        "observed_value": {
+          "title": "Observed Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "workspace_path",
+        "sha256",
+        "bytes",
+        "json_pointer",
+        "observed_value"
+      ],
+      "title": "Pointer",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "completed_at": {
+      "title": "Completed At",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "initial_notes": {
+      "$ref": "#/$defs/Asset"
+    },
+    "preparation": {
+      "$ref": "#/$defs/Asset"
+    },
+    "title_visible": {
+      "title": "Title Visible",
+      "type": "string"
+    },
+    "instrument_visible": {
+      "title": "Instrument Visible",
+      "type": "string"
+    },
+    "authority_visible": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Authority Visible",
+      "type": "array"
+    },
+    "body_scope": {
+      "title": "Body Scope",
+      "type": "string"
+    },
+    "status_visible": {
+      "title": "Status Visible",
+      "type": "string"
+    },
+    "source_dates": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Dates",
+      "type": "array"
+    },
+    "native_opened_at": {
+      "title": "Native Opened At",
+      "type": "string"
+    },
+    "native_method": {
+      "title": "Native Method",
+      "type": "string"
+    },
+    "native_pages": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "title": "Native Pages",
+      "type": "array"
+    },
+    "native_findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Native Findings",
+      "type": "array"
+    },
+    "custody_pointers": {
+      "items": {
+        "$ref": "#/$defs/Pointer"
+      },
+      "title": "Custody Pointers",
+      "type": "array"
+    },
+    "custody_qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Custody Qualifications",
+      "type": "array"
+    },
+    "unresolved": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unresolved",
+      "type": "array"
+    },
+    "no_new_requests": {
+      "const": true,
+      "title": "No New Requests",
+      "type": "boolean"
+    },
+    "source_and_native_unchanged": {
+      "const": true,
+      "title": "Source And Native Unchanged",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "completed_at",
+    "source",
+    "initial_notes",
+    "preparation",
+    "title_visible",
+    "instrument_visible",
+    "authority_visible",
+    "body_scope",
+    "status_visible",
+    "source_dates",
+    "native_opened_at",
+    "native_method",
+    "native_pages",
+    "native_findings",
+    "custody_pointers",
+    "custody_qualifications",
+    "unresolved",
+    "no_new_requests",
+    "source_and_native_unchanged",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Comparison",
+  "type": "object"
+}

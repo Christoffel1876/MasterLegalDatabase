@@ -1,0 +1,83 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact portable package member.",
+      "properties": {
+        "path": {
+          "pattern": "^[A-Za-z0-9_./-]+$",
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "maximum": 500000000,
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "source_validation": {
+      "title": "Source Validation",
+      "type": "string"
+    },
+    "source_refs": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Source Refs",
+      "type": "array"
+    },
+    "unique_source_originals": {
+      "title": "Unique Source Originals",
+      "type": "integer"
+    },
+    "native_manifest_sha256": {
+      "title": "Native Manifest Sha256",
+      "type": "string"
+    },
+    "native_pdfs": {
+      "title": "Native Pdfs",
+      "type": "integer"
+    },
+    "native_pages": {
+      "title": "Native Pages",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "source_validation",
+    "source_refs",
+    "unique_source_originals",
+    "native_manifest_sha256",
+    "native_pdfs",
+    "native_pages"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

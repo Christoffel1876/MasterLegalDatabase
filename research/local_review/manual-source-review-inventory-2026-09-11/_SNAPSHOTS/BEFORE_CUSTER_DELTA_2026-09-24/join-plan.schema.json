@@ -1,0 +1,297 @@
+{
+  "$defs": {
+    "Artifact": {
+      "additionalProperties": false,
+      "description": "Identify immutable local bytes within the selected repository.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Artifact",
+      "type": "object"
+    },
+    "AuthorityJoin": {
+      "additionalProperties": false,
+      "description": "Bind authority and source identity to an exact provenance record.",
+      "properties": {
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "provenance": {
+          "$ref": "#/$defs/Document"
+        },
+        "sha_pointer": {
+          "title": "Sha Pointer",
+          "type": "string"
+        },
+        "source_id_pointer": {
+          "title": "Source Id Pointer",
+          "type": "string"
+        },
+        "authority_pointer": {
+          "title": "Authority Pointer",
+          "type": "string"
+        },
+        "reported_acquisition_pointers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reported Acquisition Pointers",
+          "type": "array"
+        },
+        "role_pointers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Role Pointers",
+          "type": "array"
+        },
+        "qualification_pointers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Qualification Pointers",
+          "type": "array"
+        },
+        "verified_http": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/HttpBinding"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "record_id",
+        "authority_id",
+        "provenance",
+        "sha_pointer",
+        "source_id_pointer",
+        "authority_pointer"
+      ],
+      "title": "AuthorityJoin",
+      "type": "object"
+    },
+    "Document": {
+      "additionalProperties": false,
+      "description": "Select one JSON object or a zero-based JSONL row without executing package code.",
+      "properties": {
+        "artifact": {
+          "$ref": "#/$defs/Artifact"
+        },
+        "jsonl_row": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Jsonl Row"
+        }
+      },
+      "required": [
+        "artifact"
+      ],
+      "title": "Document",
+      "type": "object"
+    },
+    "HttpBinding": {
+      "additionalProperties": false,
+      "description": "Identify a recorded successful HTTP acquisition, not a repository intake time.",
+      "properties": {
+        "document": {
+          "$ref": "#/$defs/Document"
+        },
+        "sha_pointer": {
+          "title": "Sha Pointer",
+          "type": "string"
+        },
+        "status_pointer": {
+          "title": "Status Pointer",
+          "type": "string"
+        },
+        "time_pointer": {
+          "title": "Time Pointer",
+          "type": "string"
+        }
+      },
+      "required": [
+        "document",
+        "sha_pointer",
+        "status_pointer",
+        "time_pointer"
+      ],
+      "title": "HttpBinding",
+      "type": "object"
+    },
+    "ReviewJoin": {
+      "additionalProperties": false,
+      "description": "Allow one exact schema-backed review and its recorded, bounded scope.",
+      "properties": {
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "review": {
+          "$ref": "#/$defs/Artifact"
+        },
+        "review_schema": {
+          "$ref": "#/$defs/Artifact"
+        },
+        "source_sha_pointer": {
+          "title": "Source Sha Pointer",
+          "type": "string"
+        },
+        "source_id_pointer": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Id Pointer"
+        },
+        "expected_review_source_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expected Review Source Id"
+        },
+        "authority_pointer": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Authority Pointer"
+        },
+        "scope_pointers": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Scope Pointers",
+          "type": "array"
+        },
+        "limitation_pointers": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Limitation Pointers",
+          "type": "array"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "record_id",
+        "review",
+        "review_schema",
+        "source_sha_pointer",
+        "scope_pointers",
+        "limitation_pointers",
+        "note"
+      ],
+      "title": "ReviewJoin",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "An explicit source/review allowlist for one immutable manual-manifest snapshot.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "manual_manifest": {
+      "$ref": "#/$defs/Artifact"
+    },
+    "legacy_ledger": {
+      "$ref": "#/$defs/Artifact"
+    },
+    "authorities": {
+      "items": {
+        "$ref": "#/$defs/AuthorityJoin"
+      },
+      "title": "Authorities",
+      "type": "array"
+    },
+    "reviews": {
+      "items": {
+        "$ref": "#/$defs/ReviewJoin"
+      },
+      "title": "Reviews",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "manual_manifest",
+    "legacy_ledger",
+    "authorities",
+    "reviews",
+    "limitations"
+  ],
+  "title": "JoinPlan",
+  "type": "object"
+}

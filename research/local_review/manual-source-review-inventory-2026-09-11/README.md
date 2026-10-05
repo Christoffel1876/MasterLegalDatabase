@@ -6,7 +6,7 @@ answer_safe: false
 
 # Manual source/review inventory
 
-70 custody rows; 37 have an explicit review link and 33 have no allowlisted review link.
+74 custody rows; 38 have an explicit review link and 36 have no allowlisted review link.
 These are source-custody counts, not statewide coverage or current-law readiness.
 
 From the repository root:
@@ -69,7 +69,7 @@ python -m geode.pipeline.manual_review_inventory --root . --check
 | el-paso-ldc-wildfire-appendix-e-sd011 | CO-COUNTY-EL_PASO | metadata only |
 | el-paso-open-burning-22-001-sd011 | CO-COUNTY-EL_PASO | metadata only |
 | el-paso-ldc-chapter-1-sd011 | CO-COUNTY-EL_PASO | metadata only |
-| el-paso-ldc-chapter-2-sd011 | CO-COUNTY-EL_PASO | metadata only |
+| el-paso-ldc-chapter-2-sd011 | CO-COUNTY-EL_PASO | checked_passages |
 | el-paso-ldc-chapter-5-sd011 | CO-COUNTY-EL_PASO | metadata only |
 | el-paso-unsafe-buildings-18-03-sd011 | CO-COUNTY-EL_PASO | metadata only |
 | el-paso-boh-admin-regulations-sd011 | CO-COUNTY-EL_PASO | checked_passages |
@@ -87,6 +87,10 @@ python -m geode.pipeline.manual_review_inventory --root . --check
 | chaffee-cwrc-ordinance-2026-02-atlas-directed | CO-COUNTY-CHAFFEE | checked_passages |
 | chaffee-electric-ordinance-2026-01-atlas-directed | CO-COUNTY-CHAFFEE | checked_passages |
 | chaffee-planning-application-fees-atlas-directed | CO-COUNTY-CHAFFEE | checked_tables |
+| el-paso-boa-resolution-25-290-directed-lead | CO-COUNTY-EL_PASO | metadata only |
+| custer-right-to-ranch-farm-resolution-98-14-shstate03 | CO-COUNTY-CUSTER | metadata only |
+| delta-land-use-adoption-resolution-2021-r-001-shstate03 | CO-COUNTY-DELTA | metadata only |
+| delta-land-use-code-2024-label-shstate03 | CO-COUNTY-DELTA | metadata only |
 
 ## Limits
 

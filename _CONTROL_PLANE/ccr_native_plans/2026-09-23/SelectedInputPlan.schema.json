@@ -1,0 +1,73 @@
+{
+  "$defs": {
+    "DepartmentInput": {
+      "additionalProperties": false,
+      "description": "Pinned collector outputs; root is local provenance, not a portable dependency.",
+      "properties": {
+        "root": {
+          "minLength": 1,
+          "title": "Root",
+          "type": "string"
+        },
+        "department_id": {
+          "pattern": "^\\d+$",
+          "title": "Department Id",
+          "type": "string"
+        },
+        "state_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "State Sha256",
+          "type": "string"
+        },
+        "inventory_sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Inventory Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "root",
+        "department_id",
+        "state_sha256",
+        "inventory_sha256"
+      ],
+      "title": "DepartmentInput",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Version two selects whole PDF hashes while retaining every pinned source input.",
+  "properties": {
+    "version": {
+      "const": 2,
+      "default": 2,
+      "title": "Version",
+      "type": "integer"
+    },
+    "departments": {
+      "items": {
+        "$ref": "#/$defs/DepartmentInput"
+      },
+      "maxItems": 30,
+      "minItems": 1,
+      "title": "Departments",
+      "type": "array"
+    },
+    "selected_pdf_sha256": {
+      "items": {
+        "pattern": "^[a-f0-9]{64}$",
+        "type": "string"
+      },
+      "maxItems": 1000,
+      "minItems": 1,
+      "title": "Selected Pdf Sha256",
+      "type": "array"
+    }
+  },
+  "required": [
+    "departments",
+    "selected_pdf_sha256"
+  ],
+  "title": "SelectedInputPlan",
+  "type": "object"
+}

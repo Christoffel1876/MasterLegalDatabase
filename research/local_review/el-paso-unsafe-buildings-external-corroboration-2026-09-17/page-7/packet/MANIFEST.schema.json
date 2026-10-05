@@ -1,0 +1,73 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "job_id": {
+      "title": "Job Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "source_pages": {
+      "title": "Source Pages",
+      "type": "integer"
+    },
+    "assigned_pages": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Assigned Pages",
+      "type": "array"
+    },
+    "candidate_method": {
+      "title": "Candidate Method",
+      "type": "string"
+    },
+    "files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Files",
+      "type": "array"
+    }
+  },
+  "required": [
+    "job_id",
+    "source_sha256",
+    "source_pages",
+    "assigned_pages",
+    "candidate_method",
+    "files"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

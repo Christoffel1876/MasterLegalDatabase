@@ -1,0 +1,85 @@
+{
+  "$defs": {
+    "Item": {
+      "additionalProperties": true,
+      "description": "Validate shared queue fields while preserving legacy intake provenance.",
+      "properties": {
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        },
+        "layer_id": {
+          "title": "Layer Id",
+          "type": "string"
+        },
+        "priority": {
+          "title": "Priority",
+          "type": "string"
+        },
+        "official_listing_url": {
+          "title": "Official Listing Url",
+          "type": "string"
+        },
+        "block_reason": {
+          "title": "Block Reason",
+          "type": "string"
+        },
+        "next_action": {
+          "title": "Next Action",
+          "type": "string"
+        },
+        "evidence_path": {
+          "title": "Evidence Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "record_id",
+        "status",
+        "layer_id",
+        "priority",
+        "official_listing_url",
+        "block_reason",
+        "next_action",
+        "evidence_path"
+      ],
+      "title": "Item",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Require queue counts to reflect actual unresolved statuses.",
+  "properties": {
+    "generated_at": {
+      "title": "Generated At",
+      "type": "string"
+    },
+    "open_items": {
+      "title": "Open Items",
+      "type": "integer"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/$defs/Item"
+      },
+      "title": "Items",
+      "type": "array"
+    },
+    "boundary": {
+      "title": "Boundary",
+      "type": "string"
+    }
+  },
+  "required": [
+    "generated_at",
+    "open_items",
+    "items",
+    "boundary"
+  ],
+  "title": "Queue",
+  "type": "object"
+}

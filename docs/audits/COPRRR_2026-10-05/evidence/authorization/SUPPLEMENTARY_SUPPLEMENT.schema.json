@@ -1,0 +1,85 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "run_sha256": {
+      "title": "Run Sha256",
+      "type": "string"
+    },
+    "recorded_at": {
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "authorization_basis": {
+      "title": "Authorization Basis",
+      "type": "string"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    },
+    "delegated_agent": {
+      "title": "Delegated Agent",
+      "type": "string"
+    },
+    "http_request_cap": {
+      "title": "Http Request Cap",
+      "type": "integer"
+    },
+    "response_byte_cap": {
+      "title": "Response Byte Cap",
+      "type": "integer"
+    },
+    "per_response_byte_cap": {
+      "title": "Per Response Byte Cap",
+      "type": "integer"
+    },
+    "browser_navigation_cap": {
+      "title": "Browser Navigation Cap",
+      "type": "integer"
+    },
+    "browser_resource_byte_accounting": {
+      "const": "unavailable_separate_from_metered_http",
+      "title": "Browser Resource Byte Accounting",
+      "type": "string"
+    },
+    "collection_stop": {
+      "title": "Collection Stop",
+      "type": "string"
+    },
+    "official_seed_urls": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Official Seed Urls",
+      "type": "array"
+    },
+    "external_messages_allowed": {
+      "const": false,
+      "default": false,
+      "title": "External Messages Allowed",
+      "type": "boolean"
+    },
+    "base_run_limits_unchanged": {
+      "const": true,
+      "default": true,
+      "title": "Base Run Limits Unchanged",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "run_sha256",
+    "recorded_at",
+    "authorization_basis",
+    "scope",
+    "delegated_agent",
+    "http_request_cap",
+    "response_byte_cap",
+    "per_response_byte_cap",
+    "browser_navigation_cap",
+    "browser_resource_byte_accounting",
+    "collection_stop",
+    "official_seed_urls"
+  ],
+  "title": "Supplement",
+  "type": "object"
+}

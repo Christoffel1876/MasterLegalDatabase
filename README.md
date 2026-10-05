@@ -1,5 +1,11 @@
 # Project Geode
 
+## October 5 state source checkpoint
+
+The retained CCR catalogs now have PDFs for **all 1,156 listed rule identities across 25 departments**, with **39,460 physical native-text pages**. Public Health has all 238 source pairs; one Transportation Word export remains unavailable. The wider state collection still has source-custody, coverage and currentness work.
+
+Start with the [dated state-baseline report](docs/STATE_BASELINE_2026-10-05.md) for exact scope, reproducible evidence, new executive-order and COPRRR sources, and remaining work. The existing 23-of-25 whole-department publisher flag is unchanged.
+
 Project Geode is a backend-first regulatory intelligence database for Colorado
 law and regulation. It is built for AI retrieval, agentic workflows, search,
 ingestion, legal data analysis, and source-backed answer generation.
@@ -111,6 +117,21 @@ municipality, source, date range, or legal topic is covered until it appears in
 the manifest and has passed validation.
 
 ## Explore Reviewed Sources
+
+The [September 24 CCR agency research addition](docs/CCR_AGENCY_RESEARCH_2026-09-24.md)
+preserves 142 Public Health/Transportation PDF and Word pairs and supports offline
+rebuilding and source-linked searching of 6,234 PDF pages. These native pages are
+machine extractions awaiting review; the guide states the remaining source gaps.
+
+The separate [Hazardous Materials and Waste Management addendum](docs/CCR_PH141_RESEARCH_2026-09-24.md)
+adds 17 retained rule pairs and 883 pages. Together, these September 24 additions
+contain 159 pairs / 7,117 pages. A [further twelve-pair addition](docs/audits/CCR_PH141_ADDITIONAL_RESEARCH_2026-09-24/README.md)
+adds 984 pages, bringing the broader research index to 1,021 distinct PDFs / 33,034
+physical pages. These counts do not establish statewide legal completeness.
+
+The [PH141 document-role review](docs/CCR_PH141_DOCUMENT_ROLES_2026-09-24.md)
+distinguishes seven notice/history PDFs from one substantive regulation PDF.
+Nine other PDFs remain unreviewed for role; collection does not imply complete rule text.
 
 Three research commands expose the reviewed source material with its page references,
 original wording and qualifications:

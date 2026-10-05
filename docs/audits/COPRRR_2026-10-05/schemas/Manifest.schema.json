@@ -1,0 +1,90 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Hash-bound relative package member.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Closed set of portable package members except this manifest itself.",
+  "properties": {
+    "schema_version": {
+      "const": "supplementary-source-native-package-1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "created_at": {
+      "title": "Created At",
+      "type": "string"
+    },
+    "original_count": {
+      "title": "Original Count",
+      "type": "integer"
+    },
+    "native_page_count": {
+      "title": "Native Page Count",
+      "type": "integer"
+    },
+    "original_bytes": {
+      "title": "Original Bytes",
+      "type": "integer"
+    },
+    "native_text_bytes": {
+      "title": "Native Text Bytes",
+      "type": "integer"
+    },
+    "assets": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Assets",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "created_at",
+    "original_count",
+    "native_page_count",
+    "original_bytes",
+    "native_text_bytes",
+    "assets"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

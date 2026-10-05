@@ -1,0 +1,454 @@
+{
+  "schema_version": 1,
+  "report_id": "PTOLEMY-FRESHNESS-2026-09-17",
+  "session_date": "2026-09-17",
+  "prepared_at": "2026-09-17T20:44:50.765062+00:00",
+  "baseline_commit": "06504e53ca64734b05eb2362bd48d04b1f223078",
+  "search_completed": true,
+  "sources_checked": [
+    {
+      "event_id": "E001",
+      "operation": "open",
+      "requested_url": "https://www.sos.state.co.us/CCR/RegisterHome.do",
+      "reported_final_url": "https://www.sos.state.co.us/CCR/RegisterHome.do",
+      "interval_start": "2026-09-17 20:40:58 UTC",
+      "interval_end": "2026-09-17 20:41:00 UTC",
+      "interval_role": "tool_batch_wall_clock_not_http_timing",
+      "representation": "web_tool_parsed_page",
+      "evidence": {
+        "path": "evidence/web-first.json",
+        "sha256": "a9824089a16856e3b7250a163b3ea0fc08553fa43c43bc756eb77abe44d27df2",
+        "size_bytes": 21633
+      },
+      "original_http_status": null,
+      "original_source_sha256": null,
+      "source_original_retained": false
+    },
+    {
+      "event_id": "E002",
+      "operation": "open",
+      "requested_url": "https://clerkandrecorder.elpasoco.com/clerk-to-the-board/ordinances/",
+      "reported_final_url": "https://clerkandrecorder.elpasoco.com/clerk-to-the-board/ordinances/",
+      "interval_start": "2026-09-17 20:40:58 UTC",
+      "interval_end": "2026-09-17 20:41:00 UTC",
+      "interval_role": "tool_batch_wall_clock_not_http_timing",
+      "representation": "web_tool_parsed_page",
+      "evidence": {
+        "path": "evidence/web-first.json",
+        "sha256": "a9824089a16856e3b7250a163b3ea0fc08553fa43c43bc756eb77abe44d27df2",
+        "size_bytes": 21633
+      },
+      "original_http_status": null,
+      "original_source_sha256": null,
+      "source_original_retained": false
+    },
+    {
+      "event_id": "E003",
+      "operation": "open",
+      "requested_url": "https://www.arvadaco.gov/245/Meetings-and-Other-Legal-Notices",
+      "reported_final_url": "https://www.arvadaco.gov/245/Meetings-and-Other-Legal-Notices",
+      "interval_start": "2026-09-17 20:40:58 UTC",
+      "interval_end": "2026-09-17 20:41:00 UTC",
+      "interval_role": "tool_batch_wall_clock_not_http_timing",
+      "representation": "web_tool_parsed_page",
+      "evidence": {
+        "path": "evidence/web-first.json",
+        "sha256": "a9824089a16856e3b7250a163b3ea0fc08553fa43c43bc756eb77abe44d27df2",
+        "size_bytes": 21633
+      },
+      "original_http_status": null,
+      "original_source_sha256": null,
+      "source_original_retained": false
+    },
+    {
+      "event_id": "E004",
+      "operation": "click",
+      "requested_url": "https://www.sos.state.co.us/CCR/RegisterContents.do?Month=9&Volume=49&Year=2026&publicationDay=09%2F10%2F2026&yearPublishNumber=17",
+      "reported_final_url": "https://www.sos.state.co.us/CCR/RegisterContents.do?Month=9&Volume=49&Year=2026&publicationDay=09/10/2026&yearPublishNumber=17",
+      "interval_start": "2026-09-17 20:41:18 UTC",
+      "interval_end": "2026-09-17 20:41:19 UTC",
+      "interval_role": "tool_batch_wall_clock_not_http_timing",
+      "representation": "web_tool_parsed_page",
+      "evidence": {
+        "path": "evidence/web-second.json",
+        "sha256": "b6bcdb4a950077ebc09de92ce6d37374188d28081206ab1396b67430532e6723",
+        "size_bytes": 14241
+      },
+      "original_http_status": null,
+      "original_source_sha256": null,
+      "source_original_retained": false
+    }
+  ],
+  "candidates": [
+    {
+      "candidate_id": "FRESH-20260917-EPC-26-54",
+      "source_owner": "El Paso County Clerk and Recorder",
+      "source_url": "https://clerkandrecorder.elpasoco.com/clerk-to-the-board/ordinances/",
+      "possible_layer": "08_County_Authorities",
+      "discovered_date": "2026-09-17",
+      "change_type": "unknown",
+      "reason_for_review": "Official catalog displays this labeled lead; operative text and legal dates were not opened or established.",
+      "status": "needs_validation",
+      "confidence": 0.9,
+      "confidence_scope": "catalog_identity_only_not_legal_effect",
+      "authority_id": "CO-COUNTY-EL_PASO",
+      "observed_label": "Resolution No. 26-54 Control and Prevention of Graffiti",
+      "event_ids": [
+        "E002"
+      ],
+      "adoption_date": null,
+      "effective_date": null,
+      "original_sha256": null,
+      "document_url": null,
+      "local_comparison": "No same-authority exact subject identity found in scanned manual/legacy metadata; no candidate body hash is available. This is not proof that related law or another alias is absent.",
+      "next_step": "If separately authorized, retain the exact observed linked document and adoption/notice context, then compare bytes and subject identity.",
+      "legal_currentness": "not_verified",
+      "answer_safe": false
+    },
+    {
+      "candidate_id": "FRESH-20260917-ARVADA-CB26-029",
+      "source_owner": "City of Arvada",
+      "source_url": "https://www.arvadaco.gov/245/Meetings-and-Other-Legal-Notices",
+      "possible_layer": "10_Municipal_Authorities",
+      "discovered_date": "2026-09-17",
+      "change_type": "unknown",
+      "reason_for_review": "Official catalog displays this labeled lead; operative text and legal dates were not opened or established.",
+      "status": "needs_validation",
+      "confidence": 0.9,
+      "confidence_scope": "catalog_identity_only_not_legal_effect",
+      "authority_id": "CO-MUNICIPAL-ARVADA",
+      "observed_label": "CB26-029 Data Centers",
+      "event_ids": [
+        "E003"
+      ],
+      "adoption_date": null,
+      "effective_date": null,
+      "original_sha256": null,
+      "document_url": null,
+      "local_comparison": "No same-authority exact subject identity found in scanned manual/legacy metadata; no candidate body hash is available. This is not proof that related law or another alias is absent.",
+      "next_step": "If separately authorized, retain the exact observed linked document and adoption/notice context, then compare bytes and subject identity.",
+      "legal_currentness": "not_verified",
+      "answer_safe": false
+    },
+    {
+      "candidate_id": "FRESH-20260917-REGISTER-49-17",
+      "source_owner": "Colorado Secretary of State",
+      "source_url": "https://www.sos.state.co.us/CCR/RegisterContents.do?Month=9&Volume=49&Year=2026&publicationDay=09%2F10%2F2026&yearPublishNumber=17",
+      "possible_layer": "04_Rulemaking",
+      "discovered_date": "2026-09-17",
+      "change_type": "unknown",
+      "reason_for_review": "High-priority Register check; displayed issue already represented.",
+      "status": "duplicate",
+      "confidence": 1.0,
+      "confidence_scope": "catalog_identity_only_not_legal_effect",
+      "authority_id": "CO-STATE-SOS",
+      "observed_label": "September 10, 2026, 49 CR 17",
+      "event_ids": [
+        "E001",
+        "E004"
+      ],
+      "adoption_date": null,
+      "effective_date": null,
+      "original_sha256": null,
+      "document_url": null,
+      "local_comparison": "Issue identity matches REGISTER_REFRESH_STATE with 39 notice IDs and recorded source SHA 769625f63e8ed0cd848f116aa9262c3552fdddddcf6d91ac8743d4df6405eb14; all IDs compared to rulemaking index. Query ordering/URL encoding differs; no new byte-equality claim.",
+      "next_step": "No duplicate intake. Preserve future effective-date distinctions; no new collector activation follows from this report.",
+      "legal_currentness": "not_verified",
+      "answer_safe": false
+    }
+  ],
+  "controls": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "0302a59413c44fffe491b9e63b88f07793a2c9a9e956f99152555a901b051b10",
+      "size_bytes": 18506
+    },
+    {
+      "path": "_CONTROL_PLANE/SESSION_START_FRESHNESS.md",
+      "sha256": "b4761a8810ba445da69ff2c925528664b6dd9d734170d810bd33109023412481",
+      "size_bytes": 2143
+    },
+    {
+      "path": "_CONTROL_PLANE/MASTER_MANIFEST.json",
+      "sha256": "36fb018c0f1068ba2fb0684d9184a10329d63048d26a430915b6e716fa6b9114",
+      "size_bytes": 12749
+    },
+    {
+      "path": "_CONTROL_PLANE/SOURCE_FRESHNESS_REPORT.json",
+      "sha256": "4d321f20690d042967f8f8256c2b3e39d2e1243fd8696ece6f515bc5c60236a3",
+      "size_bytes": 2926
+    },
+    {
+      "path": "_CONTROL_PLANE/FRESHNESS_VERIFICATION_QUEUE.json",
+      "sha256": "5908671caa9d44a108a84f34ba458e0324332135ebd16e5a2f798751bb26faa4",
+      "size_bytes": 2349
+    },
+    {
+      "path": "_CONTROL_PLANE/FRESHNESS_PRIORITIES.json",
+      "sha256": "9c35ace074281a9563efb73e86f0a90b56bf26cb56b7d454d31975427eed6b2e",
+      "size_bytes": 3033
+    },
+    {
+      "path": "_CONTROL_PLANE/SESSION_FRESHNESS_REPORT.schema.json",
+      "sha256": "d43321c1a45ed86f9c63858f7c4c07dcc058c9e29c9f7976af91a20b589d4d67",
+      "size_bytes": 782
+    },
+    {
+      "path": "_CONTROL_PLANE/SOURCE_REGISTRY.json",
+      "sha256": "db9a24dd57a5c11e016dbb0edede01cff3371efda2aea0f9016eaef0462fe025",
+      "size_bytes": 10855
+    },
+    {
+      "path": "_CONTROL_PLANE/LOCAL_SOURCE_REGISTRY.json",
+      "sha256": "05f9bb13489109027556728e91a75ad438fdfeb6e5e7cb4027b4d4dbaf66f64f",
+      "size_bytes": 415133
+    },
+    {
+      "path": "_CONTROL_PLANE/MUNICIPAL_SOURCE_REGISTRY.json",
+      "sha256": "fd6391721d7b3889ce984b283d7a4db570049cf847dfdea013f378c54ba31f76",
+      "size_bytes": 1102182
+    },
+    {
+      "path": "_CONTROL_PLANE/REGISTER_REFRESH_STATE.json",
+      "sha256": "537feab74b1ceaa43d9a3313f89edcd10b2004c6c08d4fda098a2fc68254da2d",
+      "size_bytes": 193212
+    }
+  ],
+  "comparisons": [
+    {
+      "input": {
+        "path": "_CONTROL_PLANE/LOCAL_DOWNLOAD_MANIFEST.jsonl",
+        "sha256": "dce2b392bc3e81bbb21e31f2a837fdb498d5aa9a79f5b034942a777a82041c51",
+        "size_bytes": 33903546
+      },
+      "row_count": 48390,
+      "representation": "jsonl_records",
+      "matches": {
+        "el_paso_subject": [
+          "27241:municipal_ignacio_identity:CO-MUNICIPAL-IGNACIO",
+          "27404:municipal_ignacio_environmental:CO-MUNICIPAL-IGNACIO"
+        ],
+        "arvada_subject": [
+          "1732:county_logan_planning_zoning_building:CO-COUNTY-LOGAN",
+          "13722:county_logan_planning_zoning_building:CO-COUNTY-LOGAN",
+          "38130:municipal_granada_identity:CO-MUNICIPAL-GRANADA",
+          "38195:municipal_granada_code:CO-MUNICIPAL-GRANADA",
+          "38260:municipal_granada_ordinances:CO-MUNICIPAL-GRANADA",
+          "38326:municipal_granada_building:CO-MUNICIPAL-GRANADA",
+          "38391:municipal_granada_fire:CO-MUNICIPAL-GRANADA"
+        ],
+        "register_issue_ids": [],
+        "authority_arvada": [
+          "18013:municipal_arvada_codes_law",
+          "18014:municipal_arvada_codes_law",
+          "18015:municipal_arvada_building_permits",
+          "18016:municipal_arvada_building_permits",
+          "18017:municipal_arvada_construction",
+          "18018:municipal_arvada_construction",
+          "18069:municipal_arvada_zoning",
+          "18070:municipal_arvada_zoning",
+          "18071:municipal_arvada_fire_code",
+          "18072:municipal_arvada_fire_code",
+          "22277:municipal_arvada_ordinances",
+          "22278:municipal_arvada_environmental"
+        ]
+      },
+      "qualification": "Metadata-field search only; authority and catalog records are not document matches. Other-authority thematic matches are not duplicates. Underlying local bodies and LFS objects were not reopened."
+    },
+    {
+      "input": {
+        "path": "_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+        "sha256": "d32afb35ca30d113e786ba98768dace04c8e4d433322355a14ab35d7a3810537",
+        "size_bytes": 155913
+      },
+      "row_count": 70,
+      "representation": "jsonl_records",
+      "matches": {
+        "el_paso_subject": [],
+        "arvada_subject": [
+          "5:larimer-data-center-moratorium-sd004-04:None"
+        ],
+        "register_issue_ids": [],
+        "authority_arvada": []
+      },
+      "qualification": "Metadata-field search only; authority and catalog records are not document matches. Other-authority thematic matches are not duplicates. Underlying local bodies and LFS objects were not reopened."
+    },
+    {
+      "input": {
+        "path": "_CONTROL_PLANE/MANUAL_SOURCE_INTAKE_LEDGER.jsonl",
+        "sha256": "eb6794c68948b642b5b48534def1315afe224d8eebf2e2b438483bde5a33d043",
+        "size_bytes": 157149
+      },
+      "row_count": 71,
+      "representation": "jsonl_records",
+      "matches": {
+        "el_paso_subject": [],
+        "arvada_subject": [
+          "6:larimer-data-center-moratorium-sd004-04:None"
+        ],
+        "register_issue_ids": [],
+        "authority_arvada": []
+      },
+      "qualification": "Metadata-field search only; authority and catalog records are not document matches. Other-authority thematic matches are not duplicates. Underlying local bodies and LFS objects were not reopened."
+    },
+    {
+      "input": {
+        "path": "10_Municipal_Authorities/_index.jsonl",
+        "sha256": "81c8009d3f2373776f1a95ec8c731761aec132495b898e6fd1946dfd14bf9488",
+        "size_bytes": 87775
+      },
+      "row_count": 85,
+      "representation": "jsonl_records",
+      "matches": {
+        "el_paso_subject": [],
+        "arvada_subject": [],
+        "register_issue_ids": [],
+        "authority_arvada": [
+          "9:CO-MUNICIPAL-ARVADA"
+        ]
+      },
+      "qualification": "Metadata-field search only; authority and catalog records are not document matches. Other-authority thematic matches are not duplicates. Underlying local bodies and LFS objects were not reopened."
+    },
+    {
+      "input": {
+        "path": "04_Rulemaking/_index.jsonl",
+        "sha256": "c15367e9e8b1f0a0b89e76510356b6f03b006a1b6a94abbce4cb85f0082fbd16",
+        "size_bytes": 5483171
+      },
+      "row_count": 8120,
+      "representation": "jsonl_records",
+      "matches": {
+        "el_paso_subject": [],
+        "arvada_subject": [],
+        "register_issue_ids": [
+          "7946:RM-2026-daily-03656ba7c9bf4ef63277",
+          "7948:RM-2026-daily-08195912e8807aafa7d2",
+          "7949:RM-2026-daily-08c025a5a92a375bb4b6",
+          "7956:RM-2026-daily-11eddf42f2781a2aa572",
+          "7958:RM-2026-daily-14a27b81e8d553205928",
+          "7959:RM-2026-daily-14fec615cd369e1cf095",
+          "7962:RM-2026-daily-1a2413717140e738eaa5",
+          "7964:RM-2026-daily-1acbab701cd6f176025b",
+          "7965:RM-2026-daily-1e8270fdf3eab1d8a8db",
+          "7968:RM-2026-daily-21cfc182a600d0405545",
+          "7977:RM-2026-daily-2fa90863777cfb27dfee",
+          "7979:RM-2026-daily-3159510a4b1356aafed2",
+          "7981:RM-2026-daily-338e0de49adbbb4c0b87",
+          "7983:RM-2026-daily-34a234871f890f07ea21",
+          "7994:RM-2026-daily-3e75cce8e7765a5d2284",
+          "7999:RM-2026-daily-483683224e2d4b47bc20",
+          "8004:RM-2026-daily-4d04350354a355521310",
+          "8019:RM-2026-daily-5fa72c06abfbb8d8361c",
+          "8020:RM-2026-daily-6095dc2e34964169fedf",
+          "8026:RM-2026-daily-6a96c747c78831346f63",
+          "8032:RM-2026-daily-730d9ed6611c6d02f682",
+          "8034:RM-2026-daily-74e43b859baac318562f",
+          "8038:RM-2026-daily-7cd2eef489fbbb6459b1",
+          "8047:RM-2026-daily-8853f20f9ddf0a307e76",
+          "8048:RM-2026-daily-88e5160462d2c128bc39",
+          "8049:RM-2026-daily-898bd433f30c367355c0",
+          "8053:RM-2026-daily-8f0983795f18a7613413",
+          "8056:RM-2026-daily-9d974b5e3f524b87e813",
+          "8059:RM-2026-daily-9e749eb7a59f32fefa51",
+          "8066:RM-2026-daily-a7ba2e60a938caf559b3",
+          "8067:RM-2026-daily-a9c82ec053d6826909b6",
+          "8069:RM-2026-daily-ab86dd0134d8b79bfaf0",
+          "8074:RM-2026-daily-b1014f03c671e3a6fa13",
+          "8080:RM-2026-daily-b7ac77b9d41d793c516e",
+          "8084:RM-2026-daily-bec3b51c3812db2a4438",
+          "8092:RM-2026-daily-d9fba3d58215361eb3e4",
+          "8095:RM-2026-daily-e4869edc8a8725aa2c93",
+          "8096:RM-2026-daily-ee55d0a3294fa2011b4e",
+          "8102:RM-2026-daily-f79018a18ed2a2e2a2c1"
+        ],
+        "authority_arvada": []
+      },
+      "qualification": "Metadata-field search only; authority and catalog records are not document matches. Other-authority thematic matches are not duplicates. Underlying local bodies and LFS objects were not reopened."
+    },
+    {
+      "input": {
+        "path": "08_County_Authorities/_index.jsonl",
+        "sha256": "15b951f27e06a07dbb77208f5d7f12a9aa5eb27f1c50f4640722f9485fab4f20",
+        "size_bytes": 134
+      },
+      "row_count": 0,
+      "representation": "lfs_pointer",
+      "matches": {},
+      "qualification": "Tracked blob is an LFS pointer, not readable index/review records. Zero parsed rows does not mean zero underlying records. version https://git-lfs.github.com/spec/v1\noid sha256:e896fc157617cfd9cd9839bf2bf955d893b66d7de514107e8b3c98dc4795c806\nsize 172131787\n"
+    },
+    {
+      "input": {
+        "path": "_CONTROL_PLANE/LOCAL_REVIEW_QUEUE.jsonl",
+        "sha256": "568c4b70e3c2e1c02e440fac609c1c9efefb9306102c64e7ff85fa0cecd83d92",
+        "size_bytes": 133
+      },
+      "row_count": 0,
+      "representation": "lfs_pointer",
+      "matches": {},
+      "qualification": "Tracked blob is an LFS pointer, not readable index/review records. Zero parsed rows does not mean zero underlying records. version https://git-lfs.github.com/spec/v1\noid sha256:c65a0f190fd5d5dca7810c47afc7e6843cd78520242add1fe6951545fe92ad00\nsize 72395471\n"
+    },
+    {
+      "input": {
+        "path": "research/local_review/manual-source-review-inventory-2026-09-11/inventory.json",
+        "sha256": "c11bf7a189f215b57db7a1599a38ea5a95d17b9ef0a5b48fc56e56ef8d72da4a",
+        "size_bytes": 3277106
+      },
+      "row_count": 70,
+      "representation": "json_document",
+      "matches": {
+        "el_paso_ids": [
+          "el-paso-planning-fees-sd011",
+          "el-paso-boh-ehs-fees-sd011",
+          "el-paso-ordinance-26-01-sd011",
+          "el-paso-ldc-wildfire-appendix-e-sd011",
+          "el-paso-open-burning-22-001-sd011",
+          "el-paso-ldc-chapter-1-sd011",
+          "el-paso-ldc-chapter-2-sd011",
+          "el-paso-ldc-chapter-5-sd011",
+          "el-paso-unsafe-buildings-18-03-sd011",
+          "el-paso-boh-admin-regulations-sd011",
+          "el-paso-boh-bylaws-sd011",
+          "el-paso-boh-bylaws-spanish-sd011",
+          "el-paso-boh-ehs-fees-spanish-sd011"
+        ],
+        "arvada_ids": []
+      },
+      "qualification": "Custody inventory only: 37 scoped review links; 33 unmapped. No source bodies reopened."
+    },
+    {
+      "input": {
+        "path": "_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+        "sha256": "ad27514fe91659c9914780c7d3e69e48ace742bc31ad67d9c3a3c99945aecde3",
+        "size_bytes": 2066981
+      },
+      "row_count": 340,
+      "representation": "json_document",
+      "matches": {},
+      "qualification": "September 10 checklist snapshot; category labels do not certify a current complete corpus. No category status was promoted."
+    }
+  ],
+  "public_action_count": 4,
+  "public_action_limit": 10,
+  "findings": [
+    "The saved freshness report was generated August 11 without network refresh; its fresh/age-zero labels are historical, not September 17 verification.",
+    "Register September 10 issue is already indexed; the parsed contents list future effective dates including September 30, October 1 and December 31, 2026. Those are publisher claims, not independently reviewed operative dates.",
+    "Two county/municipal catalog leads require document-level validation. Arvada municipal ownership remains separate from Jefferson and Adams Counties.",
+    "No official original was downloaded, no candidate text was treated as current law, and no old queue or automation was activated."
+  ],
+  "unchecked_scope": [
+    "Linked local document bodies, adoption/execution instruments and complete histories.",
+    "All other state, county, municipal and district sources.",
+    "Unmerged branches, prior external handoffs and working assignments.",
+    "Underlying LFS bodies and original Windows-path archives."
+  ],
+  "limitations": [
+    "Four deliberate public actions across three subjects; no broad crawl.",
+    "Retained evidence is parsed web-tool output with cached crawl labels today/yesterday. Tool batch times are not HTTP request times; status, response headers and source body hashes are unavailable. No fresh exact-body identity is asserted.",
+    "Metadata nonmatch is not source absence, completeness or legal novelty.",
+    "The repository report-schema file is a field/enumeration policy descriptor. This packet supplies actual strict Pydantic-generated JSON Schemas and checks the descriptor required fields/enums explicitly.",
+    "Candidates are a handoff-only proposal, not canonical queue entries or tasks."
+  ],
+  "legal_currentness": "not_verified",
+  "answer_safe": false,
+  "canonical_changed": false
+}

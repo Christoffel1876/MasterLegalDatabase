@@ -1,0 +1,167 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "geode-eo-native-package-1",
+      "default": "geode-eo-native-package-1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_handoff_manifest_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Source Handoff Manifest Sha256",
+      "type": "string"
+    },
+    "catalog": {
+      "$ref": "#/$defs/Ref"
+    },
+    "prior_index": {
+      "$ref": "#/$defs/Ref"
+    },
+    "source_records": {
+      "$ref": "#/$defs/Ref"
+    },
+    "page_records": {
+      "$ref": "#/$defs/Ref"
+    },
+    "source_pdf_count": {
+      "maximum": 35,
+      "minimum": 1,
+      "title": "Source Pdf Count",
+      "type": "integer"
+    },
+    "physical_page_count": {
+      "maximum": 20000,
+      "minimum": 1,
+      "title": "Physical Page Count",
+      "type": "integer"
+    },
+    "native_bytes": {
+      "maximum": 100000000,
+      "minimum": 0,
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "metered_http_requests": {
+      "maximum": 55,
+      "minimum": 0,
+      "title": "Metered Http Requests",
+      "type": "integer"
+    },
+    "charged_response_bytes": {
+      "maximum": 130000000,
+      "minimum": 0,
+      "title": "Charged Response Bytes",
+      "type": "integer"
+    },
+    "browser_navigation_count": {
+      "maximum": 5,
+      "minimum": 0,
+      "title": "Browser Navigation Count",
+      "type": "integer"
+    },
+    "browser_resource_bytes": {
+      "default": null,
+      "title": "Browser Resource Bytes",
+      "type": "null"
+    },
+    "inherited_index_is_historical": {
+      "const": true,
+      "default": true,
+      "title": "Inherited Index Is Historical",
+      "type": "boolean"
+    },
+    "inherited_record_sha256_semantics": {
+      "const": "sha256_utf8_stored_full_text",
+      "title": "Inherited Record Sha256 Semantics",
+      "type": "string"
+    },
+    "historical_pdf_byte_hashes_known": {
+      "const": false,
+      "title": "Historical Pdf Byte Hashes Known",
+      "type": "boolean"
+    },
+    "canonical_installation": {
+      "const": false,
+      "default": false,
+      "title": "Canonical Installation",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "batch_limits": {
+      "additionalProperties": {
+        "items": {
+          "type": "integer"
+        },
+        "type": "array"
+      },
+      "title": "Batch Limits",
+      "type": "object"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_handoff_manifest_sha256",
+    "catalog",
+    "prior_index",
+    "source_records",
+    "page_records",
+    "source_pdf_count",
+    "physical_page_count",
+    "native_bytes",
+    "metered_http_requests",
+    "charged_response_bytes",
+    "browser_navigation_count",
+    "inherited_record_sha256_semantics",
+    "historical_pdf_byte_hashes_known",
+    "batch_limits",
+    "limitations"
+  ],
+  "title": "Package",
+  "type": "object"
+}

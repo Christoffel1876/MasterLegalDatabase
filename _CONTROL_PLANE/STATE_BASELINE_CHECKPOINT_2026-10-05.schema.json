@@ -1,0 +1,238 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "base_commit": {
+      "title": "Base Commit",
+      "type": "string"
+    },
+    "scope": {
+      "const": "Colorado state source baseline; retained CCR catalog PDF coverage",
+      "title": "Scope",
+      "type": "string"
+    },
+    "retained_ccr_departments": {
+      "const": 25,
+      "default": 25,
+      "title": "Retained Ccr Departments",
+      "type": "integer"
+    },
+    "retained_ccr_identities": {
+      "const": 1156,
+      "default": 1156,
+      "title": "Retained Ccr Identities",
+      "type": "integer"
+    },
+    "retained_ccr_pdfs": {
+      "const": 1156,
+      "default": 1156,
+      "title": "Retained Ccr Pdfs",
+      "type": "integer"
+    },
+    "retained_ccr_word_pairs": {
+      "const": 1155,
+      "default": 1155,
+      "title": "Retained Ccr Word Pairs",
+      "type": "integer"
+    },
+    "ccr_native_pages": {
+      "const": 39460,
+      "default": 39460,
+      "title": "Ccr Native Pages",
+      "type": "integer"
+    },
+    "ccr_source_cutoff_claims": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Ccr Source Cutoff Claims",
+      "type": "array"
+    },
+    "executive_order_catalog_scope": {
+      "const": "Observed 2026 B/D catalog only",
+      "default": "Observed 2026 B/D catalog only",
+      "title": "Executive Order Catalog Scope",
+      "type": "string"
+    },
+    "executive_order_pdfs": {
+      "const": 21,
+      "default": 21,
+      "title": "Executive Order Pdfs",
+      "type": "integer"
+    },
+    "executive_order_native_pages": {
+      "const": 84,
+      "default": 84,
+      "title": "Executive Order Native Pages",
+      "type": "integer"
+    },
+    "coprrr_scope": {
+      "const": "Latest 2025 archive reports",
+      "default": "Latest 2025 archive reports",
+      "title": "Coprrr Scope",
+      "type": "string"
+    },
+    "coprrr_pdfs": {
+      "const": 17,
+      "default": 17,
+      "title": "Coprrr Pdfs",
+      "type": "integer"
+    },
+    "coprrr_native_pages": {
+      "const": 782,
+      "default": 782,
+      "title": "Coprrr Native Pages",
+      "type": "integer"
+    },
+    "validated_artifacts": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Validated Artifacts",
+      "type": "array"
+    },
+    "local_regression_passed": {
+      "const": 3629,
+      "default": 3629,
+      "title": "Local Regression Passed",
+      "type": "integer"
+    },
+    "local_new_boundary_tests_passed": {
+      "const": 79,
+      "default": 79,
+      "title": "Local New Boundary Tests Passed",
+      "type": "integer"
+    },
+    "overlapping_testcases": {
+      "const": 16,
+      "default": 16,
+      "title": "Overlapping Testcases",
+      "type": "integer"
+    },
+    "unique_passed_testcases": {
+      "const": 3692,
+      "default": 3692,
+      "title": "Unique Passed Testcases",
+      "type": "integer"
+    },
+    "failures": {
+      "const": 0,
+      "default": 0,
+      "title": "Failures",
+      "type": "integer"
+    },
+    "errors": {
+      "const": 0,
+      "default": 0,
+      "title": "Errors",
+      "type": "integer"
+    },
+    "skips": {
+      "const": 0,
+      "default": 0,
+      "title": "Skips",
+      "type": "integer"
+    },
+    "ci_status_at_preparation": {
+      "const": "not_yet_run_for_this_checkpoint",
+      "default": "not_yet_run_for_this_checkpoint",
+      "title": "Ci Status At Preparation",
+      "type": "string"
+    },
+    "retained_ccr_pdf_baseline_complete": {
+      "const": true,
+      "default": true,
+      "title": "Retained Ccr Pdf Baseline Complete",
+      "type": "boolean"
+    },
+    "whole_state_complete": {
+      "const": false,
+      "default": false,
+      "title": "Whole State Complete",
+      "type": "boolean"
+    },
+    "all_regulation_levels_complete": {
+      "const": false,
+      "default": false,
+      "title": "All Regulation Levels Complete",
+      "type": "boolean"
+    },
+    "publisher_department_count_unchanged": {
+      "const": 23,
+      "default": 23,
+      "title": "Publisher Department Count Unchanged",
+      "type": "integer"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "native_status": {
+      "const": "machine_extraction_unreviewed",
+      "default": "machine_extraction_unreviewed",
+      "title": "Native Status",
+      "type": "string"
+    },
+    "draft_pull_request": {
+      "title": "Draft Pull Request",
+      "type": "string"
+    },
+    "remaining_work": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Remaining Work",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "base_commit",
+    "scope",
+    "ccr_source_cutoff_claims",
+    "validated_artifacts",
+    "draft_pull_request",
+    "remaining_work"
+  ],
+  "title": "Checkpoint",
+  "type": "object"
+}

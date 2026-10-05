@@ -1,0 +1,272 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact ordinary relative file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Check": {
+      "additionalProperties": false,
+      "description": "Actual focused offline check and its unchanged captured output.",
+      "properties": {
+        "command": {
+          "title": "Command",
+          "type": "string"
+        },
+        "exit_code": {
+          "const": 0,
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "result": {
+          "title": "Result",
+          "type": "string"
+        },
+        "evidence": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "command",
+        "exit_code",
+        "result",
+        "evidence"
+      ],
+      "title": "Check",
+      "type": "object"
+    },
+    "Comparison": {
+      "additionalProperties": false,
+      "description": "Exact metadata-only comparison against a whole streamed current JSONL file.",
+      "properties": {
+        "artifact": {
+          "$ref": "#/$defs/Asset"
+        },
+        "rows": {
+          "minimum": 0,
+          "title": "Rows",
+          "type": "integer"
+        },
+        "source_id_matches": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Source Id Matches",
+          "type": "array"
+        },
+        "source_sha_matches": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Source Sha Matches",
+          "type": "array"
+        },
+        "exact_source_url_matches": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Exact Source Url Matches",
+          "type": "array"
+        },
+        "meaning": {
+          "const": "metadata_equality_only_not_currentness_or_retrieval_proof",
+          "title": "Meaning",
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact",
+        "rows",
+        "source_id_matches",
+        "source_sha_matches",
+        "exact_source_url_matches",
+        "meaning"
+      ],
+      "title": "Comparison",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Completed custody addition with unchanged historical source and review bindings.",
+  "properties": {
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "status": {
+      "const": "completed_custody_only_intake",
+      "title": "Status",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "el-paso-boa-resolution-25-290-directed-lead",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "const": "754e98fb7908b66e54a192cefca9817f7bb4cf2a428cf7c469d59f7cfdcdf427",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "actual_repository_received_at": {
+      "format": "date-time",
+      "title": "Actual Repository Received At",
+      "type": "string"
+    },
+    "recorded_http_completed_at": {
+      "format": "date-time",
+      "title": "Recorded Http Completed At",
+      "type": "string"
+    },
+    "raw_before": {
+      "const": 70,
+      "title": "Raw Before",
+      "type": "integer"
+    },
+    "raw_after": {
+      "const": 71,
+      "title": "Raw After",
+      "type": "integer"
+    },
+    "ledger_before": {
+      "const": 71,
+      "title": "Ledger Before",
+      "type": "integer"
+    },
+    "ledger_after": {
+      "const": 72,
+      "title": "Ledger After",
+      "type": "integer"
+    },
+    "prior_review_joins_preserved": {
+      "const": 38,
+      "title": "Prior Review Joins Preserved",
+      "type": "integer"
+    },
+    "prior_rows_preserved": {
+      "const": 70,
+      "title": "Prior Rows Preserved",
+      "type": "integer"
+    },
+    "reviews_after": {
+      "const": 38,
+      "title": "Reviews After",
+      "type": "integer"
+    },
+    "unmapped_after": {
+      "const": 33,
+      "title": "Unmapped After",
+      "type": "integer"
+    },
+    "source_date_claims": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Date Claims",
+      "type": "array"
+    },
+    "inventory_snapshot": {
+      "title": "Inventory Snapshot",
+      "type": "string"
+    },
+    "installed_files": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Installed Files",
+      "type": "array"
+    },
+    "unchanged_inputs": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Unchanged Inputs",
+      "type": "array"
+    },
+    "snapshots": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Snapshots",
+      "type": "array"
+    },
+    "checks": {
+      "items": {
+        "$ref": "#/$defs/Check"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "legacy_comparison": {
+      "$ref": "#/$defs/Comparison"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "recorded_at",
+    "status",
+    "source_id",
+    "source_sha256",
+    "actual_repository_received_at",
+    "recorded_http_completed_at",
+    "raw_before",
+    "raw_after",
+    "ledger_before",
+    "ledger_after",
+    "prior_review_joins_preserved",
+    "prior_rows_preserved",
+    "reviews_after",
+    "unmapped_after",
+    "source_date_claims",
+    "inventory_snapshot",
+    "installed_files",
+    "unchanged_inputs",
+    "snapshots",
+    "checks",
+    "legacy_comparison",
+    "legal_currentness",
+    "answer_safe",
+    "limitations"
+  ],
+  "title": "FinalAudit",
+  "type": "object"
+}

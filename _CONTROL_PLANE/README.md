@@ -1,6 +1,12 @@
 ---
+
+## October 5 state source checkpoint
+
+The retained CCR catalogs now have PDFs for **all 1,156 listed rule identities across 25 departments**, with **39,460 physical native-text pages**. Public Health has all 238 source pairs; one Transportation Word export remains unavailable. The wider state collection still has source-custody, coverage and currentness work.
+
+Start with the [dated state-baseline report](../docs/STATE_BASELINE_2026-10-05.md) for exact scope, reproducible evidence, new executive-order and COPRRR sources, and remaining work. The existing 23-of-25 whole-department publisher flag is unchanged.
 title: Project Geode control plane
-updated: 2026-09-10
+updated: 2026-09-23
 ---
 
 # Project Geode Control Plane
@@ -33,3 +39,10 @@ Current operational handoff files:
   Its explicitly derived endpoint/redaction summaries are distinct from exact
   original source files. See `../docs/LOCAL_TEXT_RECOVERY.md` for saved native text,
   OCR page receipts, checked excerpts and the fee reconciliation study.
+
+- `CCR_SOURCE_COVERAGE_2026-09-23.json` is the dated source-availability index for
+  the statewide CCR expansion. It separates newly verified source snapshots,
+  existing department-12 metadata and uncollected catalog departments. It does not
+  certify legal currentness or replace the canonical CCR index. Verify its exact
+  hash and all referenced bytes with `scripts/verify_ccr_source_coverage.py` using
+  the command in `../docs/STATEWIDE_TRANSITION_2026-09-23.md`.

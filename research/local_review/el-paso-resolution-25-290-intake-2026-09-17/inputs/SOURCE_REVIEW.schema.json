@@ -1,0 +1,170 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact relative payload identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "Complete image and unchanged machine candidates; visual wording is separate.",
+      "properties": {
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "directly_viewed": {
+          "const": true,
+          "title": "Directly Viewed",
+          "type": "boolean"
+        },
+        "reviewed_text": {
+          "title": "Reviewed Text",
+          "type": "string"
+        },
+        "observations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Observations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "native",
+        "directly_viewed",
+        "reviewed_text",
+        "observations"
+      ],
+      "title": "Page",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Literal resolution review with qualified dates and execution markings.",
+  "properties": {
+    "source_id": {
+      "const": "el-paso-boa-resolution-25-290-directed-lead",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-EL_PASO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "reviewer": {
+      "const": "Plato",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "referring_html": {
+      "$ref": "#/$defs/Asset"
+    },
+    "referring_href": {
+      "title": "Referring Href",
+      "type": "string"
+    },
+    "referring_anchor_text": {
+      "title": "Referring Anchor Text",
+      "type": "string"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "status": {
+      "const": "literal_source_review_pending_atlas_acceptance",
+      "title": "Status",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "source_date_claims": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Date Claims",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_id",
+    "authority_id",
+    "reviewed_at",
+    "reviewer",
+    "method",
+    "source",
+    "referring_html",
+    "referring_href",
+    "referring_anchor_text",
+    "pages",
+    "status",
+    "legal_currentness",
+    "answer_safe",
+    "source_date_claims",
+    "limitations"
+  ],
+  "title": "Review",
+  "type": "object"
+}

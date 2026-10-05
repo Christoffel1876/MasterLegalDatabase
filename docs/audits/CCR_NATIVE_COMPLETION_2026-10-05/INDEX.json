@@ -1,0 +1,165 @@
+{
+  "prepared_at": "2026-10-05T21:00:32.922759+00:00",
+  "previous_index": {
+    "path": "docs/audits/CCR_BASELINE_ADDITIONS_2026-10-05/INDEX.json",
+    "sha256": "1fffb74c742cb16013a51596e8080dbddec7e4a9bdf75296aba35585c4a0d6b6",
+    "bytes": 27825
+  },
+  "ledgers": [
+    {
+      "path": "docs/audits/CCR_PH141_RESEARCH_2026-09-24/PREVIOUS_ORIGINALS.jsonl",
+      "sha256": "e7217e3072b15bb7e3f76e43866b76a781b86a02cddb72592a7dda78db3e9e03",
+      "bytes": 3832079
+    },
+    {
+      "path": "docs/audits/CCR_PH141_RESEARCH_2026-09-24/NEW_ORIGINALS.jsonl",
+      "sha256": "f11a5cbcb5c48bdd85fc5978f71336c1d60e1f8cea391318274febf99c521bb4",
+      "bytes": 107425
+    },
+    {
+      "path": "docs/audits/CCR_PH141_ADDITIONAL_RESEARCH_2026-09-24/NEW_ORIGINALS.jsonl",
+      "sha256": "8ceac7f61436952ca151e6e3367cb134db1f8b53c24be5e8b8623dcb310455a6",
+      "bytes": 119334
+    },
+    {
+      "path": "docs/audits/CCR_BASELINE_ADDITIONS_2026-10-05/NEW_ORIGINALS.jsonl",
+      "sha256": "896405e196a334c6572a400024993399b3f06ab06c5d161db796d8385f0fc90d",
+      "bytes": 720609
+    },
+    {
+      "path": "docs/audits/CCR_NATIVE_COMPLETION_2026-10-05/PH-V1-ORIGINALS.jsonl",
+      "sha256": "fb23cea4cb603e007c994cea8caeef1d2251cab16d3729e2cadcfbc45f69e6fd",
+      "bytes": 39191
+    },
+    {
+      "path": "docs/audits/CCR_NATIVE_COMPLETION_2026-10-05/DEPARTMENT12-ORIGINALS.jsonl",
+      "sha256": "67a17f4041710b087943f8a5c6449059900bdb08bf61842eb3c91f1b6a9abecb",
+      "bytes": 23802
+    },
+    {
+      "path": "docs/audits/CCR_NATIVE_COMPLETION_2026-10-05/TRANSPORTATION3475-ORIGINALS.jsonl",
+      "sha256": "61420155d366112cb00a4cb2f161b32a9d6a31407b0770375dcd87f9367066c3",
+      "bytes": 1278
+    }
+  ],
+  "packages": [
+    {
+      "package_id": "PH-V1-NATIVE",
+      "source_manifest": {
+        "path": "02_Regulations_CCR/_verification/agency_scopes/2026-10-05/PH-V1-NATIVE/MANIFEST.json",
+        "sha256": "4c13b09fb652b194749ccc1fad52d94240c872c541def20a14ee72778927e2ba",
+        "bytes": 14601
+      },
+      "input_plan": {
+        "path": "docs/audits/CCR_NATIVE_COMPLETION_2026-10-05/PH-V1-native-input.json",
+        "sha256": "c763d6a13c4fb7257cad035871e28ea87b33734a1f72cfa8297015fac67a7e1c",
+        "bytes": 180
+      },
+      "native_manifest": {
+        "path": "docs/audits/CCR_NATIVE_COMPLETION_2026-10-05/PH-V1-native-manifest.json",
+        "sha256": "f3b61af4b4b37589fd4eec188b402ef856f96d540c94794512bcab584e5d09be",
+        "bytes": 89448
+      },
+      "ledger": {
+        "path": "docs/audits/CCR_NATIVE_COMPLETION_2026-10-05/PH-V1-ORIGINALS.jsonl",
+        "sha256": "fb23cea4cb603e007c994cea8caeef1d2251cab16d3729e2cadcfbc45f69e6fd",
+        "bytes": 39191
+      },
+      "build_command": [
+        "python",
+        "-B",
+        "-m",
+        "geode.pipeline.ccr_agency_text",
+        "build",
+        "--source",
+        "02_Regulations_CCR/_verification/agency_scopes/2026-10-05/PH-V1-NATIVE",
+        "--capture-sha256",
+        "4c13b09fb652b194749ccc1fad52d94240c872c541def20a14ee72778927e2ba",
+        "--output",
+        ".geode_runtime/ccr-native-completion/PH-V1"
+      ],
+      "verify_command": [
+        "python",
+        "-B",
+        "-m",
+        "geode.pipeline.ccr_agency_text",
+        "verify",
+        "--root",
+        ".geode_runtime/ccr-native-completion/PH-V1",
+        "--manifest-sha256",
+        "f3b61af4b4b37589fd4eec188b402ef856f96d540c94794512bcab584e5d09be"
+      ]
+    },
+    {
+      "package_id": "DEPARTMENT12",
+      "source_manifest": {
+        "path": "docs/audits/CCR_DEPARTMENT12_NATIVE_2026-10-05/RECEIPT.json",
+        "sha256": "0fe5db5e9a7bad4e807caeee73c9b21c5488c7cdebec3c7dbe797884c9277067",
+        "bytes": 21182
+      },
+      "input_plan": {
+        "path": "docs/audits/CCR_DEPARTMENT12_NATIVE_2026-10-05/INPUT.json",
+        "sha256": "2f224f50eca7de3ea8517bcec1eeeaaef91870119fc34dfa644ff03b49e1922b",
+        "bytes": 286
+      },
+      "native_manifest": {
+        "path": "docs/audits/CCR_DEPARTMENT12_NATIVE_2026-10-05/MANIFEST.json",
+        "sha256": "9cd9d74d405022a79bf91fae07a81dbd50ffc28fe511a7eaaa1a0c593daefa4e",
+        "bytes": 61130
+      },
+      "ledger": {
+        "path": "docs/audits/CCR_NATIVE_COMPLETION_2026-10-05/DEPARTMENT12-ORIGINALS.jsonl",
+        "sha256": "67a17f4041710b087943f8a5c6449059900bdb08bf61842eb3c91f1b6a9abecb",
+        "bytes": 23802
+      },
+      "build_command": [
+        "python",
+        "-B",
+        "-m",
+        "geode.pipeline.ccr_source_text",
+        "build",
+        "--plan",
+        "docs/audits/CCR_DEPARTMENT12_NATIVE_2026-10-05/INPUT.json",
+        "--output",
+        ".geode_runtime/ccr-native-completion/department12"
+      ],
+      "verify_command": [
+        "python",
+        "-B",
+        "-m",
+        "geode.pipeline.ccr_source_text",
+        "verify",
+        "--package",
+        ".geode_runtime/ccr-native-completion/department12",
+        "--manifest-sha256",
+        "9cd9d74d405022a79bf91fae07a81dbd50ffc28fe511a7eaaa1a0c593daefa4e"
+      ]
+    },
+    {
+      "package_id": "TRANSPORTATION3475-PDF-ONLY",
+      "source_manifest": null,
+      "input_plan": null,
+      "native_manifest": null,
+      "ledger": {
+        "path": "docs/audits/CCR_NATIVE_COMPLETION_2026-10-05/TRANSPORTATION3475-ORIGINALS.jsonl",
+        "sha256": "61420155d366112cb00a4cb2f161b32a9d6a31407b0770375dcd87f9367066c3",
+        "bytes": 1278
+      },
+      "build_command": [],
+      "verify_command": []
+    }
+  ],
+  "unique_pdf_originals": 1156,
+  "unique_physical_pages": 39460,
+  "added_native_pdfs": 47,
+  "added_native_pages": 503,
+  "transportation_pdf": {
+    "path": "docs/audits/CCR_BASELINE_COVERAGE_2026-10-05/transportation-gap/0011_transportation3475-pdf/response.body",
+    "sha256": "a89f0c2f6a7309d6c73bbf4035a57f92ee29d0b7d9eed963e299aaa62b11cd2a",
+    "bytes": 446038
+  },
+  "legal_currentness": "not_verified",
+  "answer_safe": false,
+  "whole_state_complete": false,
+  "native_status": "machine_extraction_unreviewed"
+}

@@ -1,0 +1,80 @@
+{
+  "$defs": {
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "parent_url": {
+          "const": "https://coprrr.colorado.gov/archive-of-reviews",
+          "default": "https://coprrr.colorado.gov/archive-of-reviews",
+          "title": "Parent Url",
+          "type": "string"
+        },
+        "observed_view_url": {
+          "title": "Observed View Url",
+          "type": "string"
+        },
+        "download_url": {
+          "title": "Download Url",
+          "type": "string"
+        },
+        "inherited_id": {
+          "title": "Inherited Id",
+          "type": "string"
+        },
+        "inherited_sha256": {
+          "title": "Inherited Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "title",
+        "observed_view_url",
+        "download_url",
+        "inherited_id",
+        "inherited_sha256"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "authorization_note": {
+      "title": "Authorization Note",
+      "type": "string"
+    },
+    "root_supplement_sha256": {
+      "title": "Root Supplement Sha256",
+      "type": "string"
+    },
+    "browser_evidence": {
+      "const": "Visible official archive anchor hrefs transcribed from browser DOM tool output",
+      "default": "Visible official archive anchor hrefs transcribed from browser DOM tool output",
+      "title": "Browser Evidence",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "title": "Sources",
+      "type": "array"
+    }
+  },
+  "required": [
+    "authorization_note",
+    "root_supplement_sha256",
+    "sources"
+  ],
+  "title": "Plan",
+  "type": "object"
+}

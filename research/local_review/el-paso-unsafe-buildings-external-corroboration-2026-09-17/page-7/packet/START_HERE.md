@@ -1,0 +1,9 @@
+# EB-PAGE7-2026-09-17-02
+
+Fresh activation. Review only physical page 7 of the eight-page El Paso unsafe-buildings source, SHA256 86eed9d885a9cec1cb01528318f66f8eed525ddb0860655a1983865bfa196d00. The prior job is complete; do not modify it. Page 7 was not assigned in that job. Work offline. Deliver by 21:10 UTC on 2026-09-17; hard stop at 21:20. No next job.
+
+Verify MANIFEST.json and all inputs. Open only 01-source-only/page-7.png before freezing Pass 1. Transcribe all visible wording literally, including every condition, exception, amount, percentage, deadline and cross-reference. Do not summarize. Mark uncertain glyphs and unread regions. Disclose the caption-mediated viewing method; do not claim blind or direct-pixel inspection. Save PASS1_frozen.md and the original crops used. Bind every pre-freeze artifact by hash in a freeze receipt before opening 02-candidate/candidate.txt. A fuller executor reading must be included and hashed before the freeze; later supplements receive no retrospective freeze credit.
+
+Then compare the unchanged native PyMuPDF candidate with the image. Separate extraction errors, source anomalies and method limitations. Preserve Pass 1 and record errata separately. Do not consult Atlas, Ptolemy or Plato reviews or corrections. The review scope is page 7 only.
+
+Save a new attempt under /Users/mcoors/Documents/Project Geode/handoffs/hour-2026-09-17-2037/ebenezer-delivery/. Include all original crops used, the exact candidate, input bindings, Pass 1, freeze receipt, Pass 2, completion receipt and a closed hash inventory. List every payload except the inventory itself and an explicitly named checksum file. Do not modify repository or packet files. legal_currentness: not_verified; review_status: pending_atlas_verification; scope: physical_page_7_only. Stop after delivery.

@@ -1,0 +1,134 @@
+{
+  "$defs": {
+    "Ref": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "citation": {
+      "title": "Citation",
+      "type": "string"
+    },
+    "observed_catalog_title": {
+      "title": "Observed Catalog Title",
+      "type": "string"
+    },
+    "observed_catalog_date": {
+      "title": "Observed Catalog Date",
+      "type": "string"
+    },
+    "official_catalog_url": {
+      "title": "Official Catalog Url",
+      "type": "string"
+    },
+    "catalog_row_index": {
+      "minimum": 0,
+      "title": "Catalog Row Index",
+      "type": "integer"
+    },
+    "delegated_view_url": {
+      "title": "Delegated View Url",
+      "type": "string"
+    },
+    "final_download_url": {
+      "title": "Final Download Url",
+      "type": "string"
+    },
+    "source_received_at": {
+      "format": "date-time",
+      "title": "Source Received At",
+      "type": "string"
+    },
+    "original": {
+      "$ref": "#/$defs/Ref"
+    },
+    "receipt": {
+      "$ref": "#/$defs/Ref"
+    },
+    "physical_pages": {
+      "minimum": 1,
+      "title": "Physical Pages",
+      "type": "integer"
+    },
+    "native_pages": {
+      "minimum": 1,
+      "title": "Native Pages",
+      "type": "integer"
+    },
+    "empty_native_pages": {
+      "minimum": 0,
+      "title": "Empty Native Pages",
+      "type": "integer"
+    },
+    "native_bytes": {
+      "minimum": 0,
+      "title": "Native Bytes",
+      "type": "integer"
+    },
+    "citation_string_observed_in_native": {
+      "title": "Citation String Observed In Native",
+      "type": "boolean"
+    },
+    "source_review": {
+      "const": "machine_native_unreviewed",
+      "default": "machine_native_unreviewed",
+      "title": "Source Review",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "citation",
+    "observed_catalog_title",
+    "observed_catalog_date",
+    "official_catalog_url",
+    "catalog_row_index",
+    "delegated_view_url",
+    "final_download_url",
+    "source_received_at",
+    "original",
+    "receipt",
+    "physical_pages",
+    "native_pages",
+    "empty_native_pages",
+    "native_bytes",
+    "citation_string_observed_in_native"
+  ],
+  "title": "Source",
+  "type": "object"
+}

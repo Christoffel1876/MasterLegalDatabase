@@ -1,0 +1,446 @@
+{
+  "$defs": {
+    "Package": {
+      "additionalProperties": false,
+      "description": "Reproducible source capture and native result commitments.",
+      "properties": {
+        "group": {
+          "title": "Group",
+          "type": "string"
+        },
+        "capture_root": {
+          "title": "Capture Root",
+          "type": "string"
+        },
+        "capture_manifest": {
+          "$ref": "#/$defs/Ref"
+        },
+        "native_manifest": {
+          "$ref": "#/$defs/Ref"
+        },
+        "native_input_plan": {
+          "$ref": "#/$defs/Ref"
+        },
+        "selected_rule_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Selected Rule Ids",
+          "type": "array"
+        },
+        "catalog_agencies": {
+          "const": 18,
+          "title": "Catalog Agencies",
+          "type": "integer"
+        },
+        "agency_listing_rules": {
+          "const": 53,
+          "title": "Agency Listing Rules",
+          "type": "integer"
+        },
+        "capture_rules": {
+          "const": 6,
+          "title": "Capture Rules",
+          "type": "integer"
+        },
+        "pdf_associations": {
+          "const": 6,
+          "title": "Pdf Associations",
+          "type": "integer"
+        },
+        "word_signature_only_associations": {
+          "const": 6,
+          "title": "Word Signature Only Associations",
+          "type": "integer"
+        },
+        "native_unique_pdfs": {
+          "title": "Native Unique Pdfs",
+          "type": "integer"
+        },
+        "native_unique_pages": {
+          "title": "Native Unique Pages",
+          "type": "integer"
+        },
+        "capture_files": {
+          "title": "Capture Files",
+          "type": "integer"
+        },
+        "capture_bytes": {
+          "title": "Capture Bytes",
+          "type": "integer"
+        },
+        "native_build_command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Native Build Command",
+          "type": "array"
+        },
+        "native_verify_command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Native Verify Command",
+          "type": "array"
+        },
+        "native_query_command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Native Query Command",
+          "type": "array"
+        },
+        "source_citation_query": {
+          "title": "Source Citation Query",
+          "type": "string"
+        },
+        "department_complete": {
+          "const": false,
+          "default": false,
+          "title": "Department Complete",
+          "type": "boolean"
+        },
+        "answer_safe": {
+          "const": false,
+          "default": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        }
+      },
+      "required": [
+        "group",
+        "capture_root",
+        "capture_manifest",
+        "native_manifest",
+        "native_input_plan",
+        "selected_rule_ids",
+        "catalog_agencies",
+        "agency_listing_rules",
+        "capture_rules",
+        "pdf_associations",
+        "word_signature_only_associations",
+        "native_unique_pdfs",
+        "native_unique_pages",
+        "capture_files",
+        "capture_bytes",
+        "native_build_command",
+        "native_verify_command",
+        "native_query_command",
+        "source_citation_query"
+      ],
+      "title": "Package",
+      "type": "object"
+    },
+    "Ref": {
+      "additionalProperties": false,
+      "description": "Exact relative member identity; never a private absolute path.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Ref",
+      "type": "object"
+    },
+    "Transport": {
+      "additionalProperties": false,
+      "description": "Sanitized exact terminal claims, not independently witnessed wire traffic.",
+      "properties": {
+        "group": {
+          "title": "Group",
+          "type": "string"
+        },
+        "report_sha256": {
+          "title": "Report Sha256",
+          "type": "string"
+        },
+        "activation_sha256": {
+          "title": "Activation Sha256",
+          "type": "string"
+        },
+        "packet_sha256": {
+          "title": "Packet Sha256",
+          "type": "string"
+        },
+        "started_at_claim": {
+          "title": "Started At Claim",
+          "type": "string"
+        },
+        "stopped_at_claim": {
+          "title": "Stopped At Claim",
+          "type": "string"
+        },
+        "requests": {
+          "const": 12,
+          "title": "Requests",
+          "type": "integer"
+        },
+        "retained_body_bytes": {
+          "title": "Retained Body Bytes",
+          "type": "integer"
+        },
+        "conservative_charged_bytes": {
+          "title": "Conservative Charged Bytes",
+          "type": "integer"
+        },
+        "status": {
+          "const": "complete",
+          "title": "Status",
+          "type": "string"
+        },
+        "source_role": {
+          "const": "two_formats_for_six_source_current_versions",
+          "title": "Source Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "group",
+        "report_sha256",
+        "activation_sha256",
+        "packet_sha256",
+        "started_at_claim",
+        "stopped_at_claim",
+        "requests",
+        "retained_body_bytes",
+        "conservative_charged_bytes",
+        "status",
+        "source_role"
+      ],
+      "title": "Transport",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Measured new research scope; no statewide or legal-currentness certification.",
+  "properties": {
+    "schema_version": {
+      "const": "ccr-ph141-additional-research-2026-09-24-1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "packages": {
+      "items": {
+        "$ref": "#/$defs/Package"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "title": "Packages",
+      "type": "array"
+    },
+    "baseline_index": {
+      "$ref": "#/$defs/Ref"
+    },
+    "baseline_page_sets": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Baseline Page Sets",
+      "type": "array"
+    },
+    "new_page_set": {
+      "$ref": "#/$defs/Ref"
+    },
+    "original_schema": {
+      "$ref": "#/$defs/Ref"
+    },
+    "source_receipts": {
+      "items": {
+        "$ref": "#/$defs/Transport"
+      },
+      "title": "Source Receipts",
+      "type": "array"
+    },
+    "implementation": {
+      "items": {
+        "$ref": "#/$defs/Ref"
+      },
+      "title": "Implementation",
+      "type": "array"
+    },
+    "selected_new_rule_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Selected New Rule Ids",
+      "type": "array"
+    },
+    "previous_ph141_rule_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Previous Ph141 Rule Ids",
+      "type": "array"
+    },
+    "ph141_union_rule_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Ph141 Union Rule Ids",
+      "type": "array"
+    },
+    "ph141_unselected_rule_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Ph141 Unselected Rule Ids",
+      "type": "array"
+    },
+    "previous_unique_pdfs": {
+      "const": 1009,
+      "default": 1009,
+      "title": "Previous Unique Pdfs",
+      "type": "integer"
+    },
+    "previous_unique_pages": {
+      "const": 32050,
+      "default": 32050,
+      "title": "Previous Unique Pages",
+      "type": "integer"
+    },
+    "new_unique_pdfs": {
+      "title": "New Unique Pdfs",
+      "type": "integer"
+    },
+    "new_unique_pages": {
+      "title": "New Unique Pages",
+      "type": "integer"
+    },
+    "overlapping_pdf_hashes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Overlapping Pdf Hashes",
+      "type": "array"
+    },
+    "overlapping_physical_pages": {
+      "title": "Overlapping Physical Pages",
+      "type": "integer"
+    },
+    "overlapping_text_equal": {
+      "const": true,
+      "default": true,
+      "title": "Overlapping Text Equal",
+      "type": "boolean"
+    },
+    "union_unique_pdfs": {
+      "title": "Union Unique Pdfs",
+      "type": "integer"
+    },
+    "union_unique_pages": {
+      "title": "Union Unique Pages",
+      "type": "integer"
+    },
+    "previous_packages": {
+      "const": 23,
+      "default": 23,
+      "title": "Previous Packages",
+      "type": "integer"
+    },
+    "resulting_packages": {
+      "const": 25,
+      "default": 25,
+      "title": "Resulting Packages",
+      "type": "integer"
+    },
+    "new_requests_recorded": {
+      "const": 24,
+      "default": 24,
+      "title": "New Requests Recorded",
+      "type": "integer"
+    },
+    "new_retained_body_bytes": {
+      "const": 32200357,
+      "default": 32200357,
+      "title": "New Retained Body Bytes",
+      "type": "integer"
+    },
+    "native_status": {
+      "const": "machine_extraction_unreviewed",
+      "default": "machine_extraction_unreviewed",
+      "title": "Native Status",
+      "type": "string"
+    },
+    "department_complete": {
+      "const": false,
+      "default": false,
+      "title": "Department Complete",
+      "type": "boolean"
+    },
+    "statewide_complete": {
+      "const": false,
+      "default": false,
+      "title": "Statewide Complete",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "prepared_at",
+    "packages",
+    "baseline_index",
+    "baseline_page_sets",
+    "new_page_set",
+    "original_schema",
+    "source_receipts",
+    "implementation",
+    "selected_new_rule_ids",
+    "previous_ph141_rule_ids",
+    "ph141_union_rule_ids",
+    "ph141_unselected_rule_ids",
+    "new_unique_pdfs",
+    "new_unique_pages",
+    "overlapping_pdf_hashes",
+    "overlapping_physical_pages",
+    "union_unique_pdfs",
+    "union_unique_pages",
+    "limitations"
+  ],
+  "title": "Index",
+  "type": "object"
+}

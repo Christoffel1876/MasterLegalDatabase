@@ -1,0 +1,722 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact relative payload identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "DateStatement": {
+      "additionalProperties": false,
+      "description": "Printed source date qualified by its actual role.",
+      "properties": {
+        "literal": {
+          "const": "Effective 12/12/2017",
+          "title": "Literal",
+          "type": "string"
+        },
+        "role": {
+          "const": "source_stated_effective_date_unverified",
+          "title": "Role",
+          "type": "string"
+        },
+        "passage_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Passage Ids",
+          "type": "array"
+        },
+        "operative_date_certified": {
+          "const": false,
+          "title": "Operative Date Certified",
+          "type": "boolean"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "literal",
+        "role",
+        "passage_ids",
+        "operative_date_certified",
+        "qualification"
+      ],
+      "title": "DateStatement",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "description": "Preserved source anomaly, structural risk or uncertainty.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            "source_anomaly",
+            "structure",
+            "date_role",
+            "extraction_whitespace",
+            "exception_scope",
+            "encoding_limit"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "passage_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Passage Ids",
+          "type": "array"
+        },
+        "finding": {
+          "title": "Finding",
+          "type": "string"
+        },
+        "candidate_change_required": {
+          "const": false,
+          "title": "Candidate Change Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "category",
+        "passage_ids",
+        "finding",
+        "candidate_change_required"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "Line": {
+      "additionalProperties": false,
+      "description": "Every native byte belongs to one unchanged physical-page line.",
+      "properties": {
+        "number": {
+          "minimum": 1,
+          "title": "Number",
+          "type": "integer"
+        },
+        "native_span": {
+          "$ref": "#/$defs/Span"
+        },
+        "candidate_span": {
+          "$ref": "#/$defs/Span"
+        },
+        "raw_text": {
+          "title": "Raw Text",
+          "type": "string"
+        },
+        "passage_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Passage Id"
+        },
+        "whitespace_only": {
+          "title": "Whitespace Only",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "number",
+        "native_span",
+        "candidate_span",
+        "raw_text",
+        "passage_id",
+        "whitespace_only"
+      ],
+      "title": "Line",
+      "type": "object"
+    },
+    "Link": {
+      "additionalProperties": false,
+      "description": "Source structure continuing across physical pages, not an inferred legal chain.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "paragraph_continues",
+            "heading_to_body"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "from_id": {
+          "title": "From Id",
+          "type": "string"
+        },
+        "to_id": {
+          "title": "To Id",
+          "type": "string"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "from_id",
+        "to_id",
+        "note"
+      ],
+      "title": "Link",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "Complete physical page image and unchanged extraction.",
+      "properties": {
+        "physical_page": {
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "width_px": {
+          "const": 2550,
+          "title": "Width Px",
+          "type": "integer"
+        },
+        "height_px": {
+          "const": 3300,
+          "title": "Height Px",
+          "type": "integer"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "candidate_span": {
+          "$ref": "#/$defs/Span"
+        },
+        "native_lines": {
+          "items": {
+            "$ref": "#/$defs/Line"
+          },
+          "title": "Native Lines",
+          "type": "array"
+        },
+        "checked_passage_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Checked Passage Ids",
+          "type": "array"
+        },
+        "visual_order": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Visual Order",
+          "type": "array"
+        },
+        "coverage": {
+          "title": "Coverage",
+          "type": "string"
+        },
+        "full_image_directly_viewed": {
+          "const": true,
+          "title": "Full Image Directly Viewed",
+          "type": "boolean"
+        },
+        "unchecked_substantive_regions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Unchecked Substantive Regions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "width_px",
+        "height_px",
+        "native",
+        "candidate_span",
+        "native_lines",
+        "checked_passage_ids",
+        "visual_order",
+        "coverage",
+        "full_image_directly_viewed",
+        "unchecked_substantive_regions"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Passage": {
+      "additionalProperties": false,
+      "description": "Image-checked wording; whitespace normalization is explicitly separate.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "page": {
+          "maximum": 7,
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "document_title",
+            "section_heading",
+            "paragraph",
+            "page_header",
+            "page_footer",
+            "footer_date"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "section": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Section"
+        },
+        "logical_unit_id": {
+          "title": "Logical Unit Id",
+          "type": "string"
+        },
+        "label_as_printed": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Label As Printed"
+        },
+        "parent_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Parent Id"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_span": {
+          "$ref": "#/$defs/Span"
+        },
+        "candidate_span": {
+          "$ref": "#/$defs/Span"
+        },
+        "native_line_start": {
+          "title": "Native Line Start",
+          "type": "integer"
+        },
+        "native_line_end": {
+          "title": "Native Line End",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "visible_markup": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Visible Markup",
+          "type": "array"
+        },
+        "crop_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Crop Ids",
+          "type": "array"
+        },
+        "notes": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "page",
+        "kind",
+        "section",
+        "logical_unit_id",
+        "label_as_printed",
+        "parent_id",
+        "image",
+        "native",
+        "native_span",
+        "candidate_span",
+        "native_line_start",
+        "native_line_end",
+        "text",
+        "visible_markup",
+        "crop_ids",
+        "notes"
+      ],
+      "title": "Passage",
+      "type": "object"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "description": "Actual repository receipt separate from supplied HTTP claims.",
+      "properties": {
+        "acquisition_method": {
+          "const": "received_review_package",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "original_http_independently_verified": {
+          "const": false,
+          "title": "Original Http Independently Verified",
+          "type": "boolean"
+        },
+        "verified_http_acquired_at": {
+          "title": "Verified Http Acquired At",
+          "type": "null"
+        },
+        "supplied_url": {
+          "title": "Supplied Url",
+          "type": "string"
+        },
+        "supplied_final_url": {
+          "title": "Supplied Final Url",
+          "type": "string"
+        },
+        "source_referral_evidence": {
+          "title": "Source Referral Evidence",
+          "type": "string"
+        },
+        "public_headers": {
+          "$ref": "#/$defs/Asset"
+        },
+        "supplied_acquisition_started_at": {
+          "format": "date-time",
+          "title": "Supplied Acquisition Started At",
+          "type": "string"
+        },
+        "supplied_acquisition_completed_at": {
+          "format": "date-time",
+          "title": "Supplied Acquisition Completed At",
+          "type": "string"
+        },
+        "repository_received_at": {
+          "format": "date-time",
+          "title": "Repository Received At",
+          "type": "string"
+        },
+        "canonical_path_claim": {
+          "title": "Canonical Path Claim",
+          "type": "string"
+        },
+        "canonical_record": {
+          "$ref": "#/$defs/Asset"
+        },
+        "selected_source_provenance": {
+          "$ref": "#/$defs/Asset"
+        },
+        "intake_receipt": {
+          "$ref": "#/$defs/Asset"
+        },
+        "intake_intent": {
+          "$ref": "#/$defs/Asset"
+        }
+      },
+      "required": [
+        "acquisition_method",
+        "original_http_independently_verified",
+        "verified_http_acquired_at",
+        "supplied_url",
+        "supplied_final_url",
+        "source_referral_evidence",
+        "public_headers",
+        "supplied_acquisition_started_at",
+        "supplied_acquisition_completed_at",
+        "repository_received_at",
+        "canonical_path_claim",
+        "canonical_record",
+        "selected_source_provenance",
+        "intake_receipt",
+        "intake_intent"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "Span": {
+      "additionalProperties": false,
+      "description": "Half-open UTF-8 byte range of the named parent asset.",
+      "properties": {
+        "start": {
+          "minimum": 0,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "minimum": 0,
+          "title": "End",
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "sha256"
+      ],
+      "title": "Span",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Full seven-page source fidelity, not current or answer-safe legal evidence.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "source_id": {
+      "const": "el-paso-ldc-chapter-2-sd011",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-EL_PASO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "layer": {
+      "const": "08_County_Authorities",
+      "title": "Layer",
+      "type": "string"
+    },
+    "issuer": {
+      "title": "Issuer",
+      "type": "string"
+    },
+    "source_role": {
+      "title": "Source Role",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "status": {
+      "const": "complete_candidate_aware_source_fidelity_review_pending_atlas_acceptance",
+      "title": "Status",
+      "type": "string"
+    },
+    "review_kind": {
+      "const": "checked_passages",
+      "title": "Review Kind",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "reviewer": {
+      "const": "Plato",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "reviewed_at": {
+      "format": "date-time",
+      "title": "Reviewed At",
+      "type": "string"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "prior_exposure": {
+      "title": "Prior Exposure",
+      "type": "string"
+    },
+    "external_reports_consulted": {
+      "const": false,
+      "title": "External Reports Consulted",
+      "type": "boolean"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    },
+    "normalization": {
+      "title": "Normalization",
+      "type": "string"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Asset"
+    },
+    "packet_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "packet_preparation": {
+      "$ref": "#/$defs/Asset"
+    },
+    "inspection": {
+      "$ref": "#/$defs/Asset"
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "checked_passages": {
+      "items": {
+        "$ref": "#/$defs/Passage"
+      },
+      "title": "Checked Passages",
+      "type": "array"
+    },
+    "structural_links": {
+      "items": {
+        "$ref": "#/$defs/Link"
+      },
+      "title": "Structural Links",
+      "type": "array"
+    },
+    "dates": {
+      "items": {
+        "$ref": "#/$defs/DateStatement"
+      },
+      "title": "Dates",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "substantive_candidate_corrections": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Substantive Candidate Corrections",
+      "type": "array"
+    },
+    "table_count": {
+      "const": 0,
+      "title": "Table Count",
+      "type": "integer"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "source_id",
+    "authority_id",
+    "layer",
+    "issuer",
+    "source_role",
+    "source",
+    "status",
+    "review_kind",
+    "legal_currentness",
+    "answer_safe",
+    "reviewer",
+    "reviewed_at",
+    "method",
+    "prior_exposure",
+    "external_reports_consulted",
+    "scope",
+    "normalization",
+    "candidate",
+    "packet_manifest",
+    "packet_preparation",
+    "inspection",
+    "provenance",
+    "pages",
+    "checked_passages",
+    "structural_links",
+    "dates",
+    "findings",
+    "substantive_candidate_corrections",
+    "table_count",
+    "limitations"
+  ],
+  "title": "Review",
+  "type": "object"
+}

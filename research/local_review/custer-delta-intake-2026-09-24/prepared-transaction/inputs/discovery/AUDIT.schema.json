@@ -1,0 +1,323 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Digest/size only; never embed received body/header values in this receipt.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "description": "Bounded artifact evidence and its practical limitation.",
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "blocking",
+            "qualification",
+            "observation"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "action_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Action Ids",
+          "type": "array"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "evidence_paths": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Paths",
+          "type": "array"
+        }
+      },
+      "required": [
+        "code",
+        "severity",
+        "action_ids",
+        "description",
+        "evidence_paths"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "Pdf": {
+      "additionalProperties": false,
+      "description": "Physical parse and exact explicit-field deduplication, without visual review.",
+      "properties": {
+        "action_id": {
+          "title": "Action Id",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Asset"
+        },
+        "pages": {
+          "minimum": 1,
+          "title": "Pages",
+          "type": "integer"
+        },
+        "legacy_source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Legacy Source Ids",
+          "type": "array"
+        },
+        "manual_record_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Manual Record Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "action_id",
+        "source",
+        "pages",
+        "legacy_source_ids",
+        "manual_record_ids"
+      ],
+      "title": "Pdf",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One closed delivered packet audited without public activity.",
+  "properties": {
+    "assignment_id": {
+      "const": "SH-STATE-20260923-03",
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string"
+    },
+    "root_reported_dispatch_at": {
+      "format": "date-time",
+      "title": "Root Reported Dispatch At",
+      "type": "string"
+    },
+    "disposition": {
+      "enum": [
+        "qualified_discovery_only",
+        "blocked_incomplete_integrity"
+      ],
+      "title": "Disposition",
+      "type": "string"
+    },
+    "external_pins": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "External Pins",
+      "type": "array"
+    },
+    "payload_files": {
+      "minimum": 0,
+      "title": "Payload Files",
+      "type": "integer"
+    },
+    "actual_files": {
+      "minimum": 0,
+      "title": "Actual Files",
+      "type": "integer"
+    },
+    "checksum_entries": {
+      "minimum": 0,
+      "title": "Checksum Entries",
+      "type": "integer"
+    },
+    "actions": {
+      "maximum": 30,
+      "minimum": 0,
+      "title": "Actions",
+      "type": "integer"
+    },
+    "distinct_requested_urls": {
+      "maximum": 24,
+      "minimum": 0,
+      "title": "Distinct Requested Urls",
+      "type": "integer"
+    },
+    "retained_response_bytes": {
+      "maximum": 40000000,
+      "minimum": 0,
+      "title": "Retained Response Bytes",
+      "type": "integer"
+    },
+    "transfer_bytes": {
+      "minimum": 0,
+      "title": "Transfer Bytes",
+      "type": "integer"
+    },
+    "first_reserved_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "First Reserved At"
+    },
+    "last_finished_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Last Finished At"
+    },
+    "pending_actions": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Pending Actions",
+      "type": "integer"
+    },
+    "original_href_replays": {
+      "minimum": 0,
+      "title": "Original Href Replays",
+      "type": "integer"
+    },
+    "original_location_replays": {
+      "minimum": 0,
+      "title": "Original Location Replays",
+      "type": "integer"
+    },
+    "category_cells": {
+      "const": 48,
+      "title": "Category Cells",
+      "type": "integer"
+    },
+    "selected_legacy_rows": {
+      "const": 767,
+      "title": "Selected Legacy Rows",
+      "type": "integer"
+    },
+    "full_legacy_rows": {
+      "const": 48390,
+      "title": "Full Legacy Rows",
+      "type": "integer"
+    },
+    "manual_rows": {
+      "const": 71,
+      "title": "Manual Rows",
+      "type": "integer"
+    },
+    "pdfs": {
+      "items": {
+        "$ref": "#/$defs/Pdf"
+      },
+      "title": "Pdfs",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "passed_checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Passed Checks",
+      "type": "array"
+    },
+    "direct_transport_witnessed_by_auditor": {
+      "const": false,
+      "default": false,
+      "title": "Direct Transport Witnessed By Auditor",
+      "type": "boolean"
+    },
+    "source_visual_review_performed": {
+      "const": false,
+      "default": false,
+      "title": "Source Visual Review Performed",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "assignment_id",
+    "observed_at",
+    "root_reported_dispatch_at",
+    "disposition",
+    "external_pins",
+    "payload_files",
+    "actual_files",
+    "checksum_entries",
+    "actions",
+    "distinct_requested_urls",
+    "retained_response_bytes",
+    "transfer_bytes",
+    "first_reserved_at",
+    "last_finished_at",
+    "pending_actions",
+    "original_href_replays",
+    "original_location_replays",
+    "category_cells",
+    "selected_legacy_rows",
+    "full_legacy_rows",
+    "manual_rows",
+    "pdfs",
+    "findings",
+    "passed_checks"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

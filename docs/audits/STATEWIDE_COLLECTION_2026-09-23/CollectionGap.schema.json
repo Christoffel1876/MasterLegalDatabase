@@ -1,0 +1,74 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "record_id": {
+      "title": "Record Id",
+      "type": "string"
+    },
+    "layer_id": {
+      "title": "Layer Id",
+      "type": "string"
+    },
+    "status": {
+      "const": "blocked",
+      "default": "blocked",
+      "title": "Status",
+      "type": "string"
+    },
+    "kind": {
+      "const": "collection_scope",
+      "default": "collection_scope",
+      "title": "Kind",
+      "type": "string"
+    },
+    "priority": {
+      "const": "high",
+      "default": "high",
+      "title": "Priority",
+      "type": "string"
+    },
+    "official_listing_url": {
+      "title": "Official Listing Url",
+      "type": "string"
+    },
+    "block_reason": {
+      "title": "Block Reason",
+      "type": "string"
+    },
+    "next_action": {
+      "title": "Next Action",
+      "type": "string"
+    },
+    "evidence_path": {
+      "title": "Evidence Path",
+      "type": "string"
+    },
+    "observed_at": {
+      "title": "Observed At",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "legal_absence_inferred": {
+      "const": false,
+      "default": false,
+      "title": "Legal Absence Inferred",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "record_id",
+    "layer_id",
+    "official_listing_url",
+    "block_reason",
+    "next_action",
+    "evidence_path",
+    "observed_at"
+  ],
+  "title": "Gap",
+  "type": "object"
+}

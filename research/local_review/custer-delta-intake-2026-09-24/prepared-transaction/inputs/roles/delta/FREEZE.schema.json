@@ -1,0 +1,65 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Repository-relative exact file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "frozen_at": {
+      "title": "Frozen At",
+      "type": "string"
+    },
+    "notes": {
+      "$ref": "#/$defs/Asset"
+    },
+    "method": {
+      "const": "source_first_direct_image_review_with_prior_queue_context",
+      "title": "Method",
+      "type": "string"
+    },
+    "native_text_opened": {
+      "const": false,
+      "default": false,
+      "title": "Native Text Opened",
+      "type": "boolean"
+    },
+    "full_pages_inspected": {
+      "const": 3,
+      "default": 3,
+      "title": "Full Pages Inspected",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "frozen_at",
+    "notes",
+    "method"
+  ],
+  "title": "Freeze",
+  "type": "object"
+}

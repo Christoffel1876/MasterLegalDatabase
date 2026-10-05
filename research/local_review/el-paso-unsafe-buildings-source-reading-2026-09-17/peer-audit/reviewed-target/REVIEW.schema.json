@@ -1,0 +1,278 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Identify exact retained bytes relative to this package.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Finding": {
+      "additionalProperties": false,
+      "description": "A bounded extraction defect or preserved source observation.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "page": {
+          "maximum": 8,
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "location": {
+          "title": "Location",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "extraction_error",
+            "source_anomaly",
+            "unresolved",
+            "structure"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "impact": {
+          "enum": [
+            "substantive",
+            "metadata",
+            "cosmetic",
+            "none"
+          ],
+          "title": "Impact",
+          "type": "string"
+        },
+        "candidate_excerpt": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Candidate Excerpt"
+        },
+        "candidate_character_start": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Candidate Character Start"
+        },
+        "candidate_character_end": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Candidate Character End"
+        },
+        "image_supported_reading": {
+          "title": "Image Supported Reading",
+          "type": "string"
+        },
+        "qualification": {
+          "title": "Qualification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "page",
+        "location",
+        "kind",
+        "impact",
+        "candidate_excerpt",
+        "candidate_character_start",
+        "candidate_character_end",
+        "image_supported_reading",
+        "qualification"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "Complete page identity and actual inspection scope.",
+      "properties": {
+        "physical_page": {
+          "maximum": 8,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_text_characters": {
+          "title": "Native Text Characters",
+          "type": "integer"
+        },
+        "directly_displayed": {
+          "const": true,
+          "title": "Directly Displayed",
+          "type": "boolean"
+        },
+        "scope": {
+          "title": "Scope",
+          "type": "string"
+        },
+        "remaining_uncertainties": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Remaining Uncertainties",
+          "type": "array"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "native_text_characters",
+        "directly_displayed",
+        "scope",
+        "remaining_uncertainties"
+      ],
+      "title": "Page",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Research findings, explicitly not a current-law or full-glyph certificate.",
+  "properties": {
+    "source_id": {
+      "const": "el-paso-unsafe-buildings-18-03-sd011",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-EL_PASO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "canonical_record": {
+      "$ref": "#/$defs/Asset"
+    },
+    "native_candidate": {
+      "$ref": "#/$defs/Asset"
+    },
+    "corrected_reading": {
+      "$ref": "#/$defs/Asset"
+    },
+    "inspected_pages": {
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "title": "Inspected Pages",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "reviewer": {
+      "const": "Atlas",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "review_date": {
+      "const": "2026-09-17",
+      "title": "Review Date",
+      "type": "string"
+    },
+    "status": {
+      "const": "candidate_defects_confirmed_research_derivative_pending_peer_review",
+      "title": "Status",
+      "type": "string"
+    },
+    "review_method": {
+      "title": "Review Method",
+      "type": "string"
+    },
+    "acquisition_method": {
+      "const": "received_review_package",
+      "title": "Acquisition Method",
+      "type": "string"
+    },
+    "original_http_independently_verified": {
+      "const": false,
+      "title": "Original Http Independently Verified",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "source_id",
+    "authority_id",
+    "source",
+    "canonical_record",
+    "native_candidate",
+    "corrected_reading",
+    "inspected_pages",
+    "findings",
+    "reviewer",
+    "review_date",
+    "status",
+    "review_method",
+    "acquisition_method",
+    "original_http_independently_verified",
+    "legal_currentness",
+    "answer_safe",
+    "limitations"
+  ],
+  "title": "Review",
+  "type": "object"
+}

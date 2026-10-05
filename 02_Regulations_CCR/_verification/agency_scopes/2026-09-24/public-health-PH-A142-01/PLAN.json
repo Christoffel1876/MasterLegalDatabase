@@ -1,0 +1,463 @@
+{
+  "schema_version": "ccr-agency-selection-plan-2",
+  "department_id": "16",
+  "provenance_sha256": [
+    "ca5bf6f6fd064e06b0151694b25c543d6b4c0fd614cb9f304ca9ee1f47d08646",
+    "3959482c9b6a86dba6fef94ed8a3f5e4ff827f7e1f6f93b604e08f6c02081de6",
+    "9ba44d36e832974e23af71cd9182e97e5d7cc8f902f863fbf1c5e546a263691b",
+    "3c51b8641a66bffd5592c3dbbb75c1e3a9bdd3e88a59bc85efed5a67f4d34496",
+    "fa84dcb33b441452b2d48dce9eb8730359a0150a136619a79bc6577c23a3e93c",
+    "fe10a6d77c5093783151a9a31afba3ce9d20c55f9a1532a426a517ff60d1207a"
+  ],
+  "selections": [
+    {
+      "agency_id": "142",
+      "rule_id": "2415"
+    },
+    {
+      "agency_id": "142",
+      "rule_id": "2416"
+    },
+    {
+      "agency_id": "142",
+      "rule_id": "2420"
+    },
+    {
+      "agency_id": "142",
+      "rule_id": "2422"
+    },
+    {
+      "agency_id": "142",
+      "rule_id": "2908"
+    },
+    {
+      "agency_id": "142",
+      "rule_id": "3251"
+    }
+  ],
+  "responses": [
+    {
+      "association_id": "E0001",
+      "role": "welcome",
+      "parent_id": null,
+      "body": {
+        "path": "bodies/ada752cff759490f2ed16c3cf24c08d5e6c7692d275ecefad604e323c854fc32.bin",
+        "sha256": "ada752cff759490f2ed16c3cf24c08d5e6c7692d275ecefad604e323c854fc32",
+        "bytes": 9724
+      },
+      "claim": {
+        "receipt_sha256": "db56061ab7f65ab1e9fe3435a48a8bd68868e050621662a0081e5e474ff6c5bc",
+        "requested_url": "https://www.sos.state.co.us/CCR/Welcome.do",
+        "observed_final_url": null,
+        "started_at": "2026-09-23T18:42:28.429444Z",
+        "finished_at": "2026-09-23T18:42:28.605057Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 9724
+      }
+    },
+    {
+      "association_id": "E0002",
+      "role": "catalog",
+      "parent_id": "E0001",
+      "body": {
+        "path": "bodies/cf9abccf2117abbef58612a99849ae6dea89c096f511956bf5a1aff34e9f830b.bin",
+        "sha256": "cf9abccf2117abbef58612a99849ae6dea89c096f511956bf5a1aff34e9f830b",
+        "bytes": 132585
+      },
+      "claim": {
+        "receipt_sha256": "d26819b3980e2bfb8f11bf921576c2a8434c0151202f61c7906dd5e60d8c4813",
+        "requested_url": "https://www.sos.state.co.us/CCR/NumericalDeptList.do",
+        "observed_final_url": null,
+        "started_at": "2026-09-23T18:42:29.612910Z",
+        "finished_at": "2026-09-23T18:42:29.892301Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 132585
+      }
+    },
+    {
+      "association_id": "listing-142",
+      "role": "listing",
+      "parent_id": "E0002",
+      "body": {
+        "path": "bodies/64b9f41cb294464d96159dace836b6f080ab859294383f7276acfaf8310a59df.bin",
+        "sha256": "64b9f41cb294464d96159dace836b6f080ab859294383f7276acfaf8310a59df",
+        "bytes": 10297
+      },
+      "claim": {
+        "receipt_sha256": "cefd9b7e0410520016b5e2a4fa44251d8f85fb354b2a68e932a862735def0455",
+        "requested_url": "https://www.sos.state.co.us/CCR/NumericalCCRDocList.do?deptID=16&deptName=1000%20Department%20of%20Public%20Health%20and%20Environment&agencyID=142&agencyName=1009%20Division%20of%20Disease%20Control%20and%20Public%20Health%20Response",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/NumericalCCRDocList.do?deptID=16&deptName=1000%20Department%20of%20Public%20Health%20and%20Environment&agencyID=142&agencyName=1009%20Division%20of%20Disease%20Control%20and%20Public%20Health%20Response",
+        "started_at": "2026-09-23T21:05:05.153904Z",
+        "finished_at": "2026-09-23T21:05:05.604161Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 10297
+      }
+    },
+    {
+      "association_id": "history-2415",
+      "role": "history",
+      "parent_id": "listing-142",
+      "body": {
+        "path": "bodies/d7a18cbf873e48a7cd1bca8b8284d82767de9ca963e1558c9410a0347d9181aa.bin",
+        "sha256": "d7a18cbf873e48a7cd1bca8b8284d82767de9ca963e1558c9410a0347d9181aa",
+        "bytes": 34156
+      },
+      "claim": {
+        "receipt_sha256": "2b5622f65f659e58e944de19ca87c790ce6790b28ed168959689179ba725f11d",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2415&deptID=16&agencyID=142&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Division%20of%20Disease%20Control%20and%20Public%20Health%20Response&seriesNum=6%20CCR%201009-1",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2415&deptID=16&agencyID=142&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Division%20of%20Disease%20Control%20and%20Public%20Health%20Response&seriesNum=6%20CCR%201009-1",
+        "started_at": "2026-09-23T21:29:13.730055Z",
+        "finished_at": "2026-09-23T21:29:13.998900Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 34156
+      }
+    },
+    {
+      "association_id": "document-1",
+      "role": "pdf",
+      "parent_id": "history-2415",
+      "body": {
+        "path": "bodies/16b57b80d7c0bec13a05f638ca7fac3ffb5c631c97ccb513c0d284b866041d10.bin",
+        "sha256": "16b57b80d7c0bec13a05f638ca7fac3ffb5c631c97ccb513c0d284b866041d10",
+        "bytes": 801215
+      },
+      "claim": {
+        "receipt_sha256": "8275fbe1118ccde9503be934e01d7e8876ca8d91c2267db8a73705e554583e27",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=12431&fileName=6%20CCR%201009-1",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=12431&fileName=6%20CCR%201009-1",
+        "started_at": "2026-09-24T17:25:06.734199Z",
+        "finished_at": "2026-09-24T17:25:07.007479Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 801215
+      }
+    },
+    {
+      "association_id": "document-2",
+      "role": "word",
+      "parent_id": "history-2415",
+      "body": {
+        "path": "bodies/e4f87ae31c1859386ded552af46327c385e2c43f62262c327ea20a11449ac051.bin",
+        "sha256": "e4f87ae31c1859386ded552af46327c385e2c43f62262c327ea20a11449ac051",
+        "bytes": 369152
+      },
+      "claim": {
+        "receipt_sha256": "c505146d5c5550aeb9820acc5457b1d414570ee428076b2e8b35a835c8ed3534",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=12431&fileName=6%20CCR%201009-1",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=12431&fileName=6%20CCR%201009-1",
+        "started_at": "2026-09-24T17:25:07.035257Z",
+        "finished_at": "2026-09-24T17:25:07.299208Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 369152
+      }
+    },
+    {
+      "association_id": "history-2416",
+      "role": "history",
+      "parent_id": "listing-142",
+      "body": {
+        "path": "bodies/18578dcc74335f84120e5c842736a9ad5651b715ef293cd342e92341b300700e.bin",
+        "sha256": "18578dcc74335f84120e5c842736a9ad5651b715ef293cd342e92341b300700e",
+        "bytes": 33311
+      },
+      "claim": {
+        "receipt_sha256": "07539010e7440112e48c2181967a16c8ce32575c316c52d9220dba496aab0109",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2416&deptID=16&agencyID=142&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Division%20of%20Disease%20Control%20and%20Public%20Health%20Response&seriesNum=6%20CCR%201009-2",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2416&deptID=16&agencyID=142&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Division%20of%20Disease%20Control%20and%20Public%20Health%20Response&seriesNum=6%20CCR%201009-2",
+        "started_at": "2026-09-23T21:29:14.159437Z",
+        "finished_at": "2026-09-23T21:29:14.372072Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 33311
+      }
+    },
+    {
+      "association_id": "document-3",
+      "role": "pdf",
+      "parent_id": "history-2416",
+      "body": {
+        "path": "bodies/1fd3f595800087d003c6a441f20740682d028ed82f47031040a15cb255fdd18b.bin",
+        "sha256": "1fd3f595800087d003c6a441f20740682d028ed82f47031040a15cb255fdd18b",
+        "bytes": 464119
+      },
+      "claim": {
+        "receipt_sha256": "cc1cadbced9f65d3e5af24fd284a91f6b27d2f7b1ec7c47e0fca2c64c7007d5f",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=12392&fileName=6%20CCR%201009-2",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=12392&fileName=6%20CCR%201009-2",
+        "started_at": "2026-09-24T17:25:07.311119Z",
+        "finished_at": "2026-09-24T17:25:07.605579Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 464119
+      }
+    },
+    {
+      "association_id": "document-4",
+      "role": "word",
+      "parent_id": "history-2416",
+      "body": {
+        "path": "bodies/414ded56ffb33844ec6ad6880bb2ec4dee4c85b6302afdc8374d87d1459e07ae.bin",
+        "sha256": "414ded56ffb33844ec6ad6880bb2ec4dee4c85b6302afdc8374d87d1459e07ae",
+        "bytes": 101376
+      },
+      "claim": {
+        "receipt_sha256": "c85bbb4d0d29cd757970eb1d5fdb3a7f5a932e34e703dc17052f3c103ec5b178",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=12392&fileName=6%20CCR%201009-2",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=12392&fileName=6%20CCR%201009-2",
+        "started_at": "2026-09-24T17:25:07.620178Z",
+        "finished_at": "2026-09-24T17:25:07.851683Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 101376
+      }
+    },
+    {
+      "association_id": "history-2420",
+      "role": "history",
+      "parent_id": "listing-142",
+      "body": {
+        "path": "bodies/bc152c677e2dd8ec9498c135458ea4054478dc04ae8511c6fae821cf067a3e75.bin",
+        "sha256": "bc152c677e2dd8ec9498c135458ea4054478dc04ae8511c6fae821cf067a3e75",
+        "bytes": 18329
+      },
+      "claim": {
+        "receipt_sha256": "bb99d014ba29834099055cf182245c7c98839c5993a2edc954103de91d1f7790",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2420&deptID=16&agencyID=142&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Division%20of%20Disease%20Control%20and%20Public%20Health%20Response&seriesNum=6%20CCR%201009-7",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2420&deptID=16&agencyID=142&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Division%20of%20Disease%20Control%20and%20Public%20Health%20Response&seriesNum=6%20CCR%201009-7",
+        "started_at": "2026-09-23T21:29:14.445466Z",
+        "finished_at": "2026-09-23T21:29:14.677984Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 18329
+      }
+    },
+    {
+      "association_id": "document-5",
+      "role": "pdf",
+      "parent_id": "history-2420",
+      "body": {
+        "path": "bodies/f4996f97343bd5793b7d664365084410726cf0fbaa74ca9027dcc910abab50f6.bin",
+        "sha256": "f4996f97343bd5793b7d664365084410726cf0fbaa74ca9027dcc910abab50f6",
+        "bytes": 336331
+      },
+      "claim": {
+        "receipt_sha256": "f31c762fafa7a83d4ffe8a873cdde0ea9f8464f25015adb57f1f9bd0cdbcb9d1",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=11836&fileName=6%20CCR%201009-7",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=11836&fileName=6%20CCR%201009-7",
+        "started_at": "2026-09-24T17:25:07.861452Z",
+        "finished_at": "2026-09-24T17:25:08.163590Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 336331
+      }
+    },
+    {
+      "association_id": "document-6",
+      "role": "word",
+      "parent_id": "history-2420",
+      "body": {
+        "path": "bodies/dd4565ebe8ed08f008278890e1da3436952ceedf8e0c5709a365b46ed9634c5a.bin",
+        "sha256": "dd4565ebe8ed08f008278890e1da3436952ceedf8e0c5709a365b46ed9634c5a",
+        "bytes": 72192
+      },
+      "claim": {
+        "receipt_sha256": "ed8da77624fb8ab6d10922ae95cc55dee9f88d2186e9ad71f46665b6679f1f22",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=11836&fileName=6%20CCR%201009-7",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=11836&fileName=6%20CCR%201009-7",
+        "started_at": "2026-09-24T17:25:08.178528Z",
+        "finished_at": "2026-09-24T17:25:08.339985Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 72192
+      }
+    },
+    {
+      "association_id": "history-2422",
+      "role": "history",
+      "parent_id": "listing-142",
+      "body": {
+        "path": "bodies/f6c6d9d4d80033e7563d5b14970f460557e5907b2bce3cda4771804b657da4fe.bin",
+        "sha256": "f6c6d9d4d80033e7563d5b14970f460557e5907b2bce3cda4771804b657da4fe",
+        "bytes": 16318
+      },
+      "claim": {
+        "receipt_sha256": "d55ca3d9b40c9105a653ed4d9aefbc3c2c43547efbb0dce11918325ad1d57038",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2422&deptID=16&agencyID=142&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Division%20of%20Disease%20Control%20and%20Public%20Health%20Response&seriesNum=6%20CCR%201009-9",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2422&deptID=16&agencyID=142&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Division%20of%20Disease%20Control%20and%20Public%20Health%20Response&seriesNum=6%20CCR%201009-9",
+        "started_at": "2026-09-23T21:29:14.773115Z",
+        "finished_at": "2026-09-23T21:29:14.981989Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 16318
+      }
+    },
+    {
+      "association_id": "document-7",
+      "role": "pdf",
+      "parent_id": "history-2422",
+      "body": {
+        "path": "bodies/3193bb832fef3120c8a832a1bc630115dd8ad4678a1999fbe6a3abcf768592a9.bin",
+        "sha256": "3193bb832fef3120c8a832a1bc630115dd8ad4678a1999fbe6a3abcf768592a9",
+        "bytes": 265981
+      },
+      "claim": {
+        "receipt_sha256": "a06114383e3d2a1187f48f0cc887e0a2e42904f7ca3bd5276231c673f8501123",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=7135&fileName=6%20CCR%201009-9",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=7135&fileName=6%20CCR%201009-9",
+        "started_at": "2026-09-24T17:25:08.352058Z",
+        "finished_at": "2026-09-24T17:25:08.601376Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 265981
+      }
+    },
+    {
+      "association_id": "document-8",
+      "role": "word",
+      "parent_id": "history-2422",
+      "body": {
+        "path": "bodies/b2ba31fa5633d7637d899a693e1cbe292e2bd48adc7e0f9c457c050b86afa528.bin",
+        "sha256": "b2ba31fa5633d7637d899a693e1cbe292e2bd48adc7e0f9c457c050b86afa528",
+        "bytes": 30720
+      },
+      "claim": {
+        "receipt_sha256": "7332756321048de5ac3129f20fe1cf3919326eaa9e95fcb561e9c553b9e5711c",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=7135&fileName=6%20CCR%201009-9",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=7135&fileName=6%20CCR%201009-9",
+        "started_at": "2026-09-24T17:25:08.620632Z",
+        "finished_at": "2026-09-24T17:25:08.799812Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 30720
+      }
+    },
+    {
+      "association_id": "history-2908",
+      "role": "history",
+      "parent_id": "listing-142",
+      "body": {
+        "path": "bodies/22862b2b07412f62a3af2639ca465941a95c9065b46a27110cb65051896b0cca.bin",
+        "sha256": "22862b2b07412f62a3af2639ca465941a95c9065b46a27110cb65051896b0cca",
+        "bytes": 17674
+      },
+      "claim": {
+        "receipt_sha256": "e9c0820ec2dff6e83a3a2697c185bf2be9e54bd2398b3c113c998b680b84ceae",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2908&deptID=16&agencyID=142&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Division%20of%20Disease%20Control%20and%20Public%20Health%20Response&seriesNum=6%20CCR%201009-10",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2908&deptID=16&agencyID=142&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Division%20of%20Disease%20Control%20and%20Public%20Health%20Response&seriesNum=6%20CCR%201009-10",
+        "started_at": "2026-09-23T21:29:15.060952Z",
+        "finished_at": "2026-09-23T21:29:15.269151Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 17674
+      }
+    },
+    {
+      "association_id": "document-9",
+      "role": "pdf",
+      "parent_id": "history-2908",
+      "body": {
+        "path": "bodies/a1d399e30e43fa0db3caa0da2e81347ba498d79da28bb7270cfb68b3a7c465e0.bin",
+        "sha256": "a1d399e30e43fa0db3caa0da2e81347ba498d79da28bb7270cfb68b3a7c465e0",
+        "bytes": 310438
+      },
+      "claim": {
+        "receipt_sha256": "a84b1906f5ae5728fff8022f5f434811d984beb2451fd4ad72c6369a36ace74e",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=10938&fileName=6%20CCR%201009-10",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=10938&fileName=6%20CCR%201009-10",
+        "started_at": "2026-09-24T17:25:08.811712Z",
+        "finished_at": "2026-09-24T17:25:09.091200Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 310438
+      }
+    },
+    {
+      "association_id": "document-10",
+      "role": "word",
+      "parent_id": "history-2908",
+      "body": {
+        "path": "bodies/d0fbc7db0dc08158f73d3434f3ad365f472b9090d52d36a6e42c3d623a1ff6a2.bin",
+        "sha256": "d0fbc7db0dc08158f73d3434f3ad365f472b9090d52d36a6e42c3d623a1ff6a2",
+        "bytes": 49152
+      },
+      "claim": {
+        "receipt_sha256": "fde099fd2d8aba9d95fe416eed2cb4c7bb231025b5ae9925dda71e619e166d10",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=10938&fileName=6%20CCR%201009-10",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=10938&fileName=6%20CCR%201009-10",
+        "started_at": "2026-09-24T17:25:09.102145Z",
+        "finished_at": "2026-09-24T17:25:09.254090Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 49152
+      }
+    },
+    {
+      "association_id": "history-3251",
+      "role": "history",
+      "parent_id": "listing-142",
+      "body": {
+        "path": "bodies/e054b9c7885a6f392846fa8720d693761c350033dc3f48672fc9dda4cc002938.bin",
+        "sha256": "e054b9c7885a6f392846fa8720d693761c350033dc3f48672fc9dda4cc002938",
+        "bytes": 11920
+      },
+      "claim": {
+        "receipt_sha256": "3ffe3d11c9c2d5d2c12aeb849df03fc0eaded5fba963a8789170b5151b90d02d",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3251&deptID=16&agencyID=142&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Division%20of%20Disease%20Control%20and%20Public%20Health%20Response&seriesNum=6%20CCR%201009-11",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3251&deptID=16&agencyID=142&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Division%20of%20Disease%20Control%20and%20Public%20Health%20Response&seriesNum=6%20CCR%201009-11",
+        "started_at": "2026-09-23T21:29:15.345057Z",
+        "finished_at": "2026-09-23T21:29:15.557053Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 11920
+      }
+    },
+    {
+      "association_id": "document-11",
+      "role": "pdf",
+      "parent_id": "history-3251",
+      "body": {
+        "path": "bodies/af7c6ea7bdfe0a36cfa282c36d94484db887629e82f5f3cf9e93280b2f65d2f1.bin",
+        "sha256": "af7c6ea7bdfe0a36cfa282c36d94484db887629e82f5f3cf9e93280b2f65d2f1",
+        "bytes": 314845
+      },
+      "claim": {
+        "receipt_sha256": "b59e8280960b6a76eae8e57fa691839048506cfcc628a1c7334c61f4a037c5f3",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=6519&fileName=6%20CCR%201009-11",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=6519&fileName=6%20CCR%201009-11",
+        "started_at": "2026-09-24T17:25:09.262348Z",
+        "finished_at": "2026-09-24T17:25:09.433766Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 314845
+      }
+    },
+    {
+      "association_id": "document-12",
+      "role": "word",
+      "parent_id": "history-3251",
+      "body": {
+        "path": "bodies/53f9bc36bbc6a041f86aa96bec51cf73fca8fd634ad9ee59f56fcb86db0c2653.bin",
+        "sha256": "53f9bc36bbc6a041f86aa96bec51cf73fca8fd634ad9ee59f56fcb86db0c2653",
+        "bytes": 35328
+      },
+      "claim": {
+        "receipt_sha256": "7cf97238b7c196a2ce32acb7688a0a3c0c2f0d590f2966b666c89459076ba083",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=6519&fileName=6%20CCR%201009-11",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=6519&fileName=6%20CCR%201009-11",
+        "started_at": "2026-09-24T17:25:09.445459Z",
+        "finished_at": "2026-09-24T17:25:09.539421Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 35328
+      }
+    }
+  ],
+  "document_policy": "all_source_nonarchived_pdf_word_pairs",
+  "legal_currentness": "not_verified",
+  "answer_safe": false
+}

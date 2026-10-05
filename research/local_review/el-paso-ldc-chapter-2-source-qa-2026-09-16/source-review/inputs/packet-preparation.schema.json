@@ -1,0 +1,290 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact packet-relative payload.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "NativePage": {
+      "additionalProperties": false,
+      "description": "Exact machine-native extraction and half-open candidate byte span.",
+      "properties": {
+        "physical_page": {
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "native": {
+          "$ref": "#/$defs/Asset"
+        },
+        "candidate_start": {
+          "minimum": 0,
+          "title": "Candidate Start",
+          "type": "integer"
+        },
+        "candidate_end": {
+          "minimum": 0,
+          "title": "Candidate End",
+          "type": "integer"
+        },
+        "status": {
+          "const": "machine_native_text_unreviewed",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "physical_page",
+        "native",
+        "candidate_start",
+        "candidate_end",
+        "status"
+      ],
+      "title": "NativePage",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Actual generation methods and historical custody kept separate from source-only.",
+  "properties": {
+    "prepared_at": {
+      "format": "date-time",
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "canonical_path_claim": {
+      "title": "Canonical Path Claim",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-EL_PASO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "source_url": {
+      "title": "Source Url",
+      "type": "string"
+    },
+    "acquisition_method": {
+      "const": "received_review_package",
+      "title": "Acquisition Method",
+      "type": "string"
+    },
+    "original_http_independently_verified": {
+      "const": false,
+      "title": "Original Http Independently Verified",
+      "type": "boolean"
+    },
+    "verified_http_acquired_at": {
+      "title": "Verified Http Acquired At",
+      "type": "null"
+    },
+    "acquisition_started_at_claim": {
+      "format": "date-time",
+      "title": "Acquisition Started At Claim",
+      "type": "string"
+    },
+    "acquisition_completed_at_claim": {
+      "format": "date-time",
+      "title": "Acquisition Completed At Claim",
+      "type": "string"
+    },
+    "provenance_snapshot": {
+      "$ref": "#/$defs/Asset"
+    },
+    "provenance_line": {
+      "$ref": "#/$defs/Asset"
+    },
+    "provenance_line_number": {
+      "minimum": 1,
+      "title": "Provenance Line Number",
+      "type": "integer"
+    },
+    "public_headers": {
+      "$ref": "#/$defs/Asset"
+    },
+    "referral_html": {
+      "title": "Referral Html",
+      "type": "null"
+    },
+    "referral_basis": {
+      "const": "inherited_url_no_fresh_anchor",
+      "title": "Referral Basis",
+      "type": "string"
+    },
+    "source_referral_count": {
+      "const": 0,
+      "title": "Source Referral Count",
+      "type": "integer"
+    },
+    "final_url_claim": {
+      "title": "Final Url Claim",
+      "type": "string"
+    },
+    "repository_received_at": {
+      "format": "date-time",
+      "title": "Repository Received At",
+      "type": "string"
+    },
+    "frozen_raw_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "raw_manifest_record_count": {
+      "title": "Raw Manifest Record Count",
+      "type": "integer"
+    },
+    "canonical_line": {
+      "$ref": "#/$defs/Asset"
+    },
+    "canonical_line_number": {
+      "title": "Canonical Line Number",
+      "type": "integer"
+    },
+    "inventory_snapshot": {
+      "$ref": "#/$defs/Asset"
+    },
+    "candidate": {
+      "$ref": "#/$defs/Asset"
+    },
+    "native_pages": {
+      "items": {
+        "$ref": "#/$defs/NativePage"
+      },
+      "title": "Native Pages",
+      "type": "array"
+    },
+    "extraction_method": {
+      "title": "Extraction Method",
+      "type": "string"
+    },
+    "extraction_version": {
+      "title": "Extraction Version",
+      "type": "string"
+    },
+    "extraction_started_at": {
+      "format": "date-time",
+      "title": "Extraction Started At",
+      "type": "string"
+    },
+    "extraction_finished_at": {
+      "format": "date-time",
+      "title": "Extraction Finished At",
+      "type": "string"
+    },
+    "rendering_argv": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rendering Argv",
+      "type": "array"
+    },
+    "rendering_started_at": {
+      "format": "date-time",
+      "title": "Rendering Started At",
+      "type": "string"
+    },
+    "rendering_finished_at": {
+      "format": "date-time",
+      "title": "Rendering Finished At",
+      "type": "string"
+    },
+    "rendering_exit_code": {
+      "const": 0,
+      "title": "Rendering Exit Code",
+      "type": "integer"
+    },
+    "renderer_sha256": {
+      "title": "Renderer Sha256",
+      "type": "string"
+    },
+    "full_images_visually_inspected_by_preparer": {
+      "const": false,
+      "title": "Full Images Visually Inspected By Preparer",
+      "type": "boolean"
+    },
+    "prior_exposure": {
+      "title": "Prior Exposure",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "source_sha256",
+    "canonical_path_claim",
+    "authority_id",
+    "source_url",
+    "acquisition_method",
+    "original_http_independently_verified",
+    "verified_http_acquired_at",
+    "acquisition_started_at_claim",
+    "acquisition_completed_at_claim",
+    "provenance_snapshot",
+    "provenance_line",
+    "provenance_line_number",
+    "public_headers",
+    "referral_html",
+    "referral_basis",
+    "source_referral_count",
+    "final_url_claim",
+    "repository_received_at",
+    "frozen_raw_manifest",
+    "raw_manifest_record_count",
+    "canonical_line",
+    "canonical_line_number",
+    "inventory_snapshot",
+    "candidate",
+    "native_pages",
+    "extraction_method",
+    "extraction_version",
+    "extraction_started_at",
+    "extraction_finished_at",
+    "rendering_argv",
+    "rendering_started_at",
+    "rendering_finished_at",
+    "rendering_exit_code",
+    "renderer_sha256",
+    "full_images_visually_inspected_by_preparer",
+    "prior_exposure",
+    "legal_currentness",
+    "limitations"
+  ],
+  "title": "Preparation",
+  "type": "object"
+}

@@ -1,0 +1,496 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Identify an exact byte sequence.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Counts": {
+      "additionalProperties": false,
+      "description": "Recount of the supplied completed run, not a transport guard warranty.",
+      "properties": {
+        "events": {
+          "title": "Events",
+          "type": "integer"
+        },
+        "distinct_urls": {
+          "title": "Distinct Urls",
+          "type": "integer"
+        },
+        "retained_response_bytes": {
+          "title": "Retained Response Bytes",
+          "type": "integer"
+        },
+        "maximum_response_bytes": {
+          "title": "Maximum Response Bytes",
+          "type": "integer"
+        },
+        "action_limit": {
+          "const": 30,
+          "default": 30,
+          "title": "Action Limit",
+          "type": "integer"
+        },
+        "distinct_url_limit": {
+          "const": 20,
+          "default": 20,
+          "title": "Distinct Url Limit",
+          "type": "integer"
+        },
+        "total_byte_limit": {
+          "const": 30000000,
+          "default": 30000000,
+          "title": "Total Byte Limit",
+          "type": "integer"
+        },
+        "response_byte_limit": {
+          "const": 10000000,
+          "default": 10000000,
+          "title": "Response Byte Limit",
+          "type": "integer"
+        },
+        "redirects": {
+          "title": "Redirects",
+          "type": "integer"
+        },
+        "http_200": {
+          "title": "Http 200",
+          "type": "integer"
+        },
+        "curl_exit_zero": {
+          "title": "Curl Exit Zero",
+          "type": "integer"
+        },
+        "delivered_payloads": {
+          "title": "Delivered Payloads",
+          "type": "integer"
+        },
+        "inventory_listed_payloads": {
+          "title": "Inventory Listed Payloads",
+          "type": "integer"
+        },
+        "valid_inventory_entries": {
+          "title": "Valid Inventory Entries",
+          "type": "integer"
+        },
+        "valid_checksums": {
+          "title": "Valid Checksums",
+          "type": "integer"
+        },
+        "deliberate_exclusions": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Deliberate Exclusions",
+          "type": "array"
+        },
+        "first_request_start_claim": {
+          "title": "First Request Start Claim",
+          "type": "string"
+        },
+        "last_request_end_claim": {
+          "title": "Last Request End Claim",
+          "type": "string"
+        },
+        "reservation_replay": {
+          "const": "pass",
+          "title": "Reservation Replay",
+          "type": "string"
+        },
+        "shared_log_fields_replay": {
+          "const": "pass",
+          "title": "Shared Log Fields Replay",
+          "type": "string"
+        }
+      },
+      "required": [
+        "events",
+        "distinct_urls",
+        "retained_response_bytes",
+        "maximum_response_bytes",
+        "redirects",
+        "http_200",
+        "curl_exit_zero",
+        "delivered_payloads",
+        "inventory_listed_payloads",
+        "valid_inventory_entries",
+        "valid_checksums",
+        "deliberate_exclusions",
+        "first_request_start_claim",
+        "last_request_end_claim",
+        "reservation_replay",
+        "shared_log_fields_replay"
+      ],
+      "title": "Counts",
+      "type": "object"
+    },
+    "Evidence": {
+      "additionalProperties": false,
+      "description": "Original identity and retained exact copy or declared public derivative.",
+      "properties": {
+        "original": {
+          "$ref": "#/$defs/Asset"
+        },
+        "retained": {
+          "$ref": "#/$defs/Asset"
+        },
+        "mode": {
+          "enum": [
+            "exact",
+            "public_derivative"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "transformation": {
+          "title": "Transformation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "original",
+        "retained",
+        "mode",
+        "transformation"
+      ],
+      "title": "Evidence",
+      "type": "object"
+    },
+    "Link": {
+      "additionalProperties": false,
+      "description": "Observed catalog or parent anchor, not an adopted-law finding.",
+      "properties": {
+        "parent_path": {
+          "title": "Parent Path",
+          "type": "string"
+        },
+        "parent_sha256": {
+          "title": "Parent Sha256",
+          "type": "string"
+        },
+        "raw_href": {
+          "title": "Raw Href",
+          "type": "string"
+        },
+        "resolved_url": {
+          "title": "Resolved Url",
+          "type": "string"
+        },
+        "anchor_text": {
+          "title": "Anchor Text",
+          "type": "string"
+        },
+        "row_text": {
+          "title": "Row Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "parent_path",
+        "parent_sha256",
+        "raw_href",
+        "resolved_url",
+        "anchor_text",
+        "row_text"
+      ],
+      "title": "Link",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "description": "First-two-page identity check with remaining pages explicitly unread.",
+      "properties": {
+        "source_key": {
+          "title": "Source Key",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Asset"
+        },
+        "receipt": {
+          "$ref": "#/$defs/Asset"
+        },
+        "requested_url": {
+          "title": "Requested Url",
+          "type": "string"
+        },
+        "root_recorded_started_at": {
+          "title": "Root Recorded Started At",
+          "type": "string"
+        },
+        "root_recorded_completed_at": {
+          "title": "Root Recorded Completed At",
+          "type": "string"
+        },
+        "http_status": {
+          "const": 200,
+          "title": "Http Status",
+          "type": "integer"
+        },
+        "curl_exit_code": {
+          "const": 0,
+          "title": "Curl Exit Code",
+          "type": "integer"
+        },
+        "redirects": {
+          "const": 0,
+          "title": "Redirects",
+          "type": "integer"
+        },
+        "reported_ssl_verify_result": {
+          "const": 0,
+          "title": "Reported Ssl Verify Result",
+          "type": "integer"
+        },
+        "physical_pages": {
+          "title": "Physical Pages",
+          "type": "integer"
+        },
+        "native_characters_all_pages": {
+          "const": 0,
+          "title": "Native Characters All Pages",
+          "type": "integer"
+        },
+        "visually_inspected_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Visually Inspected Pages",
+          "type": "array"
+        },
+        "unread_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Unread Pages",
+          "type": "array"
+        },
+        "inspected_images": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "title": "Inspected Images",
+          "type": "array"
+        },
+        "printed_execution_date": {
+          "title": "Printed Execution Date",
+          "type": "string"
+        },
+        "printed_recording_date": {
+          "title": "Printed Recording Date",
+          "type": "string"
+        },
+        "reception_number": {
+          "title": "Reception Number",
+          "type": "string"
+        },
+        "identity_observation": {
+          "title": "Identity Observation",
+          "type": "string"
+        },
+        "signature_qualification": {
+          "title": "Signature Qualification",
+          "type": "string"
+        },
+        "adoption_currentness_inferred": {
+          "const": false,
+          "default": false,
+          "title": "Adoption Currentness Inferred",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "source_key",
+        "source",
+        "receipt",
+        "requested_url",
+        "root_recorded_started_at",
+        "root_recorded_completed_at",
+        "http_status",
+        "curl_exit_code",
+        "redirects",
+        "reported_ssl_verify_result",
+        "physical_pages",
+        "native_characters_all_pages",
+        "visually_inspected_pages",
+        "unread_pages",
+        "inspected_images",
+        "printed_execution_date",
+        "printed_recording_date",
+        "reception_number",
+        "identity_observation",
+        "signature_qualification"
+      ],
+      "title": "Source",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Finite offline audit; no chain completeness or current-law promotion.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    },
+    "packet": {
+      "$ref": "#/$defs/Asset"
+    },
+    "sherlock_inventory": {
+      "$ref": "#/$defs/Asset"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/Evidence"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "counts": {
+      "$ref": "#/$defs/Counts"
+    },
+    "anchored_event_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Anchored Event Ids",
+      "type": "array"
+    },
+    "search_actions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Search Actions",
+      "type": "array"
+    },
+    "catalog_links": {
+      "items": {
+        "$ref": "#/$defs/Link"
+      },
+      "title": "Catalog Links",
+      "type": "array"
+    },
+    "amended_label_occurrences": {
+      "const": 0,
+      "title": "Amended Label Occurrences",
+      "type": "integer"
+    },
+    "amended_reception_occurrences": {
+      "const": 0,
+      "title": "Amended Reception Occurrences",
+      "type": "integer"
+    },
+    "ordinary_25_291_occurrences": {
+      "const": 1,
+      "title": "Ordinary 25 291 Occurrences",
+      "type": "integer"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "title": "Sources",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "sherlock_followup_sent": {
+      "const": false,
+      "default": false,
+      "title": "Sherlock Followup Sent",
+      "type": "boolean"
+    },
+    "sherlock_status_basis": {
+      "const": "parent_reports_last_observed_standing_down",
+      "title": "Sherlock Status Basis",
+      "type": "string"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "canonical_changed": {
+      "const": false,
+      "default": false,
+      "title": "Canonical Changed",
+      "type": "boolean"
+    },
+    "public_actions_by_auditor": {
+      "const": 0,
+      "default": 0,
+      "title": "Public Actions By Auditor",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "scope",
+    "packet",
+    "sherlock_inventory",
+    "evidence",
+    "counts",
+    "anchored_event_ids",
+    "search_actions",
+    "catalog_links",
+    "amended_label_occurrences",
+    "amended_reception_occurrences",
+    "ordinary_25_291_occurrences",
+    "sources",
+    "findings",
+    "limitations",
+    "sherlock_status_basis"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

@@ -1,0 +1,150 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "maximum": 25000000,
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Closed retained-catalog accounting, with current-law approval explicitly false.",
+  "properties": {
+    "schema_version": {
+      "const": "ccr-identity-pdf-baseline-1",
+      "default": "ccr-identity-pdf-baseline-1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "coverage_index": {
+      "$ref": "#/$defs/Asset"
+    },
+    "completion_index": {
+      "$ref": "#/$defs/Asset"
+    },
+    "completion_schema": {
+      "$ref": "#/$defs/Asset"
+    },
+    "identity_ledger": {
+      "$ref": "#/$defs/Asset"
+    },
+    "identity_schema": {
+      "$ref": "#/$defs/Asset"
+    },
+    "department_count": {
+      "const": 25,
+      "default": 25,
+      "title": "Department Count",
+      "type": "integer"
+    },
+    "listed_identities": {
+      "const": 1156,
+      "default": 1156,
+      "title": "Listed Identities",
+      "type": "integer"
+    },
+    "pdf_bound_identities": {
+      "const": 1156,
+      "default": 1156,
+      "title": "Pdf Bound Identities",
+      "type": "integer"
+    },
+    "paired_identities": {
+      "const": 1155,
+      "default": 1155,
+      "title": "Paired Identities",
+      "type": "integer"
+    },
+    "unique_pdf_originals": {
+      "const": 1156,
+      "default": 1156,
+      "title": "Unique Pdf Originals",
+      "type": "integer"
+    },
+    "unique_physical_pages": {
+      "const": 39460,
+      "default": 39460,
+      "title": "Unique Physical Pages",
+      "type": "integer"
+    },
+    "source_cutoff_claims": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Cutoff Claims",
+      "type": "array"
+    },
+    "unchanged_department_publisher_count": {
+      "const": 23,
+      "default": 23,
+      "title": "Unchanged Department Publisher Count",
+      "type": "integer"
+    },
+    "whole_state_complete": {
+      "const": false,
+      "default": false,
+      "title": "Whole State Complete",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "native_status": {
+      "const": "machine_extraction_unreviewed",
+      "default": "machine_extraction_unreviewed",
+      "title": "Native Status",
+      "type": "string"
+    },
+    "exact_remaining_pair_gap": {
+      "const": "department 21 / agency 124 / rule 3475 / version 12137 Word source",
+      "default": "department 21 / agency 124 / rule 3475 / version 12137 Word source",
+      "title": "Exact Remaining Pair Gap",
+      "type": "string"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "coverage_index",
+    "completion_index",
+    "completion_schema",
+    "identity_ledger",
+    "identity_schema",
+    "source_cutoff_claims"
+  ],
+  "title": "Index",
+  "type": "object"
+}

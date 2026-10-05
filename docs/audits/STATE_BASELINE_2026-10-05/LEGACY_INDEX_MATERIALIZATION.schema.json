@@ -1,0 +1,126 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "One repository-relative immutable artifact.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Layer": {
+      "additionalProperties": false,
+      "description": "Presence measures for one unchanged inherited index.",
+      "properties": {
+        "layer": {
+          "title": "Layer",
+          "type": "string"
+        },
+        "index": {
+          "$ref": "#/$defs/Asset"
+        },
+        "records": {
+          "title": "Records",
+          "type": "integer"
+        },
+        "unique_recorded_source_paths": {
+          "title": "Unique Recorded Source Paths",
+          "type": "integer"
+        },
+        "records_with_source_file": {
+          "title": "Records With Source File",
+          "type": "integer"
+        },
+        "records_with_absent_source_file": {
+          "title": "Records With Absent Source File",
+          "type": "integer"
+        },
+        "records_without_source_path": {
+          "title": "Records Without Source Path",
+          "type": "integer"
+        },
+        "records_with_derived_file": {
+          "title": "Records With Derived File",
+          "type": "integer"
+        },
+        "caveat": {
+          "title": "Caveat",
+          "type": "string"
+        }
+      },
+      "required": [
+        "layer",
+        "index",
+        "records",
+        "unique_recorded_source_paths",
+        "records_with_source_file",
+        "records_with_absent_source_file",
+        "records_without_source_path",
+        "records_with_derived_file",
+        "caveat"
+      ],
+      "title": "Layer",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Dated observation of legacy paths; newer research captures are separate.",
+  "properties": {
+    "observed_at": {
+      "title": "Observed At",
+      "type": "string"
+    },
+    "layers": {
+      "items": {
+        "$ref": "#/$defs/Layer"
+      },
+      "title": "Layers",
+      "type": "array"
+    },
+    "whole_state_baseline_complete": {
+      "const": false,
+      "default": false,
+      "title": "Whole State Baseline Complete",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "observed_at",
+    "layers",
+    "limitations"
+  ],
+  "title": "Inventory",
+  "type": "object"
+}

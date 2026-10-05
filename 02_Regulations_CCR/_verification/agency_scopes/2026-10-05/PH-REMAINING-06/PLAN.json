@@ -1,0 +1,716 @@
+{
+  "schema_version": "ccr-agency-selection-plan-2",
+  "department_id": "16",
+  "provenance_sha256": [
+    "87dc56f4259f609ec042d68e0ec65cba0976da204b155199317b5c7e8b5421d4",
+    "21a9b1cc13acba38f4d1cd79a4cfcd379e2f73bb9b0aca18ae04144f0ba925c0",
+    "d14a0c82ce60c4739d9f2447852b22bf5e0cfaa55668a9f86bf7977eafe86edc"
+  ],
+  "selections": [
+    {
+      "agency_id": "7",
+      "rule_id": "2355"
+    },
+    {
+      "agency_id": "7",
+      "rule_id": "2942"
+    },
+    {
+      "agency_id": "7",
+      "rule_id": "3282"
+    },
+    {
+      "agency_id": "7",
+      "rule_id": "3303"
+    },
+    {
+      "agency_id": "7",
+      "rule_id": "3325"
+    },
+    {
+      "agency_id": "7",
+      "rule_id": "3344"
+    },
+    {
+      "agency_id": "7",
+      "rule_id": "3408"
+    },
+    {
+      "agency_id": "7",
+      "rule_id": "3409"
+    },
+    {
+      "agency_id": "7",
+      "rule_id": "3410"
+    },
+    {
+      "agency_id": "7",
+      "rule_id": "3411"
+    }
+  ],
+  "responses": [
+    {
+      "association_id": "welcome",
+      "role": "welcome",
+      "parent_id": null,
+      "body": {
+        "path": "bodies/b240518c27ec4187d279cf943033fa0fe62704656134d3a4c6088591da0c26d6.bin",
+        "sha256": "b240518c27ec4187d279cf943033fa0fe62704656134d3a4c6088591da0c26d6",
+        "bytes": 9724
+      },
+      "claim": {
+        "receipt_sha256": "84516ccc9ad9a2035347cb13a1c312f5ce44266f5a7b97902a550c45b0e8bd75",
+        "requested_url": "https://www.sos.state.co.us/CCR/Welcome.do",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/Welcome.do",
+        "started_at": "2026-10-05T20:45:15.307600Z",
+        "finished_at": "2026-10-05T20:45:15.457086Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 9724
+      }
+    },
+    {
+      "association_id": "catalog",
+      "role": "catalog",
+      "parent_id": "welcome",
+      "body": {
+        "path": "bodies/54090f320129c517c890eaa895846604d69ffc55ab0525254563de6b58301041.bin",
+        "sha256": "54090f320129c517c890eaa895846604d69ffc55ab0525254563de6b58301041",
+        "bytes": 133080
+      },
+      "claim": {
+        "receipt_sha256": "4459738f6716bebd140afb319448bd7d5d553b2b6d04a78957c6e6b6a1a078ce",
+        "requested_url": "https://www.sos.state.co.us/CCR/NumericalDeptList.do",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/NumericalDeptList.do",
+        "started_at": "2026-10-05T20:45:15.463646Z",
+        "finished_at": "2026-10-05T20:45:15.738147Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 133080
+      }
+    },
+    {
+      "association_id": "listing-7",
+      "role": "listing",
+      "parent_id": "catalog",
+      "body": {
+        "path": "bodies/597435a719b68d35a57e8edddbdca9b641702f494dffcce07ae03d0ad9a40ea4.bin",
+        "sha256": "597435a719b68d35a57e8edddbdca9b641702f494dffcce07ae03d0ad9a40ea4",
+        "bytes": 21895
+      },
+      "claim": {
+        "receipt_sha256": "326b541abcebb8ef4c367ce7f1b5cf2a9fae967b912b86253ccae4a434ff9bc4",
+        "requested_url": "https://www.sos.state.co.us/CCR/NumericalCCRDocList.do?deptID=16&deptName=1000%20Department%20of%20Public%20Health%20and%20Environment&agencyID=7&agencyName=1001%20Air%20Quality%20Control%20Commission",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/NumericalCCRDocList.do?deptID=16&deptName=1000%20Department%20of%20Public%20Health%20and%20Environment&agencyID=7&agencyName=1001%20Air%20Quality%20Control%20Commission",
+        "started_at": "2026-10-05T20:45:34.571344Z",
+        "finished_at": "2026-10-05T20:45:34.828349Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 21895
+      }
+    },
+    {
+      "association_id": "history-7-2355",
+      "role": "history",
+      "parent_id": "listing-7",
+      "body": {
+        "path": "bodies/7d7dff445eea6e304f6241e29f87829720c1df236269351b783c50a1a45d0273.bin",
+        "sha256": "7d7dff445eea6e304f6241e29f87829720c1df236269351b783c50a1a45d0273",
+        "bytes": 18103
+      },
+      "claim": {
+        "receipt_sha256": "9a26a3b36db5823e422a218ad0b64e28af04ecdda169957492eebdbb443a7657",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2355&deptID=16&agencyID=7&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Air%20Quality%20Control%20Commission&seriesNum=5%20CCR%201001-23",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2355&deptID=16&agencyID=7&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Air%20Quality%20Control%20Commission&seriesNum=5%20CCR%201001-23",
+        "started_at": "2026-10-05T20:45:50.824206Z",
+        "finished_at": "2026-10-05T20:45:51.091042Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 18103
+      }
+    },
+    {
+      "association_id": "doc-7-2355-9953-pdf",
+      "role": "pdf",
+      "parent_id": "history-7-2355",
+      "body": {
+        "path": "bodies/a0c0b86d493a1d83ccfdbf2cc68aefb66e1c67d0821942173b51e2b4547517ba.bin",
+        "sha256": "a0c0b86d493a1d83ccfdbf2cc68aefb66e1c67d0821942173b51e2b4547517ba",
+        "bytes": 673244
+      },
+      "claim": {
+        "receipt_sha256": "e475c8a8bebd6391d5ca3dda4619da4c87453c939d088ed22b907c4f35e01553",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=9953&fileName=5%20CCR%201001-23",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=9953&fileName=5%20CCR%201001-23",
+        "started_at": "2026-10-05T20:45:51.099573Z",
+        "finished_at": "2026-10-05T20:45:51.255393Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 673244
+      }
+    },
+    {
+      "association_id": "doc-7-2355-9953-word",
+      "role": "word",
+      "parent_id": "history-7-2355",
+      "body": {
+        "path": "bodies/d9245a7ed115282c825e2ec33e3ff5a1c83f025beae0cd8fb1722e66c3bc005f.bin",
+        "sha256": "d9245a7ed115282c825e2ec33e3ff5a1c83f025beae0cd8fb1722e66c3bc005f",
+        "bytes": 295424
+      },
+      "claim": {
+        "receipt_sha256": "5ddbca5af9d98d0f815a3720baf008e5a0696e045101e77f28d5b466209a5be3",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=9953&fileName=5%20CCR%201001-23",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=9953&fileName=5%20CCR%201001-23",
+        "started_at": "2026-10-05T20:45:51.262784Z",
+        "finished_at": "2026-10-05T20:45:51.380825Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 295424
+      }
+    },
+    {
+      "association_id": "history-7-2942",
+      "role": "history",
+      "parent_id": "listing-7",
+      "body": {
+        "path": "bodies/bb737ba594411e86ddba879beba540832d6dfe5f23141a423004395e0b6f873f.bin",
+        "sha256": "bb737ba594411e86ddba879beba540832d6dfe5f23141a423004395e0b6f873f",
+        "bytes": 11840
+      },
+      "claim": {
+        "receipt_sha256": "b3bb8ed2dc64cf1f78d69f76ae7186d9ec21df38012fd67739d4b25ca68ce811",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2942&deptID=16&agencyID=7&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Air%20Quality%20Control%20Commission&seriesNum=5%20CCR%201001-17",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2942&deptID=16&agencyID=7&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Air%20Quality%20Control%20Commission&seriesNum=5%20CCR%201001-17",
+        "started_at": "2026-10-05T20:45:51.403248Z",
+        "finished_at": "2026-10-05T20:45:51.648264Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 11840
+      }
+    },
+    {
+      "association_id": "doc-7-2942-1525-pdf",
+      "role": "pdf",
+      "parent_id": "history-7-2942",
+      "body": {
+        "path": "bodies/f4a81b8e8ac8a1a7ef8c777e707311be5806af0d927ebd3a83bffeb43061ee35.bin",
+        "sha256": "f4a81b8e8ac8a1a7ef8c777e707311be5806af0d927ebd3a83bffeb43061ee35",
+        "bytes": 312350
+      },
+      "claim": {
+        "receipt_sha256": "0c44f0907f41a1970bc441f107b74f731e952d8c768bd6fb7602933dabc893c7",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=1525&fileName=5%20CCR%201001-17",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=1525&fileName=5%20CCR%201001-17",
+        "started_at": "2026-10-05T20:45:51.659473Z",
+        "finished_at": "2026-10-05T20:45:51.781372Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 312350
+      }
+    },
+    {
+      "association_id": "doc-7-2942-1525-word",
+      "role": "word",
+      "parent_id": "history-7-2942",
+      "body": {
+        "path": "bodies/bd53224f91eb1a129a161841dbe639740cc7aae94c45402bbcdb45e33184c23f.bin",
+        "sha256": "bd53224f91eb1a129a161841dbe639740cc7aae94c45402bbcdb45e33184c23f",
+        "bytes": 29696
+      },
+      "claim": {
+        "receipt_sha256": "8945e5534df53c5dbfb80ebf0ebf851d7df121b7d829e53580eee97048f5311d",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=1525&fileName=5%20CCR%201001-17",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=1525&fileName=5%20CCR%201001-17",
+        "started_at": "2026-10-05T20:45:51.790586Z",
+        "finished_at": "2026-10-05T20:45:51.889472Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 29696
+      }
+    },
+    {
+      "association_id": "history-7-3282",
+      "role": "history",
+      "parent_id": "listing-7",
+      "body": {
+        "path": "bodies/f04516842766177d47f23258f4b0fea79e84bea649c45e1e7a7f609895181626.bin",
+        "sha256": "f04516842766177d47f23258f4b0fea79e84bea649c45e1e7a7f609895181626",
+        "bytes": 17093
+      },
+      "claim": {
+        "receipt_sha256": "db3214d0c74ea90895211c2f755ae4870c3e36a92eb7ea5263ff38cb9abe4f3e",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3282&deptID=16&agencyID=7&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Air%20Quality%20Control%20Commission&seriesNum=5%20CCR%201001-24",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3282&deptID=16&agencyID=7&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Air%20Quality%20Control%20Commission&seriesNum=5%20CCR%201001-24",
+        "started_at": "2026-10-05T20:45:51.912021Z",
+        "finished_at": "2026-10-05T20:45:52.195387Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 17093
+      }
+    },
+    {
+      "association_id": "doc-7-3282-11186-pdf",
+      "role": "pdf",
+      "parent_id": "history-7-3282",
+      "body": {
+        "path": "bodies/0a860e64cae6d65ba1eaca4940e19cfc066ff5b9afeb29913f0d0975f83446b1.bin",
+        "sha256": "0a860e64cae6d65ba1eaca4940e19cfc066ff5b9afeb29913f0d0975f83446b1",
+        "bytes": 659320
+      },
+      "claim": {
+        "receipt_sha256": "ad87bce4c25a994e275efaa8e1689a7c05b6a1c4fe9b116723b63a6b2d7bd27d",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=11186&fileName=5%20CCR%201001-24",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=11186&fileName=5%20CCR%201001-24",
+        "started_at": "2026-10-05T20:45:52.214170Z",
+        "finished_at": "2026-10-05T20:45:52.418329Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 659320
+      }
+    },
+    {
+      "association_id": "doc-7-3282-11186-word",
+      "role": "word",
+      "parent_id": "history-7-3282",
+      "body": {
+        "path": "bodies/4dbdd369f879c12517a6a5a63959ea186d6b5d7f1ea00b56aaf0cf85676479a6.bin",
+        "sha256": "4dbdd369f879c12517a6a5a63959ea186d6b5d7f1ea00b56aaf0cf85676479a6",
+        "bytes": 282624
+      },
+      "claim": {
+        "receipt_sha256": "f7b34e9e53a10d2cd13762a212d6f81615f12951e96e72c495ac72c52b226e17",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=11186&fileName=5%20CCR%201001-24",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=11186&fileName=5%20CCR%201001-24",
+        "started_at": "2026-10-05T20:45:52.434853Z",
+        "finished_at": "2026-10-05T20:45:52.573233Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 282624
+      }
+    },
+    {
+      "association_id": "history-7-3303",
+      "role": "history",
+      "parent_id": "listing-7",
+      "body": {
+        "path": "bodies/26a59968aea62c581ed03932d901f1ac510854b705db5b33d62fcabfaa96fd7e.bin",
+        "sha256": "26a59968aea62c581ed03932d901f1ac510854b705db5b33d62fcabfaa96fd7e",
+        "bytes": 13770
+      },
+      "claim": {
+        "receipt_sha256": "05998e1f8841f95f11e2cac7c0260b30d9225e3bdc1e281daca2a3e12c02787c",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3303&deptID=16&agencyID=7&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Air%20Quality%20Control%20Commission&seriesNum=5%20CCR%201001-25",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3303&deptID=16&agencyID=7&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Air%20Quality%20Control%20Commission&seriesNum=5%20CCR%201001-25",
+        "started_at": "2026-10-05T20:45:52.585422Z",
+        "finished_at": "2026-10-05T20:45:52.906120Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 13770
+      }
+    },
+    {
+      "association_id": "doc-7-3303-10677-pdf",
+      "role": "pdf",
+      "parent_id": "history-7-3303",
+      "body": {
+        "path": "bodies/9dd41af231ea34e113fa24f7916a9e1a04723934c6e73d33567fb1d2570f8fff.bin",
+        "sha256": "9dd41af231ea34e113fa24f7916a9e1a04723934c6e73d33567fb1d2570f8fff",
+        "bytes": 775204
+      },
+      "claim": {
+        "receipt_sha256": "f818c802f8eec0750093b1a13bba6f2b4a3b9e1ec3f7d2e2fcca2cc8d0fc8c83",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=10677&fileName=5%20CCR%201001-25",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=10677&fileName=5%20CCR%201001-25",
+        "started_at": "2026-10-05T20:45:52.914089Z",
+        "finished_at": "2026-10-05T20:45:53.070478Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 775204
+      }
+    },
+    {
+      "association_id": "doc-7-3303-10677-word",
+      "role": "word",
+      "parent_id": "history-7-3303",
+      "body": {
+        "path": "bodies/25dcda107d8b3a24add0d5d7e8eef47591e3c8243e6cc4c1b153e7d0729b70a2.bin",
+        "sha256": "25dcda107d8b3a24add0d5d7e8eef47591e3c8243e6cc4c1b153e7d0729b70a2",
+        "bytes": 429568
+      },
+      "claim": {
+        "receipt_sha256": "8703d7278d02e42802df3bb5723e13e29f1804793e72e99070f49ba956dc3e62",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=10677&fileName=5%20CCR%201001-25",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=10677&fileName=5%20CCR%201001-25",
+        "started_at": "2026-10-05T20:45:53.079746Z",
+        "finished_at": "2026-10-05T20:45:53.206769Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 429568
+      }
+    },
+    {
+      "association_id": "history-7-3325",
+      "role": "history",
+      "parent_id": "listing-7",
+      "body": {
+        "path": "bodies/fd33e04587179e1bc3dc4bd87d79a446ba27eed3ad91466698c988616261897f.bin",
+        "sha256": "fd33e04587179e1bc3dc4bd87d79a446ba27eed3ad91466698c988616261897f",
+        "bytes": 22583
+      },
+      "claim": {
+        "receipt_sha256": "e523ad378ac4630982fff1b455355af371956f3a621a1767c51d725faaaeb7eb",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3325&deptID=16&agencyID=7&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Air%20Quality%20Control%20Commission&seriesNum=5%20CCR%201001-26",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3325&deptID=16&agencyID=7&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Air%20Quality%20Control%20Commission&seriesNum=5%20CCR%201001-26",
+        "started_at": "2026-10-05T20:45:53.221282Z",
+        "finished_at": "2026-10-05T20:45:53.444880Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 22583
+      }
+    },
+    {
+      "association_id": "doc-7-3325-11724-pdf",
+      "role": "pdf",
+      "parent_id": "history-7-3325",
+      "body": {
+        "path": "bodies/f7dfbc608b15048eb5c1285cdaa3ade68b2fe03187905715a4c4b50fd9b8f55f.bin",
+        "sha256": "f7dfbc608b15048eb5c1285cdaa3ade68b2fe03187905715a4c4b50fd9b8f55f",
+        "bytes": 821714
+      },
+      "claim": {
+        "receipt_sha256": "1e3bac42321da1c88c9202f4e4d982b87411ebbf2c4f004dac90fe7957e6795e",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=11724&fileName=5%20CCR%201001-26",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=11724&fileName=5%20CCR%201001-26",
+        "started_at": "2026-10-05T20:45:53.463818Z",
+        "finished_at": "2026-10-05T20:45:53.648445Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 821714
+      }
+    },
+    {
+      "association_id": "doc-7-3325-11724-word",
+      "role": "word",
+      "parent_id": "history-7-3325",
+      "body": {
+        "path": "bodies/9fc48a354e1d494cbe3f9ffa73c3fa6ab9aa0cb7db7802c8c95562ca02a3e4d7.bin",
+        "sha256": "9fc48a354e1d494cbe3f9ffa73c3fa6ab9aa0cb7db7802c8c95562ca02a3e4d7",
+        "bytes": 330752
+      },
+      "claim": {
+        "receipt_sha256": "a6d3a9f49db754dd6698ffba8090ef2eebbbb96ac24d26f430eae134c492540b",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=11724&fileName=5%20CCR%201001-26",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=11724&fileName=5%20CCR%201001-26",
+        "started_at": "2026-10-05T20:45:53.663941Z",
+        "finished_at": "2026-10-05T20:45:53.791545Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 330752
+      }
+    },
+    {
+      "association_id": "history-7-3344",
+      "role": "history",
+      "parent_id": "listing-7",
+      "body": {
+        "path": "bodies/7b4a3bfd3d3891aaf0e858e94a183e9abaab5d2c32fe330478eae9f7bda1ffd1.bin",
+        "sha256": "7b4a3bfd3d3891aaf0e858e94a183e9abaab5d2c32fe330478eae9f7bda1ffd1",
+        "bytes": 13673
+      },
+      "claim": {
+        "receipt_sha256": "b20ea497a5abe92afc848fe58b062abd3a0b0edb1a4eb0675160decb1273fde8",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3344&deptID=16&agencyID=7&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Air%20Quality%20Control%20Commission&seriesNum=5%20CCR%201001-27",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3344&deptID=16&agencyID=7&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Air%20Quality%20Control%20Commission&seriesNum=5%20CCR%201001-27",
+        "started_at": "2026-10-05T20:45:53.803548Z",
+        "finished_at": "2026-10-05T20:45:54.048897Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 13673
+      }
+    },
+    {
+      "association_id": "doc-7-3344-9985-pdf",
+      "role": "pdf",
+      "parent_id": "history-7-3344",
+      "body": {
+        "path": "bodies/e349a67e3f44595334afbeae1058ee213f24a71908873c50e79e366517932833.bin",
+        "sha256": "e349a67e3f44595334afbeae1058ee213f24a71908873c50e79e366517932833",
+        "bytes": 530853
+      },
+      "claim": {
+        "receipt_sha256": "e34c7fdcde819f21a0f54ea47f110745f64d0efe6e1fa88892808d1cb00513dc",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=9985&fileName=5%20CCR%201001-27",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=9985&fileName=5%20CCR%201001-27",
+        "started_at": "2026-10-05T20:45:54.056725Z",
+        "finished_at": "2026-10-05T20:45:54.395192Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 530853
+      }
+    },
+    {
+      "association_id": "doc-7-3344-9985-word",
+      "role": "word",
+      "parent_id": "history-7-3344",
+      "body": {
+        "path": "bodies/f1ae7bf4ff06f25d4779f551e03d4b19244b1e13430623e9cfe3bc0eaabf350f.bin",
+        "sha256": "f1ae7bf4ff06f25d4779f551e03d4b19244b1e13430623e9cfe3bc0eaabf350f",
+        "bytes": 243712
+      },
+      "claim": {
+        "receipt_sha256": "8526e3ff8f860ced90ade89b1b096b62ec59d06e69598a6ffe55d3d9bd95d876",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=9985&fileName=5%20CCR%201001-27",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=9985&fileName=5%20CCR%201001-27",
+        "started_at": "2026-10-05T20:45:54.410436Z",
+        "finished_at": "2026-10-05T20:45:54.570021Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 243712
+      }
+    },
+    {
+      "association_id": "history-7-3408",
+      "role": "history",
+      "parent_id": "listing-7",
+      "body": {
+        "path": "bodies/02705063e10d51cbde71a6b20e890c2dafe81d6c7eb8f4e8921f03b265f4e0d4.bin",
+        "sha256": "02705063e10d51cbde71a6b20e890c2dafe81d6c7eb8f4e8921f03b265f4e0d4",
+        "bytes": 14807
+      },
+      "claim": {
+        "receipt_sha256": "32fda7dad2127604da8c58648092a9180ad5b43adc42c97b0092b1370f4aa9f4",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3408&deptID=16&agencyID=7&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Air%20Quality%20Control%20Commission&seriesNum=5%20CCR%201001-32",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3408&deptID=16&agencyID=7&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Air%20Quality%20Control%20Commission&seriesNum=5%20CCR%201001-32",
+        "started_at": "2026-10-05T20:45:54.596432Z",
+        "finished_at": "2026-10-05T20:45:54.867363Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 14807
+      }
+    },
+    {
+      "association_id": "doc-7-3408-12565-pdf",
+      "role": "pdf",
+      "parent_id": "history-7-3408",
+      "body": {
+        "path": "bodies/62ae6c61c69122a226c26b0c824b3ebf421c7cd6868f2bd47e55a53ffccc19ef.bin",
+        "sha256": "62ae6c61c69122a226c26b0c824b3ebf421c7cd6868f2bd47e55a53ffccc19ef",
+        "bytes": 526042
+      },
+      "claim": {
+        "receipt_sha256": "9d61840bbf1c90b75ee3a0d9c8255766dbeac247b9de9513f5a261c1c4c538d4",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=12565&fileName=5%20CCR%201001-32",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=12565&fileName=5%20CCR%201001-32",
+        "started_at": "2026-10-05T20:45:54.886241Z",
+        "finished_at": "2026-10-05T20:45:55.030592Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 526042
+      }
+    },
+    {
+      "association_id": "doc-7-3408-12565-word",
+      "role": "word",
+      "parent_id": "history-7-3408",
+      "body": {
+        "path": "bodies/1a3c20f21a74696f4b8eb270db45abbc2e54e3ab97fc317675970cc566006d37.bin",
+        "sha256": "1a3c20f21a74696f4b8eb270db45abbc2e54e3ab97fc317675970cc566006d37",
+        "bytes": 79570
+      },
+      "claim": {
+        "receipt_sha256": "cab4b329d4033d8ab1b3a3634ea0165bdb4f3de5cfc43996e4e835896f6312bb",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=12565&fileName=5%20CCR%201001-32",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=12565&fileName=5%20CCR%201001-32",
+        "started_at": "2026-10-05T20:45:55.037400Z",
+        "finished_at": "2026-10-05T20:45:55.299315Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 79570
+      }
+    },
+    {
+      "association_id": "history-7-3409",
+      "role": "history",
+      "parent_id": "listing-7",
+      "body": {
+        "path": "bodies/b7f21d7aca6532eec6192c16d38454746b5402f23e2274bdae8d69a08f0766ae.bin",
+        "sha256": "b7f21d7aca6532eec6192c16d38454746b5402f23e2274bdae8d69a08f0766ae",
+        "bytes": 13779
+      },
+      "claim": {
+        "receipt_sha256": "158aaaaa3f0bcf8a69cde625452c402c8c3ca06d21446ee6ce5b2f7925baf55d",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3409&deptID=16&agencyID=7&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Air%20Quality%20Control%20Commission&seriesNum=5%20CCR%201001-28",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3409&deptID=16&agencyID=7&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Air%20Quality%20Control%20Commission&seriesNum=5%20CCR%201001-28",
+        "started_at": "2026-10-05T20:45:55.312711Z",
+        "finished_at": "2026-10-05T20:45:55.709734Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 13779
+      }
+    },
+    {
+      "association_id": "doc-7-3409-12562-pdf",
+      "role": "pdf",
+      "parent_id": "history-7-3409",
+      "body": {
+        "path": "bodies/d734cf97b9eeae8692973db560c5a0bb2d319deafcd6dc5c70f7e1e34c27c75b.bin",
+        "sha256": "d734cf97b9eeae8692973db560c5a0bb2d319deafcd6dc5c70f7e1e34c27c75b",
+        "bytes": 650354
+      },
+      "claim": {
+        "receipt_sha256": "518b5848103738c95afa17da8f9b2c11f3c40fd92198c414adb875b73d33952a",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=12562&fileName=5%20CCR%201001-28",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=12562&fileName=5%20CCR%201001-28",
+        "started_at": "2026-10-05T20:45:55.731324Z",
+        "finished_at": "2026-10-05T20:45:56.049626Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 650354
+      }
+    },
+    {
+      "association_id": "doc-7-3409-12562-word",
+      "role": "word",
+      "parent_id": "history-7-3409",
+      "body": {
+        "path": "bodies/ce29a0917fb0d2abbac8ca58a5b78af9eefa25232465dc72a4a064b6c5f9620e.bin",
+        "sha256": "ce29a0917fb0d2abbac8ca58a5b78af9eefa25232465dc72a4a064b6c5f9620e",
+        "bytes": 972251
+      },
+      "claim": {
+        "receipt_sha256": "e825fe6aceb1ab9102e95d6dc55313dc3e6dbad4c6d8471adc3f8a03541dd829",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=12562&fileName=5%20CCR%201001-28",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=12562&fileName=5%20CCR%201001-28",
+        "started_at": "2026-10-05T20:45:56.064923Z",
+        "finished_at": "2026-10-05T20:45:56.291590Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 972251
+      }
+    },
+    {
+      "association_id": "history-7-3410",
+      "role": "history",
+      "parent_id": "listing-7",
+      "body": {
+        "path": "bodies/1e82ead6381257cd111bb94159aa620c55401f1fcae4313fdfb328381355a278.bin",
+        "sha256": "1e82ead6381257cd111bb94159aa620c55401f1fcae4313fdfb328381355a278",
+        "bytes": 14899
+      },
+      "claim": {
+        "receipt_sha256": "57290a43960cd8da61dc13bb70e411103303bcd419036e6e86bd57ab9d549b41",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3410&deptID=16&agencyID=7&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Air%20Quality%20Control%20Commission&seriesNum=5%20CCR%201001-29",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3410&deptID=16&agencyID=7&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Air%20Quality%20Control%20Commission&seriesNum=5%20CCR%201001-29",
+        "started_at": "2026-10-05T20:45:56.305457Z",
+        "finished_at": "2026-10-05T20:45:56.761665Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 14899
+      }
+    },
+    {
+      "association_id": "doc-7-3410-12376-pdf",
+      "role": "pdf",
+      "parent_id": "history-7-3410",
+      "body": {
+        "path": "bodies/7cf0fa0a96b8cf5744277ccdc9eeb3e52097bc976a534824cdee497643b67479.bin",
+        "sha256": "7cf0fa0a96b8cf5744277ccdc9eeb3e52097bc976a534824cdee497643b67479",
+        "bytes": 933039
+      },
+      "claim": {
+        "receipt_sha256": "c07ebb0444be47d8170973e67e52070f8135891d61fcbc323caaaa2ec70656f9",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=12376&fileName=5%20CCR%201001-29",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=12376&fileName=5%20CCR%201001-29",
+        "started_at": "2026-10-05T20:45:56.782638Z",
+        "finished_at": "2026-10-05T20:45:57.184227Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 933039
+      }
+    },
+    {
+      "association_id": "doc-7-3410-12376-word",
+      "role": "word",
+      "parent_id": "history-7-3410",
+      "body": {
+        "path": "bodies/e9ed81126c0086c141a86c486bc518a72a113fc79fd6cf2722e77e972a165aed.bin",
+        "sha256": "e9ed81126c0086c141a86c486bc518a72a113fc79fd6cf2722e77e972a165aed",
+        "bytes": 1423360
+      },
+      "claim": {
+        "receipt_sha256": "f3e46ac63add47c21e6403bfc36a07860307e802fae498e3005001ff428959d3",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=12376&fileName=5%20CCR%201001-29",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=12376&fileName=5%20CCR%201001-29",
+        "started_at": "2026-10-05T20:45:57.199586Z",
+        "finished_at": "2026-10-05T20:45:57.682342Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 1423360
+      }
+    },
+    {
+      "association_id": "history-7-3411",
+      "role": "history",
+      "parent_id": "listing-7",
+      "body": {
+        "path": "bodies/95eac2cf133cd1e13d2a09a92298147afabb4530ad0d9ba249cd862f96664e6d.bin",
+        "sha256": "95eac2cf133cd1e13d2a09a92298147afabb4530ad0d9ba249cd862f96664e6d",
+        "bytes": 16107
+      },
+      "claim": {
+        "receipt_sha256": "4f6a198be3bab7591bc04ecccca9ee07a5d751c98fe13c35be2b5b2429246f64",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3411&deptID=16&agencyID=7&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Air%20Quality%20Control%20Commission&seriesNum=5%20CCR%201001-30",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3411&deptID=16&agencyID=7&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Air%20Quality%20Control%20Commission&seriesNum=5%20CCR%201001-30",
+        "started_at": "2026-10-05T20:45:57.697797Z",
+        "finished_at": "2026-10-05T20:45:58.079804Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 16107
+      }
+    },
+    {
+      "association_id": "doc-7-3411-12356-pdf",
+      "role": "pdf",
+      "parent_id": "history-7-3411",
+      "body": {
+        "path": "bodies/ad6cca291176cf2980c6095f3153a0c94a31a3af0e5a4c5a0fe948e6fbdc4289.bin",
+        "sha256": "ad6cca291176cf2980c6095f3153a0c94a31a3af0e5a4c5a0fe948e6fbdc4289",
+        "bytes": 957257
+      },
+      "claim": {
+        "receipt_sha256": "224a83514519bae59418f7a5a739553a567cda13f2a2160cdbecc0baf2a1c326",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=12356&fileName=5%20CCR%201001-30",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=12356&fileName=5%20CCR%201001-30",
+        "started_at": "2026-10-05T20:45:58.113090Z",
+        "finished_at": "2026-10-05T20:45:58.767807Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 957257
+      }
+    },
+    {
+      "association_id": "doc-7-3411-12356-word",
+      "role": "word",
+      "parent_id": "history-7-3411",
+      "body": {
+        "path": "bodies/7b42a8b0c3c1ce60e49361065b42f61e0a337446ac3da154f6816393911313c0.bin",
+        "sha256": "7b42a8b0c3c1ce60e49361065b42f61e0a337446ac3da154f6816393911313c0",
+        "bytes": 1366016
+      },
+      "claim": {
+        "receipt_sha256": "5f3c4c88ce8681c3e1530da50a7896072817ff3abffbbef891f8927ea030dea0",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=12356&fileName=5%20CCR%201001-30",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=12356&fileName=5%20CCR%201001-30",
+        "started_at": "2026-10-05T20:45:58.774974Z",
+        "finished_at": "2026-10-05T20:45:59.182227Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 1366016
+      }
+    }
+  ],
+  "document_policy": "all_source_nonarchived_pdf_word_pairs",
+  "legal_currentness": "not_verified",
+  "answer_safe": false
+}

@@ -1,0 +1,85 @@
+{
+  "additionalProperties": false,
+  "description": "Completed byte custody with no currentness promotion.",
+  "properties": {
+    "status": {
+      "const": "completed_archived_pending_pipeline",
+      "title": "Status",
+      "type": "string"
+    },
+    "preparation_sha256": {
+      "title": "Preparation Sha256",
+      "type": "string"
+    },
+    "intent_sha256": {
+      "title": "Intent Sha256",
+      "type": "string"
+    },
+    "actual_repository_received_at": {
+      "format": "date-time",
+      "title": "Actual Repository Received At",
+      "type": "string"
+    },
+    "raw_sha256": {
+      "title": "Raw Sha256",
+      "type": "string"
+    },
+    "ledger_sha256": {
+      "title": "Ledger Sha256",
+      "type": "string"
+    },
+    "report_sha256": {
+      "title": "Report Sha256",
+      "type": "string"
+    },
+    "raw_records": {
+      "title": "Raw Records",
+      "type": "integer"
+    },
+    "ledger_records": {
+      "title": "Ledger Records",
+      "type": "integer"
+    },
+    "source_id_to_sha256": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Source Id To Sha256",
+      "type": "object"
+    },
+    "canonical_archive_paths": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Canonical Archive Paths",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "status",
+    "preparation_sha256",
+    "intent_sha256",
+    "actual_repository_received_at",
+    "raw_sha256",
+    "ledger_sha256",
+    "report_sha256",
+    "raw_records",
+    "ledger_records",
+    "source_id_to_sha256",
+    "canonical_archive_paths",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

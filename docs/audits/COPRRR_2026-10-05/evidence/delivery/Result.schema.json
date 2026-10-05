@@ -1,0 +1,290 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Link": {
+      "additionalProperties": false,
+      "properties": {
+        "original_start_tag": {
+          "title": "Original Start Tag",
+          "type": "string"
+        },
+        "decoded_href": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Decoded Href"
+        },
+        "original_onclick": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Original Onclick"
+        },
+        "resolved_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Resolved Url"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "opened": {
+          "const": false,
+          "default": false,
+          "title": "Opened",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "original_start_tag",
+        "decoded_href",
+        "original_onclick",
+        "resolved_url",
+        "label"
+      ],
+      "title": "Link",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "sequence": {
+      "maximum": 40,
+      "minimum": 1,
+      "title": "Sequence",
+      "type": "integer"
+    },
+    "target_id": {
+      "title": "Target Id",
+      "type": "string"
+    },
+    "requested_url": {
+      "title": "Requested Url",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "ended_at": {
+      "format": "date-time",
+      "title": "Ended At",
+      "type": "string"
+    },
+    "curl_exit": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Curl Exit"
+    },
+    "http_status": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Http Status"
+    },
+    "final_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Final Url"
+    },
+    "public_headers": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Public Headers",
+      "type": "object"
+    },
+    "routing_header_omitted_unsafe": {
+      "title": "Routing Header Omitted Unsafe",
+      "type": "boolean"
+    },
+    "body": {
+      "$ref": "#/$defs/Asset"
+    },
+    "body_magic": {
+      "enum": [
+        "html",
+        "pdf",
+        "word_ole",
+        "word_zip",
+        "word_rtf",
+        "other_or_empty"
+      ],
+      "title": "Body Magic",
+      "type": "string"
+    },
+    "complete_transfer": {
+      "title": "Complete Transfer",
+      "type": "boolean"
+    },
+    "partial_body": {
+      "title": "Partial Body",
+      "type": "boolean"
+    },
+    "charged_bytes": {
+      "maximum": 15000000,
+      "minimum": 0,
+      "title": "Charged Bytes",
+      "type": "integer"
+    },
+    "outcome": {
+      "enum": [
+        "pdf_signature_received",
+        "word_signature_received",
+        "redirect_unopened",
+        "access_denied",
+        "not_found",
+        "format_failure",
+        "transport_or_size_failure",
+        "incomplete"
+      ],
+      "title": "Outcome",
+      "type": "string"
+    },
+    "requested_format": {
+      "enum": [
+        "pdf",
+        "word"
+      ],
+      "title": "Requested Format",
+      "type": "string"
+    },
+    "actual_format_verified": {
+      "const": false,
+      "default": false,
+      "title": "Actual Format Verified",
+      "type": "boolean"
+    },
+    "document_content_reviewed": {
+      "const": false,
+      "default": false,
+      "title": "Document Content Reviewed",
+      "type": "boolean"
+    },
+    "complete_agency_rule_count": {
+      "default": null,
+      "title": "Complete Agency Rule Count",
+      "type": "null"
+    },
+    "decode_policy": {
+      "const": "not_decoded_original_bytes",
+      "default": "not_decoded_original_bytes",
+      "title": "Decode Policy",
+      "type": "string"
+    },
+    "parse_error": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Parse Error"
+    },
+    "links": {
+      "items": {
+        "$ref": "#/$defs/Link"
+      },
+      "maxItems": 0,
+      "title": "Links",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "sequence",
+    "target_id",
+    "requested_url",
+    "started_at",
+    "ended_at",
+    "curl_exit",
+    "http_status",
+    "final_url",
+    "public_headers",
+    "routing_header_omitted_unsafe",
+    "body",
+    "body_magic",
+    "complete_transfer",
+    "partial_body",
+    "charged_bytes",
+    "outcome",
+    "requested_format",
+    "links"
+  ],
+  "title": "Result",
+  "type": "object"
+}

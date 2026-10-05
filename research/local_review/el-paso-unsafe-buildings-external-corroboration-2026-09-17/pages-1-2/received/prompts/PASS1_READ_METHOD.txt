@@ -1,0 +1,1 @@
+caption_mediated source-first via Cursor Read image captions on full page-1.png / page-2.png and overlapping vertical band crops plus finer region crops. Not direct pixel OCR. legal_currentness: not_verified. visual_verification: pending_atlas_direct_image_review.

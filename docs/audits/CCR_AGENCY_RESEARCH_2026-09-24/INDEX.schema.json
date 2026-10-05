@@ -1,0 +1,263 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Repository-relative exact file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Package": {
+      "additionalProperties": false,
+      "description": "Source capture and reproducible native output are distinct artifacts.",
+      "properties": {
+        "group": {
+          "title": "Group",
+          "type": "string"
+        },
+        "department_id": {
+          "title": "Department Id",
+          "type": "string"
+        },
+        "capture_root": {
+          "title": "Capture Root",
+          "type": "string"
+        },
+        "capture_manifest": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_output_manifest": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_input_plan": {
+          "$ref": "#/$defs/Asset"
+        },
+        "selected_rules": {
+          "title": "Selected Rules",
+          "type": "integer"
+        },
+        "source_pdf_associations": {
+          "title": "Source Pdf Associations",
+          "type": "integer"
+        },
+        "word_signature_only_associations": {
+          "title": "Word Signature Only Associations",
+          "type": "integer"
+        },
+        "native_unique_pdfs": {
+          "title": "Native Unique Pdfs",
+          "type": "integer"
+        },
+        "native_unique_physical_pages": {
+          "title": "Native Unique Physical Pages",
+          "type": "integer"
+        },
+        "capture_files": {
+          "title": "Capture Files",
+          "type": "integer"
+        },
+        "capture_bytes": {
+          "title": "Capture Bytes",
+          "type": "integer"
+        },
+        "native_build_command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Native Build Command",
+          "type": "array"
+        },
+        "native_verify_command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Native Verify Command",
+          "type": "array"
+        },
+        "department_complete": {
+          "const": false,
+          "default": false,
+          "title": "Department Complete",
+          "type": "boolean"
+        },
+        "native_output_files_committed": {
+          "const": false,
+          "default": false,
+          "title": "Native Output Files Committed",
+          "type": "boolean"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "answer_safe": {
+          "const": false,
+          "default": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "group",
+        "department_id",
+        "capture_root",
+        "capture_manifest",
+        "native_output_manifest",
+        "native_input_plan",
+        "selected_rules",
+        "source_pdf_associations",
+        "word_signature_only_associations",
+        "native_unique_pdfs",
+        "native_unique_physical_pages",
+        "capture_files",
+        "capture_bytes",
+        "native_build_command",
+        "native_verify_command"
+      ],
+      "title": "Package",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Dated partial-source index, not canonical department state or a legal corpus denominator.",
+  "properties": {
+    "schema_version": {
+      "const": "ccr-partial-agency-research-index-2026-09-24",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "observed_at": {
+      "title": "Observed At",
+      "type": "string"
+    },
+    "packages": {
+      "items": {
+        "$ref": "#/$defs/Package"
+      },
+      "maxItems": 11,
+      "minItems": 11,
+      "title": "Packages",
+      "type": "array"
+    },
+    "implementation": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Implementation",
+      "type": "array"
+    },
+    "input_receipt_sha256": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Input Receipt Sha256",
+      "type": "array"
+    },
+    "newly_retained_rule_identities": {
+      "title": "Newly Retained Rule Identities",
+      "type": "integer"
+    },
+    "newly_searchable_unique_pdf_hashes": {
+      "title": "Newly Searchable Unique Pdf Hashes",
+      "type": "integer"
+    },
+    "newly_searchable_unique_physical_pages": {
+      "title": "Newly Searchable Unique Physical Pages",
+      "type": "integer"
+    },
+    "installed_source_files": {
+      "title": "Installed Source Files",
+      "type": "integer"
+    },
+    "installed_source_bytes": {
+      "title": "Installed Source Bytes",
+      "type": "integer"
+    },
+    "native_manifests_describe_generated_outputs": {
+      "const": true,
+      "default": true,
+      "title": "Native Manifests Describe Generated Outputs",
+      "type": "boolean"
+    },
+    "excluded_transportation_rule": {
+      "const": "21/124/3475; exact consolidated Word handler returned HTML",
+      "title": "Excluded Transportation Rule",
+      "type": "string"
+    },
+    "completed_department_count_unchanged": {
+      "const": 23,
+      "default": 23,
+      "title": "Completed Department Count Unchanged",
+      "type": "integer"
+    },
+    "catalog_department_count": {
+      "const": 25,
+      "default": 25,
+      "title": "Catalog Department Count",
+      "type": "integer"
+    },
+    "statewide_complete": {
+      "const": false,
+      "default": false,
+      "title": "Statewide Complete",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "observed_at",
+    "packages",
+    "implementation",
+    "input_receipt_sha256",
+    "newly_retained_rule_identities",
+    "newly_searchable_unique_pdf_hashes",
+    "newly_searchable_unique_physical_pages",
+    "installed_source_files",
+    "installed_source_bytes",
+    "excluded_transportation_rule",
+    "limitations"
+  ],
+  "title": "Index",
+  "type": "object"
+}

@@ -1,0 +1,318 @@
+name: Coverage and CCR checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: coverage-ccr-checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pilot-tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GIT_LFS_SKIP_SMUDGE: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          lfs: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+      - run: >-
+          python -m pip install --disable-pip-version-check -r requirements-ci.txt
+          PyMuPDF==1.28.2 beautifulsoup4==4.15.0 soupsieve==2.9.2
+      - name: Offline CCR parser, transaction and publishing tests
+        run: |
+          python -m pytest tests/test_ccr_current.py tests/test_ccr_current_grouped_departments.py \
+            tests/test_ccr_current_source_series.py tests/test_ccr_current_empty_agency.py \
+            tests/test_publish_ccr_current.py tests/test_publish_ccr_departments.py \
+            tests/test_ccr_source_text.py tests/test_ccr_agency_capture.py \
+            tests/test_ccr_agency_capture_v2.py tests/test_ccr_agency_text.py \
+            tests/test_coverage_dashboard.py -q \
+            --cov=geode.pipeline.ccr_current --cov=geode.pipeline.ccr_source_text \
+            --cov=geode.pipeline.ccr_agency_capture \
+            --cov=geode.pipeline.ccr_agency_capture_v2 --cov=geode.pipeline.ccr_agency_text \
+            --cov=geode.pipeline.coverage_dashboard --cov=scripts.publish_ccr_current \
+            --cov-branch --cov-report=term-missing --cov-report=xml:coverage-ccr.xml \
+            --junitxml=coverage-ccr-tests.xml
+          python -m coverage report --fail-under=90 --include=geode/pipeline/ccr_current.py
+          python -m coverage report --fail-under=90 --include=geode/pipeline/ccr_source_text.py
+          python -m coverage report --fail-under=90 --include=geode/pipeline/ccr_agency_capture.py
+          python -m coverage report --fail-under=90 --include=geode/pipeline/ccr_agency_capture_v2.py
+          python -m coverage report --fail-under=90 --include=geode/pipeline/ccr_agency_text.py
+          python -m coverage report --fail-under=90 --include=geode/pipeline/coverage_dashboard.py
+          python -m coverage report --fail-under=90 --include=scripts/publish_ccr_current.py
+      - name: Replay the committed historical agency research snapshot
+        run: >-
+          python -B -m geode.pipeline.ccr_agency_capture verify
+          --root 02_Regulations_CCR/_verification/agency_scopes/2026-09-23/public-health-137-138-140
+          --manifest-sha256 1d8807b9aff8f42f923dbe1e147fce0821c4580cde967808271c02b660816219
+      - name: Replay all eleven partial agency source captures
+        run: |
+          python -B - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          import jsonschema
+          from geode.pipeline import ccr_agency_capture_v2 as capture
+          from geode.pipeline import ccr_agency_text as native
+
+          folder = Path('docs/audits/CCR_AGENCY_RESEARCH_2026-09-24')
+          raw = (folder / 'INDEX.json').read_bytes()
+          assert hashlib.sha256(raw).hexdigest() == '7680496f30c81eac4bca6d0dbd3f27627e3f105053c4fac5fe8fa00468fe024b'
+          index = json.loads(raw)
+          jsonschema.validate(index, json.loads((folder / 'INDEX.schema.json').read_bytes()))
+          assert len(index['packages']) == 11
+          for row in index['packages']:
+              for key in ('capture_manifest', 'native_output_manifest', 'native_input_plan'):
+                  ref = row[key]
+                  body = Path(ref['path']).read_bytes()
+                  assert len(body) == ref['bytes']
+                  assert hashlib.sha256(body).hexdigest() == ref['sha256']
+              actual = capture.verify(Path(row['capture_root']), row['capture_manifest']['sha256'])
+              assert actual.selected_rule_count == row['selected_rules']
+              print(row['group'], 'source replay passed')
+          sample = next(row for row in index['packages'] if row['group'] == 'PH-A145-01')
+          output = Path('.geode_runtime/ci-native-ph145')
+          plan = native.InputPlan.model_validate_json(Path(sample['native_input_plan']['path']).read_bytes())
+          native.build(Path(sample['capture_root']), output, plan)
+          manifest = native.verify(output, sample['native_output_manifest']['sha256'])
+          assert manifest.unique_physical_pages == sample['native_unique_physical_pages']
+          result = native.query(output, sample['native_output_manifest']['sha256'], '6 CCR 1012-1', mode='citation', limit=1)
+          assert result.returned_page_associations == 1 and result.answer_safe is False
+          assert result.scope.department_complete is False
+          print('Real-source native rebuild, verification and citation query passed')
+          PY
+      - name: Replay the retained PH141 addendum and exact page union
+        run: |
+          python -B - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          import jsonschema
+          from geode.pipeline import ccr_agency_capture_v2 as capture
+          from geode.pipeline import ccr_agency_text as native
+
+          folder = Path('docs/audits/CCR_PH141_RESEARCH_2026-09-24')
+          raw = (folder / 'INDEX.json').read_bytes()
+          assert hashlib.sha256(raw).hexdigest() == 'f56e9437ff3e3851c0772bf0c0b0d32567de8dd3ff27380e4f0fc319227e74ab'
+          index = json.loads(raw)
+          jsonschema.validate(index, json.loads((folder / 'INDEX.schema.json').read_bytes()))
+          row = index['package']
+          references = [index[k] for k in ('previous_11_package_index', 'previous_page_set', 'new_page_set', 'original_schema')]
+          references += index['implementation']
+          references += [row[k] for k in ('capture_manifest', 'native_output_manifest', 'native_input_plan')]
+          for ref in references:
+              body = Path(ref['path']).read_bytes()
+              assert len(body) == ref['bytes']
+              assert hashlib.sha256(body).hexdigest() == ref['sha256']
+          source = capture.verify(Path(row['capture_root']), row['capture_manifest']['sha256'])
+          assert source.selected_rule_count == 17 and source.catalog_agency_count == 18
+          output = Path('.geode_runtime/ci-native-ph141')
+          plan = native.InputPlan.model_validate_json(Path(row['native_input_plan']['path']).read_bytes())
+          native.build(Path(row['capture_root']), output, plan)
+          manifest = native.verify(output, row['native_output_manifest']['sha256'])
+          assert manifest.unique_physical_pages == 883 and len(manifest.scope.selected_pdf_sha256) == 17
+          result = native.query(output, row['native_output_manifest']['sha256'], '6 CCR 1007-1', mode='citation', limit=1)
+          assert result.returned_page_associations == 1 and result.answer_safe is False
+          assert result.scope.department_complete is False
+          schema = json.loads(Path(index['original_schema']['path']).read_bytes())
+          validator = jsonschema.Draft202012Validator(schema)
+          def page_set(path):
+              pages = {}
+              hashes = set()
+              with Path(path).open(encoding='utf-8') as handle:
+                  for line in handle:
+                      original = json.loads(line)
+                      validator.validate(original)
+                      assert original['sha256'] not in hashes
+                      hashes.add(original['sha256'])
+                      assert [p['physical_page'] for p in original['pages']] == list(range(1, len(original['pages']) + 1))
+                      for p in original['pages']:
+                          pages[(original['sha256'], p['physical_page'])] = (p['text_sha256'], p['text_bytes'])
+              return hashes, pages
+          old_hashes, old_pages = page_set(index['previous_page_set']['path'])
+          new_hashes, new_pages = page_set(index['new_page_set']['path'])
+          actual_pages = {}
+          with (output / 'pages.jsonl').open(encoding='utf-8') as handle:
+              for line in handle:
+                  p = native.Page.model_validate_json(line)
+                  key = (p.original_sha256, p.physical_page)
+                  value = (p.text.sha256, p.text.size_bytes)
+                  assert key not in actual_pages or actual_pages[key] == value
+                  actual_pages[key] = value
+          assert actual_pages == new_pages
+          assert (len(old_hashes), len(old_pages), len(new_hashes), len(new_pages)) == (992, 31167, 17, 883)
+          assert not old_hashes & new_hashes and not old_pages.keys() & new_pages.keys()
+          assert len(old_hashes | new_hashes) == index['union_unique_pdfs'] == 1009
+          assert len(old_pages.keys() | new_pages.keys()) == index['union_unique_physical_pages'] == 32050
+          print('PH141 source/native replay, citation query and exact hash/page union passed')
+          PY
+      - name: Validate PH141 documentary roles
+        run: |
+          python -B - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          import jsonschema
+          import pymupdf
+          from geode.pipeline import ccr_agency_capture_v2 as capture
+
+          folder = Path('docs/audits/CCR_PH141_DOCUMENT_ROLES_2026-09-24')
+
+          def sha(raw):
+              return hashlib.sha256(raw).hexdigest()
+
+          def read(root, path, maximum=15_000_000):
+              rel = Path(path)
+              assert not rel.is_absolute() and '..' not in rel.parts
+              current = root
+              for part in rel.parts:
+                  current = current / part
+                  assert not current.is_symlink()
+              assert current.is_file() and current.stat().st_size <= maximum
+              with current.open('rb') as handle:
+                  raw = handle.read(maximum + 1)
+              assert len(raw) <= maximum
+              return raw
+
+          def bound(root, ref):
+              raw = read(root, ref['path'])
+              assert len(raw) == ref['bytes'] and sha(raw) == ref['sha256']
+              return raw
+
+          raw = read(folder, 'ROLES.json')
+          schema_raw = read(folder, 'ROLES.schema.json')
+          assert sha(raw) == '01803cee71f8eba8c31476d8569535c3351414c35594fbc7306cdc6cb55ab213'
+          assert sha(schema_raw) == 'fbaf0b6260e65183db1443efdf2fc16860c433dbcbb02e459e8e86baae494ba4'
+          roles = json.loads(raw)
+          jsonschema.Draft202012Validator(json.loads(schema_raw)).validate(roles)
+          assert roles['legal_currentness'] == 'not_verified' and roles['answer_safe'] is False
+          assert roles['department_complete'] is False and roles['native_package_status_changed'] is False
+          public_index = json.loads(bound(Path('.'), roles['public_index']))
+          root_rel = Path(roles['capture_root'])
+          assert not root_rel.is_absolute() and '..' not in root_rel.parts
+          root = Path('.') / root_rel
+          assert public_index['package']['capture_root'] == roles['capture_root']
+          manifest_raw = bound(Path('.'), roles['capture_manifest'])
+          manifest_pin = sha(manifest_raw)
+          assert manifest_pin == '51657265d4199ab7d034fe64920eeaa44aee73709be0b0f4de95ab47d4aa349d'
+          assert public_index['package']['capture_manifest']['sha256'] == manifest_pin
+          source = capture.verify(root, manifest_pin).model_dump(mode='json')
+          members = {r['path']: r for r in json.loads(manifest_raw)['files']}
+          plan_raw = bound(root, members['PLAN.json'])
+          record_raw = bound(root, members['CAPTURE.json'])
+          assert plan_raw == bound(Path('.'), roles['capture_plan'])
+          assert record_raw == bound(Path('.'), roles['capture_record'])
+          assert json.loads(record_raw) == source
+          plan = capture.Plan.model_validate_json(plan_raw).model_dump(mode='json')
+          responses = {r['association_id']: r for r in plan['responses']}
+          rules = {r['rule_id']: r for r in source['selected_rules']}
+          pdfs = {d['association_id']: d for d in source['documents'] if d['role'] == 'pdf'}
+          agency = next(a for a in source['agencies'] if a['agency_id'] == '141')
+          assert (source['catalog_agency_count'], agency['listed_rule_count'], source['selected_rule_count']) == (18, 53, 17)
+          rows = roles['documents']
+          assert len(rows) == len({r['association_id'] for r in rows}) == 17
+          assert len({r['capture_relative_original']['sha256'] for r in rows}) == 17
+          assert set(pdfs) == {r['association_id'] for r in rows}
+          expected_roles = {
+              '2404': 'editorial_navigation_notice',
+              '2405': 'editorial_navigation_and_history',
+              '2406': 'editorial_navigation_and_history',
+              '2407': 'substantive_body_present',
+              '2408': 'editorial_repeal_notice',
+              '2937': 'editorial_recodification_notice',
+              '2938': 'editorial_recodification_notice',
+              '2939': 'editorial_recodification_notice',
+          }
+          evidence = {e['review_id']: e for e in roles['evidence']}
+          assert len(roles['evidence']) == len(evidence) == 3
+          assert {e['manifest']['path'] for e in evidence.values()} == {
+              'review-manifests/ptolemy-six-short.json',
+              'review-manifests/plato-2406.json',
+              'review-manifests/atlas-2407.json',
+          }
+          review_members = {}
+          for key, e in evidence.items():
+              m = json.loads(bound(folder, e['manifest']))
+              items = m.get('files', m.get('assets'))
+              reports = [r for r in items if r['path'] == 'REVIEW.json']
+              assert len(reports) == 1
+              assert reports[0]['sha256'] == e['report_sha256']
+              assert reports[0].get('bytes', reports[0].get('size')) == e['report_bytes']
+              review_members[key] = items
+          for row in rows:
+              association = row['association_id']
+              response, document = responses[association], pdfs[association]
+              rule = rules[row['rule_id']]
+              assert row['department_id'] == source['department_id'] == '16'
+              assert row['agency_id'] == rule['agency_id'] == '141'
+              assert response['parent_id'] == 'rule-' + row['rule_id']
+              assert row['source_citation'] == rule['source_citation']
+              assert row['source_listing_title'] == rule['listing_title']
+              assert row['source_history_title'] == rule['history_title']
+              assert row['source_url'] == response['claim']['requested_url']
+              versions = [v for v in rule['versions'] if v['selected'] and row['source_url'] in v['document_urls']]
+              assert len(versions) == 1
+              assert row['source_version_id'] == versions[0]['version_id']
+              assert row['source_designation_claim'] == versions[0]['designation']
+              original = row['capture_relative_original']
+              assert original == response['body']
+              assert original['sha256'] == document['sha256']
+              body = bound(root, original)
+              with pymupdf.open(stream=body, filetype='pdf') as pdf:
+                  assert len(pdf) == row['physical_pages'] == document['pages']
+              assert row['legal_currentness'] == 'not_verified' and row['answer_safe'] is False
+              if row['rule_id'] in expected_roles:
+                  assert row['role_review_status'] == 'scoped_document_role_observed'
+                  assert row['observed_role'] == expected_roles[row['rule_id']]
+                  assert row['substantive_body_in_this_pdf'] is (row['observed_role'] == 'substantive_body_present')
+                  assert row['review_id'] in review_members
+                  originals = [r for r in review_members[row['review_id']]
+                               if r['path'].endswith('.pdf') and r['sha256'] == original['sha256']]
+                  assert len(originals) == 1
+                  assert originals[0].get('bytes', originals[0].get('size')) == original['bytes']
+              else:
+                  assert row['role_review_status'] == 'not_reviewed_for_document_role'
+                  assert row['observed_role'] is None
+                  assert row['substantive_body_in_this_pdf'] is None and row['review_id'] is None
+          reviewed = [r for r in rows if r['review_id'] is not None]
+          notices = [r for r in reviewed if r['observed_role'] != 'substantive_body_present']
+          substantive = [r for r in reviewed if r['observed_role'] == 'substantive_body_present']
+          unreviewed = [r for r in rows if r['review_id'] is None]
+          counts = tuple((len(xs), sum(r['physical_pages'] for r in xs))
+                         for xs in (rows, reviewed, notices, substantive, unreviewed))
+          assert counts == ((17, 883), (8, 24), (7, 14), (1, 10), (9, 859))
+          for keys, pair in [(('selected_capture_pdfs', 'selected_capture_pages'), counts[0]),
+                             (('reviewed_pdfs', 'reviewed_pages'), counts[1]),
+                             (('notice_or_history_pdfs', 'notice_or_history_pages'), counts[2]),
+                             (('substantive_body_pdfs', 'substantive_body_pages'), counts[3]),
+                             (('role_unreviewed_pdfs', 'role_unreviewed_pages'), counts[4])]:
+              assert tuple(roles[k] for k in keys) == pair
+          print(json.dumps({'status': 'PH141 role schema/source/identity checks passed',
+                            'reviewed_pdfs': 8, 'reviewed_pages': 24, 'notice_pdfs': 7,
+                            'notice_pages': 14, 'substantive_pdfs': 1, 'substantive_pages': 10,
+                            'role_unreviewed_pdfs': 9, 'role_unreviewed_pages': 859,
+                            'visual_judgment_reproduced': False}, sort_keys=True))
+          PY
+
+      - name: Retain test report
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: coverage-ccr-tests-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            coverage-ccr-tests.xml
+            coverage-ccr.xml
+          retention-days: 30
+          if-no-files-found: warn

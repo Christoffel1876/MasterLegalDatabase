@@ -1,0 +1,153 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact relative payload identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Crop": {
+      "additionalProperties": false,
+      "description": "Exact original pixel slice used after full-page review.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "page": {
+          "title": "Page",
+          "type": "integer"
+        },
+        "input_path": {
+          "title": "Input Path",
+          "type": "string"
+        },
+        "input_sha256": {
+          "title": "Input Sha256",
+          "type": "string"
+        },
+        "pixel_box": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Pixel Box",
+          "type": "array"
+        },
+        "output_path": {
+          "title": "Output Path",
+          "type": "string"
+        },
+        "output_sha256": {
+          "title": "Output Sha256",
+          "type": "string"
+        },
+        "method": {
+          "title": "Method",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "page",
+        "input_path",
+        "input_sha256",
+        "pixel_box",
+        "output_path",
+        "output_sha256",
+        "method"
+      ],
+      "title": "Crop",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Actual reviewer attestation recorded after image tool use, not tool-authenticated chronology.",
+  "properties": {
+    "reviewer": {
+      "const": "Plato",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "recorded_at": {
+      "format": "date-time",
+      "title": "Recorded At",
+      "type": "string"
+    },
+    "method": {
+      "const": "direct_view_image_full_pages_then_native_comparison_and_crops",
+      "title": "Method",
+      "type": "string"
+    },
+    "full_pages": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Full Pages",
+      "type": "array"
+    },
+    "crops": {
+      "items": {
+        "$ref": "#/$defs/Crop"
+      },
+      "title": "Crops",
+      "type": "array"
+    },
+    "full_pages_displayed_size": {
+      "title": "Full Pages Displayed Size",
+      "type": "string"
+    },
+    "prior_exposure": {
+      "title": "Prior Exposure",
+      "type": "string"
+    },
+    "native_candidate_read_after_full_images": {
+      "const": true,
+      "title": "Native Candidate Read After Full Images",
+      "type": "boolean"
+    },
+    "external_reports_consulted": {
+      "const": false,
+      "title": "External Reports Consulted",
+      "type": "boolean"
+    },
+    "chronology_limit": {
+      "title": "Chronology Limit",
+      "type": "string"
+    }
+  },
+  "required": [
+    "reviewer",
+    "recorded_at",
+    "method",
+    "full_pages",
+    "crops",
+    "full_pages_displayed_size",
+    "prior_exposure",
+    "native_candidate_read_after_full_images",
+    "external_reports_consulted",
+    "chronology_limit"
+  ],
+  "title": "Inspection",
+  "type": "object"
+}

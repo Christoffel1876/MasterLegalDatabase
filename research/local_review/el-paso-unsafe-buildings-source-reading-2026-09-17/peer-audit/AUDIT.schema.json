@@ -1,0 +1,433 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact retained bytes, not a claim about legal meaning.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "CanonicalBinding": {
+      "additionalProperties": false,
+      "description": "Tracked canonical identity checked without rewriting prior records.",
+      "properties": {
+        "commit": {
+          "title": "Commit",
+          "type": "string"
+        },
+        "raw_manifest": {
+          "$ref": "#/$defs/Asset"
+        },
+        "raw_line": {
+          "title": "Raw Line",
+          "type": "integer"
+        },
+        "intake_ledger": {
+          "$ref": "#/$defs/Asset"
+        },
+        "ledger_line": {
+          "title": "Ledger Line",
+          "type": "integer"
+        },
+        "source": {
+          "$ref": "#/$defs/Asset"
+        },
+        "inventory": {
+          "$ref": "#/$defs/Asset"
+        },
+        "inventory_source_index": {
+          "title": "Inventory Source Index",
+          "type": "integer"
+        },
+        "record_id": {
+          "title": "Record Id",
+          "type": "string"
+        },
+        "authority_id": {
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "exact_raw_and_ledger_line_match": {
+          "const": true,
+          "default": true,
+          "title": "Exact Raw And Ledger Line Match",
+          "type": "boolean"
+        },
+        "exact_canonical_source_match": {
+          "const": true,
+          "default": true,
+          "title": "Exact Canonical Source Match",
+          "type": "boolean"
+        },
+        "actual_repository_received_at": {
+          "title": "Actual Repository Received At",
+          "type": "string"
+        },
+        "acquisition_method": {
+          "const": "received_review_package",
+          "title": "Acquisition Method",
+          "type": "string"
+        },
+        "verified_http_acquired_at": {
+          "default": null,
+          "title": "Verified Http Acquired At",
+          "type": "null"
+        }
+      },
+      "required": [
+        "commit",
+        "raw_manifest",
+        "raw_line",
+        "intake_ledger",
+        "ledger_line",
+        "source",
+        "inventory",
+        "inventory_source_index",
+        "record_id",
+        "authority_id",
+        "actual_repository_received_at",
+        "acquisition_method"
+      ],
+      "title": "CanonicalBinding",
+      "type": "object"
+    },
+    "Crop": {
+      "additionalProperties": false,
+      "description": "Direct PDF crop inspected as supplementary visual evidence.",
+      "properties": {
+        "physical_page": {
+          "maximum": 8,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "rectangle_points": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Rectangle Points",
+          "type": "array"
+        },
+        "matrix_scale": {
+          "const": 3.0,
+          "default": 3.0,
+          "title": "Matrix Scale",
+          "type": "number"
+        },
+        "renderer": {
+          "const": "PyMuPDF 1.28.2",
+          "default": "PyMuPDF 1.28.2",
+          "title": "Renderer",
+          "type": "string"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "directly_viewed": {
+          "const": true,
+          "default": true,
+          "title": "Directly Viewed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "physical_page",
+        "rectangle_points",
+        "image"
+      ],
+      "title": "Crop",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "description": "A confirmed bounded source observation or unresolved limitation.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "physical_pages": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Physical Pages",
+          "type": "array"
+        },
+        "result": {
+          "enum": [
+            "confirmed",
+            "qualified"
+          ],
+          "title": "Result",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "legal_inference": {
+          "const": false,
+          "default": false,
+          "title": "Legal Inference",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "physical_pages",
+        "result",
+        "description"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "PageCheck": {
+      "additionalProperties": false,
+      "description": "Human visual judgment on a complete physical page.",
+      "properties": {
+        "physical_page": {
+          "maximum": 8,
+          "minimum": 1,
+          "title": "Physical Page",
+          "type": "integer"
+        },
+        "image": {
+          "$ref": "#/$defs/Asset"
+        },
+        "full_page_directly_viewed": {
+          "const": true,
+          "default": true,
+          "title": "Full Page Directly Viewed",
+          "type": "boolean"
+        },
+        "comparison": {
+          "title": "Comparison",
+          "type": "string"
+        },
+        "uncertainty": {
+          "title": "Uncertainty",
+          "type": "string"
+        }
+      },
+      "required": [
+        "physical_page",
+        "image",
+        "comparison",
+        "uncertainty"
+      ],
+      "title": "PageCheck",
+      "type": "object"
+    },
+    "Replay": {
+      "additionalProperties": false,
+      "description": "Observed mechanical replay, distinct from direct visual inspection.",
+      "properties": {
+        "command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Command",
+          "type": "array"
+        },
+        "cwd": {
+          "title": "Cwd",
+          "type": "string"
+        },
+        "exit_code": {
+          "const": 0,
+          "title": "Exit Code",
+          "type": "integer"
+        },
+        "stdout": {
+          "title": "Stdout",
+          "type": "string"
+        },
+        "stderr": {
+          "title": "Stderr",
+          "type": "string"
+        },
+        "scope": {
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "command",
+        "cwd",
+        "exit_code",
+        "stdout",
+        "stderr",
+        "scope"
+      ],
+      "title": "Replay",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Bounded peer review of the frozen Atlas research derivative.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "reviewer": {
+      "const": "Ptolemy",
+      "default": "Ptolemy",
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "source_id": {
+      "const": "el-paso-unsafe-buildings-18-03-sd011",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "authority_id": {
+      "const": "CO-COUNTY-EL_PASO",
+      "title": "Authority Id",
+      "type": "string"
+    },
+    "target_manifest": {
+      "$ref": "#/$defs/Asset"
+    },
+    "source": {
+      "$ref": "#/$defs/Asset"
+    },
+    "review": {
+      "$ref": "#/$defs/Asset"
+    },
+    "corrected_reading": {
+      "$ref": "#/$defs/Asset"
+    },
+    "native": {
+      "$ref": "#/$defs/Asset"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/PageCheck"
+      },
+      "title": "Pages",
+      "type": "array"
+    },
+    "supplementary_crops": {
+      "items": {
+        "$ref": "#/$defs/Crop"
+      },
+      "title": "Supplementary Crops",
+      "type": "array"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/Observation"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "canonical": {
+      "$ref": "#/$defs/CanonicalBinding"
+    },
+    "replay": {
+      "$ref": "#/$defs/Replay"
+    },
+    "method": {
+      "title": "Method",
+      "type": "string"
+    },
+    "visual_order": {
+      "title": "Visual Order",
+      "type": "string"
+    },
+    "external_review_consulted": {
+      "const": false,
+      "default": false,
+      "title": "External Review Consulted",
+      "type": "boolean"
+    },
+    "actionable_discrepancies": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Actionable Discrepancies",
+      "type": "array"
+    },
+    "disposition": {
+      "const": "no_actionable_discrepancy_within_stated_scope",
+      "title": "Disposition",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "canonical_changed": {
+      "const": false,
+      "default": false,
+      "title": "Canonical Changed",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "source_id",
+    "authority_id",
+    "target_manifest",
+    "source",
+    "review",
+    "corrected_reading",
+    "native",
+    "pages",
+    "supplementary_crops",
+    "observations",
+    "canonical",
+    "replay",
+    "method",
+    "visual_order",
+    "actionable_discrepancies",
+    "disposition",
+    "limitations"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

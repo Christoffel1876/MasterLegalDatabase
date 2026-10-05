@@ -1,0 +1,309 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Repository-relative exact file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Package": {
+      "additionalProperties": false,
+      "description": "Source capture and reproducible native output are distinct artifacts.",
+      "properties": {
+        "group": {
+          "title": "Group",
+          "type": "string"
+        },
+        "department_id": {
+          "title": "Department Id",
+          "type": "string"
+        },
+        "capture_root": {
+          "title": "Capture Root",
+          "type": "string"
+        },
+        "capture_manifest": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_output_manifest": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_input_plan": {
+          "$ref": "#/$defs/Asset"
+        },
+        "selected_rules": {
+          "title": "Selected Rules",
+          "type": "integer"
+        },
+        "source_pdf_associations": {
+          "title": "Source Pdf Associations",
+          "type": "integer"
+        },
+        "word_signature_only_associations": {
+          "title": "Word Signature Only Associations",
+          "type": "integer"
+        },
+        "native_unique_pdfs": {
+          "title": "Native Unique Pdfs",
+          "type": "integer"
+        },
+        "native_unique_physical_pages": {
+          "title": "Native Unique Physical Pages",
+          "type": "integer"
+        },
+        "capture_files": {
+          "title": "Capture Files",
+          "type": "integer"
+        },
+        "capture_bytes": {
+          "title": "Capture Bytes",
+          "type": "integer"
+        },
+        "native_build_command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Native Build Command",
+          "type": "array"
+        },
+        "native_verify_command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Native Verify Command",
+          "type": "array"
+        },
+        "department_complete": {
+          "const": false,
+          "default": false,
+          "title": "Department Complete",
+          "type": "boolean"
+        },
+        "native_output_files_committed": {
+          "const": false,
+          "default": false,
+          "title": "Native Output Files Committed",
+          "type": "boolean"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "answer_safe": {
+          "const": false,
+          "default": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "group",
+        "department_id",
+        "capture_root",
+        "capture_manifest",
+        "native_output_manifest",
+        "native_input_plan",
+        "selected_rules",
+        "source_pdf_associations",
+        "word_signature_only_associations",
+        "native_unique_pdfs",
+        "native_unique_physical_pages",
+        "capture_files",
+        "capture_bytes",
+        "native_build_command",
+        "native_verify_command"
+      ],
+      "title": "Package",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "ccr-ph141-research-addendum-2026-09-24",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "observed_at": {
+      "title": "Observed At",
+      "type": "string"
+    },
+    "package": {
+      "$ref": "#/$defs/Package"
+    },
+    "previous_11_package_index": {
+      "$ref": "#/$defs/Asset"
+    },
+    "implementation": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Implementation",
+      "type": "array"
+    },
+    "previous_page_set": {
+      "$ref": "#/$defs/Asset"
+    },
+    "new_page_set": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_schema": {
+      "$ref": "#/$defs/Asset"
+    },
+    "previous_page_set_input_sha256": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Previous Page Set Input Sha256",
+      "type": "array"
+    },
+    "previous_unique_pdfs": {
+      "const": 992,
+      "default": 992,
+      "title": "Previous Unique Pdfs",
+      "type": "integer"
+    },
+    "previous_unique_physical_pages": {
+      "const": 31167,
+      "default": 31167,
+      "title": "Previous Unique Physical Pages",
+      "type": "integer"
+    },
+    "new_unique_pdfs": {
+      "const": 17,
+      "default": 17,
+      "title": "New Unique Pdfs",
+      "type": "integer"
+    },
+    "new_unique_physical_pages": {
+      "const": 883,
+      "default": 883,
+      "title": "New Unique Physical Pages",
+      "type": "integer"
+    },
+    "overlapping_pdf_hashes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Overlapping Pdf Hashes",
+      "type": "array"
+    },
+    "overlapping_physical_pages": {
+      "const": 0,
+      "default": 0,
+      "title": "Overlapping Physical Pages",
+      "type": "integer"
+    },
+    "union_unique_pdfs": {
+      "const": 1009,
+      "default": 1009,
+      "title": "Union Unique Pdfs",
+      "type": "integer"
+    },
+    "union_unique_physical_pages": {
+      "const": 32050,
+      "default": 32050,
+      "title": "Union Unique Physical Pages",
+      "type": "integer"
+    },
+    "total_research_packages": {
+      "const": 23,
+      "default": 23,
+      "title": "Total Research Packages",
+      "type": "integer"
+    },
+    "earlier_11_plus_new_capture_rules": {
+      "const": 159,
+      "default": 159,
+      "title": "Earlier 11 Plus New Capture Rules",
+      "type": "integer"
+    },
+    "earlier_11_plus_new_native_pages": {
+      "const": 7117,
+      "default": 7117,
+      "title": "Earlier 11 Plus New Native Pages",
+      "type": "integer"
+    },
+    "earlier_11_plus_new_source_files": {
+      "const": 591,
+      "default": 591,
+      "title": "Earlier 11 Plus New Source Files",
+      "type": "integer"
+    },
+    "earlier_11_plus_new_source_bytes": {
+      "const": 195849395,
+      "default": 195849395,
+      "title": "Earlier 11 Plus New Source Bytes",
+      "type": "integer"
+    },
+    "department_complete": {
+      "const": false,
+      "default": false,
+      "title": "Department Complete",
+      "type": "boolean"
+    },
+    "statewide_complete": {
+      "const": false,
+      "default": false,
+      "title": "Statewide Complete",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "observed_at",
+    "package",
+    "previous_11_package_index",
+    "implementation",
+    "previous_page_set",
+    "new_page_set",
+    "original_schema",
+    "previous_page_set_input_sha256",
+    "overlapping_pdf_hashes",
+    "limitations"
+  ],
+  "title": "Addendum",
+  "type": "object"
+}

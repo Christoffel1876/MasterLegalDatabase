@@ -1,0 +1,175 @@
+{
+  "$defs": {
+    "Candidate": {
+      "additionalProperties": false,
+      "description": "A bounded research lead, distinct from an admitted legal record.",
+      "properties": {
+        "candidate_id": {
+          "title": "Candidate Id",
+          "type": "string"
+        },
+        "source_owner": {
+          "title": "Source Owner",
+          "type": "string"
+        },
+        "source_url": {
+          "title": "Source Url",
+          "type": "string"
+        },
+        "possible_layer": {
+          "title": "Possible Layer",
+          "type": "string"
+        },
+        "discovered_date": {
+          "title": "Discovered Date",
+          "type": "string"
+        },
+        "change_type": {
+          "enum": [
+            "new",
+            "amended",
+            "repealed",
+            "corrected",
+            "unknown"
+          ],
+          "title": "Change Type",
+          "type": "string"
+        },
+        "reason_for_review": {
+          "title": "Reason For Review",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "needs_validation",
+            "queued",
+            "processed",
+            "rejected",
+            "duplicate"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "confidence_scope": {
+          "const": "catalog_identity_only_not_legal_effect",
+          "title": "Confidence Scope",
+          "type": "string"
+        },
+        "authority_id": {
+          "title": "Authority Id",
+          "type": "string"
+        },
+        "observed_label": {
+          "title": "Observed Label",
+          "type": "string"
+        },
+        "event_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Event Ids",
+          "type": "array"
+        },
+        "adoption_date": {
+          "default": null,
+          "title": "Adoption Date",
+          "type": "null"
+        },
+        "effective_date": {
+          "default": null,
+          "title": "Effective Date",
+          "type": "null"
+        },
+        "original_sha256": {
+          "default": null,
+          "title": "Original Sha256",
+          "type": "null"
+        },
+        "document_url": {
+          "default": null,
+          "title": "Document Url",
+          "type": "null"
+        },
+        "local_comparison": {
+          "title": "Local Comparison",
+          "type": "string"
+        },
+        "next_step": {
+          "title": "Next Step",
+          "type": "string"
+        },
+        "legal_currentness": {
+          "const": "not_verified",
+          "default": "not_verified",
+          "title": "Legal Currentness",
+          "type": "string"
+        },
+        "answer_safe": {
+          "const": false,
+          "default": false,
+          "title": "Answer Safe",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "candidate_id",
+        "source_owner",
+        "source_url",
+        "possible_layer",
+        "discovered_date",
+        "change_type",
+        "reason_for_review",
+        "status",
+        "confidence",
+        "confidence_scope",
+        "authority_id",
+        "observed_label",
+        "event_ids",
+        "local_comparison",
+        "next_step"
+      ],
+      "title": "Candidate",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Nonactivated handoff-only candidate proposal.",
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "canonical_queue_changed": {
+      "const": false,
+      "default": false,
+      "title": "Canonical Queue Changed",
+      "type": "boolean"
+    },
+    "activated": {
+      "const": false,
+      "default": false,
+      "title": "Activated",
+      "type": "boolean"
+    },
+    "candidates": {
+      "items": {
+        "$ref": "#/$defs/Candidate"
+      },
+      "title": "Candidates",
+      "type": "array"
+    }
+  },
+  "required": [
+    "candidates"
+  ],
+  "title": "Queue",
+  "type": "object"
+}

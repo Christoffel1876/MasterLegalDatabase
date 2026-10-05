@@ -1,0 +1,216 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "One repository-relative immutable artifact.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Package": {
+      "additionalProperties": false,
+      "description": "Portable source capsule and reproducible native output references.",
+      "properties": {
+        "package_id": {
+          "title": "Package Id",
+          "type": "string"
+        },
+        "capture_root": {
+          "title": "Capture Root",
+          "type": "string"
+        },
+        "capture_manifest": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_manifest": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_input": {
+          "$ref": "#/$defs/Asset"
+        },
+        "native_originals": {
+          "$ref": "#/$defs/Asset"
+        },
+        "selected_rule_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Selected Rule Ids",
+          "type": "array"
+        },
+        "source_cutoff_claim": {
+          "title": "Source Cutoff Claim",
+          "type": "string"
+        },
+        "native_pdfs": {
+          "title": "Native Pdfs",
+          "type": "integer"
+        },
+        "native_pages": {
+          "title": "Native Pages",
+          "type": "integer"
+        },
+        "native_build_command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Native Build Command",
+          "type": "array"
+        },
+        "native_verify_command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Native Verify Command",
+          "type": "array"
+        }
+      },
+      "required": [
+        "package_id",
+        "capture_root",
+        "capture_manifest",
+        "native_manifest",
+        "native_input",
+        "native_originals",
+        "selected_rule_ids",
+        "source_cutoff_claim",
+        "native_pdfs",
+        "native_pages",
+        "native_build_command",
+        "native_verify_command"
+      ],
+      "title": "Package",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Source acquisition and unreviewed native text, never current-law approval.",
+  "properties": {
+    "generated_at": {
+      "title": "Generated At",
+      "type": "string"
+    },
+    "packages": {
+      "items": {
+        "$ref": "#/$defs/Package"
+      },
+      "title": "Packages",
+      "type": "array"
+    },
+    "prior_index": {
+      "$ref": "#/$defs/Asset"
+    },
+    "prior_page_sets": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Prior Page Sets",
+      "type": "array"
+    },
+    "new_page_set": {
+      "$ref": "#/$defs/Asset"
+    },
+    "original_schema": {
+      "$ref": "#/$defs/Asset"
+    },
+    "previous_pdfs": {
+      "title": "Previous Pdfs",
+      "type": "integer"
+    },
+    "previous_pages": {
+      "title": "Previous Pages",
+      "type": "integer"
+    },
+    "added_whole_rule_identities": {
+      "title": "Added Whole Rule Identities",
+      "type": "integer"
+    },
+    "new_distinct_pdfs": {
+      "title": "New Distinct Pdfs",
+      "type": "integer"
+    },
+    "new_distinct_pages": {
+      "title": "New Distinct Pages",
+      "type": "integer"
+    },
+    "overlap_pdfs": {
+      "title": "Overlap Pdfs",
+      "type": "integer"
+    },
+    "overlap_pages": {
+      "title": "Overlap Pages",
+      "type": "integer"
+    },
+    "union_pdfs": {
+      "title": "Union Pdfs",
+      "type": "integer"
+    },
+    "union_pages": {
+      "title": "Union Pages",
+      "type": "integer"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    },
+    "existing_department_completion_flags_changed": {
+      "const": false,
+      "default": false,
+      "title": "Existing Department Completion Flags Changed",
+      "type": "boolean"
+    },
+    "native_status": {
+      "const": "machine_extraction_unreviewed",
+      "default": "machine_extraction_unreviewed",
+      "title": "Native Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "generated_at",
+    "packages",
+    "prior_index",
+    "prior_page_sets",
+    "new_page_set",
+    "original_schema",
+    "previous_pdfs",
+    "previous_pages",
+    "added_whole_rule_identities",
+    "new_distinct_pdfs",
+    "new_distinct_pages",
+    "overlap_pdfs",
+    "overlap_pages",
+    "union_pdfs",
+    "union_pages"
+  ],
+  "title": "Index",
+  "type": "object"
+}

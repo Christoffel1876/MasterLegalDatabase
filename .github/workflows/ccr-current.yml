@@ -42,13 +42,23 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install frozen pilot dependencies
-        run: python -m pip install --disable-pip-version-check -r requirements-ci.txt
+        run: >-
+          python -m pip install --disable-pip-version-check -r requirements-ci.txt PyMuPDF==1.28.2
       - name: Resume pending data and merge current main
         run: python scripts/publish_ccr_current.py prepare --root . --output .geode_runtime/ccr-current-candidate
       - name: Run offline pilot regression checks
         run: |
-          python -m pytest tests/test_ccr_current.py tests/test_publish_ccr_current.py tests/test_coverage_dashboard.py -q --cov=geode.pipeline.ccr_current --cov=geode.pipeline.coverage_dashboard --cov=scripts.publish_ccr_current --cov-branch --cov-report=term-missing --cov-report=xml:.geode_runtime/ccr-current/coverage.xml --junitxml=.geode_runtime/ccr-current/tests.xml
+          python -m pytest tests/test_ccr_current.py tests/test_ccr_current_grouped_departments.py \
+            tests/test_ccr_current_source_series.py tests/test_ccr_current_empty_agency.py \
+            tests/test_publish_ccr_current.py tests/test_publish_ccr_departments.py \
+            tests/test_ccr_source_text.py tests/test_coverage_dashboard.py -q \
+            --cov=geode.pipeline.ccr_current --cov=geode.pipeline.ccr_source_text \
+            --cov=geode.pipeline.coverage_dashboard --cov=scripts.publish_ccr_current \
+            --cov-branch --cov-report=term-missing \
+            --cov-report=xml:.geode_runtime/ccr-current/coverage.xml \
+            --junitxml=.geode_runtime/ccr-current/tests.xml
           python -m coverage report --fail-under=90 --include=geode/pipeline/ccr_current.py
+          python -m coverage report --fail-under=90 --include=geode/pipeline/ccr_source_text.py
           python -m coverage report --fail-under=90 --include=geode/pipeline/coverage_dashboard.py
           python -m coverage report --fail-under=90 --include=scripts/publish_ccr_current.py
       - name: Check official sources and validate the transaction
@@ -103,6 +113,12 @@ jobs:
           ref: main
           fetch-depth: 0
           lfs: false
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+      - name: Install frozen publisher validation dependencies
+        run: python -m pip install --disable-pip-version-check -r requirements-ci.txt
       - name: Download candidate from this successful collection job
         uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
         with:

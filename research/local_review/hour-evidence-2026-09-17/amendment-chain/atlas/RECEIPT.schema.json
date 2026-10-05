@@ -1,0 +1,104 @@
+{
+  "additionalProperties": false,
+  "description": "Actual transport observations, with catalog identity still awaiting PDF inspection.",
+  "properties": {
+    "requested_url": {
+      "title": "Requested Url",
+      "type": "string"
+    },
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "title": "Completed At",
+      "type": "string"
+    },
+    "argv": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Argv",
+      "type": "array"
+    },
+    "returncode": {
+      "title": "Returncode",
+      "type": "integer"
+    },
+    "http_status": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Http Status"
+    },
+    "content_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Content Type"
+    },
+    "redirect_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Redirect Url"
+    },
+    "body_sha256": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Body Sha256",
+      "type": "string"
+    },
+    "body_size_bytes": {
+      "maximum": 10000000,
+      "minimum": 0,
+      "title": "Body Size Bytes",
+      "type": "integer"
+    },
+    "pdf_pages": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Pdf Pages"
+    },
+    "scope": {
+      "title": "Scope",
+      "type": "string"
+    }
+  },
+  "required": [
+    "requested_url",
+    "started_at",
+    "completed_at",
+    "argv",
+    "returncode",
+    "http_status",
+    "content_type",
+    "redirect_url",
+    "body_sha256",
+    "body_size_bytes",
+    "pdf_pages",
+    "scope"
+  ],
+  "title": "Receipt",
+  "type": "object"
+}

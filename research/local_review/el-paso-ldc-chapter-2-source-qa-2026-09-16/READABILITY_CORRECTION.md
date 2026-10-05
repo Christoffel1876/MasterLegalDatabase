@@ -1,0 +1,1 @@
+Before integration, Atlas inserted missing spaces in the descriptive acceptance scope and README. No source wording, QA, dates, method or decision changed. The initial wrapper versions are retained under _SNAPSHOTS/READABILITY_CORRECTION and are superseded by the root-level records.

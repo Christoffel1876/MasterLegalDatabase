@@ -1,0 +1,83 @@
+{
+  "additionalProperties": false,
+  "description": "Actual derivative method and exact crop geometry.",
+  "properties": {
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "finished_at": {
+      "format": "date-time",
+      "title": "Finished At",
+      "type": "string"
+    },
+    "argv": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Argv",
+      "type": "array"
+    },
+    "exit_code": {
+      "const": 0,
+      "title": "Exit Code",
+      "type": "integer"
+    },
+    "renderer_sha256": {
+      "title": "Renderer Sha256",
+      "type": "string"
+    },
+    "pymupdf_version": {
+      "title": "Pymupdf Version",
+      "type": "string"
+    },
+    "native_method": {
+      "title": "Native Method",
+      "type": "string"
+    },
+    "native_bytes_per_page": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Native Bytes Per Page",
+      "type": "array"
+    },
+    "crops": {
+      "items": {
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array"
+            }
+          ]
+        },
+        "type": "object"
+      },
+      "title": "Crops",
+      "type": "array"
+    }
+  },
+  "required": [
+    "started_at",
+    "finished_at",
+    "argv",
+    "exit_code",
+    "renderer_sha256",
+    "pymupdf_version",
+    "native_method",
+    "native_bytes_per_page",
+    "crops"
+  ],
+  "title": "Render",
+  "type": "object"
+}

@@ -1,0 +1,125 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "assignment_id": {
+      "title": "Assignment Id",
+      "type": "string"
+    },
+    "status": {
+      "title": "Status",
+      "type": "string"
+    },
+    "delivery_files": {
+      "title": "Delivery Files",
+      "type": "integer"
+    },
+    "inventory_payloads": {
+      "title": "Inventory Payloads",
+      "type": "integer"
+    },
+    "declared_exclusions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Declared Exclusions",
+      "type": "array"
+    },
+    "unlisted_paths": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unlisted Paths",
+      "type": "array"
+    },
+    "all_listed_hashes_match": {
+      "title": "All Listed Hashes Match",
+      "type": "boolean"
+    },
+    "all_freeze_crops_present": {
+      "title": "All Freeze Crops Present",
+      "type": "boolean"
+    },
+    "packet_candidate_exact": {
+      "title": "Packet Candidate Exact",
+      "type": "boolean"
+    },
+    "packet_pages_exact": {
+      "title": "Packet Pages Exact",
+      "type": "boolean"
+    },
+    "source_scope": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Source Scope",
+      "type": "array"
+    },
+    "root_direct_scope": {
+      "items": {
+        "type": "integer"
+      },
+      "title": "Root Direct Scope",
+      "type": "array"
+    },
+    "confirmed_findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Confirmed Findings",
+      "type": "array"
+    },
+    "qualifications": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Qualifications",
+      "type": "array"
+    },
+    "files": {
+      "items": {
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        },
+        "type": "object"
+      },
+      "title": "Files",
+      "type": "array"
+    },
+    "legal_currentness": {
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "assignment_id",
+    "status",
+    "delivery_files",
+    "inventory_payloads",
+    "declared_exclusions",
+    "unlisted_paths",
+    "all_listed_hashes_match",
+    "all_freeze_crops_present",
+    "packet_candidate_exact",
+    "packet_pages_exact",
+    "source_scope",
+    "root_direct_scope",
+    "confirmed_findings",
+    "qualifications",
+    "files",
+    "legal_currentness",
+    "answer_safe"
+  ],
+  "title": "Audit",
+  "type": "object"
+}

@@ -1,0 +1,86 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact relative payload identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Actual bounded offline check receipt, separate from visual attestation.",
+  "properties": {
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "finished_at": {
+      "format": "date-time",
+      "title": "Finished At",
+      "type": "string"
+    },
+    "argv": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Argv",
+      "type": "array"
+    },
+    "exit_code": {
+      "const": 0,
+      "title": "Exit Code",
+      "type": "integer"
+    },
+    "stdout": {
+      "$ref": "#/$defs/Asset"
+    },
+    "stderr": {
+      "$ref": "#/$defs/Asset"
+    },
+    "integrity_cases": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Integrity Cases",
+      "type": "array"
+    },
+    "source_review_limit": {
+      "title": "Source Review Limit",
+      "type": "string"
+    }
+  },
+  "required": [
+    "started_at",
+    "finished_at",
+    "argv",
+    "exit_code",
+    "stdout",
+    "stderr",
+    "integrity_cases",
+    "source_review_limit"
+  ],
+  "title": "Verification",
+  "type": "object"
+}

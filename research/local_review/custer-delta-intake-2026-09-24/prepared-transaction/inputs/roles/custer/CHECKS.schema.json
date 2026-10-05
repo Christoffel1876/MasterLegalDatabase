@@ -1,0 +1,57 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "started_at": {
+      "title": "Started At",
+      "type": "string"
+    },
+    "finished_at": {
+      "title": "Finished At",
+      "type": "string"
+    },
+    "input_hashes_verified": {
+      "const": true,
+      "title": "Input Hashes Verified",
+      "type": "boolean"
+    },
+    "original_page_count": {
+      "const": 4,
+      "title": "Original Page Count",
+      "type": "integer"
+    },
+    "full_image_pixel_replays": {
+      "const": 4,
+      "title": "Full Image Pixel Replays",
+      "type": "integer"
+    },
+    "native_reextracted_equal": {
+      "const": true,
+      "title": "Native Reextracted Equal",
+      "type": "boolean"
+    },
+    "source_initial_freeze_precedes_native": {
+      "const": true,
+      "title": "Source Initial Freeze Precedes Native",
+      "type": "boolean"
+    },
+    "integrity_refusals": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Integrity Refusals",
+      "type": "array"
+    }
+  },
+  "required": [
+    "started_at",
+    "finished_at",
+    "input_hashes_verified",
+    "original_page_count",
+    "full_image_pixel_replays",
+    "native_reextracted_equal",
+    "source_initial_freeze_precedes_native",
+    "integrity_refusals"
+  ],
+  "title": "Checks",
+  "type": "object"
+}

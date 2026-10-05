@@ -1,0 +1,116 @@
+{
+  "recorded_at": "2026-09-16T21:54:59.786041Z",
+  "request_cap": 8,
+  "distinct_target_cap": 6,
+  "per_response_byte_cap": 10485760,
+  "aggregate_byte_cap": 20971520,
+  "deliberate_attempts": 4,
+  "distinct_targets": 2,
+  "retained_body_bytes": 316142,
+  "tls_verification": true,
+  "cookies_or_authentication_used": false,
+  "events": [
+    {
+      "sequence": 1,
+      "requested_url": "https://planningdevelopment.elpasoco.com/",
+      "returned_url": null,
+      "reserved_at": "2026-09-16T21:50:50.719284Z",
+      "started_at": "2026-09-16T21:50:50.721908Z",
+      "finished_at": "2026-09-16T21:50:50.729677Z",
+      "status": null,
+      "outcome": "failed",
+      "body": null,
+      "headers": {},
+      "omitted_header_names": [],
+      "redirect_location": null,
+      "error": "URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+      "complete": false
+    },
+    {
+      "sequence": 2,
+      "requested_url": "https://planningdevelopment.elpasoco.com/",
+      "returned_url": null,
+      "reserved_at": "2026-09-16T21:51:18.852985Z",
+      "started_at": "2026-09-16T21:51:18.855188Z",
+      "finished_at": "2026-09-16T21:51:19.044367Z",
+      "status": null,
+      "outcome": "failed",
+      "body": null,
+      "headers": {},
+      "omitted_header_names": [],
+      "redirect_location": null,
+      "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1081)>",
+      "complete": false
+    },
+    {
+      "sequence": 3,
+      "requested_url": "https://planningdevelopment.elpasoco.com/",
+      "returned_url": "https://planningdevelopment.elpasoco.com/",
+      "reserved_at": "2026-09-16T21:52:30.504597Z",
+      "started_at": "2026-09-16T21:52:30.505669Z",
+      "finished_at": "2026-09-16T21:52:30.877960Z",
+      "status": 200,
+      "outcome": "received",
+      "body": {
+        "path": "curl-event-03.body",
+        "sha256": "656702af12d7746320c1ef482396318b5b7e01850f805126009d8d7d9bf16345",
+        "size_bytes": 199860
+      },
+      "headers": {
+        "date": "Wed, 16 Sep 2026 21:52:30 GMT",
+        "content-type": "text/html; charset=UTF-8",
+        "server": "Apache/2.4.68 (Amazon Linux) OpenSSL/3.5.7",
+        "last-modified": "Wed, 16 Sep 2026 21:01:21 GMT",
+        "etag": "\"d25bd6b124c17caee7a0f27cdb0b2164\""
+      },
+      "omitted_header_names": [
+        "link",
+        "referrer-policy",
+        "vary"
+      ],
+      "redirect_location": null,
+      "error": null,
+      "complete": true
+    },
+    {
+      "sequence": 4,
+      "requested_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/Misc/25-290.pdf",
+      "returned_url": "https://epc-assets.elpasoco.com/wp-content/uploads/sites/12/Misc/25-290.pdf",
+      "reserved_at": "2026-09-16T21:52:46.611705Z",
+      "started_at": "2026-09-16T21:52:46.612619Z",
+      "finished_at": "2026-09-16T21:52:46.950742Z",
+      "status": 200,
+      "outcome": "received",
+      "body": {
+        "path": "curl-event-04.body",
+        "sha256": "754e98fb7908b66e54a192cefca9817f7bb4cf2a428cf7c469d59f7cfdcdf427",
+        "size_bytes": 116282
+      },
+      "headers": {
+        "content-type": "application/pdf",
+        "content-length": "116282",
+        "date": "Wed, 16 Sep 2026 21:52:46 GMT",
+        "server": "AmazonS3",
+        "last-modified": "Wed, 12 Nov 2025 22:36:15 GMT",
+        "etag": "\"9d359071c547e3964e8cd41ee9784928\""
+      },
+      "omitted_header_names": [
+        "accept-ranges",
+        "via",
+        "x-amz-cf-id",
+        "x-amz-cf-pop",
+        "x-amz-server-side-encryption",
+        "x-cache"
+      ],
+      "redirect_location": null,
+      "error": null,
+      "complete": true
+    }
+  ],
+  "limitations": [
+    "Four deliberate attempts: default sandbox DNS failure, Python verified-TLS chain failure outside sandbox, one root-authorized ordinary system-curl homepage GET, and its exact linked PDF GET. Last two returned HTTP200 without redirects.",
+    "Default trust settings were never changed and no insecure flags were used. Each client used its own default certificate validation; successful system curl is not a claim that the Python trust chain was repaired.",
+    "Only a selected public header derivative is retained; omitted header names are preserved without their values. No complete raw-header record or upstream credential-cleansing certification is claimed.",
+    "Body sizes count network response bodies once, not duplicate friendly local copies. Hidden wire/DNS/TLS packets are not counted as deliberate requests."
+  ]
+}

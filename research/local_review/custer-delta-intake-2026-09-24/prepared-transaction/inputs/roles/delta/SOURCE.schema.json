@@ -1,0 +1,109 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Repository-relative exact file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "prepared_at": {
+      "title": "Prepared At",
+      "type": "string"
+    },
+    "received_from": {
+      "$ref": "#/$defs/Asset"
+    },
+    "retained_copy": {
+      "$ref": "#/$defs/Asset"
+    },
+    "queue_sha256": {
+      "const": "121d33acad08dd4ceb9c70f5cd6ed644c61db7b4a63a26dc8e8fac9256115241",
+      "title": "Queue Sha256",
+      "type": "string"
+    },
+    "authority_assignment": {
+      "const": "CO-COUNTY-DELTA",
+      "title": "Authority Assignment",
+      "type": "string"
+    },
+    "assignment_basis": {
+      "const": "retained_queue_not_yet_direct_source_observation",
+      "title": "Assignment Basis",
+      "type": "string"
+    },
+    "expected_pages": {
+      "const": 3,
+      "title": "Expected Pages",
+      "type": "integer"
+    },
+    "images": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Images",
+      "type": "array"
+    },
+    "rendering_command": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rendering Command",
+      "type": "array"
+    },
+    "native_text_consulted": {
+      "const": false,
+      "default": false,
+      "title": "Native Text Consulted",
+      "type": "boolean"
+    },
+    "legal_currentness": {
+      "const": "not_verified",
+      "default": "not_verified",
+      "title": "Legal Currentness",
+      "type": "string"
+    },
+    "answer_safe": {
+      "const": false,
+      "default": false,
+      "title": "Answer Safe",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "prepared_at",
+    "received_from",
+    "retained_copy",
+    "queue_sha256",
+    "authority_assignment",
+    "assignment_basis",
+    "expected_pages",
+    "images",
+    "rendering_command"
+  ],
+  "title": "Source",
+  "type": "object"
+}

@@ -1,0 +1,736 @@
+{
+  "schema_version": "ccr-agency-selection-plan-2",
+  "department_id": "16",
+  "provenance_sha256": [
+    "87dc56f4259f609ec042d68e0ec65cba0976da204b155199317b5c7e8b5421d4",
+    "21a9b1cc13acba38f4d1cd79a4cfcd379e2f73bb9b0aca18ae04144f0ba925c0",
+    "d14a0c82ce60c4739d9f2447852b22bf5e0cfaa55668a9f86bf7977eafe86edc"
+  ],
+  "selections": [
+    {
+      "agency_id": "15",
+      "rule_id": "2903"
+    },
+    {
+      "agency_id": "15",
+      "rule_id": "2941"
+    },
+    {
+      "agency_id": "15",
+      "rule_id": "3055"
+    },
+    {
+      "agency_id": "15",
+      "rule_id": "3117"
+    },
+    {
+      "agency_id": "15",
+      "rule_id": "3149"
+    },
+    {
+      "agency_id": "15",
+      "rule_id": "3157"
+    },
+    {
+      "agency_id": "15",
+      "rule_id": "3201"
+    },
+    {
+      "agency_id": "147",
+      "rule_id": "2421"
+    },
+    {
+      "agency_id": "147",
+      "rule_id": "2486"
+    },
+    {
+      "agency_id": "147",
+      "rule_id": "2487"
+    }
+  ],
+  "responses": [
+    {
+      "association_id": "welcome",
+      "role": "welcome",
+      "parent_id": null,
+      "body": {
+        "path": "bodies/b240518c27ec4187d279cf943033fa0fe62704656134d3a4c6088591da0c26d6.bin",
+        "sha256": "b240518c27ec4187d279cf943033fa0fe62704656134d3a4c6088591da0c26d6",
+        "bytes": 9724
+      },
+      "claim": {
+        "receipt_sha256": "84516ccc9ad9a2035347cb13a1c312f5ce44266f5a7b97902a550c45b0e8bd75",
+        "requested_url": "https://www.sos.state.co.us/CCR/Welcome.do",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/Welcome.do",
+        "started_at": "2026-10-05T20:45:15.307600Z",
+        "finished_at": "2026-10-05T20:45:15.457086Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 9724
+      }
+    },
+    {
+      "association_id": "catalog",
+      "role": "catalog",
+      "parent_id": "welcome",
+      "body": {
+        "path": "bodies/54090f320129c517c890eaa895846604d69ffc55ab0525254563de6b58301041.bin",
+        "sha256": "54090f320129c517c890eaa895846604d69ffc55ab0525254563de6b58301041",
+        "bytes": 133080
+      },
+      "claim": {
+        "receipt_sha256": "4459738f6716bebd140afb319448bd7d5d553b2b6d04a78957c6e6b6a1a078ce",
+        "requested_url": "https://www.sos.state.co.us/CCR/NumericalDeptList.do",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/NumericalDeptList.do",
+        "started_at": "2026-10-05T20:45:15.463646Z",
+        "finished_at": "2026-10-05T20:45:15.738147Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 133080
+      }
+    },
+    {
+      "association_id": "listing-15",
+      "role": "listing",
+      "parent_id": "catalog",
+      "body": {
+        "path": "bodies/8f9c1192bc5b66874cec2ba8c39ee958b1295f3fdc3c33fb738b359137c79940.bin",
+        "sha256": "8f9c1192bc5b66874cec2ba8c39ee958b1295f3fdc3c33fb738b359137c79940",
+        "bytes": 11554
+      },
+      "claim": {
+        "receipt_sha256": "9cd734c6af17a5dea4c5f4fdf27a71509adf6da5b35028e9f8410716b4981377",
+        "requested_url": "https://www.sos.state.co.us/CCR/NumericalCCRDocList.do?deptID=16&deptName=1000%20Department%20of%20Public%20Health%20and%20Environment&agencyID=15&agencyName=1014%20Colorado%20State%20Board%20of%20Health",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/NumericalCCRDocList.do?deptID=16&deptName=1000%20Department%20of%20Public%20Health%20and%20Environment&agencyID=15&agencyName=1014%20Colorado%20State%20Board%20of%20Health",
+        "started_at": "2026-10-05T20:45:20.690993Z",
+        "finished_at": "2026-10-05T20:45:20.888855Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 11554
+      }
+    },
+    {
+      "association_id": "history-15-2903",
+      "role": "history",
+      "parent_id": "listing-15",
+      "body": {
+        "path": "bodies/b382c2aea2fe2bf6c1ca297acc29af2441a7e46ecb82c6542c26208a95b52375.bin",
+        "sha256": "b382c2aea2fe2bf6c1ca297acc29af2441a7e46ecb82c6542c26208a95b52375",
+        "bytes": 16733
+      },
+      "claim": {
+        "receipt_sha256": "3ec4d3bd2aa9a9bf126fa8f77102340aaac909681b572cf4c1981c52334aaeb8",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2903&deptID=16&agencyID=15&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Colorado%20State%20Board%20of%20Health&seriesNum=6%20CCR%201014-5",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2903&deptID=16&agencyID=15&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Colorado%20State%20Board%20of%20Health&seriesNum=6%20CCR%201014-5",
+        "started_at": "2026-10-05T20:45:22.505908Z",
+        "finished_at": "2026-10-05T20:45:22.765470Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 16733
+      }
+    },
+    {
+      "association_id": "doc-15-2903-11457-pdf",
+      "role": "pdf",
+      "parent_id": "history-15-2903",
+      "body": {
+        "path": "bodies/6049c4777bb2791b96421bfdb551d653033a3489382c133b3d8c18f64623e860.bin",
+        "sha256": "6049c4777bb2791b96421bfdb551d653033a3489382c133b3d8c18f64623e860",
+        "bytes": 302253
+      },
+      "claim": {
+        "receipt_sha256": "56421928ac792c17ee60fc2704e5cfa45f160f67fc88aeeddcc8eb4b5fa8120e",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=11457&fileName=6%20CCR%201014-5",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=11457&fileName=6%20CCR%201014-5",
+        "started_at": "2026-10-05T20:45:22.791355Z",
+        "finished_at": "2026-10-05T20:45:22.937972Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 302253
+      }
+    },
+    {
+      "association_id": "doc-15-2903-11457-word",
+      "role": "word",
+      "parent_id": "history-15-2903",
+      "body": {
+        "path": "bodies/8ebd8d7268c4b7f7830100fdadfbafc7e51f360bc99bdf938237dbb29a395589.bin",
+        "sha256": "8ebd8d7268c4b7f7830100fdadfbafc7e51f360bc99bdf938237dbb29a395589",
+        "bytes": 37888
+      },
+      "claim": {
+        "receipt_sha256": "110f6b0e4bcb135d8ceaf8aa01cfeb4fb21493dd07227e130fa865fc8adc258a",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=11457&fileName=6%20CCR%201014-5",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=11457&fileName=6%20CCR%201014-5",
+        "started_at": "2026-10-05T20:45:22.946019Z",
+        "finished_at": "2026-10-05T20:45:23.037652Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 37888
+      }
+    },
+    {
+      "association_id": "history-15-2941",
+      "role": "history",
+      "parent_id": "listing-15",
+      "body": {
+        "path": "bodies/a4b84849aeec0d645503e77a6f4d5f8893dd399fad5a7d3b74bf464d71620131.bin",
+        "sha256": "a4b84849aeec0d645503e77a6f4d5f8893dd399fad5a7d3b74bf464d71620131",
+        "bytes": 18814
+      },
+      "claim": {
+        "receipt_sha256": "f4fee213361bbb7355fd883506b9fbe42e4c7c52dbed0d6aaf362bb1056e7a48",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2941&deptID=16&agencyID=15&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Colorado%20State%20Board%20of%20Health&seriesNum=6%20CCR%201014-3",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2941&deptID=16&agencyID=15&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Colorado%20State%20Board%20of%20Health&seriesNum=6%20CCR%201014-3",
+        "started_at": "2026-10-05T20:45:23.046194Z",
+        "finished_at": "2026-10-05T20:45:23.311712Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 18814
+      }
+    },
+    {
+      "association_id": "doc-15-2941-9483-pdf",
+      "role": "pdf",
+      "parent_id": "history-15-2941",
+      "body": {
+        "path": "bodies/261439d1309e6a05b311d3ff31b201d643d41fc064d93e7864ef27f33830f015.bin",
+        "sha256": "261439d1309e6a05b311d3ff31b201d643d41fc064d93e7864ef27f33830f015",
+        "bytes": 570683
+      },
+      "claim": {
+        "receipt_sha256": "07b37a8a42022fbb62bbb5e50696b0f58241af48c2750c64c8cfa87702b35b2f",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=9483&fileName=6%20CCR%201014-3",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=9483&fileName=6%20CCR%201014-3",
+        "started_at": "2026-10-05T20:45:23.320484Z",
+        "finished_at": "2026-10-05T20:45:23.462506Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 570683
+      }
+    },
+    {
+      "association_id": "doc-15-2941-9483-word",
+      "role": "word",
+      "parent_id": "history-15-2941",
+      "body": {
+        "path": "bodies/f4104589eb91b02593c83dbd1a54d06db23e1da09f09b2604e78c3faf6b75126.bin",
+        "sha256": "f4104589eb91b02593c83dbd1a54d06db23e1da09f09b2604e78c3faf6b75126",
+        "bytes": 210432
+      },
+      "claim": {
+        "receipt_sha256": "e5a1b8aa675f6e7f49cd7aac00866bde4cb0eb36d5e263ff387d1107909517ef",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=9483&fileName=6%20CCR%201014-3",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=9483&fileName=6%20CCR%201014-3",
+        "started_at": "2026-10-05T20:45:23.470813Z",
+        "finished_at": "2026-10-05T20:45:23.572145Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 210432
+      }
+    },
+    {
+      "association_id": "history-15-3055",
+      "role": "history",
+      "parent_id": "listing-15",
+      "body": {
+        "path": "bodies/1c450cfa40948fb42a273c0cb271f0aef62710b27aaac7b5a93d4985ab2c104a.bin",
+        "sha256": "1c450cfa40948fb42a273c0cb271f0aef62710b27aaac7b5a93d4985ab2c104a",
+        "bytes": 13544
+      },
+      "claim": {
+        "receipt_sha256": "f72797816812141088a7625306bcabd95dddd6ed8fcb17f4e0ba6daa2eb2712b",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3055&deptID=16&agencyID=15&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Colorado%20State%20Board%20of%20Health&seriesNum=6%20CCR%201014-6",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3055&deptID=16&agencyID=15&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Colorado%20State%20Board%20of%20Health&seriesNum=6%20CCR%201014-6",
+        "started_at": "2026-10-05T20:45:23.585501Z",
+        "finished_at": "2026-10-05T20:45:23.848976Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 13544
+      }
+    },
+    {
+      "association_id": "doc-15-3055-6459-pdf",
+      "role": "pdf",
+      "parent_id": "history-15-3055",
+      "body": {
+        "path": "bodies/1ab8ed8ff9ff1a52a8fc2a7d862cd24ac6d90cc379e1a3aec9d26aaee3270e72.bin",
+        "sha256": "1ab8ed8ff9ff1a52a8fc2a7d862cd24ac6d90cc379e1a3aec9d26aaee3270e72",
+        "bytes": 328208
+      },
+      "claim": {
+        "receipt_sha256": "c1e714703afde78a160c69989e514b8c17e761e85c32d3078e3f08b5f08f609f",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=6459&fileName=6%20CCR%201014-6",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=6459&fileName=6%20CCR%201014-6",
+        "started_at": "2026-10-05T20:45:23.876335Z",
+        "finished_at": "2026-10-05T20:45:24.014676Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 328208
+      }
+    },
+    {
+      "association_id": "doc-15-3055-6459-word",
+      "role": "word",
+      "parent_id": "history-15-3055",
+      "body": {
+        "path": "bodies/afdf98426e99532b3eab7b27f663f28664e1a59384e9af107c1f32f49e320bf1.bin",
+        "sha256": "afdf98426e99532b3eab7b27f663f28664e1a59384e9af107c1f32f49e320bf1",
+        "bytes": 39936
+      },
+      "claim": {
+        "receipt_sha256": "42d3be903b56bbbcf4f1603c63dc0f63bc4eaaf05cdfb91b0479919718a98344",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=6459&fileName=6%20CCR%201014-6",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=6459&fileName=6%20CCR%201014-6",
+        "started_at": "2026-10-05T20:45:24.028254Z",
+        "finished_at": "2026-10-05T20:45:24.123760Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 39936
+      }
+    },
+    {
+      "association_id": "history-15-3117",
+      "role": "history",
+      "parent_id": "listing-15",
+      "body": {
+        "path": "bodies/545ffcc6e905ac503ad3d9bfa7fa81b741aa9da58c07f06809c59d3538371fce.bin",
+        "sha256": "545ffcc6e905ac503ad3d9bfa7fa81b741aa9da58c07f06809c59d3538371fce",
+        "bytes": 13470
+      },
+      "claim": {
+        "receipt_sha256": "e4490a3f90f6f8c910f63f584364c504b63c695fbd461376009a935c620f7435",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3117&deptID=16&agencyID=15&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Colorado%20State%20Board%20of%20Health&seriesNum=6%20CCR%201014-7",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3117&deptID=16&agencyID=15&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Colorado%20State%20Board%20of%20Health&seriesNum=6%20CCR%201014-7",
+        "started_at": "2026-10-05T20:45:24.138069Z",
+        "finished_at": "2026-10-05T20:45:24.376724Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 13470
+      }
+    },
+    {
+      "association_id": "doc-15-3117-8355-pdf",
+      "role": "pdf",
+      "parent_id": "history-15-3117",
+      "body": {
+        "path": "bodies/8c4a38b905df663b2ad2b226ad6fad1bb6d87fb8181e09aab182e5ec75d6d565.bin",
+        "sha256": "8c4a38b905df663b2ad2b226ad6fad1bb6d87fb8181e09aab182e5ec75d6d565",
+        "bytes": 285183
+      },
+      "claim": {
+        "receipt_sha256": "fe6ae7e02ce900309a6bcb716c5b8ed6cfcb3b0c632ebcb0261967d1da0848d3",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=8355&fileName=6%20CCR%201014-7",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=8355&fileName=6%20CCR%201014-7",
+        "started_at": "2026-10-05T20:45:24.389572Z",
+        "finished_at": "2026-10-05T20:45:24.504091Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 285183
+      }
+    },
+    {
+      "association_id": "doc-15-3117-8355-word",
+      "role": "word",
+      "parent_id": "history-15-3117",
+      "body": {
+        "path": "bodies/ee6314133f65c27ca97af042ea01e1278a72d88789a4db855175746a93de44bf.bin",
+        "sha256": "ee6314133f65c27ca97af042ea01e1278a72d88789a4db855175746a93de44bf",
+        "bytes": 42496
+      },
+      "claim": {
+        "receipt_sha256": "0f605e9356905b75df90e7d4474d477fe14a2440dc4967f53ca3f92c5199dba3",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=8355&fileName=6%20CCR%201014-7",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=8355&fileName=6%20CCR%201014-7",
+        "started_at": "2026-10-05T20:45:24.510359Z",
+        "finished_at": "2026-10-05T20:45:24.596902Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 42496
+      }
+    },
+    {
+      "association_id": "history-15-3149",
+      "role": "history",
+      "parent_id": "listing-15",
+      "body": {
+        "path": "bodies/08173212f22eacdcd4f98761c8732248eb647fd8a38dc9f2cd9d1b137d79a4e3.bin",
+        "sha256": "08173212f22eacdcd4f98761c8732248eb647fd8a38dc9f2cd9d1b137d79a4e3",
+        "bytes": 13461
+      },
+      "claim": {
+        "receipt_sha256": "d65f27328e88f09b701411a7e85d1ff31b7b0989e7e723e6203345811dc76a23",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3149&deptID=16&agencyID=15&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Colorado%20State%20Board%20of%20Health&seriesNum=6%20CCR%201014-8",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3149&deptID=16&agencyID=15&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Colorado%20State%20Board%20of%20Health&seriesNum=6%20CCR%201014-8",
+        "started_at": "2026-10-05T20:45:24.606211Z",
+        "finished_at": "2026-10-05T20:45:24.829896Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 13461
+      }
+    },
+    {
+      "association_id": "doc-15-3149-12665-pdf",
+      "role": "pdf",
+      "parent_id": "history-15-3149",
+      "body": {
+        "path": "bodies/61e06822c2b590a61a9ca4f727bed2778889e7f9339189bcc8c3f2fa19a90cf9.bin",
+        "sha256": "61e06822c2b590a61a9ca4f727bed2778889e7f9339189bcc8c3f2fa19a90cf9",
+        "bytes": 291456
+      },
+      "claim": {
+        "receipt_sha256": "48936fc1b01655612486226c56b32e66fe9dbae662d5e5d09106706f2efce1f4",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=12665&fileName=6%20CCR%201014-8",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=12665&fileName=6%20CCR%201014-8",
+        "started_at": "2026-10-05T20:45:24.838186Z",
+        "finished_at": "2026-10-05T20:45:24.964537Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 291456
+      }
+    },
+    {
+      "association_id": "doc-15-3149-12665-word",
+      "role": "word",
+      "parent_id": "history-15-3149",
+      "body": {
+        "path": "bodies/b16513742b5a2973f3325b02126501f506d2dd7e06cbfcde3872d3f47591b8ac.bin",
+        "sha256": "b16513742b5a2973f3325b02126501f506d2dd7e06cbfcde3872d3f47591b8ac",
+        "bytes": 28098
+      },
+      "claim": {
+        "receipt_sha256": "87d570d7c531d7fddb79c6ca147b4db3d58789d25b29e469dc0581e8a17e3e7e",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=12665&fileName=6%20CCR%201014-8",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=12665&fileName=6%20CCR%201014-8",
+        "started_at": "2026-10-05T20:45:24.973206Z",
+        "finished_at": "2026-10-05T20:45:25.095622Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 28098
+      }
+    },
+    {
+      "association_id": "history-15-3157",
+      "role": "history",
+      "parent_id": "listing-15",
+      "body": {
+        "path": "bodies/548a46e09a5df3d7ed5d6dea2fc47641f627668b1376e9f50bf4baebf5538b88.bin",
+        "sha256": "548a46e09a5df3d7ed5d6dea2fc47641f627668b1376e9f50bf4baebf5538b88",
+        "bytes": 13507
+      },
+      "claim": {
+        "receipt_sha256": "bf90850675e583cd0f1cab7144b9eb6945cd65897d8aec625054e62af1ecb3db",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3157&deptID=16&agencyID=15&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Colorado%20State%20Board%20of%20Health&seriesNum=6%20CCR%201014-9",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3157&deptID=16&agencyID=15&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Colorado%20State%20Board%20of%20Health&seriesNum=6%20CCR%201014-9",
+        "started_at": "2026-10-05T20:45:25.113425Z",
+        "finished_at": "2026-10-05T20:45:25.538094Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 13507
+      }
+    },
+    {
+      "association_id": "doc-15-3157-11816-pdf",
+      "role": "pdf",
+      "parent_id": "history-15-3157",
+      "body": {
+        "path": "bodies/8b176c5145dc91fc1cbaa3f1b46e9b283a0d8bd7a8c479902c648045353edeb1.bin",
+        "sha256": "8b176c5145dc91fc1cbaa3f1b46e9b283a0d8bd7a8c479902c648045353edeb1",
+        "bytes": 290480
+      },
+      "claim": {
+        "receipt_sha256": "0a62c4da50309a359d9c6c992c43e42af3c668059df74f3fab6ebd14a8eee8b7",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=11816&fileName=6%20CCR%201014-9",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=11816&fileName=6%20CCR%201014-9",
+        "started_at": "2026-10-05T20:45:25.561217Z",
+        "finished_at": "2026-10-05T20:45:25.828290Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 290480
+      }
+    },
+    {
+      "association_id": "doc-15-3157-11816-word",
+      "role": "word",
+      "parent_id": "history-15-3157",
+      "body": {
+        "path": "bodies/d8b81a774cd8fffe0f1b4e90148b78a5e539da20adab6f18ac6e11553fa628d2.bin",
+        "sha256": "d8b81a774cd8fffe0f1b4e90148b78a5e539da20adab6f18ac6e11553fa628d2",
+        "bytes": 38912
+      },
+      "claim": {
+        "receipt_sha256": "9fc4569ff9edf696b9107a5fa13f52c85ffe042333e9ad64553da2ea69b936c8",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=11816&fileName=6%20CCR%201014-9",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=11816&fileName=6%20CCR%201014-9",
+        "started_at": "2026-10-05T20:45:25.834232Z",
+        "finished_at": "2026-10-05T20:45:26.022590Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 38912
+      }
+    },
+    {
+      "association_id": "history-15-3201",
+      "role": "history",
+      "parent_id": "listing-15",
+      "body": {
+        "path": "bodies/fa73d1ac507a6311c45c5dab0594b19b6773984bf17f517952fc7ec83d67be4c.bin",
+        "sha256": "fa73d1ac507a6311c45c5dab0594b19b6773984bf17f517952fc7ec83d67be4c",
+        "bytes": 11893
+      },
+      "claim": {
+        "receipt_sha256": "804faf1d13ebf0d2d96a358709a6a41aa54cad4d85e620a7b5eacadc32ae2a32",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3201&deptID=16&agencyID=15&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Colorado%20State%20Board%20of%20Health&seriesNum=6%20CCR%201014-10",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=3201&deptID=16&agencyID=15&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Colorado%20State%20Board%20of%20Health&seriesNum=6%20CCR%201014-10",
+        "started_at": "2026-10-05T20:45:26.031873Z",
+        "finished_at": "2026-10-05T20:45:26.608817Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 11893
+      }
+    },
+    {
+      "association_id": "doc-15-3201-5704-pdf",
+      "role": "pdf",
+      "parent_id": "history-15-3201",
+      "body": {
+        "path": "bodies/70be6ba2e30ad3525c1920ac7ab97e5e68933b062ac9fd54a3aebb4eff11a36a.bin",
+        "sha256": "70be6ba2e30ad3525c1920ac7ab97e5e68933b062ac9fd54a3aebb4eff11a36a",
+        "bytes": 325722
+      },
+      "claim": {
+        "receipt_sha256": "c9146d3215fae90f03f9ad959f930533567920071f85718d37fde339f8dd54fa",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=5704&fileName=6%20CCR%201014-10",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=5704&fileName=6%20CCR%201014-10",
+        "started_at": "2026-10-05T20:45:26.627501Z",
+        "finished_at": "2026-10-05T20:45:26.991181Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 325722
+      }
+    },
+    {
+      "association_id": "doc-15-3201-5704-word",
+      "role": "word",
+      "parent_id": "history-15-3201",
+      "body": {
+        "path": "bodies/a04839f8b641bc72e802340ac300057bbceadf52045639c2d0566fd5eeb5bceb.bin",
+        "sha256": "a04839f8b641bc72e802340ac300057bbceadf52045639c2d0566fd5eeb5bceb",
+        "bytes": 32256
+      },
+      "claim": {
+        "receipt_sha256": "50e4f2753823516ec19045c945686af1c444c30eab9ad6fefef414be8db31a70",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=5704&fileName=6%20CCR%201014-10",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=5704&fileName=6%20CCR%201014-10",
+        "started_at": "2026-10-05T20:45:26.997320Z",
+        "finished_at": "2026-10-05T20:45:27.344307Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 32256
+      }
+    },
+    {
+      "association_id": "listing-147",
+      "role": "listing",
+      "parent_id": "catalog",
+      "body": {
+        "path": "bodies/2eb5f8ee0e8999650bb221bcd7ecbab301416b90dcd3ecf66ff135f2d53ef1a5.bin",
+        "sha256": "2eb5f8ee0e8999650bb221bcd7ecbab301416b90dcd3ecf66ff135f2d53ef1a5",
+        "bytes": 12907
+      },
+      "claim": {
+        "receipt_sha256": "c276d05a03dd69b929127d16e9eea43d8be8b36d592d52d47b316a636efbb8d5",
+        "requested_url": "https://www.sos.state.co.us/CCR/NumericalCCRDocList.do?deptID=16&deptName=1000%20Department%20of%20Public%20Health%20and%20Environment&agencyID=147&agencyName=1015%20Prevention%20Services%20Division%20(1009,%201015,%201016%20Series)",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/NumericalCCRDocList.do?deptID=16&deptName=1000%20Department%20of%20Public%20Health%20and%20Environment&agencyID=147&agencyName=1015%20Prevention%20Services%20Division%20(1009,%201015,%201016%20Series)",
+        "started_at": "2026-10-05T20:45:27.357531Z",
+        "finished_at": "2026-10-05T20:45:27.786383Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 12907
+      }
+    },
+    {
+      "association_id": "history-147-2421",
+      "role": "history",
+      "parent_id": "listing-147",
+      "body": {
+        "path": "bodies/9080ed7d13ab5b9fc9f9953a01e2f51a5f40c80a1752de28571554400d4bbcf5.bin",
+        "sha256": "9080ed7d13ab5b9fc9f9953a01e2f51a5f40c80a1752de28571554400d4bbcf5",
+        "bytes": 13446
+      },
+      "claim": {
+        "receipt_sha256": "c0387e2123f7cdeefcd016db25b74360ef905f6352ccf0c842db193b906812eb",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2421&deptID=16&agencyID=147&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Prevention%20Services%20Division%20(1009,%201015,%201016%20Series)&seriesNum=6%20CCR%201009-8",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2421&deptID=16&agencyID=147&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Prevention%20Services%20Division%20(1009,%201015,%201016%20Series)&seriesNum=6%20CCR%201009-8",
+        "started_at": "2026-10-05T20:45:27.810725Z",
+        "finished_at": "2026-10-05T20:45:28.164219Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 13446
+      }
+    },
+    {
+      "association_id": "doc-147-2421-6766-pdf",
+      "role": "pdf",
+      "parent_id": "history-147-2421",
+      "body": {
+        "path": "bodies/63833c44ade6be4c444e13f8173518d0ade1a9c8f9e5e66f60f49b36e614de02.bin",
+        "sha256": "63833c44ade6be4c444e13f8173518d0ade1a9c8f9e5e66f60f49b36e614de02",
+        "bytes": 310495
+      },
+      "claim": {
+        "receipt_sha256": "c6509c7f8853bef0730ea9a8201a62ca834b9fb394834e7271e5d1c8a3f3eae0",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=6766&fileName=6%20CCR%201009-8",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=6766&fileName=6%20CCR%201009-8",
+        "started_at": "2026-10-05T20:45:28.175164Z",
+        "finished_at": "2026-10-05T20:45:28.452795Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 310495
+      }
+    },
+    {
+      "association_id": "doc-147-2421-6766-word",
+      "role": "word",
+      "parent_id": "history-147-2421",
+      "body": {
+        "path": "bodies/075846484d91a573a5228b3e0003755dec9fda12e8a141f591d8ba5a1586532a.bin",
+        "sha256": "075846484d91a573a5228b3e0003755dec9fda12e8a141f591d8ba5a1586532a",
+        "bytes": 34304
+      },
+      "claim": {
+        "receipt_sha256": "9c58c19399b9cc43d9e8d89a1000e83dc723ef7e7cb603b8a341c9712eef212e",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=6766&fileName=6%20CCR%201009-8",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=6766&fileName=6%20CCR%201009-8",
+        "started_at": "2026-10-05T20:45:28.459097Z",
+        "finished_at": "2026-10-05T20:45:28.675091Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 34304
+      }
+    },
+    {
+      "association_id": "history-147-2486",
+      "role": "history",
+      "parent_id": "listing-147",
+      "body": {
+        "path": "bodies/3670384053992d15c3553d3620246c50701b690d9f5caec59e9b8aae01a8a68f.bin",
+        "sha256": "3670384053992d15c3553d3620246c50701b690d9f5caec59e9b8aae01a8a68f",
+        "bytes": 15290
+      },
+      "claim": {
+        "receipt_sha256": "809c96ace7dff920ea000ca5ee918e2da6d4d96fa48d2d3d82c895d37cdda9f6",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2486&deptID=16&agencyID=147&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Prevention%20Services%20Division%20(1009,%201015,%201016%20Series)&seriesNum=6%20CCR%201015-5",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2486&deptID=16&agencyID=147&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Prevention%20Services%20Division%20(1009,%201015,%201016%20Series)&seriesNum=6%20CCR%201015-5",
+        "started_at": "2026-10-05T20:45:28.685237Z",
+        "finished_at": "2026-10-05T20:45:28.999214Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 15290
+      }
+    },
+    {
+      "association_id": "doc-147-2486-6859-pdf",
+      "role": "pdf",
+      "parent_id": "history-147-2486",
+      "body": {
+        "path": "bodies/a33173e04d7262ccccd1f50fb7c8eb08aa76fbb4de6b0d14ccab02e99d5f5d0e.bin",
+        "sha256": "a33173e04d7262ccccd1f50fb7c8eb08aa76fbb4de6b0d14ccab02e99d5f5d0e",
+        "bytes": 348775
+      },
+      "claim": {
+        "receipt_sha256": "f5e7252e61f92cf5ed219b38a9a3155a255b7f18df9580df23e9799596547ebd",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=6859&fileName=6%20CCR%201015-5",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=6859&fileName=6%20CCR%201015-5",
+        "started_at": "2026-10-05T20:45:29.007475Z",
+        "finished_at": "2026-10-05T20:45:29.144130Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 348775
+      }
+    },
+    {
+      "association_id": "doc-147-2486-6859-word",
+      "role": "word",
+      "parent_id": "history-147-2486",
+      "body": {
+        "path": "bodies/0c97e935a40ccbbf04c68e3f2683de6730e13066dc452069f08e2e6508ca1453.bin",
+        "sha256": "0c97e935a40ccbbf04c68e3f2683de6730e13066dc452069f08e2e6508ca1453",
+        "bytes": 47616
+      },
+      "claim": {
+        "receipt_sha256": "2d33686935a3e390d95195a40cd2c65df0e39fd38269b4965a83de2e94fd9d32",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=6859&fileName=6%20CCR%201015-5",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=6859&fileName=6%20CCR%201015-5",
+        "started_at": "2026-10-05T20:45:29.151669Z",
+        "finished_at": "2026-10-05T20:45:29.245433Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 47616
+      }
+    },
+    {
+      "association_id": "history-147-2487",
+      "role": "history",
+      "parent_id": "listing-147",
+      "body": {
+        "path": "bodies/2dee313737293747682c895b30e7f11a8215dc4841b3e2eee8a0b9eca33351f2.bin",
+        "sha256": "2dee313737293747682c895b30e7f11a8215dc4841b3e2eee8a0b9eca33351f2",
+        "bytes": 21304
+      },
+      "claim": {
+        "receipt_sha256": "e0803b06888c14fbc3dc2ffee7e9710b601d333d8ce3245857a4cbaeaf6e0712",
+        "requested_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2487&deptID=16&agencyID=147&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Prevention%20Services%20Division%20(1009,%201015,%201016%20Series)&seriesNum=6%20CCR%201015-6",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/DisplayRule.do?action=ruleinfo&ruleId=2487&deptID=16&agencyID=147&deptName=Department%20of%20Public%20Health%20and%20Environment&agencyName=Prevention%20Services%20Division%20(1009,%201015,%201016%20Series)&seriesNum=6%20CCR%201015-6",
+        "started_at": "2026-10-05T20:45:29.253960Z",
+        "finished_at": "2026-10-05T20:45:29.554761Z",
+        "http_status": 200,
+        "content_type": "text/html;charset=ISO-8859-1",
+        "charged_bytes": 21304
+      }
+    },
+    {
+      "association_id": "doc-147-2487-12086-pdf",
+      "role": "pdf",
+      "parent_id": "history-147-2487",
+      "body": {
+        "path": "bodies/198c55a76644ac88802afa34908594736ec8bd41b8c367179da8461aafd373b6.bin",
+        "sha256": "198c55a76644ac88802afa34908594736ec8bd41b8c367179da8461aafd373b6",
+        "bytes": 427153
+      },
+      "claim": {
+        "receipt_sha256": "5f19c9cc4af6689ae676a6e3ca1bf312e81fad7f85cb3538a3c7e138ff6c53f6",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=12086&fileName=6%20CCR%201015-6",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?ruleVersionId=12086&fileName=6%20CCR%201015-6",
+        "started_at": "2026-10-05T20:45:29.563965Z",
+        "finished_at": "2026-10-05T20:45:29.709244Z",
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "charged_bytes": 427153
+      }
+    },
+    {
+      "association_id": "doc-147-2487-12086-word",
+      "role": "word",
+      "parent_id": "history-147-2487",
+      "body": {
+        "path": "bodies/21acb4e66fc9ba793dbd703ba82a964c09f86d6fe92ae7863392750a9c013e28.bin",
+        "sha256": "21acb4e66fc9ba793dbd703ba82a964c09f86d6fe92ae7863392750a9c013e28",
+        "bytes": 52224
+      },
+      "claim": {
+        "receipt_sha256": "b1befdaa45d598b021a5deca8574f32260fcd5586e42b1a3ddd775c90303e50b",
+        "requested_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=12086&fileName=6%20CCR%201015-6",
+        "observed_final_url": "https://www.sos.state.co.us/CCR/GenerateRulePdf.do?type=word&ruleVersionId=12086&fileName=6%20CCR%201015-6",
+        "started_at": "2026-10-05T20:45:29.716215Z",
+        "finished_at": "2026-10-05T20:45:29.800164Z",
+        "http_status": 200,
+        "content_type": "application/msword",
+        "charged_bytes": 52224
+      }
+    }
+  ],
+  "document_policy": "all_source_nonarchived_pdf_word_pairs",
+  "legal_currentness": "not_verified",
+  "answer_safe": false
+}

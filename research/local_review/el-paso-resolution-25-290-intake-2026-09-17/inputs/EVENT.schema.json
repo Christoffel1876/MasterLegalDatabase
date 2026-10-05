@@ -1,0 +1,161 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Exact relative payload identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One deliberate attempted public request; hidden transport events unmeasured.",
+  "properties": {
+    "sequence": {
+      "maximum": 8,
+      "minimum": 1,
+      "title": "Sequence",
+      "type": "integer"
+    },
+    "requested_url": {
+      "title": "Requested Url",
+      "type": "string"
+    },
+    "returned_url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Returned Url"
+    },
+    "reserved_at": {
+      "format": "date-time",
+      "title": "Reserved At",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "finished_at": {
+      "format": "date-time",
+      "title": "Finished At",
+      "type": "string"
+    },
+    "status": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Status"
+    },
+    "outcome": {
+      "enum": [
+        "received",
+        "redirect",
+        "denied",
+        "failed",
+        "limit_refusal"
+      ],
+      "title": "Outcome",
+      "type": "string"
+    },
+    "body": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Asset"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "headers": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Headers",
+      "type": "object"
+    },
+    "omitted_header_names": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Omitted Header Names",
+      "type": "array"
+    },
+    "redirect_location": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Redirect Location"
+    },
+    "error": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Error"
+    },
+    "complete": {
+      "title": "Complete",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "sequence",
+    "requested_url",
+    "returned_url",
+    "reserved_at",
+    "started_at",
+    "finished_at",
+    "status",
+    "outcome",
+    "body",
+    "headers",
+    "omitted_header_names",
+    "redirect_location",
+    "error",
+    "complete"
+  ],
+  "title": "Event",
+  "type": "object"
+}

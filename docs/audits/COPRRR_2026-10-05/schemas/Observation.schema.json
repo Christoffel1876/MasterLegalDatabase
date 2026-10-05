@@ -1,0 +1,40 @@
+{
+  "additionalProperties": false,
+  "description": "Explicitly transcribed browser evidence, never represented as raw HTTP.",
+  "properties": {
+    "url": {
+      "title": "Url",
+      "type": "string"
+    },
+    "observation": {
+      "title": "Observation",
+      "type": "string"
+    },
+    "observed_links": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Observed Links",
+      "type": "array"
+    },
+    "evidence_kind": {
+      "const": "browser_visible_dom_transcription",
+      "default": "browser_visible_dom_transcription",
+      "title": "Evidence Kind",
+      "type": "string"
+    },
+    "raw_wire_capture_available": {
+      "const": false,
+      "default": false,
+      "title": "Raw Wire Capture Available",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "url",
+    "observation",
+    "observed_links"
+  ],
+  "title": "Observation",
+  "type": "object"
+}

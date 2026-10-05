@@ -1,0 +1,950 @@
+{
+  "activation_authorized": false,
+  "answer_safe": false,
+  "baseline_legacy_rows_compared": 48390,
+  "baseline_manual_originals": 71,
+  "baseline_manual_review_joins": 38,
+  "canonical_mutations": false,
+  "input_pins": [
+    {
+      "path": "handoffs/run-2026-09-23-1958/popper/sherlock-03-intake/AUDIT.json",
+      "sha256": "d8994b404f5ed3d2c65ba5aaa73115d7a685d795fd924cde15338e3cfc11bfec",
+      "size_bytes": 10157
+    },
+    {
+      "path": "handoffs/run-2026-09-23-1958/popper/sherlock-intake/AUDIT.json",
+      "sha256": "94b8278572b22f29907e0c39f6dc623eece12ae60d776399f27577c3cee9f0d4",
+      "size_bytes": 12997
+    },
+    {
+      "path": "handoffs/run-2026-09-23-1958/sherlock-03/deliveries/20260923T201946Z/bodies/SHSTATE03-A007.bin",
+      "sha256": "d5a6e7a8f8c3e6ba6e29ce97ede237e591e963a33eb2bbaee03b5b5c9d8c429b",
+      "size_bytes": 2340999
+    },
+    {
+      "path": "handoffs/run-2026-09-23-1958/sherlock-03/deliveries/20260923T201946Z/bodies/SHSTATE03-A014.bin",
+      "sha256": "43aa136adb355681cd8dc4ac2c5437ab74ee7cc5c52050dcfc29f6d6d90dd0ba",
+      "size_bytes": 181916
+    },
+    {
+      "path": "handoffs/run-2026-09-23-1958/sherlock-03/deliveries/20260923T201946Z/bodies/SHSTATE03-A024.bin",
+      "sha256": "5afc51d162a5472b999ce5bf308ff9a93810015bcbea7c7e710cec864932605a",
+      "size_bytes": 12688
+    },
+    {
+      "path": "handoffs/run-2026-09-23-1958/sherlock-03/deliveries/20260923T201946Z/reservations/SHSTATE03-A007.json",
+      "sha256": "502d5f5dcc17c6295335f16b03d6c2004ddba5336e70454efeb88c20571add8f",
+      "size_bytes": 620
+    },
+    {
+      "path": "handoffs/run-2026-09-23-1958/sherlock-03/deliveries/20260923T201946Z/reservations/SHSTATE03-A014.json",
+      "sha256": "9fd9a400df97ffa06a6ad22426926985dfc356733b1bea053c5dc58fd570e90f",
+      "size_bytes": 988
+    },
+    {
+      "path": "handoffs/run-2026-09-23-1958/sherlock-03/deliveries/20260923T201946Z/reservations/SHSTATE03-A024.json",
+      "sha256": "0080aba2b7ac18cf50bd2fbdca9a74fa8c25dd875042d5db69f910ec05e5b4d7",
+      "size_bytes": 989
+    },
+    {
+      "path": "handoffs/run-2026-09-23-1958/sherlock-03/deliveries/20260923T201946Z/results/SHSTATE03-A007.json",
+      "sha256": "f73282fab5162b2c9fd71c7167813c88cbe7b0a0e91ff729997bd62487ddf5b9",
+      "size_bytes": 1553
+    },
+    {
+      "path": "handoffs/run-2026-09-23-1958/sherlock-03/deliveries/20260923T201946Z/results/SHSTATE03-A014.json",
+      "sha256": "3dafbf7525f8907eb0db76fb3a7dbae679a4a09b2dbabec1ad173b1e1228c218",
+      "size_bytes": 1563
+    },
+    {
+      "path": "handoffs/run-2026-09-23-1958/sherlock-03/deliveries/20260923T201946Z/results/SHSTATE03-A024.json",
+      "sha256": "47078b50fdbd6ddc368059d2849ad00ae5169b91048177f382a5ac84bc246ab1",
+      "size_bytes": 1579
+    },
+    {
+      "path": "handoffs/run-2026-09-23-1958/sherlock/deliveries/20260923T200420Z/bodies/SHSTATE02-A012.bin",
+      "sha256": "99be25ee05ddfee724a4878a9428dc1cd17d14c33171827e9b6cf90e16a1aca9",
+      "size_bytes": 1029177
+    },
+    {
+      "path": "handoffs/run-2026-09-23-1958/sherlock/deliveries/20260923T200420Z/reservations/SHSTATE02-A012.json",
+      "sha256": "6824b21c6e4ea652318e99b9145f4b7fb499b78085a5a595ae9d34c8a53a589a",
+      "size_bytes": 573
+    },
+    {
+      "path": "handoffs/run-2026-09-23-1958/sherlock/deliveries/20260923T200420Z/results/SHSTATE02-A012.json",
+      "sha256": "0e1242a2ae3d0862e1e54e3eeaa6ca7a1bdff8c157f6c857444866b8bd27f554",
+      "size_bytes": 1443
+    },
+    {
+      "path": "handoffs/statewide-transition-2026-09-23/coverage/QUEUE.json",
+      "sha256": "34cc5bc95069327c86883b5bb8e80fc5bb3174eb7faa8cfcc0cbb386878f8c02",
+      "size_bytes": 6937184
+    },
+    {
+      "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/COUNTY_SOURCE_COVERAGE.json",
+      "sha256": "747af3e43b1e37f407ca5a37ad08c9251b4e919e2fcb82fb0a11f16e40058639",
+      "size_bytes": 444150
+    },
+    {
+      "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+      "sha256": "ad27514fe91659c9914780c7d3e69e48ace742bc31ad67d9c3a3c99945aecde3",
+      "size_bytes": 2066981
+    },
+    {
+      "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_DOWNLOAD_MANIFEST.jsonl",
+      "sha256": "dce2b392bc3e81bbb21e31f2a837fdb498d5aa9a79f5b034942a777a82041c51",
+      "size_bytes": 33903546
+    },
+    {
+      "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_SOURCE_REGISTRY.json",
+      "sha256": "05f9bb13489109027556728e91a75ad438fdfeb6e5e7cb4027b4d4dbaf66f64f",
+      "size_bytes": 415133
+    },
+    {
+      "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/MUNICIPAL_EXPANSION_QUEUE.json",
+      "sha256": "25dae23419a5112696620060677d01ab204de9a38bbb34113cf8b04a5ed050c4",
+      "size_bytes": 62439
+    },
+    {
+      "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/MUNICIPAL_SOURCE_REGISTRY.json",
+      "sha256": "fd6391721d7b3889ce984b283d7a4db570049cf847dfdea013f378c54ba31f76",
+      "size_bytes": 1102182
+    },
+    {
+      "path": "statewide-hour-2026-09-23/_RAW_ARCHIVE/local/coverage/0d3dff775d65a8c93f80824a6c12f19073c4beeac1a304e04f3f00e319696d6f.pdf",
+      "sha256": "0d3dff775d65a8c93f80824a6c12f19073c4beeac1a304e04f3f00e319696d6f",
+      "size_bytes": 3700978
+    },
+    {
+      "path": "statewide-hour-2026-09-23/_RAW_ARCHIVE/local/coverage/2ce9c8b9e010205ce69b423abe525b06d0c31d729ceed844ff4c8c10af1c2c76.pdf",
+      "sha256": "2ce9c8b9e010205ce69b423abe525b06d0c31d729ceed844ff4c8c10af1c2c76",
+      "size_bytes": 230351
+    },
+    {
+      "path": "statewide-hour-2026-09-23/_RAW_ARCHIVE/local/coverage/4d3b39b80f4e75bee7ea953d26b6d576806ef9ff7cf2f6dfa6dee2ec2c5f8166.pdf",
+      "sha256": "4d3b39b80f4e75bee7ea953d26b6d576806ef9ff7cf2f6dfa6dee2ec2c5f8166",
+      "size_bytes": 517589
+    },
+    {
+      "path": "statewide-hour-2026-09-23/_RAW_ARCHIVE/local/coverage/6573b97b27f40b83c3b27b632eebc4d838256592b0c0dc063bcf926c7f8eb9ed.pdf",
+      "sha256": "6573b97b27f40b83c3b27b632eebc4d838256592b0c0dc063bcf926c7f8eb9ed",
+      "size_bytes": 177027
+    },
+    {
+      "path": "statewide-hour-2026-09-23/_RAW_ARCHIVE/local/coverage/801a9f1a7b72ed66251f17db03f70bb7edd7e82c89e7dd404e2265e1ee922c58.html",
+      "sha256": "801a9f1a7b72ed66251f17db03f70bb7edd7e82c89e7dd404e2265e1ee922c58",
+      "size_bytes": 97896
+    },
+    {
+      "path": "statewide-hour-2026-09-23/_RAW_ARCHIVE/local/coverage/82dde7a00011381d13053e2ba7cce0a3b78944880f092308c79124b5878fba77.pdf",
+      "sha256": "82dde7a00011381d13053e2ba7cce0a3b78944880f092308c79124b5878fba77",
+      "size_bytes": 2682392
+    },
+    {
+      "path": "statewide-hour-2026-09-23/_RAW_ARCHIVE/manual_intake/manual_source_intake_manifest.jsonl",
+      "sha256": "d52a282f0eda368fcb0874f1398afd43b268e5ce5af03ab7eca6d529f6ca14f7",
+      "size_bytes": 157401
+    },
+    {
+      "path": "statewide-hour-2026-09-23/research/fees/fee-reconciliation-2026-09-10.json",
+      "sha256": "e020652a54ea844e5a8899bde2fe3388250badc6a1fc33c333ef5cb1cb8d4f0e",
+      "size_bytes": 46801
+    },
+    {
+      "path": "statewide-hour-2026-09-23/research/local_review/amendment-excerpts-2026-09-10.json",
+      "sha256": "af4af031682ecad7cacb13ea8ec388b8be4cf6b21da9ba45e3758a40a3cd6332",
+      "size_bytes": 46458
+    },
+    {
+      "path": "statewide-hour-2026-09-23/research/local_review/manual-source-review-inventory-2026-09-11/inventory.json",
+      "sha256": "2a9e40ea8e0e678a19d33fe5d7d58b60aede347bbca6a2af5ba63cf52971dcd4",
+      "size_bytes": 3483635
+    }
+  ],
+  "items": [
+    {
+      "acceptance_requirements": [
+        "Recheck exact input hashes and deduplication before any integration.",
+        "Keep original bytes, acquisition claims, intake clocks and review scope separate.",
+        "Require source-bound output and explicit unresolved scope; no automatic promotion."
+      ],
+      "authority_id": "CO-COUNTY-CUSTER",
+      "authority_name": "Custer County",
+      "bounded_next_step": "Review the exact source role and supported A023→A024 referral, then prepare one custody-only intake if existing contracts admit it; separately scope transcription.",
+      "limitations": [
+        "Resolution title is a filename claim until direct source review."
+      ],
+      "ownership_qualification": "Custer county assignment and official-domain redirect are retained; no city/district.",
+      "phase": "pending_intake",
+      "queue_id": "LOCAL-NEXT-01",
+      "rank": 1,
+      "recorded_gaps": [
+        {
+          "jsonl_line": null,
+          "path": "handoffs/run-2026-09-23-1958/popper/sherlock-03-intake/AUDIT.json",
+          "pointer": "/disposition",
+          "value": "qualified_discovery_only"
+        }
+      ],
+      "scope": "county",
+      "sources": [
+        {
+          "authority_binding": {
+            "jsonl_line": null,
+            "path": "handoffs/run-2026-09-23-1958/sherlock-03/deliveries/20260923T201946Z/reservations/SHSTATE03-A024.json",
+            "pointer": "/authority_id",
+            "value": "CO-COUNTY-CUSTER"
+          },
+          "availability": "retained_hash_verified",
+          "body": {
+            "path": "handoffs/run-2026-09-23-1958/sherlock-03/deliveries/20260923T201946Z/bodies/SHSTATE03-A024.bin",
+            "sha256": "5afc51d162a5472b999ce5bf308ff9a93810015bcbea7c7e710cec864932605a",
+            "size_bytes": 12688
+          },
+          "checked_missing_path": null,
+          "declared_sha256": "5afc51d162a5472b999ce5bf308ff9a93810015bcbea7c7e710cec864932605a",
+          "legacy_hash_matches": [],
+          "manual_hash_matches": [],
+          "qualifications": [
+            "Worker HTTP and time assertions are not this auditor's witnessed acquisition.",
+            "Title/role from recorded referral and filename; substantive review remains pending.",
+            "Private headers are excluded from this queue and must not be published wholesale."
+          ],
+          "recorded_pages": 4,
+          "sha256_binding": {
+            "jsonl_line": null,
+            "path": "handoffs/run-2026-09-23-1958/sherlock-03/deliveries/20260923T201946Z/results/SHSTATE03-A024.json",
+            "pointer": "/body/sha256",
+            "value": "5afc51d162a5472b999ce5bf308ff9a93810015bcbea7c7e710cec864932605a"
+          },
+          "source_id": "SHSTATE03-A024",
+          "url": "https://custercounty-co.gov/wp-content/uploads/2026/02/Custer-County-Colorado-Right-to-Farm-and-Ranch-Resolution.pdf",
+          "url_binding": {
+            "jsonl_line": null,
+            "path": "handoffs/run-2026-09-23-1958/sherlock-03/deliveries/20260923T201946Z/reservations/SHSTATE03-A024.json",
+            "pointer": "/requested_url",
+            "value": "https://custercounty-co.gov/wp-content/uploads/2026/02/Custer-County-Colorado-Right-to-Farm-and-Ranch-Resolution.pdf"
+          }
+        }
+      ],
+      "why_prioritized": "Small four-page county instrument is already retained and has no manual hash match."
+    },
+    {
+      "acceptance_requirements": [
+        "Recheck exact input hashes and deduplication before any integration.",
+        "Keep original bytes, acquisition claims, intake clocks and review scope separate.",
+        "Require source-bound output and explicit unresolved scope; no automatic promotion."
+      ],
+      "authority_id": "CO-COUNTY-DELTA",
+      "authority_name": "Delta County",
+      "bounded_next_step": "Prepare a two-source custody/role review of Resolution 2021-R-001 and the code; carry corrected 234 physical pages while preserving the worker's 236-page claim.",
+      "limitations": [
+        "A 2021 adoption does not establish that the 2024-labeled code is legally current."
+      ],
+      "ownership_qualification": "Delta County government; overlay districts named within county texts are not automatically separate governments.",
+      "phase": "pending_intake",
+      "queue_id": "LOCAL-NEXT-02",
+      "rank": 2,
+      "recorded_gaps": [
+        {
+          "jsonl_line": null,
+          "path": "handoffs/run-2026-09-23-1958/popper/sherlock-03-intake/AUDIT.json",
+          "pointer": "/disposition",
+          "value": "qualified_discovery_only"
+        },
+        {
+          "jsonl_line": null,
+          "path": "handoffs/run-2026-09-23-1958/popper/sherlock-03-intake/AUDIT.json",
+          "pointer": "/findings/4/description",
+          "value": "SHSTATE03-A007: received Result claims 236 physical pages; exact body parses as 234. Retain original claim and additive correction."
+        }
+      ],
+      "scope": "county",
+      "sources": [
+        {
+          "authority_binding": {
+            "jsonl_line": null,
+            "path": "handoffs/run-2026-09-23-1958/sherlock-03/deliveries/20260923T201946Z/reservations/SHSTATE03-A014.json",
+            "pointer": "/authority_id",
+            "value": "CO-COUNTY-DELTA"
+          },
+          "availability": "retained_hash_verified",
+          "body": {
+            "path": "handoffs/run-2026-09-23-1958/sherlock-03/deliveries/20260923T201946Z/bodies/SHSTATE03-A014.bin",
+            "sha256": "43aa136adb355681cd8dc4ac2c5437ab74ee7cc5c52050dcfc29f6d6d90dd0ba",
+            "size_bytes": 181916
+          },
+          "checked_missing_path": null,
+          "declared_sha256": "43aa136adb355681cd8dc4ac2c5437ab74ee7cc5c52050dcfc29f6d6d90dd0ba",
+          "legacy_hash_matches": [
+            "county_delta_building_land_use_subdivision",
+            "county_delta_building_land_use_subdivision_land_use_zoning",
+            "county_delta_building_land_use_subdivision_roads_transportation_access"
+          ],
+          "manual_hash_matches": [],
+          "qualifications": [
+            "Worker HTTP and time assertions are not this auditor's witnessed acquisition.",
+            "Title/role from recorded referral and filename; substantive review remains pending.",
+            "Private headers are excluded from this queue and must not be published wholesale."
+          ],
+          "recorded_pages": 3,
+          "sha256_binding": {
+            "jsonl_line": null,
+            "path": "handoffs/run-2026-09-23-1958/sherlock-03/deliveries/20260923T201946Z/results/SHSTATE03-A014.json",
+            "pointer": "/body/sha256",
+            "value": "43aa136adb355681cd8dc4ac2c5437ab74ee7cc5c52050dcfc29f6d6d90dd0ba"
+          },
+          "source_id": "SHSTATE03-A014",
+          "url": "https://www.deltacountyco.gov/DocumentCenter/View/12429/Resolution-2021-R-001-Adopting-Land-Use-Code",
+          "url_binding": {
+            "jsonl_line": null,
+            "path": "handoffs/run-2026-09-23-1958/sherlock-03/deliveries/20260923T201946Z/reservations/SHSTATE03-A014.json",
+            "pointer": "/requested_url",
+            "value": "https://www.deltacountyco.gov/DocumentCenter/View/12429/Resolution-2021-R-001-Adopting-Land-Use-Code"
+          }
+        },
+        {
+          "authority_binding": {
+            "jsonl_line": null,
+            "path": "handoffs/run-2026-09-23-1958/sherlock-03/deliveries/20260923T201946Z/reservations/SHSTATE03-A007.json",
+            "pointer": "/authority_id",
+            "value": "CO-COUNTY-DELTA"
+          },
+          "availability": "retained_hash_verified",
+          "body": {
+            "path": "handoffs/run-2026-09-23-1958/sherlock-03/deliveries/20260923T201946Z/bodies/SHSTATE03-A007.bin",
+            "sha256": "d5a6e7a8f8c3e6ba6e29ce97ede237e591e963a33eb2bbaee03b5b5c9d8c429b",
+            "size_bytes": 2340999
+          },
+          "checked_missing_path": null,
+          "declared_sha256": "d5a6e7a8f8c3e6ba6e29ce97ede237e591e963a33eb2bbaee03b5b5c9d8c429b",
+          "legacy_hash_matches": [
+            "county_delta_2024_land_use_code",
+            "county_delta_land_use_regulations",
+            "county_delta_land_use_regulations_building_construction",
+            "county_delta_land_use_regulations_continuing_resolutions",
+            "county_delta_land_use_regulations_roads_transportation_access",
+            "county_delta_land_use_regulations_subdivision_development"
+          ],
+          "manual_hash_matches": [],
+          "qualifications": [
+            "Worker HTTP and time assertions are not this auditor's witnessed acquisition.",
+            "Title/role from recorded referral and filename; substantive review remains pending.",
+            "Private headers are excluded from this queue and must not be published wholesale."
+          ],
+          "recorded_pages": 234,
+          "sha256_binding": {
+            "jsonl_line": null,
+            "path": "handoffs/run-2026-09-23-1958/sherlock-03/deliveries/20260923T201946Z/results/SHSTATE03-A007.json",
+            "pointer": "/body/sha256",
+            "value": "d5a6e7a8f8c3e6ba6e29ce97ede237e591e963a33eb2bbaee03b5b5c9d8c429b"
+          },
+          "source_id": "SHSTATE03-A007",
+          "url": "https://www.deltacountyco.gov/DocumentCenter/View/16005/2024-Delta-County-Land-Use-Code",
+          "url_binding": {
+            "jsonl_line": null,
+            "path": "handoffs/run-2026-09-23-1958/sherlock-03/deliveries/20260923T201946Z/reservations/SHSTATE03-A007.json",
+            "pointer": "/requested_url",
+            "value": "https://www.deltacountyco.gov/DocumentCenter/View/16005/2024-Delta-County-Land-Use-Code"
+          }
+        }
+      ],
+      "why_prioritized": "Retained three-page adopting instrument and code permit a concrete parent-chain task."
+    },
+    {
+      "acceptance_requirements": [
+        "Recheck exact input hashes and deduplication before any integration.",
+        "Keep original bytes, acquisition claims, intake clocks and review scope separate.",
+        "Require source-bound output and explicit unresolved scope; no automatic promotion."
+      ],
+      "authority_id": "CO-DISTRICT-WEST_METRO_FIRE",
+      "authority_name": "West Metro Fire Protection District",
+      "bounded_next_step": "Reuse existing OCR, review all eight pages and local amendments, and preserve the separate municipal/county approval and territorial conditions.",
+      "limitations": [
+        "Prior visual checks cover selected excerpts only; do not repeat them as full QA.",
+        "Incorporated IFC and property-specific applicability remain unresolved."
+      ],
+      "ownership_qualification": "District authority remains separate from Lakewood and Jefferson/Douglas County.",
+      "phase": "extraction_review",
+      "queue_id": "LOCAL-NEXT-03",
+      "rank": 3,
+      "recorded_gaps": [
+        {
+          "jsonl_line": null,
+          "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+          "pointer": "/authorities/66/checklist/4/gap",
+          "value": "District adoption scan preserved; OCR, incorporated IFC and local adoption overlap open."
+        },
+        {
+          "jsonl_line": null,
+          "path": "statewide-hour-2026-09-23/research/local_review/amendment-excerpts-2026-09-10.json",
+          "pointer": "/unreviewed_text_status",
+          "value": "machine_ocr_unreviewed"
+        }
+      ],
+      "scope": "district",
+      "sources": [
+        {
+          "authority_binding": {
+            "jsonl_line": null,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+            "pointer": "/sources/87/authority_id",
+            "value": "CO-DISTRICT-WEST_METRO_FIRE"
+          },
+          "availability": "retained_hash_verified",
+          "body": {
+            "path": "statewide-hour-2026-09-23/_RAW_ARCHIVE/local/coverage/0d3dff775d65a8c93f80824a6c12f19073c4beeac1a304e04f3f00e319696d6f.pdf",
+            "sha256": "0d3dff775d65a8c93f80824a6c12f19073c4beeac1a304e04f3f00e319696d6f",
+            "size_bytes": 3700978
+          },
+          "checked_missing_path": null,
+          "declared_sha256": "0d3dff775d65a8c93f80824a6c12f19073c4beeac1a304e04f3f00e319696d6f",
+          "legacy_hash_matches": [],
+          "manual_hash_matches": [],
+          "qualifications": [
+            "Source edition and all later enactments have not been fully reconciled. District resolution adopts 2024 IFC with local amendments; model-code book not captured. Municipal/county adoption and parcel applicability remain separate source boundaries. Parsed all 8 PDF pages without repair District resolution adopts 2024 IFC with local amendments; model-code book not captured. Municipal/county adoption and parcel applicability remain separate source boundaries. Scanned original requires verified OCR before text-citation claims.",
+            "Page counts are retained metadata here."
+          ],
+          "recorded_pages": 8,
+          "sha256_binding": {
+            "jsonl_line": null,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+            "pointer": "/sources/87/sha256",
+            "value": "0d3dff775d65a8c93f80824a6c12f19073c4beeac1a304e04f3f00e319696d6f"
+          },
+          "source_id": "west-metro-2024-adoption",
+          "url": "https://www.westmetrofire.org/files/4a2be34f6/Resolution+2024-06+WMFR+Adoption+of+2024+IFC.pdf",
+          "url_binding": {
+            "jsonl_line": null,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+            "pointer": "/sources/87/url",
+            "value": "https://www.westmetrofire.org/files/4a2be34f6/Resolution+2024-06+WMFR+Adoption+of+2024+IFC.pdf"
+          }
+        }
+      ],
+      "why_prioritized": "Eight retained pages and prior selected excerpts enable a finite complete review."
+    },
+    {
+      "acceptance_requirements": [
+        "Recheck exact input hashes and deduplication before any integration.",
+        "Keep original bytes, acquisition claims, intake clocks and review scope separate.",
+        "Require source-bound output and explicit unresolved scope; no automatic promotion."
+      ],
+      "authority_id": "CO-MUNICIPAL-GEORGETOWN",
+      "authority_name": "Town of Georgetown",
+      "bounded_next_step": "Reconcile literal truck-haul fee conditions and repeated cannabis labels against the two originals; preserve unresolved implementing-fee authority explicitly.",
+      "limitations": [
+        "Existing selected adoption annotation review remains credited only within scope.",
+        "Do not relabel either repeated source entry or infer a fee was repealed."
+      ],
+      "ownership_qualification": "Town authority, distinct from Clear Creek County.",
+      "phase": "extraction_review",
+      "queue_id": "LOCAL-NEXT-04",
+      "rank": 4,
+      "recorded_gaps": [
+        {
+          "jsonl_line": null,
+          "path": "statewide-hour-2026-09-23/research/fees/fee-reconciliation-2026-09-10.json",
+          "pointer": "/open_chain/5/issue",
+          "value": "Truck-haul $250 entry not reconciled against later trip/impact-based fee authorization."
+        },
+        {
+          "jsonl_line": null,
+          "path": "statewide-hour-2026-09-23/research/fees/fee-reconciliation-2026-09-10.json",
+          "pointer": "/open_chain/8/issue",
+          "value": "General 2026 schedule repeats Medical Marijuana (new) at two rates."
+        }
+      ],
+      "scope": "municipal",
+      "sources": [
+        {
+          "authority_binding": {
+            "jsonl_line": null,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+            "pointer": "/sources/110/authority_id",
+            "value": "CO-MUNICIPAL-GEORGETOWN"
+          },
+          "availability": "retained_hash_verified",
+          "body": {
+            "path": "statewide-hour-2026-09-23/_RAW_ARCHIVE/local/coverage/6573b97b27f40b83c3b27b632eebc4d838256592b0c0dc063bcf926c7f8eb9ed.pdf",
+            "sha256": "6573b97b27f40b83c3b27b632eebc4d838256592b0c0dc063bcf926c7f8eb9ed",
+            "size_bytes": 177027
+          },
+          "checked_missing_path": null,
+          "declared_sha256": "6573b97b27f40b83c3b27b632eebc4d838256592b0c0dc063bcf926c7f8eb9ed",
+          "legacy_hash_matches": [],
+          "manual_hash_matches": [],
+          "qualifications": [
+            "Three-page general schedule excludes water/wastewater per referring catalog. Building entries still refer to2015IBC; truck-haul$250 and duplicated Medical Marijuana(new) labels require reconciliation. No certification of complete current fees.",
+            "Page counts are retained metadata here."
+          ],
+          "recorded_pages": 3,
+          "sha256_binding": {
+            "jsonl_line": null,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+            "pointer": "/sources/110/sha256",
+            "value": "6573b97b27f40b83c3b27b632eebc4d838256592b0c0dc063bcf926c7f8eb9ed"
+          },
+          "source_id": "georgetown-general-fees-2026-pdf",
+          "url": "https://www.townofgeorgetown.us/2026%20Fee%20Schedule%2026.05.04.pdf?t=202605041901150",
+          "url_binding": {
+            "jsonl_line": null,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+            "pointer": "/sources/110/url",
+            "value": "https://www.townofgeorgetown.us/2026%20Fee%20Schedule%2026.05.04.pdf?t=202605041901150"
+          }
+        },
+        {
+          "authority_binding": {
+            "jsonl_line": null,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+            "pointer": "/sources/115/authority_id",
+            "value": "CO-MUNICIPAL-GEORGETOWN"
+          },
+          "availability": "retained_hash_verified",
+          "body": {
+            "path": "statewide-hour-2026-09-23/_RAW_ARCHIVE/local/coverage/2ce9c8b9e010205ce69b423abe525b06d0c31d729ceed844ff4c8c10af1c2c76.pdf",
+            "sha256": "2ce9c8b9e010205ce69b423abe525b06d0c31d729ceed844ff4c8c10af1c2c76",
+            "size_bytes": 230351
+          },
+          "checked_missing_path": null,
+          "declared_sha256": "2ce9c8b9e010205ce69b423abe525b06d0c31d729ceed844ff4c8c10af1c2c76",
+          "legacy_hash_matches": [],
+          "manual_hash_matches": [],
+          "qualifications": [
+            "Later permit provision refers to fee based on authorized trips and anticipated roadway impacts under Code3.16.010; general schedule still lists flat$250. No inference that flat amount is invalid or current.",
+            "Page counts are retained metadata here."
+          ],
+          "recorded_pages": 4,
+          "sha256_binding": {
+            "jsonl_line": null,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+            "pointer": "/sources/115/sha256",
+            "value": "2ce9c8b9e010205ce69b423abe525b06d0c31d729ceed844ff4c8c10af1c2c76"
+          },
+          "source_id": "georgetown-truck-haul-ordinance-2026-pdf",
+          "url": "https://www.townofgeorgetown.us/Ordinance%20No.%207%20%28Series%202026%29%20-%20Truck%20Haul%20Permitting.pdf?t=202609041739480",
+          "url_binding": {
+            "jsonl_line": null,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+            "pointer": "/sources/115/url",
+            "value": "https://www.townofgeorgetown.us/Ordinance%20No.%207%20%28Series%202026%29%20-%20Truck%20Haul%20Permitting.pdf?t=202609041739480"
+          }
+        }
+      ],
+      "why_prioritized": "Seven retained pages expose concrete fee-scope conflicts suitable for bounded QA."
+    },
+    {
+      "acceptance_requirements": [
+        "Recheck exact input hashes and deduplication before any integration.",
+        "Keep original bytes, acquisition claims, intake clocks and review scope separate.",
+        "Require source-bound output and explicit unresolved scope; no automatic promotion."
+      ],
+      "authority_id": "CO-MUNICIPAL-GOLDEN",
+      "authority_name": "City of Golden",
+      "bounded_next_step": "Use preserved machine OCR for all 42 pages, validate the 14-page fire attachment and reconcile inspection-minimum conflicts before proposing calculation inputs.",
+      "limitations": [
+        "Updated December 17, 2024 is a source label, not a proved effective date.",
+        "Later enactments remain a separate discovery task; no invented resolution URL."
+      ],
+      "ownership_qualification": "Golden municipal schedule; do not transfer its rates to county or fire district.",
+      "phase": "extraction_review",
+      "queue_id": "LOCAL-NEXT-05",
+      "rank": 5,
+      "recorded_gaps": [
+        {
+          "jsonl_line": null,
+          "path": "statewide-hour-2026-09-23/research/fees/fee-reconciliation-2026-09-10.json",
+          "pointer": "/open_chain/2/issue",
+          "value": "The complete 42-page Golden schedule, including its 14-page fire attachment, now has machine OCR; full table validation and legal adoption/currentness remain open."
+        },
+        {
+          "jsonl_line": null,
+          "path": "statewide-hour-2026-09-23/research/fees/fee-reconciliation-2026-09-10.json",
+          "pointer": "/open_chain/0/issue",
+          "value": "Adoption and all amendments after the December 2024 comprehensive update are unverified."
+        },
+        {
+          "jsonl_line": null,
+          "path": "statewide-hour-2026-09-23/research/fees/fee-reconciliation-2026-09-10.json",
+          "pointer": "/open_chain/1/issue",
+          "value": "Building-sheet resolution chain and conflicting inspection minimum remain open."
+        }
+      ],
+      "scope": "municipal",
+      "sources": [
+        {
+          "authority_binding": {
+            "jsonl_line": null,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+            "pointer": "/sources/108/authority_id",
+            "value": "CO-MUNICIPAL-GOLDEN"
+          },
+          "availability": "retained_hash_verified",
+          "body": {
+            "path": "statewide-hour-2026-09-23/_RAW_ARCHIVE/local/coverage/82dde7a00011381d13053e2ba7cce0a3b78944880f092308c79124b5878fba77.pdf",
+            "sha256": "82dde7a00011381d13053e2ba7cce0a3b78944880f092308c79124b5878fba77",
+            "size_bytes": 2682392
+          },
+          "checked_missing_path": null,
+          "declared_sha256": "82dde7a00011381d13053e2ba7cce0a3b78944880f092308c79124b5878fba77",
+          "legacy_hash_matches": [],
+          "manual_hash_matches": [],
+          "qualifications": [
+            "Complete42-page file preserved; first28pages have text, final14page fire attachment requires OCR. Later adoption/amendment chain not reconciled; conflict with separately linked2011 building sheet.",
+            "Page counts are retained metadata here."
+          ],
+          "recorded_pages": 42,
+          "sha256_binding": {
+            "jsonl_line": null,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+            "pointer": "/sources/108/sha256",
+            "value": "82dde7a00011381d13053e2ba7cce0a3b78944880f092308c79124b5878fba77"
+          },
+          "source_id": "golden-comprehensive-fees-pdf",
+          "url": "https://www.cityofgolden.gov/Documents/Services/Permits%20Licenses/Comprehensive_Fee_Schedule.pdf?t=202406251402150",
+          "url_binding": {
+            "jsonl_line": null,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+            "pointer": "/sources/108/url",
+            "value": "https://www.cityofgolden.gov/Documents/Services/Permits%20Licenses/Comprehensive_Fee_Schedule.pdf?t=202406251402150"
+          }
+        }
+      ],
+      "why_prioritized": "The 42-page schedule is retained; full fire-table and footnote QA is still open."
+    },
+    {
+      "acceptance_requirements": [
+        "Recheck exact input hashes and deduplication before any integration.",
+        "Keep original bytes, acquisition claims, intake clocks and review scope separate.",
+        "Require source-bound output and explicit unresolved scope; no automatic promotion."
+      ],
+      "authority_id": "CO-COUNTY-COSTILLA",
+      "authority_name": "Costilla County",
+      "bounded_next_step": "Confirm source title/authority and exact custody, reconcile known legacy hash matches, then prepare a scoped intake and whole-file extraction plan.",
+      "limitations": [
+        "Historical matching metadata does not prove availability of old originals.",
+        "No visual review or amendment-chain certification performed in this queue."
+      ],
+      "ownership_qualification": "County land-use assignment; no municipal applicability inferred.",
+      "phase": "pending_intake",
+      "queue_id": "LOCAL-NEXT-06",
+      "rank": 6,
+      "recorded_gaps": [
+        {
+          "jsonl_line": null,
+          "path": "handoffs/run-2026-09-23-1958/popper/sherlock-intake/AUDIT.json",
+          "pointer": "/disposition",
+          "value": "retain_qualified_discovery_no_canonical_intake"
+        }
+      ],
+      "scope": "county",
+      "sources": [
+        {
+          "authority_binding": {
+            "jsonl_line": null,
+            "path": "handoffs/run-2026-09-23-1958/sherlock/deliveries/20260923T200420Z/reservations/SHSTATE02-A012.json",
+            "pointer": "/authority_id",
+            "value": "CO-COUNTY-COSTILLA"
+          },
+          "availability": "retained_hash_verified",
+          "body": {
+            "path": "handoffs/run-2026-09-23-1958/sherlock/deliveries/20260923T200420Z/bodies/SHSTATE02-A012.bin",
+            "sha256": "99be25ee05ddfee724a4878a9428dc1cd17d14c33171827e9b6cf90e16a1aca9",
+            "size_bytes": 1029177
+          },
+          "checked_missing_path": null,
+          "declared_sha256": "99be25ee05ddfee724a4878a9428dc1cd17d14c33171827e9b6cf90e16a1aca9",
+          "legacy_hash_matches": [
+            "county_costilla_land_use_code",
+            "county_costilla_land_use_code_land_use_zoning",
+            "county_costilla_land_use_code_roads_transportation_access",
+            "county_costilla_land_use_code_subdivision_development"
+          ],
+          "manual_hash_matches": [],
+          "qualifications": [
+            "Worker HTTP and time assertions are not this auditor's witnessed acquisition.",
+            "Title/role from recorded referral and filename; substantive review remains pending.",
+            "Private headers are excluded from this queue and must not be published wholesale."
+          ],
+          "recorded_pages": 87,
+          "sha256_binding": {
+            "jsonl_line": null,
+            "path": "handoffs/run-2026-09-23-1958/sherlock/deliveries/20260923T200420Z/results/SHSTATE02-A012.json",
+            "pointer": "/body/sha256",
+            "value": "99be25ee05ddfee724a4878a9428dc1cd17d14c33171827e9b6cf90e16a1aca9"
+          },
+          "source_id": "SHSTATE02-A012",
+          "url": "https://www.costillacounty.gov/media/2011",
+          "url_binding": {
+            "jsonl_line": null,
+            "path": "handoffs/run-2026-09-23-1958/sherlock/deliveries/20260923T200420Z/reservations/SHSTATE02-A012.json",
+            "pointer": "/requested_url",
+            "value": "https://www.costillacounty.gov/media/2011"
+          }
+        }
+      ],
+      "why_prioritized": "Retained 87-page land-use source can advance county coverage without a new GET."
+    },
+    {
+      "acceptance_requirements": [
+        "Recheck exact input hashes and deduplication before any integration.",
+        "Keep original bytes, acquisition claims, intake clocks and review scope separate.",
+        "Require source-bound output and explicit unresolved scope; no automatic promotion."
+      ],
+      "authority_id": "CO-MUNICIPAL-LAKEWOOD",
+      "authority_name": "City of Lakewood",
+      "bounded_next_step": "First check the named historical original's custody in an explicitly bounded search. If unavailable, request a new reviewed two-target plan for the recorded city parent and its recorded ordinance PDF, with fresh parent-link validation.",
+      "limitations": [
+        "Historical URL/hash is a lead; this checkout lacks the exact mapped PDF.",
+        "Current city listing and parent support have not been refreshed."
+      ],
+      "ownership_qualification": "Municipal O-2023-15, not the West Metro district's separate 2024 resolution.",
+      "phase": "source_discovery",
+      "queue_id": "LOCAL-NEXT-07",
+      "rank": 7,
+      "recorded_gaps": [
+        {
+          "jsonl_line": null,
+          "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+          "pointer": "/authorities/209/checklist/4/gap",
+          "value": "No evidence assigned in this recovery ledger."
+        }
+      ],
+      "scope": "municipal",
+      "sources": [
+        {
+          "authority_binding": {
+            "jsonl_line": 22264,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_DOWNLOAD_MANIFEST.jsonl",
+            "pointer": "/authority_id",
+            "value": "CO-MUNICIPAL-LAKEWOOD"
+          },
+          "availability": "historical_claim_exact_path_missing",
+          "body": null,
+          "checked_missing_path": "statewide-hour-2026-09-23/_RAW_ARCHIVE/local/municipal/municipal_lakewood_fire/o-2023-15.pdf",
+          "declared_sha256": "c21ef2917f03e5c9ad8317ff6127038726dacaffb94365e954a227135191fcb6",
+          "legacy_hash_matches": [
+            "municipal_lakewood_fire"
+          ],
+          "manual_hash_matches": [],
+          "qualifications": [
+            "Historical downloaded/HTTP-200/hash claims are metadata, not available originals.",
+            "Only the exact repository-mapped path was checked; no global absence conclusion."
+          ],
+          "recorded_pages": null,
+          "sha256_binding": {
+            "jsonl_line": 22264,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_DOWNLOAD_MANIFEST.jsonl",
+            "pointer": "/sha256",
+            "value": "c21ef2917f03e5c9ad8317ff6127038726dacaffb94365e954a227135191fcb6"
+          },
+          "source_id": "municipal_lakewood_fire",
+          "url": "https://www.lakewoodco.gov/files/assets/public/v/1/city-clerks-office/pdfs/city-council-ordinances/2023/o-2023-15.pdf",
+          "url_binding": {
+            "jsonl_line": 22264,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_DOWNLOAD_MANIFEST.jsonl",
+            "pointer": "/requested_url",
+            "value": "https://www.lakewoodco.gov/files/assets/public/v/1/city-clerks-office/pdfs/city-council-ordinances/2023/o-2023-15.pdf"
+          }
+        }
+      ],
+      "why_prioritized": "Exact recorded municipal adoption helps resolve the separate district overlap."
+    },
+    {
+      "acceptance_requirements": [
+        "Recheck exact input hashes and deduplication before any integration.",
+        "Keep original bytes, acquisition claims, intake clocks and review scope separate.",
+        "Require source-bound output and explicit unresolved scope; no automatic promotion."
+      ],
+      "authority_id": "CO-DISTRICT-BVSD",
+      "authority_name": "Boulder Valley School District",
+      "bounded_next_step": "Resolve the named historical landing-page original first; if absent in the bounded custody search, prepare one fresh portal acquisition. Enumerate policy, regulation, exhibit and translation links without treating them as equivalent.",
+      "limitations": [
+        "Ledger has no assigned policy evidence even though older download metadata exists.",
+        "Do not infer an active-district denominator from DOLA boundary rows."
+      ],
+      "ownership_qualification": "School district; service boundaries and active-government status remain unverified.",
+      "phase": "source_discovery",
+      "queue_id": "LOCAL-NEXT-08",
+      "rank": 8,
+      "recorded_gaps": [
+        {
+          "jsonl_line": null,
+          "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+          "pointer": "/authorities/64/checklist/1/gap",
+          "value": "No evidence assigned in this recovery ledger."
+        }
+      ],
+      "scope": "district",
+      "sources": [
+        {
+          "authority_binding": {
+            "jsonl_line": 14,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_DOWNLOAD_MANIFEST.jsonl",
+            "pointer": "/authority_id",
+            "value": "CO-DISTRICT-BVSD"
+          },
+          "availability": "historical_claim_exact_path_missing",
+          "body": null,
+          "checked_missing_path": "statewide-hour-2026-09-23/_RAW_ARCHIVE/local/district/district_bvsd_policies/landing_page_7e68c0b4201c.html",
+          "declared_sha256": "7e68c0b4201c1e2f5ba43576d54a5b1f2f999434bf97e077381f0161da4b0657",
+          "legacy_hash_matches": [
+            "district_bvsd_policies"
+          ],
+          "manual_hash_matches": [],
+          "qualifications": [
+            "Historical downloaded/HTTP-200/hash claims are metadata, not available originals.",
+            "Only the exact repository-mapped path was checked; no global absence conclusion."
+          ],
+          "recorded_pages": null,
+          "sha256_binding": {
+            "jsonl_line": 14,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_DOWNLOAD_MANIFEST.jsonl",
+            "pointer": "/sha256",
+            "value": "7e68c0b4201c1e2f5ba43576d54a5b1f2f999434bf97e077381f0161da4b0657"
+          },
+          "source_id": "district_bvsd_policies",
+          "url": "https://www.bvsd.org/about/board-of-education/policies",
+          "url_binding": {
+            "jsonl_line": 14,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_DOWNLOAD_MANIFEST.jsonl",
+            "pointer": "/requested_url",
+            "value": "https://www.bvsd.org/about/board-of-education/policies"
+          }
+        }
+      ],
+      "why_prioritized": "An exact school-district policy portal provides a bounded second district family."
+    },
+    {
+      "acceptance_requirements": [
+        "Recheck exact input hashes and deduplication before any integration.",
+        "Keep original bytes, acquisition claims, intake clocks and review scope separate.",
+        "Require source-bound output and explicit unresolved scope; no automatic promotion."
+      ],
+      "authority_id": "CO-DISTRICT-DENVER_WATER",
+      "authority_name": "Denver Water",
+      "bounded_next_step": "Prepare a source-only version relationship and scoped extraction review; retain the uncaptured prior Resolution 002-2026 and intervening actions as open leads.",
+      "limitations": [
+        "Source-claimed October 1 effectiveness must not be inferred from retrieval time.",
+        "No claim that these two documents form the complete current operating rules."
+      ],
+      "ownership_qualification": "Public provider; inherited CO-DISTRICT identifier does not prove district status.",
+      "phase": "extraction_review",
+      "queue_id": "LOCAL-NEXT-09",
+      "rank": 9,
+      "recorded_gaps": [
+        {
+          "jsonl_line": null,
+          "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+          "pointer": "/authorities/65/checklist/1/gap",
+          "value": "August 2025 operating-rules edition preserved; subsequent board actions unreconciled."
+        },
+        {
+          "jsonl_line": null,
+          "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+          "pointer": "/authorities/65/checklist/2/gap",
+          "value": "Resolution 002a-2026 states an October 1 effective date; prior/intervening rules unresolved."
+        }
+      ],
+      "scope": "public_provider",
+      "sources": [
+        {
+          "authority_binding": {
+            "jsonl_line": null,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+            "pointer": "/sources/84/authority_id",
+            "value": "CO-DISTRICT-DENVER_WATER"
+          },
+          "availability": "retained_hash_verified",
+          "body": {
+            "path": "statewide-hour-2026-09-23/_RAW_ARCHIVE/local/coverage/4d3b39b80f4e75bee7ea953d26b6d576806ef9ff7cf2f6dfa6dee2ec2c5f8166.pdf",
+            "sha256": "4d3b39b80f4e75bee7ea953d26b6d576806ef9ff7cf2f6dfa6dee2ec2c5f8166",
+            "size_bytes": 517589
+          },
+          "checked_missing_path": null,
+          "declared_sha256": "4d3b39b80f4e75bee7ea953d26b6d576806ef9ff7cf2f6dfa6dee2ec2c5f8166",
+          "legacy_hash_matches": [
+            "district_denver_water_rules"
+          ],
+          "manual_hash_matches": [],
+          "qualifications": [
+            "Source edition and all later enactments have not been fully reconciled. Full posted operating-rules PDF recovered as a new original; canonical legacy files untouched. Legacy district ID does not establish special-district legal classification. Parsed all 90 PDF pages without repair Full posted operating-rules PDF recovered as a new original; canonical legacy files untouched. Legacy district ID does not establish special-district legal classification. Source version statement: Cover: adopted December 12, 2007; last amended July 23, 2025; effective August 28, 2025.",
+            "Page counts are retained metadata here."
+          ],
+          "recorded_pages": 90,
+          "sha256_binding": {
+            "jsonl_line": null,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+            "pointer": "/sources/84/sha256",
+            "value": "4d3b39b80f4e75bee7ea953d26b6d576806ef9ff7cf2f6dfa6dee2ec2c5f8166"
+          },
+          "source_id": "denver-water-operating-rules",
+          "url": "https://www.denverwater.org/sites/default/files/operating-rules.pdf",
+          "url_binding": {
+            "jsonl_line": null,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+            "pointer": "/sources/84/url",
+            "value": "https://www.denverwater.org/sites/default/files/operating-rules.pdf"
+          }
+        },
+        {
+          "authority_binding": {
+            "jsonl_line": null,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+            "pointer": "/sources/95/authority_id",
+            "value": "CO-DISTRICT-DENVER_WATER"
+          },
+          "availability": "retained_hash_verified",
+          "body": {
+            "path": "statewide-hour-2026-09-23/_RAW_ARCHIVE/local/coverage/801a9f1a7b72ed66251f17db03f70bb7edd7e82c89e7dd404e2265e1ee922c58.html",
+            "sha256": "801a9f1a7b72ed66251f17db03f70bb7edd7e82c89e7dd404e2265e1ee922c58",
+            "size_bytes": 97896
+          },
+          "checked_missing_path": null,
+          "declared_sha256": "801a9f1a7b72ed66251f17db03f70bb7edd7e82c89e7dd404e2265e1ee922c58",
+          "legacy_hash_matches": [],
+          "manual_hash_matches": [],
+          "qualifications": [
+            "Resolution declares future October 1, 2026 effectiveness; earlier resolution and intervening actions not fully reconciled. Board resolution adopted August 26, 2026; restrictions become effective October 1, 2026. Prior Resolution 002-2026 remains effective through September 30; it is not captured here. Do not apply future restrictions as current law as of September 10. Board resolution adopted August 26, 2026; restrictions become effective October 1, 2026. Prior Resolution 002-2026 remains effective through September 30; it is not captured here. Do not apply future restrictions as current law as of September 10. Source version statement: Adopted August 26, 2026; effective October 1, 2026.",
+            "Page counts are retained metadata here."
+          ],
+          "recorded_pages": null,
+          "sha256_binding": {
+            "jsonl_line": null,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+            "pointer": "/sources/95/sha256",
+            "value": "801a9f1a7b72ed66251f17db03f70bb7edd7e82c89e7dd404e2265e1ee922c58"
+          },
+          "source_id": "denver-water-2026-drought-amendment",
+          "url": "https://www.denverwater.org/drought/board-resolution-002a-2026",
+          "url_binding": {
+            "jsonl_line": null,
+            "path": "statewide-hour-2026-09-23/_CONTROL_PLANE/LOCAL_COVERAGE_LEDGER.json",
+            "pointer": "/sources/95/url",
+            "value": "https://www.denverwater.org/drought/board-resolution-002a-2026"
+          }
+        }
+      ],
+      "why_prioritized": "A retained rules edition and separately dated amendment expose a temporal gap."
+    }
+  ],
+  "legal_currentness": "not_verified",
+  "observed_at": "2026-09-24T18:26:50.465739+00:00",
+  "public_requests_performed": 0,
+  "qualifications": [
+    "Nine selected tasks, not a statewide coverage percentage or exhaustive priority claim.",
+    "Ranking favors retained short instruments, explicit conflicts and authority variety.",
+    "The September 10 ledger and September 23 discovery are historical snapshots.",
+    "All 48,390 current legacy rows were streamed for exact hash matches; matching metadata is not original-byte availability or substantive legal equivalence.",
+    "Manual 71/38 counts describe one inventory, not every source or review in the repo.",
+    "No raw headers, private files or source bodies are copied into this packet.",
+    "No old queue is reactivated. Any future public work requires a fresh exact-target plan, serial reservations, measured/conservative accounting and separate activation.",
+    "Wrong-target 404 and incomplete discovery do not establish a document's absence.",
+    "Exact mapped-path absence for two historical leads is bounded to this checkout."
+  ],
+  "repository_head_observed": "90f2ffe7a78fddf5eb875c71cc9306738596d49f",
+  "schema_version": 1,
+  "status": "inactive_next_session_proposal"
+}

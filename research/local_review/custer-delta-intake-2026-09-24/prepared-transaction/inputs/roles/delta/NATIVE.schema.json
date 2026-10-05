@@ -1,0 +1,71 @@
+{
+  "$defs": {
+    "Asset": {
+      "additionalProperties": false,
+      "description": "Repository-relative exact file identity.",
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "sha256",
+        "bytes"
+      ],
+      "title": "Asset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "observed_at": {
+      "title": "Observed At",
+      "type": "string"
+    },
+    "source_sha256": {
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "freeze_sha256": {
+      "title": "Freeze Sha256",
+      "type": "string"
+    },
+    "pymupdf_version": {
+      "title": "Pymupdf Version",
+      "type": "string"
+    },
+    "extraction_method": {
+      "title": "Extraction Method",
+      "type": "string"
+    },
+    "pages": {
+      "items": {
+        "$ref": "#/$defs/Asset"
+      },
+      "title": "Pages",
+      "type": "array"
+    }
+  },
+  "required": [
+    "observed_at",
+    "source_sha256",
+    "freeze_sha256",
+    "pymupdf_version",
+    "extraction_method",
+    "pages"
+  ],
+  "title": "Native",
+  "type": "object"
+}
